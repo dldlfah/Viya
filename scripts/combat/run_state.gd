@@ -149,7 +149,7 @@ func select_skill(id: String, ticket: int) -> bool:
 		return false
 	var previous_max := max_hp
 	_refresh_stats()
-	hp = mini(max_hp, hp + maxi(0, max_hp - previous_max))
+	hp = selection_health(hp, previous_max, max_hp)
 	phase = Phase.RUNNING
 	_begin_choice_if_needed()
 	return true
@@ -187,15 +187,58 @@ func _effect_rank(effect: String) -> int:
 	return 0
 
 func _refresh_stats() -> void:
-	max_hp = 100 + 20 * _effect_rank("vitality")
-	stats = {"power": 1.0 + 0.15 * _effect_rank("power"),
-		"rate": 1.0 + 0.08 * _effect_rank("haste"),
-		"speed": PLAYER_SPEED * (1.0 + 0.07 * _effect_rank("stride")),
-		"pickup": 80.0 + 20.0 * _effect_rank("magnet"),
-		"xp": 1.0 + 0.12 * _effect_rank("learning"),
-		"crit": 0.04 * _effect_rank("precision"),
-		"regen": 0.6 * _effect_rank("recovery"),
-		"ultimate": _effect_rank("ultimate")}
+	var profile: Dictionary = stats_profile(growth.owned)
+	max_hp = int(profile["max_hp"])
+	stats = profile["stats"]
+
+func stats_profile(levels: Dictionary) -> Dictionary:
+	# Pure lookup shared by actual upgrades and choice previews. Never edit levels.
+	var ranks: Dictionary = {}
+	for entry in growth.pool:
+		var effect: String = str(entry["effect"])
+		if not ranks.has(effect):
+			ranks[effect] = int(levels.get(entry["id"], 0))
+	return {"max_hp": 100 + 20 * int(ranks.get("vitality", 0)),
+		"stats": {"power": 1.0 + 0.15 * int(ranks.get("power", 0)),
+			"rate": 1.0 + 0.08 * int(ranks.get("haste", 0)),
+			"speed": PLAYER_SPEED * (1.0 + 0.07 * int(ranks.get("stride", 0))),
+			"pickup": 80.0 + 20.0 * int(ranks.get("magnet", 0)),
+			"xp": 1.0 + 0.12 * int(ranks.get("learning", 0)),
+			"crit": 0.04 * int(ranks.get("precision", 0)),
+			"regen": 0.6 * int(ranks.get("recovery", 0)),
+			"ultimate": int(ranks.get("ultimate", 0))}}
+
+func selection_health(current_hp: int, previous_max: int, next_max: int) -> int:
+	return mini(next_max, current_hp + maxi(0, next_max - previous_max))
+
+func attack_profile(effect: String, rank: int, rate: float) -> Dictionary:
+	# The production attack consumes these exact values; UI does not copy formulas.
+	if rank <= 0 or rate <= 0.0 or not is_finite(rate):
+		return {}
+	var result: Dictionary = {}
+	match effect:
+		"rifle":
+			result = {"damage": 10.0 + 3.0 * (rank - 1), "projectiles": 1, "hits": 1, "speed": BULLET_SPEED}
+		"scatter":
+			result = {"damage": 7.0 + rank * 2.0, "projectiles": 3, "hits": 1, "speed": BULLET_SPEED}
+		"lance":
+			result = {"damage": 12.0 + rank * 4.0, "projectiles": 1, "hits": 1 + rank, "speed": 1150.0}
+		"grenade":
+			result = {"damage": 12.0 + rank * 4.0, "radius": 60.0 + rank * 8.0}
+		"pulse":
+			result = {"damage": 8.0 + rank * 3.0, "radius": 105.0 + rank * 8.0}
+		"crossfire":
+			result = {"damage": 9.0 + rank * 3.0, "projectiles": 4, "hits": 1, "speed": BULLET_SPEED}
+		"chain":
+			result = {"damage": 9.0 + rank * 2.0, "targets": 1 + rank, "link_range": 160.0}
+		"heavy":
+			result = {"damage": 24.0 + rank * 8.0, "projectiles": 1, "hits": 1, "speed": 1300.0}
+		"sigil":
+			result = {"damage": 18.0 + rank * 6.0, "radius": 75.0 + rank * 12.0}
+	if result.is_empty():
+		return {}
+	result["interval"] = (SHOT_INTERVAL if effect == "rifle" else (2.0 if effect != "sigil" else 3.0)) / rate
+	return result
 
 func step(delta: float, direction: Vector2) -> void:
 	if phase != Phase.RUNNING or delta <= 0.0 or not is_finite(delta):
@@ -295,8 +338,11 @@ func _auto_fire() -> void:
 	if direction.length_squared() < 0.01:
 		direction = facing
 	facing = direction
-	if _projectile(direction, 10.0 + 3.0 * (_effect_rank("rifle") - 1), 1):
-		shot_clock = SHOT_INTERVAL / float(stats["rate"])
+	var profile: Dictionary = attack_profile("rifle", _effect_rank("rifle"), float(stats["rate"]))
+	if profile.is_empty():
+		return
+	if _projectile(direction, float(profile["damage"]), int(profile["hits"]), float(profile["speed"])):
+		shot_clock = float(profile["interval"])
 
 func _projectile(direction: Vector2, damage: float, hits: int, speed: float = BULLET_SPEED) -> bool:
 	if bullets.size() >= MAX_BULLETS:
@@ -356,40 +402,43 @@ func _tick_skills(dt: float) -> void:
 		if target.is_empty():
 			continue
 		var rank: int = growth.skill_level(id)
+		var profile: Dictionary = attack_profile(effect, rank, float(stats["rate"]))
+		if profile.is_empty():
+			continue
 		var at: Vector2 = target["p"]
 		var direction := (at - player).normalized()
 		if direction.is_zero_approx():
 			direction = facing
 		match effect:
 			"scatter":
-				for n in range(3):
-					_projectile(direction.rotated((n - 1) * 0.22), 7.0 + rank * 2.0, 1)
+				for n in range(int(profile["projectiles"])):
+					_projectile(direction.rotated((n - 1) * 0.22), float(profile["damage"]), int(profile["hits"]), float(profile["speed"]))
 			"lance":
-				_projectile(direction, 12.0 + rank * 4.0, 1 + rank, 1150.0)
+				_projectile(direction, float(profile["damage"]), int(profile["hits"]), float(profile["speed"]))
 			"grenade":
-				_burst(at, 60.0 + rank * 8.0, 12.0 + rank * 4.0, "blast")
+				_burst(at, float(profile["radius"]), float(profile["damage"]), "blast")
 			"pulse":
-				_burst(player, 105.0 + rank * 8.0, 8.0 + rank * 3.0, "pulse")
+				_burst(player, float(profile["radius"]), float(profile["damage"]), "pulse")
 			"crossfire":
-				for n in range(4):
-					_projectile(Vector2.from_angle(n * PI * 0.5), 9.0 + rank * 3.0, 1)
+				for n in range(int(profile["projectiles"])):
+					_projectile(Vector2.from_angle(n * PI * 0.5), float(profile["damage"]), int(profile["hits"]), float(profile["speed"]))
 			"chain":
 				var used: Array[int] = []
 				var anchor := player
-				for n in range(1 + rank):
-					var linked := _nearest(anchor, SHOT_RANGE if n == 0 else 160.0, used)
+				for n in range(int(profile["targets"])):
+					var linked := _nearest(anchor, SHOT_RANGE if n == 0 else float(profile["link_range"]), used)
 					if linked.is_empty():
 						break
 					var victim: int = linked["id"]
 					anchor = linked["p"]
 					used.append(victim)
-					_damage_enemy(victim, 9.0 + rank * 2.0)
+					_damage_enemy(victim, float(profile["damage"]))
 					_effect(anchor, 28.0, "chain")
 			"heavy":
-				_projectile(direction, 24.0 + rank * 8.0, 1, 1300.0)
+				_projectile(direction, float(profile["damage"]), int(profile["hits"]), float(profile["speed"]))
 			"sigil":
-				_burst(at, 75.0 + rank * 12.0, 18.0 + rank * 6.0, "sigil")
-		skill_clocks[id] = (2.0 if effect != "sigil" else 3.0) / float(stats["rate"])
+				_burst(at, float(profile["radius"]), float(profile["damage"]), "sigil")
+		skill_clocks[id] = float(profile["interval"])
 
 func _move_bullets(dt: float) -> void:
 	for bullet_index in range(bullets.size() - 1, -1, -1):

@@ -2,6 +2,7 @@ extends RefCounted
 ## Called by the existing native HUD suite. This is NOT a Python mock of the game.
 const RunState = preload("res://scripts/combat/run_state.gd")
 const Overview = preload("res://scripts/ui/growth_overview.gd")
+const PreviewChecks = preload("res://tests/test_skill_preview.gd")
 
 static func _gameplay(state) -> String:
 	return JSON.stringify([state.player, state.hp, state.max_hp, state.elapsed,
@@ -104,3 +105,4 @@ static func run(scene, verify: Callable) -> void:
 	scene.overview_button.pressed.emit()
 	scene.notification(Node.NOTIFICATION_APPLICATION_FOCUS_OUT)
 	verify.call(scene.simulation.phase == RunState.Phase.DEFEAT and not scene._overview_open, "Focus loss in result overview does not resume or relabel defeat")
+	PreviewChecks.run(scene, verify)

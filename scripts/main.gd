@@ -3,6 +3,7 @@ const RunState = preload("res://scripts/combat/run_state.gd")
 const BattleView = preload("res://scripts/combat/battle_view.gd")
 const MoveInput = preload("res://scripts/ui/move_input.gd")
 const FeedbackPanel = preload("res://scripts/ui/feedback_panel.gd")
+const SkillPreview = preload("res://scripts/ui/skill_preview.gd")
 
 var simulation = RunState.new()
 var view
@@ -334,7 +335,10 @@ func _show_levelup() -> void:
 				"passive": "공통 패시브", "ultimate": "필살기 강화"}[entry["kind"]]
 			var text := "%s · %s\n\n%s\nLv.%d → Lv.%d\n\n%s\n\n[시제품 효과]" % [kind,
 				"신규" if rank == 0 else "강화", entry["name"], rank, rank + 1, entry["description"]]
+			var preview: Dictionary = SkillPreview.build(simulation, id)
+			text += "\n\n선택 시 변화\n" + SkillPreview.describe(preview)
 			var card := _button(text, _choose_skill.bind(id, last_ticket))
+			card.set_meta("skill_preview", preview.duplicate(true))
 			card.custom_minimum_size = Vector2(310, 255)
 			card.add_theme_font_size_override("font_size", 17)
 			card.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
