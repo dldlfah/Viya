@@ -1,0 +1,26 @@
+{
+  "static_integrity": {
+    "status": "PASS",
+    "files_checked": 7,
+    "resource_references_checked": 8,
+    "errors": [],
+    "source_sha256": {
+      "project.godot": "0d8f7fce157178f7bf31acc183593b40f23cff6d266ea5270f4b75f0899b79e5",
+      "scenes/main.tscn": "b396435b9cfaeeb6e1d200da80f917e8edc241e48826ea3ef27a0a5d0734dcc0",
+      "scripts/combat/battle_view.gd": "e42d81edf60afc2bdc597bb45f80516cb7cb5c6e3c75edaffbe6b7b0f1efcedf",
+      "scripts/combat/run_state.gd": "1df8c6031661fe6744374dc68419b0d86c754bea0e128c23f442529ac611f491",
+      "scripts/main.gd": "c09bce72f56f9857192ec1a788a1236c0f16923aaa3d1f22936bfd3321c5a859",
+      "scripts/ui/move_input.gd": "bdab9a7008bf6f56d505da9e576415d528f5fc09f4a74be68ee46fd0af14a462",
+      "tests/test_combat_foundation.gd": "70bb6c053ab506ec839593397ab9f000275f53d773edec91e8b3b305dacfab20"
+    },
+    "source_fingerprint": "08d7df7649f6e9b135b340f74a6749f3b126faa377d34ce42d20e7bc79829a3e",
+    "scope": "UTF-8, delimiters, whitespace, resource existence, project settings only; NOT GDScript parser/typechecking or gameplay."
+  },
+  "godot_runtime": {
+    "status": "NOT_VERIFIED",
+    "reason": "Godot executable unavailable. No engine/parser/behavior execution was performed."
+  },
+  "windows_f5": "NOT_VERIFIED",
+  "android_device": "NOT_VERIFIED",
+  "ios_device": "NOT_VERIFIED"
+}
