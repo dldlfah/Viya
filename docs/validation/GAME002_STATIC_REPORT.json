@@ -1,0 +1,71 @@
+{
+  "static_integrity": {
+    "status": "PASS",
+    "files_checked": 13,
+    "resource_references_checked": 14,
+    "errors": [],
+    "source_sha256": {
+      "project.godot": "0d8f7fce157178f7bf31acc183593b40f23cff6d266ea5270f4b75f0899b79e5",
+      "scenes/main.tscn": "b396435b9cfaeeb6e1d200da80f917e8edc241e48826ea3ef27a0a5d0734dcc0",
+      "scripts/combat/battle_view.gd": "f99f0aa767438f89b8cd699cf848b8137c1ce1745efb38c219bc742000f4aaaf",
+      "scripts/combat/run_state.gd": "0c166e41db84abe3141985e61e1158c7ef006cf0864fbcc4e9e1bacff6c4df55",
+      "scripts/main.gd": "e4378608627ee482729c07ca084f7cbafce81141a32f56bbfd4285a819c94bb1",
+      "scripts/progression/growth_state.gd": "2df00859556690e6dc5e0c558bae90b637b09340e464ab6c6014a65f97866225",
+      "scripts/progression/skill_catalog.gd": "321cc6af61fb4028e849a8155819f49c81722db796802963fabf16606ad018a6",
+      "scripts/ui/move_input.gd": "bdab9a7008bf6f56d505da9e576415d528f5fc09f4a74be68ee46fd0af14a462",
+      "tests/test_combat_foundation.gd": "70bb6c053ab506ec839593397ab9f000275f53d773edec91e8b3b305dacfab20",
+      "tests/test_growth.gd": "dc7e93fb0f0902733a499d2c268ced9562ee2b23fe7a4cfefcee9955351dd495",
+      "data/prototype_skills.json": "edb32bbc8f3cb1fa799761eca0e1ee4bce3d10823a3c8691f0ef2bba06723864",
+      "tools/check_growth_data.py": "d193869c6b9d664b3a0c1a8547fdcc4d188582bd1fa36595d842d0695fba224f",
+      "tools/check_project.py": "a9568f8a41197c1c6d60a67569131089be35d61e90d424e3828230152bec54c6"
+    },
+    "source_fingerprint": "658edde3b1e9b58cec3204028c2fd32812628a2ca250bfcf802b7df7abba2ab4",
+    "scope": "UTF-8, delimiters, whitespace, JSON/Python syntax, resource existence, project settings; NOT GDScript parser/typechecking or gameplay."
+  },
+  "growth_data_contract": {
+    "status": "PASS",
+    "pool_count": 18,
+    "counts": {
+      "common_attack": 8,
+      "character_attack": 1,
+      "common_passive": 8,
+      "ultimate_enhancement": 1
+    },
+    "negative_controls": [
+      {
+        "fixture": "duplicate",
+        "rejected": true
+      },
+      {
+        "fixture": "resistance",
+        "rejected": true
+      },
+      {
+        "fixture": "foreign_owner",
+        "rejected": true
+      },
+      {
+        "fixture": "missing_ultimate",
+        "rejected": true
+      },
+      {
+        "fixture": "wrong_row",
+        "rejected": true
+      }
+    ],
+    "errors": [],
+    "scope": "JSON schema/content and source integration markers only; not GDScript runtime/behavior."
+  },
+  "godot_runtime": {
+    "status": "NOT_VERIFIED",
+    "reason": "Godot executable unavailable; no engine/parser/behavior execution was performed."
+  },
+  "windows_f5": "NOT_VERIFIED",
+  "android_device": "NOT_VERIFIED",
+  "ios_device": "NOT_VERIFIED",
+  "source_base_commit": "8f94c65951acf22a76d61197fb145ef108f9866b",
+  "command": "python tools/check_project.py --output .local_validation",
+  "exit_code": 2,
+  "python_version": "3.13.5",
+  "note": "Engine tests were authored but not executed; this report is not a Godot parser/type/runtime PASS."
+}

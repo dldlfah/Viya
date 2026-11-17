@@ -19,6 +19,10 @@ func _draw() -> void:
 	for y in range(int(-origin.y / 64.0) - 1, int((size.y - origin.y) / 64.0) + 2):
 		draw_line(Vector2(0, origin.y + y * 64), Vector2(size.x, origin.y + y * 64), Color("242832"))
 	draw_rect(Rect2(origin, simulation.WORLD_SIZE), Color("6c5c43"), false, 4.0)
+	for pickup in simulation.pickups:
+		var pos := _screen(pickup["p"])
+		draw_colored_polygon(PackedVector2Array([pos + Vector2(0, -7),
+			pos + Vector2(5, 0), pos + Vector2(0, 7), pos + Vector2(-5, 0)]), Color("7cd3c1"))
 	for enemy in simulation.enemies:
 		var at := _screen(enemy["p"])
 		if Rect2(Vector2.ZERO, size).grow(30).has_point(at):
@@ -29,6 +33,10 @@ func _draw() -> void:
 	for bullet in simulation.bullets:
 		var at := _screen(bullet["p"])
 		draw_line(at - bullet["direction"] * 12.0, at, Color("f6d798"), 4.0, true)
+	for effect in simulation.effects:
+		var color := Color("c95678") if effect["kind"] == "sigil" else Color("e3b66f")
+		color.a = clampf(float(effect["life"]) / 0.25, 0.0, 1.0)
+		draw_arc(_screen(effect["p"]), effect["radius"], 0.0, TAU, 40, color, 3.0, true)
 	var center := size * 0.5
 	var direction: Vector2 = simulation.facing
 	draw_circle(center + Vector2(0, 8), 23, Color(0, 0, 0, 0.5))
