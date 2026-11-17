@@ -9,35 +9,27 @@
 - [작업원칙](AGENTS.md) · [제작 스킬](.agents/skills/viya-game-production/SKILL.md)
 - [게임 기획](docs/GAME_DESIGN_BASELINE.md) · [승인 아트](docs/ART_APPROVAL.md)
 
-## GAME-004 전투·성장·마법·상태 반응 코드
+## GAME-004B: 모바일 HUD·스킬 상세 코드 연결
 
-Godot 4.x에서 `project.godot`를 열고 F5 → 출격. 기존 개발 기준 4.7.2의 호환 실행과 실제 렌더는 미검증이다. 모바일 가로 / Compatibility / 기준 1280×720.
+Godot 4.x에서 `project.godot`를 열어 F5 → 출격하는 시작 경로다. 실제 Godot 구문/타입·실행·4.7.2 호환과 모바일 렌더는 아직 미검증이다. Compatibility 렌더러와 모바일 가로 기준을 유지한다.
 
-전장 왼쪽 드래그로 이동, PC는 WASD/방향키·마우스 드래그. 자동사격→처치 XP 드롭→접근 수집→무작위 3선택→공격/패시브 강화. **레벨업 필요 XP는 기존의 3배(30,48,66,84…), 드롭 XP5는 그대로다.** 모든 스킬명에 `[임시]`를 표시한다.
+시작 장면은 `scripts/ui/mobile_main.gd`를 사용하고 기존 `scripts/main.gd`를 상속한다. 전투·성장·마법·반응 상태는 기존 소유자를 그대로 사용한다. HUD·전장·터치 범위는 `hud_layout.gd`의 동일 좌표를 사용하도록 작성했다. 좁은 가로 화면에서는 하단 상태/마법 영역과 스킬 두 줄을 나눠 배치하며, 긴 레벨업 카드는 세로 스크롤로 확인한다.
 
-오른쪽 고유 마법 버튼 또는 PC F: MP/쿨다운 조건을 통과하면 플레이어 중심 광역 피해. 임시 마법 `[임시] 진홍 파동`은 MP40·쿨다운12초, 최대MP100·전투 중 초당5 회복, 기본피해50·반경230이며 전용 필살기 강화 1단계마다 피해15·반경18 증가. 수치·이름·효과는 최종 확정이 아니다. 자동 룬탄과 다른 능력이며 18종 후보에 새 항목을 추가하지 않는다.
+전장 왼쪽 드래그 또는 PC WASD/방향키로 이동하고 가까운 적에게 자동사격한다. 처치 → 경험치 수집 → 무작위 3선택 → 강화. 오른쪽 고유 마법 버튼 또는 PC F로 마법을 사용한다. **보유 스킬 칸을 누르면 전체 임시 명칭·레벨·설명을 보는 읽기 전용 상세창**을 연다. 상세창은 전투를 정지하며 스킬 획득/강화/마법 사용은 하지 않는다. 닫거나 Esc로 이전 상태에 복귀한다.
 
-하단 **임시 반응 영역**의 문구·테두리를 실제 피격/레벨업/마법/체력 상태에 연결했다. 전투 종료>피격>마법>레벨업>저체력>기본 순서이며 시간과 우선순위는 `feedback_state.gd`에 있다. 저체력 경고는 다른 반응 중에도 유지한다. 새 비야 초상화나 표정 원화를 만든 것이 아니다.
-
-레벨업/환경설정/사망/앱 포커스 상실 중 사용과 마력·쿨다운·반응 진행은 차단한다. 빈 곳에서도 마법을 발동/소비하는 임시 정책이다. 이동 손가락과 마법 손가락 ID를 분리했지만 **모바일 실기는 미검증**이다. 결과에는 실제 레벨·시간·처치·발사·마법 횟수를 표시하고 재시작은 성장·MP·쿨다운·반응을 초기화한다.
-
-공통 공격8 + 캐릭터 공격1 + 공통 패시브8(저항 제외) + 캐릭터 필살기 강화1을 유지한다. 임시 장착 공격4/패시브4는 후보 수와 별개이며 서포터2+2는 빈 자리다. 임시 도형·반응 영역·범위 링은 승인 비야 디자인을 대체하지 않는다. 음량 설정 저장은 있으나 전투 음원은 없다.
+18종 구성, `[임시]` 명칭, 요구 XP3배(30,48,66,84…), 드롭 XP5, 임시 장착 공격4/패시브4, 빈 서포터2+2를 유지한다. 비야 마법의 MP40·쿨다운12초 등 수치는 기존 시제품 값이며 이번에는 변경하지 않았다. 반응은 전투 종료>피격>마법>레벨업>저체력>기본 순서의 문구/테두리 대역이다. 원화·3D·새 얼굴을 제작한 것이 아니다.
 
 ## 검증
 
-**GAME-004의 변경 소스 검사 PASS. 실제 Godot 구문/타입·엔진 동작·렌더·Windows/모바일 실기 NOT_VERIFIED.** 이전 GAME-003 전체 파일·데이터 검사와 이번 변경 부분 검사를 구분한다. 이번 턴에는 전체 회귀 검사기를 실행하지 않았으며 작성한 엔진 테스트를 실행한 것으로 취급하지 않는다.
+**GAME-004B 변경 소스 검사 PASS. 실제 Godot 실행·레이아웃·입력 전달·렌더·모바일 실기 NOT_VERIFIED.** 시험 코드를 작성한 것과 실행 통과는 다르다. 이번에는 전체 회귀 검사기를 실행하지 않았다.
 
 ```sh
-# 변경된 반응 연결의 정적 소스 검사만:
-python tools/check_feedback_data.py
-# Godot가 있는 환경에서 전체 검사; 검사 데이터 위치를 격리:
+# 변경 소스에 대한 정적 검사만:
+python tools/check_mobile_hud.py
+# 엔진이 있는 환경에서 전체 검사 (검사 데이터 경로 격리):
 python tools/check_project.py --godot /path/to/Godot
-# 아래 직접 실행은 사용자 설정 폴더를 사용할 수 있다.
-Godot --headless --path . --editor --import --quit
-Godot --headless --path . --script res://tests/test_combat_foundation.gd
-Godot --headless --path . --script res://tests/test_growth.gd
-Godot --headless --path . --script res://tests/test_magic.gd
-Godot --headless --path . --script res://tests/test_feedback.gd
+# 개별 엔진 시험. 직접 실행은 사용자 설정 경로를 사용할 수 있다.
+Godot --headless --path . --script res://tests/test_mobile_hud.gd
 ```
 
-전체 검사기는 엔진 부재 시 종료 코드2/NOT_VERIFIED를 반환한다. [GAME-004 변경 소스 검사](docs/validation/GAME004_STATIC_REPORT.json) · [이전 GAME-003 검사](docs/validation/GAME003_STATIC_REPORT.json). GitHub Actions/유료 CI는 사용하지 않는다. Android 내보내기에서는 `data/*.json` 포함, 안전영역, 가독성, 동시 터치, 성능을 별도로 검증해야 한다.
+기존 기반·성장·마법·반응 테스트 뒤에 새 HUD 테스트를 등록했다. [GAME-004B 검사 보고서](docs/validation/GAME004B_STATIC_REPORT.json). Android 내보내기의 JSON 포함, 실제 안전영역·터치·가독성·성능은 별도 검증 대상이다. 유료 CI/Actions·외부 아트 생성은 사용하지 않는다.

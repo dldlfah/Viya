@@ -114,6 +114,7 @@ def run_engine(engine: str, out: Path) -> dict:
             [engine, '--headless', '--path', str(ROOT), '--script', 'res://tests/test_growth.gd'],
             [engine, '--headless', '--path', str(ROOT), '--script', 'res://tests/test_magic.gd'],
             [engine, '--headless', '--path', str(ROOT), '--script', 'res://tests/test_feedback.gd'],
+            [engine, '--headless', '--path', str(ROOT), '--script', 'res://tests/test_mobile_hud.gd'],
             [engine, '--headless', '--path', str(ROOT), '--quit-after', '120'],
         ]
         records = []
@@ -132,7 +133,7 @@ def run_engine(engine: str, out: Path) -> dict:
             except (OSError, subprocess.TimeoutExpired) as error:
                 return {'status': 'FAIL', 'commands': records, 'error': str(error)}
         return {'status': 'PASS', 'commands': records,
-                'scope': 'headless import, actual foundation/growth/magic/feedback GDScript tests and main boot; visual/mobile approval separate'}
+                'scope': 'headless import, actual foundation/growth/magic/feedback/mobile-HUD GDScript tests and main boot; visual/mobile approval separate'}
 
 
 def main() -> int:
