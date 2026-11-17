@@ -6,6 +6,7 @@ No CI/network/dependency installation; real runtime logs are isolated from saves
 from __future__ import annotations
 import argparse
 import hashlib
+import importlib
 import json
 import os
 from pathlib import Path
@@ -13,11 +14,38 @@ import re
 import shutil
 import subprocess
 import tempfile
-from check_growth_data import check as check_growth
-from check_magic_data import check as check_magic
-from check_feedback_data import check as check_feedback
 
 ROOT = Path(__file__).resolve().parents[1]
+
+# Keep the existing report keys; include source suites previously run separately.
+SOURCE_CHECK_MODULES = (
+    ('growth_data_contract', 'check_growth_data'),
+    ('magic_data_contract', 'check_magic_data'),
+    ('feedback_source_contract', 'check_feedback_data'),
+    ('mobile_hud_source_contract', 'check_mobile_hud'),
+    ('run_navigation_source_contract', 'check_run_navigation'),
+    ('combat_cues_source_contract', 'check_combat_cues'),
+)
+
+
+def source_checks() -> dict:
+    """Run every existing source suite, retaining failures and import errors.
+
+    These are source/data checks, NOT evidence of native Godot execution.
+    A broken suite must not hide the other suites or accidentally enable Godot.
+    """
+    results: dict = {}
+    for key, module_name in SOURCE_CHECK_MODULES:
+        try:
+            result = importlib.import_module(module_name).check()
+            if not isinstance(result, dict) or result.get('status') not in ('PASS', 'FAIL'):
+                raise ValueError('checker did not return a PASS/FAIL result dictionary')
+        except Exception as error:
+            # Import/syntax/assertion errors are diagnostic failures, not a skipped PASS.
+            result = {'status': 'FAIL', 'error': f'{type(error).__name__}: {error}',
+                      'module': module_name}
+        results[key] = result
+    return results
 
 
 def check_delimiters(text: str) -> None:
@@ -144,24 +172,16 @@ def main() -> int:
     parser.add_argument('--output', type=Path, default=ROOT / '.local_validation')
     args = parser.parse_args()
     args.output.mkdir(parents=True, exist_ok=True)
-    integrity = static_checks()
     try:
-        growth = check_growth()
-    except (OSError, ValueError, KeyError, TypeError) as error:
-        growth = {'status': 'FAIL', 'error': str(error)}
-    try:
-        magic = check_magic()
-    except (OSError, ValueError, KeyError, TypeError) as error:
-        magic = {'status': 'FAIL', 'error': str(error)}
-    try:
-        feedback = check_feedback()
-    except (OSError, ValueError, KeyError, TypeError, AssertionError) as error:
-        feedback = {'status': 'FAIL', 'error': str(error)}
-    report = {'feedback_source_contract': feedback, 'static_integrity': integrity, 'growth_data_contract': growth, 'magic_data_contract': magic,
+        integrity = static_checks()
+    except (OSError, UnicodeError, ValueError, SyntaxError) as error:
+        integrity = {'status': 'FAIL', 'error': f'{type(error).__name__}: {error}'}
+    contracts = source_checks()
+    report = {'static_integrity': integrity, **contracts,
               'godot_runtime': {'status': 'NOT_VERIFIED'}, 'windows_f5': 'NOT_VERIFIED',
               'android_device': 'NOT_VERIFIED', 'ios_device': 'NOT_VERIFIED'}
     code = 1
-    if all(x['status'] == 'PASS' for x in (integrity, growth, magic, feedback)):
+    if all(x.get('status') == 'PASS' for x in (integrity, *contracts.values())):
         executable = args.godot or shutil.which('godot') or shutil.which('godot4')
         if executable:
             report['godot_runtime'] = run_engine(executable, args.output)
@@ -169,6 +189,8 @@ def main() -> int:
         else:
             report['godot_runtime']['reason'] = 'Godot executable unavailable; no engine/parser/behavior execution was performed.'
             code = 2
+    else:
+        report['godot_runtime']['reason'] = 'Source/data checks failed; engine execution was not started.'
     (args.output / 'report.json').write_text(json.dumps(report, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
     print(json.dumps(report, ensure_ascii=False, indent=2))
     return code

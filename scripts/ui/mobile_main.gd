@@ -340,15 +340,19 @@ func _open_skill_detail(id: String) -> void:
 	dialog_body.add_child(_label("보유 Lv.%d / 시험 상한 Lv.%d" % [simulation.growth.skill_level(id), int(entry["max_level"])], 19))
 	dialog_body.add_child(_label(str(entry["description"]), 21))
 	dialog_body.add_child(_label("읽기 전용 · 이름과 효과는 임시입니다.\n이 창에서는 스킬 획득·강화·마법 발동이 일어나지 않습니다.\n닫으면 이전 전투 또는 같은 레벨업 선택창으로 돌아갑니다.", 17))
-	detail_return_button = _button("닫기 · 이전 화면으로", _close_skill_detail)
+	detail_return_button = _button("닫기 · 이전 화면으로", _close_skill_detail.bind(simulation.navigation_ticket, _menu_revision))
 	dialog_body.add_child(detail_return_button)
 	overlay.show()
 	_fit_dialog()
 	_update_hud()
 
-func _close_skill_detail() -> void:
+func _close_skill_detail(expected_ticket: int, expected_revision: int) -> void:
 	if not _detail_open or simulation.phase != RunState.Phase.PAUSED:
 		return
+	# A delayed close from a previous detail must not resume the current one.
+	if not _menu_matches(expected_ticket, expected_revision) or not simulation.transition_action.is_empty():
+		return
+	_menu_revision += 1
 	_detail_open = false
 	super.resume_game()
 
@@ -479,7 +483,7 @@ func _unhandled_key_input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 		return
 	if _detail_open and event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_ESCAPE:
-		_close_skill_detail()
+		_close_skill_detail(simulation.navigation_ticket, _menu_revision)
 		get_viewport().set_input_as_handled()
 		return
 	super._unhandled_key_input(event)

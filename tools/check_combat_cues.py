@@ -14,6 +14,8 @@ FILES = ('scripts/combat/run_state.gd', 'scripts/combat/battle_view.gd',
 BASE_RUN_BLOB = 'c89a0e3f1aa8a0ffec0855a3fbd6b84f68b1e9b1'
 BASE_VIEW_BLOB = '26b14e587707ddfc6c80080e69fd219665b58a5d'
 BASE_RUNNER_BLOB = '1ab68ad8a51271e3d47db8b02d433991f42e8d6c'
+# Exact run_engine() from GAME-004D; all 7 suites and failure checks are protected.
+BASE_ENGINE_FUNCTION_SHA256 = '9156043eaf896d72565563cc1e2f623cf0c8fbac7f032f19bffee7e4946a69ee'
 ADDED_RUN_LINES = ('const CombatCues = preload("res://scripts/combat/combat_cues.gd")', 'var cues = CombatCues.new()', '\tcues.reset()', '\tcues.advance(dt)', '\t\tcues.record_collected_xp(player, reward)', '\t\tvar critical: bool = false', '\t\tvar previous_hp: int = int(enemies[i]["hp"])', '\t\tvar hit_at: Vector2 = enemies[i]["p"]', '\t\t\tcritical = true', '\t\t# Display HP actually removed, not theoretical overkill damage. Reuse the crit roll.', '\t\tvar hp_lost: int = maxi(0, previous_hp - maxi(0, int(enemies[i]["hp"])))', '\t\tcues.record_hit(id, hit_at, hp_lost, critical)', '\t\t\tcues.record_kill(id, hit_at)')
 
 
@@ -26,6 +28,19 @@ def section(source: str, name: str) -> str:
     return source.split('func ' + name + '(', 1)[1].split('\nfunc ', 1)[0]
 
 
+def engine_function_digest(source: str) -> str:
+    """Allow source-orchestration changes, never alteration of native checks."""
+    try:
+        nodes = [n for n in ast.parse(source).body
+                 if isinstance(n, ast.FunctionDef) and n.name == 'run_engine']
+        if len(nodes) != 1:
+            return ''
+        function_source = ast.get_source_segment(source, nodes[0])
+        return hashlib.sha256(function_source.encode('utf-8')).hexdigest()
+    except (SyntaxError, AttributeError, UnicodeError):
+        return ''
+
+
 def validate(sources: dict[str, str]) -> list[str]:
     errors: list[str] = []
     run, view, cues, tests, runner, _ = [sources[x] for x in FILES]
@@ -36,10 +51,8 @@ def validate(sources: dict[str, str]) -> list[str]:
         restored = restored.replace(line + '\n', '', 1)
     if blob(restored) != BASE_RUN_BLOB:
         errors.append('RunState changed outside reviewed additive visual hooks')
-    restored_runner = runner.replace("            [engine, '--headless', '--path', str(ROOT), '--script', 'res://tests/test_combat_cues.gd'],\n", '', 1)
-    restored_runner = restored_runner.replace('run-navigation/combat-cues GDScript', 'run-navigation GDScript', 1)
-    if blob(restored_runner) != BASE_RUNNER_BLOB or 'res://tests/test_combat_cues.gd' not in runner:
-        errors.append('Existing engine runner changed beyond new test registration')
+    if engine_function_digest(runner) != BASE_ENGINE_FUNCTION_SHA256:
+        errors.append('Existing native engine commands or pass/fail criteria changed')
     restored_view = view.split('\nfunc _draw_combat_cues() -> void:', 1)[0]
     restored_view = restored_view.replace('\t_draw_combat_cues()\n', '', 1)
     restored_view = restored_view.replace('\t\t\tvar flash: float = simulation.cues.flash_alpha(int(enemy["id"]))\n', '', 1)
@@ -119,6 +132,9 @@ def check() -> dict:
         ('cosmetic_rng', FILES[2], 'flashes[id] = FLASH_SECONDS', 'flashes[id] = randf()'),
         ('mutable_view', FILES[1], '\t_draw_combat_cues()', '\tsimulation.cues.advance(0.05)\n\t_draw_combat_cues()'),
         ('unregistered_test', FILES[4], 'res://tests/test_combat_cues.gd', 'res://tests/missing.gd'),
+        ('ignored_engine_exit', FILES[4], 'result.returncode == 0 and not bad_log', 'True and not bad_log'),
+        ('ignored_engine_errors', FILES[4], 'and not bad_log and not test_not_passed', 'and not test_not_passed'),
+        ('ignored_test_result', FILES[4], 'and not bad_log and not test_not_passed', 'and not bad_log'),
     ]
     for label, path, old, new in cases:
         altered = dict(sources)
@@ -139,6 +155,7 @@ def check() -> dict:
             'errors': errors, 'negative_controls': negative, 'source_sha256': hashes,
             'source_fingerprint': hashlib.sha256(json.dumps(hashes, sort_keys=True).encode()).hexdigest(),
             'baseline_run_blob': BASE_RUN_BLOB, 'baseline_runner_blob': BASE_RUNNER_BLOB,
+            'baseline_engine_function_sha256': BASE_ENGINE_FUNCTION_SHA256,
             'scope': 'Changed-source UTF-8/delimiters/Python syntax, hook order, bounds, isolation, '
                      'additive RunState restoration to exact Git blob and preserved engine runner. '
                      'NOT Godot parser/type/runtime, visual quality, input dispatch, or FPS.'}

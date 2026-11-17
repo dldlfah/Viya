@@ -1,0 +1,43 @@
+{
+  "base_commit": "83ca47e4d3918a348866745f5df09e3288e40efc",
+  "branch": "work/viya-turnaround-qa-20261117",
+  "scope": "Publish previously pending integration code and tests. Not a native engine execution.",
+  "pending_patch_sha256": "6712fe8a733b771fe035412dffcc5acbc48fe5904b1113277a737c0c7a61c43e",
+  "baseline_git_blobs_verified": {
+    "scripts/ui/mobile_main.gd": "612bf7f8cfb4636c33601df4049fc70852274d87",
+    "tools/check_project.py": "a37a29e3446909e4bdcd631dd11f414cf5383ef8",
+    "tools/check_combat_cues.py": "aae93be3eb1433832729ab6773af63bd6d833d9d",
+    "tests/test_mobile_hud.gd": "c32f36fb4528fa725d12c51b5e5b338c0173348f"
+  },
+  "application": "git apply --check and git apply on exact baseline source files; final newline removed on four existing files to retain original EOF style, no code-body changes from pending patch.",
+  "runner_unit_tests": {
+    "status": "PASS",
+    "count": 12,
+    "command": "python -m unittest discover -s tests -p test_check_project.py -v",
+    "exit_code": 0,
+    "python_version": "3.13.5",
+    "scope": "Actual Python runner unit tests; delegated suite and engine responses are explicit mocks. NOT full-project or Godot tests."
+  },
+  "godot_binary_available": false,
+  "download_environment": "Local DNS lookup failed for github.com, api.github.com and downloads.godotengine.org.",
+  "full_project_regression": "NOT_RUN",
+  "godot_runtime": "NOT_VERIFIED",
+  "render": "NOT_VERIFIED",
+  "windows_f5": "NOT_VERIFIED",
+  "android_device": "NOT_VERIFIED",
+  "codex_cloud_environment": "NOT_CREATED",
+  "source_git_blobs": {
+    "scripts/ui/mobile_main.gd": "731628a802726e201faf52edcd1f080ad5a26513",
+    "tools/check_project.py": "5c8fecbd25da0020711750020871c02efeeef101",
+    "tools/check_combat_cues.py": "a636d27b9ff59eda40ef90f3d103c390c92ee1be",
+    "tests/test_mobile_hud.gd": "e769209611d2c69614bef8eb3e63f58efc7a2cec",
+    "tests/test_check_project.py": "79c68add041492eb081a267e2f4ec04e52534d6e"
+  },
+  "source_sha256": {
+    "scripts/ui/mobile_main.gd": "992058fe78d0594db9831448269936578f03387c8373d25b66bb6da80f82288e",
+    "tools/check_project.py": "eeafd73fc4503c7af952331c093272a5510aade3fbae04e42afb77eb23f55157",
+    "tools/check_combat_cues.py": "116137cc8b6fe104f8e54d1d1f2b5d4233eb3922c4fba6ac434075d62c019245",
+    "tests/test_mobile_hud.gd": "5f6fd9cf79824b36ea7918628d0199918c58d78265890886b16984eefaafc749",
+    "tests/test_check_project.py": "6e29b436f54ef9b6fd1660f7a5b973558708b805286df3c08411bf3aaf5a538f"
+  }
+}

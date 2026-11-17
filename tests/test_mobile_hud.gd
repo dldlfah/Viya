@@ -25,6 +25,77 @@ func _touch(id: int, at: Vector2, pressed: bool) -> InputEventScreenTouch:
 	event.pressed = pressed
 	return event
 
+
+func _detail_close_request(scene) -> Callable:
+	var links: Array[Dictionary] = scene.detail_return_button.get_signal_connection_list("pressed")
+	verify(links.size() == 1, "Detail close has exactly one guarded callback")
+	return links[0]["callable"] if links.size() == 1 else Callable()
+
+func _test_stale_detail_close(scene) -> void:
+	# Capture the actual button callback, not a substitute copy of the guard.
+	scene.begin_run()
+	scene.simulation.spawn_clock = 999.0
+	scene._open_skill_detail("common_rifle")
+	var old_close: Callable = _detail_close_request(scene)
+	if not old_close.is_valid():
+		return
+	old_close.call()
+	verify(scene.simulation.phase == RunState.Phase.RUNNING, "Current detail callback resumes combat")
+	scene._open_skill_detail("common_rifle")
+	var before: String = JSON.stringify([scene.simulation.elapsed, scene.simulation.hp,
+		scene.simulation.magic.mana, scene.simulation.magic.cooldown_left,
+		scene.simulation.growth.owned, scene.simulation.growth.offer,
+		scene.simulation.growth.ticket, scene.simulation.navigation_ticket, scene._menu_revision])
+	old_close.call()
+	verify(scene._detail_open and scene.overlay.visible and scene.simulation.phase == RunState.Phase.PAUSED,
+		"An earlier detail callback cannot close a newer detail")
+	verify(before == JSON.stringify([scene.simulation.elapsed, scene.simulation.hp,
+		scene.simulation.magic.mana, scene.simulation.magic.cooldown_left,
+		scene.simulation.growth.owned, scene.simulation.growth.offer,
+		scene.simulation.growth.ticket, scene.simulation.navigation_ticket, scene._menu_revision]),
+		"Rejected detail close has no gameplay or navigation side effects")
+	# Test ticket and UI revision independently, not just their combined mismatch.
+	scene._close_skill_detail(scene.simulation.navigation_ticket, scene._menu_revision - 1)
+	verify(scene._detail_open, "Wrong UI revision is rejected even with current run ticket")
+	scene._close_skill_detail(scene.simulation.navigation_ticket - 1, scene._menu_revision)
+	verify(scene._detail_open, "Wrong run ticket is rejected even with current UI revision")
+	scene.detail_return_button.pressed.emit()
+	verify(scene.simulation.phase == RunState.Phase.RUNNING and not scene.overlay.visible,
+		"Current detail close still returns to combat")
+	# A stale close must not reveal a newer level-up modal or reroll its candidates.
+	scene.simulation.grant_xp(30.0)
+	scene._physics_process(0.0)
+	var choice_ticket: int = scene.simulation.growth.ticket
+	var candidates: Array[String] = scene.simulation.growth.offer.duplicate()
+	scene._open_skill_detail("common_rifle")
+	old_close.call()
+	verify(scene._detail_open and scene.simulation.phase == RunState.Phase.PAUSED,
+		"Old combat detail cannot close a detail opened over level-up")
+	var interrupted_close: Callable = _detail_close_request(scene)
+	scene.notification(Node.NOTIFICATION_APPLICATION_FOCUS_OUT)
+	if interrupted_close.is_valid():
+		interrupted_close.call()
+	verify(scene.simulation.phase == RunState.Phase.PAUSED and scene.overlay.visible and not scene._detail_open,
+		"Interrupted detail callback cannot bypass explicit Continue")
+	scene.resume_button.pressed.emit()
+	verify(scene.simulation.phase == RunState.Phase.CHOOSING
+		and scene.simulation.growth.ticket == choice_ticket
+		and scene.simulation.growth.offer == candidates,
+		"Continue after interrupted detail restores the identical level-up offer")
+	# Previous-run callbacks cannot close the next run's detail.
+	scene.begin_run()
+	scene.simulation.spawn_clock = 999.0
+	scene._open_skill_detail("common_rifle")
+	old_close.call()
+	verify(scene._detail_open and scene.simulation.phase == RunState.Phase.PAUSED,
+		"Previous-run detail callback cannot resume a new run")
+	var escape := InputEventKey.new()
+	escape.keycode = KEY_ESCAPE
+	escape.pressed = true
+	scene._unhandled_key_input(escape)
+	verify(not scene._detail_open and scene.simulation.phase == RunState.Phase.RUNNING,
+		"Esc passes current identifiers and closes the current detail")
+
 func _run() -> void:
 	for size in [Vector2(853, 384), Vector2(960, 540), Vector2(1280, 720), Vector2(1600, 720), Vector2(1920, 1080)]:
 		for inset in [0.0, 36.0]:
@@ -135,6 +206,7 @@ func _run() -> void:
 	verify(not scene._detail_open and scene.simulation.phase == RunState.Phase.PAUSED and scene.overlay.visible, "Focus loss replaces detail with an explicit pause screen")
 	scene.resume_button.pressed.emit()
 	verify(scene.simulation.phase == RunState.Phase.RUNNING, "Explicit Continue resumes after detail interruption")
+	_test_stale_detail_close(scene)
 	scene.begin_run()
 	verify(not scene._detail_open and scene.simulation.growth.owned == {"common_rifle": 1}, "Restart clears detail state and per-run upgrades")
 	scene.queue_free()
