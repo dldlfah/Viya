@@ -3,7 +3,7 @@ extends RefCounted
 const Growth = preload("res://scripts/progression/growth_state.gd")
 const MagicState = preload("res://scripts/combat/magic_state.gd")
 const FeedbackState = preload("res://scripts/combat/feedback_state.gd")
-enum Phase { READY, RUNNING, PAUSED, DEFEAT, CHOOSING }
+enum Phase { READY, RUNNING, PAUSED, DEFEAT, CHOOSING, ABANDONED }
 const WORLD_SIZE := Vector2(1800.0, 1200.0)
 const PLAYER_SPEED := 235.0
 const PLAYER_RADIUS := 17.0
@@ -42,6 +42,10 @@ var stats := {"power": 1.0, "rate": 1.0, "speed": PLAYER_SPEED,
 var _resume_phase: int = Phase.RUNNING
 var _enemy_serial: int = 0
 var _regen_remainder: float = 0.0
+# Navigation is owned here, not by a second UI simulation. Never reuse tickets.
+var navigation_ticket: int = 0
+var transition_action: String = ""
+var _finished_result: Dictionary = {}
 
 func start(seed_value: int = 0, character_id: String = "viya") -> bool:
 	# Validate the complete selected character before changing the previous run.
@@ -66,6 +70,9 @@ func start(seed_value: int = 0, character_id: String = "viya") -> bool:
 		return false
 	magic.reset(candidate, character_id)
 	feedback.reset()
+	navigation_ticket += 1
+	transition_action = ""
+	_finished_result.clear()
 	player = WORLD_SIZE * 0.5
 	facing = Vector2.RIGHT
 	hp = 100
@@ -89,13 +96,17 @@ func start(seed_value: int = 0, character_id: String = "viya") -> bool:
 	return true
 
 func set_paused(value: bool) -> void:
+	if not transition_action.is_empty():
+		return # Confirmation must be resolved or interrupted explicitly.
 	if value and phase in [Phase.RUNNING, Phase.CHOOSING]:
 		magic.invalidate_requests()
 		_resume_phase = phase
 		phase = Phase.PAUSED
+		navigation_ticket += 1
 	elif not value and phase == Phase.PAUSED:
 		magic.invalidate_requests()
 		phase = _resume_phase
+		navigation_ticket += 1
 
 func damage_player(amount: int) -> bool:
 	if phase != Phase.RUNNING or hurt_clock > 0.0 or amount <= 0:
@@ -103,9 +114,7 @@ func damage_player(amount: int) -> bool:
 	hp = maxi(0, hp - amount)
 	hurt_clock = HIT_LOCK
 	if hp == 0:
-		magic.invalidate_requests()
-		phase = Phase.DEFEAT
-		feedback.finish()
+		_finish_run("defeat")
 	else:
 		feedback.trigger("hurt")
 	return true
@@ -400,6 +409,76 @@ func _move_bullets(dt: float) -> void:
 
 
 func result_summary() -> Dictionary:
-	# A new value-only snapshot; no reference to live collections escapes.
-	return {"ended": phase == Phase.DEFEAT, "level": growth.level,
-		"elapsed": elapsed, "kills": kills, "shots": shots, "magic_casts": magic.casts}
+	# Freeze the result once. Lobby UI and callers receive independent copies.
+	if not _finished_result.is_empty():
+		return _finished_result.duplicate(true)
+	return _summary("")
+
+func _summary(outcome: String) -> Dictionary:
+	return {"ended": not outcome.is_empty(), "outcome": outcome,
+		"level": growth.level, "elapsed": elapsed, "kills": kills,
+		"shots": shots, "magic_casts": magic.casts}
+
+func has_active_run() -> bool:
+	return phase in [Phase.RUNNING, Phase.CHOOSING, Phase.PAUSED]
+
+func request_transition(action: String, expected_ticket: int) -> bool:
+	if expected_ticket != navigation_ticket or not has_active_run():
+		return false
+	if action not in ["leave", "restart"] or not transition_action.is_empty():
+		return false
+	# _resume_phase still owns the underlying choice/running state when paused.
+	set_paused(true)
+	transition_action = action
+	navigation_ticket += 1
+	return true
+
+func cancel_transition(expected_ticket: int) -> bool:
+	if not _valid_confirmation(expected_ticket):
+		return false
+	transition_action = ""
+	navigation_ticket += 1
+	set_paused(false) # Same XP, offer/ticket, HP, MP, timers and RNG state.
+	return true
+
+func confirm_transition(expected_ticket: int) -> bool:
+	if not _valid_confirmation(expected_ticket):
+		return false
+	if transition_action == "restart":
+		# start() validates first. On failure keep the old run and confirmation.
+		return start(0, growth.character_id)
+	_finish_run("abandoned")
+	return true
+
+func interrupt_transition() -> bool:
+	# Focus loss cancels pending intent, NOT the run. Explicit Continue required.
+	if phase != Phase.PAUSED or transition_action.is_empty():
+		return false
+	transition_action = ""
+	navigation_ticket += 1
+	magic.invalidate_requests()
+	return true
+
+func _valid_confirmation(expected_ticket: int) -> bool:
+	return expected_ticket == navigation_ticket and phase == Phase.PAUSED and transition_action in ["leave", "restart"]
+
+func _finish_run(outcome: String) -> void:
+	# Abandonment is a separate terminal state; it does not inflict damage.
+	phase = Phase.DEFEAT if outcome == "defeat" else Phase.ABANDONED
+	transition_action = ""
+	navigation_ticket += 1
+	magic.invalidate_requests()
+	growth.ticket += 1
+	growth.offer.clear()
+	growth.pending = 0
+	feedback.finish()
+	_finished_result = _summary(outcome)
+
+func return_to_ready(expected_ticket: int) -> bool:
+	if expected_ticket != navigation_ticket or phase not in [Phase.DEFEAT, Phase.ABANDONED]:
+		return false
+	phase = Phase.READY
+	navigation_ticket += 1
+	magic.invalidate_requests()
+	# Keep the frozen result until the next explicit start; do not start timers.
+	return true

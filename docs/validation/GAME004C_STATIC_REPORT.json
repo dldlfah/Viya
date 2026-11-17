@@ -1,0 +1,47 @@
+{
+  "source_base_commit": "6b798e0054fb6252553a9d9cb028f93d4cfb1193",
+  "game_code_base": "bf6772e7ec3652947e12e966858397b12c510706",
+  "command": "python tools/check_run_navigation.py",
+  "exit_code": 0,
+  "python_version": "3.13.5",
+  "changed_source_contract": {
+    "status": "PASS",
+    "files_checked": 5,
+    "errors": [],
+    "negative_controls": [
+      {"fixture": "unescaped_string_newline", "rejected": true},
+      {"fixture": "unguarded_intent", "rejected": true},
+      {"fixture": "confirmation_resets_hp", "rejected": true},
+      {"fixture": "cancel_rerolls", "rejected": true},
+      {"fixture": "leave_fakes_death", "rejected": true},
+      {"fixture": "no_result_copy", "rejected": true},
+      {"fixture": "stale_menu_revision", "rejected": true},
+      {"fixture": "unregistered_engine_test", "rejected": true}
+    ],
+    "source_sha256": {
+      "scripts/combat/run_state.gd": "423fe7fa8c0f12f57a0b6ef35c888fd2abcc5b82236ce251a8e2349f5991a016",
+      "scripts/ui/mobile_main.gd": "e53f0b839caea819190761c261ad8b5f9f06ac05a38026727772293e79f5f211",
+      "tests/test_run_navigation.gd": "a3d066742dd67475a42815fa13e48cb2cf3d2ad253fae90ffd1689ba7df1b85e",
+      "tools/check_project.py": "6972a48ddf45a160fdf1eef40a693bb583ac2b6f740a02d105c0109f60f88d9a",
+      "tools/check_run_navigation.py": "c1d5d76cbf6137cc25dfddb90a650dbcc4a822640a381eca5bb7419072ece930"
+    },
+    "source_fingerprint": "58bdcafe6f72f594780d06c437a05c62fa302d2b11b663efdd9b2255ccbacd60",
+    "scope": "UTF-8/delimiters/Python syntax and navigation SOURCE contracts only; NOT GDScript parsing/types, native execution, actual UI/input, or mobile testing."
+  },
+  "baseline_git_blobs_verified": {
+    "run_state.gd": "ccd1f3eebea79b9304e18ebb9abe8d8bd08b1c04",
+    "mobile_main.gd": "76249ff3311625a1b8726bbddc628e08bfc44ed0",
+    "check_project.py": "1ada2b66a2adb4a967a291c0f4a7e4efac12793e"
+  },
+  "unchanged_run_functions": ["add_enemy", "add_pickup", "grant_xp", "select_skill", "acknowledge_exhausted", "_begin_choice_if_needed", "cast_ultimate", "_effect_rank", "_refresh_stats", "step", "_collect_pickups", "_spawn_enemy", "_move_enemies", "_nearest", "_auto_fire", "_projectile", "_damage_enemy", "_burst", "_effect", "_tick_skills", "_move_bullets"],
+  "godot_runtime": {
+    "status": "NOT_VERIFIED",
+    "reason": "No Godot executable found in the active local runtime; official binary acquisition did not complete. Native test suite authored, not executed."
+  },
+  "full_project_regression": "NOT_RUN",
+  "rendered_screen": "NOT_VERIFIED",
+  "native_input_dispatch": "NOT_VERIFIED",
+  "windows_f5": "NOT_VERIFIED",
+  "android_device": "NOT_VERIFIED",
+  "ios_device": "NOT_VERIFIED"
+}

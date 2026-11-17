@@ -22,6 +22,11 @@ var _choice_grid: GridContainer
 var _modal_kind: String = "ready"
 var _detail_open := false
 var _layout_queued := false
+var confirm_button: Button
+var cancel_button: Button
+var leave_button: Button
+var lobby_button: Button
+var _menu_revision: int = 0
 
 func _ready() -> void:
 	super._ready()
@@ -51,7 +56,7 @@ func _build_interface() -> void:
 	_header_row = HBoxContainer.new()
 	_header_row.add_theme_constant_override("separation", 12)
 	_header.add_child(_header_row)
-	_brand = _label("VIYA / 04B", 21)
+	_brand = _label("VIYA / 04C", 21)
 	_header_row.add_child(_brand)
 	_growth_column = VBoxContainer.new()
 	_growth_column.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -221,6 +226,11 @@ func _apply_layout() -> void:
 	_update_magic_hud()
 
 func _clear_dialog() -> void:
+	_menu_revision += 1
+	confirm_button = null
+	cancel_button = null
+	leave_button = null
+	lobby_button = null
 	_choice_grid = null
 	detail_return_button = null
 	super._clear_dialog()
@@ -229,6 +239,31 @@ func _show_menu(kind: String) -> void:
 	_modal_kind = kind
 	_detail_open = false
 	super._show_menu(kind)
+	var ticket: int = simulation.navigation_ticket
+	var revision: int = _menu_revision
+	# Keep existing settings/results, but replace every destructive start binding.
+	for child in dialog_body.get_children():
+		if child is Button and child.pressed.is_connected(begin_run):
+			child.pressed.disconnect(begin_run)
+			if kind == "paused":
+				child.pressed.connect(_request_transition.bind("restart", ticket, revision))
+			else:
+				child.pressed.connect(_start_from_menu.bind(ticket, revision))
+	if kind == "paused":
+		if resume_button.pressed.is_connected(resume_game):
+			resume_button.pressed.disconnect(resume_game)
+		resume_button.pressed.connect(_resume_from_menu.bind(ticket, revision))
+		leave_button = _button("전투 포기 · 결과 확인", _request_transition.bind("leave", ticket, revision))
+		dialog_body.add_child(leave_button)
+	elif kind in ["defeat", "abandoned"]:
+		var heading: Label = dialog_body.get_child(0) as Label
+		heading.text = "전투 포기" if kind == "abandoned" else "전투 종료 · 패배"
+		dialog_body.add_child(_label("직접 전투를 종료했습니다. HP 소진 패배와 구분됩니다." if kind == "abandoned" else "체력이 모두 소진되었습니다.", 17))
+		lobby_button = _button("출격 대기로", _return_to_lobby.bind(ticket, revision))
+		dialog_body.add_child(lobby_button)
+	elif kind == "ready":
+		var heading: Label = dialog_body.get_child(0) as Label
+		heading.text = "VIYA | 출격 대기"
 	_scroll.scroll_vertical = 0
 	_fit_dialog()
 
@@ -318,9 +353,120 @@ func _close_skill_detail() -> void:
 	super.resume_game()
 
 func begin_run() -> void:
+	# Internal new-run operation; production menu callbacks validate tickets first.
+	if not simulation.start(0, simulation.growth.character_id):
+		push_error("Invalid character data; current run retained")
+		return
+	_after_run_started()
+
+func _after_run_started() -> void:
+	_menu_revision += 1
 	_detail_open = false
-	super.begin_run()
+	_magic_touch_id = -1
+	movement.clear_input()
+	movement.set_enabled(true)
+	overlay.hide()
+	last_phase = simulation.phase
+	last_ticket = -1
 	_scroll.scroll_vertical = 0
+	_update_hud()
+	view.queue_redraw()
+
+func _menu_matches(ticket: int, revision: int) -> bool:
+	return overlay.visible and ticket == simulation.navigation_ticket and revision == _menu_revision
+
+func _start_from_menu(ticket: int, revision: int) -> void:
+	if not _menu_matches(ticket, revision):
+		return
+	if simulation.phase not in [RunState.Phase.READY, RunState.Phase.DEFEAT, RunState.Phase.ABANDONED]:
+		return
+	begin_run()
+
+func _resume_from_menu(ticket: int, revision: int) -> void:
+	if _menu_matches(ticket, revision) and simulation.transition_action.is_empty():
+		resume_game()
+
+func _request_transition(action: String, ticket: int, revision: int) -> void:
+	if not _menu_matches(ticket, revision) or _detail_open:
+		return
+	if not simulation.request_transition(action, ticket):
+		return
+	_detail_open = false
+	_magic_touch_id = -1
+	movement.set_enabled(false)
+	last_phase = simulation.phase
+	_show_confirmation()
+
+func _show_confirmation() -> void:
+	_clear_dialog()
+	_modal_kind = "confirm"
+	var ticket: int = simulation.navigation_ticket
+	var revision: int = _menu_revision
+	var restarting: bool = simulation.transition_action == "restart"
+	dialog_body.add_child(_label("새 전투를 시작할까요?" if restarting else "이번 전투를 포기할까요?", 24))
+	dialog_body.add_child(_label("확인하기 전에는 현재 레벨·선택지·체력·마력이 유지됩니다.\n확인하면 이번 전투를 이어서 진행할 수 없습니다.", 19))
+	cancel_button = _button("취소 · 기존 전투로", _cancel_transition.bind(ticket, revision))
+	dialog_body.add_child(cancel_button)
+	confirm_button = _button("확인 · 새 전투 시작" if restarting else "확인 · 전투 포기", _confirm_transition.bind(ticket, revision))
+	dialog_body.add_child(confirm_button)
+	# Opening via a held key must not make the destructive action the default.
+	confirm_button.focus_mode = Control.FOCUS_NONE
+	_scroll.scroll_vertical = 0
+	overlay.show()
+	_fit_dialog()
+	_update_hud()
+	cancel_button.grab_focus()
+
+func _cancel_transition(ticket: int, revision: int) -> void:
+	if not _menu_matches(ticket, revision) or not simulation.cancel_transition(ticket):
+		return
+	_menu_revision += 1
+	movement.clear_input()
+	_magic_touch_id = -1
+	last_phase = -1
+	if simulation.phase == RunState.Phase.CHOOSING:
+		_sync_phase_ui()
+	else:
+		overlay.hide()
+		movement.set_enabled(true)
+	_update_hud()
+
+func _confirm_transition(ticket: int, revision: int) -> void:
+	if not _menu_matches(ticket, revision) or not simulation.confirm_transition(ticket):
+		return
+	_menu_revision += 1
+	_magic_touch_id = -1
+	movement.set_enabled(false)
+	if simulation.phase == RunState.Phase.RUNNING:
+		_after_run_started() # Confirmation already created the new run once.
+	else:
+		last_phase = simulation.phase
+		_show_menu("abandoned")
+		_update_hud()
+
+func _return_to_lobby(ticket: int, revision: int) -> void:
+	if not _menu_matches(ticket, revision) or not simulation.return_to_ready(ticket):
+		return
+	_magic_touch_id = -1
+	movement.set_enabled(false)
+	last_phase = simulation.phase
+	_show_menu("ready")
+	_update_hud()
+
+func resume_game() -> void:
+	if not simulation.transition_action.is_empty():
+		return # Do not bypass a confirmation via an old Continue callback.
+	_menu_revision += 1
+	super.resume_game()
+
+func _sync_phase_ui() -> void:
+	if simulation.phase == RunState.Phase.ABANDONED and last_phase != simulation.phase:
+		last_phase = simulation.phase
+		movement.set_enabled(false)
+		_magic_touch_id = -1
+		_show_menu("abandoned")
+		return
+	super._sync_phase_ui()
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventScreenTouch and is_instance_valid(movement) and event.index == movement.touch_id:
@@ -328,6 +474,10 @@ func _input(event: InputEvent) -> void:
 	super._input(event)
 
 func _unhandled_key_input(event: InputEvent) -> void:
+	if not simulation.transition_action.is_empty() and event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_ESCAPE:
+		_cancel_transition(simulation.navigation_ticket, _menu_revision)
+		get_viewport().set_input_as_handled()
+		return
 	if _detail_open and event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_ESCAPE:
 		_close_skill_detail()
 		get_viewport().set_input_as_handled()
@@ -335,6 +485,14 @@ func _unhandled_key_input(event: InputEvent) -> void:
 	super._unhandled_key_input(event)
 
 func pause_game() -> void:
+	if simulation.interrupt_transition():
+		# Inherited focus notification calls this; never resume on focus regain.
+		_magic_touch_id = -1
+		movement.set_enabled(false)
+		last_phase = simulation.phase
+		_show_menu("paused")
+		_update_hud()
+		return
 	# The inherited _notification handles focus/input release. Intercept only a
 	# paused detail: explicit Continue is required after an app interruption.
 	if _detail_open and simulation.phase == RunState.Phase.PAUSED:
