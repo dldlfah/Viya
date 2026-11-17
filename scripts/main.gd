@@ -2,6 +2,7 @@ extends Node
 const RunState = preload("res://scripts/combat/run_state.gd")
 const BattleView = preload("res://scripts/combat/battle_view.gd")
 const MoveInput = preload("res://scripts/ui/move_input.gd")
+const FeedbackPanel = preload("res://scripts/ui/feedback_panel.gd")
 
 var simulation = RunState.new()
 var view
@@ -20,6 +21,9 @@ var resume_button: Button
 var magic_button: Button
 var mana_bar: ProgressBar
 var mana_text: Label
+var feedback_panel
+var feedback_overlay_label: Label
+var result_summary_label: Label
 var _magic_touch_id: int = -1
 var _magic_ui_ticket: int = -1
 var choice_buttons: Array[Button] = []
@@ -84,6 +88,7 @@ func _cast_magic(expected_ticket: int = -1) -> void:
 	var ticket: int = _magic_ui_ticket if expected_ticket < 0 else expected_ticket
 	simulation.cast_ultimate(ticket)
 	_update_magic_hud()
+	_update_feedback_hud()
 	view.queue_redraw()
 
 func _unhandled_key_input(event: InputEvent) -> void:
@@ -126,6 +131,7 @@ func pause_game() -> void:
 	movement.set_enabled(false)
 	last_phase = simulation.phase
 	_show_menu("paused")
+	_update_hud()
 
 func resume_game() -> void:
 	if simulation.phase != RunState.Phase.PAUSED:
@@ -138,6 +144,7 @@ func resume_game() -> void:
 		_sync_phase_ui() # Restore the same ticket/candidates, never reroll on pause.
 	else:
 		overlay.hide()
+	_update_hud()
 
 func _label(text: String, font_size: int = 20) -> Label:
 	var item := Label.new()
@@ -197,7 +204,7 @@ func _build_interface() -> void:
 	var top_row := HBoxContainer.new()
 	top_row.add_theme_constant_override("separation", 20)
 	top.add_child(top_row)
-	top_row.add_child(_label("VIYA / 마법 03", 24))
+	top_row.add_child(_label("VIYA / 반응 04", 24))
 	var growth_column := VBoxContainer.new()
 	growth_column.custom_minimum_size.x = 245
 	top_row.add_child(growth_column)
@@ -224,6 +231,8 @@ func _build_interface() -> void:
 	var bottom_row := HBoxContainer.new()
 	bottom_row.add_theme_constant_override("separation", 16)
 	bottom.add_child(bottom_row)
+	feedback_panel = FeedbackPanel.new()
+	bottom_row.add_child(feedback_panel)
 	var identity := VBoxContainer.new()
 	identity.custom_minimum_size.x = 190
 	bottom_row.add_child(identity)
@@ -292,6 +301,8 @@ func _add_slots(parent: VBoxContainer, title: String, target: Array[Label]) -> v
 
 func _clear_dialog() -> void:
 	choice_buttons.clear()
+	feedback_overlay_label = null
+	result_summary_label = null
 	for child in dialog_body.get_children():
 		dialog_body.remove_child(child)
 		child.queue_free()
@@ -302,6 +313,7 @@ func _show_levelup() -> void:
 	last_ticket = simulation.growth.ticket
 	movement.set_enabled(false)
 	dialog_body.add_child(_label("레벨업 · 원하는 강화 하나를 선택", 28))
+	_add_feedback_banner()
 	dialog_body.add_child(_label("전투 정지 / 남은 선택 %d회 / 이름·효과·강화 상한은 임시" % simulation.growth.pending, 18))
 	var choices: Array[String] = simulation.growth.offer
 	if choices.is_empty():
@@ -368,7 +380,8 @@ func _show_menu(kind: String) -> void:
 		dialog_body.add_child(start_button)
 	elif kind == "paused":
 		dialog_body.add_child(_label("일시정지 / 환경설정", 30))
-		dialog_body.add_child(_label("레벨업 선택도 그대로 보존됩니다.", 18))
+		dialog_body.add_child(_label("선택·마력·반응 시간이 그대로 보존됩니다.", 18))
+		_add_feedback_banner()
 		dialog_body.add_child(_label("전체 음량 (저장 · 전투 음원은 미탑재)", 17))
 		var slider := HSlider.new()
 		slider.min_value = 0.0
@@ -383,7 +396,12 @@ func _show_menu(kind: String) -> void:
 		dialog_body.add_child(_button("새 전투 시작", begin_run))
 	else:
 		dialog_body.add_child(_label("전투 종료", 30))
-		dialog_body.add_child(_label("Lv.%d / 생존 %.1f초 / 처치 %d" % [simulation.growth.level, simulation.elapsed, simulation.kills], 22))
+		var summary: Dictionary = simulation.result_summary()
+		result_summary_label = _label("Lv.%d / 생존 %.1f초 / 처치 %d\n발사 %d회 / 고유 마법 %d회" % [
+			summary["level"], summary["elapsed"], summary["kills"],
+			summary["shots"], summary["magic_casts"]], 22)
+		dialog_body.add_child(result_summary_label)
+		_add_feedback_banner()
 		start_button = _button("다시 출격", begin_run)
 		dialog_body.add_child(start_button)
 	overlay.show()
@@ -402,6 +420,7 @@ func _update_hud() -> void:
 		_update_slots(attack_slots, "attack")
 		_update_slots(passive_slots, "passive")
 	_update_magic_hud()
+	_update_feedback_hud()
 
 func _update_slots(labels: Array[Label], row: String) -> void:
 	var entries: Array[Dictionary] = simulation.growth.row_entries(row)
@@ -454,3 +473,26 @@ func _load_settings() -> void:
 		volume = clampf(float(config.get_value("audio", "master", 0.7)), 0.0, 1.0)
 	AudioServer.set_bus_volume_db(0, linear_to_db(maxf(volume, 0.0001)))
 	AudioServer.set_bus_mute(0, volume == 0.0)
+
+
+func _add_feedback_banner() -> void:
+	feedback_overlay_label = _label("", 18)
+	feedback_overlay_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	dialog_body.add_child(feedback_overlay_label)
+
+func _update_feedback_hud() -> void:
+	var data: Dictionary = simulation.feedback.snapshot(simulation.hp, simulation.max_hp)
+	var context: String = ""
+	match simulation.phase:
+		RunState.Phase.READY:
+			context = "출격 대기"
+		RunState.Phase.PAUSED:
+			context = "정지 · 반응 보존"
+		RunState.Phase.CHOOSING:
+			context = "선택 · 반응 보존"
+	if is_instance_valid(feedback_panel):
+		feedback_panel.present(data, context)
+	if is_instance_valid(feedback_overlay_label):
+		feedback_overlay_label.text = "비야 상태: %s%s" % [data["label"],
+			" / 저체력 경고 유지" if bool(data["low_hp"]) else ""]
+		feedback_overlay_label.add_theme_color_override("font_color", Color(str(data["accent"])))

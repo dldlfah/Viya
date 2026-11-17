@@ -2,6 +2,7 @@ extends RefCounted
 ## One authoritative simulation. All numbers/effects are provisional test tuning.
 const Growth = preload("res://scripts/progression/growth_state.gd")
 const MagicState = preload("res://scripts/combat/magic_state.gd")
+const FeedbackState = preload("res://scripts/combat/feedback_state.gd")
 enum Phase { READY, RUNNING, PAUSED, DEFEAT, CHOOSING }
 const WORLD_SIZE := Vector2(1800.0, 1200.0)
 const PLAYER_SPEED := 235.0
@@ -34,6 +35,7 @@ var effects: Array[Dictionary] = []
 var rng := RandomNumberGenerator.new()
 var growth = Growth.new()
 var magic = MagicState.new()
+var feedback = FeedbackState.new()
 var skill_clocks: Dictionary = {}
 var stats := {"power": 1.0, "rate": 1.0, "speed": PLAYER_SPEED,
 	"pickup": 80.0, "xp": 1.0, "crit": 0.0, "regen": 0.0, "ultimate": 0}
@@ -63,6 +65,7 @@ func start(seed_value: int = 0, character_id: String = "viya") -> bool:
 	if not growth.reset(character_id, int(rng.seed) ^ 0x51A7):
 		return false
 	magic.reset(candidate, character_id)
+	feedback.reset()
 	player = WORLD_SIZE * 0.5
 	facing = Vector2.RIGHT
 	hp = 100
@@ -102,6 +105,9 @@ func damage_player(amount: int) -> bool:
 	if hp == 0:
 		magic.invalidate_requests()
 		phase = Phase.DEFEAT
+		feedback.finish()
+	else:
+		feedback.trigger("hurt")
 	return true
 
 func add_enemy(at: Vector2) -> bool:
@@ -145,6 +151,7 @@ func acknowledge_exhausted(ticket: int) -> bool:
 func _begin_choice_if_needed() -> void:
 	if growth.pending > 0:
 		growth.open_offer()
+		feedback.level_up(growth.ticket)
 		magic.invalidate_requests()
 		phase = Phase.CHOOSING
 
@@ -158,6 +165,7 @@ func cast_ultimate(expected_ticket: int) -> bool:
 	_burst(player, float(cast["radius"]), float(cast["damage"]), "ultimate")
 	effects[-1]["life"] = float(cast["effect_duration"])
 	effects[-1]["duration"] = float(cast["effect_duration"])
+	feedback.trigger("magic")
 	return true
 
 func _effect_rank(effect: String) -> int:
@@ -181,6 +189,7 @@ func step(delta: float, direction: Vector2) -> void:
 	if phase != Phase.RUNNING or delta <= 0.0 or not is_finite(delta):
 		return
 	var dt := minf(delta, 0.05)
+	feedback.advance(dt, true)
 	elapsed += dt
 	hurt_clock = maxf(0.0, hurt_clock - dt)
 	var movement := direction.limit_length(1.0)
@@ -388,3 +397,9 @@ func _move_bullets(dt: float) -> void:
 			_damage_enemy(victim, float(bullet["damage"]))
 		if bullet["remaining"] <= 0 or bullet["life"] <= 0.0:
 			bullets.remove_at(bullet_index)
+
+
+func result_summary() -> Dictionary:
+	# A new value-only snapshot; no reference to live collections escapes.
+	return {"ended": phase == Phase.DEFEAT, "level": growth.level,
+		"elapsed": elapsed, "kills": kills, "shots": shots, "magic_casts": magic.casts}

@@ -1,0 +1,61 @@
+{
+  "source_base_commit": "efd5e70938ae7f32bb6e0938531eea66334cc078",
+  "command": "python tools/check_feedback_data.py",
+  "exit_code": 0,
+  "python_version": "3.13.5",
+  "base_blobs_verified_before_patch": {
+    "scripts/main.gd": "a239eb8826a327e667d94a1862b934cdbf3af819",
+    "scripts/combat/run_state.gd": "a1d825a79b2c3beaae752bc547403e3de569efb3",
+    "tools/check_project.py": "20ec1d6ac37ac774472b5f460b92b77dd064127f"
+  },
+  "targeted_source_contract": {
+    "status": "PASS",
+    "errors": [],
+    "negative_controls": [
+      {
+        "fixture": "missing_damage_hook",
+        "rejected": true
+      },
+      {
+        "fixture": "missing_reset",
+        "rejected": true
+      },
+      {
+        "fixture": "negative_duration",
+        "rejected": true
+      },
+      {
+        "fixture": "missing_low_hp_warning",
+        "rejected": true
+      },
+      {
+        "fixture": "missing_stale_guard",
+        "rejected": true
+      }
+    ],
+    "files_checked": 7,
+    "source_sha256": {
+      "scripts/combat/feedback_state.gd": "3ee19238fb9307bc9953fed3ecc266ecff420e2c74ceffe81409069372e87d88",
+      "scripts/combat/run_state.gd": "0b6ce7c0e431fc24d9454aec85385c423cd7d6167f48f3fe5f2e68c757c3e4c2",
+      "scripts/ui/feedback_panel.gd": "e6fa69fd4752e785eeaaa3a06f1652fe106436763d44217918688233903b2d10",
+      "scripts/main.gd": "caf2b9746dc333d226ec61667f015bec975e2c6009ad0d4a432325ab0fc6584b",
+      "tests/test_feedback.gd": "dd5794b79b07dac14692716471a6a977345ca0b92a9db24fc7a40c5ef6de6823",
+      "tools/check_project.py": "8195d4d7e6e547399a314a94dc59b9a7e1a4e8e46884668e1846a88f9cf6e858",
+      "tools/check_feedback_data.py": "f1bd6f415e919a32faab1b403073e24dcdda4b819938b9b707dacfc32320bec7"
+    },
+    "scope": "7 affected code/test/checker files: UTF-8, delimiters, whitespace, Python syntax, reaction constants, integration markers, engine-test registration and new dependency paths only. NOT the full project check or GDScript parser/type/runtime, rendering, or mobile input tests."
+  },
+  "source_fingerprint": "1f0c7861452ecf0d1deff51df470e9c6cdc596715ecd83ad1c7f516a4588be05",
+  "godot_runtime": {
+    "status": "NOT_VERIFIED",
+    "detected_engine": null,
+    "reason": "No Godot executable in active environment; official binary fetch unavailable. No GDScript engine test was executed."
+  },
+  "full_project_regression": "NOT_EXECUTED_THIS_TURN",
+  "authored_engine_test": "tests/test_feedback.gd (registered after foundation/growth/magic tests)",
+  "windows_f5": "NOT_VERIFIED",
+  "rendered_layout": "NOT_VERIFIED",
+  "android_device": "NOT_VERIFIED",
+  "ios_device": "NOT_VERIFIED",
+  "preservation": "No changes to skills JSON, growth, magic, move_input, battle_view, project.godot, original tests or artwork are planned in this tree. Remote comparison is the final preservation check."
+}
