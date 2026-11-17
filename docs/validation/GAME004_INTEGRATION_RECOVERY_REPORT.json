@@ -9,7 +9,7 @@
     "tools/check_combat_cues.py": "aae93be3eb1433832729ab6773af63bd6d833d9d",
     "tests/test_mobile_hud.gd": "c32f36fb4528fa725d12c51b5e5b338c0173348f"
   },
-  "application": "git apply --check and git apply on exact baseline source files; final newline removed on four existing files to retain original EOF style, no code-body changes from pending patch.",
+  "application": "git apply --check and git apply on exact baseline source files; final LF removed on four existing files to retain baseline EOF style. Stale-detail regression invocation placed before the existing final restart assertion so that reset is checked after that regression; no existing assertions removed.",
   "runner_unit_tests": {
     "status": "PASS",
     "count": 12,
@@ -30,14 +30,28 @@
     "scripts/ui/mobile_main.gd": "731628a802726e201faf52edcd1f080ad5a26513",
     "tools/check_project.py": "5c8fecbd25da0020711750020871c02efeeef101",
     "tools/check_combat_cues.py": "a636d27b9ff59eda40ef90f3d103c390c92ee1be",
-    "tests/test_mobile_hud.gd": "e769209611d2c69614bef8eb3e63f58efc7a2cec",
-    "tests/test_check_project.py": "79c68add041492eb081a267e2f4ec04e52534d6e"
+    "tests/test_mobile_hud.gd": "6dd994a65bd8bba7cecb1d5afa1ee183e1d71893",
+    "tests/test_check_project.py": "79c68add041492eb081a267e2f4ec04e52534d6e",
+    "tools/bootstrap_godot.py": "1392f8af184e51585a1f508ad19218e95db1a1ee"
   },
   "source_sha256": {
     "scripts/ui/mobile_main.gd": "992058fe78d0594db9831448269936578f03387c8373d25b66bb6da80f82288e",
     "tools/check_project.py": "eeafd73fc4503c7af952331c093272a5510aade3fbae04e42afb77eb23f55157",
     "tools/check_combat_cues.py": "116137cc8b6fe104f8e54d1d1f2b5d4233eb3922c4fba6ac434075d62c019245",
-    "tests/test_mobile_hud.gd": "5f6fd9cf79824b36ea7918628d0199918c58d78265890886b16984eefaafc749",
-    "tests/test_check_project.py": "6e29b436f54ef9b6fd1660f7a5b973558708b805286df3c08411bf3aaf5a538f"
+    "tests/test_mobile_hud.gd": "b3a8196f336c60979900d29355092fb4f59b959d6487c55f7c16e3b54704f356",
+    "tests/test_check_project.py": "6e29b436f54ef9b6fd1660f7a5b973558708b805286df3c08411bf3aaf5a538f",
+    "tools/bootstrap_godot.py": "4c3ca17c3b90f9c5590d7a82a76ae71a353f4d15aae973cf37e03e745ebfdecc"
+  },
+  "engine_setup_script": {
+    "path": "tools/bootstrap_godot.py",
+    "target": "Godot 4.7.2 stable / Linux x86_64",
+    "official_archive_sha256": "cadd3204e728a35d3f13adb7fd0d7902636b79f6b95c40c265eb73b6c35329e4",
+    "python_compile": "PASS",
+    "help_invocation": "PASS",
+    "download_attempt_exit_code": 2,
+    "download_attempt_result": "ENVIRONMENT_NOT_READY: Temporary failure in name resolution",
+    "engine_installed": false,
+    "native_version_execution": "NOT_RUN",
+    "scope": "Pinned setup script prepared; actual environment and engine remain unavailable. No Codex account environment was created."
   }
 }

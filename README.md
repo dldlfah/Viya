@@ -1,36 +1,40 @@
 # Viya — 모바일 서바이버 게임
 
-기존 BREAKERS와 독립된 신규 프로젝트. **비야는 ART-001 시안 확정 단계에서 보류하고 게임 기능을 우선한다.**
+기존 BREAKERS와 독립된 프로젝트. **비야 ART-001은 승인 시안 단계에서 보류하고 게임 기능과 실제 실행 검증을 우선한다.**
 
-## 다음 세션 시작점
+## 세션 시작
 
-**[메인 작업문서](docs/CURRENT_WORK.md)와 [누적 개발현황·인수인계](docs/DEVELOPMENT_STATUS.md)를 반드시 함께 읽는다.** [PLANNED_WORK](docs/PLANNED_WORK.md)는 확정/후속/보류 계획, [NEXT_TASK](docs/NEXT_TASK.md)는 다음 게임 단위다. [AGENTS](AGENTS.md) · [제작 스킬](.agents/skills/viya-game-production/SKILL.md) · [초기 기획](docs/GAME_DESIGN_BASELINE.md) · [승인 아트](docs/ART_APPROVAL.md).
+**[메인 작업문서](docs/CURRENT_WORK.md)와 [누적 개발현황·인수인계](docs/DEVELOPMENT_STATUS.md)를 함께 읽는다.** [통합 계획](docs/PLANNED_WORK.md) · [다음 작업](docs/NEXT_TASK.md) · [작업원칙](AGENTS.md) · [제작 스킬](.agents/skills/viya-game-production/SKILL.md) · [게임 기획](docs/GAME_DESIGN_BASELINE.md) · [승인 아트](docs/ART_APPROVAL.md).
 
-활성 브랜치: `work/viya-turnaround-qa-20261117`. 게임 코드 기준: **`0082688a56994cfd5cf31f52b905692ef8096e0f` / GAME-004D**. 문서 커밋은 뒤에 올 수 있으므로 원격 HEAD를 다시 확인한다. main에는 게임 코드가 미병합이다.
+활성 브랜치는 **`work/viya-turnaround-qa-20261117`**다. 이전 원격 기준 `83ca47e4d391` 뒤에 미반영 통합 수정 코드 `bd76bac7c4ca1547f24de397d080ba180b826269`와 후속 기록/환경 준비 코드가 이어진다. **과거 로컬 PENDING.patch를 다시 적용하지 않는다.** main은 이전 기획본으로 유지되어 게임 코드가 아직 병합되지 않았다.
 
-## 연결된 게임 코드
+## 현재 코드 경로
 
-`project.godot → scenes/main.tscn → scripts/ui/mobile_main.gd (기존 main 상속) → 단일 RunState`. 모바일 가로/Compatibility/기준1280×720이다. **사용 경로 설명은 실제 Godot 실행·4.7.2 호환·모바일 합격 증거가 아니다.**
+`project.godot → scenes/main.tscn → scripts/ui/mobile_main.gd (main.gd 상속) → RunState 하나`.
 
-출격→이동/자동사격→처치 XP 수집→무작위3선택/강화→마법→확인 후 포기 또는 HP0패배→결과→재출격/대기. 전장 왼쪽 드래그·PC WASD/방향키, 오른쪽 마법 버튼·PC F. 보유 스킬칸은 읽기 전용 상세를 연다. 새 전투/포기에는 확인창이 있고 취소는 같은 전투/레벨업 후보를 보존한다. 오래된 화면 요청과 중복 확인을 거절하는 코드가 있다.
+출격 → 이동·자동사격 → 실제 처치/XP 수집 → 무작위3선택·강화 → 수동 마법 → 피드백 → 패배 또는 확인 후 포기 → 결과 → 대기/재출격. PC WASD/방향키, 이동 드래그, 마법 버튼/F, 보유 스킬칸의 읽기 전용 상세창을 작성했다. 좁은 HUD·카드 스크롤·확인/취소·상태 보존을 포함하지만 **전체의 실제 Godot 실행은 아직 미검증**이다.
 
-**GAME-004D:** 실제 적 HP 감소에 피격 색 강조·숫자, 실제 제거에 작은 소멸 링, 실제 픽업 수집에 `+XP` 숫자를 연결했다. 치명타는 기존 판정을 재사용하며 과잉 피해를 표시 숫자에 더하지 않는다. 이벤트48/강조80 상한, 수명 제한·근접 표시 합산을 사용한다. 정지/선택/확인/결과/대기에서는 시간이 멈추고 새 출격에서 초기화한다. 기존 전장 View가 그리며 새 원화·노드별 Timer/이펙트 제작은 없다.
+이번 통합 수정은 상세창 닫기의 오래된 콜백 차단과 기존 소스 검사6종의 통합 실행이다. 18종 구성, 스킬명 `[임시]`, 요구XP3배, 기본 드롭5XP, 임시 장착4+4와 서포터 빈칸2+2는 변경하지 않았다. 임시 도형·문구는 최종 비야 아트가 아니다.
 
-18종/기본3선택/저항 제외/임시명/요구XP3배(30,48,66…)/드롭5XP/임시 공격4·패시브4/서포터2+2 빈칸을 유지한다. HUD 반응은 문구·테두리 대역이고 최종 비야 얼굴 애니메이션이 아니다.
+## 개발 실행환경 지침
 
-## 검증
-
-**변경 소스6개 정적 검사 및 잘못된 소스8종 거절 PASS. 실제 Godot 구문/타입·실행·렌더·입력·Windows/모바일 NOT_VERIFIED. 전체 회귀 NOT_RUN.** 기존 코드를 보존한 소스 대조와 실제 게임 동작 검증은 구분한다.
+아래 명령은 개발 에이전트가 전체 체크아웃에서 실행한다. 사용자에게 수동 패치나 PC 로그 제출을 요구하는 절차가 아니다.
 
 ```sh
-# 이번 실행한 변경 소스 검사:
-python tools/check_combat_cues.py
-# 엔진이 있는 환경에서 전체 검사 (저장 경로 격리):
-python tools/check_project.py --godot /path/to/Godot
-# 개별 엔진 시험. 직접 실행은 사용자 설정 경로를 사용할 수 있다.
-Godot --headless --path . --script res://tests/test_combat_cues.gd
+# Python 실행기 자체 시험: 위임 검사/엔진은 테스트용 mock, 게임 검사와 별개
+python -m unittest discover -s tests -p test_check_project.py -v
+
+# Linux x86_64 개발환경: 공식 Godot 4.7.2 ZIP 체크섬 검증/캐시 준비 후 실제 검사
+python tools/bootstrap_godot.py --check
+
+# 엔진이 이미 준비된 환경: 기존 소스/데이터 + 네이티브 7종 시험 + 시작 장면
+python tools/check_project.py --godot /actual/path/to/Godot
 ```
 
-[GAME-004D 실제 검사 보고서](docs/validation/GAME004D_STATIC_REPORT.json). 기존 기반·성장·마법·반응·HUD·내비게이션 뒤에 전장피드백 시험을 등록했다. 작성한 엔진 시험을 실행한 것으로 세지 않는다. JSON 내보내기 포함·기기 안전영역·물리 다중터치·FPS는 별도 미검증이다. 유료 CI/Actions·외부 아트 생성은 사용하지 않았다.
+bootstrap은 계정/Codex 환경을 생성하지 않는다. 별도 root 권한·유료 CI·사용자 PC 변경 없이 실행용 바이너리를 개발환경 캐시에 준비하는 스크립트다. 공식 ZIP을 이미 갖춘 환경에서는 `--archive`를 사용할 수 있다.
 
-다음은 새 연출 확장보다 **누적 기본 플레이의 통합 오류 수정과 첫 실행 검수본 준비**다. 승인 아트나 기존 BREAKERS를 변경하지 않는다.
+## 실제 결과와 미검증
+
+Python 실행기 단위시험 **12개 PASS**, bootstrap 구문/도움말 PASS. 실제 다운로드 시도는 DNS 오류로 종료2, **Godot 설치·네이티브 검사·화면·모바일 NOT_VERIFIED, 최신 전체 프로젝트 회귀 NOT_RUN, Codex 클라우드 환경 NOT_CREATED**다. [최종 검사 보고서](docs/validation/GAME004_INTEGRATION_RECOVERY_REPORT.json) · [환경 시도 로그](docs/validation/GAME004_ENVIRONMENT_ATTEMPT.log).
+
+새 기능·캐릭터·연출 단계를 계속 늘리지 않고 기존 기본 루프의 실제 실행과 첫 오류 수정을 다음 단위로 유지한다. main 병합·배포·유료 Actions는 별도 승인 없이 수행하지 않는다.
