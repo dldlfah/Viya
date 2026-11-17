@@ -1,0 +1,30 @@
+{
+  "stage": "GAME-005 growth overview",
+  "base_commit": "5f9a7fcbcec5d60a4ebaa5e4b364d062c4a6b4fa",
+  "source_checks": {
+    "status": "PASS",
+    "files_checked": 4,
+    "errors": [],
+    "scope": "UTF-8, balanced delimiters/ordinary strings, tabs/trailing whitespace, duplicate methods, read-only helper API usage, unchanged previous HUD test text. Not GDScript parser/type/runtime."
+  },
+  "existing_hud_tests_preserved": true,
+  "native_suite_registration": "test_mobile_hud.gd calls OverviewChecks.run(scene, verify) inside its existing engine invocation",
+  "new_native_assertions_authored": 26,
+  "user_validation": {
+    "quote": "오류는 없어 현재까지 모두 ok. 다음",
+    "applies_to": "previous work reported to user before GAME-005",
+    "status": "USER_REPORTED_OK",
+    "exact_tested_sha": "NOT_PROVIDED",
+    "engine_version": "NOT_PROVIDED",
+    "platform": "NOT_PROVIDED"
+  },
+  "godot_runtime": "NOT_RUN",
+  "new_feature_user_acceptance": "NOT_YET_REPORTED",
+  "full_project_regression": "NOT_RUN",
+  "source_sha256": {
+    "tests/test_growth_overview.gd": "a080c0a3bbd4c10c089a4780c21b12e223a25badf409d988d4229b7b79c9a662",
+    "tests/test_mobile_hud.gd": "64e746bb03d8e86aaaea3d97b15df4fa1e6557f84414d34c9cad0bef9d479d10",
+    "scripts/ui/growth_overview.gd": "283395c4c552d9ba80bf5a8de34e849da66bb2556c3df1b2954b3198937a4318",
+    "scripts/ui/mobile_main.gd": "2d878bfc42d514f077ae8dd04c672c1e51d146a9ccfa3ae1d71de783273e63ea"
+  }
+}

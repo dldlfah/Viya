@@ -3,6 +3,7 @@ extends SceneTree
 const Layout = preload("res://scripts/ui/hud_layout.gd")
 const RunState = preload("res://scripts/combat/run_state.gd")
 const MoveInput = preload("res://scripts/ui/move_input.gd")
+const OverviewChecks = preload("res://tests/test_growth_overview.gd")
 var checks := 0
 var failures: Array[String] = []
 
@@ -207,6 +208,7 @@ func _run() -> void:
 	scene.resume_button.pressed.emit()
 	verify(scene.simulation.phase == RunState.Phase.RUNNING, "Explicit Continue resumes after detail interruption")
 	_test_stale_detail_close(scene)
+	OverviewChecks.run(scene, verify)
 	scene.begin_run()
 	verify(not scene._detail_open and scene.simulation.growth.owned == {"common_rifle": 1}, "Restart clears detail state and per-run upgrades")
 	scene.queue_free()

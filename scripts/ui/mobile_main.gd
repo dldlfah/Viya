@@ -3,6 +3,7 @@ extends "res://scripts/main.gd"
 ## in the existing main and simulation scripts. No new artwork or balance rules.
 const HudLayout = preload("res://scripts/ui/hud_layout.gd")
 const ResponsiveFeedback = preload("res://scripts/ui/responsive_feedback_panel.gd")
+const GrowthOverview = preload("res://scripts/ui/growth_overview.gd")
 var layout_data: Dictionary = {}
 var safe_area_override := Rect2() # Logical-coordinate test injection, empty in production.
 var slot_buttons: Array[Button] = []
@@ -27,6 +28,11 @@ var cancel_button: Button
 var leave_button: Button
 var lobby_button: Button
 var _menu_revision: int = 0
+var overview_button: Button
+var overview_return_button: Button
+var _overview_open := false
+var _overview_origin: String = ""
+var _final_growth: Dictionary = {}
 
 func _ready() -> void:
 	super._ready()
@@ -226,6 +232,8 @@ func _apply_layout() -> void:
 	_update_magic_hud()
 
 func _clear_dialog() -> void:
+	overview_button = null
+	overview_return_button = null
 	_menu_revision += 1
 	confirm_button = null
 	cancel_button = null
@@ -236,6 +244,9 @@ func _clear_dialog() -> void:
 	super._clear_dialog()
 
 func _show_menu(kind: String) -> void:
+	_overview_open = false
+	if kind in ["defeat", "abandoned"] and _final_growth.is_empty():
+		_final_growth = GrowthOverview.capture(simulation)
 	_modal_kind = kind
 	_detail_open = false
 	super._show_menu(kind)
@@ -264,10 +275,12 @@ func _show_menu(kind: String) -> void:
 	elif kind == "ready":
 		var heading: Label = dialog_body.get_child(0) as Label
 		heading.text = "VIYA | 출격 대기"
+	_add_growth_access(kind)
 	_scroll.scroll_vertical = 0
 	_fit_dialog()
 
 func _show_levelup() -> void:
+	_overview_open = false
 	_modal_kind = "choosing"
 	_detail_open = false
 	super._show_levelup()
@@ -285,6 +298,7 @@ func _show_levelup() -> void:
 			button.reparent(_choice_grid)
 		dialog_body.remove_child(old_row)
 		old_row.queue_free()
+	_add_growth_access("choosing")
 	_fit_dialog()
 
 func _fit_dialog() -> void:
@@ -364,6 +378,9 @@ func begin_run() -> void:
 	_after_run_started()
 
 func _after_run_started() -> void:
+	_overview_open = false
+	_overview_origin = ""
+	_final_growth.clear()
 	_menu_revision += 1
 	_detail_open = false
 	_magic_touch_id = -1
@@ -458,6 +475,8 @@ func _return_to_lobby(ticket: int, revision: int) -> void:
 	_update_hud()
 
 func resume_game() -> void:
+	if _overview_open:
+		return # Overview owns its guarded return path.
 	if not simulation.transition_action.is_empty():
 		return # Do not bypass a confirmation via an old Continue callback.
 	_menu_revision += 1
@@ -478,6 +497,10 @@ func _input(event: InputEvent) -> void:
 	super._input(event)
 
 func _unhandled_key_input(event: InputEvent) -> void:
+	if _overview_open and event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_ESCAPE:
+		_close_growth_overview(simulation.navigation_ticket, _menu_revision)
+		get_viewport().set_input_as_handled()
+		return
 	if not simulation.transition_action.is_empty() and event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_ESCAPE:
 		_cancel_transition(simulation.navigation_ticket, _menu_revision)
 		get_viewport().set_input_as_handled()
@@ -489,6 +512,15 @@ func _unhandled_key_input(event: InputEvent) -> void:
 	super._unhandled_key_input(event)
 
 func pause_game() -> void:
+	if _overview_open:
+		# Focus loss cancels old overview callbacks. Never auto-resume the run.
+		_overview_open = false
+		_magic_touch_id = -1
+		movement.set_enabled(false)
+		var destination: String = "paused" if simulation.phase == RunState.Phase.PAUSED else _overview_origin
+		_show_menu(destination)
+		_update_hud()
+		return
 	if simulation.interrupt_transition():
 		# Inherited focus notification calls this; never resume on focus regain.
 		_magic_touch_id = -1
@@ -507,3 +539,75 @@ func pause_game() -> void:
 		_update_hud()
 		return
 	super.pause_game()
+
+func _add_growth_access(origin: String) -> void:
+	if origin not in ["paused", "choosing", "defeat", "abandoned", "ready"]:
+		return
+	if origin == "ready" and _final_growth.is_empty():
+		return
+	var is_final: bool = origin in ["defeat", "abandoned", "ready"]
+	var data: Dictionary = _final_growth if is_final else GrowthOverview.capture(simulation)
+	if data.is_empty():
+		return
+	dialog_body.add_child(_label(GrowthOverview.compact(data), 16))
+	var caption: String = "최종 성장 현황" if is_final else "보유 스킬 · 성장 현황"
+	overview_button = _button(caption, _open_growth_overview.bind(origin, simulation.navigation_ticket, _menu_revision))
+	dialog_body.add_child(overview_button)
+
+func _open_growth_overview(origin: String, ticket: int, revision: int) -> void:
+	if _overview_open or _detail_open or not _menu_matches(ticket, revision):
+		return
+	if origin != _modal_kind or not simulation.transition_action.is_empty():
+		return
+	if origin not in ["paused", "choosing", "defeat", "abandoned", "ready"]:
+		return
+	var is_final: bool = origin in ["defeat", "abandoned", "ready"]
+	if is_final and _final_growth.is_empty():
+		return
+	if origin == "choosing":
+		if simulation.phase != RunState.Phase.CHOOSING:
+			return
+		simulation.set_paused(true)
+	elif origin == "paused" and simulation.phase != RunState.Phase.PAUSED:
+		return
+	# No growth mutations or new authoritative simulation: copy already applied values.
+	var data: Dictionary = _final_growth.duplicate(true) if is_final else GrowthOverview.capture(simulation)
+	_overview_origin = origin
+	_magic_touch_id = -1
+	movement.set_enabled(false)
+	last_phase = simulation.phase
+	_clear_dialog()
+	_overview_open = true
+	_modal_kind = "overview"
+	dialog_body.add_child(_label("최종 성장 현황" if is_final else "현재 성장 현황", 24))
+	dialog_body.add_child(_label("읽기 전용 · 모든 스킬명과 수치는 임시입니다. 영구 저장·장착 변경·강화 기능은 없습니다.", 16))
+	overview_return_button = _button("닫기 · 이전 화면으로", _close_growth_overview.bind(simulation.navigation_ticket, _menu_revision))
+	dialog_body.add_child(overview_return_button)
+	for section in GrowthOverview.sections(data):
+		dialog_body.add_child(_label(str(section["title"]), 21))
+		dialog_body.add_child(_label(str(section["body"]), 17))
+	# A long list also has a bottom close button; both use the same stale-request guard.
+	dialog_body.add_child(_button("닫기 · 이전 화면으로", _close_growth_overview.bind(simulation.navigation_ticket, _menu_revision)))
+	_scroll.scroll_vertical = 0
+	overlay.show()
+	_fit_dialog()
+	_update_hud()
+	overview_return_button.grab_focus()
+
+func _close_growth_overview(ticket: int, revision: int) -> void:
+	if not _overview_open or not _menu_matches(ticket, revision):
+		return
+	if not simulation.transition_action.is_empty():
+		return
+	var origin: String = _overview_origin
+	_overview_open = false
+	_menu_revision += 1
+	movement.clear_input()
+	_magic_touch_id = -1
+	if origin == "choosing":
+		# Existing resume restores the same candidates/ticket, not a fresh draw.
+		resume_game()
+	else:
+		# Settings stays paused; results/lobby remain terminal/ready.
+		_show_menu(origin)
+	_update_hud()
