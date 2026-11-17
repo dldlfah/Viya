@@ -1,0 +1,22 @@
+{
+  "candidate": "VIYA_TURNAROUND_R2_ATTEMPT",
+  "status": "GENERATED_REVIEW_FAILED_NOT_APPROVED",
+  "generation_provider": "ChatGPT image generation",
+  "generation_id": "ea1977ea-88c8-42ae-9867-8f9bd697a089",
+  "file": "a_detailed_professional_character_turnaround_and_d.png",
+  "dimensions_px": [1536, 1024],
+  "bytes": 2349416,
+  "sha256": "65b44d4c6c7fc470ee792ae965ae53ea9c4e9d3581c9b7e7c5f7f1fc905688b9",
+  "archive": {"provider":"Higgsfield media storage only; not a Higgsfield generation","media_id":"1eb61d14-03cf-4f5a-9bf8-ddd5a86c2352","url":"https://d2ol7oe51mr4n9.cloudfront.net/user_3LHdo37hN3iiYXd8WT9stnWXw4M/1eb61d14-03cf-4f5a-9bf8-ddd5a86c2352.png","binary_in_git":false},
+  "review": [
+    "Image is a new decorative multi-panel dossier instead of the requested narrowly corrected R1 sheet.",
+    "Ivory upper-arm sleeves remain; the intended restoration of dark fitted upper-arm structures is not satisfied.",
+    "The original physical legwear asymmetry is not reliably maintained across all views.",
+    "Image text invents height and body measurements plus new expression panels. None of these generated labels are producer-approved design specifications, source measurements, rigging data or evidence of consistency. Ignore them for modeling.",
+    "An image caption claiming consistency does not establish that the views are projections of a single 3D model."
+  ],
+  "approved_source_replaced": false,
+  "use_for_modeling": false,
+  "higgsfield_generation_credits_spent_in_this_unit": 0,
+  "stop_rule": "Do not continue unrestricted whole-sheet regeneration. Preserve actual approved ART-001 and the source-based part contract; resolve remaining conflicts with one editable common 3D blockout and orthographic checks, not additional invented body measurements."
+}
