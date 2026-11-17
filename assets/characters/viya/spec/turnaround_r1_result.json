@@ -1,0 +1,24 @@
+{
+  "candidate": "VIYA_TURNAROUND_R1",
+  "status": "GENERATED_REVIEW_FAILED_NOT_APPROVED",
+  "generation_provider": "ChatGPT image generation",
+  "generation_id": "2ffb2f61-a5db-4085-8d96-057b601a7566",
+  "file": "a_clean_detailed_anime_style_character_turnaround.png",
+  "dimensions_px": [1536, 1024],
+  "bytes": 2080772,
+  "sha256": "86faa1d4553182ea6c22e7610c18702617415ff960aa2b4ce9412ccc91e0042a",
+  "archive": {"provider":"Higgsfield media storage only; no Higgsfield generation","media_id":"ad6d3862-3f8b-4d38-96fd-568726422331","url":"https://d2ol7oe51mr4n9.cloudfront.net/user_3LHdo37hN3iiYXd8WT9stnWXw4M/ad6d3862-3f8b-4d38-96fd-568726422331.png","binary_in_git":false},
+  "observed_improvements": ["A single aligned four-view sheet now exists instead of four unrelated page layouts.","Long corset no longer exposes the added midriff.","Front and rear right-thigh exposed straps versus left dark legwear are closer to the same physical arrangement."],
+  "observed_regressions": ["New ivory puff sleeves were invented; the approved source has dark fitted armored upper-arm structures and original elbow/arm exposure, not balloon sleeves.","Rightmost nose-right profile still displays exposed strapped near thigh rather than the continuous dark near-side left legwear indicated by front.","The large floral gold hair ornament differs from the small approved geometric ornament and is placed inconsistently with physical side ownership."],
+  "next_image_correction": {
+    "target": "Edit the just-generated R1 sheet itself, using the original approved VIYA dossier only to restore the following altered costume features. Do not generate a new character or change body shape.",
+    "output": "One corrected four-view sheet R2, same layout, same mature face, same body silhouette and deep ivory neckline, same four camera angles and shared guidelines; title VIYA - TURNAROUND R2 / CONSISTENCY CANDIDATE.",
+    "fix_1": "Remove invented ivory puff sleeves in all four panels. Restore the approved fitted charcoal/dark leather upper-arm sections, layered dark engraved shoulder plates and small elbow skin gaps. Preserve ivory blouse at the chest only and original neckline. No puffy white fabric at upper arms.",
+    "fix_2": "Keep physical character RIGHT thigh exposed with two dark horizontal straps and vertical buckle strap: front screen-left, rear screen-right, nose-left profile visible near side. Physical character LEFT thigh remains continuous dark stocking/legwear: front screen-right, rear screen-left, rightmost nose-right profile visible near side. Fix the rightmost panel's near thigh to match, without covering the exposed RIGHT thigh elsewhere. Do not mirror the entire costume.",
+    "fix_3": "Replace enlarged floral hair ornament with small original gold geometric hair ornament on the same physical character RIGHT temple: front viewer-left and rear viewer-right silhouette; it may be obscured on the far side in the nose-right profile. Do not duplicate onto both temples.",
+    "preserve": "All other features of the R1 sheet remain stable: mature adult glamorous proportions, full bust and fitted waist, long dark wavy hair, short black combat skirt, belts, crimson split drapes and tall gold-trimmed heeled boots. No scene, weapon, glamour pose, new armor set or new outfit. Maintain neutral resting hair rather than wind-swept volume.",
+    "scope_limit": "One bounded targeted correction pass. Generated output remains an unapproved candidate, not a game-ready 3D model."
+  },
+  "higgsfield_generation_credits_spent_in_this_unit": 0,
+  "approval": "NOT_APPROVED"
+}
