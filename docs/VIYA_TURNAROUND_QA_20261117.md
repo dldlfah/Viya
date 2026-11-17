@@ -66,3 +66,8 @@
 - **FAIL(품질):** 양측 전체 실루엣 정합성; 1.271폭 비율, 비대칭 머리카락/천 패널·의상 대응 불명확.
 - **NOT_VERIFIED:** 실제 단일 3D 모델 렌더의 정투영 일치, Blender/GLB 교체 의상, Godot·Android 실행.
 - **변경 범위:** 참고 자료 분석·가이드·텍스트 문서만. 외부 생성 크레딧 사용 0, 기존 BREAKERS와 승인 원화 변경 없음.
+
+## 6. GitHub에 보존한 검수용 이미지
+- [4방향 정렬 미리보기](../assets/references/qa/viya_4view_alignment_preview.jpg) — 이 브랜치에 실제 JPEG 바이너리로 저장한 검수용 축소 이미지.
+- [좌우 측면 외곽 비교](../assets/references/qa/viya_side_silhouette_comparison.jpg) — 좌측면을 반전한 **형상 대조용** 이미지. 비대칭 의상을 좌우 반전해 그대로 만들라는 지시가 아님.
+- 두 파일은 4방향 전체 원본 PNG의 대체 파일이 아니며, 원본 PNG는 Higgsfield QA ZIP에만 있다.
