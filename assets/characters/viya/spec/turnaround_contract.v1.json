@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "character": "VIYA",
+  "date": "2026-11-17",
+  "status": "correction_contract_not_art_approval",
+  "approved_design": "ART-001 / a_highly_detailed_layered_production_modeling_d.png",
+  "originals_are_immutable": true,
+  "source_inspection": "Approved dossier inspected from attached PNG; all four Higgsfield PNGs reopened and displayed in this work session.",
+  "view_naming": {
+    "front": "Face toward viewer; character RIGHT appears screen-left.",
+    "rear": "Back toward viewer; character RIGHT appears screen-right.",
+    "screen_left_profile": "Nose points screen-left. This image-direction label is not anatomical LEFT; use physical garment correspondence to identify the visible side.",
+    "screen_right_profile": "Nose points screen-right. This image-direction label is not anatomical RIGHT.",
+    "correction": "Earlier generation prompts mixed screen-facing direction and anatomical camera side. Preserve existing source names, but never propagate that ambiguity into bone or garment L/R identifiers."
+  },
+  "sources": {
+    "front": "https://d8j0ntlcm91z4.cloudfront.net/user_3LHdo37hN3iiYXd8WT9stnWXw4M/hf_20261116_174554_5a7ff135-f678-489d-98af-4acab0f49863.png",
+    "screen_left_profile": "https://d8j0ntlcm91z4.cloudfront.net/user_3LHdo37hN3iiYXd8WT9stnWXw4M/hf_20261116_183253_37f25fe8-c018-4785-84fb-06124d02152e.png",
+    "rear": "https://d8j0ntlcm91z4.cloudfront.net/user_3LHdo37hN3iiYXd8WT9stnWXw4M/hf_20261116_182525_159e8ce3-fe40-4de5-bcae-103d5ecaa5ef.png",
+    "screen_right_profile": "https://d8j0ntlcm91z4.cloudfront.net/user_3LHdo37hN3iiYXd8WT9stnWXw4M/hf_20261116_183252_b00b3827-726c-4c03-b934-690eadc98d03.png"
+  },
+  "parts": [
+    {"id":"head_face","observed":"Mature anime face in approved design; independently generated profiles are not a measured rotation.","correction":"Preserve approved facial identity, eye shape, jaw, nose and neck; same head dimensions in all views. No new expression set."},
+    {"id":"hair_front","observed":"Long dark-brown layered face-framing hair; original gold hair accessory must not migrate between sides.","correction":"Keep same fringe and accessory attached to the same physical side; screen position changes with camera."},
+    {"id":"hair_back","observed":"Left-facing profile has a strongly wind-swept expanded back mass; right-facing profile hangs closer to body. Rear obscures much of the back.","correction":"Reconcile one long, voluminous wavy hairstyle with gravity-down neutral fall, matching length and back-of-head-to-hip volume. Do not shorten hair or flatten the character design. Do not infer hidden back anatomy as verified."},
+    {"id":"top_ivory","observed":"Ivory fitted low-neckline blouse with original approved bust silhouette.","correction":"Maintain neckline, coverage, fit and adult proportions; profile must be true side projection, not frontal double-breast rendering."},
+    {"id":"corset","observed":"Front has a continuous long fitted black corset to the waist belt. Right-facing profile adds a bare midriff break absent from front.","correction":"Restore continuous long corset in the right-facing profile; keep original chest and thigh exposure unchanged. Carry seams and buckle rows around one torso instead of inventing a cropped top."},
+    {"id":"shoulder_armor_L_R","observed":"Front uses layered angular black-and-gold shoulder/upper-arm plates; right-facing profile simplifies them into a rounded shell with different arm coverage.","correction":"Use the same approved angular armor components and their overlaps in every view; retain distinct left/right identifiers. Avoid heavy armor redesign."},
+    {"id":"forearm_gloves_L_R","observed":"Wrist guard shapes and gold plate breaks differ between images.","correction":"Preserve glove length, fingers, wrist boundary and the same identifiable plate arrangement. Common neutral A-pose; no independent arm posing."},
+    {"id":"waist_gear","observed":"Front has multiple waist belts and side pouches; side/rear images invent different buckle and pouch placement.","correction":"Use front only as working placement guide under approved ART-001. Map each visible pouch to the same belt/hip; hidden buckle backs remain a modeling proposal, not claimed source fact."},
+    {"id":"skirt","observed":"Short black combat overskirt and fitted underlayer preserve a readable hip/thigh silhouette.","correction":"Match hem height and waist attachment across views. Do not replace with trousers, a long skirt or a new costume."},
+    {"id":"thigh_straps_R","observed":"Front working reference shows exposed upper thigh with horizontal dark bands and a vertical buckle strap on character RIGHT (viewer-left). Rear incorrectly exposes banded skin on both thighs; right-facing profile also reproduces that near-side exposed thigh.","correction":"Keep exposed strapped RIGHT thigh on front viewer-left and rear viewer-right. Carry the same bands around that physical leg. Do not duplicate the exposed strapped arrangement onto the opposite leg."},
+    {"id":"legwear_L","observed":"Front character LEFT thigh (viewer-right) has continuous dark legwear instead of the exposed strap arrangement.","correction":"Preserve continuous dark left legwear on rear viewer-left and the appropriate near side of the right-facing profile. This is preserving existing asymmetry, not increasing overall outfit coverage."},
+    {"id":"cape_crimson_L_R","observed":"Distinct split hip-hung crimson cloth panels have inconsistent widths, attachment, lengths and rune positions across the generated views.","correction":"Use two identifiable asymmetric side/rear panels with fixed hip attachments, shared hem heights per panel, matching gold rune placement and gravity-down drape. No wind, no new shoulder cape, no central full-body cover. Original intentional asymmetry is retained; hidden construction is a review proposal."},
+    {"id":"boots_L_R","observed":"Tall dark armored heeled boots; knee plates, gold lines and heel silhouettes vary in profiles.","correction":"Keep one knee-plate design, boot shaft height, heel height and sole construction; align knee/ankle/sole levels. Preserve separate left/right boot identity."},
+    {"id":"weapon_rifle","observed":"Modeling views are empty-handed; approved rifle exists separately in ART-001.","correction":"No rifle in this turnaround. Future weapon attachment and two-hand grips remain separate work."}
+  ],
+  "landmark_policy": {
+    "shared_landmarks": ["head_crown","chin","shoulder","waist","hip","kneecap","ankle","sole"],
+    "method": "Redraw the candidate to one common reference height and neutral pose; only uniform whole-view scaling/translation is permitted for registration. Do not stretch individual body regions to fabricate agreement.",
+    "limits": "Visible clothing landmarks are not measured joint centers. No precise 3D body dimensions are claimed from these images."
+  },
+  "correction_image_brief": {
+    "deliverable": "One new clean four-view character turnaround correction sheet R1, not another decorative dossier and not a 3D mesh. Four full-body views: front, nose-left profile, rear, nose-right profile. Equal scale and baseline, same neutral A-pose physically viewed from each angle.",
+    "visual_authority": "Use attached approved VIYA dossier as identity/style authority; use reopened generated views only to locate the concrete conflicts described above.",
+    "preserve": "Adult mature glamorous character, full original curvy silhouette, narrow corseted waist, original ivory low neckline and exposed areas, long dark wavy hair, charcoal black/antique-gold armor, crimson split cloth and expressive hand-inked dark fantasy anime treatment. No photorealism and no generic game-doll redesign.",
+    "targeted_changes": "Correct inconsistent hair rest shape; restore long corset in side view; fix physical right-thigh straps versus left dark legwear; map the same shoulder, belt, pouch, boot and crimson cloth parts through all four views. Do not use a mirrored copy as the opposite costume side.",
+    "presentation": "Warm neutral plain background, no scenery or weapon, thin common alignment guides only, full uncropped figures with separated panel spacing, brief labels FRONT / PROFILE LEFT / BACK / PROFILE RIGHT and subtitle CONSISTENCY CANDIDATE R1. No detailed lore panels or close-up sexual framing.",
+    "generation_channel": "ChatGPT image generation correction candidate; no additional paid Higgsfield generation authorized or submitted in this work unit.",
+    "approval": "Candidate only. Requires actual output inspection and producer approval; do not mark model-ready solely because an image was generated."
+  },
+  "review_rules": [
+    "Compare named parts and anatomical side ownership, not overall mirrored silhouette IoU as a pass/fail threshold.",
+    "Preserve original files and do not change BREAKERS or Viya main.",
+    "Separate observed source content from inferred hidden construction and proposed repairs.",
+    "Do not rig the rejected SAM 3D mesh. No new character, costume, skill or gameplay expansion in this unit."
+  ]
+}
