@@ -4,40 +4,30 @@
 
 ## 다음 세션 시작점
 
-**[누적 개발현황 및 인수인계 문서](docs/DEVELOPMENT_STATUS.md)가 있다.** 메인 작업문서 [CURRENT_WORK](docs/CURRENT_WORK.md)와 함께 반드시 읽는다. 게임 기능·업데이트 이력·커밋·임시 수치·검증/미검증·아트 보류·다음 재개 위치가 기록되어 있다.
+**[메인 작업문서](docs/CURRENT_WORK.md)와 [누적 개발현황·인수인계](docs/DEVELOPMENT_STATUS.md)를 반드시 함께 읽는다.** 후속/보류 계획은 [PLANNED_WORK](docs/PLANNED_WORK.md), 다음 게임 단위는 [NEXT_TASK](docs/NEXT_TASK.md)다. [AGENTS](AGENTS.md) · [제작 스킬](.agents/skills/viya-game-production/SKILL.md) · [게임 기획](docs/GAME_DESIGN_BASELINE.md) · [승인 아트](docs/ART_APPROVAL.md).
 
-활성 브랜치는 **`work/viya-turnaround-qa-20261117`**이며 이름과 달리 현재 게임 개발도 여기서 이어간다. 기록 기준 게임 코드는 `bf6772e7ec3652947e12e966858397b12c510706` / GAME-004B다. `main`에는 게임 업데이트가 아직 병합되지 않았다. 원격 HEAD는 문서 커밋 이후 달라질 수 있으므로 매 세션 확인한다. 다음 게임 단위는 **GAME-004C: 이탈 확인·취소 / 결과 → 출격 대기 복귀**다.
+활성 브랜치는 `work/viya-turnaround-qa-20261117`. 게임 코드 기준은 **`189aba3574917249b5823a792660d0bb4958b9bb` / GAME-004C**이며 문서 커밋은 뒤에 올 수 있다. main에는 게임 코드가 아직 병합되지 않았다. 새 세션은 실제 원격 HEAD를 확인하고 기존 브랜치를 계속 사용한다.
 
-## 시작 문서
+## 현재 연결한 게임 흐름
 
-- **[메인 작업문서](docs/CURRENT_WORK.md)** · **[누적 개발현황](docs/DEVELOPMENT_STATUS.md)** · [다음 게임 작업](docs/NEXT_TASK.md)
-- **[통합 작업 예정 문서](docs/PLANNED_WORK.md)** — 확정 방향·후속/보류 아트 계획의 단일 기준.
-- [작업원칙](AGENTS.md) · [제작 스킬](.agents/skills/viya-game-production/SKILL.md)
-- [게임 기획](docs/GAME_DESIGN_BASELINE.md) · [승인 아트](docs/ART_APPROVAL.md) · [자산 등록 상태](docs/ASSET_MANIFEST.md)
+`project.godot` → `scenes/main.tscn` → `scripts/ui/mobile_main.gd` (기존 main 상속) → 하나의 RunState를 사용한다. 모바일 가로 / Compatibility / 기준1280×720. **아래는 작성된 코드의 사용 경로이며 실제 Godot·4.7.2 호환·모바일 실행 합격은 아니다.**
 
-읽기 순서: README → AGENTS → 제작 스킬 → CURRENT_WORK → DEVELOPMENT_STATUS → PLANNED_WORK → GAME_DESIGN_BASELINE/ART_APPROVAL → NEXT_TASK. 이후 작업마다 현재/누적/다음 기록을 함께 갱신한다.
+출격 → 이동/자동사격 → 처치 XP 수집 → 무작위3선택/강화 → 마법 → 패배 또는 확인 후 포기 → 결과 → 재출격/출격 대기. 전장 왼쪽 드래그 또는 PC WASD/방향키로 이동, 마법은 오른쪽 버튼/PC F다. 보유 스킬칸은 읽기 전용 전체 이름·레벨·효과 상세를 연다.
 
-## GAME-004B: 모바일 HUD·스킬 상세 코드 연결
+**GAME-004C 변경:** 설정창의 새 전투/포기에 확인창을 추가했다. 확인 전에는 현재 성장·HP·MP를 보존하고 취소/Esc는 동일 전투 또는 같은 레벨업 후보로 복귀한다. 포기는 실제 HP0 패배와 구분하며 결과에서 출격 대기로 돌아갈 수 있다. 화면/전투 요청 식별번호로 낡은 버튼·중복 확인을 차단하고, 확인창에서 앱이 중단되면 정지 상태를 유지한다.
 
-Godot 4.x에서 `project.godot`를 열어 F5 → 출격하는 시작 경로다. 실제 Godot 구문/타입·실행·4.7.2 호환과 모바일 렌더는 아직 미검증이다. Compatibility 렌더러와 모바일 가로 기준을 유지한다.
-
-시작 장면은 `scripts/ui/mobile_main.gd`를 사용하고 기존 `scripts/main.gd`를 상속한다. 전투·성장·마법·반응 상태는 기존 소유자를 그대로 사용한다. HUD·전장·터치 범위는 `hud_layout.gd`의 동일 좌표를 사용하도록 작성했다. 좁은 가로 화면에서는 하단 상태/마법 영역과 스킬 두 줄을 나눠 배치하며, 긴 레벨업 카드는 세로 스크롤로 확인한다.
-
-전장 왼쪽 드래그 또는 PC WASD/방향키로 이동하고 가까운 적에게 자동사격한다. 처치 → 경험치 수집 → 무작위 3선택 → 강화. 오른쪽 고유 마법 버튼 또는 PC F로 마법을 사용한다. **보유 스킬 칸을 누르면 전체 임시 명칭·레벨·설명을 보는 읽기 전용 상세창**을 연다. 상세창은 전투를 정지하며 스킬 획득/강화/마법 사용은 하지 않는다. 닫거나 Esc로 이전 상태에 복귀한다.
-
-18종 구성, `[임시]` 명칭, 요구 XP3배(30,48,66,84…), 드롭 XP5, 임시 장착 공격4/패시브4, 빈 서포터2+2를 유지한다. 비야 마법의 MP40·쿨다운12초 등 수치는 기존 시제품 값이며 이번에는 변경하지 않았다. 반응은 전투 종료>피격>마법>레벨업>저체력>기본 순서의 문구/테두리 대역이다. 원화·3D·새 얼굴을 제작한 것이 아니다.
+이전 GAME-004B의 공유 HUD 배치·compact 모드·안전영역·카드 스크롤·스킬 상세는 유지한다. 스킬18종, `[임시]` 명칭, 요구XP3배(30,48,66,84…), 드롭5XP, 임시 공격4/패시브4, 빈 서포터2+2와 마법 수치는 변경하지 않았다. 반응은 문구·테두리 대역이며 원화·3D를 새로 제작하지 않았다.
 
 ## 검증
 
-**GAME-004B 변경 소스 검사 PASS라는 기존 기록이 있다. 실제 Godot 실행·레이아웃·입력 전달·렌더·모바일 실기는 NOT_VERIFIED다.** 시험 코드를 작성한 것과 실행 통과는 다르다. GAME-004B에서 전체 회귀 검사기를 실행하지 않았으며, 이번 문서 정리에서도 게임 검사를 재실행하지 않았다.
+**이번 변경 소스5개 검사 및 잘못된 소스8종 대조 검사 PASS. Godot 구문/타입·엔진·렌더·실제 입력·Windows/모바일 NOT_VERIFIED. 전체 회귀 NOT_RUN.** 작성한 엔진 시험을 통과 실적으로 취급하지 않는다.
 
 ```sh
-# GAME-004B 변경 소스에 대한 정적 검사만:
-python tools/check_mobile_hud.py
-# 엔진이 있는 환경에서 전체 검사 (검사 데이터 경로 격리):
+python tools/check_run_navigation.py
+# 엔진이 있는 환경에서 기존 검사를 포함해 실행 (저장 경로 격리):
 python tools/check_project.py --godot /path/to/Godot
-# 개별 엔진 시험. 직접 실행은 사용자 설정 경로를 사용할 수 있다.
-Godot --headless --path . --script res://tests/test_mobile_hud.gd
+# 개별 실제 엔진 시험. 직접 호출은 사용자 설정 경로를 사용할 수 있다.
+Godot --headless --path . --script res://tests/test_run_navigation.gd
 ```
 
-기존 기반·성장·마법·반응 테스트 뒤에 새 HUD 테스트를 등록했다. [GAME-004B 검사 보고서](docs/validation/GAME004B_STATIC_REPORT.json). 과거 보고서별 범위·최신 검증 부채는 DEVELOPMENT_STATUS 8~10절을 확인한다. Android 내보내기의 JSON 포함, 실제 안전영역·터치·가독성·성능은 별도 검증 대상이다. 유료 CI/Actions·외부 아트 생성은 사용하지 않는다.
+[GAME-004C 검사 보고서](docs/validation/GAME004C_STATIC_REPORT.json). 기존 기반·성장·마법·반응·HUD 시험 뒤에 내비게이션 시험을 등록했다. 배포 JSON 포함, 실제 화면 안전영역·다중 터치·성능은 별도 검증 대상이다. 유료 CI/Actions와 외부 아트 생성은 사용하지 않는다.
