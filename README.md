@@ -1,40 +1,31 @@
 # Viya — 모바일 서바이버 게임
 
-기존 BREAKERS와 독립된 프로젝트. **비야 ART-001은 승인 시안 단계에서 보류하고 게임 기능과 실제 실행 검증을 우선한다.**
+기존 BREAKERS와 독립된 신규 프로젝트. **비야는 ART-001 승인 시안 확정 상태로 보류하고 게임 기능을 먼저 제작한다.**
 
-## 세션 시작
+## 다음 세션 필수 문서
 
-**[메인 작업문서](docs/CURRENT_WORK.md)와 [누적 개발현황·인수인계](docs/DEVELOPMENT_STATUS.md)를 함께 읽는다.** [통합 계획](docs/PLANNED_WORK.md) · [다음 작업](docs/NEXT_TASK.md) · [작업원칙](AGENTS.md) · [제작 스킬](.agents/skills/viya-game-production/SKILL.md) · [게임 기획](docs/GAME_DESIGN_BASELINE.md) · [승인 아트](docs/ART_APPROVAL.md).
+**[메인 작업문서 CURRENT_WORK](docs/CURRENT_WORK.md)와 [누적 개발현황 DEVELOPMENT_STATUS](docs/DEVELOPMENT_STATUS.md)를 함께 읽는다.** [통합 예정 PLANNED_WORK](docs/PLANNED_WORK.md) · [다음 실행 NEXT_TASK](docs/NEXT_TASK.md) · [AGENTS](AGENTS.md) · [제작 스킬](.agents/skills/viya-game-production/SKILL.md).
 
-활성 브랜치는 **`work/viya-turnaround-qa-20261117`**다. 이전 원격 기준 `83ca47e4d391` 뒤에 미반영 통합 수정 코드 `bd76bac7c4ca1547f24de397d080ba180b826269`와 후속 기록/환경 준비 코드가 이어진다. **과거 로컬 PENDING.patch를 다시 적용하지 않는다.** main은 이전 기획본으로 유지되어 게임 코드가 아직 병합되지 않았다.
+활성 브랜치 `work/viya-turnaround-qa-20261117`. 최신 GAME-005 코드 기준 **`58d1230a7d5387e5ca826a6db2ccc9fdbec418d9`**. 문서 커밋은 뒤에 올 수 있으므로 원격 HEAD 재확인. main에는 게임 코드가 아직 미병합이며 자동 병합하지 않는다.
 
-## 현재 코드 경로
+## 사용자 검수와 이번 추가
 
-`project.godot → scenes/main.tscn → scripts/ui/mobile_main.gd (main.gd 상속) → RunState 하나`.
+사용자는 GAME-005 직전까지 **“오류는 없어 현재까지 모두 ok”**라고 확인했다. USER_REPORTED_OK로 기록하고 게임 제작을 계속한다. 확인한 정확한 SHA/기기/엔진 버전은 제공되지 않았으며 자동 시험 통과로 바꾸지 않는다.
 
-출격 → 이동·자동사격 → 실제 처치/XP 수집 → 무작위3선택·강화 → 수동 마법 → 피드백 → 패배 또는 확인 후 포기 → 결과 → 대기/재출격. PC WASD/방향키, 이동 드래그, 마법 버튼/F, 보유 스킬칸의 읽기 전용 상세창을 작성했다. 좁은 HUD·카드 스크롤·확인/취소·상태 보존을 포함하지만 **전체의 실제 Godot 실행은 아직 미검증**이다.
+**GAME-005 성장 현황:** 설정창과 레벨업창에서 보유 공격·패시브의 레벨/설명, 장착 수, 고유 마법 강화·프로파일, 실제 적용 능력치를 한 화면에서 조회한다. 선택창에서 닫으면 기존 후보로 돌아간다. 결과/출격 대기에서는 직전 판의 최종 구성을 보며 새 출격 시 초기화한다. 영구 저장·장착 변경·추가 강화 기능이 아니다.
 
-이번 통합 수정은 상세창 닫기의 오래된 콜백 차단과 기존 소스 검사6종의 통합 실행이다. 18종 구성, 스킬명 `[임시]`, 요구XP3배, 기본 드롭5XP, 임시 장착4+4와 서포터 빈칸2+2는 변경하지 않았다. 임시 도형·문구는 최종 비야 아트가 아니다.
+기존 시작 경로 `project.godot → scenes/main.tscn → mobile_main.gd → main.gd/RunState` 유지. 출격→이동/자동사격→처치/XP→무작위3선택→수동마법→이탈/패배→결과→대기/재출격. PC WASD/방향키·F, 모바일 이동 드래그/마법 터치를 사용하도록 작성된 구조다.
 
-## 개발 실행환경 지침
+18종/기본3선택/임시 명칭/요구XP3배/드롭5/임시 공격4·패시브4/서포터2+2 빈칸 유지. 이번에는 게임 수치·아트·엔진 설정을 변경하지 않았다.
 
-아래 명령은 개발 에이전트가 전체 체크아웃에서 실행한다. 사용자에게 수동 패치나 PC 로그 제출을 요구하는 절차가 아니다.
+## 개발자 검증 경로
 
 ```sh
-# Python 실행기 자체 시험: 위임 검사/엔진은 테스트용 mock, 게임 검사와 별개
-python -m unittest discover -s tests -p test_check_project.py -v
-
-# Linux x86_64 개발환경: 공식 Godot 4.7.2 ZIP 체크섬 검증/캐시 준비 후 실제 검사
-python tools/bootstrap_godot.py --check
-
-# 엔진이 이미 준비된 환경: 기존 소스/데이터 + 네이티브 7종 시험 + 시작 장면
 python tools/check_project.py --godot /actual/path/to/Godot
+# 이번 회귀는 기존 HUD 시험 안에서 함께 실행된다.
+Godot --headless --path . --script res://tests/test_mobile_hud.gd
 ```
 
-bootstrap은 계정/Codex 환경을 생성하지 않는다. 별도 root 권한·유료 CI·사용자 PC 변경 없이 실행용 바이너리를 개발환경 캐시에 준비하는 스크립트다. 공식 ZIP을 이미 갖춘 환경에서는 `--archive`를 사용할 수 있다.
+이번4개 변경 소스의 기본 구조 검사 PASS. 기존 HUD assertions는 보존하고 성장 현황26개 assertion 호출을 추가했다. **이번 신규 코드의 Godot 자동 시험·신규 화면·모바일 및 전체 회귀는 미실행**이다. [이번 검사 범위/해시](docs/validation/GAME005_SOURCE_REPORT.json). 사용자 이전 정상 확인을 무시하지 않되 신규 기능까지 합격으로 소급하지 않는다.
 
-## 실제 결과와 미검증
-
-Python 실행기 단위시험 **12개 PASS**, bootstrap 구문/도움말 PASS. 실제 다운로드 시도는 DNS 오류로 종료2, **Godot 설치·네이티브 검사·화면·모바일 NOT_VERIFIED, 최신 전체 프로젝트 회귀 NOT_RUN, Codex 클라우드 환경 NOT_CREATED**다. [최종 검사 보고서](docs/validation/GAME004_INTEGRATION_RECOVERY_REPORT.json) · [환경 시도 로그](docs/validation/GAME004_ENVIRONMENT_ATTEMPT.log).
-
-새 기능·캐릭터·연출 단계를 계속 늘리지 않고 기존 기본 루프의 실제 실행과 첫 오류 수정을 다음 단위로 유지한다. main 병합·배포·유료 Actions는 별도 승인 없이 수행하지 않는다.
+고정 Linux 엔진 준비 도구 `tools/bootstrap_godot.py`와 이전 DNS 차단 기록은 유지한다. 도구 존재가 설치 완료나 Codex 환경 생성 완료를 뜻하지 않으며 같은 설치 시도를 매번 반복할 필요는 없다. 사용자 수동 패치·매회 Pull/로그를 작업 조건으로 요구하지 않는다.
