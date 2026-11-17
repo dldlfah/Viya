@@ -1,0 +1,115 @@
+{
+  "source_base_commit": "a53d286a48caa6ccc5403ae7165dd0e5d2685e95",
+  "command": "python tools/check_combat_cues.py",
+  "exit_code": 0,
+  "python_version": "3.13.5",
+  "changed_source_contract": {
+    "status": "PASS",
+    "files_checked": 6,
+    "errors": [],
+    "negative_controls": [
+      {
+        "fixture": "missing_reset",
+        "rejected": true
+      },
+      {
+        "fixture": "early_clock",
+        "rejected": true
+      },
+      {
+        "fixture": "changed_damage",
+        "rejected": true
+      },
+      {
+        "fixture": "drop_as_collection",
+        "rejected": true
+      },
+      {
+        "fixture": "unbounded_visuals",
+        "rejected": true
+      },
+      {
+        "fixture": "cosmetic_rng",
+        "rejected": true
+      },
+      {
+        "fixture": "mutable_view",
+        "rejected": true
+      },
+      {
+        "fixture": "unregistered_test",
+        "rejected": true
+      }
+    ],
+    "source_sha256": {
+      "scripts/combat/run_state.gd": "b36cf1b3700750631a2940feb334c19169ea1b1f25efea9fb610e879ca858678",
+      "scripts/combat/battle_view.gd": "2a6d96aac15411be105057716cb34d569f43a15829fe0c6695b4439715dfb74b",
+      "scripts/combat/combat_cues.gd": "ab4fbf025127efe6a6b152adb57fdd007b3a0c8db53be97f48e89663eda68c58",
+      "tests/test_combat_cues.gd": "7eb89735f7482c028507d0868ada3e267c5341110482f77b10106266c5eb7dba",
+      "tools/check_project.py": "16fe5d66ea2d93222de3c237defecb6b320e8b8a26c547bf5e04a6dc61ccc202",
+      "tools/check_combat_cues.py": "07e182e9d1adc974ebacac88b2e5dd99270109db05a94bb42543487ba942528d"
+    },
+    "source_fingerprint": "574b1acfb2ea88ead5152e97305d66867bec6662076345a23dd639aef2cf9705",
+    "baseline_run_blob": "c89a0e3f1aa8a0ffec0855a3fbd6b84f68b1e9b1",
+    "baseline_runner_blob": "1ab68ad8a51271e3d47db8b02d433991f42e8d6c",
+    "scope": "Changed-source UTF-8/delimiters/Python syntax, hook order, bounds, isolation, additive RunState restoration to exact Git blob and preserved engine runner. NOT Godot parser/type/runtime, visual quality, input dispatch, or FPS."
+  },
+  "unchanged_run_functions": [
+    "set_paused",
+    "damage_player",
+    "add_enemy",
+    "add_pickup",
+    "grant_xp",
+    "select_skill",
+    "acknowledge_exhausted",
+    "_begin_choice_if_needed",
+    "cast_ultimate",
+    "_effect_rank",
+    "_refresh_stats",
+    "_spawn_enemy",
+    "_move_enemies",
+    "_nearest",
+    "_auto_fire",
+    "_projectile",
+    "_burst",
+    "_effect",
+    "_tick_skills",
+    "_move_bullets",
+    "result_summary",
+    "_summary",
+    "has_active_run",
+    "request_transition",
+    "cancel_transition",
+    "confirm_transition",
+    "interrupt_transition",
+    "_valid_confirmation",
+    "_finish_run",
+    "return_to_ready"
+  ],
+  "validation_notes": [
+    "RunState and original runner reconstructed and matched exact Git blobs before editing.",
+    "Removing the reviewed additive cue hooks exactly reproduces the original RunState blob.",
+    "New visual checker initially matched a comment as code; comment filtering was fixed and all controls rerun.",
+    "No Python substitute of gameplay was used. Authored GDScript tests are not run."
+  ],
+  "godot_runtime": {
+    "status": "NOT_VERIFIED",
+    "reason": "No Godot executable found in current PATH or searched runtime directories. Official binary download was not obtained; no parser/type/runtime test ran."
+  },
+  "full_project_regression": "NOT_RUN",
+  "rendered_screen": "NOT_VERIFIED",
+  "windows_f5": "NOT_VERIFIED",
+  "android_device": "NOT_VERIFIED",
+  "ios_device": "NOT_VERIFIED",
+  "visual_caps": {
+    "events": 48,
+    "flashes": 80
+  },
+  "visual_seconds": {
+    "flash": 0.12,
+    "hit": 0.5,
+    "kill": 0.35,
+    "xp": 0.7
+  },
+  "rng_equivalence_engine_test": "AUTHORED_NOT_RUN"
+}

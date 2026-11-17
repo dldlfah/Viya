@@ -3,6 +3,7 @@ extends RefCounted
 const Growth = preload("res://scripts/progression/growth_state.gd")
 const MagicState = preload("res://scripts/combat/magic_state.gd")
 const FeedbackState = preload("res://scripts/combat/feedback_state.gd")
+const CombatCues = preload("res://scripts/combat/combat_cues.gd")
 enum Phase { READY, RUNNING, PAUSED, DEFEAT, CHOOSING, ABANDONED }
 const WORLD_SIZE := Vector2(1800.0, 1200.0)
 const PLAYER_SPEED := 235.0
@@ -36,6 +37,7 @@ var rng := RandomNumberGenerator.new()
 var growth = Growth.new()
 var magic = MagicState.new()
 var feedback = FeedbackState.new()
+var cues = CombatCues.new()
 var skill_clocks: Dictionary = {}
 var stats := {"power": 1.0, "rate": 1.0, "speed": PLAYER_SPEED,
 	"pickup": 80.0, "xp": 1.0, "crit": 0.0, "regen": 0.0, "ultimate": 0}
@@ -70,6 +72,7 @@ func start(seed_value: int = 0, character_id: String = "viya") -> bool:
 		return false
 	magic.reset(candidate, character_id)
 	feedback.reset()
+	cues.reset()
 	navigation_ticket += 1
 	transition_action = ""
 	_finished_result.clear()
@@ -199,6 +202,7 @@ func step(delta: float, direction: Vector2) -> void:
 		return
 	var dt := minf(delta, 0.05)
 	feedback.advance(dt, true)
+	cues.advance(dt)
 	elapsed += dt
 	hurt_clock = maxf(0.0, hurt_clock - dt)
 	var movement := direction.limit_length(1.0)
@@ -246,6 +250,7 @@ func _collect_pickups(dt: float) -> void:
 			pickups.remove_at(i)
 	if reward > 0.0:
 		grant_xp(reward)
+		cues.record_collected_xp(player, reward)
 
 func _spawn_enemy() -> void:
 	if enemies.size() >= MAX_ENEMIES:
@@ -306,13 +311,21 @@ func _damage_enemy(id: int, base_damage: float) -> void:
 		if int(enemies[i]["id"]) != id:
 			continue
 		var damage := base_damage * float(stats["power"])
+		var critical: bool = false
+		var previous_hp: int = int(enemies[i]["hp"])
+		var hit_at: Vector2 = enemies[i]["p"]
 		if float(stats["crit"]) > 0.0 and rng.randf() < float(stats["crit"]):
 			damage *= 2.0
+			critical = true
 		enemies[i]["hp"] -= maxi(1, int(ceil(damage)))
+		# Display HP actually removed, not theoretical overkill damage. Reuse the crit roll.
+		var hp_lost: int = maxi(0, previous_hp - maxi(0, int(enemies[i]["hp"])))
+		cues.record_hit(id, hit_at, hp_lost, critical)
 		if enemies[i]["hp"] <= 0:
 			add_pickup(enemies[i]["p"])
 			enemies.remove_at(i)
 			kills += 1
+			cues.record_kill(id, hit_at)
 		return
 
 func _burst(at: Vector2, radius: float, damage: float, kind: String) -> void:

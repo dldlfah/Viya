@@ -27,7 +27,9 @@ func _draw() -> void:
 		var at := _screen(enemy["p"])
 		if Rect2(Vector2.ZERO, size).grow(30).has_point(at):
 			draw_circle(at + Vector2(0, 5), 21, Color(0, 0, 0, 0.4))
-			draw_colored_polygon(PackedVector2Array([at + Vector2(0, -20), at + Vector2(19, 13), at + Vector2(-19, 13)]), Color("aa5364"))
+			var flash: float = simulation.cues.flash_alpha(int(enemy["id"]))
+			var enemy_color: Color = Color("aa5364").lerp(Color("fff1db"), flash)
+			draw_colored_polygon(PackedVector2Array([at + Vector2(0, -20), at + Vector2(19, 13), at + Vector2(-19, 13)]), enemy_color)
 			draw_rect(Rect2(at + Vector2(-18, -29), Vector2(36, 4)), Color("302b2e"))
 			draw_rect(Rect2(at + Vector2(-18, -29), Vector2(36.0 * enemy["hp"] / 20.0, 4)), Color("d98a8d"))
 	for bullet in simulation.bullets:
@@ -51,3 +53,38 @@ func _draw() -> void:
 	draw_circle(center, 16.0, player_color)
 	draw_line(center + direction * 6.0, center + direction * 34.0, Color("3a3e48"), 8.0, true)
 	draw_arc(center, 24.0, 0.0, TAU, 36, Color("b69a65"), 1.4, true)
+	_draw_combat_cues()
+
+func _draw_combat_cues() -> void:
+	# One existing canvas, no spawned labels/particles/timers and no state writes.
+	if not simulation.cues.enabled:
+		return
+	var font: Font = get_theme_default_font()
+	var visible_area := Rect2(Vector2.ZERO, size).grow(40.0)
+	for event in simulation.cues.events:
+		var at: Vector2 = _screen(event["p"])
+		if not visible_area.has_point(at):
+			continue
+		var fraction: float = clampf(float(event["life"]) / float(event["duration"]), 0.0, 1.0)
+		var progress: float = 1.0 - fraction
+		var kind: String = event["kind"]
+		if kind == "kill":
+			var ring := Color("d98a8d", fraction)
+			draw_arc(at, 12.0 + progress * 15.0, 0.0, TAU, 16, ring, 2.0, true)
+			continue
+		if font == null:
+			continue
+		var text: String
+		var color: Color
+		if kind == "xp":
+			text = "+%.2f XP" % float(event["amount"])
+			color = Color("7cd3c1", fraction)
+			at += Vector2(24.0, -18.0 - progress * 22.0)
+		else:
+			text = ("!%d" if bool(event["critical"]) else "%d") % int(event["amount"])
+			color = Color("f6d798" if bool(event["critical"]) else "fff1db", fraction)
+			at += Vector2(0.0, -35.0 - progress * 18.0)
+		var width: float = font.get_string_size(text, HORIZONTAL_ALIGNMENT_LEFT, -1, 16).x
+		at.x -= width * 0.5
+		draw_string_outline(font, at, text, HORIZONTAL_ALIGNMENT_LEFT, -1, 16, 2, Color(0.03, 0.03, 0.04, fraction))
+		draw_string(font, at, text, HORIZONTAL_ALIGNMENT_LEFT, -1, 16, color)
