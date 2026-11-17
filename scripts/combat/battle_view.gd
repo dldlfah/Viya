@@ -1,5 +1,6 @@
 extends Control
 ## Debug shapes are deliberately not final Viya character art.
+const AttackVisuals = preload("res://scripts/combat/attack_visuals.gd")
 var simulation
 
 func _ready() -> void:
@@ -34,17 +35,11 @@ func _draw() -> void:
 			draw_rect(Rect2(at + Vector2(-18, -29), Vector2(36.0 * enemy["hp"] / 20.0, 4)), Color("d98a8d"))
 	for bullet in simulation.bullets:
 		var at := _screen(bullet["p"])
-		draw_line(at - bullet["direction"] * 12.0, at, Color("f6d798"), 4.0, true)
+		AttackVisuals.draw_projectile(self, at, bullet["direction"], str(bullet.get("source", "rifle")))
 	for effect in simulation.effects:
-		var ultimate: bool = effect["kind"] == "ultimate"
-		var color := Color("f46caa") if ultimate else (Color("c95678") if effect["kind"] == "sigil" else Color("e3b66f"))
-		color.a = clampf(float(effect["life"]) / float(effect.get("duration", 0.25)), 0.0, 1.0)
 		var effect_at: Vector2 = _screen(effect["p"])
-		var radius: float = float(effect["radius"])
-		draw_arc(effect_at, radius, 0.0, TAU, 64, color, 5.0 if ultimate else 3.0, true)
-		if ultimate:
-			# The outer ring is the actual damage radius; the inner ring is visual only.
-			draw_arc(effect_at, radius * (1.0 - color.a), 0.0, TAU, 48, color, 2.0, true)
+		var link_from: Vector2 = _screen(effect.get("from", effect["p"]))
+		AttackVisuals.draw_effect(self, effect_at, effect, link_from)
 	var center := size * 0.5
 	var direction: Vector2 = simulation.facing
 	draw_circle(center + Vector2(0, 8), 23, Color(0, 0, 0, 0.5))

@@ -11,9 +11,9 @@ ROOT = Path(__file__).resolve().parents[1]
 FILES = ('scripts/combat/run_state.gd', 'scripts/combat/battle_view.gd',
          'scripts/combat/combat_cues.gd', 'tests/test_combat_cues.gd',
          'tools/check_project.py', 'tools/check_combat_cues.py')
-# GAME-006: reviewed formula extraction; numeric behavior checked against GAME-005.
-BASE_RUN_BLOB = '379e205f8c82ec76030b1081a21183247f405059'
-BASE_VIEW_BLOB = '26b14e587707ddfc6c80080e69fd219665b58a5d'
+# GAME-007: reviewed presentation metadata/drawing; gameplay restored byte-for-byte to GAME-006.
+BASE_RUN_BLOB = '7f2e884105953378b438368e3da0859c7be45a24'
+BASE_VIEW_BLOB = 'dcfd178805e51b086044faf98ff44606741283d4'
 BASE_RUNNER_BLOB = '1ab68ad8a51271e3d47db8b02d433991f42e8d6c'
 # Exact run_engine() from GAME-004D; all 7 suites and failure checks are protected.
 BASE_ENGINE_FUNCTION_SHA256 = '9156043eaf896d72565563cc1e2f623cf0c8fbac7f032f19bffee7e4946a69ee'

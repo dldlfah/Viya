@@ -1,0 +1,70 @@
+{
+  "base_commit": "ce7672c3d01545082bf4adee3bb381764b09cfcb",
+  "python_version": "3.13.5",
+  "changed_source_check": {
+    "status": "PASS",
+    "files_checked": 6,
+    "command": "python validate_sources.py (development workspace; source audit, not a Godot runtime test)",
+    "scope": "UTF-8, delimiters, ordinary strings, Python syntax, duplicate method names, whitespace; exact restoration to known source blobs; read-only drawing and committed metadata paths."
+  },
+  "verified_original_git_blobs": {
+    "scripts/combat/run_state.gd": "9490ba29005abe2350a0f5ae53bf3001f1756df2",
+    "scripts/combat/battle_view.gd": "b043b48f9bf690283c8d51d29648be407aa41ab8",
+    "tests/test_combat_cues.gd": "7cf8eb977f33ec2fbdae368168af1f9719c3eb79",
+    "tools/check_combat_cues.py": "67c0997e00fd2112d3f2881be4308701d16a56b3"
+  },
+  "run_state_preservation": {
+    "unchanged_functions": 35,
+    "changed_functions": ["_projectile", "_tick_skills"],
+    "inverse_metadata_edits_restore_exact_blob": "9490ba29005abe2350a0f5ae53bf3001f1756df2",
+    "additional_negative_controls": [
+      {"fixture": "changed_damage", "rejected": true},
+      {"fixture": "changed_profile", "rejected": true},
+      {"fixture": "changed_cooldown", "rejected": true},
+      {"fixture": "extra_rng", "rejected": true}
+    ]
+  },
+  "view_preservation": "Original View restored exactly by undoing only the visual-helper import, projectile draw and effect draw loop. Combat cues, player, enemies, pickups, camera and clip preserved.",
+  "existing_native_test_preservation": "Original combat-cues suite restored exactly by removing only a preload and one awaited helper call; original assertions and engine commands retained.",
+  "existing_cues_source_suite": {
+    "command": "python tools/check_combat_cues.py",
+    "exit_code": 0,
+    "status": "PASS",
+    "files_checked": 6,
+    "negative_controls": [
+      {"fixture": "missing_reset", "rejected": true},
+      {"fixture": "early_clock", "rejected": true},
+      {"fixture": "changed_damage", "rejected": true},
+      {"fixture": "drop_as_collection", "rejected": true},
+      {"fixture": "unbounded_visuals", "rejected": true},
+      {"fixture": "cosmetic_rng", "rejected": true},
+      {"fixture": "mutable_view", "rejected": true},
+      {"fixture": "unregistered_test", "rejected": true},
+      {"fixture": "ignored_engine_exit", "rejected": true},
+      {"fixture": "ignored_engine_errors", "rejected": true},
+      {"fixture": "ignored_test_result", "rejected": true}
+    ]
+  },
+  "source_sha256": {
+    "scripts/combat/run_state.gd": "408179bf32aa9413d874e4b1c7f55dfa9c8fc24ddec5bbc04d9edf11975f5712",
+    "scripts/combat/battle_view.gd": "d155bc4f262b697368dec11ee1185cc50f7faa568faec3415296f9c8bf631077",
+    "scripts/combat/attack_visuals.gd": "eb27b3fd8c0e7e281ef64e809c0480cfe3ddabfac2aa44973e8d4faddeef72db",
+    "tests/test_combat_cues.gd": "2729e3e732d8ea279f4c04b30f7699a510109f40219455e9130fd6ef008e1233",
+    "tests/test_attack_visuals.gd": "c1bd65890ee29ca93602ec0b074291f6252cc1b49f8fee946539f8c72cf3133f",
+    "tools/check_combat_cues.py": "ca0392057d3f707a5d212457f8081c7232dfe7abd77883285719aaaab56d9a17"
+  },
+  "source_git_blobs": {
+    "scripts/combat/run_state.gd": "8df920dea2e933085db3a920f5118545f462815a",
+    "scripts/combat/battle_view.gd": "84e7bb903791212ff03c93ebdb32474e5de40260",
+    "scripts/combat/attack_visuals.gd": "22b80496eae8d473b9448d6edda4aa1c875d1bf7",
+    "tests/test_combat_cues.gd": "2ca0c1ec91205cb322ee48b0069d15c62477f879",
+    "tests/test_attack_visuals.gd": "042918c1b23f54a45892403a7a6a00e51e038f3b",
+    "tools/check_combat_cues.py": "ab37ec0410d21444218c26407fd18862517d9b3b"
+  },
+  "godot_runtime": "NOT_RUN",
+  "rendered_screen": "NOT_VERIFIED",
+  "android_device": "NOT_VERIFIED",
+  "full_project_regression": "NOT_RUN",
+  "runtime_limitation": "No Godot executable found. This local workspace contains the exact changed files and the existing cue checker dependencies, not a full game checkout. No synthetic render or Python model was reported as game execution.",
+  "native_tests_authored": "25 projectile type/rank cases, 3 area-center cases, real chain endpoints after kills, overflow, phase freeze/reset, 180 real-step metadata isolation, actual F5 redraw read-only check. Authored only."
+}

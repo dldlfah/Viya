@@ -344,11 +344,11 @@ func _auto_fire() -> void:
 	if _projectile(direction, float(profile["damage"]), int(profile["hits"]), float(profile["speed"])):
 		shot_clock = float(profile["interval"])
 
-func _projectile(direction: Vector2, damage: float, hits: int, speed: float = BULLET_SPEED) -> bool:
+func _projectile(direction: Vector2, damage: float, hits: int, speed: float = BULLET_SPEED, source: String = "rifle") -> bool:
 	if bullets.size() >= MAX_BULLETS:
 		return false
 	bullets.append({"p": player, "direction": direction, "life": 0.75,
-		"speed": speed, "damage": damage, "remaining": hits, "seen": {}})
+		"speed": speed, "damage": damage, "remaining": hits, "seen": {}, "source": source})
 	shots += 1
 	return true
 
@@ -412,16 +412,16 @@ func _tick_skills(dt: float) -> void:
 		match effect:
 			"scatter":
 				for n in range(int(profile["projectiles"])):
-					_projectile(direction.rotated((n - 1) * 0.22), float(profile["damage"]), int(profile["hits"]), float(profile["speed"]))
+					_projectile(direction.rotated((n - 1) * 0.22), float(profile["damage"]), int(profile["hits"]), float(profile["speed"]), effect)
 			"lance":
-				_projectile(direction, float(profile["damage"]), int(profile["hits"]), float(profile["speed"]))
+				_projectile(direction, float(profile["damage"]), int(profile["hits"]), float(profile["speed"]), effect)
 			"grenade":
 				_burst(at, float(profile["radius"]), float(profile["damage"]), "blast")
 			"pulse":
 				_burst(player, float(profile["radius"]), float(profile["damage"]), "pulse")
 			"crossfire":
 				for n in range(int(profile["projectiles"])):
-					_projectile(Vector2.from_angle(n * PI * 0.5), float(profile["damage"]), int(profile["hits"]), float(profile["speed"]))
+					_projectile(Vector2.from_angle(n * PI * 0.5), float(profile["damage"]), int(profile["hits"]), float(profile["speed"]), effect)
 			"chain":
 				var used: Array[int] = []
 				var anchor := player
@@ -430,12 +430,14 @@ func _tick_skills(dt: float) -> void:
 					if linked.is_empty():
 						break
 					var victim: int = linked["id"]
+					var link_from: Vector2 = anchor
 					anchor = linked["p"]
 					used.append(victim)
 					_damage_enemy(victim, float(profile["damage"]))
 					_effect(anchor, 28.0, "chain")
+					effects[-1]["from"] = link_from # Committed link, not a new target search.
 			"heavy":
-				_projectile(direction, float(profile["damage"]), int(profile["hits"]), float(profile["speed"]))
+				_projectile(direction, float(profile["damage"]), int(profile["hits"]), float(profile["speed"]), effect)
 			"sigil":
 				_burst(at, float(profile["radius"]), float(profile["damage"]), "sigil")
 		skill_clocks[id] = float(profile["interval"])

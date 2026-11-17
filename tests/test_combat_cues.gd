@@ -2,6 +2,7 @@ extends SceneTree
 ## REAL GDScript tests. Python source checks are not execution of these cases.
 const RunState = preload("res://scripts/combat/run_state.gd")
 const Cues = preload("res://scripts/combat/combat_cues.gd")
+const AttackChecks = preload("res://tests/test_attack_visuals.gd")
 var checks: int = 0
 var failures: Array[String] = []
 
@@ -182,6 +183,7 @@ func _run() -> void:
 	await process_frame
 	scene.begin_run()
 	verify(scene.simulation.cues.events.is_empty(), "Active UI restart clears the presentation state")
+	await AttackChecks.run(scene, verify)
 	scene.queue_free()
 	await process_frame
 	await process_frame
