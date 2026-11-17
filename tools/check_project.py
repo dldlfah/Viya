@@ -14,6 +14,7 @@ import shutil
 import subprocess
 import tempfile
 from check_growth_data import check as check_growth
+from check_magic_data import check as check_magic
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -110,6 +111,7 @@ def run_engine(engine: str, out: Path) -> dict:
             [engine, '--headless', '--path', str(ROOT), '--editor', '--import', '--quit'],
             [engine, '--headless', '--path', str(ROOT), '--script', 'res://tests/test_combat_foundation.gd'],
             [engine, '--headless', '--path', str(ROOT), '--script', 'res://tests/test_growth.gd'],
+            [engine, '--headless', '--path', str(ROOT), '--script', 'res://tests/test_magic.gd'],
             [engine, '--headless', '--path', str(ROOT), '--quit-after', '120'],
         ]
         records = []
@@ -128,7 +130,7 @@ def run_engine(engine: str, out: Path) -> dict:
             except (OSError, subprocess.TimeoutExpired) as error:
                 return {'status': 'FAIL', 'commands': records, 'error': str(error)}
         return {'status': 'PASS', 'commands': records,
-                'scope': 'headless import, actual foundation/growth GDScript tests and main boot; visual/mobile approval separate'}
+                'scope': 'headless import, actual foundation/growth/magic GDScript tests and main boot; visual/mobile approval separate'}
 
 
 def main() -> int:
@@ -142,11 +144,15 @@ def main() -> int:
         growth = check_growth()
     except (OSError, ValueError, KeyError, TypeError) as error:
         growth = {'status': 'FAIL', 'error': str(error)}
-    report = {'static_integrity': integrity, 'growth_data_contract': growth,
+    try:
+        magic = check_magic()
+    except (OSError, ValueError, KeyError, TypeError) as error:
+        magic = {'status': 'FAIL', 'error': str(error)}
+    report = {'static_integrity': integrity, 'growth_data_contract': growth, 'magic_data_contract': magic,
               'godot_runtime': {'status': 'NOT_VERIFIED'}, 'windows_f5': 'NOT_VERIFIED',
               'android_device': 'NOT_VERIFIED', 'ios_device': 'NOT_VERIFIED'}
     code = 1
-    if integrity['status'] == 'PASS' and growth['status'] == 'PASS':
+    if all(x['status'] == 'PASS' for x in (integrity, growth, magic)):
         executable = args.godot or shutil.which('godot') or shutil.which('godot4')
         if executable:
             report['godot_runtime'] = run_engine(executable, args.output)

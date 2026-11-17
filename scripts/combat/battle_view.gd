@@ -34,9 +34,15 @@ func _draw() -> void:
 		var at := _screen(bullet["p"])
 		draw_line(at - bullet["direction"] * 12.0, at, Color("f6d798"), 4.0, true)
 	for effect in simulation.effects:
-		var color := Color("c95678") if effect["kind"] == "sigil" else Color("e3b66f")
-		color.a = clampf(float(effect["life"]) / 0.25, 0.0, 1.0)
-		draw_arc(_screen(effect["p"]), effect["radius"], 0.0, TAU, 40, color, 3.0, true)
+		var ultimate: bool = effect["kind"] == "ultimate"
+		var color := Color("f46caa") if ultimate else (Color("c95678") if effect["kind"] == "sigil" else Color("e3b66f"))
+		color.a = clampf(float(effect["life"]) / float(effect.get("duration", 0.25)), 0.0, 1.0)
+		var effect_at: Vector2 = _screen(effect["p"])
+		var radius: float = float(effect["radius"])
+		draw_arc(effect_at, radius, 0.0, TAU, 64, color, 5.0 if ultimate else 3.0, true)
+		if ultimate:
+			# The outer ring is the actual damage radius; the inner ring is visual only.
+			draw_arc(effect_at, radius * (1.0 - color.a), 0.0, TAU, 48, color, 2.0, true)
 	var center := size * 0.5
 	var direction: Vector2 = simulation.facing
 	draw_circle(center + Vector2(0, 8), 23, Color(0, 0, 0, 0.5))

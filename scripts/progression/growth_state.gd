@@ -3,6 +3,7 @@ extends RefCounted
 const Catalog = preload("res://scripts/progression/skill_catalog.gd")
 const ATTACK_CAP := 4 # Existing prototype UI cap, not the eight-type pool size.
 const PASSIVE_CAP := 4
+const XP_REQUIREMENT_MULTIPLIER := 3.0 # Required XP only; rewards stay unchanged.
 var catalog = Catalog.new()
 var character_id: String = "viya"
 var pool: Array[Dictionary] = []
@@ -33,7 +34,7 @@ func reset(id: String, seed_value: int) -> bool:
 	return true
 
 func threshold() -> float:
-	return 10.0 + float(level - 1) * 6.0 # Prototype tuning.
+	return (10.0 + float(level - 1) * 6.0) * XP_REQUIREMENT_MULTIPLIER
 
 func gain(amount: float) -> void:
 	if not is_finite(amount) or amount <= 0.0:

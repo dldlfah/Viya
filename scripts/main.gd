@@ -18,6 +18,10 @@ var dialog_body: VBoxContainer
 var start_button: Button
 var resume_button: Button
 var magic_button: Button
+var mana_bar: ProgressBar
+var mana_text: Label
+var _magic_touch_id: int = -1
+var _magic_ui_ticket: int = -1
 var choice_buttons: Array[Button] = []
 var attack_slots: Array[Label] = []
 var passive_slots: Array[Label] = []
@@ -41,6 +45,8 @@ func _physics_process(delta: float) -> void:
 func _sync_phase_ui() -> void:
 	var changed: bool = simulation.phase != last_phase
 	if changed:
+		if simulation.phase != RunState.Phase.RUNNING:
+			_magic_touch_id = -1
 		movement.set_enabled(simulation.phase == RunState.Phase.RUNNING)
 		last_phase = simulation.phase
 		if simulation.phase == RunState.Phase.DEFEAT:
@@ -49,7 +55,42 @@ func _sync_phase_ui() -> void:
 		if changed or last_ticket != simulation.growth.ticket:
 			_show_levelup()
 
+func _input(event: InputEvent) -> void:
+	if not is_instance_valid(magic_button) or not is_instance_valid(overlay):
+		return
+	# Native second-finger handling avoids relying on touch-to-mouse emulation.
+	if event is InputEventScreenTouch:
+		if event.index == _magic_touch_id:
+			if not event.pressed or event.canceled:
+				_magic_touch_id = -1
+			get_viewport().set_input_as_handled()
+			return
+		if overlay.visible or not magic_button.get_global_rect().has_point(event.position):
+			return
+		if event.pressed and not event.canceled and _magic_touch_id == -1:
+			_magic_touch_id = event.index
+			_cast_magic(_magic_ui_ticket)
+		get_viewport().set_input_as_handled()
+	elif event is InputEventScreenDrag and event.index == _magic_touch_id:
+		get_viewport().set_input_as_handled()
+	elif event is InputEventMouseButton and event.device == InputEvent.DEVICE_ID_EMULATION:
+		if not overlay.visible and magic_button.get_global_rect().has_point(event.position):
+			# Touch was handled above; do not cast again from its synthetic mouse click.
+			get_viewport().set_input_as_handled()
+
+func _cast_magic(expected_ticket: int = -1) -> void:
+	if overlay.visible:
+		return
+	var ticket: int = _magic_ui_ticket if expected_ticket < 0 else expected_ticket
+	simulation.cast_ultimate(ticket)
+	_update_magic_hud()
+	view.queue_redraw()
+
 func _unhandled_key_input(event: InputEvent) -> void:
+	if event is InputEventKey and event.pressed and not event.echo and event.physical_keycode == KEY_F:
+		_cast_magic()
+		get_viewport().set_input_as_handled()
+		return
 	if event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_ESCAPE:
 		if simulation.phase in [RunState.Phase.RUNNING, RunState.Phase.CHOOSING]:
 			pause_game()
@@ -59,12 +100,14 @@ func _unhandled_key_input(event: InputEvent) -> void:
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_APPLICATION_FOCUS_OUT or what == NOTIFICATION_APPLICATION_PAUSED:
+		_magic_touch_id = -1
 		if is_instance_valid(movement):
 			movement.clear_input()
 		if is_instance_valid(overlay):
 			pause_game()
 
 func begin_run() -> void:
+	_magic_touch_id = -1
 	if not simulation.start():
 		push_error("Invalid character skill catalog; run not started")
 		return
@@ -78,6 +121,7 @@ func begin_run() -> void:
 func pause_game() -> void:
 	if simulation.phase not in [RunState.Phase.RUNNING, RunState.Phase.CHOOSING]:
 		return
+	_magic_touch_id = -1
 	simulation.set_paused(true)
 	movement.set_enabled(false)
 	last_phase = simulation.phase
@@ -153,11 +197,11 @@ func _build_interface() -> void:
 	var top_row := HBoxContainer.new()
 	top_row.add_theme_constant_override("separation", 20)
 	top.add_child(top_row)
-	top_row.add_child(_label("VIYA / 성장 02", 24))
+	top_row.add_child(_label("VIYA / 마법 03", 24))
 	var growth_column := VBoxContainer.new()
 	growth_column.custom_minimum_size.x = 245
 	top_row.add_child(growth_column)
-	level_text = _label("Lv.1  EXP 0 / 10", 18)
+	level_text = _label("Lv.1  EXP 0 / 30", 18)
 	growth_column.add_child(level_text)
 	experience = ProgressBar.new()
 	experience.custom_minimum_size = Vector2(245, 12)
@@ -167,7 +211,7 @@ func _build_interface() -> void:
 	stats_text.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	top_row.add_child(stats_text)
 	top_row.add_child(_button("환경설정 II", pause_game))
-	var tip := _label("임시 전투 · 이동 후 경험치 수집 · 스킬 이름/효과/수치는 시제품입니다", 17)
+	var tip := _label("임시 전투 · 왼쪽 이동 / 오른쪽 마법 터치 (PC: F) · 모든 스킬명·효과는 임시", 17)
 	root_ui.add_child(tip)
 	tip.position = Vector2(24, 94)
 	tip.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -185,12 +229,17 @@ func _build_interface() -> void:
 	bottom_row.add_child(identity)
 	identity.add_child(_label("비야 · 전투 대역", 22))
 	health = ProgressBar.new()
-	health.custom_minimum_size = Vector2(185, 25)
+	health.custom_minimum_size = Vector2(185, 20)
 	health.show_percentage = false
 	identity.add_child(health)
 	status_text = _label("HP 100 / 100", 18)
 	identity.add_child(status_text)
-	identity.add_child(_label("승인 원화 보존 · 모델 보류", 14))
+	mana_bar = ProgressBar.new()
+	mana_bar.custom_minimum_size = Vector2(185, 12)
+	mana_bar.show_percentage = false
+	identity.add_child(mana_bar)
+	mana_text = _label("MP 0 / 0", 15)
+	identity.add_child(mana_text)
 	var slots := VBoxContainer.new()
 	slots.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	bottom_row.add_child(slots)
@@ -203,9 +252,13 @@ func _build_interface() -> void:
 	support.add_child(_label("패시브 지원 [--] [--]", 15))
 	support.add_child(_label("자리만 확보 · 효과 없음", 13))
 	magic_button = Button.new()
-	magic_button.text = "고유 마법\n발동 연결 예정"
-	magic_button.custom_minimum_size = Vector2(140, 108)
+	magic_button.text = "[임시] 고유 마법\n출격 대기"
+	magic_button.custom_minimum_size = Vector2(170, 108)
 	magic_button.disabled = true
+	magic_button.action_mode = BaseButton.ACTION_MODE_BUTTON_PRESS
+	magic_button.focus_mode = Control.FOCUS_NONE
+	magic_button.add_theme_font_size_override("font_size", 17)
+	magic_button.pressed.connect(_cast_magic)
 	bottom_row.add_child(magic_button)
 	overlay = ColorRect.new()
 	root_ui.add_child(overlay)
@@ -229,8 +282,9 @@ func _add_slots(parent: VBoxContainer, title: String, target: Array[Label]) -> v
 	heading.custom_minimum_size.x = 65
 	row.add_child(heading)
 	for index in range(4):
-		var slot := _label("--", 16)
+		var slot := _label("--", 14)
 		slot.custom_minimum_size = Vector2(84, 42)
+		slot.clip_text = true
 		slot.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		slot.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 		row.add_child(slot)
@@ -271,6 +325,7 @@ func _show_levelup() -> void:
 			var card := _button(text, _choose_skill.bind(id, last_ticket))
 			card.custom_minimum_size = Vector2(310, 255)
 			card.add_theme_font_size_override("font_size", 17)
+			card.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 			card.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 			row.add_child(card)
 			choice_buttons.append(card)
@@ -308,7 +363,7 @@ func _show_menu(kind: String) -> void:
 	if kind == "ready":
 		dialog_body.add_child(_label("VIYA | 전투·성장 시제품", 30))
 		dialog_body.add_child(_label("처치 → 경험치 수집 → 무작위 3선택 → 강화", 19))
-		dialog_body.add_child(_label("18종 후보 / 임시 장착 공격4·패시브4\n서포터·고유 마법 발동은 아직 미구현입니다.", 17))
+		dialog_body.add_child(_label("18종 후보 / 임시 장착 공격4·패시브4 / 요구 경험치 3배\n고유 마법: 오른쪽 버튼 또는 F / 서포터 효과는 미구현", 17))
 		start_button = _button("출격", begin_run)
 		dialog_body.add_child(start_button)
 	elif kind == "paused":
@@ -346,14 +401,42 @@ func _update_hud() -> void:
 		_slot_revision = simulation.growth.revision
 		_update_slots(attack_slots, "attack")
 		_update_slots(passive_slots, "passive")
-		magic_button.text = "고유 마법\n강화 Lv.%d\n발동 연결 예정" % int(simulation.stats["ultimate"])
+	_update_magic_hud()
 
 func _update_slots(labels: Array[Label], row: String) -> void:
 	var entries: Array[Dictionary] = simulation.growth.row_entries(row)
 	for i in range(labels.size()):
 		labels[i].text = "--"
+		labels[i].tooltip_text = ""
 		if i < entries.size():
-			labels[i].text = "%s\nLv.%d" % [entries[i]["name"], simulation.growth.skill_level(entries[i]["id"])]
+			labels[i].text = "[임시]\n%s Lv.%d" % [str(entries[i]["name"]).trim_prefix("[임시] "), simulation.growth.skill_level(entries[i]["id"])]
+			labels[i].tooltip_text = "%s\n%s" % [entries[i]["name"], entries[i]["description"]]
+
+func _update_magic_hud() -> void:
+	var magic = simulation.magic
+	_magic_ui_ticket = magic.ticket
+	var running: bool = simulation.phase == RunState.Phase.RUNNING
+	var reason: String = magic.unavailable_reason(running)
+	magic_button.disabled = not reason.is_empty()
+	mana_bar.max_value = float(magic.config.get("max_mana", 100.0))
+	mana_bar.value = magic.mana
+	mana_text.text = "MP %.1f / %.0f" % [magic.mana, mana_bar.max_value]
+	var state_label: String = "터치 / F"
+	match reason:
+		"inactive":
+			state_label = "전투 중에만 사용"
+		"unconfigured":
+			state_label = "마법 설정 없음"
+		"cooldown":
+			state_label = "재사용 %.1f초" % magic.cooldown_left
+		"mana":
+			state_label = "마력 부족"
+	magic_button.text = "%s\n강화 Lv.%d · MP %.0f\n%s" % [
+		str(magic.config.get("name", "[임시] 고유 마법")),
+		int(simulation.stats["ultimate"]), float(magic.config.get("mana_cost", 0.0)), state_label]
+	var info: Dictionary = magic.profile(int(simulation.stats["ultimate"]))
+	magic_button.tooltip_text = "임시 효과 · 기본 피해 %.0f / 반경 %.0f / 쿨다운 %.1f초" % [
+		float(info.get("damage", 0.0)), float(info.get("radius", 0.0)), float(info.get("cooldown", 0.0))]
 
 func _set_volume(value: float) -> void:
 	volume = clampf(value, 0.0, 1.0)

@@ -1,6 +1,7 @@
 extends RefCounted
 ## One authoritative simulation. All numbers/effects are provisional test tuning.
 const Growth = preload("res://scripts/progression/growth_state.gd")
+const MagicState = preload("res://scripts/combat/magic_state.gd")
 enum Phase { READY, RUNNING, PAUSED, DEFEAT, CHOOSING }
 const WORLD_SIZE := Vector2(1800.0, 1200.0)
 const PLAYER_SPEED := 235.0
@@ -32,6 +33,7 @@ var pickups: Array[Dictionary] = []
 var effects: Array[Dictionary] = []
 var rng := RandomNumberGenerator.new()
 var growth = Growth.new()
+var magic = MagicState.new()
 var skill_clocks: Dictionary = {}
 var stats := {"power": 1.0, "rate": 1.0, "speed": PLAYER_SPEED,
 	"pickup": 80.0, "xp": 1.0, "crit": 0.0, "regen": 0.0, "ultimate": 0}
@@ -40,12 +42,27 @@ var _enemy_serial: int = 0
 var _regen_remainder: float = 0.0
 
 func start(seed_value: int = 0, character_id: String = "viya") -> bool:
+	# Validate the complete selected character before changing the previous run.
+	var candidate_pool: Array[Dictionary] = growth.catalog.pool_for(character_id)
+	if not growth.catalog.validate_pool(candidate_pool, character_id):
+		return false
+	var hero: Dictionary = growth.catalog.characters.get(character_id, {})
+	var candidate = hero.get("active_magic", {})
+	if not candidate is Dictionary or not magic.accepts(candidate, character_id):
+		return false
+	var upgrade_valid: bool = false
+	for entry in candidate_pool:
+		if entry["id"] == candidate["upgrade_skill_id"]:
+			upgrade_valid = entry["kind"] == "ultimate" and entry["effect"] == "ultimate"
+	if not upgrade_valid:
+		return false
 	if seed_value == 0:
 		rng.randomize()
 	else:
 		rng.seed = seed_value
 	if not growth.reset(character_id, int(rng.seed) ^ 0x51A7):
 		return false
+	magic.reset(candidate, character_id)
 	player = WORLD_SIZE * 0.5
 	facing = Vector2.RIGHT
 	hp = 100
@@ -70,9 +87,11 @@ func start(seed_value: int = 0, character_id: String = "viya") -> bool:
 
 func set_paused(value: bool) -> void:
 	if value and phase in [Phase.RUNNING, Phase.CHOOSING]:
+		magic.invalidate_requests()
 		_resume_phase = phase
 		phase = Phase.PAUSED
 	elif not value and phase == Phase.PAUSED:
+		magic.invalidate_requests()
 		phase = _resume_phase
 
 func damage_player(amount: int) -> bool:
@@ -81,6 +100,7 @@ func damage_player(amount: int) -> bool:
 	hp = maxi(0, hp - amount)
 	hurt_clock = HIT_LOCK
 	if hp == 0:
+		magic.invalidate_requests()
 		phase = Phase.DEFEAT
 	return true
 
@@ -125,7 +145,20 @@ func acknowledge_exhausted(ticket: int) -> bool:
 func _begin_choice_if_needed() -> void:
 	if growth.pending > 0:
 		growth.open_offer()
+		magic.invalidate_requests()
 		phase = Phase.CHOOSING
+
+func cast_ultimate(expected_ticket: int) -> bool:
+	if magic.owner_id != growth.character_id:
+		return false
+	var cast: Dictionary = magic.consume(expected_ticket, phase == Phase.RUNNING, int(stats["ultimate"]))
+	if cast.is_empty():
+		return false
+	# Separate from automatic "sigil". Use the normal damage/death/XP path.
+	_burst(player, float(cast["radius"]), float(cast["damage"]), "ultimate")
+	effects[-1]["life"] = float(cast["effect_duration"])
+	effects[-1]["duration"] = float(cast["effect_duration"])
+	return true
 
 func _effect_rank(effect: String) -> int:
 	for entry in growth.pool:
@@ -168,6 +201,7 @@ func step(delta: float, direction: Vector2) -> void:
 	shot_clock = maxf(0.0, shot_clock - dt)
 	if shot_clock == 0.0:
 		_auto_fire()
+	magic.advance(dt, true)
 	_tick_skills(dt)
 	_move_bullets(dt)
 	for i in range(effects.size() - 1, -1, -1):

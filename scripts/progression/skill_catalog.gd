@@ -45,6 +45,8 @@ func validate_pool(pool: Array[Dictionary], character_id: String) -> bool:
 			return false
 		if kind == "passive" and str(entry.get("effect", "")).contains("resist"):
 			return false
+		if not str(entry.get("name", "")).begins_with("[임시] "):
+			return false
 		ids[id] = true
 		counts[kind] += 1
 	return counts == {"attack": 8, "passive": 8, "character": 1, "ultimate": 1}

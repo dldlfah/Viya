@@ -42,8 +42,8 @@ func _run() -> void:
 		var b = Growth.new()
 		a.reset("viya", seed_value)
 		b.reset("viya", seed_value)
-		a.gain(10.0)
-		b.gain(10.0)
+		a.gain(a.threshold())
+		b.gain(b.threshold())
 		a.open_offer()
 		b.open_offer()
 		var distinct: Dictionary = {}
@@ -58,6 +58,8 @@ func _run() -> void:
 	for entry in hero["skills"]:
 		entry["owner"] = "fixture_hero"
 		entry["id"] = "fixture_" + str(entry["effect"])
+	hero["active_magic"]["owner"] = "fixture_hero"
+	hero["active_magic"]["upgrade_skill_id"] = "fixture_ultimate"
 	state.growth.catalog.characters["fixture_hero"] = hero
 	verify(state.start(3, "fixture_hero"), "Synthetic character can supply its two own candidates")
 	verify(state.growth.definition("viya_sigil").is_empty() and state.growth.definition("viya_ultimate").is_empty(), "Viya-specific candidates absent from other character")
@@ -69,7 +71,7 @@ func _run() -> void:
 	verify(state.kills == 1 and state.pickups.size() <= 1, "Real shooting kill produces XP pickup")
 	# Collect a second drop; collecting, not spawning, grants XP.
 	state.pickups.clear()
-	state.add_pickup(state.player + Vector2(300, 0), 10.0)
+	state.add_pickup(state.player + Vector2(300, 0), state.growth.threshold())
 	state.step(0.01, Vector2.ZERO)
 	verify(state.growth.level == 1, "Remote drop does not award XP immediately")
 	state.player = state.pickups[0]["p"]
@@ -94,7 +96,7 @@ func _run() -> void:
 	var snapshot: Dictionary = state.growth.owned.duplicate(true)
 	verify(not state.select_skill(old_offer[0], old_ticket) and state.growth.owned == snapshot, "Repeated pressed event cannot apply twice")
 	state = quiet_state()
-	state.grant_xp(48.0)
+	state.grant_xp(144.0)
 	verify(state.growth.level == 4 and state.growth.pending == 3 and is_zero_approx(state.growth.xp), "Three exact thresholds queue three level choices")
 	for i in range(3):
 		var ticket: int = state.growth.ticket
@@ -106,7 +108,7 @@ func _run() -> void:
 	state.grant_xp(100.0)
 	old_ticket = state.growth.ticket
 	state.start(7)
-	state.grant_xp(10.0)
+	state.grant_xp(state.growth.threshold())
 	verify(not state.select_skill(state.growth.offer[0], old_ticket), "Prior-run callback cannot select new-run card")
 	state.start(7)
 	verify(state.growth.level == 1 and state.growth.pending == 0 and state.growth.xp == 0.0 and state.growth.owned == {"common_rifle": 1}, "Restart clears growth state")
@@ -170,9 +172,9 @@ func _run() -> void:
 	verify(state.pickups[0]["p"].distance_to(state.player) < 95.0, "Magnet pulls previously out-of-range pickup")
 	force_choice(state, "passive_learning")
 	state.pickups.clear()
-	state.add_pickup(state.player, 10.0)
+	state.add_pickup(state.player, state.growth.threshold())
 	state.step(0.01, Vector2.ZERO)
-	verify(state.growth.level == 2 and absf(state.growth.xp - 1.2) < 0.001, "Learning applies XP multiplier without discarding fractional XP")
+	verify(state.growth.level == 2 and absf(state.growth.xp - 3.6) < 0.001, "Learning applies XP multiplier without discarding fractional XP")
 	state = quiet_state()
 	force_choice(state, "passive_precision")
 	verify(is_equal_approx(state.stats["crit"], 0.04), "Precision reaches crit probability")
@@ -196,7 +198,7 @@ func _run() -> void:
 	await process_frame
 	scene.start_button.pressed.emit()
 	scene.simulation.spawn_clock = 999.0
-	scene.simulation.grant_xp(10.0)
+	scene.simulation.grant_xp(scene.simulation.growth.threshold())
 	scene._physics_process(0.0)
 	verify(scene.choice_buttons.size() == 3 and scene.overlay.visible and not scene.movement.enabled, "F5 displays three cards and disables movement")
 	var chosen_id: String = scene.simulation.growth.offer[0]
@@ -207,7 +209,7 @@ func _run() -> void:
 	scene.choice_buttons[0].pressed.emit()
 	verify(scene.simulation.growth.skill_level(chosen_id) >= 1 and not scene.overlay.visible, "Actual card button applies upgrade and closes overlay")
 	verify(scene._slot_revision == scene.simulation.growth.revision, "Actual two-row HUD updates to selected growth revision")
-	verify(scene.magic_button.disabled, "Unimplemented ultimate is not advertised as usable")
+	verify(not scene.magic_button.disabled, "Configured ultimate is usable after growth choice")
 	scene.simulation.grant_xp(100.0)
 	scene._physics_process(0.0)
 	scene.begin_run()
