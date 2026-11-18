@@ -58,17 +58,19 @@ func _run() -> void:
 	verify(not state.magic.accepts(bad_cost, "viya"), "Runtime config rejects negative cost")
 	verify(state.magic.mana == 100.0 and state.magic.cooldown_left == 0.0, "Run starts with full MP and ready magic")
 	verify(state.growth.pool.size() == 18, "Active magic is not a nineteenth choice")
-	state.add_enemy(state.player + Vector2(229, 0))
-	state.add_enemy(state.player + Vector2(231, 0))
+	state.add_enemy(state.player + Vector2(459, 0))
+	state.add_enemy(state.player + Vector2(461, 0))
 	var ticket: int = state.magic.ticket
 	verify(state.cast_ultimate(ticket), "Configured button action casts")
-	verify(state.magic.mana == 60.0 and state.magic.cooldown_left == 12.0 and state.magic.casts == 1, "One cast consumes MP/cooldown exactly once")
+	verify(state.magic.mana == 60.0 and state.magic.cooldown_left == 0.0 and state.magic.casts == 1, "One cast consumes 40 MP with no cooldown")
 	verify(state.kills == 1 and state.enemies.size() == 1 and state.pickups.size() == 1, "Radius damage uses ordinary death and XP-drop path")
 	verify(state.pickups[0]["value"] == 5.0 and state.growth.xp == 0.0, "XP reward unchanged and not awarded until collected")
-	verify(state.effects[-1]["kind"] == "ultimate" and state.effects[-1]["radius"] == 230.0, "Magic effect identifies actual damage radius")
+	verify(state.effects[-1]["kind"] == "ultimate" and state.effects[-1]["radius"] == 460.0, "Magic effect identifies actual damage radius")
 	var before: String = snapshot(state)
 	verify(not state.cast_ultimate(ticket) and snapshot(state) == before, "Duplicate/stale input cannot spend or damage twice")
-	verify(not state.cast_ultimate(state.magic.ticket) and snapshot(state) == before, "Cooldown rejects a new input without side effects")
+	verify(state.cast_ultimate(state.magic.ticket) and state.magic.mana == 20.0 and state.magic.cooldown_left == 0.0, "A fresh input casts again immediately using only MP")
+	before = snapshot(state)
+	verify(not state.cast_ultimate(state.magic.ticket) and snapshot(state) == before, "Third immediate cast is blocked by insufficient MP")
 	state.set_paused(true)
 	before = snapshot(state)
 	state.step(0.05, Vector2.RIGHT)
@@ -77,7 +79,7 @@ func _run() -> void:
 	state.set_paused(false)
 	state.enemies.clear()
 	state.step(0.05, Vector2.ZERO)
-	verify(is_equal_approx(state.magic.mana, 60.25) and is_equal_approx(state.magic.cooldown_left, 11.95), "Only active simulation restores MP and advances cooldown")
+	verify(is_equal_approx(state.magic.mana, 20.05) and state.magic.cooldown_left == 0.0, "Only active simulation restores MP at one per second")
 	state.grant_xp(state.growth.threshold())
 	before = snapshot(state)
 	state.step(0.05, Vector2.RIGHT)
@@ -103,9 +105,9 @@ func _run() -> void:
 	state = quiet_state()
 	choose_upgrade(state)
 	state.add_enemy(state.player + Vector2(240, 0))
-	state.enemies[0]["hp"] = 100
+	state.enemies[0]["hp"] = 200
 	verify(state.cast_ultimate(state.magic.ticket), "Cast after actual enhancement selection")
-	verify(state.enemies[0]["hp"] == 35 and state.effects[-1]["radius"] == 248.0, "Rank 1 increases real damage and range")
+	verify(state.enemies[0]["hp"] == 70 and state.effects[-1]["radius"] == 496.0, "Rank 1 increases real damage and range")
 	verify(state.growth.skill_level("viya_sigil") == 0, "Active enhancement does not acquire automatic sigil")
 	var saved_mp: float = state.magic.mana
 	var saved_cd: float = state.magic.cooldown_left
@@ -126,9 +128,13 @@ func _run() -> void:
 	hero["active_magic"]["upgrade_skill_id"] = "test_ultimate"
 	hero["active_magic"]["name"] = "[임시] 시험 마법"
 	hero["active_magic"]["radius"] = 90.0
+	hero["active_magic"]["cooldown"] = 3.0
 	state.growth.catalog.characters["test_hero"] = hero
 	verify(state.start(6, "test_hero"), "Test-only character binds its own magic config")
 	verify(state.magic.owner_id == "test_hero" and state.magic.profile(0)["radius"] == 90.0, "No hard-coded Viya magic fallback")
+	verify(state.cast_ultimate(state.magic.ticket) and state.magic.cooldown_left == 3.0, "Generic magic still supports a configured positive cooldown")
+	before = snapshot(state)
+	verify(not state.cast_ultimate(state.magic.ticket) and snapshot(state) == before, "A different character configured with cooldown still waits")
 	verify(state.growth.definition("viya_ultimate").is_empty(), "Other character does not inherit Viya enhancement")
 
 	# Actual F5 scene and input handlers with synthetic events; NOT a device test.
@@ -167,7 +173,11 @@ func _run() -> void:
 	scene._input(magic_touch)
 	verify(scene._magic_touch_id == -1 and scene.movement.touch_id == 5, "Magic cancel releases only its own finger")
 	scene._physics_process(0.0)
-	verify(scene.magic_button.disabled and scene.magic_button.text.contains("재사용"), "Real HUD displays cooldown and disables button")
+	verify(not scene.magic_button.disabled and not scene.magic_button.text.contains("재사용"), "Real HUD remains ready after a cast when MP is sufficient")
+	verify(scene.magic_button.tooltip_text.contains("초당 MP 회복 1") and not scene.magic_button.tooltip_text.contains("쿨다운"), "Real HUD describes mana regeneration instead of cooldown")
+	scene.magic_button.pressed.emit()
+	scene._physics_process(0.0)
+	verify(scene.simulation.magic.casts == 2 and scene.magic_button.disabled and scene.magic_button.text.contains("마력 부족"), "Second fresh button press casts immediately, then MP blocks the button")
 	scene._notification(Node.NOTIFICATION_APPLICATION_FOCUS_OUT)
 	before = snapshot(scene.simulation)
 	scene._physics_process(0.05)

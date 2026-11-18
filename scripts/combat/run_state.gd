@@ -12,7 +12,7 @@ const PLAYER_RADIUS := 17.0
 const ENEMY_RADIUS := 18.0
 const MAX_ENEMIES := 160
 const MAX_ENEMY_BULLETS := 64
-const SWARM_SIZE := 20
+const SWARM_SIZE := 30
 const MAX_BULLETS := 64
 const MAX_PICKUPS := 240
 const MAX_EFFECTS := 32
@@ -62,7 +62,7 @@ var gold_pickups: Array[Dictionary] = []
 var gold_rng := RandomNumberGenerator.new()
 var encounter_rng := RandomNumberGenerator.new()
 var _swarm_clock: float = 20.0
-var _swarm_pending: bool = false
+var _swarm_pending: bool = false # Legacy saved event; new formations never queue.
 var _swarm_serial: int = 0
 var run_id: String = ""
 var _elites_spawned: int = 0
@@ -167,9 +167,11 @@ func damage_player(amount: int) -> bool:
 	return true
 
 func add_enemy(at: Vector2, kind: String = "normal", variant: String = "normal") -> bool:
-	if enemies.size() >= MAX_ENEMIES or kind not in ["normal", "elite", "boss"]:
+	if kind not in ["normal", "elite", "boss"]:
 		return false
 	if variant not in ["normal", "ranged", "fast", "heavy", "flier"] or (kind != "normal" and variant != "normal"):
+		return false
+	if variant != "flier" and _ground_count() >= MAX_ENEMIES:
 		return false
 	_enemy_serial += 1
 	var wave := wave_profile()
@@ -380,12 +382,19 @@ func _collect_pickups(dt: float) -> void:
 		grant_xp(reward)
 		cues.record_collected_xp(player, reward)
 
+func _ground_count() -> int:
+	var count := 0
+	for enemy in enemies:
+		if enemy.variant != "flier":
+			count += 1
+	return count
+
 func _spawn_enemy(kind: String = "normal") -> bool:
-	# Reserve a complete flying formation and the scheduled boss slot.
-	var limit: int = MAX_ENEMIES - SWARM_SIZE - (0 if _boss_spawned else 1)
+	# Flying formations have their own lifetime; only reserve the ground boss slot.
+	var limit: int = MAX_ENEMIES - (0 if _boss_spawned else 1)
 	if kind == "boss":
 		limit = MAX_ENEMIES
-	if enemies.size() >= limit:
+	if _ground_count() >= limit:
 		return false
 	for attempt in range(8):
 		var candidate := player + Vector2.from_angle(rng.randf_range(0.0, TAU)) * 590.0
@@ -395,19 +404,15 @@ func _spawn_enemy(kind: String = "normal") -> bool:
 	return false
 
 func _move_enemies(dt: float) -> void:
-	for index in range(enemies.size() - 1, -1, -1):
-		var enemy: Dictionary = enemies[index]
+	# Ground movement happens first so fly-bys cannot be undone by pursuit this frame.
+	for enemy in enemies:
+		if enemy.variant == "flier":
+			continue
 		var speed: float = float(enemy.get("speed", wave_profile().speed))
 		var pos: Vector2 = enemy["p"]
 		var offset := player - pos
 		var variant: String = str(enemy.get("variant", "normal"))
-		if variant == "flier":
-			enemy.life -= dt
-			if enemy.life <= 0.0:
-				enemies.remove_at(index)
-				continue
-			pos += enemy.velocity * dt
-		elif variant == "ranged":
+		if variant == "ranged":
 			var distance := offset.length()
 			if distance > float(stage_rules.ranged.range) * 0.85:
 				pos += offset.normalized() * speed * dt
@@ -419,10 +424,44 @@ func _move_enemies(dt: float) -> void:
 		enemy["p"] = pos
 		if variant == "ranged":
 			_tick_ranged(enemy, dt)
-		if pos.distance_squared_to(player) <= pow(PLAYER_RADIUS + ENEMY_RADIUS, 2.0):
+	_move_fliers(dt)
+	for enemy in enemies:
+		if enemy.p.distance_squared_to(player) <= pow(PLAYER_RADIUS + ENEMY_RADIUS, 2.0):
 			damage_player(12)
 			if phase == Phase.DEFEAT:
 				return
+
+func _move_fliers(dt: float) -> void:
+	for index in range(enemies.size() - 1, -1, -1):
+		var flier: Dictionary = enemies[index]
+		if flier.variant != "flier":
+			continue
+		flier.life -= dt
+		if flier.life <= 0.0:
+			enemies.remove_at(index) # Expiry never awards a kill or loot.
+			continue
+		var previous: Vector2 = flier.p
+		flier.p += flier.velocity * dt
+		_push_ground(previous, flier.p)
+
+func _push_ground(previous: Vector2, destination: Vector2) -> void:
+	var direction := previous.direction_to(destination)
+	if direction.is_zero_approx():
+		return
+	var radius := ENEMY_RADIUS * 2.0
+	for enemy in enemies:
+		if enemy.variant == "flier" or (enemy.p - previous).dot(direction) < 0.0:
+			continue
+		var nearest := Geometry2D.get_closest_point_to_segment(enemy.p, previous, destination)
+		if nearest.distance_squared_to(enemy.p) >= radius * radius:
+			continue
+		var relative: Vector2 = enemy.p - destination
+		var lateral: float = relative.dot(direction.orthogonal())
+		var front := sqrt(maxf(0.0, radius * radius - lateral * lateral)) + 0.1
+		var distance: float = relative.dot(direction)
+		if distance < front:
+			# Preserve the flying path and push every ground type, including bosses.
+			enemy.p = (enemy.p + direction * (front - distance)).clamp(Vector2.ONE * 24.0, WORLD_SIZE - Vector2.ONE * 24.0)
 
 func _roll_variant() -> String:
 	var roll := encounter_rng.randf() * 100.0
@@ -467,22 +506,19 @@ func _move_enemy_bullets(dt: float) -> void:
 
 func _tick_swarm(dt: float) -> void:
 	if _swarm_pending:
-		if _spawn_swarm():
-			_swarm_pending = false
+		_spawn_swarm()
+		_swarm_pending = false
 		return
 	_swarm_clock = maxf(0.0, _swarm_clock - dt)
 	if _swarm_clock > 0.0:
 		return
 	_swarm_clock = float(stage_rules.swarm.interval)
 	var chance: float = float(stage_rules.swarm.chance)
-	_swarm_pending = chance >= 1.0 or encounter_rng.randf() < chance
-	if _swarm_pending and _spawn_swarm():
-		_swarm_pending = false
+	if chance >= 1.0 or encounter_rng.randf() < chance:
+		_spawn_swarm()
 
 func _spawn_swarm() -> bool:
-	var limit: int = MAX_ENEMIES - (0 if _boss_spawned else 1)
-	if enemies.size() + SWARM_SIZE > limit:
-		return false
+	# An accepted encounter always creates all 30, even in an occupied/full field.
 	_swarm_serial += 1
 	var direction := Vector2.from_angle(encounter_rng.randi_range(0, 3) * PI * 0.5)
 	var origin := player - direction * 650.0

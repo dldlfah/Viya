@@ -26,6 +26,8 @@ static func run(scene, verify: Callable) -> void:
 	verify.call(data["magic_rank"] == 0 and not data["magic"].is_empty(), "Unupgraded active magic is shown outside skill slots")
 	verify.call(data["attack_cap"] == scene.simulation.growth.ATTACK_CAP and data["xp_required"] == 30.0, "Overview reads the real caps and triple XP threshold")
 	verify.call(Overview.sections(data).size() == 5 and before == _gameplay(scene.simulation), "Formatting is read-only and consumes no gameplay RNG")
+	var magic_text: String = Overview.sections(data)[3].body
+	verify.call(magic_text.contains("소모 MP 40 / 초당 MP 회복 1") and not magic_text.contains("재사용"), "Real overview shows mana-only magic resources")
 	data["attack"][0]["level"] = 99
 	data["stats"]["power"] = 99.0
 	data["magic"]["damage"] = 999.0

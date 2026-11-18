@@ -10,7 +10,7 @@ import re
 ROOT = Path(__file__).resolve().parents[1]
 NUMERIC = ('max_mana', 'mana_cost', 'mana_regen', 'cooldown', 'damage',
            'damage_per_rank', 'radius', 'radius_per_rank', 'effect_duration')
-POSITIVE = ('max_mana', 'mana_cost', 'cooldown', 'damage', 'radius', 'effect_duration')
+POSITIVE = ('max_mana', 'mana_cost', 'damage', 'radius', 'effect_duration')
 
 
 def validate(data: dict) -> list[str]:
@@ -50,7 +50,7 @@ def check() -> dict:
     errors = validate(data)
     negative = []
     for change in ('plain_name', 'foreign_owner', 'missing_magic', 'negative_cost',
-                   'zero_cooldown', 'wrong_upgrade', 'nonfinite_radius', 'impossible_cost'):
+                   'negative_cooldown', 'wrong_upgrade', 'nonfinite_radius', 'impossible_cost'):
         broken = copy.deepcopy(data)
         hero = broken['characters']['viya']
         if change == 'plain_name':
@@ -61,8 +61,8 @@ def check() -> dict:
             del hero['active_magic']
         elif change == 'negative_cost':
             hero['active_magic']['mana_cost'] = -1
-        elif change == 'zero_cooldown':
-            hero['active_magic']['cooldown'] = 0
+        elif change == 'negative_cooldown':
+            hero['active_magic']['cooldown'] = -1
         elif change == 'wrong_upgrade':
             hero['active_magic']['upgrade_skill_id'] = 'viya_sigil'
         elif change == 'nonfinite_radius':

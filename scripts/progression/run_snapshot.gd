@@ -1,6 +1,7 @@
 extends RefCounted
 ## Exact gameplay data. Cosmetic effects/cues are rebuilt after a restore.
-const VERSION := 2
+const VERSION := 3
+const GAME010_RULES := "711b73b68b15d571c240c7e4b8c20261ddec790a5db723c2ef1bd2d83f68042b"
 const LEGACY_RULES := "3ecf54fd2e0aedad3127fce24d77cc55ea0f8ffe3bfbf235d2470d233a34231e"
 const LEGACY_FINGERPRINTS := [LEGACY_RULES,
 	"3c7246f58f661c077aad3c146a3719a9719269c1809a5c65dc5e72aefbfeb7dd",
@@ -32,6 +33,8 @@ static func capture(state) -> Dictionary:
 	return result.duplicate(true)
 
 static func upgrade_legacy(data: Dictionary, state) -> Dictionary:
+	if data.get("version") == 2 and data.get("rules") == GAME010_RULES:
+		return _upgrade_mana(data)
 	if data.get("version") != 1 or data.get("rules") not in LEGACY_FINGERPRINTS:
 		return data
 	if not data.get("run") is Dictionary or not data.get("rng") is Array or data.rng.size() != 3:
@@ -45,8 +48,6 @@ static func upgrade_legacy(data: Dictionary, state) -> Dictionary:
 	if rules.is_empty():
 		return data
 	data = data.duplicate(true)
-	data.version = VERSION
-	data.rules = fingerprint()
 	data.run.enemy_bullets = []
 	data.run._swarm_clock = float(rules.swarm.interval) - fmod(float(run.elapsed), float(rules.swarm.interval))
 	data.run._swarm_pending = false
@@ -58,6 +59,15 @@ static func upgrade_legacy(data: Dictionary, state) -> Dictionary:
 	var generator := RandomNumberGenerator.new()
 	generator.seed = int(data.rng[0].seed) ^ 0xE11C
 	data.rng.append({"seed": generator.seed, "state": generator.state})
+	return _upgrade_mana(data)
+
+static func _upgrade_mana(data: Dictionary) -> Dictionary:
+	if not data.get("magic") is Dictionary or not finite_number(data.magic.get("cooldown_left"), 0, 12):
+		return {} # Do not repair malformed resources into a valid save.
+	data = data.duplicate(true)
+	data.version = VERSION
+	data.rules = fingerprint()
+	data.magic.cooldown_left = 0.0 # Preserve MP/casts; the old timer no longer applies.
 	return data
 
 static func finite_number(value: Variant, minimum: float, maximum: float) -> bool:
@@ -178,7 +188,11 @@ static func valid(data: Dictionary, state) -> bool:
 	return valid_actors(run, state)
 
 static func valid_actors(run: Dictionary, state) -> bool:
-	var caps := {"enemies": state.MAX_ENEMIES, "bullets": state.MAX_BULLETS, "pickups": state.MAX_PICKUPS, "gold_pickups": state.MAX_PICKUPS, "enemy_bullets": state.MAX_ENEMY_BULLETS}
+	var swarm: Dictionary = state.stage_catalog.for_stage(run.stage).swarm
+	# Bounded by encounter interval/lifetime, with room for every legacy live flier.
+	# This validates disk input only; live formations never wait for actor capacity.
+	var flying_cap: int = (ceili(float(swarm.life) / float(swarm.interval)) + 1) * state.SWARM_SIZE + state.MAX_ENEMIES
+	var caps := {"enemies": state.MAX_ENEMIES + flying_cap, "bullets": state.MAX_BULLETS, "pickups": state.MAX_PICKUPS, "gold_pickups": state.MAX_PICKUPS, "enemy_bullets": state.MAX_ENEMY_BULLETS}
 	for key in caps:
 		if not run[key] is Array or run[key].size() > caps[key]:
 			return false
@@ -187,6 +201,7 @@ static func valid_actors(run: Dictionary, state) -> bool:
 				return false
 	var ids: Dictionary = {}
 	var boss_count := 0
+	var flying_count := 0
 	for enemy in run.enemies:
 		if not enemy.get("id") is int or enemy.id <= 0 or enemy.id > run._enemy_serial or ids.has(enemy.id):
 			return false
@@ -205,12 +220,15 @@ static func valid_actors(run: Dictionary, state) -> bool:
 			if not vector(enemy.get("aim")) or not finite_number(enemy.get("fire_clock"), 0, 1000) or not finite_number(enemy.get("windup"), 0, 1000):
 				return false
 		elif enemy.variant == "flier":
+			flying_count += 1
 			if not vector(enemy.get("velocity")) or not finite_number(enemy.get("life"), 0.000001, 1000):
 				return false
 			if not enemy.get("group") is int or enemy.group < 0 or enemy.group > run._swarm_serial:
 				return false
 		if enemy.kind == "boss":
 			boss_count += 1
+	if flying_count > flying_cap or run.enemies.size() - flying_count > state.MAX_ENEMIES:
+		return false
 	if boss_count > 1 or (run._boss_spawned and not run._boss_defeated and boss_count != 1) or (run._boss_defeated and boss_count != 0):
 		return false
 	for bullet in run.bullets:

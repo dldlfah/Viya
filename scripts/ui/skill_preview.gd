@@ -58,7 +58,7 @@ static func build(run, id: String) -> Dictionary:
 				var new_rifle: Dictionary = run.attack_profile("rifle", growth.skill_level("common_rifle"), float(after["stats"]["rate"]))
 				if not new_rifle.is_empty():
 					_add(rows, "소총 발동 간격", old_rifle, new_rifle, "interval", "seconds")
-				note = "자동 공격에 적용됩니다. 고유 마법 쿨다운·남은 대기는 그대로입니다."
+				note = "자동 공격에 적용됩니다. 고유 마법의 마나 소모·회복은 유지됩니다."
 			elif effect == "learning":
 				note = "요구 경험치(기존의 3배)는 변경되지 않습니다."
 			elif effect in ["stride", "magnet"]:
@@ -73,8 +73,11 @@ static func build(run, id: String) -> Dictionary:
 		_add(rows, "마법 기본 피해", old_magic, new_magic, "damage", "number")
 		_add(rows, "마법 반경", old_magic, new_magic, "radius", "number")
 		_add(rows, "소모 MP", old_magic, new_magic, "mana_cost", "number")
-		_add(rows, "재사용 시간", old_magic, new_magic, "cooldown", "seconds")
-		note = "강화 Lv.0에도 마법은 사용 가능합니다. 현재 MP·남은 쿨다운 유지. 기본 피해는 배율·치명타 적용 전입니다."
+		_add(rows, "초당 MP 회복", old_magic, new_magic, "mana_regen", "number")
+		note = "강화 Lv.0에도 마법은 사용 가능합니다. 현재 MP 유지. 기본 피해는 배율·치명타 적용 전입니다."
+		if float(new_magic.cooldown) > 0.0:
+			_add(rows, "재사용 시간", old_magic, new_magic, "cooldown", "seconds")
+			note += " 남은 재사용 시간은 유지됩니다."
 	else:
 		return {}
 	return {"id": id, "kind": kind, "effect": effect, "rank": rank, "next_rank": rank + 1,

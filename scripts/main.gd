@@ -548,8 +548,11 @@ func _update_magic_hud() -> void:
 		str(magic.config.get("name", "[임시] 고유 마법")),
 		int(simulation.stats["ultimate"]), float(magic.config.get("mana_cost", 0.0)), state_label]
 	var info: Dictionary = magic.profile(int(simulation.stats["ultimate"]))
-	magic_button.tooltip_text = "임시 효과 · 기본 피해 %.0f / 반경 %.0f / 쿨다운 %.1f초" % [
-		float(info.get("damage", 0.0)), float(info.get("radius", 0.0)), float(info.get("cooldown", 0.0))]
+	magic_button.tooltip_text = "임시 효과 · 기본 피해 %.0f / 반경 %.0f / 소모 MP %.0f / 초당 MP 회복 %.0f" % [
+		float(info.get("damage", 0.0)), float(info.get("radius", 0.0)),
+		float(info.get("mana_cost", 0.0)), float(info.get("mana_regen", 0.0))]
+	if float(info.get("cooldown", 0.0)) > 0.0:
+		magic_button.tooltip_text += " / 재사용 %.1f초" % float(info.cooldown)
 
 func _set_volume(value: float) -> void:
 	volume = clampf(value, 0.0, 1.0)

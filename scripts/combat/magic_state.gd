@@ -25,7 +25,7 @@ func accepts(candidate: Dictionary, character_id: String) -> bool:
 			return false
 		if not is_finite(float(value)) or float(value) < 0.0:
 			return false
-	for key in ["max_mana", "mana_cost", "cooldown", "damage", "radius", "effect_duration"]:
+	for key in ["max_mana", "mana_cost", "damage", "radius", "effect_duration"]:
 		if float(candidate[key]) <= 0.0:
 			return false
 	return float(candidate["mana_cost"]) <= float(candidate["max_mana"])
@@ -47,7 +47,7 @@ func invalidate_requests() -> void:
 func advance(delta: float, running: bool) -> void:
 	if not running or config.is_empty() or delta <= 0.0 or not is_finite(delta):
 		return
-	cooldown_left = maxf(0.0, cooldown_left - delta)
+	cooldown_left = maxf(0.0, cooldown_left - delta) if float(config["cooldown"]) > 0.0 else 0.0
 	mana = minf(float(config["max_mana"]), mana + float(config["mana_regen"]) * delta)
 
 func unavailable_reason(running: bool) -> String:
@@ -55,7 +55,7 @@ func unavailable_reason(running: bool) -> String:
 		return "inactive"
 	if config.is_empty():
 		return "unconfigured"
-	if cooldown_left > 0.0:
+	if float(config["cooldown"]) > 0.0 and cooldown_left > 0.0:
 		return "cooldown"
 	if mana < float(config["mana_cost"]):
 		return "mana"
@@ -66,6 +66,7 @@ func profile(rank: int) -> Dictionary:
 		return {}
 	return {"id": config["id"], "owner": owner_id, "name": config["name"],
 		"rank": rank, "mana_cost": float(config["mana_cost"]),
+		"mana_regen": float(config["mana_regen"]),
 		"cooldown": float(config["cooldown"]),
 		"damage": float(config["damage"]) + float(config["damage_per_rank"]) * rank,
 		"radius": float(config["radius"]) + float(config["radius_per_rank"]) * rank,

@@ -45,9 +45,11 @@ static func sections(data: Dictionary) -> Array[Dictionary]:
 		"body": _row_text(data["passive"])})
 	var magic_text: String = "마법 설정 없음"
 	if not magic.is_empty():
-		magic_text = "%s\n%s Lv.%d (공격·패시브 칸과 별도)\n기본 피해 %.0f / 반경 %.0f\n소모 MP %.0f / 재사용 %.1f초\n현재 MP %.1f / %.0f / 남은 재사용 %.1f초\n피해는 공격력·치명타 적용 전 기본값입니다." % [
+		magic_text = "%s\n%s Lv.%d (공격·패시브 칸과 별도)\n기본 피해 %.0f / 반경 %.0f\n소모 MP %.0f / 초당 MP 회복 %.0f\n현재 MP %.1f / %.0f\n피해는 공격력·치명타 적용 전 기본값입니다." % [
 			magic["name"], data["upgrade_name"], data["magic_rank"], magic["damage"], magic["radius"],
-			magic["mana_cost"], magic["cooldown"], data["mana"], data["max_mana"], data["cooldown_left"]]
+			magic["mana_cost"], magic["mana_regen"], data["mana"], data["max_mana"]]
+		if float(magic.cooldown) > 0.0:
+			magic_text += "\n재사용 %.1f초 / 남은 재사용 %.1f초" % [magic.cooldown, data.cooldown_left]
 	result.append({"title": "고유 마법", "body": magic_text})
 	result.append({"title": "현재 적용 능력치", "body":
 		"HP %d / %d\n공격 피해 배율 ×%.2f / 자동 공격 속도 배율 ×%.2f\n이동 속도 %.1f / 경험치 획득 배율 ×%.2f\n획득 범위 %.1f / 치명타 확률 %.1f%% / 초당 체력 회복 %.2f\n거리·속도는 전투 논리 단위이며 장비 점수나 영구 능력치가 아닙니다." % [

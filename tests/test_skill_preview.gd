@@ -82,7 +82,7 @@ static func run(scene, verify: Callable) -> void:
 			state._refresh_stats()
 			state.hp = state.max_hp - 37
 			state.magic.mana = 31.0
-			state.magic.cooldown_left = 7.0
+			state.magic.cooldown_left = 0.0
 			state.grant_xp(state.growth.threshold())
 			state.growth.offer.clear()
 			state.growth.offer.append(id) # Explicit candidate fixture, not an extra selection.
@@ -101,7 +101,7 @@ static func run(scene, verify: Callable) -> void:
 			verify.call(state.select_skill(id, ticket), "Original selection path accepts the candidate once")
 			verify.call(state.stats == data["after"]["stats"] and state.max_hp == int(data["after"]["max_hp"])
 				and state.hp == int(data["after"]["hp"]), "Actual post-selection values match prediction: " + id)
-			verify.call(state.magic.mana == 31.0 and state.magic.cooldown_left == 7.0, "Selection preview does not refill mana/cooldown")
+			verify.call(state.magic.mana == 31.0 and state.magic.cooldown_left == 0.0, "Selection preview does not refill mana/cooldown")
 			var selected: String = _snapshot(state)
 			verify.call(not state.select_skill(id, ticket) and selected == _snapshot(state), "Stale selection is still rejected")
 			var overview: Dictionary = Overview.capture(state)
@@ -118,8 +118,9 @@ static func run(scene, verify: Callable) -> void:
 	verify.call(Preview.build(reference, "viya_sigil").is_empty(), "Full attack slots do not invent a new-slot preview")
 	reference.start(6020)
 	var magic_data: Dictionary = Preview.build(reference, str(reference.magic.config["upgrade_skill_id"]))
-	verify.call(float(magic_data["before"]["magic"]["damage"]) == 50.0
-		and float(magic_data["after"]["magic"]["damage"]) == 65.0, "First magic upgrade starts from the already usable rank-zero spell")
+	verify.call(float(magic_data["before"]["magic"]["damage"]) == 100.0
+		and float(magic_data["after"]["magic"]["damage"]) == 130.0, "First magic upgrade starts from the already usable rank-zero spell")
+	verify.call(Preview.describe(magic_data).contains("초당 MP 회복 1") and not Preview.describe(magic_data).contains("재사용"), "Mana-only upgrade preview shows regeneration without cooldown")
 	reference.magic.config["damage"] = 77.0
 	magic_data = Preview.build(reference, str(reference.magic.config["upgrade_skill_id"]))
 	verify.call(float(magic_data["before"]["magic"]["damage"]) == 77.0, "Preview reads config values instead of hardcoding Viya damage")
