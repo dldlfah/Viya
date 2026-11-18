@@ -11,13 +11,13 @@ ROOT = Path(__file__).resolve().parents[1]
 FILES = ('scripts/combat/run_state.gd', 'scripts/combat/battle_view.gd',
          'scripts/combat/combat_cues.gd', 'tests/test_combat_cues.gd',
          'tools/check_project.py', 'tools/check_combat_cues.py')
-# GAME-016: reviewed enemy variants, formations and hostile projectile integration. Exact source baselines retain mutation guards.
-BASE_RUN_BLOB = 'ae9e555686a0fb2c77a4a8b5a7cdf6d714a73a42'
-BASE_VIEW_BLOB = '6f5499bb4fbf7dca042c9bfdd80e5d04fa5a7971'
+# GAME-017: reviewed enemy variants, formations and hostile projectile integration. Exact source baselines retain mutation guards.
+BASE_RUN_BLOB = '527d4aa1ba6bf3922dc055e1b2416e703cb3ac5d'
+BASE_VIEW_BLOB = 'fcb8fd0106eb8a14ee5139b7e3367fcafc3914a5'
 BASE_RUNNER_BLOB = '1ab68ad8a51271e3d47db8b02d433991f42e8d6c'
 # Exact run_engine() from GAME-004D; all 7 suites and failure checks are protected.
 BASE_ENGINE_FUNCTION_SHA256 = '9156043eaf896d72565563cc1e2f623cf0c8fbac7f032f19bffee7e4946a69ee'
-ADDED_RUN_LINES = ('const CombatCues = preload("res://scripts/combat/combat_cues.gd")', 'var cues = CombatCues.new()', '\tcues.reset()', '\tcues.advance(dt)', '\t\tcues.record_collected_xp(player, reward)', '\t\tvar critical: bool = false', '\t\tvar previous_hp: int = int(enemies[i]["hp"])', '\t\tvar hit_at: Vector2 = enemies[i]["p"]', '\t\t\tcritical = true', '\t\t# Display HP actually removed, not theoretical overkill damage. Reuse the crit roll.', '\t\tvar hp_lost: int = maxi(0, previous_hp - maxi(0, int(enemies[i]["hp"])))', '\t\tcues.record_hit(id, hit_at, hp_lost, critical)', '\t\t\tcues.record_kill(id, hit_at)')
+ADDED_RUN_LINES = ('const CombatCues = preload("res://scripts/combat/combat_cues.gd")', 'var cues = CombatCues.new()', '\tcues.reset()', '\tcues.advance(dt)', '\t\tcues.record_collected_xp(player, reward)', '\t\tvar critical: bool = false', '\t\tvar previous_hp: int = int(enemies[i]["hp"])', '\t\tvar hit_at: Vector2 = enemies[i]["p"]', '\t\t\tcritical = true', '\t\t# Display HP actually removed, not theoretical overkill damage. Reuse the crit roll.', '\t\tvar hp_lost: int = maxi(0, previous_hp - maxi(0, int(enemies[i]["hp"])))', '\t\tcues.record_hit(id, hit_at, hp_lost, critical)', '\tcues.record_kill(int(enemy.id), enemy.p)')
 
 
 def blob(text: str) -> str:
@@ -51,7 +51,7 @@ def validate(sources: dict[str, str]) -> list[str]:
             errors.append('Missing/duplicate reviewed visual hook: ' + line.strip())
         restored = restored.replace(line + '\n', '', 1)
     if blob(restored) != BASE_RUN_BLOB:
-        errors.append('RunState differs from the reviewed GAME-016 baseline')
+        errors.append('RunState differs from the reviewed GAME-017 baseline')
     if engine_function_digest(runner) != BASE_ENGINE_FUNCTION_SHA256:
         errors.append('Existing native engine commands or pass/fail criteria changed')
     restored_view = view.split('\nfunc _draw_combat_cues() -> void:', 1)[0]
@@ -60,7 +60,7 @@ def validate(sources: dict[str, str]) -> list[str]:
     restored_view = restored_view.replace('\t\t\tvar enemy_color: Color = Color("aa5364").lerp(Color("fff1db"), flash)\n', '', 1)
     restored_view = restored_view.replace(']), enemy_color)', ']), Color("aa5364"))', 1)
     if blob(restored_view) != BASE_VIEW_BLOB:
-        errors.append('Battle View differs from the reviewed GAME-016 baseline')
+        errors.append('Battle View differs from the reviewed GAME-017 baseline')
     for value in ('const MAX_EVENTS := 48', 'const MAX_FLASHES := 80',
                   'events.size() >= MAX_EVENTS', 'events.pop_front()',
                   'flashes.size() >= MAX_FLASHES', 'flashes.erase(flashes.keys()[0])',
@@ -81,7 +81,10 @@ def validate(sources: dict[str, str]) -> list[str]:
     hit = section(run, '_damage_enemy')
     if hit.index('cues.record_hit(') < hit.index('enemies[i]["hp"] -='):
         errors.append('Hit cue emitted before actual damage')
-    if hit.index('cues.record_kill(') < hit.index('kills += 1'):
+    death = section(run, '_defeat_enemy')
+    if '_defeat_enemy(i)' not in hit:
+        errors.append('Lethal damage must use the committed death path')
+    if death.index('cues.record_kill(') < death.index('kills += 1'):
         errors.append('Kill cue emitted before actual kill')
     collect = section(run, '_collect_pickups')
     if collect.index('cues.record_collected_xp(') < collect.index('grant_xp(reward)'):
@@ -158,7 +161,7 @@ def check() -> dict:
             'baseline_run_blob': BASE_RUN_BLOB, 'baseline_runner_blob': BASE_RUNNER_BLOB,
             'baseline_engine_function_sha256': BASE_ENGINE_FUNCTION_SHA256,
             'scope': 'Changed-source UTF-8/delimiters/Python syntax, hook order, bounds, isolation, '
-                     'reviewed GAME-016 source baselines and preserved engine runner. '
+                     'reviewed GAME-017 source baselines and preserved engine runner. '
                      'NOT Godot parser/type/runtime, visual quality, input dispatch, or FPS.'}
 
 

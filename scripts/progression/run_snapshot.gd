@@ -1,6 +1,7 @@
 extends RefCounted
 ## Exact gameplay data. Cosmetic effects/cues are rebuilt after a restore.
-const VERSION := 8
+const VERSION := 9
+const GAME016_RULES := "8d625d5607e80b1486103e77ddbf57d791b39e9ebe389c704416857e2b574d27"
 const GAME015_RULES := "99b5b472aaaec892172902f02cf5abb5f368c9da43a451578ebc2b8c7706b894"
 const GAME011_RULES := "7644920556aef98fd56539ab07f8deab2e446baab4fa4320d4a78247f38ca9f8"
 const GAME010_RULES := "711b73b68b15d571c240c7e4b8c20261ddec790a5db723c2ef1bd2d83f68042b"
@@ -13,14 +14,14 @@ const RUN_FIELDS := ["phase", "player", "facing", "hp", "elapsed", "kills", "sho
 	"shot_clock", "spawn_clock", "hurt_clock", "skill_clocks", "_resume_phase",
 	"_enemy_serial", "_regen_remainder", "navigation_ticket", "stage", "run_id",
 	"gold_collected", "gold_drop_chance", "_elites_spawned", "_boss_spawned", "_boss_defeated", "checkpoint_index", "end_reason",
-	"account_attack_level", "account_talent_levels", "_damage_reduction_remainder", "_slow_left", "_kill_heal_clock", "_kill_heal_used", "enemies", "bullets", "pickups", "gold_pickups", "enemy_bullets", "_swarm_clock", "_swarm_pending", "_swarm_serial", "_scatter_clock", "_scatter_index", "map_id", "spawn_view_size"]
+	"account_attack_level", "account_talent_levels", "_damage_reduction_remainder", "_slow_left", "_kill_heal_clock", "_kill_heal_used", "enemies", "bullets", "pickups", "gold_pickups", "enemy_bullets", "_swarm_clock", "_swarm_pending", "_swarm_serial", "_scatter_clock", "_scatter_index", "map_id", "spawn_view_size", "structures", "item_pickups", "_loot_serial"]
 const GROWTH_FIELDS := ["character_id", "owned", "level", "xp", "pending", "offer", "ticket", "revision"]
 const MAGIC_FIELDS := ["mana", "cooldown_left", "casts", "ticket"]
 
 static func fingerprint() -> String:
 	var stages := FileAccess.get_file_as_string("res://data/stages.json").replace("\r\n", "\n")
 	var skills := FileAccess.get_file_as_string("res://data/prototype_skills.json").replace("\r\n", "\n")
-	return (stages + skills + FileAccess.get_file_as_string("res://data/maps.json").replace("\r\n", "\n")).sha256_text()
+	return (stages + skills + FileAccess.get_file_as_string("res://data/maps.json").replace("\r\n", "\n") + FileAccess.get_file_as_string("res://data/destructibles.json").replace("\r\n", "\n")).sha256_text()
 
 static func capture(state) -> Dictionary:
 	var result := {"version": VERSION, "rules": fingerprint(), "run": {}, "growth": {}, "magic": {}, "rng": []}
@@ -30,11 +31,13 @@ static func capture(state) -> Dictionary:
 		result.growth[key] = state.growth.get(key)
 	for key in MAGIC_FIELDS:
 		result.magic[key] = state.magic.get(key)
-	for generator in [state.rng, state.growth.rng, state.gold_rng, state.encounter_rng, state.scatter_rng]:
+	for generator in [state.rng, state.growth.rng, state.gold_rng, state.encounter_rng, state.scatter_rng, state.loot_rng]:
 		result.rng.append({"seed": generator.seed, "state": generator.state})
 	return result.duplicate(true)
 
 static func upgrade_legacy(data: Dictionary, state) -> Dictionary:
+	if data.get("version") == 8 and data.get("rules") == GAME016_RULES:
+		return _upgrade_supplies(data)
 	if data.get("version") == 7 and data.get("rules") == GAME015_RULES:
 		return _upgrade_map(data)
 	if data.get("version") == 6 and data.get("rules") == GAME011_RULES:
@@ -143,6 +146,20 @@ static func _upgrade_map(data: Dictionary) -> Dictionary:
 	data.rules = fingerprint()
 	data.run.map_id = "legacy_arena"
 	data.run.spawn_view_size = Vector2(1256,468)
+	return _upgrade_supplies(data)
+
+static func _upgrade_supplies(data: Dictionary) -> Dictionary:
+	if not data.get("run") is Dictionary or not data.get("rng") is Array or data.rng.size() != 5 or not data.rng[0] is Dictionary or not data.rng[0].get("seed") is int:
+		return {}
+	data = data.duplicate(true)
+	data.version = VERSION
+	data.rules = fingerprint()
+	data.run.structures = [] # Old in-progress runs never gain retroactive loot.
+	data.run.item_pickups = []
+	data.run._loot_serial = 0
+	var generator := RandomNumberGenerator.new()
+	generator.seed = int(data.rng[0].seed) ^ 0x1007
+	data.rng.append({"seed": generator.seed, "state": generator.state})
 	return data
 
 static func finite_number(value: Variant, minimum: float, maximum: float) -> bool:
@@ -267,7 +284,7 @@ static func valid(data: Dictionary, state) -> bool:
 	for key in ["casts", "ticket"]:
 		if not magic.get(key) is int or not finite_number(magic[key], 0, 1000000000):
 			return false
-	if not data.get("rng") is Array or data.rng.size() != 5:
+	if not data.get("rng") is Array or data.rng.size() != 6:
 		return false
 	for generator in data.rng:
 		if not generator is Dictionary or not generator.get("seed") is int or not generator.get("state") is int:
@@ -277,7 +294,41 @@ static func valid(data: Dictionary, state) -> bool:
 	for id in run.skill_clocks:
 		if not definitions.has(id) or not finite_number(run.skill_clocks[id], 0, 60):
 			return false
-	return valid_actors(run, state)
+	return valid_supplies(run, state, space) and valid_actors(run, state)
+
+static func valid_supplies(run: Dictionary, state, space) -> bool:
+	if not run.structures is Array or not run.item_pickups is Array or not run._loot_serial is int or run._loot_serial < 0:
+		return false
+	var expected: Array[Dictionary] = state.supply_catalog.create(run.map_id, space)
+	if run.structures.size() != expected.size() and not run.structures.is_empty():
+		return false
+	var sources := {}
+	var destructions := 0
+	var max_generation := 1 + floori((float(run.elapsed) + 0.000001) / state.SupplyCatalog.RESPAWN_SECONDS)
+	for index in range(run.structures.size()):
+		var actor: Variant = run.structures[index]
+		var definition: Dictionary = expected[index]
+		if not actor is Dictionary or actor.get("id") != definition.id or not actor.get("id") is int or actor.get("p") != definition.p or actor.get("style") != definition.style or actor.get("max_hp") != definition.max_hp or not actor.get("max_hp") is int:
+			return false
+		if not actor.get("hp") is int or actor.hp < 0 or actor.hp > definition.max_hp or not actor.get("generation") is int or actor.generation < 0 or actor.generation > max_generation or not finite_number(actor.get("respawn_left"), 0, state.SupplyCatalog.RESPAWN_SECONDS):
+			return false
+		if (actor.hp > 0 and actor.respawn_left != 0.0) or (actor.hp == 0 and (actor.respawn_left <= 0.0 or actor.generation == 0)):
+			return false
+		sources[actor.id] = actor.generation
+		destructions += int(actor.generation)
+	if run.item_pickups.size() > run._loot_serial or run._loot_serial > destructions:
+		return false
+	var ids := {}
+	var generations := {}
+	for item in run.item_pickups:
+		if not item is Dictionary or not item.get("id") is int or item.id < 1 or item.id > run._loot_serial or ids.has(item.id) or not item.get("source") is int or not sources.has(item.source) or not item.get("generation") is int or item.generation < 1 or item.generation > sources[item.source] or item.get("kind") not in state.SupplyCatalog.ITEM_KINDS or not vector(item.get("p")) or not Rect2(Vector2.ZERO, space.world_size).has_point(item.p):
+			return false
+		var key := Vector2i(item.source,item.generation)
+		if generations.has(key):
+			return false
+		ids[item.id] = true
+		generations[key] = true
+	return true
 
 static func valid_actors(run: Dictionary, state) -> bool:
 	var rules: Dictionary = state.stage_catalog.for_stage(run.stage)
@@ -342,13 +393,13 @@ static func valid_actors(run: Dictionary, state) -> bool:
 	if boss_count > 1 or (run._boss_spawned and not run._boss_defeated and boss_count != 1) or (run._boss_defeated and boss_count != 0):
 		return false
 	for bullet in run.bullets:
-		if not vector(bullet.get("direction")) or not bullet.get("seen") is Dictionary or bullet.seen.size() > run._enemy_serial:
+		if not vector(bullet.get("direction")) or not bullet.get("seen") is Dictionary or bullet.seen.size() > run._enemy_serial + run.structures.size():
 			return false
 		for key in ["life", "speed", "damage", "remaining"]:
 			if not finite_number(bullet.get(key), 0, 1000000):
 				return false
 		for id in bullet.seen:
-			if not id is int or id <= 0 or id > run._enemy_serial or bullet.seen[id] != true:
+			if not id is int or id in [-1, 0] or id > run._enemy_serial or id < -run.structures.size() - 1 or bullet.seen[id] != true:
 				return false
 	for pickup in run.pickups:
 		if not finite_number(pickup.get("value"), 0.000001, 1000000000):
@@ -385,7 +436,7 @@ static func restore(data: Dictionary, state) -> bool:
 	state.magic.reset(state.growth.catalog.characters[state.growth.character_id].active_magic, state.growth.character_id)
 	for key in MAGIC_FIELDS:
 		state.magic.set(key, data.magic[key])
-	var generators := [state.rng, state.growth.rng, state.gold_rng, state.encounter_rng, state.scatter_rng]
+	var generators := [state.rng, state.growth.rng, state.gold_rng, state.encounter_rng, state.scatter_rng, state.loot_rng]
 	for index in range(generators.size()):
 		generators[index].seed = data.rng[index].seed
 		generators[index].state = data.rng[index].state

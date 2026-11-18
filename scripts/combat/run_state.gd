@@ -7,6 +7,7 @@ const CombatCues = preload("res://scripts/combat/combat_cues.gd")
 const StageCatalog = preload("res://scripts/combat/stage_catalog.gd")
 const MapCatalog = preload("res://scripts/world/map_catalog.gd")
 const MapSpace = preload("res://scripts/world/map_space.gd")
+const SupplyCatalog = preload("res://scripts/world/supply_catalog.gd")
 const AccountTalents = preload("res://scripts/progression/account_talents.gd")
 enum Phase { READY, RUNNING, PAUSED, DEFEAT, CHOOSING, ABANDONED, CLEARED }
 const WORLD_SIZE := Vector2(1800.0, 1200.0) # Legacy API; mapped runs use world_size.
@@ -87,6 +88,11 @@ var map_id: String = "legacy_arena"
 var map_space = MapSpace.new(map_catalog.definition(map_id))
 var world_size: Vector2 = WORLD_SIZE
 var spawn_view_size := Vector2(1256,468)
+var supply_catalog = SupplyCatalog.new()
+var structures: Array[Dictionary] = []
+var item_pickups: Array[Dictionary] = []
+var loot_rng := RandomNumberGenerator.new()
+var _loot_serial: int = 0
 var account_talent_levels: Dictionary = AccountTalents.empty_levels()
 var account_attack_level: int: # Compatibility view; all six levels freeze at departure.
 	get: return int(account_talent_levels.attack_power)
@@ -114,6 +120,9 @@ func start(seed_value: int = 0, character_id: String = "viya", account_level: Va
 	var map_data: Dictionary = map_catalog.definition(selected_map)
 	if map_data.is_empty():
 		return false
+	var selected_space = MapSpace.new(map_data)
+	if not SupplyCatalog.valid_layout(supply_catalog.layouts.get(selected_map), selected_space):
+		return false
 	var candidate_pool: Array[Dictionary] = growth.catalog.pool_for(character_id)
 	if not growth.catalog.validate_pool(candidate_pool, character_id):
 		return false
@@ -137,6 +146,7 @@ func start(seed_value: int = 0, character_id: String = "viya", account_level: Va
 	gold_rng.seed = int(rng.seed) ^ 0x601D
 	encounter_rng.seed = int(rng.seed) ^ 0xE11C
 	scatter_rng.seed = int(rng.seed) ^ 0x5CA77
+	loot_rng.seed = int(rng.seed) ^ 0x1007
 	run_id = Crypto.new().generate_random_bytes(16).hex_encode()
 	gold_collected = 0
 	gold_pickups.clear()
@@ -149,6 +159,9 @@ func start(seed_value: int = 0, character_id: String = "viya", account_level: Va
 	map_id = selected_map
 	map_space = MapSpace.new(map_data)
 	world_size = map_space.world_size
+	structures = supply_catalog.create(map_id, map_space)
+	item_pickups.clear()
+	_loot_serial = 0
 	_scatter_clock = float(rules.scatter.interval)
 	_scatter_index = 0
 	_swarm_clock = float(rules.swarm.interval)
@@ -412,6 +425,7 @@ func step(delta: float, direction: Vector2) -> void:
 	player = map_space.move(player, movement * float(stats["speed"]) * motion_dt, 30.0)
 	if movement.length_squared() > 0.001:
 		facing = movement.normalized()
+	_tick_structures(dt)
 	_collect_pickups(dt)
 	if phase != Phase.RUNNING:
 		_resolve_deadline()
@@ -476,6 +490,9 @@ func _heal_on_kill() -> void:
 
 func _collect_pickups(dt: float) -> void:
 	_collect_gold(dt)
+	_collect_items(dt)
+	if phase != Phase.RUNNING:
+		return # A global magnet may open an exact, saved level-up offer.
 	var reward: float = 0.0
 	for i in range(pickups.size() - 1, -1, -1):
 		var pos: Vector2 = pickups[i]["p"]
@@ -701,6 +718,15 @@ func _nearest(at: Vector2, reach: float, ignored: Array[int] = []) -> Dictionary
 		if distance < best:
 			best = distance
 			found = enemy
+	# Enemies keep priority; supplies are targets when no enemy is in range.
+	if found.is_empty():
+		for structure in structures:
+			if structure.hp <= 0 or ignored.has(int(structure.id)):
+				continue
+			var distance := at.distance_squared_to(structure.p)
+			if distance < best and map_space.wall_fraction(at, structure.p, 4.0) >= 1.0:
+				best = distance
+				found = structure
 	return found
 
 func _auto_fire() -> void:
@@ -746,18 +772,28 @@ func _damage_enemy(id: int, base_damage: float) -> void:
 		var hp_lost: int = maxi(0, previous_hp - maxi(0, int(enemies[i]["hp"])))
 		cues.record_hit(id, hit_at, hp_lost, critical)
 		if enemies[i]["hp"] <= 0:
-			add_pickup(enemies[i]["p"])
-			var kind: String = str(enemies[i].get("kind", "normal"))
-			_drop_gold(hit_at, kind)
-			enemies.remove_at(i)
-			kills += 1
-			cues.record_kill(id, hit_at)
-			_heal_on_kill()
-			if kind == "boss" and _boss_spawned:
-				_boss_defeated = true
-				if elapsed + 0.000001 >= stage_duration:
-					_clear_stage()
+			_defeat_enemy(i)
 		return
+
+func _defeat_enemy(index: int) -> void:
+	# Both normal damage and purge use this single committed death/reward path.
+	var enemy: Dictionary = enemies[index]
+	add_pickup(enemy.p)
+	_drop_gold(enemy.p, str(enemy.kind))
+	enemies.remove_at(index)
+	kills += 1
+	cues.record_kill(int(enemy.id), enemy.p)
+	_heal_on_kill()
+	if enemy.kind == "boss" and _boss_spawned:
+		_boss_defeated = true
+		if elapsed + 0.000001 >= stage_duration:
+			_clear_stage()
+
+func _damage_target(id: int, damage: float) -> void:
+	if id < -1:
+		_damage_structure(id, damage)
+	else:
+		_damage_enemy(id, damage)
 
 func _burst(at: Vector2, radius: float, damage: float, kind: String) -> void:
 	var targets: Array[int] = []
@@ -766,6 +802,9 @@ func _burst(at: Vector2, radius: float, damage: float, kind: String) -> void:
 			targets.append(int(enemy["id"]))
 	for id in targets:
 		_damage_enemy(id, damage)
+	for structure in structures:
+		if structure.hp > 0 and at.distance_squared_to(structure.p) <= radius * radius:
+			_damage_structure(int(structure.id), damage)
 	_effect(at, radius, kind)
 
 func _effect(at: Vector2, radius: float, kind: String) -> void:
@@ -820,7 +859,7 @@ func _tick_skills(dt: float) -> void:
 					var link_from: Vector2 = anchor
 					anchor = linked["p"]
 					used.append(victim)
-					_damage_enemy(victim, float(profile["damage"]))
+					_damage_target(victim, float(profile["damage"]))
 					_effect(anchor, 28.0, "chain")
 					effects[-1]["from"] = link_from # Committed link, not a new target search.
 					if phase != Phase.RUNNING:
@@ -844,21 +883,23 @@ func _move_bullets(dt: float) -> void:
 		while int(bullet["remaining"]) > 0:
 			var victim := -1
 			var first_distance := INF
-			for enemy in enemies:
-				if bullet["seen"].has(enemy["id"]):
-					continue
-				var pos: Vector2 = enemy["p"]
-				var nearest := Geometry2D.get_closest_point_to_segment(pos, old_pos, new_pos)
-				if pos.distance_squared_to(nearest) <= pow(ENEMY_RADIUS + 4.0, 2.0):
-					var distance := old_pos.distance_squared_to(nearest)
-					if distance < first_distance:
-						first_distance = distance
-						victim = int(enemy["id"])
+			for actors in [enemies, structures]:
+				for actor in actors:
+					if actor.hp <= 0 or bullet["seen"].has(actor.id):
+						continue
+					var pos: Vector2 = actor.p
+					var nearest := Geometry2D.get_closest_point_to_segment(pos, old_pos, new_pos)
+					var radius: float = SupplyCatalog.RADIUS if actor.id < 0 else ENEMY_RADIUS
+					if pos.distance_squared_to(nearest) <= pow(radius + 4.0, 2.0):
+						var distance := old_pos.distance_squared_to(nearest)
+						if distance < first_distance:
+							first_distance = distance
+							victim = int(actor.id)
 			if victim == -1:
 				break
 			bullet["seen"][victim] = true
 			bullet["remaining"] -= 1
-			_damage_enemy(victim, float(bullet["damage"]))
+			_damage_target(victim, float(bullet["damage"]))
 			if phase != Phase.RUNNING:
 				return
 		if bullet["remaining"] <= 0 or bullet["life"] <= 0.0 or wall_hit < 1.0:
@@ -961,6 +1002,78 @@ func _collect_gold(dt: float) -> void:
 		if pos.distance_squared_to(player) <= pow(PLAYER_RADIUS + 10.0, 2.0):
 			gold_collected += int(gold_pickups[i]["value"])
 			gold_pickups.remove_at(i)
+
+func _damage_structure(id: int, base_damage: float) -> void:
+	if phase != Phase.RUNNING or not is_finite(base_damage) or base_damage <= 0.0:
+		return
+	for structure in structures:
+		if structure.id != id or structure.hp <= 0:
+			continue
+		# Supplies use attack power without drawing a combat critical-hit roll.
+		var damage := maxi(1, ceili(snappedf(base_damage * float(stats.power), 0.000001)))
+		var lost := mini(int(structure.hp), damage)
+		structure.hp = maxi(0, int(structure.hp) - damage)
+		cues.record_hit(id, structure.p, lost, false)
+		if structure.hp == 0:
+			structure.generation += 1
+			structure.respawn_left = SupplyCatalog.RESPAWN_SECONDS
+			var kind := SupplyCatalog.roll_item(loot_rng)
+			_effect(structure.p, 30.0, "blast")
+			if not kind.is_empty():
+				_loot_serial += 1
+				item_pickups.append({"id": _loot_serial, "source": id, "generation": structure.generation, "p": structure.p, "kind": kind})
+		return # Broken props never reroll or award monster kills/XP/gold.
+
+func _tick_structures(dt: float) -> void:
+	# Called only within a RUNNING step; choices/pause/results freeze this timer.
+	if phase != Phase.RUNNING or dt <= 0.0 or not is_finite(dt):
+		return
+	for structure in structures:
+		if structure.hp > 0:
+			continue
+		structure.respawn_left = maxf(0.0, float(structure.respawn_left) - dt)
+		if structure.respawn_left <= 0.000000001:
+			structure.respawn_left = 0.0
+			structure.hp = structure.max_hp
+
+func _collect_items(dt: float) -> void:
+	for index in range(item_pickups.size() - 1, -1, -1):
+		if phase != Phase.RUNNING:
+			return
+		var item: Dictionary = item_pickups[index]
+		if item.p.distance_squared_to(player) <= pow(float(stats.pickup), 2.0):
+			item.p = item.p.move_toward(player, 420.0 * dt)
+		if item.p.distance_squared_to(player) > pow(PLAYER_RADIUS + 10.0, 2.0):
+			continue
+		# Commit removal before the effect, including effects that open a choice.
+		item_pickups.remove_at(index)
+		_apply_supply(str(item.kind))
+
+func _apply_supply(kind: String) -> void:
+	if phase != Phase.RUNNING or kind not in SupplyCatalog.ITEM_KINDS:
+		return
+	match kind:
+		"hp":
+			_heal_hp(max_hp * SupplyCatalog.RECOVERY_FRACTION)
+		"mp":
+			magic.mana = minf(magic.maximum_mana(), magic.mana + magic.maximum_mana() * SupplyCatalog.RECOVERY_FRACTION)
+		"magnet":
+			var xp := 0.0
+			for pickup in pickups:
+				xp += float(pickup.value) * float(stats.xp)
+			for gold in gold_pickups:
+				gold_collected += int(gold.value)
+			pickups.clear()
+			gold_pickups.clear()
+			if xp > 0.0:
+				grant_xp(xp)
+				cues.record_collected_xp(player, xp)
+		"purge":
+			for index in range(enemies.size() - 1, -1, -1):
+				if enemies[index].kind != "boss":
+					_defeat_enemy(index)
+			enemy_bullets.clear()
+	cues.record_item(player, str(SupplyCatalog.ITEM_NAMES[kind]))
 
 func _clear_stage() -> void:
 	if phase not in [Phase.RUNNING, Phase.CHOOSING] or not _boss_defeated or elapsed + 0.000001 < stage_duration:

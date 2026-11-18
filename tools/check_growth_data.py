@@ -75,7 +75,7 @@ def check() -> dict:
             errors.append('missing shared passive profile connection: ' + marker)
     for text, source in [('expected_ticket != ticket', growth), ('rng.randi_range(0, i)', growth),
                          ('RunState.Phase.CHOOSING', ui), ('_choose_skill.bind(id, last_ticket)', ui),
-                         ('growth.select(id, ticket)', run), ('add_pickup(enemies[i]["p"])', run),
+                         ('growth.select(id, ticket)', run), ('_defeat_enemy(i)', run), ('add_pickup(enemy.p)', run),
                          ('grant_xp(reward)', run), ('magic_button.disabled = true', ui)]:
         if text not in source:
             errors.append(f'missing integration marker: {text}')

@@ -55,6 +55,12 @@ func record_collected_xp(at: Vector2, amount: float) -> void:
 		return
 	_push("xp", 0, at, amount, false, XP_SECONDS)
 
+func record_item(at: Vector2, label: String) -> void:
+	if not enabled:
+		return
+	_push("item", 0, at, 0.0, false, 1.3)
+	events[-1]["label"] = label
+
 func _recent(kind: String, id: int, window: float) -> Dictionary:
 	for i in range(events.size() - 1, -1, -1):
 		var event: Dictionary = events[i]

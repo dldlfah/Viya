@@ -25,6 +25,7 @@ func _draw() -> void:
 	for y in range(int(-origin.y / 64.0) - 1, int((size.y - origin.y) / 64.0) + 2):
 		draw_line(Vector2(0, origin.y + y * 64), Vector2(size.x, origin.y + y * 64), Color("242832"))
 	_draw_map(origin)
+	_draw_supplies()
 	draw_rect(Rect2(origin, simulation.world_size), Color("6c5c43"), false, 4.0)
 	for pickup in simulation.pickups:
 		var pos := _screen(pickup["p"])
@@ -102,6 +103,56 @@ func _draw_enemy_body(at: Vector2, variant: String, color: Color) -> void:
 		_:
 			draw_colored_polygon(PackedVector2Array([at + Vector2(0, -20), at + Vector2(19, 13), at + Vector2(-19, 13)]), color)
 
+func _draw_supplies() -> void:
+	var visible := Rect2(Vector2.ZERO, size).grow(50.0)
+	for structure in simulation.structures:
+		var at := _screen(structure.p)
+		if not visible.has_point(at):
+			continue
+		if structure.hp <= 0:
+			draw_line(at+Vector2(-17,8),at+Vector2(5,3),Color("766553"),4)
+			draw_line(at+Vector2(7,6),at+Vector2(20,11),Color("766553"),3)
+			continue
+		draw_circle(at+Vector2(0,11),26,Color(0,0,0,0.3))
+		var base := Color("ac8657") if structure.style == "crate" else (Color("9c6e54") if structure.style == "urn" else Color("899085"))
+		base = base.lerp(Color("fff1db"),simulation.cues.flash_alpha(int(structure.id)))
+		match structure.style:
+			"crate":
+				draw_rect(Rect2(at-Vector2(22,20),Vector2(44,40)),base)
+				draw_rect(Rect2(at-Vector2(18,16),Vector2(36,32)),Color("594532"),false,3)
+				draw_line(at-Vector2(17,15),at+Vector2(17,15),Color("594532"),3)
+				draw_line(at+Vector2(-17,15),at+Vector2(17,-15),Color("594532"),3)
+			"urn":
+				draw_circle(at,21,base)
+				draw_rect(Rect2(at-Vector2(13,24),Vector2(26,8)),base.lightened(0.15))
+				draw_arc(at,14,0.3,PI-0.3,12,Color("554138"),3)
+			"debris":
+				draw_colored_polygon(PackedVector2Array([at+Vector2(-24,16),at+Vector2(-17,-10),at+Vector2(4,-21),at+Vector2(24,12)]),base)
+				draw_line(at+Vector2(4,-18),at+Vector2(-3,0),Color("424c47"),3)
+		if structure.hp < structure.max_hp:
+			draw_rect(Rect2(at+Vector2(-20,-33),Vector2(40,4)),Color("302b2e"))
+			draw_rect(Rect2(at+Vector2(-20,-33),Vector2(40.0*structure.hp/structure.max_hp,4)),Color("c7b187"))
+	for item in simulation.item_pickups:
+		var at := _screen(item.p)
+		if not visible.has_point(at):
+			continue
+		var color: Color = {"hp":Color("f58c9c"),"mp":Color("7abcf3"),"magnet":Color("f3ce79"),"purge":Color("cea2fa")}[item.kind]
+		draw_circle(at,17,Color("20252c"))
+		draw_arc(at,18,0,TAU,24,color,2,true)
+		match item.kind:
+			"hp":
+				draw_line(at+Vector2(-9,0),at+Vector2(9,0),color,5)
+				draw_line(at+Vector2(0,-9),at+Vector2(0,9),color,5)
+			"mp":
+				draw_colored_polygon(PackedVector2Array([at+Vector2(0,-11),at+Vector2(8,3),at+Vector2(0,10),at+Vector2(-8,3)]),color)
+			"magnet":
+				draw_arc(at,8,0,PI,14,color,5,true)
+				draw_line(at+Vector2(-8,0),at+Vector2(-8,-9),color,5)
+				draw_line(at+Vector2(8,0),at+Vector2(8,-9),color,5)
+			"purge":
+				draw_line(at-Vector2(8,8),at+Vector2(8,8),color,4)
+				draw_line(at+Vector2(-8,8),at+Vector2(8,-8),color,4)
+
 func _draw_map(origin: Vector2) -> void:
 	var visible := Rect2(simulation.camera_center()-size*0.5,size)
 	var terrain: Texture2D = art.texture("terrain_" + simulation.map_id)
@@ -161,6 +212,12 @@ func _draw_combat_cues() -> void:
 		if kind == "kill":
 			var ring := Color("d98a8d", fraction)
 			draw_arc(at, 12.0 + progress * 15.0, 0.0, TAU, 16, ring, 2.0, true)
+			continue
+		if kind == "item":
+			var label: String = event.get("label", "")
+			var text_at := at + Vector2(-font.get_string_size(label,HORIZONTAL_ALIGNMENT_LEFT,-1,17).x*0.5,-48-progress*25)
+			draw_string_outline(font,text_at,label,HORIZONTAL_ALIGNMENT_LEFT,-1,17,3,Color("17191e",fraction))
+			draw_string(font,text_at,label,HORIZONTAL_ALIGNMENT_LEFT,-1,17,Color("f5dfa6",fraction))
 			continue
 		if (kind == "xp" and not show_xp) or (kind == "hit" and not show_damage):
 			continue
