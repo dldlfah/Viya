@@ -44,6 +44,14 @@ var _talent_grid: GridContainer
 var _talents_open := false
 var _talent_category := "attack"
 var _talent_notice := ""
+var stage_launch_button: Button
+var stage_back_button: Button
+var lobby_settings_button: Button
+var stage_buttons: Array[Button] = []
+var _selected_stage: int = 1
+var boss_bar: ProgressBar
+var boss_label: Label
+var ailment_text: Label
 
 func _ready() -> void:
 	super._ready()
@@ -78,7 +86,7 @@ func _build_interface() -> void:
 	_header_row = HBoxContainer.new()
 	_header_row.add_theme_constant_override("separation", 12)
 	_header.add_child(_header_row)
-	_brand = _label("VIYA / 04C", 21)
+	_brand = _label("VIYA", 21)
 	_header_row.add_child(_brand)
 	_growth_column = VBoxContainer.new()
 	_growth_column.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -158,6 +166,17 @@ func _build_interface() -> void:
 	dialog_body.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	dialog_body.add_theme_constant_override("separation", 10)
 	_scroll.add_child(dialog_body)
+	boss_bar = ProgressBar.new()
+	boss_bar.show_percentage = false
+	boss_bar.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	root_ui.add_child(boss_bar)
+	boss_label = _label("", 14)
+	boss_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	root_ui.add_child(boss_label)
+	ailment_text = _label("", 14)
+	ailment_text.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	ailment_text.add_theme_color_override("font_color", Color("edb06e"))
+	root_ui.add_child(ailment_text)
 	_apply_layout()
 
 func _add_slots(parent: VBoxContainer, title: String, target: Array[Label]) -> void:
@@ -241,6 +260,11 @@ func _apply_layout() -> void:
 		stage_text.position = view.position + Vector2(12, 8)
 		stage_text.size.x = maxf(1.0, view.size.x - 24.0)
 		stage_text.clip_text = true
+	if is_instance_valid(boss_bar):
+		boss_bar.position = view.position + Vector2(12, 51)
+		boss_bar.size = Vector2(minf(360.0, view.size.x * 0.5), 8)
+		boss_label.position = view.position + Vector2(12, 30)
+		ailment_text.position = view.position + Vector2(12, 65)
 	_place(feedback_panel, layout_data["feedback"])
 	_place(_resources, layout_data["resources"])
 	_place(_skills, layout_data["skills"])
@@ -310,12 +334,14 @@ func _show_menu(kind: String) -> void:
 		dialog_body.add_child(lobby_button)
 	elif kind == "ready":
 		var heading: Label = dialog_body.get_child(0) as Label
-		heading.text = "VIYA | 임시 메인 로비"
+		heading.text = "VIYA | 최후의 도시 · 메인 로비"
 		var account := _label("계정 공통 특성 · 강화 %d/54 · 공격력 %s" % [AccountTalents.IDS.reduce(func(sum, id): return sum + int(gold_progress.talent_levels[id]), 0), AccountTalents.effect_text("attack_power", gold_progress.attack_level)], 20)
 		dialog_body.add_child(account)
 		dialog_body.move_child(account, 1)
 		talents_button = _button("계정 특성 · 공격 / 방어 / 회복", _open_talents.bind(ticket, revision))
 		dialog_body.add_child(talents_button)
+	if kind == "ready":
+		_decorate_lobby()
 	_add_growth_access(kind)
 	_scroll.scroll_vertical = 0
 	_fit_dialog()
@@ -455,7 +481,10 @@ func _start_from_menu(ticket: int, revision: int) -> void:
 		return
 	if simulation.phase not in [RunState.Phase.READY, RunState.Phase.DEFEAT, RunState.Phase.ABANDONED, RunState.Phase.CLEARED]:
 		return
-	begin_run()
+	if _has_saved_battle() or (not run_store.pending.is_empty() and not simulation.result_summary().ended):
+		begin_run()
+	else:
+		_open_stages()
 
 func _resume_from_menu(ticket: int, revision: int) -> void:
 	if _menu_matches(ticket, revision) and simulation.transition_action.is_empty():
@@ -555,6 +584,10 @@ func _input(event: InputEvent) -> void:
 	super._input(event)
 
 func _unhandled_key_input(event: InputEvent) -> void:
+	if _modal_kind in ["stages", "lobby_settings"] and event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_ESCAPE:
+		_campaign_back(simulation.navigation_ticket, _menu_revision)
+		get_viewport().set_input_as_handled()
+		return
 	if _talents_open and event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_ESCAPE:
 		_close_talents(simulation.navigation_ticket, _menu_revision)
 		get_viewport().set_input_as_handled()
@@ -833,3 +866,116 @@ func _cancel_discard_save(ticket: int, revision: int) -> void:
 func _confirm_discard_save(ticket: int, revision: int) -> void:
 	if _modal_kind == "discard_save" and _menu_matches(ticket, revision):
 		_discard_saved_run()
+
+# Campaign menus render data and dispatch existing guarded state transitions.
+func _decorate_lobby() -> void:
+	for child in dialog_body.get_children():
+		if child is Label and (child.text.begins_with("처치 →") or child.text.begins_with("6분 생존")):
+			dialog_body.remove_child(child)
+			child.queue_free()
+	var city = preload("res://scripts/ui/city_preview.gd").new()
+	dialog_body.add_child(city)
+	dialog_body.move_child(city, mini(2, dialog_body.get_child_count() - 1))
+	var caption := _label("최후의 도시 · 비야 / 임시 배경·캐릭터 대역", 14)
+	dialog_body.add_child(caption)
+	var menus := GridContainer.new()
+	menus.columns = 3 if layout_data.get("card_columns", 3) == 3 else 2
+	menus.add_theme_constant_override("h_separation", 8)
+	menus.add_theme_constant_override("v_separation", 8)
+	dialog_body.add_child(menus)
+	for button in [start_button, talents_button]:
+		button.reparent(menus)
+		button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	for title in ["캐릭터", "뽑기", "도시", "원정"]:
+		var button := _button(title + " · 준비 중", func(): pass)
+		button.disabled = true
+		button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		menus.add_child(button)
+	var ticket: int = simulation.navigation_ticket
+	var revision: int = _menu_revision
+	lobby_settings_button = _button("설정", _open_lobby_settings.bind(ticket, revision))
+	dialog_body.add_child(lobby_settings_button)
+
+func _open_stages() -> void:
+	_clear_dialog()
+	_modal_kind = "stages"
+	_selected_stage = gold_progress.next_stage
+	var data: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://data/chapter_one.json"))
+	dialog_body.add_child(_label(data.chapter, 28))
+	dialog_body.add_child(_label("6분 생존 + 최종 보스 처치 · 2분/4분 자동 저장", 17))
+	stage_buttons.clear()
+	var entries: Array = data.stages.duplicate(true)
+	if gold_progress.next_stage > 2:
+		entries.append({"number": gold_progress.next_stage, "name": "[시험] 일반 지역 · S%d" % gold_progress.next_stage, "description": "도시 외곽 시험 맵을 사용하는 현재 진행 전투입니다."})
+	var ticket: int = simulation.navigation_ticket
+	var revision: int = _menu_revision
+	for entry in entries:
+		var number: int = int(entry.number)
+		var state := "선택됨" if number == _selected_stage else ("클리어" if number < _selected_stage else "잠김")
+		var rules: Dictionary = simulation.stage_catalog.for_stage(number)
+		var button := _button("%s · %s\n%s\n목표: 생존 + 보스 · 기본 %d골드 + 획득 금화" % [entry.name, state, entry.description, int(rules.get("clear_gold", 100))], _select_stage.bind(number, ticket, revision))
+		button.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		button.disabled = number != gold_progress.next_stage
+		dialog_body.add_child(button)
+		stage_buttons.append(button)
+	dialog_body.add_child(_label("지역 후보 · 세부 구성 미확정", 15))
+	for region in data.future_regions:
+		var button := _button(region + " · 준비 중", func(): pass)
+		button.disabled = true
+		dialog_body.add_child(button)
+	stage_launch_button = _button("선택한 전장으로 출격", _launch_stage.bind(ticket, revision))
+	stage_launch_button.disabled = gold_error != OK or battle_save_error != OK
+	dialog_body.add_child(stage_launch_button)
+	stage_back_button = _button("뒤로 · 메인 로비", _campaign_back.bind(ticket, revision))
+	dialog_body.add_child(stage_back_button)
+	overlay.show()
+	_fit_dialog()
+
+func _select_stage(number: int, ticket: int, revision: int) -> void:
+	if _modal_kind != "stages" or not _menu_matches(ticket, revision) or number != gold_progress.next_stage:
+		return
+	_selected_stage = number
+
+func _launch_stage(ticket: int, revision: int) -> void:
+	if _modal_kind != "stages" or not _menu_matches(ticket, revision) or _selected_stage != gold_progress.next_stage or _has_saved_battle():
+		return
+	begin_run()
+
+func _campaign_back(ticket: int, revision: int) -> void:
+	if _menu_matches(ticket, revision) and _modal_kind in ["stages", "lobby_settings"]:
+		_show_menu("ready")
+
+func _open_lobby_settings(ticket: int, revision: int) -> void:
+	if not _menu_matches(ticket, revision) or simulation.phase != RunState.Phase.READY:
+		return
+	_clear_dialog()
+	_modal_kind = "lobby_settings"
+	dialog_body.add_child(_label("로비 설정", 26))
+	dialog_body.add_child(_label("전체 음량 · 전투 음원은 준비 중", 17))
+	var slider := HSlider.new()
+	slider.min_value = 0.0
+	slider.max_value = 1.0
+	slider.step = 0.05
+	slider.value = volume
+	slider.custom_minimum_size.y = 40
+	slider.value_changed.connect(_set_volume)
+	dialog_body.add_child(slider)
+	_add_display_settings()
+	stage_back_button = _button("뒤로 · 메인 로비", _campaign_back.bind(simulation.navigation_ticket, _menu_revision))
+	dialog_body.add_child(stage_back_button)
+	overlay.show()
+	_fit_dialog()
+
+func _update_hud() -> void:
+	super._update_hud()
+	if not is_instance_valid(boss_bar):
+		return
+	var bosses: Array = simulation.enemies.filter(func(enemy): return enemy.kind == "boss")
+	boss_bar.visible = not bosses.is_empty() and simulation.has_active_run()
+	boss_label.visible = boss_bar.visible
+	if not bosses.is_empty():
+		boss_bar.max_value = bosses[0].max_hp
+		boss_bar.value = bosses[0].hp
+		boss_label.text = "최종 보스 · HP %d / %d" % [bosses[0].hp, bosses[0].max_hp]
+	ailment_text.text = "둔화 · %.1f초" % simulation._slow_left if simulation._slow_left > 0.0 else ""
+	status_text.text = "HP %d / %d" % [simulation.hp, simulation.max_hp]

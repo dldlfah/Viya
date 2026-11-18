@@ -175,7 +175,7 @@ func _run() -> void:
 	root.add_child(scene)
 	await process_frame
 	scene.set_physics_process(false)
-	scene.start_button.pressed.emit()
+	preload("res://tests/test_campaign.gd").depart(scene)
 	scene.simulation.spawn_clock = 999.0
 	scene.simulation.add_enemy(scene.simulation.player + Vector2(100, 0))
 	scene.simulation._damage_enemy(scene.simulation.enemies[0]["id"], 5.0)
@@ -197,6 +197,7 @@ func _run() -> void:
 	await preload("res://tests/test_account_expansion.gd").run(scene, verify)
 	await preload("res://tests/test_talent_tree.gd").run(scene, verify)
 	await preload("res://tests/test_scatter_packs.gd").run(scene, verify)
+	await preload("res://tests/test_chapter_ui.gd").run(scene, verify)
 	scene.queue_free()
 	await process_frame
 	await process_frame

@@ -135,7 +135,7 @@ func _run() -> void:
 	scene.set_physics_process(false)
 	var lobby_ticket: int = scene.simulation.navigation_ticket
 	var lobby_revision: int = scene._menu_revision
-	scene.start_button.pressed.emit()
+	preload("res://tests/test_campaign.gd").depart(scene)
 	scene.simulation.spawn_clock = 999.0
 	verify(scene.simulation.phase == RunState.Phase.RUNNING and not scene.overlay.visible, "Actual lobby start works")
 	scene._start_from_menu(lobby_ticket, lobby_revision)
@@ -183,7 +183,7 @@ func _run() -> void:
 	old_revision = scene._menu_revision
 	scene.lobby_button.pressed.emit()
 	verify(scene.simulation.phase == RunState.Phase.READY and scene.overlay.visible, "Actual result-to-lobby button works")
-	scene.start_button.pressed.emit()
+	preload("res://tests/test_campaign.gd").depart(scene)
 	scene._return_to_lobby(result_ticket, old_revision)
 	verify(scene.simulation.phase == RunState.Phase.RUNNING and not scene.overlay.visible, "Old result callback cannot send new run to lobby")
 	scene.pause_game()

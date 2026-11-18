@@ -234,7 +234,7 @@ static func ui_checks(host, directory: String, verify: Callable) -> void:
 						return
 	verify.call(ui.gold_progress.total == 0 and ui.gold_progress.talent_levels.values().all(func(rank): return rank == 3), "Actual UI completes all54 purchases with exact remaining gold")
 	ui.talents_return_button.pressed.emit()
-	ui.start_button.pressed.emit()
+	preload("res://tests/test_campaign.gd").depart(ui)
 	verify.call(ui.simulation.magic.maximum_mana() == 115.0 and is_equal_approx(ui.simulation.magic.effective_cost(),37.6) and is_equal_approx(ui.simulation.stats.crit_damage,2.15) and ui.mana_bar.max_value == 115.0, "Real departure/HUD consume full-tree magic and crit profiles")
 	ui.queue_free()
 	await host.get_tree().process_frame

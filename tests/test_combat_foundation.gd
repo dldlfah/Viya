@@ -89,7 +89,7 @@ func _run() -> void:
 	root.add_child(scene)
 	await process_frame
 	verify(is_instance_valid(scene.start_button), "F5 scene creates a start button")
-	scene.start_button.pressed.emit()
+	preload("res://tests/test_campaign.gd").depart(scene)
 	verify(scene.simulation.phase == RunState.Phase.RUNNING and not scene.overlay.visible, "Start button is wired")
 	scene.pause_game()
 	verify(scene.simulation.phase == RunState.Phase.PAUSED and scene.overlay.visible, "Pause UI is wired")
@@ -99,7 +99,7 @@ func _run() -> void:
 	scene.simulation.damage_player(1000)
 	scene._physics_process(0.016)
 	verify(scene.overlay.visible, "Defeat opens result panel")
-	scene.start_button.pressed.emit()
+	preload("res://tests/test_campaign.gd").depart(scene)
 	verify(scene.simulation.hp == 100 and scene.simulation.enemies.is_empty(), "Result restart is wired")
 	scene.queue_free()
 	await process_frame

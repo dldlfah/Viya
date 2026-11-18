@@ -197,7 +197,7 @@ func _run() -> void:
 	scene.run_store.path = "user://native-test_growth-" + Crypto.new().generate_random_bytes(8).hex_encode() + ".save"
 	root.add_child(scene)
 	await process_frame
-	scene.start_button.pressed.emit()
+	preload("res://tests/test_campaign.gd").depart(scene)
 	scene.simulation.spawn_clock = 999.0
 	scene.simulation.grant_xp(scene.simulation.growth.threshold())
 	scene._physics_process(0.0)

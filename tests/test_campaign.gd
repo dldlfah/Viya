@@ -3,6 +3,11 @@ const RunState = preload("res://scripts/combat/run_state.gd")
 const Store = preload("res://scripts/progression/run_store.gd")
 const Snapshot = preload("res://scripts/progression/run_snapshot.gd")
 
+static func depart(ui) -> void:
+	ui.start_button.pressed.emit()
+	if ui._modal_kind == "stages":
+		ui.stage_launch_button.pressed.emit()
+
 static func comparable(state) -> Dictionary:
 	var data: Dictionary = Snapshot.capture(state)
 	data.run.erase("navigation_ticket")
@@ -129,7 +134,7 @@ static func make_ui(host, directory: String):
 
 static func ui_checks(host, directory: String, verify: Callable) -> void:
 	var ui = make_ui(host, directory)
-	ui.start_button.pressed.emit()
+	depart(ui)
 	ui.simulation.elapsed = 119.99
 	ui.simulation.spawn_clock = 999.0
 	ui._physics_process(0.02)
@@ -147,7 +152,7 @@ static func ui_checks(host, directory: String, verify: Callable) -> void:
 	await host.get_tree().process_frame
 	ui = make_ui(host, directory)
 	verify.call(ui.start_button.text == "이어하기", "New process-style scene offers the saved battle")
-	ui.start_button.pressed.emit()
+	depart(ui)
 	verify.call(ui.simulation.phase == RunState.Phase.PAUSED and ui.simulation.growth.offer == offer and ui.simulation.growth.ticket != ticket, "Continue restores paused state and invalidates pre-close callbacks")
 	ui.resume_button.pressed.emit()
 	verify.call(ui.simulation.phase == RunState.Phase.CHOOSING and ui.simulation.growth.offer == offer, "Explicit Continue opens the original three choices")
@@ -156,7 +161,7 @@ static func ui_checks(host, directory: String, verify: Callable) -> void:
 	ui.pause_game()
 	ui._park_battle()
 	verify.call(ui.simulation.phase == RunState.Phase.READY and ui.start_button.text == "이어하기", "Saved battle can be parked at the lobby")
-	ui.start_button.pressed.emit()
+	depart(ui)
 	var original_path: String = ui.run_store.path
 	ui.run_store.path = directory.path_join("missing/ui.save")
 	ui.notification(Node.NOTIFICATION_APPLICATION_FOCUS_OUT)
@@ -187,19 +192,19 @@ static func ui_checks(host, directory: String, verify: Callable) -> void:
 	ui.queue_free()
 	await host.get_tree().process_frame
 	ui = make_ui(host, directory)
-	ui.start_button.pressed.emit()
+	depart(ui)
 	verify.call(ui.battle_save_error == ERR_FILE_CORRUPT and ui.gold_progress.total == 177, "An older active checkpoint cannot replay a paid stage")
 	ui.run_store.write_snapshot(completed)
 	ui._retry_battle_load()
 	verify.call(ui.simulation.phase == RunState.Phase.CLEARED and ui.gold_progress.total == 177, "A repaired terminal save reopens its result instead of starting over")
-	ui.start_button.pressed.emit()
+	depart(ui)
 	ui.simulation.damage_player(10000)
 	ui._physics_process(0.0)
 	ui.queue_free()
 	await host.get_tree().process_frame
 	ui = make_ui(host, directory)
 	verify.call(ui.simulation.phase == RunState.Phase.READY and ui.simulation.result_summary().outcome == "defeat" and ui.gold_progress.total == 177, "Defeat tombstone survives restart into the lobby and cannot resume a pre-death checkpoint")
-	ui.start_button.pressed.emit()
+	depart(ui)
 	ui.pause_game()
 	ui.leave_button.pressed.emit()
 	ui.confirm_button.pressed.emit()
@@ -207,7 +212,7 @@ static func ui_checks(host, directory: String, verify: Callable) -> void:
 	await host.get_tree().process_frame
 	ui = make_ui(host, directory)
 	verify.call(ui.simulation.phase == RunState.Phase.READY and ui.simulation.result_summary().outcome == "abandoned" and ui.gold_progress.total == 177 and ui.gold_progress.next_stage == 2, "Abandonment persists into the lobby without gold or stage unlock")
-	ui.start_button.pressed.emit()
+	depart(ui)
 	ui.run_store.path = directory.path_join("blocked/ui.save")
 	ui.simulation.elapsed = ui.simulation.stage_duration
 	ui.simulation._boss_spawned = true
@@ -235,7 +240,7 @@ static func ui_checks(host, directory: String, verify: Callable) -> void:
 	ui._ask_discard_save()
 	ui.confirm_button.pressed.emit()
 	verify.call(not ui.start_button.disabled and ui.gold_progress.total == 277 and ui.gold_progress.next_stage == 3, "Confirmed save deletion preserves permanent gold and unlocked stage")
-	ui.start_button.pressed.emit()
+	depart(ui)
 	ui.simulation.elapsed = 359.99
 	ui._physics_process(0.02)
 	ui.queue_free()

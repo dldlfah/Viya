@@ -140,7 +140,7 @@ static func ui_checks(host, directory: String, verify: Callable) -> void:
 	await host.get_tree().process_frame
 	verify.call(ui.layout_data.safe.encloses(ui._modal_host.get_rect()) and ui._scroll.get_v_scroll_bar().max_value > ui._scroll.get_v_scroll_bar().page, "Compact safe-area talent content remains inside a scrollable modal")
 	ui.talents_return_button.pressed.emit()
-	ui.start_button.pressed.emit()
+	preload("res://tests/test_campaign.gd").depart(ui)
 	verify.call(ui.simulation.account_attack_level == 1 and is_equal_approx(ui.simulation.stats.power, 1.05), "Real lobby departure applies the purchased account bonus")
 	stale.call()
 	verify.call(ui.gold_progress.total == 1050000, "Combat rejects a delayed lobby purchase")
@@ -150,7 +150,7 @@ static func ui_checks(host, directory: String, verify: Callable) -> void:
 	ui.talent_buy_buttons[1].pressed.emit()
 	verify.call(ui.gold_progress.attack_level == 2 and ui.gold_progress.total == 1000000 and ui.simulation.account_attack_level == 1, "Lobby purchase while a battle is parked upgrades the account without rewriting the existing battle")
 	ui.talents_return_button.pressed.emit()
-	ui.start_button.pressed.emit()
+	preload("res://tests/test_campaign.gd").depart(ui)
 	verify.call(ui.simulation.phase == RunState.Phase.PAUSED and ui.simulation.account_attack_level == 1 and is_equal_approx(ui.simulation.stats.power, 1.05), "Continue restores the departure bonus even after another account purchase")
 	ui.resume_button.pressed.emit()
 	ui.pause_game()

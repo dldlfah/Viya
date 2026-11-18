@@ -120,7 +120,7 @@ func _run() -> void:
 	await process_frame
 	verify(is_instance_valid(scene.feedback_panel), "Real HUD instantiates placeholder reaction panel")
 	verify(scene.feedback_panel.mouse_filter == Control.MOUSE_FILTER_IGNORE, "Reaction panel cannot steal touch")
-	scene.start_button.pressed.emit()
+	preload("res://tests/test_campaign.gd").depart(scene)
 	scene.simulation.spawn_clock = 999.0
 	for i in range(6):
 		scene.simulation.add_enemy(scene.simulation.player + Vector2(30.0 + i * 10.0, 0.0))
@@ -153,7 +153,7 @@ func _run() -> void:
 	scene._physics_process(0.0)
 	verify(scene.overlay.visible and scene.feedback_panel.state_key == "defeat", "Scene defeat opens result and clears transient reaction")
 	verify(scene.result_summary_label.text.contains("고유 마법 1회"), "Result uses actual active-magic count")
-	scene.start_button.pressed.emit()
+	preload("res://tests/test_campaign.gd").depart(scene)
 	verify(scene.feedback_panel.state_key == "normal" and not scene.overlay.visible, "Result restart clears UI and feedback")
 	verify(scene.simulation.magic.casts == 0 and scene.simulation.growth.owned == {"common_rifle": 1}, "New run clears previous results and skill selections")
 	scene.queue_free()

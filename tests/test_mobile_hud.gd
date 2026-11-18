@@ -133,7 +133,7 @@ func _run() -> void:
 	root.add_child(scene)
 	await process_frame
 	scene.set_physics_process(false) # Deterministic checks drive the real simulation explicitly.
-	scene.start_button.pressed.emit()
+	preload("res://tests/test_campaign.gd").depart(scene)
 	scene.simulation.spawn_clock = 999.0
 	verify(scene.slot_buttons.size() == 8, "Two rows retain four read-only detail buttons each")
 	verify(scene.simulation.growth.pool.size() == 18 and scene.simulation.growth.threshold() == 30.0, "18 candidates and triple XP unchanged")

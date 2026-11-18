@@ -157,7 +157,7 @@ static func combat_checks(verify: Callable) -> void:
 static func ui_checks(host, directory: String, verify: Callable) -> void:
 	Previous.funded(directory.path_join("gold.cfg"), 6306000)
 	var ui = Campaign.make_ui(host, directory)
-	ui.start_button.pressed.emit()
+	preload("res://tests/test_campaign.gd").depart(ui)
 	ui.pause_game()
 	ui._park_battle()
 	ui.talents_button.pressed.emit()
@@ -171,7 +171,7 @@ static func ui_checks(host, directory: String, verify: Callable) -> void:
 			verify.call(ui.gold_progress.talent_levels[id] == 3, "Real UI purchases all three stages of " + id)
 	verify.call(ui.gold_progress.total == 0 and ui.simulation.account_talent_levels == Talents.empty_levels(), "All purchases debit exact gold while preserving the parked battle's original six ranks")
 	ui.talents_return_button.pressed.emit()
-	ui.start_button.pressed.emit()
+	preload("res://tests/test_campaign.gd").depart(ui)
 	verify.call(ui.simulation.max_hp == 100 and ui.simulation.magic.profile(0).mana_regen == 1.0, "Continue retains pre-purchase HP and MP-recovery values")
 	ui.resume_button.pressed.emit()
 	ui.pause_game()

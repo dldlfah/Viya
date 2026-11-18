@@ -96,7 +96,7 @@ static func run(scene, verify: Callable) -> void:
 	scene.overview_button.pressed.emit()
 	scene._unhandled_key_input(escape)
 	verify.call(scene.simulation.phase == RunState.Phase.READY and scene._final_growth == final_data, "Lobby overview returns to READY and keeps final data")
-	scene.start_button.pressed.emit()
+	preload("res://tests/test_campaign.gd").depart(scene)
 	stale_open.call()
 	stale_close.call()
 	verify.call(scene.simulation.phase == RunState.Phase.RUNNING and scene._final_growth.is_empty() and not scene._overview_open, "New deployment clears the result build and rejects old callbacks")

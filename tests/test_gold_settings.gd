@@ -144,7 +144,7 @@ static func run(scene, verify: Callable) -> void:
 	verify.call(scene._modal_kind == "cleared" and scene.gold_progress.total == 157 and scene.result_summary_label.text.contains("157"), "Real result UI displays and saves base plus acquired gold")
 	scene._show_menu("cleared")
 	verify.call(scene.gold_progress.total == 157, "Reopening results cannot pay twice")
-	scene.start_button.pressed.emit()
+	preload("res://tests/test_campaign.gd").depart(scene)
 	verify.call(scene.simulation.stage == 2 and scene.simulation.gold_collected == 0 and scene.gold_progress.total == 157, "Next-stage UI retains wallet and resets per-stage gold")
 	scene.gold_progress.path = directory.path_join("retry/gold.cfg")
 	_complete_stage(scene.simulation)
