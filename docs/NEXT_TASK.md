@@ -1,6 +1,6 @@
 # VIYA — 다음 단일 게임 작업
 
-현재 코드는 GAME-019 `c8b721d407d1a86bcd7ae6c7049bb7da95d5c685`의 방어/관통 연결을 포함한다. [CURRENT_WORK](CURRENT_WORK.md), [DEVELOPMENT_STATUS](DEVELOPMENT_STATUS.md), [PLANNED_WORK](PLANNED_WORK.md) 13/15절과 기존 AGENTS/제작 스킬을 따른다. 원격 HEAD·동시 변경을 확인하고 main 자동 병합 금지.
+현재 코드는 GAME-019 `587656e68565c4a3db9f48cdd0ddd24969d13088`의 방어/관통 연결을 포함한다. [CURRENT_WORK](CURRENT_WORK.md), [DEVELOPMENT_STATUS](DEVELOPMENT_STATUS.md), [PLANNED_WORK](PLANNED_WORK.md) 13/15절과 기존 AGENTS/제작 스킬을 따른다. 원격 HEAD·동시 변경을 확인하고 main 자동 병합 금지.
 
 ## 다음 작업 — 물리/마법 방어·관통 Godot 통합 검증 및 두 맵 밸런스 회귀
 
