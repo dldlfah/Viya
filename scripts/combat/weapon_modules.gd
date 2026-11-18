@@ -157,6 +157,10 @@ static func speed_scale(enemy: Dictionary) -> float:
 static func impact(state, actor: Dictionary, p: Dictionary) -> void:
 	if state.phase != state.Phase.RUNNING or actor.hp <= 0:
 		return
+	var attack_type: String = str(p.get("damage_type","magical" if str(p.family)=="magic" else "physical"))
+	var source: String = str(p.get("source_character_id",state.growth.character_id))
+	if attack_type not in ["physical","magical"] or (state.armor_enabled and source != state.growth.character_id and not state.support_attack_ids.has(source)):
+		return # Invalid source must not mark, slow or knock back the target.
 	var marked := false
 	if actor.id > 0:
 		if not actor.has("weapon_status"):
@@ -170,8 +174,6 @@ static func impact(state, actor: Dictionary, p: Dictionary) -> void:
 		if p.knockback > 0.0:
 			var displacement: Vector2 = state.player.direction_to(actor.p)*float(p.knockback)*(0.25 if actor.kind=="boss" else 1.0)
 			actor.p = actor.p+displacement if actor.variant=="flier" else state.map_space.move(actor.p,displacement,24.0)
-	var attack_type: String = str(p.get("damage_type","magical" if str(p.family)=="magic" else "physical"))
-	var source: String = str(p.get("source_character_id",state.growth.character_id))
 	state._damage_target(int(actor.id),float(p.damage),attack_type,source)
 	if marked and p.mark_burst > 0.0:
 		var burst: Dictionary = p.duplicate(true)

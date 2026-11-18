@@ -235,7 +235,7 @@ func set_paused(value: bool) -> void:
 		navigation_ticket += 1
 
 func damage_player(amount: int, damage_type: String = "physical", enemy_penetration: float = 0.0) -> bool:
-	if phase != Phase.RUNNING or hurt_clock > 0.0 or amount <= 0:
+	if phase != Phase.RUNNING or hurt_clock > 0.0 or amount <= 0 or damage_type not in ["physical","magical"]:
 		return false
 	if armor_enabled:
 		var player_armor: float = float(stats.get(damage_type+"_defense",0.0))
@@ -790,8 +790,11 @@ func _projectile(direction: Vector2, damage: float, hits: int, speed: float = BU
 	return true
 
 func _damage_enemy(id: int, base_damage: float, damage_type: String = "physical", source_id: String = "") -> void:
-	if phase != Phase.RUNNING:
+	if phase != Phase.RUNNING or damage_type not in ["physical","magical"]:
 		return
+	var attacker: String = growth.character_id if source_id.is_empty() else source_id
+	if armor_enabled and attacker != growth.character_id and not support_attack_ids.has(attacker):
+		return # Reject fake, unequipped support attacks before consuming crit RNG.
 	for i in range(enemies.size()):
 		if int(enemies[i]["id"]) != id:
 			continue
@@ -803,9 +806,6 @@ func _damage_enemy(id: int, base_damage: float, damage_type: String = "physical"
 			damage *= float(stats.get("crit_damage", 2.0))
 			critical = true
 		if armor_enabled:
-			var attacker: String = growth.character_id if source_id.is_empty() else source_id
-			if attacker != growth.character_id and not support_attack_ids.has(attacker):
-				return # Never let an undeployed support attacker grant damage.
 			var pierce: float = float(stats.get(damage_type+"_penetration",0.0)) if attacker == growth.character_id else DefenseRules.character_penetration(attacker,damage_type)
 			damage = DefenseRules.mitigated_damage(damage,DefenseRules.armor_rate(str(enemies[i].kind),str(enemies[i].variant),damage_type),pierce)
 		if account_attack_level > 0 or armor_enabled:

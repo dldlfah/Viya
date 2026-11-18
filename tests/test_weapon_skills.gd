@@ -61,6 +61,13 @@ static func defense_checks(verify: Callable) -> void:
 	verify.call(enemy.hp==225, "Real physical hit takes 75 of 100 raw damage against 30% heavy armor after Viya piercing")
 	state._damage_enemy(int(enemy.id),100.0,"magical")
 	verify.call(enemy.hp==135, "Real magical hit takes 90 of 100 raw damage with 10% magical resistance; physical piercing is not reused")
+	var spoof: Dictionary = state.attack_profile("viya_runebullet_v1",1,1)
+	spoof.source_character_id = "undeployed"
+	spoof.mark = 3.0
+	var rng_before: int = state.rng.state
+	var hp_before: int = int(enemy.hp)
+	Modules.impact(state,enemy,spoof)
+	verify.call(enemy.hp==hp_before and not enemy.has("weapon_status") and state.rng.state==rng_before, "Undeployed attack support cannot inflict damage or status or spend RNG")
 	var snap: Dictionary = Snapshot.capture(state)
 	verify.call(snap.version==11 and Snapshot.valid(snap,state) and snap.run.armor_enabled, "New armor-enabled run snapshots retain the branch rule")
 	var old: Dictionary = snap.duplicate(true)
