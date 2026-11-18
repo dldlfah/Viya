@@ -1,0 +1,2346 @@
+{
+  "unit": "GAME-016",
+  "date_kst": "2026-11-18",
+  "branch": "work/viya-turnaround-qa-20261117",
+  "baseline_head": "6d58cca3f61c25d9be4e66f358814bd03f46c369",
+  "instruction": {
+    "title": "VIYA — 정식 인터페이스 기반 및 챕터1 전장 제작 지시서",
+    "sha256": "483691ec4795c45c4a189752eb126104f082429a06172fd45ebc812e68c21a85",
+    "scope": "Implement A-F in existing project/RunState with temporary graphics; no final/paid/generated artwork or main merge."
+  },
+  "ui_foundation_commit": "373e7624de53dbb511b73ae2a88f95b954ff98d0",
+  "ui_foundation_native_checks": 2315,
+  "runtime_code_commit": "57d3748800c3f9978e613156326175de2c7bdae3",
+  "runtime_code_tree": "cfa54f83cd547e39fcd55f5c66d90d7dc08b117d",
+  "tasks": {
+    "A": "Working city lobby, gold/hero info, guarded chapter/stage selection/launch/back/settings, existing Continue/talents/results, readable boss/elite/status HUD. Unimplemented collection/gacha/city/expedition disabled.",
+    "B": "MapCatalog and static MapSpace geometry/route cache; per-map world/start/walkable/camera bounds/solids/zones. Existing single RunState owns all combat. Camera clamps at edges; snapshot8 records map ID/view extent.",
+    "C": "Prologue trial5000x3200 with solid wall/gate/ruins, arrival area and main lane, temporary geometry. No invented cutscene/dialogue/city health.",
+    "D": "Prologue front-only initially; first flank from120, second from240 with main-front weights1 ->4:1 ->2:1:1. General perimeter remains independent. Existing waves/archetypes/30 scatter/old flying events preserved; all new-map members must be off camera and outside solids. Whole groups defer if no valid anchor, never partially commit.",
+    "E": "Actual stage2 outskirts_trial4200x2800 with independent perimeter/ruin configuration and same combat code. Historical progress>2 reuses this prototype field without declaring further authored maps or final chapter count.",
+    "F": "Technical integration PASS; growth criterion FAIL; device/Windows/performance/human balance NOT_VERIFIED. Native chapter/maps tests, actual scene render/clear-unlock/Continue, original files1-7 in separate processes and20 scripted runs."
+  },
+  "implementation": {
+    "maps": {
+      "legacy_arena": {
+        "name": "기존 전투 저장 전장",
+        "size": [
+          1800,
+          1200
+        ],
+        "start": [
+          900,
+          600
+        ],
+        "camera": [
+          0,
+          0,
+          1800,
+          1200
+        ],
+        "mode": "legacy",
+        "obstacles": [],
+        "zones": [
+          {
+            "side": "all",
+            "from": 0.0,
+            "roles": [
+              "normal",
+              "elite",
+              "boss"
+            ],
+            "rect": [
+              24,
+              24,
+              1752,
+              1152
+            ],
+            "weights": [
+              {
+                "from": 0.0,
+                "weight": 1.0
+              }
+            ]
+          }
+        ],
+        "decor": [],
+        "short_name": "이전 전장",
+        "walkable": [
+          0,
+          0,
+          1800,
+          1200
+        ]
+      },
+      "prologue_wall": {
+        "name": "프롤로그 · 최후의 도시 성벽",
+        "size": [
+          5000,
+          3200
+        ],
+        "start": [
+          2500,
+          600
+        ],
+        "camera": [
+          0,
+          0,
+          5000,
+          3200
+        ],
+        "mode": "frontline",
+        "obstacles": [
+          {
+            "rect": [
+              0,
+              0,
+              5000,
+              420
+            ],
+            "solid": true,
+            "kind": "wall",
+            "name": "최후의 도시 성벽"
+          },
+          {
+            "rect": [
+              1300,
+              1250,
+              360,
+              120
+            ],
+            "solid": true,
+            "kind": "ruin",
+            "name": "무너진 방어진지"
+          },
+          {
+            "rect": [
+              3200,
+              1500,
+              420,
+              140
+            ],
+            "solid": true,
+            "kind": "ruin",
+            "name": "폐허 방벽"
+          },
+          {
+            "rect": [
+              2100,
+              2200,
+              300,
+              100
+            ],
+            "solid": true,
+            "kind": "ruin",
+            "name": "옛 방어진지"
+          }
+        ],
+        "zones": [
+          {
+            "side": "front",
+            "from": 0.0,
+            "roles": [
+              "normal",
+              "elite",
+              "boss"
+            ],
+            "rect": [
+              120,
+              1100,
+              4760,
+              1980
+            ],
+            "weights": [
+              {
+                "from": 0.0,
+                "weight": 1.0
+              },
+              {
+                "from": 120.0,
+                "weight": 4.0
+              },
+              {
+                "from": 240.0,
+                "weight": 2.0
+              }
+            ]
+          },
+          {
+            "side": "left",
+            "from": 120.0,
+            "roles": [
+              "normal",
+              "elite"
+            ],
+            "rect": [
+              120,
+              600,
+              1800,
+              2480
+            ],
+            "weights": [
+              {
+                "from": 0.0,
+                "weight": 1.0
+              }
+            ]
+          },
+          {
+            "side": "right",
+            "from": 240.0,
+            "roles": [
+              "normal",
+              "elite"
+            ],
+            "rect": [
+              3080,
+              600,
+              1800,
+              2480
+            ],
+            "weights": [
+              {
+                "from": 0.0,
+                "weight": 1.0
+              }
+            ]
+          }
+        ],
+        "decor": [
+          {
+            "rect": [
+              2380,
+              160,
+              240,
+              260
+            ],
+            "kind": "gate",
+            "name": "성문"
+          },
+          {
+            "rect": [
+              2150,
+              500,
+              700,
+              300
+            ],
+            "kind": "arrival",
+            "name": "비야 최초 전이 위치"
+          },
+          {
+            "rect": [
+              2350,
+              1200,
+              300,
+              1800
+            ],
+            "kind": "lane",
+            "name": "마왕군 주 진격로"
+          }
+        ],
+        "short_name": "성벽 프롤로그",
+        "walkable": [
+          0,
+          0,
+          5000,
+          3200
+        ]
+      },
+      "outskirts_trial": {
+        "name": "[시험] 도시 외곽 황무지",
+        "size": [
+          4200,
+          2800
+        ],
+        "start": [
+          2100,
+          1400
+        ],
+        "camera": [
+          0,
+          0,
+          4200,
+          2800
+        ],
+        "mode": "perimeter",
+        "obstacles": [
+          {
+            "rect": [
+              1200,
+              1100,
+              280,
+              150
+            ],
+            "solid": true,
+            "kind": "ruin",
+            "name": "외곽 폐허"
+          },
+          {
+            "rect": [
+              2800,
+              1750,
+              240,
+              180
+            ],
+            "solid": true,
+            "kind": "ruin",
+            "name": "무너진 초소"
+          },
+          {
+            "rect": [
+              1950,
+              600,
+              360,
+              120
+            ],
+            "solid": true,
+            "kind": "ruin",
+            "name": "옛 방벽"
+          }
+        ],
+        "zones": [
+          {
+            "side": "all",
+            "from": 0.0,
+            "roles": [
+              "normal",
+              "elite",
+              "boss"
+            ],
+            "rect": [
+              80,
+              80,
+              4040,
+              2640
+            ],
+            "weights": [
+              {
+                "from": 0.0,
+                "weight": 1.0
+              }
+            ]
+          }
+        ],
+        "decor": [
+          {
+            "rect": [
+              200,
+              1850,
+              3800,
+              250
+            ],
+            "kind": "lane",
+            "name": "도시 외곽 보급로"
+          }
+        ],
+        "short_name": "도시 외곽",
+        "walkable": [
+          0,
+          0,
+          4200,
+          2800
+        ]
+      }
+    },
+    "stage_binding": "stages.default.map_id=outskirts_trial; override1=prologue_wall; only current GoldProgress.next_stage is launchable, preserving sequential settlement rules. Prior cleared entries are shown completed, future entries locked/preparing.",
+    "legacy_api": "Existing3-argument RunState.start retains legacy_arena1800x1200; production UI passes the configured fourth map argument. WORLD_SIZE is a legacy constant, world_size is the actual mapped size. Confirmed restart preserves its current map.",
+    "collision": "Player/ground units use swept axis sliding against inflated axis-aligned solids and walkable bounds. Ground routes use visibility graph corners and shared goal-cost cache. Friendly/hostile projectile segments stop at the first wall, including piercing shots. Fliers fly straight over solids and keep ground pushing; existing area magic still crosses cover.",
+    "render": "Visible grid/terrain/obstacle/enemy culling; clamped camera with off-center hero at map edges. Read-only actual approach cues grouped by pack, maximum6 groups+2 incoming hostile shots. Cosmetic data reconstructed after recovery.",
+    "hud": "Existing two skill rows, supporter2+2 empty slots, touch movement/manual magic, reaction placeholder and safe area retained. Boss current/max HP, elite/boss countdown, separate slow label. Compact bottom204->160 logical pixels; compact magic2lines.",
+    "art": "presentation_slots.json ships empty paths; Texture2D or SpriteFrames replacement for city/hero/portrait/archetypes/elite/boss/terrain/skill IDs/magic button. Actual optional skill icon replacement verified with an isolated temporary resource, then removed. No final art generated or approved assets changed.",
+    "save": {
+      "account_schema": 3,
+      "battle_version": 8,
+      "fingerprint": "Normalized stages+skills+maps; geometry changes need explicit future compatibility.",
+      "compatibility": "Known1-7 restore as legacy_arena without scaling coordinates or refilling HP/MP/rewriting paid ranks. Version7 keeps existing scatter actors/index/time; older existing1-6 migrations retain their established new-scatter defaults. Unknown/corrupt map/rules/coordinates inside solids rejected.",
+      "viewport": "Saved logical view extent permits exact fixed-size continuation; UI reconstructs current viewport while paused on different-size recovery, preserving resources/actors/offers/RNG. Geometry caches and approach arrows reconstruct, not serialized as separate combat state."
+    },
+    "preserved": "6minutes,120/240 checkpoints,300 boss, elite1600/boss3200, ordinary2/4/6 and55/15/15/15 incl ranged, old20sec/20%30fliers plus12sec30scatter rotation, account18/54 and prices, XP3x/basic5XP, mana40/base1/cooldown0 and account bonuses, existing settlement/choices/pause/art hold."
+  },
+  "technical_validation": {
+    "status": "PASS",
+    "godot": "4.7.2.stable.official.ed1daf0bf",
+    "command": "python3 tools/check_project.py --godot /workspace/.viya-tools/godot-4.7.2/bin/godot --output .local_validation/GAME016",
+    "project": {
+      "static_integrity": {
+        "status": "PASS",
+        "files_checked": 61,
+        "resource_references_checked": 144,
+        "errors": [],
+        "source_sha256": {
+          "project.godot": "0d8f7fce157178f7bf31acc183593b40f23cff6d266ea5270f4b75f0899b79e5",
+          "scenes/main.tscn": "17a2e77db7cf47af860de3c263dc9119b0df349bafdf2a8b52a40f7450c9e22c",
+          "scripts/combat/approach_cues.gd": "a30074eec96a887c5fbdd99c96ea3ff247303974bd93fb7ef288eed2eaac6131",
+          "scripts/combat/attack_visuals.gd": "61bdbdd2c09b250bc67e0df4db320fe1bea00192d6fb57a8e94661a5ecf173b2",
+          "scripts/combat/battle_view.gd": "4e78e3533ed93392e35477e6c2151970df3aed91a2b3170802fae21a8bb93532",
+          "scripts/combat/combat_cues.gd": "ab4fbf025127efe6a6b152adb57fdd007b3a0c8db53be97f48e89663eda68c58",
+          "scripts/combat/feedback_state.gd": "3ee19238fb9307bc9953fed3ecc266ecff420e2c74ceffe81409069372e87d88",
+          "scripts/combat/magic_state.gd": "b7219c784b230c13fe462119b86795579d8944ed578aa9b484aa94fcae1d2ed4",
+          "scripts/combat/run_state.gd": "fe9921a0d4d4afa160bbd47e6d5217d391aeb2751d0051e652ebe2c183059057",
+          "scripts/combat/stage_catalog.gd": "47e0f6c174826c8939eef6e500b215b41aa7dd94514416c42571079ea5e2df0d",
+          "scripts/main.gd": "2f5882cb78b77d571658fc888fa687b2786a3dafce338fa3f195ad016717c0eb",
+          "scripts/progression/account_talents.gd": "0774659235d3bea9276574996565b315156260274750ef8c7f9969f18550f43e",
+          "scripts/progression/gold_progress.gd": "c16cfde2282fe60f0c4bef6e01bc7fab776b5086f4775019f2a9cd598a5fb046",
+          "scripts/progression/growth_state.gd": "4d17798e1d3e470e15e76eec7d3d2a9b881aae8f4142e3a73199c38a9244f72a",
+          "scripts/progression/run_snapshot.gd": "858e24aaab53fbfc26baa1bf8dbfc89a30970fc582ed31f218091cee8e602832",
+          "scripts/progression/run_store.gd": "bab493f1963ea2a6d98770f9ef9686d70d4b257e0b49afb3386de661a6081986",
+          "scripts/progression/skill_catalog.gd": "73f8cc38e3f998cc1f88e90fdf7c9963037f3ee6087fbc1d9a5f1e85852119d2",
+          "scripts/ui/asset_slots.gd": "82886eec7bebd4283eb5ea7137879a5edcee0f43c1fa9a629b0665bce6b4e68a",
+          "scripts/ui/city_preview.gd": "d01c0ca26b7d812b2b7d6d63339788be98241f6a09ec58a1a8d35a6f7b788937",
+          "scripts/ui/feedback_panel.gd": "2103fd9b8692c5606273175b415447f35a995f9a18306a5e8f0abeeb7c5d465b",
+          "scripts/ui/growth_overview.gd": "80fd0401d7449fdbfc3746544ecf30986985e0ff1c349e640c3772cc090f8440",
+          "scripts/ui/hud_layout.gd": "075baf23132614e3745cd78f90a699557b23747d8a207a3417194089d3794367",
+          "scripts/ui/mobile_main.gd": "5a9e68c628f497c21a36b195bbb8bad9f22c9e268faeefcd4f821f0da88b75ef",
+          "scripts/ui/move_input.gd": "cee8e709185740d1cb964fff13873a0818d14d0b3653f36d6416a1b17da40bd8",
+          "scripts/ui/responsive_feedback_panel.gd": "b36ce744a7378d696b91018935f637da0ae88beccdeddd85b1187a238958ed5b",
+          "scripts/ui/skill_preview.gd": "8a9d2ea20b0ae60d54fe3c4fa2da8e9071d0fd76a36d4b9ecc5ac1a2d85d67f0",
+          "scripts/world/map_catalog.gd": "32dc00d119e684568c72d10668076a68bd0d2b3d95748f03358ec4b880986c66",
+          "scripts/world/map_space.gd": "8110f4a28e04e67fe738011ea888f31a9c74c450ed79148d88c1da602fa03ae8",
+          "tests/measure_campaign.gd": "1d6fae90874a60c617f8b33cb47642dbb9cc9c8baccb16c6f607e15d9ddd6539",
+          "tests/test_account_expansion.gd": "97d23a6d5bc708b9ebdcc76a492982d5b8e0e2fa4be6f2ad0c2ca501d5d35422",
+          "tests/test_account_talents.gd": "a85b5b84514323481e45137ab05e611af9d18f364393b9a6891fe45f1fe2b9f3",
+          "tests/test_attack_visuals.gd": "b091e1672614637797907658c628e86bd6f16ca728ce7cb1dae67d1529f1b443",
+          "tests/test_campaign.gd": "07c21cb62d12d5394b0864afe3ce47f62b3cd11146fa4bd2780957c54d3f1f49",
+          "tests/test_chapter_ui.gd": "5ecfe2359dc614707eddc9e970037e7c8bac1fcf601113de3e06290151648a17",
+          "tests/test_combat_cues.gd": "3317af30133479b017b7ec0e3a2f1bae02423e2ee5095229586b4b7de710788a",
+          "tests/test_combat_foundation.gd": "57efe421768dad47bee7a560325214a0c8a30d5fdf8d015fc2648f2b8c71416d",
+          "tests/test_enemy_variety.gd": "413b385ab0ec5eff5ff78106cac40b9039800e84935e07fbf77f0559b18a3df3",
+          "tests/test_feedback.gd": "44fd5f91c017314ec6e89bd8abdb2347c192f551d7e170161d5424567b6733f3",
+          "tests/test_gold_settings.gd": "29358cc8bd690213f4fab1fde43cc0a921689983201cfbcbffa18dd872e047a9",
+          "tests/test_growth.gd": "68178e48fe75a3470aa0124fe90a113dc9e00c11368921e49ce972eda4e3fd7d",
+          "tests/test_growth_overview.gd": "bd6706bf3253d25b8b41c6374a53732762af0d361d11c04aac47abee4f565e87",
+          "tests/test_magic.gd": "4d175da13efd6d729040591f49bfe8edf659731df8246e10319a680f9fc2b533",
+          "tests/test_maps.gd": "3c129f9fe4aac09e01ad4d7f380d03faebb67f8b9f45f0f2d84175d79be4e2f7",
+          "tests/test_mobile_hud.gd": "1209e0ffb697b2c80da0d68d4fa0776e9d5cfa6d6f951c233fd32f13aa8afa21",
+          "tests/test_run_navigation.gd": "27f531cb68c8cb007f6676fe6ea093497de1cb1a8045292c3a25f7582988a55e",
+          "tests/test_scatter_packs.gd": "1d642ed432b31e509721d9867f5e7dde4d904499cf7555b163670ef9b5c07f2d",
+          "tests/test_skill_preview.gd": "0a62fc3bcdafeb525507f4107621d5c14a955e5d5270750a99d7de1e61f9ad9f",
+          "tests/test_talent_tree.gd": "984fdf593f086254dd17fde222ac7cafa35d8b223195fd46bc04ee170ddada21",
+          "data/chapter_one.json": "c32e288ddc61dc8193cd78de416d3682b7c11f1924bbaaa3ea4afe4b78104f76",
+          "data/maps.json": "925638f794696b96fdf48df8c266654cef3af002f43e57f91daa80f8d70e8bd4",
+          "data/presentation_slots.json": "b1718c9defed9a29eb9bb6dd51c80de2977a0362294fcc746bf2b1db0cfe930e",
+          "data/prototype_skills.json": "a6ba197fe558d328e1fcab96506fa098465a4c72aebfe1a1b29cb98642628d1a",
+          "data/stages.json": "2e656d2dc155ad93c76b8a1303133992d95529283be7f5b16423738f4edaeeae",
+          "tools/bootstrap_godot.py": "4c3ca17c3b90f9c5590d7a82a76ae71a353f4d15aae973cf37e03e745ebfdecc",
+          "tools/check_combat_cues.py": "dd94131aba36f690d5d5d36038029e42d61b514aa4e2f026acf43d63ac62ce0a",
+          "tools/check_feedback_data.py": "f1bd6f415e919a32faab1b403073e24dcdda4b819938b9b707dacfc32320bec7",
+          "tools/check_growth_data.py": "8b7e1efed2533932681074382040ca7a0792d8a850b75f259dfeae00d3e44153",
+          "tools/check_magic_data.py": "ca62bcabd9fd384392f1db5a3508041220be1628b16f554adfcda9eb4097f3e9",
+          "tools/check_mobile_hud.py": "9e43cace28480d3aacb45dabaf67acb2ad24e1c8a9366aa5c011a279eba35487",
+          "tools/check_project.py": "eeafd73fc4503c7af952331c093272a5510aade3fbae04e42afb77eb23f55157",
+          "tools/check_run_navigation.py": "07c05a0a597f7ba4f605d64ca31fb0d60fc45312b588fae349d547d0098138a2"
+        },
+        "source_fingerprint": "d0f9a14b19772b47bebfef40fae84b7fb0e72e611db3e4bae31965520f224c97",
+        "scope": "UTF-8, delimiters, whitespace, JSON/Python syntax, resource existence, project settings; NOT GDScript parser/typechecking or gameplay."
+      },
+      "growth_data_contract": {
+        "status": "PASS",
+        "pool_count": 18,
+        "counts": {
+          "common_attack": 8,
+          "character_attack": 1,
+          "common_passive": 8,
+          "ultimate_enhancement": 1
+        },
+        "negative_controls": [
+          {
+            "fixture": "duplicate",
+            "rejected": true
+          },
+          {
+            "fixture": "resistance",
+            "rejected": true
+          },
+          {
+            "fixture": "foreign_owner",
+            "rejected": true
+          },
+          {
+            "fixture": "missing_ultimate",
+            "rejected": true
+          },
+          {
+            "fixture": "wrong_row",
+            "rejected": true
+          }
+        ],
+        "errors": [],
+        "scope": "JSON schema/content and source integration markers only; not GDScript runtime/behavior."
+      },
+      "magic_data_contract": {
+        "status": "PASS",
+        "errors": [],
+        "negative_controls": [
+          {
+            "fixture": "plain_name",
+            "rejected": true
+          },
+          {
+            "fixture": "foreign_owner",
+            "rejected": true
+          },
+          {
+            "fixture": "missing_magic",
+            "rejected": true
+          },
+          {
+            "fixture": "negative_cost",
+            "rejected": true
+          },
+          {
+            "fixture": "negative_cooldown",
+            "rejected": true
+          },
+          {
+            "fixture": "wrong_upgrade",
+            "rejected": true
+          },
+          {
+            "fixture": "nonfinite_radius",
+            "rejected": true
+          },
+          {
+            "fixture": "impossible_cost",
+            "rejected": true
+          }
+        ],
+        "temporary_skill_names": 18,
+        "required_xp_first_five": [
+          30,
+          48,
+          66,
+          84,
+          102
+        ],
+        "xp_drop_unchanged": 5.0,
+        "scope": "JSON validation, negative data controls and source markers/arithmetic; NOT GDScript runtime, UI, input dispatch or mobile tests."
+      },
+      "feedback_source_contract": {
+        "status": "PASS",
+        "errors": [],
+        "negative_controls": [
+          {
+            "fixture": "missing_damage_hook",
+            "rejected": true
+          },
+          {
+            "fixture": "missing_reset",
+            "rejected": true
+          },
+          {
+            "fixture": "negative_duration",
+            "rejected": true
+          },
+          {
+            "fixture": "missing_low_hp_warning",
+            "rejected": true
+          },
+          {
+            "fixture": "missing_stale_guard",
+            "rejected": true
+          }
+        ],
+        "files_checked": 7,
+        "source_sha256": {
+          "scripts/combat/feedback_state.gd": "3ee19238fb9307bc9953fed3ecc266ecff420e2c74ceffe81409069372e87d88",
+          "scripts/combat/run_state.gd": "fe9921a0d4d4afa160bbd47e6d5217d391aeb2751d0051e652ebe2c183059057",
+          "scripts/ui/feedback_panel.gd": "2103fd9b8692c5606273175b415447f35a995f9a18306a5e8f0abeeb7c5d465b",
+          "scripts/main.gd": "2f5882cb78b77d571658fc888fa687b2786a3dafce338fa3f195ad016717c0eb",
+          "tests/test_feedback.gd": "44fd5f91c017314ec6e89bd8abdb2347c192f551d7e170161d5424567b6733f3",
+          "tools/check_project.py": "eeafd73fc4503c7af952331c093272a5510aade3fbae04e42afb77eb23f55157",
+          "tools/check_feedback_data.py": "f1bd6f415e919a32faab1b403073e24dcdda4b819938b9b707dacfc32320bec7"
+        },
+        "scope": "7 affected code/test/checker files: UTF-8, delimiters, whitespace, Python syntax, reaction constants, integration markers, engine-test registration and new dependency paths only. NOT the full project check or GDScript parser/type/runtime, rendering, or mobile input tests."
+      },
+      "mobile_hud_source_contract": {
+        "status": "PASS",
+        "files_checked": 8,
+        "errors": [],
+        "negative_controls": [
+          {
+            "fixture": "layout_detached",
+            "rejected": true
+          },
+          {
+            "fixture": "detail_not_paused",
+            "rejected": true
+          },
+          {
+            "fixture": "detail_mutates_skill",
+            "rejected": true
+          },
+          {
+            "fixture": "resize_retains_touch",
+            "rejected": true
+          },
+          {
+            "fixture": "test_not_registered",
+            "rejected": true
+          }
+        ],
+        "source_sha256": {
+          "scenes/main.tscn": "17a2e77db7cf47af860de3c263dc9119b0df349bafdf2a8b52a40f7450c9e22c",
+          "scripts/ui/mobile_main.gd": "5a9e68c628f497c21a36b195bbb8bad9f22c9e268faeefcd4f821f0da88b75ef",
+          "scripts/ui/hud_layout.gd": "075baf23132614e3745cd78f90a699557b23747d8a207a3417194089d3794367",
+          "scripts/ui/responsive_feedback_panel.gd": "b36ce744a7378d696b91018935f637da0ae88beccdeddd85b1187a238958ed5b",
+          "scripts/ui/move_input.gd": "cee8e709185740d1cb964fff13873a0818d14d0b3653f36d6416a1b17da40bd8",
+          "tests/test_mobile_hud.gd": "1209e0ffb697b2c80da0d68d4fa0776e9d5cfa6d6f951c233fd32f13aa8afa21",
+          "tools/check_project.py": "eeafd73fc4503c7af952331c093272a5510aade3fbae04e42afb77eb23f55157",
+          "tools/check_mobile_hud.py": "9e43cace28480d3aacb45dabaf67acb2ad24e1c8a9366aa5c011a279eba35487"
+        },
+        "source_fingerprint": "0bcd1b67f5a2fe3d2f4d60eef01489ec432c152cb03994f6370c5c8d479d4712",
+        "scope": "Changed UTF-8 files, delimiters, Python syntax and integration source checks only. NOT GDScript parsing/typechecking, actual Control geometry, touch dispatch, rendering or mobile execution."
+      },
+      "run_navigation_source_contract": {
+        "status": "PASS",
+        "files_checked": 5,
+        "errors": [],
+        "negative_controls": [
+          {
+            "fixture": "unescaped_string_newline",
+            "rejected": true
+          },
+          {
+            "fixture": "unguarded_intent",
+            "rejected": true
+          },
+          {
+            "fixture": "confirmation_resets_hp",
+            "rejected": true
+          },
+          {
+            "fixture": "cancel_rerolls",
+            "rejected": true
+          },
+          {
+            "fixture": "leave_fakes_death",
+            "rejected": true
+          },
+          {
+            "fixture": "no_result_copy",
+            "rejected": true
+          },
+          {
+            "fixture": "stale_menu_revision",
+            "rejected": true
+          },
+          {
+            "fixture": "unregistered_engine_test",
+            "rejected": true
+          }
+        ],
+        "source_sha256": {
+          "scripts/combat/run_state.gd": "fe9921a0d4d4afa160bbd47e6d5217d391aeb2751d0051e652ebe2c183059057",
+          "scripts/ui/mobile_main.gd": "5a9e68c628f497c21a36b195bbb8bad9f22c9e268faeefcd4f821f0da88b75ef",
+          "tests/test_run_navigation.gd": "27f531cb68c8cb007f6676fe6ea093497de1cb1a8045292c3a25f7582988a55e",
+          "tools/check_project.py": "eeafd73fc4503c7af952331c093272a5510aade3fbae04e42afb77eb23f55157",
+          "tools/check_run_navigation.py": "07c05a0a597f7ba4f605d64ca31fb0d60fc45312b588fae349d547d0098138a2"
+        },
+        "source_fingerprint": "a3504669383ca142780e09a26355154407939a7aa291498f1c9cd6a4915870c2",
+        "scope": "UTF-8/delimiters/Python syntax and navigation SOURCE contracts only; NOT GDScript parsing/types, native execution, actual UI/input, or mobile testing."
+      },
+      "combat_cues_source_contract": {
+        "status": "PASS",
+        "files_checked": 6,
+        "errors": [],
+        "negative_controls": [
+          {
+            "fixture": "missing_reset",
+            "rejected": true
+          },
+          {
+            "fixture": "early_clock",
+            "rejected": true
+          },
+          {
+            "fixture": "changed_damage",
+            "rejected": true
+          },
+          {
+            "fixture": "drop_as_collection",
+            "rejected": true
+          },
+          {
+            "fixture": "unbounded_visuals",
+            "rejected": true
+          },
+          {
+            "fixture": "cosmetic_rng",
+            "rejected": true
+          },
+          {
+            "fixture": "mutable_view",
+            "rejected": true
+          },
+          {
+            "fixture": "unregistered_test",
+            "rejected": true
+          },
+          {
+            "fixture": "ignored_engine_exit",
+            "rejected": true
+          },
+          {
+            "fixture": "ignored_engine_errors",
+            "rejected": true
+          },
+          {
+            "fixture": "ignored_test_result",
+            "rejected": true
+          }
+        ],
+        "source_sha256": {
+          "scripts/combat/run_state.gd": "fe9921a0d4d4afa160bbd47e6d5217d391aeb2751d0051e652ebe2c183059057",
+          "scripts/combat/battle_view.gd": "4e78e3533ed93392e35477e6c2151970df3aed91a2b3170802fae21a8bb93532",
+          "scripts/combat/combat_cues.gd": "ab4fbf025127efe6a6b152adb57fdd007b3a0c8db53be97f48e89663eda68c58",
+          "tests/test_combat_cues.gd": "3317af30133479b017b7ec0e3a2f1bae02423e2ee5095229586b4b7de710788a",
+          "tools/check_project.py": "eeafd73fc4503c7af952331c093272a5510aade3fbae04e42afb77eb23f55157",
+          "tools/check_combat_cues.py": "dd94131aba36f690d5d5d36038029e42d61b514aa4e2f026acf43d63ac62ce0a"
+        },
+        "source_fingerprint": "083777a2d4443a9f30bf5bde509f8b64e627db53d31064ae442973ca0d75ee4f",
+        "baseline_run_blob": "ae9e555686a0fb2c77a4a8b5a7cdf6d714a73a42",
+        "baseline_runner_blob": "1ab68ad8a51271e3d47db8b02d433991f42e8d6c",
+        "baseline_engine_function_sha256": "9156043eaf896d72565563cc1e2f623cf0c8fbac7f032f19bffee7e4946a69ee",
+        "scope": "Changed-source UTF-8/delimiters/Python syntax, hook order, bounds, isolation, reviewed GAME-016 source baselines and preserved engine runner. NOT Godot parser/type/runtime, visual quality, input dispatch, or FPS."
+      },
+      "godot_runtime": {
+        "status": "PASS",
+        "commands": [
+          {
+            "command": [
+              "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+              "--headless",
+              "--version"
+            ],
+            "exit_code": 0,
+            "status": "PASS"
+          },
+          {
+            "command": [
+              "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+              "--headless",
+              "--path",
+              "/workspace/Viya",
+              "--editor",
+              "--import",
+              "--quit"
+            ],
+            "exit_code": 0,
+            "status": "PASS"
+          },
+          {
+            "command": [
+              "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+              "--headless",
+              "--path",
+              "/workspace/Viya",
+              "--script",
+              "res://tests/test_combat_foundation.gd"
+            ],
+            "exit_code": 0,
+            "status": "PASS"
+          },
+          {
+            "command": [
+              "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+              "--headless",
+              "--path",
+              "/workspace/Viya",
+              "--script",
+              "res://tests/test_growth.gd"
+            ],
+            "exit_code": 0,
+            "status": "PASS"
+          },
+          {
+            "command": [
+              "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+              "--headless",
+              "--path",
+              "/workspace/Viya",
+              "--script",
+              "res://tests/test_magic.gd"
+            ],
+            "exit_code": 0,
+            "status": "PASS"
+          },
+          {
+            "command": [
+              "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+              "--headless",
+              "--path",
+              "/workspace/Viya",
+              "--script",
+              "res://tests/test_feedback.gd"
+            ],
+            "exit_code": 0,
+            "status": "PASS"
+          },
+          {
+            "command": [
+              "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+              "--headless",
+              "--path",
+              "/workspace/Viya",
+              "--script",
+              "res://tests/test_mobile_hud.gd"
+            ],
+            "exit_code": 0,
+            "status": "PASS"
+          },
+          {
+            "command": [
+              "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+              "--headless",
+              "--path",
+              "/workspace/Viya",
+              "--script",
+              "res://tests/test_run_navigation.gd"
+            ],
+            "exit_code": 0,
+            "status": "PASS"
+          },
+          {
+            "command": [
+              "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+              "--headless",
+              "--path",
+              "/workspace/Viya",
+              "--script",
+              "res://tests/test_combat_cues.gd"
+            ],
+            "exit_code": 0,
+            "status": "PASS"
+          },
+          {
+            "command": [
+              "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+              "--headless",
+              "--path",
+              "/workspace/Viya",
+              "--quit-after",
+              "120"
+            ],
+            "exit_code": 0,
+            "status": "PASS"
+          }
+        ],
+        "scope": "headless import, actual foundation/growth/magic/feedback/mobile-HUD/run-navigation/combat-cues GDScript tests and main boot; visual/mobile approval separate"
+      },
+      "windows_f5": "NOT_VERIFIED",
+      "android_device": "NOT_VERIFIED",
+      "ios_device": "NOT_VERIFIED"
+    },
+    "native_suites": {
+      "foundation": {
+        "checks": 23,
+        "failures": [],
+        "status": "PASS"
+      },
+      "growth": {
+        "checks": 70,
+        "failures": [],
+        "status": "PASS"
+      },
+      "magic": {
+        "checks": 122,
+        "failures": [],
+        "status": "PASS"
+      },
+      "feedback": {
+        "checks": 57,
+        "failures": [],
+        "status": "PASS"
+      },
+      "hud": {
+        "checks": 1336,
+        "failures": [],
+        "status": "PASS"
+      },
+      "navigation": {
+        "checks": 68,
+        "failures": [],
+        "status": "PASS"
+      },
+      "combat_cues_integrations": {
+        "checks": 695,
+        "failures": [],
+        "status": "PASS"
+      }
+    },
+    "native_total": 2371,
+    "python": {
+      "command": "python3 -m unittest discover -s tests -p 'test_*.py' -q",
+      "status": "PASS",
+      "tests": 12
+    },
+    "coverage": [
+      "UI locked/forged/stale stage launch; Back/settings, actual boss HP/slow, paid result->stage cancel->real talent flow without duplicate reward (includes random boss drop)",
+      "Map schema/start/size, camera bounds, actual player wall collision, ground detour to target, both projectile wall paths, airborne straight travel",
+      "Perimeter four-direction vs prologue front; whole30 packs off camera/outside terrain, original flying coexistence, bounded real approach cues",
+      "Expanded coordinates/map ID/mana restore and30-frame exact continuation across pack event; unknown/inside-solid saves rejected",
+      "Existing checkpoints/choice freeze/clear/defeat/settlement/talent suites preserved; optional art wiring and empty production paths checked"
+    ],
+    "separate_process": {
+      "current": {
+        "actors": 41,
+        "damage_carry": 0.0,
+        "gold": 270,
+        "hp": 100,
+        "hp_carry": 0.0,
+        "kill_clock": 0.0,
+        "kill_used": 0.0,
+        "mana": 100.0,
+        "map_id": "outskirts_trial",
+        "max_mana": 100.0,
+        "new_version": 8,
+        "old_version": 8,
+        "position": "(30.0, 2600.0)",
+        "rng_streams": 5,
+        "run_levels": {
+          "attack_power": 0,
+          "attack_range": 0,
+          "attack_speed": 0,
+          "crit_chance": 0,
+          "crit_damage": 0,
+          "damage_reduction": 0,
+          "healing_efficiency": 0,
+          "hp_regen": 0,
+          "invulnerability": 0,
+          "kill_heal": 0,
+          "knockback_resist": 0,
+          "mana_cost_reduction": 0,
+          "max_hp": 0,
+          "max_mana": 0,
+          "move_speed": 0,
+          "mp_regen": 0,
+          "projectile_speed": 0,
+          "status_resist": 0
+        },
+        "scatter_clock": 10.5,
+        "scatter_index": 1,
+        "slow": 0.0,
+        "status": "PASS",
+        "world_size": "(4200.0, 2800.0)"
+      },
+      "v1": {
+        "actors": 2,
+        "damage_carry": 0.0,
+        "gold": 117,
+        "hp": 73,
+        "hp_carry": 0.0,
+        "kill_clock": 0.0,
+        "kill_used": 0.0,
+        "mana": 48.5,
+        "map_id": "legacy_arena",
+        "max_mana": 100.0,
+        "new_version": 8,
+        "old_version": 1,
+        "position": "(900.0, 600.0)",
+        "rng_streams": 5,
+        "run_levels": {
+          "attack_power": 0,
+          "attack_range": 0,
+          "attack_speed": 0,
+          "crit_chance": 0,
+          "crit_damage": 0,
+          "damage_reduction": 0,
+          "healing_efficiency": 0,
+          "hp_regen": 0,
+          "invulnerability": 0,
+          "kill_heal": 0,
+          "knockback_resist": 0,
+          "mana_cost_reduction": 0,
+          "max_hp": 0,
+          "max_mana": 0,
+          "move_speed": 0,
+          "mp_regen": 0,
+          "projectile_speed": 0,
+          "status_resist": 0
+        },
+        "scatter_clock": 12.0,
+        "scatter_index": 0,
+        "slow": 0.0,
+        "status": "PASS",
+        "world_size": "(1800.0, 1200.0)"
+      },
+      "v2": {
+        "actors": 27,
+        "damage_carry": 0.0,
+        "gold": 0,
+        "hp": 100,
+        "hp_carry": 0.0,
+        "kill_clock": 0.0,
+        "kill_used": 0.0,
+        "mana": 100.0,
+        "map_id": "legacy_arena",
+        "max_mana": 100.0,
+        "new_version": 8,
+        "old_version": 2,
+        "position": "(900.0, 600.0)",
+        "rng_streams": 5,
+        "run_levels": {
+          "attack_power": 0,
+          "attack_range": 0,
+          "attack_speed": 0,
+          "crit_chance": 0,
+          "crit_damage": 0,
+          "damage_reduction": 0,
+          "healing_efficiency": 0,
+          "hp_regen": 0,
+          "invulnerability": 0,
+          "kill_heal": 0,
+          "knockback_resist": 0,
+          "mana_cost_reduction": 0,
+          "max_hp": 0,
+          "max_mana": 0,
+          "move_speed": 0,
+          "mp_regen": 0,
+          "projectile_speed": 0,
+          "status_resist": 0
+        },
+        "scatter_clock": 12.0,
+        "scatter_index": 0,
+        "slow": 0.0,
+        "status": "PASS",
+        "world_size": "(1800.0, 1200.0)"
+      },
+      "v3": {
+        "actors": 190,
+        "damage_carry": 0.0,
+        "gold": 0,
+        "hp": 88,
+        "hp_carry": 0.0,
+        "kill_clock": 0.0,
+        "kill_used": 0.0,
+        "mana": 100.0,
+        "map_id": "legacy_arena",
+        "max_mana": 100.0,
+        "new_version": 8,
+        "old_version": 3,
+        "position": "(900.0, 600.0)",
+        "rng_streams": 5,
+        "run_levels": {
+          "attack_power": 0,
+          "attack_range": 0,
+          "attack_speed": 0,
+          "crit_chance": 0,
+          "crit_damage": 0,
+          "damage_reduction": 0,
+          "healing_efficiency": 0,
+          "hp_regen": 0,
+          "invulnerability": 0,
+          "kill_heal": 0,
+          "knockback_resist": 0,
+          "mana_cost_reduction": 0,
+          "max_hp": 0,
+          "max_mana": 0,
+          "move_speed": 0,
+          "mp_regen": 0,
+          "projectile_speed": 0,
+          "status_resist": 0
+        },
+        "scatter_clock": 12.0,
+        "scatter_index": 0,
+        "slow": 0.0,
+        "status": "PASS",
+        "world_size": "(1800.0, 1200.0)"
+      },
+      "v4": {
+        "actors": 0,
+        "damage_carry": 0.0,
+        "gold": 1050000,
+        "hp": 100,
+        "hp_carry": 0.0,
+        "kill_clock": 0.0,
+        "kill_used": 0.0,
+        "mana": 60.0,
+        "map_id": "legacy_arena",
+        "max_mana": 100.0,
+        "new_version": 8,
+        "old_version": 4,
+        "position": "(900.0, 600.0)",
+        "rng_streams": 5,
+        "run_levels": {
+          "attack_power": 1,
+          "attack_range": 0,
+          "attack_speed": 0,
+          "crit_chance": 0,
+          "crit_damage": 0,
+          "damage_reduction": 0,
+          "healing_efficiency": 0,
+          "hp_regen": 0,
+          "invulnerability": 0,
+          "kill_heal": 0,
+          "knockback_resist": 0,
+          "mana_cost_reduction": 0,
+          "max_hp": 0,
+          "max_mana": 0,
+          "move_speed": 0,
+          "mp_regen": 0,
+          "projectile_speed": 0,
+          "status_resist": 0
+        },
+        "scatter_clock": 12.0,
+        "scatter_index": 0,
+        "slow": 0.0,
+        "status": "PASS",
+        "world_size": "(1800.0, 1200.0)"
+      },
+      "v5": {
+        "actors": 0,
+        "damage_carry": 0.36,
+        "gold": 0,
+        "hp": 103,
+        "hp_carry": 0.0075,
+        "kill_clock": 0.0,
+        "kill_used": 0.0,
+        "mana": 60.0575,
+        "map_id": "legacy_arena",
+        "max_mana": 100.0,
+        "new_version": 8,
+        "old_version": 5,
+        "position": "(900.0, 600.0)",
+        "rng_streams": 5,
+        "run_levels": {
+          "attack_power": 3,
+          "attack_range": 0,
+          "attack_speed": 3,
+          "crit_chance": 0,
+          "crit_damage": 0,
+          "damage_reduction": 3,
+          "healing_efficiency": 0,
+          "hp_regen": 3,
+          "invulnerability": 0,
+          "kill_heal": 0,
+          "knockback_resist": 0,
+          "mana_cost_reduction": 0,
+          "max_hp": 3,
+          "max_mana": 0,
+          "move_speed": 0,
+          "mp_regen": 3,
+          "projectile_speed": 0,
+          "status_resist": 0
+        },
+        "scatter_clock": 12.0,
+        "scatter_index": 0,
+        "slow": 0.0,
+        "status": "PASS",
+        "world_size": "(1800.0, 1200.0)"
+      },
+      "v6": {
+        "actors": 0,
+        "damage_carry": 0.6,
+        "gold": 0,
+        "hp": 95,
+        "hp_carry": 0.5175,
+        "kill_clock": 1.0,
+        "kill_used": 0.3,
+        "mana": 40.95,
+        "map_id": "legacy_arena",
+        "max_mana": 115.0,
+        "new_version": 8,
+        "old_version": 6,
+        "position": "(915.3, 600.0)",
+        "rng_streams": 5,
+        "run_levels": {
+          "attack_power": 3,
+          "attack_range": 3,
+          "attack_speed": 3,
+          "crit_chance": 3,
+          "crit_damage": 3,
+          "damage_reduction": 3,
+          "healing_efficiency": 3,
+          "hp_regen": 3,
+          "invulnerability": 3,
+          "kill_heal": 3,
+          "knockback_resist": 3,
+          "mana_cost_reduction": 3,
+          "max_hp": 3,
+          "max_mana": 3,
+          "move_speed": 3,
+          "mp_regen": 3,
+          "projectile_speed": 3,
+          "status_resist": 3
+        },
+        "scatter_clock": 12.0,
+        "scatter_index": 0,
+        "slow": 0.8,
+        "status": "PASS",
+        "world_size": "(1800.0, 1200.0)"
+      },
+      "v7": {
+        "actors": 151,
+        "damage_carry": 0.0,
+        "gold": 0,
+        "hp": 100,
+        "hp_carry": 0.0,
+        "kill_clock": 0.0,
+        "kill_used": 0.0,
+        "mana": 100.0,
+        "map_id": "legacy_arena",
+        "max_mana": 100.0,
+        "new_version": 8,
+        "old_version": 7,
+        "position": "(900.0, 600.0)",
+        "rng_streams": 5,
+        "run_levels": {
+          "attack_power": 0,
+          "attack_range": 0,
+          "attack_speed": 0,
+          "crit_chance": 0,
+          "crit_damage": 0,
+          "damage_reduction": 0,
+          "healing_efficiency": 0,
+          "hp_regen": 0,
+          "invulnerability": 0,
+          "kill_heal": 0,
+          "knockback_resist": 0,
+          "mana_cost_reduction": 0,
+          "max_hp": 0,
+          "max_mana": 0,
+          "move_speed": 0,
+          "mp_regen": 0,
+          "projectile_speed": 0,
+          "status_resist": 0
+        },
+        "scatter_clock": 0.03,
+        "scatter_index": 4,
+        "slow": 0.0,
+        "status": "PASS",
+        "world_size": "(1800.0, 1200.0)"
+      }
+    },
+    "render": {
+      "status": "PASS",
+      "driver": "X11/OpenGL4.5 Mesa llvmpipe software rendering",
+      "resolutions": [
+        "1280x720",
+        "853x384 compact"
+      ],
+      "records": {
+        "gold": 270,
+        "next_stage": 2,
+        "records": [
+          {
+            "actors": 40,
+            "camera": "(2500.0, 450.01)",
+            "hp": 100,
+            "map": "prologue_wall",
+            "time": 14.0000000000001,
+            "world_size": "(5000.0, 3200.0)"
+          },
+          {
+            "actors": 39,
+            "camera": "(628.0, 2570.0)",
+            "hp": 100,
+            "map": "outskirts_trial",
+            "time": 13.0,
+            "world_size": "(4200.0, 2800.0)"
+          }
+        ],
+        "renderer": "llvmpipe (LLVM 19.1.7, 256 bits)",
+        "snapshot": 8,
+        "status": "PASS"
+      },
+      "flow": "Actual lobby->stage selection->prologue->real movement/wall/attacks/choices->park/Continue/compact->fixture boss clear/unlock/result->actual general stage->map edge camera->save. Fixture clear verifies routes/settlement, separate20-run measurement below covers natural outcomes. No production gift currency/HP or final art.",
+      "captures": [
+        "boss_hud.png",
+        "city_wall.png",
+        "clear_result.png",
+        "compact_boss_hud.png",
+        "compact_frontline.png",
+        "edge_camera.png",
+        "frontline.png",
+        "general_region.png",
+        "general_unlocked.png",
+        "lobby.png",
+        "prologue_arrival.png",
+        "stage_selection.png"
+      ],
+      "boss_hud": {
+        "boss_hp": 3200.0,
+        "boss_label": "최종 보스 · HP 3200 / 3200",
+        "compact_battle_height": 151.200012207031,
+        "map_id": "prologue_wall",
+        "status": "PASS"
+      }
+    }
+  },
+  "balance_measurement": {
+    "status": "FAIL",
+    "goal": "10-12 meaningful choices remains the original measurement criterion; observed18-28. All4 commands exit1, no target weakened or XP adjusted.",
+    "command": "Godot --headless --path . --script res://tests/measure_campaign.gd -- --map=prologue_wall|outskirts_trial --talents=none|full",
+    "controller": "Same existing controller and5 seeds7/42/143/407/2026 per case, no invulnerability/HP/XP gifts. Map-aware world bounds, no advanced player navigation AI. Default logical view1256x468. Not human balance or causal per-talent comparison; buffed crit/combat timing changes later RNG/positions.",
+    "summary": {
+      "prologue_wall-none": {
+        "outcomes": [
+          "cleared",
+          "cleared",
+          "cleared",
+          "timeout",
+          "cleared"
+        ],
+        "choices": [
+          23,
+          26,
+          24,
+          24,
+          28
+        ],
+        "casts": [
+          11,
+          11,
+          11,
+          11,
+          11
+        ],
+        "clear_gold_mean": 12422.75,
+        "peak_enemies": 132,
+        "exit_code": 1,
+        "status": "FAIL"
+      },
+      "prologue_wall-full": {
+        "outcomes": [
+          "cleared",
+          "cleared",
+          "timeout",
+          "cleared",
+          "cleared"
+        ],
+        "choices": [
+          25,
+          25,
+          24,
+          26,
+          26
+        ],
+        "casts": [
+          13,
+          13,
+          13,
+          13,
+          13
+        ],
+        "clear_gold_mean": 12948.0,
+        "peak_enemies": 125,
+        "exit_code": 1,
+        "status": "FAIL"
+      },
+      "outskirts_trial-none": {
+        "outcomes": [
+          "defeat",
+          "cleared",
+          "cleared",
+          "cleared",
+          "cleared"
+        ],
+        "choices": [
+          18,
+          25,
+          23,
+          25,
+          26
+        ],
+        "casts": [
+          7,
+          11,
+          11,
+          11,
+          11
+        ],
+        "clear_gold_mean": 12001.25,
+        "peak_enemies": 158,
+        "exit_code": 1,
+        "status": "FAIL"
+      },
+      "outskirts_trial-full": {
+        "outcomes": [
+          "cleared",
+          "cleared",
+          "cleared",
+          "cleared",
+          "cleared"
+        ],
+        "choices": [
+          25,
+          26,
+          24,
+          26,
+          26
+        ],
+        "casts": [
+          13,
+          13,
+          13,
+          13,
+          13
+        ],
+        "clear_gold_mean": 13348.2,
+        "peak_enemies": 100,
+        "exit_code": 1,
+        "status": "FAIL"
+      }
+    },
+    "raw": {
+      "prologue_wall-none": {
+        "exit_code": 1,
+        "result": {
+          "account_levels": {
+            "attack_power": 0,
+            "attack_range": 0,
+            "attack_speed": 0,
+            "crit_chance": 0,
+            "crit_damage": 0,
+            "damage_reduction": 0,
+            "healing_efficiency": 0,
+            "hp_regen": 0,
+            "invulnerability": 0,
+            "kill_heal": 0,
+            "knockback_resist": 0,
+            "mana_cost_reduction": 0,
+            "max_hp": 0,
+            "max_mana": 0,
+            "move_speed": 0,
+            "mp_regen": 0,
+            "projectile_speed": 0,
+            "status_resist": 0
+          },
+          "growth_target_met": false,
+          "map_id": "prologue_wall",
+          "profile": "none",
+          "runs": [
+            {
+              "boss_defeated_at": 354.400000000046,
+              "choices": 23,
+              "elapsed": 360.0,
+              "first_choice": 8.04999999999998,
+              "gold_reward": 12547,
+              "hp": 89,
+              "kills": 1241,
+              "magic_casts": 11,
+              "mana_left": 16.5000000000001,
+              "max_hp": 120,
+              "max_mana": 100.0,
+              "milestones": [
+                {
+                  "choices": 11,
+                  "gold_collected": 2804,
+                  "hp": 80,
+                  "kills": 315,
+                  "time": 119.999999999995
+                },
+                {
+                  "choices": 19,
+                  "gold_collected": 7567,
+                  "hp": 24,
+                  "kills": 765,
+                  "time": 240.00000000002
+                },
+                {
+                  "choices": 23,
+                  "gold_collected": 12447,
+                  "hp": 89,
+                  "kills": 1241,
+                  "time": 360.0
+                }
+              ],
+              "outcome": "cleared",
+              "peak_enemies": 132,
+              "seed": 7
+            },
+            {
+              "boss_defeated_at": 354.050000000046,
+              "choices": 26,
+              "elapsed": 360.0,
+              "first_choice": 7.64999999999998,
+              "gold_reward": 13460,
+              "hp": 8,
+              "kills": 1338,
+              "magic_casts": 11,
+              "mana_left": 16.1000000000001,
+              "max_hp": 100,
+              "max_mana": 100.0,
+              "milestones": [
+                {
+                  "choices": 12,
+                  "gold_collected": 3411,
+                  "hp": 68,
+                  "kills": 314,
+                  "time": 119.999999999995
+                },
+                {
+                  "choices": 20,
+                  "gold_collected": 8346,
+                  "hp": 44,
+                  "kills": 793,
+                  "time": 240.00000000002
+                },
+                {
+                  "choices": 26,
+                  "gold_collected": 13360,
+                  "hp": 8,
+                  "kills": 1338,
+                  "time": 360.0
+                }
+              ],
+              "outcome": "cleared",
+              "peak_enemies": 128,
+              "seed": 42
+            },
+            {
+              "boss_defeated_at": 356.800000000047,
+              "choices": 24,
+              "elapsed": 360.0,
+              "first_choice": 9.04999999999999,
+              "gold_reward": 11715,
+              "hp": 48,
+              "kills": 1255,
+              "magic_casts": 11,
+              "mana_left": 16.2000000000001,
+              "max_hp": 140,
+              "max_mana": 100.0,
+              "milestones": [
+                {
+                  "choices": 11,
+                  "gold_collected": 2603,
+                  "hp": 80,
+                  "kills": 310,
+                  "time": 119.999999999995
+                },
+                {
+                  "choices": 19,
+                  "gold_collected": 7250,
+                  "hp": 72,
+                  "kills": 798,
+                  "time": 240.00000000002
+                },
+                {
+                  "choices": 24,
+                  "gold_collected": 11615,
+                  "hp": 48,
+                  "kills": 1255,
+                  "time": 360.0
+                }
+              ],
+              "outcome": "cleared",
+              "peak_enemies": 123,
+              "seed": 143
+            },
+            {
+              "boss_defeated_at": -1.0,
+              "choices": 24,
+              "elapsed": 360.0,
+              "first_choice": 7.14999999999998,
+              "gold_reward": 0,
+              "hp": 85,
+              "kills": 1220,
+              "magic_casts": 11,
+              "mana_left": 16.3999999999999,
+              "max_hp": 100,
+              "max_mana": 100.0,
+              "milestones": [
+                {
+                  "choices": 12,
+                  "gold_collected": 2674,
+                  "hp": 56,
+                  "kills": 318,
+                  "time": 119.999999999995
+                },
+                {
+                  "choices": 20,
+                  "gold_collected": 7729,
+                  "hp": 96,
+                  "kills": 800,
+                  "time": 240.00000000002
+                },
+                {
+                  "choices": 24,
+                  "gold_collected": 11528,
+                  "hp": 85,
+                  "kills": 1220,
+                  "time": 360.0
+                }
+              ],
+              "outcome": "timeout",
+              "peak_enemies": 120,
+              "seed": 407
+            },
+            {
+              "boss_defeated_at": 355.350000000047,
+              "choices": 28,
+              "elapsed": 360.0,
+              "first_choice": 8.39999999999998,
+              "gold_reward": 11969,
+              "hp": 72,
+              "kills": 1307,
+              "magic_casts": 11,
+              "mana_left": 16.3500000000001,
+              "max_hp": 160,
+              "max_mana": 100.0,
+              "milestones": [
+                {
+                  "choices": 12,
+                  "gold_collected": 2635,
+                  "hp": 100,
+                  "kills": 308,
+                  "time": 119.999999999995
+                },
+                {
+                  "choices": 20,
+                  "gold_collected": 6631,
+                  "hp": 72,
+                  "kills": 774,
+                  "time": 240.00000000002
+                },
+                {
+                  "choices": 28,
+                  "gold_collected": 11869,
+                  "hp": 72,
+                  "kills": 1307,
+                  "time": 360.0
+                }
+              ],
+              "outcome": "cleared",
+              "peak_enemies": 131,
+              "seed": 2026
+            }
+          ],
+          "status": "FAIL"
+        },
+        "stderr": ""
+      },
+      "prologue_wall-full": {
+        "exit_code": 1,
+        "result": {
+          "account_levels": {
+            "attack_power": 3,
+            "attack_range": 3,
+            "attack_speed": 3,
+            "crit_chance": 3,
+            "crit_damage": 3,
+            "damage_reduction": 3,
+            "healing_efficiency": 3,
+            "hp_regen": 3,
+            "invulnerability": 3,
+            "kill_heal": 3,
+            "knockback_resist": 3,
+            "mana_cost_reduction": 3,
+            "max_hp": 3,
+            "max_mana": 3,
+            "move_speed": 3,
+            "mp_regen": 3,
+            "projectile_speed": 3,
+            "status_resist": 3
+          },
+          "growth_target_met": false,
+          "map_id": "prologue_wall",
+          "profile": "full",
+          "runs": [
+            {
+              "boss_defeated_at": 334.200000000042,
+              "choices": 25,
+              "elapsed": 360.0,
+              "first_choice": 7.94999999999998,
+              "gold_reward": 12556,
+              "hp": 115,
+              "kills": 1350,
+              "magic_casts": 13,
+              "mana_left": 36.1750000000013,
+              "max_hp": 115,
+              "max_mana": 115.0,
+              "milestones": [
+                {
+                  "choices": 12,
+                  "gold_collected": 2953,
+                  "hp": 109,
+                  "kills": 322,
+                  "time": 119.999999999995
+                },
+                {
+                  "choices": 20,
+                  "gold_collected": 7802,
+                  "hp": 115,
+                  "kills": 843,
+                  "time": 240.00000000002
+                },
+                {
+                  "choices": 25,
+                  "gold_collected": 12456,
+                  "hp": 115,
+                  "kills": 1350,
+                  "time": 360.0
+                }
+              ],
+              "outcome": "cleared",
+              "peak_enemies": 109,
+              "seed": 7
+            },
+            {
+              "boss_defeated_at": 340.900000000043,
+              "choices": 25,
+              "elapsed": 360.0,
+              "first_choice": 8.34999999999998,
+              "gold_reward": 12426,
+              "hp": 115,
+              "kills": 1226,
+              "magic_casts": 13,
+              "mana_left": 35.8874999999983,
+              "max_hp": 115,
+              "max_mana": 115.0,
+              "milestones": [
+                {
+                  "choices": 12,
+                  "gold_collected": 3537,
+                  "hp": 115,
+                  "kills": 334,
+                  "time": 119.999999999995
+                },
+                {
+                  "choices": 20,
+                  "gold_collected": 7818,
+                  "hp": 115,
+                  "kills": 778,
+                  "time": 240.00000000002
+                },
+                {
+                  "choices": 25,
+                  "gold_collected": 12326,
+                  "hp": 115,
+                  "kills": 1226,
+                  "time": 360.0
+                }
+              ],
+              "outcome": "cleared",
+              "peak_enemies": 120,
+              "seed": 42
+            },
+            {
+              "boss_defeated_at": -1.0,
+              "choices": 24,
+              "elapsed": 360.0,
+              "first_choice": 8.79999999999999,
+              "gold_reward": 0,
+              "hp": 138,
+              "kills": 1268,
+              "magic_casts": 13,
+              "mana_left": 26.629999999999,
+              "max_hp": 138,
+              "max_mana": 115.0,
+              "milestones": [
+                {
+                  "choices": 12,
+                  "gold_collected": 2633,
+                  "hp": 97,
+                  "kills": 369,
+                  "time": 119.999999999995
+                },
+                {
+                  "choices": 19,
+                  "gold_collected": 7111,
+                  "hp": 115,
+                  "kills": 803,
+                  "time": 240.00000000002
+                },
+                {
+                  "choices": 24,
+                  "gold_collected": 11245,
+                  "hp": 138,
+                  "kills": 1268,
+                  "time": 360.0
+                }
+              ],
+              "outcome": "timeout",
+              "peak_enemies": 110,
+              "seed": 143
+            },
+            {
+              "boss_defeated_at": 326.10000000004,
+              "choices": 26,
+              "elapsed": 360.0,
+              "first_choice": 8.09999999999998,
+              "gold_reward": 14726,
+              "hp": 115,
+              "kills": 1304,
+              "magic_casts": 13,
+              "mana_left": 33.702500000001,
+              "max_hp": 115,
+              "max_mana": 115.0,
+              "milestones": [
+                {
+                  "choices": 12,
+                  "gold_collected": 2808,
+                  "hp": 114,
+                  "kills": 341,
+                  "time": 119.999999999995
+                },
+                {
+                  "choices": 20,
+                  "gold_collected": 7805,
+                  "hp": 115,
+                  "kills": 801,
+                  "time": 240.00000000002
+                },
+                {
+                  "choices": 26,
+                  "gold_collected": 14626,
+                  "hp": 115,
+                  "kills": 1304,
+                  "time": 360.0
+                }
+              ],
+              "outcome": "cleared",
+              "peak_enemies": 119,
+              "seed": 407
+            },
+            {
+              "boss_defeated_at": 321.050000000039,
+              "choices": 26,
+              "elapsed": 360.0,
+              "first_choice": 8.14999999999998,
+              "gold_reward": 12084,
+              "hp": 115,
+              "kills": 1268,
+              "magic_casts": 13,
+              "mana_left": 36.232499999998,
+              "max_hp": 115,
+              "max_mana": 115.0,
+              "milestones": [
+                {
+                  "choices": 12,
+                  "gold_collected": 2752,
+                  "hp": 115,
+                  "kills": 323,
+                  "time": 119.999999999995
+                },
+                {
+                  "choices": 21,
+                  "gold_collected": 6963,
+                  "hp": 115,
+                  "kills": 851,
+                  "time": 240.00000000002
+                },
+                {
+                  "choices": 26,
+                  "gold_collected": 11984,
+                  "hp": 115,
+                  "kills": 1268,
+                  "time": 360.0
+                }
+              ],
+              "outcome": "cleared",
+              "peak_enemies": 125,
+              "seed": 2026
+            }
+          ],
+          "status": "FAIL"
+        },
+        "stderr": ""
+      },
+      "outskirts_trial-none": {
+        "exit_code": 1,
+        "result": {
+          "account_levels": {
+            "attack_power": 0,
+            "attack_range": 0,
+            "attack_speed": 0,
+            "crit_chance": 0,
+            "crit_damage": 0,
+            "damage_reduction": 0,
+            "healing_efficiency": 0,
+            "hp_regen": 0,
+            "invulnerability": 0,
+            "kill_heal": 0,
+            "knockback_resist": 0,
+            "mana_cost_reduction": 0,
+            "max_hp": 0,
+            "max_mana": 0,
+            "move_speed": 0,
+            "mp_regen": 0,
+            "projectile_speed": 0,
+            "status_resist": 0
+          },
+          "growth_target_met": false,
+          "map_id": "outskirts_trial",
+          "profile": "none",
+          "runs": [
+            {
+              "boss_defeated_at": -1.0,
+              "choices": 18,
+              "elapsed": 223.000000000016,
+              "first_choice": 10.0,
+              "gold_reward": 0,
+              "hp": 0,
+              "kills": 717,
+              "magic_casts": 7,
+              "mana_left": 37.7,
+              "max_hp": 100,
+              "max_mana": 100.0,
+              "milestones": [
+                {
+                  "choices": 11,
+                  "gold_collected": 2753,
+                  "hp": 80,
+                  "kills": 341,
+                  "time": 119.999999999995
+                }
+              ],
+              "outcome": "defeat",
+              "peak_enemies": 103,
+              "seed": 7
+            },
+            {
+              "boss_defeated_at": 348.300000000045,
+              "choices": 25,
+              "elapsed": 360.0,
+              "first_choice": 18.0500000000001,
+              "gold_reward": 11905,
+              "hp": 90,
+              "kills": 1255,
+              "magic_casts": 11,
+              "mana_left": 11.65,
+              "max_hp": 100,
+              "max_mana": 100.0,
+              "milestones": [
+                {
+                  "choices": 12,
+                  "gold_collected": 3624,
+                  "hp": 95,
+                  "kills": 331,
+                  "time": 119.999999999995
+                },
+                {
+                  "choices": 20,
+                  "gold_collected": 7777,
+                  "hp": 100,
+                  "kills": 794,
+                  "time": 240.00000000002
+                },
+                {
+                  "choices": 25,
+                  "gold_collected": 11805,
+                  "hp": 90,
+                  "kills": 1255,
+                  "time": 360.0
+                }
+              ],
+              "outcome": "cleared",
+              "peak_enemies": 130,
+              "seed": 42
+            },
+            {
+              "boss_defeated_at": 338.650000000043,
+              "choices": 23,
+              "elapsed": 360.0,
+              "first_choice": 10.15,
+              "gold_reward": 12172,
+              "hp": 48,
+              "kills": 1276,
+              "magic_casts": 11,
+              "mana_left": 0.5,
+              "max_hp": 120,
+              "max_mana": 100.0,
+              "milestones": [
+                {
+                  "choices": 12,
+                  "gold_collected": 2708,
+                  "hp": 76,
+                  "kills": 333,
+                  "time": 119.999999999995
+                },
+                {
+                  "choices": 16,
+                  "gold_collected": 5909,
+                  "hp": 40,
+                  "kills": 794,
+                  "time": 240.00000000002
+                },
+                {
+                  "choices": 23,
+                  "gold_collected": 12072,
+                  "hp": 48,
+                  "kills": 1276,
+                  "time": 360.0
+                }
+              ],
+              "outcome": "cleared",
+              "peak_enemies": 158,
+              "seed": 143
+            },
+            {
+              "boss_defeated_at": 351.850000000046,
+              "choices": 25,
+              "elapsed": 360.0,
+              "first_choice": 11.0,
+              "gold_reward": 12466,
+              "hp": 100,
+              "kills": 1271,
+              "magic_casts": 11,
+              "mana_left": 16.3499999999999,
+              "max_hp": 100,
+              "max_mana": 100.0,
+              "milestones": [
+                {
+                  "choices": 12,
+                  "gold_collected": 2685,
+                  "hp": 68,
+                  "kills": 343,
+                  "time": 119.999999999995
+                },
+                {
+                  "choices": 19,
+                  "gold_collected": 7221,
+                  "hp": 100,
+                  "kills": 811,
+                  "time": 240.00000000002
+                },
+                {
+                  "choices": 25,
+                  "gold_collected": 12366,
+                  "hp": 100,
+                  "kills": 1271,
+                  "time": 360.0
+                }
+              ],
+              "outcome": "cleared",
+              "peak_enemies": 95,
+              "seed": 407
+            },
+            {
+              "boss_defeated_at": 339.200000000043,
+              "choices": 26,
+              "elapsed": 360.0,
+              "first_choice": 11.3,
+              "gold_reward": 11462,
+              "hp": 84,
+              "kills": 1256,
+              "magic_casts": 11,
+              "mana_left": 8.3999999999998,
+              "max_hp": 100,
+              "max_mana": 100.0,
+              "milestones": [
+                {
+                  "choices": 12,
+                  "gold_collected": 2987,
+                  "hp": 100,
+                  "kills": 341,
+                  "time": 119.999999999995
+                },
+                {
+                  "choices": 21,
+                  "gold_collected": 6819,
+                  "hp": 91,
+                  "kills": 808,
+                  "time": 240.00000000002
+                },
+                {
+                  "choices": 26,
+                  "gold_collected": 11362,
+                  "hp": 84,
+                  "kills": 1256,
+                  "time": 360.0
+                }
+              ],
+              "outcome": "cleared",
+              "peak_enemies": 95,
+              "seed": 2026
+            }
+          ],
+          "status": "FAIL"
+        },
+        "stderr": ""
+      },
+      "outskirts_trial-full": {
+        "exit_code": 1,
+        "result": {
+          "account_levels": {
+            "attack_power": 3,
+            "attack_range": 3,
+            "attack_speed": 3,
+            "crit_chance": 3,
+            "crit_damage": 3,
+            "damage_reduction": 3,
+            "healing_efficiency": 3,
+            "hp_regen": 3,
+            "invulnerability": 3,
+            "kill_heal": 3,
+            "knockback_resist": 3,
+            "mana_cost_reduction": 3,
+            "max_hp": 3,
+            "max_mana": 3,
+            "move_speed": 3,
+            "mp_regen": 3,
+            "projectile_speed": 3,
+            "status_resist": 3
+          },
+          "growth_target_met": false,
+          "map_id": "outskirts_trial",
+          "profile": "full",
+          "runs": [
+            {
+              "boss_defeated_at": 329.950000000041,
+              "choices": 25,
+              "elapsed": 360.0,
+              "first_choice": 8.54999999999999,
+              "gold_reward": 12853,
+              "hp": 111,
+              "kills": 1401,
+              "magic_casts": 13,
+              "mana_left": 20.7074999999987,
+              "max_hp": 115,
+              "max_mana": 115.0,
+              "milestones": [
+                {
+                  "choices": 12,
+                  "gold_collected": 3141,
+                  "hp": 115,
+                  "kills": 366,
+                  "time": 119.999999999995
+                },
+                {
+                  "choices": 19,
+                  "gold_collected": 7457,
+                  "hp": 115,
+                  "kills": 817,
+                  "time": 240.00000000002
+                },
+                {
+                  "choices": 25,
+                  "gold_collected": 12753,
+                  "hp": 111,
+                  "kills": 1401,
+                  "time": 360.0
+                }
+              ],
+              "outcome": "cleared",
+              "peak_enemies": 96,
+              "seed": 7
+            },
+            {
+              "boss_defeated_at": 329.450000000041,
+              "choices": 26,
+              "elapsed": 360.0,
+              "first_choice": 10.8,
+              "gold_reward": 15367,
+              "hp": 80,
+              "kills": 1479,
+              "magic_casts": 13,
+              "mana_left": 19.2124999999983,
+              "max_hp": 115,
+              "max_mana": 115.0,
+              "milestones": [
+                {
+                  "choices": 11,
+                  "gold_collected": 3097,
+                  "hp": 107,
+                  "kills": 354,
+                  "time": 119.999999999995
+                },
+                {
+                  "choices": 20,
+                  "gold_collected": 7885,
+                  "hp": 115,
+                  "kills": 870,
+                  "time": 240.00000000002
+                },
+                {
+                  "choices": 26,
+                  "gold_collected": 15267,
+                  "hp": 80,
+                  "kills": 1479,
+                  "time": 360.0
+                }
+              ],
+              "outcome": "cleared",
+              "peak_enemies": 93,
+              "seed": 42
+            },
+            {
+              "boss_defeated_at": 325.85000000004,
+              "choices": 24,
+              "elapsed": 360.0,
+              "first_choice": 10.65,
+              "gold_reward": 12639,
+              "hp": 131,
+              "kills": 1335,
+              "magic_casts": 13,
+              "mana_left": 12.2549999999996,
+              "max_hp": 138,
+              "max_mana": 115.0,
+              "milestones": [
+                {
+                  "choices": 12,
+                  "gold_collected": 2943,
+                  "hp": 109,
+                  "kills": 346,
+                  "time": 119.999999999995
+                },
+                {
+                  "choices": 18,
+                  "gold_collected": 6731,
+                  "hp": 113,
+                  "kills": 794,
+                  "time": 240.00000000002
+                },
+                {
+                  "choices": 24,
+                  "gold_collected": 12539,
+                  "hp": 131,
+                  "kills": 1335,
+                  "time": 360.0
+                }
+              ],
+              "outcome": "cleared",
+              "peak_enemies": 91,
+              "seed": 143
+            },
+            {
+              "boss_defeated_at": 335.050000000042,
+              "choices": 26,
+              "elapsed": 360.0,
+              "first_choice": 9.15,
+              "gold_reward": 13988,
+              "hp": 115,
+              "kills": 1347,
+              "magic_casts": 13,
+              "mana_left": 36.1174999999988,
+              "max_hp": 115,
+              "max_mana": 115.0,
+              "milestones": [
+                {
+                  "choices": 12,
+                  "gold_collected": 2784,
+                  "hp": 115,
+                  "kills": 353,
+                  "time": 119.999999999995
+                },
+                {
+                  "choices": 20,
+                  "gold_collected": 7800,
+                  "hp": 115,
+                  "kills": 858,
+                  "time": 240.00000000002
+                },
+                {
+                  "choices": 26,
+                  "gold_collected": 13888,
+                  "hp": 115,
+                  "kills": 1347,
+                  "time": 360.0
+                }
+              ],
+              "outcome": "cleared",
+              "peak_enemies": 91,
+              "seed": 407
+            },
+            {
+              "boss_defeated_at": 320.000000000038,
+              "choices": 26,
+              "elapsed": 360.0,
+              "first_choice": 11.25,
+              "gold_reward": 11894,
+              "hp": 115,
+              "kills": 1299,
+              "magic_casts": 13,
+              "mana_left": 30.54,
+              "max_hp": 115,
+              "max_mana": 115.0,
+              "milestones": [
+                {
+                  "choices": 13,
+                  "gold_collected": 3035,
+                  "hp": 115,
+                  "kills": 359,
+                  "time": 119.999999999995
+                },
+                {
+                  "choices": 21,
+                  "gold_collected": 6740,
+                  "hp": 115,
+                  "kills": 826,
+                  "time": 240.00000000002
+                },
+                {
+                  "choices": 26,
+                  "gold_collected": 11794,
+                  "hp": 115,
+                  "kills": 1299,
+                  "time": 360.0
+                }
+              ],
+              "outcome": "cleared",
+              "peak_enemies": 100,
+              "seed": 2026
+            }
+          ],
+          "status": "FAIL"
+        },
+        "stderr": ""
+      }
+    }
+  },
+  "not_verified": [
+    "Android/iOS devices, touch readability/lifecycle, FPS/heat/memory",
+    "Windows F5 or mobile export/package JSON/font inclusion",
+    "Human difficulty/economy/visual approval and final map sizes/weights",
+    "Other stages/controllers/seeds beyond described samples"
+  ],
+  "not_implemented": [
+    "Final character/monster/map/UI art, rig and full attack/cast/portrait animation sets",
+    "Transfer cutscene/dialogue, city/gate health, full chapter roster/map count/world map",
+    "Collection/gacha/city/expedition gameplay, supporter effects, extra talent candidates",
+    "Retreat payout and long/infinite modes"
+  ],
+  "artifacts_sha256": {
+    ".local_validation/GAME016/balance-outskirts_trial-full.log": "108ddcaacae597020cd2b8d3b21518b1e791472f9aaf1d5c2a6694b92e026bc0",
+    ".local_validation/GAME016/balance-outskirts_trial-none.log": "0fd977ab1de8194eab3516215bf1498ee73df0efb516a77a0ecdbe70e93ddf18",
+    ".local_validation/GAME016/balance-prologue_wall-full.log": "e760fe4f575879704780263ff151675938e0b5bed161a6eb18f8e55799a781e2",
+    ".local_validation/GAME016/balance-prologue_wall-none.log": "f2192c64bd6e938dbcc33b3c056621d30aac8ac502d64e9c8ba60be9a165492f",
+    ".local_validation/GAME016/balance-results.json": "76deba7b09fd081a0f732878148ea1450c22b530ad64de411d4456111959cb67",
+    ".local_validation/GAME016/boss_hud.png": "81b1fdfa42ff99f98f8703affa5aef222023a3834c32f31e697d971312d2a65e",
+    ".local_validation/GAME016/boss_probe.gd": "09781e49d14b5aeda4871c611b0319ca4637a20e1b08c58d57cbc54a37a4154e",
+    ".local_validation/GAME016/boss_render.log": "c13e72321ba7ec4789479c29980bcaf48285d71ce371808d24aaa59e3c78cbdb",
+    ".local_validation/GAME016/city_wall.png": "7b59aafa0c602fc9a559646cc34814778c2bacf4e9a2a43cefd5b5f3f1fe8945",
+    ".local_validation/GAME016/clear_result.png": "76591b0b2bdf59cbf757af796dfa5d8d9ff6e32b933d537fe8b47a8573457986",
+    ".local_validation/GAME016/compact_boss_hud.png": "735c8f180b482818ef08008d1a4770add35fbdfd0db6ae991ffb9e8e392f4217",
+    ".local_validation/GAME016/compact_frontline.png": "10d5216d93f8fdf8c625457e3e860b03c42e4f0176ce3b0dd46c625c477631f4",
+    ".local_validation/GAME016/edge_camera.png": "77517df58d02d096969167fe142903556884d61c95ae3356e3abeb487b57df90",
+    ".local_validation/GAME016/engine_0.log": "edff16c1721dd4ae989cadf29a01f574ae8d51b118221f664725bd6980bbba5d",
+    ".local_validation/GAME016/engine_1.log": "bd175cdf7c9db6376ff16d7e39ebc7f084e899ed5358467e834bf6e8bdbe9165",
+    ".local_validation/GAME016/engine_2.log": "1938b93b03756e658dd6fc29e699189d67afb2aec05905c840e9c22f5b89a6cd",
+    ".local_validation/GAME016/engine_3.log": "190487dfb2bdf99cdccfff084fd5d95b81eac04fcfe3ec43e502d524daacb8eb",
+    ".local_validation/GAME016/engine_4.log": "0dc80f41a9d961a6b4d962614c905af0b7c3bc209f569871d09048860b58f7ff",
+    ".local_validation/GAME016/engine_5.log": "c5a9e5b87c0439795f9d5bcfe6c17d74bce134acc53d7f341cfb55a11bdb1e1d",
+    ".local_validation/GAME016/engine_6.log": "570a42343d370c104902d16c9ff0b402573f94ed3076772afb70e6bce96084fc",
+    ".local_validation/GAME016/engine_7.log": "025f863c84ce84466e9269a07033239400176c7aad50ada31ff794c6e59b0837",
+    ".local_validation/GAME016/engine_8.log": "fdc948d5134739afc32e6a76ee1c761a92f255d6da0718b8125648e67331114d",
+    ".local_validation/GAME016/engine_9.log": "6d1c065383a27c36804949b6ffa4b09714470b112e5dacc0bd5aeb7b9c147c4e",
+    ".local_validation/GAME016/frontline.png": "7f12a33802ba6baa50a88cbdaf721080e26b9f437bca33c5d6239860fd013405",
+    ".local_validation/GAME016/general_region.png": "0ef050b9c63ddfde7045d3d04fbadad1598d615b963ebde0607856b3a2143daf",
+    ".local_validation/GAME016/general_unlocked.png": "d623669a302323d1f8859e9d056e661604d75feab17b0cf1f41d78146331434e",
+    ".local_validation/GAME016/lobby.png": "49c1b5d6e71554861b76f0bdecd2ba1befe805da0474dae349b1fd1adaf4da46",
+    ".local_validation/GAME016/process-current.log": "1d2fae21a53c844d015e6f46f5b3576f27f4073eb28b5190d18ce96f096642fb",
+    ".local_validation/GAME016/process-v1.log": "bf709c5c800f6d7029b91d98a0d16f59dc29391f910575886af36ed913aac4bb",
+    ".local_validation/GAME016/process-v2.log": "6475f38b07c2f224523a6e8703a01d16b242ec2576126e51269e7167d2d08206",
+    ".local_validation/GAME016/process-v3.log": "a4380936acb4bef0c8840f41bc83c6a494d68c7e8b1f5572631a5927b4a823a2",
+    ".local_validation/GAME016/process-v4.log": "66eee411db354abcdf7a24327e959f4d6a33d422cf7c15e8abd923020fcf5c7d",
+    ".local_validation/GAME016/process-v5.log": "b1106dba3a464470b9156023a5a834346081de9d657c8136523786eadcc8eb50",
+    ".local_validation/GAME016/process-v6.log": "f49c46ce7d43e5a3fb451ef42571105c7953f5aefc73c5c4bbfabcbd87b89e5a",
+    ".local_validation/GAME016/process-v7.log": "6fe1df5348b608d9fd3fe1ec1c9e1a6977e607666de5eaf7a726003ef246ee56",
+    ".local_validation/GAME016/process_probe.gd": "9ce89fbf7b34e00891dda6902f8de2027006f273396d462dd13fe49018c8db86",
+    ".local_validation/GAME016/prologue_arrival.png": "e7582631108a9b0c5f9d1114d3f2384800fff14a6ef922f4574f57d3f90e268f",
+    ".local_validation/GAME016/python.log": "f8dfa13568bc747aa2b98fdfdd8861b3f3ebcf5b00f2f7b0ccfd1950e75ffed6",
+    ".local_validation/GAME016/render.log": "ea63cc0d60027bdd3bfa97587dad1963c05d6ea081a40d5996dfe163227dab19",
+    ".local_validation/GAME016/render_probe.gd": "ccb1dce202afc25adc8debf5e6669d5048c721c7e48d54caaa7dc06f0fdc0d1c",
+    ".local_validation/GAME016/report.json": "0f32f843d6cf4f113e2e75c172866b47273d137eba1a35dfe20839b196ae873b",
+    ".local_validation/GAME016/stage_selection.png": "fdbcc51e4a77fcb8b5373ddae7b6f6db91a54d1bb058e42d3319352299476c73"
+  },
+  "artifact_scope": "Ignored local logs/probes/captures identify this Linux validation, not final assets or a shipped build.",
+  "concurrent_user_documents": {
+    "commit": "76d1bf6c7c7009aa1d8004d472d3ffdad81e1664",
+    "files": [
+      "docs/PLANNED_WORK.md"
+    ],
+    "preserved": "Entire weapon-family/dual-unique/Lv5-evolution section10 and2.1 precedence note retained verbatim; our GAME016 implementation status moved to11. New skill planning is not implemented by this task. Tested source61 unchanged."
+  }
+}
