@@ -4,6 +4,7 @@ const RunState = preload("res://scripts/combat/run_state.gd")
 const Talents = preload("res://scripts/progression/account_talents.gd")
 var profile_name := "none"
 var map_name := "prologue_wall"
+var skill_ruleset := "weapons_v1"
 var account_levels: Dictionary = Talents.empty_levels()
 const PRIORITY := {"pulse": 16.0, "chain": 15.0, "grenade": 14.0,
 	"scatter": 13.0, "rifle": 12.0, "power": 11.0, "haste": 10.0,
@@ -11,6 +12,9 @@ const PRIORITY := {"pulse": 16.0, "chain": 15.0, "grenade": 14.0,
 
 func _initialize() -> void:
 	for argument in OS.get_cmdline_user_args():
+		if argument.begins_with("--ruleset="):
+			skill_ruleset = argument.trim_prefix("--ruleset=")
+			continue
 		if argument.begins_with("--map="):
 			map_name = argument.trim_prefix("--map=")
 			continue
@@ -23,6 +27,10 @@ func _initialize() -> void:
 		printerr("Unknown map")
 		quit(2)
 		return
+	if skill_ruleset not in ["legacy","weapons_v1"]:
+		printerr("Unknown skill ruleset")
+		quit(2)
+		return
 	if profile_name not in ["none", "roots", "full"]:
 		printerr("Expected --talents=none, roots or full")
 		quit(2)
@@ -33,14 +41,14 @@ func _initialize() -> void:
 	for seed_value in [7, 42, 143, 407, 2026]:
 		reports.append(measure(seed_value))
 	var target_met: bool = reports.all(func(result): return result.choices >= 10 and result.choices <= 12)
-	print(JSON.stringify({"profile": profile_name, "map_id": map_name, "account_levels": account_levels, "runs": reports, "growth_target_met": target_met,
+	print(JSON.stringify({"profile": profile_name, "map_id": map_name, "skill_ruleset":skill_ruleset, "account_levels": account_levels, "runs": reports, "growth_target_met": target_met,
 		"status": "PASS" if target_met else "FAIL"}))
 	quit(0 if target_met else 1)
 
 func measure(seed_value: int) -> Dictionary:
 	var state = RunState.new()
 	state.stage = 2 if map_name == "outskirts_trial" else 1
-	if not state.start(seed_value, "viya", account_levels, map_name):
+	if not state.start(seed_value, "viya", account_levels, map_name, skill_ruleset):
 		return {"seed": seed_value, "choices": -1, "outcome": "invalid_stage"}
 	var choices := 0
 	var first_choice := -1.0
@@ -70,14 +78,16 @@ func measure(seed_value: int) -> Dictionary:
 		"elapsed": state.elapsed, "hp": state.hp, "kills": state.kills,
 		"choices": choices, "first_choice": first_choice, "boss_defeated_at": boss_defeated_at,
 		"peak_enemies": peak_enemies, "gold_reward": state.result_summary().gold_reward, "milestones": milestones,
-		"magic_casts": state.magic.casts, "mana_left": state.magic.mana, "max_mana": state.magic.maximum_mana(), "max_hp": state.max_hp}
+		"magic_casts": state.magic.casts, "mana_left": state.magic.mana, "max_mana": state.magic.maximum_mana(), "max_hp": state.max_hp,
+		"owned":state.growth.owned.duplicate(true), "evolved":state.growth.owned.keys().filter(func(id):return state.growth.owned[id]==5 and state.growth.definition(id).kind!="passive")}
 
 func pick_skill(state) -> String:
 	var selected: String = state.growth.offer[0]
 	var best := -100.0
 	for id in state.growth.offer:
 		var entry: Dictionary = state.growth.definition(id)
-		var score: float = PRIORITY.get(str(entry.effect), 5.0)
+		var semantic: String = {"gun_rifle":"rifle","gun_scatter":"scatter","gun_lance":"lance","gun_grenade":"grenade","gun_suppress":"pulse","gun_ricochet":"chain","gun_sniper":"heavy","gun_rupture":"crossfire"}.get(str(entry.effect),str(entry.effect))
+		var score: float = PRIORITY.get(semantic, 5.0)
 		if float(state.hp) / state.max_hp < 0.6:
 			if entry.effect == "vitality":
 				score = 20.0

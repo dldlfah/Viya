@@ -32,6 +32,18 @@ func accepts(candidate: Dictionary, character_id: String) -> bool:
 	for key in ["max_mana", "mana_cost", "damage", "radius", "effect_duration"]:
 		if float(candidate[key]) <= 0.0:
 			return false
+	if candidate.has("upgrades"):
+		if not candidate.upgrades is Array or candidate.upgrades.size() != 6:
+			return false
+		for upgrade in candidate.upgrades:
+			if not upgrade is Dictionary:
+				return false
+			for key in ["knockback","mark_damage","echoes"]:
+				var value: Variant = upgrade.get(key)
+				if not (value is float or value is int) or not is_finite(value) or value < 0 or value > 1000:
+					return false
+			if upgrade.echoes != 0 and upgrade.echoes != 1:
+				return false
 	return float(candidate["mana_cost"]) <= float(candidate["max_mana"])
 
 func reset(candidate: Dictionary, character_id: String) -> bool:
@@ -78,13 +90,16 @@ func unavailable_reason(running: bool) -> String:
 func profile(rank: int) -> Dictionary:
 	if config.is_empty() or rank < 0:
 		return {}
-	return {"id": config["id"], "owner": owner_id, "name": config["name"],
+	var result := {"id": config["id"], "owner": owner_id, "name": config["name"],
 		"rank": rank, "mana_cost": effective_cost(), "max_mana": maximum_mana(),
 		"mana_regen": float(config["mana_regen"]) + bonus_mana_regen,
 		"cooldown": float(config["cooldown"]),
 		"damage": float(config["damage"]) + float(config["damage_per_rank"]) * rank,
 		"radius": (float(config["radius"]) + float(config["radius_per_rank"]) * rank) * radius_scale,
 		"effect_duration": float(config["effect_duration"])}
+	if config.has("upgrades") and rank <= 5:
+		result.merge(config.upgrades[rank].duplicate(true))
+	return result
 
 func consume(expected_ticket: int, running: bool, rank: int) -> Dictionary:
 	if expected_ticket != ticket or not unavailable_reason(running).is_empty():

@@ -60,7 +60,7 @@ def validate(sources: dict[str, str]) -> list[str]:
         ('not _valid_confirmation(expected_ticket)', function(run, 'confirm_transition')),
         ('not _valid_confirmation(expected_ticket)', function(run, 'cancel_transition')),
         ('set_paused(false)', function(run, 'cancel_transition')),
-        ('return start(0, growth.character_id, account_level, map_id)', function(run, 'confirm_transition')),
+        ('return start(0, growth.character_id, account_level, map_id, growth.ruleset)', function(run, 'confirm_transition')),
         ('_finish_run("abandoned")', function(run, 'confirm_transition')),
         ('_finish_run("defeat")', function(run, 'damage_player')),
         ('if not transition_action.is_empty():', function(run, 'set_paused')),

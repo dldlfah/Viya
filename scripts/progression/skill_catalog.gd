@@ -4,6 +4,7 @@ const DATA_PATH := "res://data/prototype_skills.json"
 var common: Array[Dictionary] = []
 var characters: Dictionary = {}
 var error: String = ""
+var weapons = preload("res://scripts/progression/weapon_catalog.gd").new()
 
 func _init() -> void:
 	var parsed = JSON.parse_string(FileAccess.get_file_as_string(DATA_PATH))
@@ -15,8 +16,22 @@ func _init() -> void:
 			common.append(entry.duplicate(true))
 	characters = parsed.get("characters", {}).duplicate(true)
 
-func pool_for(character_id: String) -> Array[Dictionary]:
+func pool_for(character_id: String, ruleset: String = "legacy") -> Array[Dictionary]:
 	var result: Array[Dictionary] = []
+	if ruleset == weapons.RULESET:
+		var selected: Dictionary = hero(character_id,ruleset)
+		if selected.is_empty():
+			return result
+		for id in selected.attack_pool:
+			result.append(weapons.entries[id].duplicate(true))
+		for entry in common:
+			if entry.kind == "passive":
+				result.append(entry.duplicate(true))
+		for entry in selected.skills:
+			result.append(entry.duplicate(true))
+		return result
+	if ruleset != "legacy":
+		return result
 	if not error.is_empty() or not characters.has(character_id):
 		return result
 	for entry in common:
@@ -24,6 +39,13 @@ func pool_for(character_id: String) -> Array[Dictionary]:
 	for entry in characters[character_id].get("skills", []):
 		result.append(entry.duplicate(true))
 	return result
+
+func hero(id: String, ruleset: String = "legacy") -> Dictionary:
+	if ruleset == "legacy":
+		return characters.get(id,{}).duplicate(true)
+	if ruleset == weapons.RULESET and weapons.error.is_empty() and weapons.characters.has(id) and weapons.valid_hero(weapons.characters[id],id):
+		return weapons.characters[id].duplicate(true)
+	return {}
 
 func validate_pool(pool: Array[Dictionary], character_id: String) -> bool:
 	if pool.size() != 18:

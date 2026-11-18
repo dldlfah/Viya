@@ -26,7 +26,8 @@ static func _row(growth, row: String) -> Array[Dictionary]:
 		var id: String = str(entry["id"])
 		result.append({"id": id, "name": str(entry["name"]),
 			"level": growth.skill_level(id), "max_level": int(entry["max_level"]),
-			"description": str(entry["description"])})
+			"description": str(entry.levels[growth.skill_level(id)-1].change) if entry.has("levels") else str(entry["description"]),
+			"evolved": growth.ruleset == "weapons_v1" and growth.skill_level(id)==5 and entry.kind!="passive"})
 	return result
 
 static func compact(data: Dictionary) -> String:
@@ -70,4 +71,6 @@ static func _row_text(entries: Array) -> String:
 	for entry in entries:
 		lines.append("%s · Lv.%d/%d\n%s" % [entry["name"], entry["level"],
 			entry["max_level"], entry["description"]])
+		if entry.get("evolved",false):
+			lines[-1] += "\n최종 진화"
 	return "\n\n".join(lines)

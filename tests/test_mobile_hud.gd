@@ -129,6 +129,7 @@ func _run() -> void:
 	stick.queue_free()
 	# Load the production F5 scene, which inherits the existing combat main.
 	var scene = load("res://scenes/main.tscn").instantiate()
+	scene.new_run_ruleset = "legacy" # Preserve this historical regression; GAME018 separately tests the production default.
 	scene.run_store.path = "user://native-test_mobile_hud-" + Crypto.new().generate_random_bytes(8).hex_encode() + ".save"
 	root.add_child(scene)
 	await process_frame

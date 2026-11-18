@@ -30,11 +30,28 @@ static func build(run, id: String) -> Dictionary:
 		_add(rows, "1발 기본 피해" if new_attack.has("projectiles") else "1대상 기본 피해", old_attack, new_attack, "damage", "number")
 		_add(rows, "발동 간격", old_attack, new_attack, "interval", "seconds")
 		for key in ["projectiles", "hits", "targets", "radius"]:
+			if new_attack.has("mode"):
+				if key=="projectiles" and new_attack.mode not in ["projectile","orbit"]:
+					continue
+				if key=="hits" and new_attack.mode!="projectile":
+					continue
+				if key=="targets" and new_attack.mode!="chain":
+					continue
+				if key=="radius" and float(new_attack.radius)==0:
+					continue
 			if new_attack.has(key):
 				var label: String = {"projectiles": "한 번에 발사", "hits": "탄환당 최대 타격 대상",
 					"targets": "최대 연쇄 대상", "radius": "반경"}[key]
 				_add(rows, label, old_attack, new_attack, key, "number")
 		note = "피해는 공격력·치명타 적용 전입니다. 남은 공격 대기는 유지됩니다."
+		if new_attack.has("change"):
+			var labels := {"bursts":"연속 발동", "fragments":"파편 수", "bounces":"도탄 횟수", "impact":"피격 폭발 반경", "ticks":"지속 타격", "knockback":"밀어내기", "slow":"둔화 비율", "orbit_radius":"회전 궤도 반경", "mark_burst":"표식 폭발 반경"}
+			for key in labels:
+				if key=="ticks" and new_attack.mode not in ["zone","orbit"]:
+					continue
+				if float(new_attack.get(key,0)) > 0 or float(old_attack.get(key,0)) > 0:
+					_add(rows,str(labels[key]),old_attack,new_attack,key,"percent" if key=="slow" else "number")
+			note += "\n%s%s" % ["Lv.5 최종 진화 · " if rank+1==5 else "다음 단계 · ",new_attack.change]
 	elif kind == "passive":
 		if effect == "vitality":
 			_add(rows, "최대 HP", before, after, "max_hp", "number")
@@ -54,8 +71,10 @@ static func build(run, id: String) -> Dictionary:
 			var field: Array = fields[effect]
 			_add(rows, str(field[1]), before["stats"], after["stats"], str(field[0]), str(field[2]))
 			if effect == "haste":
-				var old_rifle: Dictionary = run.attack_profile("rifle", growth.skill_level("common_rifle"), float(before["stats"]["rate"]))
-				var new_rifle: Dictionary = run.attack_profile("rifle", growth.skill_level("common_rifle"), float(after["stats"]["rate"]))
+				var start_id := "common_rifle" if growth.ruleset == "legacy" else str(growth.catalog.hero(growth.character_id,growth.ruleset).starting_attack)
+				var start_effect := "rifle" if growth.ruleset == "legacy" else start_id
+				var old_rifle: Dictionary = run.attack_profile(start_effect, growth.skill_level(start_id), float(before["stats"]["rate"]))
+				var new_rifle: Dictionary = run.attack_profile(start_effect, growth.skill_level(start_id), float(after["stats"]["rate"]))
 				if not new_rifle.is_empty():
 					_add(rows, "소총 발동 간격", old_rifle, new_rifle, "interval", "seconds")
 				note = "자동 공격에 적용됩니다. 고유 마법의 마나 소모·회복은 유지됩니다."
@@ -75,6 +94,11 @@ static func build(run, id: String) -> Dictionary:
 		_add(rows, "소모 MP", old_magic, new_magic, "mana_cost", "number")
 		_add(rows, "초당 MP 회복", old_magic, new_magic, "mana_regen", "number")
 		note = "강화 Lv.0에도 마법은 사용 가능합니다. 현재 MP 유지. 기본 피해는 배율·치명타 적용 전입니다."
+		for key in ["knockback","mark_damage","echoes"]:
+			if new_magic.has(key):
+				_add(rows,{"knockback":"밀어내기","mark_damage":"표식 대상 추가 피해","echoes":"추가 파동"}[key],old_magic,new_magic,key,"number")
+		if new_magic.has("echoes") and rank+1==5:
+			note += "\nLv.5 최종 진화 · 한 번의 MP 소모로 이중 파동."
 		if float(new_magic.cooldown) > 0.0:
 			_add(rows, "재사용 시간", old_magic, new_magic, "cooldown", "seconds")
 			note += " 남은 재사용 시간은 유지됩니다."

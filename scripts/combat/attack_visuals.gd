@@ -3,6 +3,17 @@ extends RefCounted
 ## Only committed bullet/effect data is read. No targets, timers, RNG or damage.
 
 static func projectile_style(source: String) -> Dictionary:
+	if source.begins_with("bow_"):
+		return {"shape":"arrow", "color":Color("a6d89a")}
+	if source.begins_with("sword_"):
+		return {"shape":"blade", "color":Color("9cd9ee")}
+	if source.begins_with("magic_"):
+		return {"shape":"orb", "color":Color("b8a5ed")}
+	if source == "viya_runebullet_v1":
+		return {"shape":"rune_bullet", "color":Color("e573a0")}
+	if source.begins_with("gun_"):
+		var code := source.trim_prefix("gun_")
+		return projectile_style({"rifle":"rifle","scatter":"scatter","lance":"lance","suppress":"crossfire","sniper":"heavy","ricochet":"lance","rupture":"heavy"}.get(code,"rifle"))
 	match source:
 		"scatter":
 			return {"shape": "pellet", "color": Color("ffb46a")}
@@ -26,20 +37,42 @@ static func effect_style(kind: String) -> Dictionary:
 			return {"shape": "rune", "color": Color("c95678")}
 		"ultimate":
 			return {"shape": "ultimate", "color": Color("f46caa")}
+		"slash":
+			return {"shape":"slash", "color":Color("9cd9ee")}
+		"dash":
+			return {"shape":"dash", "color":Color("9cd9ee")}
 	return {"shape": "ring", "color": Color("e3b66f")}
 
-static func draw_projectile(canvas: CanvasItem, at: Vector2, direction: Vector2, source: String, simplified: bool = false) -> void:
+static func draw_projectile(canvas: CanvasItem, at: Vector2, direction: Vector2, source: String, simplified: bool = false, evolved: bool = false, fragment: bool = false) -> void:
 	var style: Dictionary = projectile_style(source)
 	var color: Color = style["color"]
 	var d: Vector2 = direction.normalized()
 	if d.is_zero_approx():
 		d = Vector2.RIGHT
 	var normal: Vector2 = d.orthogonal()
+	if evolved:
+		canvas.draw_line(at-d*20+normal*5,at-d*5+normal*5,color.lightened(0.3),1.2,true)
+		canvas.draw_line(at-d*20-normal*5,at-d*5-normal*5,color.lightened(0.3),1.2,true)
+	if fragment:
+		canvas.draw_line(at-d*7,at,color,1.4,true)
+		return
 	if simplified:
 		canvas.draw_line(at - d * 12.0, at, color, 2.0, true)
 		return
 	# Silhouette sizes are cosmetic, never collision radii or damage ranges.
 	match str(style["shape"]):
+		"arrow":
+			canvas.draw_line(at-d*24,at,color,2,true)
+			canvas.draw_polyline(PackedVector2Array([at-d*8+normal*5,at,at-d*8-normal*5]),color,2,true)
+			canvas.draw_line(at-d*22-normal*4,at-d*17+normal*4,color,1.4,true)
+		"blade":
+			canvas.draw_colored_polygon(PackedVector2Array([at+d*10,at-d*22+normal*9,at-d*14,at-d*22-normal*9]),color)
+		"orb":
+			canvas.draw_circle(at,7,color)
+			canvas.draw_arc(at,11,0.3,PI*1.6,12,color.lightened(0.3),1.3,true)
+		"rune_bullet":
+			canvas.draw_polyline(PackedVector2Array([at+d*9,at+normal*7,at-d*13,at-normal*7,at+d*9]),color,2,true)
+			canvas.draw_line(at-d*23,at-d*15,color,2,true)
 		"pellet":
 			canvas.draw_line(at - d * 6.0, at, color, 2.0, true)
 			canvas.draw_circle(at, 2.8, color)
@@ -80,6 +113,16 @@ static func draw_effect(canvas: CanvasItem, at: Vector2, effect: Dictionary, lin
 	var radius: float = float(effect.get("radius", 0.0))
 	if radius <= 0.0 or not is_finite(radius):
 		return
+	if shape == "slash":
+		var direction: Vector2 = effect.get("direction",Vector2.RIGHT)
+		var angle: float = float(effect.get("angle",PI))
+		canvas.draw_arc(at,radius,direction.angle()-angle*0.5,direction.angle()+angle*0.5,32,color,5.0 if effect.get("evolved",false) else 3.0,true)
+		return
+	if shape == "dash":
+		canvas.draw_line(link_from,at,color,7,true)
+		return
+	if effect.get("evolved",false):
+		canvas.draw_arc(at,radius*0.85,0,TAU,40,color,1.5,true)
 	if shape == "segmented":
 		if simplified:
 			canvas.draw_arc(at, radius, 0.0, TAU, 48, color, 2.5, true)

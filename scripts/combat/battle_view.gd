@@ -26,6 +26,7 @@ func _draw() -> void:
 		draw_line(Vector2(0, origin.y + y * 64), Vector2(size.x, origin.y + y * 64), Color("242832"))
 	_draw_map(origin)
 	_draw_supplies()
+	_draw_weapon_fields()
 	draw_rect(Rect2(origin, simulation.world_size), Color("6c5c43"), false, 4.0)
 	for pickup in simulation.pickups:
 		var pos := _screen(pickup["p"])
@@ -51,6 +52,11 @@ func _draw() -> void:
 				draw_arc(at, 29.0 if kind == "elite" else 34.0, 0.0, TAU, 24, base, 3.0, true)
 				if kind == "boss":
 					draw_arc(at, 39.0, 0.0, TAU, 24, base, 1.5, true)
+			var weapon_status: Dictionary = enemy.get("weapon_status",{})
+			if float(weapon_status.get("mark",0)) > 0:
+				draw_polyline(PackedVector2Array([at+Vector2(-8,-40),at+Vector2(0,-48),at+Vector2(8,-40),at+Vector2(0,-32),at+Vector2(-8,-40)]),Color("ed759d"),2,true)
+			if float(weapon_status.get("slow_left",0)) > 0:
+				draw_arc(at,23,0,TAU,20,Color("8bcbe3"),1.3,true)
 			draw_rect(Rect2(at + Vector2(-18, -29), Vector2(36, 4)), Color("302b2e"))
 			draw_rect(Rect2(at + Vector2(-18, -29), Vector2(36.0 * enemy["hp"] / float(enemy.get("max_hp", 20)), 4)), Color("d98a8d"))
 		if variant == "ranged" and float(enemy.windup) > 0.0:
@@ -63,7 +69,7 @@ func _draw() -> void:
 		draw_arc(at, 4.0, 0.0, TAU, 12, Color("fff0b3"), 1.2, true)
 	for bullet in simulation.bullets:
 		var at := _screen(bullet["p"])
-		AttackVisuals.draw_projectile(self, at, bullet["direction"], str(bullet.get("source", "rifle")), simple_attacks)
+		AttackVisuals.draw_projectile(self, at, bullet["direction"], str(bullet.get("source", "rifle")), simple_attacks, bool(bullet.get("weapon",{}).get("evolved",false)), bool(bullet.get("weapon",{}).get("fragment",false)))
 	for bullet in simulation.enemy_bullets:
 		var at := _screen(bullet.p)
 		draw_line(at - bullet.velocity.normalized() * 10.0, at, Color("ed9268"), 2.0, true)
@@ -152,6 +158,23 @@ func _draw_supplies() -> void:
 			"purge":
 				draw_line(at-Vector2(8,8),at+Vector2(8,8),color,4)
 				draw_line(at+Vector2(-8,8),at+Vector2(8,-8),color,4)
+
+func _draw_weapon_fields() -> void:
+	for event in simulation.weapon_events:
+		var p: Dictionary = event.profile
+		if p.mode not in ["zone","orbit","blast"]:
+			continue
+		var color: Color = {"gun":Color("e5b079"),"bow":Color("a6d89a"),"sword":Color("9cd9ee"),"magic":Color("b8a5ed")}[p.family]
+		color.a = 0.55
+		var at := _screen(simulation.player if p.follow else event.p)
+		if p.mode == "orbit":
+			for index in range(int(p.projectiles)):
+				var angle: float = maxi(0,int(event.index)-1)*float(p.tick_gap)*float(p.orbit_speed)+TAU*index/int(p.projectiles)
+				draw_circle(_screen(simulation.player)+Vector2.from_angle(angle)*float(p.orbit_radius),6,color)
+		else:
+			draw_arc(at,float(p.radius),0,TAU,40,color,2.0 if p.evolved else 1.0,true)
+			if p.mode == "blast":
+				draw_line(at-Vector2(8,0),at+Vector2(8,0),color,1.5,true)
 
 func _draw_map(origin: Vector2) -> void:
 	var visible := Rect2(simulation.camera_center()-size*0.5,size)

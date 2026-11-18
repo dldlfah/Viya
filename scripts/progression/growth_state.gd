@@ -15,15 +15,19 @@ var offer: Array[String] = []
 var ticket: int = 0 # Never reset: callbacks from a prior run must stay stale.
 var revision: int = 0
 var rng := RandomNumberGenerator.new()
+var ruleset: String = "legacy"
 
-func reset(id: String, seed_value: int) -> bool:
-	var candidate: Array[Dictionary] = catalog.pool_for(id)
+func reset(id: String, seed_value: int, selected_ruleset: String = "legacy") -> bool:
+	var candidate: Array[Dictionary] = catalog.pool_for(id,selected_ruleset)
 	if not catalog.validate_pool(candidate, id):
 		return false # No silent Viya fallback for an unknown character.
 	character_id = id
+	ruleset = selected_ruleset
 	pool = candidate
 	owned.clear()
 	owned["common_rifle"] = 1 # Preserve existing starting rifle and its HUD slot.
+	if ruleset == catalog.weapons.RULESET:
+		owned = catalog.hero(id,ruleset).starting_levels.duplicate(true)
 	level = 1
 	xp = 0.0
 	pending = 0

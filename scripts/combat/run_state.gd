@@ -8,6 +8,7 @@ const StageCatalog = preload("res://scripts/combat/stage_catalog.gd")
 const MapCatalog = preload("res://scripts/world/map_catalog.gd")
 const MapSpace = preload("res://scripts/world/map_space.gd")
 const SupplyCatalog = preload("res://scripts/world/supply_catalog.gd")
+const WeaponModules = preload("res://scripts/combat/weapon_modules.gd")
 const AccountTalents = preload("res://scripts/progression/account_talents.gd")
 enum Phase { READY, RUNNING, PAUSED, DEFEAT, CHOOSING, ABANDONED, CLEARED }
 const WORLD_SIZE := Vector2(1800.0, 1200.0) # Legacy API; mapped runs use world_size.
@@ -93,6 +94,7 @@ var structures: Array[Dictionary] = []
 var item_pickups: Array[Dictionary] = []
 var loot_rng := RandomNumberGenerator.new()
 var _loot_serial: int = 0
+var weapon_events: Array[Dictionary] = []
 var account_talent_levels: Dictionary = AccountTalents.empty_levels()
 var account_attack_level: int: # Compatibility view; all six levels freeze at departure.
 	get: return int(account_talent_levels.attack_power)
@@ -102,7 +104,7 @@ var _slow_left: float = 0.0
 var _kill_heal_clock: float = 0.0
 var _kill_heal_used: float = 0.0
 
-func start(seed_value: int = 0, character_id: String = "viya", account_level: Variant = null, selected_map: String = "legacy_arena") -> bool:
+func start(seed_value: int = 0, character_id: String = "viya", account_level: Variant = null, selected_map: String = "legacy_arena", skill_ruleset: String = "legacy") -> bool:
 	# Validate the complete selected character before changing the previous run.
 	var selected_levels: Dictionary = account_talent_levels.duplicate(true)
 	if account_level is int:
@@ -123,10 +125,10 @@ func start(seed_value: int = 0, character_id: String = "viya", account_level: Va
 	var selected_space = MapSpace.new(map_data)
 	if not SupplyCatalog.valid_layout(supply_catalog.layouts.get(selected_map), selected_space):
 		return false
-	var candidate_pool: Array[Dictionary] = growth.catalog.pool_for(character_id)
+	var candidate_pool: Array[Dictionary] = growth.catalog.pool_for(character_id,skill_ruleset)
 	if not growth.catalog.validate_pool(candidate_pool, character_id):
 		return false
-	var hero: Dictionary = growth.catalog.characters.get(character_id, {})
+	var hero: Dictionary = growth.catalog.hero(character_id,skill_ruleset)
 	var candidate = hero.get("active_magic", {})
 	if not candidate is Dictionary or not magic.accepts(candidate, character_id):
 		return false
@@ -140,7 +142,7 @@ func start(seed_value: int = 0, character_id: String = "viya", account_level: Va
 		rng.randomize()
 	else:
 		rng.seed = seed_value
-	if not growth.reset(character_id, int(rng.seed) ^ 0x51A7):
+	if not growth.reset(character_id, int(rng.seed) ^ 0x51A7,skill_ruleset):
 		return false
 	account_talent_levels = selected_levels
 	gold_rng.seed = int(rng.seed) ^ 0x601D
@@ -162,6 +164,7 @@ func start(seed_value: int = 0, character_id: String = "viya", account_level: Va
 	structures = supply_catalog.create(map_id, map_space)
 	item_pickups.clear()
 	_loot_serial = 0
+	weapon_events.clear()
 	_scatter_clock = float(rules.scatter.interval)
 	_scatter_index = 0
 	_swarm_clock = float(rules.swarm.interval)
@@ -321,7 +324,10 @@ func cast_ultimate(expected_ticket: int) -> bool:
 	if cast.is_empty():
 		return false
 	# Separate from automatic "sigil". Use the normal damage/death/XP path.
-	_burst(player, float(cast["radius"]), float(cast["damage"]), "ultimate")
+	if growth.ruleset == "weapons_v1":
+		WeaponModules.ultimate(self,cast)
+	else:
+		_burst(player, float(cast["radius"]), float(cast["damage"]), "ultimate")
 	effects[-1]["life"] = float(cast["effect_duration"])
 	effects[-1]["duration"] = float(cast["effect_duration"])
 	feedback.trigger("magic")
@@ -374,6 +380,10 @@ func selection_health(current_hp: int, previous_max: int, next_max: int) -> int:
 
 func attack_profile(effect: String, rank: int, rate: float) -> Dictionary:
 	# The production attack consumes these exact values; UI does not copy formulas.
+	if growth.catalog.weapons.entries.has(effect):
+		var profile_stats: Dictionary = stats.duplicate(true)
+		profile_stats.rate = rate
+		return growth.catalog.weapons.profile(effect,rank,profile_stats)
 	if rank <= 0 or rate <= 0.0 or not is_finite(rate):
 		return {}
 	var result: Dictionary = {}
@@ -426,6 +436,9 @@ func step(delta: float, direction: Vector2) -> void:
 	if movement.length_squared() > 0.001:
 		facing = movement.normalized()
 	_tick_structures(dt)
+	WeaponModules.advance(self,dt)
+	if phase != Phase.RUNNING:
+		return
 	_collect_pickups(dt)
 	if phase != Phase.RUNNING:
 		_resolve_deadline()
@@ -535,7 +548,7 @@ func _move_enemies(dt: float) -> void:
 	for enemy in enemies:
 		if enemy.variant == "flier":
 			continue
-		var speed: float = float(enemy.get("speed", wave_profile().speed))
+		var speed: float = float(enemy.get("speed", wave_profile().speed)) * WeaponModules.speed_scale(enemy)
 		var pos: Vector2 = enemy["p"]
 		var offset := player - pos
 		var variant: String = str(enemy.get("variant", "normal"))
@@ -575,7 +588,7 @@ func _move_fliers(dt: float) -> void:
 			enemies.remove_at(index) # Expiry never awards a kill or loot.
 			continue
 		var previous: Vector2 = flier.p
-		flier.p += flier.velocity * dt
+		flier.p += flier.velocity * dt * WeaponModules.speed_scale(flier)
 		_push_ground(previous, flier.p)
 
 func _push_ground(previous: Vector2, destination: Vector2) -> void:
@@ -730,6 +743,9 @@ func _nearest(at: Vector2, reach: float, ignored: Array[int] = []) -> Dictionary
 	return found
 
 func _auto_fire() -> void:
+	if growth.ruleset == "weapons_v1":
+		WeaponModules.fire_start(self)
+		return
 	var target := _nearest(player, SHOT_RANGE * float(stats.get("attack_range", 1.0)))
 	if target.is_empty():
 		return
@@ -813,6 +829,9 @@ func _effect(at: Vector2, radius: float, kind: String) -> void:
 	effects.append({"p": at, "radius": radius, "kind": kind, "life": 0.25})
 
 func _tick_skills(dt: float) -> void:
+	if growth.ruleset == "weapons_v1":
+		WeaponModules.tick_skills(self,dt)
+		return
 	for entry in growth.row_entries("attack"):
 		if phase != Phase.RUNNING:
 			return
@@ -873,6 +892,11 @@ func _tick_skills(dt: float) -> void:
 func _move_bullets(dt: float) -> void:
 	for bullet_index in range(bullets.size() - 1, -1, -1):
 		var bullet: Dictionary = bullets[bullet_index]
+		if bullet.has("weapon"):
+			WeaponModules.move_projectile(self,bullet_index,dt)
+			if phase != Phase.RUNNING:
+				return
+			continue
 		var old_pos: Vector2 = bullet["p"]
 		var new_pos: Vector2 = old_pos + bullet["direction"] * float(bullet["speed"]) * dt
 		var wall_hit: float = map_space.wall_fraction(old_pos,new_pos,4.0)
@@ -946,7 +970,7 @@ func confirm_transition(expected_ticket: int, account_level: Variant = null) -> 
 		return false
 	if transition_action == "restart":
 		# start() validates first. On failure keep the old run and confirmation.
-		return start(0, growth.character_id, account_level, map_id)
+		return start(0, growth.character_id, account_level, map_id, growth.ruleset)
 	_finish_run("abandoned")
 	return true
 

@@ -439,7 +439,8 @@ func _open_skill_detail(id: String) -> void:
 	_scroll.scroll_vertical = 0
 	dialog_body.add_child(_label(str(entry["name"]), 24))
 	dialog_body.add_child(_label("보유 Lv.%d / 시험 상한 Lv.%d" % [simulation.growth.skill_level(id), int(entry["max_level"])], 19))
-	dialog_body.add_child(_label(str(entry["description"]), 21))
+	var description: String = str(entry.levels[simulation.growth.skill_level(id)-1].change) if entry.has("levels") else str(entry.description)
+	dialog_body.add_child(_label(description, 21))
 	dialog_body.add_child(_label("읽기 전용 · 이름과 효과는 임시입니다.\n이 창에서는 스킬 획득·강화·마법 발동이 일어나지 않습니다.\n닫으면 이전 전투 또는 같은 레벨업 선택창으로 돌아갑니다.", 17))
 	detail_return_button = _button("닫기 · 이전 화면으로", _close_skill_detail.bind(simulation.navigation_ticket, _menu_revision))
 	dialog_body.add_child(detail_return_button)
@@ -466,7 +467,7 @@ func begin_run() -> void:
 		return
 	var previous_stage: int = simulation.stage
 	simulation.stage = gold_progress.next_stage
-	if not simulation.start(0, simulation.growth.character_id, gold_progress.talent_levels, str(simulation.stage_catalog.for_stage(simulation.stage).map_id)):
+	if not simulation.start(0, simulation.growth.character_id, gold_progress.talent_levels, str(simulation.stage_catalog.for_stage(simulation.stage).map_id), new_run_ruleset):
 		simulation.stage = previous_stage
 		push_error("Invalid character data; current run retained")
 		return
@@ -1044,3 +1045,5 @@ func _update_magic_hud() -> void:
 		var reason: String = simulation.magic.unavailable_reason(simulation.phase == RunState.Phase.RUNNING)
 		var hint := "터치 / F" if reason.is_empty() else ("마력 부족" if reason == "mana" else "전투 중 사용")
 		magic_button.text = "%s · Lv.%d\nMP %.1f · %s" % [simulation.magic.config.get("name","[임시] 마법"),int(simulation.stats.ultimate),simulation.magic.effective_cost(),hint]
+	if simulation.growth.ruleset == "weapons_v1" and int(simulation.stats.ultimate)==5:
+		magic_button.text = magic_button.text.replace("Lv.5","Lv.5 진화")

@@ -140,6 +140,7 @@ func _run() -> void:
 	# Actual F5 scene and input handlers with synthetic events; NOT a device test.
 	root.size = Vector2i(1280, 720)
 	var scene = load("res://scenes/main.tscn").instantiate()
+	scene.new_run_ruleset = "legacy" # Preserve this historical regression; GAME018 separately tests the production default.
 	scene.run_store.path = "user://native-test_magic-" + Crypto.new().generate_random_bytes(8).hex_encode() + ".save"
 	root.add_child(scene)
 	scene.set_physics_process(false)

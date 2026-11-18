@@ -8,6 +8,7 @@ const GoldProgress = preload("res://scripts/progression/gold_progress.gd")
 const RunStore = preload("res://scripts/progression/run_store.gd")
 
 var simulation = RunState.new()
+var new_run_ruleset: String = "weapons_v1" # New sorties; resumed saves retain theirs.
 var view
 var movement
 var root_ui: Control
@@ -161,7 +162,7 @@ func begin_run() -> void:
 	_magic_touch_id = -1
 	var previous_stage: int = simulation.stage
 	simulation.stage = gold_progress.next_stage
-	if not simulation.start(0, simulation.growth.character_id, gold_progress.talent_levels, str(simulation.stage_catalog.for_stage(simulation.stage).map_id)):
+	if not simulation.start(0, simulation.growth.character_id, gold_progress.talent_levels, str(simulation.stage_catalog.for_stage(simulation.stage).map_id), new_run_ruleset):
 		simulation.stage = previous_stage
 		push_error("Invalid character skill catalog; run not started")
 		return
@@ -386,8 +387,9 @@ func _show_levelup() -> void:
 			var rank: int = simulation.growth.skill_level(id)
 			var kind: String = {"attack": "공통 공격", "character": "캐릭터 전용",
 				"passive": "공통 패시브", "ultimate": "필살기 강화"}[entry["kind"]]
+			var description: String = str(entry.levels[rank].change) if entry.has("levels") else str(entry.description)
 			var text := "%s · %s\n\n%s\nLv.%d → Lv.%d\n\n%s\n\n[시제품 효과]" % [kind,
-				"신규" if rank == 0 else "강화", entry["name"], rank, rank + 1, entry["description"]]
+				"신규" if rank == 0 else "강화", entry["name"], rank, rank + 1, description]
 			var preview: Dictionary = SkillPreview.build(simulation, id)
 			text += "\n\n선택 시 변화\n" + SkillPreview.describe(preview)
 			var card := _button(text, _choose_skill.bind(id, last_ticket))
@@ -528,7 +530,11 @@ func _update_slots(labels: Array[Label], row: String) -> void:
 		labels[i].tooltip_text = ""
 		if i < entries.size():
 			labels[i].text = "[임시]\n%s Lv.%d" % [str(entries[i]["name"]).trim_prefix("[임시] "), simulation.growth.skill_level(entries[i]["id"])]
+			if simulation.growth.ruleset == "weapons_v1" and simulation.growth.skill_level(entries[i].id) == 5 and entries[i].kind != "passive":
+				labels[i].text += " 진화"
 			labels[i].tooltip_text = "%s\n%s" % [entries[i]["name"], entries[i]["description"]]
+			if entries[i].has("levels"):
+				labels[i].tooltip_text = "%s\n%s" % [entries[i].name,entries[i].levels[simulation.growth.skill_level(entries[i].id)-1].change]
 
 func _update_magic_hud() -> void:
 	var magic = simulation.magic
