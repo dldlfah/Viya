@@ -170,7 +170,9 @@ static func impact(state, actor: Dictionary, p: Dictionary) -> void:
 		if p.knockback > 0.0:
 			var displacement: Vector2 = state.player.direction_to(actor.p)*float(p.knockback)*(0.25 if actor.kind=="boss" else 1.0)
 			actor.p = actor.p+displacement if actor.variant=="flier" else state.map_space.move(actor.p,displacement,24.0)
-	state._damage_target(int(actor.id),float(p.damage))
+	var attack_type: String = str(p.get("damage_type","magical" if str(p.family)=="magic" else "physical"))
+	var source: String = str(p.get("source_character_id",state.growth.character_id))
+	state._damage_target(int(actor.id),float(p.damage),attack_type,source)
 	if marked and p.mark_burst > 0.0:
 		var burst: Dictionary = p.duplicate(true)
 		burst.damage *= 0.5
@@ -303,6 +305,7 @@ static func ultimate(state, cast: Dictionary) -> void:
 	var id: String = str(state.growth.catalog.hero(state.growth.character_id,state.growth.ruleset).unique_auto)
 	var p: Dictionary = state.attack_profile(id,1,float(state.stats.rate))
 	p.damage = float(cast.damage)
+	p.damage_type = "magical" # Viya manual crimson wave, NOT her physical rune bullets.
 	p.radius = float(cast.radius)
 	p.mark = 0.0
 	p.mark_burst = 0.0
@@ -319,6 +322,6 @@ static func ultimate(state, cast: Dictionary) -> void:
 	area(state,state.player,float(cast.radius),p)
 	for victim in marked:
 		if cast.get("mark_damage",0.0) > 0.0:
-			state._damage_enemy(victim,float(cast.mark_damage))
+			state._damage_enemy(victim,float(cast.mark_damage),"magical")
 	secondary(state,state.player,p)
 	visual(state,state.player,float(cast.radius),p,"ultimate")

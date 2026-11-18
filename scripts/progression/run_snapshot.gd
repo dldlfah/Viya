@@ -1,6 +1,6 @@
 extends RefCounted
 ## Exact gameplay data. Cosmetic effects/cues are rebuilt after a restore.
-const VERSION := 10
+const VERSION := 11
 const GAME017_RULES := "2e0bfb55209da4daaba2c62e718741d3603f31933a50702c8d3bc783438e7913"
 const GAME016_RULES := "8d625d5607e80b1486103e77ddbf57d791b39e9ebe389c704416857e2b574d27"
 const GAME015_RULES := "99b5b472aaaec892172902f02cf5abb5f368c9da43a451578ebc2b8c7706b894"
@@ -15,14 +15,20 @@ const RUN_FIELDS := ["phase", "player", "facing", "hp", "elapsed", "kills", "sho
 	"shot_clock", "spawn_clock", "hurt_clock", "skill_clocks", "_resume_phase",
 	"_enemy_serial", "_regen_remainder", "navigation_ticket", "stage", "run_id",
 	"gold_collected", "gold_drop_chance", "_elites_spawned", "_boss_spawned", "_boss_defeated", "checkpoint_index", "end_reason",
-	"account_attack_level", "account_talent_levels", "_damage_reduction_remainder", "_slow_left", "_kill_heal_clock", "_kill_heal_used", "enemies", "bullets", "pickups", "gold_pickups", "enemy_bullets", "_swarm_clock", "_swarm_pending", "_swarm_serial", "_scatter_clock", "_scatter_index", "map_id", "spawn_view_size", "structures", "item_pickups", "_loot_serial", "weapon_events"]
+	"account_attack_level", "account_talent_levels", "_damage_reduction_remainder", "_slow_left", "_kill_heal_clock", "_kill_heal_used", "enemies", "bullets", "pickups", "gold_pickups", "enemy_bullets", "_swarm_clock", "_swarm_pending", "_swarm_serial", "_scatter_clock", "_scatter_index", "map_id", "spawn_view_size", "structures", "item_pickups", "_loot_serial", "weapon_events",
+	"armor_enabled", "support_attack_ids", "support_passive_ids"]
 const GROWTH_FIELDS := ["ruleset", "character_id", "owned", "level", "xp", "pending", "offer", "ticket", "revision"]
 const MAGIC_FIELDS := ["mana", "cooldown_left", "casts", "ticket"]
 
-static func fingerprint() -> String:
+static func fingerprint_previous() -> String:
 	var stages := FileAccess.get_file_as_string("res://data/stages.json").replace("\r\n", "\n")
 	var skills := FileAccess.get_file_as_string("res://data/prototype_skills.json").replace("\r\n", "\n")
 	return (stages + skills + FileAccess.get_file_as_string("res://data/maps.json").replace("\r\n", "\n") + FileAccess.get_file_as_string("res://data/destructibles.json").replace("\r\n", "\n") + FileAccess.get_file_as_string("res://data/weapon_skills.json").replace("\r\n", "\n")).sha256_text()
+
+static func fingerprint() -> String:
+	# Keep the published v10 digest for exact conversion of in-progress battles.
+	var source: String = FileAccess.get_file_as_string("res://scripts/combat/defense_rules.gd").replace("\r\n","\n")
+	return (fingerprint_previous()+source).sha256_text()
 
 static func capture(state) -> Dictionary:
 	var result := {"version": VERSION, "rules": fingerprint(), "run": {}, "growth": {}, "magic": {}, "rng": []}
@@ -37,6 +43,8 @@ static func capture(state) -> Dictionary:
 	return result.duplicate(true)
 
 static func upgrade_legacy(data: Dictionary, state) -> Dictionary:
+	if data.get("version") == 10 and data.get("rules") == fingerprint_previous():
+		return _upgrade_defense(data)
 	if data.get("version") == 9 and data.get("rules") == GAME017_RULES:
 		return _upgrade_weapons(data)
 	if data.get("version") == 8 and data.get("rules") == GAME016_RULES:
@@ -173,6 +181,17 @@ static func _upgrade_weapons(data: Dictionary) -> Dictionary:
 	data.rules = fingerprint()
 	data.growth.ruleset = "legacy" # Keep old IDs/effects/offers exactly as played.
 	data.run.weapon_events = []
+	return _upgrade_defense(data)
+
+static func _upgrade_defense(data: Dictionary) -> Dictionary:
+	if not data.get("run") is Dictionary:
+		return {}
+	data = data.duplicate(true)
+	data.version = VERSION
+	data.rules = fingerprint()
+	data.run.armor_enabled = false # Do not increase defense halfway through an old battle.
+	data.run.support_attack_ids = []
+	data.run.support_passive_ids = []
 	return data
 
 static func finite_number(value: Variant, minimum: float, maximum: float) -> bool:
@@ -193,6 +212,10 @@ static func valid(data: Dictionary, state) -> bool:
 	for key in RUN_FIELDS:
 		if not run.has(key):
 			return false
+	if not run.armor_enabled is bool or not run.support_attack_ids is Array or not run.support_passive_ids is Array:
+		return false
+	if not state.DefenseRules.valid_supports(str(growth.get("character_id","")),run.support_attack_ids,run.support_passive_ids):
+		return false
 	if not vector(run.get("player")) or not run.map_id is String or not vector(run.spawn_view_size) or run.spawn_view_size.x < 1 or run.spawn_view_size.y < 1:
 		return false
 	var map_data: Dictionary = state.map_catalog.definition(run.map_id)
@@ -242,7 +265,7 @@ static func valid(data: Dictionary, state) -> bool:
 		return false
 	if not growth.get("character_id") is String or not growth.get("owned") is Dictionary or not growth.get("offer") is Array:
 		return false
-	if growth.get("ruleset") not in ["legacy", "weapons_v1"]:
+	if growth.get("ruleset") not in ["legacy", "weapons_v1"] or (growth.ruleset=="legacy" and run.armor_enabled):
 		return false
 	var pool: Array[Dictionary] = state.growth.catalog.pool_for(growth.character_id,growth.ruleset)
 	if not state.growth.catalog.validate_pool(pool, growth.character_id):

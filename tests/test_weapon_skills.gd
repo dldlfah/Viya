@@ -6,6 +6,7 @@ const Store = preload("res://scripts/progression/run_store.gd")
 const Campaign = preload("res://tests/test_campaign.gd")
 const Preview = preload("res://scripts/ui/skill_preview.gd")
 const Visuals = preload("res://scripts/combat/attack_visuals.gd")
+const Defense = preload("res://scripts/combat/defense_rules.gd")
 
 static func quiet(family: String = "gun"):
 	var state = State.new()
@@ -35,11 +36,44 @@ static func damage(state) -> int:
 
 static func run(host, verify: Callable) -> void:
 	catalog_checks(verify)
+	defense_checks(verify)
 	all_attacks(verify)
 	module_checks(verify)
 	unique_checks(verify)
 	recovery_checks(verify)
 	await ui_checks(host,verify)
+
+
+static func defense_checks(verify: Callable) -> void:
+	var state = quiet()
+	verify.call(state.armor_enabled and is_equal_approx(float(state.stats.physical_penetration),0.15), "New Viya sortie applies intrinsic physical armor penetration 15%")
+	verify.call(float(state.stats.magical_penetration)==0.0 and state.stats.physical_defense==0.0, "Viya has no invented magical penetration or defense")
+	verify.call(is_equal_approx(Defense.mitigated_damage(100.0,0.4,0.15),66.0), "15% penetration negates 15% of armor: 40% reduction becomes 34%")
+	verify.call(is_equal_approx(Defense.mitigated_damage(100.0,0.0,0.15),100.0), "Armor piercing does not become free raw damage against zero armor")
+	verify.call(Defense.valid_supports("other",[],["viya"]) and is_equal_approx(Defense.main_penetration("other",["viya"],"physical"),0.15), "Viya passive supporter contributes 15% to a different main character")
+	verify.call(is_equal_approx(Defense.character_penetration("viya","physical"),0.15) and Defense.character_penetration("viya","magical")==0.0, "Viya attack supporter keeps own physical-only intrinsic penetration")
+	verify.call(not Defense.valid_supports("viya",[],["viya"]) and not Defense.valid_supports("other",["viya"],["viya"]), "Cannot equip Viya as own/duplicate support")
+	state.add_enemy(state.player+Vector2(130,0),"normal","heavy")
+	var enemy: Dictionary = state.enemies[-1]
+	enemy.hp=300
+	enemy.max_hp=300
+	state._damage_enemy(int(enemy.id),100.0,"physical")
+	verify.call(enemy.hp==225, "Real physical hit takes 75 of 100 raw damage against 30% heavy armor after Viya piercing")
+	state._damage_enemy(int(enemy.id),100.0,"magical")
+	verify.call(enemy.hp==135, "Real magical hit takes 90 of 100 raw damage with 10% magical resistance; physical piercing is not reused")
+	var snap: Dictionary = Snapshot.capture(state)
+	verify.call(snap.version==11 and Snapshot.valid(snap,state) and snap.run.armor_enabled, "New armor-enabled run snapshots retain the branch rule")
+	var old: Dictionary = snap.duplicate(true)
+	old.version=10
+	old.rules=Snapshot.fingerprint_previous()
+	old.run.erase("armor_enabled")
+	old.run.erase("support_attack_ids")
+	old.run.erase("support_passive_ids")
+	var migrated: Dictionary = Snapshot.upgrade_legacy(old,state)
+	verify.call(migrated.version==11 and not migrated.run.armor_enabled and Snapshot.valid(migrated,state), "Existing v10 saves continue unchanged without retroactive armor")
+	var legacy = State.new()
+	legacy.start(125,"viya",null,"legacy_arena","legacy")
+	verify.call(not legacy.armor_enabled and float(legacy.stats.physical_penetration)==0.0, "Legacy damage semantics remain intact")
 
 static func catalog_checks(verify: Callable) -> void:
 	var state = quiet()

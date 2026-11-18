@@ -10,6 +10,7 @@ const MapSpace = preload("res://scripts/world/map_space.gd")
 const SupplyCatalog = preload("res://scripts/world/supply_catalog.gd")
 const WeaponModules = preload("res://scripts/combat/weapon_modules.gd")
 const AccountTalents = preload("res://scripts/progression/account_talents.gd")
+const DefenseRules = preload("res://scripts/combat/defense_rules.gd")
 enum Phase { READY, RUNNING, PAUSED, DEFEAT, CHOOSING, ABANDONED, CLEARED }
 const WORLD_SIZE := Vector2(1800.0, 1200.0) # Legacy API; mapped runs use world_size.
 const PLAYER_SPEED := 235.0
@@ -103,8 +104,11 @@ var _damage_reduction_remainder: float = 0.0
 var _slow_left: float = 0.0
 var _kill_heal_clock: float = 0.0
 var _kill_heal_used: float = 0.0
+var armor_enabled: bool = false # Published versions 1-10 continue WITHOUT new armor.
+var support_attack_ids: Array = [] # Equipment UI awaits additional real heroes.
+var support_passive_ids: Array = []
 
-func start(seed_value: int = 0, character_id: String = "viya", account_level: Variant = null, selected_map: String = "legacy_arena", skill_ruleset: String = "legacy") -> bool:
+func start(seed_value: int = 0, character_id: String = "viya", account_level: Variant = null, selected_map: String = "legacy_arena", skill_ruleset: String = "legacy", support_loadout: Dictionary = {}) -> bool:
 	# Validate the complete selected character before changing the previous run.
 	var selected_levels: Dictionary = account_talent_levels.duplicate(true)
 	if account_level is int:
@@ -115,6 +119,13 @@ func start(seed_value: int = 0, character_id: String = "viya", account_level: Va
 			return false
 		selected_levels = account_level.duplicate(true)
 	if not AccountTalents.valid_levels(selected_levels):
+		return false
+	var loadout: Dictionary = {"attack":[],"passive":[]}
+	if not support_loadout.is_empty():
+		if not support_loadout.has("attack") or not support_loadout.has("passive") or not support_loadout.attack is Array or not support_loadout.passive is Array:
+			return false
+		loadout = support_loadout.duplicate(true)
+	if not DefenseRules.valid_supports(character_id,loadout.attack,loadout.passive):
 		return false
 	var rules: Dictionary = stage_catalog.for_stage(stage)
 	if rules.is_empty():
@@ -145,6 +156,9 @@ func start(seed_value: int = 0, character_id: String = "viya", account_level: Va
 	if not growth.reset(character_id, int(rng.seed) ^ 0x51A7,skill_ruleset):
 		return false
 	account_talent_levels = selected_levels
+	armor_enabled = skill_ruleset == "weapons_v1"
+	support_attack_ids = loadout.attack.duplicate()
+	support_passive_ids = loadout.passive.duplicate()
 	gold_rng.seed = int(rng.seed) ^ 0x601D
 	encounter_rng.seed = int(rng.seed) ^ 0xE11C
 	scatter_rng.seed = int(rng.seed) ^ 0x5CA77
@@ -220,9 +234,12 @@ func set_paused(value: bool) -> void:
 		phase = _resume_phase
 		navigation_ticket += 1
 
-func damage_player(amount: int) -> bool:
+func damage_player(amount: int, damage_type: String = "physical", enemy_penetration: float = 0.0) -> bool:
 	if phase != Phase.RUNNING or hurt_clock > 0.0 or amount <= 0:
 		return false
+	if armor_enabled:
+		var player_armor: float = float(stats.get(damage_type+"_defense",0.0))
+		amount = maxi(1,int(ceil(DefenseRules.mitigated_damage(float(amount),player_armor,enemy_penetration))))
 	# Accumulate fractional prevention so 1-3% works with small integer-HP hits.
 	_damage_reduction_remainder += amount * float(stats.get("damage_reduction", 0.0))
 	var prevented := mini(amount, int(floor(_damage_reduction_remainder + 0.000000001)))
@@ -327,7 +344,7 @@ func cast_ultimate(expected_ticket: int) -> bool:
 	if growth.ruleset == "weapons_v1":
 		WeaponModules.ultimate(self,cast)
 	else:
-		_burst(player, float(cast["radius"]), float(cast["damage"]), "ultimate")
+		_burst(player, float(cast["radius"]), float(cast["damage"]), "ultimate", "magical")
 	effects[-1]["life"] = float(cast["effect_duration"])
 	effects[-1]["duration"] = float(cast["effect_duration"])
 	feedback.trigger("magic")
@@ -357,6 +374,7 @@ func stats_profile(levels: Dictionary) -> Dictionary:
 		if not ranks.has(effect):
 			ranks[effect] = int(levels.get(entry["id"], 0))
 	var account := AccountTalents.bonuses(account_talent_levels)
+	var intrinsic: Dictionary = DefenseRules.character_stats(growth.character_id)
 	return {"max_hp": AccountTalents.maximum_hp(100 + 20 * int(ranks.get("vitality", 0)), account_talent_levels),
 		"stats": {"power": (1.0 + 0.15 * int(ranks.get("power", 0))) * AccountTalents.power_multiplier(account_attack_level),
 			"rate": (1.0 + 0.08 * int(ranks.get("haste", 0))) * (1.0 + float(account.attack_speed)),
@@ -372,6 +390,10 @@ func stats_profile(levels: Dictionary) -> Dictionary:
 			"projectile_speed": 1.0 + float(account.projectile_speed), "attack_range": 1.0 + float(account.attack_range),
 			"regen": 0.6 * int(ranks.get("recovery", 0)) + float(account.hp_regen),
 			"damage_reduction": float(account.damage_reduction),
+			"physical_penetration": DefenseRules.main_penetration(growth.character_id,support_passive_ids,"physical") if armor_enabled else 0.0,
+			"magical_penetration": DefenseRules.main_penetration(growth.character_id,support_passive_ids,"magical") if armor_enabled else 0.0,
+			"physical_defense": float(intrinsic.physical_defense) if armor_enabled else 0.0,
+			"magical_defense": float(intrinsic.magical_defense) if armor_enabled else 0.0,
 			"ultimate": int(ranks.get("ultimate", 0))}}
 
 func selection_health(current_hp: int, previous_max: int, next_max: int) -> int:
@@ -767,7 +789,7 @@ func _projectile(direction: Vector2, damage: float, hits: int, speed: float = BU
 	shots += 1
 	return true
 
-func _damage_enemy(id: int, base_damage: float) -> void:
+func _damage_enemy(id: int, base_damage: float, damage_type: String = "physical", source_id: String = "") -> void:
 	if phase != Phase.RUNNING:
 		return
 	for i in range(enemies.size()):
@@ -780,8 +802,14 @@ func _damage_enemy(id: int, base_damage: float) -> void:
 		if float(stats["crit"]) > 0.0 and rng.randf() < float(stats["crit"]):
 			damage *= float(stats.get("crit_damage", 2.0))
 			critical = true
-		if account_attack_level > 0:
-			# 100 * 1.10 must be 110, not 111 from binary rounding before ceil.
+		if armor_enabled:
+			var attacker: String = growth.character_id if source_id.is_empty() else source_id
+			if attacker != growth.character_id and not support_attack_ids.has(attacker):
+				return # Never let an undeployed support attacker grant damage.
+			var pierce: float = float(stats.get(damage_type+"_penetration",0.0)) if attacker == growth.character_id else DefenseRules.character_penetration(attacker,damage_type)
+			damage = DefenseRules.mitigated_damage(damage,DefenseRules.armor_rate(str(enemies[i].kind),str(enemies[i].variant),damage_type),pierce)
+		if account_attack_level > 0 or armor_enabled:
+			# Avoid spurious +1 from binary rounding just above an exact integer.
 			damage = snappedf(damage, 0.000001)
 		enemies[i]["hp"] -= maxi(1, int(ceil(damage)))
 		# Display HP actually removed, not theoretical overkill damage. Reuse the crit roll.
@@ -805,19 +833,19 @@ func _defeat_enemy(index: int) -> void:
 		if elapsed + 0.000001 >= stage_duration:
 			_clear_stage()
 
-func _damage_target(id: int, damage: float) -> void:
+func _damage_target(id: int, damage: float, damage_type: String = "physical", source_id: String = "") -> void:
 	if id < -1:
 		_damage_structure(id, damage)
 	else:
-		_damage_enemy(id, damage)
+		_damage_enemy(id, damage, damage_type, source_id)
 
-func _burst(at: Vector2, radius: float, damage: float, kind: String) -> void:
+func _burst(at: Vector2, radius: float, damage: float, kind: String, damage_type: String = "physical") -> void:
 	var targets: Array[int] = []
 	for enemy in enemies:
 		if at.distance_squared_to(enemy["p"]) <= radius * radius:
 			targets.append(int(enemy["id"]))
 	for id in targets:
-		_damage_enemy(id, damage)
+		_damage_enemy(id, damage, damage_type)
 	for structure in structures:
 		if structure.hp > 0 and at.distance_squared_to(structure.p) <= radius * radius:
 			_damage_structure(int(structure.id), damage)
@@ -886,7 +914,7 @@ func _tick_skills(dt: float) -> void:
 			"heavy":
 				_projectile(direction, float(profile["damage"]), int(profile["hits"]), float(profile["speed"]), effect)
 			"sigil":
-				_burst(at, float(profile["radius"]), float(profile["damage"]), "sigil")
+				_burst(at, float(profile["radius"]), float(profile["damage"]), "sigil", "magical")
 		skill_clocks[id] = float(profile["interval"])
 
 func _move_bullets(dt: float) -> void:

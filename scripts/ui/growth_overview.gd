@@ -58,6 +58,9 @@ static func sections(data: Dictionary) -> Array[Dictionary]:
 		"HP %d / %d\n공격 피해 배율 ×%.2f / 자동 공격 속도 배율 ×%.2f\n이동 속도 %.1f / 경험치 획득 배율 ×%.2f\n획득 범위 %.1f / 치명타 확률 %.1f%% / 초당 체력 회복 %.2f\n거리·속도는 전투 논리 단위이며 장비 점수나 영구 능력치가 아닙니다." % [
 			data["hp"], data["max_hp"], stats["power"], stats["rate"], stats["speed"],
 			stats["xp"], stats["pickup"], float(stats["crit"]) * 100.0, stats["regen"]]})
+	result[-1].body += "\n물리 방어 관통 %.0f%% / 마법 저항 관통 %.0f%%\n물리 방어 %.0f%% / 마법 저항 %.0f%%" % [
+		float(stats.get("physical_penetration",0.0))*100.0,float(stats.get("magical_penetration",0.0))*100.0,
+		float(stats.get("physical_defense",0.0))*100.0,float(stats.get("magical_defense",0.0))*100.0]
 	result[-1].body += "\n출격 당시 계정 특성"
 	for id in AccountTalents.IDS:
 		var level: int = data.account_talent_levels[id]
