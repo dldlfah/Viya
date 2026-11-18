@@ -3,6 +3,7 @@ extends SceneTree
 const RunState = preload("res://scripts/combat/run_state.gd")
 const Talents = preload("res://scripts/progression/account_talents.gd")
 var profile_name := "none"
+var map_name := "prologue_wall"
 var account_levels: Dictionary = Talents.empty_levels()
 const PRIORITY := {"pulse": 16.0, "chain": 15.0, "grenade": 14.0,
 	"scatter": 13.0, "rifle": 12.0, "power": 11.0, "haste": 10.0,
@@ -10,11 +11,18 @@ const PRIORITY := {"pulse": 16.0, "chain": 15.0, "grenade": 14.0,
 
 func _initialize() -> void:
 	for argument in OS.get_cmdline_user_args():
+		if argument.begins_with("--map="):
+			map_name = argument.trim_prefix("--map=")
+			continue
 		if not argument.begins_with("--talents="):
 			printerr("Unknown measurement argument: ", argument)
 			quit(2)
 			return
 		profile_name = argument.trim_prefix("--talents=")
+	if map_name not in ["legacy_arena", "prologue_wall", "outskirts_trial"]:
+		printerr("Unknown map")
+		quit(2)
+		return
 	if profile_name not in ["none", "roots", "full"]:
 		printerr("Expected --talents=none, roots or full")
 		quit(2)
@@ -25,13 +33,14 @@ func _initialize() -> void:
 	for seed_value in [7, 42, 143, 407, 2026]:
 		reports.append(measure(seed_value))
 	var target_met: bool = reports.all(func(result): return result.choices >= 10 and result.choices <= 12)
-	print(JSON.stringify({"profile": profile_name, "account_levels": account_levels, "runs": reports, "growth_target_met": target_met,
+	print(JSON.stringify({"profile": profile_name, "map_id": map_name, "account_levels": account_levels, "runs": reports, "growth_target_met": target_met,
 		"status": "PASS" if target_met else "FAIL"}))
 	quit(0 if target_met else 1)
 
 func measure(seed_value: int) -> Dictionary:
 	var state = RunState.new()
-	if not state.start(seed_value, "viya", account_levels):
+	state.stage = 2 if map_name == "outskirts_trial" else 1
+	if not state.start(seed_value, "viya", account_levels, map_name):
 		return {"seed": seed_value, "choices": -1, "outcome": "invalid_stage"}
 	var choices := 0
 	var first_choice := -1.0
@@ -87,7 +96,7 @@ func move_direction(state, near: Dictionary) -> Vector2:
 	var best := -INF
 	for index in range(9):
 		var direction := Vector2.ZERO if index == 8 else Vector2.from_angle(index * TAU / 8.0)
-		var future: Vector2 = (state.player + direction * float(state.stats.speed) * 0.35).clamp(Vector2.ONE * 30, state.WORLD_SIZE - Vector2.ONE * 30)
+		var future: Vector2 = (state.player + direction * float(state.stats.speed) * 0.35).clamp(Vector2.ONE * 30, state.world_size - Vector2.ONE * 30)
 		var score: float = direction.dot(goal) * 30.0
 		for enemy in state.enemies:
 			var predicted: Vector2 = enemy.p
@@ -102,7 +111,7 @@ func move_direction(state, near: Dictionary) -> Vector2:
 		for bullet in state.enemy_bullets:
 			var line := Geometry2D.get_closest_point_to_segment(future, bullet.p, bullet.p + bullet.velocity * 0.65)
 			score -= maxf(0.0, 42.0 - future.distance_to(line)) * 8.0
-		if future.x < 70 or future.y < 70 or future.x > state.WORLD_SIZE.x - 70 or future.y > state.WORLD_SIZE.y - 70:
+		if future.x < 70 or future.y < 70 or future.x > state.world_size.x - 70 or future.y > state.world_size.y - 70:
 			score -= 20.0
 		if score > best:
 			best = score

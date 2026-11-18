@@ -7,6 +7,8 @@ var context_text: Label
 var danger_text: Label
 var frame_style: StyleBoxFlat
 var _signature: String = ""
+var art = preload("res://scripts/ui/asset_slots.gd").new()
+var portrait: TextureRect
 
 func _ready() -> void:
 	name = "ViyaFeedbackPlaceholder"
@@ -22,6 +24,7 @@ func _ready() -> void:
 	frame_style.content_margin_bottom = 8
 	add_theme_stylebox_override("panel", frame_style)
 	var column := VBoxContainer.new()
+	column.name = "ReactionColumn"
 	column.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	column.add_theme_constant_override("separation", 4)
 	add_child(column)
@@ -34,6 +37,14 @@ func _ready() -> void:
 	danger_text.custom_minimum_size.y = 16
 	danger_text.add_theme_color_override("font_color", Color("efae77"))
 	column.add_child(danger_text)
+	portrait = TextureRect.new()
+	portrait.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	portrait.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	portrait.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	portrait.modulate.a = 0.35
+	add_child(portrait)
+	move_child(portrait,0)
+	portrait.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 
 func _text(value: String, pixels: int) -> Label:
 	var item := Label.new()
@@ -47,6 +58,8 @@ func present(data: Dictionary, context: String = "") -> void:
 	if not is_instance_valid(reaction_text):
 		return
 	state_key = str(data["key"])
+	portrait.texture = art.texture("viya_portrait",state_key)
+	portrait.visible = portrait.texture != null
 	var signature: String = "%s|%s|%s" % [state_key, data["low_hp"], context]
 	if signature == _signature:
 		return

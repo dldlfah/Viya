@@ -1,6 +1,7 @@
 extends RefCounted
 ## Exact gameplay data. Cosmetic effects/cues are rebuilt after a restore.
-const VERSION := 7
+const VERSION := 8
+const GAME015_RULES := "99b5b472aaaec892172902f02cf5abb5f368c9da43a451578ebc2b8c7706b894"
 const GAME011_RULES := "7644920556aef98fd56539ab07f8deab2e446baab4fa4320d4a78247f38ca9f8"
 const GAME010_RULES := "711b73b68b15d571c240c7e4b8c20261ddec790a5db723c2ef1bd2d83f68042b"
 const LEGACY_RULES := "3ecf54fd2e0aedad3127fce24d77cc55ea0f8ffe3bfbf235d2470d233a34231e"
@@ -12,14 +13,14 @@ const RUN_FIELDS := ["phase", "player", "facing", "hp", "elapsed", "kills", "sho
 	"shot_clock", "spawn_clock", "hurt_clock", "skill_clocks", "_resume_phase",
 	"_enemy_serial", "_regen_remainder", "navigation_ticket", "stage", "run_id",
 	"gold_collected", "gold_drop_chance", "_elites_spawned", "_boss_spawned", "_boss_defeated", "checkpoint_index", "end_reason",
-	"account_attack_level", "account_talent_levels", "_damage_reduction_remainder", "_slow_left", "_kill_heal_clock", "_kill_heal_used", "enemies", "bullets", "pickups", "gold_pickups", "enemy_bullets", "_swarm_clock", "_swarm_pending", "_swarm_serial", "_scatter_clock", "_scatter_index"]
+	"account_attack_level", "account_talent_levels", "_damage_reduction_remainder", "_slow_left", "_kill_heal_clock", "_kill_heal_used", "enemies", "bullets", "pickups", "gold_pickups", "enemy_bullets", "_swarm_clock", "_swarm_pending", "_swarm_serial", "_scatter_clock", "_scatter_index", "map_id", "spawn_view_size"]
 const GROWTH_FIELDS := ["character_id", "owned", "level", "xp", "pending", "offer", "ticket", "revision"]
 const MAGIC_FIELDS := ["mana", "cooldown_left", "casts", "ticket"]
 
 static func fingerprint() -> String:
 	var stages := FileAccess.get_file_as_string("res://data/stages.json").replace("\r\n", "\n")
 	var skills := FileAccess.get_file_as_string("res://data/prototype_skills.json").replace("\r\n", "\n")
-	return (stages + skills).sha256_text()
+	return (stages + skills + FileAccess.get_file_as_string("res://data/maps.json").replace("\r\n", "\n")).sha256_text()
 
 static func capture(state) -> Dictionary:
 	var result := {"version": VERSION, "rules": fingerprint(), "run": {}, "growth": {}, "magic": {}, "rng": []}
@@ -34,6 +35,8 @@ static func capture(state) -> Dictionary:
 	return result.duplicate(true)
 
 static func upgrade_legacy(data: Dictionary, state) -> Dictionary:
+	if data.get("version") == 7 and data.get("rules") == GAME015_RULES:
+		return _upgrade_map(data)
 	if data.get("version") == 6 and data.get("rules") == GAME011_RULES:
 		return _upgrade_scatter(data)
 	if data.get("version") == 5 and data.get("rules") == GAME011_RULES:
@@ -130,6 +133,16 @@ static func _upgrade_scatter(data: Dictionary) -> Dictionary:
 	var generator := RandomNumberGenerator.new()
 	generator.seed = int(data.rng[0].seed) ^ 0x5CA77
 	data.rng.append({"seed": generator.seed, "state": generator.state})
+	return _upgrade_map(data)
+
+static func _upgrade_map(data: Dictionary) -> Dictionary:
+	if not data.get("run") is Dictionary:
+		return {}
+	data = data.duplicate(true)
+	data.version = VERSION
+	data.rules = fingerprint()
+	data.run.map_id = "legacy_arena"
+	data.run.spawn_view_size = Vector2(1256,468)
 	return data
 
 static func finite_number(value: Variant, minimum: float, maximum: float) -> bool:
@@ -150,6 +163,14 @@ static func valid(data: Dictionary, state) -> bool:
 	for key in RUN_FIELDS:
 		if not run.has(key):
 			return false
+	if not vector(run.get("player")) or not run.map_id is String or not vector(run.spawn_view_size) or run.spawn_view_size.x < 1 or run.spawn_view_size.y < 1:
+		return false
+	var map_data: Dictionary = state.map_catalog.definition(run.map_id)
+	if map_data.is_empty():
+		return false
+	var space = state.MapSpace.new(map_data)
+	if not space.valid_position(run.player,30.0):
+		return false
 	if not state.AccountTalents.valid_levels(run.account_talent_levels) or not state.AccountTalents.valid_level(run.account_attack_level) or run.account_attack_level != run.account_talent_levels.attack_power:
 		return false
 	if not finite_number(run._damage_reduction_remainder, 0, 0.999999999999):
@@ -168,7 +189,7 @@ static func valid(data: Dictionary, state) -> bool:
 		return false
 	if not finite_number(run._swarm_clock, 0, 1000) or not run._swarm_pending is bool or not run._swarm_serial is int or run._swarm_serial < 0:
 		return false
-	if run.player != run.player.clamp(Vector2.ONE * 30.0, state.WORLD_SIZE - Vector2.ONE * 30.0):
+	if run.player != run.player.clamp(Vector2.ONE * 30.0, space.world_size - Vector2.ONE * 30.0):
 		return false
 	if run._regen_remainder >= 1.0 or run.hurt_clock > state.HIT_LOCK + float(state.AccountTalents.bonuses(run.account_talent_levels).invulnerability) + 0.000000001:
 		return false
@@ -260,6 +281,7 @@ static func valid(data: Dictionary, state) -> bool:
 
 static func valid_actors(run: Dictionary, state) -> bool:
 	var rules: Dictionary = state.stage_catalog.for_stage(run.stage)
+	var space = state.MapSpace.new(state.map_catalog.definition(run.map_id))
 	var swarm: Dictionary = rules.swarm
 	# Bounded by encounter interval/lifetime, with room for every legacy live flier.
 	# This validates disk input only; live formations never wait for actor capacity.
@@ -289,6 +311,8 @@ static func valid_actors(run: Dictionary, state) -> bool:
 		if not finite_number(enemy.get("speed"), 1, 1000):
 			return false
 		if enemy.get("variant") not in ["normal", "ranged", "fast", "heavy", "flier"]:
+			return false
+		if run.map_id != "legacy_arena" and enemy.variant != "flier" and not space.valid_position(enemy.p,24.0):
 			return false
 		if enemy.kind != "normal" and enemy.variant != "normal":
 			return false
@@ -365,6 +389,8 @@ static func restore(data: Dictionary, state) -> bool:
 	for index in range(generators.size()):
 		generators[index].seed = data.rng[index].seed
 		generators[index].state = data.rng[index].state
+	state.map_space = state.MapSpace.new(state.map_catalog.definition(state.map_id))
+	state.world_size = state.map_space.world_size
 	state.stage_rules = state.stage_catalog.for_stage(state.stage)
 	state.stage_duration = float(state.stage_rules.duration)
 	state.stage_clear_gold = int(state.stage_rules.clear_gold)

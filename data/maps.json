@@ -1,0 +1,321 @@
+{
+  "legacy_arena": {
+    "name": "기존 전투 저장 전장",
+    "size": [
+      1800,
+      1200
+    ],
+    "start": [
+      900,
+      600
+    ],
+    "camera": [
+      0,
+      0,
+      1800,
+      1200
+    ],
+    "mode": "legacy",
+    "obstacles": [],
+    "zones": [
+      {
+        "side": "all",
+        "from": 0.0,
+        "roles": [
+          "normal",
+          "elite",
+          "boss"
+        ],
+        "rect": [
+          24,
+          24,
+          1752,
+          1152
+        ],
+        "weights": [
+          {
+            "from": 0.0,
+            "weight": 1.0
+          }
+        ]
+      }
+    ],
+    "decor": [],
+    "short_name": "이전 전장",
+    "walkable": [
+      0,
+      0,
+      1800,
+      1200
+    ]
+  },
+  "prologue_wall": {
+    "name": "프롤로그 · 최후의 도시 성벽",
+    "size": [
+      5000,
+      3200
+    ],
+    "start": [
+      2500,
+      600
+    ],
+    "camera": [
+      0,
+      0,
+      5000,
+      3200
+    ],
+    "mode": "frontline",
+    "obstacles": [
+      {
+        "rect": [
+          0,
+          0,
+          5000,
+          420
+        ],
+        "solid": true,
+        "kind": "wall",
+        "name": "최후의 도시 성벽"
+      },
+      {
+        "rect": [
+          1300,
+          1250,
+          360,
+          120
+        ],
+        "solid": true,
+        "kind": "ruin",
+        "name": "무너진 방어진지"
+      },
+      {
+        "rect": [
+          3200,
+          1500,
+          420,
+          140
+        ],
+        "solid": true,
+        "kind": "ruin",
+        "name": "폐허 방벽"
+      },
+      {
+        "rect": [
+          2100,
+          2200,
+          300,
+          100
+        ],
+        "solid": true,
+        "kind": "ruin",
+        "name": "옛 방어진지"
+      }
+    ],
+    "zones": [
+      {
+        "side": "front",
+        "from": 0.0,
+        "roles": [
+          "normal",
+          "elite",
+          "boss"
+        ],
+        "rect": [
+          120,
+          1100,
+          4760,
+          1980
+        ],
+        "weights": [
+          {
+            "from": 0.0,
+            "weight": 1.0
+          },
+          {
+            "from": 120.0,
+            "weight": 4.0
+          },
+          {
+            "from": 240.0,
+            "weight": 2.0
+          }
+        ]
+      },
+      {
+        "side": "left",
+        "from": 120.0,
+        "roles": [
+          "normal",
+          "elite"
+        ],
+        "rect": [
+          120,
+          600,
+          1800,
+          2480
+        ],
+        "weights": [
+          {
+            "from": 0.0,
+            "weight": 1.0
+          }
+        ]
+      },
+      {
+        "side": "right",
+        "from": 240.0,
+        "roles": [
+          "normal",
+          "elite"
+        ],
+        "rect": [
+          3080,
+          600,
+          1800,
+          2480
+        ],
+        "weights": [
+          {
+            "from": 0.0,
+            "weight": 1.0
+          }
+        ]
+      }
+    ],
+    "decor": [
+      {
+        "rect": [
+          2380,
+          160,
+          240,
+          260
+        ],
+        "kind": "gate",
+        "name": "성문"
+      },
+      {
+        "rect": [
+          2150,
+          500,
+          700,
+          300
+        ],
+        "kind": "arrival",
+        "name": "비야 최초 전이 위치"
+      },
+      {
+        "rect": [
+          2350,
+          1200,
+          300,
+          1800
+        ],
+        "kind": "lane",
+        "name": "마왕군 주 진격로"
+      }
+    ],
+    "short_name": "성벽 프롤로그",
+    "walkable": [
+      0,
+      0,
+      5000,
+      3200
+    ]
+  },
+  "outskirts_trial": {
+    "name": "[시험] 도시 외곽 황무지",
+    "size": [
+      4200,
+      2800
+    ],
+    "start": [
+      2100,
+      1400
+    ],
+    "camera": [
+      0,
+      0,
+      4200,
+      2800
+    ],
+    "mode": "perimeter",
+    "obstacles": [
+      {
+        "rect": [
+          1200,
+          1100,
+          280,
+          150
+        ],
+        "solid": true,
+        "kind": "ruin",
+        "name": "외곽 폐허"
+      },
+      {
+        "rect": [
+          2800,
+          1750,
+          240,
+          180
+        ],
+        "solid": true,
+        "kind": "ruin",
+        "name": "무너진 초소"
+      },
+      {
+        "rect": [
+          1950,
+          600,
+          360,
+          120
+        ],
+        "solid": true,
+        "kind": "ruin",
+        "name": "옛 방벽"
+      }
+    ],
+    "zones": [
+      {
+        "side": "all",
+        "from": 0.0,
+        "roles": [
+          "normal",
+          "elite",
+          "boss"
+        ],
+        "rect": [
+          80,
+          80,
+          4040,
+          2640
+        ],
+        "weights": [
+          {
+            "from": 0.0,
+            "weight": 1.0
+          }
+        ]
+      }
+    ],
+    "decor": [
+      {
+        "rect": [
+          200,
+          1850,
+          3800,
+          250
+        ],
+        "kind": "lane",
+        "name": "도시 외곽 보급로"
+      }
+    ],
+    "short_name": "도시 외곽",
+    "walkable": [
+      0,
+      0,
+      4200,
+      2800
+    ]
+  }
+}

@@ -5,6 +5,7 @@ const HudLayout = preload("res://scripts/ui/hud_layout.gd")
 const ResponsiveFeedback = preload("res://scripts/ui/responsive_feedback_panel.gd")
 const GrowthOverview = preload("res://scripts/ui/growth_overview.gd")
 const AccountTalents = preload("res://scripts/progression/account_talents.gd")
+var ui_art = preload("res://scripts/ui/asset_slots.gd").new()
 var layout_data: Dictionary = {}
 var safe_area_override := Rect2() # Logical-coordinate test injection, empty in production.
 var slot_buttons: Array[Button] = []
@@ -246,6 +247,12 @@ func _apply_layout() -> void:
 	layout_data = new_layout
 	var compact: bool = layout_data["compact"]
 	feedback_panel.fit_compact(compact)
+	status_text.add_theme_font_size_override("font_size",13 if compact else 17)
+	mana_text.add_theme_font_size_override("font_size",12 if compact else 15)
+	health.custom_minimum_size.y = 8 if compact else 15
+	mana_bar.custom_minimum_size.y = 6 if compact else 10
+	_resources.add_theme_constant_override("separation",2 if compact else 3)
+	magic_button.add_theme_font_size_override("font_size",14 if compact else 16)
 	_identity_title.visible = not compact
 	_brand.visible = not compact
 	stats_text.custom_minimum_size.x = 185.0 if compact else 245.0
@@ -256,6 +263,7 @@ func _apply_layout() -> void:
 	style.content_margin_bottom = 4
 	_place(_header, layout_data["top"])
 	_place(view, layout_data["battle"])
+	simulation.spawn_view_size = view.size
 	if is_instance_valid(stage_text):
 		stage_text.position = view.position + Vector2(12, 8)
 		stage_text.size.x = maxf(1.0, view.size.x - 24.0)
@@ -335,7 +343,7 @@ func _show_menu(kind: String) -> void:
 	elif kind == "ready":
 		var heading: Label = dialog_body.get_child(0) as Label
 		heading.text = "VIYA | 최후의 도시 · 메인 로비"
-		var account := _label("계정 공통 특성 · 강화 %d/54 · 공격력 %s" % [AccountTalents.IDS.reduce(func(sum, id): return sum + int(gold_progress.talent_levels[id]), 0), AccountTalents.effect_text("attack_power", gold_progress.attack_level)], 20)
+		var account := _label("주력 비야 · 계정 특성 강화 %d/54 · 공격력 %s" % [AccountTalents.IDS.reduce(func(sum, id): return sum + int(gold_progress.talent_levels[id]), 0), AccountTalents.effect_text("attack_power", gold_progress.attack_level)], 20)
 		dialog_body.add_child(account)
 		dialog_body.move_child(account, 1)
 		talents_button = _button("계정 특성 · 공격 / 방어 / 회복", _open_talents.bind(ticket, revision))
@@ -399,6 +407,14 @@ func _update_slots(labels: Array[Label], row: String) -> void:
 		button.disabled = label.text == "--"
 		button.tooltip_text = label.tooltip_text
 
+	var entries: Array[Dictionary] = simulation.growth.row_entries(row)
+	for index in range(labels.size()):
+		var button := labels[index].get_parent() as Button
+		button.icon = ui_art.texture(str(entries[index].id)) if index < entries.size() else null
+		button.add_theme_constant_override("icon_max_width",28)
+		button.icon_alignment = HORIZONTAL_ALIGNMENT_LEFT
+		labels[index].offset_left = 34 if button.icon else 4
+
 func _open_owned_detail(row: String, index: int) -> void:
 	if overlay.visible:
 		return
@@ -450,7 +466,7 @@ func begin_run() -> void:
 		return
 	var previous_stage: int = simulation.stage
 	simulation.stage = gold_progress.next_stage
-	if not simulation.start(0, simulation.growth.character_id, gold_progress.talent_levels):
+	if not simulation.start(0, simulation.growth.character_id, gold_progress.talent_levels, str(simulation.stage_catalog.for_stage(simulation.stage).map_id)):
 		simulation.stage = previous_stage
 		push_error("Invalid character data; current run retained")
 		return
@@ -875,7 +891,10 @@ func _decorate_lobby() -> void:
 			child.queue_free()
 	var city = preload("res://scripts/ui/city_preview.gd").new()
 	dialog_body.add_child(city)
-	dialog_body.move_child(city, mini(2, dialog_body.get_child_count() - 1))
+	for child in dialog_body.get_children():
+		if child is Label and child.text.begins_with("보유 금화"):
+			dialog_body.move_child(child,mini(2,dialog_body.get_child_count()-1))
+	dialog_body.move_child(city, mini(3, dialog_body.get_child_count() - 1))
 	var caption := _label("최후의 도시 · 비야 / 임시 배경·캐릭터 대역", 14)
 	dialog_body.add_child(caption)
 	var menus := GridContainer.new()
@@ -897,6 +916,9 @@ func _decorate_lobby() -> void:
 	dialog_body.add_child(lobby_settings_button)
 
 func _open_stages() -> void:
+	if simulation.phase in [RunState.Phase.CLEARED,RunState.Phase.DEFEAT,RunState.Phase.ABANDONED]:
+		if battle_save_error != OK or (simulation.phase == RunState.Phase.CLEARED and gold_error != OK) or not simulation.return_to_ready(simulation.navigation_ticket):
+			return
 	_clear_dialog()
 	_modal_kind = "stages"
 	_selected_stage = gold_progress.next_stage
@@ -971,11 +993,54 @@ func _update_hud() -> void:
 	if not is_instance_valid(boss_bar):
 		return
 	var bosses: Array = simulation.enemies.filter(func(enemy): return enemy.kind == "boss")
-	boss_bar.visible = not bosses.is_empty() and simulation.has_active_run()
+	boss_bar.visible = not bosses.is_empty() and simulation.has_active_run() and not overlay.visible
 	boss_label.visible = boss_bar.visible
 	if not bosses.is_empty():
 		boss_bar.max_value = bosses[0].max_hp
 		boss_bar.value = bosses[0].hp
 		boss_label.text = "최종 보스 · HP %d / %d" % [bosses[0].hp, bosses[0].max_hp]
+	if not simulation.stage_rules.is_empty():
+		var left: int = maxi(0,int(ceil(simulation.stage_duration-simulation.elapsed)))
+		var next := "보스 처치" if simulation._boss_spawned and not simulation._boss_defeated else ("생존 유지" if simulation._boss_defeated else "보스 %d초" % maxi(0,int(ceil(float(simulation.stage_rules.boss_at)-simulation.elapsed))))
+		if simulation._elites_spawned < 2 and not simulation._boss_spawned:
+			next = "정예 %d초" % maxi(0,int(ceil(float(simulation.stage_rules.elites[simulation._elites_spawned])-simulation.elapsed)))
+		stage_text.add_theme_font_size_override("font_size",14)
+		stage_text.text = "S%d %s · %02d:%02d · 생존+보스 · %s · 저장 %d/2" % [simulation.stage,simulation.map_space.definition.get("short_name","전장"),left/60,left%60,next,simulation.checkpoint_index]
+		stage_text.tooltip_text = simulation.map_space.definition.name
+	stage_text.visible = not overlay.visible
+	ailment_text.visible = not overlay.visible
 	ailment_text.text = "둔화 · %.1f초" % simulation._slow_left if simulation._slow_left > 0.0 else ""
 	status_text.text = "HP %d / %d" % [simulation.hp, simulation.max_hp]
+
+func _handle_mobile_back() -> bool:
+	if _modal_kind in ["stages", "lobby_settings"]:
+		_campaign_back(simulation.navigation_ticket,_menu_revision)
+		return true
+	if _talents_open:
+		_close_talents(simulation.navigation_ticket,_menu_revision)
+		return true
+	if not simulation.transition_action.is_empty():
+		_cancel_transition(simulation.navigation_ticket,_menu_revision)
+		return true
+	if _detail_open:
+		_close_skill_detail(simulation.navigation_ticket,_menu_revision)
+		return true
+	if _overview_open:
+		_close_growth_overview(simulation.navigation_ticket,_menu_revision)
+		return true
+	if simulation.phase == RunState.Phase.PAUSED and _modal_kind == "paused":
+		resume_game()
+		return true
+	if simulation.has_active_run():
+		pause_game()
+		return true
+	return false
+
+func _update_magic_hud() -> void:
+	super._update_magic_hud()
+	magic_button.icon = ui_art.texture("ultimate_button")
+	magic_button.add_theme_constant_override("icon_max_width",28)
+	if layout_data.get("compact",false):
+		var reason: String = simulation.magic.unavailable_reason(simulation.phase == RunState.Phase.RUNNING)
+		var hint := "터치 / F" if reason.is_empty() else ("마력 부족" if reason == "mana" else "전투 중 사용")
+		magic_button.text = "%s · Lv.%d\nMP %.1f · %s" % [simulation.magic.config.get("name","[임시] 마법"),int(simulation.stats.ultimate),simulation.magic.effective_cost(),hint]

@@ -69,7 +69,12 @@
       "spacing": 80.0,
       "jitter": 12.0,
       "approach": 590.0
-    }
+    },
+    "map_id": "outskirts_trial"
   },
-  "overrides": {}
+  "overrides": {
+    "1": {
+      "map_id": "prologue_wall"
+    }
+  }
 }

@@ -29,6 +29,16 @@ static func run(host, verify: Callable) -> void:
 	ui.simulation.apply_slow(1.0)
 	ui._update_hud()
 	verify.call(ui.ailment_text.text.contains("둔화"), "Slow has a dedicated readable status field")
+	ui.simulation.elapsed = 360.0
+	ui.simulation.checkpoint_index = 2
+	ui.simulation._damage_enemy(ui.simulation.enemies[-1].id,100000)
+	ui._physics_process(0.0)
+	var paid_balance: int = ui.gold_progress.total
+	ui.start_button.pressed.emit()
+	verify.call(ui._modal_kind == "stages" and ui.simulation.phase == ui.RunState.Phase.READY and ui.gold_progress.next_stage == 2,"Next-stage selection leaves the paid result in a proper frozen lobby state")
+	ui.stage_back_button.pressed.emit()
+	ui.talents_button.pressed.emit()
+	verify.call(ui._talents_open and ui.gold_progress.total == paid_balance,"Cancel after a result preserves the complete paid reward and allows lobby talents")
 	ui.queue_free()
 	await host.get_tree().process_frame
 	for name in DirAccess.get_files_at(directory):

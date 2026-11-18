@@ -3,6 +3,9 @@ extends Control
 @export var backdrop: Texture2D
 @export var hero: Texture2D
 func _ready() -> void:
+	var bank = preload("res://scripts/ui/asset_slots.gd").new()
+	backdrop = bank.texture("lobby_city") if backdrop == null else backdrop
+	hero = bank.texture("viya_lobby") if hero == null else hero
 	custom_minimum_size.y = 150
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
 	resized.connect(queue_redraw)

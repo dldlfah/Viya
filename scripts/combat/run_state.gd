@@ -5,9 +5,11 @@ const MagicState = preload("res://scripts/combat/magic_state.gd")
 const FeedbackState = preload("res://scripts/combat/feedback_state.gd")
 const CombatCues = preload("res://scripts/combat/combat_cues.gd")
 const StageCatalog = preload("res://scripts/combat/stage_catalog.gd")
+const MapCatalog = preload("res://scripts/world/map_catalog.gd")
+const MapSpace = preload("res://scripts/world/map_space.gd")
 const AccountTalents = preload("res://scripts/progression/account_talents.gd")
 enum Phase { READY, RUNNING, PAUSED, DEFEAT, CHOOSING, ABANDONED, CLEARED }
-const WORLD_SIZE := Vector2(1800.0, 1200.0)
+const WORLD_SIZE := Vector2(1800.0, 1200.0) # Legacy API; mapped runs use world_size.
 const PLAYER_SPEED := 235.0
 const PLAYER_RADIUS := 17.0
 const ENEMY_RADIUS := 18.0
@@ -80,6 +82,11 @@ var checkpoint_index: int = 0
 var end_reason: String = ""
 var stage_catalog = StageCatalog.new()
 var stage_rules: Dictionary = {}
+var map_catalog = MapCatalog.new()
+var map_id: String = "legacy_arena"
+var map_space = MapSpace.new(map_catalog.definition(map_id))
+var world_size: Vector2 = WORLD_SIZE
+var spawn_view_size := Vector2(1256,468)
 var account_talent_levels: Dictionary = AccountTalents.empty_levels()
 var account_attack_level: int: # Compatibility view; all six levels freeze at departure.
 	get: return int(account_talent_levels.attack_power)
@@ -89,7 +96,7 @@ var _slow_left: float = 0.0
 var _kill_heal_clock: float = 0.0
 var _kill_heal_used: float = 0.0
 
-func start(seed_value: int = 0, character_id: String = "viya", account_level: Variant = null) -> bool:
+func start(seed_value: int = 0, character_id: String = "viya", account_level: Variant = null, selected_map: String = "legacy_arena") -> bool:
 	# Validate the complete selected character before changing the previous run.
 	var selected_levels: Dictionary = account_talent_levels.duplicate(true)
 	if account_level is int:
@@ -103,6 +110,9 @@ func start(seed_value: int = 0, character_id: String = "viya", account_level: Va
 		return false
 	var rules: Dictionary = stage_catalog.for_stage(stage)
 	if rules.is_empty():
+		return false
+	var map_data: Dictionary = map_catalog.definition(selected_map)
+	if map_data.is_empty():
 		return false
 	var candidate_pool: Array[Dictionary] = growth.catalog.pool_for(character_id)
 	if not growth.catalog.validate_pool(candidate_pool, character_id):
@@ -136,6 +146,9 @@ func start(seed_value: int = 0, character_id: String = "viya", account_level: Va
 	checkpoint_index = 0
 	end_reason = ""
 	stage_rules = rules
+	map_id = selected_map
+	map_space = MapSpace.new(map_data)
+	world_size = map_space.world_size
 	_scatter_clock = float(rules.scatter.interval)
 	_scatter_index = 0
 	_swarm_clock = float(rules.swarm.interval)
@@ -149,7 +162,7 @@ func start(seed_value: int = 0, character_id: String = "viya", account_level: Va
 	navigation_ticket += 1
 	transition_action = ""
 	_finished_result.clear()
-	player = WORLD_SIZE * 0.5
+	player = map_space.start
 	facing = Vector2.RIGHT
 	hp = 100
 	max_hp = 100
@@ -215,7 +228,7 @@ func apply_slow(duration: float) -> bool:
 func push_player(displacement: Vector2) -> bool:
 	if phase != Phase.RUNNING or not displacement.is_finite():
 		return false
-	player = (player + displacement * (1.0 - float(stats.get("knockback_resist", 0.0)))).clamp(Vector2.ONE * 30.0, WORLD_SIZE - Vector2.ONE * 30.0)
+	player = map_space.move(player, displacement * (1.0 - float(stats.get("knockback_resist", 0.0))), 30.0)
 	return true
 
 func add_enemy(at: Vector2, kind: String = "normal", variant: String = "normal", scatter_group: int = 0) -> bool:
@@ -396,8 +409,7 @@ func step(delta: float, direction: Vector2) -> void:
 	var movement := direction.limit_length(1.0)
 	var motion_dt := dt - (1.0 - SLOW_SPEED_SCALE) * minf(dt, _slow_left)
 	_slow_left = maxf(0.0, _slow_left - dt)
-	player += movement * float(stats["speed"]) * motion_dt
-	player = player.clamp(Vector2.ONE * 30.0, WORLD_SIZE - Vector2.ONE * 30.0)
+	player = map_space.move(player, movement * float(stats["speed"]) * motion_dt, 30.0)
 	if movement.length_squared() > 0.001:
 		facing = movement.normalized()
 	_collect_pickups(dt)
@@ -491,9 +503,12 @@ func _spawn_enemy(kind: String = "normal") -> bool:
 		limit = MAX_ENEMIES
 	if _ground_count() >= limit:
 		return false
+	if map_id != "legacy_arena":
+		var at: Variant = map_space.spawn_anchor(rng, player, elapsed, kind, visible_world(), 24.0)
+		return add_enemy(at, kind, _roll_variant() if kind == "normal" else "normal") if at is Vector2 else false
 	for attempt in range(8):
 		var candidate := player + Vector2.from_angle(rng.randf_range(0.0, TAU)) * 590.0
-		candidate = candidate.clamp(Vector2.ONE * 24.0, WORLD_SIZE - Vector2.ONE * 24.0)
+		candidate = candidate.clamp(Vector2.ONE * 24.0, world_size - Vector2.ONE * 24.0)
 		if candidate.distance_squared_to(player) >= 160.0 * 160.0:
 			return add_enemy(candidate, kind, _roll_variant() if kind == "normal" else "normal")
 	return false
@@ -513,9 +528,14 @@ func _move_enemies(dt: float) -> void:
 				pos += offset.normalized() * speed * dt
 			elif distance < float(stage_rules.ranged.keep_distance) * 0.75:
 				pos -= offset.normalized() * speed * dt
-			pos = pos.clamp(Vector2.ONE * 24.0, WORLD_SIZE - Vector2.ONE * 24.0)
+			pos = pos.clamp(Vector2.ONE * 24.0, world_size - Vector2.ONE * 24.0)
 		elif offset.length_squared() > 0.01:
 			pos += offset.normalized() * minf(speed * dt, offset.length())
+		if map_id != "legacy_arena":
+			if variant != "ranged" or offset.length() > float(stage_rules.ranged.range) * 0.85:
+				var waypoint: Vector2 = map_space.route_target(enemy.p, player, 24.0)
+				pos = enemy.p.move_toward(waypoint, speed * dt)
+			pos = map_space.move(enemy.p, pos - enemy.p, 24.0)
 		enemy["p"] = pos
 		if variant == "ranged":
 			_tick_ranged(enemy, dt)
@@ -558,7 +578,7 @@ func _push_ground(previous: Vector2, destination: Vector2) -> void:
 		var distance: float = relative.dot(direction)
 		if distance < front:
 			# Preserve the flying path and push every ground type, including bosses.
-			enemy.p = (enemy.p + direction * (front - distance)).clamp(Vector2.ONE * 24.0, WORLD_SIZE - Vector2.ONE * 24.0)
+			enemy.p = map_space.move(enemy.p, direction * (front - distance), 24.0)
 
 func _roll_variant() -> String:
 	var roll := encounter_rng.randf() * 100.0
@@ -590,22 +610,23 @@ func _move_enemy_bullets(dt: float) -> void:
 	for index in range(enemy_bullets.size() - 1, -1, -1):
 		var bullet: Dictionary = enemy_bullets[index]
 		var previous: Vector2 = bullet.p
-		bullet.p += bullet.velocity * minf(dt, float(bullet.life))
+		var next: Vector2 = bullet.p + bullet.velocity * minf(dt, float(bullet.life))
+		var wall_hit: float = map_space.wall_fraction(previous,next,5.0)
+		bullet.p = previous.lerp(next,wall_hit)
 		bullet.life -= dt
 		var nearest := Geometry2D.get_closest_point_to_segment(player, previous, bullet.p)
 		var hit: bool = nearest.distance_squared_to(player) <= pow(PLAYER_RADIUS + 5.0, 2.0)
 		if hit:
 			if damage_player(int(bullet.damage)):
 				apply_slow(RANGED_SLOW_DURATION)
-		if hit or bullet.life <= 0.0:
+		if hit or bullet.life <= 0.0 or wall_hit < 1.0:
 			enemy_bullets.remove_at(index)
 		if phase != Phase.RUNNING:
 			return
 
 func _tick_swarm(dt: float) -> void:
 	if _swarm_pending:
-		_spawn_swarm()
-		_swarm_pending = false
+		_swarm_pending = not _spawn_swarm()
 		return
 	_swarm_clock = maxf(0.0, _swarm_clock - dt)
 	if _swarm_clock > 0.0:
@@ -613,9 +634,11 @@ func _tick_swarm(dt: float) -> void:
 	_swarm_clock = float(stage_rules.swarm.interval)
 	var chance: float = float(stage_rules.swarm.chance)
 	if chance >= 1.0 or encounter_rng.randf() < chance:
-		_spawn_swarm()
+		_swarm_pending = not _spawn_swarm()
 
 func _spawn_swarm() -> bool:
+	if map_id != "legacy_arena":
+		return _spawn_map_formation("flier", 5, float(stage_rules.swarm.spacing), 0.0, encounter_rng, false)
 	# An accepted encounter always creates all 30, even in an occupied/full field.
 	_swarm_serial += 1
 	var direction := Vector2.from_angle(encounter_rng.randi_range(0, 3) * PI * 0.5)
@@ -633,20 +656,22 @@ func _tick_scatter(dt: float) -> void:
 		return
 	_scatter_clock = maxf(0.0, _scatter_clock - dt)
 	if _scatter_clock <= 0.000001:
-		_spawn_scatter()
-		_scatter_clock = float(stage_rules.scatter.interval)
+		if _spawn_scatter():
+			_scatter_clock = float(stage_rules.scatter.interval)
 
 func _spawn_scatter() -> bool:
 	# Independent schedule/RNG and population: never replace or block old spawns.
 	var rules: Dictionary = stage_rules.scatter
 	if _scatter_index >= ceili(stage_duration / float(rules.interval)):
 		return false
+	if map_id != "legacy_arena":
+		return _spawn_map_formation(SCATTER_VARIANTS[_scatter_index % 4], 6, float(rules.spacing), float(rules.jitter), scatter_rng, true)
 	var spacing: float = float(rules.spacing)
 	var jitter: float = float(rules.jitter)
 	var margin := Vector2.ONE * (spacing * 3.0 + jitter)
 	var centers: Array[Vector2] = []
 	for side in range(4):
-		var at := (player + Vector2.from_angle(side * PI * 0.5) * float(rules.approach)).clamp(margin, WORLD_SIZE - margin)
+		var at := (player + Vector2.from_angle(side * PI * 0.5) * float(rules.approach)).clamp(margin, world_size - margin)
 		if at.distance_to(player) >= spacing * 2.0 + jitter + 180.0:
 			centers.append(at)
 	if centers.is_empty():
@@ -811,6 +836,8 @@ func _move_bullets(dt: float) -> void:
 		var bullet: Dictionary = bullets[bullet_index]
 		var old_pos: Vector2 = bullet["p"]
 		var new_pos: Vector2 = old_pos + bullet["direction"] * float(bullet["speed"]) * dt
+		var wall_hit: float = map_space.wall_fraction(old_pos,new_pos,4.0)
+		new_pos = old_pos.lerp(new_pos,wall_hit)
 		bullet["p"] = new_pos
 		bullet["life"] -= dt
 		# Swept collision, ordered impacts, stable enemy IDs: one hit per target.
@@ -834,7 +861,7 @@ func _move_bullets(dt: float) -> void:
 			_damage_enemy(victim, float(bullet["damage"]))
 			if phase != Phase.RUNNING:
 				return
-		if bullet["remaining"] <= 0 or bullet["life"] <= 0.0:
+		if bullet["remaining"] <= 0 or bullet["life"] <= 0.0 or wall_hit < 1.0:
 			bullets.remove_at(bullet_index)
 
 
@@ -878,7 +905,7 @@ func confirm_transition(expected_ticket: int, account_level: Variant = null) -> 
 		return false
 	if transition_action == "restart":
 		# start() validates first. On failure keep the old run and confirmation.
-		return start(0, growth.character_id, account_level)
+		return start(0, growth.character_id, account_level, map_id)
 	_finish_run("abandoned")
 	return true
 
@@ -965,4 +992,37 @@ func park_saved_run() -> bool:
 	phase = Phase.READY
 	navigation_ticket += 1
 	magic.invalidate_requests()
+	return true
+
+func camera_center() -> Vector2:
+	return player if map_id == "legacy_arena" else map_space.camera_center(player, spawn_view_size)
+
+func visible_world() -> Rect2:
+	return Rect2(camera_center() - spawn_view_size * 0.5, spawn_view_size)
+
+func _spawn_map_formation(variant: String, columns: int, spacing: float, jitter: float, generator: RandomNumberGenerator, scatter: bool) -> bool:
+	var rows := SWARM_SIZE / columns
+	var footprint := Vector2((columns - 1) * spacing, (rows - 1) * spacing).length() * 0.5 + jitter * sqrt(2.0) + 24.0
+	var at: Variant = map_space.spawn_anchor(generator, player, elapsed, "normal", visible_world(), footprint)
+	if not at is Vector2:
+		return false
+	var center: Vector2 = at
+	var direction := center.direction_to(player)
+	var positions: Array[Vector2] = []
+	for index in range(SWARM_SIZE):
+		var offset := direction.orthogonal() * ((index % columns) - (columns - 1) * 0.5) * spacing
+		offset += direction * (int(index / columns) - (rows - 1) * 0.5) * spacing
+		offset += Vector2(generator.randf_range(-jitter,jitter),generator.randf_range(-jitter,jitter)) if jitter > 0.0 else Vector2.ZERO
+		var position := center + offset
+		if not map_space.valid_position(position, 24.0) or visible_world().grow(32).has_point(position):
+			return false # Never commit a partial group or spawn in a wall/on screen.
+		positions.append(position)
+	if scatter:
+		_scatter_index += 1
+	if variant == "flier":
+		_swarm_serial += 1
+	for position in positions:
+		add_enemy(position, "normal", variant, _scatter_index if scatter else 0)
+		if variant == "flier":
+			enemies[-1].velocity = direction * float(stage_rules.swarm.speed)
 	return true

@@ -137,6 +137,9 @@ func _unhandled_key_input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 
 func _notification(what: int) -> void:
+	if what == NOTIFICATION_WM_GO_BACK_REQUEST and is_instance_valid(overlay) and has_method("_handle_mobile_back"):
+		if call("_handle_mobile_back"):
+			return
 	if what in [NOTIFICATION_WM_CLOSE_REQUEST, NOTIFICATION_WM_GO_BACK_REQUEST] and is_instance_valid(overlay):
 		if simulation.phase == RunState.Phase.READY or _ensure_battle_saved():
 			get_tree().quit()
@@ -158,7 +161,7 @@ func begin_run() -> void:
 	_magic_touch_id = -1
 	var previous_stage: int = simulation.stage
 	simulation.stage = gold_progress.next_stage
-	if not simulation.start(0, simulation.growth.character_id, gold_progress.talent_levels):
+	if not simulation.start(0, simulation.growth.character_id, gold_progress.talent_levels, str(simulation.stage_catalog.for_stage(simulation.stage).map_id)):
 		simulation.stage = previous_stage
 		push_error("Invalid character skill catalog; run not started")
 		return

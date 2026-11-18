@@ -18,20 +18,20 @@ static func build(viewport_size: Vector2, safe_area: Rect2 = Rect2()) -> Diction
 	var compact := inner.size.x < COMPACT_WIDTH
 	var top_height := 64.0 * unit
 	# Compact mode keeps the two skill rows below the status/magic row.
-	var bottom_height := 204.0 if compact else 156.0 * unit
+	var bottom_height := 160.0 if compact else 156.0 * unit
 	bottom_height = minf(bottom_height, maxf(90.0, inner.size.y - top_height - gap * 2.0 - 48.0))
 	var top := Rect2(inner.position, Vector2(inner.size.x, top_height))
 	var bottom := Rect2(Vector2(inner.position.x, inner.end.y - bottom_height), Vector2(inner.size.x, bottom_height))
 	var battle := Rect2(Vector2(inner.position.x, top.end.y + gap), Vector2(inner.size.x, maxf(1.0, bottom.position.y - top.end.y - gap * 2.0)))
 	var move := Rect2(battle.position, Vector2(battle.size.x * 0.36, battle.size.y))
-	var support_height := 18.0
+	var support_height := 14.0 if compact else 18.0
 	var feedback: Rect2
 	var resources: Rect2
 	var skills: Rect2
 	var support: Rect2
 	var magic: Rect2
 	if compact:
-		var info_height := minf(82.0, bottom.size.y * 0.40)
+		var info_height := minf(54.0, bottom.size.y * 0.40)
 		var feedback_width := bottom.size.x * 0.25
 		var magic_width := bottom.size.x * 0.29
 		feedback = Rect2(bottom.position, Vector2(feedback_width, info_height))

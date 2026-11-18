@@ -20,6 +20,8 @@ func for_stage(number: int) -> Dictionary:
 	return result if valid(result) else {}
 
 static func valid(rules: Dictionary) -> bool:
+	if not rules.get("map_id") is String or preload("res://scripts/world/map_catalog.gd").new().definition(rules.map_id).is_empty():
+		return false
 	for key in ["duration", "boss_at"]:
 		if not rules.get(key) is float or not is_finite(rules[key]) or rules[key] <= 0.0 or rules[key] > 36000.0:
 			return false

@@ -5,7 +5,7 @@ func fit_compact(compact: bool) -> void:
 	if not is_instance_valid(reaction_text):
 		return
 	custom_minimum_size = Vector2.ZERO
-	var column: VBoxContainer = get_child(0)
+	var column: VBoxContainer = get_node("ReactionColumn")
 	column.add_theme_constant_override("separation", 2 if compact else 4)
 	column.get_child(0).visible = not compact
 	context_text.visible = not compact
