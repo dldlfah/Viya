@@ -28,7 +28,7 @@ static func run(host, verify: Callable) -> void:
 static func wallet_checks(directory: String, verify: Callable) -> void:
 	var wallet = Previous.funded(directory.path_join("all.cfg"), 6306000)
 	var expected := Talents.empty_levels()
-	for id in Talents.IDS:
+	for id in Talents.ROOT_IDS:
 		for level in range(3):
 			var balance: int = wallet.total
 			expected[id] += 1
@@ -100,7 +100,7 @@ static func combat_checks(verify: Callable) -> void:
 		state.magic.advance(1000.0, true)
 		verify.call(state.magic.mana == 100.0, "Expanded MP recovery still respects maximum mana")
 	var levels := Talents.empty_levels()
-	for id in Talents.IDS:
+	for id in Talents.ROOT_IDS:
 		levels[id] = 3
 	var state = quiet(levels)
 	state.hp = 80
@@ -162,8 +162,8 @@ static func ui_checks(host, directory: String, verify: Callable) -> void:
 	ui.talents_button.pressed.emit()
 	for tab in range(3):
 		ui.talent_tabs[tab].pressed.emit()
-		verify.call(ui.talent_buy_buttons.size() == 6 and ui.talent_buttons_by_id.size() == 2, "Every actual category contains two independent three-stage talents")
-		var ids: Array = ui.talent_buttons_by_id.keys()
+		verify.call(ui.talent_buy_buttons.size() == 18 and ui.talent_buttons_by_id.size() == 6, "Every actual category contains two three-node chains")
+		var ids: Array = ui.talent_buttons_by_id.keys().filter(func(id): return id in Talents.ROOT_IDS)
 		for id in ids:
 			for level in range(3):
 				ui.talent_buttons_by_id[id][level].pressed.emit()

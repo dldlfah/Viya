@@ -1,6 +1,6 @@
 extends RefCounted
 ## Exact gameplay data. Cosmetic effects/cues are rebuilt after a restore.
-const VERSION := 5
+const VERSION := 6
 const GAME011_RULES := "7644920556aef98fd56539ab07f8deab2e446baab4fa4320d4a78247f38ca9f8"
 const GAME010_RULES := "711b73b68b15d571c240c7e4b8c20261ddec790a5db723c2ef1bd2d83f68042b"
 const LEGACY_RULES := "3ecf54fd2e0aedad3127fce24d77cc55ea0f8ffe3bfbf235d2470d233a34231e"
@@ -12,7 +12,7 @@ const RUN_FIELDS := ["phase", "player", "facing", "hp", "elapsed", "kills", "sho
 	"shot_clock", "spawn_clock", "hurt_clock", "skill_clocks", "_resume_phase",
 	"_enemy_serial", "_regen_remainder", "navigation_ticket", "stage", "run_id",
 	"gold_collected", "gold_drop_chance", "_elites_spawned", "_boss_spawned", "_boss_defeated", "checkpoint_index", "end_reason",
-	"account_attack_level", "account_talent_levels", "_damage_reduction_remainder", "enemies", "bullets", "pickups", "gold_pickups", "enemy_bullets", "_swarm_clock", "_swarm_pending", "_swarm_serial"]
+	"account_attack_level", "account_talent_levels", "_damage_reduction_remainder", "_slow_left", "_kill_heal_clock", "_kill_heal_used", "enemies", "bullets", "pickups", "gold_pickups", "enemy_bullets", "_swarm_clock", "_swarm_pending", "_swarm_serial"]
 const GROWTH_FIELDS := ["character_id", "owned", "level", "xp", "pending", "offer", "ticket", "revision"]
 const MAGIC_FIELDS := ["mana", "cooldown_left", "casts", "ticket"]
 
@@ -34,6 +34,15 @@ static func capture(state) -> Dictionary:
 	return result.duplicate(true)
 
 static func upgrade_legacy(data: Dictionary, state) -> Dictionary:
+	if data.get("version") == 5 and data.get("rules") == GAME011_RULES:
+		if not data.get("run") is Dictionary:
+			return {}
+		var expanded: Dictionary = state.AccountTalents.expand_six(data.run.get("account_talent_levels"))
+		if expanded.is_empty():
+			return {}
+		data = data.duplicate(true)
+		data.run.account_talent_levels = expanded
+		return _upgrade_tree(data)
 	if data.get("version") == 4 and data.get("rules") == GAME011_RULES:
 		if not data.get("run") is Dictionary or not state.AccountTalents.valid_level(data.run.get("account_attack_level")):
 			return {}
@@ -41,7 +50,7 @@ static func upgrade_legacy(data: Dictionary, state) -> Dictionary:
 		data.version = VERSION
 		data.run.account_talent_levels = state.AccountTalents.from_attack(data.run.account_attack_level)
 		data.run._damage_reduction_remainder = 0.0
-		return data
+		return _upgrade_tree(data)
 	if data.get("version") == 3 and data.get("rules") == GAME011_RULES:
 		return _upgrade_account(data)
 	if data.get("version") == 2 and data.get("rules") == GAME010_RULES:
@@ -90,6 +99,13 @@ static func _upgrade_account(data: Dictionary) -> Dictionary:
 	data.run.account_attack_level = 0 # Older runs predate account talents.
 	data.run.account_talent_levels = preload("res://scripts/progression/account_talents.gd").empty_levels()
 	data.run._damage_reduction_remainder = 0.0
+	return _upgrade_tree(data)
+
+static func _upgrade_tree(data: Dictionary) -> Dictionary:
+	data.version = VERSION
+	data.run._slow_left = 0.0
+	data.run._kill_heal_clock = 0.0
+	data.run._kill_heal_used = 0.0
 	return data
 
 static func finite_number(value: Variant, minimum: float, maximum: float) -> bool:
@@ -130,7 +146,7 @@ static func valid(data: Dictionary, state) -> bool:
 		return false
 	if run.player != run.player.clamp(Vector2.ONE * 30.0, state.WORLD_SIZE - Vector2.ONE * 30.0):
 		return false
-	if run._regen_remainder >= 1.0 or run.hurt_clock > state.HIT_LOCK:
+	if run._regen_remainder >= 1.0 or run.hurt_clock > state.HIT_LOCK + float(state.AccountTalents.bonuses(run.account_talent_levels).invulnerability) + 0.000000001:
 		return false
 	if not run.run_id is String or run.run_id.length() != 32 or not run.run_id.is_valid_hex_number(false):
 		return false
@@ -195,8 +211,11 @@ static func valid(data: Dictionary, state) -> bool:
 		return false
 	if (run.end_reason == "defeat") != (run.hp == 0) or (run.end_reason == "timeout" and run.elapsed + 0.000001 < rules.duration):
 		return false
+	var account: Dictionary = state.AccountTalents.bonuses(run.account_talent_levels)
+	if not finite_number(run._slow_left, 0, state.RANGED_SLOW_DURATION * (1.0 - float(account.status_resist)) + 0.000000001) or not finite_number(run._kill_heal_clock, 0, 1) or not finite_number(run._kill_heal_used, 0, float(account.kill_heal) * 6.0 + 0.000000001):
+		return false
 	var config: Dictionary = state.growth.catalog.characters[growth.character_id].active_magic
-	if not finite_number(magic.get("mana"), 0, config.max_mana) or not finite_number(magic.get("cooldown_left"), 0, config.cooldown):
+	if not finite_number(magic.get("mana"), 0, float(config.max_mana) + float(account.max_mana)) or not finite_number(magic.get("cooldown_left"), 0, config.cooldown):
 		return false
 	for key in ["casts", "ticket"]:
 		if not magic.get(key) is int or not finite_number(magic[key], 0, 1000000000):

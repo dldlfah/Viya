@@ -507,6 +507,8 @@ func _update_hud() -> void:
 		stage_text.text = "스테이지 %d · 남은 시간 %02d:%02d · %s · 체크포인트 %d/2" % [simulation.stage, remaining / 60, remaining % 60, target, simulation.checkpoint_index]
 	status_text.text = "HP %d / %d%s" % [simulation.hp, simulation.max_hp, " · 피격" if simulation.hurt_clock > 0.0 else ""]
 	level_text.text = "Lv.%d  EXP %.1f / %.0f" % [simulation.growth.level, simulation.growth.xp, simulation.growth.threshold()]
+	if simulation._slow_left > 0.0:
+		status_text.text += " · 둔화 %.1f초" % simulation._slow_left
 	experience.max_value = simulation.growth.threshold()
 	experience.value = simulation.growth.xp
 	if _slot_revision != simulation.growth.revision:
@@ -531,7 +533,7 @@ func _update_magic_hud() -> void:
 	var running: bool = simulation.phase == RunState.Phase.RUNNING
 	var reason: String = magic.unavailable_reason(running)
 	magic_button.disabled = not reason.is_empty()
-	mana_bar.max_value = float(magic.config.get("max_mana", 100.0))
+	mana_bar.max_value = magic.maximum_mana()
 	mana_bar.value = magic.mana
 	mana_text.text = "MP %.1f / %.0f" % [magic.mana, mana_bar.max_value]
 	var state_label: String = "터치 / F"
@@ -544,11 +546,11 @@ func _update_magic_hud() -> void:
 			state_label = "재사용 %.1f초" % magic.cooldown_left
 		"mana":
 			state_label = "마력 부족"
-	magic_button.text = "%s\n강화 Lv.%d · MP %.0f\n%s" % [
+	magic_button.text = "%s\n강화 Lv.%d · MP %.1f\n%s" % [
 		str(magic.config.get("name", "[임시] 고유 마법")),
-		int(simulation.stats["ultimate"]), float(magic.config.get("mana_cost", 0.0)), state_label]
+		int(simulation.stats["ultimate"]), magic.effective_cost(), state_label]
 	var info: Dictionary = magic.profile(int(simulation.stats["ultimate"]))
-	magic_button.tooltip_text = "임시 효과 · 기본 피해 %.0f / 반경 %.0f / 소모 MP %.0f / 초당 MP 회복 %.2f" % [
+	magic_button.tooltip_text = "임시 효과 · 기본 피해 %.0f / 반경 %.0f / 소모 MP %.1f / 초당 MP 회복 %.2f" % [
 		float(info.get("damage", 0.0)), float(info.get("radius", 0.0)),
 		float(info.get("mana_cost", 0.0)), float(info.get("mana_regen", 0.0))]
 	if float(info.get("cooldown", 0.0)) > 0.0:

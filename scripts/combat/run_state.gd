@@ -21,6 +21,9 @@ const SHOT_INTERVAL := 0.30
 const SHOT_RANGE := 520.0
 const BULLET_SPEED := 920.0
 const HIT_LOCK := 0.85
+const RANGED_SLOW_DURATION := 1.0 # Provisional existing-ranged-hit status.
+const SLOW_SPEED_SCALE := 0.85
+const FLIER_PLAYER_PUSH := 18.0
 
 var phase: int = Phase.READY
 var player := WORLD_SIZE * 0.5
@@ -78,6 +81,9 @@ var account_attack_level: int: # Compatibility view; all six levels freeze at de
 	get: return int(account_talent_levels.attack_power)
 	set(value): account_talent_levels.attack_power = value
 var _damage_reduction_remainder: float = 0.0
+var _slow_left: float = 0.0
+var _kill_heal_clock: float = 0.0
+var _kill_heal_used: float = 0.0
 
 func start(seed_value: int = 0, character_id: String = "viya", account_level: Variant = null) -> bool:
 	# Validate the complete selected character before changing the previous run.
@@ -149,6 +155,9 @@ func start(seed_value: int = 0, character_id: String = "viya", account_level: Va
 	_enemy_serial = 0
 	_regen_remainder = 0.0
 	_damage_reduction_remainder = 0.0
+	_slow_left = 0.0
+	_kill_heal_clock = 0.0
+	_kill_heal_used = 0.0
 	_resume_phase = Phase.RUNNING
 	enemies.clear()
 	enemy_bullets.clear()
@@ -158,6 +167,7 @@ func start(seed_value: int = 0, character_id: String = "viya", account_level: Va
 	skill_clocks.clear()
 	_refresh_stats()
 	hp = max_hp
+	magic.mana = magic.maximum_mana()
 	phase = Phase.RUNNING
 	return true
 
@@ -182,11 +192,23 @@ func damage_player(amount: int) -> bool:
 	var prevented := mini(amount, int(floor(_damage_reduction_remainder + 0.000000001)))
 	_damage_reduction_remainder = maxf(0.0, _damage_reduction_remainder - prevented)
 	hp = maxi(0, hp - (amount - prevented))
-	hurt_clock = HIT_LOCK
+	hurt_clock = float(stats.get("hit_lock", HIT_LOCK))
 	if hp == 0:
 		_finish_run("defeat")
 	else:
 		feedback.trigger("hurt")
+	return true
+
+func apply_slow(duration: float) -> bool:
+	if phase != Phase.RUNNING or duration <= 0.0 or not is_finite(duration):
+		return false
+	_slow_left = maxf(_slow_left, minf(duration, RANGED_SLOW_DURATION) * (1.0 - float(stats.get("status_resist", 0.0))))
+	return true
+
+func push_player(displacement: Vector2) -> bool:
+	if phase != Phase.RUNNING or not displacement.is_finite():
+		return false
+	player = (player + displacement * (1.0 - float(stats.get("knockback_resist", 0.0)))).clamp(Vector2.ONE * 30.0, WORLD_SIZE - Vector2.ONE * 30.0)
 	return true
 
 func add_enemy(at: Vector2, kind: String = "normal", variant: String = "normal") -> bool:
@@ -280,7 +302,11 @@ func _refresh_stats() -> void:
 	var profile: Dictionary = stats_profile(growth.owned)
 	max_hp = int(profile["max_hp"])
 	stats = profile["stats"]
-	magic.bonus_mana_regen = float(AccountTalents.bonuses(account_talent_levels).mp_regen)
+	var account := AccountTalents.bonuses(account_talent_levels)
+	magic.bonus_mana_regen = float(account.mp_regen)
+	magic.bonus_max_mana = float(account.max_mana)
+	magic.mana_cost_scale = 1.0 - float(account.mana_cost_reduction)
+	magic.radius_scale = 1.0 + float(account.attack_range)
 
 func stats_profile(levels: Dictionary) -> Dictionary:
 	# Pure lookup shared by actual upgrades and choice previews. Never edit levels.
@@ -293,16 +319,23 @@ func stats_profile(levels: Dictionary) -> Dictionary:
 	return {"max_hp": AccountTalents.maximum_hp(100 + 20 * int(ranks.get("vitality", 0)), account_talent_levels),
 		"stats": {"power": (1.0 + 0.15 * int(ranks.get("power", 0))) * AccountTalents.power_multiplier(account_attack_level),
 			"rate": (1.0 + 0.08 * int(ranks.get("haste", 0))) * (1.0 + float(account.attack_speed)),
-			"speed": PLAYER_SPEED * (1.0 + 0.07 * int(ranks.get("stride", 0))),
+			"speed": PLAYER_SPEED * (1.0 + 0.07 * int(ranks.get("stride", 0))) * (1.0 + float(account.move_speed)),
 			"pickup": 80.0 + 20.0 * int(ranks.get("magnet", 0)),
 			"xp": 1.0 + 0.12 * int(ranks.get("learning", 0)),
-			"crit": 0.04 * int(ranks.get("precision", 0)),
+			"crit": minf(1.0, 0.04 * int(ranks.get("precision", 0)) + float(account.crit_chance)),
+			"crit_damage": 2.0 + float(account.crit_damage),
+			"hit_lock": HIT_LOCK + float(account.invulnerability),
+			"knockback_resist": float(account.knockback_resist), "status_resist": float(account.status_resist),
+			"healing_efficiency": 1.0 + float(account.healing_efficiency),
+			"kill_heal": float(account.kill_heal), "kill_heal_cap": float(account.kill_heal) * 6.0,
+			"projectile_speed": 1.0 + float(account.projectile_speed), "attack_range": 1.0 + float(account.attack_range),
 			"regen": 0.6 * int(ranks.get("recovery", 0)) + float(account.hp_regen),
 			"damage_reduction": float(account.damage_reduction),
 			"ultimate": int(ranks.get("ultimate", 0))}}
 
 func selection_health(current_hp: int, previous_max: int, next_max: int) -> int:
-	return mini(next_max, current_hp + maxi(0, next_max - previous_max))
+	var scale: float = 1.0 + float(AccountTalents.bonuses(account_talent_levels).healing_efficiency)
+	return mini(next_max, current_hp + int(floor(maxi(0, next_max - previous_max) * scale + 0.000000001)))
 
 func attack_profile(effect: String, rank: int, rate: float) -> Dictionary:
 	# The production attack consumes these exact values; UI does not copy formulas.
@@ -330,6 +363,11 @@ func attack_profile(effect: String, rank: int, rate: float) -> Dictionary:
 			result = {"damage": 18.0 + rank * 6.0, "radius": 75.0 + rank * 12.0}
 	if result.is_empty():
 		return {}
+	if result.has("speed"):
+		result.speed *= float(stats.get("projectile_speed", 1.0))
+	for key in ["radius", "link_range"]:
+		if result.has(key):
+			result[key] *= float(stats.get("attack_range", 1.0))
 	result["interval"] = (SHOT_INTERVAL if effect == "rifle" else (2.0 if effect != "sigil" else 3.0)) / rate
 	return result
 
@@ -343,8 +381,13 @@ func step(delta: float, direction: Vector2) -> void:
 	while checkpoint_index < 2 and elapsed + 0.000001 >= float(stage_rules.checkpoints[checkpoint_index]):
 		checkpoint_index += 1
 	hurt_clock = maxf(0.0, hurt_clock - dt)
+	_kill_heal_clock = maxf(0.0, _kill_heal_clock - dt)
+	if _kill_heal_clock == 0.0:
+		_kill_heal_used = 0.0
 	var movement := direction.limit_length(1.0)
-	player += movement * float(stats["speed"]) * dt
+	var motion_dt := dt - (1.0 - SLOW_SPEED_SCALE) * minf(dt, _slow_left)
+	_slow_left = maxf(0.0, _slow_left - dt)
+	player += movement * float(stats["speed"]) * motion_dt
 	player = player.clamp(Vector2.ONE * 30.0, WORLD_SIZE - Vector2.ONE * 30.0)
 	if movement.length_squared() > 0.001:
 		facing = movement.normalized()
@@ -384,14 +427,30 @@ func step(delta: float, direction: Vector2) -> void:
 		effects[i]["life"] -= dt
 		if effects[i]["life"] <= 0.0:
 			effects.remove_at(i)
-	if hp < max_hp:
-		_regen_remainder += float(stats["regen"]) * dt
-		var healing := int(floor(_regen_remainder + 0.000000001))
-		hp = mini(max_hp, hp + healing)
-		_regen_remainder = maxf(0.0, _regen_remainder - healing)
-	else:
-		_regen_remainder = 0.0
+	_heal_hp(float(stats["regen"]) * dt)
 	_resolve_deadline()
+
+func _heal_hp(amount: float) -> void:
+	if phase != Phase.RUNNING or amount < 0.0 or not is_finite(amount):
+		return
+	if hp >= max_hp:
+		_regen_remainder = 0.0
+		return
+	_regen_remainder += amount * float(stats.get("healing_efficiency", 1.0))
+	var healing := int(floor(_regen_remainder + 0.000000001))
+	hp = mini(max_hp, hp + healing)
+	_regen_remainder = 0.0 if hp == max_hp else maxf(0.0, _regen_remainder - healing)
+
+func _heal_on_kill() -> void:
+	var amount: float = float(stats.get("kill_heal", 0.0))
+	if amount <= 0.0:
+		return
+	if _kill_heal_clock == 0.0:
+		_kill_heal_clock = 1.0
+		_kill_heal_used = 0.0
+	amount = minf(amount, maxf(0.0, float(stats.kill_heal_cap) - _kill_heal_used))
+	_kill_heal_used += amount
+	_heal_hp(amount)
 
 func _collect_pickups(dt: float) -> void:
 	_collect_gold(dt)
@@ -453,7 +512,9 @@ func _move_enemies(dt: float) -> void:
 	_move_fliers(dt)
 	for enemy in enemies:
 		if enemy.p.distance_squared_to(player) <= pow(PLAYER_RADIUS + ENEMY_RADIUS, 2.0):
-			damage_player(12)
+			var accepted := damage_player(12)
+			if accepted and enemy.variant == "flier":
+				push_player(enemy.velocity.normalized() * FLIER_PLAYER_PUSH)
 			if phase == Phase.DEFEAT:
 				return
 
@@ -524,7 +585,8 @@ func _move_enemy_bullets(dt: float) -> void:
 		var nearest := Geometry2D.get_closest_point_to_segment(player, previous, bullet.p)
 		var hit: bool = nearest.distance_squared_to(player) <= pow(PLAYER_RADIUS + 5.0, 2.0)
 		if hit:
-			damage_player(int(bullet.damage))
+			if damage_player(int(bullet.damage)):
+				apply_slow(RANGED_SLOW_DURATION)
 		if hit or bullet.life <= 0.0:
 			enemy_bullets.remove_at(index)
 		if phase != Phase.RUNNING:
@@ -569,7 +631,7 @@ func _nearest(at: Vector2, reach: float, ignored: Array[int] = []) -> Dictionary
 	return found
 
 func _auto_fire() -> void:
-	var target := _nearest(player, SHOT_RANGE)
+	var target := _nearest(player, SHOT_RANGE * float(stats.get("attack_range", 1.0)))
 	if target.is_empty():
 		return
 	var direction: Vector2 = (target["p"] - player).normalized()
@@ -601,7 +663,7 @@ func _damage_enemy(id: int, base_damage: float) -> void:
 		var previous_hp: int = int(enemies[i]["hp"])
 		var hit_at: Vector2 = enemies[i]["p"]
 		if float(stats["crit"]) > 0.0 and rng.randf() < float(stats["crit"]):
-			damage *= 2.0
+			damage *= float(stats.get("crit_damage", 2.0))
 			critical = true
 		if account_attack_level > 0:
 			# 100 * 1.10 must be 110, not 111 from binary rounding before ceil.
@@ -617,6 +679,7 @@ func _damage_enemy(id: int, base_damage: float) -> void:
 			enemies.remove_at(i)
 			kills += 1
 			cues.record_kill(id, hit_at)
+			_heal_on_kill()
 			if kind == "boss" and _boss_spawned:
 				_boss_defeated = true
 				if elapsed + 0.000001 >= stage_duration:
@@ -649,7 +712,7 @@ func _tick_skills(dt: float) -> void:
 		skill_clocks[id] = clock
 		if clock > 0.0:
 			continue
-		var target := _nearest(player, SHOT_RANGE)
+		var target := _nearest(player, SHOT_RANGE * float(stats.get("attack_range", 1.0)))
 		if target.is_empty():
 			continue
 		var rank: int = growth.skill_level(id)
@@ -677,7 +740,7 @@ func _tick_skills(dt: float) -> void:
 				var used: Array[int] = []
 				var anchor := player
 				for n in range(int(profile["targets"])):
-					var linked := _nearest(anchor, SHOT_RANGE if n == 0 else float(profile["link_range"]), used)
+					var linked := _nearest(anchor, SHOT_RANGE * float(stats.get("attack_range", 1.0)) if n == 0 else float(profile["link_range"]), used)
 					if linked.is_empty():
 						break
 					var victim: int = linked["id"]

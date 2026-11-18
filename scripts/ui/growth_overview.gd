@@ -15,7 +15,7 @@ static func capture(run) -> Dictionary:
 		"hp": run.hp, "max_hp": run.max_hp, "stats": run.stats.duplicate(true),
 		"magic": run.magic.profile(rank).duplicate(true), "magic_rank": rank,
 		"upgrade_name": str(upgrade.get("name", "[임시] 고유 마법 강화")),
-		"mana": run.magic.mana, "max_mana": float(run.magic.config.get("max_mana", 0.0)),
+		"mana": run.magic.mana, "max_mana": run.magic.maximum_mana(),
 		"account_attack_level": run.account_attack_level, "account_talent_levels": run.account_talent_levels.duplicate(true),
 		"cooldown_left": run.magic.cooldown_left,
 		"summary": run.result_summary().duplicate(true)}
@@ -47,7 +47,7 @@ static func sections(data: Dictionary) -> Array[Dictionary]:
 		"body": _row_text(data["passive"])})
 	var magic_text: String = "마법 설정 없음"
 	if not magic.is_empty():
-		magic_text = "%s\n%s Lv.%d (공격·패시브 칸과 별도)\n기본 피해 %.0f / 반경 %.0f\n소모 MP %.0f / 초당 MP 회복 %.2f\n현재 MP %.1f / %.0f\n피해는 공격력·치명타 적용 전 기본값입니다." % [
+		magic_text = "%s\n%s Lv.%d (공격·패시브 칸과 별도)\n기본 피해 %.0f / 반경 %.0f\n소모 MP %.1f / 초당 MP 회복 %.2f\n현재 MP %.1f / %.0f\n피해는 공격력·치명타 적용 전 기본값입니다." % [
 			magic["name"], data["upgrade_name"], data["magic_rank"], magic["damage"], magic["radius"],
 			magic["mana_cost"], magic["mana_regen"], data["mana"], data["max_mana"]]
 		if float(magic.cooldown) > 0.0:

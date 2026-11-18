@@ -119,11 +119,11 @@ static func ui_checks(host, directory: String, verify: Callable) -> void:
 	var ui = Campaign.make_ui(host, directory)
 	verify.call(ui.simulation.phase == RunState.Phase.READY and ui.dialog_body.get_child(0).text.contains("메인 로비") and ui.overlay.color.a == 1.0, "Actual start scene opens an opaque temporary main lobby")
 	ui.talents_button.pressed.emit()
-	verify.call(ui._talents_open and ui.talent_tabs.size() == 3 and ui.talent_buy_buttons.size() == 6, "Lobby opens attack/defense/recovery tabs with two attack talents, each with three stages")
+	verify.call(ui._talents_open and ui.talent_tabs.size() == 3 and ui.talent_buy_buttons.size() == 18, "Lobby opens attack/defense/recovery tabs with two three-node attack chains")
 	var stale: Callable = callback(ui.talent_buy_buttons[0])
 	for index in [1, 2]:
 		ui.talent_tabs[index].pressed.emit()
-		verify.call(ui.talent_buttons_by_id.size() == 2 and ui.talent_buy_buttons.size() == 6, "Defense and recovery each expose two three-stage talents")
+		verify.call(ui.talent_buttons_by_id.size() == 6 and ui.talent_buy_buttons.size() == 18, "Defense and recovery each expose six three-stage nodes")
 	stale.call()
 	verify.call(ui.gold_progress.attack_level == 0 and ui.gold_progress.total == 1051000, "Old purchase callbacks cannot buy from a different category")
 	ui.talent_tabs[0].pressed.emit()

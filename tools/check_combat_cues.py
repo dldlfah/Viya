@@ -11,8 +11,8 @@ ROOT = Path(__file__).resolve().parents[1]
 FILES = ('scripts/combat/run_state.gd', 'scripts/combat/battle_view.gd',
          'scripts/combat/combat_cues.gd', 'tests/test_combat_cues.gd',
          'tools/check_project.py', 'tools/check_combat_cues.py')
-# GAME-013: reviewed enemy variants, formations and hostile projectile integration. Exact source baselines retain mutation guards.
-BASE_RUN_BLOB = 'd35d857fb3de3dfe5be1a0191bc8b319458ea347'
+# GAME-014: reviewed enemy variants, formations and hostile projectile integration. Exact source baselines retain mutation guards.
+BASE_RUN_BLOB = '44755799ed72a8910c8c9ea63db4bc34671d6f4a'
 BASE_VIEW_BLOB = 'ccd3ccd6b6c3413e51abe737fa5999d456703f42'
 BASE_RUNNER_BLOB = '1ab68ad8a51271e3d47db8b02d433991f42e8d6c'
 # Exact run_engine() from GAME-004D; all 7 suites and failure checks are protected.
@@ -51,7 +51,7 @@ def validate(sources: dict[str, str]) -> list[str]:
             errors.append('Missing/duplicate reviewed visual hook: ' + line.strip())
         restored = restored.replace(line + '\n', '', 1)
     if blob(restored) != BASE_RUN_BLOB:
-        errors.append('RunState differs from the reviewed GAME-013 baseline')
+        errors.append('RunState differs from the reviewed GAME-014 baseline')
     if engine_function_digest(runner) != BASE_ENGINE_FUNCTION_SHA256:
         errors.append('Existing native engine commands or pass/fail criteria changed')
     restored_view = view.split('\nfunc _draw_combat_cues() -> void:', 1)[0]
@@ -60,7 +60,7 @@ def validate(sources: dict[str, str]) -> list[str]:
     restored_view = restored_view.replace('\t\t\tvar enemy_color: Color = Color("aa5364").lerp(Color("fff1db"), flash)\n', '', 1)
     restored_view = restored_view.replace(']), enemy_color)', ']), Color("aa5364"))', 1)
     if blob(restored_view) != BASE_VIEW_BLOB:
-        errors.append('Battle View differs from the reviewed GAME-013 baseline')
+        errors.append('Battle View differs from the reviewed GAME-014 baseline')
     for value in ('const MAX_EVENTS := 48', 'const MAX_FLASHES := 80',
                   'events.size() >= MAX_EVENTS', 'events.pop_front()',
                   'flashes.size() >= MAX_FLASHES', 'flashes.erase(flashes.keys()[0])',
@@ -127,7 +127,7 @@ def check() -> dict:
     cases = [
         ('missing_reset', FILES[0], '\tcues.reset()\n', ''),
         ('early_clock', FILES[0], '\tvar dt := minf(delta, 0.05)\n', '\tvar dt := minf(delta, 0.05)\n\tcues.advance(dt)\n'),
-        ('changed_damage', FILES[0], 'damage *= 2.0', 'damage *= 3.0'),
+        ('changed_damage', FILES[0], 'damage *= float(stats.get("crit_damage", 2.0))', 'damage *= 99.0'),
         ('drop_as_collection', FILES[0], '\tpickups.append(', '\tcues.record_collected_xp(at, value)\n\tpickups.append('),
         ('unbounded_visuals', FILES[2], 'events.pop_front()', 'pass'),
         ('cosmetic_rng', FILES[2], 'flashes[id] = FLASH_SECONDS', 'flashes[id] = randf()'),
@@ -158,7 +158,7 @@ def check() -> dict:
             'baseline_run_blob': BASE_RUN_BLOB, 'baseline_runner_blob': BASE_RUNNER_BLOB,
             'baseline_engine_function_sha256': BASE_ENGINE_FUNCTION_SHA256,
             'scope': 'Changed-source UTF-8/delimiters/Python syntax, hook order, bounds, isolation, '
-                     'reviewed GAME-013 source baselines and preserved engine runner. '
+                     'reviewed GAME-014 source baselines and preserved engine runner. '
                      'NOT Godot parser/type/runtime, visual quality, input dispatch, or FPS.'}
 
 

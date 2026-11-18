@@ -40,6 +40,7 @@ var talent_tabs: Array[Button] = []
 var talent_buy_buttons: Array[Button] = []
 var talent_buttons_by_id: Dictionary = {}
 var talent_content: VBoxContainer
+var _talent_grid: GridContainer
 var _talents_open := false
 var _talent_category := "attack"
 var _talent_notice := ""
@@ -257,6 +258,7 @@ func _clear_dialog() -> void:
 	talent_buy_buttons.clear()
 	talent_buttons_by_id.clear()
 	talent_content = null
+	_talent_grid = null
 	overview_button = null
 	overview_return_button = null
 	_menu_revision += 1
@@ -309,7 +311,7 @@ func _show_menu(kind: String) -> void:
 	elif kind == "ready":
 		var heading: Label = dialog_body.get_child(0) as Label
 		heading.text = "VIYA | 임시 메인 로비"
-		var account := _label("계정 공통 특성 · 강화 %d/18 · 공격력 %s" % [AccountTalents.IDS.reduce(func(sum, id): return sum + int(gold_progress.talent_levels[id]), 0), AccountTalents.effect_text("attack_power", gold_progress.attack_level)], 20)
+		var account := _label("계정 공통 특성 · 강화 %d/54 · 공격력 %s" % [AccountTalents.IDS.reduce(func(sum, id): return sum + int(gold_progress.talent_levels[id]), 0), AccountTalents.effect_text("attack_power", gold_progress.attack_level)], 20)
 		dialog_body.add_child(account)
 		dialog_body.move_child(account, 1)
 		talents_button = _button("계정 특성 · 공격 / 방어 / 회복", _open_talents.bind(ticket, revision))
@@ -347,6 +349,8 @@ func _fit_dialog() -> void:
 		return
 	dialog.custom_minimum_size = Vector2.ZERO
 	_place(_modal_host, layout_data["modal"])
+	if is_instance_valid(_talent_grid):
+		_talent_grid.columns = 2 if layout_data.modal.size.x >= 850.0 else 1
 	for child in dialog_body.get_children():
 		if child is Label:
 			child.custom_minimum_size.x = 0.0
@@ -623,6 +627,7 @@ func _show_talents() -> void:
 	var revision: int = _menu_revision
 	dialog_body.add_child(_label("계정 공통 특성", 24))
 	dialog_body.add_child(_label("보유 골드 %s · 모든 캐릭터의 새 전투에 적용\n이어하기는 출격 당시 특성을 유지합니다." % AccountTalents.gold_text(gold_progress.total), 18))
+	dialog_body.add_child(_label("하위 특성 Lv.k는 바로 위 특성 Lv.k 이상이 필요합니다.\n[임시] 표시는 효과 수치를 조정 중인 특성입니다.", 16))
 	talents_return_button = _button("메인 로비로", _close_talents.bind(ticket, revision))
 	dialog_body.add_child(talents_return_button)
 	var tabs := HBoxContainer.new()
@@ -639,29 +644,15 @@ func _show_talents() -> void:
 	panel.custom_minimum_size.y = 140
 	talent_content = VBoxContainer.new()
 	panel.add_child(talent_content)
-	for id in AccountTalents.IDS:
-		var definition: Dictionary = AccountTalents.DEFINITIONS[id]
-		if definition.category != _talent_category:
-			continue
-		talent_content.add_child(_label("%s · %s / %s / %s" % [definition.name, AccountTalents.effect_text(id, 1), AccountTalents.effect_text(id, 2), AccountTalents.effect_text(id, 3)], 18))
-		talent_buttons_by_id[id] = []
-		var current: int = gold_progress.talent_levels[id]
-		for level in range(3):
-			var state_text := "강화하기"
-			if level < current:
-				state_text = "강화 완료"
-			elif level > current:
-				state_text = "이전 단계 필요"
-			elif gold_progress.total < int(AccountTalents.ATTACK_COSTS[level]):
-				state_text = "골드 부족"
-			var caption := "%d단계 · %s · %s 골드 · %s" % [level + 1, AccountTalents.effect_text(id, level + 1), AccountTalents.gold_text(AccountTalents.ATTACK_COSTS[level]), state_text]
-			var buy := _button(caption, _buy_talent.bind(id, level, ticket, revision))
-			buy.add_theme_font_size_override("font_size", 18)
-			buy.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-			buy.disabled = gold_error != OK or not gold_progress.loaded or level != current or gold_progress.total < int(AccountTalents.ATTACK_COSTS[level])
-			talent_content.add_child(buy)
-			talent_buy_buttons.append(buy)
-			talent_buttons_by_id[id].append(buy)
+	_talent_grid = GridContainer.new()
+	_talent_grid.add_theme_constant_override("h_separation", 14)
+	talent_content.add_child(_talent_grid)
+	for chain in AccountTalents.CHAINS[_talent_category]:
+		var column := VBoxContainer.new()
+		column.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		_talent_grid.add_child(column)
+		for id in chain:
+			_add_talent_node(column, id, ticket, revision)
 	if gold_error != OK:
 		dialog_body.add_child(_label("계정 저장을 확인할 수 없습니다. 로비에서 다시 불러와 주세요.", 17))
 	if not _talent_notice.is_empty():
@@ -670,6 +661,42 @@ func _show_talents() -> void:
 	_scroll.scroll_vertical = 0
 	overlay.show()
 	_fit_dialog()
+
+func _add_talent_node(column: VBoxContainer, id: String, ticket: int, revision: int) -> void:
+	var definition: Dictionary = AccountTalents.DEFINITIONS[id]
+	var parent: String = definition.get("parent", "")
+	if not parent.is_empty():
+		column.add_child(_label("↓ %s와 같은 레벨 필요" % AccountTalents.DEFINITIONS[parent].name, 14))
+	var panel := _panel(column)
+	var body := VBoxContainer.new()
+	panel.add_child(body)
+	var title := _label("%s\n%s / %s / %s" % [definition.name, AccountTalents.effect_text(id, 1), AccountTalents.effect_text(id, 2), AccountTalents.effect_text(id, 3)], 17)
+	title.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	body.add_child(title)
+	if AccountTalents.DESCRIPTIONS.has(id):
+		var detail := _label(AccountTalents.DESCRIPTIONS[id], 14)
+		detail.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		body.add_child(detail)
+	talent_buttons_by_id[id] = []
+	var current: int = gold_progress.talent_levels[id]
+	for level in range(3):
+		var state_text := "강화하기"
+		if level < current:
+			state_text = "강화 완료"
+		elif level > current:
+			state_text = "이전 단계 필요"
+		elif not AccountTalents.can_purchase(gold_progress.talent_levels, id, level):
+			state_text = "%s Lv.%d 필요" % [AccountTalents.DEFINITIONS[parent].name, level + 1]
+		elif gold_progress.total < int(AccountTalents.ATTACK_COSTS[level]):
+			state_text = "골드 부족"
+		var caption := "Lv.%d · %s · %s 골드\n%s" % [level + 1, AccountTalents.effect_text(id, level + 1), AccountTalents.gold_text(AccountTalents.ATTACK_COSTS[level]), state_text]
+		var buy := _button(caption, _buy_talent.bind(id, level, ticket, revision))
+		buy.add_theme_font_size_override("font_size", 16)
+		buy.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		buy.disabled = gold_error != OK or not gold_progress.loaded or not AccountTalents.can_purchase(gold_progress.talent_levels, id, level) or gold_progress.total < int(AccountTalents.ATTACK_COSTS[level])
+		body.add_child(buy)
+		talent_buy_buttons.append(buy)
+		talent_buttons_by_id[id].append(buy)
 
 func _select_talent_category(category: String, ticket: int, revision: int) -> void:
 	if not _talents_open or not _menu_matches(ticket, revision) or category not in ["attack", "defense", "recovery"]:

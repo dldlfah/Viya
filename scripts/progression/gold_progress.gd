@@ -39,6 +39,10 @@ func load_progress() -> Error:
 			return ERR_FILE_CORRUPT
 		if schema == 1:
 			saved_levels = Talents.from_attack(saved_attack)
+		elif schema == 2:
+			saved_levels = Talents.expand_six(file.get_value("account", "talent_levels", {}))
+			if saved_levels.is_empty() or saved_levels.attack_power != saved_attack:
+				return ERR_FILE_CORRUPT
 		elif schema == Talents.SCHEMA:
 			var saved: Variant = file.get_value("account", "talent_levels", {})
 			if not Talents.valid_levels(saved) or saved.attack_power != saved_attack:
@@ -72,7 +76,9 @@ func purchase_attack(expected_level: int) -> Error:
 func purchase_talent(id: String, expected_level: int) -> Error:
 	if not loaded or id not in Talents.IDS or not Talents.valid_level(expected_level) or expected_level != talent_levels[id]:
 		return ERR_INVALID_PARAMETER
-	if expected_level >= 3 or total < int(Talents.ATTACK_COSTS[expected_level]):
+	if not Talents.can_purchase(talent_levels, id, expected_level):
+		return ERR_UNAVAILABLE
+	if total < int(Talents.ATTACK_COSTS[expected_level]):
 		return ERR_UNAVAILABLE
 	var disk = get_script().new()
 	disk.path = path

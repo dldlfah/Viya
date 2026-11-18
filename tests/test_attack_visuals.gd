@@ -27,6 +27,7 @@ static func _snapshot(state) -> String:
 		state.navigation_ticket, state.transition_action, state.result_summary(),
 		state.gold_pickups, state.gold_collected, state.gold_rng.state,
 		state.account_talent_levels, state._damage_reduction_remainder, state._regen_remainder, state.magic.bonus_mana_regen,
+		state._slow_left, state._kill_heal_clock, state._kill_heal_used, state.magic.bonus_max_mana, state.magic.mana_cost_scale, state.magic.radius_scale,
 		state.enemy_bullets, state.encounter_rng.state, state._swarm_clock, state._swarm_pending, state._swarm_serial,
 		state.cues.snapshot(), state.feedback.snapshot(state.hp, state.max_hp)])
 

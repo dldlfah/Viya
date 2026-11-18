@@ -8,6 +8,9 @@ var cooldown_left: float = 0.0
 var casts: int = 0
 var ticket: int = 0 # Monotonic across restarts, phase changes, and successful casts.
 var bonus_mana_regen: float = 0.0 # Derived from this battle's frozen account talents.
+var bonus_max_mana: float = 0.0
+var mana_cost_scale: float = 1.0
+var radius_scale: float = 1.0
 
 func accepts(candidate: Dictionary, character_id: String) -> bool:
 	if character_id.is_empty() or candidate.get("owner", "") != character_id:
@@ -40,17 +43,26 @@ func reset(candidate: Dictionary, character_id: String) -> bool:
 	cooldown_left = 0.0
 	casts = 0
 	bonus_mana_regen = 0.0
+	bonus_max_mana = 0.0
+	mana_cost_scale = 1.0
+	radius_scale = 1.0
 	invalidate_requests()
 	return true
 
 func invalidate_requests() -> void:
 	ticket += 1
 
+func maximum_mana() -> float:
+	return float(config.get("max_mana", 100.0)) + bonus_max_mana
+
+func effective_cost() -> float:
+	return float(config.get("mana_cost", 0.0)) * mana_cost_scale
+
 func advance(delta: float, running: bool) -> void:
 	if not running or config.is_empty() or delta <= 0.0 or not is_finite(delta):
 		return
 	cooldown_left = maxf(0.0, cooldown_left - delta) if float(config["cooldown"]) > 0.0 else 0.0
-	mana = minf(float(config["max_mana"]), mana + (float(config["mana_regen"]) + bonus_mana_regen) * delta)
+	mana = minf(maximum_mana(), mana + (float(config["mana_regen"]) + bonus_mana_regen) * delta)
 
 func unavailable_reason(running: bool) -> String:
 	if not running:
@@ -59,7 +71,7 @@ func unavailable_reason(running: bool) -> String:
 		return "unconfigured"
 	if float(config["cooldown"]) > 0.0 and cooldown_left > 0.0:
 		return "cooldown"
-	if mana < float(config["mana_cost"]):
+	if mana + 0.000000001 < effective_cost():
 		return "mana"
 	return ""
 
@@ -67,11 +79,11 @@ func profile(rank: int) -> Dictionary:
 	if config.is_empty() or rank < 0:
 		return {}
 	return {"id": config["id"], "owner": owner_id, "name": config["name"],
-		"rank": rank, "mana_cost": float(config["mana_cost"]),
+		"rank": rank, "mana_cost": effective_cost(), "max_mana": maximum_mana(),
 		"mana_regen": float(config["mana_regen"]) + bonus_mana_regen,
 		"cooldown": float(config["cooldown"]),
 		"damage": float(config["damage"]) + float(config["damage_per_rank"]) * rank,
-		"radius": float(config["radius"]) + float(config["radius_per_rank"]) * rank,
+		"radius": (float(config["radius"]) + float(config["radius_per_rank"]) * rank) * radius_scale,
 		"effect_duration": float(config["effect_duration"])}
 
 func consume(expected_ticket: int, running: bool, rank: int) -> Dictionary:
