@@ -1,16 +1,23 @@
 extends RefCounted
 ## Exact gameplay data. Cosmetic effects/cues are rebuilt after a restore.
-const VERSION := 1
+const VERSION := 2
+const LEGACY_RULES := "3ecf54fd2e0aedad3127fce24d77cc55ea0f8ffe3bfbf235d2470d233a34231e"
+const LEGACY_FINGERPRINTS := [LEGACY_RULES,
+	"3c7246f58f661c077aad3c146a3719a9719269c1809a5c65dc5e72aefbfeb7dd",
+	"221b21de9116fbafd0eb9bcde72f93efa72126f76e73c89788e69d41e5dc53bd",
+	"3772fbaceb94a67d68624118ddfe9f021dfb8b26dd36bdef7c16f8e4d4405ad0"]
 const RUN_FIELDS := ["phase", "player", "facing", "hp", "elapsed", "kills", "shots",
 	"shot_clock", "spawn_clock", "hurt_clock", "skill_clocks", "_resume_phase",
 	"_enemy_serial", "_regen_remainder", "navigation_ticket", "stage", "run_id",
 	"gold_collected", "gold_drop_chance", "_elites_spawned", "_boss_spawned", "_boss_defeated", "checkpoint_index", "end_reason",
-	"enemies", "bullets", "pickups", "gold_pickups"]
+	"enemies", "bullets", "pickups", "gold_pickups", "enemy_bullets", "_swarm_clock", "_swarm_pending", "_swarm_serial"]
 const GROWTH_FIELDS := ["character_id", "owned", "level", "xp", "pending", "offer", "ticket", "revision"]
 const MAGIC_FIELDS := ["mana", "cooldown_left", "casts", "ticket"]
 
 static func fingerprint() -> String:
-	return (FileAccess.get_file_as_string("res://data/stages.json") + FileAccess.get_file_as_string("res://data/prototype_skills.json")).sha256_text()
+	var stages := FileAccess.get_file_as_string("res://data/stages.json").replace("\r\n", "\n")
+	var skills := FileAccess.get_file_as_string("res://data/prototype_skills.json").replace("\r\n", "\n")
+	return (stages + skills).sha256_text()
 
 static func capture(state) -> Dictionary:
 	var result := {"version": VERSION, "rules": fingerprint(), "run": {}, "growth": {}, "magic": {}, "rng": []}
@@ -20,9 +27,38 @@ static func capture(state) -> Dictionary:
 		result.growth[key] = state.growth.get(key)
 	for key in MAGIC_FIELDS:
 		result.magic[key] = state.magic.get(key)
-	for generator in [state.rng, state.growth.rng, state.gold_rng]:
+	for generator in [state.rng, state.growth.rng, state.gold_rng, state.encounter_rng]:
 		result.rng.append({"seed": generator.seed, "state": generator.state})
 	return result.duplicate(true)
+
+static func upgrade_legacy(data: Dictionary, state) -> Dictionary:
+	if data.get("version") != 1 or data.get("rules") not in LEGACY_FINGERPRINTS:
+		return data
+	if not data.get("run") is Dictionary or not data.get("rng") is Array or data.rng.size() != 3:
+		return data
+	var run: Dictionary = data.run
+	if not run.get("enemies") is Array or not run.get("stage") is int or not finite_number(run.get("elapsed"), 0, 36000):
+		return data
+	if not data.rng[0] is Dictionary or not data.rng[0].get("seed") is int:
+		return data
+	var rules: Dictionary = state.stage_catalog.for_stage(run.stage)
+	if rules.is_empty():
+		return data
+	data = data.duplicate(true)
+	data.version = VERSION
+	data.rules = fingerprint()
+	data.run.enemy_bullets = []
+	data.run._swarm_clock = float(rules.swarm.interval) - fmod(float(run.elapsed), float(rules.swarm.interval))
+	data.run._swarm_pending = false
+	data.run._swarm_serial = 0
+	for enemy in data.run.enemies:
+		if not enemy is Dictionary:
+			return {}
+		enemy.variant = "normal" # Existing enemies retain their actual HP and speed.
+	var generator := RandomNumberGenerator.new()
+	generator.seed = int(data.rng[0].seed) ^ 0xE11C
+	data.rng.append({"seed": generator.seed, "state": generator.state})
+	return data
 
 static func finite_number(value: Variant, minimum: float, maximum: float) -> bool:
 	return (value is float or value is int) and is_finite(float(value)) and value >= minimum and value <= maximum
@@ -53,6 +89,8 @@ static func valid(data: Dictionary, state) -> bool:
 	if not vector(run.player) or not vector(run.facing) or run.stage < 1 or run.checkpoint_index > 2 or run._elites_spawned > 2:
 		return false
 	if not finite_number(run.get("gold_drop_chance"), 0, 1):
+		return false
+	if not finite_number(run._swarm_clock, 0, 1000) or not run._swarm_pending is bool or not run._swarm_serial is int or run._swarm_serial < 0:
 		return false
 	if run.player != run.player.clamp(Vector2.ONE * 30.0, state.WORLD_SIZE - Vector2.ONE * 30.0):
 		return false
@@ -127,7 +165,7 @@ static func valid(data: Dictionary, state) -> bool:
 	for key in ["casts", "ticket"]:
 		if not magic.get(key) is int or not finite_number(magic[key], 0, 1000000000):
 			return false
-	if not data.get("rng") is Array or data.rng.size() != 3:
+	if not data.get("rng") is Array or data.rng.size() != 4:
 		return false
 	for generator in data.rng:
 		if not generator is Dictionary or not generator.get("seed") is int or not generator.get("state") is int:
@@ -140,7 +178,7 @@ static func valid(data: Dictionary, state) -> bool:
 	return valid_actors(run, state)
 
 static func valid_actors(run: Dictionary, state) -> bool:
-	var caps := {"enemies": state.MAX_ENEMIES, "bullets": state.MAX_BULLETS, "pickups": state.MAX_PICKUPS, "gold_pickups": state.MAX_PICKUPS}
+	var caps := {"enemies": state.MAX_ENEMIES, "bullets": state.MAX_BULLETS, "pickups": state.MAX_PICKUPS, "gold_pickups": state.MAX_PICKUPS, "enemy_bullets": state.MAX_ENEMY_BULLETS}
 	for key in caps:
 		if not run[key] is Array or run[key].size() > caps[key]:
 			return false
@@ -155,10 +193,22 @@ static func valid_actors(run: Dictionary, state) -> bool:
 		ids[enemy.id] = true
 		if enemy.get("kind") not in ["normal", "elite", "boss"]:
 			return false
-		if not enemy.get("hp") is int or not enemy.get("max_hp") is int or enemy.hp < 1 or enemy.hp > enemy.max_hp or enemy.max_hp > 1000000:
+		if not enemy.get("hp") is int or not enemy.get("max_hp") is int or enemy.hp < 1 or enemy.hp > enemy.max_hp or enemy.max_hp > 2000000:
 			return false
 		if not finite_number(enemy.get("speed"), 1, 1000):
 			return false
+		if enemy.get("variant") not in ["normal", "ranged", "fast", "heavy", "flier"]:
+			return false
+		if enemy.kind != "normal" and enemy.variant != "normal":
+			return false
+		if enemy.variant == "ranged":
+			if not vector(enemy.get("aim")) or not finite_number(enemy.get("fire_clock"), 0, 1000) or not finite_number(enemy.get("windup"), 0, 1000):
+				return false
+		elif enemy.variant == "flier":
+			if not vector(enemy.get("velocity")) or not finite_number(enemy.get("life"), 0.000001, 1000):
+				return false
+			if not enemy.get("group") is int or enemy.group < 0 or enemy.group > run._swarm_serial:
+				return false
 		if enemy.kind == "boss":
 			boss_count += 1
 	if boss_count > 1 or (run._boss_spawned and not run._boss_defeated and boss_count != 1) or (run._boss_defeated and boss_count != 0):
@@ -178,9 +228,15 @@ static func valid_actors(run: Dictionary, state) -> bool:
 	for pickup in run.gold_pickups:
 		if not pickup.get("value") is int or pickup.value < 1 or pickup.value > 1000000000:
 			return false
+	for bullet in run.enemy_bullets:
+		if not vector(bullet.get("velocity")) or not finite_number(bullet.get("life"), 0.000001, 1000):
+			return false
+		if not bullet.get("damage") is int or bullet.damage < 1 or bullet.damage > 1000:
+			return false
 	return true
 
 static func restore(data: Dictionary, state) -> bool:
+	data = upgrade_legacy(data, state)
 	if not valid(data, state):
 		return false
 	data = data.duplicate(true)
@@ -201,8 +257,8 @@ static func restore(data: Dictionary, state) -> bool:
 	state.magic.reset(state.growth.catalog.characters[state.growth.character_id].active_magic, state.growth.character_id)
 	for key in MAGIC_FIELDS:
 		state.magic.set(key, data.magic[key])
-	var generators := [state.rng, state.growth.rng, state.gold_rng]
-	for index in range(3):
+	var generators := [state.rng, state.growth.rng, state.gold_rng, state.encounter_rng]
+	for index in range(4):
 		generators[index].seed = data.rng[index].seed
 		generators[index].state = data.rng[index].state
 	state.stage_rules = state.stage_catalog.for_stage(state.stage)

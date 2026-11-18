@@ -10,7 +10,9 @@ const WORLD_SIZE := Vector2(1800.0, 1200.0)
 const PLAYER_SPEED := 235.0
 const PLAYER_RADIUS := 17.0
 const ENEMY_RADIUS := 18.0
-const MAX_ENEMIES := 80
+const MAX_ENEMIES := 160
+const MAX_ENEMY_BULLETS := 64
+const SWARM_SIZE := 20
 const MAX_BULLETS := 64
 const MAX_PICKUPS := 240
 const MAX_EFFECTS := 32
@@ -31,6 +33,7 @@ var shot_clock: float = 0.0
 var spawn_clock: float = 0.0
 var hurt_clock: float = 0.0
 var enemies: Array[Dictionary] = []
+var enemy_bullets: Array[Dictionary] = []
 var bullets: Array[Dictionary] = []
 var pickups: Array[Dictionary] = []
 var effects: Array[Dictionary] = []
@@ -57,6 +60,10 @@ var stage: int = 1
 var gold_collected: int = 0
 var gold_pickups: Array[Dictionary] = []
 var gold_rng := RandomNumberGenerator.new()
+var encounter_rng := RandomNumberGenerator.new()
+var _swarm_clock: float = 20.0
+var _swarm_pending: bool = false
+var _swarm_serial: int = 0
 var run_id: String = ""
 var _elites_spawned: int = 0
 var _boss_spawned: bool = false
@@ -91,6 +98,7 @@ func start(seed_value: int = 0, character_id: String = "viya") -> bool:
 	if not growth.reset(character_id, int(rng.seed) ^ 0x51A7):
 		return false
 	gold_rng.seed = int(rng.seed) ^ 0x601D
+	encounter_rng.seed = int(rng.seed) ^ 0xE11C
 	run_id = Crypto.new().generate_random_bytes(16).hex_encode()
 	gold_collected = 0
 	gold_pickups.clear()
@@ -100,6 +108,9 @@ func start(seed_value: int = 0, character_id: String = "viya") -> bool:
 	checkpoint_index = 0
 	end_reason = ""
 	stage_rules = rules
+	_swarm_clock = float(rules.swarm.interval)
+	_swarm_pending = false
+	_swarm_serial = 0
 	stage_duration = float(rules.duration)
 	stage_clear_gold = int(rules.clear_gold)
 	magic.reset(candidate, character_id)
@@ -122,6 +133,7 @@ func start(seed_value: int = 0, character_id: String = "viya") -> bool:
 	_regen_remainder = 0.0
 	_resume_phase = Phase.RUNNING
 	enemies.clear()
+	enemy_bullets.clear()
 	bullets.clear()
 	pickups.clear()
 	effects.clear()
@@ -154,8 +166,10 @@ func damage_player(amount: int) -> bool:
 		feedback.trigger("hurt")
 	return true
 
-func add_enemy(at: Vector2, kind: String = "normal") -> bool:
+func add_enemy(at: Vector2, kind: String = "normal", variant: String = "normal") -> bool:
 	if enemies.size() >= MAX_ENEMIES or kind not in ["normal", "elite", "boss"]:
+		return false
+	if variant not in ["normal", "ranged", "fast", "heavy", "flier"] or (kind != "normal" and variant != "normal"):
 		return false
 	_enemy_serial += 1
 	var wave := wave_profile()
@@ -164,7 +178,20 @@ func add_enemy(at: Vector2, kind: String = "normal") -> bool:
 		life = int(stage_rules.elite_hp[mini(_elites_spawned, 1)])
 	elif kind == "boss":
 		life = int(stage_rules.boss_hp)
-	enemies.append({"id": _enemy_serial, "p": at, "hp": life, "max_hp": life, "kind": kind, "speed": float(wave.speed)})
+	var speed: float = float(wave.speed)
+	match variant:
+		"fast": speed *= float(stage_rules.fast_speed_scale)
+		"heavy":
+			life *= 2
+			speed *= float(stage_rules.heavy_speed_scale)
+		"ranged": speed *= float(stage_rules.ranged.speed_scale)
+		"flier": speed = float(stage_rules.swarm.speed)
+	var enemy := {"id": _enemy_serial, "p": at, "hp": life, "max_hp": life, "kind": kind, "variant": variant, "speed": speed}
+	if variant == "ranged":
+		enemy.merge({"fire_clock": float(stage_rules.ranged.interval), "windup": 0.0, "aim": at})
+	elif variant == "flier":
+		enemy.merge({"velocity": Vector2.RIGHT * float(stage_rules.swarm.speed), "life": float(stage_rules.swarm.life), "group": _swarm_serial})
+	enemies.append(enemy)
 	return true
 
 func add_pickup(at: Vector2, value: float = 5.0) -> void:
@@ -308,7 +335,11 @@ func step(delta: float, direction: Vector2) -> void:
 		for index in range(int(wave.batch)):
 			_spawn_enemy()
 		spawn_clock = float(wave.interval)
+	_tick_swarm(dt)
 	_move_enemies(dt)
+	if phase != Phase.RUNNING:
+		return
+	_move_enemy_bullets(dt)
 	if phase != Phase.RUNNING:
 		return
 	shot_clock = maxf(0.0, shot_clock - dt)
@@ -350,29 +381,118 @@ func _collect_pickups(dt: float) -> void:
 		cues.record_collected_xp(player, reward)
 
 func _spawn_enemy(kind: String = "normal") -> bool:
-	# Keep a slot for the scheduled boss under a saturated normal wave.
-	var limit: int = MAX_ENEMIES if kind == "boss" or _boss_spawned else MAX_ENEMIES - 1
+	# Reserve a complete flying formation and the scheduled boss slot.
+	var limit: int = MAX_ENEMIES - SWARM_SIZE - (0 if _boss_spawned else 1)
+	if kind == "boss":
+		limit = MAX_ENEMIES
 	if enemies.size() >= limit:
 		return false
 	for attempt in range(8):
 		var candidate := player + Vector2.from_angle(rng.randf_range(0.0, TAU)) * 590.0
 		candidate = candidate.clamp(Vector2.ONE * 24.0, WORLD_SIZE - Vector2.ONE * 24.0)
 		if candidate.distance_squared_to(player) >= 160.0 * 160.0:
-			return add_enemy(candidate, kind)
+			return add_enemy(candidate, kind, _roll_variant() if kind == "normal" else "normal")
 	return false
 
 func _move_enemies(dt: float) -> void:
-	for enemy in enemies:
+	for index in range(enemies.size() - 1, -1, -1):
+		var enemy: Dictionary = enemies[index]
 		var speed: float = float(enemy.get("speed", wave_profile().speed))
 		var pos: Vector2 = enemy["p"]
 		var offset := player - pos
-		if offset.length_squared() > 0.01:
+		var variant: String = str(enemy.get("variant", "normal"))
+		if variant == "flier":
+			enemy.life -= dt
+			if enemy.life <= 0.0:
+				enemies.remove_at(index)
+				continue
+			pos += enemy.velocity * dt
+		elif variant == "ranged":
+			var distance := offset.length()
+			if distance > float(stage_rules.ranged.range) * 0.85:
+				pos += offset.normalized() * speed * dt
+			elif distance < float(stage_rules.ranged.keep_distance) * 0.75:
+				pos -= offset.normalized() * speed * dt
+			pos = pos.clamp(Vector2.ONE * 24.0, WORLD_SIZE - Vector2.ONE * 24.0)
+		elif offset.length_squared() > 0.01:
 			pos += offset.normalized() * minf(speed * dt, offset.length())
 		enemy["p"] = pos
+		if variant == "ranged":
+			_tick_ranged(enemy, dt)
 		if pos.distance_squared_to(player) <= pow(PLAYER_RADIUS + ENEMY_RADIUS, 2.0):
 			damage_player(12)
 			if phase == Phase.DEFEAT:
 				return
+
+func _roll_variant() -> String:
+	var roll := encounter_rng.randf() * 100.0
+	var weight := 0.0
+	for variant in ["normal", "ranged", "fast", "heavy"]:
+		weight += float(stage_rules.enemy_mix[variant])
+		if roll < weight:
+			return variant
+	return "heavy"
+
+func _tick_ranged(enemy: Dictionary, dt: float) -> void:
+	var rules: Dictionary = stage_rules.ranged
+	enemy.fire_clock = maxf(0.0, float(enemy.fire_clock) - dt)
+	if enemy.windup > 0.0:
+		enemy.windup = maxf(0.0, float(enemy.windup) - dt)
+		if enemy.windup == 0.0:
+			if enemy_bullets.size() < MAX_ENEMY_BULLETS:
+				var direction: Vector2 = enemy.p.direction_to(enemy.aim)
+				if direction.is_zero_approx():
+					direction = Vector2.RIGHT
+				enemy_bullets.append({"p": enemy.p, "velocity": direction * float(rules.bullet_speed), "life": float(rules.bullet_life), "damage": int(rules.damage)})
+			enemy.fire_clock = float(rules.interval)
+		return
+	if enemy.fire_clock == 0.0 and enemy.p.distance_to(player) <= float(rules.range):
+		enemy.aim = player
+		enemy.windup = float(rules.windup)
+
+func _move_enemy_bullets(dt: float) -> void:
+	for index in range(enemy_bullets.size() - 1, -1, -1):
+		var bullet: Dictionary = enemy_bullets[index]
+		var previous: Vector2 = bullet.p
+		bullet.p += bullet.velocity * minf(dt, float(bullet.life))
+		bullet.life -= dt
+		var nearest := Geometry2D.get_closest_point_to_segment(player, previous, bullet.p)
+		var hit: bool = nearest.distance_squared_to(player) <= pow(PLAYER_RADIUS + 5.0, 2.0)
+		if hit:
+			damage_player(int(bullet.damage))
+		if hit or bullet.life <= 0.0:
+			enemy_bullets.remove_at(index)
+		if phase != Phase.RUNNING:
+			return
+
+func _tick_swarm(dt: float) -> void:
+	if _swarm_pending:
+		if _spawn_swarm():
+			_swarm_pending = false
+		return
+	_swarm_clock = maxf(0.0, _swarm_clock - dt)
+	if _swarm_clock > 0.0:
+		return
+	_swarm_clock = float(stage_rules.swarm.interval)
+	var chance: float = float(stage_rules.swarm.chance)
+	_swarm_pending = chance >= 1.0 or encounter_rng.randf() < chance
+	if _swarm_pending and _spawn_swarm():
+		_swarm_pending = false
+
+func _spawn_swarm() -> bool:
+	var limit: int = MAX_ENEMIES - (0 if _boss_spawned else 1)
+	if enemies.size() + SWARM_SIZE > limit:
+		return false
+	_swarm_serial += 1
+	var direction := Vector2.from_angle(encounter_rng.randi_range(0, 3) * PI * 0.5)
+	var origin := player - direction * 650.0
+	var rules: Dictionary = stage_rules.swarm
+	for index in range(SWARM_SIZE):
+		var offset := direction.orthogonal() * ((index % 5) - 2) * float(rules.spacing)
+		offset -= direction * int(index / 5) * float(rules.spacing)
+		add_enemy(origin + offset, "normal", "flier")
+		enemies[-1].velocity = direction * float(rules.speed)
+	return true
 
 func _nearest(at: Vector2, reach: float, ignored: Array[int] = []) -> Dictionary:
 	var best := reach * reach

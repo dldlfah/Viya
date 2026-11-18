@@ -40,6 +40,7 @@ func gameplay_snapshot(state) -> String:
 		state.magic.cooldown_left, state.magic.ticket, state.magic.casts,
 		state.navigation_ticket, state.transition_action, state.result_summary(),
 		state.gold_pickups, state.gold_collected, state.gold_rng.state,
+		state.enemy_bullets, state.encounter_rng.state, state._swarm_clock, state._swarm_pending, state._swarm_serial,
 		state.feedback.snapshot(state.hp, state.max_hp)])
 
 func frozen_cues(state, description: String) -> void:
@@ -188,6 +189,7 @@ func _run() -> void:
 	await AttackChecks.run(scene, verify)
 	await preload("res://tests/test_gold_settings.gd").run(scene, verify)
 	await preload("res://tests/test_campaign.gd").run(scene, verify)
+	await preload("res://tests/test_enemy_variety.gd").run(scene, verify)
 	scene.queue_free()
 	await process_frame
 	await process_frame

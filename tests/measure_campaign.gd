@@ -53,6 +53,11 @@ func pick_skill(state) -> String:
 	for id in state.growth.offer:
 		var entry: Dictionary = state.growth.definition(id)
 		var score: float = PRIORITY.get(str(entry.effect), 5.0)
+		if float(state.hp) / state.max_hp < 0.6:
+			if entry.effect == "vitality":
+				score = 20.0
+			elif entry.effect == "recovery":
+				score = 19.0
 		if entry.row == "attack" and state.growth.skill_level(id) == 0:
 			score += 2.0
 		if score > best:
@@ -61,6 +66,34 @@ func pick_skill(state) -> String:
 	return selected
 
 func move_direction(state, near: Dictionary) -> Vector2:
+	var goal := movement_goal(state, near)
+	var selected := Vector2.ZERO
+	var best := -INF
+	for index in range(9):
+		var direction := Vector2.ZERO if index == 8 else Vector2.from_angle(index * TAU / 8.0)
+		var future: Vector2 = (state.player + direction * float(state.stats.speed) * 0.35).clamp(Vector2.ONE * 30, state.WORLD_SIZE - Vector2.ONE * 30)
+		var score: float = direction.dot(goal) * 30.0
+		for enemy in state.enemies:
+			var predicted: Vector2 = enemy.p
+			if enemy.get("variant", "normal") == "flier":
+				predicted += enemy.velocity * 0.35
+			var distance := future.distance_to(predicted)
+			if distance < 100.0:
+				score -= (100.0 - distance) * 4.0
+			if enemy.get("variant", "normal") == "ranged" and float(enemy.windup) > 0.0:
+				var aim_line := Geometry2D.get_closest_point_to_segment(future, enemy.p, enemy.aim)
+				score -= maxf(0.0, 40.0 - future.distance_to(aim_line)) * 3.0
+		for bullet in state.enemy_bullets:
+			var line := Geometry2D.get_closest_point_to_segment(future, bullet.p, bullet.p + bullet.velocity * 0.65)
+			score -= maxf(0.0, 42.0 - future.distance_to(line)) * 8.0
+		if future.x < 70 or future.y < 70 or future.x > state.WORLD_SIZE.x - 70 or future.y > state.WORLD_SIZE.y - 70:
+			score -= 20.0
+		if score > best:
+			best = score
+			selected = direction
+	return selected
+
+func movement_goal(state, near: Dictionary) -> Vector2:
 	if not near.is_empty() and state.player.distance_to(near.p) < 100:
 		return (state.player - near.p).normalized()
 	if not state.pickups.is_empty():

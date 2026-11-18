@@ -29,17 +29,26 @@ func _draw() -> void:
 			pos + Vector2(5, 0), pos + Vector2(0, 7), pos + Vector2(-5, 0)]), Color("7cd3c1"))
 	for enemy in simulation.enemies:
 		var at := _screen(enemy["p"])
+		var variant: String = str(enemy.get("variant", "normal"))
 		if Rect2(Vector2.ZERO, size).grow(30).has_point(at):
 			draw_circle(at + Vector2(0, 5), 21, Color(0, 0, 0, 0.4))
 			var flash: float = simulation.cues.flash_alpha(int(enemy["id"]))
 			var kind: String = str(enemy.get("kind", "normal"))
-			var base: Color = {"normal": Color("aa5364"), "elite": Color("d6a65d"), "boss": Color("b66ad6")}[kind]
-			var enemy_color: Color = base.lerp(Color("fff1db"), flash)
-			draw_colored_polygon(PackedVector2Array([at + Vector2(0, -20), at + Vector2(19, 13), at + Vector2(-19, 13)]), enemy_color)
+			var base: Color = {"normal": Color("aa5364"), "ranged": Color("85ce95"), "fast": Color("6fcce6"), "heavy": Color("c39360"), "flier": Color("a6a8ed")}[variant]
 			if kind != "normal":
-				draw_arc(at, 25.0 if kind == "elite" else 29.0, 0.0, TAU, 24, base, 3.0, true)
+				base = Color("b66ad6") if kind == "elite" else Color("eb5868")
+			var enemy_color: Color = base.lerp(Color("fff1db"), flash)
+			_draw_enemy_body(at, variant, enemy_color)
+			if kind != "normal":
+				draw_arc(at, 29.0 if kind == "elite" else 34.0, 0.0, TAU, 24, base, 3.0, true)
+				if kind == "boss":
+					draw_arc(at, 39.0, 0.0, TAU, 24, base, 1.5, true)
 			draw_rect(Rect2(at + Vector2(-18, -29), Vector2(36, 4)), Color("302b2e"))
 			draw_rect(Rect2(at + Vector2(-18, -29), Vector2(36.0 * enemy["hp"] / float(enemy.get("max_hp", 20)), 4)), Color("d98a8d"))
+		if variant == "ranged" and float(enemy.windup) > 0.0:
+			var target := _screen(enemy.aim)
+			draw_line(at, target, Color(0.8, 0.4, 0.3, 0.5), 1.5, true)
+			draw_arc(target, 8.0, 0, TAU, 16, Color("edb06e"), 1.5, true)
 	for gold in simulation.gold_pickups:
 		var at := _screen(gold["p"])
 		draw_circle(at, 7.0, Color("edbc54"))
@@ -47,6 +56,10 @@ func _draw() -> void:
 	for bullet in simulation.bullets:
 		var at := _screen(bullet["p"])
 		AttackVisuals.draw_projectile(self, at, bullet["direction"], str(bullet.get("source", "rifle")), simple_attacks)
+	for bullet in simulation.enemy_bullets:
+		var at := _screen(bullet.p)
+		draw_line(at - bullet.velocity.normalized() * 10.0, at, Color("ed9268"), 2.0, true)
+		draw_circle(at, 5.0, Color("f7ac6d"))
 	for effect in simulation.effects:
 		var effect_at: Vector2 = _screen(effect["p"])
 		var link_from: Vector2 = _screen(effect.get("from", effect["p"]))
@@ -60,6 +73,22 @@ func _draw() -> void:
 	draw_line(center + direction * 6.0, center + direction * 34.0, Color("3a3e48"), 8.0, true)
 	draw_arc(center, 24.0, 0.0, TAU, 36, Color("b69a65"), 1.4, true)
 	_draw_combat_cues()
+
+func _draw_enemy_body(at: Vector2, variant: String, color: Color) -> void:
+	match variant:
+		"ranged":
+			draw_colored_polygon(PackedVector2Array([at + Vector2(0, -19), at + Vector2(18, 0), at + Vector2(0, 19), at + Vector2(-18, 0)]), color)
+			draw_circle(at, 6.0, Color("283c32"))
+		"heavy":
+			draw_rect(Rect2(at - Vector2(17, 17), Vector2(34, 34)), color)
+			draw_rect(Rect2(at - Vector2(12, 12), Vector2(24, 24)), Color("72533c"), false, 3.0)
+		"fast":
+			draw_colored_polygon(PackedVector2Array([at + Vector2(0, -22), at + Vector2(13, 16), at, at + Vector2(-13, 16)]), color)
+		"flier":
+			draw_polyline(PackedVector2Array([at + Vector2(-17, -8), at, at + Vector2(17, -8)]), color, 5.0, true)
+			draw_circle(at, 6.0, color)
+		_:
+			draw_colored_polygon(PackedVector2Array([at + Vector2(0, -20), at + Vector2(19, 13), at + Vector2(-19, 13)]), color)
 
 func _draw_combat_cues() -> void:
 	# One existing canvas, no spawned labels/particles/timers and no state writes.

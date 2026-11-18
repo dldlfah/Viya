@@ -54,4 +54,35 @@ static func valid(rules: Dictionary) -> bool:
 		if wave.batch < 1 or wave.batch > 8 or wave.hp < 1 or wave.hp > 1000000 or wave.hp != floor(wave.hp) or wave.batch != floor(wave.batch):
 			return false
 		previous = wave.from
-	return rules.waves[0].from == 0.0
+	if rules.waves[0].from != 0.0:
+		return false
+	if not rules.get("enemy_mix") is Dictionary or rules.enemy_mix.size() != 4:
+		return false
+	var weight := 0.0
+	for key in ["normal", "ranged", "fast", "heavy"]:
+		if not number(rules.enemy_mix.get(key), 0, 100):
+			return false
+		weight += float(rules.enemy_mix[key])
+	if not is_equal_approx(weight, 100.0) or not number(rules.get("fast_speed_scale"), 1.01, 5):
+		return false
+	if not number(rules.get("heavy_speed_scale"), 0.1, 0.99):
+		return false
+	if not rules.get("ranged") is Dictionary or not rules.get("swarm") is Dictionary:
+		return false
+	for key in ["speed_scale", "range", "keep_distance", "interval", "windup", "bullet_speed", "bullet_life", "damage"]:
+		if not number(rules.ranged.get(key), 0.01, 1000):
+			return false
+	if rules.ranged.keep_distance >= rules.ranged.range or rules.ranged.damage != floor(rules.ranged.damage):
+		return false
+	for wave in rules.waves:
+		if float(wave.speed) * maxf(float(rules.fast_speed_scale), float(rules.ranged.speed_scale)) > 1000.0:
+			return false
+	for key in ["interval", "speed", "life", "spacing"]:
+		if not number(rules.swarm.get(key), 0.01, 1000):
+			return false
+	if float(rules.swarm.speed) * float(rules.swarm.life) > 50000.0 or float(rules.ranged.bullet_speed) * float(rules.ranged.bullet_life) > 50000.0:
+		return false
+	return number(rules.swarm.get("chance"), 0, 1)
+
+static func number(value: Variant, minimum: float, maximum: float) -> bool:
+	return value is float and is_finite(value) and value >= minimum and value <= maximum

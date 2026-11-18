@@ -27,6 +27,8 @@ func load_saved(state) -> Error:
 		error = ERR_FILE_CORRUPT
 		return error
 	var decoded: Variant = bytes_to_var(payload)
+	if decoded is Dictionary:
+		decoded = Snapshot.upgrade_legacy(decoded, state)
 	if not decoded is Dictionary or not Snapshot.valid(decoded, state):
 		error = ERR_FILE_CORRUPT
 		return error

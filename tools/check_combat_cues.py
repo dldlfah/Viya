@@ -11,9 +11,9 @@ ROOT = Path(__file__).resolve().parents[1]
 FILES = ('scripts/combat/run_state.gd', 'scripts/combat/battle_view.gd',
          'scripts/combat/combat_cues.gd', 'tests/test_combat_cues.gd',
          'tools/check_project.py', 'tools/check_combat_cues.py')
-# GAME-009: reviewed six-minute campaign and save integration. Exact source baselines retain mutation guards.
-BASE_RUN_BLOB = 'a6b9a8e23b5b6859786fb4d55189bffaf90d3789'
-BASE_VIEW_BLOB = '9545a3c49037260b96b2b526e2d1a66b7be72fbe'
+# GAME-010: reviewed enemy variants, formations and hostile projectile integration. Exact source baselines retain mutation guards.
+BASE_RUN_BLOB = '170720f54cd40644f40e74395ebbfddace4c3b1d'
+BASE_VIEW_BLOB = 'ccd3ccd6b6c3413e51abe737fa5999d456703f42'
 BASE_RUNNER_BLOB = '1ab68ad8a51271e3d47db8b02d433991f42e8d6c'
 # Exact run_engine() from GAME-004D; all 7 suites and failure checks are protected.
 BASE_ENGINE_FUNCTION_SHA256 = '9156043eaf896d72565563cc1e2f623cf0c8fbac7f032f19bffee7e4946a69ee'
@@ -51,7 +51,7 @@ def validate(sources: dict[str, str]) -> list[str]:
             errors.append('Missing/duplicate reviewed visual hook: ' + line.strip())
         restored = restored.replace(line + '\n', '', 1)
     if blob(restored) != BASE_RUN_BLOB:
-        errors.append('RunState differs from the reviewed GAME-009 baseline')
+        errors.append('RunState differs from the reviewed GAME-010 baseline')
     if engine_function_digest(runner) != BASE_ENGINE_FUNCTION_SHA256:
         errors.append('Existing native engine commands or pass/fail criteria changed')
     restored_view = view.split('\nfunc _draw_combat_cues() -> void:', 1)[0]
@@ -60,7 +60,7 @@ def validate(sources: dict[str, str]) -> list[str]:
     restored_view = restored_view.replace('\t\t\tvar enemy_color: Color = Color("aa5364").lerp(Color("fff1db"), flash)\n', '', 1)
     restored_view = restored_view.replace(']), enemy_color)', ']), Color("aa5364"))', 1)
     if blob(restored_view) != BASE_VIEW_BLOB:
-        errors.append('Battle View differs from the reviewed GAME-009 baseline')
+        errors.append('Battle View differs from the reviewed GAME-010 baseline')
     for value in ('const MAX_EVENTS := 48', 'const MAX_FLASHES := 80',
                   'events.size() >= MAX_EVENTS', 'events.pop_front()',
                   'flashes.size() >= MAX_FLASHES', 'flashes.erase(flashes.keys()[0])',
@@ -158,7 +158,7 @@ def check() -> dict:
             'baseline_run_blob': BASE_RUN_BLOB, 'baseline_runner_blob': BASE_RUNNER_BLOB,
             'baseline_engine_function_sha256': BASE_ENGINE_FUNCTION_SHA256,
             'scope': 'Changed-source UTF-8/delimiters/Python syntax, hook order, bounds, isolation, '
-                     'reviewed GAME-009 source baselines and preserved engine runner. '
+                     'reviewed GAME-010 source baselines and preserved engine runner. '
                      'NOT Godot parser/type/runtime, visual quality, input dispatch, or FPS.'}
 
 

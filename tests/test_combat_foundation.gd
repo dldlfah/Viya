@@ -54,7 +54,7 @@ func _run() -> void:
 	verify(state.player == frozen_position, "No simulation after defeat")
 	state.start(10)
 	verify(state.hp == 100 and state.kills == 0 and state.shots == 0 and state.enemies.is_empty() and state.bullets.is_empty(), "Restart clears run state")
-	for number in range(100):
+	for number in range(RunState.MAX_ENEMIES + 20):
 		state.add_enemy(Vector2(500, 300))
 	verify(state.enemies.size() == RunState.MAX_ENEMIES, "Enemy bound enforced")
 	var stick = MoveInput.new()
