@@ -2,8 +2,8 @@
   "unit": "GAME-018",
   "recorded_date_kst": "2026-11-18",
   "branch": "work/viya-turnaround-qa-20261117",
-  "code_commit": "c3e28d3c977512c178b8cd3bd98389685520ccac",
-  "code_tree": "ad352669140bb80061d82ed571f116e16ad6f82b",
+  "code_commit": "d9e45e6f0a3a393ddad7311035dbed4f3c099bd1",
+  "code_tree": "2d507434d65148fd05f3ff7470ca05de4b01aeb7",
   "base_commit": "79097d4afb6d510086101d13d26566e4916e1c96",
   "scope": {
     "common_families": {
@@ -15,8 +15,7 @@
     "playable_character": "viya",
     "production_candidate_pool": "8gun+8legacy_passives+1unique_auto_upgrade+1MP_upgrade=18;3choices",
     "starting_levels": {
-      "gun_rifle": 1,
-      "viya_runebullet_v1": 1
+      "gun_rifle": 1
     },
     "slot_limits": {
       "attack": 4,
@@ -29,7 +28,8 @@
     "account_schema": 3,
     "rng_streams": 6,
     "compatibility": "Published1-9 retain original IDs/semantics/offers/resources in legacy; new lobby sorties use weapons_v1; same-run restart preserves ruleset",
-    "unchanged_legacy_data_sha256": "a6ba197fe558d328e1fcab96506fa098465a4c72aebfe1a1b29cb98642628d1a"
+    "unchanged_legacy_data_sha256": "a6ba197fe558d328e1fcab96506fa098465a4c72aebfe1a1b29cb98642628d1a",
+    "automatic_unique_start": "Not granted; actual level-up acquisition. Concurrent locked initial stat plan preserved."
   },
   "project_checks": {
     "static_integrity": {
@@ -53,10 +53,10 @@
         "scripts/progression/account_talents.gd": "0774659235d3bea9276574996565b315156260274750ef8c7f9969f18550f43e",
         "scripts/progression/gold_progress.gd": "c16cfde2282fe60f0c4bef6e01bc7fab776b5086f4775019f2a9cd598a5fb046",
         "scripts/progression/growth_state.gd": "d6da1a0cb72b30851cb87490c43e6ee068de2ee4250368c7d5d7689eb4098f9c",
-        "scripts/progression/run_snapshot.gd": "6e625c95713045a93aa4866d4b27f37337c0bd563068a8540b5b1166f51b43cc",
+        "scripts/progression/run_snapshot.gd": "ed76290641d9ef36005c7449cf672a78d6f4fb08f4fdfbeab0c5083b14fd719e",
         "scripts/progression/run_store.gd": "bab493f1963ea2a6d98770f9ef9686d70d4b257e0b49afb3386de661a6081986",
         "scripts/progression/skill_catalog.gd": "ccd13a2b02f4b57497beae39e483edfca53617cc3a39e43cbaf8009535c820d8",
-        "scripts/progression/weapon_catalog.gd": "60a9d6e3eb47c6299d1bf1a09dead5ead55bddba0d431fc30edf88243ca1de51",
+        "scripts/progression/weapon_catalog.gd": "aced8b45e765780b4053bfa436e1dbbc1696d2173cb4cb762f21298d5f91421b",
         "scripts/ui/asset_slots.gd": "82886eec7bebd4283eb5ea7137879a5edcee0f43c1fa9a629b0665bce6b4e68a",
         "scripts/ui/city_preview.gd": "d01c0ca26b7d812b2b7d6d63339788be98241f6a09ec58a1a8d35a6f7b788937",
         "scripts/ui/feedback_panel.gd": "2103fd9b8692c5606273175b415447f35a995f9a18306a5e8f0abeeb7c5d465b",
@@ -90,14 +90,14 @@
         "tests/test_skill_preview.gd": "0a62fc3bcdafeb525507f4107621d5c14a955e5d5270750a99d7de1e61f9ad9f",
         "tests/test_supplies.gd": "514cf18adce64efdc33bba386450c3153e13367225f4a27f906dad1db74123d2",
         "tests/test_talent_tree.gd": "984fdf593f086254dd17fde222ac7cafa35d8b223195fd46bc04ee170ddada21",
-        "tests/test_weapon_skills.gd": "45f421264b45f73a52a0a122a1fb32e3d4b6164ac1fa681475f47e3102e63c7c",
+        "tests/test_weapon_skills.gd": "fb8cb3f4dfdd48ef80d5c4301a7d5d9915fa311fab5aab74bdc8a1011e1bf70a",
         "data/chapter_one.json": "c32e288ddc61dc8193cd78de416d3682b7c11f1924bbaaa3ea4afe4b78104f76",
         "data/destructibles.json": "130421dd85d4dbf9ff9f70ab297b36586870e65fb9426cec0c2f58ce57a49b39",
         "data/maps.json": "925638f794696b96fdf48df8c266654cef3af002f43e57f91daa80f8d70e8bd4",
         "data/presentation_slots.json": "b1718c9defed9a29eb9bb6dd51c80de2977a0362294fcc746bf2b1db0cfe930e",
         "data/prototype_skills.json": "a6ba197fe558d328e1fcab96506fa098465a4c72aebfe1a1b29cb98642628d1a",
         "data/stages.json": "2e656d2dc155ad93c76b8a1303133992d95529283be7f5b16423738f4edaeeae",
-        "data/weapon_skills.json": "6d56af0baa56914bbc5f6bac12f13d5e7385cbd85dead712d7d9bbbf23ad0c87",
+        "data/weapon_skills.json": "be23e1eb349958fcebf3dba088fcf389d50654fc31cb83523513c178ff81c659",
         "tools/bootstrap_godot.py": "4c3ca17c3b90f9c5590d7a82a76ae71a353f4d15aae973cf37e03e745ebfdecc",
         "tools/check_combat_cues.py": "c8075179913c08677109d1b8c0a500718e21261608386e8dfc58596575570277",
         "tools/check_feedback_data.py": "f1bd6f415e919a32faab1b403073e24dcdda4b819938b9b707dacfc32320bec7",
@@ -107,7 +107,7 @@
         "tools/check_project.py": "eeafd73fc4503c7af952331c093272a5510aade3fbae04e42afb77eb23f55157",
         "tools/check_run_navigation.py": "baa927ab5ccdb9b8f38b123a14b1c1f9723bcaf6ece6d588c8e063e7ec5221f3"
       },
-      "source_fingerprint": "48fb0340268e786dfe57b144a1de80d320f6b5cdbdca594309041f529b17aa2a",
+      "source_fingerprint": "7e3eaba8cac683992b8a9cdd5141f55f276b304f65186ecdf37171df6ae0fedd",
       "scope": "UTF-8, delimiters, whitespace, JSON/Python syntax, resource existence, project settings; NOT GDScript parser/typechecking or gameplay."
     },
     "growth_data_contract": {
@@ -514,8 +514,8 @@
       "failures": [],
       "status": "PASS"
     },
-    "engine_3.log": {
-      "checks": 70,
+    "engine_8.log": {
+      "checks": 1247,
       "failures": [],
       "status": "PASS"
     },
@@ -524,13 +524,8 @@
       "failures": [],
       "status": "PASS"
     },
-    "engine_5.log": {
-      "checks": 57,
-      "failures": [],
-      "status": "PASS"
-    },
-    "engine_6.log": {
-      "checks": 1336,
+    "engine_3.log": {
+      "checks": 70,
       "failures": [],
       "status": "PASS"
     },
@@ -539,127 +534,26 @@
       "failures": [],
       "status": "PASS"
     },
-    "engine_8.log": {
-      "checks": 1246,
+    "engine_6.log": {
+      "checks": 1336,
+      "failures": [],
+      "status": "PASS"
+    },
+    "engine_5.log": {
+      "checks": 57,
       "failures": [],
       "status": "PASS"
     }
   },
-  "native_checks_total": 2922,
-  "new_checks": 472,
-  "legacy_regression_scope": "Existing2450checks preserved. Historical numeric/ID UI fixtures explicitly select legacy. New472checks include unmodified production scene default/lobby launch/cards/HUD/focus save and32x5ranks actual combat. Seven engine commands/exit/error/failure detection and negative controls retained.",
+  "native_checks_total": 2923,
+  "new_checks": 473,
+  "legacy_regression_scope": "Existing2450checks preserved. Historical numeric/ID UI fixtures explicitly select legacy. New473checks include unmodified production scene default/lobby launch/cards/HUD/focus save and32x5ranks actual combat. Seven engine commands/exit/error/failure detection and negative controls retained.",
   "python_tests": {
     "tests": 12,
     "status": "PASS",
     "command": "python3 -m unittest discover -s tests -p 'test_*.py' -q"
   },
   "separate_processes": {
-    "process-current": {
-      "actors": 12,
-      "damage_carry": 0.0,
-      "future_frames_equal": true,
-      "generation": 1,
-      "gold": 0,
-      "hp": 100,
-      "hp_carry": 0.0,
-      "items": 1,
-      "kill_clock": 0.0,
-      "kill_used": 0.0,
-      "mana": 60.5,
-      "map_id": "prologue_wall",
-      "max_mana": 100.0,
-      "new_version": 10,
-      "old_version": 10,
-      "owned": {
-        "gun_rifle": 3,
-        "viya_runebullet_v1": 3,
-        "viya_wave_upgrade_v1": 5
-      },
-      "position": "(2500.0, 600.0)",
-      "respawn_left": 44.5,
-      "rng_streams": 6,
-      "run_levels": {
-        "attack_power": 0,
-        "attack_range": 0,
-        "attack_speed": 0,
-        "crit_chance": 0,
-        "crit_damage": 0,
-        "damage_reduction": 0,
-        "healing_efficiency": 0,
-        "hp_regen": 0,
-        "invulnerability": 0,
-        "kill_heal": 0,
-        "knockback_resist": 0,
-        "mana_cost_reduction": 0,
-        "max_hp": 0,
-        "max_mana": 0,
-        "move_speed": 0,
-        "mp_regen": 0,
-        "projectile_speed": 0,
-        "status_resist": 0
-      },
-      "scatter_clock": 998.200000000001,
-      "scatter_index": 0,
-      "skill_ruleset": "weapons_v1",
-      "slow": 0.0,
-      "status": "PASS",
-      "structures": 32,
-      "weapon_events": 1,
-      "world_size": "(5000.0, 3200.0)"
-    },
-    "process-v1": {
-      "actors": 2,
-      "damage_carry": 0.0,
-      "future_frames_equal": true,
-      "generation": 0,
-      "gold": 117,
-      "hp": 73,
-      "hp_carry": 0.0,
-      "items": 0,
-      "kill_clock": 0.0,
-      "kill_used": 0.0,
-      "mana": 48.5,
-      "map_id": "legacy_arena",
-      "max_mana": 100.0,
-      "new_version": 10,
-      "old_version": 1,
-      "owned": {
-        "common_grenade": 1,
-        "common_rifle": 1,
-        "common_scatter": 1
-      },
-      "position": "(900.0, 600.0)",
-      "respawn_left": 0,
-      "rng_streams": 6,
-      "run_levels": {
-        "attack_power": 0,
-        "attack_range": 0,
-        "attack_speed": 0,
-        "crit_chance": 0,
-        "crit_damage": 0,
-        "damage_reduction": 0,
-        "healing_efficiency": 0,
-        "hp_regen": 0,
-        "invulnerability": 0,
-        "kill_heal": 0,
-        "knockback_resist": 0,
-        "mana_cost_reduction": 0,
-        "max_hp": 0,
-        "max_mana": 0,
-        "move_speed": 0,
-        "mp_regen": 0,
-        "projectile_speed": 0,
-        "status_resist": 0
-      },
-      "scatter_clock": 12.0,
-      "scatter_index": 0,
-      "skill_ruleset": "legacy",
-      "slow": 0.0,
-      "status": "PASS",
-      "structures": 0,
-      "weapon_events": 0,
-      "world_size": "(1800.0, 1200.0)"
-    },
     "process-v2": {
       "actors": 27,
       "damage_carry": 0.0,
@@ -711,24 +605,179 @@
       "weapon_events": 0,
       "world_size": "(1800.0, 1200.0)"
     },
-    "process-v3": {
-      "actors": 190,
-      "damage_carry": 0.0,
+    "process-v6": {
+      "actors": 0,
+      "damage_carry": 0.6,
       "future_frames_equal": true,
       "generation": 0,
       "gold": 0,
-      "hp": 88,
+      "hp": 95,
+      "hp_carry": 0.5175,
+      "items": 0,
+      "kill_clock": 1.0,
+      "kill_used": 0.3,
+      "mana": 40.95,
+      "map_id": "legacy_arena",
+      "max_mana": 115.0,
+      "new_version": 10,
+      "old_version": 6,
+      "owned": {
+        "common_rifle": 1
+      },
+      "position": "(915.3, 600.0)",
+      "respawn_left": 0,
+      "rng_streams": 6,
+      "run_levels": {
+        "attack_power": 3,
+        "attack_range": 3,
+        "attack_speed": 3,
+        "crit_chance": 3,
+        "crit_damage": 3,
+        "damage_reduction": 3,
+        "healing_efficiency": 3,
+        "hp_regen": 3,
+        "invulnerability": 3,
+        "kill_heal": 3,
+        "knockback_resist": 3,
+        "mana_cost_reduction": 3,
+        "max_hp": 3,
+        "max_mana": 3,
+        "move_speed": 3,
+        "mp_regen": 3,
+        "projectile_speed": 3,
+        "status_resist": 3
+      },
+      "scatter_clock": 12.0,
+      "scatter_index": 0,
+      "skill_ruleset": "legacy",
+      "slow": 0.8,
+      "status": "PASS",
+      "structures": 0,
+      "weapon_events": 0,
+      "world_size": "(1800.0, 1200.0)"
+    },
+    "process-v9": {
+      "actors": 0,
+      "damage_carry": 0.0,
+      "future_frames_equal": true,
+      "generation": 2,
+      "gold": 0,
+      "hp": 75,
+      "hp_carry": 0.0,
+      "items": 3,
+      "kill_clock": 0.0,
+      "kill_used": 0.0,
+      "mana": 50.15,
+      "map_id": "prologue_wall",
+      "max_mana": 100.0,
+      "new_version": 10,
+      "old_version": 9,
+      "owned": {
+        "common_rifle": 1
+      },
+      "position": "(2500.0, 600.0)",
+      "respawn_left": 45.0,
+      "rng_streams": 6,
+      "run_levels": {
+        "attack_power": 0,
+        "attack_range": 0,
+        "attack_speed": 0,
+        "crit_chance": 0,
+        "crit_damage": 0,
+        "damage_reduction": 0,
+        "healing_efficiency": 0,
+        "hp_regen": 0,
+        "invulnerability": 0,
+        "kill_heal": 0,
+        "knockback_resist": 0,
+        "mana_cost_reduction": 0,
+        "max_hp": 0,
+        "max_mana": 0,
+        "move_speed": 0,
+        "mp_regen": 0,
+        "projectile_speed": 0,
+        "status_resist": 0
+      },
+      "scatter_clock": 998.85,
+      "scatter_index": 0,
+      "skill_ruleset": "legacy",
+      "slow": 0.0,
+      "status": "PASS",
+      "structures": 32,
+      "weapon_events": 0,
+      "world_size": "(5000.0, 3200.0)"
+    },
+    "process-v5": {
+      "actors": 0,
+      "damage_carry": 0.36,
+      "future_frames_equal": true,
+      "generation": 0,
+      "gold": 0,
+      "hp": 103,
+      "hp_carry": 0.0075,
+      "items": 0,
+      "kill_clock": 0.0,
+      "kill_used": 0.0,
+      "mana": 60.0575,
+      "map_id": "legacy_arena",
+      "max_mana": 100.0,
+      "new_version": 10,
+      "old_version": 5,
+      "owned": {
+        "common_rifle": 1
+      },
+      "position": "(900.0, 600.0)",
+      "respawn_left": 0,
+      "rng_streams": 6,
+      "run_levels": {
+        "attack_power": 3,
+        "attack_range": 0,
+        "attack_speed": 3,
+        "crit_chance": 0,
+        "crit_damage": 0,
+        "damage_reduction": 3,
+        "healing_efficiency": 0,
+        "hp_regen": 3,
+        "invulnerability": 0,
+        "kill_heal": 0,
+        "knockback_resist": 0,
+        "mana_cost_reduction": 0,
+        "max_hp": 3,
+        "max_mana": 0,
+        "move_speed": 0,
+        "mp_regen": 3,
+        "projectile_speed": 0,
+        "status_resist": 0
+      },
+      "scatter_clock": 12.0,
+      "scatter_index": 0,
+      "skill_ruleset": "legacy",
+      "slow": 0.0,
+      "status": "PASS",
+      "structures": 0,
+      "weapon_events": 0,
+      "world_size": "(1800.0, 1200.0)"
+    },
+    "process-v1": {
+      "actors": 2,
+      "damage_carry": 0.0,
+      "future_frames_equal": true,
+      "generation": 0,
+      "gold": 117,
+      "hp": 73,
       "hp_carry": 0.0,
       "items": 0,
       "kill_clock": 0.0,
       "kill_used": 0.0,
-      "mana": 100.0,
+      "mana": 48.5,
       "map_id": "legacy_arena",
       "max_mana": 100.0,
       "new_version": 10,
-      "old_version": 3,
+      "old_version": 1,
       "owned": {
-        "common_rifle": 1
+        "common_grenade": 1,
+        "common_rifle": 1,
+        "common_scatter": 1
       },
       "position": "(900.0, 600.0)",
       "respawn_left": 0,
@@ -813,115 +862,13 @@
       "weapon_events": 0,
       "world_size": "(1800.0, 1200.0)"
     },
-    "process-v5": {
-      "actors": 0,
-      "damage_carry": 0.36,
-      "future_frames_equal": true,
-      "generation": 0,
-      "gold": 0,
-      "hp": 103,
-      "hp_carry": 0.0075,
-      "items": 0,
-      "kill_clock": 0.0,
-      "kill_used": 0.0,
-      "mana": 60.0575,
-      "map_id": "legacy_arena",
-      "max_mana": 100.0,
-      "new_version": 10,
-      "old_version": 5,
-      "owned": {
-        "common_rifle": 1
-      },
-      "position": "(900.0, 600.0)",
-      "respawn_left": 0,
-      "rng_streams": 6,
-      "run_levels": {
-        "attack_power": 3,
-        "attack_range": 0,
-        "attack_speed": 3,
-        "crit_chance": 0,
-        "crit_damage": 0,
-        "damage_reduction": 3,
-        "healing_efficiency": 0,
-        "hp_regen": 3,
-        "invulnerability": 0,
-        "kill_heal": 0,
-        "knockback_resist": 0,
-        "mana_cost_reduction": 0,
-        "max_hp": 3,
-        "max_mana": 0,
-        "move_speed": 0,
-        "mp_regen": 3,
-        "projectile_speed": 0,
-        "status_resist": 0
-      },
-      "scatter_clock": 12.0,
-      "scatter_index": 0,
-      "skill_ruleset": "legacy",
-      "slow": 0.0,
-      "status": "PASS",
-      "structures": 0,
-      "weapon_events": 0,
-      "world_size": "(1800.0, 1200.0)"
-    },
-    "process-v6": {
-      "actors": 0,
-      "damage_carry": 0.6,
-      "future_frames_equal": true,
-      "generation": 0,
-      "gold": 0,
-      "hp": 95,
-      "hp_carry": 0.5175,
-      "items": 0,
-      "kill_clock": 1.0,
-      "kill_used": 0.3,
-      "mana": 40.95,
-      "map_id": "legacy_arena",
-      "max_mana": 115.0,
-      "new_version": 10,
-      "old_version": 6,
-      "owned": {
-        "common_rifle": 1
-      },
-      "position": "(915.3, 600.0)",
-      "respawn_left": 0,
-      "rng_streams": 6,
-      "run_levels": {
-        "attack_power": 3,
-        "attack_range": 3,
-        "attack_speed": 3,
-        "crit_chance": 3,
-        "crit_damage": 3,
-        "damage_reduction": 3,
-        "healing_efficiency": 3,
-        "hp_regen": 3,
-        "invulnerability": 3,
-        "kill_heal": 3,
-        "knockback_resist": 3,
-        "mana_cost_reduction": 3,
-        "max_hp": 3,
-        "max_mana": 3,
-        "move_speed": 3,
-        "mp_regen": 3,
-        "projectile_speed": 3,
-        "status_resist": 3
-      },
-      "scatter_clock": 12.0,
-      "scatter_index": 0,
-      "skill_ruleset": "legacy",
-      "slow": 0.8,
-      "status": "PASS",
-      "structures": 0,
-      "weapon_events": 0,
-      "world_size": "(1800.0, 1200.0)"
-    },
-    "process-v7": {
-      "actors": 151,
+    "process-v3": {
+      "actors": 190,
       "damage_carry": 0.0,
       "future_frames_equal": true,
       "generation": 0,
       "gold": 0,
-      "hp": 100,
+      "hp": 88,
       "hp_carry": 0.0,
       "items": 0,
       "kill_clock": 0.0,
@@ -930,7 +877,7 @@
       "map_id": "legacy_arena",
       "max_mana": 100.0,
       "new_version": 10,
-      "old_version": 7,
+      "old_version": 3,
       "owned": {
         "common_rifle": 1
       },
@@ -957,8 +904,8 @@
         "projectile_speed": 0,
         "status_resist": 0
       },
-      "scatter_clock": 0.03,
-      "scatter_index": 4,
+      "scatter_clock": 12.0,
+      "scatter_index": 0,
       "skill_ruleset": "legacy",
       "slow": 0.0,
       "status": "PASS",
@@ -1017,27 +964,27 @@
       "weapon_events": 0,
       "world_size": "(4200.0, 2800.0)"
     },
-    "process-v9": {
-      "actors": 0,
+    "process-v7": {
+      "actors": 151,
       "damage_carry": 0.0,
       "future_frames_equal": true,
-      "generation": 2,
+      "generation": 0,
       "gold": 0,
-      "hp": 75,
+      "hp": 100,
       "hp_carry": 0.0,
-      "items": 3,
+      "items": 0,
       "kill_clock": 0.0,
       "kill_used": 0.0,
-      "mana": 50.15,
-      "map_id": "prologue_wall",
+      "mana": 100.0,
+      "map_id": "legacy_arena",
       "max_mana": 100.0,
       "new_version": 10,
-      "old_version": 9,
+      "old_version": 7,
       "owned": {
         "common_rifle": 1
       },
-      "position": "(2500.0, 600.0)",
-      "respawn_left": 45.0,
+      "position": "(900.0, 600.0)",
+      "respawn_left": 0,
       "rng_streams": 6,
       "run_levels": {
         "attack_power": 0,
@@ -1059,13 +1006,66 @@
         "projectile_speed": 0,
         "status_resist": 0
       },
-      "scatter_clock": 998.85,
-      "scatter_index": 0,
+      "scatter_clock": 0.03,
+      "scatter_index": 4,
       "skill_ruleset": "legacy",
       "slow": 0.0,
       "status": "PASS",
-      "structures": 32,
+      "structures": 0,
       "weapon_events": 0,
+      "world_size": "(1800.0, 1200.0)"
+    },
+    "process-current": {
+      "actors": 12,
+      "damage_carry": 0.0,
+      "future_frames_equal": true,
+      "generation": 1,
+      "gold": 0,
+      "hp": 100,
+      "hp_carry": 0.0,
+      "items": 1,
+      "kill_clock": 0.0,
+      "kill_used": 0.0,
+      "mana": 60.5,
+      "map_id": "prologue_wall",
+      "max_mana": 100.0,
+      "new_version": 10,
+      "old_version": 10,
+      "owned": {
+        "gun_rifle": 3,
+        "viya_runebullet_v1": 3,
+        "viya_wave_upgrade_v1": 5
+      },
+      "position": "(2500.0, 600.0)",
+      "respawn_left": 44.5,
+      "rng_streams": 6,
+      "run_levels": {
+        "attack_power": 0,
+        "attack_range": 0,
+        "attack_speed": 0,
+        "crit_chance": 0,
+        "crit_damage": 0,
+        "damage_reduction": 0,
+        "healing_efficiency": 0,
+        "hp_regen": 0,
+        "invulnerability": 0,
+        "kill_heal": 0,
+        "knockback_resist": 0,
+        "mana_cost_reduction": 0,
+        "max_hp": 0,
+        "max_mana": 0,
+        "move_speed": 0,
+        "mp_regen": 0,
+        "projectile_speed": 0,
+        "status_resist": 0
+      },
+      "scatter_clock": 998.200000000001,
+      "scatter_index": 0,
+      "skill_ruleset": "weapons_v1",
+      "slow": 0.0,
+      "status": "PASS",
+      "structures": 32,
+      "weapon_events": 1,
       "world_size": "(5000.0, 3200.0)"
     }
   },
@@ -1074,13 +1074,12 @@
     "records": [
       {
         "elapsed": 18.0000000000001,
-        "hp": 84,
-        "items": 0,
-        "kills": 17,
+        "hp": 92,
+        "items": 1,
+        "kills": 14,
         "level": 1,
         "owned": {
-          "gun_rifle": 1,
-          "viya_runebullet_v1": 1
+          "gun_rifle": 1
         },
         "type": "natural_main_loop"
       },
@@ -1112,7 +1111,7 @@
   },
   "bounded_save_fixture": {
     "actors": 1059,
-    "bytes": 572356,
+    "bytes": 572320,
     "pending_attack_events": 96,
     "projectiles": 64,
     "scope": "Bounded worst-case serialized combat fixture, not natural spawn schedule or mobile performance",
@@ -1146,61 +1145,7 @@
       "profile": "full",
       "runs": [
         {
-          "boss_defeated_at": 308.350000000036,
-          "choices": 29,
-          "elapsed": 360.0,
-          "evolved": [
-            "gun_rifle",
-            "gun_grenade",
-            "gun_suppress"
-          ],
-          "first_choice": 8.49999999999999,
-          "gold_reward": 14470,
-          "hp": 115,
-          "kills": 1465,
-          "magic_casts": 14,
-          "mana_left": 27.5549999999993,
-          "max_hp": 115,
-          "max_mana": 115.0,
-          "milestones": [
-            {
-              "choices": 11,
-              "gold_collected": 2248,
-              "hp": 115,
-              "kills": 365,
-              "time": 119.999999999995
-            },
-            {
-              "choices": 18,
-              "gold_collected": 6290,
-              "hp": 96,
-              "kills": 866,
-              "time": 240.00000000002
-            },
-            {
-              "choices": 29,
-              "gold_collected": 14370,
-              "hp": 115,
-              "kills": 1465,
-              "time": 360.0
-            }
-          ],
-          "outcome": "cleared",
-          "owned": {
-            "gun_grenade": 5,
-            "gun_rifle": 5,
-            "gun_suppress": 5,
-            "passive_learning": 5,
-            "passive_magnet": 4,
-            "passive_power": 5,
-            "passive_recovery": 1,
-            "viya_runebullet_v1": 1
-          },
-          "peak_enemies": 86,
-          "seed": 7
-        },
-        {
-          "boss_defeated_at": 313.500000000037,
+          "boss_defeated_at": 313.650000000037,
           "choices": 26,
           "elapsed": 360.0,
           "evolved": [
@@ -1208,142 +1153,252 @@
             "gun_suppress",
             "gun_ricochet"
           ],
-          "first_choice": 22.9500000000002,
-          "gold_reward": 13640,
+          "first_choice": 11.3,
+          "gold_reward": 13979,
           "hp": 115,
-          "kills": 1399,
+          "kills": 1499,
           "magic_casts": 15,
-          "mana_left": 86.7275000000009,
+          "mana_left": 88.5100000000003,
           "max_hp": 115,
           "max_mana": 115.0,
           "milestones": [
             {
-              "choices": 11,
-              "gold_collected": 3219,
+              "choices": 12,
+              "gold_collected": 3131,
               "hp": 115,
-              "kills": 335,
+              "kills": 376,
               "time": 119.999999999995
             },
             {
-              "choices": 20,
-              "gold_collected": 8590,
+              "choices": 21,
+              "gold_collected": 8497,
               "hp": 115,
-              "kills": 838,
+              "kills": 907,
               "time": 240.00000000002
             },
             {
               "choices": 26,
-              "gold_collected": 13540,
+              "gold_collected": 13879,
               "hp": 115,
-              "kills": 1399,
+              "kills": 1499,
               "time": 360.0
             }
           ],
           "outcome": "cleared",
           "owned": {
+            "gun_grenade": 4,
             "gun_ricochet": 5,
             "gun_rifle": 5,
             "gun_suppress": 5,
-            "passive_haste": 4,
-            "passive_magnet": 2,
-            "passive_power": 5,
-            "passive_recovery": 1,
-            "viya_runebullet_v1": 1
+            "passive_haste": 3,
+            "passive_learning": 1,
+            "passive_magnet": 1,
+            "passive_power": 3
           },
-          "peak_enemies": 93,
+          "peak_enemies": 75,
+          "seed": 7
+        },
+        {
+          "boss_defeated_at": 315.650000000037,
+          "choices": 28,
+          "elapsed": 360.0,
+          "evolved": [
+            "gun_rifle",
+            "gun_suppress",
+            "gun_ricochet",
+            "gun_grenade"
+          ],
+          "first_choice": 22.9500000000002,
+          "gold_reward": 14765,
+          "hp": 115,
+          "kills": 1500,
+          "magic_casts": 16,
+          "mana_left": 49.0124999999972,
+          "max_hp": 115,
+          "max_mana": 115.0,
+          "milestones": [
+            {
+              "choices": 12,
+              "gold_collected": 3687,
+              "hp": 115,
+              "kills": 362,
+              "time": 119.999999999995
+            },
+            {
+              "choices": 21,
+              "gold_collected": 8007,
+              "hp": 115,
+              "kills": 925,
+              "time": 240.00000000002
+            },
+            {
+              "choices": 28,
+              "gold_collected": 14665,
+              "hp": 115,
+              "kills": 1500,
+              "time": 360.0
+            }
+          ],
+          "outcome": "cleared",
+          "owned": {
+            "gun_grenade": 5,
+            "gun_ricochet": 5,
+            "gun_rifle": 5,
+            "gun_suppress": 5,
+            "passive_haste": 1,
+            "passive_learning": 2,
+            "passive_magnet": 1,
+            "passive_power": 5
+          },
+          "peak_enemies": 98,
           "seed": 42
         },
         {
-          "boss_defeated_at": 305.500000000035,
-          "choices": 29,
+          "boss_defeated_at": 310.050000000036,
+          "choices": 26,
           "elapsed": 360.0,
           "evolved": [
             "gun_rifle",
             "gun_ricochet",
             "gun_scatter"
           ],
-          "first_choice": 10.3,
-          "gold_reward": 14231,
-          "hp": 115,
-          "kills": 1511,
-          "magic_casts": 13,
-          "mana_left": 22.2024999999969,
-          "max_hp": 115,
+          "first_choice": 9.6,
+          "gold_reward": 14643,
+          "hp": 126,
+          "kills": 1577,
+          "magic_casts": 14,
+          "mana_left": 36.8975000000015,
+          "max_hp": 138,
           "max_mana": 115.0,
           "milestones": [
             {
-              "choices": 11,
-              "gold_collected": 2307,
-              "hp": 100,
-              "kills": 332,
+              "choices": 12,
+              "gold_collected": 2965,
+              "hp": 104,
+              "kills": 389,
               "time": 119.999999999995
             },
             {
-              "choices": 19,
-              "gold_collected": 6992,
-              "hp": 93,
-              "kills": 897,
+              "choices": 20,
+              "gold_collected": 8264,
+              "hp": 115,
+              "kills": 969,
               "time": 240.00000000002
             },
             {
-              "choices": 29,
-              "gold_collected": 14131,
-              "hp": 115,
-              "kills": 1511,
+              "choices": 26,
+              "gold_collected": 14543,
+              "hp": 126,
+              "kills": 1577,
               "time": 360.0
             }
           ],
           "outcome": "cleared",
           "owned": {
+            "gun_grenade": 3,
             "gun_ricochet": 5,
             "gun_rifle": 5,
             "gun_scatter": 5,
-            "passive_haste": 3,
-            "passive_learning": 5,
-            "passive_power": 5,
-            "passive_recovery": 2,
-            "viya_runebullet_v1": 1
+            "passive_haste": 2,
+            "passive_magnet": 1,
+            "passive_power": 4,
+            "passive_vitality": 1,
+            "viya_wave_upgrade_v1": 1
           },
-          "peak_enemies": 101,
+          "peak_enemies": 78,
           "seed": 143
         },
         {
-          "boss_defeated_at": 315.500000000037,
-          "choices": 26,
+          "boss_defeated_at": 317.200000000038,
+          "choices": 27,
+          "elapsed": 360.0,
+          "evolved": [
+            "gun_rifle",
+            "gun_scatter",
+            "gun_grenade"
+          ],
+          "first_choice": 9.2,
+          "gold_reward": 14072,
+          "hp": 111,
+          "kills": 1392,
+          "magic_casts": 16,
+          "mana_left": 61.3174999999961,
+          "max_hp": 115,
+          "max_mana": 115.0,
+          "milestones": [
+            {
+              "choices": 12,
+              "gold_collected": 2728,
+              "hp": 115,
+              "kills": 361,
+              "time": 119.999999999995
+            },
+            {
+              "choices": 19,
+              "gold_collected": 7599,
+              "hp": 102,
+              "kills": 838,
+              "time": 240.00000000002
+            },
+            {
+              "choices": 27,
+              "gold_collected": 13972,
+              "hp": 111,
+              "kills": 1392,
+              "time": 360.0
+            }
+          ],
+          "outcome": "cleared",
+          "owned": {
+            "gun_grenade": 5,
+            "gun_rifle": 5,
+            "gun_scatter": 5,
+            "gun_suppress": 4,
+            "passive_haste": 2,
+            "passive_learning": 2,
+            "passive_magnet": 2,
+            "passive_power": 3
+          },
+          "peak_enemies": 78,
+          "seed": 407
+        },
+        {
+          "boss_defeated_at": 316.600000000038,
+          "choices": 29,
           "elapsed": 360.0,
           "evolved": [
             "gun_rifle",
             "gun_suppress",
             "gun_scatter"
           ],
-          "first_choice": 9.15,
-          "gold_reward": 15023,
+          "first_choice": 30.0000000000003,
+          "gold_reward": 12954,
           "hp": 115,
-          "kills": 1429,
-          "magic_casts": 17,
-          "mana_left": 23.717499999998,
+          "kills": 1437,
+          "magic_casts": 15,
+          "mana_left": 24.2249999999984,
           "max_hp": 115,
           "max_mana": 115.0,
           "milestones": [
             {
-              "choices": 12,
-              "gold_collected": 3070,
-              "hp": 115,
-              "kills": 365,
+              "choices": 13,
+              "gold_collected": 3024,
+              "hp": 111,
+              "kills": 363,
               "time": 119.999999999995
             },
             {
-              "choices": 20,
-              "gold_collected": 8153,
+              "choices": 21,
+              "gold_collected": 6950,
               "hp": 115,
-              "kills": 909,
+              "kills": 838,
               "time": 240.00000000002
             },
             {
-              "choices": 26,
-              "gold_collected": 14923,
+              "choices": 29,
+              "gold_collected": 12854,
               "hp": 115,
-              "kills": 1429,
+              "kills": 1437,
               "time": 360.0
             }
           ],
@@ -1354,65 +1409,11 @@
             "gun_suppress": 5,
             "passive_haste": 5,
             "passive_learning": 2,
-            "passive_magnet": 1,
-            "passive_power": 4,
+            "passive_power": 5,
+            "passive_recovery": 2,
             "viya_runebullet_v1": 1
           },
-          "peak_enemies": 75,
-          "seed": 407
-        },
-        {
-          "boss_defeated_at": 307.250000000036,
-          "choices": 27,
-          "elapsed": 360.0,
-          "evolved": [
-            "gun_rifle",
-            "gun_suppress"
-          ],
-          "first_choice": 29.8000000000003,
-          "gold_reward": 12719,
-          "hp": 115,
-          "kills": 1383,
-          "magic_casts": 16,
-          "mana_left": 6.92499999999993,
-          "max_hp": 115,
-          "max_mana": 115.0,
-          "milestones": [
-            {
-              "choices": 11,
-              "gold_collected": 2811,
-              "hp": 115,
-              "kills": 355,
-              "time": 119.999999999995
-            },
-            {
-              "choices": 21,
-              "gold_collected": 7215,
-              "hp": 115,
-              "kills": 856,
-              "time": 240.00000000002
-            },
-            {
-              "choices": 27,
-              "gold_collected": 12619,
-              "hp": 115,
-              "kills": 1383,
-              "time": 360.0
-            }
-          ],
-          "outcome": "cleared",
-          "owned": {
-            "gun_rifle": 5,
-            "gun_rupture": 1,
-            "gun_suppress": 5,
-            "passive_haste": 3,
-            "passive_learning": 4,
-            "passive_magnet": 4,
-            "passive_power": 5,
-            "viya_runebullet_v1": 1,
-            "viya_wave_upgrade_v1": 1
-          },
-          "peak_enemies": 107,
+          "peak_enemies": 74,
           "seed": 2026
         }
       ],
@@ -1445,42 +1446,207 @@
       "profile": "none",
       "runs": [
         {
-          "boss_defeated_at": 320.200000000039,
-          "choices": 27,
+          "boss_defeated_at": 318.550000000038,
+          "choices": 26,
           "elapsed": 360.0,
           "evolved": [
             "gun_rifle",
             "gun_grenade",
-            "gun_suppress"
+            "gun_suppress",
+            "gun_ricochet"
           ],
-          "first_choice": 10.1,
-          "gold_reward": 13030,
-          "hp": 95,
-          "kills": 1422,
-          "magic_casts": 14,
-          "mana_left": 14.299999999999,
+          "first_choice": 10.25,
+          "gold_reward": 14782,
+          "hp": 93,
+          "kills": 1460,
+          "magic_casts": 13,
+          "mana_left": 24.2999999999997,
           "max_hp": 100,
           "max_mana": 100.0,
           "milestones": [
             {
               "choices": 12,
-              "gold_collected": 3020,
+              "gold_collected": 2820,
               "hp": 100,
-              "kills": 345,
+              "kills": 351,
               "time": 119.999999999995
             },
             {
-              "choices": 19,
-              "gold_collected": 6549,
+              "choices": 20,
+              "gold_collected": 8221,
               "hp": 100,
-              "kills": 813,
+              "kills": 881,
+              "time": 240.00000000002
+            },
+            {
+              "choices": 26,
+              "gold_collected": 14682,
+              "hp": 93,
+              "kills": 1460,
+              "time": 360.0
+            }
+          ],
+          "outcome": "cleared",
+          "owned": {
+            "gun_grenade": 5,
+            "gun_ricochet": 5,
+            "gun_rifle": 5,
+            "gun_suppress": 5,
+            "passive_haste": 2,
+            "passive_magnet": 1,
+            "passive_power": 3,
+            "passive_recovery": 1
+          },
+          "peak_enemies": 75,
+          "seed": 7
+        },
+        {
+          "boss_defeated_at": 306.900000000036,
+          "choices": 27,
+          "elapsed": 360.0,
+          "evolved": [
+            "gun_rifle",
+            "gun_suppress",
+            "gun_ricochet",
+            "gun_grenade"
+          ],
+          "first_choice": 19.9500000000001,
+          "gold_reward": 14342,
+          "hp": 100,
+          "kills": 1373,
+          "magic_casts": 12,
+          "mana_left": 31.4499999999993,
+          "max_hp": 100,
+          "max_mana": 100.0,
+          "milestones": [
+            {
+              "choices": 13,
+              "gold_collected": 3586,
+              "hp": 100,
+              "kills": 366,
+              "time": 119.999999999995
+            },
+            {
+              "choices": 20,
+              "gold_collected": 8530,
+              "hp": 100,
+              "kills": 838,
               "time": 240.00000000002
             },
             {
               "choices": 27,
-              "gold_collected": 12930,
-              "hp": 95,
-              "kills": 1422,
+              "gold_collected": 14242,
+              "hp": 100,
+              "kills": 1373,
+              "time": 360.0
+            }
+          ],
+          "outcome": "cleared",
+          "owned": {
+            "gun_grenade": 5,
+            "gun_ricochet": 5,
+            "gun_rifle": 5,
+            "gun_suppress": 5,
+            "passive_haste": 1,
+            "passive_learning": 1,
+            "passive_magnet": 1,
+            "passive_power": 5
+          },
+          "peak_enemies": 96,
+          "seed": 42
+        },
+        {
+          "boss_defeated_at": 314.500000000037,
+          "choices": 26,
+          "elapsed": 360.0,
+          "evolved": [
+            "gun_rifle",
+            "gun_ricochet",
+            "gun_scatter"
+          ],
+          "first_choice": 11.2,
+          "gold_reward": 13903,
+          "hp": 120,
+          "kills": 1491,
+          "magic_casts": 13,
+          "mana_left": 13.1499999999981,
+          "max_hp": 120,
+          "max_mana": 100.0,
+          "milestones": [
+            {
+              "choices": 13,
+              "gold_collected": 3380,
+              "hp": 100,
+              "kills": 389,
+              "time": 119.999999999995
+            },
+            {
+              "choices": 21,
+              "gold_collected": 8603,
+              "hp": 100,
+              "kills": 939,
+              "time": 240.00000000002
+            },
+            {
+              "choices": 26,
+              "gold_collected": 13803,
+              "hp": 120,
+              "kills": 1491,
+              "time": 360.0
+            }
+          ],
+          "outcome": "cleared",
+          "owned": {
+            "gun_grenade": 3,
+            "gun_ricochet": 5,
+            "gun_rifle": 5,
+            "gun_scatter": 5,
+            "passive_haste": 2,
+            "passive_magnet": 1,
+            "passive_power": 4,
+            "passive_vitality": 1,
+            "viya_wave_upgrade_v1": 1
+          },
+          "peak_enemies": 102,
+          "seed": 143
+        },
+        {
+          "boss_defeated_at": 317.450000000038,
+          "choices": 27,
+          "elapsed": 360.0,
+          "evolved": [
+            "gun_rifle",
+            "gun_scatter",
+            "gun_grenade"
+          ],
+          "first_choice": 11.2,
+          "gold_reward": 14402,
+          "hp": 100,
+          "kills": 1378,
+          "magic_casts": 12,
+          "mana_left": 87.8999999999968,
+          "max_hp": 100,
+          "max_mana": 100.0,
+          "milestones": [
+            {
+              "choices": 12,
+              "gold_collected": 2919,
+              "hp": 100,
+              "kills": 338,
+              "time": 119.999999999995
+            },
+            {
+              "choices": 20,
+              "gold_collected": 7646,
+              "hp": 92,
+              "kills": 863,
+              "time": 240.00000000002
+            },
+            {
+              "choices": 27,
+              "gold_collected": 14302,
+              "hp": 100,
+              "kills": 1378,
               "time": 360.0
             }
           ],
@@ -1488,126 +1654,18 @@
           "owned": {
             "gun_grenade": 5,
             "gun_rifle": 5,
-            "gun_suppress": 5,
-            "passive_learning": 4,
-            "passive_magnet": 3,
-            "passive_power": 5,
-            "passive_recovery": 1,
-            "viya_runebullet_v1": 1
-          },
-          "peak_enemies": 87,
-          "seed": 7
-        },
-        {
-          "boss_defeated_at": 312.500000000037,
-          "choices": 26,
-          "elapsed": 360.0,
-          "evolved": [
-            "gun_rifle",
-            "gun_suppress",
-            "gun_ricochet"
-          ],
-          "first_choice": 19.9500000000001,
-          "gold_reward": 12927,
-          "hp": 100,
-          "kills": 1397,
-          "magic_casts": 13,
-          "mana_left": 21.4999999999973,
-          "max_hp": 100,
-          "max_mana": 100.0,
-          "milestones": [
-            {
-              "choices": 12,
-              "gold_collected": 3422,
-              "hp": 88,
-              "kills": 337,
-              "time": 119.999999999995
-            },
-            {
-              "choices": 20,
-              "gold_collected": 8004,
-              "hp": 100,
-              "kills": 875,
-              "time": 240.00000000002
-            },
-            {
-              "choices": 26,
-              "gold_collected": 12827,
-              "hp": 100,
-              "kills": 1397,
-              "time": 360.0
-            }
-          ],
-          "outcome": "cleared",
-          "owned": {
-            "gun_ricochet": 5,
-            "gun_rifle": 5,
-            "gun_suppress": 5,
-            "passive_haste": 4,
-            "passive_magnet": 2,
-            "passive_power": 5,
-            "passive_recovery": 1,
-            "viya_runebullet_v1": 1
-          },
-          "peak_enemies": 106,
-          "seed": 42
-        },
-        {
-          "boss_defeated_at": 311.450000000037,
-          "choices": 28,
-          "elapsed": 360.0,
-          "evolved": [
-            "gun_rifle",
-            "gun_ricochet",
-            "gun_scatter"
-          ],
-          "first_choice": 11.1,
-          "gold_reward": 13321,
-          "hp": 100,
-          "kills": 1431,
-          "magic_casts": 12,
-          "mana_left": 27.2999999999975,
-          "max_hp": 100,
-          "max_mana": 100.0,
-          "milestones": [
-            {
-              "choices": 12,
-              "gold_collected": 2731,
-              "hp": 88,
-              "kills": 335,
-              "time": 119.999999999995
-            },
-            {
-              "choices": 21,
-              "gold_collected": 7657,
-              "hp": 100,
-              "kills": 859,
-              "time": 240.00000000002
-            },
-            {
-              "choices": 28,
-              "gold_collected": 13221,
-              "hp": 100,
-              "kills": 1431,
-              "time": 360.0
-            }
-          ],
-          "outcome": "cleared",
-          "owned": {
-            "gun_ricochet": 5,
-            "gun_rifle": 5,
             "gun_scatter": 5,
-            "passive_haste": 3,
-            "passive_learning": 4,
-            "passive_power": 5,
-            "passive_recovery": 2,
-            "viya_runebullet_v1": 1
+            "gun_suppress": 4,
+            "passive_haste": 2,
+            "passive_learning": 2,
+            "passive_magnet": 2,
+            "passive_power": 3
           },
-          "peak_enemies": 83,
-          "seed": 143
+          "peak_enemies": 82,
+          "seed": 407
         },
         {
-          "boss_defeated_at": 315.350000000037,
+          "boss_defeated_at": 323.000000000039,
           "choices": 27,
           "elapsed": 360.0,
           "evolved": [
@@ -1615,34 +1673,34 @@
             "gun_suppress",
             "gun_scatter"
           ],
-          "first_choice": 11.1,
-          "gold_reward": 13716,
+          "first_choice": 11.3,
+          "gold_reward": 14172,
           "hp": 100,
-          "kills": 1366,
-          "magic_casts": 14,
-          "mana_left": 24.8999999999978,
+          "kills": 1371,
+          "magic_casts": 13,
+          "mana_left": 18.4499999999972,
           "max_hp": 100,
           "max_mana": 100.0,
           "milestones": [
             {
               "choices": 12,
-              "gold_collected": 3187,
-              "hp": 80,
-              "kills": 363,
+              "gold_collected": 2612,
+              "hp": 88,
+              "kills": 322,
               "time": 119.999999999995
             },
             {
               "choices": 20,
-              "gold_collected": 7921,
+              "gold_collected": 6767,
               "hp": 100,
-              "kills": 840,
+              "kills": 862,
               "time": 240.00000000002
             },
             {
               "choices": 27,
-              "gold_collected": 13616,
+              "gold_collected": 14072,
               "hp": 100,
-              "kills": 1366,
+              "kills": 1371,
               "time": 360.0
             }
           ],
@@ -1651,67 +1709,13 @@
             "gun_rifle": 5,
             "gun_scatter": 5,
             "gun_suppress": 5,
-            "passive_haste": 5,
+            "passive_haste": 3,
             "passive_learning": 2,
-            "passive_magnet": 1,
             "passive_power": 5,
+            "passive_recovery": 2,
             "viya_runebullet_v1": 1
           },
-          "peak_enemies": 106,
-          "seed": 407
-        },
-        {
-          "boss_defeated_at": 318.450000000038,
-          "choices": 29,
-          "elapsed": 360.0,
-          "evolved": [
-            "gun_rifle",
-            "gun_suppress"
-          ],
-          "first_choice": 11.6,
-          "gold_reward": 12753,
-          "hp": 100,
-          "kills": 1401,
-          "magic_casts": 14,
-          "mana_left": 38.0499999999991,
-          "max_hp": 100,
-          "max_mana": 100.0,
-          "milestones": [
-            {
-              "choices": 11,
-              "gold_collected": 2416,
-              "hp": 100,
-              "kills": 350,
-              "time": 119.999999999995
-            },
-            {
-              "choices": 20,
-              "gold_collected": 6729,
-              "hp": 98,
-              "kills": 817,
-              "time": 240.00000000002
-            },
-            {
-              "choices": 29,
-              "gold_collected": 12653,
-              "hp": 100,
-              "kills": 1401,
-              "time": 360.0
-            }
-          ],
-          "outcome": "cleared",
-          "owned": {
-            "gun_rifle": 5,
-            "gun_rupture": 1,
-            "gun_suppress": 5,
-            "passive_haste": 5,
-            "passive_learning": 4,
-            "passive_magnet": 4,
-            "passive_power": 5,
-            "viya_runebullet_v1": 1,
-            "viya_wave_upgrade_v1": 1
-          },
-          "peak_enemies": 96,
+          "peak_enemies": 88,
           "seed": 2026
         }
       ],
@@ -1744,42 +1748,206 @@
       "profile": "full",
       "runs": [
         {
-          "boss_defeated_at": 326.90000000004,
-          "choices": 29,
+          "boss_defeated_at": 311.100000000036,
+          "choices": 24,
           "elapsed": 360.0,
           "evolved": [
             "gun_rifle",
-            "gun_grenade",
-            "gun_suppress"
+            "gun_suppress",
+            "gun_ricochet"
           ],
           "first_choice": 8.24999999999998,
-          "gold_reward": 12853,
+          "gold_reward": 14450,
+          "hp": 108,
+          "kills": 1459,
+          "magic_casts": 14,
+          "mana_left": 33.1325000000004,
+          "max_hp": 115,
+          "max_mana": 115.0,
+          "milestones": [
+            {
+              "choices": 12,
+              "gold_collected": 2987,
+              "hp": 93,
+              "kills": 351,
+              "time": 119.999999999995
+            },
+            {
+              "choices": 18,
+              "gold_collected": 6786,
+              "hp": 115,
+              "kills": 894,
+              "time": 240.00000000002
+            },
+            {
+              "choices": 24,
+              "gold_collected": 14350,
+              "hp": 108,
+              "kills": 1459,
+              "time": 360.0
+            }
+          ],
+          "outcome": "cleared",
+          "owned": {
+            "gun_grenade": 3,
+            "gun_ricochet": 5,
+            "gun_rifle": 5,
+            "gun_suppress": 5,
+            "passive_haste": 3,
+            "passive_learning": 1,
+            "passive_magnet": 1,
+            "passive_power": 2
+          },
+          "peak_enemies": 106,
+          "seed": 7
+        },
+        {
+          "boss_defeated_at": 343.150000000044,
+          "choices": 27,
+          "elapsed": 360.0,
+          "evolved": [
+            "gun_rifle",
+            "gun_suppress",
+            "gun_ricochet",
+            "gun_grenade"
+          ],
+          "first_choice": 8.04999999999998,
+          "gold_reward": 13180,
           "hp": 115,
-          "kills": 1401,
+          "kills": 1349,
           "magic_casts": 15,
-          "mana_left": 60.2150000000002,
+          "mana_left": 29.5724999999979,
           "max_hp": 115,
           "max_mana": 115.0,
           "milestones": [
             {
               "choices": 11,
-              "gold_collected": 2547,
+              "gold_collected": 3364,
               "hp": 115,
-              "kills": 354,
+              "kills": 323,
               "time": 119.999999999995
             },
             {
-              "choices": 21,
-              "gold_collected": 7590,
+              "choices": 20,
+              "gold_collected": 7399,
               "hp": 115,
-              "kills": 843,
+              "kills": 781,
               "time": 240.00000000002
             },
             {
-              "choices": 29,
-              "gold_collected": 12753,
+              "choices": 27,
+              "gold_collected": 13080,
               "hp": 115,
-              "kills": 1401,
+              "kills": 1349,
+              "time": 360.0
+            }
+          ],
+          "outcome": "cleared",
+          "owned": {
+            "gun_grenade": 5,
+            "gun_ricochet": 5,
+            "gun_rifle": 5,
+            "gun_suppress": 5,
+            "passive_haste": 1,
+            "passive_learning": 1,
+            "passive_magnet": 1,
+            "passive_power": 5
+          },
+          "peak_enemies": 105,
+          "seed": 42
+        },
+        {
+          "boss_defeated_at": 310.450000000036,
+          "choices": 24,
+          "elapsed": 360.0,
+          "evolved": [
+            "gun_rifle",
+            "gun_ricochet",
+            "gun_scatter"
+          ],
+          "first_choice": 8.69999999999999,
+          "gold_reward": 13026,
+          "hp": 138,
+          "kills": 1393,
+          "magic_casts": 15,
+          "mana_left": 62.8650000000082,
+          "max_hp": 138,
+          "max_mana": 115.0,
+          "milestones": [
+            {
+              "choices": 13,
+              "gold_collected": 3506,
+              "hp": 115,
+              "kills": 414,
+              "time": 119.999999999995
+            },
+            {
+              "choices": 19,
+              "gold_collected": 7568,
+              "hp": 115,
+              "kills": 877,
+              "time": 240.00000000002
+            },
+            {
+              "choices": 24,
+              "gold_collected": 12926,
+              "hp": 138,
+              "kills": 1393,
+              "time": 360.0
+            }
+          ],
+          "outcome": "cleared",
+          "owned": {
+            "gun_grenade": 2,
+            "gun_ricochet": 5,
+            "gun_rifle": 5,
+            "gun_scatter": 5,
+            "passive_haste": 2,
+            "passive_magnet": 1,
+            "passive_power": 3,
+            "passive_vitality": 1,
+            "viya_wave_upgrade_v1": 1
+          },
+          "peak_enemies": 86,
+          "seed": 143
+        },
+        {
+          "boss_defeated_at": 307.050000000036,
+          "choices": 26,
+          "elapsed": 360.0,
+          "evolved": [
+            "gun_rifle",
+            "gun_scatter",
+            "gun_grenade"
+          ],
+          "first_choice": 7.49999999999998,
+          "gold_reward": 12949,
+          "hp": 115,
+          "kills": 1315,
+          "magic_casts": 15,
+          "mana_left": 29.8599999999957,
+          "max_hp": 115,
+          "max_mana": 115.0,
+          "milestones": [
+            {
+              "choices": 8,
+              "gold_collected": 1350,
+              "hp": 115,
+              "kills": 341,
+              "time": 119.999999999995
+            },
+            {
+              "choices": 20,
+              "gold_collected": 7525,
+              "hp": 115,
+              "kills": 831,
+              "time": 240.00000000002
+            },
+            {
+              "choices": 26,
+              "gold_collected": 12849,
+              "hp": 115,
+              "kills": 1315,
               "time": 360.0
             }
           ],
@@ -1787,230 +1955,68 @@
           "owned": {
             "gun_grenade": 5,
             "gun_rifle": 5,
-            "gun_suppress": 5,
-            "passive_learning": 5,
-            "passive_magnet": 4,
-            "passive_power": 5,
-            "passive_recovery": 1,
-            "viya_runebullet_v1": 1
-          },
-          "peak_enemies": 114,
-          "seed": 7
-        },
-        {
-          "boss_defeated_at": 310.850000000036,
-          "choices": 26,
-          "elapsed": 360.0,
-          "evolved": [
-            "gun_rifle",
-            "gun_suppress",
-            "gun_ricochet"
-          ],
-          "first_choice": 8.04999999999998,
-          "gold_reward": 14499,
-          "hp": 115,
-          "kills": 1408,
-          "magic_casts": 13,
-          "mana_left": 84.0149999999987,
-          "max_hp": 115,
-          "max_mana": 115.0,
-          "milestones": [
-            {
-              "choices": 11,
-              "gold_collected": 3327,
-              "hp": 115,
-              "kills": 308,
-              "time": 119.999999999995
-            },
-            {
-              "choices": 19,
-              "gold_collected": 7509,
-              "hp": 115,
-              "kills": 860,
-              "time": 240.00000000002
-            },
-            {
-              "choices": 26,
-              "gold_collected": 14399,
-              "hp": 115,
-              "kills": 1408,
-              "time": 360.0
-            }
-          ],
-          "outcome": "cleared",
-          "owned": {
-            "gun_ricochet": 5,
-            "gun_rifle": 5,
-            "gun_suppress": 5,
-            "passive_haste": 4,
+            "gun_scatter": 5,
+            "gun_suppress": 4,
+            "passive_haste": 2,
+            "passive_learning": 1,
             "passive_magnet": 2,
-            "passive_power": 5,
-            "passive_recovery": 1,
-            "viya_runebullet_v1": 1
+            "passive_power": 3
           },
-          "peak_enemies": 135,
-          "seed": 42
+          "peak_enemies": 111,
+          "seed": 407
         },
         {
-          "boss_defeated_at": 305.750000000035,
+          "boss_defeated_at": 325.60000000004,
           "choices": 27,
           "elapsed": 360.0,
           "evolved": [
             "gun_rifle",
-            "gun_ricochet",
-            "gun_scatter"
-          ],
-          "first_choice": 8.64999999999999,
-          "gold_reward": 15060,
-          "hp": 115,
-          "kills": 1455,
-          "magic_casts": 15,
-          "mana_left": 28.6524999999996,
-          "max_hp": 115,
-          "max_mana": 115.0,
-          "milestones": [
-            {
-              "choices": 13,
-              "gold_collected": 3468,
-              "hp": 115,
-              "kills": 420,
-              "time": 119.999999999995
-            },
-            {
-              "choices": 22,
-              "gold_collected": 9160,
-              "hp": 115,
-              "kills": 964,
-              "time": 240.00000000002
-            },
-            {
-              "choices": 27,
-              "gold_collected": 14960,
-              "hp": 115,
-              "kills": 1455,
-              "time": 360.0
-            }
-          ],
-          "outcome": "cleared",
-          "owned": {
-            "gun_ricochet": 5,
-            "gun_rifle": 5,
-            "gun_scatter": 5,
-            "passive_haste": 3,
-            "passive_learning": 3,
-            "passive_power": 5,
-            "passive_recovery": 2,
-            "viya_runebullet_v1": 1
-          },
-          "peak_enemies": 107,
-          "seed": 143
-        },
-        {
-          "boss_defeated_at": 335.300000000042,
-          "choices": 26,
-          "elapsed": 360.0,
-          "evolved": [
-            "gun_rifle",
             "gun_suppress",
             "gun_scatter"
           ],
-          "first_choice": 8.29999999999998,
-          "gold_reward": 14742,
+          "first_choice": 7.99999999999998,
+          "gold_reward": 12034,
           "hp": 115,
-          "kills": 1345,
-          "magic_casts": 13,
-          "mana_left": 36.0599999999972,
-          "max_hp": 115,
-          "max_mana": 115.0,
-          "milestones": [
-            {
-              "choices": 11,
-              "gold_collected": 2599,
-              "hp": 115,
-              "kills": 312,
-              "time": 119.999999999995
-            },
-            {
-              "choices": 19,
-              "gold_collected": 8415,
-              "hp": 115,
-              "kills": 837,
-              "time": 240.00000000002
-            },
-            {
-              "choices": 26,
-              "gold_collected": 14642,
-              "hp": 115,
-              "kills": 1345,
-              "time": 360.0
-            }
-          ],
-          "outcome": "cleared",
-          "owned": {
-            "gun_rifle": 5,
-            "gun_scatter": 5,
-            "gun_suppress": 5,
-            "passive_haste": 5,
-            "passive_learning": 2,
-            "passive_magnet": 1,
-            "passive_power": 4,
-            "viya_runebullet_v1": 1
-          },
-          "peak_enemies": 108,
-          "seed": 407
-        },
-        {
-          "boss_defeated_at": 318.800000000038,
-          "choices": 29,
-          "elapsed": 360.0,
-          "evolved": [
-            "gun_rifle",
-            "gun_suppress"
-          ],
-          "first_choice": 8.04999999999998,
-          "gold_reward": 12875,
-          "hp": 115,
-          "kills": 1412,
+          "kills": 1315,
           "magic_casts": 16,
-          "mana_left": 26.7599999999978,
+          "mana_left": 49.8674999999994,
           "max_hp": 115,
           "max_mana": 115.0,
           "milestones": [
             {
               "choices": 12,
-              "gold_collected": 2997,
+              "gold_collected": 2835,
               "hp": 115,
-              "kills": 348,
+              "kills": 317,
               "time": 119.999999999995
             },
             {
-              "choices": 21,
-              "gold_collected": 7161,
+              "choices": 20,
+              "gold_collected": 6424,
               "hp": 115,
-              "kills": 875,
+              "kills": 756,
               "time": 240.00000000002
             },
             {
-              "choices": 29,
-              "gold_collected": 12775,
+              "choices": 27,
+              "gold_collected": 11934,
               "hp": 115,
-              "kills": 1412,
+              "kills": 1315,
               "time": 360.0
             }
           ],
           "outcome": "cleared",
           "owned": {
             "gun_rifle": 5,
-            "gun_rupture": 1,
+            "gun_scatter": 5,
             "gun_suppress": 5,
-            "passive_haste": 5,
-            "passive_learning": 4,
-            "passive_magnet": 4,
+            "passive_haste": 3,
+            "passive_learning": 2,
             "passive_power": 5,
-            "viya_runebullet_v1": 1,
-            "viya_wave_upgrade_v1": 1
+            "passive_recovery": 2,
+            "viya_runebullet_v1": 1
           },
-          "peak_enemies": 142,
+          "peak_enemies": 104,
           "seed": 2026
         }
       ],
@@ -2043,61 +2049,7 @@
       "profile": "none",
       "runs": [
         {
-          "boss_defeated_at": 318.950000000038,
-          "choices": 28,
-          "elapsed": 360.0,
-          "evolved": [
-            "gun_rifle",
-            "gun_grenade",
-            "gun_suppress"
-          ],
-          "first_choice": 7.94999999999998,
-          "gold_reward": 12121,
-          "hp": 100,
-          "kills": 1326,
-          "magic_casts": 13,
-          "mana_left": 17.9499999999959,
-          "max_hp": 100,
-          "max_mana": 100.0,
-          "milestones": [
-            {
-              "choices": 12,
-              "gold_collected": 2953,
-              "hp": 98,
-              "kills": 319,
-              "time": 119.999999999995
-            },
-            {
-              "choices": 21,
-              "gold_collected": 7227,
-              "hp": 100,
-              "kills": 796,
-              "time": 240.00000000002
-            },
-            {
-              "choices": 28,
-              "gold_collected": 12021,
-              "hp": 100,
-              "kills": 1326,
-              "time": 360.0
-            }
-          ],
-          "outcome": "cleared",
-          "owned": {
-            "gun_grenade": 5,
-            "gun_rifle": 5,
-            "gun_suppress": 5,
-            "passive_learning": 5,
-            "passive_magnet": 3,
-            "passive_power": 5,
-            "passive_recovery": 1,
-            "viya_runebullet_v1": 1
-          },
-          "peak_enemies": 129,
-          "seed": 7
-        },
-        {
-          "boss_defeated_at": 311.450000000037,
+          "boss_defeated_at": 325.00000000004,
           "choices": 25,
           "elapsed": 360.0,
           "evolved": [
@@ -2105,142 +2057,252 @@
             "gun_suppress",
             "gun_ricochet"
           ],
-          "first_choice": 7.64999999999998,
-          "gold_reward": 13732,
-          "hp": 100,
-          "kills": 1352,
+          "first_choice": 7.94999999999998,
+          "gold_reward": 12318,
+          "hp": 76,
+          "kills": 1341,
           "magic_casts": 12,
-          "mana_left": 36.1000000000001,
+          "mana_left": 31.2499999999983,
           "max_hp": 100,
           "max_mana": 100.0,
           "milestones": [
             {
-              "choices": 11,
-              "gold_collected": 3346,
+              "choices": 12,
+              "gold_collected": 2953,
               "hp": 100,
-              "kills": 311,
+              "kills": 324,
               "time": 119.999999999995
             },
             {
-              "choices": 20,
-              "gold_collected": 8589,
-              "hp": 100,
-              "kills": 840,
+              "choices": 18,
+              "gold_collected": 6171,
+              "hp": 76,
+              "kills": 847,
               "time": 240.00000000002
             },
             {
               "choices": 25,
-              "gold_collected": 13632,
-              "hp": 100,
-              "kills": 1352,
+              "gold_collected": 12218,
+              "hp": 76,
+              "kills": 1341,
               "time": 360.0
             }
           ],
           "outcome": "cleared",
           "owned": {
+            "gun_grenade": 4,
             "gun_ricochet": 5,
             "gun_rifle": 5,
             "gun_suppress": 5,
             "passive_haste": 3,
-            "passive_magnet": 2,
-            "passive_power": 5,
-            "passive_recovery": 1,
-            "viya_runebullet_v1": 1
+            "passive_learning": 1,
+            "passive_magnet": 1,
+            "passive_power": 2
           },
-          "peak_enemies": 117,
+          "peak_enemies": 111,
+          "seed": 7
+        },
+        {
+          "boss_defeated_at": 321.800000000039,
+          "choices": 26,
+          "elapsed": 360.0,
+          "evolved": [
+            "gun_rifle",
+            "gun_suppress",
+            "gun_ricochet",
+            "gun_grenade"
+          ],
+          "first_choice": 7.59999999999998,
+          "gold_reward": 13090,
+          "hp": 60,
+          "kills": 1354,
+          "magic_casts": 13,
+          "mana_left": 26.0999999999973,
+          "max_hp": 100,
+          "max_mana": 100.0,
+          "milestones": [
+            {
+              "choices": 12,
+              "gold_collected": 3425,
+              "hp": 100,
+              "kills": 341,
+              "time": 119.999999999995
+            },
+            {
+              "choices": 20,
+              "gold_collected": 7446,
+              "hp": 100,
+              "kills": 784,
+              "time": 240.00000000002
+            },
+            {
+              "choices": 26,
+              "gold_collected": 12990,
+              "hp": 60,
+              "kills": 1354,
+              "time": 360.0
+            }
+          ],
+          "outcome": "cleared",
+          "owned": {
+            "gun_grenade": 5,
+            "gun_ricochet": 5,
+            "gun_rifle": 5,
+            "gun_suppress": 5,
+            "passive_haste": 1,
+            "passive_learning": 1,
+            "passive_magnet": 1,
+            "passive_power": 4
+          },
+          "peak_enemies": 118,
           "seed": 42
         },
         {
-          "boss_defeated_at": 318.900000000038,
-          "choices": 27,
+          "boss_defeated_at": 321.200000000039,
+          "choices": 26,
           "elapsed": 360.0,
           "evolved": [
             "gun_rifle",
             "gun_ricochet",
             "gun_scatter"
           ],
-          "first_choice": 9.3,
-          "gold_reward": 13604,
-          "hp": 100,
-          "kills": 1388,
+          "first_choice": 9.15,
+          "gold_reward": 13869,
+          "hp": 120,
+          "kills": 1448,
           "magic_casts": 11,
-          "mana_left": 43.5999999999988,
-          "max_hp": 100,
+          "mana_left": 74.8499999999972,
+          "max_hp": 120,
           "max_mana": 100.0,
           "milestones": [
             {
               "choices": 12,
-              "gold_collected": 2788,
-              "hp": 92,
-              "kills": 327,
+              "gold_collected": 3017,
+              "hp": 100,
+              "kills": 388,
               "time": 119.999999999995
             },
             {
               "choices": 20,
-              "gold_collected": 7438,
+              "gold_collected": 7753,
               "hp": 100,
-              "kills": 828,
+              "kills": 857,
               "time": 240.00000000002
             },
             {
-              "choices": 27,
-              "gold_collected": 13504,
-              "hp": 100,
-              "kills": 1388,
+              "choices": 26,
+              "gold_collected": 13769,
+              "hp": 120,
+              "kills": 1448,
               "time": 360.0
             }
           ],
           "outcome": "cleared",
           "owned": {
+            "gun_grenade": 3,
             "gun_ricochet": 5,
             "gun_rifle": 5,
             "gun_scatter": 5,
-            "passive_haste": 3,
-            "passive_learning": 3,
-            "passive_power": 5,
-            "passive_recovery": 2,
-            "viya_runebullet_v1": 1
+            "passive_haste": 2,
+            "passive_magnet": 1,
+            "passive_power": 4,
+            "passive_vitality": 1,
+            "viya_wave_upgrade_v1": 1
           },
-          "peak_enemies": 118,
+          "peak_enemies": 112,
           "seed": 143
         },
         {
-          "boss_defeated_at": 312.850000000037,
-          "choices": 28,
+          "boss_defeated_at": 315.250000000037,
+          "choices": 26,
+          "elapsed": 360.0,
+          "evolved": [
+            "gun_rifle",
+            "gun_scatter",
+            "gun_grenade"
+          ],
+          "first_choice": 7.14999999999998,
+          "gold_reward": 13063,
+          "hp": 100,
+          "kills": 1381,
+          "magic_casts": 13,
+          "mana_left": 26.2999999999987,
+          "max_hp": 100,
+          "max_mana": 100.0,
+          "milestones": [
+            {
+              "choices": 11,
+              "gold_collected": 2668,
+              "hp": 76,
+              "kills": 329,
+              "time": 119.999999999995
+            },
+            {
+              "choices": 20,
+              "gold_collected": 6919,
+              "hp": 100,
+              "kills": 788,
+              "time": 240.00000000002
+            },
+            {
+              "choices": 26,
+              "gold_collected": 12963,
+              "hp": 100,
+              "kills": 1381,
+              "time": 360.0
+            }
+          ],
+          "outcome": "cleared",
+          "owned": {
+            "gun_grenade": 5,
+            "gun_rifle": 5,
+            "gun_scatter": 5,
+            "gun_suppress": 4,
+            "passive_haste": 2,
+            "passive_learning": 1,
+            "passive_magnet": 2,
+            "passive_power": 3
+          },
+          "peak_enemies": 111,
+          "seed": 407
+        },
+        {
+          "boss_defeated_at": 335.750000000042,
+          "choices": 26,
           "elapsed": 360.0,
           "evolved": [
             "gun_rifle",
             "gun_suppress",
             "gun_scatter"
           ],
-          "first_choice": 6.99999999999998,
-          "gold_reward": 14243,
+          "first_choice": 8.44999999999999,
+          "gold_reward": 12285,
           "hp": 100,
-          "kills": 1432,
-          "magic_casts": 11,
-          "mana_left": 46.199999999996,
+          "kills": 1339,
+          "magic_casts": 12,
+          "mana_left": 6.1499999999977,
           "max_hp": 100,
           "max_mana": 100.0,
           "milestones": [
             {
               "choices": 11,
-              "gold_collected": 2355,
+              "gold_collected": 2226,
               "hp": 68,
-              "kills": 326,
+              "kills": 314,
               "time": 119.999999999995
             },
             {
               "choices": 21,
-              "gold_collected": 8651,
-              "hp": 86,
-              "kills": 877,
+              "gold_collected": 7007,
+              "hp": 97,
+              "kills": 841,
               "time": 240.00000000002
             },
             {
-              "choices": 28,
-              "gold_collected": 14143,
+              "choices": 26,
+              "gold_collected": 12185,
               "hp": 100,
-              "kills": 1432,
+              "kills": 1339,
               "time": 360.0
             }
           ],
@@ -2249,67 +2311,13 @@
             "gun_rifle": 5,
             "gun_scatter": 5,
             "gun_suppress": 5,
-            "passive_haste": 5,
-            "passive_learning": 3,
-            "passive_magnet": 1,
+            "passive_haste": 3,
+            "passive_learning": 2,
             "passive_power": 5,
+            "passive_recovery": 1,
             "viya_runebullet_v1": 1
           },
-          "peak_enemies": 118,
-          "seed": 407
-        },
-        {
-          "boss_defeated_at": 336.900000000042,
-          "choices": 29,
-          "elapsed": 360.0,
-          "evolved": [
-            "gun_rifle",
-            "gun_suppress"
-          ],
-          "first_choice": 8.09999999999998,
-          "gold_reward": 13948,
-          "hp": 94,
-          "kills": 1359,
-          "magic_casts": 13,
-          "mana_left": 26.0000000000001,
-          "max_hp": 100,
-          "max_mana": 100.0,
-          "milestones": [
-            {
-              "choices": 11,
-              "gold_collected": 2725,
-              "hp": 92,
-              "kills": 307,
-              "time": 119.999999999995
-            },
-            {
-              "choices": 20,
-              "gold_collected": 7147,
-              "hp": 64,
-              "kills": 789,
-              "time": 240.00000000002
-            },
-            {
-              "choices": 29,
-              "gold_collected": 13848,
-              "hp": 94,
-              "kills": 1359,
-              "time": 360.0
-            }
-          ],
-          "outcome": "cleared",
-          "owned": {
-            "gun_rifle": 5,
-            "gun_rupture": 1,
-            "gun_suppress": 5,
-            "passive_haste": 5,
-            "passive_learning": 4,
-            "passive_magnet": 4,
-            "passive_power": 5,
-            "viya_runebullet_v1": 1,
-            "viya_wave_upgrade_v1": 1
-          },
-          "peak_enemies": 124,
+          "peak_enemies": 106,
           "seed": 2026
         }
       ],
@@ -2323,7 +2331,7 @@
       12
     ],
     "actual_choices": [
-      25,
+      24,
       29
     ],
     "outcome": "FAIL",
@@ -2336,8 +2344,8 @@
     "clears": 20,
     "runs": 20,
     "observed_evolved_attacks_per_run": [
-      2,
-      3
+      3,
+      4
     ],
     "method": "Existing5seeds/controller/movement; semantic priority aliases for new gun IDs; no HP/XP/invulnerability gifts; not a human/active supply-seeking controller; not individual skill/talent causal evidence"
   },
@@ -2357,213 +2365,221 @@
     "PassiveLv5extra effects/final skill names/balance/slot-start approval"
   ],
   "artifacts": {
-    ".local_validation/GAME018/balance-outskirts_trial-full.log": {
-      "bytes": 4149,
-      "sha256": "5dc7a619b841a2a06ba8b68d0e5c7f5648ebf09e7ab8195f722356442e80c645"
-    },
-    ".local_validation/GAME018/balance-outskirts_trial-none.log": {
-      "bytes": 4121,
-      "sha256": "68518354ada6112aa6a56ccdd107921fdf046aae1cd32b076dc73150b7a34269"
-    },
-    ".local_validation/GAME018/balance-prologue_wall-full.log": {
-      "bytes": 4176,
-      "sha256": "fbf5a80f74ac159b4e04badd8a02fb2bf81be8013c91c0c65e86c1e958aa7ff3"
-    },
-    ".local_validation/GAME018/balance-prologue_wall-none.log": {
-      "bytes": 4155,
-      "sha256": "8dbfc3450bbf4ce6b1a9fd1d2847ea37abddc605b00b941c0e6c9ca09e1c5046"
-    },
-    ".local_validation/GAME018/balance-results.json": {
-      "bytes": 29444,
-      "sha256": "caba1599420cf16806676431c05261c60ca73bc9bc9b71c19ea35ae90a8c54bf"
-    },
-    ".local_validation/GAME018/catalog_probe.gd": {
-      "bytes": 1053,
-      "sha256": "0d250d7daecde2e68a69e4e47b73120c36eb755513cd4496d4826f6ed7bcb88a"
-    },
-    ".local_validation/GAME018/compact_evolved.png": {
-      "bytes": 49118,
-      "sha256": "9860debe214a12b0cc5de3dedde4bbb41d4c6443d8562ee64135271842fe7db8"
-    },
-    ".local_validation/GAME018/engine_0.log": {
-      "bytes": 32,
-      "sha256": "edff16c1721dd4ae989cadf29a01f574ae8d51b118221f664725bd6980bbba5d"
-    },
-    ".local_validation/GAME018/engine_1.log": {
-      "bytes": 1352,
-      "sha256": "bd175cdf7c9db6376ff16d7e39ebc7f084e899ed5358467e834bf6e8bdbe9165"
-    },
-    ".local_validation/GAME018/engine_2.log": {
-      "bytes": 117,
-      "sha256": "1938b93b03756e658dd6fc29e699189d67afb2aec05905c840e9c22f5b89a6cd"
-    },
-    ".local_validation/GAME018/engine_3.log": {
-      "bytes": 117,
-      "sha256": "190487dfb2bdf99cdccfff084fd5d95b81eac04fcfe3ec43e502d524daacb8eb"
-    },
-    ".local_validation/GAME018/engine_4.log": {
-      "bytes": 118,
-      "sha256": "0dc80f41a9d961a6b4d962614c905af0b7c3bc209f569871d09048860b58f7ff"
-    },
-    ".local_validation/GAME018/engine_5.log": {
-      "bytes": 117,
-      "sha256": "c5a9e5b87c0439795f9d5bcfe6c17d74bce134acc53d7f341cfb55a11bdb1e1d"
-    },
-    ".local_validation/GAME018/engine_6.log": {
-      "bytes": 119,
-      "sha256": "570a42343d370c104902d16c9ff0b402573f94ed3076772afb70e6bce96084fc"
-    },
-    ".local_validation/GAME018/engine_7.log": {
-      "bytes": 117,
-      "sha256": "025f863c84ce84466e9269a07033239400176c7aad50ada31ff794c6e59b0837"
-    },
-    ".local_validation/GAME018/engine_8.log": {
-      "bytes": 119,
-      "sha256": "006364307decfbacc8d38999f35570eedb4ce152d4f9885e88d788a396da59c0"
-    },
-    ".local_validation/GAME018/engine_9.log": {
-      "bytes": 73,
-      "sha256": "6d1c065383a27c36804949b6ffa4b09714470b112e5dacc0bd5aeb7b9c147c4e"
-    },
-    ".local_validation/GAME018/evolution_choices.png": {
-      "bytes": 42782,
-      "sha256": "1be401bfc0637f413fd93d2aa7a9b8711b73886c672ecba2001d13f4693e8284"
-    },
-    ".local_validation/GAME018/explosive_evolution.png": {
-      "bytes": 118818,
-      "sha256": "49eacb5eaccca7e32c1ca793215eaf1b11f1a1807c4c2a62910c424c2ca5dc36"
-    },
-    ".local_validation/GAME018/gun_level1.png": {
-      "bytes": 66057,
-      "sha256": "f400c3730aa6874f1d0d919c7768bbcbde956506ba3b5e29cce00b58bddae022"
-    },
-    ".local_validation/GAME018/gun_level5.png": {
-      "bytes": 94184,
-      "sha256": "40e9ec9acf9fe2d988bf0d69b215540125fc7e457a52bacbbb80640d7b6af416"
-    },
     ".local_validation/GAME018/import.log": {
       "bytes": 11279,
       "sha256": "ea8498e2605e178e8ae08c8a5a3f6351f3f05007b661fcd77e2a1532f1730821"
-    },
-    ".local_validation/GAME018/legacy-first.log": {
-      "bytes": 5572,
-      "sha256": "1ce631c9f73dfb4b9ddbf1fec7a98884744aec763dcb7fe050acca3d5ee051a4"
-    },
-    ".local_validation/GAME018/live-data/resume-weapons.save": {
-      "bytes": 15528,
-      "sha256": "9430fe5d0eadbdd2be752ee22fd5a24a7f559e565ed852bb8aa172c6321fb289"
-    },
-    ".local_validation/GAME018/manual_double_wave.png": {
-      "bytes": 113047,
-      "sha256": "cfb290241710570a18c47cd66cc0e0538d7a6fda706ab2e532df836cc8f5a2b6"
-    },
-    ".local_validation/GAME018/natural_skills.png": {
-      "bytes": 61834,
-      "sha256": "5827e6c39f9465163ff5bbb5b70a44e34ab81a4ecd48c2bb18850b836d3cf248"
-    },
-    ".local_validation/GAME018/new_sortie.png": {
-      "bytes": 58709,
-      "sha256": "6e2a286e07e21df99d25c85af03e9eb4f9f02673486b06c9051a11d4264c3a1e"
-    },
-    ".local_validation/GAME018/process-current.log": {
-      "bytes": 947,
-      "sha256": "a0bb123397518d0b547f172c820be96d8ac92a94d7f98c05ec1f96439a86fa7d"
-    },
-    ".local_validation/GAME018/process-v1.log": {
-      "bytes": 917,
-      "sha256": "33157e07517928da535f1aafcd232ddd3f3193e96d7c8a7fd27194c5c33c82cb"
-    },
-    ".local_validation/GAME018/process-v2.log": {
-      "bytes": 880,
-      "sha256": "87355134d4205ccf72bad52644695ee8d77baeee29077c63c6c4986041af0852"
-    },
-    ".local_validation/GAME018/process-v3.log": {
-      "bytes": 880,
-      "sha256": "91096e508aceeaeef9a22ce4c64580f5528523280d3bdedeeb750a4c81dd1d38"
-    },
-    ".local_validation/GAME018/process-v4.log": {
-      "bytes": 884,
-      "sha256": "375ebdf5d10d5c3f7614dc997886a72c5aeca7e89cccc7588e115da33e22c9fc"
-    },
-    ".local_validation/GAME018/process-v5.log": {
-      "bytes": 885,
-      "sha256": "4dfbe28fbfd44ba6b78978411ae969fb4f1bdfcdf567da08881291eaea53288a"
-    },
-    ".local_validation/GAME018/process-v6.log": {
-      "bytes": 881,
-      "sha256": "7805401a5cb527af6f6f2ee754f056cc97921b659f172cf191a08e673adfb0a9"
-    },
-    ".local_validation/GAME018/process-v7.log": {
-      "bytes": 881,
-      "sha256": "841c58b53c713dbaf3e797e5adbfe33d700201604a9de40e1d8eebf8c80acb88"
-    },
-    ".local_validation/GAME018/process-v8.log": {
-      "bytes": 885,
-      "sha256": "06013226de3e5d12a560875232efcbc37e73e37d50b895cfe7f88a5ca5b7198e"
-    },
-    ".local_validation/GAME018/process-v9.log": {
-      "bytes": 886,
-      "sha256": "fa59839e0507fc2355712db22a4aa132ad21916b0d08a2113bf935862674395e"
-    },
-    ".local_validation/GAME018/process_probe.gd": {
-      "bytes": 4066,
-      "sha256": "7f99baedbdc91c7b160a36e64e3a762a12b3114e50c4665edf3f982b062622bf"
-    },
-    ".local_validation/GAME018/python.log": {
-      "bytes": 98,
-      "sha256": "c1e43429408eeda6541e417a8a17b28d21cb4d14e67ca40ee5f0aba95de13e38"
-    },
-    ".local_validation/GAME018/render.log": {
-      "bytes": 1410,
-      "sha256": "c621459f613b875656de6825c9e3b74df978a227829179772af4292ba367cea5"
-    },
-    ".local_validation/GAME018/render_probe.gd": {
-      "bytes": 4693,
-      "sha256": "719d425b3cb7d273e61b1420d5aead439acdb5c4e668327bd7ac1f6a06ccc521"
-    },
-    ".local_validation/GAME018/report.json": {
-      "bytes": 19632,
-      "sha256": "c4eed642bab19ad91de5568055bf7de7a2d5e2f4b2b6e74018e2bec0cb1ce438"
-    },
-    ".local_validation/GAME018/rune_marks.png": {
-      "bytes": 72962,
-      "sha256": "17b9e2d7a9f1c2835dfecd3e03f0111b2726641e061cd590f236d73a8fcc7200"
-    },
-    ".local_validation/GAME018/second_wave.png": {
-      "bytes": 95298,
-      "sha256": "cb80c83f849db706cf64bee4c3fb217f31d3cea2e7e20f18633484784fe4f861"
-    },
-    ".local_validation/GAME018/stress.log": {
-      "bytes": 291,
-      "sha256": "288ade622933f08983f03c8ebaac6b0ab7c512ccd2768f72597fbfe590558d3d"
-    },
-    ".local_validation/GAME018/stress_probe.gd": {
-      "bytes": 1933,
-      "sha256": "df1221971eb6a31e7e268441de27e165db0cd5e9aeffb69b734182ffb0659eaf"
     },
     ".local_validation/GAME018/weapon_probe.gd": {
       "bytes": 535,
       "sha256": "1c4447db6a1888f94d51a4574fdd1ce290414e8ffece9b7a159b94cf5aa66b03"
     },
-    ".local_validation/GAME018/weapons-final.log": {
-      "bytes": 118,
-      "sha256": "beb9a7d6e693081ed6915a36eb0df1e99a02e6cca6efd968f0edc28d34a6055c"
+    ".local_validation/GAME018/balance-outskirts_trial-full.log": {
+      "bytes": 4134,
+      "sha256": "5dc2cfc5ff27fa8298d50bc8a3c1ad523518195f8c75b4ccb4c9f3060d328630"
     },
     ".local_validation/GAME018/weapons-first.log": {
       "bytes": 7433,
       "sha256": "f678c0cf4cd5648e9fcbd36476508da70f92ed5bd16dd12e9493321aa539a669"
     },
-    ".local_validation/GAME018/weapons-parse.log": {
-      "bytes": 73,
-      "sha256": "6d1c065383a27c36804949b6ffa4b09714470b112e5dacc0bd5aeb7b9c147c4e"
+    ".local_validation/GAME018/process-v2.log": {
+      "bytes": 880,
+      "sha256": "87355134d4205ccf72bad52644695ee8d77baeee29077c63c6c4986041af0852"
+    },
+    ".local_validation/GAME018/process-v6.log": {
+      "bytes": 881,
+      "sha256": "7805401a5cb527af6f6f2ee754f056cc97921b659f172cf191a08e673adfb0a9"
+    },
+    ".local_validation/GAME018/weapons-third.log": {
+      "bytes": 271,
+      "sha256": "c5cc0de50e9de8d072be44e1be741a0c8c1493b3837fae6fb5455a4b3742a45d"
+    },
+    ".local_validation/GAME018/engine_2.log": {
+      "bytes": 117,
+      "sha256": "1938b93b03756e658dd6fc29e699189d67afb2aec05905c840e9c22f5b89a6cd"
+    },
+    ".local_validation/GAME018/stress.log": {
+      "bytes": 291,
+      "sha256": "61076d29b7e8a32a44330c58b29969f741988626c8633a057bee7c3bbecee05a"
+    },
+    ".local_validation/GAME018/manual_double_wave.png": {
+      "bytes": 113047,
+      "sha256": "cfb290241710570a18c47cd66cc0e0538d7a6fda706ab2e532df836cc8f5a2b6"
+    },
+    ".local_validation/GAME018/evolution_choices.png": {
+      "bytes": 42782,
+      "sha256": "1be401bfc0637f413fd93d2aa7a9b8711b73886c672ecba2001d13f4693e8284"
+    },
+    ".local_validation/GAME018/balance-prologue_wall-full.log": {
+      "bytes": 4171,
+      "sha256": "06843af50e87e18ac1bcede43969101bbae3b443b4887de7efdff27888be1046"
+    },
+    ".local_validation/GAME018/engine_8.log": {
+      "bytes": 119,
+      "sha256": "abb6d201d0746f4b19333e9407eb92d6f98a957c861a840bae23a391c0633106"
+    },
+    ".local_validation/GAME018/natural_skills.png": {
+      "bytes": 61895,
+      "sha256": "80b6b7d510001277aeb19e3bfd64cc535c2cf8d0336100f8633b1abead35f831"
+    },
+    ".local_validation/GAME018/engine_4.log": {
+      "bytes": 118,
+      "sha256": "0dc80f41a9d961a6b4d962614c905af0b7c3bc209f569871d09048860b58f7ff"
+    },
+    ".local_validation/GAME018/process_probe.gd": {
+      "bytes": 4066,
+      "sha256": "7f99baedbdc91c7b160a36e64e3a762a12b3114e50c4665edf3f982b062622bf"
+    },
+    ".local_validation/GAME018/engine_3.log": {
+      "bytes": 117,
+      "sha256": "190487dfb2bdf99cdccfff084fd5d95b81eac04fcfe3ec43e502d524daacb8eb"
+    },
+    ".local_validation/GAME018/weapons-final.log": {
+      "bytes": 118,
+      "sha256": "beb9a7d6e693081ed6915a36eb0df1e99a02e6cca6efd968f0edc28d34a6055c"
+    },
+    ".local_validation/GAME018/process-v9.log": {
+      "bytes": 886,
+      "sha256": "fa59839e0507fc2355712db22a4aa132ad21916b0d08a2113bf935862674395e"
+    },
+    ".local_validation/GAME018/explosive_evolution.png": {
+      "bytes": 118818,
+      "sha256": "49eacb5eaccca7e32c1ca793215eaf1b11f1a1807c4c2a62910c424c2ca5dc36"
     },
     ".local_validation/GAME018/weapons-second.log": {
       "bytes": 7433,
       "sha256": "f678c0cf4cd5648e9fcbd36476508da70f92ed5bd16dd12e9493321aa539a669"
     },
-    ".local_validation/GAME018/weapons-third.log": {
-      "bytes": 271,
-      "sha256": "c5cc0de50e9de8d072be44e1be741a0c8c1493b3837fae6fb5455a4b3742a45d"
+    ".local_validation/GAME018/legacy-first.log": {
+      "bytes": 5572,
+      "sha256": "1ce631c9f73dfb4b9ddbf1fec7a98884744aec763dcb7fe050acca3d5ee051a4"
+    },
+    ".local_validation/GAME018/balance-prologue_wall-none.log": {
+      "bytes": 4153,
+      "sha256": "5cf7b52cec7668f557a441f4190f815bfe5f372b49ce4b33413ec497d1c5ac3f"
+    },
+    ".local_validation/GAME018/gun_level5.png": {
+      "bytes": 94184,
+      "sha256": "40e9ec9acf9fe2d988bf0d69b215540125fc7e457a52bacbbb80640d7b6af416"
+    },
+    ".local_validation/GAME018/engine_0.log": {
+      "bytes": 32,
+      "sha256": "edff16c1721dd4ae989cadf29a01f574ae8d51b118221f664725bd6980bbba5d"
+    },
+    ".local_validation/GAME018/stress_probe.gd": {
+      "bytes": 1933,
+      "sha256": "df1221971eb6a31e7e268441de27e165db0cd5e9aeffb69b734182ffb0659eaf"
+    },
+    ".local_validation/GAME018/new_sortie.png": {
+      "bytes": 57126,
+      "sha256": "08cc3f75ba1cd20f36d3bdcfe19922f9853d5c5009895853995d4b2d117a9a59"
+    },
+    ".local_validation/GAME018/engine_9.log": {
+      "bytes": 73,
+      "sha256": "6d1c065383a27c36804949b6ffa4b09714470b112e5dacc0bd5aeb7b9c147c4e"
+    },
+    ".local_validation/GAME018/process-v5.log": {
+      "bytes": 885,
+      "sha256": "4dfbe28fbfd44ba6b78978411ae969fb4f1bdfcdf567da08881291eaea53288a"
+    },
+    ".local_validation/GAME018/balance-results.json": {
+      "bytes": 29536,
+      "sha256": "7f3c1b69e1b34e6025474868bdeecdabb9e0925922271d8eff35d62ca86a4f12"
+    },
+    ".local_validation/GAME018/engine_7.log": {
+      "bytes": 117,
+      "sha256": "025f863c84ce84466e9269a07033239400176c7aad50ada31ff794c6e59b0837"
+    },
+    ".local_validation/GAME018/process-v1.log": {
+      "bytes": 917,
+      "sha256": "33157e07517928da535f1aafcd232ddd3f3193e96d7c8a7fd27194c5c33c82cb"
+    },
+    ".local_validation/GAME018/report.json": {
+      "bytes": 19632,
+      "sha256": "cf26cb95c033ef1e6f767cbea3896b0061a7ba276af9549bd4a1cbb6aa692f18"
+    },
+    ".local_validation/GAME018/process-v4.log": {
+      "bytes": 884,
+      "sha256": "375ebdf5d10d5c3f7614dc997886a72c5aeca7e89cccc7588e115da33e22c9fc"
+    },
+    ".local_validation/GAME018/process-v3.log": {
+      "bytes": 880,
+      "sha256": "91096e508aceeaeef9a22ce4c64580f5528523280d3bdedeeb750a4c81dd1d38"
+    },
+    ".local_validation/GAME018/render_probe.gd": {
+      "bytes": 4693,
+      "sha256": "719d425b3cb7d273e61b1420d5aead439acdb5c4e668327bd7ac1f6a06ccc521"
+    },
+    ".local_validation/GAME018/process-v8.log": {
+      "bytes": 885,
+      "sha256": "06013226de3e5d12a560875232efcbc37e73e37d50b895cfe7f88a5ca5b7198e"
+    },
+    ".local_validation/GAME018/engine_1.log": {
+      "bytes": 11514,
+      "sha256": "5bf2e1c4a51d5b95c632b36e626c99218fc8ffad2c39a18840db3daebf4a9c1a"
+    },
+    ".local_validation/GAME018/balance-outskirts_trial-none.log": {
+      "bytes": 4136,
+      "sha256": "ddd22e6db60c3ef902de838b639b20c7dee0be194092aff2adef396a0137f4b9"
+    },
+    ".local_validation/GAME018/python.log": {
+      "bytes": 98,
+      "sha256": "21ab2ac3927ad641efa5c2d6290edef9454f9a2ce67507eff1259cea498a2bcd"
+    },
+    ".local_validation/GAME018/engine_6.log": {
+      "bytes": 119,
+      "sha256": "570a42343d370c104902d16c9ff0b402573f94ed3076772afb70e6bce96084fc"
+    },
+    ".local_validation/GAME018/gun_level1.png": {
+      "bytes": 66057,
+      "sha256": "f400c3730aa6874f1d0d919c7768bbcbde956506ba3b5e29cce00b58bddae022"
+    },
+    ".local_validation/GAME018/compact_evolved.png": {
+      "bytes": 49118,
+      "sha256": "9860debe214a12b0cc5de3dedde4bbb41d4c6443d8562ee64135271842fe7db8"
+    },
+    ".local_validation/GAME018/render.log": {
+      "bytes": 1387,
+      "sha256": "62413a1087726ab260f3acc3a8c3ac431ed945815adf699221cee2f561c4118d"
+    },
+    ".local_validation/GAME018/catalog_probe.gd": {
+      "bytes": 1053,
+      "sha256": "0d250d7daecde2e68a69e4e47b73120c36eb755513cd4496d4826f6ed7bcb88a"
+    },
+    ".local_validation/GAME018/rune_marks.png": {
+      "bytes": 72962,
+      "sha256": "17b9e2d7a9f1c2835dfecd3e03f0111b2726641e061cd590f236d73a8fcc7200"
+    },
+    ".local_validation/GAME018/engine_5.log": {
+      "bytes": 117,
+      "sha256": "c5a9e5b87c0439795f9d5bcfe6c17d74bce134acc53d7f341cfb55a11bdb1e1d"
+    },
+    ".local_validation/GAME018/process-v7.log": {
+      "bytes": 881,
+      "sha256": "841c58b53c713dbaf3e797e5adbfe33d700201604a9de40e1d8eebf8c80acb88"
+    },
+    ".local_validation/GAME018/weapons-parse.log": {
+      "bytes": 73,
+      "sha256": "6d1c065383a27c36804949b6ffa4b09714470b112e5dacc0bd5aeb7b9c147c4e"
+    },
+    ".local_validation/GAME018/process-current.log": {
+      "bytes": 947,
+      "sha256": "a0bb123397518d0b547f172c820be96d8ac92a94d7f98c05ec1f96439a86fa7d"
+    },
+    ".local_validation/GAME018/second_wave.png": {
+      "bytes": 95298,
+      "sha256": "cb80c83f849db706cf64bee4c3fb217f31d3cea2e7e20f18633484784fe4f861"
+    },
+    ".local_validation/GAME018/live-data/resume-weapons.save": {
+      "bytes": 15528,
+      "sha256": "6784fc630856424928380b10ef33aab38550c37648244fffc3a56e8b561bc0a2"
     }
+  },
+  "concurrent_planning": {
+    "commits": [
+      "122ef45",
+      "737af28"
+    ],
+    "preserved": "PLANNED13 verbatim, stats baseline section11 (renumber duplicate heading), skills implementation section14/baseline12",
+    "application": "Retained rifle-only initial stats; automatic unique learned from level-up. Monster species/boss profiles/gold slime dungeon2daily entries remain future planning; no unrequested race/dungeon implementation."
   }
 }
