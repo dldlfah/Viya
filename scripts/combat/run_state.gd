@@ -5,6 +5,7 @@ const MagicState = preload("res://scripts/combat/magic_state.gd")
 const FeedbackState = preload("res://scripts/combat/feedback_state.gd")
 const CombatCues = preload("res://scripts/combat/combat_cues.gd")
 const StageCatalog = preload("res://scripts/combat/stage_catalog.gd")
+const AccountTalents = preload("res://scripts/progression/account_talents.gd")
 enum Phase { READY, RUNNING, PAUSED, DEFEAT, CHOOSING, ABANDONED, CLEARED }
 const WORLD_SIZE := Vector2(1800.0, 1200.0)
 const PLAYER_SPEED := 235.0
@@ -72,9 +73,13 @@ var checkpoint_index: int = 0
 var end_reason: String = ""
 var stage_catalog = StageCatalog.new()
 var stage_rules: Dictionary = {}
+var account_attack_level: int = 0 # Frozen at departure, including saved battles.
 
-func start(seed_value: int = 0, character_id: String = "viya") -> bool:
+func start(seed_value: int = 0, character_id: String = "viya", account_level: int = -1) -> bool:
 	# Validate the complete selected character before changing the previous run.
+	var selected_account_level := account_attack_level if account_level == -1 else account_level
+	if not AccountTalents.valid_level(selected_account_level):
+		return false
 	var rules: Dictionary = stage_catalog.for_stage(stage)
 	if rules.is_empty():
 		return false
@@ -97,6 +102,7 @@ func start(seed_value: int = 0, character_id: String = "viya") -> bool:
 		rng.seed = seed_value
 	if not growth.reset(character_id, int(rng.seed) ^ 0x51A7):
 		return false
+	account_attack_level = selected_account_level
 	gold_rng.seed = int(rng.seed) ^ 0x601D
 	encounter_rng.seed = int(rng.seed) ^ 0xE11C
 	run_id = Crypto.new().generate_random_bytes(16).hex_encode()
@@ -266,7 +272,7 @@ func stats_profile(levels: Dictionary) -> Dictionary:
 		if not ranks.has(effect):
 			ranks[effect] = int(levels.get(entry["id"], 0))
 	return {"max_hp": 100 + 20 * int(ranks.get("vitality", 0)),
-		"stats": {"power": 1.0 + 0.15 * int(ranks.get("power", 0)),
+		"stats": {"power": (1.0 + 0.15 * int(ranks.get("power", 0))) * AccountTalents.power_multiplier(account_attack_level),
 			"rate": 1.0 + 0.08 * int(ranks.get("haste", 0)),
 			"speed": PLAYER_SPEED * (1.0 + 0.07 * int(ranks.get("stride", 0))),
 			"pickup": 80.0 + 20.0 * int(ranks.get("magnet", 0)),
@@ -577,6 +583,9 @@ func _damage_enemy(id: int, base_damage: float) -> void:
 		if float(stats["crit"]) > 0.0 and rng.randf() < float(stats["crit"]):
 			damage *= 2.0
 			critical = true
+		if account_attack_level > 0:
+			# 100 * 1.10 must be 110, not 111 from binary rounding before ceil.
+			damage = snappedf(damage, 0.000001)
 		enemies[i]["hp"] -= maxi(1, int(ceil(damage)))
 		# Display HP actually removed, not theoretical overkill damage. Reuse the crit roll.
 		var hp_lost: int = maxi(0, previous_hp - maxi(0, int(enemies[i]["hp"])))
@@ -733,12 +742,12 @@ func cancel_transition(expected_ticket: int) -> bool:
 	set_paused(false) # Same XP, offer/ticket, HP, MP, timers and RNG state.
 	return true
 
-func confirm_transition(expected_ticket: int) -> bool:
+func confirm_transition(expected_ticket: int, account_level: int = -1) -> bool:
 	if not _valid_confirmation(expected_ticket):
 		return false
 	if transition_action == "restart":
 		# start() validates first. On failure keep the old run and confirmation.
-		return start(0, growth.character_id)
+		return start(0, growth.character_id, account_level)
 	_finish_run("abandoned")
 	return true
 

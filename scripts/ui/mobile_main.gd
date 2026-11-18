@@ -4,6 +4,7 @@ extends "res://scripts/main.gd"
 const HudLayout = preload("res://scripts/ui/hud_layout.gd")
 const ResponsiveFeedback = preload("res://scripts/ui/responsive_feedback_panel.gd")
 const GrowthOverview = preload("res://scripts/ui/growth_overview.gd")
+const AccountTalents = preload("res://scripts/progression/account_talents.gd")
 var layout_data: Dictionary = {}
 var safe_area_override := Rect2() # Logical-coordinate test injection, empty in production.
 var slot_buttons: Array[Button] = []
@@ -33,9 +34,22 @@ var overview_return_button: Button
 var _overview_open := false
 var _overview_origin: String = ""
 var _final_growth: Dictionary = {}
+var talents_button: Button
+var talents_return_button: Button
+var talent_tabs: Array[Button] = []
+var talent_buy_buttons: Array[Button] = []
+var talent_content: VBoxContainer
+var _talents_open := false
+var _talent_category := "attack"
+var _talent_notice := ""
 
 func _ready() -> void:
 	super._ready()
+	# Recover/pay terminal intent first, then start at the lobby with its frozen result.
+	if battle_save_error == OK and gold_error == OK and simulation.phase in [RunState.Phase.CLEARED, RunState.Phase.DEFEAT, RunState.Phase.ABANDONED]:
+		if simulation.return_to_ready(simulation.navigation_ticket):
+			last_phase = simulation.phase
+			_show_menu("ready")
 	root_ui.resized.connect(_queue_layout)
 	get_viewport().size_changed.connect(_queue_layout)
 	_apply_layout()
@@ -236,6 +250,11 @@ func _apply_layout() -> void:
 	_update_magic_hud()
 
 func _clear_dialog() -> void:
+	talents_button = null
+	talents_return_button = null
+	talent_tabs.clear()
+	talent_buy_buttons.clear()
+	talent_content = null
 	overview_button = null
 	overview_return_button = null
 	_menu_revision += 1
@@ -248,12 +267,14 @@ func _clear_dialog() -> void:
 	super._clear_dialog()
 
 func _show_menu(kind: String) -> void:
+	_talents_open = false
 	_overview_open = false
 	if kind in ["defeat", "abandoned", "cleared"] and _final_growth.is_empty():
 		_final_growth = GrowthOverview.capture(simulation)
 	_modal_kind = kind
 	_detail_open = false
 	super._show_menu(kind)
+	overlay.color.a = 1.0 if kind == "ready" else 0.88
 	var ticket: int = simulation.navigation_ticket
 	var revision: int = _menu_revision
 	# Keep existing settings/results, but replace every destructive start binding.
@@ -285,7 +306,12 @@ func _show_menu(kind: String) -> void:
 		dialog_body.add_child(lobby_button)
 	elif kind == "ready":
 		var heading: Label = dialog_body.get_child(0) as Label
-		heading.text = "VIYA | 출격 대기"
+		heading.text = "VIYA | 임시 메인 로비"
+		var account := _label("계정 공통 특성 · 공격 %d/3 · 공격력 +%.0f%%" % [gold_progress.attack_level, (AccountTalents.power_multiplier(gold_progress.attack_level) - 1.0) * 100.0], 20)
+		dialog_body.add_child(account)
+		dialog_body.move_child(account, 1)
+		talents_button = _button("계정 특성 · 공격 / 방어 / 회복", _open_talents.bind(ticket, revision))
+		dialog_body.add_child(talents_button)
 	_add_growth_access(kind)
 	_scroll.scroll_vertical = 0
 	_fit_dialog()
@@ -392,7 +418,7 @@ func begin_run() -> void:
 		return
 	var previous_stage: int = simulation.stage
 	simulation.stage = gold_progress.next_stage
-	if not simulation.start(0, simulation.growth.character_id):
+	if not simulation.start(0, simulation.growth.character_id, gold_progress.attack_level):
 		simulation.stage = previous_stage
 		push_error("Invalid character data; current run retained")
 		return
@@ -475,7 +501,7 @@ func _cancel_transition(ticket: int, revision: int) -> void:
 	_update_hud()
 
 func _confirm_transition(ticket: int, revision: int) -> void:
-	if not _menu_matches(ticket, revision) or not simulation.confirm_transition(ticket):
+	if not _menu_matches(ticket, revision) or not simulation.confirm_transition(ticket, gold_progress.attack_level):
 		return
 	_menu_revision += 1
 	_magic_touch_id = -1
@@ -523,6 +549,10 @@ func _input(event: InputEvent) -> void:
 	super._input(event)
 
 func _unhandled_key_input(event: InputEvent) -> void:
+	if _talents_open and event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_ESCAPE:
+		_close_talents(simulation.navigation_ticket, _menu_revision)
+		get_viewport().set_input_as_handled()
+		return
 	if _modal_kind == "discard_save" and event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_ESCAPE:
 		_cancel_discard_save(simulation.navigation_ticket, _menu_revision)
 		get_viewport().set_input_as_handled()
@@ -542,6 +572,9 @@ func _unhandled_key_input(event: InputEvent) -> void:
 	super._unhandled_key_input(event)
 
 func pause_game() -> void:
+	if _talents_open:
+		_show_menu("ready") # Interruption invalidates every outstanding purchase callback.
+		return
 	if _modal_kind == "discard_save":
 		_show_menu("ready")
 		return
@@ -572,6 +605,86 @@ func pause_game() -> void:
 		_update_hud()
 		return
 	super.pause_game()
+
+func _open_talents(ticket: int, revision: int) -> void:
+	if not _menu_matches(ticket, revision) or simulation.phase != RunState.Phase.READY or _modal_kind != "ready":
+		return
+	_talent_category = "attack"
+	_talent_notice = ""
+	_show_talents()
+
+func _show_talents() -> void:
+	_clear_dialog()
+	_talents_open = true
+	_modal_kind = "talents"
+	var ticket: int = simulation.navigation_ticket
+	var revision: int = _menu_revision
+	dialog_body.add_child(_label("계정 공통 특성", 24))
+	dialog_body.add_child(_label("보유 골드 %s · 모든 캐릭터의 새 전투에 적용\n이어하기는 출격 당시 특성을 유지합니다." % AccountTalents.gold_text(gold_progress.total), 18))
+	talents_return_button = _button("메인 로비로", _close_talents.bind(ticket, revision))
+	dialog_body.add_child(talents_return_button)
+	var tabs := HBoxContainer.new()
+	dialog_body.add_child(tabs)
+	for category in ["attack", "defense", "recovery"]:
+		var tab := _button({"attack": "공격", "defense": "방어", "recovery": "회복"}[category], _select_talent_category.bind(category, ticket, revision))
+		tab.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		tab.toggle_mode = true
+		tab.button_pressed = category == _talent_category
+		tabs.add_child(tab)
+		talent_tabs.append(tab)
+	var panel := _panel(dialog_body)
+	panel.name = "TalentArea"
+	panel.custom_minimum_size.y = 140
+	talent_content = VBoxContainer.new()
+	panel.add_child(talent_content)
+	if _talent_category == "attack":
+		talent_content.add_child(_label("[임시] 공격력 강화 · 누적 +5% / +10% / +15%", 18))
+		for level in range(3):
+			var state_text := "강화하기"
+			if level < gold_progress.attack_level:
+				state_text = "강화 완료"
+			elif level > gold_progress.attack_level:
+				state_text = "이전 단계 필요"
+			elif gold_progress.total < int(AccountTalents.ATTACK_COSTS[level]):
+				state_text = "골드 부족"
+			var caption := "%d단계 · 누적 공격력 +%.0f%% · %s 골드 · %s" % [level + 1, float(AccountTalents.ATTACK_BONUSES[level + 1]) * 100, AccountTalents.gold_text(AccountTalents.ATTACK_COSTS[level]), state_text]
+			var buy := _button(caption, _buy_attack_talent.bind(level, ticket, revision))
+			buy.add_theme_font_size_override("font_size", 18)
+			buy.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+			buy.disabled = gold_error != OK or not gold_progress.loaded or level != gold_progress.attack_level or gold_progress.total < int(AccountTalents.ATTACK_COSTS[level])
+			talent_content.add_child(buy)
+			talent_buy_buttons.append(buy)
+	if gold_error != OK:
+		dialog_body.add_child(_label("계정 저장을 확인할 수 없습니다. 로비에서 다시 불러와 주세요.", 17))
+	if not _talent_notice.is_empty():
+		dialog_body.add_child(_label(_talent_notice, 17))
+	dialog_body.add_child(_button("메인 로비로", _close_talents.bind(ticket, revision)))
+	_scroll.scroll_vertical = 0
+	overlay.show()
+	_fit_dialog()
+
+func _select_talent_category(category: String, ticket: int, revision: int) -> void:
+	if not _talents_open or not _menu_matches(ticket, revision) or category not in ["attack", "defense", "recovery"]:
+		return
+	_talent_category = category
+	_talent_notice = ""
+	_show_talents()
+
+func _buy_attack_talent(level: int, ticket: int, revision: int) -> void:
+	if not _talents_open or not _menu_matches(ticket, revision) or _talent_category != "attack" or simulation.phase != RunState.Phase.READY or gold_error != OK:
+		return
+	var error: Error = gold_progress.purchase_attack(level)
+	if error == OK:
+		_talent_notice = "공격력 %d단계 강화 완료 · 새 전투부터 적용됩니다." % gold_progress.attack_level
+	else:
+		_talent_notice = "강화 저장 실패 · 골드와 강화 단계를 확인해 주세요. (%s)" % error_string(error)
+		if error in [ERR_BUSY, ERR_FILE_CORRUPT, ERR_PARSE_ERROR]:
+			gold_error = gold_progress.load_progress()
+	_show_talents()
+
+func _close_talents(ticket: int, revision: int) -> void:
+	if _talents_open and _menu_matches(ticket, revision):
+		_show_menu("ready")
 
 func _add_growth_access(origin: String) -> void:
 	if origin not in ["paused", "choosing", "defeat", "abandoned", "ready", "cleared"]:

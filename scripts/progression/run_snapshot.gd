@@ -1,6 +1,7 @@
 extends RefCounted
 ## Exact gameplay data. Cosmetic effects/cues are rebuilt after a restore.
-const VERSION := 3
+const VERSION := 4
+const GAME011_RULES := "7644920556aef98fd56539ab07f8deab2e446baab4fa4320d4a78247f38ca9f8"
 const GAME010_RULES := "711b73b68b15d571c240c7e4b8c20261ddec790a5db723c2ef1bd2d83f68042b"
 const LEGACY_RULES := "3ecf54fd2e0aedad3127fce24d77cc55ea0f8ffe3bfbf235d2470d233a34231e"
 const LEGACY_FINGERPRINTS := [LEGACY_RULES,
@@ -11,7 +12,7 @@ const RUN_FIELDS := ["phase", "player", "facing", "hp", "elapsed", "kills", "sho
 	"shot_clock", "spawn_clock", "hurt_clock", "skill_clocks", "_resume_phase",
 	"_enemy_serial", "_regen_remainder", "navigation_ticket", "stage", "run_id",
 	"gold_collected", "gold_drop_chance", "_elites_spawned", "_boss_spawned", "_boss_defeated", "checkpoint_index", "end_reason",
-	"enemies", "bullets", "pickups", "gold_pickups", "enemy_bullets", "_swarm_clock", "_swarm_pending", "_swarm_serial"]
+	"account_attack_level", "enemies", "bullets", "pickups", "gold_pickups", "enemy_bullets", "_swarm_clock", "_swarm_pending", "_swarm_serial"]
 const GROWTH_FIELDS := ["character_id", "owned", "level", "xp", "pending", "offer", "ticket", "revision"]
 const MAGIC_FIELDS := ["mana", "cooldown_left", "casts", "ticket"]
 
@@ -33,6 +34,8 @@ static func capture(state) -> Dictionary:
 	return result.duplicate(true)
 
 static func upgrade_legacy(data: Dictionary, state) -> Dictionary:
+	if data.get("version") == 3 and data.get("rules") == GAME011_RULES:
+		return _upgrade_account(data)
 	if data.get("version") == 2 and data.get("rules") == GAME010_RULES:
 		return _upgrade_mana(data)
 	if data.get("version") != 1 or data.get("rules") not in LEGACY_FINGERPRINTS:
@@ -68,6 +71,15 @@ static func _upgrade_mana(data: Dictionary) -> Dictionary:
 	data.version = VERSION
 	data.rules = fingerprint()
 	data.magic.cooldown_left = 0.0 # Preserve MP/casts; the old timer no longer applies.
+	return _upgrade_account(data)
+
+static func _upgrade_account(data: Dictionary) -> Dictionary:
+	if not data.get("run") is Dictionary:
+		return {}
+	data = data.duplicate(true)
+	data.version = VERSION
+	data.rules = fingerprint()
+	data.run.account_attack_level = 0 # Older runs predate account talents.
 	return data
 
 static func finite_number(value: Variant, minimum: float, maximum: float) -> bool:
@@ -88,6 +100,8 @@ static func valid(data: Dictionary, state) -> bool:
 	for key in RUN_FIELDS:
 		if not run.has(key):
 			return false
+	if not state.AccountTalents.valid_level(run.account_attack_level):
+		return false
 	if run.phase not in [1, 2, 3, 4, 5, 6] or run._resume_phase not in [1, 4]:
 		return false
 	for key in ["hp", "kills", "shots", "_enemy_serial", "navigation_ticket", "stage", "gold_collected", "_elites_spawned", "checkpoint_index"]:

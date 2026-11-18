@@ -15,6 +15,7 @@ static func capture(run) -> Dictionary:
 		"magic": run.magic.profile(rank).duplicate(true), "magic_rank": rank,
 		"upgrade_name": str(upgrade.get("name", "[임시] 고유 마법 강화")),
 		"mana": run.magic.mana, "max_mana": float(run.magic.config.get("max_mana", 0.0)),
+		"account_attack_level": run.account_attack_level,
 		"cooldown_left": run.magic.cooldown_left,
 		"summary": run.result_summary().duplicate(true)}
 
@@ -55,6 +56,7 @@ static func sections(data: Dictionary) -> Array[Dictionary]:
 		"HP %d / %d\n공격 피해 배율 ×%.2f / 자동 공격 속도 배율 ×%.2f\n이동 속도 %.1f / 경험치 획득 배율 ×%.2f\n획득 범위 %.1f / 치명타 확률 %.1f%% / 초당 체력 회복 %.2f\n거리·속도는 전투 논리 단위이며 장비 점수나 영구 능력치가 아닙니다." % [
 			data["hp"], data["max_hp"], stats["power"], stats["rate"], stats["speed"],
 			stats["xp"], stats["pickup"], float(stats["crit"]) * 100.0, stats["regen"]]})
+	result[-1].body += "\n출격 당시 계정 공격 특성 %d/3단계 적용" % int(data.account_attack_level)
 	return result
 
 static func _row_text(entries: Array) -> String:

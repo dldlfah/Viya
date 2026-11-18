@@ -172,7 +172,7 @@ static func ui_checks(host, directory: String, verify: Callable) -> void:
 	ui.queue_free()
 	await host.get_tree().process_frame
 	ui = make_ui(host, directory)
-	verify.call(ui.simulation.phase == RunState.Phase.CLEARED and ui.gold_progress.total == 177 and ui.gold_progress.next_stage == 2, "Recovery after payment replays the result without duplicate gold")
+	verify.call(ui.simulation.phase == RunState.Phase.READY and ui.simulation.result_summary().outcome == "cleared" and ui.gold_progress.total == 177 and ui.gold_progress.next_stage == 2, "Recovery after payment opens the main lobby with its frozen result and no duplicate gold")
 	var completed: Dictionary = ui.run_store.pending.duplicate(true)
 	ui.run_store.write_snapshot(pre_clear)
 	ui.queue_free()
@@ -189,7 +189,7 @@ static func ui_checks(host, directory: String, verify: Callable) -> void:
 	ui.queue_free()
 	await host.get_tree().process_frame
 	ui = make_ui(host, directory)
-	verify.call(ui.simulation.phase == RunState.Phase.DEFEAT and ui.gold_progress.total == 177, "Defeat tombstone survives restart and cannot resume a pre-death checkpoint")
+	verify.call(ui.simulation.phase == RunState.Phase.READY and ui.simulation.result_summary().outcome == "defeat" and ui.gold_progress.total == 177, "Defeat tombstone survives restart into the lobby and cannot resume a pre-death checkpoint")
 	ui.start_button.pressed.emit()
 	ui.pause_game()
 	ui.leave_button.pressed.emit()
@@ -197,7 +197,7 @@ static func ui_checks(host, directory: String, verify: Callable) -> void:
 	ui.queue_free()
 	await host.get_tree().process_frame
 	ui = make_ui(host, directory)
-	verify.call(ui.simulation.phase == RunState.Phase.ABANDONED and ui.gold_progress.total == 177 and ui.gold_progress.next_stage == 2, "Abandonment persists without gold or stage unlock")
+	verify.call(ui.simulation.phase == RunState.Phase.READY and ui.simulation.result_summary().outcome == "abandoned" and ui.gold_progress.total == 177 and ui.gold_progress.next_stage == 2, "Abandonment persists into the lobby without gold or stage unlock")
 	ui.start_button.pressed.emit()
 	ui.run_store.path = directory.path_join("blocked/ui.save")
 	ui.simulation.elapsed = ui.simulation.stage_duration
@@ -232,6 +232,6 @@ static func ui_checks(host, directory: String, verify: Callable) -> void:
 	ui.queue_free()
 	await host.get_tree().process_frame
 	ui = make_ui(host, directory)
-	verify.call(ui.simulation.end_reason == "timeout" and ui.dialog_body.get_child(0).text.contains("시간 초과") and ui.gold_progress.total == 277, "Timeout result survives restart with no payment or stage unlock")
+	verify.call(ui.simulation.phase == RunState.Phase.READY and ui.simulation.end_reason == "timeout" and ui.dialog_body.get_child(0).text.contains("메인 로비") and ui.gold_progress.total == 277, "Timeout result survives a lobby restart with no payment or stage unlock")
 	ui.queue_free()
 	await host.get_tree().process_frame

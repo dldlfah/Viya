@@ -158,7 +158,7 @@ func begin_run() -> void:
 	_magic_touch_id = -1
 	var previous_stage: int = simulation.stage
 	simulation.stage = gold_progress.next_stage
-	if not simulation.start():
+	if not simulation.start(0, simulation.growth.character_id, gold_progress.attack_level):
 		simulation.stage = previous_stage
 		push_error("Invalid character skill catalog; run not started")
 		return
