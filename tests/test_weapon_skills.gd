@@ -16,7 +16,7 @@ static func quiet(family: String = "gun"):
 		hero.families = [family]
 		hero.attack_pool = library.entries.values().filter(func(e): return e.kind=="attack" and e.family==family).map(func(e): return e.id)
 		hero.starting_attack = hero.attack_pool[0]
-		hero.starting_levels = {hero.starting_attack:1,hero.unique_auto:1}
+		hero.starting_levels = {hero.starting_attack:1}
 	state.start(1801,"viya",null,"legacy_arena","weapons_v1")
 	state.spawn_clock = 999.0
 	state.shot_clock = 999.0
@@ -47,7 +47,7 @@ static func catalog_checks(verify: Callable) -> void:
 	verify.call(library.error.is_empty() and library.entries.size()==33, "Four8-skill family libraries plus one Viya automatic unique are valid")
 	verify.call(state.growth.ruleset=="weapons_v1" and state.growth.pool.size()==18, "New rules select exactly eighteen candidates")
 	verify.call(state.growth.pool.filter(func(e):return e.kind=="attack").all(func(e):return e.family=="gun"), "Viya only receives the eight gun-family attacks")
-	verify.call(state.growth.owned=={"gun_rifle":1,"viya_runebullet_v1":1} and state.growth.row_entries("attack").size()==2, "Provisional starting rifle/automatic unique occupy two of four attack slots")
+	verify.call(state.growth.owned=={"gun_rifle":1} and state.growth.row_entries("attack").size()==1, "Locked initial state grants only rifle1; automatic unique remains a level-up candidate")
 	verify.call(state.magic.config.id=="viya_wave_v1" and state.growth.definition("viya_wave_upgrade_v1").kind=="ultimate", "Independent MP unique and its enhancement point to the right character")
 	verify.call(not state.growth.pool.any(func(e):return e.id in ["common_rifle","viya_sigil","viya_ultimate"]), "Old IDs are never silently relabelled as new weapons")
 	var original: Dictionary = Campaign.comparable(state)
@@ -74,6 +74,7 @@ static func catalog_checks(verify: Callable) -> void:
 			verify.call(shape!=final and str(entry.levels[4].change).begins_with("진화:"), "Lv5 changes actual attack behavior beyond damage/name: "+entry.id)
 	state.growth.owned["gun_scatter"] = 1
 	state.growth.owned["gun_lance"] = 1
+	state.growth.owned["viya_runebullet_v1"] = 1
 	verify.call(not state.growth.eligible().has("gun_grenade") and state.growth.eligible().has("gun_rifle"), "Four-slot attack cap still permits upgrades and blocks a fifth attack")
 	state.growth.owned.gun_rifle = 5
 	verify.call(not state.growth.eligible().has("gun_rifle"), "Evolved skill cannot be offered an invented sixth level")
@@ -242,13 +243,20 @@ static func ui_checks(host, verify: Callable) -> void:
 	verify.call(ui.new_run_ruleset=="weapons_v1", "Unmodified production main scene defaults to the new weapon rules")
 	Campaign.depart(ui)
 	verify.call(ui.simulation.growth.ruleset=="weapons_v1" and ui.simulation.map_id=="prologue_wall" and ui.simulation.structures.size()==32, "Actual lobby/stage launch connects new skills and existing supply/map systems")
-	verify.call(ui.attack_slots[0].text.contains("연발 소총") and ui.attack_slots[1].text.contains("진홍 각인탄"), "Actual two-row HUD shows starting gun and automatic unique separately")
+	verify.call(ui.attack_slots[0].text.contains("연발 소총") and ui.attack_slots[1].text=="--" and state_initial_power(ui.simulation), "Actual HUD/initial stats retain rifle-only locked baseline")
 	ui.simulation.grant_xp(30)
 	ui._physics_process(0)
 	verify.call(ui.choice_buttons.size()==3 and ui.simulation.growth.offer.all(func(id): return ui.simulation.growth.definition(id).get("family","gun")=="gun"), "Actual level-up still presents three choices without foreign-family attacks")
 	for button in ui.choice_buttons:
 		verify.call(button.text.contains("선택 시 변화") and button.get_meta("skill_preview")==Preview.build(ui.simulation,ui.simulation.growth.offer[ui.choice_buttons.find(button)]), "Production card uses the exact new combat profile")
 	ui.choice_buttons[0].pressed.emit()
+	ui.begin_run()
+	ui.simulation.grant_xp(30)
+	ui.simulation.growth.offer.assign(["viya_runebullet_v1"])
+	ui._physics_process(0)
+	ui.choice_buttons[0].pressed.emit()
+	ui._update_hud()
+	verify.call(ui.simulation.growth.skill_level("viya_runebullet_v1")==1 and ui.attack_slots[1].text.contains("진홍 각인탄"), "Real level-up acquisition adds the automatic unique instead of granting it at departure")
 	ui.begin_run()
 	var state=ui.simulation
 	state.growth.owned.gun_rifle=4
@@ -271,3 +279,7 @@ static func ui_checks(host, verify: Callable) -> void:
 	await host.get_tree().process_frame
 	for file in DirAccess.get_files_at(folder):DirAccess.remove_absolute(folder.path_join(file))
 	DirAccess.remove_absolute(folder)
+
+static func state_initial_power(state) -> bool:
+	var p: Dictionary = state.attack_profile("gun_rifle",1,1)
+	return state.hp==100 and state.magic.mana==100 and state.stats.speed==235 and p.damage==10 and p.interval==0.30 and p.reach==520 and p.speed==920 and state.stats.crit==0 and state.stats.regen==0

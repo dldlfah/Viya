@@ -265,8 +265,7 @@ static func valid(data: Dictionary, state) -> bool:
 			return false
 		rows[definitions[id].row] += 1
 		upgrades += rank
-	var initial_extra := 1 if growth.ruleset == "weapons_v1" else 0
-	if rows.attack > 4 or rows.passive > 4 or rows.ultimate > 1 or upgrades + growth.pending > growth.level + initial_extra:
+	if rows.attack > 4 or rows.passive > 4 or rows.ultimate > 1 or upgrades + growth.pending > growth.level:
 		return false
 	var eligible: Array = []
 	for entry in pool:

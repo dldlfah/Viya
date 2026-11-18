@@ -85,7 +85,7 @@ func valid_hero(hero: Dictionary, id: String) -> bool:
 			manual = str(entry.id)
 	if automatic != hero.get("unique_auto") or automatic.is_empty() or manual != hero.get("active_magic", {}).get("upgrade_skill_id") or manual.is_empty() or hero.get("starting_attack") not in hero.attack_pool:
 		return false
-	return hero.starting_levels.size()==2 and hero.starting_levels.get(hero.starting_attack)==1 and hero.starting_levels.get(automatic)==1
+	return hero.starting_levels.size()==1 and hero.starting_levels.get(hero.starting_attack)==1
 
 func profile(id: String, rank: int, stats: Dictionary) -> Dictionary:
 	if not error.is_empty() or not entries.has(id) or rank < 1 or rank > 5 or float(stats.get("rate", 0)) <= 0:

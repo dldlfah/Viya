@@ -6749,8 +6749,7 @@
       "starting_attack": "gun_rifle",
       "unique_auto": "viya_runebullet_v1",
       "starting_levels": {
-        "gun_rifle": 1,
-        "viya_runebullet_v1": 1
+        "gun_rifle": 1
       },
       "skills": [
         {
