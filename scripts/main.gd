@@ -5,6 +5,7 @@ const MoveInput = preload("res://scripts/ui/move_input.gd")
 const FeedbackPanel = preload("res://scripts/ui/feedback_panel.gd")
 const SkillPreview = preload("res://scripts/ui/skill_preview.gd")
 const GoldProgress = preload("res://scripts/progression/gold_progress.gd")
+const RunStore = preload("res://scripts/progression/run_store.gd")
 
 var simulation = RunState.new()
 var view
@@ -43,19 +44,36 @@ var show_xp: bool = true
 var simple_attacks: bool = false
 var settings_message: Label
 var settings_error: Error = OK
+var run_store = RunStore.new()
+var battle_save_error: Error = OK
+var _saved_checkpoint: int = 0
+var stage_text: Label
 
 func _ready() -> void:
 	_load_settings()
 	gold_error = gold_progress.load_progress()
+	battle_save_error = run_store.load_saved(simulation)
 	_build_interface()
 	for key in ["show_damage", "show_xp", "simple_attacks"]:
 		view.set(key, get(key))
+	stage_text = _label("", 16)
+	root_ui.add_child(stage_text)
+	root_ui.move_child(stage_text, view.get_index() + 1)
+	stage_text.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	stage_text.position = Vector2(28, 92)
+	stage_text.size.x = 1200
 	_show_menu("ready")
+	if battle_save_error == OK and not run_store.pending.is_empty() and not _has_saved_battle():
+		_resume_saved_run()
+	get_tree().auto_accept_quit = false
+	get_tree().quit_on_go_back = false
 	_update_hud()
 
 func _physics_process(delta: float) -> void:
 	simulation.step(delta, movement.direction())
 	_sync_phase_ui()
+	if simulation.has_active_run() and simulation.checkpoint_index > _saved_checkpoint and battle_save_error == OK:
+		_ensure_battle_saved()
 	_update_hud()
 	view.queue_redraw()
 
@@ -119,27 +137,38 @@ func _unhandled_key_input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 
 func _notification(what: int) -> void:
+	if what in [NOTIFICATION_WM_CLOSE_REQUEST, NOTIFICATION_WM_GO_BACK_REQUEST] and is_instance_valid(overlay):
+		if simulation.phase == RunState.Phase.READY or _ensure_battle_saved():
+			get_tree().quit()
+		return
 	if what == NOTIFICATION_APPLICATION_FOCUS_OUT or what == NOTIFICATION_APPLICATION_PAUSED:
 		_magic_touch_id = -1
 		if is_instance_valid(movement):
 			movement.clear_input()
 		if is_instance_valid(overlay):
 			pause_game()
+			_ensure_battle_saved()
 
 func begin_run() -> void:
+	if simulation.phase == RunState.Phase.READY and not run_store.pending.is_empty() and (_has_saved_battle() or not simulation.result_summary().ended):
+		_resume_saved_run()
+		return
 	if not _can_start_rewarded_run():
 		return
 	_magic_touch_id = -1
+	var previous_stage: int = simulation.stage
+	simulation.stage = gold_progress.next_stage
 	if not simulation.start():
+		simulation.stage = previous_stage
 		push_error("Invalid character skill catalog; run not started")
 		return
-	simulation.stage = gold_progress.next_stage
 	movement.clear_input()
 	movement.set_enabled(true)
 	overlay.hide()
 	last_phase = simulation.phase
 	last_ticket = -1
 	_update_hud()
+	_ensure_battle_saved()
 
 func pause_game() -> void:
 	if simulation.phase not in [RunState.Phase.RUNNING, RunState.Phase.CHOOSING]:
@@ -150,9 +179,10 @@ func pause_game() -> void:
 	last_phase = simulation.phase
 	_show_menu("paused")
 	_update_hud()
+	_ensure_battle_saved()
 
 func resume_game() -> void:
-	if simulation.phase != RunState.Phase.PAUSED:
+	if simulation.phase != RunState.Phase.PAUSED or battle_save_error != OK:
 		return
 	movement.clear_input()
 	simulation.set_paused(false)
@@ -327,6 +357,8 @@ func _clear_dialog() -> void:
 		child.queue_free()
 
 func _show_levelup() -> void:
+	if not _ensure_battle_saved():
+		return
 	_clear_dialog()
 	dialog.custom_minimum_size.x = 1010
 	last_ticket = simulation.growth.ticket
@@ -367,7 +399,9 @@ func _show_levelup() -> void:
 	overlay.show()
 
 func _choose_skill(id: String, ticket: int) -> void:
-	if not simulation.select_skill(id, ticket):
+	if battle_save_error != OK or not simulation.select_skill(id, ticket):
+		return
+	if not _ensure_battle_saved():
 		return
 	for button in choice_buttons:
 		button.disabled = true
@@ -381,6 +415,8 @@ func _choose_skill(id: String, ticket: int) -> void:
 
 func _finish_exhausted(ticket: int) -> void:
 	if simulation.acknowledge_exhausted(ticket):
+		if not _ensure_battle_saved():
+			return
 		for button in choice_buttons:
 			button.disabled = true
 		overlay.hide()
@@ -397,10 +433,20 @@ func _show_menu(kind: String) -> void:
 	if kind == "ready":
 		dialog_body.add_child(_label("VIYA | 전투·성장 시제품", 30))
 		dialog_body.add_child(_label("처치 → 경험치 수집 → 무작위 3선택 → 강화", 19))
-		dialog_body.add_child(_label("18종 후보 / 임시 장착 공격4·패시브4 / 요구 경험치 3배\n고유 마법: 오른쪽 버튼 또는 F / 서포터 효과는 미구현", 17))
+		dialog_body.add_child(_label("6분 생존 + 보스 처치 / 2·4분 자동 저장\n5분 보스 등장 / 18종 후보·3선택 / 오른쪽 마법 또는 F", 17))
 		start_button = _button("출격", begin_run)
 		dialog_body.add_child(start_button)
 		_add_gold_status()
+		if _has_saved_battle():
+			start_button.text = "이어하기"
+			var saved: Dictionary = run_store.pending.run
+			dialog_body.add_child(_label("저장된 스테이지 %d · %.1f초 · 체크포인트 %d/2" % [saved.stage, saved.elapsed, saved.checkpoint_index], 18))
+			dialog_body.add_child(_button("저장 전투 포기", _abandon_saved_run))
+		if battle_save_error != OK:
+			start_button.disabled = true
+			dialog_body.add_child(_label("전투 저장 파일 오류 · %s" % error_string(battle_save_error), 17))
+			dialog_body.add_child(_button("전투 불러오기 재시도", _retry_battle_load))
+			dialog_body.add_child(_button("손상된 전투 저장 삭제", _ask_discard_save))
 	elif kind == "paused":
 		dialog_body.add_child(_label("일시정지 / 환경설정", 30))
 		dialog_body.add_child(_label("선택·마력·반응 시간이 그대로 보존됩니다.", 18))
@@ -416,9 +462,13 @@ func _show_menu(kind: String) -> void:
 		dialog_body.add_child(slider)
 		_add_display_settings()
 		resume_button = _button("계속하기", resume_game)
+		resume_button.disabled = battle_save_error != OK
 		dialog_body.add_child(resume_button)
 		dialog_body.add_child(_button("새 전투 시작", begin_run))
+		dialog_body.add_child(_button("저장 후 출격 대기로", _park_battle))
+		_add_battle_save_error()
 	else:
+		_persist_battle()
 		dialog_body.add_child(_label("전투 종료", 30))
 		var summary: Dictionary = simulation.result_summary()
 		result_summary_label = _label("Lv.%d / 생존 %.1f초 / 처치 %d\n발사 %d회 / 고유 마법 %d회" % [
@@ -426,7 +476,7 @@ func _show_menu(kind: String) -> void:
 			summary["shots"], summary["magic_casts"]], 22)
 		dialog_body.add_child(result_summary_label)
 		if kind == "cleared":
-			gold_error = gold_progress.settle(summary)
+			gold_error = gold_progress.settle(summary) if battle_save_error == OK else battle_save_error
 			result_summary_label.text += "\n기본 보상 %d + 획득 금화 %d = 총 %d 금화\n보유 금화 %d" % [summary["gold_bonus"], summary["gold_collected"], summary["gold_reward"], gold_progress.total]
 			if gold_error != OK:
 				dialog_body.add_child(_label("금화 저장 실패 · %s" % error_string(gold_error), 18))
@@ -438,7 +488,9 @@ func _show_menu(kind: String) -> void:
 		if kind == "cleared":
 			start_button.text = "다음 스테이지"
 			start_button.disabled = gold_error != OK
+		start_button.disabled = start_button.disabled or battle_save_error != OK
 		dialog_body.add_child(start_button)
+		_add_battle_save_error()
 	overlay.show()
 
 func _update_hud() -> void:
@@ -446,7 +498,13 @@ func _update_hud() -> void:
 	health.value = simulation.hp
 	var seconds := int(simulation.elapsed)
 	stats_text.text = "S%d %02d:%02d | 처치 %d | 금화 %d" % [simulation.stage, int(seconds / 60.0), seconds % 60, simulation.kills, simulation.gold_collected]
-	stats_text.tooltip_text = "보유 금화 %d · 스테이지 금화 %d\n%.0f초 생존 후 보스 처치 시 클리어" % [gold_progress.total, simulation.gold_collected, simulation.stage_duration]
+	stats_text.tooltip_text = "보유 금화 %d · 스테이지 금화 %d\n%.0f초 생존 및 보스 처치 시 클리어" % [gold_progress.total, simulation.gold_collected, simulation.stage_duration]
+	if is_instance_valid(stage_text) and not simulation.stage_rules.is_empty():
+		var remaining: int = maxi(0, int(ceil(simulation.stage_duration - simulation.elapsed)))
+		var target: String = "보스 등장까지 %d초" % maxi(0, int(ceil(float(simulation.stage_rules.boss_at) - simulation.elapsed)))
+		if simulation._boss_spawned:
+			target = "보스 처치 완료 · 생존 유지" if simulation._boss_defeated else "보스 처치"
+		stage_text.text = "스테이지 %d · 남은 시간 %02d:%02d · %s · 체크포인트 %d/2" % [simulation.stage, remaining / 60, remaining % 60, target, simulation.checkpoint_index]
 	status_text.text = "HP %d / %d%s" % [simulation.hp, simulation.max_hp, " · 피격" if simulation.hurt_clock > 0.0 else ""]
 	level_text.text = "Lv.%d  EXP %.1f / %.0f" % [simulation.growth.level, simulation.growth.xp, simulation.growth.threshold()]
 	experience.max_value = simulation.growth.threshold()
@@ -566,6 +624,8 @@ func _retry_gold_load() -> void:
 		return
 	gold_error = gold_progress.load_progress()
 	_show_menu("ready")
+	if gold_error == OK and not run_store.pending.is_empty() and not _has_saved_battle():
+		_resume_saved_run()
 
 func _retry_gold_save() -> void:
 	if simulation.phase != RunState.Phase.CLEARED:
@@ -573,9 +633,101 @@ func _retry_gold_save() -> void:
 	_show_menu("cleared")
 
 func _can_start_rewarded_run() -> bool:
-	if not gold_progress.loaded or (simulation.phase == RunState.Phase.CLEARED and gold_error != OK):
+	if not gold_progress.loaded or battle_save_error != OK or (simulation.phase == RunState.Phase.CLEARED and gold_error != OK):
 		return false
 	return true
+
+func _has_saved_battle() -> bool:
+	return not run_store.pending.is_empty() and run_store.pending.run.phase in [RunState.Phase.RUNNING, RunState.Phase.PAUSED, RunState.Phase.CHOOSING]
+
+func _persist_battle() -> bool:
+	if simulation.has_active_run() or simulation.phase in [RunState.Phase.CLEARED, RunState.Phase.DEFEAT, RunState.Phase.ABANDONED]:
+		battle_save_error = run_store.save_current(simulation)
+		if battle_save_error == OK:
+			_saved_checkpoint = simulation.checkpoint_index
+	return battle_save_error == OK
+
+func _ensure_battle_saved() -> bool:
+	if _persist_battle():
+		return true
+	if simulation.has_active_run():
+		simulation.set_paused(true)
+		movement.set_enabled(false)
+		last_phase = simulation.phase
+		_show_menu("paused")
+	return false
+
+func _retry_battle_save() -> void:
+	if simulation.phase not in [RunState.Phase.PAUSED, RunState.Phase.DEFEAT, RunState.Phase.ABANDONED, RunState.Phase.CLEARED]:
+		return
+	if not _ensure_battle_saved():
+		return
+	var kind: String = {RunState.Phase.CLEARED: "cleared", RunState.Phase.DEFEAT: "defeat", RunState.Phase.ABANDONED: "abandoned"}.get(simulation.phase, "paused")
+	_show_menu(kind)
+
+func _add_battle_save_error() -> void:
+	if battle_save_error != OK:
+		dialog_body.add_child(_label("전투 저장 실패 · %s" % error_string(battle_save_error), 17))
+		dialog_body.add_child(_button("전투 저장 재시도", _retry_battle_save))
+
+func _retry_battle_load() -> void:
+	if simulation.phase == RunState.Phase.READY:
+		battle_save_error = run_store.load_saved(simulation)
+		_show_menu("ready")
+		if battle_save_error == OK and not run_store.pending.is_empty() and not _has_saved_battle():
+			_resume_saved_run()
+
+func _resume_saved_run() -> void:
+	if simulation.phase != RunState.Phase.READY or run_store.pending.is_empty() or not gold_progress.loaded:
+		return
+	var saved: Dictionary = run_store.pending.run
+	var paid: bool = saved.phase == RunState.Phase.CLEARED and saved.run_id == gold_progress.last_run and saved.stage + 1 == gold_progress.next_stage
+	if (saved.stage != gold_progress.next_stage and not paid) or (saved.run_id == gold_progress.last_run and not paid):
+		battle_save_error = ERR_FILE_CORRUPT
+		_show_menu("ready")
+		return
+	if not RunStore.Snapshot.restore(run_store.pending, simulation):
+		battle_save_error = ERR_FILE_CORRUPT
+		_show_menu("ready")
+		return
+	_slot_revision = -1
+	last_ticket = -1
+	last_phase = -1
+	movement.clear_input()
+	movement.set_enabled(false)
+	if simulation.phase == RunState.Phase.PAUSED:
+		_ensure_battle_saved()
+		_show_menu("paused")
+	else:
+		_sync_phase_ui()
+	_update_hud()
+	view.queue_redraw()
+
+func _park_battle() -> void:
+	if simulation.phase != RunState.Phase.PAUSED or not _ensure_battle_saved():
+		return
+	if simulation.park_saved_run():
+		last_phase = simulation.phase
+		_show_menu("ready")
+
+func _abandon_saved_run() -> void:
+	_resume_saved_run()
+	if simulation.phase == RunState.Phase.PAUSED:
+		pause_game()
+
+func _ask_discard_save() -> void:
+	if simulation.phase != RunState.Phase.READY:
+		return
+	_clear_dialog()
+	dialog_body.add_child(_label("저장된 전투를 삭제할까요?", 24))
+	dialog_body.add_child(_label("이번 전투의 진행과 획득 금화가 사라집니다. 보유 금화는 유지됩니다.", 18))
+	dialog_body.add_child(_button("취소", _show_menu.bind("ready")))
+	dialog_body.add_child(_button("확인 · 저장 삭제", _discard_saved_run))
+
+func _discard_saved_run() -> void:
+	if simulation.phase == RunState.Phase.READY:
+		battle_save_error = run_store.discard()
+		_show_menu("ready")
 
 
 func _add_feedback_banner() -> void:

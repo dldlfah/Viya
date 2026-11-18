@@ -129,6 +129,7 @@ func _run() -> void:
 
 	# Production F5 scene, not a replacement mock interface.
 	var scene = load("res://scenes/main.tscn").instantiate()
+	scene.run_store.path = "user://native-test_run_navigation-" + Crypto.new().generate_random_bytes(8).hex_encode() + ".save"
 	root.add_child(scene)
 	await process_frame
 	scene.set_physics_process(false)

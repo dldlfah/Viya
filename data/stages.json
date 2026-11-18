@@ -1,0 +1,17 @@
+{
+  "default": {
+    "duration": 360.0,
+    "checkpoints": [120.0, 240.0],
+    "elites": [110.0, 230.0],
+    "elite_hp": [140, 240],
+    "boss_at": 300.0,
+    "boss_hp": 1600,
+    "clear_gold": 100,
+    "waves": [
+      {"from": 0.0, "interval": 1.6, "batch": 1, "hp": 20, "speed": 68.0},
+      {"from": 120.0, "interval": 2.4, "batch": 2, "hp": 28, "speed": 80.0},
+      {"from": 240.0, "interval": 3.0, "batch": 3, "hp": 36, "speed": 96.0}
+    ]
+  },
+  "overrides": {}
+}

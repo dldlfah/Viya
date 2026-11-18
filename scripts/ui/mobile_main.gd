@@ -221,6 +221,10 @@ func _apply_layout() -> void:
 	style.content_margin_bottom = 4
 	_place(_header, layout_data["top"])
 	_place(view, layout_data["battle"])
+	if is_instance_valid(stage_text):
+		stage_text.position = view.position + Vector2(12, 8)
+		stage_text.size.x = maxf(1.0, view.size.x - 24.0)
+		stage_text.clip_text = true
 	_place(feedback_panel, layout_data["feedback"])
 	_place(_resources, layout_data["resources"])
 	_place(_skills, layout_data["skills"])
@@ -269,10 +273,15 @@ func _show_menu(kind: String) -> void:
 	elif kind in ["defeat", "abandoned", "cleared"]:
 		var heading: Label = dialog_body.get_child(0) as Label
 		heading.text = {"abandoned": "전투 포기", "defeat": "전투 종료 · 패배", "cleared": "스테이지 %d 클리어" % simulation.stage}[kind]
+		if simulation.end_reason == "timeout":
+			heading.text = "전투 종료 · 시간 초과"
 		if kind != "cleared":
-			dialog_body.add_child(_label("직접 전투를 종료했습니다. HP 소진 패배와 구분됩니다." if kind == "abandoned" else "체력이 모두 소진되었습니다.", 17))
+			var explanation: String = "직접 전투를 종료했습니다. HP 소진 패배와 구분됩니다." if kind == "abandoned" else "체력이 모두 소진되었습니다."
+			if simulation.end_reason == "timeout":
+				explanation = "6분 안에 보스를 처치하지 못했습니다. 클리어 보상은 지급되지 않습니다."
+			dialog_body.add_child(_label(explanation, 17))
 		lobby_button = _button("출격 대기로", _return_to_lobby.bind(ticket, revision))
-		lobby_button.disabled = kind == "cleared" and gold_error != OK
+		lobby_button.disabled = battle_save_error != OK or (kind == "cleared" and gold_error != OK)
 		dialog_body.add_child(lobby_button)
 	elif kind == "ready":
 		var heading: Label = dialog_body.get_child(0) as Label
@@ -286,6 +295,8 @@ func _show_levelup() -> void:
 	_modal_kind = "choosing"
 	_detail_open = false
 	super._show_levelup()
+	if battle_save_error != OK:
+		return
 	_scroll.scroll_vertical = 0
 	if not choice_buttons.is_empty() and choice_buttons[0].get_parent() is HBoxContainer:
 		var old_row: HBoxContainer = choice_buttons[0].get_parent() as HBoxContainer
@@ -374,12 +385,17 @@ func _close_skill_detail(expected_ticket: int, expected_revision: int) -> void:
 
 func begin_run() -> void:
 	# Internal new-run operation; production menu callbacks validate tickets first.
+	if simulation.phase == RunState.Phase.READY and not run_store.pending.is_empty() and (_has_saved_battle() or not simulation.result_summary().ended):
+		_resume_saved_run()
+		return
 	if not _can_start_rewarded_run():
 		return
+	var previous_stage: int = simulation.stage
+	simulation.stage = gold_progress.next_stage
 	if not simulation.start(0, simulation.growth.character_id):
+		simulation.stage = previous_stage
 		push_error("Invalid character data; current run retained")
 		return
-	simulation.stage = gold_progress.next_stage
 	_after_run_started()
 
 func _after_run_started() -> void:
@@ -397,6 +413,7 @@ func _after_run_started() -> void:
 	_scroll.scroll_vertical = 0
 	_update_hud()
 	view.queue_redraw()
+	_ensure_battle_saved()
 
 func _menu_matches(ticket: int, revision: int) -> bool:
 	return overlay.visible and ticket == simulation.navigation_ticket and revision == _menu_revision
@@ -413,7 +430,7 @@ func _resume_from_menu(ticket: int, revision: int) -> void:
 		resume_game()
 
 func _request_transition(action: String, ticket: int, revision: int) -> void:
-	if not _menu_matches(ticket, revision) or _detail_open:
+	if not _menu_matches(ticket, revision) or _detail_open or battle_save_error != OK:
 		return
 	if not simulation.request_transition(action, ticket):
 		return
@@ -471,6 +488,8 @@ func _confirm_transition(ticket: int, revision: int) -> void:
 		_update_hud()
 
 func _return_to_lobby(ticket: int, revision: int) -> void:
+	if battle_save_error != OK:
+		return
 	if simulation.phase == RunState.Phase.CLEARED and gold_error != OK:
 		return
 	if not _menu_matches(ticket, revision) or not simulation.return_to_ready(ticket):
@@ -504,6 +523,10 @@ func _input(event: InputEvent) -> void:
 	super._input(event)
 
 func _unhandled_key_input(event: InputEvent) -> void:
+	if _modal_kind == "discard_save" and event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_ESCAPE:
+		_cancel_discard_save(simulation.navigation_ticket, _menu_revision)
+		get_viewport().set_input_as_handled()
+		return
 	if _overview_open and event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_ESCAPE:
 		_close_growth_overview(simulation.navigation_ticket, _menu_revision)
 		get_viewport().set_input_as_handled()
@@ -519,6 +542,9 @@ func _unhandled_key_input(event: InputEvent) -> void:
 	super._unhandled_key_input(event)
 
 func pause_game() -> void:
+	if _modal_kind == "discard_save":
+		_show_menu("ready")
+		return
 	if _overview_open:
 		# Focus loss cancels old overview callbacks. Never auto-resume the run.
 		_overview_open = false
@@ -618,3 +644,44 @@ func _close_growth_overview(ticket: int, revision: int) -> void:
 		# Settings stays paused; results/lobby remain terminal/ready.
 		_show_menu(origin)
 	_update_hud()
+
+func _resume_saved_run() -> void:
+	if simulation.phase != RunState.Phase.READY:
+		return
+	_final_growth.clear()
+	_overview_open = false
+	_detail_open = false
+	super._resume_saved_run()
+	_apply_layout()
+
+func _abandon_saved_run() -> void:
+	if simulation.phase != RunState.Phase.READY or not _has_saved_battle():
+		return
+	_resume_saved_run()
+	if simulation.phase == RunState.Phase.PAUSED:
+		_request_transition("leave", simulation.navigation_ticket, _menu_revision)
+
+func _ask_discard_save() -> void:
+	if simulation.phase != RunState.Phase.READY:
+		return
+	_clear_dialog()
+	_modal_kind = "discard_save"
+	var ticket: int = simulation.navigation_ticket
+	var revision: int = _menu_revision
+	dialog_body.add_child(_label("저장된 전투를 삭제할까요?", 24))
+	dialog_body.add_child(_label("이번 전투의 진행과 획득 금화가 사라집니다. 보유 금화는 유지됩니다.", 18))
+	cancel_button = _button("취소", _cancel_discard_save.bind(ticket, revision))
+	confirm_button = _button("확인 · 저장 삭제", _confirm_discard_save.bind(ticket, revision))
+	dialog_body.add_child(cancel_button)
+	dialog_body.add_child(confirm_button)
+	confirm_button.focus_mode = Control.FOCUS_NONE
+	_fit_dialog()
+	cancel_button.grab_focus()
+
+func _cancel_discard_save(ticket: int, revision: int) -> void:
+	if _modal_kind == "discard_save" and _menu_matches(ticket, revision):
+		_show_menu("ready")
+
+func _confirm_discard_save(ticket: int, revision: int) -> void:
+	if _modal_kind == "discard_save" and _menu_matches(ticket, revision):
+		_discard_saved_run()

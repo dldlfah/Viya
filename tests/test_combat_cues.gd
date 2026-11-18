@@ -167,6 +167,7 @@ func _run() -> void:
 	verify(identical, "Visual switch preserves damage, XP, RNG streams, offers, tickets and timers over 180 production steps")
 	# Active F5 scene: same RunState/View and the existing read-only detail modal.
 	var scene = load("res://scenes/main.tscn").instantiate()
+	scene.run_store.path = "user://native-test_combat_cues-" + Crypto.new().generate_random_bytes(8).hex_encode() + ".save"
 	root.add_child(scene)
 	await process_frame
 	scene.set_physics_process(false)
@@ -186,6 +187,7 @@ func _run() -> void:
 	verify(scene.simulation.cues.events.is_empty(), "Active UI restart clears the presentation state")
 	await AttackChecks.run(scene, verify)
 	await preload("res://tests/test_gold_settings.gd").run(scene, verify)
+	await preload("res://tests/test_campaign.gd").run(scene, verify)
 	scene.queue_free()
 	await process_frame
 	await process_frame

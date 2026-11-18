@@ -4,6 +4,7 @@ const Growth = preload("res://scripts/progression/growth_state.gd")
 const MagicState = preload("res://scripts/combat/magic_state.gd")
 const FeedbackState = preload("res://scripts/combat/feedback_state.gd")
 const CombatCues = preload("res://scripts/combat/combat_cues.gd")
+const StageCatalog = preload("res://scripts/combat/stage_catalog.gd")
 enum Phase { READY, RUNNING, PAUSED, DEFEAT, CHOOSING, ABANDONED, CLEARED }
 const WORLD_SIZE := Vector2(1800.0, 1200.0)
 const PLAYER_SPEED := 235.0
@@ -49,7 +50,7 @@ var navigation_ticket: int = 0
 var transition_action: String = ""
 var _finished_result: Dictionary = {}
 # Provisional stage length, probability and base bonus. Gold ranges are fixed.
-var stage_duration: float = 90.0
+var stage_duration: float = 360.0
 var gold_drop_chance: float = 0.3
 var stage_clear_gold: int = 100
 var stage: int = 1
@@ -59,9 +60,17 @@ var gold_rng := RandomNumberGenerator.new()
 var run_id: String = ""
 var _elites_spawned: int = 0
 var _boss_spawned: bool = false
+var _boss_defeated: bool = false
+var checkpoint_index: int = 0
+var end_reason: String = ""
+var stage_catalog = StageCatalog.new()
+var stage_rules: Dictionary = {}
 
 func start(seed_value: int = 0, character_id: String = "viya") -> bool:
 	# Validate the complete selected character before changing the previous run.
+	var rules: Dictionary = stage_catalog.for_stage(stage)
+	if rules.is_empty():
+		return false
 	var candidate_pool: Array[Dictionary] = growth.catalog.pool_for(character_id)
 	if not growth.catalog.validate_pool(candidate_pool, character_id):
 		return false
@@ -87,6 +96,12 @@ func start(seed_value: int = 0, character_id: String = "viya") -> bool:
 	gold_pickups.clear()
 	_elites_spawned = 0
 	_boss_spawned = false
+	_boss_defeated = false
+	checkpoint_index = 0
+	end_reason = ""
+	stage_rules = rules
+	stage_duration = float(rules.duration)
+	stage_clear_gold = int(rules.clear_gold)
 	magic.reset(candidate, character_id)
 	feedback.reset()
 	cues.reset()
@@ -143,8 +158,13 @@ func add_enemy(at: Vector2, kind: String = "normal") -> bool:
 	if enemies.size() >= MAX_ENEMIES or kind not in ["normal", "elite", "boss"]:
 		return false
 	_enemy_serial += 1
-	var life: int = {"normal": 20, "elite": 100, "boss": 600}[kind]
-	enemies.append({"id": _enemy_serial, "p": at, "hp": life, "max_hp": life, "kind": kind})
+	var wave := wave_profile()
+	var life: int = int(wave.hp)
+	if kind == "elite":
+		life = int(stage_rules.elite_hp[mini(_elites_spawned, 1)])
+	elif kind == "boss":
+		life = int(stage_rules.boss_hp)
+	enemies.append({"id": _enemy_serial, "p": at, "hp": life, "max_hp": life, "kind": kind, "speed": float(wave.speed)})
 	return true
 
 func add_pickup(at: Vector2, value: float = 5.0) -> void:
@@ -264,7 +284,9 @@ func step(delta: float, direction: Vector2) -> void:
 	var dt := minf(delta, 0.05)
 	feedback.advance(dt, true)
 	cues.advance(dt)
-	elapsed += dt
+	elapsed = minf(stage_duration, elapsed + dt)
+	while checkpoint_index < 2 and elapsed + 0.000001 >= float(stage_rules.checkpoints[checkpoint_index]):
+		checkpoint_index += 1
 	hurt_clock = maxf(0.0, hurt_clock - dt)
 	var movement := direction.limit_length(1.0)
 	player += movement * float(stats["speed"]) * dt
@@ -273,16 +295,19 @@ func step(delta: float, direction: Vector2) -> void:
 		facing = movement.normalized()
 	_collect_pickups(dt)
 	if phase != Phase.RUNNING:
+		_resolve_deadline()
 		return
 	spawn_clock -= dt
-	if elapsed >= stage_duration and not _boss_spawned:
+	if elapsed >= float(stage_rules.boss_at) and not _boss_spawned:
 		_boss_spawned = _spawn_enemy("boss")
-	elif _elites_spawned < 2 and elapsed >= stage_duration * float(_elites_spawned + 1) / 3.0:
+	elif _elites_spawned < 2 and elapsed >= float(stage_rules.elites[_elites_spawned]):
 		if _spawn_enemy("elite"):
 			_elites_spawned += 1
-	if spawn_clock <= 0.0 and elapsed < stage_duration:
-		_spawn_enemy()
-		spawn_clock = maxf(0.32, 0.85 - elapsed * 0.003)
+	if spawn_clock <= 0.0:
+		var wave := wave_profile()
+		for index in range(int(wave.batch)):
+			_spawn_enemy()
+		spawn_clock = float(wave.interval)
 	_move_enemies(dt)
 	if phase != Phase.RUNNING:
 		return
@@ -307,6 +332,7 @@ func step(delta: float, direction: Vector2) -> void:
 		_regen_remainder -= healing
 	else:
 		_regen_remainder = 0.0
+	_resolve_deadline()
 
 func _collect_pickups(dt: float) -> void:
 	_collect_gold(dt)
@@ -324,7 +350,9 @@ func _collect_pickups(dt: float) -> void:
 		cues.record_collected_xp(player, reward)
 
 func _spawn_enemy(kind: String = "normal") -> bool:
-	if enemies.size() >= MAX_ENEMIES:
+	# Keep a slot for the scheduled boss under a saturated normal wave.
+	var limit: int = MAX_ENEMIES if kind == "boss" or _boss_spawned else MAX_ENEMIES - 1
+	if enemies.size() >= limit:
 		return false
 	for attempt in range(8):
 		var candidate := player + Vector2.from_angle(rng.randf_range(0.0, TAU)) * 590.0
@@ -334,8 +362,8 @@ func _spawn_enemy(kind: String = "normal") -> bool:
 	return false
 
 func _move_enemies(dt: float) -> void:
-	var speed := 68.0 + minf(38.0, elapsed * 0.35)
 	for enemy in enemies:
+		var speed: float = float(enemy.get("speed", wave_profile().speed))
 		var pos: Vector2 = enemy["p"]
 		var offset := player - pos
 		if offset.length_squared() > 0.01:
@@ -404,8 +432,10 @@ func _damage_enemy(id: int, base_damage: float) -> void:
 			enemies.remove_at(i)
 			kills += 1
 			cues.record_kill(id, hit_at)
-			if kind == "boss" and _boss_spawned and elapsed >= stage_duration:
-				_clear_stage()
+			if kind == "boss" and _boss_spawned:
+				_boss_defeated = true
+				if elapsed + 0.000001 >= stage_duration:
+					_clear_stage()
 		return
 
 func _burst(at: Vector2, radius: float, damage: float, kind: String) -> void:
@@ -570,7 +600,8 @@ func _valid_confirmation(expected_ticket: int) -> bool:
 
 func _finish_run(outcome: String) -> void:
 	# Abandonment is a separate terminal state; it does not inflict damage.
-	phase = {"defeat": Phase.DEFEAT, "abandoned": Phase.ABANDONED, "cleared": Phase.CLEARED}[outcome]
+	end_reason = outcome
+	phase = {"defeat": Phase.DEFEAT, "timeout": Phase.DEFEAT, "abandoned": Phase.ABANDONED, "cleared": Phase.CLEARED}[outcome]
 	transition_action = ""
 	navigation_ticket += 1
 	magic.invalidate_requests()
@@ -609,10 +640,33 @@ func _collect_gold(dt: float) -> void:
 			gold_pickups.remove_at(i)
 
 func _clear_stage() -> void:
-	if phase != Phase.RUNNING:
+	if phase not in [Phase.RUNNING, Phase.CHOOSING] or not _boss_defeated or elapsed + 0.000001 < stage_duration:
 		return
 	# Sweep the final boss drop and remaining field gold into the same settlement.
 	for pickup in gold_pickups:
 		gold_collected += int(pickup["value"])
 	gold_pickups.clear()
 	_finish_run("cleared")
+
+func _resolve_deadline() -> void:
+	if phase not in [Phase.RUNNING, Phase.CHOOSING] or elapsed + 0.000001 < stage_duration:
+		return
+	if _boss_defeated:
+		_clear_stage()
+	else:
+		_finish_run("timeout")
+
+func wave_profile() -> Dictionary:
+	var selected: Dictionary = stage_rules.get("waves", [{"hp": 20, "speed": 68.0}])[0]
+	for wave in stage_rules.get("waves", []):
+		if elapsed >= float(wave.from):
+			selected = wave
+	return selected
+
+func park_saved_run() -> bool:
+	if phase != Phase.PAUSED or not transition_action.is_empty():
+		return false
+	phase = Phase.READY
+	navigation_ticket += 1
+	magic.invalidate_requests()
+	return true

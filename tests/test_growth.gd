@@ -194,6 +194,7 @@ func _run() -> void:
 	verify(state.pickups.size() == RunState.MAX_PICKUPS and reward_sum == float(RunState.MAX_PICKUPS + 5) * 5.0, "Pickup cap merges value without losing XP")
 	# Exercise actual scene buttons and status rows, not a substitute test interface.
 	var scene = load("res://scenes/main.tscn").instantiate()
+	scene.run_store.path = "user://native-test_growth-" + Crypto.new().generate_random_bytes(8).hex_encode() + ".save"
 	root.add_child(scene)
 	await process_frame
 	scene.start_button.pressed.emit()

@@ -85,6 +85,7 @@ func _run() -> void:
 	stick.queue_free()
 	# Instantiate the actual F5 scene, not a replacement test UI.
 	var scene = load("res://scenes/main.tscn").instantiate()
+	scene.run_store.path = "user://native-test_combat_foundation-" + Crypto.new().generate_random_bytes(8).hex_encode() + ".save"
 	root.add_child(scene)
 	await process_frame
 	verify(is_instance_valid(scene.start_button), "F5 scene creates a start button")

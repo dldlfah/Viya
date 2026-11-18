@@ -59,11 +59,13 @@ static func run(scene, verify: Callable) -> void:
 	state.spawn_clock = 999.0
 	state.step(0.01, Vector2.ZERO)
 	verify.call(state.enemies.any(func(enemy): return enemy["kind"] == "elite"), "Stage schedule spawns an elite through the existing spawn path")
-	state.elapsed = state.stage_duration
+	state.elapsed = float(state.stage_rules.boss_at)
 	state.step(0.01, Vector2.ZERO)
 	var bosses: Array = state.enemies.filter(func(enemy): return enemy["kind"] == "boss")
 	verify.call(bosses.size() == 1 and state._boss_spawned, "Stage schedule spawns one final boss")
 	state._damage_enemy(bosses[0]["id"], 10000)
+	state.elapsed = state.stage_duration - 0.01
+	state.step(0.02, Vector2.ZERO)
 	var result: Dictionary = state.result_summary()
 	verify.call(state.phase == RunState.Phase.CLEARED and result["gold_collected"] >= 100, "Boss death clears the stage and includes its final gold drop")
 	verify.call(result["gold_reward"] == result["gold_collected"] + result["gold_bonus"], "Clear reward is base bonus plus acquired gold")
@@ -137,7 +139,7 @@ static func run(scene, verify: Callable) -> void:
 	scene.gold_error = scene.gold_progress.load_progress()
 	scene.begin_run()
 	scene.simulation.gold_collected = 57
-	scene.simulation._clear_stage()
+	_complete_stage(scene.simulation)
 	scene._physics_process(0.0)
 	verify.call(scene._modal_kind == "cleared" and scene.gold_progress.total == 157 and scene.result_summary_label.text.contains("157"), "Real result UI displays and saves base plus acquired gold")
 	scene._show_menu("cleared")
@@ -145,7 +147,7 @@ static func run(scene, verify: Callable) -> void:
 	scene.start_button.pressed.emit()
 	verify.call(scene.simulation.stage == 2 and scene.simulation.gold_collected == 0 and scene.gold_progress.total == 157, "Next-stage UI retains wallet and resets per-stage gold")
 	scene.gold_progress.path = directory.path_join("retry/gold.cfg")
-	scene.simulation._clear_stage()
+	_complete_stage(scene.simulation)
 	scene._physics_process(0.0)
 	verify.call(scene.start_button.disabled and scene.lobby_button.disabled and scene.gold_progress.total == 157, "Failed settlement blocks losing the pending reward by leaving results")
 	DirAccess.make_dir_recursive_absolute(directory.path_join("retry"))
@@ -157,3 +159,10 @@ static func run(scene, verify: Callable) -> void:
 		DirAccess.remove_absolute(directory.path_join(file))
 	DirAccess.remove_absolute(directory)
 	verify.call(true, "Gold/settings suite reached its final integration check")
+
+static func _complete_stage(state) -> void:
+	state.elapsed = state.stage_duration
+	state.gold_drop_chance = 0.0
+	state._boss_spawned = true
+	state.add_enemy(state.player, "boss")
+	state._damage_enemy(state.enemies[-1]["id"], 10000)

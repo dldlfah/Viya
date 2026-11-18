@@ -113,6 +113,7 @@ func _run() -> void:
 
 	# Actual F5 scene: cast kills -> pickups -> three choices -> feedback -> death -> restart.
 	var scene = load("res://scenes/main.tscn").instantiate()
+	scene.run_store.path = "user://native-test_feedback-" + Crypto.new().generate_random_bytes(8).hex_encode() + ".save"
 	root.add_child(scene)
 	scene.set_physics_process(false) # Deterministic test stepping; production still uses physics.
 	await process_frame
