@@ -1,0 +1,529 @@
+{
+  "code_commit": "1f0a89ed1022527572927b7ab76d20e6c2b76ecb",
+  "code_tree": "8890e743cd2e525aa40eee658d64c15d917691e7",
+  "date_kst": "2026-11-18",
+  "engine": "4.7.2.stable.official.ed1daf0bf",
+  "baseline_commit": "a047061f33674748684576295e24030cb6476a14",
+  "native_suites": [
+    {
+      "suite": "res://tests/test_combat_foundation.gd",
+      "checks": 23,
+      "failures": [],
+      "status": "PASS"
+    },
+    {
+      "suite": "res://tests/test_growth.gd",
+      "checks": 70,
+      "failures": [],
+      "status": "PASS"
+    },
+    {
+      "suite": "res://tests/test_magic.gd",
+      "checks": 117,
+      "failures": [],
+      "status": "PASS"
+    },
+    {
+      "suite": "res://tests/test_feedback.gd",
+      "checks": 57,
+      "failures": [],
+      "status": "PASS"
+    },
+    {
+      "suite": "res://tests/test_mobile_hud.gd",
+      "checks": 1334,
+      "failures": [],
+      "status": "PASS"
+    },
+    {
+      "suite": "res://tests/test_run_navigation.gd",
+      "checks": 68,
+      "failures": [],
+      "status": "PASS"
+    },
+    {
+      "suite": "res://tests/test_combat_cues.gd",
+      "checks": 157,
+      "failures": [],
+      "status": "PASS"
+    }
+  ],
+  "native_total_checks": 1826,
+  "python_runner_tests": {
+    "status": "PASS",
+    "tests": 12
+  },
+  "project_report": {
+    "static_integrity": {
+      "status": "PASS",
+      "files_checked": 39,
+      "resource_references_checked": 55,
+      "errors": [],
+      "source_sha256": {
+        "project.godot": "0d8f7fce157178f7bf31acc183593b40f23cff6d266ea5270f4b75f0899b79e5",
+        "scenes/main.tscn": "17a2e77db7cf47af860de3c263dc9119b0df349bafdf2a8b52a40f7450c9e22c",
+        "scripts/combat/attack_visuals.gd": "61bdbdd2c09b250bc67e0df4db320fe1bea00192d6fb57a8e94661a5ecf173b2",
+        "scripts/combat/battle_view.gd": "7e8d05ccf25daee628dd190f4f9a1e0fc5b8b9b0fdbf311e036f1dfaa38bdffa",
+        "scripts/combat/combat_cues.gd": "ab4fbf025127efe6a6b152adb57fdd007b3a0c8db53be97f48e89663eda68c58",
+        "scripts/combat/feedback_state.gd": "3ee19238fb9307bc9953fed3ecc266ecff420e2c74ceffe81409069372e87d88",
+        "scripts/combat/magic_state.gd": "224538112caa60459ff1ed909129390e866d0fa12946825faa9239589d98ff76",
+        "scripts/combat/run_state.gd": "3e39ace4650913745722081108a4ea9b9deb14c14676fdaf2ead3f9fd9925a1f",
+        "scripts/main.gd": "65a71c48281d074726f1e9cc5538bdb4d8a8bd23e38d2d7c0789581ed1b11f72",
+        "scripts/progression/gold_progress.gd": "1593c8623e8fdd69bb9a7eb183be8fd8790bedd1ffa7a7de1b23805da9c1e63b",
+        "scripts/progression/growth_state.gd": "4d17798e1d3e470e15e76eec7d3d2a9b881aae8f4142e3a73199c38a9244f72a",
+        "scripts/progression/skill_catalog.gd": "73f8cc38e3f998cc1f88e90fdf7c9963037f3ee6087fbc1d9a5f1e85852119d2",
+        "scripts/ui/feedback_panel.gd": "e6fa69fd4752e785eeaaa3a06f1652fe106436763d44217918688233903b2d10",
+        "scripts/ui/growth_overview.gd": "283395c4c552d9ba80bf5a8de34e849da66bb2556c3df1b2954b3198937a4318",
+        "scripts/ui/hud_layout.gd": "f85a7fdc757693b55909c93957b235ff0f343e50396ee2365edf353866c07da5",
+        "scripts/ui/mobile_main.gd": "9ade16238dbb4d146c6e12b437419eecc7e5e834e5f544a5e0a1a3a7e5e45584",
+        "scripts/ui/move_input.gd": "cee8e709185740d1cb964fff13873a0818d14d0b3653f36d6416a1b17da40bd8",
+        "scripts/ui/responsive_feedback_panel.gd": "60efa5e9a99e3a9d4f66c23b3ebb2f7954379cf26f3a2d4d759b5d19584e94ea",
+        "scripts/ui/skill_preview.gd": "48a5823652f75d9540feebc81b17e6e48cf33e9536881a6ed11c6ff877b661d0",
+        "tests/test_attack_visuals.gd": "0803f70eecd318b5fcebb8cfac61f6642f5a9f8b543d56f2f8d13ea2c619c9f7",
+        "tests/test_combat_cues.gd": "9528d4f87b97858a202c2f97c31f9bfc07a2da1e28c556166fa30924057e170c",
+        "tests/test_combat_foundation.gd": "70bb6c053ab506ec839593397ab9f000275f53d773edec91e8b3b305dacfab20",
+        "tests/test_feedback.gd": "dd5794b79b07dac14692716471a6a977345ca0b92a9db24fc7a40c5ef6de6823",
+        "tests/test_gold_settings.gd": "c923b4171fdb7eb0269b6755edd0c21eba3eb68c473203993ba1e1b465347ae6",
+        "tests/test_growth.gd": "1f30dfd9d2505067765c7ce1dab9b59075b10e9a1a645d207a50e508842264cf",
+        "tests/test_growth_overview.gd": "22389136d5e9b1c88c90253107baeacf7d21bcff202684068da9d16c2efb6bfb",
+        "tests/test_magic.gd": "127603684b9202f9c2ec07b9955e1de0c9f08512467946bc537d7bac7fd2acfc",
+        "tests/test_mobile_hud.gd": "904a2da5bde8ecd5bcfdda04155ee302d867fc6cee1b2a792cfb521194985354",
+        "tests/test_run_navigation.gd": "a3d066742dd67475a42815fa13e48cb2cf3d2ad253fae90ffd1689ba7df1b85e",
+        "tests/test_skill_preview.gd": "a69261d8daa6f7e40f9901b498634f35f31afd4465d53221e8b91184b1951a9e",
+        "data/prototype_skills.json": "7e0494299572e3fdec4144eaace96971b7e5c5d75eacca7d66bba8931ff4c9fa",
+        "tools/bootstrap_godot.py": "4c3ca17c3b90f9c5590d7a82a76ae71a353f4d15aae973cf37e03e745ebfdecc",
+        "tools/check_combat_cues.py": "25bf3e6b887c826fc6b08e18e23083661772c1feceac60d546156f0104dcbbcf",
+        "tools/check_feedback_data.py": "f1bd6f415e919a32faab1b403073e24dcdda4b819938b9b707dacfc32320bec7",
+        "tools/check_growth_data.py": "8b7e1efed2533932681074382040ca7a0792d8a850b75f259dfeae00d3e44153",
+        "tools/check_magic_data.py": "90d0bfa02c392fed2573d01d2700a3407caab37e4e1805b76a9696a340a76483",
+        "tools/check_mobile_hud.py": "9e43cace28480d3aacb45dabaf67acb2ad24e1c8a9366aa5c011a279eba35487",
+        "tools/check_project.py": "eeafd73fc4503c7af952331c093272a5510aade3fbae04e42afb77eb23f55157",
+        "tools/check_run_navigation.py": "1a3516dd8ef9ba68eaab8a2f50c9b73c03d964b80c57f70a978de81b7f381eaa"
+      },
+      "source_fingerprint": "879aef16aa14a7776c8bd4ae174ac65f3d4ec5ec1b72798e1e206ef2d814ef9b",
+      "scope": "UTF-8, delimiters, whitespace, JSON/Python syntax, resource existence, project settings; NOT GDScript parser/typechecking or gameplay."
+    },
+    "growth_data_contract": {
+      "status": "PASS",
+      "pool_count": 18,
+      "counts": {
+        "common_attack": 8,
+        "character_attack": 1,
+        "common_passive": 8,
+        "ultimate_enhancement": 1
+      },
+      "negative_controls": [
+        {
+          "fixture": "duplicate",
+          "rejected": true
+        },
+        {
+          "fixture": "resistance",
+          "rejected": true
+        },
+        {
+          "fixture": "foreign_owner",
+          "rejected": true
+        },
+        {
+          "fixture": "missing_ultimate",
+          "rejected": true
+        },
+        {
+          "fixture": "wrong_row",
+          "rejected": true
+        }
+      ],
+      "errors": [],
+      "scope": "JSON schema/content and source integration markers only; not GDScript runtime/behavior."
+    },
+    "magic_data_contract": {
+      "status": "PASS",
+      "errors": [],
+      "negative_controls": [
+        {
+          "fixture": "plain_name",
+          "rejected": true
+        },
+        {
+          "fixture": "foreign_owner",
+          "rejected": true
+        },
+        {
+          "fixture": "missing_magic",
+          "rejected": true
+        },
+        {
+          "fixture": "negative_cost",
+          "rejected": true
+        },
+        {
+          "fixture": "zero_cooldown",
+          "rejected": true
+        },
+        {
+          "fixture": "wrong_upgrade",
+          "rejected": true
+        },
+        {
+          "fixture": "nonfinite_radius",
+          "rejected": true
+        },
+        {
+          "fixture": "impossible_cost",
+          "rejected": true
+        }
+      ],
+      "temporary_skill_names": 18,
+      "required_xp_first_five": [
+        30,
+        48,
+        66,
+        84,
+        102
+      ],
+      "xp_drop_unchanged": 5.0,
+      "scope": "JSON validation, negative data controls and source markers/arithmetic; NOT GDScript runtime, UI, input dispatch or mobile tests."
+    },
+    "feedback_source_contract": {
+      "status": "PASS",
+      "errors": [],
+      "negative_controls": [
+        {
+          "fixture": "missing_damage_hook",
+          "rejected": true
+        },
+        {
+          "fixture": "missing_reset",
+          "rejected": true
+        },
+        {
+          "fixture": "negative_duration",
+          "rejected": true
+        },
+        {
+          "fixture": "missing_low_hp_warning",
+          "rejected": true
+        },
+        {
+          "fixture": "missing_stale_guard",
+          "rejected": true
+        }
+      ],
+      "files_checked": 7,
+      "source_sha256": {
+        "scripts/combat/feedback_state.gd": "3ee19238fb9307bc9953fed3ecc266ecff420e2c74ceffe81409069372e87d88",
+        "scripts/combat/run_state.gd": "3e39ace4650913745722081108a4ea9b9deb14c14676fdaf2ead3f9fd9925a1f",
+        "scripts/ui/feedback_panel.gd": "e6fa69fd4752e785eeaaa3a06f1652fe106436763d44217918688233903b2d10",
+        "scripts/main.gd": "65a71c48281d074726f1e9cc5538bdb4d8a8bd23e38d2d7c0789581ed1b11f72",
+        "tests/test_feedback.gd": "dd5794b79b07dac14692716471a6a977345ca0b92a9db24fc7a40c5ef6de6823",
+        "tools/check_project.py": "eeafd73fc4503c7af952331c093272a5510aade3fbae04e42afb77eb23f55157",
+        "tools/check_feedback_data.py": "f1bd6f415e919a32faab1b403073e24dcdda4b819938b9b707dacfc32320bec7"
+      },
+      "scope": "7 affected code/test/checker files: UTF-8, delimiters, whitespace, Python syntax, reaction constants, integration markers, engine-test registration and new dependency paths only. NOT the full project check or GDScript parser/type/runtime, rendering, or mobile input tests."
+    },
+    "mobile_hud_source_contract": {
+      "status": "PASS",
+      "files_checked": 8,
+      "errors": [],
+      "negative_controls": [
+        {
+          "fixture": "layout_detached",
+          "rejected": true
+        },
+        {
+          "fixture": "detail_not_paused",
+          "rejected": true
+        },
+        {
+          "fixture": "detail_mutates_skill",
+          "rejected": true
+        },
+        {
+          "fixture": "resize_retains_touch",
+          "rejected": true
+        },
+        {
+          "fixture": "test_not_registered",
+          "rejected": true
+        }
+      ],
+      "source_sha256": {
+        "scenes/main.tscn": "17a2e77db7cf47af860de3c263dc9119b0df349bafdf2a8b52a40f7450c9e22c",
+        "scripts/ui/mobile_main.gd": "9ade16238dbb4d146c6e12b437419eecc7e5e834e5f544a5e0a1a3a7e5e45584",
+        "scripts/ui/hud_layout.gd": "f85a7fdc757693b55909c93957b235ff0f343e50396ee2365edf353866c07da5",
+        "scripts/ui/responsive_feedback_panel.gd": "60efa5e9a99e3a9d4f66c23b3ebb2f7954379cf26f3a2d4d759b5d19584e94ea",
+        "scripts/ui/move_input.gd": "cee8e709185740d1cb964fff13873a0818d14d0b3653f36d6416a1b17da40bd8",
+        "tests/test_mobile_hud.gd": "904a2da5bde8ecd5bcfdda04155ee302d867fc6cee1b2a792cfb521194985354",
+        "tools/check_project.py": "eeafd73fc4503c7af952331c093272a5510aade3fbae04e42afb77eb23f55157",
+        "tools/check_mobile_hud.py": "9e43cace28480d3aacb45dabaf67acb2ad24e1c8a9366aa5c011a279eba35487"
+      },
+      "source_fingerprint": "5617aa7d172383f09ca7f223f5762cd33e0636d156e0c9f4d4913896453632c3",
+      "scope": "Changed UTF-8 files, delimiters, Python syntax and integration source checks only. NOT GDScript parsing/typechecking, actual Control geometry, touch dispatch, rendering or mobile execution."
+    },
+    "run_navigation_source_contract": {
+      "status": "PASS",
+      "files_checked": 5,
+      "errors": [],
+      "negative_controls": [
+        {
+          "fixture": "unescaped_string_newline",
+          "rejected": true
+        },
+        {
+          "fixture": "unguarded_intent",
+          "rejected": true
+        },
+        {
+          "fixture": "confirmation_resets_hp",
+          "rejected": true
+        },
+        {
+          "fixture": "cancel_rerolls",
+          "rejected": true
+        },
+        {
+          "fixture": "leave_fakes_death",
+          "rejected": true
+        },
+        {
+          "fixture": "no_result_copy",
+          "rejected": true
+        },
+        {
+          "fixture": "stale_menu_revision",
+          "rejected": true
+        },
+        {
+          "fixture": "unregistered_engine_test",
+          "rejected": true
+        }
+      ],
+      "source_sha256": {
+        "scripts/combat/run_state.gd": "3e39ace4650913745722081108a4ea9b9deb14c14676fdaf2ead3f9fd9925a1f",
+        "scripts/ui/mobile_main.gd": "9ade16238dbb4d146c6e12b437419eecc7e5e834e5f544a5e0a1a3a7e5e45584",
+        "tests/test_run_navigation.gd": "a3d066742dd67475a42815fa13e48cb2cf3d2ad253fae90ffd1689ba7df1b85e",
+        "tools/check_project.py": "eeafd73fc4503c7af952331c093272a5510aade3fbae04e42afb77eb23f55157",
+        "tools/check_run_navigation.py": "1a3516dd8ef9ba68eaab8a2f50c9b73c03d964b80c57f70a978de81b7f381eaa"
+      },
+      "source_fingerprint": "954eca76da59e37341d8736c24ee69c431ef11e324c8188f9a77b2516e169890",
+      "scope": "UTF-8/delimiters/Python syntax and navigation SOURCE contracts only; NOT GDScript parsing/types, native execution, actual UI/input, or mobile testing."
+    },
+    "combat_cues_source_contract": {
+      "status": "PASS",
+      "files_checked": 6,
+      "errors": [],
+      "negative_controls": [
+        {
+          "fixture": "missing_reset",
+          "rejected": true
+        },
+        {
+          "fixture": "early_clock",
+          "rejected": true
+        },
+        {
+          "fixture": "changed_damage",
+          "rejected": true
+        },
+        {
+          "fixture": "drop_as_collection",
+          "rejected": true
+        },
+        {
+          "fixture": "unbounded_visuals",
+          "rejected": true
+        },
+        {
+          "fixture": "cosmetic_rng",
+          "rejected": true
+        },
+        {
+          "fixture": "mutable_view",
+          "rejected": true
+        },
+        {
+          "fixture": "unregistered_test",
+          "rejected": true
+        },
+        {
+          "fixture": "ignored_engine_exit",
+          "rejected": true
+        },
+        {
+          "fixture": "ignored_engine_errors",
+          "rejected": true
+        },
+        {
+          "fixture": "ignored_test_result",
+          "rejected": true
+        }
+      ],
+      "source_sha256": {
+        "scripts/combat/run_state.gd": "3e39ace4650913745722081108a4ea9b9deb14c14676fdaf2ead3f9fd9925a1f",
+        "scripts/combat/battle_view.gd": "7e8d05ccf25daee628dd190f4f9a1e0fc5b8b9b0fdbf311e036f1dfaa38bdffa",
+        "scripts/combat/combat_cues.gd": "ab4fbf025127efe6a6b152adb57fdd007b3a0c8db53be97f48e89663eda68c58",
+        "tests/test_combat_cues.gd": "9528d4f87b97858a202c2f97c31f9bfc07a2da1e28c556166fa30924057e170c",
+        "tools/check_project.py": "eeafd73fc4503c7af952331c093272a5510aade3fbae04e42afb77eb23f55157",
+        "tools/check_combat_cues.py": "25bf3e6b887c826fc6b08e18e23083661772c1feceac60d546156f0104dcbbcf"
+      },
+      "source_fingerprint": "063a2a5b3c0b6fca60d57366eb5b178063bc69db18685b29e6dfa73884e47d66",
+      "baseline_run_blob": "f4a29d3a3b981421f864fa9a78c903b24fc21dc7",
+      "baseline_runner_blob": "1ab68ad8a51271e3d47db8b02d433991f42e8d6c",
+      "baseline_engine_function_sha256": "9156043eaf896d72565563cc1e2f623cf0c8fbac7f032f19bffee7e4946a69ee",
+      "scope": "Changed-source UTF-8/delimiters/Python syntax, hook order, bounds, isolation, reviewed GAME-008 source baselines and preserved engine runner. NOT Godot parser/type/runtime, visual quality, input dispatch, or FPS."
+    },
+    "godot_runtime": {
+      "status": "PASS",
+      "commands": [
+        {
+          "command": [
+            "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+            "--headless",
+            "--version"
+          ],
+          "exit_code": 0,
+          "status": "PASS"
+        },
+        {
+          "command": [
+            "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+            "--headless",
+            "--path",
+            "/workspace/Viya",
+            "--editor",
+            "--import",
+            "--quit"
+          ],
+          "exit_code": 0,
+          "status": "PASS"
+        },
+        {
+          "command": [
+            "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+            "--headless",
+            "--path",
+            "/workspace/Viya",
+            "--script",
+            "res://tests/test_combat_foundation.gd"
+          ],
+          "exit_code": 0,
+          "status": "PASS"
+        },
+        {
+          "command": [
+            "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+            "--headless",
+            "--path",
+            "/workspace/Viya",
+            "--script",
+            "res://tests/test_growth.gd"
+          ],
+          "exit_code": 0,
+          "status": "PASS"
+        },
+        {
+          "command": [
+            "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+            "--headless",
+            "--path",
+            "/workspace/Viya",
+            "--script",
+            "res://tests/test_magic.gd"
+          ],
+          "exit_code": 0,
+          "status": "PASS"
+        },
+        {
+          "command": [
+            "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+            "--headless",
+            "--path",
+            "/workspace/Viya",
+            "--script",
+            "res://tests/test_feedback.gd"
+          ],
+          "exit_code": 0,
+          "status": "PASS"
+        },
+        {
+          "command": [
+            "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+            "--headless",
+            "--path",
+            "/workspace/Viya",
+            "--script",
+            "res://tests/test_mobile_hud.gd"
+          ],
+          "exit_code": 0,
+          "status": "PASS"
+        },
+        {
+          "command": [
+            "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+            "--headless",
+            "--path",
+            "/workspace/Viya",
+            "--script",
+            "res://tests/test_run_navigation.gd"
+          ],
+          "exit_code": 0,
+          "status": "PASS"
+        },
+        {
+          "command": [
+            "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+            "--headless",
+            "--path",
+            "/workspace/Viya",
+            "--script",
+            "res://tests/test_combat_cues.gd"
+          ],
+          "exit_code": 0,
+          "status": "PASS"
+        },
+        {
+          "command": [
+            "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+            "--headless",
+            "--path",
+            "/workspace/Viya",
+            "--quit-after",
+            "120"
+          ],
+          "exit_code": 0,
+          "status": "PASS"
+        }
+      ],
+      "scope": "headless import, actual foundation/growth/magic/feedback/mobile-HUD/run-navigation/combat-cues GDScript tests and main boot; visual/mobile approval separate"
+    },
+    "windows_f5": "NOT_VERIFIED",
+    "android_device": "NOT_VERIFIED",
+    "ios_device": "NOT_VERIFIED"
+  },
+  "render": {
+    "status": "PASS",
+    "driver": "X11 dummy, Mesa llvmpipe, OpenGL 4.5 compatibility",
+    "scope": "Actual scenes/main.tscn, controlled enemy/death and elapsed-time fixtures, settings toggles, clear settlement. Separate test saves. Full 90-second balance and mobile input/device behavior remain NOT_VERIFIED.",
+    "images": {
+      "battle": {
+        "path": ".local_validation/GAME008/battle.png",
+        "sha256": "d027b7c06f7162f5c308462a0c7273d87bb717ae197cbebf41623b1d19602ced"
+      },
+      "settings": {
+        "path": ".local_validation/GAME008/settings.png",
+        "sha256": "038e17499fae5d210587be4113e3180021a9e065980520ad6ecd0dfe2db44a86"
+      },
+      "result": {
+        "path": ".local_validation/GAME008/result.png",
+        "sha256": "2e9289678a246a440edb56c67ac9bbbbe882c4e02def7b17094b86757b38eec3"
+      }
+    }
+  },
+  "baseline_findings": [
+    "Stale passive profile, attack drawing and runner registration source markers were corrected to their existing production locations.",
+    "Exact floating rectangle comparisons failed at subpixel rounding and now use Godot Rect2.is_equal_approx without removing geometry checks."
+  ],
+  "mobile_devices": "NOT_VERIFIED",
+  "windows_f5": "NOT_VERIFIED"
+}
