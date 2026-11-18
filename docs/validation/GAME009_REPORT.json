@@ -1,0 +1,759 @@
+{
+  "code_commit": "b1ede7df1692a026aee1cdf60b7f80a2c3723de5",
+  "code_tree": "595a16643a52ed04f78c75c3e51ffb21601d4472",
+  "date_kst": "2026-11-18",
+  "baseline_commit": "7849f3212c19a54d39418ca8f1e56367706125f9",
+  "engine": "4.7.2.stable.official.ed1daf0bf",
+  "project_report": {
+    "static_integrity": {
+      "status": "PASS",
+      "files_checked": 45,
+      "resource_references_checked": 67,
+      "errors": [],
+      "source_sha256": {
+        "project.godot": "0d8f7fce157178f7bf31acc183593b40f23cff6d266ea5270f4b75f0899b79e5",
+        "scenes/main.tscn": "17a2e77db7cf47af860de3c263dc9119b0df349bafdf2a8b52a40f7450c9e22c",
+        "scripts/combat/attack_visuals.gd": "61bdbdd2c09b250bc67e0df4db320fe1bea00192d6fb57a8e94661a5ecf173b2",
+        "scripts/combat/battle_view.gd": "7e8d05ccf25daee628dd190f4f9a1e0fc5b8b9b0fdbf311e036f1dfaa38bdffa",
+        "scripts/combat/combat_cues.gd": "ab4fbf025127efe6a6b152adb57fdd007b3a0c8db53be97f48e89663eda68c58",
+        "scripts/combat/feedback_state.gd": "3ee19238fb9307bc9953fed3ecc266ecff420e2c74ceffe81409069372e87d88",
+        "scripts/combat/magic_state.gd": "224538112caa60459ff1ed909129390e866d0fa12946825faa9239589d98ff76",
+        "scripts/combat/run_state.gd": "50872a1a624ebde72546010f71ed4ae3a1dfb1d58fe9b53832b2d456d280ff7e",
+        "scripts/combat/stage_catalog.gd": "41f74f5e4b4963ba1c9a7667632da664fb4731b53c297e68e490a5dba4c06e7e",
+        "scripts/main.gd": "b8f85a6d98d5efa1bb21442ac3bbcbbcaa4cb6f273d9efacb6301398af2a5ea8",
+        "scripts/progression/gold_progress.gd": "1593c8623e8fdd69bb9a7eb183be8fd8790bedd1ffa7a7de1b23805da9c1e63b",
+        "scripts/progression/growth_state.gd": "4d17798e1d3e470e15e76eec7d3d2a9b881aae8f4142e3a73199c38a9244f72a",
+        "scripts/progression/run_snapshot.gd": "ced0bcdb710362ea36e36ec29f519afed948b94095ef31fd377e924887ead106",
+        "scripts/progression/run_store.gd": "c2128f277a9ae1af144347e315d06a98b6692088907905ad262ee19a485b5ff2",
+        "scripts/progression/skill_catalog.gd": "73f8cc38e3f998cc1f88e90fdf7c9963037f3ee6087fbc1d9a5f1e85852119d2",
+        "scripts/ui/feedback_panel.gd": "e6fa69fd4752e785eeaaa3a06f1652fe106436763d44217918688233903b2d10",
+        "scripts/ui/growth_overview.gd": "283395c4c552d9ba80bf5a8de34e849da66bb2556c3df1b2954b3198937a4318",
+        "scripts/ui/hud_layout.gd": "f85a7fdc757693b55909c93957b235ff0f343e50396ee2365edf353866c07da5",
+        "scripts/ui/mobile_main.gd": "24dd93d6e49f53a13a4f70b06d950d46c015502ed6c42809b0fb3d4b40da4ca1",
+        "scripts/ui/move_input.gd": "cee8e709185740d1cb964fff13873a0818d14d0b3653f36d6416a1b17da40bd8",
+        "scripts/ui/responsive_feedback_panel.gd": "60efa5e9a99e3a9d4f66c23b3ebb2f7954379cf26f3a2d4d759b5d19584e94ea",
+        "scripts/ui/skill_preview.gd": "48a5823652f75d9540feebc81b17e6e48cf33e9536881a6ed11c6ff877b661d0",
+        "tests/measure_campaign.gd": "69b325acba3b142184466713e179e9fe1aba781d7fa427cdb09791d1d92c4113",
+        "tests/test_attack_visuals.gd": "0803f70eecd318b5fcebb8cfac61f6642f5a9f8b543d56f2f8d13ea2c619c9f7",
+        "tests/test_campaign.gd": "ae6259d0e8755f679d2633b937600347d4dd65486f3d9485d5b2cbfdc89155a8",
+        "tests/test_combat_cues.gd": "420832e3f24a719dffc502fbfc4ae4a3fd7654b26c8360b2fb8485f897e846d9",
+        "tests/test_combat_foundation.gd": "015daa54010ec6613b452086d3019ab21cf8d0c0c7e48f00d1950aa8e3780e2c",
+        "tests/test_feedback.gd": "3b5ff1a83378a96fcca6cfeff3773a23201bf1aad6f4717de917be86c2bea25a",
+        "tests/test_gold_settings.gd": "ec1806253041dbaf6e6ed1a906fa8ebe1b914d5962e53151934f60e782ed1a8b",
+        "tests/test_growth.gd": "ddaa54ed7faac7d1d1ab4ac4229e9a854418d4155186a4e4d014f513911e1505",
+        "tests/test_growth_overview.gd": "22389136d5e9b1c88c90253107baeacf7d21bcff202684068da9d16c2efb6bfb",
+        "tests/test_magic.gd": "7ba643c0abe3ea8b2ee897569b0d236ef1d9116e9cea8d8b6437688b67cc6b15",
+        "tests/test_mobile_hud.gd": "006cd283e56a67c3266c05c298194b5aadfd264670b0eb4b2a64120cf2776cc4",
+        "tests/test_run_navigation.gd": "4797fbd7a9a4c2faf3fae8446e9da36048f57357f16fb61de1472d89f246619e",
+        "tests/test_skill_preview.gd": "a69261d8daa6f7e40f9901b498634f35f31afd4465d53221e8b91184b1951a9e",
+        "data/prototype_skills.json": "7e0494299572e3fdec4144eaace96971b7e5c5d75eacca7d66bba8931ff4c9fa",
+        "data/stages.json": "077593a7ef01f2acfa4c4df295007a0d33392c891ad23487501c0085bef452a6",
+        "tools/bootstrap_godot.py": "4c3ca17c3b90f9c5590d7a82a76ae71a353f4d15aae973cf37e03e745ebfdecc",
+        "tools/check_combat_cues.py": "a01ebc837d21e77b6bf3cdd437fae6b3e4a72b0cc55a8ae836a07dbd935ee6eb",
+        "tools/check_feedback_data.py": "f1bd6f415e919a32faab1b403073e24dcdda4b819938b9b707dacfc32320bec7",
+        "tools/check_growth_data.py": "8b7e1efed2533932681074382040ca7a0792d8a850b75f259dfeae00d3e44153",
+        "tools/check_magic_data.py": "90d0bfa02c392fed2573d01d2700a3407caab37e4e1805b76a9696a340a76483",
+        "tools/check_mobile_hud.py": "9e43cace28480d3aacb45dabaf67acb2ad24e1c8a9366aa5c011a279eba35487",
+        "tools/check_project.py": "eeafd73fc4503c7af952331c093272a5510aade3fbae04e42afb77eb23f55157",
+        "tools/check_run_navigation.py": "1a3516dd8ef9ba68eaab8a2f50c9b73c03d964b80c57f70a978de81b7f381eaa"
+      },
+      "source_fingerprint": "6b95699b18aa54193e9d714902e51208fbe51f1597d3a09a0bc32ee86cc72ae3",
+      "scope": "UTF-8, delimiters, whitespace, JSON/Python syntax, resource existence, project settings; NOT GDScript parser/typechecking or gameplay."
+    },
+    "growth_data_contract": {
+      "status": "PASS",
+      "pool_count": 18,
+      "counts": {
+        "common_attack": 8,
+        "character_attack": 1,
+        "common_passive": 8,
+        "ultimate_enhancement": 1
+      },
+      "negative_controls": [
+        {
+          "fixture": "duplicate",
+          "rejected": true
+        },
+        {
+          "fixture": "resistance",
+          "rejected": true
+        },
+        {
+          "fixture": "foreign_owner",
+          "rejected": true
+        },
+        {
+          "fixture": "missing_ultimate",
+          "rejected": true
+        },
+        {
+          "fixture": "wrong_row",
+          "rejected": true
+        }
+      ],
+      "errors": [],
+      "scope": "JSON schema/content and source integration markers only; not GDScript runtime/behavior."
+    },
+    "magic_data_contract": {
+      "status": "PASS",
+      "errors": [],
+      "negative_controls": [
+        {
+          "fixture": "plain_name",
+          "rejected": true
+        },
+        {
+          "fixture": "foreign_owner",
+          "rejected": true
+        },
+        {
+          "fixture": "missing_magic",
+          "rejected": true
+        },
+        {
+          "fixture": "negative_cost",
+          "rejected": true
+        },
+        {
+          "fixture": "zero_cooldown",
+          "rejected": true
+        },
+        {
+          "fixture": "wrong_upgrade",
+          "rejected": true
+        },
+        {
+          "fixture": "nonfinite_radius",
+          "rejected": true
+        },
+        {
+          "fixture": "impossible_cost",
+          "rejected": true
+        }
+      ],
+      "temporary_skill_names": 18,
+      "required_xp_first_five": [
+        30,
+        48,
+        66,
+        84,
+        102
+      ],
+      "xp_drop_unchanged": 5.0,
+      "scope": "JSON validation, negative data controls and source markers/arithmetic; NOT GDScript runtime, UI, input dispatch or mobile tests."
+    },
+    "feedback_source_contract": {
+      "status": "PASS",
+      "errors": [],
+      "negative_controls": [
+        {
+          "fixture": "missing_damage_hook",
+          "rejected": true
+        },
+        {
+          "fixture": "missing_reset",
+          "rejected": true
+        },
+        {
+          "fixture": "negative_duration",
+          "rejected": true
+        },
+        {
+          "fixture": "missing_low_hp_warning",
+          "rejected": true
+        },
+        {
+          "fixture": "missing_stale_guard",
+          "rejected": true
+        }
+      ],
+      "files_checked": 7,
+      "source_sha256": {
+        "scripts/combat/feedback_state.gd": "3ee19238fb9307bc9953fed3ecc266ecff420e2c74ceffe81409069372e87d88",
+        "scripts/combat/run_state.gd": "50872a1a624ebde72546010f71ed4ae3a1dfb1d58fe9b53832b2d456d280ff7e",
+        "scripts/ui/feedback_panel.gd": "e6fa69fd4752e785eeaaa3a06f1652fe106436763d44217918688233903b2d10",
+        "scripts/main.gd": "b8f85a6d98d5efa1bb21442ac3bbcbbcaa4cb6f273d9efacb6301398af2a5ea8",
+        "tests/test_feedback.gd": "3b5ff1a83378a96fcca6cfeff3773a23201bf1aad6f4717de917be86c2bea25a",
+        "tools/check_project.py": "eeafd73fc4503c7af952331c093272a5510aade3fbae04e42afb77eb23f55157",
+        "tools/check_feedback_data.py": "f1bd6f415e919a32faab1b403073e24dcdda4b819938b9b707dacfc32320bec7"
+      },
+      "scope": "7 affected code/test/checker files: UTF-8, delimiters, whitespace, Python syntax, reaction constants, integration markers, engine-test registration and new dependency paths only. NOT the full project check or GDScript parser/type/runtime, rendering, or mobile input tests."
+    },
+    "mobile_hud_source_contract": {
+      "status": "PASS",
+      "files_checked": 8,
+      "errors": [],
+      "negative_controls": [
+        {
+          "fixture": "layout_detached",
+          "rejected": true
+        },
+        {
+          "fixture": "detail_not_paused",
+          "rejected": true
+        },
+        {
+          "fixture": "detail_mutates_skill",
+          "rejected": true
+        },
+        {
+          "fixture": "resize_retains_touch",
+          "rejected": true
+        },
+        {
+          "fixture": "test_not_registered",
+          "rejected": true
+        }
+      ],
+      "source_sha256": {
+        "scenes/main.tscn": "17a2e77db7cf47af860de3c263dc9119b0df349bafdf2a8b52a40f7450c9e22c",
+        "scripts/ui/mobile_main.gd": "24dd93d6e49f53a13a4f70b06d950d46c015502ed6c42809b0fb3d4b40da4ca1",
+        "scripts/ui/hud_layout.gd": "f85a7fdc757693b55909c93957b235ff0f343e50396ee2365edf353866c07da5",
+        "scripts/ui/responsive_feedback_panel.gd": "60efa5e9a99e3a9d4f66c23b3ebb2f7954379cf26f3a2d4d759b5d19584e94ea",
+        "scripts/ui/move_input.gd": "cee8e709185740d1cb964fff13873a0818d14d0b3653f36d6416a1b17da40bd8",
+        "tests/test_mobile_hud.gd": "006cd283e56a67c3266c05c298194b5aadfd264670b0eb4b2a64120cf2776cc4",
+        "tools/check_project.py": "eeafd73fc4503c7af952331c093272a5510aade3fbae04e42afb77eb23f55157",
+        "tools/check_mobile_hud.py": "9e43cace28480d3aacb45dabaf67acb2ad24e1c8a9366aa5c011a279eba35487"
+      },
+      "source_fingerprint": "4b0d6cc6b53575e750cdade6a484b50efdc73d20cde1ed5e36c9300b4b122231",
+      "scope": "Changed UTF-8 files, delimiters, Python syntax and integration source checks only. NOT GDScript parsing/typechecking, actual Control geometry, touch dispatch, rendering or mobile execution."
+    },
+    "run_navigation_source_contract": {
+      "status": "PASS",
+      "files_checked": 5,
+      "errors": [],
+      "negative_controls": [
+        {
+          "fixture": "unescaped_string_newline",
+          "rejected": true
+        },
+        {
+          "fixture": "unguarded_intent",
+          "rejected": true
+        },
+        {
+          "fixture": "confirmation_resets_hp",
+          "rejected": true
+        },
+        {
+          "fixture": "cancel_rerolls",
+          "rejected": true
+        },
+        {
+          "fixture": "leave_fakes_death",
+          "rejected": true
+        },
+        {
+          "fixture": "no_result_copy",
+          "rejected": true
+        },
+        {
+          "fixture": "stale_menu_revision",
+          "rejected": true
+        },
+        {
+          "fixture": "unregistered_engine_test",
+          "rejected": true
+        }
+      ],
+      "source_sha256": {
+        "scripts/combat/run_state.gd": "50872a1a624ebde72546010f71ed4ae3a1dfb1d58fe9b53832b2d456d280ff7e",
+        "scripts/ui/mobile_main.gd": "24dd93d6e49f53a13a4f70b06d950d46c015502ed6c42809b0fb3d4b40da4ca1",
+        "tests/test_run_navigation.gd": "4797fbd7a9a4c2faf3fae8446e9da36048f57357f16fb61de1472d89f246619e",
+        "tools/check_project.py": "eeafd73fc4503c7af952331c093272a5510aade3fbae04e42afb77eb23f55157",
+        "tools/check_run_navigation.py": "1a3516dd8ef9ba68eaab8a2f50c9b73c03d964b80c57f70a978de81b7f381eaa"
+      },
+      "source_fingerprint": "78edca03bbb46b7776af3c23bc390498aba9b2853ce727f7f2f442a205bb6c60",
+      "scope": "UTF-8/delimiters/Python syntax and navigation SOURCE contracts only; NOT GDScript parsing/types, native execution, actual UI/input, or mobile testing."
+    },
+    "combat_cues_source_contract": {
+      "status": "PASS",
+      "files_checked": 6,
+      "errors": [],
+      "negative_controls": [
+        {
+          "fixture": "missing_reset",
+          "rejected": true
+        },
+        {
+          "fixture": "early_clock",
+          "rejected": true
+        },
+        {
+          "fixture": "changed_damage",
+          "rejected": true
+        },
+        {
+          "fixture": "drop_as_collection",
+          "rejected": true
+        },
+        {
+          "fixture": "unbounded_visuals",
+          "rejected": true
+        },
+        {
+          "fixture": "cosmetic_rng",
+          "rejected": true
+        },
+        {
+          "fixture": "mutable_view",
+          "rejected": true
+        },
+        {
+          "fixture": "unregistered_test",
+          "rejected": true
+        },
+        {
+          "fixture": "ignored_engine_exit",
+          "rejected": true
+        },
+        {
+          "fixture": "ignored_engine_errors",
+          "rejected": true
+        },
+        {
+          "fixture": "ignored_test_result",
+          "rejected": true
+        }
+      ],
+      "source_sha256": {
+        "scripts/combat/run_state.gd": "50872a1a624ebde72546010f71ed4ae3a1dfb1d58fe9b53832b2d456d280ff7e",
+        "scripts/combat/battle_view.gd": "7e8d05ccf25daee628dd190f4f9a1e0fc5b8b9b0fdbf311e036f1dfaa38bdffa",
+        "scripts/combat/combat_cues.gd": "ab4fbf025127efe6a6b152adb57fdd007b3a0c8db53be97f48e89663eda68c58",
+        "tests/test_combat_cues.gd": "420832e3f24a719dffc502fbfc4ae4a3fd7654b26c8360b2fb8485f897e846d9",
+        "tools/check_project.py": "eeafd73fc4503c7af952331c093272a5510aade3fbae04e42afb77eb23f55157",
+        "tools/check_combat_cues.py": "a01ebc837d21e77b6bf3cdd437fae6b3e4a72b0cc55a8ae836a07dbd935ee6eb"
+      },
+      "source_fingerprint": "a66201983064e39aa0520d95ea8b8723897ba98db0a623d585c9e1b881a7637e",
+      "baseline_run_blob": "a6b9a8e23b5b6859786fb4d55189bffaf90d3789",
+      "baseline_runner_blob": "1ab68ad8a51271e3d47db8b02d433991f42e8d6c",
+      "baseline_engine_function_sha256": "9156043eaf896d72565563cc1e2f623cf0c8fbac7f032f19bffee7e4946a69ee",
+      "scope": "Changed-source UTF-8/delimiters/Python syntax, hook order, bounds, isolation, reviewed GAME-009 source baselines and preserved engine runner. NOT Godot parser/type/runtime, visual quality, input dispatch, or FPS."
+    },
+    "godot_runtime": {
+      "status": "PASS",
+      "commands": [
+        {
+          "command": [
+            "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+            "--headless",
+            "--version"
+          ],
+          "exit_code": 0,
+          "status": "PASS"
+        },
+        {
+          "command": [
+            "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+            "--headless",
+            "--path",
+            "/workspace/Viya",
+            "--editor",
+            "--import",
+            "--quit"
+          ],
+          "exit_code": 0,
+          "status": "PASS"
+        },
+        {
+          "command": [
+            "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+            "--headless",
+            "--path",
+            "/workspace/Viya",
+            "--script",
+            "res://tests/test_combat_foundation.gd"
+          ],
+          "exit_code": 0,
+          "status": "PASS"
+        },
+        {
+          "command": [
+            "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+            "--headless",
+            "--path",
+            "/workspace/Viya",
+            "--script",
+            "res://tests/test_growth.gd"
+          ],
+          "exit_code": 0,
+          "status": "PASS"
+        },
+        {
+          "command": [
+            "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+            "--headless",
+            "--path",
+            "/workspace/Viya",
+            "--script",
+            "res://tests/test_magic.gd"
+          ],
+          "exit_code": 0,
+          "status": "PASS"
+        },
+        {
+          "command": [
+            "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+            "--headless",
+            "--path",
+            "/workspace/Viya",
+            "--script",
+            "res://tests/test_feedback.gd"
+          ],
+          "exit_code": 0,
+          "status": "PASS"
+        },
+        {
+          "command": [
+            "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+            "--headless",
+            "--path",
+            "/workspace/Viya",
+            "--script",
+            "res://tests/test_mobile_hud.gd"
+          ],
+          "exit_code": 0,
+          "status": "PASS"
+        },
+        {
+          "command": [
+            "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+            "--headless",
+            "--path",
+            "/workspace/Viya",
+            "--script",
+            "res://tests/test_run_navigation.gd"
+          ],
+          "exit_code": 0,
+          "status": "PASS"
+        },
+        {
+          "command": [
+            "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+            "--headless",
+            "--path",
+            "/workspace/Viya",
+            "--script",
+            "res://tests/test_combat_cues.gd"
+          ],
+          "exit_code": 0,
+          "status": "PASS"
+        },
+        {
+          "command": [
+            "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+            "--headless",
+            "--path",
+            "/workspace/Viya",
+            "--quit-after",
+            "120"
+          ],
+          "exit_code": 0,
+          "status": "PASS"
+        }
+      ],
+      "scope": "headless import, actual foundation/growth/magic/feedback/mobile-HUD/run-navigation/combat-cues GDScript tests and main boot; visual/mobile approval separate"
+    },
+    "windows_f5": "NOT_VERIFIED",
+    "android_device": "NOT_VERIFIED",
+    "ios_device": "NOT_VERIFIED"
+  },
+  "native_suites": [
+    {
+      "suite": "res://tests/test_combat_foundation.gd",
+      "checks": 23,
+      "failures": [],
+      "status": "PASS"
+    },
+    {
+      "suite": "res://tests/test_growth.gd",
+      "checks": 70,
+      "failures": [],
+      "status": "PASS"
+    },
+    {
+      "suite": "res://tests/test_magic.gd",
+      "checks": 117,
+      "failures": [],
+      "status": "PASS"
+    },
+    {
+      "suite": "res://tests/test_feedback.gd",
+      "checks": 57,
+      "failures": [],
+      "status": "PASS"
+    },
+    {
+      "suite": "res://tests/test_mobile_hud.gd",
+      "checks": 1334,
+      "failures": [],
+      "status": "PASS"
+    },
+    {
+      "suite": "res://tests/test_run_navigation.gd",
+      "checks": 68,
+      "failures": [],
+      "status": "PASS"
+    },
+    {
+      "suite": "res://tests/test_combat_cues.gd",
+      "checks": 201,
+      "failures": [],
+      "status": "PASS"
+    }
+  ],
+  "native_total_checks": 1870,
+  "python_runner_tests": {
+    "tests": 12,
+    "status": "PASS"
+  },
+  "growth_measurement": {
+    "growth_target_met": true,
+    "runs": [
+      {
+        "boss_defeated_at": 332.900000000041,
+        "choices": 11,
+        "elapsed": 360.0,
+        "first_choice": 10.6,
+        "gold_reward": 3788,
+        "hp": 88,
+        "kills": 292,
+        "milestones": [
+          {
+            "choices": 5,
+            "gold_collected": 752,
+            "hp": 100,
+            "kills": 75,
+            "time": 119.999999999995
+          },
+          {
+            "choices": 8,
+            "gold_collected": 1597,
+            "hp": 100,
+            "kills": 174,
+            "time": 240.00000000002
+          },
+          {
+            "choices": 11,
+            "gold_collected": 3688,
+            "hp": 88,
+            "kills": 292,
+            "time": 360.0
+          }
+        ],
+        "outcome": "cleared",
+        "peak_enemies": 12,
+        "seed": 7
+      },
+      {
+        "boss_defeated_at": 324.350000000039,
+        "choices": 11,
+        "elapsed": 360.0,
+        "first_choice": 11.8,
+        "gold_reward": 3803,
+        "hp": 100,
+        "kills": 292,
+        "milestones": [
+          {
+            "choices": 5,
+            "gold_collected": 706,
+            "hp": 100,
+            "kills": 76,
+            "time": 119.999999999995
+          },
+          {
+            "choices": 8,
+            "gold_collected": 2100,
+            "hp": 100,
+            "kills": 174,
+            "time": 240.00000000002
+          },
+          {
+            "choices": 11,
+            "gold_collected": 3703,
+            "hp": 100,
+            "kills": 292,
+            "time": 360.0
+          }
+        ],
+        "outcome": "cleared",
+        "peak_enemies": 12,
+        "seed": 42
+      },
+      {
+        "boss_defeated_at": -1.0,
+        "choices": 10,
+        "elapsed": 313.200000000037,
+        "first_choice": 10.6,
+        "gold_reward": 0,
+        "hp": 0,
+        "kills": 238,
+        "milestones": [
+          {
+            "choices": 5,
+            "gold_collected": 976,
+            "hp": 100,
+            "kills": 74,
+            "time": 119.999999999995
+          },
+          {
+            "choices": 8,
+            "gold_collected": 1596,
+            "hp": 100,
+            "kills": 174,
+            "time": 240.00000000002
+          }
+        ],
+        "outcome": "defeat",
+        "peak_enemies": 12,
+        "seed": 143
+      },
+      {
+        "boss_defeated_at": 328.900000000041,
+        "choices": 11,
+        "elapsed": 360.0,
+        "first_choice": 11.1,
+        "gold_reward": 2698,
+        "hp": 88,
+        "kills": 289,
+        "milestones": [
+          {
+            "choices": 5,
+            "gold_collected": 469,
+            "hp": 100,
+            "kills": 75,
+            "time": 119.999999999995
+          },
+          {
+            "choices": 8,
+            "gold_collected": 1384,
+            "hp": 100,
+            "kills": 175,
+            "time": 240.00000000002
+          },
+          {
+            "choices": 11,
+            "gold_collected": 2598,
+            "hp": 88,
+            "kills": 289,
+            "time": 360.0
+          }
+        ],
+        "outcome": "cleared",
+        "peak_enemies": 13,
+        "seed": 407
+      },
+      {
+        "boss_defeated_at": 320.200000000039,
+        "choices": 12,
+        "elapsed": 360.0,
+        "first_choice": 10.0,
+        "gold_reward": 3230,
+        "hp": 28,
+        "kills": 291,
+        "milestones": [
+          {
+            "choices": 5,
+            "gold_collected": 1164,
+            "hp": 100,
+            "kills": 76,
+            "time": 119.999999999995
+          },
+          {
+            "choices": 9,
+            "gold_collected": 2061,
+            "hp": 100,
+            "kills": 175,
+            "time": 240.00000000002
+          },
+          {
+            "choices": 12,
+            "gold_collected": 3130,
+            "hp": 28,
+            "kills": 291,
+            "time": 360.0
+          }
+        ],
+        "outcome": "cleared",
+        "peak_enemies": 12,
+        "seed": 2026
+      }
+    ],
+    "status": "PASS"
+  },
+  "growth_scope": "Production RunState with deterministic controller, real drops/choices/magic/damage at dt=0.05. Four clears and one legitimate defeat. Player enjoyment and mobile balance remain unverified. No invulnerability or artificial XP grants in measurement.",
+  "process_restarts": [
+    {
+      "elapsed": 120.01,
+      "gold": 0,
+      "hp": 73,
+      "mana": 48.5,
+      "offer": [
+        "common_scatter",
+        "passive_power",
+        "common_lance"
+      ],
+      "phase": "write",
+      "status": "PASS"
+    },
+    {
+      "elapsed": 120.01,
+      "gold": 0,
+      "hp": 73,
+      "mana": 48.5,
+      "offer": [
+        "common_scatter",
+        "passive_power",
+        "common_lance"
+      ],
+      "phase": "read",
+      "status": "PASS"
+    },
+    {
+      "elapsed": 360.0,
+      "gold": 117,
+      "hp": 73,
+      "mana": 48.5,
+      "offer": [],
+      "phase": "finish",
+      "status": "PASS"
+    },
+    {
+      "elapsed": 360.0,
+      "gold": 117,
+      "hp": 73,
+      "mana": 48.5,
+      "offer": [],
+      "phase": "replay",
+      "status": "PASS"
+    }
+  ],
+  "process_scope": "Four separate Godot invocations of scenes/main.tscn, one isolated XDG data directory, full-precision binary expected snapshot, HP/MP/actors/offer/RNG continuity, completed payment replay. Fixture retained in ignored .local_validation/GAME009/campaign_process.gd.",
+  "render": {
+    "status": "PASS",
+    "driver": "X11 dummy, OpenGL 4.5 Mesa llvmpipe",
+    "scope": "Real existing main scene with controlled elapsed-time/enemy fixtures. Saved lobby, cold restored menu, five-minute boss and six-minute payout inspected. Separate test save files.",
+    "images": {
+      "lobby": {
+        "path": ".local_validation/GAME009/lobby.png",
+        "sha256": "0a88ee3eabecf484a516f393554be562cbec4b7aad9f52c030a27a08fa35359b"
+      },
+      "restored": {
+        "path": ".local_validation/GAME009/restored.png",
+        "sha256": "76e1b769ad42ab922025156008a328e9117cc9826872ac7cfdb4983374aefda5"
+      },
+      "boss": {
+        "path": ".local_validation/GAME009/boss.png",
+        "sha256": "02f908db0829501eb76e294e26a48abf77e7c8c000c200a3c92c2580a14dcc65"
+      },
+      "result": {
+        "path": ".local_validation/GAME009/result.png",
+        "sha256": "c2ac5c3a9973b56877a52556b282655bbaeed2b7f5c69207b1f56cda9d0e2db3"
+      }
+    }
+  },
+  "mobile_devices": "NOT_VERIFIED",
+  "windows_f5": "NOT_VERIFIED",
+  "withdrawal": "Design only. Illustrative 20% proposal is inactive. A non-advancing settlement ledger is required before a withdrawal prototype.",
+  "long_modes": "Planning only"
+}
