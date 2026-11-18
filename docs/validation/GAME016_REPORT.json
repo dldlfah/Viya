@@ -2337,10 +2337,14 @@
   },
   "artifact_scope": "Ignored local logs/probes/captures identify this Linux validation, not final assets or a shipped build.",
   "concurrent_user_documents": {
-    "commit": "76d1bf6c7c7009aa1d8004d472d3ffdad81e1664",
     "files": [
-      "docs/PLANNED_WORK.md"
+      "docs/PLANNED_WORK.md",
+      "docs/GAME_DESIGN_BASELINE.md"
     ],
-    "preserved": "Entire weapon-family/dual-unique/Lv5-evolution section10 and2.1 precedence note retained verbatim; our GAME016 implementation status moved to11. New skill planning is not implemented by this task. Tested source61 unchanged."
+    "preserved": "Entire weapon-family/dual-unique/Lv5-evolution section10 and2.1 precedence note retained verbatim; our GAME016 implementation status moved to11. New skill planning is not implemented by this task. Tested source61 unchanged. Entire baseline weapon-design section9 also retained verbatim alongside updated map implementation facts; no runtime source changed.",
+    "commits": [
+      "76d1bf6c7c7009aa1d8004d472d3ffdad81e1664",
+      "43b96b4e9a8cf4092d59698ecb23d3507b43e285"
+    ]
   }
 }
