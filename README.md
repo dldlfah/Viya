@@ -4,7 +4,7 @@
 
 ## 세션 필수 문서
 
-[CURRENT_WORK](docs/CURRENT_WORK.md)와 **[누적 DEVELOPMENT_STATUS](docs/DEVELOPMENT_STATUS.md)**를 함께 읽는다. [PLANNED_WORK](docs/PLANNED_WORK.md) · [NEXT_TASK](docs/NEXT_TASK.md) · [AGENTS](AGENTS.md) · [제작 스킬](.agents/skills/viya-game-production/SKILL.md). GAME-018 코드 **`d9e45e6f0a3a393ddad7311035dbed4f3c099bd1`**, 브랜치 `work/viya-turnaround-qa-20261117`. 문서 HEAD는 코드 뒤에 오며 main 자동 병합은 하지 않는다.
+[CURRENT_WORK](docs/CURRENT_WORK.md)와 **[누적 DEVELOPMENT_STATUS](docs/DEVELOPMENT_STATUS.md)**를 함께 읽는다. [PLANNED_WORK](docs/PLANNED_WORK.md) · [NEXT_TASK](docs/NEXT_TASK.md) · [AGENTS](AGENTS.md) · [제작 스킬](.agents/skills/viya-game-production/SKILL.md). GAME-020 코드 **`3e38ee8b7211eab80f0488d8b3538e00a5301057`**, 브랜치 `work/viya-turnaround-qa-20261117`. 문서 HEAD는 코드 뒤에 오며 main 자동 병합은 하지 않는다.
 
 ## 실제 플레이 경로
 
@@ -19,15 +19,17 @@
 
 실제 보스 HP·등장 안내·둔화·HP/MP/반응·두 줄 스킬·서포터2+2 빈칸·터치 이동/필살기·안전영역/compact를 연결했다. 빈 `presentation_slots.json`에 나중에 텍스처/프레임·아이콘을 연결한다. 임시 도형은 최종 비야/몬스터 디자인이 아니다.
 
-저장10은 이전1~9의 진행·좌표·자원·특성·보상과 구 스킬ID/효과를legacy로 보존한다. 새 출격만weapons_v1을 적용하며 구 저장에 새 고유기/스킬을 소급 지급하지 않는다. 기존4인자 `RunState.start`는 레거시 호환용이며 실제 UI는 맵과5번째 규칙 인자를 넘긴다. 실행은 기존 `main.tscn → mobile_main/main → 단일 RunState`다.
+저장12는 이전1~11의 진행·자원·특성·보상/기존 스킬과 몬스터 스탯·미래 생성도 보존한다. 구1~10의 방어미적용/구11의 방어적용을 유지한다. 신규 출격부터 종족 프로필과 별도7번째 난수를 적용하며 구 저장에 새 스탯/고유기/스킬을 소급 지급하지 않는다. 기존4인자 `RunState.start`는 레거시 호환용이며 실제 UI는 맵과5번째 규칙 인자를 넘긴다. 실행은 기존 `main.tscn → mobile_main/main → 단일 RunState`다.
 
 두 맵에 상자/항아리/잔해 **각32개**를 자동 공격·스킬로 파괴할 수 있다. 매 파괴20%로1개 아이템: 성공 후HP40%/MP40%/전체 자석10%/보스 제외 제거10%다. 회복은 임시 최대치30%, 자석은 맵 전체XP/금화, 제거는 정예까지 기존 처치 보상·보스 면역이다. **파괴45초 후 재생성**하며 비활성 시간은 멈춘다. 이전 드롭과 새 회차 아이템/남은 시간·독립 난수를 저장한다. 소형 물체는 이동 비충돌이며 기존 성벽·성문 충돌을 유지한다.
 
 총기/활/검/마법 각8종의 임시 스킬 라이브러리와 Lv.1~5 실제 동작/진화를 연결했다. **실제 비야는 총기8+패시브8+자동고유/MP강화2의18후보**만 사용한다. 초기 스탯 잠금에 맞춰 시작은 소총Lv.1만 보유하고 진홍각인탄은 레벨업으로 습득한다.4+4/3선택을 유지한다. 도탄/파편/시차점사·룬 표식·진홍파동Lv5 이중파동을 실제 공격/저장/카드·HUD에 연결했다. 다른24종은 후속캐릭터 라이브러리이며 새캐릭터/마법형 비야를 만들지 않았다. 명칭/수치는임시다.
 
+비야 초기 HP100/MP100·이동235·소총10/0.30초/520·물리 관통15%와 일반7/정예3/보스2의 HP·이동·접촉 피해를 기획대로 적용했다. 일반은 시간별 HP/지상속도 배율 후 반올림(해골24→34→43·오크40→56→72), 비행속도360고정이다. 프롤로그는 공성파괴자→주술사/선봉장, 외곽은 주술사→기사/지휘관이며 종족 이름·보스HP와 투창/화살 임시 도형을 표시한다. 전용 정예/보스 패턴·실제 서포터 편성·골드 슬라임 던전은 후속이다.
+
 ## 검증
 
-Godot4.7.2 소스/임포트·기존7묶음 **2923 checks**·부트와 Python12는 PASS다. 실제 저장1~9/새10의 별도 프로세스·실제 로비/선택/두 전장/경계·일반/compact 렌더를 확인했다. [정확한 소스와 근거](docs/validation/GAME018_REPORT.json).
+Godot4.7.2 소스/임포트·기존7묶음 **3040 native checks**·부트와 Python12는 PASS다. 실제 구1~11/새12 저장의12개 별도 프로세스와 실제 종족/보스/투창·화살·일반/compact 렌더를 확인했다. [정확한 소스와 근거](docs/validation/GAME020_REPORT.json).
 
 ```sh
 python3 tools/check_project.py --godot /actual/path/to/Godot
@@ -36,4 +38,4 @@ Godot --headless --path . --script res://tests/test_combat_cues.gd
 Godot --headless --path . --script res://tests/measure_campaign.gd -- --map=prologue_wall --talents=none
 ```
 
-두 새 맵·무강화/전체강화·5시드의20회는모두클리어·매판공격3~4종Lv5였다. 선택24~29회로10~12목표 **FAIL**이며 XP/가격은 유지했다. 모바일·Windows F5·성능·사람의 난도/경제는 미검증이다. 다음 작업은 개편 스킬을포함한 두 전장의 성장·진화/공세 균형이다. 전체 챕터/컷신/정식 아트·수집/성급·철수/장시간 모드는 후속이다.
+두 맵·무강화/계정18최대·5시드20회는18클리어/프롤로그2시간초과·매판 공격3~4종Lv5였다. 선택24~28회로10~12목표 **FAIL**이며 지정 스탯/XP3배/5XP·가격은 유지했다. 모바일·Windows F5·성능·사람의 난도/경제는 미검증이다. 다음 작업은 종족/방어 적용 후 두 전장의 성장·진화/공세 균형이다. 전체 챕터/컷신/정식 아트·수집/성급·철수/장시간 모드는 후속이다.
