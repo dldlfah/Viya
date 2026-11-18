@@ -1,6 +1,7 @@
 extends RefCounted
 ## Exact gameplay data. Cosmetic effects/cues are rebuilt after a restore.
-const VERSION := 11
+const VERSION := 12
+const GAME019_RULES := "cea5d6c275ba3c2fa7d55cb9cf615c386df1480ec4d9a1413f62d95b51292536"
 const GAME017_RULES := "2e0bfb55209da4daaba2c62e718741d3603f31933a50702c8d3bc783438e7913"
 const GAME016_RULES := "8d625d5607e80b1486103e77ddbf57d791b39e9ebe389c704416857e2b574d27"
 const GAME015_RULES := "99b5b472aaaec892172902f02cf5abb5f368c9da43a451578ebc2b8c7706b894"
@@ -16,7 +17,7 @@ const RUN_FIELDS := ["phase", "player", "facing", "hp", "elapsed", "kills", "sho
 	"_enemy_serial", "_regen_remainder", "navigation_ticket", "stage", "run_id",
 	"gold_collected", "gold_drop_chance", "_elites_spawned", "_boss_spawned", "_boss_defeated", "checkpoint_index", "end_reason",
 	"account_attack_level", "account_talent_levels", "_damage_reduction_remainder", "_slow_left", "_kill_heal_clock", "_kill_heal_used", "enemies", "bullets", "pickups", "gold_pickups", "enemy_bullets", "_swarm_clock", "_swarm_pending", "_swarm_serial", "_scatter_clock", "_scatter_index", "map_id", "spawn_view_size", "structures", "item_pickups", "_loot_serial", "weapon_events",
-	"armor_enabled", "support_attack_ids", "support_passive_ids"]
+	"armor_enabled", "support_attack_ids", "support_passive_ids", "combat_profile_version"]
 const GROWTH_FIELDS := ["ruleset", "character_id", "owned", "level", "xp", "pending", "offer", "ticket", "revision"]
 const MAGIC_FIELDS := ["mana", "cooldown_left", "casts", "ticket"]
 
@@ -25,10 +26,13 @@ static func fingerprint_previous() -> String:
 	var skills := FileAccess.get_file_as_string("res://data/prototype_skills.json").replace("\r\n", "\n")
 	return (stages + skills + FileAccess.get_file_as_string("res://data/maps.json").replace("\r\n", "\n") + FileAccess.get_file_as_string("res://data/destructibles.json").replace("\r\n", "\n") + FileAccess.get_file_as_string("res://data/weapon_skills.json").replace("\r\n", "\n")).sha256_text()
 
-static func fingerprint() -> String:
+static func fingerprint_for_v11() -> String:
 	# Keep the published v10 digest for exact conversion of in-progress battles.
 	var source: String = FileAccess.get_file_as_string("res://scripts/combat/defense_rules.gd").replace("\r\n","\n")
 	return (fingerprint_previous()+source).sha256_text()
+
+static func fingerprint() -> String:
+	return (fingerprint_for_v11()+FileAccess.get_file_as_string("res://data/combat_profiles.json").replace("\r\n","\n")).sha256_text()
 
 static func capture(state) -> Dictionary:
 	var result := {"version": VERSION, "rules": fingerprint(), "run": {}, "growth": {}, "magic": {}, "rng": []}
@@ -38,11 +42,13 @@ static func capture(state) -> Dictionary:
 		result.growth[key] = state.growth.get(key)
 	for key in MAGIC_FIELDS:
 		result.magic[key] = state.magic.get(key)
-	for generator in [state.rng, state.growth.rng, state.gold_rng, state.encounter_rng, state.scatter_rng, state.loot_rng]:
+	for generator in [state.rng, state.growth.rng, state.gold_rng, state.encounter_rng, state.scatter_rng, state.loot_rng, state.species_rng]:
 		result.rng.append({"seed": generator.seed, "state": generator.state})
 	return result.duplicate(true)
 
 static func upgrade_legacy(data: Dictionary, state) -> Dictionary:
+	if data.get("version")==11 and data.get("rules")==GAME019_RULES:
+		return _upgrade_profiles(data)
 	if data.get("version") == 10 and data.get("rules") == fingerprint_previous():
 		return _upgrade_defense(data)
 	if data.get("version") == 9 and data.get("rules") == GAME017_RULES:
@@ -192,6 +198,18 @@ static func _upgrade_defense(data: Dictionary) -> Dictionary:
 	data.run.armor_enabled = false # Do not increase defense halfway through an old battle.
 	data.run.support_attack_ids = []
 	data.run.support_passive_ids = []
+	return _upgrade_profiles(data)
+
+static func _upgrade_profiles(data: Dictionary) -> Dictionary:
+	if not data.get("run") is Dictionary or not data.get("rng") is Array or data.rng.size()!=6 or not data.rng[0] is Dictionary or not data.rng[0].get("seed") is int:
+		return {}
+	data=data.duplicate(true)
+	data.version=VERSION
+	data.rules=fingerprint()
+	data.run.combat_profile_version=0 # Never recalculate old living or future actors.
+	var generator:=RandomNumberGenerator.new()
+	generator.seed=int(data.rng[0].seed)^0x5EEC1E5
+	data.rng.append({"seed":generator.seed,"state":generator.state})
 	return data
 
 static func finite_number(value: Variant, minimum: float, maximum: float) -> bool:
@@ -212,6 +230,8 @@ static func valid(data: Dictionary, state) -> bool:
 	for key in RUN_FIELDS:
 		if not run.has(key):
 			return false
+	if not run.combat_profile_version is int or run.combat_profile_version not in [0,1] or (run.combat_profile_version==1 and (run.get("armor_enabled")!=true or growth.get("ruleset")!="weapons_v1" or not state.profiles.error.is_empty() or state.profiles.hero(str(growth.get("character_id",""))).is_empty())):
+		return false
 	if not run.armor_enabled is bool or not run.support_attack_ids is Array or not run.support_passive_ids is Array:
 		return false
 	if not state.DefenseRules.valid_supports(str(growth.get("character_id","")),run.support_attack_ids,run.support_passive_ids):
@@ -306,7 +326,7 @@ static func valid(data: Dictionary, state) -> bool:
 	var choosing: bool = run.phase == 4 or (run.phase == 2 and run._resume_phase == 4)
 	if choosing != (growth.pending > 0) or growth.offer.size() != (mini(3, eligible.size()) if choosing else 0):
 		return false
-	var maximum_hp: int = state.AccountTalents.maximum_hp(100 + 20 * int(growth.owned.get("passive_vitality", 0)), run.account_talent_levels)
+	var maximum_hp: int = state.AccountTalents.maximum_hp((int(state.profiles.hero(growth.character_id).hp) if run.combat_profile_version==1 else 100) + 20 * int(growth.owned.get("passive_vitality", 0)), run.account_talent_levels)
 	if run.hp > maximum_hp or run.get("end_reason") not in ["", "defeat", "timeout", "abandoned", "cleared"]:
 		return false
 	if (run.phase in [1, 2, 4] and run.end_reason != "") or (run.phase == 3 and run.end_reason not in ["defeat", "timeout"]) or (run.phase == 5 and run.end_reason != "abandoned") or (run.phase == 6 and run.end_reason != "cleared"):
@@ -319,13 +339,13 @@ static func valid(data: Dictionary, state) -> bool:
 	var selected_hero: Dictionary = state.growth.catalog.hero(growth.character_id,growth.ruleset)
 	if selected_hero.is_empty():
 		return false
-	var config: Dictionary = selected_hero.active_magic
+	var config: Dictionary = state.magic_configuration(selected_hero,run.combat_profile_version,growth.character_id)
 	if not finite_number(magic.get("mana"), 0, float(config.max_mana) + float(account.max_mana)) or not finite_number(magic.get("cooldown_left"), 0, config.cooldown):
 		return false
 	for key in ["casts", "ticket"]:
 		if not magic.get(key) is int or not finite_number(magic[key], 0, 1000000000):
 			return false
-	if not data.get("rng") is Array or data.rng.size() != 6:
+	if not data.get("rng") is Array or data.rng.size() != 7:
 		return false
 	for generator in data.rng:
 		if not generator is Dictionary or not generator.get("seed") is int or not generator.get("state") is int:
@@ -434,6 +454,20 @@ static func valid_actors(run: Dictionary, state) -> bool:
 			return false
 		if run.map_id != "legacy_arena" and enemy.variant != "flier" and not space.valid_position(enemy.p,24.0):
 			return false
+		if run.combat_profile_version==1:
+			if not enemy.get("species") is String or not enemy.get("spawn_wave") is int:
+				return false
+			var definition: Dictionary=state.profiles.species(enemy.species)
+			if definition.is_empty() or definition.kind!=enemy.kind or definition.variant!=enemy.variant or not enemy.get("contact_damage") is int or enemy.contact_damage!=int(definition.contact_damage):
+				return false
+			if enemy.kind=="normal":
+				if enemy.spawn_wave<0 or enemy.spawn_wave>=rules.waves.size():return false
+				var expected: Dictionary=state.profiles.scaled(enemy.species,rules.waves[enemy.spawn_wave],rules)
+				if enemy.max_hp!=int(expected.hp) or enemy.speed!=float(expected.speed):return false
+			elif enemy.spawn_wave!=-1 or enemy.speed!=float(definition.speed) or (enemy.kind=="boss" and enemy.max_hp!=int(rules.boss_hp)) or (enemy.kind=="elite" and not rules.elite_hp.any(func(value):return int(value)==enemy.max_hp)):
+				return false
+		elif enemy.has("species") or enemy.has("contact_damage") or enemy.has("spawn_wave"):
+			return false
 		if enemy.kind != "normal" and enemy.variant != "normal":
 			return false
 		if not enemy.get("scatter_group") is int or enemy.scatter_group < 0 or enemy.scatter_group > run._scatter_index:
@@ -477,6 +511,10 @@ static func valid_actors(run: Dictionary, state) -> bool:
 		if not pickup.get("value") is int or pickup.value < 1 or pickup.value > 1000000000:
 			return false
 	for bullet in run.enemy_bullets:
+		if run.combat_profile_version==1:
+			var source: Dictionary=state.profiles.species(str(bullet.get("species","")))
+			if source.is_empty() or source.variant!="ranged" or bullet.get("shot")!=source.shot:
+				return false
 		if not vector(bullet.get("velocity")) or not finite_number(bullet.get("life"), 0.000001, 1000):
 			return false
 		if not bullet.get("damage") is int or bullet.damage < 1 or bullet.damage > 1000:
@@ -502,10 +540,10 @@ static func restore(data: Dictionary, state) -> bool:
 		else:
 			state.growth.set(key, data.growth[key])
 	state.growth.pool = state.growth.catalog.pool_for(state.growth.character_id,state.growth.ruleset)
-	state.magic.reset(state.growth.catalog.hero(state.growth.character_id,state.growth.ruleset).active_magic, state.growth.character_id)
+	state.magic.reset(state.magic_configuration(state.growth.catalog.hero(state.growth.character_id,state.growth.ruleset),state.combat_profile_version,state.growth.character_id), state.growth.character_id)
 	for key in MAGIC_FIELDS:
 		state.magic.set(key, data.magic[key])
-	var generators := [state.rng, state.growth.rng, state.gold_rng, state.encounter_rng, state.scatter_rng, state.loot_rng]
+	var generators := [state.rng, state.growth.rng, state.gold_rng, state.encounter_rng, state.scatter_rng, state.loot_rng, state.species_rng]
 	for index in range(generators.size()):
 		generators[index].seed = data.rng[index].seed
 		generators[index].state = data.rng[index].state

@@ -1,0 +1,263 @@
+{
+  "schema_version": 1,
+  "notice": "PLANNED13/15 locked base stats. Per-map species weights are provisional; existing behavior mix/schedules/rewards stay. No elite/boss special patterns or slime dungeon.",
+  "characters": {
+    "viya": {
+      "name": "비야",
+      "hp": 100,
+      "speed": 235,
+      "pickup": 80,
+      "crit": 0,
+      "crit_damage": 2,
+      "hit_lock": 0.85,
+      "hp_regen": 0,
+      "power": 1,
+      "rate": 1,
+      "magic": {
+        "max_mana": 100,
+        "mana_cost": 40,
+        "mana_regen": 1,
+        "damage": 100,
+        "radius": 460,
+        "cooldown": 0
+      }
+    }
+  },
+  "species": {
+    "goblin_raider": {
+      "name": "고블린 약탈병",
+      "kind": "normal",
+      "variant": "normal",
+      "hp": 20,
+      "speed": 68,
+      "contact_damage": 12,
+      "shot": ""
+    },
+    "goblin_javelin": {
+      "name": "고블린 투창병",
+      "kind": "normal",
+      "variant": "ranged",
+      "hp": 20,
+      "speed": 58,
+      "contact_damage": 12,
+      "shot": "javelin"
+    },
+    "hell_hound": {
+      "name": "지옥 사냥개",
+      "kind": "normal",
+      "variant": "fast",
+      "hp": 20,
+      "speed": 116,
+      "contact_damage": 12,
+      "shot": ""
+    },
+    "orc_shield": {
+      "name": "오크 방패병",
+      "kind": "normal",
+      "variant": "heavy",
+      "hp": 40,
+      "speed": 37,
+      "contact_damage": 12,
+      "shot": ""
+    },
+    "wing_imp": {
+      "name": "날개 임프",
+      "kind": "normal",
+      "variant": "flier",
+      "hp": 20,
+      "speed": 360,
+      "contact_damage": 12,
+      "shot": ""
+    },
+    "skeleton_soldier": {
+      "name": "해골 보병",
+      "kind": "normal",
+      "variant": "normal",
+      "hp": 24,
+      "speed": 68,
+      "contact_damage": 12,
+      "shot": ""
+    },
+    "skeleton_archer": {
+      "name": "해골 궁수",
+      "kind": "normal",
+      "variant": "ranged",
+      "hp": 20,
+      "speed": 58,
+      "contact_damage": 12,
+      "shot": "arrow"
+    },
+    "orc_siege": {
+      "name": "오크 공성파괴자",
+      "kind": "elite",
+      "variant": "normal",
+      "hp": 1600,
+      "speed": 45,
+      "contact_damage": 18,
+      "shot": ""
+    },
+    "demon_shaman": {
+      "name": "마왕군 주술사",
+      "kind": "elite",
+      "variant": "normal",
+      "hp": 1600,
+      "speed": 65,
+      "contact_damage": 12,
+      "shot": ""
+    },
+    "undead_knight": {
+      "name": "망자 기사",
+      "kind": "elite",
+      "variant": "normal",
+      "hp": 1600,
+      "speed": 85,
+      "contact_damage": 16,
+      "shot": ""
+    },
+    "demon_vanguard": {
+      "name": "마왕군 선봉장",
+      "kind": "boss",
+      "variant": "normal",
+      "hp": 3200,
+      "speed": 60,
+      "contact_damage": 20,
+      "shot": ""
+    },
+    "undead_commander": {
+      "name": "망자의 지휘관",
+      "kind": "boss",
+      "variant": "normal",
+      "hp": 3200,
+      "speed": 65,
+      "contact_damage": 16,
+      "shot": ""
+    }
+  },
+  "maps": {
+    "legacy_arena": {
+      "normal": {
+        "normal": [
+          {
+            "id": "goblin_raider",
+            "weight": 1
+          }
+        ],
+        "ranged": [
+          {
+            "id": "goblin_javelin",
+            "weight": 1
+          }
+        ],
+        "fast": [
+          {
+            "id": "hell_hound",
+            "weight": 1
+          }
+        ],
+        "heavy": [
+          {
+            "id": "orc_shield",
+            "weight": 1
+          }
+        ],
+        "flier": [
+          {
+            "id": "wing_imp",
+            "weight": 1
+          }
+        ]
+      },
+      "elites": [
+        "orc_siege",
+        "demon_shaman"
+      ],
+      "boss": "demon_vanguard"
+    },
+    "prologue_wall": {
+      "normal": {
+        "normal": [
+          {
+            "id": "goblin_raider",
+            "weight": 1
+          }
+        ],
+        "ranged": [
+          {
+            "id": "goblin_javelin",
+            "weight": 1
+          }
+        ],
+        "fast": [
+          {
+            "id": "hell_hound",
+            "weight": 1
+          }
+        ],
+        "heavy": [
+          {
+            "id": "orc_shield",
+            "weight": 1
+          }
+        ],
+        "flier": [
+          {
+            "id": "wing_imp",
+            "weight": 1
+          }
+        ]
+      },
+      "elites": [
+        "orc_siege",
+        "demon_shaman"
+      ],
+      "boss": "demon_vanguard"
+    },
+    "outskirts_trial": {
+      "normal": {
+        "normal": [
+          {
+            "id": "goblin_raider",
+            "weight": 1
+          },
+          {
+            "id": "skeleton_soldier",
+            "weight": 1
+          }
+        ],
+        "ranged": [
+          {
+            "id": "goblin_javelin",
+            "weight": 1
+          },
+          {
+            "id": "skeleton_archer",
+            "weight": 1
+          }
+        ],
+        "fast": [
+          {
+            "id": "hell_hound",
+            "weight": 1
+          }
+        ],
+        "heavy": [
+          {
+            "id": "orc_shield",
+            "weight": 1
+          }
+        ],
+        "flier": [
+          {
+            "id": "wing_imp",
+            "weight": 1
+          }
+        ]
+      },
+      "elites": [
+        "demon_shaman",
+        "undead_knight"
+      ],
+      "boss": "undead_commander"
+    }
+  }
+}

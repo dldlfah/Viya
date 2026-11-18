@@ -32,6 +32,7 @@ func _draw() -> void:
 		var pos := _screen(pickup["p"])
 		draw_colored_polygon(PackedVector2Array([pos + Vector2(0, -7),
 			pos + Vector2(5, 0), pos + Vector2(0, 7), pos + Vector2(-5, 0)]), Color("7cd3c1"))
+	var names_left := 8
 	for enemy in simulation.enemies:
 		var at := _screen(enemy["p"])
 		var variant: String = str(enemy.get("variant", "normal"))
@@ -40,6 +41,8 @@ func _draw() -> void:
 			var flash: float = simulation.cues.flash_alpha(int(enemy["id"]))
 			var kind: String = str(enemy.get("kind", "normal"))
 			var base: Color = {"normal": Color("aa5364"), "ranged": Color("85ce95"), "fast": Color("6fcce6"), "heavy": Color("c39360"), "flier": Color("a6a8ed")}[variant]
+			if str(enemy.get("species","")).begins_with("skeleton_"):
+				base = Color("d6d0c3")
 			if kind != "normal":
 				base = Color("b66ad6") if kind == "elite" else Color("eb5868")
 			var enemy_color: Color = base.lerp(Color("fff1db"), flash)
@@ -59,6 +62,13 @@ func _draw() -> void:
 				draw_arc(at,23,0,TAU,20,Color("8bcbe3"),1.3,true)
 			draw_rect(Rect2(at + Vector2(-18, -29), Vector2(36, 4)), Color("302b2e"))
 			draw_rect(Rect2(at + Vector2(-18, -29), Vector2(36.0 * enemy["hp"] / float(enemy.get("max_hp", 20)), 4)), Color("d98a8d"))
+			if enemy.has("species") and (names_left>0 or kind!="normal"):
+				var name: String = str(simulation.profiles.species(enemy.species).name)
+				var font: Font = get_theme_default_font()
+				var label_at := at+Vector2(-font.get_string_size(name,HORIZONTAL_ALIGNMENT_LEFT,-1,12).x*0.5,-37)
+				draw_string_outline(font,label_at,name,HORIZONTAL_ALIGNMENT_LEFT,-1,12,2,Color("17191e"))
+				draw_string(font,label_at,name,HORIZONTAL_ALIGNMENT_LEFT,-1,12,Color("ece0c5"))
+				names_left -= 1
 		if variant == "ranged" and float(enemy.windup) > 0.0:
 			var target := _screen(enemy.aim)
 			draw_line(at, target, Color(0.8, 0.4, 0.3, 0.5), 1.5, true)
@@ -73,7 +83,13 @@ func _draw() -> void:
 	for bullet in simulation.enemy_bullets:
 		var at := _screen(bullet.p)
 		draw_line(at - bullet.velocity.normalized() * 10.0, at, Color("ed9268"), 2.0, true)
-		draw_circle(at, 5.0, Color("f7ac6d"))
+		if bullet.get("shot","") in ["arrow","javelin"]:
+			var direction: Vector2 = bullet.velocity.normalized()
+			var reach := 18.0 if bullet.shot=="javelin" else 11.0
+			draw_line(at-direction*reach,at,Color("f7ac6d"),2.5,true)
+			draw_polyline(PackedVector2Array([at-direction*7+direction.orthogonal()*4,at,at-direction*7-direction.orthogonal()*4]),Color("f7ac6d"),1.5,true)
+		else:
+			draw_circle(at, 5.0, Color("f7ac6d"))
 	for effect in simulation.effects:
 		var effect_at: Vector2 = _screen(effect["p"])
 		var link_from: Vector2 = _screen(effect.get("from", effect["p"]))

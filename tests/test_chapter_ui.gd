@@ -25,7 +25,7 @@ static func run(host, verify: Callable) -> void:
 	verify.call(ui.boss_bar.visible and ui.boss_bar.value == 3200.0, "Actual boss health appears in the HUD")
 	ui.simulation._damage_enemy(ui.simulation.enemies[-1].id, 100.0)
 	ui._update_hud()
-	verify.call(ui.boss_bar.value == 3100.0, "Boss health display follows real damage")
+	verify.call(ui.boss_bar.value == 3129.0, "Boss health display follows real damage")
 	ui.simulation.apply_slow(1.0)
 	ui._update_hud()
 	verify.call(ui.ailment_text.text.contains("둔화"), "Slow has a dedicated readable status field")

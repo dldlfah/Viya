@@ -1000,6 +1000,8 @@ func _update_hud() -> void:
 		boss_bar.max_value = bosses[0].max_hp
 		boss_bar.value = bosses[0].hp
 		boss_label.text = "최종 보스 · HP %d / %d" % [bosses[0].hp, bosses[0].max_hp]
+		if bosses[0].has("species"):
+			boss_label.text = "%s · HP %d / %d" % [simulation.profiles.species(bosses[0].species).name,bosses[0].hp,bosses[0].max_hp]
 	if not simulation.stage_rules.is_empty():
 		var left: int = maxi(0,int(ceil(simulation.stage_duration-simulation.elapsed)))
 		var next := "보스 처치" if simulation._boss_spawned and not simulation._boss_defeated else ("생존 유지" if simulation._boss_defeated else "보스 %d초" % maxi(0,int(ceil(float(simulation.stage_rules.boss_at)-simulation.elapsed))))

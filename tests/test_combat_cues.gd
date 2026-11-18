@@ -202,6 +202,7 @@ func _run() -> void:
 	await preload("res://tests/test_maps.gd").run(scene, verify)
 	await preload("res://tests/test_supplies.gd").run(scene, verify)
 	await preload("res://tests/test_weapon_skills.gd").run(scene, verify)
+	await preload("res://tests/test_combat_profiles.gd").run(scene, verify)
 	scene.queue_free()
 	await process_frame
 	await process_frame

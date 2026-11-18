@@ -85,7 +85,7 @@ def check() -> dict:
     markers = {
         'scripts/combat/run_state.gd': ['magic.consume(expected_ticket, phase == Phase.RUNNING',
             'magic.owner_id != growth.character_id', 'magic.advance(dt, true)',
-            '_burst(player, float(cast["radius"]), float(cast["damage"]), "ultimate")',
+            '_burst(player, float(cast["radius"]), float(cast["damage"]), "ultimate", "magical")',
             'value: float = 5.0'],
         'scripts/combat/magic_state.gd': ['expected_ticket != ticket', 'invalidate_requests()',
             'if not running or config.is_empty()', 'mana = maxf(0.0, mana -'],

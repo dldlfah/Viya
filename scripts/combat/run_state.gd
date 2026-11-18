@@ -11,6 +11,7 @@ const SupplyCatalog = preload("res://scripts/world/supply_catalog.gd")
 const WeaponModules = preload("res://scripts/combat/weapon_modules.gd")
 const AccountTalents = preload("res://scripts/progression/account_talents.gd")
 const DefenseRules = preload("res://scripts/combat/defense_rules.gd")
+const CombatProfiles = preload("res://scripts/combat/combat_profiles.gd")
 enum Phase { READY, RUNNING, PAUSED, DEFEAT, CHOOSING, ABANDONED, CLEARED }
 const WORLD_SIZE := Vector2(1800.0, 1200.0) # Legacy API; mapped runs use world_size.
 const PLAYER_SPEED := 235.0
@@ -107,6 +108,9 @@ var _kill_heal_used: float = 0.0
 var armor_enabled: bool = false # Published versions 1-10 continue WITHOUT new armor.
 var support_attack_ids: Array = [] # Equipment UI awaits additional real heroes.
 var support_passive_ids: Array = []
+var profiles = CombatProfiles.new()
+var combat_profile_version: int = 0 # Existing v1-11 battles retain their actor stats.
+var species_rng := RandomNumberGenerator.new()
 
 func start(seed_value: int = 0, character_id: String = "viya", account_level: Variant = null, selected_map: String = "legacy_arena", skill_ruleset: String = "legacy", support_loadout: Dictionary = {}) -> bool:
 	# Validate the complete selected character before changing the previous run.
@@ -140,7 +144,10 @@ func start(seed_value: int = 0, character_id: String = "viya", account_level: Va
 	if not growth.catalog.validate_pool(candidate_pool, character_id):
 		return false
 	var hero: Dictionary = growth.catalog.hero(character_id,skill_ruleset)
-	var candidate = hero.get("active_magic", {})
+	var selected_profile := 1 if skill_ruleset=="weapons_v1" else 0
+	if selected_profile==1 and (not profiles.error.is_empty() or profiles.hero(character_id).is_empty() or not profiles.data.maps.has(selected_map)):
+		return false
+	var candidate: Dictionary = magic_configuration(hero,selected_profile,character_id)
 	if not candidate is Dictionary or not magic.accepts(candidate, character_id):
 		return false
 	var upgrade_valid: bool = false
@@ -157,12 +164,14 @@ func start(seed_value: int = 0, character_id: String = "viya", account_level: Va
 		return false
 	account_talent_levels = selected_levels
 	armor_enabled = skill_ruleset == "weapons_v1"
+	combat_profile_version = selected_profile
 	support_attack_ids = loadout.attack.duplicate()
 	support_passive_ids = loadout.passive.duplicate()
 	gold_rng.seed = int(rng.seed) ^ 0x601D
 	encounter_rng.seed = int(rng.seed) ^ 0xE11C
 	scatter_rng.seed = int(rng.seed) ^ 0x5CA77
 	loot_rng.seed = int(rng.seed) ^ 0x1007
+	species_rng.seed = int(rng.seed) ^ 0x5EEC1E5
 	run_id = Crypto.new().generate_random_bytes(16).hex_encode()
 	gold_collected = 0
 	gold_pickups.clear()
@@ -264,7 +273,7 @@ func push_player(displacement: Vector2) -> bool:
 	player = map_space.move(player, displacement * (1.0 - float(stats.get("knockback_resist", 0.0))), 30.0)
 	return true
 
-func add_enemy(at: Vector2, kind: String = "normal", variant: String = "normal", scatter_group: int = 0) -> bool:
+func add_enemy(at: Vector2, kind: String = "normal", variant: String = "normal", scatter_group: int = 0, species_id: String = "") -> bool:
 	if kind not in ["normal", "elite", "boss"]:
 		return false
 	if variant not in ["normal", "ranged", "fast", "heavy", "flier"] or (kind != "normal" and variant != "normal"):
@@ -273,6 +282,14 @@ func add_enemy(at: Vector2, kind: String = "normal", variant: String = "normal",
 		return false
 	if scatter_group == 0 and variant != "flier" and _ground_count() >= MAX_ENEMIES:
 		return false
+	# Explicit species are checked before consuming IDs, RNG or live state.
+	var definition: Dictionary = profiles.species(species_id) if not species_id.is_empty() else {}
+	if not species_id.is_empty() and (combat_profile_version!=1 or definition.is_empty() or definition.kind!=kind or definition.variant!=variant):
+		return false
+	if combat_profile_version==1 and species_id.is_empty():
+		species_id = profiles.select(map_id,kind,variant,_elites_spawned,species_rng)
+		definition = profiles.species(species_id)
+		if definition.is_empty():return false
 	_enemy_serial += 1
 	var wave := wave_profile()
 	var life: int = int(wave.hp)
@@ -289,10 +306,18 @@ func add_enemy(at: Vector2, kind: String = "normal", variant: String = "normal",
 		"ranged": speed *= float(stage_rules.ranged.speed_scale)
 		"flier": speed = float(stage_rules.swarm.speed)
 	var enemy := {"id": _enemy_serial, "p": at, "hp": life, "max_hp": life, "kind": kind, "variant": variant, "speed": speed, "scatter_group": scatter_group}
+	if combat_profile_version==1:
+		var actual: Dictionary = profiles.scaled(species_id,wave,stage_rules)
+		enemy.hp = life if kind=="elite" else int(actual.hp)
+		enemy.max_hp = enemy.hp
+		enemy.speed = float(actual.speed)
+		enemy.species = species_id
+		enemy.contact_damage = int(actual.contact_damage)
+		enemy.spawn_wave = stage_rules.waves.find(wave) if kind=="normal" else -1
 	if variant == "ranged":
 		enemy.merge({"fire_clock": float(stage_rules.ranged.interval), "windup": 0.0, "aim": at})
 	elif variant == "flier":
-		enemy.merge({"velocity": Vector2.RIGHT * float(stage_rules.swarm.speed), "life": float(stage_rules.swarm.life), "group": _swarm_serial})
+		enemy.merge({"velocity": Vector2.RIGHT * float(enemy.speed if combat_profile_version==1 else stage_rules.swarm.speed), "life": float(stage_rules.swarm.life), "group": _swarm_serial})
 	enemies.append(enemy)
 	return true
 
@@ -366,6 +391,17 @@ func _refresh_stats() -> void:
 	magic.mana_cost_scale = 1.0 - float(account.mana_cost_reduction)
 	magic.radius_scale = 1.0 + float(account.attack_range)
 
+func base_profile() -> Dictionary:
+	if combat_profile_version==1:
+		return profiles.hero(growth.character_id)
+	return {"hp":100,"speed":PLAYER_SPEED,"pickup":80.0,"crit":0.0,"crit_damage":2.0,"hit_lock":HIT_LOCK,"hp_regen":0.0,"power":1.0,"rate":1.0}
+
+func magic_configuration(hero: Dictionary, version: int, character_id: String) -> Dictionary:
+	var config: Dictionary = hero.get("active_magic",{}).duplicate(true)
+	if version==1:
+		config.merge(profiles.hero(character_id).get("magic",{}),true)
+	return config
+
 func stats_profile(levels: Dictionary) -> Dictionary:
 	# Pure lookup shared by actual upgrades and choice previews. Never edit levels.
 	var ranks: Dictionary = {}
@@ -375,20 +411,21 @@ func stats_profile(levels: Dictionary) -> Dictionary:
 			ranks[effect] = int(levels.get(entry["id"], 0))
 	var account := AccountTalents.bonuses(account_talent_levels)
 	var intrinsic: Dictionary = DefenseRules.character_stats(growth.character_id)
-	return {"max_hp": AccountTalents.maximum_hp(100 + 20 * int(ranks.get("vitality", 0)), account_talent_levels),
-		"stats": {"power": (1.0 + 0.15 * int(ranks.get("power", 0))) * AccountTalents.power_multiplier(account_attack_level),
-			"rate": (1.0 + 0.08 * int(ranks.get("haste", 0))) * (1.0 + float(account.attack_speed)),
-			"speed": PLAYER_SPEED * (1.0 + 0.07 * int(ranks.get("stride", 0))) * (1.0 + float(account.move_speed)),
-			"pickup": 80.0 + 20.0 * int(ranks.get("magnet", 0)),
+	var base := base_profile()
+	return {"max_hp": AccountTalents.maximum_hp(int(base.hp) + 20 * int(ranks.get("vitality", 0)), account_talent_levels),
+		"stats": {"power": float(base.power) * (1.0 + 0.15 * int(ranks.get("power", 0))) * AccountTalents.power_multiplier(account_attack_level),
+			"rate": float(base.rate) * (1.0 + 0.08 * int(ranks.get("haste", 0))) * (1.0 + float(account.attack_speed)),
+			"speed": float(base.speed) * (1.0 + 0.07 * int(ranks.get("stride", 0))) * (1.0 + float(account.move_speed)),
+			"pickup": float(base.pickup) + 20.0 * int(ranks.get("magnet", 0)),
 			"xp": 1.0 + 0.12 * int(ranks.get("learning", 0)),
-			"crit": minf(1.0, 0.04 * int(ranks.get("precision", 0)) + float(account.crit_chance)),
-			"crit_damage": 2.0 + float(account.crit_damage),
-			"hit_lock": HIT_LOCK + float(account.invulnerability),
+			"crit": minf(1.0, float(base.crit) + 0.04 * int(ranks.get("precision", 0)) + float(account.crit_chance)),
+			"crit_damage": float(base.crit_damage) + float(account.crit_damage),
+			"hit_lock": float(base.hit_lock) + float(account.invulnerability),
 			"knockback_resist": float(account.knockback_resist), "status_resist": float(account.status_resist),
 			"healing_efficiency": 1.0 + float(account.healing_efficiency),
 			"kill_heal": float(account.kill_heal), "kill_heal_cap": float(account.kill_heal) * 6.0,
 			"projectile_speed": 1.0 + float(account.projectile_speed), "attack_range": 1.0 + float(account.attack_range),
-			"regen": 0.6 * int(ranks.get("recovery", 0)) + float(account.hp_regen),
+			"regen": float(base.hp_regen) + 0.6 * int(ranks.get("recovery", 0)) + float(account.hp_regen),
 			"damage_reduction": float(account.damage_reduction),
 			"physical_penetration": DefenseRules.main_penetration(growth.character_id,support_passive_ids,"physical") if armor_enabled else 0.0,
 			"magical_penetration": DefenseRules.main_penetration(growth.character_id,support_passive_ids,"magical") if armor_enabled else 0.0,
@@ -594,7 +631,7 @@ func _move_enemies(dt: float) -> void:
 	_move_fliers(dt)
 	for enemy in enemies:
 		if enemy.p.distance_squared_to(player) <= pow(PLAYER_RADIUS + ENEMY_RADIUS, 2.0):
-			var accepted := damage_player(12)
+			var accepted := damage_player(int(enemy.get("contact_damage",12)))
 			if accepted and enemy.variant == "flier":
 				push_player(enemy.velocity.normalized() * FLIER_PLAYER_PUSH)
 			if phase == Phase.DEFEAT:
@@ -646,12 +683,18 @@ func _tick_ranged(enemy: Dictionary, dt: float) -> void:
 	enemy.fire_clock = maxf(0.0, float(enemy.fire_clock) - dt)
 	if enemy.windup > 0.0:
 		enemy.windup = maxf(0.0, float(enemy.windup) - dt)
+		if combat_profile_version==1 and enemy.windup <= 0.000000001:
+			enemy.windup = 0.0
 		if enemy.windup == 0.0:
 			if enemy_bullets.size() < MAX_ENEMY_BULLETS:
 				var direction: Vector2 = enemy.p.direction_to(enemy.aim)
 				if direction.is_zero_approx():
 					direction = Vector2.RIGHT
-				enemy_bullets.append({"p": enemy.p, "velocity": direction * float(rules.bullet_speed), "life": float(rules.bullet_life), "damage": int(rules.damage)})
+				var bullet := {"p": enemy.p, "velocity": direction * float(rules.bullet_speed), "life": float(rules.bullet_life), "damage": int(rules.damage)}
+				if enemy.has("species"):
+					bullet.species = enemy.species
+					bullet.shot = profiles.species(str(enemy.species)).shot
+				enemy_bullets.append(bullet)
 			enemy.fire_clock = float(rules.interval)
 		return
 	if enemy.fire_clock == 0.0 and enemy.p.distance_to(player) <= float(rules.range):
@@ -700,7 +743,7 @@ func _spawn_swarm() -> bool:
 		var offset := direction.orthogonal() * ((index % 5) - 2) * float(rules.spacing)
 		offset -= direction * int(index / 5) * float(rules.spacing)
 		add_enemy(origin + offset, "normal", "flier")
-		enemies[-1].velocity = direction * float(rules.speed)
+		enemies[-1].velocity = direction * float(enemies[-1].speed if combat_profile_version==1 else rules.speed)
 	return true
 
 func _tick_scatter(dt: float) -> void:
@@ -734,13 +777,14 @@ func _spawn_scatter() -> bool:
 	_scatter_index += 1
 	if variant == "flier":
 		_swarm_serial += 1
+	var species_id := profiles.select(map_id,"normal",variant,0,species_rng) if combat_profile_version==1 else ""
 	for index in range(SWARM_SIZE):
 		var offset := direction.orthogonal() * ((index % 6) - 2.5) * spacing
 		offset += direction * (int(index / 6) - 2) * spacing
 		offset += Vector2(scatter_rng.randf_range(-jitter, jitter), scatter_rng.randf_range(-jitter, jitter))
-		add_enemy(center + offset, "normal", variant, _scatter_index)
+		add_enemy(center + offset, "normal", variant, _scatter_index, species_id)
 		if variant == "flier":
-			enemies[-1].velocity = direction * float(stage_rules.swarm.speed)
+			enemies[-1].velocity = direction * float(enemies[-1].speed if combat_profile_version==1 else stage_rules.swarm.speed)
 	return true
 
 func _nearest(at: Vector2, reach: float, ignored: Array[int] = []) -> Dictionary:
@@ -1186,8 +1230,9 @@ func _spawn_map_formation(variant: String, columns: int, spacing: float, jitter:
 		_scatter_index += 1
 	if variant == "flier":
 		_swarm_serial += 1
+	var species_id := profiles.select(map_id,"normal",variant,0,species_rng) if combat_profile_version==1 else ""
 	for position in positions:
-		add_enemy(position, "normal", variant, _scatter_index if scatter else 0)
+		add_enemy(position, "normal", variant, _scatter_index if scatter else 0, species_id)
 		if variant == "flier":
-			enemies[-1].velocity = direction * float(stage_rules.swarm.speed)
+			enemies[-1].velocity = direction * float(enemies[-1].speed if combat_profile_version==1 else stage_rules.swarm.speed)
 	return true
