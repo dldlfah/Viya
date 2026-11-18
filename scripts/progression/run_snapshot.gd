@@ -1,6 +1,6 @@
 extends RefCounted
 ## Exact gameplay data. Cosmetic effects/cues are rebuilt after a restore.
-const VERSION := 4
+const VERSION := 5
 const GAME011_RULES := "7644920556aef98fd56539ab07f8deab2e446baab4fa4320d4a78247f38ca9f8"
 const GAME010_RULES := "711b73b68b15d571c240c7e4b8c20261ddec790a5db723c2ef1bd2d83f68042b"
 const LEGACY_RULES := "3ecf54fd2e0aedad3127fce24d77cc55ea0f8ffe3bfbf235d2470d233a34231e"
@@ -12,7 +12,7 @@ const RUN_FIELDS := ["phase", "player", "facing", "hp", "elapsed", "kills", "sho
 	"shot_clock", "spawn_clock", "hurt_clock", "skill_clocks", "_resume_phase",
 	"_enemy_serial", "_regen_remainder", "navigation_ticket", "stage", "run_id",
 	"gold_collected", "gold_drop_chance", "_elites_spawned", "_boss_spawned", "_boss_defeated", "checkpoint_index", "end_reason",
-	"account_attack_level", "enemies", "bullets", "pickups", "gold_pickups", "enemy_bullets", "_swarm_clock", "_swarm_pending", "_swarm_serial"]
+	"account_attack_level", "account_talent_levels", "_damage_reduction_remainder", "enemies", "bullets", "pickups", "gold_pickups", "enemy_bullets", "_swarm_clock", "_swarm_pending", "_swarm_serial"]
 const GROWTH_FIELDS := ["character_id", "owned", "level", "xp", "pending", "offer", "ticket", "revision"]
 const MAGIC_FIELDS := ["mana", "cooldown_left", "casts", "ticket"]
 
@@ -34,6 +34,14 @@ static func capture(state) -> Dictionary:
 	return result.duplicate(true)
 
 static func upgrade_legacy(data: Dictionary, state) -> Dictionary:
+	if data.get("version") == 4 and data.get("rules") == GAME011_RULES:
+		if not data.get("run") is Dictionary or not state.AccountTalents.valid_level(data.run.get("account_attack_level")):
+			return {}
+		data = data.duplicate(true)
+		data.version = VERSION
+		data.run.account_talent_levels = state.AccountTalents.from_attack(data.run.account_attack_level)
+		data.run._damage_reduction_remainder = 0.0
+		return data
 	if data.get("version") == 3 and data.get("rules") == GAME011_RULES:
 		return _upgrade_account(data)
 	if data.get("version") == 2 and data.get("rules") == GAME010_RULES:
@@ -80,6 +88,8 @@ static func _upgrade_account(data: Dictionary) -> Dictionary:
 	data.version = VERSION
 	data.rules = fingerprint()
 	data.run.account_attack_level = 0 # Older runs predate account talents.
+	data.run.account_talent_levels = preload("res://scripts/progression/account_talents.gd").empty_levels()
+	data.run._damage_reduction_remainder = 0.0
 	return data
 
 static func finite_number(value: Variant, minimum: float, maximum: float) -> bool:
@@ -100,7 +110,9 @@ static func valid(data: Dictionary, state) -> bool:
 	for key in RUN_FIELDS:
 		if not run.has(key):
 			return false
-	if not state.AccountTalents.valid_level(run.account_attack_level):
+	if not state.AccountTalents.valid_levels(run.account_talent_levels) or not state.AccountTalents.valid_level(run.account_attack_level) or run.account_attack_level != run.account_talent_levels.attack_power:
+		return false
+	if not finite_number(run._damage_reduction_remainder, 0, 0.999999999999):
 		return false
 	if run.phase not in [1, 2, 3, 4, 5, 6] or run._resume_phase not in [1, 4]:
 		return false
@@ -176,7 +188,7 @@ static func valid(data: Dictionary, state) -> bool:
 	var choosing: bool = run.phase == 4 or (run.phase == 2 and run._resume_phase == 4)
 	if choosing != (growth.pending > 0) or growth.offer.size() != (mini(3, eligible.size()) if choosing else 0):
 		return false
-	var maximum_hp: int = 100 + 20 * int(growth.owned.get("passive_vitality", 0))
+	var maximum_hp: int = state.AccountTalents.maximum_hp(100 + 20 * int(growth.owned.get("passive_vitality", 0)), run.account_talent_levels)
 	if run.hp > maximum_hp or run.get("end_reason") not in ["", "defeat", "timeout", "abandoned", "cleared"]:
 		return false
 	if (run.phase in [1, 2, 4] and run.end_reason != "") or (run.phase == 3 and run.end_reason not in ["defeat", "timeout"]) or (run.phase == 5 and run.end_reason != "abandoned") or (run.phase == 6 and run.end_reason != "cleared"):

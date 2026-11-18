@@ -38,6 +38,7 @@ var talents_button: Button
 var talents_return_button: Button
 var talent_tabs: Array[Button] = []
 var talent_buy_buttons: Array[Button] = []
+var talent_buttons_by_id: Dictionary = {}
 var talent_content: VBoxContainer
 var _talents_open := false
 var _talent_category := "attack"
@@ -254,6 +255,7 @@ func _clear_dialog() -> void:
 	talents_return_button = null
 	talent_tabs.clear()
 	talent_buy_buttons.clear()
+	talent_buttons_by_id.clear()
 	talent_content = null
 	overview_button = null
 	overview_return_button = null
@@ -307,7 +309,7 @@ func _show_menu(kind: String) -> void:
 	elif kind == "ready":
 		var heading: Label = dialog_body.get_child(0) as Label
 		heading.text = "VIYA | 임시 메인 로비"
-		var account := _label("계정 공통 특성 · 공격 %d/3 · 공격력 +%.0f%%" % [gold_progress.attack_level, (AccountTalents.power_multiplier(gold_progress.attack_level) - 1.0) * 100.0], 20)
+		var account := _label("계정 공통 특성 · 강화 %d/18 · 공격력 %s" % [AccountTalents.IDS.reduce(func(sum, id): return sum + int(gold_progress.talent_levels[id]), 0), AccountTalents.effect_text("attack_power", gold_progress.attack_level)], 20)
 		dialog_body.add_child(account)
 		dialog_body.move_child(account, 1)
 		talents_button = _button("계정 특성 · 공격 / 방어 / 회복", _open_talents.bind(ticket, revision))
@@ -418,7 +420,7 @@ func begin_run() -> void:
 		return
 	var previous_stage: int = simulation.stage
 	simulation.stage = gold_progress.next_stage
-	if not simulation.start(0, simulation.growth.character_id, gold_progress.attack_level):
+	if not simulation.start(0, simulation.growth.character_id, gold_progress.talent_levels):
 		simulation.stage = previous_stage
 		push_error("Invalid character data; current run retained")
 		return
@@ -501,7 +503,7 @@ func _cancel_transition(ticket: int, revision: int) -> void:
 	_update_hud()
 
 func _confirm_transition(ticket: int, revision: int) -> void:
-	if not _menu_matches(ticket, revision) or not simulation.confirm_transition(ticket, gold_progress.attack_level):
+	if not _menu_matches(ticket, revision) or not simulation.confirm_transition(ticket, gold_progress.talent_levels):
 		return
 	_menu_revision += 1
 	_magic_touch_id = -1
@@ -637,23 +639,29 @@ func _show_talents() -> void:
 	panel.custom_minimum_size.y = 140
 	talent_content = VBoxContainer.new()
 	panel.add_child(talent_content)
-	if _talent_category == "attack":
-		talent_content.add_child(_label("[임시] 공격력 강화 · 누적 +5% / +10% / +15%", 18))
+	for id in AccountTalents.IDS:
+		var definition: Dictionary = AccountTalents.DEFINITIONS[id]
+		if definition.category != _talent_category:
+			continue
+		talent_content.add_child(_label("%s · %s / %s / %s" % [definition.name, AccountTalents.effect_text(id, 1), AccountTalents.effect_text(id, 2), AccountTalents.effect_text(id, 3)], 18))
+		talent_buttons_by_id[id] = []
+		var current: int = gold_progress.talent_levels[id]
 		for level in range(3):
 			var state_text := "강화하기"
-			if level < gold_progress.attack_level:
+			if level < current:
 				state_text = "강화 완료"
-			elif level > gold_progress.attack_level:
+			elif level > current:
 				state_text = "이전 단계 필요"
 			elif gold_progress.total < int(AccountTalents.ATTACK_COSTS[level]):
 				state_text = "골드 부족"
-			var caption := "%d단계 · 누적 공격력 +%.0f%% · %s 골드 · %s" % [level + 1, float(AccountTalents.ATTACK_BONUSES[level + 1]) * 100, AccountTalents.gold_text(AccountTalents.ATTACK_COSTS[level]), state_text]
-			var buy := _button(caption, _buy_attack_talent.bind(level, ticket, revision))
+			var caption := "%d단계 · %s · %s 골드 · %s" % [level + 1, AccountTalents.effect_text(id, level + 1), AccountTalents.gold_text(AccountTalents.ATTACK_COSTS[level]), state_text]
+			var buy := _button(caption, _buy_talent.bind(id, level, ticket, revision))
 			buy.add_theme_font_size_override("font_size", 18)
 			buy.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-			buy.disabled = gold_error != OK or not gold_progress.loaded or level != gold_progress.attack_level or gold_progress.total < int(AccountTalents.ATTACK_COSTS[level])
+			buy.disabled = gold_error != OK or not gold_progress.loaded or level != current or gold_progress.total < int(AccountTalents.ATTACK_COSTS[level])
 			talent_content.add_child(buy)
 			talent_buy_buttons.append(buy)
+			talent_buttons_by_id[id].append(buy)
 	if gold_error != OK:
 		dialog_body.add_child(_label("계정 저장을 확인할 수 없습니다. 로비에서 다시 불러와 주세요.", 17))
 	if not _talent_notice.is_empty():
@@ -670,12 +678,12 @@ func _select_talent_category(category: String, ticket: int, revision: int) -> vo
 	_talent_notice = ""
 	_show_talents()
 
-func _buy_attack_talent(level: int, ticket: int, revision: int) -> void:
-	if not _talents_open or not _menu_matches(ticket, revision) or _talent_category != "attack" or simulation.phase != RunState.Phase.READY or gold_error != OK:
+func _buy_talent(id: String, level: int, ticket: int, revision: int) -> void:
+	if not _talents_open or not _menu_matches(ticket, revision) or (id not in AccountTalents.IDS or AccountTalents.DEFINITIONS[id].category != _talent_category) or simulation.phase != RunState.Phase.READY or gold_error != OK:
 		return
-	var error: Error = gold_progress.purchase_attack(level)
+	var error: Error = gold_progress.purchase_talent(id, level)
 	if error == OK:
-		_talent_notice = "공격력 %d단계 강화 완료 · 새 전투부터 적용됩니다." % gold_progress.attack_level
+		_talent_notice = "%s %d단계 강화 완료 · 새 전투부터 적용됩니다." % [AccountTalents.DEFINITIONS[id].name, gold_progress.talent_levels[id]]
 	else:
 		_talent_notice = "강화 저장 실패 · 골드와 강화 단계를 확인해 주세요. (%s)" % error_string(error)
 		if error in [ERR_BUSY, ERR_FILE_CORRUPT, ERR_PARSE_ERROR]:

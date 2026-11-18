@@ -158,7 +158,7 @@ func begin_run() -> void:
 	_magic_touch_id = -1
 	var previous_stage: int = simulation.stage
 	simulation.stage = gold_progress.next_stage
-	if not simulation.start(0, simulation.growth.character_id, gold_progress.attack_level):
+	if not simulation.start(0, simulation.growth.character_id, gold_progress.talent_levels):
 		simulation.stage = previous_stage
 		push_error("Invalid character skill catalog; run not started")
 		return
@@ -548,7 +548,7 @@ func _update_magic_hud() -> void:
 		str(magic.config.get("name", "[임시] 고유 마법")),
 		int(simulation.stats["ultimate"]), float(magic.config.get("mana_cost", 0.0)), state_label]
 	var info: Dictionary = magic.profile(int(simulation.stats["ultimate"]))
-	magic_button.tooltip_text = "임시 효과 · 기본 피해 %.0f / 반경 %.0f / 소모 MP %.0f / 초당 MP 회복 %.0f" % [
+	magic_button.tooltip_text = "임시 효과 · 기본 피해 %.0f / 반경 %.0f / 소모 MP %.0f / 초당 MP 회복 %.2f" % [
 		float(info.get("damage", 0.0)), float(info.get("radius", 0.0)),
 		float(info.get("mana_cost", 0.0)), float(info.get("mana_regen", 0.0))]
 	if float(info.get("cooldown", 0.0)) > 0.0:

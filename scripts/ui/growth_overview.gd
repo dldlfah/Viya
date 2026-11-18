@@ -1,6 +1,7 @@
 extends RefCounted
 ## Read-only projections of the existing run. No new stat formulas or RNG.
 const Growth = preload("res://scripts/progression/growth_state.gd")
+const AccountTalents = preload("res://scripts/progression/account_talents.gd")
 
 static func capture(run) -> Dictionary:
 	var growth = run.growth
@@ -15,7 +16,7 @@ static func capture(run) -> Dictionary:
 		"magic": run.magic.profile(rank).duplicate(true), "magic_rank": rank,
 		"upgrade_name": str(upgrade.get("name", "[임시] 고유 마법 강화")),
 		"mana": run.magic.mana, "max_mana": float(run.magic.config.get("max_mana", 0.0)),
-		"account_attack_level": run.account_attack_level,
+		"account_attack_level": run.account_attack_level, "account_talent_levels": run.account_talent_levels.duplicate(true),
 		"cooldown_left": run.magic.cooldown_left,
 		"summary": run.result_summary().duplicate(true)}
 
@@ -46,7 +47,7 @@ static func sections(data: Dictionary) -> Array[Dictionary]:
 		"body": _row_text(data["passive"])})
 	var magic_text: String = "마법 설정 없음"
 	if not magic.is_empty():
-		magic_text = "%s\n%s Lv.%d (공격·패시브 칸과 별도)\n기본 피해 %.0f / 반경 %.0f\n소모 MP %.0f / 초당 MP 회복 %.0f\n현재 MP %.1f / %.0f\n피해는 공격력·치명타 적용 전 기본값입니다." % [
+		magic_text = "%s\n%s Lv.%d (공격·패시브 칸과 별도)\n기본 피해 %.0f / 반경 %.0f\n소모 MP %.0f / 초당 MP 회복 %.2f\n현재 MP %.1f / %.0f\n피해는 공격력·치명타 적용 전 기본값입니다." % [
 			magic["name"], data["upgrade_name"], data["magic_rank"], magic["damage"], magic["radius"],
 			magic["mana_cost"], magic["mana_regen"], data["mana"], data["max_mana"]]
 		if float(magic.cooldown) > 0.0:
@@ -56,7 +57,10 @@ static func sections(data: Dictionary) -> Array[Dictionary]:
 		"HP %d / %d\n공격 피해 배율 ×%.2f / 자동 공격 속도 배율 ×%.2f\n이동 속도 %.1f / 경험치 획득 배율 ×%.2f\n획득 범위 %.1f / 치명타 확률 %.1f%% / 초당 체력 회복 %.2f\n거리·속도는 전투 논리 단위이며 장비 점수나 영구 능력치가 아닙니다." % [
 			data["hp"], data["max_hp"], stats["power"], stats["rate"], stats["speed"],
 			stats["xp"], stats["pickup"], float(stats["crit"]) * 100.0, stats["regen"]]})
-	result[-1].body += "\n출격 당시 계정 공격 특성 %d/3단계 적용" % int(data.account_attack_level)
+	result[-1].body += "\n출격 당시 계정 특성"
+	for id in AccountTalents.IDS:
+		var level: int = data.account_talent_levels[id]
+		result[-1].body += "\n%s %d/3 · %s" % [AccountTalents.DEFINITIONS[id].name, level, AccountTalents.effect_text(id, level)]
 	return result
 
 static func _row_text(entries: Array) -> String:

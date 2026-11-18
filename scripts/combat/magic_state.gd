@@ -7,6 +7,7 @@ var mana: float = 0.0
 var cooldown_left: float = 0.0
 var casts: int = 0
 var ticket: int = 0 # Monotonic across restarts, phase changes, and successful casts.
+var bonus_mana_regen: float = 0.0 # Derived from this battle's frozen account talents.
 
 func accepts(candidate: Dictionary, character_id: String) -> bool:
 	if character_id.is_empty() or candidate.get("owner", "") != character_id:
@@ -38,6 +39,7 @@ func reset(candidate: Dictionary, character_id: String) -> bool:
 	mana = float(config["max_mana"])
 	cooldown_left = 0.0
 	casts = 0
+	bonus_mana_regen = 0.0
 	invalidate_requests()
 	return true
 
@@ -48,7 +50,7 @@ func advance(delta: float, running: bool) -> void:
 	if not running or config.is_empty() or delta <= 0.0 or not is_finite(delta):
 		return
 	cooldown_left = maxf(0.0, cooldown_left - delta) if float(config["cooldown"]) > 0.0 else 0.0
-	mana = minf(float(config["max_mana"]), mana + float(config["mana_regen"]) * delta)
+	mana = minf(float(config["max_mana"]), mana + (float(config["mana_regen"]) + bonus_mana_regen) * delta)
 
 func unavailable_reason(running: bool) -> String:
 	if not running:
@@ -66,7 +68,7 @@ func profile(rank: int) -> Dictionary:
 		return {}
 	return {"id": config["id"], "owner": owner_id, "name": config["name"],
 		"rank": rank, "mana_cost": float(config["mana_cost"]),
-		"mana_regen": float(config["mana_regen"]),
+		"mana_regen": float(config["mana_regen"]) + bonus_mana_regen,
 		"cooldown": float(config["cooldown"]),
 		"damage": float(config["damage"]) + float(config["damage_per_rank"]) * rank,
 		"radius": float(config["radius"]) + float(config["radius_per_rank"]) * rank,

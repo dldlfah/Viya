@@ -73,12 +73,23 @@ var checkpoint_index: int = 0
 var end_reason: String = ""
 var stage_catalog = StageCatalog.new()
 var stage_rules: Dictionary = {}
-var account_attack_level: int = 0 # Frozen at departure, including saved battles.
+var account_talent_levels: Dictionary = AccountTalents.empty_levels()
+var account_attack_level: int: # Compatibility view; all six levels freeze at departure.
+	get: return int(account_talent_levels.attack_power)
+	set(value): account_talent_levels.attack_power = value
+var _damage_reduction_remainder: float = 0.0
 
-func start(seed_value: int = 0, character_id: String = "viya", account_level: int = -1) -> bool:
+func start(seed_value: int = 0, character_id: String = "viya", account_level: Variant = null) -> bool:
 	# Validate the complete selected character before changing the previous run.
-	var selected_account_level := account_attack_level if account_level == -1 else account_level
-	if not AccountTalents.valid_level(selected_account_level):
+	var selected_levels: Dictionary = account_talent_levels.duplicate(true)
+	if account_level is int:
+		if account_level != -1:
+			selected_levels = AccountTalents.from_attack(account_level)
+	elif account_level != null:
+		if not AccountTalents.valid_levels(account_level):
+			return false
+		selected_levels = account_level.duplicate(true)
+	if not AccountTalents.valid_levels(selected_levels):
 		return false
 	var rules: Dictionary = stage_catalog.for_stage(stage)
 	if rules.is_empty():
@@ -102,7 +113,7 @@ func start(seed_value: int = 0, character_id: String = "viya", account_level: in
 		rng.seed = seed_value
 	if not growth.reset(character_id, int(rng.seed) ^ 0x51A7):
 		return false
-	account_attack_level = selected_account_level
+	account_talent_levels = selected_levels
 	gold_rng.seed = int(rng.seed) ^ 0x601D
 	encounter_rng.seed = int(rng.seed) ^ 0xE11C
 	run_id = Crypto.new().generate_random_bytes(16).hex_encode()
@@ -137,6 +148,7 @@ func start(seed_value: int = 0, character_id: String = "viya", account_level: in
 	hurt_clock = 0.0
 	_enemy_serial = 0
 	_regen_remainder = 0.0
+	_damage_reduction_remainder = 0.0
 	_resume_phase = Phase.RUNNING
 	enemies.clear()
 	enemy_bullets.clear()
@@ -145,6 +157,7 @@ func start(seed_value: int = 0, character_id: String = "viya", account_level: in
 	effects.clear()
 	skill_clocks.clear()
 	_refresh_stats()
+	hp = max_hp
 	phase = Phase.RUNNING
 	return true
 
@@ -164,7 +177,11 @@ func set_paused(value: bool) -> void:
 func damage_player(amount: int) -> bool:
 	if phase != Phase.RUNNING or hurt_clock > 0.0 or amount <= 0:
 		return false
-	hp = maxi(0, hp - amount)
+	# Accumulate fractional prevention so 1-3% works with small integer-HP hits.
+	_damage_reduction_remainder += amount * float(stats.get("damage_reduction", 0.0))
+	var prevented := mini(amount, int(floor(_damage_reduction_remainder + 0.000000001)))
+	_damage_reduction_remainder = maxf(0.0, _damage_reduction_remainder - prevented)
+	hp = maxi(0, hp - (amount - prevented))
 	hurt_clock = HIT_LOCK
 	if hp == 0:
 		_finish_run("defeat")
@@ -263,6 +280,7 @@ func _refresh_stats() -> void:
 	var profile: Dictionary = stats_profile(growth.owned)
 	max_hp = int(profile["max_hp"])
 	stats = profile["stats"]
+	magic.bonus_mana_regen = float(AccountTalents.bonuses(account_talent_levels).mp_regen)
 
 func stats_profile(levels: Dictionary) -> Dictionary:
 	# Pure lookup shared by actual upgrades and choice previews. Never edit levels.
@@ -271,14 +289,16 @@ func stats_profile(levels: Dictionary) -> Dictionary:
 		var effect: String = str(entry["effect"])
 		if not ranks.has(effect):
 			ranks[effect] = int(levels.get(entry["id"], 0))
-	return {"max_hp": 100 + 20 * int(ranks.get("vitality", 0)),
+	var account := AccountTalents.bonuses(account_talent_levels)
+	return {"max_hp": AccountTalents.maximum_hp(100 + 20 * int(ranks.get("vitality", 0)), account_talent_levels),
 		"stats": {"power": (1.0 + 0.15 * int(ranks.get("power", 0))) * AccountTalents.power_multiplier(account_attack_level),
-			"rate": 1.0 + 0.08 * int(ranks.get("haste", 0)),
+			"rate": (1.0 + 0.08 * int(ranks.get("haste", 0))) * (1.0 + float(account.attack_speed)),
 			"speed": PLAYER_SPEED * (1.0 + 0.07 * int(ranks.get("stride", 0))),
 			"pickup": 80.0 + 20.0 * int(ranks.get("magnet", 0)),
 			"xp": 1.0 + 0.12 * int(ranks.get("learning", 0)),
 			"crit": 0.04 * int(ranks.get("precision", 0)),
-			"regen": 0.6 * int(ranks.get("recovery", 0)),
+			"regen": 0.6 * int(ranks.get("recovery", 0)) + float(account.hp_regen),
+			"damage_reduction": float(account.damage_reduction),
 			"ultimate": int(ranks.get("ultimate", 0))}}
 
 func selection_health(current_hp: int, previous_max: int, next_max: int) -> int:
@@ -366,9 +386,9 @@ func step(delta: float, direction: Vector2) -> void:
 			effects.remove_at(i)
 	if hp < max_hp:
 		_regen_remainder += float(stats["regen"]) * dt
-		var healing := int(_regen_remainder)
+		var healing := int(floor(_regen_remainder + 0.000000001))
 		hp = mini(max_hp, hp + healing)
-		_regen_remainder -= healing
+		_regen_remainder = maxf(0.0, _regen_remainder - healing)
 	else:
 		_regen_remainder = 0.0
 	_resolve_deadline()
@@ -742,7 +762,7 @@ func cancel_transition(expected_ticket: int) -> bool:
 	set_paused(false) # Same XP, offer/ticket, HP, MP, timers and RNG state.
 	return true
 
-func confirm_transition(expected_ticket: int, account_level: int = -1) -> bool:
+func confirm_transition(expected_ticket: int, account_level: Variant = null) -> bool:
 	if not _valid_confirmation(expected_ticket):
 		return false
 	if transition_action == "restart":
