@@ -10,6 +10,7 @@ static func quiet(levels: Dictionary):
 	var state = RunState.new()
 	state.start(1300, "viya", levels)
 	state.spawn_clock = 999.0
+	state._scatter_clock = 999.0
 	state.shot_clock = 999.0
 	state.stage_rules.swarm.chance = 0.0
 	return state
@@ -130,7 +131,7 @@ static func combat_checks(verify: Callable) -> void:
 	verify.call(before == Campaign.comparable(state), "Pause freezes all six talents and fractional carry")
 	var old = quiet(Talents.from_attack(2))
 	old.magic.mana = 23.5
-	var legacy: Dictionary = Snapshot.capture(old)
+	var legacy: Dictionary = Campaign.pre_scatter(Snapshot.capture(old))
 	legacy.version = 4
 	legacy.run.erase("account_talent_levels")
 	legacy.run.erase("_damage_reduction_remainder")

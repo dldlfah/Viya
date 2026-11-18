@@ -14,6 +14,7 @@ const ENEMY_RADIUS := 18.0
 const MAX_ENEMIES := 160
 const MAX_ENEMY_BULLETS := 64
 const SWARM_SIZE := 30
+const SCATTER_VARIANTS := ["normal", "fast", "heavy", "flier"]
 const MAX_BULLETS := 64
 const MAX_PICKUPS := 240
 const MAX_EFFECTS := 32
@@ -65,6 +66,9 @@ var gold_collected: int = 0
 var gold_pickups: Array[Dictionary] = []
 var gold_rng := RandomNumberGenerator.new()
 var encounter_rng := RandomNumberGenerator.new()
+var scatter_rng := RandomNumberGenerator.new()
+var _scatter_clock: float = 12.0
+var _scatter_index: int = 0
 var _swarm_clock: float = 20.0
 var _swarm_pending: bool = false # Legacy saved event; new formations never queue.
 var _swarm_serial: int = 0
@@ -122,6 +126,7 @@ func start(seed_value: int = 0, character_id: String = "viya", account_level: Va
 	account_talent_levels = selected_levels
 	gold_rng.seed = int(rng.seed) ^ 0x601D
 	encounter_rng.seed = int(rng.seed) ^ 0xE11C
+	scatter_rng.seed = int(rng.seed) ^ 0x5CA77
 	run_id = Crypto.new().generate_random_bytes(16).hex_encode()
 	gold_collected = 0
 	gold_pickups.clear()
@@ -131,6 +136,8 @@ func start(seed_value: int = 0, character_id: String = "viya", account_level: Va
 	checkpoint_index = 0
 	end_reason = ""
 	stage_rules = rules
+	_scatter_clock = float(rules.scatter.interval)
+	_scatter_index = 0
 	_swarm_clock = float(rules.swarm.interval)
 	_swarm_pending = false
 	_swarm_serial = 0
@@ -211,12 +218,14 @@ func push_player(displacement: Vector2) -> bool:
 	player = (player + displacement * (1.0 - float(stats.get("knockback_resist", 0.0)))).clamp(Vector2.ONE * 30.0, WORLD_SIZE - Vector2.ONE * 30.0)
 	return true
 
-func add_enemy(at: Vector2, kind: String = "normal", variant: String = "normal") -> bool:
+func add_enemy(at: Vector2, kind: String = "normal", variant: String = "normal", scatter_group: int = 0) -> bool:
 	if kind not in ["normal", "elite", "boss"]:
 		return false
 	if variant not in ["normal", "ranged", "fast", "heavy", "flier"] or (kind != "normal" and variant != "normal"):
 		return false
-	if variant != "flier" and _ground_count() >= MAX_ENEMIES:
+	if scatter_group < 0 or scatter_group > _scatter_index or (scatter_group > 0 and (kind != "normal" or variant not in SCATTER_VARIANTS)):
+		return false
+	if scatter_group == 0 and variant != "flier" and _ground_count() >= MAX_ENEMIES:
 		return false
 	_enemy_serial += 1
 	var wave := wave_profile()
@@ -233,7 +242,7 @@ func add_enemy(at: Vector2, kind: String = "normal", variant: String = "normal")
 			speed *= float(stage_rules.heavy_speed_scale)
 		"ranged": speed *= float(stage_rules.ranged.speed_scale)
 		"flier": speed = float(stage_rules.swarm.speed)
-	var enemy := {"id": _enemy_serial, "p": at, "hp": life, "max_hp": life, "kind": kind, "variant": variant, "speed": speed}
+	var enemy := {"id": _enemy_serial, "p": at, "hp": life, "max_hp": life, "kind": kind, "variant": variant, "speed": speed, "scatter_group": scatter_group}
 	if variant == "ranged":
 		enemy.merge({"fire_clock": float(stage_rules.ranged.interval), "windup": 0.0, "aim": at})
 	elif variant == "flier":
@@ -407,6 +416,7 @@ func step(delta: float, direction: Vector2) -> void:
 			_spawn_enemy()
 		spawn_clock = float(wave.interval)
 	_tick_swarm(dt)
+	_tick_scatter(dt)
 	_move_enemies(dt)
 	if phase != Phase.RUNNING:
 		return
@@ -470,7 +480,7 @@ func _collect_pickups(dt: float) -> void:
 func _ground_count() -> int:
 	var count := 0
 	for enemy in enemies:
-		if enemy.variant != "flier":
+		if enemy.variant != "flier" and enemy.scatter_group == 0:
 			count += 1
 	return count
 
@@ -616,6 +626,44 @@ func _spawn_swarm() -> bool:
 		offset -= direction * int(index / 5) * float(rules.spacing)
 		add_enemy(origin + offset, "normal", "flier")
 		enemies[-1].velocity = direction * float(rules.speed)
+	return true
+
+func _tick_scatter(dt: float) -> void:
+	if phase != Phase.RUNNING or elapsed >= stage_duration:
+		return
+	_scatter_clock = maxf(0.0, _scatter_clock - dt)
+	if _scatter_clock <= 0.000001:
+		_spawn_scatter()
+		_scatter_clock = float(stage_rules.scatter.interval)
+
+func _spawn_scatter() -> bool:
+	# Independent schedule/RNG and population: never replace or block old spawns.
+	var rules: Dictionary = stage_rules.scatter
+	if _scatter_index >= ceili(stage_duration / float(rules.interval)):
+		return false
+	var spacing: float = float(rules.spacing)
+	var jitter: float = float(rules.jitter)
+	var margin := Vector2.ONE * (spacing * 3.0 + jitter)
+	var centers: Array[Vector2] = []
+	for side in range(4):
+		var at := (player + Vector2.from_angle(side * PI * 0.5) * float(rules.approach)).clamp(margin, WORLD_SIZE - margin)
+		if at.distance_to(player) >= spacing * 2.0 + jitter + 180.0:
+			centers.append(at)
+	if centers.is_empty():
+		return false
+	var center: Vector2 = centers[scatter_rng.randi_range(0, centers.size() - 1)]
+	var direction := center.direction_to(player)
+	var variant: String = SCATTER_VARIANTS[_scatter_index % SCATTER_VARIANTS.size()]
+	_scatter_index += 1
+	if variant == "flier":
+		_swarm_serial += 1
+	for index in range(SWARM_SIZE):
+		var offset := direction.orthogonal() * ((index % 6) - 2.5) * spacing
+		offset += direction * (int(index / 6) - 2) * spacing
+		offset += Vector2(scatter_rng.randf_range(-jitter, jitter), scatter_rng.randf_range(-jitter, jitter))
+		add_enemy(center + offset, "normal", variant, _scatter_index)
+		if variant == "flier":
+			enemies[-1].velocity = direction * float(stage_rules.swarm.speed)
 	return true
 
 func _nearest(at: Vector2, reach: float, ignored: Array[int] = []) -> Dictionary:

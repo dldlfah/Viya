@@ -1,6 +1,6 @@
 extends RefCounted
 ## Exact gameplay data. Cosmetic effects/cues are rebuilt after a restore.
-const VERSION := 6
+const VERSION := 7
 const GAME011_RULES := "7644920556aef98fd56539ab07f8deab2e446baab4fa4320d4a78247f38ca9f8"
 const GAME010_RULES := "711b73b68b15d571c240c7e4b8c20261ddec790a5db723c2ef1bd2d83f68042b"
 const LEGACY_RULES := "3ecf54fd2e0aedad3127fce24d77cc55ea0f8ffe3bfbf235d2470d233a34231e"
@@ -12,7 +12,7 @@ const RUN_FIELDS := ["phase", "player", "facing", "hp", "elapsed", "kills", "sho
 	"shot_clock", "spawn_clock", "hurt_clock", "skill_clocks", "_resume_phase",
 	"_enemy_serial", "_regen_remainder", "navigation_ticket", "stage", "run_id",
 	"gold_collected", "gold_drop_chance", "_elites_spawned", "_boss_spawned", "_boss_defeated", "checkpoint_index", "end_reason",
-	"account_attack_level", "account_talent_levels", "_damage_reduction_remainder", "_slow_left", "_kill_heal_clock", "_kill_heal_used", "enemies", "bullets", "pickups", "gold_pickups", "enemy_bullets", "_swarm_clock", "_swarm_pending", "_swarm_serial"]
+	"account_attack_level", "account_talent_levels", "_damage_reduction_remainder", "_slow_left", "_kill_heal_clock", "_kill_heal_used", "enemies", "bullets", "pickups", "gold_pickups", "enemy_bullets", "_swarm_clock", "_swarm_pending", "_swarm_serial", "_scatter_clock", "_scatter_index"]
 const GROWTH_FIELDS := ["character_id", "owned", "level", "xp", "pending", "offer", "ticket", "revision"]
 const MAGIC_FIELDS := ["mana", "cooldown_left", "casts", "ticket"]
 
@@ -29,11 +29,13 @@ static func capture(state) -> Dictionary:
 		result.growth[key] = state.growth.get(key)
 	for key in MAGIC_FIELDS:
 		result.magic[key] = state.magic.get(key)
-	for generator in [state.rng, state.growth.rng, state.gold_rng, state.encounter_rng]:
+	for generator in [state.rng, state.growth.rng, state.gold_rng, state.encounter_rng, state.scatter_rng]:
 		result.rng.append({"seed": generator.seed, "state": generator.state})
 	return result.duplicate(true)
 
 static func upgrade_legacy(data: Dictionary, state) -> Dictionary:
+	if data.get("version") == 6 and data.get("rules") == GAME011_RULES:
+		return _upgrade_scatter(data)
 	if data.get("version") == 5 and data.get("rules") == GAME011_RULES:
 		if not data.get("run") is Dictionary:
 			return {}
@@ -106,6 +108,28 @@ static func _upgrade_tree(data: Dictionary) -> Dictionary:
 	data.run._slow_left = 0.0
 	data.run._kill_heal_clock = 0.0
 	data.run._kill_heal_used = 0.0
+	return _upgrade_scatter(data)
+
+static func _upgrade_scatter(data: Dictionary) -> Dictionary:
+	if not data.get("run") is Dictionary or not data.get("rng") is Array or data.rng.size() != 4:
+		return {}
+	if not data.rng[0] is Dictionary or not data.rng[0].get("seed") is int or not data.run.get("stage") is int or not data.run.get("enemies") is Array:
+		return {}
+	var rules: Dictionary = preload("res://scripts/combat/stage_catalog.gd").new().for_stage(data.run.stage)
+	if rules.is_empty():
+		return {}
+	data = data.duplicate(true)
+	data.version = VERSION
+	data.rules = fingerprint()
+	data.run._scatter_clock = float(rules.scatter.interval) # No retroactive packs.
+	data.run._scatter_index = 0
+	for enemy in data.run.enemies:
+		if not enemy is Dictionary:
+			return {}
+		enemy.scatter_group = 0
+	var generator := RandomNumberGenerator.new()
+	generator.seed = int(data.rng[0].seed) ^ 0x5CA77
+	data.rng.append({"seed": generator.seed, "state": generator.state})
 	return data
 
 static func finite_number(value: Variant, minimum: float, maximum: float) -> bool:
@@ -154,6 +178,8 @@ static func valid(data: Dictionary, state) -> bool:
 		return false
 	var rules: Dictionary = state.stage_catalog.for_stage(run.stage)
 	if rules.is_empty() or (run.phase == 6 and (not run._boss_defeated or run.elapsed + 0.000001 < rules.duration)):
+		return false
+	if not finite_number(run._scatter_clock, 0, 1000) or not run._scatter_index is int or run._scatter_index < 0 or run._scatter_index > ceili(float(rules.duration) / float(rules.scatter.interval)):
 		return false
 	if run._boss_spawned and run.elapsed + 0.000001 < float(rules.boss_at):
 		return false
@@ -220,7 +246,7 @@ static func valid(data: Dictionary, state) -> bool:
 	for key in ["casts", "ticket"]:
 		if not magic.get(key) is int or not finite_number(magic[key], 0, 1000000000):
 			return false
-	if not data.get("rng") is Array or data.rng.size() != 4:
+	if not data.get("rng") is Array or data.rng.size() != 5:
 		return false
 	for generator in data.rng:
 		if not generator is Dictionary or not generator.get("seed") is int or not generator.get("state") is int:
@@ -233,11 +259,14 @@ static func valid(data: Dictionary, state) -> bool:
 	return valid_actors(run, state)
 
 static func valid_actors(run: Dictionary, state) -> bool:
-	var swarm: Dictionary = state.stage_catalog.for_stage(run.stage).swarm
+	var rules: Dictionary = state.stage_catalog.for_stage(run.stage)
+	var swarm: Dictionary = rules.swarm
 	# Bounded by encounter interval/lifetime, with room for every legacy live flier.
 	# This validates disk input only; live formations never wait for actor capacity.
 	var flying_cap: int = (ceili(float(swarm.life) / float(swarm.interval)) + 1) * state.SWARM_SIZE + state.MAX_ENEMIES
-	var caps := {"enemies": state.MAX_ENEMIES + flying_cap, "bullets": state.MAX_BULLETS, "pickups": state.MAX_PICKUPS, "gold_pickups": state.MAX_PICKUPS, "enemy_bullets": state.MAX_ENEMY_BULLETS}
+	flying_cap += (ceili(float(swarm.life) / float(rules.scatter.interval)) + 1) * state.SWARM_SIZE
+	var scatter_cap: int = ceili(float(rules.duration) / float(rules.scatter.interval)) * state.SWARM_SIZE
+	var caps := {"enemies": state.MAX_ENEMIES + flying_cap + scatter_cap, "bullets": state.MAX_BULLETS, "pickups": state.MAX_PICKUPS, "gold_pickups": state.MAX_PICKUPS, "enemy_bullets": state.MAX_ENEMY_BULLETS}
 	for key in caps:
 		if not run[key] is Array or run[key].size() > caps[key]:
 			return false
@@ -247,6 +276,8 @@ static func valid_actors(run: Dictionary, state) -> bool:
 	var ids: Dictionary = {}
 	var boss_count := 0
 	var flying_count := 0
+	var ground_count := 0
+	var groups := {}
 	for enemy in run.enemies:
 		if not enemy.get("id") is int or enemy.id <= 0 or enemy.id > run._enemy_serial or ids.has(enemy.id):
 			return false
@@ -261,6 +292,16 @@ static func valid_actors(run: Dictionary, state) -> bool:
 			return false
 		if enemy.kind != "normal" and enemy.variant != "normal":
 			return false
+		if not enemy.get("scatter_group") is int or enemy.scatter_group < 0 or enemy.scatter_group > run._scatter_index:
+			return false
+		if enemy.scatter_group > 0:
+			if enemy.kind != "normal" or enemy.variant != state.SCATTER_VARIANTS[(enemy.scatter_group - 1) % state.SCATTER_VARIANTS.size()]:
+				return false
+			groups[enemy.scatter_group] = int(groups.get(enemy.scatter_group, 0)) + 1
+			if groups[enemy.scatter_group] > state.SWARM_SIZE:
+				return false
+		elif enemy.variant != "flier":
+			ground_count += 1
 		if enemy.variant == "ranged":
 			if not vector(enemy.get("aim")) or not finite_number(enemy.get("fire_clock"), 0, 1000) or not finite_number(enemy.get("windup"), 0, 1000):
 				return false
@@ -272,7 +313,7 @@ static func valid_actors(run: Dictionary, state) -> bool:
 				return false
 		if enemy.kind == "boss":
 			boss_count += 1
-	if flying_count > flying_cap or run.enemies.size() - flying_count > state.MAX_ENEMIES:
+	if flying_count > flying_cap or ground_count > state.MAX_ENEMIES:
 		return false
 	if boss_count > 1 or (run._boss_spawned and not run._boss_defeated and boss_count != 1) or (run._boss_defeated and boss_count != 0):
 		return false
@@ -320,8 +361,8 @@ static func restore(data: Dictionary, state) -> bool:
 	state.magic.reset(state.growth.catalog.characters[state.growth.character_id].active_magic, state.growth.character_id)
 	for key in MAGIC_FIELDS:
 		state.magic.set(key, data.magic[key])
-	var generators := [state.rng, state.growth.rng, state.gold_rng, state.encounter_rng]
-	for index in range(4):
+	var generators := [state.rng, state.growth.rng, state.gold_rng, state.encounter_rng, state.scatter_rng]
+	for index in range(generators.size()):
 		generators[index].seed = data.rng[index].seed
 		generators[index].state = data.rng[index].state
 	state.stage_rules = state.stage_catalog.for_stage(state.stage)

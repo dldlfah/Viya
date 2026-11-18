@@ -63,6 +63,12 @@
       "speed": 360.0,
       "life": 5.0,
       "spacing": 22.0
+    },
+    "scatter": {
+      "interval": 12.0,
+      "spacing": 80.0,
+      "jitter": 12.0,
+      "approach": 590.0
     }
   },
   "overrides": {}

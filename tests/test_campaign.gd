@@ -11,6 +11,15 @@ static func comparable(state) -> Dictionary:
 	data.magic.erase("ticket")
 	return data
 
+static func pre_scatter(data: Dictionary) -> Dictionary:
+	# Recreate the old four-stream payload before selecting its historical version.
+	data = data.duplicate(true)
+	data.rules = Snapshot.GAME011_RULES
+	data.rng.resize(4)
+	data.run.erase("_scatter_clock")
+	data.run.erase("_scatter_index")
+	return data
+
 static func run(host, verify: Callable) -> void:
 	var state = RunState.new()
 	verify.call(state.start(123), "Data-driven campaign starts")

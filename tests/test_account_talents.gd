@@ -93,7 +93,7 @@ static func combat_checks(verify: Callable) -> void:
 	verify.call(Snapshot.restore(Snapshot.capture(state), restored) and restored.account_attack_level == 2 and restored.magic.mana == 23.5, "Battle snapshot retains the departure talent and spent MP")
 	restored.set_paused(false)
 	verify.call(Campaign.comparable(state) == Campaign.comparable(restored), "Restored bonus does not alter actors, resources, offers or RNG")
-	var legacy: Dictionary = Snapshot.capture(state)
+	var legacy: Dictionary = Campaign.pre_scatter(Snapshot.capture(state))
 	legacy.version = 3
 	legacy.rules = Snapshot.GAME011_RULES
 	legacy.run.erase("account_attack_level")

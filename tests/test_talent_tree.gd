@@ -17,6 +17,7 @@ static func quiet(levels: Dictionary):
 	var state = RunState.new()
 	state.start(1400, "viya", levels)
 	state.spawn_clock = 999.0
+	state._scatter_clock = 999.0
 	state.shot_clock = 999.0
 	state.stage_rules.swarm.chance = 0.0
 	state.gold_drop_chance = 0.0
@@ -187,7 +188,7 @@ static func recovery_checks(verify: Callable) -> void:
 		restored.step(0.05, Vector2.RIGHT)
 		same = same and Campaign.comparable(state) == Campaign.comparable(restored)
 	verify.call(same and state._slow_left == 0.0, "Restored slow expires at the same time while moving/healing and regenerating boosted mana")
-	var old: Dictionary = Snapshot.capture(quiet(Talents.from_attack(2)))
+	var old: Dictionary = Campaign.pre_scatter(Snapshot.capture(quiet(Talents.from_attack(2))))
 	old.version = 5
 	var roots := {}
 	for id in Talents.ROOT_IDS:

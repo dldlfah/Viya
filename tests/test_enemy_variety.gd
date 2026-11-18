@@ -8,6 +8,7 @@ static func quiet(seed_value: int = 71):
 	var state = RunState.new()
 	state.start(seed_value)
 	state.spawn_clock = 999.0
+	state._scatter_clock = 999.0
 	state.shot_clock = 999.0
 	return state
 
@@ -187,7 +188,7 @@ static func legacy_checks(store, verify: Callable) -> void:
 	var old = quiet()
 	old.add_enemy(old.player + Vector2(150, 0))
 	old.enemies[0].hp = 9
-	var legacy: Dictionary = Snapshot.capture(old)
+	var legacy: Dictionary = Campaign.pre_scatter(Snapshot.capture(old))
 	legacy.version = 1
 	legacy.rules = Snapshot.LEGACY_RULES
 	legacy.magic.mana = 53.5
@@ -199,7 +200,7 @@ static func legacy_checks(store, verify: Callable) -> void:
 		enemy.erase("variant")
 	store.write_snapshot(legacy)
 	var restored = quiet(75)
-	verify.call(store.load_saved(restored) == OK and store.pending.version == 6, "Published GAME-009 snapshots migrate through the real file loader")
+	verify.call(store.load_saved(restored) == OK and store.pending.version == 7, "Published GAME-009 snapshots migrate through the real file loader")
 	verify.call(Snapshot.restore(store.pending, restored) and restored.enemies[0].hp == 9 and restored.enemies[0].max_hp == 20, "Migration preserves living enemies and their actual damage")
 	verify.call(restored.magic.mana == 53.5 and restored.magic.cooldown_left == 0.0, "GAME-009 migration removes the old cooldown without refilling MP")
 	verify.call(restored.growth.owned == old.growth.owned and restored.rng.state == old.rng.state and restored.growth.rng.state == old.growth.rng.state and restored.gold_rng.state == old.gold_rng.state, "Migration preserves skills and all three existing RNG streams")
@@ -208,12 +209,12 @@ static func legacy_checks(store, verify: Callable) -> void:
 	for fingerprint in Snapshot.LEGACY_FINGERPRINTS:
 		legacy.rules = fingerprint
 		var migrated: Dictionary = Snapshot.upgrade_legacy(legacy, restored)
-		verify.call(migrated.version == 6 and Snapshot.valid(migrated, restored), "GAME-009 migration accepts the published data's LF/CRLF line-ending fingerprints")
+		verify.call(migrated.version == 7 and Snapshot.valid(migrated, restored), "GAME-009 migration accepts the published data's LF/CRLF line-ending fingerprints")
 	old = quiet()
 	old._spawn_swarm()
 	for index in range(10):
 		old.enemies.pop_back() # Actual twenty-member GAME-010 formation.
-	legacy = Snapshot.capture(old)
+	legacy = Campaign.pre_scatter(Snapshot.capture(old))
 	legacy.version = 2
 	legacy.rules = Snapshot.GAME010_RULES
 	legacy.magic.mana = 21.5

@@ -82,7 +82,12 @@ static func valid(rules: Dictionary) -> bool:
 			return false
 	if float(rules.swarm.speed) * float(rules.swarm.life) > 50000.0 or float(rules.ranged.bullet_speed) * float(rules.ranged.bullet_life) > 50000.0:
 		return false
-	return number(rules.swarm.get("chance"), 0, 1)
+	if not number(rules.swarm.get("chance"), 0, 1) or not rules.get("scatter") is Dictionary:
+		return false
+	for entry in [["interval", 8, 120], ["spacing", 72, 96], ["jitter", 0, 12], ["approach", 500, 700]]:
+		if not number(rules.scatter.get(entry[0]), entry[1], entry[2]):
+			return false
+	return float(rules.scatter.jitter) <= float(rules.scatter.spacing) * 0.15
 
 static func number(value: Variant, minimum: float, maximum: float) -> bool:
 	return value is float and is_finite(value) and value >= minimum and value <= maximum
