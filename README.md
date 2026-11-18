@@ -4,7 +4,7 @@
 
 ## 다음 세션 필수 문서
 
-**[CURRENT_WORK](docs/CURRENT_WORK.md)와 [누적 DEVELOPMENT_STATUS](docs/DEVELOPMENT_STATUS.md)를 함께 읽는다.** [PLANNED_WORK](docs/PLANNED_WORK.md) · [NEXT_TASK](docs/NEXT_TASK.md) · [AGENTS](AGENTS.md) · [제작 스킬](.agents/skills/viya-game-production/SKILL.md). 캐릭터 수집/성급의 확정·잠정 기획은 PLANNED6절이며 실제 계정 특성과 구분한다.
+**[CURRENT_WORK](docs/CURRENT_WORK.md)와 [누적 DEVELOPMENT_STATUS](docs/DEVELOPMENT_STATUS.md)를 함께 읽는다.** [PLANNED_WORK](docs/PLANNED_WORK.md) · [NEXT_TASK](docs/NEXT_TASK.md) · [AGENTS](AGENTS.md) · [제작 스킬](.agents/skills/viya-game-production/SKILL.md). 캐릭터 수집/성급 기획은 PLANNED6절, 후속18종 트리/선행 잠금은7절이며 현재6종 구현과 구분한다.
 
 활성 브랜치 `work/viya-turnaround-qa-20261117`, GAME-013 코드 기준 **`f7ae9dbd0eace9d82ac4f0b610c500fb80ac9348`**. 문서 커밋은 뒤에 오므로 원격 HEAD를 다시 확인한다. main 자동 병합은 하지 않는다.
 

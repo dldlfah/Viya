@@ -845,5 +845,9 @@
   "balance": "No new six-minute/talent economy or completion-rate measurement. Prior GAME011 growth14-17 vs10-12 goal remains historical FAIL evidence; this feature does not claim to resolve it.",
   "mobile_devices": "NOT_VERIFIED",
   "windows_f5": "NOT_VERIFIED",
-  "fps_and_player_balance": "NOT_VERIFIED"
+  "fps_and_player_balance": "NOT_VERIFIED",
+  "concurrent_planning_merge": {
+    "remote_head": "ea2e2ae86cc3ede827fd5b10add8a21c427c4aa2",
+    "scope": "Merged the two concurrent user planning commits after the first push was rejected. Only GAME_DESIGN_BASELINE and PLANNED changed. Preserved all collection/18-talent/prerequisite/economy planning; added current six-talent implementation clarification. No extra12 talents or prerequisite gameplay implemented. Runtime/test/data/tool sources still exactly match tested f7ae9db."
+  }
 }
