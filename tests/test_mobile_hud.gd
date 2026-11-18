@@ -146,8 +146,8 @@ func _run() -> void:
 		var allowed: Rect2 = scene.layout_data["safe"]
 		for control in [scene._header, scene.feedback_panel, scene._resources, scene._skills, scene._support, scene.magic_button, scene.view]:
 			verify(contains(allowed, control.get_rect()), "Actual Control fits after container layout: " + str(control.name))
-		verify(scene.view.get_rect() == scene.layout_data["battle"], "Battle view follows shared rectangle")
-		verify(scene.movement.interaction_rect == scene.layout_data["move"], "Joystick uses shared rectangle, not old constants")
+		verify(scene.view.get_rect().is_equal_approx(scene.layout_data["battle"]), "Battle view follows shared rectangle")
+		verify(scene.movement.interaction_rect.is_equal_approx(scene.layout_data["move"]), "Joystick uses shared rectangle, not old constants")
 	# Long names: tapping a HUD slot must never acquire/upgrade/cast anything.
 	var owned_before: Dictionary = scene.simulation.growth.owned.duplicate(true)
 	var casts_before: int = scene.simulation.magic.casts

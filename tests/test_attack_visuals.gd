@@ -25,6 +25,7 @@ static func _snapshot(state) -> String:
 		state.growth.ticket, state.growth.revision, state.magic.config, state.magic.mana,
 		state.magic.cooldown_left, state.magic.ticket, state.magic.casts,
 		state.navigation_ticket, state.transition_action, state.result_summary(),
+		state.gold_pickups, state.gold_collected, state.gold_rng.state,
 		state.cues.snapshot(), state.feedback.snapshot(state.hp, state.max_hp)])
 
 static func run(scene, verify: Callable) -> void:

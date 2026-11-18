@@ -2,6 +2,9 @@ extends Control
 ## Debug shapes are deliberately not final Viya character art.
 const AttackVisuals = preload("res://scripts/combat/attack_visuals.gd")
 var simulation
+var show_damage: bool = true
+var show_xp: bool = true
+var simple_attacks: bool = false
 
 func _ready() -> void:
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -29,17 +32,25 @@ func _draw() -> void:
 		if Rect2(Vector2.ZERO, size).grow(30).has_point(at):
 			draw_circle(at + Vector2(0, 5), 21, Color(0, 0, 0, 0.4))
 			var flash: float = simulation.cues.flash_alpha(int(enemy["id"]))
-			var enemy_color: Color = Color("aa5364").lerp(Color("fff1db"), flash)
+			var kind: String = str(enemy.get("kind", "normal"))
+			var base: Color = {"normal": Color("aa5364"), "elite": Color("d6a65d"), "boss": Color("b66ad6")}[kind]
+			var enemy_color: Color = base.lerp(Color("fff1db"), flash)
 			draw_colored_polygon(PackedVector2Array([at + Vector2(0, -20), at + Vector2(19, 13), at + Vector2(-19, 13)]), enemy_color)
+			if kind != "normal":
+				draw_arc(at, 25.0 if kind == "elite" else 29.0, 0.0, TAU, 24, base, 3.0, true)
 			draw_rect(Rect2(at + Vector2(-18, -29), Vector2(36, 4)), Color("302b2e"))
-			draw_rect(Rect2(at + Vector2(-18, -29), Vector2(36.0 * enemy["hp"] / 20.0, 4)), Color("d98a8d"))
+			draw_rect(Rect2(at + Vector2(-18, -29), Vector2(36.0 * enemy["hp"] / float(enemy.get("max_hp", 20)), 4)), Color("d98a8d"))
+	for gold in simulation.gold_pickups:
+		var at := _screen(gold["p"])
+		draw_circle(at, 7.0, Color("edbc54"))
+		draw_arc(at, 4.0, 0.0, TAU, 12, Color("fff0b3"), 1.2, true)
 	for bullet in simulation.bullets:
 		var at := _screen(bullet["p"])
-		AttackVisuals.draw_projectile(self, at, bullet["direction"], str(bullet.get("source", "rifle")))
+		AttackVisuals.draw_projectile(self, at, bullet["direction"], str(bullet.get("source", "rifle")), simple_attacks)
 	for effect in simulation.effects:
 		var effect_at: Vector2 = _screen(effect["p"])
 		var link_from: Vector2 = _screen(effect.get("from", effect["p"]))
-		AttackVisuals.draw_effect(self, effect_at, effect, link_from)
+		AttackVisuals.draw_effect(self, effect_at, effect, link_from, simple_attacks)
 	var center := size * 0.5
 	var direction: Vector2 = simulation.facing
 	draw_circle(center + Vector2(0, 8), 23, Color(0, 0, 0, 0.5))
@@ -66,6 +77,8 @@ func _draw_combat_cues() -> void:
 		if kind == "kill":
 			var ring := Color("d98a8d", fraction)
 			draw_arc(at, 12.0 + progress * 15.0, 0.0, TAU, 16, ring, 2.0, true)
+			continue
+		if (kind == "xp" and not show_xp) or (kind == "hit" and not show_damage):
 			continue
 		if font == null:
 			continue

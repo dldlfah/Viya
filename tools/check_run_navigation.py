@@ -71,7 +71,7 @@ def validate(sources: dict[str, str]) -> list[str]:
         ('growth.pending = 0', function(run, '_finish_run')),
         ('navigation_ticket += 1', function(run, 'start')),
         ('_finished_result.clear()', function(run, 'start')),
-        ('phase not in [Phase.DEFEAT, Phase.ABANDONED]', function(run, 'return_to_ready')),
+        ('phase not in [Phase.DEFEAT, Phase.ABANDONED, Phase.CLEARED]', function(run, 'return_to_ready')),
         ('phase = Phase.READY', function(run, 'return_to_ready')),
         ('extends "res://scripts/main.gd"', ui),
         ('child.pressed.disconnect(begin_run)', function(ui, '_show_menu')),

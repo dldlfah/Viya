@@ -39,6 +39,7 @@ func gameplay_snapshot(state) -> String:
 		state.growth.revision, state.skill_clocks, state.stats, state.magic.mana,
 		state.magic.cooldown_left, state.magic.ticket, state.magic.casts,
 		state.navigation_ticket, state.transition_action, state.result_summary(),
+		state.gold_pickups, state.gold_collected, state.gold_rng.state,
 		state.feedback.snapshot(state.hp, state.max_hp)])
 
 func frozen_cues(state, description: String) -> void:
@@ -184,6 +185,7 @@ func _run() -> void:
 	scene.begin_run()
 	verify(scene.simulation.cues.events.is_empty(), "Active UI restart clears the presentation state")
 	await AttackChecks.run(scene, verify)
+	await preload("res://tests/test_gold_settings.gd").run(scene, verify)
 	scene.queue_free()
 	await process_frame
 	await process_frame

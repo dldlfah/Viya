@@ -28,13 +28,16 @@ static func effect_style(kind: String) -> Dictionary:
 			return {"shape": "ultimate", "color": Color("f46caa")}
 	return {"shape": "ring", "color": Color("e3b66f")}
 
-static func draw_projectile(canvas: CanvasItem, at: Vector2, direction: Vector2, source: String) -> void:
+static func draw_projectile(canvas: CanvasItem, at: Vector2, direction: Vector2, source: String, simplified: bool = false) -> void:
 	var style: Dictionary = projectile_style(source)
 	var color: Color = style["color"]
 	var d: Vector2 = direction.normalized()
 	if d.is_zero_approx():
 		d = Vector2.RIGHT
 	var normal: Vector2 = d.orthogonal()
+	if simplified:
+		canvas.draw_line(at - d * 12.0, at, color, 2.0, true)
+		return
 	# Silhouette sizes are cosmetic, never collision radii or damage ranges.
 	match str(style["shape"]):
 		"pellet":
@@ -55,7 +58,7 @@ static func draw_projectile(canvas: CanvasItem, at: Vector2, direction: Vector2,
 		_:
 			canvas.draw_line(at - d * 12.0, at, color, 4.0, true)
 
-static func draw_effect(canvas: CanvasItem, at: Vector2, effect: Dictionary, link_from: Vector2) -> void:
+static func draw_effect(canvas: CanvasItem, at: Vector2, effect: Dictionary, link_from: Vector2, simplified: bool = false) -> void:
 	var style: Dictionary = effect_style(str(effect.get("kind", "")))
 	var duration: float = float(effect.get("duration", 0.25))
 	if duration <= 0.0 or not is_finite(duration):
@@ -78,6 +81,9 @@ static func draw_effect(canvas: CanvasItem, at: Vector2, effect: Dictionary, lin
 	if radius <= 0.0 or not is_finite(radius):
 		return
 	if shape == "segmented":
+		if simplified:
+			canvas.draw_arc(at, radius, 0.0, TAU, 48, color, 2.5, true)
+			return
 		# All segments lie on the committed damage boundary. No filled screen wash.
 		for n in range(12):
 			var start: float = float(n) * TAU / 12.0
@@ -86,6 +92,8 @@ static func draw_effect(canvas: CanvasItem, at: Vector2, effect: Dictionary, lin
 		return
 	# The full outer ring always uses the real burst center and radius.
 	canvas.draw_arc(at, radius, 0.0, TAU, 64, color, 5.0 if shape == "ultimate" else 3.0, true)
+	if simplified and shape != "ultimate":
+		return
 	match shape:
 		"blast":
 			for n in range(8):

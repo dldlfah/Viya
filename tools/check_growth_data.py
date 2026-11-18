@@ -68,8 +68,11 @@ def check() -> dict:
         if f'"{effect}":' not in run:
             errors.append(f'missing offensive handler: {effect}')
     for effect in PASSIVE_EFFECTS:
-        if f'_effect_rank("{effect}")' not in run:
+        if f'int(ranks.get("{effect}", 0))' not in run:
             errors.append(f'missing passive integration: {effect}')
+    for marker in ('var profile: Dictionary = stats_profile(growth.owned)', 'stats = profile["stats"]'):
+        if marker not in run:
+            errors.append('missing shared passive profile connection: ' + marker)
     for text, source in [('expected_ticket != ticket', growth), ('rng.randi_range(0, i)', growth),
                          ('RunState.Phase.CHOOSING', ui), ('_choose_skill.bind(id, last_ticket)', ui),
                          ('growth.select(id, ticket)', run), ('add_pickup(enemies[i]["p"])', run),

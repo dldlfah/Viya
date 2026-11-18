@@ -4,6 +4,7 @@ const BattleView = preload("res://scripts/combat/battle_view.gd")
 const MoveInput = preload("res://scripts/ui/move_input.gd")
 const FeedbackPanel = preload("res://scripts/ui/feedback_panel.gd")
 const SkillPreview = preload("res://scripts/ui/skill_preview.gd")
+const GoldProgress = preload("res://scripts/progression/gold_progress.gd")
 
 var simulation = RunState.new()
 var view
@@ -34,10 +35,21 @@ var volume: float = 0.7
 var last_phase: int = -1
 var last_ticket: int = -1
 var _slot_revision: int = -1
+var gold_progress = GoldProgress.new()
+var gold_error: Error = OK
+var settings_path: String = "user://viya_settings.cfg"
+var show_damage: bool = true
+var show_xp: bool = true
+var simple_attacks: bool = false
+var settings_message: Label
+var settings_error: Error = OK
 
 func _ready() -> void:
 	_load_settings()
+	gold_error = gold_progress.load_progress()
 	_build_interface()
+	for key in ["show_damage", "show_xp", "simple_attacks"]:
+		view.set(key, get(key))
 	_show_menu("ready")
 	_update_hud()
 
@@ -56,6 +68,8 @@ func _sync_phase_ui() -> void:
 		last_phase = simulation.phase
 		if simulation.phase == RunState.Phase.DEFEAT:
 			_show_menu("defeat")
+		elif simulation.phase == RunState.Phase.CLEARED:
+			_show_menu("cleared")
 	if simulation.phase == RunState.Phase.CHOOSING:
 		if changed or last_ticket != simulation.growth.ticket:
 			_show_levelup()
@@ -113,10 +127,13 @@ func _notification(what: int) -> void:
 			pause_game()
 
 func begin_run() -> void:
+	if not _can_start_rewarded_run():
+		return
 	_magic_touch_id = -1
 	if not simulation.start():
 		push_error("Invalid character skill catalog; run not started")
 		return
+	simulation.stage = gold_progress.next_stage
 	movement.clear_input()
 	movement.set_enabled(true)
 	overlay.hide()
@@ -301,6 +318,7 @@ func _add_slots(parent: VBoxContainer, title: String, target: Array[Label]) -> v
 		target.append(slot)
 
 func _clear_dialog() -> void:
+	settings_message = null
 	choice_buttons.clear()
 	feedback_overlay_label = null
 	result_summary_label = null
@@ -382,6 +400,7 @@ func _show_menu(kind: String) -> void:
 		dialog_body.add_child(_label("18종 후보 / 임시 장착 공격4·패시브4 / 요구 경험치 3배\n고유 마법: 오른쪽 버튼 또는 F / 서포터 효과는 미구현", 17))
 		start_button = _button("출격", begin_run)
 		dialog_body.add_child(start_button)
+		_add_gold_status()
 	elif kind == "paused":
 		dialog_body.add_child(_label("일시정지 / 환경설정", 30))
 		dialog_body.add_child(_label("선택·마력·반응 시간이 그대로 보존됩니다.", 18))
@@ -395,6 +414,7 @@ func _show_menu(kind: String) -> void:
 		slider.custom_minimum_size.y = 36
 		slider.value_changed.connect(_set_volume)
 		dialog_body.add_child(slider)
+		_add_display_settings()
 		resume_button = _button("계속하기", resume_game)
 		dialog_body.add_child(resume_button)
 		dialog_body.add_child(_button("새 전투 시작", begin_run))
@@ -405,8 +425,19 @@ func _show_menu(kind: String) -> void:
 			summary["level"], summary["elapsed"], summary["kills"],
 			summary["shots"], summary["magic_casts"]], 22)
 		dialog_body.add_child(result_summary_label)
+		if kind == "cleared":
+			gold_error = gold_progress.settle(summary)
+			result_summary_label.text += "\n기본 보상 %d + 획득 금화 %d = 총 %d 금화\n보유 금화 %d" % [summary["gold_bonus"], summary["gold_collected"], summary["gold_reward"], gold_progress.total]
+			if gold_error != OK:
+				dialog_body.add_child(_label("금화 저장 실패 · %s" % error_string(gold_error), 18))
+				dialog_body.add_child(_button("금화 저장 재시도", _retry_gold_save))
+		else:
+			result_summary_label.text += "\n획득 금화 %d · 클리어 보상 미지급\n보유 금화 %d" % [summary["gold_collected"], gold_progress.total]
 		_add_feedback_banner()
 		start_button = _button("다시 출격", begin_run)
+		if kind == "cleared":
+			start_button.text = "다음 스테이지"
+			start_button.disabled = gold_error != OK
 		dialog_body.add_child(start_button)
 	overlay.show()
 
@@ -414,7 +445,8 @@ func _update_hud() -> void:
 	health.max_value = simulation.max_hp
 	health.value = simulation.hp
 	var seconds := int(simulation.elapsed)
-	stats_text.text = "%02d:%02d | 처치 %d | 적 %d/%d" % [int(seconds / 60.0), seconds % 60, simulation.kills, simulation.enemies.size(), RunState.MAX_ENEMIES]
+	stats_text.text = "S%d %02d:%02d | 처치 %d | 금화 %d" % [simulation.stage, int(seconds / 60.0), seconds % 60, simulation.kills, simulation.gold_collected]
+	stats_text.tooltip_text = "보유 금화 %d · 스테이지 금화 %d\n%.0f초 생존 후 보스 처치 시 클리어" % [gold_progress.total, simulation.gold_collected, simulation.stage_duration]
 	status_text.text = "HP %d / %d%s" % [simulation.hp, simulation.max_hp, " · 피격" if simulation.hurt_clock > 0.0 else ""]
 	level_text.text = "Lv.%d  EXP %.1f / %.0f" % [simulation.growth.level, simulation.growth.xp, simulation.growth.threshold()]
 	experience.max_value = simulation.growth.threshold()
@@ -465,18 +497,85 @@ func _set_volume(value: float) -> void:
 	volume = clampf(value, 0.0, 1.0)
 	AudioServer.set_bus_volume_db(0, linear_to_db(maxf(volume, 0.0001)))
 	AudioServer.set_bus_mute(0, volume == 0.0)
-	var config := ConfigFile.new()
-	config.set_value("audio", "master", volume)
-	var result := config.save("user://viya_settings.cfg")
-	if result != OK:
-		push_warning("Could not save Viya settings: %d" % result)
+	_save_settings()
 
 func _load_settings() -> void:
+	volume = 0.7
+	show_damage = true
+	show_xp = true
+	simple_attacks = false
 	var config := ConfigFile.new()
-	if config.load("user://viya_settings.cfg") == OK:
-		volume = clampf(float(config.get_value("audio", "master", 0.7)), 0.0, 1.0)
+	if config.load(settings_path) == OK:
+		var saved_volume: Variant = config.get_value("audio", "master", 0.7)
+		if (saved_volume is float or saved_volume is int) and is_finite(float(saved_volume)):
+			volume = clampf(float(saved_volume), 0.0, 1.0)
+		for key in ["show_damage", "show_xp", "simple_attacks"]:
+			var saved: Variant = config.get_value("display", key, key != "simple_attacks")
+			set(key, saved if saved is bool else key != "simple_attacks")
 	AudioServer.set_bus_volume_db(0, linear_to_db(maxf(volume, 0.0001)))
 	AudioServer.set_bus_mute(0, volume == 0.0)
+
+func _save_settings() -> void:
+	var config := ConfigFile.new()
+	settings_error = config.load(settings_path)
+	if settings_error not in [OK, ERR_FILE_NOT_FOUND]:
+		_update_settings_message()
+		return
+	config.set_value("audio", "master", volume)
+	for key in ["show_damage", "show_xp", "simple_attacks"]:
+		config.set_value("display", key, get(key))
+	settings_error = config.save(settings_path + ".tmp")
+	if settings_error == OK:
+		settings_error = DirAccess.rename_absolute(ProjectSettings.globalize_path(settings_path + ".tmp"), ProjectSettings.globalize_path(settings_path))
+	_update_settings_message()
+
+func _add_display_settings() -> void:
+	for entry in [["show_damage", "피해 숫자 표시"], ["show_xp", "XP 획득 문구 표시"], ["simple_attacks", "공격 장식 간소화"]]:
+		var toggle := CheckBox.new()
+		toggle.name = str(entry[0])
+		toggle.text = str(entry[1])
+		toggle.custom_minimum_size.y = 44
+		toggle.button_pressed = bool(get(entry[0]))
+		toggle.toggled.connect(_set_display_option.bind(str(entry[0])))
+		dialog_body.add_child(toggle)
+	settings_message = _label("", 16)
+	dialog_body.add_child(settings_message)
+	_update_settings_message()
+
+func _set_display_option(value: bool, key: String) -> void:
+	if key not in ["show_damage", "show_xp", "simple_attacks"]:
+		return
+	set(key, value)
+	view.set(key, value)
+	view.queue_redraw()
+	_save_settings()
+
+func _update_settings_message() -> void:
+	if is_instance_valid(settings_message):
+		settings_message.text = "설정은 변경 시 자동 저장됩니다." if settings_error == OK else "설정 저장 실패 · %s" % error_string(settings_error)
+
+func _add_gold_status() -> void:
+	dialog_body.add_child(_label("보유 금화 %d · 다음 스테이지 %d" % [gold_progress.total, gold_progress.next_stage], 19))
+	if gold_error != OK:
+		start_button.disabled = true
+		dialog_body.add_child(_label("금화 파일 불러오기 실패 · %s" % error_string(gold_error), 17))
+		dialog_body.add_child(_button("금화 불러오기 재시도", _retry_gold_load))
+
+func _retry_gold_load() -> void:
+	if simulation.phase != RunState.Phase.READY:
+		return
+	gold_error = gold_progress.load_progress()
+	_show_menu("ready")
+
+func _retry_gold_save() -> void:
+	if simulation.phase != RunState.Phase.CLEARED:
+		return
+	_show_menu("cleared")
+
+func _can_start_rewarded_run() -> bool:
+	if not gold_progress.loaded or (simulation.phase == RunState.Phase.CLEARED and gold_error != OK):
+		return false
+	return true
 
 
 func _add_feedback_banner() -> void:

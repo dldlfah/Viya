@@ -245,7 +245,7 @@ func _clear_dialog() -> void:
 
 func _show_menu(kind: String) -> void:
 	_overview_open = false
-	if kind in ["defeat", "abandoned"] and _final_growth.is_empty():
+	if kind in ["defeat", "abandoned", "cleared"] and _final_growth.is_empty():
 		_final_growth = GrowthOverview.capture(simulation)
 	_modal_kind = kind
 	_detail_open = false
@@ -266,11 +266,13 @@ func _show_menu(kind: String) -> void:
 		resume_button.pressed.connect(_resume_from_menu.bind(ticket, revision))
 		leave_button = _button("전투 포기 · 결과 확인", _request_transition.bind("leave", ticket, revision))
 		dialog_body.add_child(leave_button)
-	elif kind in ["defeat", "abandoned"]:
+	elif kind in ["defeat", "abandoned", "cleared"]:
 		var heading: Label = dialog_body.get_child(0) as Label
-		heading.text = "전투 포기" if kind == "abandoned" else "전투 종료 · 패배"
-		dialog_body.add_child(_label("직접 전투를 종료했습니다. HP 소진 패배와 구분됩니다." if kind == "abandoned" else "체력이 모두 소진되었습니다.", 17))
+		heading.text = {"abandoned": "전투 포기", "defeat": "전투 종료 · 패배", "cleared": "스테이지 %d 클리어" % simulation.stage}[kind]
+		if kind != "cleared":
+			dialog_body.add_child(_label("직접 전투를 종료했습니다. HP 소진 패배와 구분됩니다." if kind == "abandoned" else "체력이 모두 소진되었습니다.", 17))
 		lobby_button = _button("출격 대기로", _return_to_lobby.bind(ticket, revision))
+		lobby_button.disabled = kind == "cleared" and gold_error != OK
 		dialog_body.add_child(lobby_button)
 	elif kind == "ready":
 		var heading: Label = dialog_body.get_child(0) as Label
@@ -372,9 +374,12 @@ func _close_skill_detail(expected_ticket: int, expected_revision: int) -> void:
 
 func begin_run() -> void:
 	# Internal new-run operation; production menu callbacks validate tickets first.
+	if not _can_start_rewarded_run():
+		return
 	if not simulation.start(0, simulation.growth.character_id):
 		push_error("Invalid character data; current run retained")
 		return
+	simulation.stage = gold_progress.next_stage
 	_after_run_started()
 
 func _after_run_started() -> void:
@@ -399,7 +404,7 @@ func _menu_matches(ticket: int, revision: int) -> bool:
 func _start_from_menu(ticket: int, revision: int) -> void:
 	if not _menu_matches(ticket, revision):
 		return
-	if simulation.phase not in [RunState.Phase.READY, RunState.Phase.DEFEAT, RunState.Phase.ABANDONED]:
+	if simulation.phase not in [RunState.Phase.READY, RunState.Phase.DEFEAT, RunState.Phase.ABANDONED, RunState.Phase.CLEARED]:
 		return
 	begin_run()
 
@@ -466,6 +471,8 @@ func _confirm_transition(ticket: int, revision: int) -> void:
 		_update_hud()
 
 func _return_to_lobby(ticket: int, revision: int) -> void:
+	if simulation.phase == RunState.Phase.CLEARED and gold_error != OK:
+		return
 	if not _menu_matches(ticket, revision) or not simulation.return_to_ready(ticket):
 		return
 	_magic_touch_id = -1
@@ -541,11 +548,11 @@ func pause_game() -> void:
 	super.pause_game()
 
 func _add_growth_access(origin: String) -> void:
-	if origin not in ["paused", "choosing", "defeat", "abandoned", "ready"]:
+	if origin not in ["paused", "choosing", "defeat", "abandoned", "ready", "cleared"]:
 		return
 	if origin == "ready" and _final_growth.is_empty():
 		return
-	var is_final: bool = origin in ["defeat", "abandoned", "ready"]
+	var is_final: bool = origin in ["defeat", "abandoned", "ready", "cleared"]
 	var data: Dictionary = _final_growth if is_final else GrowthOverview.capture(simulation)
 	if data.is_empty():
 		return
@@ -559,9 +566,9 @@ func _open_growth_overview(origin: String, ticket: int, revision: int) -> void:
 		return
 	if origin != _modal_kind or not simulation.transition_action.is_empty():
 		return
-	if origin not in ["paused", "choosing", "defeat", "abandoned", "ready"]:
+	if origin not in ["paused", "choosing", "defeat", "abandoned", "ready", "cleared"]:
 		return
-	var is_final: bool = origin in ["defeat", "abandoned", "ready"]
+	var is_final: bool = origin in ["defeat", "abandoned", "ready", "cleared"]
 	if is_final and _final_growth.is_empty():
 		return
 	if origin == "choosing":

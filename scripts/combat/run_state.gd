@@ -4,7 +4,7 @@ const Growth = preload("res://scripts/progression/growth_state.gd")
 const MagicState = preload("res://scripts/combat/magic_state.gd")
 const FeedbackState = preload("res://scripts/combat/feedback_state.gd")
 const CombatCues = preload("res://scripts/combat/combat_cues.gd")
-enum Phase { READY, RUNNING, PAUSED, DEFEAT, CHOOSING, ABANDONED }
+enum Phase { READY, RUNNING, PAUSED, DEFEAT, CHOOSING, ABANDONED, CLEARED }
 const WORLD_SIZE := Vector2(1800.0, 1200.0)
 const PLAYER_SPEED := 235.0
 const PLAYER_RADIUS := 17.0
@@ -48,6 +48,17 @@ var _regen_remainder: float = 0.0
 var navigation_ticket: int = 0
 var transition_action: String = ""
 var _finished_result: Dictionary = {}
+# Provisional stage length, probability and base bonus. Gold ranges are fixed.
+var stage_duration: float = 90.0
+var gold_drop_chance: float = 0.3
+var stage_clear_gold: int = 100
+var stage: int = 1
+var gold_collected: int = 0
+var gold_pickups: Array[Dictionary] = []
+var gold_rng := RandomNumberGenerator.new()
+var run_id: String = ""
+var _elites_spawned: int = 0
+var _boss_spawned: bool = false
 
 func start(seed_value: int = 0, character_id: String = "viya") -> bool:
 	# Validate the complete selected character before changing the previous run.
@@ -70,6 +81,12 @@ func start(seed_value: int = 0, character_id: String = "viya") -> bool:
 		rng.seed = seed_value
 	if not growth.reset(character_id, int(rng.seed) ^ 0x51A7):
 		return false
+	gold_rng.seed = int(rng.seed) ^ 0x601D
+	run_id = Crypto.new().generate_random_bytes(16).hex_encode()
+	gold_collected = 0
+	gold_pickups.clear()
+	_elites_spawned = 0
+	_boss_spawned = false
 	magic.reset(candidate, character_id)
 	feedback.reset()
 	cues.reset()
@@ -122,11 +139,12 @@ func damage_player(amount: int) -> bool:
 		feedback.trigger("hurt")
 	return true
 
-func add_enemy(at: Vector2) -> bool:
-	if enemies.size() >= MAX_ENEMIES:
+func add_enemy(at: Vector2, kind: String = "normal") -> bool:
+	if enemies.size() >= MAX_ENEMIES or kind not in ["normal", "elite", "boss"]:
 		return false
 	_enemy_serial += 1
-	enemies.append({"id": _enemy_serial, "p": at, "hp": 20})
+	var life: int = {"normal": 20, "elite": 100, "boss": 600}[kind]
+	enemies.append({"id": _enemy_serial, "p": at, "hp": life, "max_hp": life, "kind": kind})
 	return true
 
 func add_pickup(at: Vector2, value: float = 5.0) -> void:
@@ -257,7 +275,12 @@ func step(delta: float, direction: Vector2) -> void:
 	if phase != Phase.RUNNING:
 		return
 	spawn_clock -= dt
-	if spawn_clock <= 0.0:
+	if elapsed >= stage_duration and not _boss_spawned:
+		_boss_spawned = _spawn_enemy("boss")
+	elif _elites_spawned < 2 and elapsed >= stage_duration * float(_elites_spawned + 1) / 3.0:
+		if _spawn_enemy("elite"):
+			_elites_spawned += 1
+	if spawn_clock <= 0.0 and elapsed < stage_duration:
 		_spawn_enemy()
 		spawn_clock = maxf(0.32, 0.85 - elapsed * 0.003)
 	_move_enemies(dt)
@@ -268,7 +291,11 @@ func step(delta: float, direction: Vector2) -> void:
 		_auto_fire()
 	magic.advance(dt, true)
 	_tick_skills(dt)
+	if phase != Phase.RUNNING:
+		return
 	_move_bullets(dt)
+	if phase != Phase.RUNNING:
+		return
 	for i in range(effects.size() - 1, -1, -1):
 		effects[i]["life"] -= dt
 		if effects[i]["life"] <= 0.0:
@@ -282,6 +309,7 @@ func step(delta: float, direction: Vector2) -> void:
 		_regen_remainder = 0.0
 
 func _collect_pickups(dt: float) -> void:
+	_collect_gold(dt)
 	var reward: float = 0.0
 	for i in range(pickups.size() - 1, -1, -1):
 		var pos: Vector2 = pickups[i]["p"]
@@ -295,15 +323,15 @@ func _collect_pickups(dt: float) -> void:
 		grant_xp(reward)
 		cues.record_collected_xp(player, reward)
 
-func _spawn_enemy() -> void:
+func _spawn_enemy(kind: String = "normal") -> bool:
 	if enemies.size() >= MAX_ENEMIES:
-		return
+		return false
 	for attempt in range(8):
 		var candidate := player + Vector2.from_angle(rng.randf_range(0.0, TAU)) * 590.0
 		candidate = candidate.clamp(Vector2.ONE * 24.0, WORLD_SIZE - Vector2.ONE * 24.0)
 		if candidate.distance_squared_to(player) >= 160.0 * 160.0:
-			add_enemy(candidate)
-			return
+			return add_enemy(candidate, kind)
+	return false
 
 func _move_enemies(dt: float) -> void:
 	var speed := 68.0 + minf(38.0, elapsed * 0.35)
@@ -353,6 +381,8 @@ func _projectile(direction: Vector2, damage: float, hits: int, speed: float = BU
 	return true
 
 func _damage_enemy(id: int, base_damage: float) -> void:
+	if phase != Phase.RUNNING:
+		return
 	for i in range(enemies.size()):
 		if int(enemies[i]["id"]) != id:
 			continue
@@ -369,9 +399,13 @@ func _damage_enemy(id: int, base_damage: float) -> void:
 		cues.record_hit(id, hit_at, hp_lost, critical)
 		if enemies[i]["hp"] <= 0:
 			add_pickup(enemies[i]["p"])
+			var kind: String = str(enemies[i].get("kind", "normal"))
+			_drop_gold(hit_at, kind)
 			enemies.remove_at(i)
 			kills += 1
 			cues.record_kill(id, hit_at)
+			if kind == "boss" and _boss_spawned and elapsed >= stage_duration:
+				_clear_stage()
 		return
 
 func _burst(at: Vector2, radius: float, damage: float, kind: String) -> void:
@@ -390,6 +424,8 @@ func _effect(at: Vector2, radius: float, kind: String) -> void:
 
 func _tick_skills(dt: float) -> void:
 	for entry in growth.row_entries("attack"):
+		if phase != Phase.RUNNING:
+			return
 		var effect: String = entry["effect"]
 		if effect == "rifle":
 			continue
@@ -436,6 +472,8 @@ func _tick_skills(dt: float) -> void:
 					_damage_enemy(victim, float(profile["damage"]))
 					_effect(anchor, 28.0, "chain")
 					effects[-1]["from"] = link_from # Committed link, not a new target search.
+					if phase != Phase.RUNNING:
+						return
 			"heavy":
 				_projectile(direction, float(profile["damage"]), int(profile["hits"]), float(profile["speed"]), effect)
 			"sigil":
@@ -468,6 +506,8 @@ func _move_bullets(dt: float) -> void:
 			bullet["seen"][victim] = true
 			bullet["remaining"] -= 1
 			_damage_enemy(victim, float(bullet["damage"]))
+			if phase != Phase.RUNNING:
+				return
 		if bullet["remaining"] <= 0 or bullet["life"] <= 0.0:
 			bullets.remove_at(bullet_index)
 
@@ -481,7 +521,9 @@ func result_summary() -> Dictionary:
 func _summary(outcome: String) -> Dictionary:
 	return {"ended": not outcome.is_empty(), "outcome": outcome,
 		"level": growth.level, "elapsed": elapsed, "kills": kills,
-		"shots": shots, "magic_casts": magic.casts}
+		"shots": shots, "magic_casts": magic.casts, "run_id": run_id if not outcome.is_empty() else "", "stage": stage,
+		"gold_collected": gold_collected, "gold_bonus": stage_clear_gold if outcome == "cleared" else 0,
+		"gold_reward": gold_collected + stage_clear_gold if outcome == "cleared" else 0}
 
 func has_active_run() -> bool:
 	return phase in [Phase.RUNNING, Phase.CHOOSING, Phase.PAUSED]
@@ -528,7 +570,7 @@ func _valid_confirmation(expected_ticket: int) -> bool:
 
 func _finish_run(outcome: String) -> void:
 	# Abandonment is a separate terminal state; it does not inflict damage.
-	phase = Phase.DEFEAT if outcome == "defeat" else Phase.ABANDONED
+	phase = {"defeat": Phase.DEFEAT, "abandoned": Phase.ABANDONED, "cleared": Phase.CLEARED}[outcome]
 	transition_action = ""
 	navigation_ticket += 1
 	magic.invalidate_requests()
@@ -539,10 +581,38 @@ func _finish_run(outcome: String) -> void:
 	_finished_result = _summary(outcome)
 
 func return_to_ready(expected_ticket: int) -> bool:
-	if expected_ticket != navigation_ticket or phase not in [Phase.DEFEAT, Phase.ABANDONED]:
+	if expected_ticket != navigation_ticket or phase not in [Phase.DEFEAT, Phase.ABANDONED, Phase.CLEARED]:
 		return false
 	phase = Phase.READY
 	navigation_ticket += 1
 	magic.invalidate_requests()
 	# Keep the frozen result until the next explicit start; do not start timers.
 	return true
+
+func _drop_gold(at: Vector2, kind: String) -> void:
+	if gold_drop_chance < 1.0 and gold_rng.randf() >= gold_drop_chance:
+		return
+	var amount: int = gold_rng.randi_range(10, 50) if kind == "normal" else gold_rng.randi_range(100, 1000)
+	if gold_pickups.size() >= MAX_PICKUPS:
+		gold_pickups[-1]["value"] += amount
+	else:
+		gold_pickups.append({"p": at, "value": amount})
+
+func _collect_gold(dt: float) -> void:
+	for i in range(gold_pickups.size() - 1, -1, -1):
+		var pos: Vector2 = gold_pickups[i]["p"]
+		if pos.distance_squared_to(player) <= pow(float(stats["pickup"]), 2.0):
+			pos = pos.move_toward(player, 420.0 * dt)
+			gold_pickups[i]["p"] = pos
+		if pos.distance_squared_to(player) <= pow(PLAYER_RADIUS + 10.0, 2.0):
+			gold_collected += int(gold_pickups[i]["value"])
+			gold_pickups.remove_at(i)
+
+func _clear_stage() -> void:
+	if phase != Phase.RUNNING:
+		return
+	# Sweep the final boss drop and remaining field gold into the same settlement.
+	for pickup in gold_pickups:
+		gold_collected += int(pickup["value"])
+	gold_pickups.clear()
+	_finish_run("cleared")
