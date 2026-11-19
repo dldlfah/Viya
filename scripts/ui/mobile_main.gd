@@ -951,7 +951,7 @@ func _open_gold_dungeon() -> void:
 	var revision: int=_menu_revision
 	dialog_body.add_child(_label("골드 슬라임 던전",28))
 	dialog_body.add_child(_label("3분 생존 · 보스 없음 · 1분/2분 자동 저장\n느린 슬라임의 대량 군집을 피해 금화를 모으세요.",19))
-	dialog_body.add_child(_label("하루 2회 · 한국시간 자정 초기화 · 남은 입장 %d/2\n처치 시 10~50금화 확정 · 클리어 시 획득 금화 전액 정산\n실패/포기는 보상 없음 · 이어하기는 추가 소모 없음\n입장 시 횟수 차감 · 캠페인 진행은 유지됩니다." % gold_progress.dungeon_remaining(),18))
+	dialog_body.add_child(_label("하루 2회 · 한국시간 자정 초기화 · 남은 입장 %d/2\n처치 시 %d~%d금화 확정 · 클리어 평균 약 10만 금화 목표\n실패/포기는 보상 없음 · 이어하기는 추가 소모 없음\n입장 시 횟수 차감 · 캠페인 진행은 유지됩니다." % [gold_progress.dungeon_remaining(),simulation.dungeon.drop_range(1).x,simulation.dungeon.drop_range(1).y],18))
 	if not _dungeon_notice.is_empty():dialog_body.add_child(_label(_dungeon_notice,17))
 	dungeon_launch_button=_button("입장 · 오늘 %d회 남음" % gold_progress.dungeon_remaining(),_launch_gold_dungeon.bind(ticket,revision))
 	dungeon_launch_button.disabled=gold_progress.dungeon_remaining()<=0

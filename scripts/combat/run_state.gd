@@ -113,6 +113,7 @@ var combat_profile_version: int = 0 # Existing v1-11 battles retain their actor 
 var species_rng := RandomNumberGenerator.new()
 var run_mode: String = "campaign"
 var dungeon_day: int = -1
+var gold_reward_version:int=0 # Published1-14 keep original drops throughout Continue.
 var dungeon = preload("res://scripts/combat/gold_dungeon.gd").new()
 func enemy_definition(id: String) -> Dictionary:
 	return dungeon.species(wave_profile()) if id=="gold_slime" and run_mode=="gold_slime" else profiles.species(id)
@@ -136,6 +137,7 @@ func start(seed_value: int = 0, character_id: String = "viya", account_level: Va
 		loadout = support_loadout.duplicate(true)
 	if not DefenseRules.valid_supports(character_id,loadout.attack,loadout.passive):
 		return false
+	if mode=="gold_slime" and dungeon.rewards.is_empty():return false
 	var selected_pacing:int=(1 if skill_ruleset=="weapons_v1" else 0) if pacing_version==-1 else pacing_version
 	if selected_pacing not in [0,1] or (selected_pacing==1 and (skill_ruleset!="weapons_v1" or growth.pacing.data.is_empty())):return false
 	if mode not in ["campaign","gold_slime"] or (mode=="campaign" and (entry_day!=-1 or selected_map=="gold_slime")) or (mode=="gold_slime" and (selected_map!="gold_slime" or entry_day<0 or entry_day>100000000 or skill_ruleset!="weapons_v1" or dungeon.data.is_empty())):
@@ -177,6 +179,7 @@ func start(seed_value: int = 0, character_id: String = "viya", account_level: Va
 	var previous_mode: String=run_mode
 	run_mode = mode
 	dungeon_day = entry_day
+	gold_reward_version=1 if mode=="gold_slime" else 0
 	gold_drop_chance = 1.0 if mode=="gold_slime" else (0.30 if previous_mode=="gold_slime" else gold_drop_chance)
 	support_attack_ids = loadout.attack.duplicate()
 	support_passive_ids = loadout.passive.duplicate()
@@ -1102,10 +1105,15 @@ func return_to_ready(expected_ticket: int) -> bool:
 	# Keep the frozen result until the next explicit start; do not start timers.
 	return true
 
+func gold_drop_range(kind:String="normal")->Vector2i:
+	if kind!="normal":return Vector2i(100,1000)
+	return dungeon.drop_range(gold_reward_version) if run_mode=="gold_slime" else Vector2i(10,50)
+
 func _drop_gold(at: Vector2, kind: String) -> void:
 	if gold_drop_chance < 1.0 and gold_rng.randf() >= gold_drop_chance:
 		return
-	var amount: int = gold_rng.randi_range(10, 50) if kind == "normal" else gold_rng.randi_range(100, 1000)
+	var limits:Vector2i=gold_drop_range(kind)
+	var amount:int=gold_rng.randi_range(limits.x,limits.y)
 	if gold_pickups.size() >= MAX_PICKUPS:
 		gold_pickups[-1]["value"] += amount
 	else:

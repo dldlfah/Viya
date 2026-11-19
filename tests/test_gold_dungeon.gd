@@ -7,6 +7,7 @@ const Campaign=preload("res://tests/test_campaign.gd")
 static func fresh(day: int=20000):
 	var state=State.new()
 	state.start(2021,"viya",null,"gold_slime","weapons_v1",{},"gold_slime",day)
+	state.gold_reward_version=0 # Original numeric drop fixtures;new profile tested separately.
 	return state
 static func finish(state) -> Dictionary:
 	state.elapsed=179.99

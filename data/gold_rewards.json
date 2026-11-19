@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "notice": "GAME023: gold dungeon average clear target approximately100000;22-110perkill calibrated from GAME022 same5seeds/none+full. Campaign and historical gold runs remain10-50.",
+  "gold_slime": {
+    "minimum": 22,
+    "maximum": 110,
+    "average_clear_target": 100000
+  }
+}
