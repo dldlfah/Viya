@@ -14,6 +14,7 @@ func _init() -> void:
 	var parsed: Variant = JSON.parse_string(FileAccess.get_file_as_string(PATH))
 	if parsed is Dictionary:
 		layouts = parsed
+		layouts["gold_slime"]=[] # No campaign supply/respawn changes in this mode.
 
 func create(map_id: String, space) -> Array[Dictionary]:
 	var result: Array[Dictionary] = []

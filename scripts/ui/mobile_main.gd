@@ -53,6 +53,9 @@ var _selected_stage: int = 1
 var boss_bar: ProgressBar
 var boss_label: Label
 var ailment_text: Label
+var dungeon_button: Button
+var dungeon_launch_button: Button
+var _dungeon_notice: String = ""
 
 func _ready() -> void:
 	super._ready()
@@ -284,6 +287,8 @@ func _apply_layout() -> void:
 	_update_magic_hud()
 
 func _clear_dialog() -> void:
+	dungeon_button=null
+	dungeon_launch_button=null
 	talents_button = null
 	talents_return_button = null
 	talent_tabs.clear()
@@ -322,6 +327,10 @@ func _show_menu(kind: String) -> void:
 			else:
 				child.pressed.connect(_start_from_menu.bind(ticket, revision))
 	if kind == "paused":
+		if simulation.run_mode=="gold_slime":
+			for child in dialog_body.get_children():
+				if child is Button and child.pressed.is_connected(_request_transition.bind("restart",ticket,revision)):
+					child.text="포기 후 던전 재입장 · 입장 1회 소모"
 		if resume_button.pressed.is_connected(resume_game):
 			resume_button.pressed.disconnect(resume_game)
 		resume_button.pressed.connect(_resume_from_menu.bind(ticket, revision))
@@ -337,8 +346,13 @@ func _show_menu(kind: String) -> void:
 			if simulation.end_reason == "timeout":
 				explanation = "6분 안에 보스를 처치하지 못했습니다. 클리어 보상은 지급되지 않습니다."
 			dialog_body.add_child(_label(explanation, 17))
+		if simulation.run_mode=="gold_slime":
+			heading.text="골드 슬라임 던전 · "+{"cleared":"클리어","defeat":"패배","abandoned":"포기"}[kind]
+			start_button.text="던전 입장 화면"
+			start_button.disabled=gold_error!=OK or battle_save_error!=OK
+			dialog_body.add_child(_label("캠페인 해금 없음 · 오늘 남은 입장 %d/2 · 실패/포기 시 미지급" % gold_progress.dungeon_remaining(),17))
 		lobby_button = _button("출격 대기로", _return_to_lobby.bind(ticket, revision))
-		lobby_button.disabled = battle_save_error != OK or (kind == "cleared" and gold_error != OK)
+		lobby_button.disabled = battle_save_error != OK or ((kind == "cleared" or simulation.run_mode=="gold_slime") and gold_error != OK)
 		dialog_body.add_child(lobby_button)
 	elif kind == "ready":
 		var heading: Label = dialog_body.get_child(0) as Label
@@ -500,6 +514,8 @@ func _start_from_menu(ticket: int, revision: int) -> void:
 		return
 	if _has_saved_battle() or (not run_store.pending.is_empty() and not simulation.result_summary().ended):
 		begin_run()
+	elif simulation.run_mode=="gold_slime" and simulation.phase in [RunState.Phase.DEFEAT,RunState.Phase.ABANDONED,RunState.Phase.CLEARED]:
+		if gold_error==OK and simulation.return_to_ready(simulation.navigation_ticket):_open_gold_dungeon()
 	else:
 		_open_stages()
 
@@ -553,6 +569,9 @@ func _cancel_transition(ticket: int, revision: int) -> void:
 	_update_hud()
 
 func _confirm_transition(ticket: int, revision: int) -> void:
+	if not _menu_matches(ticket,revision):return
+	var reenter: bool=simulation.run_mode=="gold_slime" and simulation.transition_action=="restart"
+	if reenter:simulation.transition_action="leave" # No restart can bypass charged admission.
 	if not _menu_matches(ticket, revision) or not simulation.confirm_transition(ticket, gold_progress.talent_levels):
 		return
 	_menu_revision += 1
@@ -564,11 +583,12 @@ func _confirm_transition(ticket: int, revision: int) -> void:
 		last_phase = simulation.phase
 		_show_menu("abandoned")
 		_update_hud()
+		if reenter and gold_error==OK and battle_save_error==OK and simulation.return_to_ready(simulation.navigation_ticket):_open_gold_dungeon()
 
 func _return_to_lobby(ticket: int, revision: int) -> void:
 	if battle_save_error != OK:
 		return
-	if simulation.phase == RunState.Phase.CLEARED and gold_error != OK:
+	if (simulation.phase == RunState.Phase.CLEARED or simulation.run_mode=="gold_slime") and gold_error != OK:
 		return
 	if not _menu_matches(ticket, revision) or not simulation.return_to_ready(ticket):
 		return
@@ -601,7 +621,7 @@ func _input(event: InputEvent) -> void:
 	super._input(event)
 
 func _unhandled_key_input(event: InputEvent) -> void:
-	if _modal_kind in ["stages", "lobby_settings"] and event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_ESCAPE:
+	if _modal_kind in ["stages", "lobby_settings", "gold_dungeon"] and event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_ESCAPE:
 		_campaign_back(simulation.navigation_ticket, _menu_revision)
 		get_viewport().set_input_as_handled()
 		return
@@ -906,6 +926,10 @@ func _decorate_lobby() -> void:
 	for button in [start_button, talents_button]:
 		button.reparent(menus)
 		button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	dungeon_button=_button("골드 슬라임 던전 · %d/2" % gold_progress.dungeon_remaining(),_open_gold_dungeon_guarded.bind(simulation.navigation_ticket,_menu_revision))
+	dungeon_button.disabled=gold_error!=OK or battle_save_error!=OK or _has_saved_battle() or not gold_progress.dungeon.initial.is_empty()
+	dungeon_button.size_flags_horizontal=Control.SIZE_EXPAND_FILL
+	menus.add_child(dungeon_button)
 	for title in ["캐릭터", "뽑기", "도시", "원정"]:
 		var button := _button(title + " · 준비 중", func(): pass)
 		button.disabled = true
@@ -915,6 +939,56 @@ func _decorate_lobby() -> void:
 	var revision: int = _menu_revision
 	lobby_settings_button = _button("설정", _open_lobby_settings.bind(ticket, revision))
 	dialog_body.add_child(lobby_settings_button)
+
+func _open_gold_dungeon_guarded(ticket: int, revision: int) -> void:
+	if _modal_kind=="ready" and _menu_matches(ticket,revision):_open_gold_dungeon()
+
+func _open_gold_dungeon() -> void:
+	if simulation.phase!=RunState.Phase.READY or _has_saved_battle() or gold_error!=OK or battle_save_error!=OK or not gold_progress.dungeon.initial.is_empty():return
+	_clear_dialog()
+	_modal_kind="gold_dungeon"
+	var ticket: int=simulation.navigation_ticket
+	var revision: int=_menu_revision
+	dialog_body.add_child(_label("골드 슬라임 던전",28))
+	dialog_body.add_child(_label("3분 생존 · 보스 없음 · 1분/2분 자동 저장\n느린 슬라임의 대량 군집을 피해 금화를 모으세요.",19))
+	dialog_body.add_child(_label("하루 2회 · 한국시간 자정 초기화 · 남은 입장 %d/2\n처치 시 10~50금화 확정 · 클리어 시 획득 금화 전액 정산\n실패/포기는 보상 없음 · 이어하기는 추가 소모 없음\n입장 시 횟수 차감 · 캠페인 진행은 유지됩니다." % gold_progress.dungeon_remaining(),18))
+	if not _dungeon_notice.is_empty():dialog_body.add_child(_label(_dungeon_notice,17))
+	dungeon_launch_button=_button("입장 · 오늘 %d회 남음" % gold_progress.dungeon_remaining(),_launch_gold_dungeon.bind(ticket,revision))
+	dungeon_launch_button.disabled=gold_progress.dungeon_remaining()<=0
+	dialog_body.add_child(dungeon_launch_button)
+	dialog_body.add_child(_button("메인 로비로",_campaign_back.bind(ticket,revision)))
+	overlay.show()
+	_fit_dialog()
+
+func _launch_gold_dungeon(ticket: int, revision: int) -> void:
+	if _modal_kind!="gold_dungeon" or not _menu_matches(ticket,revision) or simulation.phase!=RunState.Phase.READY or _has_saved_battle() or not _can_start_rewarded_run() or not gold_progress.dungeon.initial.is_empty() or gold_progress.dungeon_remaining()<=0:return
+	var previous: Dictionary=RunStore.Snapshot.capture(simulation)
+	var previous_result: Dictionary=simulation.result_summary()
+	simulation.stage=gold_progress.next_stage
+	var today: int=simulation.dungeon.day_index(int(Time.get_unix_time_from_system()))
+	if not simulation.start(0,"viya",gold_progress.talent_levels,"gold_slime","weapons_v1",{},"gold_slime",today):
+		simulation.stage=int(previous.run.stage)
+		_dungeon_notice="던전 데이터를 확인할 수 없습니다. 입장 횟수는 사용하지 않았습니다."
+		_open_gold_dungeon()
+		return
+	var initial: Dictionary=RunStore.Snapshot.capture(simulation)
+	var admission: Error=gold_progress.admit_dungeon(initial)
+	if admission!=OK:
+		# No previous active battle is replaceable here. Restore a prior result,
+		# including its resources, if admission persistence fails.
+		if previous_result.ended:
+			previous.run.phase={"cleared":6,"defeat":3,"timeout":3,"abandoned":5}[previous_result.outcome]
+			RunStore.Snapshot.restore(previous,simulation)
+			simulation.return_to_ready(simulation.navigation_ticket)
+		else:
+			simulation.phase=RunState.Phase.READY
+			simulation._finished_result.clear()
+		_dungeon_notice="입장 저장 실패 · 횟수 미사용 (%s)" % error_string(admission)
+		if admission==ERR_BUSY:gold_error=gold_progress.load_progress()
+		_open_gold_dungeon()
+		return
+	_dungeon_notice=""
+	_after_run_started()
 
 func _open_stages() -> void:
 	if simulation.phase in [RunState.Phase.CLEARED,RunState.Phase.DEFEAT,RunState.Phase.ABANDONED]:
@@ -965,7 +1039,7 @@ func _launch_stage(ticket: int, revision: int) -> void:
 	begin_run()
 
 func _campaign_back(ticket: int, revision: int) -> void:
-	if _menu_matches(ticket, revision) and _modal_kind in ["stages", "lobby_settings"]:
+	if _menu_matches(ticket, revision) and _modal_kind in ["stages", "lobby_settings", "gold_dungeon"]:
 		_show_menu("ready")
 
 func _open_lobby_settings(ticket: int, revision: int) -> void:
@@ -1010,6 +1084,14 @@ func _update_hud() -> void:
 		stage_text.add_theme_font_size_override("font_size",14)
 		stage_text.text = "S%d %s · %02d:%02d · 생존+보스 · %s · 저장 %d/2" % [simulation.stage,simulation.map_space.definition.get("short_name","전장"),left/60,left%60,next,simulation.checkpoint_index]
 		stage_text.tooltip_text = simulation.map_space.definition.name
+	if simulation.run_mode=="gold_slime":
+		var left:=maxi(0,int(ceil(simulation.stage_duration-simulation.elapsed)))
+		stage_text.text="골드 슬라임 던전 · %02d:%02d · 생존 · 저장 %d/2" % [left/60,left%60,simulation.checkpoint_index]
+		stats_text.text="던전 %02d:%02d | 처치 %d | 금화 %d" % [int(simulation.elapsed)/60,int(simulation.elapsed)%60,simulation.kills,simulation.gold_collected]
+		stats_text.tooltip_text="3분 생존 시 획득 금화 정산 · 캠페인 해금 없음"
+	if _modal_kind=="gold_dungeon" and is_instance_valid(dungeon_launch_button):
+		dungeon_launch_button.text="입장 · 오늘 %d회 남음" % gold_progress.dungeon_remaining()
+		dungeon_launch_button.disabled=gold_progress.dungeon_remaining()<=0
 	stage_text.visible = not overlay.visible
 	ailment_text.visible = not overlay.visible
 	ailment_text.text = "둔화 · %.1f초" % simulation._slow_left if simulation._slow_left > 0.0 else ""

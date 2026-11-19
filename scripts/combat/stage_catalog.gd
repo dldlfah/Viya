@@ -19,6 +19,13 @@ func for_stage(number: int) -> Dictionary:
 	result.merge(custom, true)
 	return result if valid(result) else {}
 
+func for_run(number: int, mode: String = "campaign") -> Dictionary:
+	var rules:=for_stage(number)
+	if mode=="campaign":return rules
+	if mode!="gold_slime" or rules.is_empty():return {}
+	rules=preload("res://scripts/combat/gold_dungeon.gd").new().rules(rules)
+	return rules if valid(rules) else {}
+
 static func valid(rules: Dictionary) -> bool:
 	if not rules.get("map_id") is String or preload("res://scripts/world/map_catalog.gd").new().definition(rules.map_id).is_empty():
 		return false
@@ -28,7 +35,7 @@ static func valid(rules: Dictionary) -> bool:
 	if rules.boss_at >= rules.duration:
 		return false
 	for key in ["boss_hp", "clear_gold"]:
-		if not rules.get(key) is float or not is_finite(rules[key]) or rules[key] < 1 or rules[key] > 1000000 or rules[key] != floor(rules[key]):
+		if not rules.get(key) is float or not is_finite(rules[key]) or rules[key] < (0 if key=="clear_gold" and rules.map_id=="gold_slime" else 1) or rules[key] > 1000000 or rules[key] != floor(rules[key]):
 			return false # JSON numeric values are floats in Godot.
 	for key in ["checkpoints", "elites"]:
 		if not rules.get(key) is Array or rules[key].size() != 2:
@@ -87,7 +94,7 @@ static func valid(rules: Dictionary) -> bool:
 	if not number(rules.swarm.get("chance"), 0, 1) or not rules.get("scatter") is Dictionary:
 		return false
 	for entry in [["interval", 8, 120], ["spacing", 72, 96], ["jitter", 0, 12], ["approach", 500, 700]]:
-		if not number(rules.scatter.get(entry[0]), entry[1], entry[2]):
+		if not number(rules.scatter.get(entry[0]), 4 if entry[0]=="interval" and rules.map_id=="gold_slime" else entry[1], entry[2]):
 			return false
 	return float(rules.scatter.jitter) <= float(rules.scatter.spacing) * 0.15
 

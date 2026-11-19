@@ -111,8 +111,13 @@ var support_passive_ids: Array = []
 var profiles = CombatProfiles.new()
 var combat_profile_version: int = 0 # Existing v1-11 battles retain their actor stats.
 var species_rng := RandomNumberGenerator.new()
+var run_mode: String = "campaign"
+var dungeon_day: int = -1
+var dungeon = preload("res://scripts/combat/gold_dungeon.gd").new()
+func enemy_definition(id: String) -> Dictionary:
+	return dungeon.species(wave_profile()) if id=="gold_slime" and run_mode=="gold_slime" else profiles.species(id)
 
-func start(seed_value: int = 0, character_id: String = "viya", account_level: Variant = null, selected_map: String = "legacy_arena", skill_ruleset: String = "legacy", support_loadout: Dictionary = {}) -> bool:
+func start(seed_value: int = 0, character_id: String = "viya", account_level: Variant = null, selected_map: String = "legacy_arena", skill_ruleset: String = "legacy", support_loadout: Dictionary = {}, mode: String = "campaign", entry_day: int = -1) -> bool:
 	# Validate the complete selected character before changing the previous run.
 	var selected_levels: Dictionary = account_talent_levels.duplicate(true)
 	if account_level is int:
@@ -131,7 +136,9 @@ func start(seed_value: int = 0, character_id: String = "viya", account_level: Va
 		loadout = support_loadout.duplicate(true)
 	if not DefenseRules.valid_supports(character_id,loadout.attack,loadout.passive):
 		return false
-	var rules: Dictionary = stage_catalog.for_stage(stage)
+	if mode not in ["campaign","gold_slime"] or (mode=="campaign" and (entry_day!=-1 or selected_map=="gold_slime")) or (mode=="gold_slime" and (selected_map!="gold_slime" or entry_day<0 or entry_day>100000000 or skill_ruleset!="weapons_v1" or dungeon.data.is_empty())):
+		return false
+	var rules: Dictionary = stage_catalog.for_run(stage,mode)
 	if rules.is_empty():
 		return false
 	var map_data: Dictionary = map_catalog.definition(selected_map)
@@ -145,7 +152,7 @@ func start(seed_value: int = 0, character_id: String = "viya", account_level: Va
 		return false
 	var hero: Dictionary = growth.catalog.hero(character_id,skill_ruleset)
 	var selected_profile := 1 if skill_ruleset=="weapons_v1" else 0
-	if selected_profile==1 and (not profiles.error.is_empty() or profiles.hero(character_id).is_empty() or not profiles.data.maps.has(selected_map)):
+	if selected_profile==1 and (not profiles.error.is_empty() or profiles.hero(character_id).is_empty() or (mode=="campaign" and not profiles.data.maps.has(selected_map))):
 		return false
 	var candidate: Dictionary = magic_configuration(hero,selected_profile,character_id)
 	if not candidate is Dictionary or not magic.accepts(candidate, character_id):
@@ -165,6 +172,10 @@ func start(seed_value: int = 0, character_id: String = "viya", account_level: Va
 	account_talent_levels = selected_levels
 	armor_enabled = skill_ruleset == "weapons_v1"
 	combat_profile_version = selected_profile
+	var previous_mode: String=run_mode
+	run_mode = mode
+	dungeon_day = entry_day
+	gold_drop_chance = 1.0 if mode=="gold_slime" else (0.30 if previous_mode=="gold_slime" else gold_drop_chance)
 	support_attack_ids = loadout.attack.duplicate()
 	support_passive_ids = loadout.passive.duplicate()
 	gold_rng.seed = int(rng.seed) ^ 0x601D
@@ -282,8 +293,11 @@ func add_enemy(at: Vector2, kind: String = "normal", variant: String = "normal",
 		return false
 	if scatter_group == 0 and variant != "flier" and _ground_count() >= MAX_ENEMIES:
 		return false
+	if run_mode=="gold_slime" and (kind!="normal" or variant!="normal" or species_id not in ["","gold_slime"] or enemies.size()>=int(dungeon.data.max_enemies)):
+		return false
+	if run_mode=="gold_slime":species_id="gold_slime"
 	# Explicit species are checked before consuming IDs, RNG or live state.
-	var definition: Dictionary = profiles.species(species_id) if not species_id.is_empty() else {}
+	var definition: Dictionary = enemy_definition(species_id) if not species_id.is_empty() else {}
 	if not species_id.is_empty() and (combat_profile_version!=1 or definition.is_empty() or definition.kind!=kind or definition.variant!=variant):
 		return false
 	if combat_profile_version==1 and species_id.is_empty():
@@ -307,7 +321,7 @@ func add_enemy(at: Vector2, kind: String = "normal", variant: String = "normal",
 		"flier": speed = float(stage_rules.swarm.speed)
 	var enemy := {"id": _enemy_serial, "p": at, "hp": life, "max_hp": life, "kind": kind, "variant": variant, "speed": speed, "scatter_group": scatter_group}
 	if combat_profile_version==1:
-		var actual: Dictionary = profiles.scaled(species_id,wave,stage_rules)
+		var actual: Dictionary = dungeon.species(wave) if run_mode=="gold_slime" else profiles.scaled(species_id,wave,stage_rules)
 		enemy.hp = life if kind=="elite" else int(actual.hp)
 		enemy.max_hp = enemy.hp
 		enemy.speed = float(actual.speed)
@@ -503,9 +517,9 @@ func step(delta: float, direction: Vector2) -> void:
 		_resolve_deadline()
 		return
 	spawn_clock -= dt
-	if elapsed >= float(stage_rules.boss_at) and not _boss_spawned:
+	if run_mode=="campaign" and elapsed >= float(stage_rules.boss_at) and not _boss_spawned:
 		_boss_spawned = _spawn_enemy("boss")
-	elif _elites_spawned < 2 and elapsed >= float(stage_rules.elites[_elites_spawned]):
+	elif run_mode=="campaign" and _elites_spawned < 2 and elapsed >= float(stage_rules.elites[_elites_spawned]):
 		if _spawn_enemy("elite"):
 			_elites_spawned += 1
 	if spawn_clock <= 0.0:
@@ -586,6 +600,7 @@ func _ground_count() -> int:
 	return count
 
 func _spawn_enemy(kind: String = "normal") -> bool:
+	if run_mode=="gold_slime" and (kind!="normal" or enemies.size()>=int(dungeon.data.max_enemies)):return false
 	# Flying formations have their own lifetime; only reserve the ground boss slot.
 	var limit: int = MAX_ENEMIES - (0 if _boss_spawned else 1)
 	if kind == "boss":
@@ -720,6 +735,7 @@ func _move_enemy_bullets(dt: float) -> void:
 			return
 
 func _tick_swarm(dt: float) -> void:
+	if run_mode=="gold_slime":return
 	if _swarm_pending:
 		_swarm_pending = not _spawn_swarm()
 		return
@@ -755,6 +771,9 @@ func _tick_scatter(dt: float) -> void:
 			_scatter_clock = float(stage_rules.scatter.interval)
 
 func _spawn_scatter() -> bool:
+	if run_mode=="gold_slime":
+		if enemies.size()+SWARM_SIZE>int(dungeon.data.max_enemies):return false
+		return _spawn_map_formation("normal",6,72.0,8.0,scatter_rng,true)
 	# Independent schedule/RNG and population: never replace or block old spawns.
 	var rules: Dictionary = stage_rules.scatter
 	if _scatter_index >= ceili(stage_duration / float(rules.interval)):
@@ -1010,7 +1029,7 @@ func result_summary() -> Dictionary:
 
 func _summary(outcome: String) -> Dictionary:
 	return {"ended": not outcome.is_empty(), "outcome": outcome,
-		"level": growth.level, "elapsed": elapsed, "kills": kills,
+		"run_mode":run_mode,"dungeon_day":dungeon_day,"level": growth.level, "elapsed": elapsed, "kills": kills,
 		"shots": shots, "magic_casts": magic.casts, "run_id": run_id if not outcome.is_empty() else "", "stage": stage,
 		"gold_collected": gold_collected, "gold_bonus": stage_clear_gold if outcome == "cleared" else 0,
 		"gold_reward": gold_collected + stage_clear_gold if outcome == "cleared" else 0}
@@ -1040,6 +1059,7 @@ func cancel_transition(expected_ticket: int) -> bool:
 func confirm_transition(expected_ticket: int, account_level: Variant = null) -> bool:
 	if not _valid_confirmation(expected_ticket):
 		return false
+	if transition_action == "restart" and run_mode=="gold_slime":return false # UI must settle/forfeit before a fresh charged admission.
 	if transition_action == "restart":
 		# start() validates first. On failure keep the old run and confirmation.
 		return start(0, growth.character_id, account_level, map_id, growth.ruleset)
@@ -1172,7 +1192,7 @@ func _apply_supply(kind: String) -> void:
 	cues.record_item(player, str(SupplyCatalog.ITEM_NAMES[kind]))
 
 func _clear_stage() -> void:
-	if phase not in [Phase.RUNNING, Phase.CHOOSING] or not _boss_defeated or elapsed + 0.000001 < stage_duration:
+	if phase not in [Phase.RUNNING, Phase.CHOOSING] or (run_mode=="campaign" and not _boss_defeated) or elapsed + 0.000001 < stage_duration:
 		return
 	# Sweep the final boss drop and remaining field gold into the same settlement.
 	for pickup in gold_pickups:
@@ -1183,7 +1203,7 @@ func _clear_stage() -> void:
 func _resolve_deadline() -> void:
 	if phase not in [Phase.RUNNING, Phase.CHOOSING] or elapsed + 0.000001 < stage_duration:
 		return
-	if _boss_defeated:
+	if run_mode=="gold_slime" or _boss_defeated:
 		_clear_stage()
 	else:
 		_finish_run("timeout")
@@ -1230,7 +1250,7 @@ func _spawn_map_formation(variant: String, columns: int, spacing: float, jitter:
 		_scatter_index += 1
 	if variant == "flier":
 		_swarm_serial += 1
-	var species_id := profiles.select(map_id,"normal",variant,0,species_rng) if combat_profile_version==1 else ""
+	var species_id := "gold_slime" if run_mode=="gold_slime" else (profiles.select(map_id,"normal",variant,0,species_rng) if combat_profile_version==1 else "")
 	for position in positions:
 		add_enemy(position, "normal", variant, _scatter_index if scatter else 0, species_id)
 		if variant == "flier":

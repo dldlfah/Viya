@@ -41,6 +41,7 @@ func _draw() -> void:
 			var flash: float = simulation.cues.flash_alpha(int(enemy["id"]))
 			var kind: String = str(enemy.get("kind", "normal"))
 			var base: Color = {"normal": Color("aa5364"), "ranged": Color("85ce95"), "fast": Color("6fcce6"), "heavy": Color("c39360"), "flier": Color("a6a8ed")}[variant]
+			if enemy.get("species","")=="gold_slime":base=Color("e5bd42")
 			if str(enemy.get("species","")).begins_with("skeleton_"):
 				base = Color("d6d0c3")
 			if kind != "normal":
@@ -49,6 +50,11 @@ func _draw() -> void:
 			var texture: Texture2D = art.texture(kind if kind != "normal" else variant,"run",simulation.elapsed)
 			if texture:
 				draw_texture_rect(texture,Rect2(at-Vector2(22,30),Vector2(44,52)),false,enemy_color.lightened(0.5))
+			elif enemy.get("species","")=="gold_slime":
+				draw_circle(at+Vector2(0,2),18,enemy_color)
+				draw_circle(at+Vector2(-6,-3),2,Color("3c3224"))
+				draw_circle(at+Vector2(6,-3),2,Color("3c3224"))
+				draw_arc(at+Vector2(-4,-5),6,PI,PI*1.5,8,Color("fff0a6"),2,true)
 			else:
 				_draw_enemy_body(at, variant, enemy_color)
 			if kind != "normal":
@@ -63,7 +69,7 @@ func _draw() -> void:
 			draw_rect(Rect2(at + Vector2(-18, -29), Vector2(36, 4)), Color("302b2e"))
 			draw_rect(Rect2(at + Vector2(-18, -29), Vector2(36.0 * enemy["hp"] / float(enemy.get("max_hp", 20)), 4)), Color("d98a8d"))
 			if enemy.has("species") and (names_left>0 or kind!="normal"):
-				var name: String = str(simulation.profiles.species(enemy.species).name)
+				var name: String = str(simulation.enemy_definition(enemy.species).name)
 				var font: Font = get_theme_default_font()
 				var label_at := at+Vector2(-font.get_string_size(name,HORIZONTAL_ALIGNMENT_LEFT,-1,12).x*0.5,-37)
 				draw_string_outline(font,label_at,name,HORIZONTAL_ALIGNMENT_LEFT,-1,12,2,Color("17191e"))

@@ -1,6 +1,7 @@
 extends RefCounted
 ## Exact gameplay data. Cosmetic effects/cues are rebuilt after a restore.
-const VERSION := 12
+const VERSION := 13
+const GAME020_RULES := "b7986a61066095ac126a39187bae083d61ad529c1cf084dcdf602b6f033ed4a0"
 const GAME019_RULES := "cea5d6c275ba3c2fa7d55cb9cf615c386df1480ec4d9a1413f62d95b51292536"
 const GAME017_RULES := "2e0bfb55209da4daaba2c62e718741d3603f31933a50702c8d3bc783438e7913"
 const GAME016_RULES := "8d625d5607e80b1486103e77ddbf57d791b39e9ebe389c704416857e2b574d27"
@@ -17,7 +18,7 @@ const RUN_FIELDS := ["phase", "player", "facing", "hp", "elapsed", "kills", "sho
 	"_enemy_serial", "_regen_remainder", "navigation_ticket", "stage", "run_id",
 	"gold_collected", "gold_drop_chance", "_elites_spawned", "_boss_spawned", "_boss_defeated", "checkpoint_index", "end_reason",
 	"account_attack_level", "account_talent_levels", "_damage_reduction_remainder", "_slow_left", "_kill_heal_clock", "_kill_heal_used", "enemies", "bullets", "pickups", "gold_pickups", "enemy_bullets", "_swarm_clock", "_swarm_pending", "_swarm_serial", "_scatter_clock", "_scatter_index", "map_id", "spawn_view_size", "structures", "item_pickups", "_loot_serial", "weapon_events",
-	"armor_enabled", "support_attack_ids", "support_passive_ids", "combat_profile_version"]
+	"armor_enabled", "support_attack_ids", "support_passive_ids", "combat_profile_version", "run_mode", "dungeon_day"]
 const GROWTH_FIELDS := ["ruleset", "character_id", "owned", "level", "xp", "pending", "offer", "ticket", "revision"]
 const MAGIC_FIELDS := ["mana", "cooldown_left", "casts", "ticket"]
 
@@ -31,8 +32,11 @@ static func fingerprint_for_v11() -> String:
 	var source: String = FileAccess.get_file_as_string("res://scripts/combat/defense_rules.gd").replace("\r\n","\n")
 	return (fingerprint_previous()+source).sha256_text()
 
-static func fingerprint() -> String:
+static func fingerprint_for_v12() -> String:
 	return (fingerprint_for_v11()+FileAccess.get_file_as_string("res://data/combat_profiles.json").replace("\r\n","\n")).sha256_text()
+
+static func fingerprint() -> String:
+	return (fingerprint_for_v12()+FileAccess.get_file_as_string("res://data/gold_dungeon.json").replace("\r\n","\n")).sha256_text()
 
 static func capture(state) -> Dictionary:
 	var result := {"version": VERSION, "rules": fingerprint(), "run": {}, "growth": {}, "magic": {}, "rng": []}
@@ -47,6 +51,7 @@ static func capture(state) -> Dictionary:
 	return result.duplicate(true)
 
 static func upgrade_legacy(data: Dictionary, state) -> Dictionary:
+	if data.get("version")==12 and data.get("rules")==GAME020_RULES:return _upgrade_mode(data)
 	if data.get("version")==11 and data.get("rules")==GAME019_RULES:
 		return _upgrade_profiles(data)
 	if data.get("version") == 10 and data.get("rules") == fingerprint_previous():
@@ -210,6 +215,15 @@ static func _upgrade_profiles(data: Dictionary) -> Dictionary:
 	var generator:=RandomNumberGenerator.new()
 	generator.seed=int(data.rng[0].seed)^0x5EEC1E5
 	data.rng.append({"seed":generator.seed,"state":generator.state})
+	return _upgrade_mode(data)
+
+static func _upgrade_mode(data: Dictionary) -> Dictionary:
+	if not data.get("run") is Dictionary:return {}
+	data=data.duplicate(true)
+	data.version=VERSION
+	data.rules=fingerprint()
+	data.run.run_mode="campaign"
+	data.run.dungeon_day=-1
 	return data
 
 static func finite_number(value: Variant, minimum: float, maximum: float) -> bool:
@@ -230,6 +244,8 @@ static func valid(data: Dictionary, state) -> bool:
 	for key in RUN_FIELDS:
 		if not run.has(key):
 			return false
+	if run.run_mode not in ["campaign","gold_slime"] or not run.dungeon_day is int or (run.run_mode=="campaign" and (run.dungeon_day!=-1 or run.map_id=="gold_slime")) or (run.run_mode=="gold_slime" and (run.map_id!="gold_slime" or run.dungeon_day<0 or run.dungeon_day>100000000 or run.combat_profile_version!=1 or growth.get("ruleset")!="weapons_v1" or run.gold_drop_chance!=1.0 or run._elites_spawned!=0 or run._boss_spawned!=false or run._boss_defeated!=false or (not run.enemy_bullets is Array or not run.enemy_bullets.is_empty()))):
+		return false
 	if not run.combat_profile_version is int or run.combat_profile_version not in [0,1] or (run.combat_profile_version==1 and (run.get("armor_enabled")!=true or growth.get("ruleset")!="weapons_v1" or not state.profiles.error.is_empty() or state.profiles.hero(str(growth.get("character_id",""))).is_empty())):
 		return false
 	if not run.armor_enabled is bool or not run.support_attack_ids is Array or not run.support_passive_ids is Array:
@@ -270,8 +286,8 @@ static func valid(data: Dictionary, state) -> bool:
 		return false
 	if not run._boss_spawned is bool or not run._boss_defeated is bool or (run._boss_defeated and not run._boss_spawned):
 		return false
-	var rules: Dictionary = state.stage_catalog.for_stage(run.stage)
-	if rules.is_empty() or (run.phase == 6 and (not run._boss_defeated or run.elapsed + 0.000001 < rules.duration)):
+	var rules: Dictionary = state.stage_catalog.for_run(run.stage,run.run_mode)
+	if rules.is_empty() or (run.phase == 6 and ((run.run_mode=="campaign" and not run._boss_defeated) or run.elapsed + 0.000001 < rules.duration)):
 		return false
 	if not finite_number(run._scatter_clock, 0, 1000) or not run._scatter_index is int or run._scatter_index < 0 or run._scatter_index > ceili(float(rules.duration) / float(rules.scatter.interval)):
 		return false
@@ -420,7 +436,7 @@ static func valid_weapon_profile(p: Variant, library, allowed: Dictionary) -> bo
 	return true
 
 static func valid_actors(run: Dictionary, state) -> bool:
-	var rules: Dictionary = state.stage_catalog.for_stage(run.stage)
+	var rules: Dictionary = state.stage_catalog.for_run(run.stage,run.run_mode)
 	var space = state.MapSpace.new(state.map_catalog.definition(run.map_id))
 	var swarm: Dictionary = rules.swarm
 	# Bounded by encounter interval/lifetime, with room for every legacy live flier.
@@ -429,6 +445,7 @@ static func valid_actors(run: Dictionary, state) -> bool:
 	flying_cap += (ceili(float(swarm.life) / float(rules.scatter.interval)) + 1) * state.SWARM_SIZE
 	var scatter_cap: int = ceili(float(rules.duration) / float(rules.scatter.interval)) * state.SWARM_SIZE
 	var caps := {"enemies": state.MAX_ENEMIES + flying_cap + scatter_cap, "bullets": state.MAX_BULLETS, "pickups": state.MAX_PICKUPS, "gold_pickups": state.MAX_PICKUPS, "enemy_bullets": state.MAX_ENEMY_BULLETS}
+	if run.run_mode=="gold_slime":caps.enemies=int(state.dungeon.data.max_enemies)
 	for key in caps:
 		if not run[key] is Array or run[key].size() > caps[key]:
 			return false
@@ -457,12 +474,12 @@ static func valid_actors(run: Dictionary, state) -> bool:
 		if run.combat_profile_version==1:
 			if not enemy.get("species") is String or not enemy.get("spawn_wave") is int:
 				return false
-			var definition: Dictionary=state.profiles.species(enemy.species)
-			if definition.is_empty() or definition.kind!=enemy.kind or definition.variant!=enemy.variant or not enemy.get("contact_damage") is int or enemy.contact_damage!=int(definition.contact_damage):
+			var definition: Dictionary=state.dungeon.species(rules.waves[0]) if run.run_mode=="gold_slime" and enemy.species=="gold_slime" else state.profiles.species(enemy.species)
+			if (run.run_mode=="gold_slime" and enemy.species!="gold_slime") or (run.run_mode=="campaign" and enemy.species=="gold_slime") or definition.is_empty() or definition.kind!=enemy.kind or definition.variant!=enemy.variant or not enemy.get("contact_damage") is int or enemy.contact_damage!=int(definition.contact_damage):
 				return false
 			if enemy.kind=="normal":
 				if enemy.spawn_wave<0 or enemy.spawn_wave>=rules.waves.size():return false
-				var expected: Dictionary=state.profiles.scaled(enemy.species,rules.waves[enemy.spawn_wave],rules)
+				var expected: Dictionary=state.dungeon.species(rules.waves[enemy.spawn_wave]) if run.run_mode=="gold_slime" else state.profiles.scaled(enemy.species,rules.waves[enemy.spawn_wave],rules)
 				if enemy.max_hp!=int(expected.hp) or enemy.speed!=float(expected.speed):return false
 			elif enemy.spawn_wave!=-1 or enemy.speed!=float(definition.speed) or (enemy.kind=="boss" and enemy.max_hp!=int(rules.boss_hp)) or (enemy.kind=="elite" and not rules.elite_hp.any(func(value):return int(value)==enemy.max_hp)):
 				return false
@@ -473,7 +490,7 @@ static func valid_actors(run: Dictionary, state) -> bool:
 		if not enemy.get("scatter_group") is int or enemy.scatter_group < 0 or enemy.scatter_group > run._scatter_index:
 			return false
 		if enemy.scatter_group > 0:
-			if enemy.kind != "normal" or enemy.variant != state.SCATTER_VARIANTS[(enemy.scatter_group - 1) % state.SCATTER_VARIANTS.size()]:
+			if enemy.kind != "normal" or enemy.variant != ("normal" if run.run_mode=="gold_slime" else state.SCATTER_VARIANTS[(enemy.scatter_group - 1) % state.SCATTER_VARIANTS.size()]):
 				return false
 			groups[enemy.scatter_group] = int(groups.get(enemy.scatter_group, 0)) + 1
 			if groups[enemy.scatter_group] > state.SWARM_SIZE:
@@ -549,7 +566,7 @@ static func restore(data: Dictionary, state) -> bool:
 		generators[index].state = data.rng[index].state
 	state.map_space = state.MapSpace.new(state.map_catalog.definition(state.map_id))
 	state.world_size = state.map_space.world_size
-	state.stage_rules = state.stage_catalog.for_stage(state.stage)
+	state.stage_rules = state.stage_catalog.for_run(state.stage,state.run_mode)
 	state.stage_duration = float(state.stage_rules.duration)
 	state.stage_clear_gold = int(state.stage_rules.clear_gold)
 	state._refresh_stats()

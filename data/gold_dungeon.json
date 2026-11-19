@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "name": "골드 슬라임 던전",
+  "notice": "Provisional playable values: user selected180seconds;2entries/KSTmidnight;guaranteed10-50gold;no boss;full collected gold on clear only.",
+  "duration": 180.0,
+  "checkpoints": [
+    60.0,
+    120.0
+  ],
+  "daily_entries": 2,
+  "utc_offset_seconds": 32400,
+  "horde_interval": 4.0,
+  "max_enemies": 360,
+  "contact_damage": 6,
+  "waves": [
+    {
+      "from": 0.0,
+      "interval": 1.6,
+      "batch": 2,
+      "hp": 20,
+      "speed": 32.0
+    },
+    {
+      "from": 60.0,
+      "interval": 2.4,
+      "batch": 4,
+      "hp": 28,
+      "speed": 36.0
+    },
+    {
+      "from": 120.0,
+      "interval": 3.0,
+      "batch": 6,
+      "hp": 36,
+      "speed": 40.0
+    }
+  ],
+  "map": {
+    "name": "[시제품] 골드 슬라임 채굴장",
+    "short_name": "골드 슬라임 던전",
+    "size": [
+      3600,
+      2400
+    ],
+    "start": [
+      1800,
+      1200
+    ],
+    "camera": [
+      0,
+      0,
+      3600,
+      2400
+    ],
+    "walkable": [
+      0,
+      0,
+      3600,
+      2400
+    ],
+    "mode": "perimeter",
+    "obstacles": [],
+    "decor": [
+      {
+        "rect": [
+          1440,
+          960,
+          720,
+          480
+        ],
+        "kind": "arrival",
+        "name": "황금 광맥"
+      }
+    ],
+    "zones": [
+      {
+        "side": "all",
+        "from": 0.0,
+        "roles": [
+          "normal"
+        ],
+        "rect": [
+          80,
+          80,
+          3440,
+          2240
+        ],
+        "weights": [
+          {
+            "from": 0.0,
+            "weight": 1.0
+          }
+        ]
+      }
+    ]
+  }
+}

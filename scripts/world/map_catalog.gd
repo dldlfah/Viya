@@ -6,7 +6,7 @@ func _init() -> void:
 	if parsed is Dictionary:
 		data = parsed
 func definition(id: String) -> Dictionary:
-	var found: Variant = data.get(id)
+	var found: Variant = preload("res://scripts/combat/gold_dungeon.gd").new().data.get("map") if id=="gold_slime" else data.get(id)
 	return found.duplicate(true) if valid(found) else {}
 static func pair(value: Variant) -> bool:
 	return value is Array and value.size() == 2 and value.all(func(v): return (v is float or v is int) and is_finite(v))

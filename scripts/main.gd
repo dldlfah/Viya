@@ -54,6 +54,7 @@ func _ready() -> void:
 	_load_settings()
 	gold_error = gold_progress.load_progress()
 	battle_save_error = run_store.load_saved(simulation)
+	_recover_dungeon_admission()
 	_build_interface()
 	for key in ["show_damage", "show_xp", "simple_attacks"]:
 		view.set(key, get(key))
@@ -69,6 +70,21 @@ func _ready() -> void:
 	get_tree().auto_accept_quit = false
 	get_tree().quit_on_go_back = false
 	_update_hud()
+
+func _recover_dungeon_admission() -> void:
+	if gold_error!=OK or battle_save_error!=OK or gold_progress.dungeon.initial.is_empty():return
+	var initial: Dictionary=gold_progress.dungeon.initial
+	if not RunStore.Snapshot.valid(initial,simulation):
+		battle_save_error=ERR_FILE_CORRUPT
+		return
+	if not run_store.pending.is_empty():
+		if run_store.pending.run.run_id==initial.run.run_id:return
+		if run_store.pending.run.phase in [1,2,4]:
+			battle_save_error=ERR_FILE_CORRUPT
+			return
+	# Durable admission includes its starting snapshot. Recover ONLY the missing
+	# first write, never roll a damaged/newer checkpoint back to the initial state.
+	battle_save_error=run_store.write_snapshot(initial)
 
 func _physics_process(delta: float) -> void:
 	simulation.step(delta, movement.direction())
@@ -487,6 +503,11 @@ func _show_menu(kind: String) -> void:
 				dialog_body.add_child(_label("금화 저장 실패 · %s" % error_string(gold_error), 18))
 				dialog_body.add_child(_button("금화 저장 재시도", _retry_gold_save))
 		else:
+			if simulation.run_mode=="gold_slime":
+				gold_error=gold_progress.finish_dungeon(summary) if battle_save_error==OK else battle_save_error
+				if gold_error!=OK:
+					dialog_body.add_child(_label("던전 종료 저장 실패 · %s" % error_string(gold_error),18))
+					dialog_body.add_child(_button("계정 저장 재시도",_retry_gold_save))
 			result_summary_label.text += "\n획득 금화 %d · 클리어 보상 미지급\n보유 금화 %d" % [summary["gold_collected"], gold_progress.total]
 		_add_feedback_banner()
 		start_button = _button("다시 출격", begin_run)
@@ -637,17 +658,17 @@ func _retry_gold_load() -> void:
 	if simulation.phase != RunState.Phase.READY:
 		return
 	gold_error = gold_progress.load_progress()
+	_recover_dungeon_admission()
 	_show_menu("ready")
 	if gold_error == OK and not run_store.pending.is_empty() and not _has_saved_battle():
 		_resume_saved_run()
 
 func _retry_gold_save() -> void:
-	if simulation.phase != RunState.Phase.CLEARED:
-		return
-	_show_menu("cleared")
+	if simulation.phase not in [RunState.Phase.CLEARED,RunState.Phase.DEFEAT,RunState.Phase.ABANDONED]:return
+	_show_menu({RunState.Phase.CLEARED:"cleared",RunState.Phase.DEFEAT:"defeat",RunState.Phase.ABANDONED:"abandoned"}[simulation.phase])
 
 func _can_start_rewarded_run() -> bool:
-	if not gold_progress.loaded or battle_save_error != OK or (simulation.phase == RunState.Phase.CLEARED and gold_error != OK):
+	if not gold_progress.loaded or battle_save_error != OK or not gold_progress.dungeon.initial.is_empty() or ((simulation.phase == RunState.Phase.CLEARED or simulation.run_mode=="gold_slime") and gold_error != OK):
 		return false
 	return true
 
@@ -687,6 +708,7 @@ func _add_battle_save_error() -> void:
 func _retry_battle_load() -> void:
 	if simulation.phase == RunState.Phase.READY:
 		battle_save_error = run_store.load_saved(simulation)
+		_recover_dungeon_admission()
 		_show_menu("ready")
 		if battle_save_error == OK and not run_store.pending.is_empty() and not _has_saved_battle():
 			_resume_saved_run()
@@ -695,8 +717,13 @@ func _resume_saved_run() -> void:
 	if simulation.phase != RunState.Phase.READY or run_store.pending.is_empty() or not gold_progress.loaded:
 		return
 	var saved: Dictionary = run_store.pending.run
+	if saved.get("run_mode","campaign")=="gold_slime":
+		if not gold_progress.dungeon_allows(saved):
+			battle_save_error=ERR_FILE_CORRUPT
+			_show_menu("ready")
+			return
 	var paid: bool = saved.phase == RunState.Phase.CLEARED and saved.run_id == gold_progress.last_run and saved.stage + 1 == gold_progress.next_stage
-	if (saved.stage != gold_progress.next_stage and not paid) or (saved.run_id == gold_progress.last_run and not paid):
+	if saved.get("run_mode","campaign")=="campaign" and ((saved.stage != gold_progress.next_stage and not paid) or (saved.run_id == gold_progress.last_run and not paid)):
 		battle_save_error = ERR_FILE_CORRUPT
 		_show_menu("ready")
 		return
@@ -740,6 +767,12 @@ func _ask_discard_save() -> void:
 
 func _discard_saved_run() -> void:
 	if simulation.phase == RunState.Phase.READY:
+		if not gold_progress.dungeon.initial.is_empty():
+			var entry: Dictionary=gold_progress.dungeon.initial.run
+			gold_error=gold_progress.finish_dungeon({"run_mode":"gold_slime","outcome":"abandoned","run_id":entry.run_id,"dungeon_day":entry.dungeon_day,"stage":entry.stage,"gold_reward":0})
+			if gold_error!=OK:
+				_show_menu("ready")
+				return
 		battle_save_error = run_store.discard()
 		_show_menu("ready")
 
