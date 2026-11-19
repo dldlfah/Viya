@@ -1,6 +1,7 @@
 extends RefCounted
 ## Exact gameplay data. Cosmetic effects/cues are rebuilt after a restore.
-const VERSION := 13
+const VERSION := 14
+const GAME021_RULES := "3480971cf9cb7602c911416d32c93e97cef575d8634b9aa37b21c77d20a6ad87"
 const GAME020_RULES := "b7986a61066095ac126a39187bae083d61ad529c1cf084dcdf602b6f033ed4a0"
 const GAME019_RULES := "cea5d6c275ba3c2fa7d55cb9cf615c386df1480ec4d9a1413f62d95b51292536"
 const GAME017_RULES := "2e0bfb55209da4daaba2c62e718741d3603f31933a50702c8d3bc783438e7913"
@@ -19,7 +20,7 @@ const RUN_FIELDS := ["phase", "player", "facing", "hp", "elapsed", "kills", "sho
 	"gold_collected", "gold_drop_chance", "_elites_spawned", "_boss_spawned", "_boss_defeated", "checkpoint_index", "end_reason",
 	"account_attack_level", "account_talent_levels", "_damage_reduction_remainder", "_slow_left", "_kill_heal_clock", "_kill_heal_used", "enemies", "bullets", "pickups", "gold_pickups", "enemy_bullets", "_swarm_clock", "_swarm_pending", "_swarm_serial", "_scatter_clock", "_scatter_index", "map_id", "spawn_view_size", "structures", "item_pickups", "_loot_serial", "weapon_events",
 	"armor_enabled", "support_attack_ids", "support_passive_ids", "combat_profile_version", "run_mode", "dungeon_day"]
-const GROWTH_FIELDS := ["ruleset", "character_id", "owned", "level", "xp", "pending", "offer", "ticket", "revision"]
+const GROWTH_FIELDS := ["ruleset", "character_id", "owned", "level", "xp", "pending", "offer", "ticket", "revision", "pacing_version"]
 const MAGIC_FIELDS := ["mana", "cooldown_left", "casts", "ticket"]
 
 static func fingerprint_previous() -> String:
@@ -35,8 +36,11 @@ static func fingerprint_for_v11() -> String:
 static func fingerprint_for_v12() -> String:
 	return (fingerprint_for_v11()+FileAccess.get_file_as_string("res://data/combat_profiles.json").replace("\r\n","\n")).sha256_text()
 
-static func fingerprint() -> String:
+static func fingerprint_for_v13() -> String:
 	return (fingerprint_for_v12()+FileAccess.get_file_as_string("res://data/gold_dungeon.json").replace("\r\n","\n")).sha256_text()
+
+static func fingerprint() -> String:
+	return (fingerprint_for_v13()+FileAccess.get_file_as_string("res://data/combat_pacing.json").replace("\r\n","\n")+FileAccess.get_file_as_string("res://scripts/progression/combat_pacing.gd").replace("\r\n","\n")).sha256_text()
 
 static func capture(state) -> Dictionary:
 	var result := {"version": VERSION, "rules": fingerprint(), "run": {}, "growth": {}, "magic": {}, "rng": []}
@@ -51,6 +55,7 @@ static func capture(state) -> Dictionary:
 	return result.duplicate(true)
 
 static func upgrade_legacy(data: Dictionary, state) -> Dictionary:
+	if data.get("version")==13 and data.get("rules")==GAME021_RULES:return _upgrade_pacing(data)
 	if data.get("version")==12 and data.get("rules")==GAME020_RULES:return _upgrade_mode(data)
 	if data.get("version")==11 and data.get("rules")==GAME019_RULES:
 		return _upgrade_profiles(data)
@@ -224,6 +229,14 @@ static func _upgrade_mode(data: Dictionary) -> Dictionary:
 	data.rules=fingerprint()
 	data.run.run_mode="campaign"
 	data.run.dungeon_day=-1
+	return _upgrade_pacing(data)
+
+static func _upgrade_pacing(data:Dictionary)->Dictionary:
+	if not data.get("growth") is Dictionary:return {}
+	data=data.duplicate(true)
+	data.version=VERSION
+	data.rules=fingerprint()
+	data.growth.pacing_version=0
 	return data
 
 static func finite_number(value: Variant, minimum: float, maximum: float) -> bool:
@@ -244,6 +257,7 @@ static func valid(data: Dictionary, state) -> bool:
 	for key in RUN_FIELDS:
 		if not run.has(key):
 			return false
+	if not growth.get("pacing_version") is int or growth.pacing_version not in [0,1] or (growth.pacing_version==1 and (growth.get("ruleset")!="weapons_v1" or state.growth.pacing.data.is_empty())):return false
 	if run.run_mode not in ["campaign","gold_slime"] or not run.dungeon_day is int or (run.run_mode=="campaign" and (run.dungeon_day!=-1 or run.map_id=="gold_slime")) or (run.run_mode=="gold_slime" and (run.map_id!="gold_slime" or run.dungeon_day<0 or run.dungeon_day>100000000 or run.combat_profile_version!=1 or growth.get("ruleset")!="weapons_v1" or run.gold_drop_chance!=1.0 or run._elites_spawned!=0 or run._boss_spawned!=false or run._boss_defeated!=false or (not run.enemy_bullets is Array or not run.enemy_bullets.is_empty()))):
 		return false
 	if not run.combat_profile_version is int or run.combat_profile_version not in [0,1] or (run.combat_profile_version==1 and (run.get("armor_enabled")!=true or growth.get("ruleset")!="weapons_v1" or not state.profiles.error.is_empty() or state.profiles.hero(str(growth.get("character_id",""))).is_empty())):
@@ -309,9 +323,9 @@ static func valid(data: Dictionary, state) -> bool:
 	for key in ["level", "pending", "ticket", "revision"]:
 		if not growth.get(key) is int or not finite_number(growth[key], 0, 1000000):
 			return false
-	if growth.level < 1 or growth.pending >= growth.level or not finite_number(growth.get("xp"), 0, (10 + (growth.level - 1) * 6) * 3):
+	if growth.level < 1 or growth.pending >= growth.level or not finite_number(growth.get("xp"), 0, state.growth.threshold_for(growth.level,run.run_mode,growth.pacing_version)):
 		return false
-	if growth.xp >= (10 + (growth.level - 1) * 6) * 3:
+	if growth.xp >= state.growth.threshold_for(growth.level,run.run_mode,growth.pacing_version):
 		return false
 	var definitions: Dictionary = {}
 	for entry in pool:
@@ -556,6 +570,7 @@ static func restore(data: Dictionary, state) -> bool:
 			state.growth.get(key).assign(data.growth[key].duplicate(true))
 		else:
 			state.growth.set(key, data.growth[key])
+	state.growth.pacing_mode=state.run_mode
 	state.growth.pool = state.growth.catalog.pool_for(state.growth.character_id,state.growth.ruleset)
 	state.magic.reset(state.magic_configuration(state.growth.catalog.hero(state.growth.character_id,state.growth.ruleset),state.combat_profile_version,state.growth.character_id), state.growth.character_id)
 	for key in MAGIC_FIELDS:

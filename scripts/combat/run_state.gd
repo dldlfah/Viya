@@ -117,7 +117,7 @@ var dungeon = preload("res://scripts/combat/gold_dungeon.gd").new()
 func enemy_definition(id: String) -> Dictionary:
 	return dungeon.species(wave_profile()) if id=="gold_slime" and run_mode=="gold_slime" else profiles.species(id)
 
-func start(seed_value: int = 0, character_id: String = "viya", account_level: Variant = null, selected_map: String = "legacy_arena", skill_ruleset: String = "legacy", support_loadout: Dictionary = {}, mode: String = "campaign", entry_day: int = -1) -> bool:
+func start(seed_value: int = 0, character_id: String = "viya", account_level: Variant = null, selected_map: String = "legacy_arena", skill_ruleset: String = "legacy", support_loadout: Dictionary = {}, mode: String = "campaign", entry_day: int = -1, pacing_version:int=-1) -> bool:
 	# Validate the complete selected character before changing the previous run.
 	var selected_levels: Dictionary = account_talent_levels.duplicate(true)
 	if account_level is int:
@@ -136,6 +136,8 @@ func start(seed_value: int = 0, character_id: String = "viya", account_level: Va
 		loadout = support_loadout.duplicate(true)
 	if not DefenseRules.valid_supports(character_id,loadout.attack,loadout.passive):
 		return false
+	var selected_pacing:int=(1 if skill_ruleset=="weapons_v1" else 0) if pacing_version==-1 else pacing_version
+	if selected_pacing not in [0,1] or (selected_pacing==1 and (skill_ruleset!="weapons_v1" or growth.pacing.data.is_empty())):return false
 	if mode not in ["campaign","gold_slime"] or (mode=="campaign" and (entry_day!=-1 or selected_map=="gold_slime")) or (mode=="gold_slime" and (selected_map!="gold_slime" or entry_day<0 or entry_day>100000000 or skill_ruleset!="weapons_v1" or dungeon.data.is_empty())):
 		return false
 	var rules: Dictionary = stage_catalog.for_run(stage,mode)
@@ -167,7 +169,7 @@ func start(seed_value: int = 0, character_id: String = "viya", account_level: Va
 		rng.randomize()
 	else:
 		rng.seed = seed_value
-	if not growth.reset(character_id, int(rng.seed) ^ 0x51A7,skill_ruleset):
+	if not growth.reset(character_id, int(rng.seed) ^ 0x51A7,skill_ruleset,selected_pacing,mode):
 		return false
 	account_talent_levels = selected_levels
 	armor_enabled = skill_ruleset == "weapons_v1"
@@ -1062,7 +1064,7 @@ func confirm_transition(expected_ticket: int, account_level: Variant = null) -> 
 	if transition_action == "restart" and run_mode=="gold_slime":return false # UI must settle/forfeit before a fresh charged admission.
 	if transition_action == "restart":
 		# start() validates first. On failure keep the old run and confirmation.
-		return start(0, growth.character_id, account_level, map_id, growth.ruleset)
+		return start(0, growth.character_id, account_level, map_id, growth.ruleset,{},run_mode,dungeon_day,growth.pacing_version)
 	_finish_run("abandoned")
 	return true
 

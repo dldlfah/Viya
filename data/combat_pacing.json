@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "notice": "GAME022: XP requirement multiplier3 and5XP drops remain. Base requirements below are multiplied by3. New sorties only;prior saves use pacing_version0.",
+  "focus_from_level": 5,
+  "boss_priority": true,
+  "profiles": {
+    "campaign": {
+      "base_requirements": [
+        10,
+        16,
+        22,
+        28,
+        52,
+        80,
+        120,
+        170,
+        230,
+        300,
+        380,
+        800,
+        1200
+      ],
+      "tail_increment": 600,
+      "choice_target": [
+        10,
+        12
+      ]
+    },
+    "gold_slime": {
+      "base_requirements": [
+        10,
+        20,
+        40,
+        80,
+        160,
+        270,
+        400,
+        600,
+        870,
+        1340
+      ],
+      "tail_increment": 600,
+      "choice_target": [
+        6,
+        9
+      ]
+    }
+  }
+}

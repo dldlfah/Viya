@@ -73,7 +73,7 @@ func _ready() -> void:
 
 func _recover_dungeon_admission() -> void:
 	if gold_error!=OK or battle_save_error!=OK or gold_progress.dungeon.initial.is_empty():return
-	var initial: Dictionary=gold_progress.dungeon.initial
+	var initial: Dictionary=RunStore.Snapshot.upgrade_legacy(gold_progress.dungeon.initial,simulation)
 	if not RunStore.Snapshot.valid(initial,simulation):
 		battle_save_error=ERR_FILE_CORRUPT
 		return
@@ -386,6 +386,7 @@ func _show_levelup() -> void:
 	dialog_body.add_child(_label("레벨업 · 원하는 강화 하나를 선택", 28))
 	_add_feedback_banner()
 	dialog_body.add_child(_label("전투 정지 / 남은 선택 %d회 / 이름·효과·강화 상한은 임시" % simulation.growth.pending, 18))
+	if not simulation.growth.pacing.focus(simulation.growth).is_empty():dialog_body.add_child(_label("보유 공격 강화 우선 후보 · Lv.5에서 공격 진화",16))
 	var choices: Array[String] = simulation.growth.offer
 	if choices.is_empty():
 		dialog_body.add_child(_label("현재 장착 구성에서 더 강화할 후보가 없습니다.\n임시 처리: 추가 스킬·보상 없이 전투를 계속합니다.", 20))

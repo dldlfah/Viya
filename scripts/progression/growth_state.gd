@@ -16,13 +16,19 @@ var ticket: int = 0 # Never reset: callbacks from a prior run must stay stale.
 var revision: int = 0
 var rng := RandomNumberGenerator.new()
 var ruleset: String = "legacy"
+var pacing_version:int=0 # Published1-13 retain their exact XP/offer policy.
+var pacing_mode:String="campaign"
+var pacing=preload("res://scripts/progression/combat_pacing.gd").new()
 
-func reset(id: String, seed_value: int, selected_ruleset: String = "legacy") -> bool:
+func reset(id: String, seed_value: int, selected_ruleset: String = "legacy", version:int=0, mode:String="campaign") -> bool:
+	if version not in [0,1] or mode not in ["campaign","gold_slime"] or (version==1 and (selected_ruleset!="weapons_v1" or pacing.data.is_empty())):return false
 	var candidate: Array[Dictionary] = catalog.pool_for(id,selected_ruleset)
 	if not catalog.validate_pool(candidate, id):
 		return false # No silent Viya fallback for an unknown character.
 	character_id = id
 	ruleset = selected_ruleset
+	pacing_version=version
+	pacing_mode=mode
 	pool = candidate
 	owned.clear()
 	owned["common_rifle"] = 1 # Preserve existing starting rifle and its HUD slot.
@@ -38,7 +44,11 @@ func reset(id: String, seed_value: int, selected_ruleset: String = "legacy") -> 
 	return true
 
 func threshold() -> float:
-	return (10.0 + float(level - 1) * 6.0) * XP_REQUIREMENT_MULTIPLIER
+	return threshold_for(level,pacing_mode,pacing_version)
+
+func threshold_for(at_level:int,mode:String,version:int)->float:
+	if version==0:return (10.0+float(at_level-1)*6.0)*XP_REQUIREMENT_MULTIPLIER
+	return pacing.base_requirement(at_level,mode)*XP_REQUIREMENT_MULTIPLIER
 
 func gain(amount: float) -> void:
 	if not is_finite(amount) or amount <= 0.0:
@@ -97,6 +107,8 @@ func open_offer() -> void:
 	offer.clear()
 	for i in range(mini(3, candidates.size())):
 		offer.append(candidates[i])
+	var focused:String=pacing.focus(self)
+	if not focused.is_empty() and not offer.has(focused) and not offer.is_empty():offer[0]=focused
 	ticket += 1
 
 func select(id: String, expected_ticket: int) -> bool:

@@ -77,8 +77,11 @@ def check() -> dict:
     multiplier = re.search(r'^const XP_REQUIREMENT_MULTIPLIER := (\d+\.\d+)', growth, re.M)
     if not multiplier or float(multiplier.group(1)) != 3.0:
         errors.append('XP requirement multiplier must be 3.0')
-    if 'return (10.0 + float(level - 1) * 6.0) * XP_REQUIREMENT_MULTIPLIER' not in growth:
-        errors.append('unexpected threshold formula')
+    for marker in ('return threshold_for(level,pacing_mode,pacing_version)',
+                   'if version==0:return (10.0+float(at_level-1)*6.0)*XP_REQUIREMENT_MULTIPLIER',
+                   'return pacing.base_requirement(at_level,mode)*XP_REQUIREMENT_MULTIPLIER'):
+        if marker not in growth:
+            errors.append('missing legacy/new XP3x threshold contract: ' + marker)
     sources = {f: (ROOT / f).read_text(encoding='utf-8') for f in (
         'scripts/combat/run_state.gd', 'scripts/combat/magic_state.gd',
         'scripts/main.gd', 'scripts/combat/battle_view.gd', 'scripts/combat/attack_visuals.gd', 'tools/check_project.py')}

@@ -9,7 +9,7 @@ static func starter(state) -> String:
 static func fire_start(state) -> void:
 	var id := starter(state)
 	var p: Dictionary = state.attack_profile(id,state.growth.skill_level(id),float(state.stats.rate))
-	if not p.is_empty() and fire(state,p):
+	if not p.is_empty() and fire(state,p,state.growth.pacing_version==1 and bool(state.growth.pacing.data.boss_priority)):
 		state.shot_clock = float(p.interval)
 
 static func tick_skills(state, dt: float) -> void:
@@ -36,10 +36,15 @@ static func target(state, at: Vector2, reach: float, mode: String = "nearest", i
 			found = enemy
 	return state._nearest(at,reach,ignored) if found.is_empty() else found
 
-static func fire(state, p: Dictionary) -> bool:
+static func fire(state, p: Dictionary, boss_priority:bool=false) -> bool:
 	if state.phase != state.Phase.RUNNING or state.weapon_events.size() >= MAX_EVENTS:
 		return false
 	var victim := target(state,state.player,float(p.reach),str(p.target))
+	if boss_priority:
+		for enemy in state.enemies:
+			if enemy.kind=="boss" and state.player.distance_to(enemy.p)<=float(p.reach):
+				victim=enemy
+				break
 	if victim.is_empty():
 		return false
 	var direction: Vector2 = state.player.direction_to(victim.p)

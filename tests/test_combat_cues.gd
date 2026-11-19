@@ -204,6 +204,7 @@ func _run() -> void:
 	await preload("res://tests/test_weapon_skills.gd").run(scene, verify)
 	await preload("res://tests/test_combat_profiles.gd").run(scene, verify)
 	await preload("res://tests/test_gold_dungeon.gd").run(scene, verify)
+	await preload("res://tests/test_combat_pacing.gd").run(scene, verify)
 	scene.queue_free()
 	await process_frame
 	await process_frame
