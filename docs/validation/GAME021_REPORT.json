@@ -1,0 +1,2856 @@
+{
+  "unit": "GAME-021",
+  "recorded_date_kst": "2026-11-19",
+  "branch": "work/viya-turnaround-qa-20261117",
+  "code_commit": "d672222a52db364a46e22456fdb9b4764673124f",
+  "code_tree": "a5192fd47d771821ecd3a6fe7906cd16116c3a06",
+  "base_commit": "7c43ed0f6c59a3252390a144246e9259e2b6a72e",
+  "scope": {
+    "user_request": "Implement planned gold slime dungeon; user selected3minute battles in follow-up",
+    "rules": {
+      "duration": 180,
+      "checkpoints": [
+        60,
+        120
+      ],
+      "daily_entries": 2,
+      "reset": "00:00KST;local system UTC epoch+32400;persisted day high-water prevents backward-clock refill",
+      "clear": "Survive180seconds;no boss or elites",
+      "reward": "Guaranteed10-50gold per slain slime;all earned/present field gold on clear;no fixed bonus;failure/forfeit0;campaign not advanced",
+      "entry": "Consume on durable admission, no refund;existing Continue no extra consumption;confirmed retry/forfeit closes old entry first",
+      "provisional": {
+        "map_size": [
+          3600,
+          2400
+        ],
+        "hp_by_minute": [
+          20,
+          28,
+          36
+        ],
+        "speed_by_minute": [
+          32,
+          36,
+          40
+        ],
+        "contact_damage": 6,
+        "horde_size": 30,
+        "horde_interval": 4,
+        "total_actor_limit": 360
+      }
+    },
+    "implementation": "Existing single RunState with explicit run_mode/gold_slime map and data-only GoldDungeon helper; no new gameplay state/project",
+    "account": "Existing talent schema3 and wallet/stage/last_run preserved;additional gold_dungeon schema1 includes day/used/initial admission snapshot and last closed outcome/reward, committed atomically in the same file",
+    "battle_save": "Version13 retains7RNG;mode/day and separate dungeon JSON fingerprint;known1-12 migrate to campaign and original profile/armor/skills/resources unchanged",
+    "admission_recovery": "Save entry charge+initial snapshot in account before first run-file write. Recover only missing first write/tombstone/old terminal snapshot; malformed/newer current checkpoint is not silently reset. Account retry also recovers admission. Existing single saved-battle slot blocks replacing a parked campaign/dungeon.",
+    "preserved_data_files": [
+      "stages.json",
+      "maps.json",
+      "combat_profiles.json",
+      "prototype_skills.json",
+      "weapon_skills.json",
+      "destructibles.json"
+    ],
+    "unimplemented": "Server time/online account authority,slime variants,final artwork,actual mobile verification;campaign elite/boss special patterns/support UI unchanged"
+  },
+  "project_checks": {
+    "static_integrity": {
+      "status": "PASS",
+      "files_checked": 75,
+      "resource_references_checked": 192,
+      "errors": [],
+      "source_sha256": {
+        "project.godot": "0d8f7fce157178f7bf31acc183593b40f23cff6d266ea5270f4b75f0899b79e5",
+        "scenes/main.tscn": "17a2e77db7cf47af860de3c263dc9119b0df349bafdf2a8b52a40f7450c9e22c",
+        "scripts/combat/approach_cues.gd": "a30074eec96a887c5fbdd99c96ea3ff247303974bd93fb7ef288eed2eaac6131",
+        "scripts/combat/attack_visuals.gd": "e340fbaafb6c8c001c18e45740bba6f7285d4d1911d5f44934cda2ad1f0b6a1b",
+        "scripts/combat/battle_view.gd": "85a6d94e5fcdeff01d0433c4514908dbb686090d934b7dce50424870875166f9",
+        "scripts/combat/combat_cues.gd": "cd42b15155532b8671c9b66decfcf231389ec824d1f767b11035a95acab3ad81",
+        "scripts/combat/combat_profiles.gd": "515689ca733856a0855739531ad4ebeddb20609839210df41c3b6f6202c898e0",
+        "scripts/combat/defense_rules.gd": "1fa247925d4d5a33dfdf7371285d9192b85b0cd83603efed33894693053691f8",
+        "scripts/combat/feedback_state.gd": "3ee19238fb9307bc9953fed3ecc266ecff420e2c74ceffe81409069372e87d88",
+        "scripts/combat/gold_dungeon.gd": "83d4321f1df768403f56609032166c18d5bf26ad37bc481f7a09e868d8e962f7",
+        "scripts/combat/magic_state.gd": "41a9a7739edc46e98dda26986f23dddf1c0ff6bdf9b40d80640f797460b9223b",
+        "scripts/combat/run_state.gd": "d86063d931163531fc06a4b6cf489ce36abdfd3c01a3d3b07489521b8194ea63",
+        "scripts/combat/stage_catalog.gd": "8059f41d7134818deeea1978d2f81fddc2456d530e33479d458461004600516f",
+        "scripts/combat/weapon_modules.gd": "a01f2952c50bb0b8b2824774b9509636a5d53b4d447a8217a61f01aec4969062",
+        "scripts/main.gd": "85231b3cea3254f95abf9f1bec7664af9f24e449afe496ed754cc504b1e96edf",
+        "scripts/progression/account_talents.gd": "0774659235d3bea9276574996565b315156260274750ef8c7f9969f18550f43e",
+        "scripts/progression/gold_progress.gd": "2289fc850fc5f856d674863de6119987da74ed6bd931ade50f0faa11ea0f7012",
+        "scripts/progression/growth_state.gd": "d6da1a0cb72b30851cb87490c43e6ee068de2ee4250368c7d5d7689eb4098f9c",
+        "scripts/progression/run_snapshot.gd": "6d6980fc10539c75ac6a0b43ec80cd5b2c81cabd827ddc9f241f6959a6918b66",
+        "scripts/progression/run_store.gd": "bab493f1963ea2a6d98770f9ef9686d70d4b257e0b49afb3386de661a6081986",
+        "scripts/progression/skill_catalog.gd": "ccd13a2b02f4b57497beae39e483edfca53617cc3a39e43cbaf8009535c820d8",
+        "scripts/progression/weapon_catalog.gd": "aced8b45e765780b4053bfa436e1dbbc1696d2173cb4cb762f21298d5f91421b",
+        "scripts/ui/asset_slots.gd": "82886eec7bebd4283eb5ea7137879a5edcee0f43c1fa9a629b0665bce6b4e68a",
+        "scripts/ui/city_preview.gd": "d01c0ca26b7d812b2b7d6d63339788be98241f6a09ec58a1a8d35a6f7b788937",
+        "scripts/ui/feedback_panel.gd": "2103fd9b8692c5606273175b415447f35a995f9a18306a5e8f0abeeb7c5d465b",
+        "scripts/ui/growth_overview.gd": "43dfb9306f4e280b57c8445b179c0e797938bc9fd0e5fa070053474cadb53a42",
+        "scripts/ui/hud_layout.gd": "075baf23132614e3745cd78f90a699557b23747d8a207a3417194089d3794367",
+        "scripts/ui/mobile_main.gd": "15cefe14f05d4f022c412d6d661c5e6a2bf4eaa04a790fc325a47c97ffef6af6",
+        "scripts/ui/move_input.gd": "cee8e709185740d1cb964fff13873a0818d14d0b3653f36d6416a1b17da40bd8",
+        "scripts/ui/responsive_feedback_panel.gd": "b36ce744a7378d696b91018935f637da0ae88beccdeddd85b1187a238958ed5b",
+        "scripts/ui/skill_preview.gd": "5c3de40b161d38de44234f6f1a2c63064bbc99021c4def95f7995382b02af5db",
+        "scripts/world/map_catalog.gd": "952abbc81d539817dfdd98ed4a59185f13fb8c1adac0210839d176ebee087ea6",
+        "scripts/world/map_space.gd": "8110f4a28e04e67fe738011ea888f31a9c74c450ed79148d88c1da602fa03ae8",
+        "scripts/world/supply_catalog.gd": "1af21cb685b8da0858491a961f007e8a0511c24e0f70b0165e0051d7fcb310a1",
+        "tests/measure_campaign.gd": "acc9b093cdc59af87d11f342a88a537b7f0d35ac8745149eb1ca0046ac791e6c",
+        "tests/test_account_expansion.gd": "97d23a6d5bc708b9ebdcc76a492982d5b8e0e2fa4be6f2ad0c2ca501d5d35422",
+        "tests/test_account_talents.gd": "a85b5b84514323481e45137ab05e611af9d18f364393b9a6891fe45f1fe2b9f3",
+        "tests/test_attack_visuals.gd": "b091e1672614637797907658c628e86bd6f16ca728ce7cb1dae67d1529f1b443",
+        "tests/test_campaign.gd": "07c21cb62d12d5394b0864afe3ce47f62b3cd11146fa4bd2780957c54d3f1f49",
+        "tests/test_chapter_ui.gd": "b48b6813b9d8a5e8d98c4d1e7d6a9ba65f7c54c5995bee66b8afcb55348db984",
+        "tests/test_combat_cues.gd": "035dfc14edceffa454bf54a3cfcc59812cfae3e31e33acc504709443e9c26675",
+        "tests/test_combat_foundation.gd": "57efe421768dad47bee7a560325214a0c8a30d5fdf8d015fc2648f2b8c71416d",
+        "tests/test_combat_profiles.gd": "42b9e84e68307362dc9859a25c2d99cba259863bb7545e0ae3615411c865064a",
+        "tests/test_enemy_variety.gd": "208337c41a6cdc1e748580404c4831fe6dacecccb71e2a5fe0c1dfde8707101e",
+        "tests/test_feedback.gd": "a0558acd7ab6216ccceb597f90c823a1078b0cda9337392440fe6523f22fce86",
+        "tests/test_gold_dungeon.gd": "6e003e2afd52ab6dba19015583bdb61fb432bb6c56abba8caac1a8543cb793d8",
+        "tests/test_gold_settings.gd": "29358cc8bd690213f4fab1fde43cc0a921689983201cfbcbffa18dd872e047a9",
+        "tests/test_growth.gd": "98f63a46d71eeba5f8807655ba6bd9d87fe89b240fca92bbbc12f253fbe0ba72",
+        "tests/test_growth_overview.gd": "bd6706bf3253d25b8b41c6374a53732762af0d361d11c04aac47abee4f565e87",
+        "tests/test_magic.gd": "8f6676cdf96165f66b713265916e2d0696b42a89466ed3c50a03f285a32ace84",
+        "tests/test_maps.gd": "3c129f9fe4aac09e01ad4d7f380d03faebb67f8b9f45f0f2d84175d79be4e2f7",
+        "tests/test_mobile_hud.gd": "3d0234bea7a3883f6cb38fe127d8062cbd393b97c3132109e853e84c68e75a76",
+        "tests/test_run_navigation.gd": "14b88030cf3b84cdaed8c559e04c0f1b15552a9860f32c1c959be06bea9ee475",
+        "tests/test_scatter_packs.gd": "1d642ed432b31e509721d9867f5e7dde4d904499cf7555b163670ef9b5c07f2d",
+        "tests/test_skill_preview.gd": "0a62fc3bcdafeb525507f4107621d5c14a955e5d5270750a99d7de1e61f9ad9f",
+        "tests/test_supplies.gd": "514cf18adce64efdc33bba386450c3153e13367225f4a27f906dad1db74123d2",
+        "tests/test_talent_tree.gd": "984fdf593f086254dd17fde222ac7cafa35d8b223195fd46bc04ee170ddada21",
+        "tests/test_weapon_skills.gd": "f309d7e5f874588639024dc4a24819a5181f725bb5e01027cefb4acdb70e33d8",
+        "data/chapter_one.json": "c32e288ddc61dc8193cd78de416d3682b7c11f1924bbaaa3ea4afe4b78104f76",
+        "data/combat_profiles.json": "d36abf0b4d0feb950e6448474732decdac9f98035a9962e5f5287b09eb1d1144",
+        "data/destructibles.json": "130421dd85d4dbf9ff9f70ab297b36586870e65fb9426cec0c2f58ce57a49b39",
+        "data/gold_dungeon.json": "9a3427a6ddfb3462123f92e6918966ff7b1887ff324f368c600a9ad5993b1f9e",
+        "data/maps.json": "925638f794696b96fdf48df8c266654cef3af002f43e57f91daa80f8d70e8bd4",
+        "data/presentation_slots.json": "b1718c9defed9a29eb9bb6dd51c80de2977a0362294fcc746bf2b1db0cfe930e",
+        "data/prototype_skills.json": "a6ba197fe558d328e1fcab96506fa098465a4c72aebfe1a1b29cb98642628d1a",
+        "data/stages.json": "2e656d2dc155ad93c76b8a1303133992d95529283be7f5b16423738f4edaeeae",
+        "data/weapon_skills.json": "be23e1eb349958fcebf3dba088fcf389d50654fc31cb83523513c178ff81c659",
+        "tools/bootstrap_godot.py": "4c3ca17c3b90f9c5590d7a82a76ae71a353f4d15aae973cf37e03e745ebfdecc",
+        "tools/check_combat_cues.py": "40da81e34884fac6f3ef0c0d28c627b6e97a22dc754e4dae50babea85851173e",
+        "tools/check_feedback_data.py": "f1bd6f415e919a32faab1b403073e24dcdda4b819938b9b707dacfc32320bec7",
+        "tools/check_growth_data.py": "304be6a17484dd44525d94bad31f422bd13be315ba3309a366ca2bd5b9e2ebfd",
+        "tools/check_magic_data.py": "d46877ed6ce1d81ddf898c7c828a5b336b787b22bc50b668d77b7061299bf4f0",
+        "tools/check_mobile_hud.py": "9e43cace28480d3aacb45dabaf67acb2ad24e1c8a9366aa5c011a279eba35487",
+        "tools/check_project.py": "eeafd73fc4503c7af952331c093272a5510aade3fbae04e42afb77eb23f55157",
+        "tools/check_run_navigation.py": "baa927ab5ccdb9b8f38b123a14b1c1f9723bcaf6ece6d588c8e063e7ec5221f3"
+      },
+      "source_fingerprint": "215bb766501cb0a1fdd51c786510d3da6bc1024e64171a15942553117263dd25",
+      "scope": "UTF-8, delimiters, whitespace, JSON/Python syntax, resource existence, project settings; NOT GDScript parser/typechecking or gameplay."
+    },
+    "growth_data_contract": {
+      "status": "PASS",
+      "pool_count": 18,
+      "counts": {
+        "common_attack": 8,
+        "character_attack": 1,
+        "common_passive": 8,
+        "ultimate_enhancement": 1
+      },
+      "negative_controls": [
+        {
+          "fixture": "duplicate",
+          "rejected": true
+        },
+        {
+          "fixture": "resistance",
+          "rejected": true
+        },
+        {
+          "fixture": "foreign_owner",
+          "rejected": true
+        },
+        {
+          "fixture": "missing_ultimate",
+          "rejected": true
+        },
+        {
+          "fixture": "wrong_row",
+          "rejected": true
+        }
+      ],
+      "errors": [],
+      "scope": "JSON schema/content and source integration markers only; not GDScript runtime/behavior."
+    },
+    "magic_data_contract": {
+      "status": "PASS",
+      "errors": [],
+      "negative_controls": [
+        {
+          "fixture": "plain_name",
+          "rejected": true
+        },
+        {
+          "fixture": "foreign_owner",
+          "rejected": true
+        },
+        {
+          "fixture": "missing_magic",
+          "rejected": true
+        },
+        {
+          "fixture": "negative_cost",
+          "rejected": true
+        },
+        {
+          "fixture": "negative_cooldown",
+          "rejected": true
+        },
+        {
+          "fixture": "wrong_upgrade",
+          "rejected": true
+        },
+        {
+          "fixture": "nonfinite_radius",
+          "rejected": true
+        },
+        {
+          "fixture": "impossible_cost",
+          "rejected": true
+        }
+      ],
+      "temporary_skill_names": 18,
+      "required_xp_first_five": [
+        30,
+        48,
+        66,
+        84,
+        102
+      ],
+      "xp_drop_unchanged": 5.0,
+      "scope": "JSON validation, negative data controls and source markers/arithmetic; NOT GDScript runtime, UI, input dispatch or mobile tests."
+    },
+    "feedback_source_contract": {
+      "status": "PASS",
+      "errors": [],
+      "negative_controls": [
+        {
+          "fixture": "missing_damage_hook",
+          "rejected": true
+        },
+        {
+          "fixture": "missing_reset",
+          "rejected": true
+        },
+        {
+          "fixture": "negative_duration",
+          "rejected": true
+        },
+        {
+          "fixture": "missing_low_hp_warning",
+          "rejected": true
+        },
+        {
+          "fixture": "missing_stale_guard",
+          "rejected": true
+        }
+      ],
+      "files_checked": 7,
+      "source_sha256": {
+        "scripts/combat/feedback_state.gd": "3ee19238fb9307bc9953fed3ecc266ecff420e2c74ceffe81409069372e87d88",
+        "scripts/combat/run_state.gd": "d86063d931163531fc06a4b6cf489ce36abdfd3c01a3d3b07489521b8194ea63",
+        "scripts/ui/feedback_panel.gd": "2103fd9b8692c5606273175b415447f35a995f9a18306a5e8f0abeeb7c5d465b",
+        "scripts/main.gd": "85231b3cea3254f95abf9f1bec7664af9f24e449afe496ed754cc504b1e96edf",
+        "tests/test_feedback.gd": "a0558acd7ab6216ccceb597f90c823a1078b0cda9337392440fe6523f22fce86",
+        "tools/check_project.py": "eeafd73fc4503c7af952331c093272a5510aade3fbae04e42afb77eb23f55157",
+        "tools/check_feedback_data.py": "f1bd6f415e919a32faab1b403073e24dcdda4b819938b9b707dacfc32320bec7"
+      },
+      "scope": "7 affected code/test/checker files: UTF-8, delimiters, whitespace, Python syntax, reaction constants, integration markers, engine-test registration and new dependency paths only. NOT the full project check or GDScript parser/type/runtime, rendering, or mobile input tests."
+    },
+    "mobile_hud_source_contract": {
+      "status": "PASS",
+      "files_checked": 8,
+      "errors": [],
+      "negative_controls": [
+        {
+          "fixture": "layout_detached",
+          "rejected": true
+        },
+        {
+          "fixture": "detail_not_paused",
+          "rejected": true
+        },
+        {
+          "fixture": "detail_mutates_skill",
+          "rejected": true
+        },
+        {
+          "fixture": "resize_retains_touch",
+          "rejected": true
+        },
+        {
+          "fixture": "test_not_registered",
+          "rejected": true
+        }
+      ],
+      "source_sha256": {
+        "scenes/main.tscn": "17a2e77db7cf47af860de3c263dc9119b0df349bafdf2a8b52a40f7450c9e22c",
+        "scripts/ui/mobile_main.gd": "15cefe14f05d4f022c412d6d661c5e6a2bf4eaa04a790fc325a47c97ffef6af6",
+        "scripts/ui/hud_layout.gd": "075baf23132614e3745cd78f90a699557b23747d8a207a3417194089d3794367",
+        "scripts/ui/responsive_feedback_panel.gd": "b36ce744a7378d696b91018935f637da0ae88beccdeddd85b1187a238958ed5b",
+        "scripts/ui/move_input.gd": "cee8e709185740d1cb964fff13873a0818d14d0b3653f36d6416a1b17da40bd8",
+        "tests/test_mobile_hud.gd": "3d0234bea7a3883f6cb38fe127d8062cbd393b97c3132109e853e84c68e75a76",
+        "tools/check_project.py": "eeafd73fc4503c7af952331c093272a5510aade3fbae04e42afb77eb23f55157",
+        "tools/check_mobile_hud.py": "9e43cace28480d3aacb45dabaf67acb2ad24e1c8a9366aa5c011a279eba35487"
+      },
+      "source_fingerprint": "c110158fff0fad9f50fb14cba1ce4782a5ba80fa1446bbe1a8750ff490c72d36",
+      "scope": "Changed UTF-8 files, delimiters, Python syntax and integration source checks only. NOT GDScript parsing/typechecking, actual Control geometry, touch dispatch, rendering or mobile execution."
+    },
+    "run_navigation_source_contract": {
+      "status": "PASS",
+      "files_checked": 5,
+      "errors": [],
+      "negative_controls": [
+        {
+          "fixture": "unescaped_string_newline",
+          "rejected": true
+        },
+        {
+          "fixture": "unguarded_intent",
+          "rejected": true
+        },
+        {
+          "fixture": "confirmation_resets_hp",
+          "rejected": true
+        },
+        {
+          "fixture": "cancel_rerolls",
+          "rejected": true
+        },
+        {
+          "fixture": "leave_fakes_death",
+          "rejected": true
+        },
+        {
+          "fixture": "no_result_copy",
+          "rejected": true
+        },
+        {
+          "fixture": "stale_menu_revision",
+          "rejected": true
+        },
+        {
+          "fixture": "unregistered_engine_test",
+          "rejected": true
+        }
+      ],
+      "source_sha256": {
+        "scripts/combat/run_state.gd": "d86063d931163531fc06a4b6cf489ce36abdfd3c01a3d3b07489521b8194ea63",
+        "scripts/ui/mobile_main.gd": "15cefe14f05d4f022c412d6d661c5e6a2bf4eaa04a790fc325a47c97ffef6af6",
+        "tests/test_run_navigation.gd": "14b88030cf3b84cdaed8c559e04c0f1b15552a9860f32c1c959be06bea9ee475",
+        "tools/check_project.py": "eeafd73fc4503c7af952331c093272a5510aade3fbae04e42afb77eb23f55157",
+        "tools/check_run_navigation.py": "baa927ab5ccdb9b8f38b123a14b1c1f9723bcaf6ece6d588c8e063e7ec5221f3"
+      },
+      "source_fingerprint": "43d97a09bccfc39c09befed4ea2bea9a33762bcdf89644b397bde52d05315a63",
+      "scope": "UTF-8/delimiters/Python syntax and navigation SOURCE contracts only; NOT GDScript parsing/types, native execution, actual UI/input, or mobile testing."
+    },
+    "combat_cues_source_contract": {
+      "status": "PASS",
+      "files_checked": 6,
+      "errors": [],
+      "negative_controls": [
+        {
+          "fixture": "missing_reset",
+          "rejected": true
+        },
+        {
+          "fixture": "early_clock",
+          "rejected": true
+        },
+        {
+          "fixture": "changed_damage",
+          "rejected": true
+        },
+        {
+          "fixture": "drop_as_collection",
+          "rejected": true
+        },
+        {
+          "fixture": "unbounded_visuals",
+          "rejected": true
+        },
+        {
+          "fixture": "cosmetic_rng",
+          "rejected": true
+        },
+        {
+          "fixture": "mutable_view",
+          "rejected": true
+        },
+        {
+          "fixture": "unregistered_test",
+          "rejected": true
+        },
+        {
+          "fixture": "ignored_engine_exit",
+          "rejected": true
+        },
+        {
+          "fixture": "ignored_engine_errors",
+          "rejected": true
+        },
+        {
+          "fixture": "ignored_test_result",
+          "rejected": true
+        }
+      ],
+      "source_sha256": {
+        "scripts/combat/run_state.gd": "d86063d931163531fc06a4b6cf489ce36abdfd3c01a3d3b07489521b8194ea63",
+        "scripts/combat/battle_view.gd": "85a6d94e5fcdeff01d0433c4514908dbb686090d934b7dce50424870875166f9",
+        "scripts/combat/combat_cues.gd": "cd42b15155532b8671c9b66decfcf231389ec824d1f767b11035a95acab3ad81",
+        "tests/test_combat_cues.gd": "035dfc14edceffa454bf54a3cfcc59812cfae3e31e33acc504709443e9c26675",
+        "tools/check_project.py": "eeafd73fc4503c7af952331c093272a5510aade3fbae04e42afb77eb23f55157",
+        "tools/check_combat_cues.py": "40da81e34884fac6f3ef0c0d28c627b6e97a22dc754e4dae50babea85851173e"
+      },
+      "source_fingerprint": "9f48a60fcff5f8cd88a36a5f24c4950187193439fb798be42760892a570bbba9",
+      "baseline_run_blob": "10de53fecd184148732c258a594834d67619d1c8",
+      "baseline_runner_blob": "1ab68ad8a51271e3d47db8b02d433991f42e8d6c",
+      "baseline_engine_function_sha256": "9156043eaf896d72565563cc1e2f623cf0c8fbac7f032f19bffee7e4946a69ee",
+      "scope": "Changed-source UTF-8/delimiters/Python syntax, hook order, bounds, isolation, reviewed GAME-021 source baselines and preserved engine runner. NOT Godot parser/type/runtime, visual quality, input dispatch, or FPS."
+    },
+    "godot_runtime": {
+      "status": "PASS",
+      "commands": [
+        {
+          "command": [
+            "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+            "--headless",
+            "--version"
+          ],
+          "exit_code": 0,
+          "status": "PASS"
+        },
+        {
+          "command": [
+            "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+            "--headless",
+            "--path",
+            "/workspace/Viya",
+            "--editor",
+            "--import",
+            "--quit"
+          ],
+          "exit_code": 0,
+          "status": "PASS"
+        },
+        {
+          "command": [
+            "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+            "--headless",
+            "--path",
+            "/workspace/Viya",
+            "--script",
+            "res://tests/test_combat_foundation.gd"
+          ],
+          "exit_code": 0,
+          "status": "PASS"
+        },
+        {
+          "command": [
+            "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+            "--headless",
+            "--path",
+            "/workspace/Viya",
+            "--script",
+            "res://tests/test_growth.gd"
+          ],
+          "exit_code": 0,
+          "status": "PASS"
+        },
+        {
+          "command": [
+            "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+            "--headless",
+            "--path",
+            "/workspace/Viya",
+            "--script",
+            "res://tests/test_magic.gd"
+          ],
+          "exit_code": 0,
+          "status": "PASS"
+        },
+        {
+          "command": [
+            "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+            "--headless",
+            "--path",
+            "/workspace/Viya",
+            "--script",
+            "res://tests/test_feedback.gd"
+          ],
+          "exit_code": 0,
+          "status": "PASS"
+        },
+        {
+          "command": [
+            "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+            "--headless",
+            "--path",
+            "/workspace/Viya",
+            "--script",
+            "res://tests/test_mobile_hud.gd"
+          ],
+          "exit_code": 0,
+          "status": "PASS"
+        },
+        {
+          "command": [
+            "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+            "--headless",
+            "--path",
+            "/workspace/Viya",
+            "--script",
+            "res://tests/test_run_navigation.gd"
+          ],
+          "exit_code": 0,
+          "status": "PASS"
+        },
+        {
+          "command": [
+            "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+            "--headless",
+            "--path",
+            "/workspace/Viya",
+            "--script",
+            "res://tests/test_combat_cues.gd"
+          ],
+          "exit_code": 0,
+          "status": "PASS"
+        },
+        {
+          "command": [
+            "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+            "--headless",
+            "--path",
+            "/workspace/Viya",
+            "--quit-after",
+            "120"
+          ],
+          "exit_code": 0,
+          "status": "PASS"
+        }
+      ],
+      "scope": "headless import, actual foundation/growth/magic/feedback/mobile-HUD/run-navigation/combat-cues GDScript tests and main boot; visual/mobile approval separate"
+    },
+    "windows_f5": "NOT_VERIFIED",
+    "android_device": "NOT_VERIFIED",
+    "ios_device": "NOT_VERIFIED"
+  },
+  "native": {
+    "total": 3095,
+    "checks_per_original_command": [
+      23,
+      70,
+      122,
+      57,
+      1336,
+      68,
+      1419
+    ],
+    "new_dungeon_checks": 55,
+    "wired_into": "tests/test_combat_cues.gd",
+    "status": "PASS"
+  },
+  "python": {
+    "tests": 12,
+    "status": "PASS",
+    "command": "python3 -m unittest discover -s tests -p 'test_*.py' -q"
+  },
+  "process_restoration": {
+    "status": "PASS",
+    "method": "12 original historical files+new13 in13 independent Godot processes through existing scene/lobby Continue;converted copies not treated as original version. Navigation/tickets/revision and viewport rebuilt only.",
+    "original_inputs": {
+      "1": {
+        "original": "/tmp/viya-process-final-XRugPY/data/godot/app_userdata/Viya — Combat Foundation/viya_run.save",
+        "gold": "/tmp/viya-process-final-XRugPY/data/godot/app_userdata/Viya — Combat Foundation/viya_gold.cfg"
+      },
+      "2": {
+        "original": "/tmp/viya-enemy-render.save",
+        "gold": null
+      },
+      "3": {
+        "original": "/workspace/Viya/.local_validation/GAME011/v3.save",
+        "gold": null
+      },
+      "4": {
+        "original": "/workspace/Viya/.local_validation/GAME012/render-data/battle.save",
+        "gold": "/workspace/Viya/.local_validation/GAME012/render-data/gold.cfg"
+      },
+      "5": {
+        "original": "/workspace/Viya/.local_validation/GAME013/live-data/battle.save",
+        "gold": "/workspace/Viya/.local_validation/GAME013/live-data/gold.cfg"
+      },
+      "6": {
+        "original": "/workspace/Viya/.local_validation/GAME014/live-data/battle.save",
+        "gold": "/workspace/Viya/.local_validation/GAME014/live-data/gold.cfg"
+      },
+      "7": {
+        "original": "/workspace/Viya/.local_validation/GAME015/live-data/battle.save",
+        "gold": null
+      },
+      "8": {
+        "original": "/workspace/Viya/.local_validation/GAME016/live-data-release/battle.save",
+        "gold": "/workspace/Viya/.local_validation/GAME016/live-data-release/gold.cfg"
+      },
+      "9": {
+        "original": "/workspace/Viya/.local_validation/GAME017/live-data/resume-supplies.save",
+        "gold": null
+      },
+      "10": {
+        "original": "/workspace/Viya/.local_validation/GAME018/live-data/resume-weapons.save",
+        "gold": null
+      },
+      "11": {
+        "original": "/workspace/Viya/.local_validation/GAME020/published-v11.save",
+        "gold": null
+      },
+      "12": {
+        "original": "/workspace/Viya/.local_validation/GAME021/published-v12.save",
+        "gold": "/workspace/Viya/.local_validation/GAME020/live-data/gold.cfg"
+      }
+    },
+    "results": [
+      {
+        "input": "v1",
+        "actors": 2,
+        "armor_enabled": false,
+        "damage_carry": 0.0,
+        "future_frames_equal": true,
+        "generation": 0,
+        "gold": 117,
+        "hp": 73,
+        "hp_carry": 0.0,
+        "items": 0,
+        "kill_clock": 0.0,
+        "kill_used": 0.0,
+        "mana": 48.5,
+        "map_id": "legacy_arena",
+        "max_mana": 100.0,
+        "new_version": 13,
+        "old_version": 1,
+        "owned": {
+          "common_grenade": 1,
+          "common_rifle": 1,
+          "common_scatter": 1
+        },
+        "position": "(900.0, 600.0)",
+        "profile_version": 0,
+        "respawn_left": 0,
+        "rng_streams": 7,
+        "run_levels": {
+          "attack_power": 0,
+          "attack_range": 0,
+          "attack_speed": 0,
+          "crit_chance": 0,
+          "crit_damage": 0,
+          "damage_reduction": 0,
+          "healing_efficiency": 0,
+          "hp_regen": 0,
+          "invulnerability": 0,
+          "kill_heal": 0,
+          "knockback_resist": 0,
+          "mana_cost_reduction": 0,
+          "max_hp": 0,
+          "max_mana": 0,
+          "move_speed": 0,
+          "mp_regen": 0,
+          "projectile_speed": 0,
+          "status_resist": 0
+        },
+        "run_mode": "campaign",
+        "scatter_clock": 12.0,
+        "scatter_index": 0,
+        "skill_ruleset": "legacy",
+        "slow": 0.0,
+        "species": [
+          "generic",
+          "generic"
+        ],
+        "status": "PASS",
+        "structures": 0,
+        "weapon_events": 0,
+        "world_size": "(1800.0, 1200.0)"
+      },
+      {
+        "input": "v2",
+        "actors": 27,
+        "armor_enabled": false,
+        "damage_carry": 0.0,
+        "future_frames_equal": true,
+        "generation": 0,
+        "gold": 0,
+        "hp": 100,
+        "hp_carry": 0.0,
+        "items": 0,
+        "kill_clock": 0.0,
+        "kill_used": 0.0,
+        "mana": 100.0,
+        "map_id": "legacy_arena",
+        "max_mana": 100.0,
+        "new_version": 13,
+        "old_version": 2,
+        "owned": {
+          "common_rifle": 1
+        },
+        "position": "(900.0, 600.0)",
+        "profile_version": 0,
+        "respawn_left": 0,
+        "rng_streams": 7,
+        "run_levels": {
+          "attack_power": 0,
+          "attack_range": 0,
+          "attack_speed": 0,
+          "crit_chance": 0,
+          "crit_damage": 0,
+          "damage_reduction": 0,
+          "healing_efficiency": 0,
+          "hp_regen": 0,
+          "invulnerability": 0,
+          "kill_heal": 0,
+          "knockback_resist": 0,
+          "mana_cost_reduction": 0,
+          "max_hp": 0,
+          "max_mana": 0,
+          "move_speed": 0,
+          "mp_regen": 0,
+          "projectile_speed": 0,
+          "status_resist": 0
+        },
+        "run_mode": "campaign",
+        "scatter_clock": 12.0,
+        "scatter_index": 0,
+        "skill_ruleset": "legacy",
+        "slow": 0.0,
+        "species": [
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic"
+        ],
+        "status": "PASS",
+        "structures": 0,
+        "weapon_events": 0,
+        "world_size": "(1800.0, 1200.0)"
+      },
+      {
+        "input": "v3",
+        "actors": 190,
+        "armor_enabled": false,
+        "damage_carry": 0.0,
+        "future_frames_equal": true,
+        "generation": 0,
+        "gold": 0,
+        "hp": 88,
+        "hp_carry": 0.0,
+        "items": 0,
+        "kill_clock": 0.0,
+        "kill_used": 0.0,
+        "mana": 100.0,
+        "map_id": "legacy_arena",
+        "max_mana": 100.0,
+        "new_version": 13,
+        "old_version": 3,
+        "owned": {
+          "common_rifle": 1
+        },
+        "position": "(900.0, 600.0)",
+        "profile_version": 0,
+        "respawn_left": 0,
+        "rng_streams": 7,
+        "run_levels": {
+          "attack_power": 0,
+          "attack_range": 0,
+          "attack_speed": 0,
+          "crit_chance": 0,
+          "crit_damage": 0,
+          "damage_reduction": 0,
+          "healing_efficiency": 0,
+          "hp_regen": 0,
+          "invulnerability": 0,
+          "kill_heal": 0,
+          "knockback_resist": 0,
+          "mana_cost_reduction": 0,
+          "max_hp": 0,
+          "max_mana": 0,
+          "move_speed": 0,
+          "mp_regen": 0,
+          "projectile_speed": 0,
+          "status_resist": 0
+        },
+        "run_mode": "campaign",
+        "scatter_clock": 12.0,
+        "scatter_index": 0,
+        "skill_ruleset": "legacy",
+        "slow": 0.0,
+        "species": [
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic"
+        ],
+        "status": "PASS",
+        "structures": 0,
+        "weapon_events": 0,
+        "world_size": "(1800.0, 1200.0)"
+      },
+      {
+        "input": "v4",
+        "actors": 0,
+        "armor_enabled": false,
+        "damage_carry": 0.0,
+        "future_frames_equal": true,
+        "generation": 0,
+        "gold": 1050000,
+        "hp": 100,
+        "hp_carry": 0.0,
+        "items": 0,
+        "kill_clock": 0.0,
+        "kill_used": 0.0,
+        "mana": 60.0,
+        "map_id": "legacy_arena",
+        "max_mana": 100.0,
+        "new_version": 13,
+        "old_version": 4,
+        "owned": {
+          "common_rifle": 1
+        },
+        "position": "(900.0, 600.0)",
+        "profile_version": 0,
+        "respawn_left": 0,
+        "rng_streams": 7,
+        "run_levels": {
+          "attack_power": 1,
+          "attack_range": 0,
+          "attack_speed": 0,
+          "crit_chance": 0,
+          "crit_damage": 0,
+          "damage_reduction": 0,
+          "healing_efficiency": 0,
+          "hp_regen": 0,
+          "invulnerability": 0,
+          "kill_heal": 0,
+          "knockback_resist": 0,
+          "mana_cost_reduction": 0,
+          "max_hp": 0,
+          "max_mana": 0,
+          "move_speed": 0,
+          "mp_regen": 0,
+          "projectile_speed": 0,
+          "status_resist": 0
+        },
+        "run_mode": "campaign",
+        "scatter_clock": 12.0,
+        "scatter_index": 0,
+        "skill_ruleset": "legacy",
+        "slow": 0.0,
+        "species": [],
+        "status": "PASS",
+        "structures": 0,
+        "weapon_events": 0,
+        "world_size": "(1800.0, 1200.0)"
+      },
+      {
+        "input": "v5",
+        "actors": 0,
+        "armor_enabled": false,
+        "damage_carry": 0.36,
+        "future_frames_equal": true,
+        "generation": 0,
+        "gold": 0,
+        "hp": 103,
+        "hp_carry": 0.0075,
+        "items": 0,
+        "kill_clock": 0.0,
+        "kill_used": 0.0,
+        "mana": 60.0575,
+        "map_id": "legacy_arena",
+        "max_mana": 100.0,
+        "new_version": 13,
+        "old_version": 5,
+        "owned": {
+          "common_rifle": 1
+        },
+        "position": "(900.0, 600.0)",
+        "profile_version": 0,
+        "respawn_left": 0,
+        "rng_streams": 7,
+        "run_levels": {
+          "attack_power": 3,
+          "attack_range": 0,
+          "attack_speed": 3,
+          "crit_chance": 0,
+          "crit_damage": 0,
+          "damage_reduction": 3,
+          "healing_efficiency": 0,
+          "hp_regen": 3,
+          "invulnerability": 0,
+          "kill_heal": 0,
+          "knockback_resist": 0,
+          "mana_cost_reduction": 0,
+          "max_hp": 3,
+          "max_mana": 0,
+          "move_speed": 0,
+          "mp_regen": 3,
+          "projectile_speed": 0,
+          "status_resist": 0
+        },
+        "run_mode": "campaign",
+        "scatter_clock": 12.0,
+        "scatter_index": 0,
+        "skill_ruleset": "legacy",
+        "slow": 0.0,
+        "species": [],
+        "status": "PASS",
+        "structures": 0,
+        "weapon_events": 0,
+        "world_size": "(1800.0, 1200.0)"
+      },
+      {
+        "input": "v6",
+        "actors": 0,
+        "armor_enabled": false,
+        "damage_carry": 0.6,
+        "future_frames_equal": true,
+        "generation": 0,
+        "gold": 0,
+        "hp": 95,
+        "hp_carry": 0.5175,
+        "items": 0,
+        "kill_clock": 1.0,
+        "kill_used": 0.3,
+        "mana": 40.95,
+        "map_id": "legacy_arena",
+        "max_mana": 115.0,
+        "new_version": 13,
+        "old_version": 6,
+        "owned": {
+          "common_rifle": 1
+        },
+        "position": "(915.3, 600.0)",
+        "profile_version": 0,
+        "respawn_left": 0,
+        "rng_streams": 7,
+        "run_levels": {
+          "attack_power": 3,
+          "attack_range": 3,
+          "attack_speed": 3,
+          "crit_chance": 3,
+          "crit_damage": 3,
+          "damage_reduction": 3,
+          "healing_efficiency": 3,
+          "hp_regen": 3,
+          "invulnerability": 3,
+          "kill_heal": 3,
+          "knockback_resist": 3,
+          "mana_cost_reduction": 3,
+          "max_hp": 3,
+          "max_mana": 3,
+          "move_speed": 3,
+          "mp_regen": 3,
+          "projectile_speed": 3,
+          "status_resist": 3
+        },
+        "run_mode": "campaign",
+        "scatter_clock": 12.0,
+        "scatter_index": 0,
+        "skill_ruleset": "legacy",
+        "slow": 0.8,
+        "species": [],
+        "status": "PASS",
+        "structures": 0,
+        "weapon_events": 0,
+        "world_size": "(1800.0, 1200.0)"
+      },
+      {
+        "input": "v7",
+        "actors": 151,
+        "armor_enabled": false,
+        "damage_carry": 0.0,
+        "future_frames_equal": true,
+        "generation": 0,
+        "gold": 0,
+        "hp": 100,
+        "hp_carry": 0.0,
+        "items": 0,
+        "kill_clock": 0.0,
+        "kill_used": 0.0,
+        "mana": 100.0,
+        "map_id": "legacy_arena",
+        "max_mana": 100.0,
+        "new_version": 13,
+        "old_version": 7,
+        "owned": {
+          "common_rifle": 1
+        },
+        "position": "(900.0, 600.0)",
+        "profile_version": 0,
+        "respawn_left": 0,
+        "rng_streams": 7,
+        "run_levels": {
+          "attack_power": 0,
+          "attack_range": 0,
+          "attack_speed": 0,
+          "crit_chance": 0,
+          "crit_damage": 0,
+          "damage_reduction": 0,
+          "healing_efficiency": 0,
+          "hp_regen": 0,
+          "invulnerability": 0,
+          "kill_heal": 0,
+          "knockback_resist": 0,
+          "mana_cost_reduction": 0,
+          "max_hp": 0,
+          "max_mana": 0,
+          "move_speed": 0,
+          "mp_regen": 0,
+          "projectile_speed": 0,
+          "status_resist": 0
+        },
+        "run_mode": "campaign",
+        "scatter_clock": 0.03,
+        "scatter_index": 4,
+        "skill_ruleset": "legacy",
+        "slow": 0.0,
+        "species": [
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic"
+        ],
+        "status": "PASS",
+        "structures": 0,
+        "weapon_events": 0,
+        "world_size": "(1800.0, 1200.0)"
+      },
+      {
+        "input": "v8",
+        "actors": 39,
+        "armor_enabled": false,
+        "damage_carry": 0.0,
+        "future_frames_equal": true,
+        "generation": 0,
+        "gold": 270,
+        "hp": 100,
+        "hp_carry": 0.0,
+        "items": 0,
+        "kill_clock": 0.0,
+        "kill_used": 0.0,
+        "mana": 100.0,
+        "map_id": "outskirts_trial",
+        "max_mana": 100.0,
+        "new_version": 13,
+        "old_version": 8,
+        "owned": {
+          "common_rifle": 1
+        },
+        "position": "(30.0, 2600.0)",
+        "profile_version": 0,
+        "respawn_left": 0,
+        "rng_streams": 7,
+        "run_levels": {
+          "attack_power": 0,
+          "attack_range": 0,
+          "attack_speed": 0,
+          "crit_chance": 0,
+          "crit_damage": 0,
+          "damage_reduction": 0,
+          "healing_efficiency": 0,
+          "hp_regen": 0,
+          "invulnerability": 0,
+          "kill_heal": 0,
+          "knockback_resist": 0,
+          "mana_cost_reduction": 0,
+          "max_hp": 0,
+          "max_mana": 0,
+          "move_speed": 0,
+          "mp_regen": 0,
+          "projectile_speed": 0,
+          "status_resist": 0
+        },
+        "run_mode": "campaign",
+        "scatter_clock": 11.0,
+        "scatter_index": 1,
+        "skill_ruleset": "legacy",
+        "slow": 0.0,
+        "species": [
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic"
+        ],
+        "status": "PASS",
+        "structures": 0,
+        "weapon_events": 0,
+        "world_size": "(4200.0, 2800.0)"
+      },
+      {
+        "input": "v9",
+        "actors": 0,
+        "armor_enabled": false,
+        "damage_carry": 0.0,
+        "future_frames_equal": true,
+        "generation": 2,
+        "gold": 0,
+        "hp": 75,
+        "hp_carry": 0.0,
+        "items": 3,
+        "kill_clock": 0.0,
+        "kill_used": 0.0,
+        "mana": 50.15,
+        "map_id": "prologue_wall",
+        "max_mana": 100.0,
+        "new_version": 13,
+        "old_version": 9,
+        "owned": {
+          "common_rifle": 1
+        },
+        "position": "(2500.0, 600.0)",
+        "profile_version": 0,
+        "respawn_left": 45.0,
+        "rng_streams": 7,
+        "run_levels": {
+          "attack_power": 0,
+          "attack_range": 0,
+          "attack_speed": 0,
+          "crit_chance": 0,
+          "crit_damage": 0,
+          "damage_reduction": 0,
+          "healing_efficiency": 0,
+          "hp_regen": 0,
+          "invulnerability": 0,
+          "kill_heal": 0,
+          "knockback_resist": 0,
+          "mana_cost_reduction": 0,
+          "max_hp": 0,
+          "max_mana": 0,
+          "move_speed": 0,
+          "mp_regen": 0,
+          "projectile_speed": 0,
+          "status_resist": 0
+        },
+        "run_mode": "campaign",
+        "scatter_clock": 998.85,
+        "scatter_index": 0,
+        "skill_ruleset": "legacy",
+        "slow": 0.0,
+        "species": [],
+        "status": "PASS",
+        "structures": 32,
+        "weapon_events": 0,
+        "world_size": "(5000.0, 3200.0)"
+      },
+      {
+        "input": "v10",
+        "actors": 12,
+        "armor_enabled": false,
+        "damage_carry": 0.0,
+        "future_frames_equal": true,
+        "generation": 1,
+        "gold": 0,
+        "hp": 100,
+        "hp_carry": 0.0,
+        "items": 1,
+        "kill_clock": 0.0,
+        "kill_used": 0.0,
+        "mana": 60.0,
+        "map_id": "prologue_wall",
+        "max_mana": 100.0,
+        "new_version": 13,
+        "old_version": 10,
+        "owned": {
+          "gun_rifle": 3,
+          "viya_runebullet_v1": 3,
+          "viya_wave_upgrade_v1": 5
+        },
+        "position": "(2500.0, 600.0)",
+        "profile_version": 0,
+        "respawn_left": 45.0,
+        "rng_streams": 7,
+        "run_levels": {
+          "attack_power": 0,
+          "attack_range": 0,
+          "attack_speed": 0,
+          "crit_chance": 0,
+          "crit_damage": 0,
+          "damage_reduction": 0,
+          "healing_efficiency": 0,
+          "hp_regen": 0,
+          "invulnerability": 0,
+          "kill_heal": 0,
+          "knockback_resist": 0,
+          "mana_cost_reduction": 0,
+          "max_hp": 0,
+          "max_mana": 0,
+          "move_speed": 0,
+          "mp_regen": 0,
+          "projectile_speed": 0,
+          "status_resist": 0
+        },
+        "run_mode": "campaign",
+        "scatter_clock": 998.7,
+        "scatter_index": 0,
+        "skill_ruleset": "weapons_v1",
+        "slow": 0.0,
+        "species": [
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic",
+          "generic"
+        ],
+        "status": "PASS",
+        "structures": 32,
+        "weapon_events": 1,
+        "world_size": "(5000.0, 3200.0)"
+      },
+      {
+        "input": "v11",
+        "actors": 1,
+        "armor_enabled": true,
+        "damage_carry": 0.0,
+        "future_frames_equal": true,
+        "generation": 0,
+        "gold": 0,
+        "hp": 73,
+        "hp_carry": 0.0,
+        "items": 0,
+        "kill_clock": 0.0,
+        "kill_used": 0.0,
+        "mana": 42.5,
+        "map_id": "prologue_wall",
+        "max_mana": 100.0,
+        "new_version": 13,
+        "old_version": 11,
+        "owned": {
+          "gun_rifle": 5
+        },
+        "position": "(2500.0, 600.0)",
+        "profile_version": 0,
+        "respawn_left": 0.0,
+        "rng_streams": 7,
+        "run_levels": {
+          "attack_power": 0,
+          "attack_range": 0,
+          "attack_speed": 0,
+          "crit_chance": 0,
+          "crit_damage": 0,
+          "damage_reduction": 0,
+          "healing_efficiency": 0,
+          "hp_regen": 0,
+          "invulnerability": 0,
+          "kill_heal": 0,
+          "knockback_resist": 0,
+          "mana_cost_reduction": 0,
+          "max_hp": 0,
+          "max_mana": 0,
+          "move_speed": 0,
+          "mp_regen": 0,
+          "projectile_speed": 0,
+          "status_resist": 0
+        },
+        "run_mode": "campaign",
+        "scatter_clock": 12.0,
+        "scatter_index": 0,
+        "skill_ruleset": "weapons_v1",
+        "slow": 0.0,
+        "species": [
+          "generic"
+        ],
+        "status": "PASS",
+        "structures": 32,
+        "weapon_events": 1,
+        "world_size": "(5000.0, 3200.0)"
+      },
+      {
+        "input": "v12",
+        "actors": 3,
+        "armor_enabled": true,
+        "damage_carry": 0.0,
+        "future_frames_equal": true,
+        "generation": 0,
+        "gold": 0,
+        "hp": 73,
+        "hp_carry": 0.0,
+        "items": 0,
+        "kill_clock": 0.0,
+        "kill_used": 0.0,
+        "mana": 42.52,
+        "map_id": "outskirts_trial",
+        "max_mana": 100.0,
+        "new_version": 13,
+        "old_version": 12,
+        "owned": {
+          "gun_rifle": 1
+        },
+        "position": "(2100.0, 1400.0)",
+        "profile_version": 1,
+        "respawn_left": 0.0,
+        "rng_streams": 7,
+        "run_levels": {
+          "attack_power": 0,
+          "attack_range": 0,
+          "attack_speed": 0,
+          "crit_chance": 0,
+          "crit_damage": 0,
+          "damage_reduction": 0,
+          "healing_efficiency": 0,
+          "hp_regen": 0,
+          "invulnerability": 0,
+          "kill_heal": 0,
+          "knockback_resist": 0,
+          "mana_cost_reduction": 0,
+          "max_hp": 0,
+          "max_mana": 0,
+          "move_speed": 0,
+          "mp_regen": 0,
+          "projectile_speed": 0,
+          "status_resist": 0
+        },
+        "run_mode": "campaign",
+        "scatter_clock": 0.01,
+        "scatter_index": 0,
+        "skill_ruleset": "weapons_v1",
+        "slow": 0.0,
+        "species": [
+          "skeleton_soldier",
+          "skeleton_archer",
+          "demon_shaman"
+        ],
+        "status": "PASS",
+        "structures": 32,
+        "weapon_events": 0,
+        "world_size": "(4200.0, 2800.0)"
+      },
+      {
+        "input": "current",
+        "actors": 195,
+        "armor_enabled": true,
+        "damage_carry": 0.0,
+        "future_frames_equal": true,
+        "generation": 0,
+        "gold": 0,
+        "hp": 73,
+        "hp_carry": 0.0,
+        "items": 0,
+        "kill_clock": 0.0,
+        "kill_used": 0.0,
+        "mana": 47.5199999999997,
+        "map_id": "gold_slime",
+        "max_mana": 100.0,
+        "new_version": 13,
+        "old_version": 13,
+        "owned": {
+          "gun_rifle": 1
+        },
+        "position": "(1800.0, 1200.0)",
+        "profile_version": 1,
+        "respawn_left": 0,
+        "rng_streams": 7,
+        "run_levels": {
+          "attack_power": 0,
+          "attack_range": 0,
+          "attack_speed": 0,
+          "crit_chance": 0,
+          "crit_damage": 0,
+          "damage_reduction": 0,
+          "healing_efficiency": 0,
+          "hp_regen": 0,
+          "invulnerability": 0,
+          "kill_heal": 0,
+          "knockback_resist": 0,
+          "mana_cost_reduction": 0,
+          "max_hp": 0,
+          "max_mana": 0,
+          "move_speed": 0,
+          "mp_regen": 0,
+          "projectile_speed": 0,
+          "status_resist": 0
+        },
+        "run_mode": "gold_slime",
+        "scatter_clock": 3.0,
+        "scatter_index": 6,
+        "skill_ruleset": "weapons_v1",
+        "slow": 0.0,
+        "species": [
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime",
+          "gold_slime"
+        ],
+        "status": "PASS",
+        "structures": 0,
+        "weapon_events": 0,
+        "world_size": "(3600.0, 2400.0)"
+      }
+    ],
+    "current": "60.01s fixture with165slimes/5groups/73HP/42.52MP at saved one-minute checkpoint;100frames(5s) matched reference;195slimes/6groups/73HP/47.52MP;no second entry charge",
+    "fixture_diagnosis": "Initial v12 replay lacked its stage2 account file;copied matching original account and reran. This was fixture setup,not a save conversion failure."
+  },
+  "render": {
+    "records": [
+      {
+        "elapsed": 18.0000000000001,
+        "groups": 4,
+        "hp": 100,
+        "kills": 9,
+        "slimes": 135,
+        "species_only_slimes": true,
+        "type": "natural18seconds"
+      },
+      {
+        "actors": 165,
+        "elapsed": 60.01,
+        "entries_used": 1,
+        "groups": 5,
+        "hp": 73,
+        "mp": 42.52,
+        "run_id": "b6f4b2d9133162c5681a32fba64f6274",
+        "type": "checkpoint_time_fixture",
+        "version": 13
+      },
+      {
+        "next_stage": 1,
+        "result": {
+          "dungeon_day": 20776,
+          "elapsed": 180.0,
+          "ended": true,
+          "gold_bonus": 0,
+          "gold_collected": 279,
+          "gold_reward": 279,
+          "kills": 9,
+          "level": 1,
+          "magic_casts": 0,
+          "outcome": "cleared",
+          "run_id": "b6f4b2d9133162c5681a32fba64f6274",
+          "run_mode": "gold_slime",
+          "shots": 27,
+          "stage": 1
+        },
+        "type": "deadline_fixture",
+        "wallet": 279
+      }
+    ],
+    "render": "X11/OpenGL Mesa llvmpipe; natural18s separate from time/HP/MP/deadline fixtures; no physical mobile performance claim",
+    "screenshots": 8,
+    "status": "PASS"
+  },
+  "render_limits": "8 actual X11/OpenGL Mesa llvmpipe images;audio-driverDummy since audio hardware is unavailable. Natural18seconds separate from explicit checkpoint59.99->60.01/HP/MP anddeadline179.99->180fixtures. Not full natural180s human play/mobile FPS.",
+  "automated_180s_runs": {
+    "status": "PASS",
+    "count": 10,
+    "cleared": 10,
+    "samples": [
+      {
+        "account_levels": {
+          "attack_power": 0,
+          "attack_range": 0,
+          "attack_speed": 0,
+          "crit_chance": 0,
+          "crit_damage": 0,
+          "damage_reduction": 0,
+          "healing_efficiency": 0,
+          "hp_regen": 0,
+          "invulnerability": 0,
+          "kill_heal": 0,
+          "knockback_resist": 0,
+          "mana_cost_reduction": 0,
+          "max_hp": 0,
+          "max_mana": 0,
+          "move_speed": 0,
+          "mp_regen": 0,
+          "projectile_speed": 0,
+          "status_resist": 0
+        },
+        "map_id": "gold_slime",
+        "profile": "none",
+        "runs": [
+          {
+            "boss_defeated_at": -1.0,
+            "choices": 26,
+            "elapsed": 180.0,
+            "evolved": [
+              "gun_rifle",
+              "gun_suppress",
+              "gun_ricochet"
+            ],
+            "first_choice": 9.6,
+            "gold_reward": 48050,
+            "hp": 100,
+            "kills": 1579,
+            "magic_casts": 6,
+            "mana_left": 35.8999999999988,
+            "max_hp": 100,
+            "max_mana": 100.0,
+            "milestones": [
+              {
+                "choices": 10,
+                "gold_collected": 7872,
+                "hp": 100,
+                "kills": 277,
+                "time": 59.9999999999987
+              },
+              {
+                "choices": 20,
+                "gold_collected": 25080,
+                "hp": 100,
+                "kills": 959,
+                "time": 119.999999999995
+              },
+              {
+                "choices": 26,
+                "gold_collected": 48050,
+                "hp": 100,
+                "kills": 1579,
+                "time": 180.0
+              }
+            ],
+            "outcome": "cleared",
+            "owned": {
+              "gun_grenade": 4,
+              "gun_ricochet": 5,
+              "gun_rifle": 5,
+              "gun_suppress": 5,
+              "passive_haste": 3,
+              "passive_learning": 1,
+              "passive_magnet": 1,
+              "passive_power": 3
+            },
+            "peak_enemies": 247,
+            "seed": 7
+          },
+          {
+            "boss_defeated_at": -1.0,
+            "choices": 26,
+            "elapsed": 180.0,
+            "evolved": [
+              "gun_rifle",
+              "gun_suppress",
+              "gun_ricochet",
+              "gun_grenade"
+            ],
+            "first_choice": 11.15,
+            "gold_reward": 44932,
+            "hp": 100,
+            "kills": 1490,
+            "magic_casts": 6,
+            "mana_left": 28.0000000000003,
+            "max_hp": 100,
+            "max_mana": 100.0,
+            "milestones": [
+              {
+                "choices": 11,
+                "gold_collected": 8529,
+                "hp": 100,
+                "kills": 292,
+                "time": 59.9999999999987
+              },
+              {
+                "choices": 21,
+                "gold_collected": 25540,
+                "hp": 100,
+                "kills": 923,
+                "time": 119.999999999995
+              },
+              {
+                "choices": 26,
+                "gold_collected": 44932,
+                "hp": 100,
+                "kills": 1490,
+                "time": 180.0
+              }
+            ],
+            "outcome": "cleared",
+            "owned": {
+              "gun_grenade": 5,
+              "gun_ricochet": 5,
+              "gun_rifle": 5,
+              "gun_suppress": 5,
+              "passive_haste": 1,
+              "passive_learning": 1,
+              "passive_magnet": 1,
+              "passive_power": 4
+            },
+            "peak_enemies": 235,
+            "seed": 42
+          },
+          {
+            "boss_defeated_at": -1.0,
+            "choices": 26,
+            "elapsed": 180.0,
+            "evolved": [
+              "gun_rifle",
+              "gun_ricochet",
+              "gun_scatter"
+            ],
+            "first_choice": 11.25,
+            "gold_reward": 46703,
+            "hp": 120,
+            "kills": 1536,
+            "magic_casts": 6,
+            "mana_left": 28.0499999999987,
+            "max_hp": 120,
+            "max_mana": 100.0,
+            "milestones": [
+              {
+                "choices": 11,
+                "gold_collected": 8725,
+                "hp": 100,
+                "kills": 320,
+                "time": 59.9999999999987
+              },
+              {
+                "choices": 19,
+                "gold_collected": 24446,
+                "hp": 100,
+                "kills": 944,
+                "time": 119.999999999995
+              },
+              {
+                "choices": 26,
+                "gold_collected": 46703,
+                "hp": 120,
+                "kills": 1536,
+                "time": 180.0
+              }
+            ],
+            "outcome": "cleared",
+            "owned": {
+              "gun_grenade": 3,
+              "gun_ricochet": 5,
+              "gun_rifle": 5,
+              "gun_scatter": 5,
+              "passive_haste": 2,
+              "passive_magnet": 1,
+              "passive_power": 4,
+              "passive_vitality": 1,
+              "viya_wave_upgrade_v1": 1
+            },
+            "peak_enemies": 219,
+            "seed": 143
+          },
+          {
+            "boss_defeated_at": -1.0,
+            "choices": 28,
+            "elapsed": 180.0,
+            "evolved": [
+              "gun_rifle",
+              "gun_scatter",
+              "gun_grenade"
+            ],
+            "first_choice": 11.7,
+            "gold_reward": 45508,
+            "hp": 100,
+            "kills": 1503,
+            "magic_casts": 6,
+            "mana_left": 27.6000000000003,
+            "max_hp": 100,
+            "max_mana": 100.0,
+            "milestones": [
+              {
+                "choices": 10,
+                "gold_collected": 7166,
+                "hp": 100,
+                "kills": 308,
+                "time": 59.9999999999987
+              },
+              {
+                "choices": 21,
+                "gold_collected": 26297,
+                "hp": 100,
+                "kills": 946,
+                "time": 119.999999999995
+              },
+              {
+                "choices": 28,
+                "gold_collected": 45508,
+                "hp": 100,
+                "kills": 1503,
+                "time": 180.0
+              }
+            ],
+            "outcome": "cleared",
+            "owned": {
+              "gun_grenade": 5,
+              "gun_rifle": 5,
+              "gun_scatter": 5,
+              "gun_suppress": 4,
+              "passive_haste": 3,
+              "passive_learning": 2,
+              "passive_magnet": 2,
+              "passive_power": 3
+            },
+            "peak_enemies": 237,
+            "seed": 407
+          },
+          {
+            "boss_defeated_at": -1.0,
+            "choices": 28,
+            "elapsed": 180.0,
+            "evolved": [
+              "gun_rifle",
+              "gun_suppress",
+              "gun_scatter"
+            ],
+            "first_choice": 12.25,
+            "gold_reward": 45004,
+            "hp": 100,
+            "kills": 1505,
+            "magic_casts": 6,
+            "mana_left": 27.0000000000001,
+            "max_hp": 100,
+            "max_mana": 100.0,
+            "milestones": [
+              {
+                "choices": 11,
+                "gold_collected": 8219,
+                "hp": 100,
+                "kills": 298,
+                "time": 59.9999999999987
+              },
+              {
+                "choices": 21,
+                "gold_collected": 24309,
+                "hp": 100,
+                "kills": 937,
+                "time": 119.999999999995
+              },
+              {
+                "choices": 28,
+                "gold_collected": 45004,
+                "hp": 100,
+                "kills": 1505,
+                "time": 180.0
+              }
+            ],
+            "outcome": "cleared",
+            "owned": {
+              "gun_rifle": 5,
+              "gun_scatter": 5,
+              "gun_suppress": 5,
+              "passive_haste": 4,
+              "passive_learning": 2,
+              "passive_power": 5,
+              "passive_recovery": 2,
+              "viya_runebullet_v1": 1
+            },
+            "peak_enemies": 236,
+            "seed": 2026
+          }
+        ],
+        "skill_ruleset": "weapons_v1",
+        "status": "PASS",
+        "survival_and_earned_gold": true,
+        "summary": {
+          "gold_min": 44932,
+          "gold_max": 48050,
+          "gold_mean": 46039.4,
+          "choices": [
+            26,
+            26,
+            26,
+            28,
+            28
+          ],
+          "peak_enemies": 247
+        }
+      },
+      {
+        "account_levels": {
+          "attack_power": 3,
+          "attack_range": 3,
+          "attack_speed": 3,
+          "crit_chance": 3,
+          "crit_damage": 3,
+          "damage_reduction": 3,
+          "healing_efficiency": 3,
+          "hp_regen": 3,
+          "invulnerability": 3,
+          "kill_heal": 3,
+          "knockback_resist": 3,
+          "mana_cost_reduction": 3,
+          "max_hp": 3,
+          "max_mana": 3,
+          "move_speed": 3,
+          "mp_regen": 3,
+          "projectile_speed": 3,
+          "status_resist": 3
+        },
+        "map_id": "gold_slime",
+        "profile": "full",
+        "runs": [
+          {
+            "boss_defeated_at": -1.0,
+            "choices": 27,
+            "elapsed": 180.0,
+            "evolved": [
+              "gun_rifle",
+              "gun_suppress",
+              "gun_ricochet"
+            ],
+            "first_choice": 12.75,
+            "gold_reward": 47864,
+            "hp": 115,
+            "kills": 1572,
+            "magic_casts": 5,
+            "mana_left": 113.990000000003,
+            "max_hp": 115,
+            "max_mana": 115.0,
+            "milestones": [
+              {
+                "choices": 11,
+                "gold_collected": 9020,
+                "hp": 115,
+                "kills": 354,
+                "time": 59.9999999999987
+              },
+              {
+                "choices": 20,
+                "gold_collected": 25906,
+                "hp": 115,
+                "kills": 996,
+                "time": 119.999999999995
+              },
+              {
+                "choices": 27,
+                "gold_collected": 47864,
+                "hp": 115,
+                "kills": 1572,
+                "time": 180.0
+              }
+            ],
+            "outcome": "cleared",
+            "owned": {
+              "gun_grenade": 4,
+              "gun_ricochet": 5,
+              "gun_rifle": 5,
+              "gun_suppress": 5,
+              "passive_haste": 4,
+              "passive_learning": 1,
+              "passive_magnet": 1,
+              "passive_power": 3
+            },
+            "peak_enemies": 187,
+            "seed": 7
+          },
+          {
+            "boss_defeated_at": -1.0,
+            "choices": 26,
+            "elapsed": 180.0,
+            "evolved": [
+              "gun_rifle",
+              "gun_suppress",
+              "gun_ricochet",
+              "gun_grenade"
+            ],
+            "first_choice": 11.1,
+            "gold_reward": 46479,
+            "hp": 115,
+            "kills": 1542,
+            "magic_casts": 8,
+            "mana_left": 7.57249999999896,
+            "max_hp": 115,
+            "max_mana": 115.0,
+            "milestones": [
+              {
+                "choices": 11,
+                "gold_collected": 8996,
+                "hp": 115,
+                "kills": 347,
+                "time": 59.9999999999987
+              },
+              {
+                "choices": 19,
+                "gold_collected": 22853,
+                "hp": 115,
+                "kills": 905,
+                "time": 119.999999999995
+              },
+              {
+                "choices": 26,
+                "gold_collected": 46479,
+                "hp": 115,
+                "kills": 1542,
+                "time": 180.0
+              }
+            ],
+            "outcome": "cleared",
+            "owned": {
+              "gun_grenade": 5,
+              "gun_ricochet": 5,
+              "gun_rifle": 5,
+              "gun_suppress": 5,
+              "passive_haste": 1,
+              "passive_learning": 1,
+              "passive_magnet": 1,
+              "passive_power": 4
+            },
+            "peak_enemies": 209,
+            "seed": 42
+          },
+          {
+            "boss_defeated_at": -1.0,
+            "choices": 25,
+            "elapsed": 180.0,
+            "evolved": [
+              "gun_rifle",
+              "gun_ricochet",
+              "gun_scatter"
+            ],
+            "first_choice": 11.9,
+            "gold_reward": 47850,
+            "hp": 138,
+            "kills": 1576,
+            "magic_casts": 7,
+            "mana_left": 42.1824999999982,
+            "max_hp": 138,
+            "max_mana": 115.0,
+            "milestones": [
+              {
+                "choices": 11,
+                "gold_collected": 9213,
+                "hp": 115,
+                "kills": 350,
+                "time": 59.9999999999987
+              },
+              {
+                "choices": 19,
+                "gold_collected": 23691,
+                "hp": 115,
+                "kills": 974,
+                "time": 119.999999999995
+              },
+              {
+                "choices": 25,
+                "gold_collected": 47850,
+                "hp": 138,
+                "kills": 1576,
+                "time": 180.0
+              }
+            ],
+            "outcome": "cleared",
+            "owned": {
+              "gun_grenade": 3,
+              "gun_ricochet": 5,
+              "gun_rifle": 5,
+              "gun_scatter": 5,
+              "passive_haste": 2,
+              "passive_magnet": 1,
+              "passive_power": 3,
+              "passive_vitality": 1,
+              "viya_wave_upgrade_v1": 1
+            },
+            "peak_enemies": 179,
+            "seed": 143
+          },
+          {
+            "boss_defeated_at": -1.0,
+            "choices": 28,
+            "elapsed": 180.0,
+            "evolved": [
+              "gun_rifle",
+              "gun_scatter",
+              "gun_grenade"
+            ],
+            "first_choice": 9.90000000000001,
+            "gold_reward": 47705,
+            "hp": 115,
+            "kills": 1574,
+            "magic_casts": 7,
+            "mana_left": 46.5524999999997,
+            "max_hp": 115,
+            "max_mana": 115.0,
+            "milestones": [
+              {
+                "choices": 12,
+                "gold_collected": 9966,
+                "hp": 115,
+                "kills": 388,
+                "time": 59.9999999999987
+              },
+              {
+                "choices": 21,
+                "gold_collected": 26465,
+                "hp": 115,
+                "kills": 889,
+                "time": 119.999999999995
+              },
+              {
+                "choices": 28,
+                "gold_collected": 47705,
+                "hp": 115,
+                "kills": 1574,
+                "time": 180.0
+              }
+            ],
+            "outcome": "cleared",
+            "owned": {
+              "gun_grenade": 5,
+              "gun_rifle": 5,
+              "gun_scatter": 5,
+              "gun_suppress": 4,
+              "passive_haste": 3,
+              "passive_learning": 2,
+              "passive_magnet": 2,
+              "passive_power": 3
+            },
+            "peak_enemies": 181,
+            "seed": 407
+          },
+          {
+            "boss_defeated_at": -1.0,
+            "choices": 27,
+            "elapsed": 180.0,
+            "evolved": [
+              "gun_rifle",
+              "gun_suppress",
+              "gun_scatter"
+            ],
+            "first_choice": 10.45,
+            "gold_reward": 45407,
+            "hp": 115,
+            "kills": 1519,
+            "magic_casts": 8,
+            "mana_left": 8.3199999999982,
+            "max_hp": 115,
+            "max_mana": 115.0,
+            "milestones": [
+              {
+                "choices": 11,
+                "gold_collected": 7858,
+                "hp": 115,
+                "kills": 306,
+                "time": 59.9999999999987
+              },
+              {
+                "choices": 22,
+                "gold_collected": 25405,
+                "hp": 115,
+                "kills": 960,
+                "time": 119.999999999995
+              },
+              {
+                "choices": 27,
+                "gold_collected": 45407,
+                "hp": 115,
+                "kills": 1519,
+                "time": 180.0
+              }
+            ],
+            "outcome": "cleared",
+            "owned": {
+              "gun_rifle": 5,
+              "gun_scatter": 5,
+              "gun_suppress": 5,
+              "passive_haste": 3,
+              "passive_learning": 2,
+              "passive_power": 5,
+              "passive_recovery": 2,
+              "viya_runebullet_v1": 1
+            },
+            "peak_enemies": 229,
+            "seed": 2026
+          }
+        ],
+        "skill_ruleset": "weapons_v1",
+        "status": "PASS",
+        "survival_and_earned_gold": true,
+        "summary": {
+          "gold_min": 45407,
+          "gold_max": 47864,
+          "gold_mean": 47061.0,
+          "choices": [
+            27,
+            26,
+            25,
+            28,
+            27
+          ],
+          "peak_enemies": 229
+        }
+      }
+    ],
+    "method": "Retained ignored adapter of unchanged tests/measure_campaign.gd controller and5seeds for each none/full account18;only map/start/milestone interval/outcome gate adapted;no HP/XP/invulnerability gifts. Actual180seconds of RunState simulation.",
+    "balance_not_approved": "Observed25-28choices and44932-48050gold;no final economy/fun approval. Historical GAME020 campaign growth24-28vs10-12 FAIL and2timeouts remain;no new20run campaign balance measurement this unit."
+  },
+  "not_verified": [
+    "Android/iOS devices",
+    "Windows F5",
+    "APK/iOS export",
+    "mobile FPS/heat/memory",
+    "human readability/fun/economy",
+    "network/server time authority"
+  ],
+  "artifacts": {
+    ".local_validation/GAME021/balance-full.log": {
+      "bytes": 4076,
+      "sha256": "c0ef53a1843a09b4ba84aba614413d8a2adceb949017cd82514bb594f220211a"
+    },
+    ".local_validation/GAME021/balance-none.log": {
+      "bytes": 4065,
+      "sha256": "8e7e96c6a9c88af37f0564a1ee330f071ccb5d5947e69ac96868f1fb2e88026c"
+    },
+    ".local_validation/GAME021/balance-results.json": {
+      "bytes": 15038,
+      "sha256": "5934172f6ef18472a8cd915872a4e378d970ce5f45cd964a77a2b246011123e0"
+    },
+    ".local_validation/GAME021/checkpoint_paused.png": {
+      "bytes": 77606,
+      "sha256": "a0704b078dfdd3c7ae0ecf6d7b3f184cc3b016626cfd491917e53ec7e68a81f6"
+    },
+    ".local_validation/GAME021/compact_dungeon_entry.png": {
+      "bytes": 34756,
+      "sha256": "bada2273a0d349dc93509138b2fe9d3474dadc5136c8cee8de178091b3752ba4"
+    },
+    ".local_validation/GAME021/dungeon_entry.png": {
+      "bytes": 54202,
+      "sha256": "04522b8354ee6b667bf335b8220dc4501498c1b72f5430f9b6039d62775657f9"
+    },
+    ".local_validation/GAME021/dungeon_measure.gd": {
+      "bytes": 6727,
+      "sha256": "2c6b933aaf2feedeb6b4fa7aae6d77ab69e2643b64416969e963a8fb5986ab00"
+    },
+    ".local_validation/GAME021/dungeon_probe.gd": {
+      "bytes": 714,
+      "sha256": "c77a70548d23259fd1426e09c1a9692da9d42dd8409d9af017fc3f899617f176"
+    },
+    ".local_validation/GAME021/dungeon_result.png": {
+      "bytes": 62831,
+      "sha256": "60141b382bcb5bd14a83cef0f0d8dc08f9690b30a1cb9f0698a42101198beefe"
+    },
+    ".local_validation/GAME021/dungeon_sortie.png": {
+      "bytes": 52996,
+      "sha256": "688cf81279403b87cc8f2ad3580b07a04607bf1352b1879384ee1c799744b702"
+    },
+    ".local_validation/GAME021/engine_0.log": {
+      "bytes": 32,
+      "sha256": "edff16c1721dd4ae989cadf29a01f574ae8d51b118221f664725bd6980bbba5d"
+    },
+    ".local_validation/GAME021/engine_1.log": {
+      "bytes": 1017,
+      "sha256": "f15ffd4c558b01611d562c8c257508942bdc2dc542124f423ae2a592a46edfa6"
+    },
+    ".local_validation/GAME021/engine_2.log": {
+      "bytes": 117,
+      "sha256": "1938b93b03756e658dd6fc29e699189d67afb2aec05905c840e9c22f5b89a6cd"
+    },
+    ".local_validation/GAME021/engine_3.log": {
+      "bytes": 117,
+      "sha256": "190487dfb2bdf99cdccfff084fd5d95b81eac04fcfe3ec43e502d524daacb8eb"
+    },
+    ".local_validation/GAME021/engine_4.log": {
+      "bytes": 118,
+      "sha256": "0dc80f41a9d961a6b4d962614c905af0b7c3bc209f569871d09048860b58f7ff"
+    },
+    ".local_validation/GAME021/engine_5.log": {
+      "bytes": 117,
+      "sha256": "c5a9e5b87c0439795f9d5bcfe6c17d74bce134acc53d7f341cfb55a11bdb1e1d"
+    },
+    ".local_validation/GAME021/engine_6.log": {
+      "bytes": 119,
+      "sha256": "570a42343d370c104902d16c9ff0b402573f94ed3076772afb70e6bce96084fc"
+    },
+    ".local_validation/GAME021/engine_7.log": {
+      "bytes": 117,
+      "sha256": "025f863c84ce84466e9269a07033239400176c7aad50ada31ff794c6e59b0837"
+    },
+    ".local_validation/GAME021/engine_8.log": {
+      "bytes": 119,
+      "sha256": "fadf2d229e562d89c189a79a8d5edfdc579730b8d78e73f901bf3d125b3304dd"
+    },
+    ".local_validation/GAME021/engine_9.log": {
+      "bytes": 73,
+      "sha256": "6d1c065383a27c36804949b6ffa4b09714470b112e5dacc0bd5aeb7b9c147c4e"
+    },
+    ".local_validation/GAME021/historical-inputs.json": {
+      "bytes": 1770,
+      "sha256": "ee03259c101fa406e4147fa0677bc9d0c4c05664eef4bd7698b5597890c75c7a"
+    },
+    ".local_validation/GAME021/lobby_dungeon.png": {
+      "bytes": 45647,
+      "sha256": "0fa9f30fd9c835fd1e2252a23bf21d086ab14946c3c3984c6ab9b498875e6809"
+    },
+    ".local_validation/GAME021/natural_slime_hordes.png": {
+      "bytes": 69482,
+      "sha256": "6dca43c8300e8e2b9ea74bbe5026cc3bb7cdcc236a6d7641ed4ca8da7ce8d4aa"
+    },
+    ".local_validation/GAME021/process-current.log": {
+      "bytes": 3504,
+      "sha256": "bfd98b84f2eb6a7f83cdddb1417d81cf7c4b732fbbbfeb93f511e21207e206a7"
+    },
+    ".local_validation/GAME021/process-v1.log": {
+      "bytes": 1013,
+      "sha256": "8cd6fb067ca842410e9be0483142060d25fb8e87bfdc905b30880233438d0f95"
+    },
+    ".local_validation/GAME021/process-v10.log": {
+      "bytes": 1132,
+      "sha256": "492dcf25486cbcdc2c6d194309a043cf0005e4a7fb8225fdb388579c9eada501"
+    },
+    ".local_validation/GAME021/process-v11.log": {
+      "bytes": 969,
+      "sha256": "96fceab6ee545566848f3a779e16c72113d437576a46a3cb02158afdcaeba2c7"
+    },
+    ".local_validation/GAME021/process-v12.log": {
+      "bytes": 1015,
+      "sha256": "51df3bbd2e01d7332294381dc7a53216c94ddc95ee7708d1cc338be5f4bd5d40"
+    },
+    ".local_validation/GAME021/process-v2.log": {
+      "bytes": 1226,
+      "sha256": "db10327b06e3f47349b70828f9ea6ef5d5052e7b35211d1190c1df3065345182"
+    },
+    ".local_validation/GAME021/process-v3.log": {
+      "bytes": 2856,
+      "sha256": "bb89aec51741a2c0bb83d2c593860487d281fc29c4ad022bf18f873b34149c5f"
+    },
+    ".local_validation/GAME021/process-v4.log": {
+      "bytes": 961,
+      "sha256": "75663da84d256b4277f0ed12c4ad451c46cd0fe01a0fd9d9089fc8c0c1f659bb"
+    },
+    ".local_validation/GAME021/process-v5.log": {
+      "bytes": 962,
+      "sha256": "bf54cafbb64b20c345d32a172569767fba23383b4fc98faa3372c6e1ebc54d84"
+    },
+    ".local_validation/GAME021/process-v6.log": {
+      "bytes": 958,
+      "sha256": "75966651420218c01cff855bca91f8283f5220f07762fac3b1716e4936fff61f"
+    },
+    ".local_validation/GAME021/process-v7.log": {
+      "bytes": 2467,
+      "sha256": "e88ba314585f685f76e22b131e39a9c4710c7ba97d3c2de2cdaa84f59aaea4c7"
+    },
+    ".local_validation/GAME021/process-v8.log": {
+      "bytes": 1351,
+      "sha256": "5ec921594b5073eaa10b58a0c1bbda5a0d1dd8f4fc3ed88751359eef60e466e7"
+    },
+    ".local_validation/GAME021/process-v9.log": {
+      "bytes": 963,
+      "sha256": "d938a0d80ff804fc8cbec3946d2c0f86b22f449d4510b8e2c01b6164f154ab08"
+    },
+    ".local_validation/GAME021/process_probe.gd": {
+      "bytes": 4305,
+      "sha256": "be015b458416505f55a17f2c858a8b4d0c6eafae77633c3a53eda542328d496f"
+    },
+    ".local_validation/GAME021/python.log": {
+      "bytes": 98,
+      "sha256": "4a34b48a2d7a82688171499dd9d7d8bcffbe56866cb5fd32b0892fcdf36559c5"
+    },
+    ".local_validation/GAME021/render.log": {
+      "bytes": 1151,
+      "sha256": "90646e9f3ca34bf5c25ff901be44fb558926592ec53dd2c4cf45e5e63209c421"
+    },
+    ".local_validation/GAME021/render_probe.gd": {
+      "bytes": 3921,
+      "sha256": "0c059e6214009c0bd78cabe71e3014dd03c9bba8b3e16e4a0b123099d6e1363a"
+    },
+    ".local_validation/GAME021/report.json": {
+      "bytes": 20374,
+      "sha256": "9a3ffce5ba9e03061852b6959a7f6ee4c6b622df6191d46801851c17532f12e7"
+    },
+    ".local_validation/GAME021/saved_dungeon_lobby.png": {
+      "bytes": 55385,
+      "sha256": "1637dbdf7a651a614bf492da0c06694c788d07d9047d94f0dd3ba4aefdc93e98"
+    },
+    ".local_validation/GAME021/published-v12.save": {
+      "bytes": 10040,
+      "sha256": "6808ff888d0e207de32c3a975f1f439212cb77990a19ad593c1a69757179311b"
+    },
+    ".local_validation/GAME021/live-data-verified/resume-dungeon.save": {
+      "bytes": 56876,
+      "sha256": "bdaa5d2695059c05f00af6b5915ae14170e20a3698154fb3c2c48a7903300ad7"
+    },
+    ".local_validation/GAME021/live-data-verified/resume-gold.cfg": {
+      "bytes": 3062,
+      "sha256": "b01c0ebfd465b09558f1ba064ae353307c2b511284784a1f6aa2776b0c3c99bd"
+    }
+  },
+  "artifact_retention": "Ignored local probes/logs/screenshots/save copies;hashes identify actual observed artifacts,not public assets or shipped final art."
+}
