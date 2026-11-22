@@ -4,6 +4,7 @@ extends Node
 var frames:=300
 var warmup:=60
 var simple:=false
+var legacy_view:=false
 var ui
 var actor_serial:=0
 var cpu_samples:Array=[]
@@ -13,6 +14,7 @@ func _ready()->void:
 	for argument in OS.get_cmdline_user_args():
 		if argument.begins_with("--frames="):frames=int(argument.trim_prefix("--frames="))
 		elif argument=="--simple":simple=true
+		elif argument=="--legacy-view":legacy_view=true
 	if frames<60 or frames>3600:
 		get_tree().quit(2)
 		return
@@ -50,6 +52,7 @@ func run()->void:
 	state.enemies.clear()
 	ui.simple_attacks=simple
 	ui.view.simple_attacks=simple
+	ui.view.high_angle=not legacy_view
 	var timer:=Time.get_ticks_usec()
 	var survived:=true
 	for frame in range(warmup+frames):
@@ -73,6 +76,9 @@ func run()->void:
 			survived=false
 			break
 	var result:={"status":"MEASURED" if survived and cpu_samples.size()==frames else "INCOMPLETE","os":OS.get_name(),"display":DisplayServer.get_name(),"rendering_device":("headless: no GPU" if DisplayServer.get_name()=="headless" else RenderingServer.get_video_adapter_name()),"viewport":str(get_viewport().get_visible_rect().size),"simple_attacks":simple,"frames":cpu_samples.size(),"warmup":warmup,"cpu_step_ms":summary(cpu_samples),"whole_frame_ms":summary(frame_samples),"peaks":peaks,"active_4x_Lv5":state.growth.owned,"kills":state.kills,"hp_end":state.hp,"limits":"Synthetic360slime replenishment +4Lv5; only actual measured OS/device is covered. Whole-frame includes render/event scheduling and load refill. Headless timing excludes GPU; desktop/software rendering does not establish mobile FPS/thermal/battery."}
+	result.view_mode="legacy" if legacy_view else "high_angle"
+	result.render_counts=ui.view.high_renderer.stats.duplicate() if not legacy_view else {}
+	result.scene_nodes=get_tree().get_node_count()
 	print(JSON.stringify(result))
 	ui.queue_free()
 	await get_tree().process_frame

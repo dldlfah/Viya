@@ -2,6 +2,9 @@ extends Control
 ## Debug shapes are deliberately not final Viya character art.
 const AttackVisuals = preload("res://scripts/combat/attack_visuals.gd")
 const ApproachCues = preload("res://scripts/combat/approach_cues.gd")
+const BattleProjection = preload("res://scripts/combat/battle_projection.gd")
+var high_angle: bool = true # F8: development-only comparison, never a gameplay rule.
+var high_renderer = preload("res://scripts/combat/high_angle_battle.gd").new()
 var art = preload("res://scripts/ui/asset_slots.gd").new()
 var simulation
 var show_damage: bool = true
@@ -12,10 +15,24 @@ func _ready() -> void:
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
 	clip_contents = true
 
+func world_to_screen(at: Vector2) -> Vector2:
+	return BattleProjection.world_to_screen(at,simulation.camera_center(),size) if high_angle else at-simulation.camera_center()+size*.5
+
+func screen_to_world(at: Vector2) -> Vector2:
+	return BattleProjection.screen_to_world(at,simulation.camera_center(),size) if high_angle else at+simulation.camera_center()-size*.5
+
+func world_view_size() -> Vector2:
+	# The comparison toggle does not change saved viewport geometry or spawn RNG.
+	# This is a conservative offscreen guard for both renderers.
+	return BattleProjection.world_view_size(size)
+
 func _screen(at: Vector2) -> Vector2:
-	return at - simulation.camera_center() + size * 0.5
+	return world_to_screen(at)
 
 func _draw() -> void:
+	if high_angle and simulation != null:
+		high_renderer.draw(self)
+		return
 	draw_rect(Rect2(Vector2.ZERO, size), Color("191c22") if simulation == null or simulation.map_id == "legacy_arena" else (Color("302d2a") if simulation.map_id == "prologue_wall" else Color("28352f")))
 	if simulation == null:
 		return

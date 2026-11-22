@@ -31,5 +31,12 @@
   "passive_recovery": "",
   "viya_sigil": "",
   "viya_ultimate": "",
-  "viya_crimson_wave": ""
+  "viya_crimson_wave": "",
+  "stone_floor_tile": "",
+  "wall_segment": "",
+  "ruin_block": "",
+  "palisade": "",
+  "prop_crate": "",
+  "prop_urn": "",
+  "prop_debris": ""
 }

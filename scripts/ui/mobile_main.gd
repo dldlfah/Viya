@@ -249,33 +249,54 @@ func _apply_layout() -> void:
 		simulation.magic.invalidate_requests()
 	layout_data = new_layout
 	var compact: bool = layout_data["compact"]
-	feedback_panel.fit_compact(compact)
-	status_text.add_theme_font_size_override("font_size",13 if compact else 17)
+	feedback_panel.fit_compact(true)
+	feedback_panel.reaction_text.add_theme_font_size_override("font_size",11 if compact else 14)
+	feedback_panel.danger_text.add_theme_font_size_override("font_size",10)
+	feedback_panel.danger_text.custom_minimum_size.y = 12
+	feedback_panel.get_node("ReactionColumn").add_theme_constant_override("separation",0)
+	feedback_panel.frame_style.content_margin_top = 3
+	feedback_panel.frame_style.content_margin_bottom = 3
+	status_text.add_theme_font_size_override("font_size",11 if compact else 15)
 	mana_text.add_theme_font_size_override("font_size",12 if compact else 15)
-	health.custom_minimum_size.y = 8 if compact else 15
-	mana_bar.custom_minimum_size.y = 6 if compact else 10
-	_resources.add_theme_constant_override("separation",2 if compact else 3)
-	magic_button.add_theme_font_size_override("font_size",14 if compact else 16)
-	_identity_title.visible = not compact
+	health.custom_minimum_size.y = 8
+	mana_bar.custom_minimum_size.y = 6
+	_resources.add_theme_constant_override("separation",0 if compact else 3)
+	magic_button.add_theme_font_size_override("font_size",12 if compact else 16)
+	_identity_title.visible = false
+	_settings_button.custom_minimum_size = Vector2(70 if compact else 116, 28 if layout_data.top.size.y < 40 else 40)
+	_settings_button.text = "정지 II" if compact else "환경설정 II"
+	_settings_button.add_theme_font_size_override("font_size",13 if compact else 15)
+	stats_text.custom_minimum_size.x = 0 if compact else 245
+	stats_text.visible = not compact
 	_brand.visible = not compact
-	stats_text.custom_minimum_size.x = 185.0 if compact else 245.0
-	_settings_button.custom_minimum_size = Vector2(116, 36 if compact else 44)
+	level_text.add_theme_font_size_override("font_size",12 if compact else 15)
+	experience.custom_minimum_size.y = 5
+	_growth_column.add_theme_constant_override("separation",0)
+	_skills.add_theme_constant_override("separation",3)
+	for button in slot_buttons:button.custom_minimum_size.y = 24 if compact else 38
+	for row in _skills.get_children():
+		var heading:Label=row.get_child(0)
+		heading.custom_minimum_size.x = 35 if compact else 48
+		heading.add_theme_font_size_override("font_size",11 if compact else 14)
+	for label in attack_slots+passive_slots:label.add_theme_font_size_override("font_size",11 if compact else 14)
+	_support.add_theme_font_size_override("font_size",10)
+	_support.text="지원 2+2 · 빈칸"
 	_header_row.add_theme_constant_override("separation", 6 if compact else 12)
 	var style: StyleBoxFlat = _header.get_theme_stylebox("panel") as StyleBoxFlat
-	style.content_margin_top = 4
-	style.content_margin_bottom = 4
+	style.content_margin_top = 2
+	style.content_margin_bottom = 2
 	_place(_header, layout_data["top"])
 	_place(view, layout_data["battle"])
-	simulation.spawn_view_size = view.size
+	simulation.spawn_view_size = view.world_view_size()
 	if is_instance_valid(stage_text):
-		stage_text.position = view.position + Vector2(12, 8)
+		stage_text.position = _header.position + Vector2(0, 0)
 		stage_text.size.x = maxf(1.0, view.size.x - 24.0)
 		stage_text.clip_text = true
 	if is_instance_valid(boss_bar):
-		boss_bar.position = view.position + Vector2(12, 51)
+		boss_bar.position = view.position + Vector2(12, 17)
 		boss_bar.size = Vector2(minf(360.0, view.size.x * 0.5), 8)
-		boss_label.position = view.position + Vector2(12, 30)
-		ailment_text.position = view.position + Vector2(12, 65)
+		boss_label.position = view.position + Vector2(12, 0)
+		ailment_text.position = layout_data.resources.position-Vector2(0,19)
 	_place(feedback_panel, layout_data["feedback"])
 	_place(_resources, layout_data["resources"])
 	_place(_skills, layout_data["skills"])
@@ -621,6 +642,11 @@ func _input(event: InputEvent) -> void:
 	super._input(event)
 
 func _unhandled_key_input(event: InputEvent) -> void:
+	if OS.is_debug_build() and event is InputEventKey and event.pressed and not event.echo and event.keycode==KEY_F8:
+		view.high_angle = not view.high_angle
+		view.queue_redraw()
+		get_viewport().set_input_as_handled()
+		return
 	if _modal_kind in ["stages", "lobby_settings", "gold_dungeon"] and event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_ESCAPE:
 		_campaign_back(simulation.navigation_ticket, _menu_revision)
 		get_viewport().set_input_as_handled()
@@ -1092,7 +1118,13 @@ func _update_hud() -> void:
 	if _modal_kind=="gold_dungeon" and is_instance_valid(dungeon_launch_button):
 		dungeon_launch_button.text="입장 · 오늘 %d회 남음" % gold_progress.dungeon_remaining()
 		dungeon_launch_button.disabled=gold_progress.dungeon_remaining()<=0
-	stage_text.visible = not overlay.visible
+	# Fold the verbose mission into existing header hover/read-only pause context.
+	stage_text.visible = false
+	_header.tooltip_text = stage_text.text
+	level_text.tooltip_text = stage_text.text
+	if not overlay.visible:
+		var remaining:int=maxi(0,int(ceil(simulation.stage_duration-simulation.elapsed)))
+		level_text.text += " · %02d:%02d" % [remaining/60,remaining%60]
 	ailment_text.visible = not overlay.visible
 	ailment_text.text = "둔화 · %.1f초" % simulation._slow_left if simulation._slow_left > 0.0 else ""
 	status_text.text = "HP %d / %d" % [simulation.hp, simulation.max_hp]
@@ -1128,6 +1160,7 @@ func _update_magic_hud() -> void:
 	if layout_data.get("compact",false):
 		var reason: String = simulation.magic.unavailable_reason(simulation.phase == RunState.Phase.RUNNING)
 		var hint := "터치 / F" if reason.is_empty() else ("마력 부족" if reason == "mana" else "전투 중 사용")
-		magic_button.text = "%s · Lv.%d\nMP %.1f · %s" % [simulation.magic.config.get("name","[임시] 마법"),int(simulation.stats.ultimate),simulation.magic.effective_cost(),hint]
+		magic_button.tooltip_text = "%s · 강화 Lv.%d" % [simulation.magic.config.get("name","[임시] 마법"),int(simulation.stats.ultimate)]
+		magic_button.text = "고유기 · %dMP\n%s" % [simulation.magic.effective_cost(),hint]
 	if simulation.growth.ruleset == "weapons_v1" and int(simulation.stats.ultimate)==5:
 		magic_button.text = magic_button.text.replace("Lv.5","Lv.5 진화")
