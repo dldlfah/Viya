@@ -48,3 +48,13 @@
 [원본 4방향 PNG·원본 외곽 측정 JSON 및 전체 크기 QA JPG를 포함한 ZIP](https://d2ol7oe51mr4n9.cloudfront.net/user_3LHdo37hN3iiYXd8WT9stnWXw4M/68bc52c2-9a6a-4b56-beb7-e9cce87668da.zip) · [검수/모델링 기준 상세](VIYA_TURNAROUND_QA_20261117.md).
 
 전후 관계: `ART-001`만 사용자 승인 원화 방향. `GEN-001..004`는 그 승인 디자인에서 파생된 4방향 작업용 이미지이며, **원화 최종 치수와 의상 분해 정합성은 여전히 미승인**. 원본 및 전체 비교 ZIP을 GitHub에 올렸다는 주장은 금지.
+
+## 2026-11-22 — 비야 3/4 정면 전투 포즈 시안
+
+| 식별자 | GitHub 원본 | 용도 | 상태 |
+| --- | --- | --- | --- |
+| `GEN-005` | [GEN-005_viya_combat_pose_three_quarter_front.png](../assets/references/GEN-005_viya_combat_pose_three_quarter_front.png) | 로비 대표 일러스트 후보, 전투 HUD 기본 초상화 참고 | PNG 원본 등록, 최종 채택 승인 대기, 게임 화면 미연결 |
+
+- 출처는 사용자 첨부 `비야 캐릭터 모델링 제작 시트(2).png`를 참조해 채팅에서 생성한 `비야의 다크 판타지 전투 포즈.png`다.
+- 원본은 PNG RGB **1024×1536**, **1,921,148바이트**다. SHA-256은 `d3c0084c73aff9a706a50a6cac760d124c0647d23fa36e6ae30635dc6929a730`이다.
+- 사용 권한은 사용자 지시에 따른 Viya 저장소 등록이다. 상업 배포 권한은 별도 검토 대상이다.
