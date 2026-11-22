@@ -100,6 +100,8 @@ static func run(host, verify: Callable) -> void:
 	key.keycode=KEY_F8
 	scene._unhandled_key_input(key)
 	verify.call(not scene.view.high_angle and Snapshot.capture(scene.simulation)==frozen,"ActualF8callback switches only the renderer")
+	scene.pause_game()
+	verify.call(scene.dialog_body.get_children().any(func(child):return child is Label and child.text==scene.stage_text.text),"Folded mission is available in the actual mobile pause screen")
 	scene.queue_free()
 	await host.get_tree().process_frame
 	for path in ["user://high-angle-"+suffix+".save","user://high-angle-"+suffix+".cfg","user://high-angle-"+suffix+"-settings.cfg"]:DirAccess.remove_absolute(path)

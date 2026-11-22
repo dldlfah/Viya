@@ -348,6 +348,7 @@ func _show_menu(kind: String) -> void:
 			else:
 				child.pressed.connect(_start_from_menu.bind(ticket, revision))
 	if kind == "paused":
+		dialog_body.add_child(_label(stage_text.text,14))
 		if simulation.run_mode=="gold_slime":
 			for child in dialog_body.get_children():
 				if child is Button and child.pressed.is_connected(_request_transition.bind("restart",ticket,revision)):
@@ -1161,6 +1162,6 @@ func _update_magic_hud() -> void:
 		var reason: String = simulation.magic.unavailable_reason(simulation.phase == RunState.Phase.RUNNING)
 		var hint := "터치 / F" if reason.is_empty() else ("마력 부족" if reason == "mana" else "전투 중 사용")
 		magic_button.tooltip_text = "%s · 강화 Lv.%d" % [simulation.magic.config.get("name","[임시] 마법"),int(simulation.stats.ultimate)]
-		magic_button.text = "고유기 · %dMP\n%s" % [simulation.magic.effective_cost(),hint]
+		magic_button.text = "고유기 · %.1fMP\n%s" % [simulation.magic.effective_cost(),hint]
 	if simulation.growth.ruleset == "weapons_v1" and int(simulation.stats.ultimate)==5:
 		magic_button.text = magic_button.text.replace("Lv.5","Lv.5 진화")
