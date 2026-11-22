@@ -761,3 +761,41 @@ F의 기술 검증은 Godot2371/Python12·이전 저장1~7/새8 별도 프로세
 저장15/보상버전1은 신규 던전만 적용한다. 구1~14의 진행 중 전투는 보상0/기존10~50·수집/바닥 금화·HP/MP/난수를 유지하며 구14 pacing1/구1~13 pacing0도 보존한다. 3154native/Python12·17복원프로세스/4렌더 PASS. 상세 CURRENT/DEVELOPMENT_STATUS8.16/GAME023_REPORT.
 
 금화42시나리오는 새 던전10회와 변경 없는 GAME-022 캠페인20회 재사용을 구분했다. 가격1000/50000/1000000 유지·하루 던전2+캠페인1의 고정 수입 가정에서 첫특성Lv3 약5~6일/전체18Lv3 약89~91일이다. 최종 경제/사람 편차·서버 시각/동기화는 후속이며 가격 추가 조정은 미적용이다. 남은 보스 시간초과·실제 모바일 성능/터치 QA와 정식 콘텐츠/아트 보류 경계를 유지한다.
+
+## 20. GAME-024 — 고각2.5D 전장·모바일 화면 개편 (2026-11-22)
+
+최신 통합 지시서가 그래픽 작업을 우선 지정했다. 이전NEXT의 보스 시간초과는 미해결로 보존하며 우선순위만 바뀐다. **첫 묶음 구현:** 60도/축회전없는 지면 정사영,반복타일·바닥세부/그림자·발정렬/입체벽/가림·공격효과·고정HUD. `world_to_screen`/`screen_to_world`와 투영 가시영역을 공유한다. 기존 한RunState/월드좌표/스탯/타격/보상·저장15/7난수는 유지했다. 정확한 쿼터뷰 방위각·정식 아트 투영 승인은 후속이다.
+
+**기본 모바일 시야 구현:** 두 줄4+4·작은 반응/HP/MP·빈지원2+2·MP버튼/상단정지를 유지하며 안전영역 내 예약 전투높이72.7~74.7%를 확보했다. F8개발비교는 렌더만 변경한다. 3193native/Python12·18복원/8렌더/실제이벤트 이동·필살기100회PASS. 이는 실기dp/가독성·8~9점 승인과 다르다. 360슬라임+4Lv5의Linux llvmpipe 전체프레임p95는 새일반69.302ms/간소화67.643ms·기존79.036ms이며 모바일FPS판정은미검증이다.
+
+### 20.1. 외부 자산 제작 전 규격 — 아직 제작하지 않음
+
+지면은 월드좌표에서 투영을 한 번 적용하고, 캐릭터는 발이 고정된 직립 billboard다. **바닥에 이미 투영된 원근을 굽거나 배경 한 장으로 전장을 대체하지 않는다.** 색채는차콜/황동/진홍,조명은좌상단하나로통일하고그림자는별도바닥레이어에서처리한다. 캐릭터/환경PNG는투명알파·의도한해상도 여백을고정하고,발기준점/프레임영역/색상sRGB를기록한다. 표의수치는시제품계약이며최종아트크기/기기승인이아니다.
+
+| 자산 | 1차 규격·접점 | 현재 연결/후속 |
+| --- | --- | --- |
+| 석재 바닥 | 월드112×80의반복tile,원본224×160권장,상하좌우seamless·정수배반복,바닥만불투명 | `stone_floor_tile`빈슬롯→보이는구간반복,없으면도형.투영중복금지 |
+| 성벽 기본 | 화면96×122의반복전면재질,원본192×244권장,하단이충돌박스앞발선·상부입체면은지오메트리 | `wall_segment`빈슬롯;장애물충돌과그림자미포함 |
+| 모서리·성문 | 동일60도/광원·발선,모서리좌우와성문을독립PNG로제작,축미러링으로비대칭재사용금지 | 현재성문은임시도형,전용corner/gate슬롯·방향규격은후속 |
+| 목책·바리케이드 | 96×64전후로읽히는분리PNG,발접점하단중앙,높이/충돌footprint별도 | `palisade`는빈경로만,전용그리기/배치후속 |
+| 상자·항아리·잔해 | 화면46×43전후,PNG92×86권장,하단중앙발접점,파괴/온전함은같은캔버스 | `prop_crate/prop_urn/prop_debris`빈슬롯·없으면도형,45초재생성규칙유지 |
+| VIYA 전투 자세 | 화면50×62시험값/원본200×248전후고정캔버스,발pivot(0.5,1),무기포함·총구기준별도 | `viya_battle`SpriteFrames/Texture지원·idle/hurt접속.방향별run/attack/필살기애니메이션은후속.ART001이master,GEN005최종승인아님 |
+| 고블린1종 | 화면32×40시험값/원본128×160,발pivot(0.5,1),우선idle/run/hurt/death·같은발캔버스 | 현재`normal`은행동공통슬롯이므로종족별슬롯분리후연결.일반전체를고블린으로자동치환하지않음 |
+
+애니메이션초기시험은idle4~6frames/6fps,run6~8frames/8~12fps,hurt1~2frames이며공유SpriteFrames/atlas를사용한다. **재생속도는시각적시험값으로타격주기·이동/피해량을바꾸지않는다.** 실제발/총구pivot·비대칭의상/장비·투명경계는ART001대조와실기크기로승인한다. 원화전체를게임배경으로늘리거나캐릭터마다노드/조명을추가하지않는다.
+
+### 20.2. Higgsfield 제작 프롬프트 초안 — 실행/비용 승인 아님
+
+공통: `One independently composable dark-fantasy game asset. Match the approved reference and charcoal/brass/crimson palette. Consistent upper-left lighting. No text, UI, borders, background scene or baked ground shadow. Preserve asymmetric construction. Follow the stated ground-contact pivot and fixed canvas.`
+
+- 바닥: `Seamlessly tileable top-down stone floor material,112x80world-unit aspect,subtle cracks and restrained contrast,no perspective or vertical structures. Projection is applied by the game,not painted into this material.`
+- 성벽: `A repeatable96x122front-facing stone wall facade module with brass/crimson accents where referenced. No floor,camera perspective,ground shadow or adjacent scene. Upper cap is a separate geometric layer.`
+- 모서리/성문: `A single modular corner OR gate asset per output,consistent60degree high-angle guide,explicit ground footprint and bottom baseline. Preserve left/right construction;do not mirror asymmetry.`
+- 목책: `One independent barricade or palisade module,transparent background,readable high-angle silhouette,clearly defined bottom contact and no baked collision markings.`
+- 파괴물: `One wooden crate OR clay urn OR rubble prop per output,transparent background,matching high-angle guide and fixed bottom-center contact. Intact/destroyed variants share exactly the same canvas.`
+- 비야: `UseART001as the exact character master. One mature VIYA with the original ivory/black/brass/crimson costume and original rune rifle.60degree high-angle orthographic combat reference with stable feet and readable weapon direction. Transparent background,no redesign,no extra white sleeves,no mirrored asymmetric fabric. GEN005is a pose study only.`
+- 고블린: `One goblin combat actor matching the approved monster design when supplied. High-angle orthographic upright sprite,stable bottom-center feet,fixed canvas,no baked floor/shadow/no UI. Keep its silhouette readable at32x40logical pixels.`
+
+### 20.3. 후속 묶음/미완성
+
+다음은HUD세부 가독성/조작·모바일에서펼치는임무안내·실기dp/터치검증과전방5~10%카메라시야보정비교다. 이후밀집효과자동예산/숫자겹침·종족별아트슬롯/애니메이션연계를진행한다. 중급Android실제모델에서p95<=33ms/p99<=50ms·기본30FPS/권장60FPS·발열/지연을측정하기전에는모바일합격/8~9점을선언하지않는다. 이전보스407시간초과·최종경제/GEN005채택은별도미해결이다. 이번작업은Higgsfield유료이미지/동영상/3D생성이나유료Actions를실행하지않았다.

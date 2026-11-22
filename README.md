@@ -4,7 +4,7 @@
 
 ## 세션 필수 문서
 
-[CURRENT_WORK](docs/CURRENT_WORK.md)와 **[누적 DEVELOPMENT_STATUS](docs/DEVELOPMENT_STATUS.md)**를 함께 읽는다. [PLANNED_WORK](docs/PLANNED_WORK.md) · [NEXT_TASK](docs/NEXT_TASK.md) · [AGENTS](AGENTS.md) · [제작 스킬](.agents/skills/viya-game-production/SKILL.md). GAME-023 코드 **`b3d8f8c7b7a2060848db6633f2523f4851731dcc`**, 브랜치 `work/viya-turnaround-qa-20261117`. 문서 HEAD는 코드 뒤에 오며 main 자동 병합은 하지 않는다.
+[CURRENT_WORK](docs/CURRENT_WORK.md)와 **[누적 DEVELOPMENT_STATUS](docs/DEVELOPMENT_STATUS.md)**를 함께 읽는다. [PLANNED_WORK](docs/PLANNED_WORK.md) · [NEXT_TASK](docs/NEXT_TASK.md) · [AGENTS](AGENTS.md) · [제작 스킬](.agents/skills/viya-game-production/SKILL.md). GAME-024 코드 **`bd0e80ef61d770eee1a48c288b065422096345d8`**, 브랜치 `work/viya-turnaround-qa-20261117`. 문서 HEAD는 코드 뒤에 오며 main 자동 병합은 하지 않는다.
 
 ## 실제 플레이 경로
 
@@ -31,9 +31,11 @@
 
 신규 출격은 `combat_pacing.json`의 모드별 요구XP표×기존3배를 사용하며 드롭5XP는 유지한다. Lv5부터 보유 공격 강화1후보를 우선 포함해3선택을 유지하고,기본무기는 사거리 내 보스를 우선 조준한다. 구1~13저장은pacing0의 기존XP/후보/조준·HP/MP를 유지한다. 진화는 플레이어의 강화 선택으로 진행한다.
 
+기본 전투 화면은 **고각60도 2.5D 시제품**이다. 반복 바닥/입체벽·발 기준 정렬·비야 가림 완화·고정 HUD를 연결했고,시험 화면의 예약 전투 높이는 안전영역의72.7~74.7%다. 디버그 **F8**로 기존 렌더러와 비교한다. ART-001·GEN-005를 새 스프라이트로 자동 채택하지 않았으며 정식 아트/모바일8~9점 승인은 별도다.
+
 ## 검증
 
-Godot4.7.2 소스/임포트·기존7묶음 **3154 native checks**·부트와 Python12는 PASS다. 실제 구1~13/구14두모드/새15두모드의17개 별도 복원 프로세스와 실제 던전 입장·정지/이어하기·정산4화면을 확인했다. [정확한 소스와 근거](docs/validation/GAME023_REPORT.json).
+Godot4.7.2 소스/임포트·기존7묶음 **3193 native checks**·부트와 Python12는 PASS다. 실제 구1~15/새 UI의18개 복원 프로세스·고각/기존/가림/compact 실제8화면·이동/MP고유기 병행100회 이벤트 검사를 통과했다. 360슬라임+4Lv5의Linux부하 측정과 실제모바일 미검증을 구분한다. [정확한 소스와 근거](docs/validation/GAME024_REPORT.json).
 
 ```sh
 python3 tools/check_project.py --godot /actual/path/to/Godot
