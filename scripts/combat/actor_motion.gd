@@ -19,6 +19,7 @@ func prepare(state, track_enemies:bool=true) -> void:
 	if state.run_id!=run_id or state.elapsed<clock:reset(state.run_id)
 	if not entries.has(0):entries[0]={"p":state.player,"hp":state.hp,"shots":state.shots,"casts":state.magic.casts,"pose":"idle","moving":false,"since":state.elapsed,"direction":direction(state.facing),"facing":state.facing}
 	entries[0].before_bullets=state.bullets.duplicate()
+	entries[0].before_received=state.cues.received_serial
 	if not track_enemies:return
 	for enemy in state.enemies:
 		if not entries.has(int(enemy.id)):entries[int(enemy.id)]={"p":enemy.p,"hp":enemy.hp,"fire_clock":enemy.get("fire_clock",0),"pose":"idle","moving":false,"since":state.elapsed,"direction":direction(state.player-enemy.p),"facing":enemy.p.direction_to(state.player)}
@@ -31,6 +32,16 @@ func sync(state, hero_displacement:Vector2, active:bool, track_enemies:bool=true
 	var hero:Dictionary=entries.get(0,{"p":state.player-hero_displacement,"hp":state.hp,"shots":state.shots,"casts":state.magic.casts})
 	var fired:bool=state.shots>int(hero.get("shots",state.shots)) or state.magic.casts>int(hero.get("casts",state.magic.casts))
 	var aim:Vector2=state.facing
+	var contacts:Dictionary={}
+	var received_now:bool=false
+	for hit in state.cues.received:
+		if int(hit.serial)<=int(hero.get("before_received",state.cues.received_serial)):continue
+		received_now=true
+		hero.hurt_until=state.elapsed+.12
+		hero.erase("hurt_aim")
+		if not hit.direction.is_zero_approx():hero.hurt_aim=hit.direction
+		if hit.kind=="contact":contacts[int(hit.id)]=hit.p
+	if state.hp<float(hero.hp) and not received_now:hero.erase("hurt_aim")
 	if state.shots>int(hero.get("shots",state.shots)):
 		for index in range(state.bullets.size()-1,-1,-1):
 			var bullet:Dictionary=state.bullets[index]
@@ -41,6 +52,7 @@ func sync(state, hero_displacement:Vector2, active:bool, track_enemies:bool=true
 	entries[0].shots=state.shots
 	entries[0].casts=state.magic.casts
 	entries[0].before_bullets=[]
+	entries[0].before_received=state.cues.received_serial
 	for enemy in (state.enemies if track_enemies else []):
 		var id:int=enemy.id
 		live[id]=true
@@ -50,6 +62,10 @@ func sync(state, hero_displacement:Vector2, active:bool, track_enemies:bool=true
 		var windup:float=enemy.get("windup",0)
 		var attacking:bool=windup>0 or float(enemy.get("fire_clock",0))>float(previous.get("fire_clock",enemy.get("fire_clock",0)))
 		var aim_at:Vector2=enemy.get("aim",state.player) if attacking else state.player
+		if contacts.has(id):
+			attacking=true
+			windup=0
+			aim_at=contacts[id]
 		update(id,previous,enemy.p,enemy.hp,enemy.p-previous.p,aim_at-enemy.p,attacking,windup,state)
 		entries[id].fire_clock=enemy.get("fire_clock",0)
 		entries[id].flash=flash
@@ -71,6 +87,7 @@ func update(id:int, previous:Dictionary, position:Vector2, hp:float, displacemen
 	if pose=="attack":value.since=value.get("attack_since",now)
 	if moving and not previous.get("moving",false):value.move_since=now
 	var face:Vector2=value.get("aim",facing) if pose=="attack" else (displacement if moving else facing)
+	if pose=="hurt":face=value.get("hurt_aim",face)
 	value.merge({"p":position,"hp":hp,"pose":pose,"moving":moving,"direction":direction(face),"facing":face.normalized()},true)
 	entries[id]=value
 

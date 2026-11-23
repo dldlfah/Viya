@@ -259,9 +259,10 @@ func set_paused(value: bool) -> void:
 		phase = _resume_phase
 		navigation_ticket += 1
 
-func damage_player(amount: int, damage_type: String = "physical", enemy_penetration: float = 0.0) -> bool:
+func damage_player(amount: int, damage_type: String = "physical", enemy_penetration: float = 0.0, source: Dictionary = {}) -> bool:
 	if phase != Phase.RUNNING or hurt_clock > 0.0 or amount <= 0 or damage_type not in ["physical","magical"]:
 		return false
+	var previous_hp: int = hp
 	if armor_enabled:
 		var player_armor: float = float(stats.get(damage_type+"_defense",0.0))
 		amount = maxi(1,int(ceil(DefenseRules.mitigated_damage(float(amount),player_armor,enemy_penetration))))
@@ -270,10 +271,11 @@ func damage_player(amount: int, damage_type: String = "physical", enemy_penetrat
 	var prevented := mini(amount, int(floor(_damage_reduction_remainder + 0.000000001)))
 	_damage_reduction_remainder = maxf(0.0, _damage_reduction_remainder - prevented)
 	hp = maxi(0, hp - (amount - prevented))
+	cues.record_received(player, previous_hp-hp, source)
 	hurt_clock = float(stats.get("hit_lock", HIT_LOCK))
 	if hp == 0:
 		_finish_run("defeat")
-	else:
+	elif hp < previous_hp:
 		feedback.trigger("hurt")
 	return true
 
@@ -651,7 +653,7 @@ func _move_enemies(dt: float) -> void:
 	_move_fliers(dt)
 	for enemy in enemies:
 		if enemy.p.distance_squared_to(player) <= pow(PLAYER_RADIUS + ENEMY_RADIUS, 2.0):
-			var accepted := damage_player(int(enemy.get("contact_damage",12)))
+			var accepted := damage_player(int(enemy.get("contact_damage",12)), "physical", 0.0, {"kind":"contact", "id":int(enemy.id), "p":enemy.p})
 			if accepted and enemy.variant == "flier":
 				push_player(enemy.velocity.normalized() * FLIER_PLAYER_PUSH)
 			if phase == Phase.DEFEAT:
@@ -732,7 +734,7 @@ func _move_enemy_bullets(dt: float) -> void:
 		var nearest := Geometry2D.get_closest_point_to_segment(player, previous, bullet.p)
 		var hit: bool = nearest.distance_squared_to(player) <= pow(PLAYER_RADIUS + 5.0, 2.0)
 		if hit:
-			if damage_player(int(bullet.damage)):
+			if damage_player(int(bullet.damage), "physical", 0.0, {"kind":"projectile", "direction":-bullet.velocity.normalized()}):
 				apply_slow(RANGED_SLOW_DURATION)
 		if hit or bullet.life <= 0.0 or wall_hit < 1.0:
 			enemy_bullets.remove_at(index)

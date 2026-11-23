@@ -13,11 +13,21 @@ FILES = ('scripts/combat/run_state.gd', 'scripts/combat/battle_view.gd',
          'tools/check_project.py', 'tools/check_combat_cues.py')
 # GAME-024: reviewed enemy variants, formations and hostile projectile integration. Exact source baselines retain mutation guards.
 BASE_RUN_BLOB = '673d75a748fa5f1f9ac72ec73bbd9120fdcfce02'
-BASE_VIEW_BLOB = '93029bbf7674fadb2205552ca733c3a20121038b'
+BASE_VIEW_BLOB = '9e5c23c321e53f3ccb948d5dc7f1a2f101ffcd32'
 BASE_RUNNER_BLOB = '1ab68ad8a51271e3d47db8b02d433991f42e8d6c'
 # Exact run_engine() from GAME-004D; all 7 suites and failure checks are protected.
 BASE_ENGINE_FUNCTION_SHA256 = '9156043eaf896d72565563cc1e2f623cf0c8fbac7f032f19bffee7e4946a69ee'
 ADDED_RUN_LINES = ('const CombatCues = preload("res://scripts/combat/combat_cues.gd")', 'var cues = CombatCues.new()', '\tcues.reset()', '\tcues.advance(dt)', '\t\tcues.record_collected_xp(player, reward)', '\t\tvar critical: bool = false', '\t\tvar previous_hp: int = int(enemies[i]["hp"])', '\t\tvar hit_at: Vector2 = enemies[i]["p"]', '\t\t\tcritical = true', '\t\t# Display HP actually removed, not theoretical overkill damage. Reuse the crit roll.', '\t\tvar hp_lost: int = maxi(0, previous_hp - maxi(0, int(enemies[i]["hp"])))', '\t\tcues.record_hit(id, hit_at, hp_lost, critical)', '\tcues.record_kill(int(enemy.id), enemy.p)')
+
+
+# GAME030: exact cosmetic-only contextual damage hooks; strip back to GAME024.
+RECEIVED_RUN_REPLACEMENTS = (
+    ('func damage_player(amount: int, damage_type: String = "physical", enemy_penetration: float = 0.0, source: Dictionary = {}) -> bool:', 'func damage_player(amount: int, damage_type: String = "physical", enemy_penetration: float = 0.0) -> bool:'),
+    ('\telif hp < previous_hp:\n\t\tfeedback.trigger("hurt")', '\telse:\n\t\tfeedback.trigger("hurt")'),
+    ('damage_player(int(enemy.get("contact_damage",12)), "physical", 0.0, {"kind":"contact", "id":int(enemy.id), "p":enemy.p})', 'damage_player(int(enemy.get("contact_damage",12)))'),
+    ('damage_player(int(bullet.damage), "physical", 0.0, {"kind":"projectile", "direction":-bullet.velocity.normalized()})', 'damage_player(int(bullet.damage))'),
+)
+RECEIVED_RUN_LINES = ('\tvar previous_hp: int = hp', '\tcues.record_received(player, previous_hp-hp, source)')
 
 
 def blob(text: str) -> str:
@@ -46,7 +56,11 @@ def validate(sources: dict[str, str]) -> list[str]:
     errors: list[str] = []
     run, view, cues, tests, runner, _ = [sources[x] for x in FILES]
     restored = run
-    for line in ADDED_RUN_LINES:
+    for old, original in RECEIVED_RUN_REPLACEMENTS:
+        if restored.count(old) != 1:
+            errors.append('Missing/duplicate reviewed received-damage hook: ' + old)
+        restored = restored.replace(old, original, 1)
+    for line in ADDED_RUN_LINES + RECEIVED_RUN_LINES:
         if restored.splitlines().count(line) != 1:
             errors.append('Missing/duplicate reviewed visual hook: ' + line.strip())
         restored = restored.replace(line + '\n', '', 1)
@@ -60,7 +74,7 @@ def validate(sources: dict[str, str]) -> list[str]:
     restored_view = restored_view.replace('\t\t\tvar enemy_color: Color = Color("aa5364").lerp(Color("fff1db"), flash)\n', '', 1)
     restored_view = restored_view.replace(']), enemy_color)', ']), Color("aa5364"))', 1)
     if blob(restored_view) != BASE_VIEW_BLOB:
-        errors.append('Battle View differs from the reviewed GAME-029 boss guidance baseline')
+        errors.append('Battle View differs from the reviewed GAME-030 incoming feedback baseline')
     for value in ('const MAX_EVENTS := 48', 'const MAX_FLASHES := 80',
                   'events.size() >= MAX_EVENTS', 'events.pop_front()',
                   'flashes.size() >= MAX_FLASHES', 'flashes.erase(flashes.keys()[0])',
@@ -78,6 +92,12 @@ def validate(sources: dict[str, str]) -> list[str]:
     step = section(run, 'step')
     if step.index('cues.advance(dt)') < step.index('if phase != Phase.RUNNING'):
         errors.append('Visual time advances before the RUNNING guard')
+    received = section(run, 'damage_player')
+    if 'cues.record_received(player, previous_hp-hp, source)' not in received or received.index('cues.record_received(') < received.index('hp = maxi(0, hp - (amount - prevented))'):
+        errors.append('Received cue must follow committed post-mitigation HP loss')
+    for marker in ('const MAX_RECEIVED := 6', 'received.size() >= MAX_RECEIVED', 'received.pop_front()', 'received.duplicate(true)', 'received.clear()'):
+        if marker not in cues:
+            errors.append('Missing received-damage bound/reset/copy: ' + marker)
     hit = section(run, '_damage_enemy')
     if hit.index('cues.record_hit(') < hit.index('enemies[i]["hp"] -='):
         errors.append('Hit cue emitted before actual damage')
@@ -132,6 +152,8 @@ def check() -> dict:
         ('early_clock', FILES[0], '\tvar dt := minf(delta, 0.05)\n', '\tvar dt := minf(delta, 0.05)\n\tcues.advance(dt)\n'),
         ('changed_damage', FILES[0], 'damage *= float(stats.get("crit_damage", 2.0))', 'damage *= 99.0'),
         ('drop_as_collection', FILES[0], '\tpickups.append(', '\tcues.record_collected_xp(at, value)\n\tpickups.append('),
+        ('unbounded_received', FILES[2], 'received.pop_front()', 'pass'),
+        ('received_before_hp', FILES[0], '\thp = maxi(0, hp - (amount - prevented))\n\tcues.record_received(player, previous_hp-hp, source)', '\tcues.record_received(player, previous_hp-hp, source)\n\thp = maxi(0, hp - (amount - prevented))'),
         ('unbounded_visuals', FILES[2], 'events.pop_front()', 'pass'),
         ('cosmetic_rng', FILES[2], 'flashes[id] = FLASH_SECONDS', 'flashes[id] = randf()'),
         ('mutable_view', FILES[1], '\t_draw_combat_cues()', '\tsimulation.cues.advance(0.05)\n\t_draw_combat_cues()'),

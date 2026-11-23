@@ -75,6 +75,7 @@ func draw(view) -> void:
 				CombatSkin.rune(canvas,effect.p,reach*.78,Color("d95b75",alpha*.8),true)
 	canvas.draw_set_transform_matrix(Transform2D.IDENTITY)
 	canvas._draw_combat_cues()
+	canvas.IncomingFeedback.draw(canvas,canvas.incoming_plan)
 	canvas._draw_foreground_threats()
 	# Foreground identification remains visible even in a dense crowd.
 	var feet := screen(state.player)

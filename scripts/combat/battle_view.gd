@@ -5,6 +5,8 @@ const ApproachCues = preload("res://scripts/combat/approach_cues.gd")
 const BattleProjection = preload("res://scripts/combat/battle_projection.gd")
 const Display=preload("res://scripts/combat/combat_display.gd")
 const BossGuidance=preload("res://scripts/combat/boss_guidance.gd")
+const IncomingFeedback=preload("res://scripts/combat/incoming_feedback.gd")
+var incoming_plan:Dictionary={}
 var boss_guidance:Dictionary={}
 var auto_display:bool=true # Diagnostic comparison; no gameplay/save setting.
 var display_plan:Dictionary={}
@@ -59,6 +61,7 @@ func tracks_enemy_motion() -> bool:
 
 func _draw() -> void:
 	if simulation!=null:boss_guidance=BossGuidance.build(self)
+	if simulation!=null:incoming_plan=IncomingFeedback.build(self)
 	if simulation!=null:display_plan=Display.build(self)
 	if high_angle and simulation != null:
 		high_renderer.draw(self)
@@ -149,6 +152,7 @@ func _draw() -> void:
 		draw_line(center + direction * 6.0, center + direction * 34.0, Color("3a3e48"), 8.0, true)
 		draw_arc(center, 24.0, 0.0, TAU, 36, Color("b69a65"), 1.4, true)
 	_draw_combat_cues()
+	IncomingFeedback.draw(self,incoming_plan)
 	_draw_foreground_threats()
 	_draw_approaches()
 	BossGuidance.draw(self,boss_guidance)

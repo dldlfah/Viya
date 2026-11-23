@@ -39,6 +39,7 @@ static func build(view) -> Dictionary:
 	var actors:=0
 	var important:Dictionary={}
 	var reserved:Array=[Rect2(view.world_to_screen(state.player)-Vector2(25,64),Vector2(50,86))]
+	if not view.incoming_plan.is_empty():reserved.append(Rect2(view.incoming_plan.center-Vector2.ONE*43,Vector2.ONE*86))
 	if not view.boss_guidance.is_empty():
 		reserved.append(view.boss_guidance.status_rect.grow(3))
 		if view.boss_guidance.marker_rect.has_area():reserved.append(view.boss_guidance.marker_rect.grow(3))
@@ -73,6 +74,9 @@ static func build(view) -> Dictionary:
 			links+=1
 		planned.push_front(effect)
 	var cues:Array=merged_events(state.cues.events) if state.cues.enabled else []
+	if not view.incoming_plan.is_empty():
+		var received:Dictionary=state.cues.latest_received()
+		cues.append({"kind":"received","id":0,"p":state.player,"amount":received.amount,"life":received.life,"duration":received.duration})
 	var limit:int=(8 if compact else 12) if dense else (16 if compact else 24)
 	var labels:Array=layout_labels(cues,view.world_to_screen,view.size,view.get_theme_default_font(),reserved,important,limit,view.show_damage,view.show_xp)
 	var kills:Array=[]
@@ -81,6 +85,7 @@ static func build(view) -> Dictionary:
 	return {"dense":dense,"simple":simple,"actors":actors,"bullets":bullets,"effects":planned,"skipped_links":skipped,"labels":labels,"label_limit":limit,"kills":kills,"reserved":reserved,"raw_events":state.cues.events.size(),"merged_events":cues.size()}
 
 static func priority(event: Dictionary, important: Dictionary) -> int:
+	if event.kind=="received":return -1
 	if event.kind=="item":return 0
 	if event.kind=="hit":return 1 if important.has(int(event.id)) else (2 if event.critical else 4)
 	return 3
@@ -88,7 +93,7 @@ static func priority(event: Dictionary, important: Dictionary) -> int:
 static func layout_labels(events: Array, project: Callable, viewport: Vector2, font: Font, reserved: Array, important: Dictionary, limit: int, show_damage: bool, show_xp: bool) -> Array:
 	var candidates:Array=[]
 	for event in events:
-		if event.kind=="kill" or (event.kind=="hit" and not show_damage) or (event.kind=="xp" and not show_xp):continue
+		if event.kind=="kill" or (event.kind in ["hit","received"] and not show_damage) or (event.kind=="xp" and not show_xp):continue
 		if float(event.life)<=0 or not Rect2(Vector2.ZERO,viewport).has_point(project.call(event.p)):continue
 		candidates.append(event)
 	candidates.sort_custom(func(a,b):return priority(a,important)<priority(b,important) if priority(a,important)!=priority(b,important) else float(a.life)/float(a.duration)>float(b.life)/float(b.duration))
@@ -103,7 +108,12 @@ static func layout_labels(events: Array, project: Callable, viewport: Vector2, f
 		var color:Color
 		var point:Vector2=project.call(event.p)
 		var font_size:int=17 if event.kind=="item" else 16
-		if event.kind=="item":
+		if event.kind=="received":
+			font_size=14
+			text="−%d HP" % int(event.amount)
+			color=Color("ffafba",fraction)
+			point+=Vector2(70,-12-progress*12)
+		elif event.kind=="item":
 			text=str(event.get("label",""))
 			color=Color("f5dfa6",fraction)
 			point+=Vector2(0,-48-progress*25)

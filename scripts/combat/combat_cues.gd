@@ -8,13 +8,45 @@ const KILL_SECONDS := 0.35
 const XP_SECONDS := 0.70
 const HIT_MERGE_WINDOW := 0.06
 const XP_MERGE_WINDOW := 0.10
+const MAX_RECEIVED := 6
+const RECEIVED_SECONDS := 0.55
 var enabled: bool = true
 var events: Array[Dictionary] = []
 var flashes: Dictionary = {}
+var received: Array[Dictionary] = []
+var received_serial: int = 0
 
 func reset() -> void:
 	events.clear()
 	flashes.clear()
+	received.clear()
+	received_serial = 0
+
+func record_received(at: Vector2, hp_lost: int, source: Dictionary = {}) -> void:
+	if not enabled or hp_lost <= 0 or not at.is_finite():
+		return
+	var kind := "unknown"
+	var id := 0
+	var origin := at
+	var direction := Vector2.ZERO
+	if source.get("kind","")=="contact" and source.get("p") is Vector2 and source.p.is_finite() and int(source.get("id",0))>0:
+		kind = "contact"
+		id = int(source.id)
+		origin = source.p
+		direction = (origin-at).normalized()
+	elif source.get("kind","")=="projectile" and source.get("direction") is Vector2 and source.direction.is_finite():
+		kind = "projectile"
+		direction = source.direction.normalized()
+	# Old bullets have no shooter ID. Never infer an attacker from nearby actors.
+	if received.size() >= MAX_RECEIVED:
+		received.pop_front()
+	received_serial += 1
+	received.append({"serial":received_serial,"kind":kind,"id":id,"p":at,
+		"origin":origin,"direction":direction,"amount":hp_lost,
+		"life":RECEIVED_SECONDS,"duration":RECEIVED_SECONDS})
+
+func latest_received() -> Dictionary:
+	return received[-1].duplicate(true) if enabled and not received.is_empty() else {}
 
 func set_enabled(value: bool) -> void:
 	# Diagnostic switch: no influence on the authoritative simulation.
@@ -90,6 +122,10 @@ func advance(delta: float) -> void:
 		events[i]["life"] = maxf(0.0, float(events[i]["life"]) - delta)
 		if float(events[i]["life"]) <= 0.0:
 			events.remove_at(i)
+	for i in range(received.size() - 1, -1, -1):
+		received[i].life = maxf(0.0, float(received[i].life) - delta)
+		if received[i].life <= 0.0:
+			received.remove_at(i)
 
 func flash_alpha(id: int) -> float:
 	if not enabled:
@@ -97,4 +133,4 @@ func flash_alpha(id: int) -> float:
 	return clampf(float(flashes.get(id, 0.0)) / FLASH_SECONDS, 0.0, 1.0)
 
 func snapshot() -> Dictionary:
-	return {"events": events.duplicate(true), "flashes": flashes.duplicate(true)}
+	return {"events": events.duplicate(true), "flashes": flashes.duplicate(true), "received":received.duplicate(true)}

@@ -1195,6 +1195,13 @@ func _open_lobby_settings(ticket: int, revision: int) -> void:
 	overlay.show()
 	_fit_dialog()
 
+func _update_feedback_hud() -> void:
+	super._update_feedback_hud()
+	if not is_instance_valid(feedback_panel):return
+	var notice:String=""
+	if simulation.phase==RunState.Phase.RUNNING and feedback_panel.state_key=="hurt":notice=view.IncomingFeedback.notice(simulation,view.high_angle)
+	feedback_panel.reaction_text.text=notice if not notice.is_empty() else str(simulation.feedback.PRESENTATION[feedback_panel.state_key].label)
+
 func _update_hud() -> void:
 	super._update_hud()
 	if not is_instance_valid(boss_bar):
