@@ -213,8 +213,10 @@ func _run() -> void:
 	await preload("res://tests/test_actor_animation.gd").run(scene, verify)
 	await preload("res://tests/test_boss_guidance.gd").run(scene, verify)
 	await preload("res://tests/test_incoming_feedback.gd").run(scene, verify)
+	await preload("res://tests/test_combat_audio.gd").run(scene, verify)
 	scene.queue_free()
 	await process_frame
 	await process_frame
+	await create_timer(0.06).timeout # Flush stopped audio on the final host's mixer slice.
 	print(JSON.stringify({"checks": checks, "failures": failures, "status": "PASS" if failures.is_empty() else "FAIL"}))
 	quit(0 if failures.is_empty() else 1)

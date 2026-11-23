@@ -9,6 +9,7 @@ const CombatSkin=preload("res://scripts/ui/combat_skin.gd")
 const CombatSlot=preload("res://scripts/ui/combat_slot_button.gd")
 var combat_skin=CombatSkin.new()
 var battle_chrome
+var combat_audio=preload("res://scripts/combat/combat_audio.gd").new()
 var mission_button:Button
 var mission_return_button:Button
 var _mission_open:bool=false
@@ -67,6 +68,7 @@ var dungeon_launch_button: Button
 var _dungeon_notice: String = ""
 
 func _ready() -> void:
+	add_child(combat_audio)
 	super._ready()
 	# Recover/pay terminal intent first, then start at the lobby with its frozen result.
 	if battle_save_error == OK and gold_error == OK and simulation.phase in [RunState.Phase.CLEARED, RunState.Phase.DEFEAT, RunState.Phase.ABANDONED]:
@@ -78,6 +80,7 @@ func _ready() -> void:
 	_apply_layout()
 
 func _physics_process(delta: float) -> void:
+	combat_audio.prepare(simulation,not overlay.visible)
 	var track_enemies:bool=view.tracks_enemy_motion()
 	view.actors.prepare(simulation,track_enemies)
 	var before:Vector2=simulation.player
@@ -85,6 +88,18 @@ func _physics_process(delta: float) -> void:
 	super._physics_process(delta)
 	view.advance_camera(delta,simulation.player-before,active and simulation.phase==RunState.Phase.RUNNING and not overlay.visible)
 	view.actors.sync(simulation,simulation.player-before,active and simulation.phase==RunState.Phase.RUNNING and not overlay.visible,track_enemies)
+	combat_audio.finish(simulation,active,not overlay.visible)
+
+func _cast_magic(expected_ticket:int=-1) -> void:
+	var active:bool=simulation.phase==RunState.Phase.RUNNING and not overlay.visible
+	combat_audio.prepare(simulation,not overlay.visible)
+	super._cast_magic(expected_ticket)
+	_sync_phase_ui() # Build a resulting modal before its one-shot audio starts.
+	combat_audio.finish(simulation,active,not overlay.visible)
+
+func _set_volume(value:float) -> void:
+	super._set_volume(value)
+	combat_audio.guard(simulation,not overlay.visible)
 
 func _build_interface() -> void:
 	root_ui = Control.new()
@@ -368,6 +383,7 @@ func _apply_layout() -> void:
 	_update_magic_hud()
 
 func _clear_dialog() -> void:
+	combat_audio.stop_all()
 	dungeon_button=null
 	dungeon_launch_button=null
 	talents_button = null
@@ -1180,7 +1196,7 @@ func _open_lobby_settings(ticket: int, revision: int) -> void:
 	_clear_dialog()
 	_modal_kind = "lobby_settings"
 	dialog_body.add_child(_label("로비 설정", 26))
-	dialog_body.add_child(_label("전체 음량 · 전투 음원은 준비 중", 17))
+	dialog_body.add_child(_label("전체 음량 · 임시 전투 효과음", 17))
 	var slider := HSlider.new()
 	slider.min_value = 0.0
 	slider.max_value = 1.0
@@ -1204,6 +1220,7 @@ func _update_feedback_hud() -> void:
 
 func _update_hud() -> void:
 	super._update_hud()
+	combat_audio.guard(simulation,not overlay.visible)
 	if not is_instance_valid(boss_bar):
 		return
 	var bosses: Array = simulation.enemies.filter(func(enemy): return enemy.kind == "boss")

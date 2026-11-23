@@ -473,7 +473,7 @@ func _show_menu(kind: String) -> void:
 		dialog_body.add_child(_label("일시정지 / 환경설정", 30))
 		dialog_body.add_child(_label("선택·마력·반응 시간이 그대로 보존됩니다.", 18))
 		_add_feedback_banner()
-		dialog_body.add_child(_label("전체 음량 (저장 · 전투 음원은 미탑재)", 17))
+		dialog_body.add_child(_label("전체 음량 (저장 · 임시 전투 효과음)", 17))
 		var slider := HSlider.new()
 		slider.min_value = 0.0
 		slider.max_value = 1.0
