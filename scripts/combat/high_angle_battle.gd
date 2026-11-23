@@ -49,8 +49,12 @@ func draw(view) -> void:
 	canvas.draw_set_transform_matrix(Transform2D.IDENTITY)
 	var commands := depth_commands(state, visible)
 	stats.commands = commands.size()
-	detail_actors=not view.simple_attacks and commands.size()<=125
+	detail_actors=not view.display_plan.simple and commands.size()<=125
 	stats.detailed_actors=detail_actors
+	stats.display_dense=view.display_plan.dense
+	stats.labels=view.display_plan.labels.size()
+	stats.effects=view.display_plan.effects.size()
+	stats.skipped_links=view.display_plan.skipped_links
 	for command in commands:
 		match command.layer:
 			"enemy":_draw_enemy(command.value)
@@ -60,20 +64,18 @@ func draw(view) -> void:
 	# Ground-space effects use the SAME transform as their actual damage geometry.
 	canvas.draw_set_transform_matrix(ground)
 	for bullet in state.bullets:
-		if visible.grow(50).has_point(bullet.p):Visuals.draw_projectile(canvas, bullet.p, bullet.direction, str(bullet.get("source","rifle")), canvas.simple_attacks, bool(bullet.get("weapon",{}).get("evolved",false)), bool(bullet.get("weapon",{}).get("fragment",false)))
-	for bullet in state.enemy_bullets:
-		if not visible.grow(30).has_point(bullet.p):continue
-		var direction: Vector2 = bullet.velocity.normalized()
-		canvas.draw_line(bullet.p-direction*18, bullet.p, Color("ff916b"), 3, true)
-		canvas.draw_polyline(PackedVector2Array([bullet.p-direction*8+direction.orthogonal()*5,bullet.p,bullet.p-direction*8-direction.orthogonal()*5]),Color("ffd2a3"),2,true)
-	for effect in state.effects:
+		if visible.grow(50).has_point(bullet.p):Visuals.draw_projectile(canvas, bullet.p, bullet.direction, str(bullet.get("source","rifle")), canvas.display_plan.simple, bool(bullet.get("weapon",{}).get("evolved",false)), bool(bullet.get("weapon",{}).get("fragment",false)))
+
+	for effect in canvas.display_plan.effects:
 		var reach: float = float(effect.get("radius",0))
 		if visible.grow(reach+40).has_point(effect.p) or effect.has("from"):
-			Visuals.draw_effect(canvas, effect.p, effect, effect.get("from",effect.p),canvas.simple_attacks)
-			if effect.get("kind","")=="ultimate" and reach>0 and not canvas.simple_attacks:
+			Visuals.draw_effect(canvas, effect.p, effect, effect.get("from",effect.p),canvas.display_plan.simple)
+			if effect.get("kind","")=="ultimate" and reach>0 and not canvas.display_plan.simple:
 				var alpha:float=clampf(float(effect.life)/maxf(.001,float(effect.get("duration",.25))),0,1)
 				CombatSkin.rune(canvas,effect.p,reach*.78,Color("d95b75",alpha*.8),true)
 	canvas.draw_set_transform_matrix(Transform2D.IDENTITY)
+	canvas._draw_combat_cues()
+	canvas._draw_foreground_threats()
 	# Foreground identification remains visible even in a dense crowd.
 	var feet := screen(state.player)
 	canvas.draw_arc(feet, 20, 0, TAU, 28, Color("f5dc9c"), 2, true)
@@ -81,7 +83,6 @@ func draw(view) -> void:
 	if stats.occluders > 0:
 		canvas.draw_polyline(PackedVector2Array([feet+Vector2(-14,-6),feet+Vector2(-10,-38),feet+Vector2(0,-54),feet+Vector2(11,-38),feet+Vector2(15,-6)]),Color("fff0bc"),2,true)
 	_draw_approaches()
-	canvas._draw_combat_cues()
 	canvas = null
 	state = null
 
@@ -106,10 +107,7 @@ func _draw_floor_effects() -> void:
 	for enemy in state.enemies:
 		if visible.grow(50).has_point(enemy.p):
 			canvas.draw_circle(enemy.p,16 if enemy.kind=="normal" else 25,Color(0,0,0,.28))
-		if enemy.get("variant","")=="ranged" and float(enemy.get("windup",0))>0:
-			canvas.draw_line(enemy.p,enemy.aim,Color("ff936d",.7),2,true)
-			canvas.draw_arc(enemy.aim,8,0,TAU,16,Color("ffb37f"),2,true)
-			canvas.draw_line(enemy.aim-Vector2(10,0),enemy.aim+Vector2(10,0),Color("ffb37f"),1.5,true)
+
 	canvas.draw_circle(state.player,19,Color(0,0,0,.35))
 	for pickup in state.pickups:
 		if visible.grow(10).has_point(pickup.p):

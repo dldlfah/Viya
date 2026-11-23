@@ -3,6 +3,9 @@ extends Control
 const AttackVisuals = preload("res://scripts/combat/attack_visuals.gd")
 const ApproachCues = preload("res://scripts/combat/approach_cues.gd")
 const BattleProjection = preload("res://scripts/combat/battle_projection.gd")
+const Display=preload("res://scripts/combat/combat_display.gd")
+var auto_display:bool=true # Diagnostic comparison; no gameplay/save setting.
+var display_plan:Dictionary={}
 var camera = preload("res://scripts/combat/combat_camera.gd").new()
 var high_angle: bool = true # F8: development-only comparison, never a gameplay rule.
 var high_renderer = preload("res://scripts/combat/high_angle_battle.gd").new()
@@ -40,6 +43,7 @@ func _screen(at: Vector2) -> Vector2:
 	return world_to_screen(at)
 
 func _draw() -> void:
+	if simulation!=null:display_plan=Display.build(self)
 	if high_angle and simulation != null:
 		high_renderer.draw(self)
 		return
@@ -102,31 +106,19 @@ func _draw() -> void:
 				draw_string_outline(font,label_at,name,HORIZONTAL_ALIGNMENT_LEFT,-1,12,2,Color("17191e"))
 				draw_string(font,label_at,name,HORIZONTAL_ALIGNMENT_LEFT,-1,12,Color("ece0c5"))
 				names_left -= 1
-		if variant == "ranged" and float(enemy.windup) > 0.0:
-			var target := _screen(enemy.aim)
-			draw_line(at, target, Color(0.8, 0.4, 0.3, 0.5), 1.5, true)
-			draw_arc(target, 8.0, 0, TAU, 16, Color("edb06e"), 1.5, true)
+
 	for gold in simulation.gold_pickups:
 		var at := _screen(gold["p"])
 		draw_circle(at, 7.0, Color("edbc54"))
 		draw_arc(at, 4.0, 0.0, TAU, 12, Color("fff0b3"), 1.2, true)
 	for bullet in simulation.bullets:
 		var at := _screen(bullet["p"])
-		AttackVisuals.draw_projectile(self, at, bullet["direction"], str(bullet.get("source", "rifle")), simple_attacks, bool(bullet.get("weapon",{}).get("evolved",false)), bool(bullet.get("weapon",{}).get("fragment",false)))
-	for bullet in simulation.enemy_bullets:
-		var at := _screen(bullet.p)
-		draw_line(at - bullet.velocity.normalized() * 10.0, at, Color("ed9268"), 2.0, true)
-		if bullet.get("shot","") in ["arrow","javelin"]:
-			var direction: Vector2 = bullet.velocity.normalized()
-			var reach := 18.0 if bullet.shot=="javelin" else 11.0
-			draw_line(at-direction*reach,at,Color("f7ac6d"),2.5,true)
-			draw_polyline(PackedVector2Array([at-direction*7+direction.orthogonal()*4,at,at-direction*7-direction.orthogonal()*4]),Color("f7ac6d"),1.5,true)
-		else:
-			draw_circle(at, 5.0, Color("f7ac6d"))
-	for effect in simulation.effects:
+		AttackVisuals.draw_projectile(self, at, bullet["direction"], str(bullet.get("source", "rifle")), display_plan.simple, bool(bullet.get("weapon",{}).get("evolved",false)), bool(bullet.get("weapon",{}).get("fragment",false)))
+
+	for effect in display_plan.effects:
 		var effect_at: Vector2 = _screen(effect["p"])
 		var link_from: Vector2 = _screen(effect.get("from", effect["p"]))
-		AttackVisuals.draw_effect(self, effect_at, effect, link_from, simple_attacks)
+		AttackVisuals.draw_effect(self, effect_at, effect, link_from, display_plan.simple)
 	var center := _screen(simulation.player)
 	var direction: Vector2 = simulation.facing
 	var hero: Texture2D = art.texture("viya_battle", "hurt" if simulation.hurt_clock > 0.0 else "idle", simulation.elapsed)
@@ -139,8 +131,9 @@ func _draw() -> void:
 		draw_circle(center, 16.0, player_color)
 		draw_line(center + direction * 6.0, center + direction * 34.0, Color("3a3e48"), 8.0, true)
 		draw_arc(center, 24.0, 0.0, TAU, 36, Color("b69a65"), 1.4, true)
-	_draw_approaches()
 	_draw_combat_cues()
+	_draw_foreground_threats()
+	_draw_approaches()
 
 func _draw_enemy_body(at: Vector2, variant: String, color: Color) -> void:
 	match variant:
@@ -268,44 +261,33 @@ func _draw_approaches() -> void:
 		var text := "!" if cue.kind == "shot" else str(cue.count)
 		draw_string(get_theme_default_font(),at-direction*20+Vector2(-5,5),text,HORIZONTAL_ALIGNMENT_LEFT,-1,14,color)
 
+func _draw_foreground_threats() -> void:
+	# Never reduced by friendly-attack/text budgets; always above their decoration.
+	for enemy in simulation.enemies:
+		if enemy.get("variant","")!="ranged" or float(enemy.get("windup",0))<=0:continue
+		var at:Vector2=_screen(enemy.p)
+		var aim:Vector2=_screen(enemy.aim)
+		draw_line(at,aim,Color("ff936d",.8),2,true)
+		draw_arc(aim,8,0,TAU,16,Color("ffb37f"),2,true)
+		draw_line(aim-Vector2(10,0),aim+Vector2(10,0),Color("ffb37f"),1.5,true)
+	for bullet in simulation.enemy_bullets:
+		var at:Vector2=_screen(bullet.p)
+		if not Rect2(Vector2.ZERO,size).grow(30).has_point(at):continue
+		var direction:Vector2=bullet.velocity.normalized()
+		var start:Vector2=_screen(bullet.p-direction*18)
+		var d:Vector2=(at-start).normalized()
+		draw_line(start,at,Color("ff916b"),3,true)
+		if bullet.get("shot","") in ["arrow","javelin"]:
+			draw_polyline(PackedVector2Array([at-d*8+d.orthogonal()*5,at,at-d*8-d.orthogonal()*5]),Color("ffd2a3"),2,true)
+		else:draw_circle(at,5,Color("ffd2a3"))
+
 func _draw_combat_cues() -> void:
-	# One existing canvas, no spawned labels/particles/timers and no state writes.
-	if not simulation.cues.enabled:
-		return
-	var font: Font = get_theme_default_font()
-	var visible_area := Rect2(Vector2.ZERO, size).grow(40.0)
-	for event in simulation.cues.events:
-		var at: Vector2 = _screen(event["p"])
-		if not visible_area.has_point(at):
-			continue
-		var fraction: float = clampf(float(event["life"]) / float(event["duration"]), 0.0, 1.0)
-		var progress: float = 1.0 - fraction
-		var kind: String = event["kind"]
-		if kind == "kill":
-			var ring := Color("d98a8d", fraction)
-			draw_arc(at, 12.0 + progress * 15.0, 0.0, TAU, 16, ring, 2.0, true)
-			continue
-		if kind == "item":
-			var label: String = event.get("label", "")
-			var text_at := at + Vector2(-font.get_string_size(label,HORIZONTAL_ALIGNMENT_LEFT,-1,17).x*0.5,-48-progress*25)
-			draw_string_outline(font,text_at,label,HORIZONTAL_ALIGNMENT_LEFT,-1,17,3,Color("17191e",fraction))
-			draw_string(font,text_at,label,HORIZONTAL_ALIGNMENT_LEFT,-1,17,Color("f5dfa6",fraction))
-			continue
-		if (kind == "xp" and not show_xp) or (kind == "hit" and not show_damage):
-			continue
-		if font == null:
-			continue
-		var text: String
-		var color: Color
-		if kind == "xp":
-			text = "+%.2f XP" % float(event["amount"])
-			color = Color("7cd3c1", fraction)
-			at += Vector2(24.0, -18.0 - progress * 22.0)
-		else:
-			text = ("!%d" if bool(event["critical"]) else "%d") % int(event["amount"])
-			color = Color("f6d798" if bool(event["critical"]) else "fff1db", fraction)
-			at += Vector2(0.0, -35.0 - progress * 18.0)
-		var width: float = font.get_string_size(text, HORIZONTAL_ALIGNMENT_LEFT, -1, 16).x
-		at.x -= width * 0.5
-		draw_string_outline(font, at, text, HORIZONTAL_ALIGNMENT_LEFT, -1, 16, 2, Color(0.03, 0.03, 0.04, fraction))
-		draw_string(font, at, text, HORIZONTAL_ALIGNMENT_LEFT, -1, 16, color)
+	if not simulation.cues.enabled:return
+	var font:Font=get_theme_default_font()
+	for event in display_plan.get("kills",[]):
+		var fraction:float=clampf(float(event.life)/float(event.duration),0,1)
+		draw_arc(_screen(event.p),12+(1-fraction)*15,0,TAU,16,Color("d98a8d",fraction),2,true)
+	for label in display_plan.get("labels",[]):
+		var color:Color=label.color
+		draw_string_outline(font,label.at,label.text,HORIZONTAL_ALIGNMENT_LEFT,-1,label.font_size,2,Color(.03,.03,.04,color.a))
+		draw_string(font,label.at,label.text,HORIZONTAL_ALIGNMENT_LEFT,-1,label.font_size,color)

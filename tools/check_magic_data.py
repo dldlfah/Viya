@@ -95,7 +95,7 @@ def check() -> dict:
         'scripts/main.gd': ['magic_button.pressed.connect(_cast_magic)', 'InputEventScreenTouch',
             'InputEvent.DEVICE_ID_EMULATION', 'magic_button.disabled = not reason.is_empty()',
             '[임시]', 'mana_bar.value = magic.mana'],
-        'scripts/combat/battle_view.gd': ['const AttackVisuals = preload("res://scripts/combat/attack_visuals.gd")', 'AttackVisuals.draw_effect(self, effect_at, effect, link_from, simple_attacks)'],
+        'scripts/combat/battle_view.gd': ['const AttackVisuals = preload("res://scripts/combat/attack_visuals.gd")', 'display_plan=Display.build(self)', 'AttackVisuals.draw_effect(self, effect_at, effect, link_from, display_plan.simple)'],
         'scripts/combat/attack_visuals.gd': ['"ultimate":', 'effect.get("duration", 0.25)', 'if shape == "ultimate" else 3.0'],
         'tools/check_project.py': ['res://tests/test_magic.gd', "('magic_data_contract', 'check_magic_data')", "code = 2"],
     }

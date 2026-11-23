@@ -50,7 +50,7 @@ static func draw_projectile(canvas: CanvasItem, at: Vector2, direction: Vector2,
 	if d.is_zero_approx():
 		d = Vector2.RIGHT
 	var normal: Vector2 = d.orthogonal()
-	if evolved:
+	if evolved and not simplified:
 		canvas.draw_line(at-d*20+normal*5,at-d*5+normal*5,color.lightened(0.3),1.2,true)
 		canvas.draw_line(at-d*20-normal*5,at-d*5-normal*5,color.lightened(0.3),1.2,true)
 	if fragment:
@@ -107,6 +107,7 @@ static func draw_effect(canvas: CanvasItem, at: Vector2, effect: Dictionary, lin
 		# connect to today's player position or search a fresh nearest enemy here.
 		if effect.has("from"):
 			canvas.draw_line(link_from, at, color, 2.0, true)
+		if simplified:return
 		canvas.draw_polyline(PackedVector2Array([at + Vector2(0, -5), at + Vector2(5, 0),
 			at + Vector2(0, 5), at + Vector2(-5, 0), at + Vector2(0, -5)]), color, 1.5, true)
 		return # A chain hit is not a circular area attack.
@@ -121,7 +122,7 @@ static func draw_effect(canvas: CanvasItem, at: Vector2, effect: Dictionary, lin
 	if shape == "dash":
 		canvas.draw_line(link_from,at,color,7,true)
 		return
-	if effect.get("evolved",false):
+	if effect.get("evolved",false) and not simplified:
 		canvas.draw_arc(at,radius*0.85,0,TAU,40,color,1.5,true)
 	if shape == "segmented":
 		if simplified:
@@ -134,8 +135,8 @@ static func draw_effect(canvas: CanvasItem, at: Vector2, effect: Dictionary, lin
 		canvas.draw_arc(at, radius * (1.0 - fraction), 0.0, TAU, 32, color, 1.5, true)
 		return
 	# The full outer ring always uses the real burst center and radius.
-	canvas.draw_arc(at, radius, 0.0, TAU, 64, color, 5.0 if shape == "ultimate" else 3.0, true)
-	if simplified and shape != "ultimate":
+	canvas.draw_arc(at, radius, 0.0, TAU, (48 if shape=="ultimate" else 32) if simplified else 64, color, 5.0 if shape == "ultimate" else 3.0, true)
+	if simplified:
 		return
 	match shape:
 		"blast":
