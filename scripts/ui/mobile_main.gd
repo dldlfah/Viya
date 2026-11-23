@@ -5,6 +5,15 @@ const HudLayout = preload("res://scripts/ui/hud_layout.gd")
 const ResponsiveFeedback = preload("res://scripts/ui/responsive_feedback_panel.gd")
 const GrowthOverview = preload("res://scripts/ui/growth_overview.gd")
 const AccountTalents = preload("res://scripts/progression/account_talents.gd")
+const CombatSkin=preload("res://scripts/ui/combat_skin.gd")
+const CombatSlot=preload("res://scripts/ui/combat_slot_button.gd")
+var combat_skin=CombatSkin.new()
+var battle_chrome
+var mission_button:Button
+var mission_return_button:Button
+var _mission_open:bool=false
+var _mission_touch_id:int=-1
+var _phase_text:Label
 var ui_art = preload("res://scripts/ui/asset_slots.gd").new()
 var layout_data: Dictionary = {}
 var safe_area_override := Rect2() # Logical-coordinate test injection, empty in production.
@@ -83,6 +92,10 @@ func _build_interface() -> void:
 	view = BattleView.new()
 	root_ui.add_child(view)
 	view.simulation = simulation
+	battle_chrome=preload("res://scripts/ui/battle_chrome.gd").new()
+	battle_chrome.hud=self
+	root_ui.add_child(battle_chrome)
+	battle_chrome.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	movement = MoveInput.new()
 	root_ui.add_child(movement)
 	movement.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
@@ -90,7 +103,8 @@ func _build_interface() -> void:
 	_header_row = HBoxContainer.new()
 	_header_row.add_theme_constant_override("separation", 12)
 	_header.add_child(_header_row)
-	_brand = _label("VIYA", 21)
+	_brand = _label("✦", 22)
+	_brand.add_theme_color_override("font_color",CombatSkin.GOLD)
 	_header_row.add_child(_brand)
 	_growth_column = VBoxContainer.new()
 	_growth_column.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -104,6 +118,11 @@ func _build_interface() -> void:
 	_growth_column.add_child(experience)
 	stats_text = _label("", 16)
 	stats_text.clip_text = true
+	_phase_text=_label("출격 대기",22)
+	_phase_text.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER
+	_phase_text.size_flags_horizontal=Control.SIZE_EXPAND_FILL
+	_phase_text.add_theme_color_override("font_color",CombatSkin.LIGHT)
+	_header_row.add_child(_phase_text)
 	_header_row.add_child(stats_text)
 	_settings_button = _button("환경설정 II", pause_game)
 	_settings_button.custom_minimum_size = Vector2(120, 44)
@@ -142,7 +161,8 @@ func _build_interface() -> void:
 	_support.clip_text = true
 	_support.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	root_ui.add_child(_support)
-	magic_button = Button.new()
+	magic_button = CombatSlot.new()
+	magic_button.ultimate=true
 	magic_button.text = "[임시] 고유 마법\n출격 대기"
 	magic_button.disabled = true
 	magic_button.action_mode = BaseButton.ACTION_MODE_BUTTON_PRESS
@@ -151,6 +171,10 @@ func _build_interface() -> void:
 	magic_button.add_theme_font_size_override("font_size", 16)
 	magic_button.pressed.connect(_cast_magic)
 	root_ui.add_child(magic_button)
+	mission_button=Button.new()
+	mission_button.focus_mode=Control.FOCUS_NONE
+	mission_button.pressed.connect(func():_open_mission(simulation.navigation_ticket,_menu_revision))
+	root_ui.add_child(mission_button)
 	overlay = ColorRect.new()
 	root_ui.add_child(overlay)
 	overlay.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
@@ -181,6 +205,13 @@ func _build_interface() -> void:
 	ailment_text.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	ailment_text.add_theme_color_override("font_color", Color("edb06e"))
 	root_ui.add_child(ailment_text)
+	_header.add_theme_stylebox_override("panel",CombatSkin.plate())
+	dialog.add_theme_stylebox_override("panel",CombatSkin.plate())
+	CombatSkin.style_bar(experience,Color("d9bd82"))
+	CombatSkin.style_bar(health,Color("9a3545"))
+	CombatSkin.style_bar(mana_bar,Color("744f87"))
+	CombatSkin.style_bar(boss_bar,Color("b3484c"))
+	root_ui.move_child(battle_chrome,root_ui.get_children().find(overlay))
 	_apply_layout()
 
 func _add_slots(parent: VBoxContainer, title: String, target: Array[Label]) -> void:
@@ -194,7 +225,7 @@ func _add_slots(parent: VBoxContainer, title: String, target: Array[Label]) -> v
 	row.add_child(heading)
 	var row_id := "attack" if title == "공격" else "passive"
 	for index in range(4):
-		var button := Button.new()
+		var button := CombatSlot.new()
 		button.name = "%s_%d_details" % [row_id, index]
 		button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		button.size_flags_vertical = Control.SIZE_EXPAND_FILL
@@ -245,6 +276,7 @@ func _apply_layout() -> void:
 	if new_layout != layout_data:
 		# A layout change cancels input ownership, not XP, offers or cooldowns.
 		movement.clear_input()
+		_mission_touch_id=-1
 		_magic_touch_id = -1
 		simulation.magic.invalidate_requests()
 	layout_data = new_layout
@@ -264,10 +296,17 @@ func _apply_layout() -> void:
 	magic_button.add_theme_font_size_override("font_size",12 if compact else 16)
 	_identity_title.visible = false
 	_settings_button.custom_minimum_size = Vector2(70 if compact else 116, 28 if layout_data.top.size.y < 40 else 40)
-	_settings_button.text = "정지 II" if compact else "환경설정 II"
+	_settings_button.text = "설정" if compact else "환경설정"
+	_settings_button.icon=combat_skin.glyph("gear")
+	_settings_button.add_theme_constant_override("icon_max_width",18)
 	_settings_button.add_theme_font_size_override("font_size",13 if compact else 15)
-	stats_text.custom_minimum_size.x = 0 if compact else 245
-	stats_text.visible = not compact
+	stats_text.custom_minimum_size.x = 72 if compact else 130
+	stats_text.visible = true
+	stats_text.add_theme_font_size_override("font_size",12 if compact else 16)
+	stats_text.add_theme_color_override("font_color",CombatSkin.LIGHT)
+	_phase_text.add_theme_font_size_override("font_size",14 if compact else 22)
+	_phase_text.custom_minimum_size.x=130 if compact else 220
+	_growth_column.custom_minimum_size.x=130 if compact else 200
 	_brand.visible = not compact
 	level_text.add_theme_font_size_override("font_size",12 if compact else 15)
 	experience.custom_minimum_size.y = 5
@@ -278,7 +317,7 @@ func _apply_layout() -> void:
 		var heading:Label=row.get_child(0)
 		heading.custom_minimum_size.x = 35 if compact else 48
 		heading.add_theme_font_size_override("font_size",11 if compact else 14)
-	for label in attack_slots+passive_slots:label.add_theme_font_size_override("font_size",11 if compact else 14)
+	for label in attack_slots+passive_slots:label.add_theme_font_size_override("font_size",11 if compact else 12)
 	_support.add_theme_font_size_override("font_size",10)
 	_support.text="지원 2+2 · 빈칸"
 	_header_row.add_theme_constant_override("separation", 6 if compact else 12)
@@ -293,9 +332,12 @@ func _apply_layout() -> void:
 		stage_text.size.x = maxf(1.0, view.size.x - 24.0)
 		stage_text.clip_text = true
 	if is_instance_valid(boss_bar):
-		boss_bar.position = view.position + Vector2(12, 17)
-		boss_bar.size = Vector2(minf(360.0, view.size.x * 0.5), 8)
-		boss_label.position = view.position + Vector2(12, 0)
+		boss_bar.position = view.position + Vector2(view.size.x*.33,18)
+		boss_bar.size = Vector2(minf(360.0, view.size.x * 0.40), 6)
+		boss_label.position = view.position + Vector2(view.size.x*.33,0)
+		boss_label.size=Vector2(boss_bar.size.x,18)
+		boss_label.clip_text=true
+		boss_label.add_theme_font_size_override("font_size",11 if compact else 13)
 		ailment_text.position = layout_data.resources.position-Vector2(0,19)
 	_place(feedback_panel, layout_data["feedback"])
 	_place(_resources, layout_data["resources"])
@@ -304,6 +346,14 @@ func _apply_layout() -> void:
 	_place(magic_button, layout_data["magic"])
 	var local_to_move: Transform2D = movement.get_global_transform_with_canvas().affine_inverse() * root_ui.get_global_transform_with_canvas()
 	movement.set_interaction_rect(local_to_move * layout_data["move"])
+	_place(mission_button,Rect2(view.position+Vector2(8,6),Vector2(82 if compact else 215,28)))
+	mission_button.add_theme_font_size_override("font_size",11 if compact else 14)
+	CombatSkin.style_button(mission_button)
+	CombatSkin.style_button(_settings_button)
+	magic_button.compact=compact
+	CombatSkin.style_button(magic_button,true,compact)
+	_update_slots(attack_slots,"attack")
+	_update_slots(passive_slots,"passive")
 	_fit_dialog()
 	_update_magic_hud()
 
@@ -329,6 +379,8 @@ func _clear_dialog() -> void:
 	super._clear_dialog()
 
 func _show_menu(kind: String) -> void:
+	_mission_touch_id=-1
+	_mission_open=false
 	_talents_open = false
 	_overview_open = false
 	if kind in ["defeat", "abandoned", "cleared"] and _final_growth.is_empty():
@@ -437,19 +489,36 @@ func _fit_dialog() -> void:
 			button.add_theme_font_size_override("font_size", 16)
 
 func _update_slots(labels: Array[Label], row: String) -> void:
-	super._update_slots(labels, row)
-	for label in labels:
-		var button: Button = label.get_parent() as Button
-		button.disabled = label.text == "--"
-		button.tooltip_text = label.tooltip_text
-
-	var entries: Array[Dictionary] = simulation.growth.row_entries(row)
+	super._update_slots(labels,row)
+	var compact:bool=layout_data.get("compact",false)
+	var entries:Array[Dictionary]=simulation.growth.row_entries(row)
 	for index in range(labels.size()):
-		var button := labels[index].get_parent() as Button
-		button.icon = ui_art.texture(str(entries[index].id)) if index < entries.size() else null
-		button.add_theme_constant_override("icon_max_width",28)
-		button.icon_alignment = HORIZONTAL_ALIGNMENT_LEFT
-		labels[index].offset_left = 34 if button.icon else 4
+		var button=labels[index].get_parent()
+		button.disabled=index>=entries.size()
+		button.tooltip_text=labels[index].tooltip_text
+		button.compact=compact
+		button.icon=null
+		CombatSkin.style_button(button)
+		labels[index].offset_left=29 if compact else 42
+		labels[index].offset_bottom=0 if compact else -6
+		if index<entries.size():
+			var entry:Dictionary=entries[index]
+			var rank:int=simulation.growth.skill_level(entry.id)
+			button.glyph_id=entry.id
+			button.rank=rank
+			button.glyph_texture=ui_art.texture(entry.id)
+			button.icon=button.glyph_texture
+			button.icon_alignment=HORIZONTAL_ALIGNMENT_LEFT
+			button.add_theme_constant_override("icon_max_width",28)
+			var name:String=str(entry.name).trim_prefix("[임시] ")
+			labels[index].text=("[임시] %d%s" % [rank," ✦" if rank==5 else ""]) if compact else ("%s\n[임시] Lv.%d%s" % [name,rank," 진화" if rank==5 and row=="attack" else ""])
+		else:
+			button.glyph_id=""
+			button.rank=0
+			button.glyph_texture=null
+			labels[index].offset_left=4
+			labels[index].text="--"
+		button.queue_redraw()
 
 func _open_owned_detail(row: String, index: int) -> void:
 	if overlay.visible:
@@ -621,6 +690,8 @@ func _return_to_lobby(ticket: int, revision: int) -> void:
 	_update_hud()
 
 func resume_game() -> void:
+	if _mission_open:
+		return # The guarded mission return owns this modal.
 	if _overview_open:
 		return # Overview owns its guarded return path.
 	if not simulation.transition_action.is_empty():
@@ -640,9 +711,26 @@ func _sync_phase_ui() -> void:
 func _input(event: InputEvent) -> void:
 	if event is InputEventScreenTouch and is_instance_valid(movement) and event.index == movement.touch_id:
 		return # A held movement finger cannot turn into a magic finger over the button.
+	if event is InputEventScreenTouch:
+		if event.index==_mission_touch_id:
+			if not event.pressed or event.canceled:_mission_touch_id=-1
+			get_viewport().set_input_as_handled()
+			return
+		if event.pressed and not event.canceled and mission_button.visible and not overlay.visible and mission_button.get_global_rect().has_point(event.position):
+			_open_mission(simulation.navigation_ticket,_menu_revision)
+			_mission_touch_id=event.index if _mission_open else -1
+			get_viewport().set_input_as_handled()
+			return
+	elif event is InputEventScreenDrag and event.index==_mission_touch_id:
+		get_viewport().set_input_as_handled()
+		return
 	super._input(event)
 
 func _unhandled_key_input(event: InputEvent) -> void:
+	if _mission_open and event is InputEventKey and event.pressed and not event.echo and event.keycode==KEY_ESCAPE:
+		_close_mission(simulation.navigation_ticket,_menu_revision)
+		get_viewport().set_input_as_handled()
+		return
 	if OS.is_debug_build() and event is InputEventKey and event.pressed and not event.echo and event.keycode==KEY_F8:
 		view.high_angle = not view.high_angle
 		view.queue_redraw()
@@ -675,6 +763,13 @@ func _unhandled_key_input(event: InputEvent) -> void:
 	super._unhandled_key_input(event)
 
 func pause_game() -> void:
+	if _mission_open:
+		_mission_open=false
+		_magic_touch_id=-1
+		movement.set_enabled(false)
+		_show_menu("paused")
+		_update_hud()
+		return
 	if _talents_open:
 		_show_menu("ready") # Interruption invalidates every outstanding purchase callback.
 		return
@@ -1129,8 +1224,21 @@ func _update_hud() -> void:
 	ailment_text.visible = not overlay.visible
 	ailment_text.text = "둔화 · %.1f초" % simulation._slow_left if simulation._slow_left > 0.0 else ""
 	status_text.text = "HP %d / %d" % [simulation.hp, simulation.max_hp]
+	level_text.text="Lv.%d Viya · EXP %.0f/%.0f" % [simulation.growth.level,simulation.growth.xp,simulation.growth.threshold()]
+	var seconds:int=maxi(0,int(ceil(simulation.stage_duration-simulation.elapsed)))
+	var phase:int=simulation.stage_rules.get("waves",[]).find(simulation.wave_profile())+1 if not simulation.stage_rules.is_empty() else 0
+	_phase_text.text="%s · %02d:%02d" % ["골드 던전" if simulation.run_mode=="gold_slime" else ("보스전" if simulation._boss_spawned and not simulation._boss_defeated else "공세 %02d" % phase),seconds/60,seconds%60]
+	stats_text.text="금화 %s" % str(simulation.gold_collected)
+	stats_text.tooltip_text="이번 전투 %d · 계정 보유 %d" % [simulation.gold_collected,gold_progress.total]
+	mission_button.visible=simulation.has_active_run() and not overlay.visible
+	mission_button.text="임무 ▸" if layout_data.get("compact",false) else ("최후의 성벽 방어 ▸" if simulation.map_id=="prologue_wall" else "전투 임무 ▸")
+	mission_button.tooltip_text=stage_text.text
+	battle_chrome.queue_redraw()
 
 func _handle_mobile_back() -> bool:
+	if _mission_open:
+		_close_mission(simulation.navigation_ticket,_menu_revision)
+		return true
 	if _modal_kind in ["stages", "lobby_settings"]:
 		_campaign_back(simulation.navigation_ticket,_menu_revision)
 		return true
@@ -1158,10 +1266,42 @@ func _update_magic_hud() -> void:
 	super._update_magic_hud()
 	magic_button.icon = ui_art.texture("ultimate_button")
 	magic_button.add_theme_constant_override("icon_max_width",28)
-	if layout_data.get("compact",false):
-		var reason: String = simulation.magic.unavailable_reason(simulation.phase == RunState.Phase.RUNNING)
-		var hint := "터치 / F" if reason.is_empty() else ("마력 부족" if reason == "mana" else "전투 중 사용")
-		magic_button.tooltip_text = "%s · 강화 Lv.%d" % [simulation.magic.config.get("name","[임시] 마법"),int(simulation.stats.ultimate)]
-		magic_button.text = "고유기 · %.1fMP\n%s" % [simulation.magic.effective_cost(),hint]
-	if simulation.growth.ruleset == "weapons_v1" and int(simulation.stats.ultimate)==5:
-		magic_button.text = magic_button.text.replace("Lv.5","Lv.5 진화")
+	var reason:String=simulation.magic.unavailable_reason(simulation.phase==RunState.Phase.RUNNING)
+	var hint:String="[임시] 발동" if reason.is_empty() else ("마력 부족" if reason=="mana" else "전투 대기")
+	magic_button.tooltip_text += "\n%s · 강화 Lv.%d" % [simulation.magic.config.get("name","[임시] 마법"),int(simulation.stats.ultimate)]
+	magic_button.text="%.1f MP\n%s" % [simulation.magic.effective_cost(),hint]
+	if not layout_data.is_empty():_place(magic_button,layout_data.magic)
+	magic_button.queue_redraw()
+
+func _open_mission(ticket:int,revision:int) -> void:
+	if overlay.visible or simulation.phase!=RunState.Phase.RUNNING or ticket!=simulation.navigation_ticket or revision!=_menu_revision:return
+	pause_game()
+	if battle_save_error!=OK:return
+	_clear_dialog()
+	_mission_open=true
+	_modal_kind="mission"
+	dialog_body.add_child(_label("전투 임무 · "+str(simulation.map_space.definition.name),23))
+	var duration:int=int(simulation.stage_duration)
+	dialog_body.add_child(_label("생존 %.1f / %d초" % [simulation.elapsed,duration],19))
+	if simulation.run_mode=="gold_slime":
+		dialog_body.add_child(_label("3분 생존 시 획득 금화 전액 정산 · 캠페인 해금 없음",18))
+	else:
+		dialog_body.add_child(_label("보스 격파: "+("완료" if simulation._boss_defeated else "진행 중"),19))
+		dialog_body.add_child(_label("생존 시간과 보스 처치를 모두 달성하면 클리어합니다.",18))
+	dialog_body.add_child(_label("체크포인트 %d/2 · 획득 금화 %d" % [simulation.checkpoint_index,simulation.gold_collected],18))
+	mission_return_button=_button("닫기 · 전투로",_close_mission.bind(simulation.navigation_ticket,_menu_revision))
+	dialog_body.add_child(mission_return_button)
+	overlay.show()
+	_fit_dialog()
+	_update_hud()
+
+func _close_mission(ticket:int,revision:int) -> void:
+	if not _mission_open or simulation.phase!=RunState.Phase.PAUSED or not _menu_matches(ticket,revision) or not simulation.transition_action.is_empty():return
+	_mission_open=false
+	_mission_touch_id=-1
+	if battle_save_error!=OK:
+		_show_menu("paused")
+		_update_hud()
+		return
+	_menu_revision+=1
+	super.resume_game()
