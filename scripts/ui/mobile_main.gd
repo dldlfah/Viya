@@ -111,7 +111,41 @@ func _result_payment_text(summary:Dictionary) -> String:
 	return "\n"+str(data.get("text",""))
 
 func _saved_battle_text() -> String:
-	return SaveNotice.summary(run_store.pending,simulation.map_catalog) if battle_save_error==OK else "저장 정보 확인 불가 · 불러오기 오류를 확인하세요"
+	return SaveNotice.summary(run_store.pending,simulation.map_catalog)+"\n이어하기는 출격 당시 계정 강화를 유지합니다." if battle_save_error==OK else "저장 정보 확인 불가 · 불러오기 오류를 확인하세요"
+
+func _add_account_summary(data:Dictionary,caption:String,note:String) -> Control:
+	var box:=VBoxContainer.new()
+	box.name="AccountBonusSummary"
+	box.set_meta("summary",data)
+	box.set_meta("caption",caption+(" · %d/54단계" % int(data.total) if data.available else " · 확인 불가"))
+	dialog_body.add_child(box)
+	var toggle:=_button(str(box.get_meta("caption"))+" ▸",_toggle_account_summary.bind(simulation.navigation_ticket,_menu_revision))
+	toggle.name="Toggle"
+	toggle.add_theme_font_size_override("font_size",16)
+	toggle.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART
+	toggle.disabled=not data.available
+	box.add_child(toggle)
+	var brief:=_label(str(data.brief)+"\n"+note,15)
+	brief.name="Brief"
+	brief.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART
+	brief.mouse_filter=Control.MOUSE_FILTER_IGNORE
+	box.add_child(brief)
+	var detail:=_label(str(data.detail),16)
+	detail.name="Details"
+	detail.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART
+	detail.mouse_filter=Control.MOUSE_FILTER_IGNORE
+	detail.visible=false
+	box.add_child(detail)
+	return box
+
+func _toggle_account_summary(ticket:int,revision:int) -> void:
+	if not _menu_matches(ticket,revision):return
+	var box:Control=dialog_body.get_node_or_null("AccountBonusSummary")
+	if not is_instance_valid(box):return
+	var detail:Label=box.get_node("Details")
+	detail.visible=not detail.visible
+	box.get_node("Toggle").text=str(box.get_meta("caption"))+(" ▾" if detail.visible else " ▸")
+	_fit_dialog()
 
 func _refresh_save_context() -> void:
 	if not is_instance_valid(_saved_context_label):return
@@ -498,17 +532,19 @@ func _show_menu(kind: String) -> void:
 	elif kind == "ready":
 		var heading: Label = dialog_body.get_child(0) as Label
 		heading.text = "VIYA | 최후의 도시 · 메인 로비"
-		var account := _label("주력 비야 · 계정 특성 강화 %d/54 · 공격력 %s" % [AccountTalents.IDS.reduce(func(sum, id): return sum + int(gold_progress.talent_levels[id]), 0), AccountTalents.effect_text("attack_power", gold_progress.attack_level)], 20)
+		var account := _label("주력 비야 · 현재 계정 특성 강화 %d/54 · 공격력 %s" % [AccountTalents.IDS.reduce(func(sum, id): return sum + int(gold_progress.talent_levels[id]), 0), AccountTalents.effect_text("attack_power", gold_progress.attack_level)] if gold_progress.loaded and gold_error==OK else "현재 계정 특성 정보 확인 불가", 20)
 		dialog_body.add_child(account)
 		dialog_body.move_child(account, 1)
 		talents_button = _button("계정 특성 · 공격 / 방어 / 회복", _open_talents.bind(ticket, revision))
 		dialog_body.add_child(talents_button)
 	if kind == "ready":
 		_decorate_lobby()
+		if _has_saved_battle():_add_account_summary(preload("res://scripts/ui/account_bonus_summary.gd").for_saved(run_store.pending,battle_save_error),"이어하기 · 출격 당시 계정 보너스","현재 계정의 변경 사항은 새 전투부터 적용됩니다.")
 	if kind=="paused":
 		_add_save_context(resume_button)
 		dialog_body.move_child(resume_button,1)
 		dialog_body.move_child(_saved_context_label,2)
+		_add_account_summary(preload("res://scripts/ui/account_bonus_summary.gd").for_levels(simulation.account_talent_levels),"이번 전투 · 출격 당시 계정 보너스","전투 중 강화·현재 HP/MP와는 별개입니다.")
 	_add_growth_access(kind)
 	_scroll.scroll_vertical = 0
 	_fit_dialog()
@@ -1154,11 +1190,20 @@ func _open_gold_dungeon() -> void:
 	dialog_body.add_child(_label("골드 슬라임 던전",28))
 	dialog_body.add_child(_label("3분 생존 · 보스 없음 · 1분/2분 자동 저장\n느린 슬라임의 대량 군집을 피해 금화를 모으세요.",19))
 	dialog_body.add_child(_label("하루 2회 · 한국시간 자정 초기화 · 남은 입장 %d/2\n처치 시 %d~%d금화 확정 · 클리어 평균 약 10만 금화 목표\n실패/포기는 보상 없음 · 이어하기는 추가 소모 없음\n입장 시 횟수 차감 · 캠페인 진행은 유지됩니다." % [gold_progress.dungeon_remaining(),simulation.dungeon.drop_range(1).x,simulation.dungeon.drop_range(1).y],18))
-	if not _dungeon_notice.is_empty():dialog_body.add_child(_label(_dungeon_notice,17))
+	if not _dungeon_notice.is_empty():
+		var notice:=_label(_dungeon_notice,17)
+		notice.name="DungeonAdmissionNotice"
+		dialog_body.add_child(notice)
 	dungeon_launch_button=_button("입장 · 오늘 %d회 남음" % gold_progress.dungeon_remaining(),_launch_gold_dungeon.bind(ticket,revision))
 	dungeon_launch_button.disabled=gold_progress.dungeon_remaining()<=0
 	dialog_body.add_child(dungeon_launch_button)
 	dialog_body.add_child(_button("메인 로비로",_campaign_back.bind(ticket,revision)))
+	# Keep admission/back actions above expandable bonus details.
+	dialog_body.move_child(dungeon_launch_button,2)
+	dialog_body.move_child(dialog_body.get_child(dialog_body.get_child_count()-1),3)
+	var bonuses:=_add_account_summary(preload("res://scripts/ui/account_bonus_summary.gd").for_account(gold_progress,gold_error),"새 출격 · 계정 보너스","입장 시 현재 계정 강화를 적용합니다.")
+	dialog_body.move_child(bonuses,4)
+	if not _dungeon_notice.is_empty():dialog_body.move_child(dialog_body.get_node("DungeonAdmissionNotice"),2)
 	overlay.show()
 	_fit_dialog()
 
@@ -1201,7 +1246,7 @@ func _open_stages() -> void:
 	_selected_stage = gold_progress.next_stage
 	var data: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://data/chapter_one.json"))
 	dialog_body.add_child(_label(data.chapter, 28))
-	dialog_body.add_child(_label("6분 생존 + 최종 보스 처치 · 2분/4분 자동 저장", 17))
+	dialog_body.add_child(_label("출격 S%d · 6분 생존 + 최종 보스 처치 · 2분/4분 자동 저장" % _selected_stage, 17))
 	stage_buttons.clear()
 	var entries: Array = data.stages.duplicate(true)
 	if gold_progress.next_stage > 2:
@@ -1227,6 +1272,10 @@ func _open_stages() -> void:
 	dialog_body.add_child(stage_launch_button)
 	stage_back_button = _button("뒤로 · 메인 로비", _campaign_back.bind(ticket, revision))
 	dialog_body.add_child(stage_back_button)
+	dialog_body.move_child(stage_launch_button,2)
+	dialog_body.move_child(stage_back_button,3)
+	var bonuses:=_add_account_summary(preload("res://scripts/ui/account_bonus_summary.gd").for_account(gold_progress,gold_error),"새 출격 · 계정 보너스","출격 시 현재 계정 강화를 적용합니다.")
+	dialog_body.move_child(bonuses,4)
 	overlay.show()
 	_fit_dialog()
 
