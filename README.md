@@ -4,7 +4,7 @@
 
 ## 세션 필수 문서
 
-[CURRENT_WORK](docs/CURRENT_WORK.md)와 **[누적 DEVELOPMENT_STATUS](docs/DEVELOPMENT_STATUS.md)**를 함께 읽는다. [PLANNED_WORK](docs/PLANNED_WORK.md) · [NEXT_TASK](docs/NEXT_TASK.md) · [AGENTS](AGENTS.md) · [제작 스킬](.agents/skills/viya-game-production/SKILL.md). GAME-035 코드 **`b87c5073b4cef9c3df5c9280505cf957a84453c6`**, 브랜치 `work/viya-turnaround-qa-20261117`. 문서 HEAD는 코드 뒤에 오며 main 자동 병합은 하지 않는다.
+[CURRENT_WORK](docs/CURRENT_WORK.md)와 **[누적 DEVELOPMENT_STATUS](docs/DEVELOPMENT_STATUS.md)**를 함께 읽는다. [PLANNED_WORK](docs/PLANNED_WORK.md) · [NEXT_TASK](docs/NEXT_TASK.md) · [AGENTS](AGENTS.md) · [제작 스킬](.agents/skills/viya-game-production/SKILL.md). GAME-036 코드 **`892fb0157d2b1479b4e0acf4067205c55d2d8820`**, 브랜치 `work/viya-turnaround-qa-20261117`. 문서 HEAD는 코드 뒤에 오며 main 자동 병합은 하지 않는다.
 
 ## 실제 플레이 경로
 
@@ -55,9 +55,11 @@
 
 결과와 기존 최종 성장·보상 내역에서 실제 지급완료/예정·미지급·지급기록확인을 구분한다. 예정금화와 확인된 잔액을 섞지 않고,기존 주요 저장재시도를 상단에서 누를 수 있다. 재실행/중복조회는 원래ID/정산으로 복구하며 보상/입장/해금을 중복 변경하지 않는다.
 
+출격 준비에서 실제 계정의 공격/방어/회복 보너스를 요약하고 활성특성18종까지 펼쳐본다. 이어하기·일시정지에는 출격당시 강화를 따로 표시해 현재계정 구매와 구분한다. 계정확인실패는확인불가로표시하며기존구매/출격/입장·HP/MP/저장규칙을유지한다.
+
 ## 검증
 
-Godot4.7.2 임포트·기존7묶음 **3527native**·부트,117소스/6계약·negative controls/Python12 PASS. 구1~15/실제터미널저장7개 등24별도프로세스·129실제화면·기존전투/저장입력+새보상마우스14회를 확인했다. 지급대기 자동복구/기지급·입장/해금·계정파일 무중복과 결과/최종조회·compact의 재시도를 확인했다. 새7개의100프레임은 로비동결검사로 실제전투100단계와 구분한다. 모바일·새성능/믹서·6분/경제 표본은 미검증/미측정이다. [정확한 소스와 근거](docs/validation/GAME035_REPORT.json).
+Godot4.7.2 임포트·기존7묶음 **3559native**·부트,119소스/6계약·negative controls/Python12 PASS. 구1~15의17개+실제계정/저장쌍2개의19별도프로세스·157화면·새요약마우스30회/기존전투·저장·보상입력을 확인했다. 계정강화5%→10% 구매 뒤에도 이어하기는출격당시5%/남은HP·MP를유지하고새출격만10%를적용했다. 새2복원은실제전투100단계/7난수일치·무료이어하기를확인했다. 모바일·새성능/믹서·6분/경제표본은미검증/미측정이다. [정확한 소스와 근거](docs/validation/GAME036_REPORT.json).
 
 ```sh
 python3 tools/check_project.py --godot /actual/path/to/Godot
@@ -70,7 +72,7 @@ Godot --headless --path . --script res://tests/measure_boss_guidance.gd
 Godot --headless --audio-driver Dummy --path . --script res://tests/measure_combat_audio.gd
 ```
 
-공격 강화 우선 선택의 동일 조작 대조에서 신규 캠페인은20회 모두11~12선택/공격Lv5 2종,19클리어·1시간초과였다. 골드던전10회는모두8선택/Lv5 1종·클리어다. 선택 시점/관통별 실제TTK/가격1000·50000·1000000의42경제시나리오를 기록했다. 하루던전2+캠페인1의고정수입가정에서첫특성Lv3약5~6일/전체18Lv3약89~91일이다. 모바일 기기가없어실기FPS/발열은미검증이며Linux부하계측을그것으로대체하지않는다. 구설정407시간초과는 재현되며 현재4표본 클리어를 전체 균형·안내 효과로 확대하지 않는다. 다음은 출격 전 계정 강화 효과 요약이다.
+공격 강화 우선 선택의 동일 조작 대조에서 신규 캠페인은20회 모두11~12선택/공격Lv5 2종,19클리어·1시간초과였다. 골드던전10회는모두8선택/Lv5 1종·클리어다. 선택 시점/관통별 실제TTK/가격1000·50000·1000000의42경제시나리오를 기록했다. 하루던전2+캠페인1의고정수입가정에서첫특성Lv3약5~6일/전체18Lv3약89~91일이다. 모바일 기기가없어실기FPS/발열은미검증이며Linux부하계측을그것으로대체하지않는다. 구설정407시간초과는 재현되며 현재4표본 클리어를 전체 균형·안내 효과로 확대하지 않는다. 다음은 정예·보스 실제 등장 피드백이다.
 
 ```sh
 Godot --headless --path . --script res://tests/measure_balance.gd -- --map=gold_slime --talents=none
