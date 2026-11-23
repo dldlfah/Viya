@@ -93,7 +93,7 @@ static func run(host, verify: Callable) -> void:
 			fitted=fitted and scene.layout_data.safe.grow(1).encloses(control.get_rect())
 		verify.call(fitted,"Real Controls remain inside the safe area after minimum sizes: "+str(size))
 		verify.call(scene._resources.get_rect().intersection(scene._support.get_rect()).get_area()<1 and scene._skills.get_rect().intersection(scene.magic_button.get_rect()).get_area()<1,"Real resource/support/skill/button regions do not overlap: "+str(size))
-		verify.call(scene.simulation.visible_world().size.is_equal_approx(scene.view.world_view_size()) and not scene.stage_text.visible,"Existing simulation uses conservative projected viewport and folded mission: "+str(size))
+		verify.call(scene.simulation.visible_world().size.is_equal_approx(scene.view.spawn_guard_size()) and not scene.stage_text.visible,"Existing simulation uses conservative projected viewport and folded mission: "+str(size))
 	var frozen:Dictionary=Snapshot.capture(scene.simulation)
 	var key:=InputEventKey.new()
 	key.pressed=true

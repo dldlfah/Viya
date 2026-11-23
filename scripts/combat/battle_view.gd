@@ -3,6 +3,7 @@ extends Control
 const AttackVisuals = preload("res://scripts/combat/attack_visuals.gd")
 const ApproachCues = preload("res://scripts/combat/approach_cues.gd")
 const BattleProjection = preload("res://scripts/combat/battle_projection.gd")
+var camera = preload("res://scripts/combat/combat_camera.gd").new()
 var high_angle: bool = true # F8: development-only comparison, never a gameplay rule.
 var high_renderer = preload("res://scripts/combat/high_angle_battle.gd").new()
 var art = preload("res://scripts/ui/asset_slots.gd").new()
@@ -15,15 +16,24 @@ func _ready() -> void:
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
 	clip_contents = true
 
+func camera_center() -> Vector2:
+	return camera.center(simulation,size)
+
+func spawn_guard_size() -> Vector2:
+	return camera.guard_size(size)
+
+func advance_camera(delta: float, displacement: Vector2, active: bool) -> void:
+	camera.advance(simulation.run_id,displacement,delta,active)
+
 func world_to_screen(at: Vector2) -> Vector2:
-	return BattleProjection.world_to_screen(at,simulation.camera_center(),size) if high_angle else at-simulation.camera_center()+size*.5
+	return BattleProjection.world_to_screen(at,camera_center(),size) if high_angle else at-camera_center()+size*.5
 
 func screen_to_world(at: Vector2) -> Vector2:
-	return BattleProjection.screen_to_world(at,simulation.camera_center(),size) if high_angle else at+simulation.camera_center()-size*.5
+	return BattleProjection.screen_to_world(at,camera_center(),size) if high_angle else at+camera_center()-size*.5
 
 func world_view_size() -> Vector2:
 	# The comparison toggle does not change saved viewport geometry or spawn RNG.
-	# This is a conservative offscreen guard for both renderers.
+	# Unshifted extent; spawn_guard_size also covers the entire possible lead.
 	return BattleProjection.world_view_size(size)
 
 func _screen(at: Vector2) -> Vector2:
@@ -36,7 +46,7 @@ func _draw() -> void:
 	draw_rect(Rect2(Vector2.ZERO, size), Color("191c22") if simulation == null or simulation.map_id == "legacy_arena" else (Color("302d2a") if simulation.map_id == "prologue_wall" else Color("28352f")))
 	if simulation == null:
 		return
-	var origin: Vector2 = size * 0.5 - simulation.camera_center()
+	var origin: Vector2 = size * 0.5 - camera_center()
 	for x in range(int(-origin.x / 64.0) - 1, int((size.x - origin.x) / 64.0) + 2):
 		draw_line(Vector2(origin.x + x * 64, 0), Vector2(origin.x + x * 64, size.y), Color("242832"))
 	for y in range(int(-origin.y / 64.0) - 1, int((size.y - origin.y) / 64.0) + 2):
@@ -216,7 +226,7 @@ func _draw_weapon_fields() -> void:
 				draw_line(at-Vector2(8,0),at+Vector2(8,0),color,1.5,true)
 
 func _draw_map(origin: Vector2) -> void:
-	var visible := Rect2(simulation.camera_center()-size*0.5,size)
+	var visible := Rect2(camera_center()-size*0.5,size)
 	var terrain: Texture2D = art.texture("terrain_" + simulation.map_id)
 	if terrain:
 		draw_texture_rect(terrain,Rect2(origin,simulation.world_size),false)
@@ -247,7 +257,7 @@ func _draw_map(origin: Vector2) -> void:
 				draw_rect(Rect2(origin+box.position,box.size),Color("b29b71"),false,4)
 
 func _draw_approaches() -> void:
-	var visible := Rect2(simulation.camera_center()-size*0.5,size)
+	var visible := Rect2(camera_center()-size*0.5,size)
 	for cue in ApproachCues.build(simulation,visible):
 		var raw: Vector2 = _screen(cue.at)
 		var at := raw.clamp(Vector2.ONE*20.0,size-Vector2.ONE*20.0)

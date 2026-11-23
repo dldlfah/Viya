@@ -37,7 +37,7 @@ func depth_commands(simulation, area: Rect2) -> Array:
 func draw(view) -> void:
 	canvas = view
 	state = view.simulation
-	camera = state.camera_center()
+	camera = canvas.camera_center()
 	ground = BattleProjection.transform(camera, view.size)
 	visible = BattleProjection.visible_world(camera, view.size)
 	viewport = Rect2(Vector2.ZERO, view.size)

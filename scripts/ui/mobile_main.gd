@@ -77,6 +77,12 @@ func _ready() -> void:
 	get_viewport().size_changed.connect(_queue_layout)
 	_apply_layout()
 
+func _physics_process(delta: float) -> void:
+	var before:Vector2=simulation.player
+	var active:bool=simulation.phase==RunState.Phase.RUNNING and not overlay.visible
+	super._physics_process(delta)
+	view.advance_camera(delta,simulation.player-before,active and simulation.phase==RunState.Phase.RUNNING and not overlay.visible)
+
 func _build_interface() -> void:
 	root_ui = Control.new()
 	root_ui.name = "MobileHUD"
@@ -276,6 +282,7 @@ func _apply_layout() -> void:
 	if new_layout != layout_data:
 		# A layout change cancels input ownership, not XP, offers or cooldowns.
 		movement.clear_input()
+		view.camera.reset(simulation.run_id)
 		_mission_touch_id=-1
 		_magic_touch_id = -1
 		simulation.magic.invalidate_requests()
@@ -326,7 +333,7 @@ func _apply_layout() -> void:
 	style.content_margin_bottom = 2
 	_place(_header, layout_data["top"])
 	_place(view, layout_data["battle"])
-	simulation.spawn_view_size = view.world_view_size()
+	simulation.spawn_view_size = view.spawn_guard_size()
 	if is_instance_valid(stage_text):
 		stage_text.position = _header.position + Vector2(0, 0)
 		stage_text.size.x = maxf(1.0, view.size.x - 24.0)
