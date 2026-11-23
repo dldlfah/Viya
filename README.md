@@ -4,7 +4,7 @@
 
 ## 세션 필수 문서
 
-[CURRENT_WORK](docs/CURRENT_WORK.md)와 **[누적 DEVELOPMENT_STATUS](docs/DEVELOPMENT_STATUS.md)**를 함께 읽는다. [PLANNED_WORK](docs/PLANNED_WORK.md) · [NEXT_TASK](docs/NEXT_TASK.md) · [AGENTS](AGENTS.md) · [제작 스킬](.agents/skills/viya-game-production/SKILL.md). GAME-033 코드 **`a520147f0f3f6f11a2c7907d02581b669e5d088a`**, 브랜치 `work/viya-turnaround-qa-20261117`. 문서 HEAD는 코드 뒤에 오며 main 자동 병합은 하지 않는다.
+[CURRENT_WORK](docs/CURRENT_WORK.md)와 **[누적 DEVELOPMENT_STATUS](docs/DEVELOPMENT_STATUS.md)**를 함께 읽는다. [PLANNED_WORK](docs/PLANNED_WORK.md) · [NEXT_TASK](docs/NEXT_TASK.md) · [AGENTS](AGENTS.md) · [제작 스킬](.agents/skills/viya-game-production/SKILL.md). GAME-034 코드 **`488c52fad5a58e5bb7dc286ae98192c71a9024d2`**, 브랜치 `work/viya-turnaround-qa-20261117`. 문서 HEAD는 코드 뒤에 오며 main 자동 병합은 하지 않는다.
 
 ## 실제 플레이 경로
 
@@ -51,9 +51,11 @@
 
 4종 아이템은 두렌더러에서 같은 십자/물방울/자석/제거 기호로 표시한다. 기존 획득 문구에 실제회복량·자석XP/금화·제거수/보스제외를 연결했으며 가득찬 자원이나 바닥에 남은 보상을 과장하지 않는다. compact에서 보스 안내와 겹치면 캐릭터 아래에도 배치한다.
 
+파괴 가능한 상자/항아리/잔해는 작은 망치,파괴 뒤에는 모래시계/실제 재생성 진행을 표시한다. 가까운 잔해의 남은 시간만 제한적으로 안내하고 기존 중요 전투 표시·필드 아이템을 우선한다. 고각 손상 flash는 실제 피격에 연결하며,복원된 과거 파괴를 다시 연출하지 않는다.
+
 ## 검증
 
-Godot4.7.2 임포트·기존7묶음 **3455native**·부트,113소스/6계약·negative controls/Python12 PASS. 구1~15/실제아이템저장2개 등19별도프로세스·88실제화면·병행입력100+마법3/슬라이더2/계속하기4/재시도1/성장카드1을 확인했다. 회복/자석/제거와 실제 수치·보스 면역·선택/중단·복원 무재생을 확인했다. 모바일 실기·새성능/믹서·6분/경제 표본은 미검증/미측정이다. [정확한 소스와 근거](docs/validation/GAME033_REPORT.json).
+Godot4.7.2 임포트·기존7묶음 **3483native**·부트,115소스/6계약·negative controls/Python12 PASS. 구1~15/실제구조물저장2개 등19별도프로세스·112실제화면·병행입력100+추가마법5/슬라이더2/계속하기5/재시도1/성장카드1을 확인했다. 실제사격/파괴·45초 활성시간·중단/복원·2회차/이전아이템을 보존한다. 모바일 실기·새성능/믹서·6분/경제 표본은 미검증/미측정이다. [정확한 소스와 근거](docs/validation/GAME034_REPORT.json).
 
 ```sh
 python3 tools/check_project.py --godot /actual/path/to/Godot
@@ -66,7 +68,7 @@ Godot --headless --path . --script res://tests/measure_boss_guidance.gd
 Godot --headless --audio-driver Dummy --path . --script res://tests/measure_combat_audio.gd
 ```
 
-공격 강화 우선 선택의 동일 조작 대조에서 신규 캠페인은20회 모두11~12선택/공격Lv5 2종,19클리어·1시간초과였다. 골드던전10회는모두8선택/Lv5 1종·클리어다. 선택 시점/관통별 실제TTK/가격1000·50000·1000000의42경제시나리오를 기록했다. 하루던전2+캠페인1의고정수입가정에서첫특성Lv3약5~6일/전체18Lv3약89~91일이다. 모바일 기기가없어실기FPS/발열은미검증이며Linux부하계측을그것으로대체하지않는다. 구설정407시간초과는 재현되며 현재4표본 클리어를 전체 균형·안내 효과로 확대하지 않는다. 다음은 파괴 구조물 식별·재생성 상태 안내이다.
+공격 강화 우선 선택의 동일 조작 대조에서 신규 캠페인은20회 모두11~12선택/공격Lv5 2종,19클리어·1시간초과였다. 골드던전10회는모두8선택/Lv5 1종·클리어다. 선택 시점/관통별 실제TTK/가격1000·50000·1000000의42경제시나리오를 기록했다. 하루던전2+캠페인1의고정수입가정에서첫특성Lv3약5~6일/전체18Lv3약89~91일이다. 모바일 기기가없어실기FPS/발열은미검증이며Linux부하계측을그것으로대체하지않는다. 구설정407시간초과는 재현되며 현재4표본 클리어를 전체 균형·안내 효과로 확대하지 않는다. 다음은 전투 결과·보상 지급 상태 안내이다.
 
 ```sh
 Godot --headless --path . --script res://tests/measure_balance.gd -- --map=gold_slime --talents=none
