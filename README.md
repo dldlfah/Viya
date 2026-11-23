@@ -4,7 +4,7 @@
 
 ## 세션 필수 문서
 
-[CURRENT_WORK](docs/CURRENT_WORK.md)와 **[누적 DEVELOPMENT_STATUS](docs/DEVELOPMENT_STATUS.md)**를 함께 읽는다. [PLANNED_WORK](docs/PLANNED_WORK.md) · [NEXT_TASK](docs/NEXT_TASK.md) · [AGENTS](AGENTS.md) · [제작 스킬](.agents/skills/viya-game-production/SKILL.md). GAME-029 코드 **`22746e88c56ed3a5edc04ad626f6c183f71b6477`**, 브랜치 `work/viya-turnaround-qa-20261117`. 문서 HEAD는 코드 뒤에 오며 main 자동 병합은 하지 않는다.
+[CURRENT_WORK](docs/CURRENT_WORK.md)와 **[누적 DEVELOPMENT_STATUS](docs/DEVELOPMENT_STATUS.md)**를 함께 읽는다. [PLANNED_WORK](docs/PLANNED_WORK.md) · [NEXT_TASK](docs/NEXT_TASK.md) · [AGENTS](AGENTS.md) · [제작 스킬](.agents/skills/viya-game-production/SKILL.md). GAME-030 코드 **`9fa1e39d2d9ce1424fcf43be6e281cbf7098b788`**, 브랜치 `work/viya-turnaround-qa-20261117`. 문서 HEAD는 코드 뒤에 오며 main 자동 병합은 하지 않는다.
 
 ## 실제 플레이 경로
 
@@ -43,9 +43,11 @@
 
 실제 보스의 화면 밖 방향과 기본 공격 사거리·지형 차단/조준 안내를 HP바 아래 연결했다. 보스 조준은 명중 보장이 아니며 정지/선택/임무·결과/던전에는 남은 안내가 없다. 기존 적 경고·피해 숫자·입력을 보존한다.
 
+실제 잃은HP의 방향·음수숫자/반응 표시와 실제 접촉 가해자의 공격 동작을 연결했다. 탄환 발사자를 추정하지 않고,방어/무적/지형에 막힌 무피해를 타격으로 표시하지 않는다. 같은 단계 회복으로 가려진 피격도 반영하며 정지/새전투/복원은 과거 타격을 재생하지 않는다.
+
 ## 검증
 
-Godot4.7.2 소스/임포트·기존7묶음 **3331 native checks**·부트와 Python12는 PASS다. 구1~15/새 UI의18개 복원 프로세스·고각/기존/compact/보스 안내 실제27화면·이동/MP 병행100회 이벤트 검사를 통과했다. 현재 실제UI크기의6분 캠페인4표본은11~12선택/Lv5 2종/클리어다. 실제모바일은 미검증이다. [정확한 소스와 근거](docs/validation/GAME029_REPORT.json).
+Godot4.7.2 임포트·기존7묶음 **3366native**·부트,105소스/6계약·negative controls/Python12 PASS. 구1~15/새UI/피격중저장19프로세스·45실제화면·이동/MP병행100회를 통과했다. 밀집Linux1회 계측과 실제폰 미검증을 구분한다. [정확한 소스와 근거](docs/validation/GAME030_REPORT.json).
 
 ```sh
 python3 tools/check_project.py --godot /actual/path/to/Godot
@@ -56,7 +58,7 @@ Godot --headless --path . --script res://tests/measure_campaign.gd -- --map=prol
 Godot --headless --path . --script res://tests/measure_boss_guidance.gd
 ```
 
-공격 강화 우선 선택의 동일 조작 대조에서 신규 캠페인은20회 모두11~12선택/공격Lv5 2종,19클리어·1시간초과였다. 골드던전10회는모두8선택/Lv5 1종·클리어다. 선택 시점/관통별 실제TTK/가격1000·50000·1000000의42경제시나리오를 기록했다. 하루던전2+캠페인1의고정수입가정에서첫특성Lv3약5~6일/전체18Lv3약89~91일이다. 모바일 기기가없어실기FPS/발열은미검증이며Linux부하계측을그것으로대체하지않는다. 구설정407시간초과는 재현되며 현재4표본 클리어를 전체 균형·안내 효과로 확대하지 않는다. 다음은 피격 방향·접촉 공격 피드백이다.
+공격 강화 우선 선택의 동일 조작 대조에서 신규 캠페인은20회 모두11~12선택/공격Lv5 2종,19클리어·1시간초과였다. 골드던전10회는모두8선택/Lv5 1종·클리어다. 선택 시점/관통별 실제TTK/가격1000·50000·1000000의42경제시나리오를 기록했다. 하루던전2+캠페인1의고정수입가정에서첫특성Lv3약5~6일/전체18Lv3약89~91일이다. 모바일 기기가없어실기FPS/발열은미검증이며Linux부하계측을그것으로대체하지않는다. 구설정407시간초과는 재현되며 현재4표본 클리어를 전체 균형·안내 효과로 확대하지 않는다. 다음은 임시 전투음·음량 설정 연결이다. 전체음량/저장은 연결됐고 전투 음원은 미탑재다.
 
 ```sh
 Godot --headless --path . --script res://tests/measure_balance.gd -- --map=gold_slime --talents=none
