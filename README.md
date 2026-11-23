@@ -4,7 +4,7 @@
 
 ## 세션 필수 문서
 
-[CURRENT_WORK](docs/CURRENT_WORK.md)와 **[누적 DEVELOPMENT_STATUS](docs/DEVELOPMENT_STATUS.md)**를 함께 읽는다. [PLANNED_WORK](docs/PLANNED_WORK.md) · [NEXT_TASK](docs/NEXT_TASK.md) · [AGENTS](AGENTS.md) · [제작 스킬](.agents/skills/viya-game-production/SKILL.md). GAME-028 코드 **`c0c7429c76956ad74457c39553e390d3ca4803e5`**, 브랜치 `work/viya-turnaround-qa-20261117`. 문서 HEAD는 코드 뒤에 오며 main 자동 병합은 하지 않는다.
+[CURRENT_WORK](docs/CURRENT_WORK.md)와 **[누적 DEVELOPMENT_STATUS](docs/DEVELOPMENT_STATUS.md)**를 함께 읽는다. [PLANNED_WORK](docs/PLANNED_WORK.md) · [NEXT_TASK](docs/NEXT_TASK.md) · [AGENTS](AGENTS.md) · [제작 스킬](.agents/skills/viya-game-production/SKILL.md). GAME-029 코드 **`22746e88c56ed3a5edc04ad626f6c183f71b6477`**, 브랜치 `work/viya-turnaround-qa-20261117`. 문서 HEAD는 코드 뒤에 오며 main 자동 병합은 하지 않는다.
 
 ## 실제 플레이 경로
 
@@ -41,18 +41,22 @@
 
 실제 종족별 아트와8방향 idle/run/attack/hurt 프레임 접점을 연결했다. 고정 발pivot·프레임 길이/반복과 시뮬레이션 시간·실제 이동/발사를 사용하며 자동 미러링하지 않는다. 기존40경로/종족13추가 경로는 모두 비어 있고 실제 아트가 없으면 도형으로 복귀한다. 검증용 임시 SpriteFrames는 최종 아트가 아니다.
 
+실제 보스의 화면 밖 방향과 기본 공격 사거리·지형 차단/조준 안내를 HP바 아래 연결했다. 보스 조준은 명중 보장이 아니며 정지/선택/임무·결과/던전에는 남은 안내가 없다. 기존 적 경고·피해 숫자·입력을 보존한다.
+
 ## 검증
 
-Godot4.7.2 소스/임포트·기존7묶음 **3306 native checks**·부트와 Python12는 PASS다. 실제 구1~15/새 UI의18개 복원 프로세스·고각/기존/가림/compact 실제21화면·이동/MP고유기 병행100회 이벤트 검사를 통과했다. 360슬라임+4Lv5의Linux부하 측정과 실제모바일 미검증을 구분한다. [정확한 소스와 근거](docs/validation/GAME028_REPORT.json).
+Godot4.7.2 소스/임포트·기존7묶음 **3331 native checks**·부트와 Python12는 PASS다. 구1~15/새 UI의18개 복원 프로세스·고각/기존/compact/보스 안내 실제27화면·이동/MP 병행100회 이벤트 검사를 통과했다. 현재 실제UI크기의6분 캠페인4표본은11~12선택/Lv5 2종/클리어다. 실제모바일은 미검증이다. [정확한 소스와 근거](docs/validation/GAME029_REPORT.json).
 
 ```sh
 python3 tools/check_project.py --godot /actual/path/to/Godot
 Godot --headless --path . --script res://tests/test_combat_cues.gd
 # map: prologue_wall / outskirts_trial / legacy_arena; talents: none / roots / full
 Godot --headless --path . --script res://tests/measure_campaign.gd -- --map=prologue_wall --talents=none
+# Historical407 versus exact current HUD extents,unchanged evolve controller
+Godot --headless --path . --script res://tests/measure_boss_guidance.gd
 ```
 
-공격 강화 우선 선택의 동일 조작 대조에서 신규 캠페인은20회 모두11~12선택/공격Lv5 2종,19클리어·1시간초과였다. 골드던전10회는모두8선택/Lv5 1종·클리어다. 선택 시점/관통별 실제TTK/가격1000·50000·1000000의42경제시나리오를 기록했다. 하루던전2+캠페인1의고정수입가정에서첫특성Lv3약5~6일/전체18Lv3약89~91일이다. 모바일 기기가없어실기FPS/발열은미검증이며Linux부하계측을그것으로대체하지않는다. 다음은 보스 추적·사거리/지형 피드백이며 남은 보스/실기 QA도 보존한다.
+공격 강화 우선 선택의 동일 조작 대조에서 신규 캠페인은20회 모두11~12선택/공격Lv5 2종,19클리어·1시간초과였다. 골드던전10회는모두8선택/Lv5 1종·클리어다. 선택 시점/관통별 실제TTK/가격1000·50000·1000000의42경제시나리오를 기록했다. 하루던전2+캠페인1의고정수입가정에서첫특성Lv3약5~6일/전체18Lv3약89~91일이다. 모바일 기기가없어실기FPS/발열은미검증이며Linux부하계측을그것으로대체하지않는다. 구설정407시간초과는 재현되며 현재4표본 클리어를 전체 균형·안내 효과로 확대하지 않는다. 다음은 피격 방향·접촉 공격 피드백이다.
 
 ```sh
 Godot --headless --path . --script res://tests/measure_balance.gd -- --map=gold_slime --talents=none
