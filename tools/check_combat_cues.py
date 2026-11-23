@@ -13,7 +13,7 @@ FILES = ('scripts/combat/run_state.gd', 'scripts/combat/battle_view.gd',
          'tools/check_project.py', 'tools/check_combat_cues.py')
 # GAME-024: reviewed enemy variants, formations and hostile projectile integration. Exact source baselines retain mutation guards.
 BASE_RUN_BLOB = '673d75a748fa5f1f9ac72ec73bbd9120fdcfce02'
-BASE_VIEW_BLOB = '5d1a81b4c0efefc3b7b3a8159f6163895fd91454'
+BASE_VIEW_BLOB = 'a19ad5615823edacd5866ae45ad15b857d24cbfa'
 BASE_RUNNER_BLOB = '1ab68ad8a51271e3d47db8b02d433991f42e8d6c'
 # Exact run_engine() from GAME-004D; all 7 suites and failure checks are protected.
 BASE_ENGINE_FUNCTION_SHA256 = '9156043eaf896d72565563cc1e2f623cf0c8fbac7f032f19bffee7e4946a69ee'

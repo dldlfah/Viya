@@ -51,6 +51,10 @@ func actor_visual(enemy:Dictionary={}) -> Dictionary:
 	data.sample=actor_art.frame(art,keys,data.pose,data.direction,data.clock)
 	return data
 
+func tracks_enemy_motion() -> bool:
+	# The blank-art slime fallback has no gait; avoid unused per-slime observers.
+	return simulation.run_mode!="gold_slime" or art.definitions.get("gold_slime","")!="" or art.definitions.get("normal","")!=""
+
 func _draw() -> void:
 	if simulation!=null:display_plan=Display.build(self)
 	if high_angle and simulation != null:

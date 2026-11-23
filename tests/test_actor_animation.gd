@@ -205,6 +205,16 @@ static func run(host,verify:Callable)->void:
 	ui.movement.axis=Vector2.LEFT
 	ui._physics_process(.05)
 	verify.call(ui.view.actors.pose(state).pose!="run" and not ui.view.actors.pose(state).moving,"Wall-blocked input cannot animate walking; actual attacks may still play")
+	state.start(2831,"viya",null,"gold_slime","weapons_v1",{},"gold_slime",2831)
+	state.spawn_clock=999
+	state._scatter_clock=999
+	state.add_enemy(state.player+Vector2(250,0),"normal","normal",0,"gold_slime")
+	ui.movement.axis=Vector2.ZERO
+	ui._physics_process(.05)
+	verify.call(not ui.view.tracks_enemy_motion() and ui.view.actors.entries.size()==1,"Blank-art gold slimes skip unused animation observers while the hero still animates")
+	ui.view.art.definitions.normal=path
+	ui._physics_process(.05)
+	verify.call(ui.view.tracks_enemy_motion() and ui.view.actors.entries.has(int(state.enemies[0].id)) and ui.view.actor_visual(state.enemies[0]).sample.slot=="normal","Connecting slime or generic frame art automatically enables its actual movement observations")
 	ui.queue_free()
 	await host.get_tree().process_frame
 	for file in ["actor.tres","generic.tres","right.tres","bad.tres","battle.save","gold.cfg","settings.cfg"]:DirAccess.remove_absolute(folder.path_join(file))
