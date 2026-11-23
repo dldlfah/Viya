@@ -29,8 +29,8 @@ static func advance(state,seconds:float,direction:Vector2=Vector2.ZERO) -> void:
 
 static func run(host,verify:Callable)->void:
 	var state=fresh()
-	verify.call(Snapshot.VERSION==16 and Snapshot.fingerprint_for_v15()==Snapshot.GAME023_RULES,"Explicit v16 pattern schema retains the exact published v15 fingerprint")
-	verify.call(state.enemy_pattern_version==1 and state.enemies[0].has("pattern") and state.enemies[0].hp==1600 and state.enemies[0].speed==45 and state.enemies[0].contact_damage==18,"New production campaign attaches only the pattern while preserving locked elite stats")
+	verify.call(Snapshot.VERSION==17 and Snapshot.fingerprint_for_v15()==Snapshot.GAME023_RULES,"Explicit v17 pattern schema retains the exact published v15 fingerprint")
+	verify.call(state.enemy_pattern_version==1 and state.enemies[0].has("pattern") and state.enemies[0].hp==1600 and state.enemies[0].speed==45 and state.enemies[0].contact_damage==18,"Explicit v1 campaign attaches only the pattern while preserving locked elite stats")
 	for mutation in ["missing","fractional","negative","nan","short","angle","range","schema"]:
 		var data:Dictionary=state.enemy_patterns.data.duplicate(true)
 		match mutation:
@@ -152,7 +152,7 @@ static func run(host,verify:Callable)->void:
 	for mutation in ["version","missing","phase","timer","direction","origin","extra","species","mode"]:
 		var bad:Dictionary=valid.duplicate(true)
 		match mutation:
-			"version":bad.run.enemy_pattern_version=2
+			"version":bad.run.enemy_pattern_version=3
 			"missing":bad.run.enemies[0].erase("pattern")
 			"phase":bad.run.enemies[0].pattern.phase="again"
 			"timer":bad.run.enemies[0].pattern.left=INF
@@ -202,14 +202,22 @@ static func run(host,verify:Callable)->void:
 	for frame in range(30):ui._physics_process(.05)
 	verify.call(state.enemies[0].pattern.left==left and state.phase==State.Phase.CHOOSING,"Original level choice freezes windup and its selected offer")
 	ui.choice_buttons[0].pressed.emit()
+	# The selected upgrade may increase HP or knock back the enemy. Compare the
+	# same selected battle rather than assuming every random offer leaves HP100.
+	var uninterrupted=State.new()
+	Snapshot.restore(Snapshot.capture(state),uninterrupted)
+	uninterrupted.set_paused(false)
 	ui.pause_game()
 	var ui2=SavedTests.make_ui(host,folder)
 	await host.get_tree().process_frame
 	ui2.start_button.pressed.emit()
 	verify.call(ui2.simulation.phase==State.Phase.PAUSED and ui2.simulation.enemies[0].pattern.left==left,"Actual binary scene restore waits for Continue with exact pending windup")
 	ui2.resume_button.pressed.emit()
-	for frame in range(18):ui2._physics_process(.05)
-	verify.call(ui2.simulation.hp==76 and ui2.simulation.enemies[0].pattern.phase=="strike","Explicit UI Continue completes the saved windup with one actual impact")
+	uninterrupted.spawn_view_size=ui2.simulation.spawn_view_size
+	for frame in range(18):
+		uninterrupted.step(.05,Vector2.ZERO)
+		ui2._physics_process(.05)
+	verify.call(Campaign.comparable(ui2.simulation)==Campaign.comparable(uninterrupted),"Explicit UI Continue matches the selected upgrade and uninterrupted attack without duplicate impact")
 	state=State.new()
 	state.start(3802,"viya",null,"gold_slime","weapons_v1",{},"gold_slime",20000)
 	state._spawn_enemy()

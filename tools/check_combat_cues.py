@@ -16,6 +16,9 @@ FILES = ('scripts/combat/run_state.gd', 'scripts/combat/battle_view.gd',
          'scripts/progression/run_snapshot.gd',
          'scripts/combat/actor_motion.gd',
          'data/enemy_patterns.json',
+         'scripts/combat/enemy_patterns_v1.gd',
+         'scripts/combat/enemy_patterns_v2.gd',
+         'data/enemy_patterns_v2.json',
 )
 # GAME-024: reviewed enemy variants, formations and hostile projectile integration. Exact source baselines retain mutation guards.
 BASE_RUN_BLOB = '673d75a748fa5f1f9ac72ec73bbd9120fdcfce02'
@@ -48,8 +51,8 @@ PATTERN_RUN_LINES = (
     'const EnemyPatterns = preload("res://scripts/combat/enemy_patterns.gd")',
     'var enemy_patterns = EnemyPatterns.new()',
     'var enemy_pattern_version:int=0',
-    '\tvar selected_pattern:int=(1 if selected_profile==1 and mode=="campaign" else 0) if pattern_version==-1 else pattern_version',
-    '\tif selected_pattern not in [0,1] or (selected_pattern==1 and (selected_profile!=1 or mode!="campaign" or not enemy_patterns.error.is_empty())):return false',
+    '\tvar selected_pattern:int=(2 if selected_profile==1 and mode=="campaign" else 0) if pattern_version==-1 else pattern_version',
+    '\tif selected_pattern not in [0,1,2] or (selected_pattern>0 and (selected_profile!=1 or mode!="campaign" or not enemy_patterns.available(selected_pattern))):return false',
     '\tenemy_pattern_version = selected_pattern',
     '\tenemy_patterns.attach(self,enemy)',
     '\t\tvar pattern_locked:bool=enemy_patterns.tick(self,enemy,dt)',
@@ -59,7 +62,7 @@ PATTERN_RUN_LINES = (
 )
 PATTERN_START_SIGNATURE = (', pacing_version:int=-1, pattern_version:int=-1) -> bool:', ', pacing_version:int=-1) -> bool:')
 # Pin the reviewed new AI/migration/render adapters as well as the historical baseline.
-PATTERN_REVIEWED_SHA256 = {'scripts/combat/enemy_patterns.gd': '4059f30002b56fa0ccb73ed38b4fe4af9c0fe8092a8f5836ad53f6e3cef5a4af', 'scripts/combat/enemy_pattern_visuals.gd': '7ffd0cbb0b3e50bbdd2c344618522b0f1ebd792f187f10ac32d5393444eedb74', 'scripts/progression/run_snapshot.gd': '61703b550b07ee8eab71dbdef2237066a7997ebb26313d90e948d2dda1dcceb8', 'scripts/combat/actor_motion.gd': 'f54f9db4346617b1a6c589fd58ef30d53d3e4ee18cc1bafd2aa2c4bd43cf0045', 'data/enemy_patterns.json': 'ba04c2b3076746724a09cf212576886edfa33821f666daa97a541d5042680bec'}
+PATTERN_REVIEWED_SHA256 = {'scripts/combat/enemy_patterns.gd': 'df42114040f4da370a67257445063fdb851033182108111eac609758334b81ab', 'scripts/combat/enemy_pattern_visuals.gd': '6a933583874b488303c07507ef8c1bb21469fa593ff7db1d2947a439fd30b797', 'scripts/progression/run_snapshot.gd': '41ee1d3cb66697d05532cfaf2533557383da5ea69ccb296cb855641a0644d087', 'scripts/combat/actor_motion.gd': '77c63ca6327c28a4b99aafea6f104a0b0ae9a91c2e364914d79307d4e90b5261', 'data/enemy_patterns.json': 'ba04c2b3076746724a09cf212576886edfa33821f666daa97a541d5042680bec', 'scripts/combat/enemy_patterns_v1.gd': '4059f30002b56fa0ccb73ed38b4fe4af9c0fe8092a8f5836ad53f6e3cef5a4af', 'scripts/combat/enemy_patterns_v2.gd': '60ff5da133476bd9c851aaef695cd07ae748e313d9f654dd4b2b0e258af7ca1d', 'data/enemy_patterns_v2.json': '83bf0449e6dad16499af5a4c533c51d0ce3dc06fd73c02eb626de2d1e2e7ac21'}
 
 
 def blob(text: str) -> str:
@@ -90,6 +93,8 @@ def validate(sources: dict[str, str]) -> list[str]:
     for path, expected in PATTERN_REVIEWED_SHA256.items():
         if hashlib.sha256(sources[path].encode('utf-8')).hexdigest() != expected:
             errors.append('Reviewed GAME038 pattern/compatibility source changed: ' + path)
+    if 'res://tests/test_pattern_reacquire.gd' not in tests:
+        errors.append('Reacquisition runtime tests are not registered')
     if 'res://tests/test_enemy_patterns.gd' not in tests:
         errors.append('Pattern runtime tests are not registered')
     if view.count('preload("res://scripts/combat/enemy_pattern_visuals.gd").draw(self)') != 1:
@@ -206,11 +211,13 @@ def check() -> dict:
             errors.append(f'{name}: {error}')
     negative = []
     cases = [
-        ('pattern_single_hit', 'scripts/combat/enemy_patterns.gd', 'p.phase="strike"', 'p.phase="windup"'),
+        ('reacquire_unregistered', FILES[3], 'res://tests/test_pattern_reacquire.gd', 'res://tests/missing_reacquire.gd'),
+        ('v16_retrofit', 'scripts/progression/run_snapshot.gd', 'return data # Preserve original rules', 'data.run.enemy_pattern_version=2\n\treturn data # Preserve original rules'),
+        ('pattern_single_hit', 'scripts/combat/enemy_patterns_v1.gd', 'p.phase="strike"', 'p.phase="windup"'),
         ('pattern_old_ai', 'scripts/progression/run_snapshot.gd', 'data.run.enemy_pattern_version=0', 'data.run.enemy_pattern_version=1'),
         ('pattern_visual_mutation', 'scripts/combat/enemy_pattern_visuals.gd', 'var result:Array=[]', 'var result:Array=[]\n\tview.simulation.hp=1'),
         ('pattern_unregistered', FILES[3], 'res://tests/test_enemy_patterns.gd', 'res://tests/missing_pattern.gd'),
-        ('pattern_gate', FILES[0], 'if selected_pattern not in [0,1]', 'if false'),
+        ('pattern_gate', FILES[0], 'if selected_pattern not in [0,1,2]', 'if false'),
         ('pattern_contact_guard', FILES[0], '\t\tif enemy_patterns.locked(self,enemy):continue', ''),
         ('pattern_stop_on_defeat', FILES[0], '\t\tif phase!=Phase.RUNNING:return', ''),
         ('missing_reset', FILES[0], '\tcues.reset()\n', ''),
@@ -251,7 +258,7 @@ def check() -> dict:
             'baseline_run_blob': BASE_RUN_BLOB, 'baseline_runner_blob': BASE_RUNNER_BLOB,
             'baseline_engine_function_sha256': BASE_ENGINE_FUNCTION_SHA256,
             'scope': 'Changed-source UTF-8/delimiters/Python syntax, hook order, bounds, isolation, '
-                     'reviewed GAME-024 RunState/GAME-030 view baselines with exact GAME-033 observations and GAME-038 version-gated pattern adapters, preserved engine runner. '
+                     'reviewed GAME-024 RunState/GAME-030 view baselines with exact GAME-033 observations and GAME-038/039 version-gated pattern adapters and frozen v1, preserved engine runner. '
                      'NOT Godot parser/type/runtime, visual quality, input dispatch, or FPS.'}
 
 

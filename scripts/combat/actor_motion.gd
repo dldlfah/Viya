@@ -59,6 +59,10 @@ func sync(state, hero_displacement:Vector2, active:bool, track_enemies:bool=true
 		var previous:Dictionary=entries.get(id,{"p":enemy.p,"hp":enemy.hp})
 		var flash:float=state.cues.flash_alpha(id)
 		if flash>float(previous.get("flash",0)):previous.hurt_until=state.elapsed+.12
+		if enemy.get("pattern",{}).get("phase","")=="reacquire":
+			previous.erase("attack_until")
+			previous.erase("attack_since")
+			previous.erase("aim")
 		var windup:float=enemy.get("windup",0)
 		var attacking:bool=windup>0 or float(enemy.get("fire_clock",0))>float(previous.get("fire_clock",enemy.get("fire_clock",0)))
 		var aim_at:Vector2=enemy.get("aim",state.player) if attacking else state.player

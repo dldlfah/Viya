@@ -3,12 +3,15 @@ extends RefCounted
 static func plan(view) -> Array:
 	var result:Array=[]
 	var state=view.simulation
-	if state.phase!=state.Phase.RUNNING or state.enemy_pattern_version!=1:return result
-	var spec:Dictionary=state.enemy_patterns.data.orc_siege
+	if state.phase!=state.Phase.RUNNING or state.enemy_pattern_version not in [1,2]:return result
+	var spec:Dictionary=state.enemy_patterns.specification(state.enemy_pattern_version)
 	for enemy in state.enemies:
 		if not state.enemy_patterns.applies(state,enemy) or enemy.pattern.phase=="chase":continue
 		var p:Dictionary=enemy.pattern
-		if p.phase=="recovery":continue
+		if p.phase=="reacquire":
+			result.append({"id":int(enemy.id),"phase":"reacquire","origin":view.world_to_screen(enemy.p),"progress":1-float(p.left)/float(spec.reacquire)})
+			continue
+		if p.phase not in ["windup","strike"]:continue
 		var points:=PackedVector2Array([view.world_to_screen(p.origin)])
 		var half:float=deg_to_rad(float(spec.half_angle_degrees))
 		for index in range(49):
@@ -20,6 +23,13 @@ static func plan(view) -> Array:
 
 static func draw(view) -> void:
 	for entry in plan(view):
+		if entry.phase=="reacquire":
+			var at:Vector2=entry.origin
+			var color:=Color("b7c4d0",.8)
+			view.draw_arc(at,23,.25,TAU-.25,24,color,2,true)
+			view.draw_line(at+Vector2(-5,-5),at+Vector2(5,5),color,2,true)
+			view.draw_line(at+Vector2(-5,5),at+Vector2(5,-5),color,2,true)
+			continue
 		var points:PackedVector2Array=entry.points
 		var color:Color=Color("ffce80") if entry.phase=="windup" else Color("ff7b6e")
 		# Individual triangles remain valid when terrain clips adjacent rays to zero.

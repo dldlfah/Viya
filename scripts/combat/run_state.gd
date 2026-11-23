@@ -159,8 +159,8 @@ func start(seed_value: int = 0, character_id: String = "viya", account_level: Va
 		return false
 	var hero: Dictionary = growth.catalog.hero(character_id,skill_ruleset)
 	var selected_profile := 1 if skill_ruleset=="weapons_v1" else 0
-	var selected_pattern:int=(1 if selected_profile==1 and mode=="campaign" else 0) if pattern_version==-1 else pattern_version
-	if selected_pattern not in [0,1] or (selected_pattern==1 and (selected_profile!=1 or mode!="campaign" or not enemy_patterns.error.is_empty())):return false
+	var selected_pattern:int=(2 if selected_profile==1 and mode=="campaign" else 0) if pattern_version==-1 else pattern_version
+	if selected_pattern not in [0,1,2] or (selected_pattern>0 and (selected_profile!=1 or mode!="campaign" or not enemy_patterns.available(selected_pattern))):return false
 	if selected_profile==1 and (not profiles.error.is_empty() or profiles.hero(character_id).is_empty() or (mode=="campaign" and not profiles.data.maps.has(selected_map))):
 		return false
 	var candidate: Dictionary = magic_configuration(hero,selected_profile,character_id)

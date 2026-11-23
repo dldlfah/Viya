@@ -1,6 +1,7 @@
 extends RefCounted
 ## Exact gameplay data. Cosmetic effects/cues are rebuilt after a restore.
-const VERSION := 16
+const VERSION := 17
+const GAME038_RULES := "29f9c4404b89acd779d45598c859a8669e5d30c08fbfe218c7a9be7caa463a47"
 const GAME023_RULES := "25dfc5d463289c0eb5f9aac0fab694d203fcdf0b6e2e5621a21eab91caa3ec30"
 const GAME022_RULES := "9a0c5ce43584f5464325aca9faa2db1597b33bd3243b9055cc65d8e6965ba196"
 const GAME021_RULES := "3480971cf9cb7602c911416d32c93e97cef575d8634b9aa37b21c77d20a6ad87"
@@ -47,8 +48,11 @@ static func fingerprint_for_v14() -> String:
 static func fingerprint_for_v15()->String:
 	return (fingerprint_for_v14()+FileAccess.get_file_as_string("res://data/gold_rewards.json").replace("\r\n","\n")).sha256_text()
 
+static func fingerprint_for_v16()->String:
+	return (fingerprint_for_v15()+FileAccess.get_file_as_string("res://data/enemy_patterns.json").replace("\r\n","\n")+FileAccess.get_file_as_string("res://scripts/combat/enemy_patterns_v1.gd").replace("\r\n","\n")).sha256_text()
+
 static func fingerprint()->String:
-	return (fingerprint_for_v15()+FileAccess.get_file_as_string("res://data/enemy_patterns.json").replace("\r\n","\n")+FileAccess.get_file_as_string("res://scripts/combat/enemy_patterns.gd").replace("\r\n","\n")).sha256_text()
+	return (fingerprint_for_v16()+FileAccess.get_file_as_string("res://data/enemy_patterns_v2.json").replace("\r\n","\n")+FileAccess.get_file_as_string("res://scripts/combat/enemy_patterns_v2.gd").replace("\r\n","\n")+FileAccess.get_file_as_string("res://scripts/combat/enemy_patterns.gd").replace("\r\n","\n")).sha256_text()
 
 static func capture(state) -> Dictionary:
 	var result := {"version": VERSION, "rules": fingerprint(), "run": {}, "growth": {}, "magic": {}, "rng": []}
@@ -63,6 +67,7 @@ static func capture(state) -> Dictionary:
 	return result.duplicate(true)
 
 static func upgrade_legacy(data: Dictionary, state) -> Dictionary:
+	if data.get("version")==16 and data.get("rules")==GAME038_RULES:return _upgrade_pattern_revision(data)
 	if data.get("version")==15 and data.get("rules")==GAME023_RULES:return _upgrade_patterns(data)
 	if data.get("version")==14 and data.get("rules")==GAME022_RULES:return _upgrade_rewards(data)
 	if data.get("version")==13 and data.get("rules")==GAME021_RULES:return _upgrade_pacing(data)
@@ -268,6 +273,14 @@ static func _upgrade_patterns(data:Dictionary)->Dictionary:
 	data.run.enemy_pattern_version=0 # Old living AND future enemies retain their original AI.
 	return data
 
+
+static func _upgrade_pattern_revision(data:Dictionary)->Dictionary:
+	if not data.get("run") is Dictionary or not data.run.get("enemy_pattern_version") is int or data.run.enemy_pattern_version not in [0,1]:return {}
+	data=data.duplicate(true)
+	data.version=VERSION
+	data.rules=fingerprint()
+	return data # Preserve original rules and every in-progress attack field.
+
 static func finite_number(value: Variant, minimum: float, maximum: float) -> bool:
 	return (value is float or value is int) and is_finite(float(value)) and value >= minimum and value <= maximum
 
@@ -286,7 +299,7 @@ static func valid(data: Dictionary, state) -> bool:
 	for key in RUN_FIELDS:
 		if not run.has(key):
 			return false
-	if not run.enemy_pattern_version is int or run.enemy_pattern_version not in [0,1] or (run.enemy_pattern_version==1 and (run.run_mode!="campaign" or run.combat_profile_version!=1 or not state.enemy_patterns.error.is_empty())):return false
+	if not run.enemy_pattern_version is int or run.enemy_pattern_version not in [0,1,2] or (run.enemy_pattern_version>0 and (run.run_mode!="campaign" or run.combat_profile_version!=1 or not state.enemy_patterns.available(run.enemy_pattern_version))):return false
 	if not run.gold_reward_version is int or run.gold_reward_version not in [0,1] or (run.gold_reward_version==1 and (run.run_mode!="gold_slime" or state.dungeon.rewards.is_empty())):return false
 	if not growth.get("pacing_version") is int or growth.pacing_version not in [0,1] or (growth.pacing_version==1 and (growth.get("ruleset")!="weapons_v1" or state.growth.pacing.data.is_empty())):return false
 	if run.run_mode not in ["campaign","gold_slime"] or not run.dungeon_day is int or (run.run_mode=="campaign" and (run.dungeon_day!=-1 or run.map_id=="gold_slime")) or (run.run_mode=="gold_slime" and (run.map_id!="gold_slime" or run.dungeon_day<0 or run.dungeon_day>100000000 or run.combat_profile_version!=1 or growth.get("ruleset")!="weapons_v1" or run.gold_drop_chance!=1.0 or run._elites_spawned!=0 or run._boss_spawned!=false or run._boss_defeated!=false or (not run.enemy_bullets is Array or not run.enemy_bullets.is_empty()))):
