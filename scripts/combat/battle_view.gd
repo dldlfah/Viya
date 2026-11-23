@@ -294,6 +294,7 @@ func _draw_foreground_threats() -> void:
 
 func _draw_combat_cues() -> void:
 	if not simulation.cues.enabled:return
+	preload("res://scripts/combat/structure_feedback.gd").draw(self,display_plan.get("structures",[]))
 	var font:Font=get_theme_default_font()
 	for event in display_plan.get("kills",[]):
 		var fraction:float=clampf(float(event.life)/float(event.duration),0,1)

@@ -175,8 +175,10 @@ func _draw_prop(prop: Dictionary) -> void:
 		canvas.draw_line(feet-Vector2(14,2),feet+Vector2(16,3),Color("756c5c"),4,true)
 		return
 	var color := Color("a48254") if prop.style=="crate" else (Color("9c7159") if prop.style=="urn" else Color("8d8d7e"))
+	var flash:float=state.cues.flash_alpha(int(prop.id))
+	color=color.lerp(Color("fff1db"),flash)
 	var texture: Texture2D = canvas.art.texture("prop_"+prop.style)
-	if texture:canvas.draw_texture_rect(texture,Rect2(feet-Vector2(23,43),Vector2(46,43)),false)
+	if texture:canvas.draw_texture_rect(texture,Rect2(feet-Vector2(23,43),Vector2(46,43)),false,Color.WHITE.lerp(Color(1.8,1.8,1.8),flash))
 	elif prop.style=="urn":
 		canvas.draw_circle(feet-Vector2(0,20),17,color.darkened(.15))
 		canvas.draw_rect(Rect2(feet-Vector2(10,39),Vector2(20,10)),color)

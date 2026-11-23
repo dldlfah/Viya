@@ -2,6 +2,7 @@ extends RefCounted
 ## Read-only frame planning. Limits decoration/text, never actors, attacks or RNG.
 const Ground=preload("res://scripts/combat/battle_projection.gd")
 const SupplyFeedback=preload("res://scripts/combat/supply_feedback.gd")
+const StructureFeedback=preload("res://scripts/combat/structure_feedback.gd")
 const MERGE_SECONDS := .12
 const DENSE_ACTORS := 80
 const DENSE_EFFECTS := 16
@@ -82,16 +83,20 @@ static func build(view) -> Dictionary:
 		var received:Dictionary=state.cues.latest_received()
 		cues.append({"kind":"received","id":0,"p":state.player,"amount":received.amount,"life":received.life,"duration":received.duration})
 	var limit:int=(8 if compact else 12) if dense else (16 if compact else 24)
+	var structures:Dictionary=StructureFeedback.build(view,reserved,compact,dense)
+	reserved.append_array(structures.reserved)
+	cues.append_array(structures.events)
 	var labels:Array=layout_labels(cues,view.world_to_screen,view.size,view.get_theme_default_font(),reserved,important,limit,view.show_damage,view.show_xp)
 	var kills:Array=[]
 	for event in cues:
 		if event.kind=="kill" and area.has_point(event.p) and kills.size()<(4 if simple else 12):kills.append(event)
-	return {"dense":dense,"simple":simple,"actors":actors,"bullets":bullets,"effects":planned,"skipped_links":skipped,"labels":labels,"label_limit":limit,"kills":kills,"reserved":reserved,"raw_events":state.cues.events.size(),"merged_events":cues.size()}
+	return {"dense":dense,"simple":simple,"actors":actors,"bullets":bullets,"effects":planned,"skipped_links":skipped,"labels":labels,"label_limit":limit,"kills":kills,"reserved":reserved,"raw_events":state.cues.events.size(),"merged_events":cues.size(),"structures":structures.markers}
 
 static func priority(event: Dictionary, important: Dictionary) -> int:
 	if event.kind=="received":return -1
 	if event.kind=="item":return 0
 	if event.kind=="hit":return 1 if important.has(int(event.id)) else (2 if event.critical else 4)
+	if event.kind=="structure":return 5
 	return 3
 
 static func layout_labels(events: Array, project: Callable, viewport: Vector2, font: Font, reserved: Array, important: Dictionary, limit: int, show_damage: bool, show_xp: bool) -> Array:
@@ -125,6 +130,11 @@ static func layout_labels(events: Array, project: Callable, viewport: Vector2, f
 			text="+%.2f XP" % float(event.amount)
 			color=Color("7cd3c1",fraction)
 			point+=Vector2(24,-18-progress*22)
+		elif event.kind=="structure":
+			font_size=11 if viewport.x<900 or viewport.y<350 else 12
+			text=str(event.label)
+			color=Color("d0c5ac")
+			point+=Vector2(0,-28)
 		else:
 			text=("!%d" if event.critical else "%d") % int(event.amount)
 			color=Color("f6d798" if event.critical else "fff1db",fraction)
