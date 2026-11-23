@@ -4,7 +4,7 @@
 
 ## 세션 필수 문서
 
-[CURRENT_WORK](docs/CURRENT_WORK.md)와 **[누적 DEVELOPMENT_STATUS](docs/DEVELOPMENT_STATUS.md)**를 함께 읽는다. [PLANNED_WORK](docs/PLANNED_WORK.md) · [NEXT_TASK](docs/NEXT_TASK.md) · [AGENTS](AGENTS.md) · [제작 스킬](.agents/skills/viya-game-production/SKILL.md). GAME-025 코드 **`c08394c9b3be0872cdb9ee8c69e1036382a0c204`**, 브랜치 `work/viya-turnaround-qa-20261117`. 문서 HEAD는 코드 뒤에 오며 main 자동 병합은 하지 않는다.
+[CURRENT_WORK](docs/CURRENT_WORK.md)와 **[누적 DEVELOPMENT_STATUS](docs/DEVELOPMENT_STATUS.md)**를 함께 읽는다. [PLANNED_WORK](docs/PLANNED_WORK.md) · [NEXT_TASK](docs/NEXT_TASK.md) · [AGENTS](AGENTS.md) · [제작 스킬](.agents/skills/viya-game-production/SKILL.md). GAME-026 코드 **`1a20fb5e6dbfa1a1ba877358d1b4e6ad46c8ae72`**, 브랜치 `work/viya-turnaround-qa-20261117`. 문서 HEAD는 코드 뒤에 오며 main 자동 병합은 하지 않는다.
 
 ## 실제 플레이 경로
 
@@ -35,9 +35,11 @@
 
 사용자 가이드에 맞춰 **차콜/황동 전투 HUD·진홍 룬 MP 버튼·두 줄 아이콘/단계·모바일 임무 펼침/복귀**를 연결했다. 상단 시간/공세·금화와 표준 폭의 작은 레이더는 실제 상태만 표시한다. 바닥/벽/몬스터는 교체 가능한 임시 표현이며 가이드 그림은 최종 아트로 승인되지 않았다. ART-001 기준/GEN-005 승인 대기·게임 미연결·3D보류를 유지한다.
 
+실제 이동 방향으로 **최대화면8% 전방 카메라**를 적용했다. 정지/반전은 부드럽게 보정하고 임무/선택/일시정지에서 멈춘다. 두 렌더러·좌표 변환/가림/경고가 표시 중심을 공유한다. 기존 생성에는1.16배 고정 안전영역을 적용하며 보간 이력은 저장/RNG에 넣지 않는다. 실제폰의 카메라 체감과 새 시야의6분 균형은 별도 검증이다.
+
 ## 검증
 
-Godot4.7.2 소스/임포트·기존7묶음 **3220 native checks**·부트와 Python12는 PASS다. 실제 구1~15/새 UI의18개 복원 프로세스·고각/기존/가림/compact 실제10화면·이동/MP고유기 병행100회 이벤트 검사를 통과했다. 360슬라임+4Lv5의Linux부하 측정과 실제모바일 미검증을 구분한다. [정확한 소스와 근거](docs/validation/GAME025_REPORT.json).
+Godot4.7.2 소스/임포트·기존7묶음 **3252 native checks**·부트와 Python12는 PASS다. 실제 구1~15/새 UI의18개 복원 프로세스·고각/기존/가림/compact 실제13화면·이동/MP고유기 병행100회 이벤트 검사를 통과했다. 360슬라임+4Lv5의Linux부하 측정과 실제모바일 미검증을 구분한다. [정확한 소스와 근거](docs/validation/GAME026_REPORT.json).
 
 ```sh
 python3 tools/check_project.py --godot /actual/path/to/Godot
@@ -46,7 +48,7 @@ Godot --headless --path . --script res://tests/test_combat_cues.gd
 Godot --headless --path . --script res://tests/measure_campaign.gd -- --map=prologue_wall --talents=none
 ```
 
-공격 강화 우선 선택의 동일 조작 대조에서 신규 캠페인은20회 모두11~12선택/공격Lv5 2종,19클리어·1시간초과였다. 골드던전10회는모두8선택/Lv5 1종·클리어다. 선택 시점/관통별 실제TTK/가격1000·50000·1000000의42경제시나리오를 기록했다. 하루던전2+캠페인1의고정수입가정에서첫특성Lv3약5~6일/전체18Lv3약89~91일이다. 모바일 기기가없어실기FPS/발열은미검증이며Linux부하계측을그것으로대체하지않는다. 다음은 전방 시야 보정 시제품이며 남은 보스/실기 QA도 보존한다.
+공격 강화 우선 선택의 동일 조작 대조에서 신규 캠페인은20회 모두11~12선택/공격Lv5 2종,19클리어·1시간초과였다. 골드던전10회는모두8선택/Lv5 1종·클리어다. 선택 시점/관통별 실제TTK/가격1000·50000·1000000의42경제시나리오를 기록했다. 하루던전2+캠페인1의고정수입가정에서첫특성Lv3약5~6일/전체18Lv3약89~91일이다. 모바일 기기가없어실기FPS/발열은미검증이며Linux부하계측을그것으로대체하지않는다. 다음은 밀집 효과·피해 숫자 표시 예산이며 남은 보스/실기 QA도 보존한다.
 
 ```sh
 Godot --headless --path . --script res://tests/measure_balance.gd -- --map=gold_slime --talents=none
