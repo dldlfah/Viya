@@ -4,7 +4,7 @@
 
 ## 세션 필수 문서
 
-[CURRENT_WORK](docs/CURRENT_WORK.md)와 **[누적 DEVELOPMENT_STATUS](docs/DEVELOPMENT_STATUS.md)**를 함께 읽는다. [PLANNED_WORK](docs/PLANNED_WORK.md) · [NEXT_TASK](docs/NEXT_TASK.md) · [AGENTS](AGENTS.md) · [제작 스킬](.agents/skills/viya-game-production/SKILL.md). GAME-030 코드 **`9fa1e39d2d9ce1424fcf43be6e281cbf7098b788`**, 브랜치 `work/viya-turnaround-qa-20261117`. 문서 HEAD는 코드 뒤에 오며 main 자동 병합은 하지 않는다.
+[CURRENT_WORK](docs/CURRENT_WORK.md)와 **[누적 DEVELOPMENT_STATUS](docs/DEVELOPMENT_STATUS.md)**를 함께 읽는다. [PLANNED_WORK](docs/PLANNED_WORK.md) · [NEXT_TASK](docs/NEXT_TASK.md) · [AGENTS](AGENTS.md) · [제작 스킬](.agents/skills/viya-game-production/SKILL.md). GAME-031 코드 **`60551f9d588da4cc8b308d44c12a56c9e72fb23c`**, 브랜치 `work/viya-turnaround-qa-20261117`. 문서 HEAD는 코드 뒤에 오며 main 자동 병합은 하지 않는다.
 
 ## 실제 플레이 경로
 
@@ -45,9 +45,11 @@
 
 실제 잃은HP의 방향·음수숫자/반응 표시와 실제 접촉 가해자의 공격 동작을 연결했다. 탄환 발사자를 추정하지 않고,방어/무적/지형에 막힌 무피해를 타격으로 표시하지 않는다. 같은 단계 회복으로 가려진 피격도 반영하며 정지/새전투/복원은 과거 타격을 재생하지 않는다.
 
+실제 발사·피해/MP·획득/성장·결과에 임시 효과음8종을 연결했다. 공유6플레이어/한번에3종·중요음 우선이며,기존음량/무음/중단·복원에 연결해 과거소리를 재생하지 않는다. 정식음원/음성은 미확정이다.
+
 ## 검증
 
-Godot4.7.2 임포트·기존7묶음 **3366native**·부트,105소스/6계약·negative controls/Python12 PASS. 구1~15/새UI/피격중저장19프로세스·45실제화면·이동/MP병행100회를 통과했다. 밀집Linux1회 계측과 실제폰 미검증을 구분한다. [정확한 소스와 근거](docs/validation/GAME030_REPORT.json).
+Godot4.7.2 임포트·기존7묶음 **3398native**·부트,109소스/6계약·negative controls/Python12 PASS. 구1~15/새UI/피격저장19프로세스·51실제화면·병행입력100+마법3/음량슬라이더2·믹서8구간을 통과했다. Dummy의 Master전 PCM기록과 실제스피커/사람청취/모바일 미검증을 구분한다. [정확한 소스와 근거](docs/validation/GAME031_REPORT.json).
 
 ```sh
 python3 tools/check_project.py --godot /actual/path/to/Godot
@@ -56,9 +58,11 @@ Godot --headless --path . --script res://tests/test_combat_cues.gd
 Godot --headless --path . --script res://tests/measure_campaign.gd -- --map=prologue_wall --talents=none
 # Historical407 versus exact current HUD extents,unchanged evolve controller
 Godot --headless --path . --script res://tests/measure_boss_guidance.gd
+# Real engine mixer frames/WAV;not speaker or human listening proof
+Godot --headless --audio-driver Dummy --path . --script res://tests/measure_combat_audio.gd
 ```
 
-공격 강화 우선 선택의 동일 조작 대조에서 신규 캠페인은20회 모두11~12선택/공격Lv5 2종,19클리어·1시간초과였다. 골드던전10회는모두8선택/Lv5 1종·클리어다. 선택 시점/관통별 실제TTK/가격1000·50000·1000000의42경제시나리오를 기록했다. 하루던전2+캠페인1의고정수입가정에서첫특성Lv3약5~6일/전체18Lv3약89~91일이다. 모바일 기기가없어실기FPS/발열은미검증이며Linux부하계측을그것으로대체하지않는다. 구설정407시간초과는 재현되며 현재4표본 클리어를 전체 균형·안내 효과로 확대하지 않는다. 다음은 임시 전투음·음량 설정 연결이다. 전체음량/저장은 연결됐고 전투 음원은 미탑재다.
+공격 강화 우선 선택의 동일 조작 대조에서 신규 캠페인은20회 모두11~12선택/공격Lv5 2종,19클리어·1시간초과였다. 골드던전10회는모두8선택/Lv5 1종·클리어다. 선택 시점/관통별 실제TTK/가격1000·50000·1000000의42경제시나리오를 기록했다. 하루던전2+캠페인1의고정수입가정에서첫특성Lv3약5~6일/전체18Lv3약89~91일이다. 모바일 기기가없어실기FPS/발열은미검증이며Linux부하계측을그것으로대체하지않는다. 구설정407시간초과는 재현되며 현재4표본 클리어를 전체 균형·안내 효과로 확대하지 않는다. 다음은 전투 저장·이어하기 상태 안내이다.
 
 ```sh
 Godot --headless --path . --script res://tests/measure_balance.gd -- --map=gold_slime --talents=none
