@@ -500,7 +500,7 @@ func _show_menu(kind: String) -> void:
 		dialog_body.add_child(result_summary_label)
 		if kind == "cleared":
 			gold_error = gold_progress.settle(summary) if battle_save_error == OK else battle_save_error
-			result_summary_label.text += "\n기본 보상 %d + 획득 금화 %d = 총 %d 금화\n보유 금화 %d" % [summary["gold_bonus"], summary["gold_collected"], summary["gold_reward"], gold_progress.total]
+			result_summary_label.text += _result_payment_text(summary)
 			if gold_error != OK:
 				dialog_body.add_child(_label("금화 저장 실패 · %s" % error_string(gold_error), 18))
 				dialog_body.add_child(_button("금화 저장 재시도", _retry_gold_save))
@@ -510,7 +510,7 @@ func _show_menu(kind: String) -> void:
 				if gold_error!=OK:
 					dialog_body.add_child(_label("던전 종료 저장 실패 · %s" % error_string(gold_error),18))
 					dialog_body.add_child(_button("계정 저장 재시도",_retry_gold_save))
-			result_summary_label.text += "\n획득 금화 %d · 클리어 보상 미지급\n보유 금화 %d" % [summary["gold_collected"], gold_progress.total]
+			result_summary_label.text += _result_payment_text(summary)
 		_add_feedback_banner()
 		start_button = _button("다시 출격", begin_run)
 		if kind == "cleared":
@@ -648,6 +648,11 @@ func _set_display_option(value: bool, key: String) -> void:
 func _update_settings_message() -> void:
 	if is_instance_valid(settings_message):
 		settings_message.text = "설정은 변경 시 자동 저장됩니다." if settings_error == OK else "설정 저장 실패 · %s" % error_string(settings_error)
+
+func _result_payment_text(summary:Dictionary) -> String:
+	if summary.outcome=="cleared":
+		return "\n기본 보상 %d + 획득 금화 %d = 총 %d 금화\n보유 금화 %d" % [summary["gold_bonus"],summary["gold_collected"],summary["gold_reward"],gold_progress.total]
+	return "\n획득 금화 %d · 클리어 보상 미지급\n보유 금화 %d" % [summary["gold_collected"],gold_progress.total]
 
 func _saved_battle_text() -> String:
 	var saved:Dictionary=run_store.pending.run

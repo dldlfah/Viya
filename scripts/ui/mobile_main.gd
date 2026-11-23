@@ -106,6 +106,10 @@ func _set_volume(value:float) -> void:
 	super._set_volume(value)
 	combat_audio.guard(simulation,not overlay.visible)
 
+func _result_payment_text(summary:Dictionary) -> String:
+	var data:Dictionary=preload("res://scripts/ui/reward_payment.gd").describe(summary,run_store.pending,gold_progress,battle_save_error,gold_error)
+	return "\n"+str(data.get("text",""))
+
 func _saved_battle_text() -> String:
 	return SaveNotice.summary(run_store.pending,simulation.map_catalog) if battle_save_error==OK else "저장 정보 확인 불가 · 불러오기 오류를 확인하세요"
 
@@ -485,6 +489,12 @@ func _show_menu(kind: String) -> void:
 		lobby_button = _button("출격 대기로", _return_to_lobby.bind(ticket, revision))
 		lobby_button.disabled = battle_save_error != OK or ((kind == "cleared" or simulation.run_mode=="gold_slime") and gold_error != OK)
 		dialog_body.add_child(lobby_button)
+		# Keep the existing relevant recovery action visible above a long result.
+		var primary_retry:Callable=_retry_battle_save if battle_save_error!=OK else _retry_gold_save
+		for child in dialog_body.get_children():
+			if child is Button and child.pressed.is_connected(primary_retry):
+				dialog_body.move_child(child,1)
+				break
 	elif kind == "ready":
 		var heading: Label = dialog_body.get_child(0) as Label
 		heading.text = "VIYA | 최후의 도시 · 메인 로비"
@@ -985,7 +995,7 @@ func _add_growth_access(origin: String) -> void:
 	if data.is_empty():
 		return
 	dialog_body.add_child(_label(GrowthOverview.compact(data), 16))
-	var caption: String = "최종 성장 현황" if is_final else "보유 스킬 · 성장 현황"
+	var caption: String = "최종 성장 · 보상 내역" if is_final else "보유 스킬 · 성장 현황"
 	overview_button = _button(caption, _open_growth_overview.bind(origin, simulation.navigation_ticket, _menu_revision))
 	dialog_body.add_child(overview_button)
 
@@ -1015,9 +1025,14 @@ func _open_growth_overview(origin: String, ticket: int, revision: int) -> void:
 	_overview_open = true
 	_modal_kind = "overview"
 	dialog_body.add_child(_label("최종 성장 현황" if is_final else "현재 성장 현황", 24))
-	dialog_body.add_child(_label("읽기 전용 · 모든 스킬명과 수치는 임시입니다. 영구 저장·장착 변경·강화 기능은 없습니다.", 16))
+	dialog_body.add_child(_label("읽기 전용 · 모든 스킬명과 수치는 임시입니다. 성장 기록의 영구 보관·장착 변경·강화 기능은 없습니다.", 16))
 	overview_return_button = _button("닫기 · 이전 화면으로", _close_growth_overview.bind(simulation.navigation_ticket, _menu_revision))
 	dialog_body.add_child(overview_return_button)
+	if is_final and simulation.result_summary().ended:
+		var payment_label:=_label(_result_payment_text(simulation.result_summary()).trim_prefix("\n"),17)
+		payment_label.name="RewardPaymentSummary"
+		payment_label.mouse_filter=Control.MOUSE_FILTER_IGNORE
+		dialog_body.add_child(payment_label)
 	for section in GrowthOverview.sections(data):
 		dialog_body.add_child(_label(str(section["title"]), 21))
 		dialog_body.add_child(_label(str(section["body"]), 17))
