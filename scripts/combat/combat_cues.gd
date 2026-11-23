@@ -1,5 +1,6 @@
 extends RefCounted
 ## Bounded presentation data. Receives committed events; never owns gameplay or RNG.
+const SupplyFeedback=preload("res://scripts/combat/supply_feedback.gd")
 const MAX_EVENTS := 48
 const MAX_FLASHES := 80
 const FLASH_SECONDS := 0.12
@@ -87,11 +88,12 @@ func record_collected_xp(at: Vector2, amount: float) -> void:
 		return
 	_push("xp", 0, at, amount, false, XP_SECONDS)
 
-func record_item(at: Vector2, label: String) -> void:
+func record_item(at: Vector2, label: String, receipt: Dictionary = {}) -> void:
 	if not enabled:
 		return
 	_push("item", 0, at, 0.0, false, 1.3)
-	events[-1]["label"] = label
+	events[-1]["label"] = SupplyFeedback.text(receipt) if not receipt.is_empty() else label
+	if not receipt.is_empty():events[-1]["supply"] = receipt.duplicate(true)
 
 func _recent(kind: String, id: int, window: float) -> Dictionary:
 	for i in range(events.size() - 1, -1, -1):

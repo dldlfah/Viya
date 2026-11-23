@@ -1,6 +1,7 @@
 extends RefCounted
 ## Read-only frame planning. Limits decoration/text, never actors, attacks or RNG.
 const Ground=preload("res://scripts/combat/battle_projection.gd")
+const SupplyFeedback=preload("res://scripts/combat/supply_feedback.gd")
 const MERGE_SECONDS := .12
 const DENSE_ACTORS := 80
 const DENSE_EFFECTS := 16
@@ -45,6 +46,9 @@ static func build(view) -> Dictionary:
 		if view.boss_guidance.marker_rect.has_area():reserved.append(view.boss_guidance.marker_rect.grow(3))
 	var hero_art:Dictionary=view.actor_visual().sample
 	if not hero_art.is_empty():reserved[0]=reserved[0].merge(view.actor_art.rectangle(hero_art,view.world_to_screen(state.player)))
+	for item in state.item_pickups:
+		var at:Vector2=view.world_to_screen(item.p)
+		if Rect2(Vector2.ZERO,view.size).grow(22).has_point(at):reserved.append(SupplyFeedback.bounds(at,compact))
 	for enemy in state.enemies:
 		if not area.grow(40).has_point(enemy.p):continue
 		actors+=1
@@ -115,7 +119,7 @@ static func layout_labels(events: Array, project: Callable, viewport: Vector2, f
 			point+=Vector2(70,-12-progress*12)
 		elif event.kind=="item":
 			text=str(event.get("label",""))
-			color=Color("f5dfa6",fraction)
+			color=Color(SupplyFeedback.color(str(event.get("supply",{}).get("kind",""))),fraction)
 			point+=Vector2(0,-48-progress*25)
 		elif event.kind=="xp":
 			text="+%.2f XP" % float(event.amount)
@@ -127,7 +131,10 @@ static func layout_labels(events: Array, project: Callable, viewport: Vector2, f
 			point+=Vector2(0,-35-progress*18)
 			if important.has(int(event.id)):point.y-=65
 		var size:=Vector2(font.get_string_size(text,HORIZONTAL_ALIGNMENT_LEFT,-1,font_size).x,font.get_height(font_size))+Vector2(6,4)
-		for shift in [Vector2.ZERO,Vector2(0,-22),Vector2(0,-44),Vector2(-36,-22),Vector2(36,-22),Vector2(0,-66),Vector2(-36,-44),Vector2(36,-44)]:
+		var shifts:Array=[Vector2.ZERO,Vector2(0,-22),Vector2(0,-44),Vector2(-36,-22),Vector2(36,-22),Vector2(0,-66),Vector2(-36,-44),Vector2(36,-44)]
+		# Small screens can have boss status above the hero; keep the same label budget.
+		if event.kind=="item":shifts.append_array([Vector2(0,112),Vector2(0,136),Vector2(0,160)])
+		for shift in shifts:
 			var box:=Rect2(point+shift-Vector2(size.x*.5,font.get_ascent(font_size)+2),size)
 			if not safe.encloses(box):continue
 			if occupied.any(func(other):return box.grow(2).intersects(other)):continue

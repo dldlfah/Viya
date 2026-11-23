@@ -29,6 +29,12 @@ RECEIVED_RUN_REPLACEMENTS = (
 )
 RECEIVED_RUN_LINES = ('\tvar previous_hp: int = hp', '\tcues.record_received(player, previous_hp-hp, source)')
 
+# GAME033: strip only these exact read-only pickup observations and shared glyph adapter.
+SUPPLY_RUN_LINES = ('\t# Observe committed deltas only; keep the existing effect/reward order unchanged.', '\tvar supply_before:Dictionary={"hp":hp,"mp":magic.mana,"gold":gold_collected,"kills":kills,"bullets":enemy_bullets.size()}', '\tvar supply_xp:float=0.0', '\t\t\t\tsupply_xp=xp')
+SUPPLY_RECEIPT = ('\tcues.record_item(player, str(SupplyCatalog.ITEM_NAMES[kind]), {"kind":kind,"hp":hp-int(supply_before.hp),"mp":magic.mana-float(supply_before.mp),"gold":gold_collected-int(supply_before.gold),"kills":kills-int(supply_before.kills),"bullets":int(supply_before.bullets)-enemy_bullets.size(),"xp":supply_xp})', '\tcues.record_item(player, str(SupplyCatalog.ITEM_NAMES[kind]))')
+SUPPLY_VIEW_ADAPTER = ('\t_draw_supply_items()\n\nfunc _draw_supply_items() -> void:\n\tvar visible:=Rect2(Vector2.ZERO,size).grow(22)\n\tvar compact:bool=size.x<900 or size.y<350\n\tfor item in simulation.item_pickups:\n\t\tvar at:=_screen(item.p)\n\t\tif visible.has_point(at):SupplyFeedback.draw_item(self,at,str(item.kind),compact)\n', '\tfor item in simulation.item_pickups:\n\t\tvar at := _screen(item.p)\n\t\tif not visible.has_point(at):\n\t\t\tcontinue\n\t\tvar color: Color = {"hp":Color("f58c9c"),"mp":Color("7abcf3"),"magnet":Color("f3ce79"),"purge":Color("cea2fa")}[item.kind]\n\t\tdraw_circle(at,17,Color("20252c"))\n\t\tdraw_arc(at,18,0,TAU,24,color,2,true)\n\t\tmatch item.kind:\n\t\t\t"hp":\n\t\t\t\tdraw_line(at+Vector2(-9,0),at+Vector2(9,0),color,5)\n\t\t\t\tdraw_line(at+Vector2(0,-9),at+Vector2(0,9),color,5)\n\t\t\t"mp":\n\t\t\t\tdraw_colored_polygon(PackedVector2Array([at+Vector2(0,-11),at+Vector2(8,3),at+Vector2(0,10),at+Vector2(-8,3)]),color)\n\t\t\t"magnet":\n\t\t\t\tdraw_arc(at,8,0,PI,14,color,5,true)\n\t\t\t\tdraw_line(at+Vector2(-8,0),at+Vector2(-8,-9),color,5)\n\t\t\t\tdraw_line(at+Vector2(8,0),at+Vector2(8,-9),color,5)\n\t\t\t"purge":\n\t\t\t\tdraw_line(at-Vector2(8,8),at+Vector2(8,8),color,4)\n\t\t\t\tdraw_line(at+Vector2(-8,8),at+Vector2(8,-8),color,4)\n')
+SUPPLY_VIEW_IMPORT = 'const SupplyFeedback=preload("res://scripts/combat/supply_feedback.gd")\n'
+
 
 def blob(text: str) -> str:
     data = text.encode('utf-8')
@@ -56,6 +62,13 @@ def validate(sources: dict[str, str]) -> list[str]:
     errors: list[str] = []
     run, view, cues, tests, runner, _ = [sources[x] for x in FILES]
     restored = run
+    if restored.count(SUPPLY_RECEIPT[0]) != 1:
+        errors.append('Missing/changed committed supply receipt hook')
+    restored = restored.replace(*SUPPLY_RECEIPT, 1)
+    for line in SUPPLY_RUN_LINES:
+        if restored.splitlines().count(line) != 1:
+            errors.append('Missing/changed read-only supply observation: ' + line.strip())
+        restored = restored.replace(line + '\n', '', 1)
     for old, original in RECEIVED_RUN_REPLACEMENTS:
         if restored.count(old) != 1:
             errors.append('Missing/duplicate reviewed received-damage hook: ' + old)
@@ -68,7 +81,10 @@ def validate(sources: dict[str, str]) -> list[str]:
         errors.append('RunState differs from the reviewed GAME-024 baseline')
     if engine_function_digest(runner) != BASE_ENGINE_FUNCTION_SHA256:
         errors.append('Existing native engine commands or pass/fail criteria changed')
-    restored_view = view.split('\nfunc _draw_combat_cues() -> void:', 1)[0]
+    if view.count(SUPPLY_VIEW_ADAPTER[0]) != 1 or view.count(SUPPLY_VIEW_IMPORT) != 1:
+        errors.append('Missing/changed shared supply glyph adapter')
+    restored_view = view.replace(*SUPPLY_VIEW_ADAPTER, 1).replace(SUPPLY_VIEW_IMPORT, '', 1)
+    restored_view = restored_view.split('\nfunc _draw_combat_cues() -> void:', 1)[0]
     restored_view = restored_view.replace('\t_draw_combat_cues()\n', '', 1)
     restored_view = restored_view.replace('\t\t\tvar flash: float = simulation.cues.flash_alpha(int(enemy["id"]))\n', '', 1)
     restored_view = restored_view.replace('\t\t\tvar enemy_color: Color = Color("aa5364").lerp(Color("fff1db"), flash)\n', '', 1)
@@ -157,6 +173,9 @@ def check() -> dict:
         ('unbounded_visuals', FILES[2], 'events.pop_front()', 'pass'),
         ('cosmetic_rng', FILES[2], 'flashes[id] = FLASH_SECONDS', 'flashes[id] = randf()'),
         ('mutable_view', FILES[1], '\t_draw_combat_cues()', '\tsimulation.cues.advance(0.05)\n\t_draw_combat_cues()'),
+        ('supply_changes_rewards', FILES[0], 'gold_collected += int(gold.value)', 'gold_collected += int(gold.value) * 2'),
+        ('supply_mutates_observation', FILES[0], '\tvar supply_xp:float=0.0', '\thp += 1\n\tvar supply_xp:float=0.0'),
+        ('supply_glyph_mutates_state', FILES[1], 'func _draw_supply_items() -> void:', 'func _draw_supply_items() -> void:\n\tsimulation.hp=1'),
         ('unregistered_test', FILES[4], 'res://tests/test_combat_cues.gd', 'res://tests/missing.gd'),
         ('ignored_engine_exit', FILES[4], 'result.returncode == 0 and not bad_log', 'True and not bad_log'),
         ('ignored_engine_errors', FILES[4], 'and not bad_log and not test_not_passed', 'and not test_not_passed'),
@@ -183,7 +202,7 @@ def check() -> dict:
             'baseline_run_blob': BASE_RUN_BLOB, 'baseline_runner_blob': BASE_RUNNER_BLOB,
             'baseline_engine_function_sha256': BASE_ENGINE_FUNCTION_SHA256,
             'scope': 'Changed-source UTF-8/delimiters/Python syntax, hook order, bounds, isolation, '
-                     'reviewed GAME-024 RunState/GAME-028 view baselines and preserved engine runner. '
+                     'reviewed GAME-024 RunState/GAME-030 view baselines with exact GAME-033 read-only adapters and preserved engine runner. '
                      'NOT Godot parser/type/runtime, visual quality, input dispatch, or FPS.'}
 
 

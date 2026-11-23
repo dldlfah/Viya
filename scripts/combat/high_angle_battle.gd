@@ -116,11 +116,10 @@ func _draw_floor_effects() -> void:
 			canvas.draw_colored_polygon(PackedVector2Array([at+Vector2(0,-6),at+Vector2(5,0),at+Vector2(0,6),at-Vector2(5,0)]),Color("8ad4c5"))
 	for gold in state.gold_pickups:
 		if visible.grow(10).has_point(gold.p):canvas.draw_circle(gold.p,6,Color("efc364"))
-	for item in state.item_pickups:
-		if not visible.grow(20).has_point(item.p):continue
-		var color: Color = {"hp":Color("f58c9c"),"mp":Color("7abcf3"),"magnet":Color("f3ce79"),"purge":Color("cea2fa")}[item.kind]
-		canvas.draw_arc(item.p,15,0,TAU,20,color,2,true)
-		canvas.draw_string(canvas.get_theme_default_font(),item.p+Vector2(-8,5),{"hp":"+","mp":"M","magnet":"U","purge":"X"}[item.kind],HORIZONTAL_ALIGNMENT_LEFT,-1,16,color)
+	# Supply badges stay upright and the same screen size in both renderers.
+	canvas.draw_set_transform_matrix(Transform2D.IDENTITY)
+	canvas._draw_supply_items()
+	canvas.draw_set_transform_matrix(ground)
 	for event in state.weapon_events:
 		var p: Dictionary = event.profile
 		if p.mode not in ["zone","orbit","blast"]:continue

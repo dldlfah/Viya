@@ -5,6 +5,7 @@ const ApproachCues = preload("res://scripts/combat/approach_cues.gd")
 const BattleProjection = preload("res://scripts/combat/battle_projection.gd")
 const Display=preload("res://scripts/combat/combat_display.gd")
 const BossGuidance=preload("res://scripts/combat/boss_guidance.gd")
+const SupplyFeedback=preload("res://scripts/combat/supply_feedback.gd")
 const IncomingFeedback=preload("res://scripts/combat/incoming_feedback.gd")
 var incoming_plan:Dictionary={}
 var boss_guidance:Dictionary={}
@@ -202,26 +203,14 @@ func _draw_supplies() -> void:
 		if structure.hp < structure.max_hp:
 			draw_rect(Rect2(at+Vector2(-20,-33),Vector2(40,4)),Color("302b2e"))
 			draw_rect(Rect2(at+Vector2(-20,-33),Vector2(40.0*structure.hp/structure.max_hp,4)),Color("c7b187"))
+	_draw_supply_items()
+
+func _draw_supply_items() -> void:
+	var visible:=Rect2(Vector2.ZERO,size).grow(22)
+	var compact:bool=size.x<900 or size.y<350
 	for item in simulation.item_pickups:
-		var at := _screen(item.p)
-		if not visible.has_point(at):
-			continue
-		var color: Color = {"hp":Color("f58c9c"),"mp":Color("7abcf3"),"magnet":Color("f3ce79"),"purge":Color("cea2fa")}[item.kind]
-		draw_circle(at,17,Color("20252c"))
-		draw_arc(at,18,0,TAU,24,color,2,true)
-		match item.kind:
-			"hp":
-				draw_line(at+Vector2(-9,0),at+Vector2(9,0),color,5)
-				draw_line(at+Vector2(0,-9),at+Vector2(0,9),color,5)
-			"mp":
-				draw_colored_polygon(PackedVector2Array([at+Vector2(0,-11),at+Vector2(8,3),at+Vector2(0,10),at+Vector2(-8,3)]),color)
-			"magnet":
-				draw_arc(at,8,0,PI,14,color,5,true)
-				draw_line(at+Vector2(-8,0),at+Vector2(-8,-9),color,5)
-				draw_line(at+Vector2(8,0),at+Vector2(8,-9),color,5)
-			"purge":
-				draw_line(at-Vector2(8,8),at+Vector2(8,8),color,4)
-				draw_line(at+Vector2(-8,8),at+Vector2(8,-8),color,4)
+		var at:=_screen(item.p)
+		if visible.has_point(at):SupplyFeedback.draw_item(self,at,str(item.kind),compact)
 
 func _draw_weapon_fields() -> void:
 	for event in simulation.weapon_events:

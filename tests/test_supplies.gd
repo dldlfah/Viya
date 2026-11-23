@@ -50,7 +50,7 @@ static func run(scene, verify: Callable) -> void:
 	scene.view.queue_redraw()
 	await scene.get_tree().process_frame
 	verify.call(frozen == Campaign.comparable(state), "Supply/item/feedback drawing does not mutate gameplay or any RNG")
-	verify.call(state.cues.events.any(func(event): return event.kind == "item" and event.label == "체력 회복"), "Committed pickup drives its visible Korean feedback")
+	verify.call(state.cues.events.any(func(event): return event.kind == "item" and event.label == "HP +30"), "Committed pickup drives its visible Korean feedback")
 
 static func probability_checks(verify: Callable) -> void:
 	verify.call(Rules.item_for_roll(0.2,0.0)=="" and Rules.item_for_roll(0.999,0.4)=="", "Exactly20percent of the drop roll interval yields an item")

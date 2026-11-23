@@ -1180,6 +1180,9 @@ func _collect_items(dt: float) -> void:
 func _apply_supply(kind: String) -> void:
 	if phase != Phase.RUNNING or kind not in SupplyCatalog.ITEM_KINDS:
 		return
+	# Observe committed deltas only; keep the existing effect/reward order unchanged.
+	var supply_before:Dictionary={"hp":hp,"mp":magic.mana,"gold":gold_collected,"kills":kills,"bullets":enemy_bullets.size()}
+	var supply_xp:float=0.0
 	match kind:
 		"hp":
 			_heal_hp(max_hp * SupplyCatalog.RECOVERY_FRACTION)
@@ -1195,13 +1198,14 @@ func _apply_supply(kind: String) -> void:
 			gold_pickups.clear()
 			if xp > 0.0:
 				grant_xp(xp)
+				supply_xp=xp
 				cues.record_collected_xp(player, xp)
 		"purge":
 			for index in range(enemies.size() - 1, -1, -1):
 				if enemies[index].kind != "boss":
 					_defeat_enemy(index)
 			enemy_bullets.clear()
-	cues.record_item(player, str(SupplyCatalog.ITEM_NAMES[kind]))
+	cues.record_item(player, str(SupplyCatalog.ITEM_NAMES[kind]), {"kind":kind,"hp":hp-int(supply_before.hp),"mp":magic.mana-float(supply_before.mp),"gold":gold_collected-int(supply_before.gold),"kills":kills-int(supply_before.kills),"bullets":int(supply_before.bullets)-enemy_bullets.size(),"xp":supply_xp})
 
 func _clear_stage() -> void:
 	if phase not in [Phase.RUNNING, Phase.CHOOSING] or (run_mode=="campaign" and not _boss_defeated) or elapsed + 0.000001 < stage_duration:
