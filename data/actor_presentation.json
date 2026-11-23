@@ -1,0 +1,330 @@
+{
+  "schema_version": 1,
+  "notice": "임시 접점 규격. 모든 원화 경로는 비어 있으며 최종 아트 승인이 아니다. canvas 0,0은 첫 프레임 크기를 추론하고 모든 프레임이 같은지 확인한다. 방향 자동 반전 없음.",
+  "directions": [
+    "e",
+    "se",
+    "s",
+    "sw",
+    "w",
+    "nw",
+    "n",
+    "ne"
+  ],
+  "poses": [
+    "idle",
+    "run",
+    "attack",
+    "hurt"
+  ],
+  "defaults": {
+    "size": [
+      32,
+      40
+    ],
+    "pivot": [
+      0.5,
+      1
+    ],
+    "canvas": [
+      0,
+      0
+    ]
+  },
+  "actors": {
+    "normal": {
+      "size": [
+        32,
+        40
+      ],
+      "pivot": [
+        0.5,
+        1
+      ],
+      "canvas": [
+        0,
+        0
+      ]
+    },
+    "ranged": {
+      "size": [
+        32,
+        40
+      ],
+      "pivot": [
+        0.5,
+        1
+      ],
+      "canvas": [
+        0,
+        0
+      ]
+    },
+    "fast": {
+      "size": [
+        32,
+        40
+      ],
+      "pivot": [
+        0.5,
+        1
+      ],
+      "canvas": [
+        0,
+        0
+      ]
+    },
+    "flier": {
+      "size": [
+        32,
+        40
+      ],
+      "pivot": [
+        0.5,
+        1
+      ],
+      "canvas": [
+        0,
+        0
+      ]
+    },
+    "heavy": {
+      "size": [
+        40,
+        50
+      ],
+      "pivot": [
+        0.5,
+        1
+      ],
+      "canvas": [
+        0,
+        0
+      ]
+    },
+    "elite": {
+      "size": [
+        53,
+        66
+      ],
+      "pivot": [
+        0.5,
+        1
+      ],
+      "canvas": [
+        0,
+        0
+      ]
+    },
+    "boss": {
+      "size": [
+        74,
+        92
+      ],
+      "pivot": [
+        0.5,
+        1
+      ],
+      "canvas": [
+        0,
+        0
+      ]
+    },
+    "viya_battle": {
+      "size": [
+        50,
+        62
+      ],
+      "pivot": [
+        0.5,
+        1
+      ],
+      "canvas": [
+        0,
+        0
+      ]
+    },
+    "goblin_raider": {
+      "size": [
+        32,
+        40
+      ],
+      "pivot": [
+        0.5,
+        1
+      ],
+      "canvas": [
+        0,
+        0
+      ]
+    },
+    "goblin_javelin": {
+      "size": [
+        32,
+        40
+      ],
+      "pivot": [
+        0.5,
+        1
+      ],
+      "canvas": [
+        0,
+        0
+      ]
+    },
+    "hell_hound": {
+      "size": [
+        32,
+        40
+      ],
+      "pivot": [
+        0.5,
+        1
+      ],
+      "canvas": [
+        0,
+        0
+      ]
+    },
+    "orc_shield": {
+      "size": [
+        40,
+        50
+      ],
+      "pivot": [
+        0.5,
+        1
+      ],
+      "canvas": [
+        0,
+        0
+      ]
+    },
+    "wing_imp": {
+      "size": [
+        32,
+        40
+      ],
+      "pivot": [
+        0.5,
+        1
+      ],
+      "canvas": [
+        0,
+        0
+      ]
+    },
+    "skeleton_soldier": {
+      "size": [
+        32,
+        40
+      ],
+      "pivot": [
+        0.5,
+        1
+      ],
+      "canvas": [
+        0,
+        0
+      ]
+    },
+    "skeleton_archer": {
+      "size": [
+        32,
+        40
+      ],
+      "pivot": [
+        0.5,
+        1
+      ],
+      "canvas": [
+        0,
+        0
+      ]
+    },
+    "orc_siege": {
+      "size": [
+        53,
+        66
+      ],
+      "pivot": [
+        0.5,
+        1
+      ],
+      "canvas": [
+        0,
+        0
+      ]
+    },
+    "demon_shaman": {
+      "size": [
+        53,
+        66
+      ],
+      "pivot": [
+        0.5,
+        1
+      ],
+      "canvas": [
+        0,
+        0
+      ]
+    },
+    "undead_knight": {
+      "size": [
+        53,
+        66
+      ],
+      "pivot": [
+        0.5,
+        1
+      ],
+      "canvas": [
+        0,
+        0
+      ]
+    },
+    "demon_vanguard": {
+      "size": [
+        74,
+        92
+      ],
+      "pivot": [
+        0.5,
+        1
+      ],
+      "canvas": [
+        0,
+        0
+      ]
+    },
+    "undead_commander": {
+      "size": [
+        74,
+        92
+      ],
+      "pivot": [
+        0.5,
+        1
+      ],
+      "canvas": [
+        0,
+        0
+      ]
+    },
+    "gold_slime": {
+      "size": [
+        32,
+        40
+      ],
+      "pivot": [
+        0.5,
+        1
+      ],
+      "canvas": [
+        0,
+        0
+      ]
+    }
+  }
+}

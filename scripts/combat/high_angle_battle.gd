@@ -143,15 +143,15 @@ func _draw_enemy(enemy: Dictionary) -> void:
 	if kind!="normal":color=Color("bd85db") if kind=="elite" else Color("ee7777")
 	color=color.lerp(Color("fff1db"),state.cues.flash_alpha(int(enemy.id)))
 	var height: float = 92 if kind=="boss" else (66 if kind=="elite" else (50 if variant=="heavy" else 40))
-	var texture: Texture2D = canvas.art.texture(kind if kind!="normal" else variant,"run",state.elapsed)
-	if texture:canvas.draw_texture_rect(texture,Rect2(feet-Vector2(height*.4,height),Vector2(height*.8,height)),false)
+	var visual:Dictionary=canvas.actor_visual(enemy)
+	if not visual.sample.is_empty():canvas.draw_texture_rect(visual.sample.texture,canvas.actor_art.rectangle(visual.sample,feet),false,Color.WHITE.lerp(Color(1.8,1.8,1.8),state.cues.flash_alpha(int(enemy.id))))
 	elif enemy.get("species","")=="gold_slime":
 		canvas.draw_circle(feet+Vector2(0,-13),16,color)
 		canvas.draw_circle(feet+Vector2(-5,-16),2,Color("403822"))
 		canvas.draw_circle(feet+Vector2(5,-16),2,Color("403822"))
 		if not canvas.simple_attacks:canvas.draw_arc(feet+Vector2(-3,-19),6,PI,PI*1.6,8,Color("fff0ac"),2,true)
 	else:
-		Forms.enemy(canvas,feet,variant,color,height,detail_actors or kind!="normal")
+		Forms.enemy(canvas,feet,variant,color,height,detail_actors or kind!="normal",visual)
 	if kind!="normal" or enemy.hp < enemy.max_hp:
 		canvas.draw_rect(Rect2(feet+Vector2(-18,-height-7),Vector2(36,3)),Color("302b2e"))
 		canvas.draw_rect(Rect2(feet+Vector2(-18,-height-7),Vector2(36.0*enemy.hp/float(enemy.max_hp),3)),color)
@@ -163,11 +163,11 @@ func _draw_enemy(enemy: Dictionary) -> void:
 
 func _draw_hero() -> void:
 	var feet := screen(state.player)
-	var texture: Texture2D = canvas.art.texture("viya_battle","hurt" if state.hurt_clock>0 else "idle",state.elapsed)
-	if texture:canvas.draw_texture_rect(texture,Rect2(feet-Vector2(25,62),Vector2(50,62)),false)
+	var visual:Dictionary=canvas.actor_visual()
+	if not visual.sample.is_empty():canvas.draw_texture_rect(visual.sample.texture,canvas.actor_art.rectangle(visual.sample,feet),false)
 	else:
-		var direction: Vector2 = Vector2(state.facing.x,state.facing.y*BattleProjection.GROUND_Y).normalized()
-		Forms.hero(canvas,feet,direction,state.hurt_clock>.5)
+		var direction: Vector2 = Vector2(visual.facing.x,visual.facing.y*BattleProjection.GROUND_Y).normalized()
+		Forms.hero(canvas,feet,direction,state.hurt_clock>.5,visual)
 
 func _draw_prop(prop: Dictionary) -> void:
 	var feet := screen(prop.p)

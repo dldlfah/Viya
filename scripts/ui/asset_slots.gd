@@ -6,13 +6,18 @@ func _init() -> void:
 	var parsed: Variant = JSON.parse_string(FileAccess.get_file_as_string("res://data/presentation_slots.json"))
 	if parsed is Dictionary:
 		definitions = parsed
-func texture(id: String, pose: String = "idle", clock: float = 0.0) -> Texture2D:
-	var path: String = str(definitions.get(id,""))
+func resource(id: String) -> Resource:
+	var value:Variant=definitions.get(id,"")
+	if not value is String:return null
+	var path:String=value
 	if path.is_empty() or not ResourceLoader.exists(path):
 		return null
 	if not _resources.has(path):
 		_resources[path] = load(path)
-	var asset: Resource = _resources[path]
+	return _resources[path]
+
+func texture(id: String, pose: String = "idle", clock: float = 0.0) -> Texture2D:
+	var asset:Resource=resource(id)
 	if asset is Texture2D:
 		return asset
 	if asset is SpriteFrames:

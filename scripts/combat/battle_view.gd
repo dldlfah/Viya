@@ -10,6 +10,8 @@ var camera = preload("res://scripts/combat/combat_camera.gd").new()
 var high_angle: bool = true # F8: development-only comparison, never a gameplay rule.
 var high_renderer = preload("res://scripts/combat/high_angle_battle.gd").new()
 var art = preload("res://scripts/ui/asset_slots.gd").new()
+var actor_art=preload("res://scripts/ui/actor_assets.gd").new()
+var actors=preload("res://scripts/combat/actor_motion.gd").new()
 var simulation
 var show_damage: bool = true
 var show_xp: bool = true
@@ -41,6 +43,13 @@ func world_view_size() -> Vector2:
 
 func _screen(at: Vector2) -> Vector2:
 	return world_to_screen(at)
+
+func actor_visual(enemy:Dictionary={}) -> Dictionary:
+	var data:Dictionary=actors.pose(simulation,int(enemy.get("id",0)))
+	var keys:Array=["viya_battle"]
+	if not enemy.is_empty():keys=[str(enemy.get("species","")),str(enemy.kind if enemy.kind!="normal" else enemy.get("variant","normal"))]
+	data.sample=actor_art.frame(art,keys,data.pose,data.direction,data.clock)
+	return data
 
 func _draw() -> void:
 	if simulation!=null:display_plan=Display.build(self)
@@ -78,9 +87,9 @@ func _draw() -> void:
 			if kind != "normal":
 				base = Color("b66ad6") if kind == "elite" else Color("eb5868")
 			var enemy_color: Color = base.lerp(Color("fff1db"), flash)
-			var texture: Texture2D = art.texture(kind if kind != "normal" else variant,"run",simulation.elapsed)
-			if texture:
-				draw_texture_rect(texture,Rect2(at-Vector2(22,30),Vector2(44,52)),false,enemy_color.lightened(0.5))
+			var visual:Dictionary=actor_visual(enemy)
+			if not visual.sample.is_empty():
+				draw_texture_rect(visual.sample.texture,actor_art.rectangle(visual.sample,at),false,Color.WHITE.lerp(Color(1.8,1.8,1.8),flash))
 			elif enemy.get("species","")=="gold_slime":
 				draw_circle(at+Vector2(0,2),18,enemy_color)
 				draw_circle(at+Vector2(-6,-3),2,Color("3c3224"))
@@ -120,10 +129,10 @@ func _draw() -> void:
 		var link_from: Vector2 = _screen(effect.get("from", effect["p"]))
 		AttackVisuals.draw_effect(self, effect_at, effect, link_from, display_plan.simple)
 	var center := _screen(simulation.player)
-	var direction: Vector2 = simulation.facing
-	var hero: Texture2D = art.texture("viya_battle", "hurt" if simulation.hurt_clock > 0.0 else "idle", simulation.elapsed)
-	if hero:
-		draw_texture_rect(hero,Rect2(center-Vector2(26,40),Vector2(52,68)),false)
+	var hero:Dictionary=actor_visual()
+	var direction: Vector2 = hero.facing
+	if not hero.sample.is_empty():
+		draw_texture_rect(hero.sample.texture,actor_art.rectangle(hero.sample,center),false)
 	else:
 		draw_circle(center + Vector2(0, 8), 23, Color(0, 0, 0, 0.5))
 		draw_colored_polygon(PackedVector2Array([center - direction * 26.0, center + direction.orthogonal() * 12.0, center - direction.orthogonal() * 12.0]), Color("8e2b47"))

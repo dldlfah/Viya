@@ -13,7 +13,7 @@ FILES = ('scripts/combat/run_state.gd', 'scripts/combat/battle_view.gd',
          'tools/check_project.py', 'tools/check_combat_cues.py')
 # GAME-024: reviewed enemy variants, formations and hostile projectile integration. Exact source baselines retain mutation guards.
 BASE_RUN_BLOB = '673d75a748fa5f1f9ac72ec73bbd9120fdcfce02'
-BASE_VIEW_BLOB = '2901abd7642133a8cec334ee5fea81613b2c22e1'
+BASE_VIEW_BLOB = '5d1a81b4c0efefc3b7b3a8159f6163895fd91454'
 BASE_RUNNER_BLOB = '1ab68ad8a51271e3d47db8b02d433991f42e8d6c'
 # Exact run_engine() from GAME-004D; all 7 suites and failure checks are protected.
 BASE_ENGINE_FUNCTION_SHA256 = '9156043eaf896d72565563cc1e2f623cf0c8fbac7f032f19bffee7e4946a69ee'
@@ -60,7 +60,7 @@ def validate(sources: dict[str, str]) -> list[str]:
     restored_view = restored_view.replace('\t\t\tvar enemy_color: Color = Color("aa5364").lerp(Color("fff1db"), flash)\n', '', 1)
     restored_view = restored_view.replace(']), enemy_color)', ']), Color("aa5364"))', 1)
     if blob(restored_view) != BASE_VIEW_BLOB:
-        errors.append('Battle View differs from the reviewed GAME-027 display baseline')
+        errors.append('Battle View differs from the reviewed GAME-028 actor baseline')
     for value in ('const MAX_EVENTS := 48', 'const MAX_FLASHES := 80',
                   'events.size() >= MAX_EVENTS', 'events.pop_front()',
                   'flashes.size() >= MAX_FLASHES', 'flashes.erase(flashes.keys()[0])',
@@ -161,7 +161,7 @@ def check() -> dict:
             'baseline_run_blob': BASE_RUN_BLOB, 'baseline_runner_blob': BASE_RUNNER_BLOB,
             'baseline_engine_function_sha256': BASE_ENGINE_FUNCTION_SHA256,
             'scope': 'Changed-source UTF-8/delimiters/Python syntax, hook order, bounds, isolation, '
-                     'reviewed GAME-024 RunState/GAME-027 view baselines and preserved engine runner. '
+                     'reviewed GAME-024 RunState/GAME-028 view baselines and preserved engine runner. '
                      'NOT Godot parser/type/runtime, visual quality, input dispatch, or FPS.'}
 
 

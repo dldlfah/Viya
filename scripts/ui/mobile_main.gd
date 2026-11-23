@@ -78,10 +78,12 @@ func _ready() -> void:
 	_apply_layout()
 
 func _physics_process(delta: float) -> void:
+	view.actors.prepare(simulation)
 	var before:Vector2=simulation.player
 	var active:bool=simulation.phase==RunState.Phase.RUNNING and not overlay.visible
 	super._physics_process(delta)
 	view.advance_camera(delta,simulation.player-before,active and simulation.phase==RunState.Phase.RUNNING and not overlay.visible)
+	view.actors.sync(simulation,simulation.player-before,active and simulation.phase==RunState.Phase.RUNNING and not overlay.visible)
 
 func _build_interface() -> void:
 	root_ui = Control.new()

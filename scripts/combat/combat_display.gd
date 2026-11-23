@@ -39,12 +39,17 @@ static func build(view) -> Dictionary:
 	var actors:=0
 	var important:Dictionary={}
 	var reserved:Array=[Rect2(view.world_to_screen(state.player)-Vector2(25,64),Vector2(50,86))]
+	var hero_art:Dictionary=view.actor_visual().sample
+	if not hero_art.is_empty():reserved[0]=reserved[0].merge(view.actor_art.rectangle(hero_art,view.world_to_screen(state.player)))
 	for enemy in state.enemies:
 		if not area.grow(40).has_point(enemy.p):continue
 		actors+=1
 		if enemy.kind!="normal":
 			important[int(enemy.id)]=true
-			reserved.append(Rect2(view.world_to_screen(enemy.p)-Vector2(26,100),Vector2(52,112)))
+			var body:=Rect2(view.world_to_screen(enemy.p)-Vector2(26,100),Vector2(52,112))
+			var sample:Dictionary=view.actor_visual(enemy).sample
+			if not sample.is_empty():body=body.merge(view.actor_art.rectangle(sample,view.world_to_screen(enemy.p)))
+			reserved.append(body)
 	var effects:Array=[]
 	for effect in state.effects:
 		if visible_effect(effect,area):effects.append(effect)
