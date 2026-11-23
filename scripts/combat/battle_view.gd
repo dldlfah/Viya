@@ -4,6 +4,8 @@ const AttackVisuals = preload("res://scripts/combat/attack_visuals.gd")
 const ApproachCues = preload("res://scripts/combat/approach_cues.gd")
 const BattleProjection = preload("res://scripts/combat/battle_projection.gd")
 const Display=preload("res://scripts/combat/combat_display.gd")
+const BossGuidance=preload("res://scripts/combat/boss_guidance.gd")
+var boss_guidance:Dictionary={}
 var auto_display:bool=true # Diagnostic comparison; no gameplay/save setting.
 var display_plan:Dictionary={}
 var camera = preload("res://scripts/combat/combat_camera.gd").new()
@@ -56,9 +58,11 @@ func tracks_enemy_motion() -> bool:
 	return simulation.run_mode!="gold_slime" or art.definitions.get("gold_slime","")!="" or art.definitions.get("normal","")!=""
 
 func _draw() -> void:
+	if simulation!=null:boss_guidance=BossGuidance.build(self)
 	if simulation!=null:display_plan=Display.build(self)
 	if high_angle and simulation != null:
 		high_renderer.draw(self)
+		BossGuidance.draw(self,boss_guidance)
 		return
 	draw_rect(Rect2(Vector2.ZERO, size), Color("191c22") if simulation == null or simulation.map_id == "legacy_arena" else (Color("302d2a") if simulation.map_id == "prologue_wall" else Color("28352f")))
 	if simulation == null:
@@ -147,6 +151,7 @@ func _draw() -> void:
 	_draw_combat_cues()
 	_draw_foreground_threats()
 	_draw_approaches()
+	BossGuidance.draw(self,boss_guidance)
 
 func _draw_enemy_body(at: Vector2, variant: String, color: Color) -> void:
 	match variant:

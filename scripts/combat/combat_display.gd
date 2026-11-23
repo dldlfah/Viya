@@ -39,6 +39,9 @@ static func build(view) -> Dictionary:
 	var actors:=0
 	var important:Dictionary={}
 	var reserved:Array=[Rect2(view.world_to_screen(state.player)-Vector2(25,64),Vector2(50,86))]
+	if not view.boss_guidance.is_empty():
+		reserved.append(view.boss_guidance.status_rect.grow(3))
+		if view.boss_guidance.marker_rect.has_area():reserved.append(view.boss_guidance.marker_rect.grow(3))
 	var hero_art:Dictionary=view.actor_visual().sample
 	if not hero_art.is_empty():reserved[0]=reserved[0].merge(view.actor_art.rectangle(hero_art,view.world_to_screen(state.player)))
 	for enemy in state.enemies:
