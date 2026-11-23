@@ -284,6 +284,9 @@ func _draw_foreground_threats() -> void:
 	for bullet in simulation.enemy_bullets:
 		var at:Vector2=_screen(bullet.p)
 		if not Rect2(Vector2.ZERO,size).grow(30).has_point(at):continue
+		if simulation.enemy_patterns.is_curse(simulation,bullet):
+			preload("res://scripts/combat/curse_visuals.gd").draw_bullet(self,bullet)
+			continue
 		var direction:Vector2=bullet.velocity.normalized()
 		var start:Vector2=_screen(bullet.p-direction*18)
 		var d:Vector2=(at-start).normalized()

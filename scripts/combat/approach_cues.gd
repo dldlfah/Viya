@@ -30,4 +30,12 @@ static func build(state, visible: Rect2) -> Array:
 		if not visible.has_point(bullet.p) and bullet.velocity.dot(state.player-bullet.p) > 0:
 			result.append({"at":bullet.p,"count":1,"kind":"shot"})
 			shots += 1
+	# Share the existing two hostile-shot markers; no new text/input budget.
+	if state.phase==state.Phase.RUNNING and state.enemy_pattern_version==3:
+		for enemy in state.enemies:
+			if shots>=2:break
+			if enemy.get("species","")!="demon_shaman" or enemy.get("pattern",{}).get("phase","")!="windup":continue
+			if not visible.has_point(enemy.p) and enemy.pattern.direction.dot(state.player-enemy.pattern.origin)>0:
+				result.append({"at":enemy.p,"count":1,"kind":"shot"})
+				shots+=1
 	return result

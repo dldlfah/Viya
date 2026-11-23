@@ -29,7 +29,7 @@ static func advance(state,seconds:float,direction:Vector2=Vector2.ZERO) -> void:
 
 static func run(host,verify:Callable)->void:
 	var state=fresh()
-	verify.call(Snapshot.VERSION==17 and Snapshot.fingerprint_for_v15()==Snapshot.GAME023_RULES,"Explicit v17 pattern schema retains the exact published v15 fingerprint")
+	verify.call(Snapshot.VERSION==18 and Snapshot.fingerprint_for_v15()==Snapshot.GAME023_RULES,"Explicit v18 pattern schema retains the exact published v15 fingerprint")
 	verify.call(state.enemy_pattern_version==1 and state.enemies[0].has("pattern") and state.enemies[0].hp==1600 and state.enemies[0].speed==45 and state.enemies[0].contact_damage==18,"Explicit v1 campaign attaches only the pattern while preserving locked elite stats")
 	for mutation in ["missing","fractional","negative","nan","short","angle","range","schema"]:
 		var data:Dictionary=state.enemy_patterns.data.duplicate(true)
@@ -152,7 +152,7 @@ static func run(host,verify:Callable)->void:
 	for mutation in ["version","missing","phase","timer","direction","origin","extra","species","mode"]:
 		var bad:Dictionary=valid.duplicate(true)
 		match mutation:
-			"version":bad.run.enemy_pattern_version=3
+			"version":bad.run.enemy_pattern_version=4
 			"missing":bad.run.enemies[0].erase("pattern")
 			"phase":bad.run.enemies[0].pattern.phase="again"
 			"timer":bad.run.enemies[0].pattern.left=INF

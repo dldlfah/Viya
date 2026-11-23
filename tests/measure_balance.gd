@@ -15,7 +15,7 @@ func _initialize()->void:
 			printerr("Unknown measurement argument: ",arg)
 			quit(2)
 			return
-	if map_name not in ["prologue_wall","outskirts_trial","gold_slime"] or profile_name not in ["none","full"] or pattern_override not in [-1,0,1,2] or pacing_override not in [-1,0,1] or strategy not in ["evolve","original"]:
+	if map_name not in ["prologue_wall","outskirts_trial","gold_slime"] or profile_name not in ["none","full"] or pattern_override not in [-1,0,1,2,3] or pacing_override not in [-1,0,1] or strategy not in ["evolve","original"]:
 		quit(2)
 		return
 	for id in (Talents.IDS if profile_name=="full" else []):account_levels[id]=3

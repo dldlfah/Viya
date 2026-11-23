@@ -19,8 +19,8 @@ static func interrupted():
 
 static func run(host,verify:Callable)->void:
 	var state=State.new()
-	verify.call(state.start(3901,"viya",null,"prologue_wall","weapons_v1") and state.enemy_pattern_version==2,"The original production start defaults only new campaigns to revision2")
-	verify.call(Snapshot.VERSION==17 and Snapshot.fingerprint_for_v16()==Snapshot.GAME038_RULES,"Schema17 retains the exact published16 fingerprint")
+	verify.call(state.start(3901,"viya",null,"prologue_wall","weapons_v1",{},"campaign",-1,-1,2) and state.enemy_pattern_version==2,"The original production start retains explicit revision2 campaigns")
+	verify.call(Snapshot.VERSION==18 and Snapshot.fingerprint_for_v16()==Snapshot.GAME038_RULES,"Schema18 retains the exact published16 fingerprint")
 	var frozen:String=FileAccess.get_file_as_string("res://scripts/combat/enemy_patterns_v1.gd")
 	verify.call(frozen.sha256_text()=="4059f30002b56fa0ccb73ed38b4fe4af9c0fe8092a8f5836ad53f6e3cef5a4af","Published v1 logic is preserved byte for byte")
 	var old:Dictionary=state.enemy_patterns.specification(1)
@@ -125,7 +125,7 @@ static func run(host,verify:Callable)->void:
 	ui._physics_process(.05)
 	state.enemies[0].p+=Vector2(10,0)
 	ui._physics_process(.05)
-	verify.call(state.enemy_pattern_version==2 and state.enemies[0].pattern.phase=="reacquire" and ui.view.actors.pose(state,state.enemies[0].id).pose!="attack","Actual scene cancels the stale attack pose for the interrupted swing")
+	verify.call(state.enemy_pattern_version==3 and state.enemies[0].pattern.phase=="reacquire" and ui.view.actors.pose(state,state.enemies[0].id).pose!="attack","Actual scene cancels the stale attack pose for the interrupted swing")
 	var plan:Array=Visuals.plan(ui.view)
 	verify.call(plan.size()==1 and plan[0].phase=="reacquire" and not plan[0].has("points"),"Cancelled swing has a neutral marker and no damaging sector")
 	var left:float=state.enemies[0].pattern.left
@@ -143,7 +143,7 @@ static func run(host,verify:Callable)->void:
 	var ui2=SavedTests.make_ui(host,folder)
 	await host.get_tree().process_frame
 	ui2.start_button.pressed.emit()
-	verify.call(ui2.simulation.phase==State.Phase.PAUSED and ui2.simulation.enemy_pattern_version==2 and ui2.simulation.enemies[0].pattern.phase=="reacquire" and ui2.simulation.enemies[0].pattern.left==left,"Real binary scene recovery retains the interrupted phase until explicit Continue")
+	verify.call(ui2.simulation.phase==State.Phase.PAUSED and ui2.simulation.enemy_pattern_version==3 and ui2.simulation.enemies[0].pattern.phase=="reacquire" and ui2.simulation.enemies[0].pattern.left==left,"Real binary scene recovery retains the interrupted phase until explicit Continue")
 	ui2.resume_button.pressed.emit()
 	for frame in range(6):ui2._physics_process(.05)
 	verify.call(ui2.simulation.enemies[0].pattern.phase=="chase" and ui2.simulation.hp==saved_hp,"Continue completes only remaining interrupted recovery without an old hit")

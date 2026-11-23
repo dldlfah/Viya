@@ -3,10 +3,14 @@ extends RefCounted
 static func plan(view) -> Array:
 	var result:Array=[]
 	var state=view.simulation
-	if state.phase!=state.Phase.RUNNING or state.enemy_pattern_version not in [1,2]:return result
-	var spec:Dictionary=state.enemy_patterns.specification(state.enemy_pattern_version)
+	if state.phase!=state.Phase.RUNNING or state.enemy_pattern_version not in [1,2,3]:return result
 	for enemy in state.enemies:
 		if not state.enemy_patterns.applies(state,enemy) or enemy.pattern.phase=="chase":continue
+		var spec:Dictionary=state.enemy_patterns.specification(state.enemy_pattern_version,str(enemy.species))
+		if enemy.species=="demon_shaman":
+			var entry:Dictionary=preload("res://scripts/combat/curse_visuals.gd").plan(view,enemy,spec)
+			if not entry.is_empty():result.append(entry)
+			continue
 		var p:Dictionary=enemy.pattern
 		if p.phase=="reacquire":
 			result.append({"id":int(enemy.id),"phase":"reacquire","origin":view.world_to_screen(enemy.p),"progress":1-float(p.left)/float(spec.reacquire)})
@@ -23,6 +27,9 @@ static func plan(view) -> Array:
 
 static func draw(view) -> void:
 	for entry in plan(view):
+		if entry.phase=="curse_windup":
+			preload("res://scripts/combat/curse_visuals.gd").draw_windup(view,entry)
+			continue
 		if entry.phase=="reacquire":
 			var at:Vector2=entry.origin
 			var color:=Color("b7c4d0",.8)
