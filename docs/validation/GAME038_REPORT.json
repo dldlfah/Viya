@@ -1,0 +1,5177 @@
+{
+  "unit": "GAME-038",
+  "recorded_date_kst": "2026-11-23",
+  "branch": "work/viya-turnaround-qa-20261117",
+  "code_commit": "45a2420d070de0feec95d942675dcd047ff347b4",
+  "code_tree": "11b404ca5c51adbba67dcebcdef6a7718f7fe748",
+  "base_document_head": "cd47a3ea7dc24f06bd7233897beae732a82457d0",
+  "base_game_code": "92b808042fd55a4219f6b861f6a1519946745404",
+  "overall": "PROTOTYPE_IMPLEMENTED_TECHNICAL_PASS_BALANCE_REGRESSION_OPEN",
+  "implementation": {
+    "rules": "New campaign weapons_v1 enables enemy_pattern_version1 only for actual orc_siege elite. Original HP1600/speed45/contact18 and all other actors/dungeon unchanged. Prototype data:24physical,145trigger/150reach,55degree half-angle,0.9windup/0.16strike/0.75recovery/3cooldown/1.25initial delay. Values are not approved final balance.",
+    "simulation": "One original authoritative RunState. chase->fixed origin/direction windup->single consumed impact attempt->recovery->original terrain-aware chase. Stop own pursuit/contact during active pattern;original contact rules resume during chase and share existing hurt_clock. Circle-sector collision uses original player radius;wall ray blocks arming/impact. Formation displacement cancels windup without changing original flier push. Damage calls existing physical defense/reduction/invulnerability/received-source pipeline. No new RNG.",
+    "rendering": "Read-only shared sector geometry clips world rays against actual map walls and projects through original view in both renderers. Amber windup/red strike and simple temporary hammer line,original actor attack pose and exact melee-source received direction. Independent of outgoing damage-label toggle,bounded by actual eligible actors. No final art/audio/assets or new input.",
+    "recovery": "Snapshot16 adds one run pattern-version field and4per-target fields:phase,left,origin,direction. Strike phase means the one attempt already consumed,so restoring it cannot hit again. Explicit1~15conversion gives pattern0 to living AND future actors,including unchanged15dungeon22-110rewards;no retroactive stats/refill. Malformed phases/timers/direction/origin/target/version rejected before mutation. Existing atomic RunStore/account/admission/settlement unchanged.",
+    "preservation": "69other production/data/assets byte-identical incl Main/Mobile/account/economy/weaponstats/maps/stages/audio/assets.5existing production files change only explicit AI/render/source/schema adapters. Original GAME024RunState baseline recovered by exact addition stripping;original engine commands/error detection digest unchanged.5new reviewed pattern/data/migration/pose source digests pinned;23negative source controls. SingleRunState/7RNG/6min3min/daily2/MP40/4+4/art hold preserved."
+  },
+  "validation": {
+    "final_engine_run": {
+      "static_integrity": {
+        "status": "PASS",
+        "files_checked": 126,
+        "resource_references_checked": 383,
+        "errors": [],
+        "source_sha256": {
+          "project.godot": "0d8f7fce157178f7bf31acc183593b40f23cff6d266ea5270f4b75f0899b79e5",
+          "scenes/main.tscn": "17a2e77db7cf47af860de3c263dc9119b0df349bafdf2a8b52a40f7450c9e22c",
+          "scripts/combat/actor_motion.gd": "f54f9db4346617b1a6c589fd58ef30d53d3e4ee18cc1bafd2aa2c4bd43cf0045",
+          "scripts/combat/approach_cues.gd": "a30074eec96a887c5fbdd99c96ea3ff247303974bd93fb7ef288eed2eaac6131",
+          "scripts/combat/attack_visuals.gd": "49e9acdb93325368fbf4c6d2732d11877e25f9daa829e6b00a466b74d339556f",
+          "scripts/combat/battle_forms.gd": "a0e9ebcf2cb5d369c0db53f089ab9bb9df0163b1f171908a57bd63f7e285ab95",
+          "scripts/combat/battle_projection.gd": "f8abad51e46f2353d01cc6f1f4b904485621d00ccf75e854ab873bc688f160a0",
+          "scripts/combat/battle_view.gd": "1e526b5f168fcd478f4e25d1afb8a5f72c9600e210834e5da0c3e74f63f1eaea",
+          "scripts/combat/boss_guidance.gd": "d7c1195590ce6fedd3cc8c90cbcdfdf4a2aaf7b994fdfe1a26206e3a9709fef9",
+          "scripts/combat/combat_audio.gd": "9d8d1f2e1d6b617e63a5f8454d182b5e16f08b99b28ade31c1e24cb95be18d2b",
+          "scripts/combat/combat_audio_bank.gd": "589afc536b6514a10a86b5436bc5271ffa6c522452e12949842a1ba8ca65d9ce",
+          "scripts/combat/combat_camera.gd": "ecb81da9ebb62e9f2b84f9ba7ffb4de578646d5c3d5accad647fd63c74b09567",
+          "scripts/combat/combat_cues.gd": "04027c56be8fa43d6465a165569b1e209dd7782a630d97a6e96d0acc3235ebda",
+          "scripts/combat/combat_display.gd": "dbb2493bf333b9972603f6cc5ae123010f5cd57e660133e44b4a9110a935d4f7",
+          "scripts/combat/combat_profiles.gd": "515689ca733856a0855739531ad4ebeddb20609839210df41c3b6f6202c898e0",
+          "scripts/combat/defense_rules.gd": "1fa247925d4d5a33dfdf7371285d9192b85b0cd83603efed33894693053691f8",
+          "scripts/combat/enemy_pattern_visuals.gd": "7ffd0cbb0b3e50bbdd2c344618522b0f1ebd792f187f10ac32d5393444eedb74",
+          "scripts/combat/enemy_patterns.gd": "4059f30002b56fa0ccb73ed38b4fe4af9c0fe8092a8f5836ad53f6e3cef5a4af",
+          "scripts/combat/feedback_state.gd": "3ee19238fb9307bc9953fed3ecc266ecff420e2c74ceffe81409069372e87d88",
+          "scripts/combat/gold_dungeon.gd": "f7073b32297d4326a0abc973022d7280c53f92114d49db53933874118b3ccc0d",
+          "scripts/combat/high_angle_battle.gd": "3ae7b64f8cc7b8351ca147c40855041093d9d74fd3109ca531a54f5a7137c6e4",
+          "scripts/combat/incoming_feedback.gd": "71dfbafc9d3e58435afa40b2f1f427387ad899f118906cda72b028538fdb853b",
+          "scripts/combat/magic_state.gd": "41a9a7739edc46e98dda26986f23dddf1c0ff6bdf9b40d80640f797460b9223b",
+          "scripts/combat/run_state.gd": "659c6cb022d779085db483f7a1d9f8ca39b121dbd146712b30f1a252c9878083",
+          "scripts/combat/stage_catalog.gd": "8059f41d7134818deeea1978d2f81fddc2456d530e33479d458461004600516f",
+          "scripts/combat/structure_feedback.gd": "5eb5b6acd005b04652a1c337caaacfa47de2dfb0ca5a758ea06c5b4e3b4d6d11",
+          "scripts/combat/supply_feedback.gd": "09731b47d1cd26ed58fac503525ca349006efd8f3542545b4dd61f381c1f8287",
+          "scripts/combat/weapon_modules.gd": "a405c2ddad96a396c8e5e0820ac0d4ee4093a951c473ac7c849294e872616a2e",
+          "scripts/main.gd": "ca74e6a3a4030b2ad9e505a63f118f4558e8b366585a79a4abd0b2b202d995a4",
+          "scripts/progression/account_talents.gd": "0774659235d3bea9276574996565b315156260274750ef8c7f9969f18550f43e",
+          "scripts/progression/combat_pacing.gd": "07f73dae843a7779f992976efb1901774782db1bd021bef01999a83ea7814826",
+          "scripts/progression/gold_progress.gd": "2289fc850fc5f856d674863de6119987da74ed6bd931ade50f0faa11ea0f7012",
+          "scripts/progression/growth_state.gd": "07287b03d12eac144dce6f1858ceb2b6561e6281b4c011ac6bc5d5d3c72a0e6e",
+          "scripts/progression/run_snapshot.gd": "61703b550b07ee8eab71dbdef2237066a7997ebb26313d90e948d2dda1dcceb8",
+          "scripts/progression/run_store.gd": "bab493f1963ea2a6d98770f9ef9686d70d4b257e0b49afb3386de661a6081986",
+          "scripts/progression/skill_catalog.gd": "ccd13a2b02f4b57497beae39e483edfca53617cc3a39e43cbaf8009535c820d8",
+          "scripts/progression/weapon_catalog.gd": "aced8b45e765780b4053bfa436e1dbbc1696d2173cb4cb762f21298d5f91421b",
+          "scripts/ui/account_bonus_summary.gd": "c75ffab9d10f7b73fa9b89df9c532a119f00431447651ca13a1f004122e4cee8",
+          "scripts/ui/actor_assets.gd": "f98126291f60e27b9d903999c61f6a1c03a34555eb824a5fdd3e51db18a359c1",
+          "scripts/ui/asset_slots.gd": "b6f7edc881a4a4f658d3df115a2b7444fd2d8731cbc11fdb8048eddb56dc7353",
+          "scripts/ui/battle_chrome.gd": "6be2ec2203a0517ce6842d3c7979135ec7c94afaa5b69b1fff2508f083473a2a",
+          "scripts/ui/battle_save_notice.gd": "4030876186c66ae7de4ec2b8808d8b905881c40d0c0af29bd241f659dcdf2189",
+          "scripts/ui/city_preview.gd": "d01c0ca26b7d812b2b7d6d63339788be98241f6a09ec58a1a8d35a6f7b788937",
+          "scripts/ui/combat_skin.gd": "b9ed37f5c7f1831095805e13c6e3eaa986e762081209372cf8a4e09ff6608c66",
+          "scripts/ui/combat_slot_button.gd": "91a02ab52e8ebcb26985ae143dd596fbd4b62bd3fa6e440e5b0d12e44132a81d",
+          "scripts/ui/encounter_notice.gd": "316faf9f8de95b3917268b4773092a205cb0019e5860044294e0f781cb640e3e",
+          "scripts/ui/feedback_panel.gd": "2103fd9b8692c5606273175b415447f35a995f9a18306a5e8f0abeeb7c5d465b",
+          "scripts/ui/growth_overview.gd": "43dfb9306f4e280b57c8445b179c0e797938bc9fd0e5fa070053474cadb53a42",
+          "scripts/ui/hud_layout.gd": "d9a5dacd8e3816611b1658557c5366e1dbd6caeded4312d8f2e5e5584becddb6",
+          "scripts/ui/mobile_main.gd": "9b2cbd89a9f6b735ff5c7f1443bb9cc652a5e456e6ec320a7855212412bca367",
+          "scripts/ui/move_input.gd": "cee8e709185740d1cb964fff13873a0818d14d0b3653f36d6416a1b17da40bd8",
+          "scripts/ui/responsive_feedback_panel.gd": "b36ce744a7378d696b91018935f637da0ae88beccdeddd85b1187a238958ed5b",
+          "scripts/ui/reward_payment.gd": "d3fc0b75e7f9fbb5f55ffdbfe708039ccb77e4a35231c58d6fdcd4996a246c11",
+          "scripts/ui/skill_preview.gd": "5c3de40b161d38de44234f6f1a2c63064bbc99021c4def95f7995382b02af5db",
+          "scripts/world/map_catalog.gd": "952abbc81d539817dfdd98ed4a59185f13fb8c1adac0210839d176ebee087ea6",
+          "scripts/world/map_space.gd": "8110f4a28e04e67fe738011ea888f31a9c74c450ed79148d88c1da602fa03ae8",
+          "scripts/world/supply_catalog.gd": "1af21cb685b8da0858491a961f007e8a0511c24e0f70b0165e0051d7fcb310a1",
+          "tests/measure_armor.gd": "19a42c9db8ac7b52b6bc2778f24e78ff05b433676c1443d3300a7d4bdd67c6af",
+          "tests/measure_balance.gd": "0af494f3e685bae77f8d46d48f1be97c71c196b6f96a50f4421f8cf012e278b8",
+          "tests/measure_boss_guidance.gd": "891bd7aba3c747e25b065acfd5ef45d9057e01047ff374656247e02744d46b13",
+          "tests/measure_campaign.gd": "acc9b093cdc59af87d11f342a88a537b7f0d35ac8745149eb1ca0046ac791e6c",
+          "tests/measure_combat_audio.gd": "727d34de154acb4bb080553683e423a5cdea35fcf4592ee23fe00540848d199c",
+          "tests/measure_enemy_patterns.gd": "d49f9091fcde4ca3fecf19d2263917a51d4e9cb84bda27f0fb2e788a7cbbd9e9",
+          "tests/profile_combat.gd": "1499a2a5db64c0869bca71f94582729a029bd7b240dd9ba1ad75a52e3333a2cf",
+          "tests/test_account_bonus_summary.gd": "8949dd854d50c6fbe4898180848c4b9377b91ff55bfd7e9b0c04a24e5bef64c7",
+          "tests/test_account_expansion.gd": "97d23a6d5bc708b9ebdcc76a492982d5b8e0e2fa4be6f2ad0c2ca501d5d35422",
+          "tests/test_account_talents.gd": "a85b5b84514323481e45137ab05e611af9d18f364393b9a6891fe45f1fe2b9f3",
+          "tests/test_actor_animation.gd": "a85f368b78cd6000f1b27407e3dc42ccd45852f794675aba5db32a174640ba44",
+          "tests/test_attack_visuals.gd": "b091e1672614637797907658c628e86bd6f16ca728ce7cb1dae67d1529f1b443",
+          "tests/test_battle_save_notice.gd": "2bbfd4ef99e616b4be393a204e7c99a1acd17e0c3c1fb0b90629166ae0dd178c",
+          "tests/test_boss_guidance.gd": "2f3e94e8c0cb9e61e9343a6fd87ac26fc3e77316d42da42e99fd4d32100329b3",
+          "tests/test_camera_lead.gd": "63298dc841afd0f812ac5530ad67f75b6873a86147b8c0b012b0c95b014dbb61",
+          "tests/test_campaign.gd": "07c21cb62d12d5394b0864afe3ce47f62b3cd11146fa4bd2780957c54d3f1f49",
+          "tests/test_chapter_ui.gd": "b48b6813b9d8a5e8d98c4d1e7d6a9ba65f7c54c5995bee66b8afcb55348db984",
+          "tests/test_combat_audio.gd": "cd4b66cf0f8e48faf98fdcf6ea4b0c87d687d06b47e424bb1a3210857e2e2beb",
+          "tests/test_combat_cues.gd": "6a85ac9c2954863ebfe0422cdad6dfc2475958ef42062d036a06ce2266167de4",
+          "tests/test_combat_display.gd": "15b28b0a80b539bf9ccdce23ee988777307bfb875a84e4429796ba32575dbcdf",
+          "tests/test_combat_foundation.gd": "57efe421768dad47bee7a560325214a0c8a30d5fdf8d015fc2648f2b8c71416d",
+          "tests/test_combat_pacing.gd": "d321ef8b3e01f9879b8240bb439d93eaae8b5b75e5962437ddd40f7e6298b600",
+          "tests/test_combat_profiles.gd": "b9bd77beba226279c7c4fb4825e4290dd078974abd96969b4785778995b12f95",
+          "tests/test_encounter_notice.gd": "3d300aafff042d777c4bec71fc481f039a2e1486975be8c360ad0810350e2488",
+          "tests/test_enemy_patterns.gd": "5b9b820abab92916638bf8dc01d9297aae2fc7a2819fd776d34b921693eff533",
+          "tests/test_enemy_variety.gd": "f6fe832160d824c6b6333d746ac6080ba75db60fb26248491ff141e5a1260ccd",
+          "tests/test_feedback.gd": "a0558acd7ab6216ccceb597f90c823a1078b0cda9337392440fe6523f22fce86",
+          "tests/test_gold_dungeon.gd": "5bf6924c97cb1bb83bb3b9586e2a5ba97dc045dceb345aa2819f49fd4eda5709",
+          "tests/test_gold_rewards.gd": "ea84e51520721ad62e52416145f51163d541ef0c3eac40cc125ef343d08c28b4",
+          "tests/test_gold_settings.gd": "29358cc8bd690213f4fab1fde43cc0a921689983201cfbcbffa18dd872e047a9",
+          "tests/test_growth.gd": "98f63a46d71eeba5f8807655ba6bd9d87fe89b240fca92bbbc12f253fbe0ba72",
+          "tests/test_growth_overview.gd": "bd6706bf3253d25b8b41c6374a53732762af0d361d11c04aac47abee4f565e87",
+          "tests/test_guide_skin.gd": "50502dc737876e114d1443ad66af92d5973b131f746a2162952d7385797d1b6a",
+          "tests/test_high_angle.gd": "b71ca42fe1297729e1d207a1b470baf74647541acb75f8ddd13e80c06118ef89",
+          "tests/test_incoming_feedback.gd": "19965b733e2e28451744a1af948a236631e3bc9d0b8bf83b3beb4f4a737e37ee",
+          "tests/test_magic.gd": "2969ef796d9255f7b4c79534c68ebabb1b2e349adb0828929d3450ab8f75a090",
+          "tests/test_maps.gd": "3c129f9fe4aac09e01ad4d7f380d03faebb67f8b9f45f0f2d84175d79be4e2f7",
+          "tests/test_mobile_hud.gd": "3d0234bea7a3883f6cb38fe127d8062cbd393b97c3132109e853e84c68e75a76",
+          "tests/test_reward_payment.gd": "3025a1882616b2d7fcdecb276a8b772d633bcbef93990d426ded5e733c3fded1",
+          "tests/test_run_navigation.gd": "14b88030cf3b84cdaed8c559e04c0f1b15552a9860f32c1c959be06bea9ee475",
+          "tests/test_scatter_packs.gd": "1d642ed432b31e509721d9867f5e7dde4d904499cf7555b163670ef9b5c07f2d",
+          "tests/test_skill_preview.gd": "0a62fc3bcdafeb525507f4107621d5c14a955e5d5270750a99d7de1e61f9ad9f",
+          "tests/test_structure_feedback.gd": "99ccd533fc5acb0071a33b4a6e54ac8bc575cd86b2ca7568546a37b01edcd833",
+          "tests/test_supplies.gd": "5de153bb81aaa06f5f6bbd321b8689d7afe59160d314a6cb06353fac39d8678d",
+          "tests/test_supply_feedback.gd": "72f6b9ea21ba920944c8148be4a376840f0b1c4a562fd8256fe4f6025c6c7597",
+          "tests/test_talent_tree.gd": "984fdf593f086254dd17fde222ac7cafa35d8b223195fd46bc04ee170ddada21",
+          "tests/test_weapon_skills.gd": "e783e2b9f30dfbd367f91f4e65c13055bed8d3f51a2e55e5088354e0fd5f08f1",
+          "data/actor_presentation.json": "e82ae99f672bd3e6979778f9a6201efb659b160a3407d9b1b6099eb0e0257f04",
+          "data/chapter_one.json": "c32e288ddc61dc8193cd78de416d3682b7c11f1924bbaaa3ea4afe4b78104f76",
+          "data/combat_pacing.json": "d153666f7f77506da281d1f90ae5fbc5822cd997c6db76590f35ef8a6662d597",
+          "data/combat_profiles.json": "d36abf0b4d0feb950e6448474732decdac9f98035a9962e5f5287b09eb1d1144",
+          "data/destructibles.json": "130421dd85d4dbf9ff9f70ab297b36586870e65fb9426cec0c2f58ce57a49b39",
+          "data/enemy_patterns.json": "ba04c2b3076746724a09cf212576886edfa33821f666daa97a541d5042680bec",
+          "data/gold_dungeon.json": "9a3427a6ddfb3462123f92e6918966ff7b1887ff324f368c600a9ad5993b1f9e",
+          "data/gold_rewards.json": "8f465cd44d1bf712b0fa758b2b8ff7cd17ecb450cff7f8e567d27f0397154993",
+          "data/maps.json": "925638f794696b96fdf48df8c266654cef3af002f43e57f91daa80f8d70e8bd4",
+          "data/presentation_slots.json": "d0a2e6ea1a55d37680bfa02ef9f9036f00deb03575ff9e9dcd10fa7179aa1001",
+          "data/prototype_skills.json": "a6ba197fe558d328e1fcab96506fa098465a4c72aebfe1a1b29cb98642628d1a",
+          "data/stages.json": "2e656d2dc155ad93c76b8a1303133992d95529283be7f5b16423738f4edaeeae",
+          "data/weapon_skills.json": "be23e1eb349958fcebf3dba088fcf389d50654fc31cb83523513c178ff81c659",
+          "tools/bootstrap_godot.py": "4c3ca17c3b90f9c5590d7a82a76ae71a353f4d15aae973cf37e03e745ebfdecc",
+          "tools/check_combat_cues.py": "a297a0ba827cf93c140ef5432f04206b7461bf2430f4f67aeb497946db26eac5",
+          "tools/check_feedback_data.py": "f1bd6f415e919a32faab1b403073e24dcdda4b819938b9b707dacfc32320bec7",
+          "tools/check_growth_data.py": "304be6a17484dd44525d94bad31f422bd13be315ba3309a366ca2bd5b9e2ebfd",
+          "tools/check_magic_data.py": "9405ac2a576b42d279944aacec82f00500ad50c70e5f141413a05e64b1f39e5b",
+          "tools/check_mobile_hud.py": "9e43cace28480d3aacb45dabaf67acb2ad24e1c8a9366aa5c011a279eba35487",
+          "tools/check_project.py": "eeafd73fc4503c7af952331c093272a5510aade3fbae04e42afb77eb23f55157",
+          "tools/check_run_navigation.py": "82fbdd522682329e597017bf5fc80e40df104169c0463a492f265354ba734518",
+          "tools/report_economy.py": "5c449e04b43847c57ec9617c7c43b2408566dbc7691e32b8d3e33d8b33b24bd6"
+        },
+        "source_fingerprint": "26f92d0d8b5316c02a9976149966766db52bb50242fd9897d8562b264f416b98",
+        "scope": "UTF-8, delimiters, whitespace, JSON/Python syntax, resource existence, project settings; NOT GDScript parser/typechecking or gameplay."
+      },
+      "growth_data_contract": {
+        "status": "PASS",
+        "pool_count": 18,
+        "counts": {
+          "common_attack": 8,
+          "character_attack": 1,
+          "common_passive": 8,
+          "ultimate_enhancement": 1
+        },
+        "negative_controls": [
+          {
+            "fixture": "duplicate",
+            "rejected": true
+          },
+          {
+            "fixture": "resistance",
+            "rejected": true
+          },
+          {
+            "fixture": "foreign_owner",
+            "rejected": true
+          },
+          {
+            "fixture": "missing_ultimate",
+            "rejected": true
+          },
+          {
+            "fixture": "wrong_row",
+            "rejected": true
+          }
+        ],
+        "errors": [],
+        "scope": "JSON schema/content and source integration markers only; not GDScript runtime/behavior."
+      },
+      "magic_data_contract": {
+        "status": "PASS",
+        "errors": [],
+        "negative_controls": [
+          {
+            "fixture": "plain_name",
+            "rejected": true
+          },
+          {
+            "fixture": "foreign_owner",
+            "rejected": true
+          },
+          {
+            "fixture": "missing_magic",
+            "rejected": true
+          },
+          {
+            "fixture": "negative_cost",
+            "rejected": true
+          },
+          {
+            "fixture": "negative_cooldown",
+            "rejected": true
+          },
+          {
+            "fixture": "wrong_upgrade",
+            "rejected": true
+          },
+          {
+            "fixture": "nonfinite_radius",
+            "rejected": true
+          },
+          {
+            "fixture": "impossible_cost",
+            "rejected": true
+          }
+        ],
+        "temporary_skill_names": 18,
+        "required_xp_first_five": [
+          30,
+          48,
+          66,
+          84,
+          102
+        ],
+        "xp_drop_unchanged": 5.0,
+        "scope": "JSON validation, negative data controls and source markers/arithmetic; NOT GDScript runtime, UI, input dispatch or mobile tests."
+      },
+      "feedback_source_contract": {
+        "status": "PASS",
+        "errors": [],
+        "negative_controls": [
+          {
+            "fixture": "missing_damage_hook",
+            "rejected": true
+          },
+          {
+            "fixture": "missing_reset",
+            "rejected": true
+          },
+          {
+            "fixture": "negative_duration",
+            "rejected": true
+          },
+          {
+            "fixture": "missing_low_hp_warning",
+            "rejected": true
+          },
+          {
+            "fixture": "missing_stale_guard",
+            "rejected": true
+          }
+        ],
+        "files_checked": 7,
+        "source_sha256": {
+          "scripts/combat/feedback_state.gd": "3ee19238fb9307bc9953fed3ecc266ecff420e2c74ceffe81409069372e87d88",
+          "scripts/combat/run_state.gd": "659c6cb022d779085db483f7a1d9f8ca39b121dbd146712b30f1a252c9878083",
+          "scripts/ui/feedback_panel.gd": "2103fd9b8692c5606273175b415447f35a995f9a18306a5e8f0abeeb7c5d465b",
+          "scripts/main.gd": "ca74e6a3a4030b2ad9e505a63f118f4558e8b366585a79a4abd0b2b202d995a4",
+          "tests/test_feedback.gd": "a0558acd7ab6216ccceb597f90c823a1078b0cda9337392440fe6523f22fce86",
+          "tools/check_project.py": "eeafd73fc4503c7af952331c093272a5510aade3fbae04e42afb77eb23f55157",
+          "tools/check_feedback_data.py": "f1bd6f415e919a32faab1b403073e24dcdda4b819938b9b707dacfc32320bec7"
+        },
+        "scope": "7 affected code/test/checker files: UTF-8, delimiters, whitespace, Python syntax, reaction constants, integration markers, engine-test registration and new dependency paths only. NOT the full project check or GDScript parser/type/runtime, rendering, or mobile input tests."
+      },
+      "mobile_hud_source_contract": {
+        "status": "PASS",
+        "files_checked": 8,
+        "errors": [],
+        "negative_controls": [
+          {
+            "fixture": "layout_detached",
+            "rejected": true
+          },
+          {
+            "fixture": "detail_not_paused",
+            "rejected": true
+          },
+          {
+            "fixture": "detail_mutates_skill",
+            "rejected": true
+          },
+          {
+            "fixture": "resize_retains_touch",
+            "rejected": true
+          },
+          {
+            "fixture": "test_not_registered",
+            "rejected": true
+          }
+        ],
+        "source_sha256": {
+          "scenes/main.tscn": "17a2e77db7cf47af860de3c263dc9119b0df349bafdf2a8b52a40f7450c9e22c",
+          "scripts/ui/mobile_main.gd": "9b2cbd89a9f6b735ff5c7f1443bb9cc652a5e456e6ec320a7855212412bca367",
+          "scripts/ui/hud_layout.gd": "d9a5dacd8e3816611b1658557c5366e1dbd6caeded4312d8f2e5e5584becddb6",
+          "scripts/ui/responsive_feedback_panel.gd": "b36ce744a7378d696b91018935f637da0ae88beccdeddd85b1187a238958ed5b",
+          "scripts/ui/move_input.gd": "cee8e709185740d1cb964fff13873a0818d14d0b3653f36d6416a1b17da40bd8",
+          "tests/test_mobile_hud.gd": "3d0234bea7a3883f6cb38fe127d8062cbd393b97c3132109e853e84c68e75a76",
+          "tools/check_project.py": "eeafd73fc4503c7af952331c093272a5510aade3fbae04e42afb77eb23f55157",
+          "tools/check_mobile_hud.py": "9e43cace28480d3aacb45dabaf67acb2ad24e1c8a9366aa5c011a279eba35487"
+        },
+        "source_fingerprint": "ac282af6e6dbe5a7aaca12f1b34b0fc4b94072bbfccfcf852491d99e74502f40",
+        "scope": "Changed UTF-8 files, delimiters, Python syntax and integration source checks only. NOT GDScript parsing/typechecking, actual Control geometry, touch dispatch, rendering or mobile execution."
+      },
+      "run_navigation_source_contract": {
+        "status": "PASS",
+        "files_checked": 5,
+        "errors": [],
+        "negative_controls": [
+          {
+            "fixture": "unescaped_string_newline",
+            "rejected": true
+          },
+          {
+            "fixture": "unguarded_intent",
+            "rejected": true
+          },
+          {
+            "fixture": "confirmation_resets_hp",
+            "rejected": true
+          },
+          {
+            "fixture": "cancel_rerolls",
+            "rejected": true
+          },
+          {
+            "fixture": "leave_fakes_death",
+            "rejected": true
+          },
+          {
+            "fixture": "no_result_copy",
+            "rejected": true
+          },
+          {
+            "fixture": "stale_menu_revision",
+            "rejected": true
+          },
+          {
+            "fixture": "unregistered_engine_test",
+            "rejected": true
+          }
+        ],
+        "source_sha256": {
+          "scripts/combat/run_state.gd": "659c6cb022d779085db483f7a1d9f8ca39b121dbd146712b30f1a252c9878083",
+          "scripts/ui/mobile_main.gd": "9b2cbd89a9f6b735ff5c7f1443bb9cc652a5e456e6ec320a7855212412bca367",
+          "tests/test_run_navigation.gd": "14b88030cf3b84cdaed8c559e04c0f1b15552a9860f32c1c959be06bea9ee475",
+          "tools/check_project.py": "eeafd73fc4503c7af952331c093272a5510aade3fbae04e42afb77eb23f55157",
+          "tools/check_run_navigation.py": "82fbdd522682329e597017bf5fc80e40df104169c0463a492f265354ba734518"
+        },
+        "source_fingerprint": "98f79d2f6eb9a080a94a73dcdefee0e684a7d5086478270ca40ad4cf478ae579",
+        "scope": "UTF-8/delimiters/Python syntax and navigation SOURCE contracts only; NOT GDScript parsing/types, native execution, actual UI/input, or mobile testing."
+      },
+      "combat_cues_source_contract": {
+        "status": "PASS",
+        "files_checked": 11,
+        "errors": [],
+        "negative_controls": [
+          {
+            "fixture": "pattern_single_hit",
+            "rejected": true
+          },
+          {
+            "fixture": "pattern_old_ai",
+            "rejected": true
+          },
+          {
+            "fixture": "pattern_visual_mutation",
+            "rejected": true
+          },
+          {
+            "fixture": "pattern_unregistered",
+            "rejected": true
+          },
+          {
+            "fixture": "pattern_gate",
+            "rejected": true
+          },
+          {
+            "fixture": "pattern_contact_guard",
+            "rejected": true
+          },
+          {
+            "fixture": "pattern_stop_on_defeat",
+            "rejected": true
+          },
+          {
+            "fixture": "missing_reset",
+            "rejected": true
+          },
+          {
+            "fixture": "early_clock",
+            "rejected": true
+          },
+          {
+            "fixture": "changed_damage",
+            "rejected": true
+          },
+          {
+            "fixture": "drop_as_collection",
+            "rejected": true
+          },
+          {
+            "fixture": "unbounded_received",
+            "rejected": true
+          },
+          {
+            "fixture": "received_before_hp",
+            "rejected": true
+          },
+          {
+            "fixture": "unbounded_visuals",
+            "rejected": true
+          },
+          {
+            "fixture": "cosmetic_rng",
+            "rejected": true
+          },
+          {
+            "fixture": "mutable_view",
+            "rejected": true
+          },
+          {
+            "fixture": "supply_changes_rewards",
+            "rejected": true
+          },
+          {
+            "fixture": "supply_mutates_observation",
+            "rejected": true
+          },
+          {
+            "fixture": "supply_glyph_mutates_state",
+            "rejected": true
+          },
+          {
+            "fixture": "unregistered_test",
+            "rejected": true
+          },
+          {
+            "fixture": "ignored_engine_exit",
+            "rejected": true
+          },
+          {
+            "fixture": "ignored_engine_errors",
+            "rejected": true
+          },
+          {
+            "fixture": "ignored_test_result",
+            "rejected": true
+          }
+        ],
+        "source_sha256": {
+          "scripts/combat/run_state.gd": "659c6cb022d779085db483f7a1d9f8ca39b121dbd146712b30f1a252c9878083",
+          "scripts/combat/battle_view.gd": "1e526b5f168fcd478f4e25d1afb8a5f72c9600e210834e5da0c3e74f63f1eaea",
+          "scripts/combat/combat_cues.gd": "04027c56be8fa43d6465a165569b1e209dd7782a630d97a6e96d0acc3235ebda",
+          "tests/test_combat_cues.gd": "6a85ac9c2954863ebfe0422cdad6dfc2475958ef42062d036a06ce2266167de4",
+          "tools/check_project.py": "eeafd73fc4503c7af952331c093272a5510aade3fbae04e42afb77eb23f55157",
+          "tools/check_combat_cues.py": "a297a0ba827cf93c140ef5432f04206b7461bf2430f4f67aeb497946db26eac5",
+          "scripts/combat/enemy_patterns.gd": "4059f30002b56fa0ccb73ed38b4fe4af9c0fe8092a8f5836ad53f6e3cef5a4af",
+          "scripts/combat/enemy_pattern_visuals.gd": "7ffd0cbb0b3e50bbdd2c344618522b0f1ebd792f187f10ac32d5393444eedb74",
+          "scripts/progression/run_snapshot.gd": "61703b550b07ee8eab71dbdef2237066a7997ebb26313d90e948d2dda1dcceb8",
+          "scripts/combat/actor_motion.gd": "f54f9db4346617b1a6c589fd58ef30d53d3e4ee18cc1bafd2aa2c4bd43cf0045",
+          "data/enemy_patterns.json": "ba04c2b3076746724a09cf212576886edfa33821f666daa97a541d5042680bec"
+        },
+        "source_fingerprint": "02fbfaa19636d7fecea25893ffd6bc19c5cbf6b68a752a04a76ce9059d761a4a",
+        "baseline_run_blob": "673d75a748fa5f1f9ac72ec73bbd9120fdcfce02",
+        "baseline_runner_blob": "1ab68ad8a51271e3d47db8b02d433991f42e8d6c",
+        "baseline_engine_function_sha256": "9156043eaf896d72565563cc1e2f623cf0c8fbac7f032f19bffee7e4946a69ee",
+        "scope": "Changed-source UTF-8/delimiters/Python syntax, hook order, bounds, isolation, reviewed GAME-024 RunState/GAME-030 view baselines with exact GAME-033 observations and GAME-038 version-gated pattern adapters, preserved engine runner. NOT Godot parser/type/runtime, visual quality, input dispatch, or FPS."
+      },
+      "godot_runtime": {
+        "status": "PASS",
+        "commands": [
+          {
+            "command": [
+              "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+              "--headless",
+              "--version"
+            ],
+            "exit_code": 0,
+            "status": "PASS"
+          },
+          {
+            "command": [
+              "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+              "--headless",
+              "--path",
+              "/workspace/Viya",
+              "--editor",
+              "--import",
+              "--quit"
+            ],
+            "exit_code": 0,
+            "status": "PASS"
+          },
+          {
+            "command": [
+              "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+              "--headless",
+              "--path",
+              "/workspace/Viya",
+              "--script",
+              "res://tests/test_combat_foundation.gd"
+            ],
+            "exit_code": 0,
+            "status": "PASS"
+          },
+          {
+            "command": [
+              "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+              "--headless",
+              "--path",
+              "/workspace/Viya",
+              "--script",
+              "res://tests/test_growth.gd"
+            ],
+            "exit_code": 0,
+            "status": "PASS"
+          },
+          {
+            "command": [
+              "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+              "--headless",
+              "--path",
+              "/workspace/Viya",
+              "--script",
+              "res://tests/test_magic.gd"
+            ],
+            "exit_code": 0,
+            "status": "PASS"
+          },
+          {
+            "command": [
+              "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+              "--headless",
+              "--path",
+              "/workspace/Viya",
+              "--script",
+              "res://tests/test_feedback.gd"
+            ],
+            "exit_code": 0,
+            "status": "PASS"
+          },
+          {
+            "command": [
+              "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+              "--headless",
+              "--path",
+              "/workspace/Viya",
+              "--script",
+              "res://tests/test_mobile_hud.gd"
+            ],
+            "exit_code": 0,
+            "status": "PASS"
+          },
+          {
+            "command": [
+              "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+              "--headless",
+              "--path",
+              "/workspace/Viya",
+              "--script",
+              "res://tests/test_run_navigation.gd"
+            ],
+            "exit_code": 0,
+            "status": "PASS"
+          },
+          {
+            "command": [
+              "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+              "--headless",
+              "--path",
+              "/workspace/Viya",
+              "--script",
+              "res://tests/test_combat_cues.gd"
+            ],
+            "exit_code": 0,
+            "status": "PASS"
+          },
+          {
+            "command": [
+              "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+              "--headless",
+              "--path",
+              "/workspace/Viya",
+              "--quit-after",
+              "120"
+            ],
+            "exit_code": 0,
+            "status": "PASS"
+          }
+        ],
+        "scope": "headless import, actual foundation/growth/magic/feedback/mobile-HUD/run-navigation/combat-cues GDScript tests and main boot; visual/mobile approval separate"
+      },
+      "windows_f5": "NOT_VERIFIED",
+      "android_device": "NOT_VERIFIED",
+      "ios_device": "NOT_VERIFIED"
+    },
+    "native_results": [
+      {
+        "log": ".local_validation/GAME038/engine_2.log",
+        "checks": 23,
+        "status": "PASS",
+        "failures": []
+      },
+      {
+        "log": ".local_validation/GAME038/engine_3.log",
+        "checks": 70,
+        "status": "PASS",
+        "failures": []
+      },
+      {
+        "log": ".local_validation/GAME038/engine_4.log",
+        "checks": 122,
+        "status": "PASS",
+        "failures": []
+      },
+      {
+        "log": ".local_validation/GAME038/engine_5.log",
+        "checks": 57,
+        "status": "PASS",
+        "failures": []
+      },
+      {
+        "log": ".local_validation/GAME038/engine_6.log",
+        "checks": 1336,
+        "status": "PASS",
+        "failures": []
+      },
+      {
+        "log": ".local_validation/GAME038/engine_7.log",
+        "checks": 68,
+        "status": "PASS",
+        "failures": []
+      },
+      {
+        "log": ".local_validation/GAME038/engine_8.log",
+        "checks": 1979,
+        "status": "PASS",
+        "failures": []
+      }
+    ],
+    "native_total": 3655,
+    "new_pattern_checks": 59,
+    "python": {
+      "tests": 12,
+      "status": "PASS"
+    },
+    "source_proof": {
+      "base": "cd47a3ea7dc24f06bd7233897beae732a82457d0",
+      "protected_count": 69,
+      "protected_files": {
+        "assets/characters/viya/spec/turnaround_contract.v1.json": "a8f65fa1637b49235d2158ef582f9d696a2cb13caddc86a5dd27dbeccbca117a",
+        "assets/characters/viya/spec/turnaround_r1_result.json": "6c337719be2f54e5ea35304cb32b4f5f6bf5b4cca987e00ce6b4d59a37983db8",
+        "assets/characters/viya/spec/turnaround_r2_result.json": "8ca504e6b4165cf9ced1addf06878c0bb7018030c070119c446345ac6ebcb421",
+        "assets/references/GEN-005_viya_combat_pose_three_quarter_front.png": "d3c0084c73aff9a706a50a6cac760d124c0647d23fa36e6ae30635dc6929a730",
+        "assets/references/README.md": "ccee5345d56bbe2ecdf03cc0a54eea7c61dd684f9582a3ec83284218742e18a5",
+        "assets/references/qa/viya_4view_alignment_preview.jpg": "8fbd8b3c99af7099de926ca3c39feae0217dd984ff959e314e51d2338786fd0c",
+        "assets/references/qa/viya_side_silhouette_comparison.jpg": "1f8fe11aa693d84ebec41db9b6bea3af2bf61f61fd80f2ffdd45f799acd23170",
+        "data/actor_presentation.json": "e82ae99f672bd3e6979778f9a6201efb659b160a3407d9b1b6099eb0e0257f04",
+        "data/chapter_one.json": "c32e288ddc61dc8193cd78de416d3682b7c11f1924bbaaa3ea4afe4b78104f76",
+        "data/combat_pacing.json": "d153666f7f77506da281d1f90ae5fbc5822cd997c6db76590f35ef8a6662d597",
+        "data/combat_profiles.json": "d36abf0b4d0feb950e6448474732decdac9f98035a9962e5f5287b09eb1d1144",
+        "data/destructibles.json": "130421dd85d4dbf9ff9f70ab297b36586870e65fb9426cec0c2f58ce57a49b39",
+        "data/gold_dungeon.json": "9a3427a6ddfb3462123f92e6918966ff7b1887ff324f368c600a9ad5993b1f9e",
+        "data/gold_rewards.json": "8f465cd44d1bf712b0fa758b2b8ff7cd17ecb450cff7f8e567d27f0397154993",
+        "data/maps.json": "925638f794696b96fdf48df8c266654cef3af002f43e57f91daa80f8d70e8bd4",
+        "data/presentation_slots.json": "d0a2e6ea1a55d37680bfa02ef9f9036f00deb03575ff9e9dcd10fa7179aa1001",
+        "data/prototype_skills.json": "a6ba197fe558d328e1fcab96506fa098465a4c72aebfe1a1b29cb98642628d1a",
+        "data/stages.json": "2e656d2dc155ad93c76b8a1303133992d95529283be7f5b16423738f4edaeeae",
+        "data/weapon_skills.json": "be23e1eb349958fcebf3dba088fcf389d50654fc31cb83523513c178ff81c659",
+        "project.godot": "0d8f7fce157178f7bf31acc183593b40f23cff6d266ea5270f4b75f0899b79e5",
+        "scenes/main.tscn": "17a2e77db7cf47af860de3c263dc9119b0df349bafdf2a8b52a40f7450c9e22c",
+        "scripts/combat/approach_cues.gd": "a30074eec96a887c5fbdd99c96ea3ff247303974bd93fb7ef288eed2eaac6131",
+        "scripts/combat/attack_visuals.gd": "49e9acdb93325368fbf4c6d2732d11877e25f9daa829e6b00a466b74d339556f",
+        "scripts/combat/battle_forms.gd": "a0e9ebcf2cb5d369c0db53f089ab9bb9df0163b1f171908a57bd63f7e285ab95",
+        "scripts/combat/battle_projection.gd": "f8abad51e46f2353d01cc6f1f4b904485621d00ccf75e854ab873bc688f160a0",
+        "scripts/combat/boss_guidance.gd": "d7c1195590ce6fedd3cc8c90cbcdfdf4a2aaf7b994fdfe1a26206e3a9709fef9",
+        "scripts/combat/combat_audio.gd": "9d8d1f2e1d6b617e63a5f8454d182b5e16f08b99b28ade31c1e24cb95be18d2b",
+        "scripts/combat/combat_audio_bank.gd": "589afc536b6514a10a86b5436bc5271ffa6c522452e12949842a1ba8ca65d9ce",
+        "scripts/combat/combat_camera.gd": "ecb81da9ebb62e9f2b84f9ba7ffb4de578646d5c3d5accad647fd63c74b09567",
+        "scripts/combat/combat_display.gd": "dbb2493bf333b9972603f6cc5ae123010f5cd57e660133e44b4a9110a935d4f7",
+        "scripts/combat/combat_profiles.gd": "515689ca733856a0855739531ad4ebeddb20609839210df41c3b6f6202c898e0",
+        "scripts/combat/defense_rules.gd": "1fa247925d4d5a33dfdf7371285d9192b85b0cd83603efed33894693053691f8",
+        "scripts/combat/feedback_state.gd": "3ee19238fb9307bc9953fed3ecc266ecff420e2c74ceffe81409069372e87d88",
+        "scripts/combat/gold_dungeon.gd": "f7073b32297d4326a0abc973022d7280c53f92114d49db53933874118b3ccc0d",
+        "scripts/combat/high_angle_battle.gd": "3ae7b64f8cc7b8351ca147c40855041093d9d74fd3109ca531a54f5a7137c6e4",
+        "scripts/combat/incoming_feedback.gd": "71dfbafc9d3e58435afa40b2f1f427387ad899f118906cda72b028538fdb853b",
+        "scripts/combat/magic_state.gd": "41a9a7739edc46e98dda26986f23dddf1c0ff6bdf9b40d80640f797460b9223b",
+        "scripts/combat/stage_catalog.gd": "8059f41d7134818deeea1978d2f81fddc2456d530e33479d458461004600516f",
+        "scripts/combat/structure_feedback.gd": "5eb5b6acd005b04652a1c337caaacfa47de2dfb0ca5a758ea06c5b4e3b4d6d11",
+        "scripts/combat/supply_feedback.gd": "09731b47d1cd26ed58fac503525ca349006efd8f3542545b4dd61f381c1f8287",
+        "scripts/combat/weapon_modules.gd": "a405c2ddad96a396c8e5e0820ac0d4ee4093a951c473ac7c849294e872616a2e",
+        "scripts/main.gd": "ca74e6a3a4030b2ad9e505a63f118f4558e8b366585a79a4abd0b2b202d995a4",
+        "scripts/progression/account_talents.gd": "0774659235d3bea9276574996565b315156260274750ef8c7f9969f18550f43e",
+        "scripts/progression/combat_pacing.gd": "07f73dae843a7779f992976efb1901774782db1bd021bef01999a83ea7814826",
+        "scripts/progression/gold_progress.gd": "2289fc850fc5f856d674863de6119987da74ed6bd931ade50f0faa11ea0f7012",
+        "scripts/progression/growth_state.gd": "07287b03d12eac144dce6f1858ceb2b6561e6281b4c011ac6bc5d5d3c72a0e6e",
+        "scripts/progression/run_store.gd": "bab493f1963ea2a6d98770f9ef9686d70d4b257e0b49afb3386de661a6081986",
+        "scripts/progression/skill_catalog.gd": "ccd13a2b02f4b57497beae39e483edfca53617cc3a39e43cbaf8009535c820d8",
+        "scripts/progression/weapon_catalog.gd": "aced8b45e765780b4053bfa436e1dbbc1696d2173cb4cb762f21298d5f91421b",
+        "scripts/ui/account_bonus_summary.gd": "c75ffab9d10f7b73fa9b89df9c532a119f00431447651ca13a1f004122e4cee8",
+        "scripts/ui/actor_assets.gd": "f98126291f60e27b9d903999c61f6a1c03a34555eb824a5fdd3e51db18a359c1",
+        "scripts/ui/asset_slots.gd": "b6f7edc881a4a4f658d3df115a2b7444fd2d8731cbc11fdb8048eddb56dc7353",
+        "scripts/ui/battle_chrome.gd": "6be2ec2203a0517ce6842d3c7979135ec7c94afaa5b69b1fff2508f083473a2a",
+        "scripts/ui/battle_save_notice.gd": "4030876186c66ae7de4ec2b8808d8b905881c40d0c0af29bd241f659dcdf2189",
+        "scripts/ui/city_preview.gd": "d01c0ca26b7d812b2b7d6d63339788be98241f6a09ec58a1a8d35a6f7b788937",
+        "scripts/ui/combat_skin.gd": "b9ed37f5c7f1831095805e13c6e3eaa986e762081209372cf8a4e09ff6608c66",
+        "scripts/ui/combat_slot_button.gd": "91a02ab52e8ebcb26985ae143dd596fbd4b62bd3fa6e440e5b0d12e44132a81d",
+        "scripts/ui/encounter_notice.gd": "316faf9f8de95b3917268b4773092a205cb0019e5860044294e0f781cb640e3e",
+        "scripts/ui/feedback_panel.gd": "2103fd9b8692c5606273175b415447f35a995f9a18306a5e8f0abeeb7c5d465b",
+        "scripts/ui/growth_overview.gd": "43dfb9306f4e280b57c8445b179c0e797938bc9fd0e5fa070053474cadb53a42",
+        "scripts/ui/hud_layout.gd": "d9a5dacd8e3816611b1658557c5366e1dbd6caeded4312d8f2e5e5584becddb6",
+        "scripts/ui/mobile_main.gd": "9b2cbd89a9f6b735ff5c7f1443bb9cc652a5e456e6ec320a7855212412bca367",
+        "scripts/ui/move_input.gd": "cee8e709185740d1cb964fff13873a0818d14d0b3653f36d6416a1b17da40bd8",
+        "scripts/ui/responsive_feedback_panel.gd": "b36ce744a7378d696b91018935f637da0ae88beccdeddd85b1187a238958ed5b",
+        "scripts/ui/reward_payment.gd": "d3fc0b75e7f9fbb5f55ffdbfe708039ccb77e4a35231c58d6fdcd4996a246c11",
+        "scripts/ui/skill_preview.gd": "5c3de40b161d38de44234f6f1a2c63064bbc99021c4def95f7995382b02af5db",
+        "scripts/world/map_catalog.gd": "952abbc81d539817dfdd98ed4a59185f13fb8c1adac0210839d176ebee087ea6",
+        "scripts/world/map_space.gd": "8110f4a28e04e67fe738011ea888f31a9c74c450ed79148d88c1da602fa03ae8",
+        "scripts/world/supply_catalog.gd": "1af21cb685b8da0858491a961f007e8a0511c24e0f70b0165e0051d7fcb310a1"
+      },
+      "changed_existing_production": {
+        "scripts/combat/actor_motion.gd": {
+          "base_sha256": "e75bfd25a61446500f5e4f9494bff583dd4d9dbcc4050c25d69ea9a435b53bb7",
+          "current_sha256": "f54f9db4346617b1a6c589fd58ef30d53d3e4ee18cc1bafd2aa2c4bd43cf0045"
+        },
+        "scripts/combat/battle_view.gd": {
+          "base_sha256": "966d0e7fb608b0de067f6cfa02d0c611d2fba52be482a97ff76d6c139e25af34",
+          "current_sha256": "1e526b5f168fcd478f4e25d1afb8a5f72c9600e210834e5da0c3e74f63f1eaea"
+        },
+        "scripts/combat/combat_cues.gd": {
+          "base_sha256": "990db858f95f0f0e109bc45d4a1382fcf843d01712be909640e6fa799a5734cf",
+          "current_sha256": "04027c56be8fa43d6465a165569b1e209dd7782a630d97a6e96d0acc3235ebda"
+        },
+        "scripts/combat/run_state.gd": {
+          "base_sha256": "6637a163edd9b7c0167c1867ff90e716ccd1ff12297c246258fd612d402f4773",
+          "current_sha256": "659c6cb022d779085db483f7a1d9f8ca39b121dbd146712b30f1a252c9878083"
+        },
+        "scripts/progression/run_snapshot.gd": {
+          "base_sha256": "068e7dc82a6ec7cec87075e7f64e2eb553752679f22ef88d84db0bfc33a11389",
+          "current_sha256": "61703b550b07ee8eab71dbdef2237066a7997ebb26313d90e948d2dda1dcceb8"
+        }
+      },
+      "new_production": [
+        "data/enemy_patterns.json",
+        "scripts/combat/enemy_patterns.gd",
+        "scripts/combat/enemy_pattern_visuals.gd"
+      ],
+      "historical_runstate_baseline_recovered_by_exact_reviewed_adapter_stripping": true,
+      "guard_negative_controls": [
+        {
+          "fixture": "pattern_single_hit",
+          "rejected": true
+        },
+        {
+          "fixture": "pattern_old_ai",
+          "rejected": true
+        },
+        {
+          "fixture": "pattern_visual_mutation",
+          "rejected": true
+        },
+        {
+          "fixture": "pattern_unregistered",
+          "rejected": true
+        },
+        {
+          "fixture": "pattern_gate",
+          "rejected": true
+        },
+        {
+          "fixture": "pattern_contact_guard",
+          "rejected": true
+        },
+        {
+          "fixture": "pattern_stop_on_defeat",
+          "rejected": true
+        },
+        {
+          "fixture": "missing_reset",
+          "rejected": true
+        },
+        {
+          "fixture": "early_clock",
+          "rejected": true
+        },
+        {
+          "fixture": "changed_damage",
+          "rejected": true
+        },
+        {
+          "fixture": "drop_as_collection",
+          "rejected": true
+        },
+        {
+          "fixture": "unbounded_received",
+          "rejected": true
+        },
+        {
+          "fixture": "received_before_hp",
+          "rejected": true
+        },
+        {
+          "fixture": "unbounded_visuals",
+          "rejected": true
+        },
+        {
+          "fixture": "cosmetic_rng",
+          "rejected": true
+        },
+        {
+          "fixture": "mutable_view",
+          "rejected": true
+        },
+        {
+          "fixture": "supply_changes_rewards",
+          "rejected": true
+        },
+        {
+          "fixture": "supply_mutates_observation",
+          "rejected": true
+        },
+        {
+          "fixture": "supply_glyph_mutates_state",
+          "rejected": true
+        },
+        {
+          "fixture": "unregistered_test",
+          "rejected": true
+        },
+        {
+          "fixture": "ignored_engine_exit",
+          "rejected": true
+        },
+        {
+          "fixture": "ignored_engine_errors",
+          "rejected": true
+        },
+        {
+          "fixture": "ignored_test_result",
+          "rejected": true
+        }
+      ],
+      "new_pattern_and_migration_files_exact_reviewed_hashes": true,
+      "original_engine_commands_and_error_detection_unchanged": true,
+      "original_move_and_skill_controller_unchanged": true,
+      "schema": 16,
+      "old_schema_versions": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "rng_streams": 7,
+      "ownership": "Single existing RunState. Main/Mobile/account,base stats/maps/stages/economy/weapons/audio/assets unchanged. New AI only version1orc_siege elite in campaign;old restored living/future actors retain version0."
+    },
+    "gui": {
+      "errors": [],
+      "mouse_controls": 11,
+      "native_dodge_touch": 1,
+      "native_mission_touch": 1,
+      "records": [
+        {
+          "arrival_caption": "정예 등장 · 임무 ▸",
+          "audio_active": 0,
+          "dense": false,
+          "high_angle": true,
+          "hp": 100,
+          "image": "hammer_windup_true_1280",
+          "incoming": {},
+          "label_overlaps": 0,
+          "labels": 0,
+          "mp": 100.0,
+          "patterns": [
+            {
+              "direction": "(1.0, 0.0)",
+              "left": 0.9,
+              "origin": "(2400.0, 1700.0)",
+              "phase": "windup"
+            }
+          ],
+          "phase": 1,
+          "telegraph": [
+            {
+              "id": 1,
+              "origin": "(534.384, 262.3571)",
+              "phase": "windup",
+              "points": "[(534.384, 262.3571), (620.4204, 155.946), (625.2649, 159.0106), (629.9641, 162.2404), (634.5103, 165.6302), (638.8962, 169.1749), (643.115, 172.8687), (647.1599, 176.7056), (651.0247, 180.6794), (654.7024, 184.7839), (658.188, 189.0125), (661.4756, 193.3584), (664.5598, 197.8147), (667.4355, 202.3741), (670.0989, 207.0297), (672.5449, 211.7736), (674.77, 216.5984), (676.7705, 221.4965), (678.5432, 226.46), (680.0854, 231.4808), (681.3945, 236.5509), (682.4685, 241.6625), (683.3054, 246.8071), (683.9043, 251.9766), (684.2642, 257.1627), (684.384, 262.3571), (684.2642, 267.5514), (683.9043, 272.7375), (683.3054, 277.907), (682.4685, 283.0516), (681.3945, 288.1632), (680.0854, 293.2333), (678.5432, 298.2542), (676.7705, 303.2177), (674.77, 308.1157), (672.5449, 312.9406), (670.0989, 317.6844), (667.4355, 322.34), (664.5598, 326.8994), (661.4756, 331.3557), (658.188, 335.7017), (654.7024, 339.9302), (651.0247, 344.0347), (647.1599, 348.0085), (643.115, 351.8455), (638.8962, 355.5392), (634.5103, 359.0837), (629.9641, 362.4736), (625.2649, 365.7035), (620.4204, 368.7681)]",
+              "progress": 0.0
+            }
+          ],
+          "viewport": "(1280, 720)"
+        },
+        {
+          "arrival_caption": "정예 등장 ▸",
+          "audio_active": 0,
+          "dense": false,
+          "high_angle": true,
+          "hp": 100,
+          "image": "hammer_windup_true_853",
+          "incoming": {},
+          "label_overlaps": 0,
+          "labels": 0,
+          "mp": 100.0,
+          "patterns": [
+            {
+              "direction": "(1.0, 0.0)",
+              "left": 0.9,
+              "origin": "(2400.0, 1700.0)",
+              "phase": "windup"
+            }
+          ],
+          "phase": 1,
+          "telegraph": [
+            {
+              "id": 1,
+              "origin": "(303.5, 136.625)",
+              "phase": "windup",
+              "points": "[(303.5, 136.625), (389.5364, 30.21399), (394.3809, 33.27856), (399.0801, 36.5083), (403.6262, 39.89819), (408.0122, 43.44287), (412.231, 47.1366), (416.2759, 50.97351), (420.1406, 54.94739), (423.8184, 59.05188), (427.304, 63.2804), (430.5916, 67.62634), (433.6758, 72.08264), (436.5515, 76.64209), (439.2148, 81.29761), (441.6609, 86.0415), (443.886, 90.86633), (445.8865, 95.7644), (447.6592, 100.7279), (449.2014, 105.7488), (450.5105, 110.8188), (451.5845, 115.9304), (452.4214, 121.0751), (453.0203, 126.2445), (453.3801, 131.4307), (453.5, 136.625), (453.3801, 141.8193), (453.0203, 147.0055), (452.4214, 152.1749), (451.5845, 157.3196), (450.5105, 162.4312), (449.2014, 167.5012), (447.6592, 172.5221), (445.8865, 177.4856), (443.886, 182.3837), (441.6609, 187.2085), (439.2148, 191.9524), (436.5515, 196.6079), (433.6758, 201.1674), (430.5916, 205.6237), (427.304, 209.9696), (423.8184, 214.1981), (420.1406, 218.3026), (416.2759, 222.2765), (412.231, 226.1134), (408.0122, 229.8071), (403.6262, 233.3517), (399.0801, 236.7416), (394.3809, 239.9714), (389.5364, 243.036)]",
+              "progress": 0.0
+            }
+          ],
+          "viewport": "(853, 393)"
+        },
+        {
+          "arrival_caption": "정예 등장 · 임무 ▸",
+          "audio_active": 0,
+          "dense": false,
+          "high_angle": true,
+          "hp": 100,
+          "image": "hammer_windup_true_1920",
+          "incoming": {},
+          "label_overlaps": 0,
+          "labels": 0,
+          "mp": 100.0,
+          "patterns": [
+            {
+              "direction": "(1.0, 0.0)",
+              "left": 0.9,
+              "origin": "(2400.0, 1700.0)",
+              "phase": "windup"
+            }
+          ],
+          "phase": 1,
+          "telegraph": [
+            {
+              "id": 1,
+              "origin": "(854.0, 441.0)",
+              "phase": "windup",
+              "points": "[(854.0, 441.0), (940.0364, 334.589), (944.8809, 337.6536), (949.5801, 340.8833), (954.1262, 344.2732), (958.5122, 347.8179), (962.731, 351.5116), (966.7759, 355.3485), (970.6406, 359.3224), (974.3184, 363.4269), (977.804, 367.6554), (981.0916, 372.0013), (984.1758, 376.4576), (987.0515, 381.0171), (989.7148, 385.6726), (992.1609, 390.4165), (994.386, 395.2413), (996.3865, 400.1394), (998.1592, 405.1029), (999.7014, 410.1238), (1001.01, 415.1938), (1002.084, 420.3054), (1002.921, 425.4501), (1003.52, 430.6195), (1003.88, 435.8057), (1004.0, 441.0), (1003.88, 446.1943), (1003.52, 451.3805), (1002.921, 456.5499), (1002.084, 461.6946), (1001.01, 466.8062), (999.7014, 471.8762), (998.1592, 476.8971), (996.3865, 481.8606), (994.386, 486.7587), (992.1609, 491.5835), (989.7148, 496.3274), (987.0515, 500.9829), (984.1758, 505.5424), (981.0916, 509.9987), (977.804, 514.3446), (974.3184, 518.5731), (970.6406, 522.6776), (966.7759, 526.6515), (962.731, 530.4884), (958.5122, 534.1821), (954.1262, 537.7267), (949.5801, 541.1166), (944.8809, 544.3464), (940.0364, 547.411)]",
+              "progress": 0.0
+            }
+          ],
+          "viewport": "(1920, 1080)"
+        },
+        {
+          "arrival_caption": "정예 등장 · 임무 ▸",
+          "audio_active": 0,
+          "dense": false,
+          "high_angle": false,
+          "hp": 100,
+          "image": "hammer_windup_false_1280",
+          "incoming": {},
+          "label_overlaps": 0,
+          "labels": 0,
+          "mp": 100.0,
+          "patterns": [
+            {
+              "direction": "(1.0, 0.0)",
+              "left": 0.9,
+              "origin": "(2400.0, 1700.0)",
+              "phase": "windup"
+            }
+          ],
+          "phase": 1,
+          "telegraph": [
+            {
+              "id": 1,
+              "origin": "(534.384, 262.357)",
+              "phase": "windup",
+              "points": "[(534.384, 262.357), (620.4203, 139.4842), (625.2648, 143.0228), (629.9641, 146.7523), (634.5102, 150.6666), (638.8962, 154.7596), (643.1149, 159.0247), (647.1599, 163.4552), (651.0246, 168.0438), (654.7023, 172.7833), (658.1879, 177.666), (661.4755, 182.6842), (664.5598, 187.8299), (667.4355, 193.0947), (670.0988, 198.4704), (672.5449, 203.9482), (674.77, 209.5195), (676.7704, 215.1753), (678.5432, 220.9066), (680.0854, 226.7042), (681.3945, 232.5587), (682.4684, 238.461), (683.3054, 244.4015), (683.9042, 250.3707), (684.2641, 256.3591), (684.384, 262.357), (684.2641, 268.3549), (683.9042, 274.3434), (683.3054, 280.3126), (682.4684, 286.253), (681.3945, 292.1554), (680.0854, 298.0099), (678.5432, 303.8075), (676.7704, 309.5388), (674.77, 315.1945), (672.5449, 320.7658), (670.0988, 326.2436), (667.4355, 331.6194), (664.5598, 336.8841), (661.4755, 342.0299), (658.1879, 347.0481), (654.7023, 351.9308), (651.0246, 356.6703), (647.1599, 361.2589), (643.1149, 365.6893), (638.8962, 369.9544), (634.5102, 374.0475), (629.9641, 377.9618), (625.2648, 381.6913), (620.4203, 385.2298)]",
+              "progress": 0.0
+            }
+          ],
+          "viewport": "(1280, 720)"
+        },
+        {
+          "arrival_caption": "정예 등장 ▸",
+          "audio_active": 0,
+          "dense": false,
+          "high_angle": false,
+          "hp": 100,
+          "image": "hammer_windup_false_853",
+          "incoming": {},
+          "label_overlaps": 0,
+          "labels": 0,
+          "mp": 100.0,
+          "patterns": [
+            {
+              "direction": "(1.0, 0.0)",
+              "left": 0.9,
+              "origin": "(2400.0, 1700.0)",
+              "phase": "windup"
+            }
+          ],
+          "phase": 1,
+          "telegraph": [
+            {
+              "id": 1,
+              "origin": "(303.5, 136.625)",
+              "phase": "windup",
+              "points": "[(303.5, 136.625), (389.5364, 13.7522), (394.3809, 17.29077), (399.0801, 21.02026), (403.6262, 24.93457), (408.0122, 29.02759), (412.231, 33.29272), (416.2759, 37.72314), (420.1406, 42.31177), (423.8184, 47.05127), (427.304, 51.93396), (430.5916, 56.95215), (433.6758, 62.0979), (436.5515, 67.36267), (439.2148, 72.7384), (441.6609, 78.21619), (443.886, 83.78748), (445.8865, 89.44324), (447.6592, 95.17456), (449.2014, 100.9722), (450.5105, 106.8267), (451.5845, 112.729), (452.4214, 118.6694), (453.0203, 124.6387), (453.3801, 130.6271), (453.5, 136.625), (453.3801, 142.6229), (453.0203, 148.6113), (452.4214, 154.5806), (451.5845, 160.521), (450.5105, 166.4233), (449.2014, 172.2778), (447.6592, 178.0754), (445.8865, 183.8068), (443.886, 189.4625), (441.6609, 195.0338), (439.2148, 200.5116), (436.5515, 205.8873), (433.6758, 211.1521), (430.5916, 216.2979), (427.304, 221.316), (423.8184, 226.1987), (420.1406, 230.9382), (416.2759, 235.5269), (412.231, 239.9573), (408.0122, 244.2224), (403.6262, 248.3154), (399.0801, 252.2297), (394.3809, 255.9592), (389.5364, 259.4978)]",
+              "progress": 0.0
+            }
+          ],
+          "viewport": "(853, 393)"
+        },
+        {
+          "arrival_caption": "정예 등장 · 임무 ▸",
+          "audio_active": 0,
+          "dense": false,
+          "high_angle": false,
+          "hp": 100,
+          "image": "hammer_windup_false_1920",
+          "incoming": {},
+          "label_overlaps": 0,
+          "labels": 0,
+          "mp": 100.0,
+          "patterns": [
+            {
+              "direction": "(1.0, 0.0)",
+              "left": 0.9,
+              "origin": "(2400.0, 1700.0)",
+              "phase": "windup"
+            }
+          ],
+          "phase": 1,
+          "telegraph": [
+            {
+              "id": 1,
+              "origin": "(854.0, 441.0)",
+              "phase": "windup",
+              "points": "[(854.0, 441.0), (940.0364, 318.1272), (944.8809, 321.6658), (949.5801, 325.3953), (954.1262, 329.3096), (958.5122, 333.4026), (962.731, 337.6677), (966.7759, 342.0981), (970.6406, 346.6868), (974.3184, 351.4263), (977.804, 356.309), (981.0916, 361.3271), (984.1758, 366.4729), (987.0515, 371.7377), (989.7148, 377.1134), (992.1609, 382.5912), (994.386, 388.1625), (996.3865, 393.8182), (998.1592, 399.5496), (999.7014, 405.3472), (1001.01, 411.2017), (1002.084, 417.104), (1002.921, 423.0444), (1003.52, 429.0137), (1003.88, 435.0021), (1004.0, 441.0), (1003.88, 446.9979), (1003.52, 452.9863), (1002.921, 458.9556), (1002.084, 464.896), (1001.01, 470.7983), (999.7014, 476.6528), (998.1592, 482.4504), (996.3865, 488.1818), (994.386, 493.8375), (992.1609, 499.4088), (989.7148, 504.8866), (987.0515, 510.2623), (984.1758, 515.5271), (981.0916, 520.6729), (977.804, 525.691), (974.3184, 530.5737), (970.6406, 535.3132), (966.7759, 539.9019), (962.731, 544.3323), (958.5122, 548.5974), (954.1262, 552.6904), (949.5801, 556.6047), (944.8809, 560.3342), (940.0364, 563.8728)]",
+              "progress": 0.0
+            }
+          ],
+          "viewport": "(1920, 1080)"
+        },
+        {
+          "arrival_caption": "임무 ▸",
+          "audio_active": 0,
+          "dense": false,
+          "high_angle": false,
+          "hp": 100,
+          "image": "hammer_mission_pause",
+          "incoming": {},
+          "label_overlaps": 0,
+          "labels": 0,
+          "mp": 100.0,
+          "patterns": [
+            {
+              "direction": "(1.0, 0.0)",
+              "left": 0.9,
+              "origin": "(2400.0, 1700.0)",
+              "phase": "windup"
+            }
+          ],
+          "phase": 2,
+          "telegraph": [],
+          "viewport": "(853, 393)"
+        },
+        {
+          "arrival_caption": "정예 등장 ▸",
+          "audio_active": 0,
+          "dense": false,
+          "high_angle": false,
+          "hp": 100,
+          "image": "hammer_native_dodge",
+          "incoming": {},
+          "label_overlaps": 0,
+          "labels": 0,
+          "mp": 100.0,
+          "patterns": [
+            {
+              "direction": "(1.0, 0.0)",
+              "left": 0.16,
+              "origin": "(2400.0, 1700.0)",
+              "phase": "strike"
+            }
+          ],
+          "phase": 1,
+          "telegraph": [
+            {
+              "id": 1,
+              "origin": "(303.5, 373.2527)",
+              "phase": "strike",
+              "points": "[(303.5, 373.2527), (389.5364, 250.3799), (394.3809, 253.9185), (399.0801, 257.6479), (403.6262, 261.5623), (408.0122, 265.6553), (412.231, 269.9204), (416.2759, 274.3508), (420.1406, 278.9395), (423.8184, 283.679), (427.304, 288.5616), (430.5916, 293.5798), (433.6758, 298.7256), (436.5515, 303.9904), (439.2148, 309.3661), (441.6609, 314.8439), (443.886, 320.4152), (445.8865, 326.0709), (447.6592, 331.8022), (449.2014, 337.5999), (450.5105, 343.4543), (451.5845, 349.3567), (452.4214, 355.2971), (453.0203, 361.2664), (453.3801, 367.2548), (453.5, 373.2527), (453.3801, 379.2506), (453.0203, 385.239), (452.4214, 391.2083), (451.5845, 397.1487), (450.5105, 403.051), (449.2014, 408.9055), (447.6592, 414.7031), (445.8865, 420.4344), (443.886, 426.0902), (441.6609, 431.6615), (439.2148, 437.1393), (436.5515, 442.515), (433.6758, 447.7798), (430.5916, 452.9255), (427.304, 457.9437), (423.8184, 462.8264), (420.1406, 467.5659), (416.2759, 472.1545), (412.231, 476.585), (408.0122, 480.8501), (403.6262, 484.9431), (399.0801, 488.8574), (394.3809, 492.5869), (389.5364, 496.1255)]",
+              "progress": 0.0
+            }
+          ],
+          "viewport": "(853, 393)"
+        },
+        {
+          "arrival_caption": "정예 등장 · 임무 ▸",
+          "audio_active": 0,
+          "dense": false,
+          "high_angle": true,
+          "hp": 76,
+          "image": "hammer_strike_true_1280",
+          "incoming": {
+            "alpha": 1.0,
+            "center": "(634.384, 262.3571)",
+            "marks": [
+              {
+                "alpha": 1.0,
+                "contact": false,
+                "direction": "(-1.0, 0.0)",
+                "origin": "(534.384, 262.3571)"
+              }
+            ],
+            "text": "−24 HP"
+          },
+          "label_overlaps": 0,
+          "labels": 1,
+          "mp": 100.0,
+          "patterns": [
+            {
+              "direction": "(1.0, 0.0)",
+              "left": 0.16,
+              "origin": "(2400.0, 1700.0)",
+              "phase": "strike"
+            }
+          ],
+          "phase": 1,
+          "telegraph": [
+            {
+              "id": 1,
+              "origin": "(534.384, 262.3571)",
+              "phase": "strike",
+              "points": "[(534.384, 262.3571), (620.4204, 155.946), (625.2649, 159.0106), (629.9641, 162.2404), (634.5103, 165.6302), (638.8962, 169.1749), (643.115, 172.8687), (647.1599, 176.7056), (651.0247, 180.6794), (654.7024, 184.7839), (658.188, 189.0125), (661.4756, 193.3584), (664.5598, 197.8147), (667.4355, 202.3741), (670.0989, 207.0297), (672.5449, 211.7736), (674.77, 216.5984), (676.7705, 221.4965), (678.5432, 226.46), (680.0854, 231.4808), (681.3945, 236.5509), (682.4685, 241.6625), (683.3054, 246.8071), (683.9043, 251.9766), (684.2642, 257.1627), (684.384, 262.3571), (684.2642, 267.5514), (683.9043, 272.7375), (683.3054, 277.907), (682.4685, 283.0516), (681.3945, 288.1632), (680.0854, 293.2333), (678.5432, 298.2542), (676.7705, 303.2177), (674.77, 308.1157), (672.5449, 312.9406), (670.0989, 317.6844), (667.4355, 322.34), (664.5598, 326.8994), (661.4756, 331.3557), (658.188, 335.7017), (654.7024, 339.9302), (651.0247, 344.0347), (647.1599, 348.0085), (643.115, 351.8455), (638.8962, 355.5392), (634.5103, 359.0837), (629.9641, 362.4736), (625.2649, 365.7035), (620.4204, 368.7681)]",
+              "progress": 0.0
+            }
+          ],
+          "viewport": "(1280, 720)"
+        },
+        {
+          "arrival_caption": "정예 등장 ▸",
+          "audio_active": 0,
+          "dense": false,
+          "high_angle": true,
+          "hp": 76,
+          "image": "hammer_strike_true_853",
+          "incoming": {
+            "alpha": 1.0,
+            "center": "(403.5, 136.625)",
+            "marks": [
+              {
+                "alpha": 1.0,
+                "contact": false,
+                "direction": "(-1.0, 0.0)",
+                "origin": "(303.5, 136.625)"
+              }
+            ],
+            "text": "−24 HP"
+          },
+          "label_overlaps": 0,
+          "labels": 1,
+          "mp": 100.0,
+          "patterns": [
+            {
+              "direction": "(1.0, 0.0)",
+              "left": 0.16,
+              "origin": "(2400.0, 1700.0)",
+              "phase": "strike"
+            }
+          ],
+          "phase": 1,
+          "telegraph": [
+            {
+              "id": 1,
+              "origin": "(303.5, 136.625)",
+              "phase": "strike",
+              "points": "[(303.5, 136.625), (389.5364, 30.21399), (394.3809, 33.27856), (399.0801, 36.5083), (403.6262, 39.89819), (408.0122, 43.44287), (412.231, 47.1366), (416.2759, 50.97351), (420.1406, 54.94739), (423.8184, 59.05188), (427.304, 63.2804), (430.5916, 67.62634), (433.6758, 72.08264), (436.5515, 76.64209), (439.2148, 81.29761), (441.6609, 86.0415), (443.886, 90.86633), (445.8865, 95.7644), (447.6592, 100.7279), (449.2014, 105.7488), (450.5105, 110.8188), (451.5845, 115.9304), (452.4214, 121.0751), (453.0203, 126.2445), (453.3801, 131.4307), (453.5, 136.625), (453.3801, 141.8193), (453.0203, 147.0055), (452.4214, 152.1749), (451.5845, 157.3196), (450.5105, 162.4312), (449.2014, 167.5012), (447.6592, 172.5221), (445.8865, 177.4856), (443.886, 182.3837), (441.6609, 187.2085), (439.2148, 191.9524), (436.5515, 196.6079), (433.6758, 201.1674), (430.5916, 205.6237), (427.304, 209.9696), (423.8184, 214.1981), (420.1406, 218.3026), (416.2759, 222.2765), (412.231, 226.1134), (408.0122, 229.8071), (403.6262, 233.3517), (399.0801, 236.7416), (394.3809, 239.9714), (389.5364, 243.036)]",
+              "progress": 0.0
+            }
+          ],
+          "viewport": "(853, 393)"
+        },
+        {
+          "arrival_caption": "정예 등장 · 임무 ▸",
+          "audio_active": 0,
+          "dense": false,
+          "high_angle": true,
+          "hp": 76,
+          "image": "hammer_strike_true_1920",
+          "incoming": {
+            "alpha": 1.0,
+            "center": "(954.0, 441.0)",
+            "marks": [
+              {
+                "alpha": 1.0,
+                "contact": false,
+                "direction": "(-1.0, 0.0)",
+                "origin": "(854.0, 441.0)"
+              }
+            ],
+            "text": "−24 HP"
+          },
+          "label_overlaps": 0,
+          "labels": 1,
+          "mp": 100.0,
+          "patterns": [
+            {
+              "direction": "(1.0, 0.0)",
+              "left": 0.16,
+              "origin": "(2400.0, 1700.0)",
+              "phase": "strike"
+            }
+          ],
+          "phase": 1,
+          "telegraph": [
+            {
+              "id": 1,
+              "origin": "(854.0, 441.0)",
+              "phase": "strike",
+              "points": "[(854.0, 441.0), (940.0364, 334.589), (944.8809, 337.6536), (949.5801, 340.8833), (954.1262, 344.2732), (958.5122, 347.8179), (962.731, 351.5116), (966.7759, 355.3485), (970.6406, 359.3224), (974.3184, 363.4269), (977.804, 367.6554), (981.0916, 372.0013), (984.1758, 376.4576), (987.0515, 381.0171), (989.7148, 385.6726), (992.1609, 390.4165), (994.386, 395.2413), (996.3865, 400.1394), (998.1592, 405.1029), (999.7014, 410.1238), (1001.01, 415.1938), (1002.084, 420.3054), (1002.921, 425.4501), (1003.52, 430.6195), (1003.88, 435.8057), (1004.0, 441.0), (1003.88, 446.1943), (1003.52, 451.3805), (1002.921, 456.5499), (1002.084, 461.6946), (1001.01, 466.8062), (999.7014, 471.8762), (998.1592, 476.8971), (996.3865, 481.8606), (994.386, 486.7587), (992.1609, 491.5835), (989.7148, 496.3274), (987.0515, 500.9829), (984.1758, 505.5424), (981.0916, 509.9987), (977.804, 514.3446), (974.3184, 518.5731), (970.6406, 522.6776), (966.7759, 526.6515), (962.731, 530.4884), (958.5122, 534.1821), (954.1262, 537.7267), (949.5801, 541.1166), (944.8809, 544.3464), (940.0364, 547.411)]",
+              "progress": 0.0
+            }
+          ],
+          "viewport": "(1920, 1080)"
+        },
+        {
+          "arrival_caption": "정예 등장 · 임무 ▸",
+          "audio_active": 0,
+          "dense": false,
+          "high_angle": false,
+          "hp": 76,
+          "image": "hammer_strike_false_1280",
+          "incoming": {
+            "alpha": 1.0,
+            "center": "(634.384, 262.357)",
+            "marks": [
+              {
+                "alpha": 1.0,
+                "contact": false,
+                "direction": "(-1.0, 0.0)",
+                "origin": "(534.384, 262.357)"
+              }
+            ],
+            "text": "−24 HP"
+          },
+          "label_overlaps": 0,
+          "labels": 1,
+          "mp": 100.0,
+          "patterns": [
+            {
+              "direction": "(1.0, 0.0)",
+              "left": 0.16,
+              "origin": "(2400.0, 1700.0)",
+              "phase": "strike"
+            }
+          ],
+          "phase": 1,
+          "telegraph": [
+            {
+              "id": 1,
+              "origin": "(534.384, 262.357)",
+              "phase": "strike",
+              "points": "[(534.384, 262.357), (620.4203, 139.4842), (625.2648, 143.0228), (629.9641, 146.7523), (634.5102, 150.6666), (638.8962, 154.7596), (643.1149, 159.0247), (647.1599, 163.4552), (651.0246, 168.0438), (654.7023, 172.7833), (658.1879, 177.666), (661.4755, 182.6842), (664.5598, 187.8299), (667.4355, 193.0947), (670.0988, 198.4704), (672.5449, 203.9482), (674.77, 209.5195), (676.7704, 215.1753), (678.5432, 220.9066), (680.0854, 226.7042), (681.3945, 232.5587), (682.4684, 238.461), (683.3054, 244.4015), (683.9042, 250.3707), (684.2641, 256.3591), (684.384, 262.357), (684.2641, 268.3549), (683.9042, 274.3434), (683.3054, 280.3126), (682.4684, 286.253), (681.3945, 292.1554), (680.0854, 298.0099), (678.5432, 303.8075), (676.7704, 309.5388), (674.77, 315.1945), (672.5449, 320.7658), (670.0988, 326.2436), (667.4355, 331.6194), (664.5598, 336.8841), (661.4755, 342.0299), (658.1879, 347.0481), (654.7023, 351.9308), (651.0246, 356.6703), (647.1599, 361.2589), (643.1149, 365.6893), (638.8962, 369.9544), (634.5102, 374.0475), (629.9641, 377.9618), (625.2648, 381.6913), (620.4203, 385.2298)]",
+              "progress": 0.0
+            }
+          ],
+          "viewport": "(1280, 720)"
+        },
+        {
+          "arrival_caption": "정예 등장 ▸",
+          "audio_active": 0,
+          "dense": false,
+          "high_angle": false,
+          "hp": 76,
+          "image": "hammer_strike_false_853",
+          "incoming": {
+            "alpha": 1.0,
+            "center": "(403.5, 136.625)",
+            "marks": [
+              {
+                "alpha": 1.0,
+                "contact": false,
+                "direction": "(-1.0, 0.0)",
+                "origin": "(303.5, 136.625)"
+              }
+            ],
+            "text": "−24 HP"
+          },
+          "label_overlaps": 0,
+          "labels": 1,
+          "mp": 100.0,
+          "patterns": [
+            {
+              "direction": "(1.0, 0.0)",
+              "left": 0.16,
+              "origin": "(2400.0, 1700.0)",
+              "phase": "strike"
+            }
+          ],
+          "phase": 1,
+          "telegraph": [
+            {
+              "id": 1,
+              "origin": "(303.5, 136.625)",
+              "phase": "strike",
+              "points": "[(303.5, 136.625), (389.5364, 13.7522), (394.3809, 17.29077), (399.0801, 21.02026), (403.6262, 24.93457), (408.0122, 29.02759), (412.231, 33.29272), (416.2759, 37.72314), (420.1406, 42.31177), (423.8184, 47.05127), (427.304, 51.93396), (430.5916, 56.95215), (433.6758, 62.0979), (436.5515, 67.36267), (439.2148, 72.7384), (441.6609, 78.21619), (443.886, 83.78748), (445.8865, 89.44324), (447.6592, 95.17456), (449.2014, 100.9722), (450.5105, 106.8267), (451.5845, 112.729), (452.4214, 118.6694), (453.0203, 124.6387), (453.3801, 130.6271), (453.5, 136.625), (453.3801, 142.6229), (453.0203, 148.6113), (452.4214, 154.5806), (451.5845, 160.521), (450.5105, 166.4233), (449.2014, 172.2778), (447.6592, 178.0754), (445.8865, 183.8068), (443.886, 189.4625), (441.6609, 195.0338), (439.2148, 200.5116), (436.5515, 205.8873), (433.6758, 211.1521), (430.5916, 216.2979), (427.304, 221.316), (423.8184, 226.1987), (420.1406, 230.9382), (416.2759, 235.5269), (412.231, 239.9573), (408.0122, 244.2224), (403.6262, 248.3154), (399.0801, 252.2297), (394.3809, 255.9592), (389.5364, 259.4978)]",
+              "progress": 0.0
+            }
+          ],
+          "viewport": "(853, 393)"
+        },
+        {
+          "arrival_caption": "정예 등장 · 임무 ▸",
+          "audio_active": 0,
+          "dense": false,
+          "high_angle": false,
+          "hp": 76,
+          "image": "hammer_strike_false_1920",
+          "incoming": {
+            "alpha": 1.0,
+            "center": "(954.0, 441.0)",
+            "marks": [
+              {
+                "alpha": 1.0,
+                "contact": false,
+                "direction": "(-1.0, 0.0)",
+                "origin": "(854.0, 441.0)"
+              }
+            ],
+            "text": "−24 HP"
+          },
+          "label_overlaps": 0,
+          "labels": 1,
+          "mp": 100.0,
+          "patterns": [
+            {
+              "direction": "(1.0, 0.0)",
+              "left": 0.16,
+              "origin": "(2400.0, 1700.0)",
+              "phase": "strike"
+            }
+          ],
+          "phase": 1,
+          "telegraph": [
+            {
+              "id": 1,
+              "origin": "(854.0, 441.0)",
+              "phase": "strike",
+              "points": "[(854.0, 441.0), (940.0364, 318.1272), (944.8809, 321.6658), (949.5801, 325.3953), (954.1262, 329.3096), (958.5122, 333.4026), (962.731, 337.6677), (966.7759, 342.0981), (970.6406, 346.6868), (974.3184, 351.4263), (977.804, 356.309), (981.0916, 361.3271), (984.1758, 366.4729), (987.0515, 371.7377), (989.7148, 377.1134), (992.1609, 382.5912), (994.386, 388.1625), (996.3865, 393.8182), (998.1592, 399.5496), (999.7014, 405.3472), (1001.01, 411.2017), (1002.084, 417.104), (1002.921, 423.0444), (1003.52, 429.0137), (1003.88, 435.0021), (1004.0, 441.0), (1003.88, 446.9979), (1003.52, 452.9863), (1002.921, 458.9556), (1002.084, 464.896), (1001.01, 470.7983), (999.7014, 476.6528), (998.1592, 482.4504), (996.3865, 488.1818), (994.386, 493.8375), (992.1609, 499.4088), (989.7148, 504.8866), (987.0515, 510.2623), (984.1758, 515.5271), (981.0916, 520.6729), (977.804, 525.691), (974.3184, 530.5737), (970.6406, 535.3132), (966.7759, 539.9019), (962.731, 544.3323), (958.5122, 548.5974), (954.1262, 552.6904), (949.5801, 556.6047), (944.8809, 560.3342), (940.0364, 563.8728)]",
+              "progress": 0.0
+            }
+          ],
+          "viewport": "(1920, 1080)"
+        },
+        {
+          "arrival_caption": "정예 등장 · 임무 ▸",
+          "audio_active": 0,
+          "dense": false,
+          "high_angle": false,
+          "hp": 76,
+          "image": "hammer_recovery",
+          "incoming": {
+            "alpha": 0.545454545454546,
+            "center": "(634.384, 262.357)",
+            "marks": [
+              {
+                "alpha": 0.545454545454546,
+                "contact": false,
+                "direction": "(-1.0, 0.0)",
+                "origin": "(534.384, 262.357)"
+              }
+            ],
+            "text": "−24 HP"
+          },
+          "label_overlaps": 0,
+          "labels": 1,
+          "mp": 100.0,
+          "patterns": [
+            {
+              "direction": "(1.0, 0.0)",
+              "left": 0.7,
+              "origin": "(2400.0, 1700.0)",
+              "phase": "recovery"
+            }
+          ],
+          "phase": 1,
+          "telegraph": [],
+          "viewport": "(1280, 720)"
+        },
+        {
+          "arrival_caption": "최후의 성벽 방어 ▸",
+          "audio_active": 0,
+          "dense": false,
+          "high_angle": false,
+          "hp": 100,
+          "image": "hammer_choice",
+          "incoming": {},
+          "label_overlaps": 0,
+          "labels": 0,
+          "mp": 100.0,
+          "patterns": [
+            {
+              "direction": "(1.0, 0.0)",
+              "left": 0.9,
+              "origin": "(2400.0, 1700.0)",
+              "phase": "windup"
+            }
+          ],
+          "phase": 4,
+          "telegraph": [],
+          "viewport": "(1280, 720)"
+        },
+        {
+          "arrival_caption": "정예 등장 · 임무 ▸",
+          "audio_active": 0,
+          "dense": false,
+          "high_angle": false,
+          "hp": 120,
+          "image": "hammer_choice_return",
+          "incoming": {},
+          "label_overlaps": 0,
+          "labels": 0,
+          "mp": 100.0,
+          "patterns": [
+            {
+              "direction": "(1.0, 0.0)",
+              "left": 0.9,
+              "origin": "(2400.0, 1700.0)",
+              "phase": "windup"
+            }
+          ],
+          "phase": 1,
+          "telegraph": [
+            {
+              "id": 1,
+              "origin": "(534.384, 262.357)",
+              "phase": "windup",
+              "points": "[(534.384, 262.357), (620.4203, 139.4842), (625.2648, 143.0228), (629.9641, 146.7523), (634.5102, 150.6666), (638.8962, 154.7596), (643.1149, 159.0247), (647.1599, 163.4552), (651.0246, 168.0438), (654.7023, 172.7833), (658.1879, 177.666), (661.4755, 182.6842), (664.5598, 187.8299), (667.4355, 193.0947), (670.0988, 198.4704), (672.5449, 203.9482), (674.77, 209.5195), (676.7704, 215.1753), (678.5432, 220.9066), (680.0854, 226.7042), (681.3945, 232.5587), (682.4684, 238.461), (683.3054, 244.4015), (683.9042, 250.3707), (684.2641, 256.3591), (684.384, 262.357), (684.2641, 268.3549), (683.9042, 274.3434), (683.3054, 280.3126), (682.4684, 286.253), (681.3945, 292.1554), (680.0854, 298.0099), (678.5432, 303.8075), (676.7704, 309.5388), (674.77, 315.1945), (672.5449, 320.7658), (670.0988, 326.2436), (667.4355, 331.6194), (664.5598, 336.8841), (661.4755, 342.0299), (658.1879, 347.0481), (654.7023, 351.9308), (651.0246, 356.6703), (647.1599, 361.2589), (643.1149, 365.6893), (638.8962, 369.9544), (634.5102, 374.0475), (629.9641, 377.9618), (625.2648, 381.6913), (620.4203, 385.2298)]",
+              "progress": 0.0
+            }
+          ],
+          "viewport": "(1280, 720)"
+        },
+        {
+          "arrival_caption": "정예 등장 · 임무 ▸",
+          "audio_active": 0,
+          "dense": false,
+          "high_angle": true,
+          "hp": 100,
+          "image": "hammer_wall_true",
+          "incoming": {},
+          "label_overlaps": 0,
+          "labels": 0,
+          "mp": 100.0,
+          "patterns": [
+            {
+              "direction": "(1.0, 0.0)",
+              "left": 0.9,
+              "origin": "(2400.0, 1700.0)",
+              "phase": "windup"
+            }
+          ],
+          "phase": 1,
+          "telegraph": [
+            {
+              "id": 1,
+              "origin": "(534.384, 262.3571)",
+              "phase": "windup",
+              "points": "[(534.384, 262.3571), (574.384, 212.8845), (574.384, 216.8705), (574.384, 220.4585), (574.384, 223.7151), (574.384, 226.6935), (574.384, 229.436), (574.384, 231.9777), (574.384, 234.347), (574.384, 236.5677), (574.384, 238.66), (574.384, 240.6409), (574.384, 242.5248), (574.384, 244.324), (574.384, 246.05), (574.384, 247.7122), (574.384, 249.3191), (574.384, 250.8783), (574.384, 252.3966), (574.384, 253.8804), (574.384, 255.3354), (574.384, 256.7671), (574.384, 258.1803), (574.384, 259.58), (574.384, 260.9708), (574.384, 262.3571), (574.384, 263.7433), (574.384, 265.1342), (574.384, 266.5338), (574.384, 267.947), (574.384, 269.3787), (574.384, 270.8336), (574.384, 272.3175), (574.384, 273.8358), (574.384, 275.395), (574.384, 277.0018), (574.384, 278.6641), (574.384, 280.3901), (574.384, 282.1893), (574.384, 284.0732), (574.384, 286.0541), (574.384, 288.1464), (574.384, 290.3671), (574.384, 292.7365), (574.384, 295.2781), (574.384, 298.0206), (574.384, 300.999), (574.384, 304.2556), (574.384, 307.8436), (574.384, 311.8296)]",
+              "progress": 0.0
+            }
+          ],
+          "viewport": "(1280, 720)"
+        },
+        {
+          "arrival_caption": "정예 등장 · 임무 ▸",
+          "audio_active": 0,
+          "dense": false,
+          "high_angle": false,
+          "hp": 100,
+          "image": "hammer_wall_false",
+          "incoming": {},
+          "label_overlaps": 0,
+          "labels": 0,
+          "mp": 100.0,
+          "patterns": [
+            {
+              "direction": "(1.0, 0.0)",
+              "left": 0.9,
+              "origin": "(2400.0, 1700.0)",
+              "phase": "windup"
+            }
+          ],
+          "phase": 1,
+          "telegraph": [
+            {
+              "id": 1,
+              "origin": "(534.384, 262.357)",
+              "phase": "windup",
+              "points": "[(534.384, 262.357), (574.384, 205.231), (574.384, 209.8337), (574.384, 213.9768), (574.384, 217.7372), (574.384, 221.1762), (574.384, 224.3431), (574.384, 227.2779), (574.384, 230.0139), (574.384, 232.5781), (574.384, 234.9941), (574.384, 237.2813), (574.384, 239.4566), (574.384, 241.5343), (574.384, 243.5273), (574.384, 245.4466), (574.384, 247.3021), (574.384, 249.1025), (574.384, 250.8557), (574.384, 252.5691), (574.384, 254.2492), (574.384, 255.9023), (574.384, 257.5341), (574.384, 259.1504), (574.384, 260.7563), (574.384, 262.357), (574.384, 263.9577), (574.384, 265.5637), (574.384, 267.1799), (574.384, 268.8117), (574.384, 270.4648), (574.384, 272.145), (574.384, 273.8584), (574.384, 275.6115), (574.384, 277.412), (574.384, 279.2674), (574.384, 281.1867), (574.384, 283.1798), (574.384, 285.2574), (574.384, 287.4327), (574.384, 289.7199), (574.384, 292.136), (574.384, 294.7002), (574.384, 297.4361), (574.384, 300.3709), (574.384, 303.5378), (574.384, 306.9769), (574.384, 310.7373), (574.384, 314.8803), (574.384, 319.483)]",
+              "progress": 0.0
+            }
+          ],
+          "viewport": "(1280, 720)"
+        },
+        {
+          "arrival_caption": "정예 등장 · 임무 ▸",
+          "audio_active": 0,
+          "dense": false,
+          "high_angle": false,
+          "hp": 100,
+          "image": "hammer_wall_blocked",
+          "incoming": {},
+          "label_overlaps": 0,
+          "labels": 0,
+          "mp": 100.0,
+          "patterns": [
+            {
+              "direction": "(1.0, 0.0)",
+              "left": 0.16,
+              "origin": "(2400.0, 1700.0)",
+              "phase": "strike"
+            }
+          ],
+          "phase": 1,
+          "telegraph": [
+            {
+              "id": 1,
+              "origin": "(534.384, 262.357)",
+              "phase": "strike",
+              "points": "[(534.384, 262.357), (574.384, 205.231), (574.384, 209.8337), (574.384, 213.9768), (574.384, 217.7372), (574.384, 221.1762), (574.384, 224.3431), (574.384, 227.2779), (574.384, 230.0139), (574.384, 232.5781), (574.384, 234.9941), (574.384, 237.2813), (574.384, 239.4566), (574.384, 241.5343), (574.384, 243.5273), (574.384, 245.4466), (574.384, 247.3021), (574.384, 249.1025), (574.384, 250.8557), (574.384, 252.5691), (574.384, 254.2492), (574.384, 255.9023), (574.384, 257.5341), (574.384, 259.1504), (574.384, 260.7563), (574.384, 262.357), (574.384, 263.9577), (574.384, 265.5637), (574.384, 267.1799), (574.384, 268.8117), (574.384, 270.4648), (574.384, 272.145), (574.384, 273.8584), (574.384, 275.6115), (574.384, 277.412), (574.384, 279.2674), (574.384, 281.1867), (574.384, 283.1798), (574.384, 285.2574), (574.384, 287.4327), (574.384, 289.7199), (574.384, 292.136), (574.384, 294.7002), (574.384, 297.4361), (574.384, 300.3709), (574.384, 303.5378), (574.384, 306.9769), (574.384, 310.7373), (574.384, 314.8803), (574.384, 319.483)]",
+              "progress": 0.0
+            }
+          ],
+          "viewport": "(1280, 720)"
+        },
+        {
+          "arrival_caption": "정예 등장 ▸",
+          "audio_active": 0,
+          "dense": true,
+          "high_angle": true,
+          "hp": 100,
+          "image": "hammer_dense_true",
+          "incoming": {},
+          "label_overlaps": 0,
+          "labels": 0,
+          "mp": 100.0,
+          "patterns": [
+            {
+              "direction": "(1.0, 0.0)",
+              "left": 0.9,
+              "origin": "(2400.0, 1700.0)",
+              "phase": "windup"
+            }
+          ],
+          "phase": 1,
+          "telegraph": [
+            {
+              "id": 1,
+              "origin": "(303.5, 136.625)",
+              "phase": "windup",
+              "points": "[(303.5, 136.625), (389.5364, 30.21399), (394.3809, 33.27856), (399.0801, 36.5083), (403.6262, 39.89819), (408.0122, 43.44287), (412.231, 47.1366), (416.2759, 50.97351), (420.1406, 54.94739), (423.8184, 59.05188), (427.304, 63.2804), (430.5916, 67.62634), (433.6758, 72.08264), (436.5515, 76.64209), (439.2148, 81.29761), (441.6609, 86.0415), (443.886, 90.86633), (445.8865, 95.7644), (447.6592, 100.7279), (449.2014, 105.7488), (450.5105, 110.8188), (451.5845, 115.9304), (452.4214, 121.0751), (453.0203, 126.2445), (453.3801, 131.4307), (453.5, 136.625), (453.3801, 141.8193), (453.0203, 147.0055), (452.4214, 152.1749), (451.5845, 157.3196), (450.5105, 162.4312), (449.2014, 167.5012), (447.6592, 172.5221), (445.8865, 177.4856), (443.886, 182.3837), (441.6609, 187.2085), (439.2148, 191.9524), (436.5515, 196.6079), (433.6758, 201.1674), (430.5916, 205.6237), (427.304, 209.9696), (423.8184, 214.1981), (420.1406, 218.3026), (416.2759, 222.2765), (412.231, 226.1134), (408.0122, 229.8071), (403.6262, 233.3517), (399.0801, 236.7416), (394.3809, 239.9714), (389.5364, 243.036)]",
+              "progress": 0.0
+            }
+          ],
+          "viewport": "(853, 393)"
+        },
+        {
+          "arrival_caption": "정예 등장 ▸",
+          "audio_active": 0,
+          "dense": true,
+          "high_angle": false,
+          "hp": 100,
+          "image": "hammer_dense_false",
+          "incoming": {},
+          "label_overlaps": 0,
+          "labels": 0,
+          "mp": 100.0,
+          "patterns": [
+            {
+              "direction": "(1.0, 0.0)",
+              "left": 0.9,
+              "origin": "(2400.0, 1700.0)",
+              "phase": "windup"
+            }
+          ],
+          "phase": 1,
+          "telegraph": [
+            {
+              "id": 1,
+              "origin": "(303.5, 136.625)",
+              "phase": "windup",
+              "points": "[(303.5, 136.625), (389.5364, 13.7522), (394.3809, 17.29077), (399.0801, 21.02026), (403.6262, 24.93457), (408.0122, 29.02759), (412.231, 33.29272), (416.2759, 37.72314), (420.1406, 42.31177), (423.8184, 47.05127), (427.304, 51.93396), (430.5916, 56.95215), (433.6758, 62.0979), (436.5515, 67.36267), (439.2148, 72.7384), (441.6609, 78.21619), (443.886, 83.78748), (445.8865, 89.44324), (447.6592, 95.17456), (449.2014, 100.9722), (450.5105, 106.8267), (451.5845, 112.729), (452.4214, 118.6694), (453.0203, 124.6387), (453.3801, 130.6271), (453.5, 136.625), (453.3801, 142.6229), (453.0203, 148.6113), (452.4214, 154.5806), (451.5845, 160.521), (450.5105, 166.4233), (449.2014, 172.2778), (447.6592, 178.0754), (445.8865, 183.8068), (443.886, 189.4625), (441.6609, 195.0338), (439.2148, 200.5116), (436.5515, 205.8873), (433.6758, 211.1521), (430.5916, 216.2979), (427.304, 221.316), (423.8184, 226.1987), (420.1406, 230.9382), (416.2759, 235.5269), (412.231, 239.9573), (408.0122, 244.2224), (403.6262, 248.3154), (399.0801, 252.2297), (394.3809, 255.9592), (389.5364, 259.4978)]",
+              "progress": 0.0
+            }
+          ],
+          "viewport": "(853, 393)"
+        },
+        {
+          "arrival_caption": "임무 ▸",
+          "audio_active": 0,
+          "dense": true,
+          "high_angle": false,
+          "hp": 100,
+          "image": "hammer_terminal",
+          "incoming": {},
+          "label_overlaps": 0,
+          "labels": 0,
+          "mp": 100.0,
+          "patterns": [
+            {
+              "direction": "(1.0, 0.0)",
+              "left": 0.9,
+              "origin": "(2400.0, 1700.0)",
+              "phase": "windup"
+            }
+          ],
+          "phase": 5,
+          "telegraph": [],
+          "viewport": "(853, 393)"
+        }
+      ],
+      "scope": "Actual scheduled orc and real pattern steps,native movement dodge/mission/choice/Continue,2renderers3sizes,dense/wall placement fixtures;not natural6minute/FPS/device approval.",
+      "status": "PASS"
+    },
+    "gui_capture_count": 23,
+    "visual_inspection": [
+      "hammer_windup_true_853.png",
+      "hammer_strike_true_1280.png"
+    ],
+    "historical_fresh_processes": [
+      {
+        "tag": "v1",
+        "status": "PASS",
+        "exit_code": 0,
+        "old_version": 1,
+        "new_version": 16,
+        "gold_reward_version": 0,
+        "rng_streams": 7,
+        "future_frames_equal": true,
+        "audio_silent_initial": true,
+        "ready_summary": ""
+      },
+      {
+        "tag": "v2",
+        "status": "PASS",
+        "exit_code": 0,
+        "old_version": 2,
+        "new_version": 16,
+        "gold_reward_version": 0,
+        "rng_streams": 7,
+        "future_frames_equal": true,
+        "audio_silent_initial": true,
+        "ready_summary": "저장된 전투 · 캠페인 S1\n기존 전투 저장 전장\n진행 05:00 · 체크포인트 2/2 · Lv.1\nHP 100 · MP 100.0 · 획득 금화 0\n이어하기는 출격 당시 계정 강화를 유지합니다."
+      },
+      {
+        "tag": "v3",
+        "status": "PASS",
+        "exit_code": 0,
+        "old_version": 3,
+        "new_version": 16,
+        "gold_reward_version": 0,
+        "rng_streams": 7,
+        "future_frames_equal": true,
+        "audio_silent_initial": true,
+        "ready_summary": "저장된 전투 · 캠페인 S1\n기존 전투 저장 전장\n진행 03:00 · 체크포인트 1/2 · Lv.1\nHP 88 · MP 100.0 · 획득 금화 0\n이어하기는 출격 당시 계정 강화를 유지합니다."
+      },
+      {
+        "tag": "v4",
+        "status": "PASS",
+        "exit_code": 0,
+        "old_version": 4,
+        "new_version": 16,
+        "gold_reward_version": 0,
+        "rng_streams": 7,
+        "future_frames_equal": true,
+        "audio_silent_initial": true,
+        "ready_summary": "저장된 전투 · 캠페인 S2\n기존 전투 저장 전장\n진행 00:00 · 체크포인트 0/2 · Lv.1\nHP 100 · MP 60.0 · 획득 금화 0\n이어하기는 출격 당시 계정 강화를 유지합니다."
+      },
+      {
+        "tag": "v5",
+        "status": "PASS",
+        "exit_code": 0,
+        "old_version": 5,
+        "new_version": 16,
+        "gold_reward_version": 0,
+        "rng_streams": 7,
+        "future_frames_equal": true,
+        "audio_silent_initial": true,
+        "ready_summary": "저장된 전투 · 캠페인 S2\n기존 전투 저장 전장\n진행 00:00 · 체크포인트 0/2 · Lv.1\nHP 103 · MP 60.1 · 획득 금화 0\n이어하기는 출격 당시 계정 강화를 유지합니다."
+      },
+      {
+        "tag": "v6",
+        "status": "PASS",
+        "exit_code": 0,
+        "old_version": 6,
+        "new_version": 16,
+        "gold_reward_version": 0,
+        "rng_streams": 7,
+        "future_frames_equal": true,
+        "audio_silent_initial": true,
+        "ready_summary": "저장된 전투 · 캠페인 S2\n기존 전투 저장 전장\n진행 00:01 · 체크포인트 0/2 · Lv.1\nHP 95 · MP 40.9 · 획득 금화 0\n이어하기는 출격 당시 계정 강화를 유지합니다."
+      },
+      {
+        "tag": "v7",
+        "status": "PASS",
+        "exit_code": 0,
+        "old_version": 7,
+        "new_version": 16,
+        "gold_reward_version": 0,
+        "rng_streams": 7,
+        "future_frames_equal": true,
+        "audio_silent_initial": true,
+        "ready_summary": "저장된 전투 · 캠페인 S1\n기존 전투 저장 전장\n진행 00:00 · 체크포인트 0/2 · Lv.1\nHP 100 · MP 100.0 · 획득 금화 0\n이어하기는 출격 당시 계정 강화를 유지합니다."
+      },
+      {
+        "tag": "v8",
+        "status": "PASS",
+        "exit_code": 0,
+        "old_version": 8,
+        "new_version": 16,
+        "gold_reward_version": 0,
+        "rng_streams": 7,
+        "future_frames_equal": true,
+        "audio_silent_initial": true,
+        "ready_summary": "저장된 전투 · 캠페인 S2\n[시험] 도시 외곽 황무지\n진행 00:13 · 체크포인트 0/2 · Lv.1\nHP 100 · MP 100.0 · 획득 금화 0\n이어하기는 출격 당시 계정 강화를 유지합니다."
+      },
+      {
+        "tag": "v9",
+        "status": "PASS",
+        "exit_code": 0,
+        "old_version": 9,
+        "new_version": 16,
+        "gold_reward_version": 0,
+        "rng_streams": 7,
+        "future_frames_equal": true,
+        "audio_silent_initial": true,
+        "ready_summary": "저장된 전투 · 캠페인 S1\n프롤로그 · 최후의 도시 성벽\n진행 00:44 · 체크포인트 0/2 · Lv.1\nHP 75 · MP 50.1 · 획득 금화 0\n이어하기는 출격 당시 계정 강화를 유지합니다."
+      },
+      {
+        "tag": "v10",
+        "status": "PASS",
+        "exit_code": 0,
+        "old_version": 10,
+        "new_version": 16,
+        "gold_reward_version": 0,
+        "rng_streams": 7,
+        "future_frames_equal": true,
+        "audio_silent_initial": true,
+        "ready_summary": "저장된 전투 · 캠페인 S1\n프롤로그 · 최후의 도시 성벽\n진행 00:00 · 체크포인트 0/2 · Lv.100\nHP 100 · MP 60.0 · 획득 금화 0\n이어하기는 출격 당시 계정 강화를 유지합니다."
+      },
+      {
+        "tag": "v11",
+        "status": "PASS",
+        "exit_code": 0,
+        "old_version": 11,
+        "new_version": 16,
+        "gold_reward_version": 0,
+        "rng_streams": 7,
+        "future_frames_equal": true,
+        "audio_silent_initial": true,
+        "ready_summary": "저장된 전투 · 캠페인 S1\n프롤로그 · 최후의 도시 성벽\n진행 00:00 · 체크포인트 0/2 · Lv.50\nHP 73 · MP 42.5 · 획득 금화 0\n이어하기는 출격 당시 계정 강화를 유지합니다."
+      },
+      {
+        "tag": "v12",
+        "status": "PASS",
+        "exit_code": 0,
+        "old_version": 12,
+        "new_version": 16,
+        "gold_reward_version": 0,
+        "rng_streams": 7,
+        "future_frames_equal": true,
+        "audio_silent_initial": true,
+        "ready_summary": "저장된 전투 · 캠페인 S2\n[시험] 도시 외곽 황무지\n진행 02:00 · 체크포인트 1/2 · Lv.1\nHP 73 · MP 42.5 · 획득 금화 0\n이어하기는 출격 당시 계정 강화를 유지합니다."
+      },
+      {
+        "tag": "v13",
+        "status": "PASS",
+        "exit_code": 0,
+        "old_version": 13,
+        "new_version": 16,
+        "gold_reward_version": 0,
+        "rng_streams": 7,
+        "future_frames_equal": true,
+        "audio_silent_initial": true,
+        "ready_summary": "저장된 전투 · 골드 던전\n[시제품] 골드 슬라임 채굴장\n진행 01:00 · 체크포인트 1/2 · Lv.1\nHP 73 · MP 42.5 · 획득 금화 0\n이어하기는 추가 입장 횟수를 사용하지 않습니다\n이어하기는 출격 당시 계정 강화를 유지합니다."
+      },
+      {
+        "tag": "v14-campaign",
+        "status": "PASS",
+        "exit_code": 0,
+        "old_version": 14,
+        "new_version": 16,
+        "gold_reward_version": 0,
+        "rng_streams": 7,
+        "future_frames_equal": true,
+        "audio_silent_initial": true,
+        "ready_summary": "저장된 전투 · 캠페인 S1\n프롤로그 · 최후의 도시 성벽\n진행 02:00 · 체크포인트 1/2 · Lv.10\nHP 73 · MP 42.5 · 획득 금화 0\n이어하기는 출격 당시 계정 강화를 유지합니다."
+      },
+      {
+        "tag": "v14-dungeon",
+        "status": "PASS",
+        "exit_code": 0,
+        "old_version": 14,
+        "new_version": 16,
+        "gold_reward_version": 0,
+        "rng_streams": 7,
+        "future_frames_equal": true,
+        "audio_silent_initial": true,
+        "ready_summary": "저장된 전투 · 골드 던전\n[시제품] 골드 슬라임 채굴장\n진행 01:00 · 체크포인트 1/2 · Lv.1\nHP 61 · MP 33.3 · 획득 금화 0\n이어하기는 추가 입장 횟수를 사용하지 않습니다\n이어하기는 출격 당시 계정 강화를 유지합니다."
+      },
+      {
+        "tag": "v15-campaign",
+        "status": "PASS",
+        "exit_code": 0,
+        "old_version": 15,
+        "new_version": 16,
+        "gold_reward_version": 0,
+        "rng_streams": 7,
+        "future_frames_equal": true,
+        "audio_silent_initial": true,
+        "ready_summary": "저장된 전투 · 캠페인 S1\n프롤로그 · 최후의 도시 성벽\n진행 00:02 · 체크포인트 0/2 · Lv.1\nHP 100 · MP 100.0 · 획득 금화 0\n이어하기는 출격 당시 계정 강화를 유지합니다."
+      },
+      {
+        "tag": "v15-dungeon",
+        "status": "PASS",
+        "exit_code": 0,
+        "old_version": 15,
+        "new_version": 16,
+        "gold_reward_version": 1,
+        "rng_streams": 7,
+        "future_frames_equal": true,
+        "audio_silent_initial": true,
+        "ready_summary": "저장된 전투 · 골드 던전\n[시제품] 골드 슬라임 채굴장\n진행 01:00 · 체크포인트 1/2 · Lv.1\nHP 61 · MP 33.3 · 획득 금화 0\n이어하기는 추가 입장 횟수를 사용하지 않습니다\n이어하기는 출격 당시 계정 강화를 유지합니다."
+      }
+    ],
+    "actual_pattern_fresh_processes": [
+      {
+        "balance": 0,
+        "consumed_hit_safe": true,
+        "errors": [],
+        "final_hp": 40,
+        "final_phase": "windup",
+        "old_arrival_replays": 0,
+        "pattern_version": 1,
+        "rng_streams": 7,
+        "running100_equal": true,
+        "saved_hp": 100.0,
+        "saved_left": 0.9,
+        "saved_mp": 100.0,
+        "saved_phase": "windup",
+        "status": "PASS",
+        "tag": "windup",
+        "used_entries": 0,
+        "version": 16
+      },
+      {
+        "balance": 0,
+        "consumed_hit_safe": true,
+        "errors": [],
+        "final_hp": 16,
+        "final_phase": "strike",
+        "old_arrival_replays": 0,
+        "pattern_version": 1,
+        "rng_streams": 7,
+        "running100_equal": true,
+        "saved_hp": 76.0,
+        "saved_left": 0.16,
+        "saved_mp": 100.0,
+        "saved_phase": "strike",
+        "status": "PASS",
+        "tag": "strike",
+        "used_entries": 0,
+        "version": 16
+      },
+      {
+        "balance": 0,
+        "consumed_hit_safe": true,
+        "errors": [],
+        "final_hp": 16,
+        "final_phase": "recovery",
+        "old_arrival_replays": 0,
+        "pattern_version": 1,
+        "rng_streams": 7,
+        "running100_equal": true,
+        "saved_hp": 76.0,
+        "saved_left": 0.7,
+        "saved_mp": 100.0,
+        "saved_phase": "recovery",
+        "status": "PASS",
+        "tag": "recovery",
+        "used_entries": 0,
+        "version": 16
+      }
+    ],
+    "fresh_process_total": 20,
+    "restore_scope": "17real historical1~13/14-15campaign-dungeon saves upgrade to16/pattern0 with resources/7RNG/old future AI retained.3new OS processes load actualUI windup/strike/recovery binary saves,wait READY/explicitPAUSED/Continue,retain exact attack4fields and HP/MP,compare100RUNNINGsteps/7RNG,confirm no consumed-hit/arrival/audio/currency/entry replay.",
+    "balance_status": "REGRESSION_DETECTED_FINAL_BALANCE_NOT_APPROVED",
+    "automatic_six_minute_comparison": {
+      "runs": [
+        {
+          "boss_defeated_at": 329.150000000041,
+          "boss_distance_left": 0.0,
+          "boss_hp_left": 0,
+          "choices": 11,
+          "elapsed": 360.0,
+          "enemy_pattern_version": 0,
+          "evolved": [
+            "gun_rifle",
+            "gun_ricochet"
+          ],
+          "evolved_at": {
+            "gun_ricochet": 252.500000000023,
+            "gun_rifle": 75.4499999999979
+          },
+          "gold_reward": 12318,
+          "hammer_hits": 0,
+          "hammer_hp_lost": 0,
+          "hammer_strikes": 0,
+          "hp": 80,
+          "kills": 1343,
+          "map_id": "prologue_wall",
+          "milestones": [
+            {
+              "choices": 6,
+              "collected_gold": 1490,
+              "hp": 100,
+              "kills": 158,
+              "mp": 27.9500000000003,
+              "time": 59.9999999999987,
+              "xp": 745.0
+            },
+            {
+              "choices": 7,
+              "collected_gold": 2687,
+              "hp": 100,
+              "kills": 327,
+              "mp": 37.8999999999995,
+              "time": 119.999999999995,
+              "xp": 1475.0
+            },
+            {
+              "choices": 9,
+              "collected_gold": 5127,
+              "hp": 100,
+              "kills": 624,
+              "mp": 17.8000000000001,
+              "time": 180.000000000007,
+              "xp": 2770.0
+            },
+            {
+              "choices": 10,
+              "collected_gold": 7645,
+              "hp": 100,
+              "kills": 847,
+              "mp": 37.7499999999987,
+              "time": 240.00000000002,
+              "xp": 4050.0
+            },
+            {
+              "choices": 11,
+              "collected_gold": 9684,
+              "hp": 100,
+              "kills": 1071,
+              "mp": 17.7000000000001,
+              "time": 300.000000000034,
+              "xp": 5200.0
+            },
+            {
+              "choices": 11,
+              "collected_gold": 12218,
+              "hp": 80,
+              "kills": 1343,
+              "mp": 37.7,
+              "time": 360.0,
+              "xp": 6445.0
+            }
+          ],
+          "mp": 37.7,
+          "outcome": "cleared",
+          "owned": {
+            "gun_grenade": 1,
+            "gun_ricochet": 5,
+            "gun_rifle": 5,
+            "gun_suppress": 1
+          },
+          "pacing_version": 1,
+          "peak_enemies": 105,
+          "seed": 7,
+          "talents": "none",
+          "total_collected_xp": 6445.0,
+          "trace": [
+            {
+              "collected_xp": 30.0,
+              "kills": 7,
+              "rank": 1,
+              "skill": "gun_grenade",
+              "time": 7.74999999999998
+            },
+            {
+              "collected_xp": 80.0,
+              "kills": 16,
+              "rank": 1,
+              "skill": "gun_suppress",
+              "time": 15.3000000000001
+            },
+            {
+              "collected_xp": 145.0,
+              "kills": 48,
+              "rank": 1,
+              "skill": "gun_ricochet",
+              "time": 28.9000000000003
+            },
+            {
+              "collected_xp": 230.0,
+              "kills": 49,
+              "rank": 2,
+              "skill": "gun_rifle",
+              "time": 29.6000000000003
+            },
+            {
+              "collected_xp": 385.0,
+              "kills": 81,
+              "rank": 3,
+              "skill": "gun_rifle",
+              "time": 33.2500000000002
+            },
+            {
+              "collected_xp": 625.0,
+              "kills": 136,
+              "rank": 4,
+              "skill": "gun_rifle",
+              "time": 51.8499999999992
+            },
+            {
+              "collected_xp": 985.0,
+              "kills": 229,
+              "rank": 5,
+              "skill": "gun_rifle",
+              "time": 75.4499999999979
+            },
+            {
+              "collected_xp": 1495.0,
+              "kills": 327,
+              "rank": 2,
+              "skill": "gun_ricochet",
+              "time": 120.249999999995
+            },
+            {
+              "collected_xp": 2185.0,
+              "kills": 478,
+              "rank": 3,
+              "skill": "gun_ricochet",
+              "time": 149.15
+            },
+            {
+              "collected_xp": 3085.0,
+              "kills": 700,
+              "rank": 4,
+              "skill": "gun_ricochet",
+              "time": 190.050000000009
+            },
+            {
+              "collected_xp": 4225.0,
+              "kills": 906,
+              "rank": 5,
+              "skill": "gun_ricochet",
+              "time": 252.500000000023
+            }
+          ]
+        },
+        {
+          "boss_defeated_at": 333.000000000041,
+          "boss_distance_left": 0.0,
+          "boss_hp_left": 0,
+          "choices": 12,
+          "elapsed": 360.0,
+          "enemy_pattern_version": 0,
+          "evolved": [
+            "gun_rifle",
+            "gun_scatter"
+          ],
+          "evolved_at": {
+            "gun_rifle": 78.9499999999977,
+            "gun_scatter": 247.000000000022
+          },
+          "gold_reward": 13088,
+          "hammer_hits": 0,
+          "hammer_hp_lost": 0,
+          "hammer_strikes": 0,
+          "hp": 100,
+          "kills": 1356,
+          "map_id": "prologue_wall",
+          "milestones": [
+            {
+              "choices": 5,
+              "collected_gold": 972,
+              "hp": 100,
+              "kills": 113,
+              "mp": 37.2999999999995,
+              "time": 59.9999999999987,
+              "xp": 550.0
+            },
+            {
+              "choices": 8,
+              "collected_gold": 2825,
+              "hp": 92,
+              "kills": 366,
+              "mp": 17.1499999999998,
+              "time": 119.999999999995,
+              "xp": 1635.0
+            },
+            {
+              "choices": 9,
+              "collected_gold": 5459,
+              "hp": 92,
+              "kills": 586,
+              "mp": 37.0999999999996,
+              "time": 180.000000000007,
+              "xp": 2770.0
+            },
+            {
+              "choices": 10,
+              "collected_gold": 7308,
+              "hp": 100,
+              "kills": 820,
+              "mp": 17.0499999999984,
+              "time": 240.00000000002,
+              "xp": 4055.0
+            },
+            {
+              "choices": 11,
+              "collected_gold": 9707,
+              "hp": 100,
+              "kills": 1068,
+              "mp": 36.999999999998,
+              "time": 300.000000000034,
+              "xp": 5250.0
+            },
+            {
+              "choices": 12,
+              "collected_gold": 12988,
+              "hp": 100,
+              "kills": 1356,
+              "mp": 76.9499999999995,
+              "time": 360.0,
+              "xp": 6705.0
+            }
+          ],
+          "mp": 76.9499999999995,
+          "outcome": "cleared",
+          "owned": {
+            "gun_grenade": 1,
+            "gun_rifle": 5,
+            "gun_scatter": 5,
+            "gun_suppress": 2
+          },
+          "pacing_version": 1,
+          "peak_enemies": 106,
+          "seed": 407,
+          "talents": "none",
+          "total_collected_xp": 6705.0,
+          "trace": [
+            {
+              "collected_xp": 30.0,
+              "kills": 6,
+              "rank": 1,
+              "skill": "gun_suppress",
+              "time": 6.99999999999998
+            },
+            {
+              "collected_xp": 80.0,
+              "kills": 17,
+              "rank": 1,
+              "skill": "gun_scatter",
+              "time": 17.2000000000001
+            },
+            {
+              "collected_xp": 145.0,
+              "kills": 44,
+              "rank": 1,
+              "skill": "gun_grenade",
+              "time": 25.4000000000002
+            },
+            {
+              "collected_xp": 230.0,
+              "kills": 52,
+              "rank": 2,
+              "skill": "gun_rifle",
+              "time": 28.2500000000003
+            },
+            {
+              "collected_xp": 390.0,
+              "kills": 97,
+              "rank": 3,
+              "skill": "gun_rifle",
+              "time": 43.9499999999996
+            },
+            {
+              "collected_xp": 625.0,
+              "kills": 161,
+              "rank": 4,
+              "skill": "gun_rifle",
+              "time": 66.6999999999984
+            },
+            {
+              "collected_xp": 985.0,
+              "kills": 229,
+              "rank": 5,
+              "skill": "gun_rifle",
+              "time": 78.9499999999977
+            },
+            {
+              "collected_xp": 1495.0,
+              "kills": 332,
+              "rank": 2,
+              "skill": "gun_scatter",
+              "time": 108.599999999996
+            },
+            {
+              "collected_xp": 2185.0,
+              "kills": 485,
+              "rank": 3,
+              "skill": "gun_scatter",
+              "time": 144.549999999999
+            },
+            {
+              "collected_xp": 3085.0,
+              "kills": 660,
+              "rank": 4,
+              "skill": "gun_scatter",
+              "time": 197.500000000011
+            },
+            {
+              "collected_xp": 4225.0,
+              "kills": 877,
+              "rank": 5,
+              "skill": "gun_scatter",
+              "time": 247.000000000022
+            },
+            {
+              "collected_xp": 6705.0,
+              "kills": 1341,
+              "rank": 2,
+              "skill": "gun_suppress",
+              "time": 359.450000000047
+            }
+          ]
+        },
+        {
+          "boss_defeated_at": 331.450000000041,
+          "boss_distance_left": 0.0,
+          "boss_hp_left": 0,
+          "choices": 11,
+          "elapsed": 360.0,
+          "enemy_pattern_version": 1,
+          "evolved": [
+            "gun_rifle",
+            "gun_ricochet"
+          ],
+          "evolved_at": {
+            "gun_ricochet": 259.900000000025,
+            "gun_rifle": 75.4499999999979
+          },
+          "gold_reward": 12369,
+          "hammer_hits": 0,
+          "hammer_hp_lost": 0,
+          "hammer_strikes": 1,
+          "hp": 100,
+          "kills": 1242,
+          "map_id": "prologue_wall",
+          "milestones": [
+            {
+              "choices": 6,
+              "collected_gold": 1490,
+              "hp": 100,
+              "kills": 158,
+              "mp": 27.9500000000003,
+              "time": 59.9999999999987,
+              "xp": 745.0
+            },
+            {
+              "choices": 7,
+              "collected_gold": 2692,
+              "hp": 100,
+              "kills": 328,
+              "mp": 37.8999999999995,
+              "time": 119.999999999995,
+              "xp": 1480.0
+            },
+            {
+              "choices": 9,
+              "collected_gold": 5313,
+              "hp": 100,
+              "kills": 589,
+              "mp": 17.7999999999993,
+              "time": 180.000000000007,
+              "xp": 2810.0
+            },
+            {
+              "choices": 10,
+              "collected_gold": 6973,
+              "hp": 100,
+              "kills": 791,
+              "mp": 37.7499999999988,
+              "time": 240.00000000002,
+              "xp": 3785.0
+            },
+            {
+              "choices": 11,
+              "collected_gold": 9510,
+              "hp": 100,
+              "kills": 1057,
+              "mp": 47.6999999999992,
+              "time": 300.000000000034,
+              "xp": 5130.0
+            },
+            {
+              "choices": 11,
+              "collected_gold": 12269,
+              "hp": 100,
+              "kills": 1242,
+              "mp": 27.6999999999987,
+              "time": 360.0,
+              "xp": 6115.0
+            }
+          ],
+          "mp": 27.6999999999987,
+          "outcome": "cleared",
+          "owned": {
+            "gun_grenade": 1,
+            "gun_ricochet": 5,
+            "gun_rifle": 5,
+            "gun_suppress": 1
+          },
+          "pacing_version": 1,
+          "peak_enemies": 98,
+          "seed": 7,
+          "talents": "none",
+          "total_collected_xp": 6115.0,
+          "trace": [
+            {
+              "collected_xp": 30.0,
+              "kills": 7,
+              "rank": 1,
+              "skill": "gun_grenade",
+              "time": 7.74999999999998
+            },
+            {
+              "collected_xp": 80.0,
+              "kills": 16,
+              "rank": 1,
+              "skill": "gun_suppress",
+              "time": 15.3000000000001
+            },
+            {
+              "collected_xp": 145.0,
+              "kills": 48,
+              "rank": 1,
+              "skill": "gun_ricochet",
+              "time": 28.9000000000003
+            },
+            {
+              "collected_xp": 230.0,
+              "kills": 49,
+              "rank": 2,
+              "skill": "gun_rifle",
+              "time": 29.6000000000003
+            },
+            {
+              "collected_xp": 385.0,
+              "kills": 81,
+              "rank": 3,
+              "skill": "gun_rifle",
+              "time": 33.2500000000002
+            },
+            {
+              "collected_xp": 625.0,
+              "kills": 136,
+              "rank": 4,
+              "skill": "gun_rifle",
+              "time": 51.8499999999992
+            },
+            {
+              "collected_xp": 985.0,
+              "kills": 229,
+              "rank": 5,
+              "skill": "gun_rifle",
+              "time": 75.4499999999979
+            },
+            {
+              "collected_xp": 1495.0,
+              "kills": 328,
+              "rank": 2,
+              "skill": "gun_ricochet",
+              "time": 120.249999999995
+            },
+            {
+              "collected_xp": 2185.0,
+              "kills": 473,
+              "rank": 3,
+              "skill": "gun_ricochet",
+              "time": 148.299999999999
+            },
+            {
+              "collected_xp": 3085.0,
+              "kills": 678,
+              "rank": 4,
+              "skill": "gun_ricochet",
+              "time": 197.950000000011
+            },
+            {
+              "collected_xp": 4225.0,
+              "kills": 906,
+              "rank": 5,
+              "skill": "gun_ricochet",
+              "time": 259.900000000025
+            }
+          ]
+        },
+        {
+          "boss_defeated_at": 323.150000000039,
+          "boss_distance_left": 0.0,
+          "boss_hp_left": 0,
+          "choices": 11,
+          "elapsed": 353.800000000046,
+          "enemy_pattern_version": 1,
+          "evolved": [
+            "gun_rifle",
+            "gun_scatter"
+          ],
+          "evolved_at": {
+            "gun_rifle": 78.9499999999977,
+            "gun_scatter": 316.300000000038
+          },
+          "gold_reward": 0,
+          "hammer_hits": 0,
+          "hammer_hp_lost": 0,
+          "hammer_strikes": 0,
+          "hp": 0,
+          "kills": 1357,
+          "map_id": "prologue_wall",
+          "milestones": [
+            {
+              "choices": 5,
+              "collected_gold": 972,
+              "hp": 100,
+              "kills": 113,
+              "mp": 37.2999999999995,
+              "time": 59.9999999999987,
+              "xp": 550.0
+            },
+            {
+              "choices": 8,
+              "collected_gold": 2963,
+              "hp": 92,
+              "kills": 367,
+              "mp": 17.1499999999998,
+              "time": 119.999999999995,
+              "xp": 1645.0
+            },
+            {
+              "choices": 9,
+              "collected_gold": 4451,
+              "hp": 92,
+              "kills": 624,
+              "mp": 37.0999999999995,
+              "time": 180.000000000007,
+              "xp": 2355.0
+            },
+            {
+              "choices": 9,
+              "collected_gold": 4619,
+              "hp": 60,
+              "kills": 844,
+              "mp": 17.0999999999976,
+              "time": 240.00000000002,
+              "xp": 2470.0
+            },
+            {
+              "choices": 10,
+              "collected_gold": 5891,
+              "hp": 42,
+              "kills": 1114,
+              "mp": 37.049999999997,
+              "time": 300.000000000034,
+              "xp": 3470.0
+            }
+          ],
+          "mp": 40.7499999999962,
+          "outcome": "defeat",
+          "owned": {
+            "gun_grenade": 1,
+            "gun_rifle": 5,
+            "gun_scatter": 5,
+            "gun_suppress": 1
+          },
+          "pacing_version": 1,
+          "peak_enemies": 83,
+          "seed": 407,
+          "talents": "none",
+          "total_collected_xp": 5830.0,
+          "trace": [
+            {
+              "collected_xp": 30.0,
+              "kills": 6,
+              "rank": 1,
+              "skill": "gun_suppress",
+              "time": 6.99999999999998
+            },
+            {
+              "collected_xp": 80.0,
+              "kills": 17,
+              "rank": 1,
+              "skill": "gun_scatter",
+              "time": 17.2000000000001
+            },
+            {
+              "collected_xp": 145.0,
+              "kills": 44,
+              "rank": 1,
+              "skill": "gun_grenade",
+              "time": 25.4000000000002
+            },
+            {
+              "collected_xp": 230.0,
+              "kills": 52,
+              "rank": 2,
+              "skill": "gun_rifle",
+              "time": 28.2500000000003
+            },
+            {
+              "collected_xp": 390.0,
+              "kills": 97,
+              "rank": 3,
+              "skill": "gun_rifle",
+              "time": 43.9499999999996
+            },
+            {
+              "collected_xp": 625.0,
+              "kills": 161,
+              "rank": 4,
+              "skill": "gun_rifle",
+              "time": 66.6999999999984
+            },
+            {
+              "collected_xp": 985.0,
+              "kills": 229,
+              "rank": 5,
+              "skill": "gun_rifle",
+              "time": 78.9499999999977
+            },
+            {
+              "collected_xp": 1495.0,
+              "kills": 332,
+              "rank": 2,
+              "skill": "gun_scatter",
+              "time": 108.599999999996
+            },
+            {
+              "collected_xp": 2185.0,
+              "kills": 479,
+              "rank": 3,
+              "skill": "gun_scatter",
+              "time": 152.900000000001
+            },
+            {
+              "collected_xp": 3430.0,
+              "kills": 922,
+              "rank": 4,
+              "skill": "gun_scatter",
+              "time": 255.750000000024
+            },
+            {
+              "collected_xp": 4555.0,
+              "kills": 1183,
+              "rank": 5,
+              "skill": "gun_scatter",
+              "time": 316.300000000038
+            }
+          ]
+        },
+        {
+          "boss_defeated_at": 323.850000000039,
+          "boss_distance_left": 0.0,
+          "boss_hp_left": 0,
+          "choices": 12,
+          "elapsed": 360.0,
+          "enemy_pattern_version": 0,
+          "evolved": [
+            "gun_rifle",
+            "gun_ricochet"
+          ],
+          "evolved_at": {
+            "gun_ricochet": 250.750000000023,
+            "gun_rifle": 128.749999999995
+          },
+          "gold_reward": 12946,
+          "hammer_hits": 0,
+          "hammer_hp_lost": 0,
+          "hammer_strikes": 0,
+          "hp": 115,
+          "kills": 1418,
+          "map_id": "prologue_wall",
+          "milestones": [
+            {
+              "choices": 6,
+              "collected_gold": 1339,
+              "hp": 114,
+              "kills": 148,
+              "mp": 30.6675000000012,
+              "time": 59.9999999999987,
+              "xp": 675.0
+            },
+            {
+              "choices": 6,
+              "collected_gold": 1597,
+              "hp": 115,
+              "kills": 328,
+              "mp": 58.9675000000029,
+              "time": 119.999999999995,
+              "xp": 845.0
+            },
+            {
+              "choices": 8,
+              "collected_gold": 3702,
+              "hp": 107,
+              "kills": 640,
+              "mp": 52.6525000000019,
+              "time": 180.000000000007,
+              "xp": 2125.0
+            },
+            {
+              "choices": 9,
+              "collected_gold": 5281,
+              "hp": 115,
+              "kills": 918,
+              "mp": 8.79500000000174,
+              "time": 240.00000000002,
+              "xp": 2615.0
+            },
+            {
+              "choices": 11,
+              "collected_gold": 9373,
+              "hp": 115,
+              "kills": 1154,
+              "mp": 74.5800000000014,
+              "time": 300.000000000034,
+              "xp": 5260.0
+            },
+            {
+              "choices": 12,
+              "collected_gold": 12846,
+              "hp": 115,
+              "kills": 1418,
+              "mp": 30.7225000000008,
+              "time": 360.0,
+              "xp": 6855.0
+            }
+          ],
+          "mp": 30.7225000000008,
+          "outcome": "cleared",
+          "owned": {
+            "gun_grenade": 2,
+            "gun_ricochet": 5,
+            "gun_rifle": 5,
+            "gun_suppress": 1
+          },
+          "pacing_version": 1,
+          "peak_enemies": 104,
+          "seed": 7,
+          "talents": "full",
+          "total_collected_xp": 6855.0,
+          "trace": [
+            {
+              "collected_xp": 30.0,
+              "kills": 8,
+              "rank": 1,
+              "skill": "gun_grenade",
+              "time": 8.24999999999998
+            },
+            {
+              "collected_xp": 80.0,
+              "kills": 17,
+              "rank": 1,
+              "skill": "gun_suppress",
+              "time": 19.2000000000001
+            },
+            {
+              "collected_xp": 145.0,
+              "kills": 33,
+              "rank": 1,
+              "skill": "gun_ricochet",
+              "time": 35.3500000000001
+            },
+            {
+              "collected_xp": 230.0,
+              "kills": 91,
+              "rank": 2,
+              "skill": "gun_rifle",
+              "time": 47.1999999999995
+            },
+            {
+              "collected_xp": 385.0,
+              "kills": 102,
+              "rank": 3,
+              "skill": "gun_rifle",
+              "time": 49.4499999999993
+            },
+            {
+              "collected_xp": 625.0,
+              "kills": 144,
+              "rank": 4,
+              "skill": "gun_rifle",
+              "time": 58.3999999999988
+            },
+            {
+              "collected_xp": 985.0,
+              "kills": 375,
+              "rank": 5,
+              "skill": "gun_rifle",
+              "time": 128.749999999995
+            },
+            {
+              "collected_xp": 1495.0,
+              "kills": 486,
+              "rank": 2,
+              "skill": "gun_ricochet",
+              "time": 148.399999999999
+            },
+            {
+              "collected_xp": 2185.0,
+              "kills": 868,
+              "rank": 3,
+              "skill": "gun_ricochet",
+              "time": 226.200000000017
+            },
+            {
+              "collected_xp": 3875.0,
+              "kills": 951,
+              "rank": 4,
+              "skill": "gun_ricochet",
+              "time": 243.700000000021
+            },
+            {
+              "collected_xp": 4235.0,
+              "kills": 970,
+              "rank": 5,
+              "skill": "gun_ricochet",
+              "time": 250.750000000023
+            },
+            {
+              "collected_xp": 6625.0,
+              "kills": 1400,
+              "rank": 2,
+              "skill": "gun_grenade",
+              "time": 353.350000000046
+            }
+          ]
+        },
+        {
+          "boss_defeated_at": -1.0,
+          "boss_distance_left": 438.406127929688,
+          "boss_hp_left": 1380,
+          "choices": 11,
+          "elapsed": 360.0,
+          "enemy_pattern_version": 0,
+          "evolved": [
+            "gun_rifle",
+            "gun_scatter"
+          ],
+          "evolved_at": {
+            "gun_rifle": 90.699999999997,
+            "gun_scatter": 245.550000000022
+          },
+          "gold_reward": 0,
+          "hammer_hits": 0,
+          "hammer_hp_lost": 0,
+          "hammer_strikes": 0,
+          "hp": 115,
+          "kills": 1388,
+          "map_id": "prologue_wall",
+          "milestones": [
+            {
+              "choices": 5,
+              "collected_gold": 849,
+              "hp": 115,
+              "kills": 154,
+              "mp": 30.6674999999991,
+              "time": 59.9999999999987,
+              "xp": 570.0
+            },
+            {
+              "choices": 7,
+              "collected_gold": 2565,
+              "hp": 115,
+              "kills": 351,
+              "mp": 61.9524999999977,
+              "time": 119.999999999995,
+              "xp": 1485.0
+            },
+            {
+              "choices": 9,
+              "collected_gold": 4944,
+              "hp": 115,
+              "kills": 588,
+              "mp": 18.0374999999983,
+              "time": 180.000000000007,
+              "xp": 2585.0
+            },
+            {
+              "choices": 10,
+              "collected_gold": 7352,
+              "hp": 115,
+              "kills": 853,
+              "mp": 115.0,
+              "time": 240.00000000002,
+              "xp": 4090.0
+            },
+            {
+              "choices": 11,
+              "collected_gold": 10340,
+              "hp": 115,
+              "kills": 1190,
+              "mp": 31.5300000000013,
+              "time": 300.000000000034,
+              "xp": 5550.0
+            },
+            {
+              "choices": 11,
+              "collected_gold": 12139,
+              "hp": 115,
+              "kills": 1388,
+              "mp": 22.23,
+              "time": 360.0,
+              "xp": 6465.0
+            }
+          ],
+          "mp": 22.23,
+          "outcome": "timeout",
+          "owned": {
+            "gun_grenade": 1,
+            "gun_rifle": 5,
+            "gun_scatter": 5,
+            "gun_suppress": 1
+          },
+          "pacing_version": 1,
+          "peak_enemies": 107,
+          "seed": 407,
+          "talents": "full",
+          "total_collected_xp": 6465.0,
+          "trace": [
+            {
+              "collected_xp": 30.0,
+              "kills": 8,
+              "rank": 1,
+              "skill": "gun_suppress",
+              "time": 7.49999999999998
+            },
+            {
+              "collected_xp": 80.0,
+              "kills": 17,
+              "rank": 1,
+              "skill": "gun_scatter",
+              "time": 19.1000000000001
+            },
+            {
+              "collected_xp": 145.0,
+              "kills": 54,
+              "rank": 1,
+              "skill": "gun_grenade",
+              "time": 27.8000000000003
+            },
+            {
+              "collected_xp": 235.0,
+              "kills": 59,
+              "rank": 2,
+              "skill": "gun_rifle",
+              "time": 29.7000000000003
+            },
+            {
+              "collected_xp": 395.0,
+              "kills": 101,
+              "rank": 3,
+              "skill": "gun_rifle",
+              "time": 40.9999999999998
+            },
+            {
+              "collected_xp": 625.0,
+              "kills": 203,
+              "rank": 4,
+              "skill": "gun_rifle",
+              "time": 82.1499999999975
+            },
+            {
+              "collected_xp": 985.0,
+              "kills": 262,
+              "rank": 5,
+              "skill": "gun_rifle",
+              "time": 90.699999999997
+            },
+            {
+              "collected_xp": 1495.0,
+              "kills": 366,
+              "rank": 2,
+              "skill": "gun_scatter",
+              "time": 122.849999999995
+            },
+            {
+              "collected_xp": 2185.0,
+              "kills": 496,
+              "rank": 3,
+              "skill": "gun_scatter",
+              "time": 163.750000000003
+            },
+            {
+              "collected_xp": 3085.0,
+              "kills": 660,
+              "rank": 4,
+              "skill": "gun_scatter",
+              "time": 190.250000000009
+            },
+            {
+              "collected_xp": 4225.0,
+              "kills": 886,
+              "rank": 5,
+              "skill": "gun_scatter",
+              "time": 245.550000000022
+            }
+          ]
+        },
+        {
+          "boss_defeated_at": 323.850000000039,
+          "boss_distance_left": 0.0,
+          "boss_hp_left": 0,
+          "choices": 12,
+          "elapsed": 360.0,
+          "enemy_pattern_version": 1,
+          "evolved": [
+            "gun_rifle",
+            "gun_ricochet"
+          ],
+          "evolved_at": {
+            "gun_ricochet": 250.750000000023,
+            "gun_rifle": 128.749999999995
+          },
+          "gold_reward": 12946,
+          "hammer_hits": 0,
+          "hammer_hp_lost": 0,
+          "hammer_strikes": 0,
+          "hp": 115,
+          "kills": 1418,
+          "map_id": "prologue_wall",
+          "milestones": [
+            {
+              "choices": 6,
+              "collected_gold": 1339,
+              "hp": 114,
+              "kills": 148,
+              "mp": 30.6675000000012,
+              "time": 59.9999999999987,
+              "xp": 675.0
+            },
+            {
+              "choices": 6,
+              "collected_gold": 1597,
+              "hp": 115,
+              "kills": 328,
+              "mp": 58.9675000000029,
+              "time": 119.999999999995,
+              "xp": 845.0
+            },
+            {
+              "choices": 8,
+              "collected_gold": 3702,
+              "hp": 107,
+              "kills": 640,
+              "mp": 52.6525000000019,
+              "time": 180.000000000007,
+              "xp": 2125.0
+            },
+            {
+              "choices": 9,
+              "collected_gold": 5281,
+              "hp": 115,
+              "kills": 918,
+              "mp": 8.79500000000174,
+              "time": 240.00000000002,
+              "xp": 2615.0
+            },
+            {
+              "choices": 11,
+              "collected_gold": 9373,
+              "hp": 115,
+              "kills": 1154,
+              "mp": 74.5800000000014,
+              "time": 300.000000000034,
+              "xp": 5260.0
+            },
+            {
+              "choices": 12,
+              "collected_gold": 12846,
+              "hp": 115,
+              "kills": 1418,
+              "mp": 30.7225000000008,
+              "time": 360.0,
+              "xp": 6855.0
+            }
+          ],
+          "mp": 30.7225000000008,
+          "outcome": "cleared",
+          "owned": {
+            "gun_grenade": 2,
+            "gun_ricochet": 5,
+            "gun_rifle": 5,
+            "gun_suppress": 1
+          },
+          "pacing_version": 1,
+          "peak_enemies": 104,
+          "seed": 7,
+          "talents": "full",
+          "total_collected_xp": 6855.0,
+          "trace": [
+            {
+              "collected_xp": 30.0,
+              "kills": 8,
+              "rank": 1,
+              "skill": "gun_grenade",
+              "time": 8.24999999999998
+            },
+            {
+              "collected_xp": 80.0,
+              "kills": 17,
+              "rank": 1,
+              "skill": "gun_suppress",
+              "time": 19.2000000000001
+            },
+            {
+              "collected_xp": 145.0,
+              "kills": 33,
+              "rank": 1,
+              "skill": "gun_ricochet",
+              "time": 35.3500000000001
+            },
+            {
+              "collected_xp": 230.0,
+              "kills": 91,
+              "rank": 2,
+              "skill": "gun_rifle",
+              "time": 47.1999999999995
+            },
+            {
+              "collected_xp": 385.0,
+              "kills": 102,
+              "rank": 3,
+              "skill": "gun_rifle",
+              "time": 49.4499999999993
+            },
+            {
+              "collected_xp": 625.0,
+              "kills": 144,
+              "rank": 4,
+              "skill": "gun_rifle",
+              "time": 58.3999999999988
+            },
+            {
+              "collected_xp": 985.0,
+              "kills": 375,
+              "rank": 5,
+              "skill": "gun_rifle",
+              "time": 128.749999999995
+            },
+            {
+              "collected_xp": 1495.0,
+              "kills": 486,
+              "rank": 2,
+              "skill": "gun_ricochet",
+              "time": 148.399999999999
+            },
+            {
+              "collected_xp": 2185.0,
+              "kills": 868,
+              "rank": 3,
+              "skill": "gun_ricochet",
+              "time": 226.200000000017
+            },
+            {
+              "collected_xp": 3875.0,
+              "kills": 951,
+              "rank": 4,
+              "skill": "gun_ricochet",
+              "time": 243.700000000021
+            },
+            {
+              "collected_xp": 4235.0,
+              "kills": 970,
+              "rank": 5,
+              "skill": "gun_ricochet",
+              "time": 250.750000000023
+            },
+            {
+              "collected_xp": 6625.0,
+              "kills": 1400,
+              "rank": 2,
+              "skill": "gun_grenade",
+              "time": 353.350000000046
+            }
+          ]
+        },
+        {
+          "boss_defeated_at": 321.450000000039,
+          "boss_distance_left": 0.0,
+          "boss_hp_left": 0,
+          "choices": 11,
+          "elapsed": 360.0,
+          "enemy_pattern_version": 1,
+          "evolved": [
+            "gun_rifle",
+            "gun_scatter"
+          ],
+          "evolved_at": {
+            "gun_rifle": 90.699999999997,
+            "gun_scatter": 242.500000000021
+          },
+          "gold_reward": 13630,
+          "hammer_hits": 0,
+          "hammer_hp_lost": 0,
+          "hammer_strikes": 2,
+          "hp": 106,
+          "kills": 1405,
+          "map_id": "prologue_wall",
+          "milestones": [
+            {
+              "choices": 5,
+              "collected_gold": 849,
+              "hp": 115,
+              "kills": 154,
+              "mp": 30.6674999999991,
+              "time": 59.9999999999987,
+              "xp": 570.0
+            },
+            {
+              "choices": 7,
+              "collected_gold": 2565,
+              "hp": 115,
+              "kills": 351,
+              "mp": 61.9524999999977,
+              "time": 119.999999999995,
+              "xp": 1485.0
+            },
+            {
+              "choices": 9,
+              "collected_gold": 5579,
+              "hp": 115,
+              "kills": 615,
+              "mp": 55.6374999999978,
+              "time": 180.000000000007,
+              "xp": 2640.0
+            },
+            {
+              "choices": 10,
+              "collected_gold": 8067,
+              "hp": 115,
+              "kills": 886,
+              "mp": 8.67999999999936,
+              "time": 240.00000000002,
+              "xp": 4150.0
+            },
+            {
+              "choices": 11,
+              "collected_gold": 10583,
+              "hp": 115,
+              "kills": 1143,
+              "mp": 33.8225000000008,
+              "time": 300.000000000034,
+              "xp": 5490.0
+            },
+            {
+              "choices": 11,
+              "collected_gold": 13530,
+              "hp": 106,
+              "kills": 1405,
+              "mp": 27.6225000000003,
+              "time": 360.0,
+              "xp": 6215.0
+            }
+          ],
+          "mp": 27.6225000000003,
+          "outcome": "cleared",
+          "owned": {
+            "gun_grenade": 1,
+            "gun_rifle": 5,
+            "gun_scatter": 5,
+            "gun_suppress": 1
+          },
+          "pacing_version": 1,
+          "peak_enemies": 104,
+          "seed": 407,
+          "talents": "full",
+          "total_collected_xp": 6215.0,
+          "trace": [
+            {
+              "collected_xp": 30.0,
+              "kills": 8,
+              "rank": 1,
+              "skill": "gun_suppress",
+              "time": 7.49999999999998
+            },
+            {
+              "collected_xp": 80.0,
+              "kills": 17,
+              "rank": 1,
+              "skill": "gun_scatter",
+              "time": 19.1000000000001
+            },
+            {
+              "collected_xp": 145.0,
+              "kills": 54,
+              "rank": 1,
+              "skill": "gun_grenade",
+              "time": 27.8000000000003
+            },
+            {
+              "collected_xp": 235.0,
+              "kills": 59,
+              "rank": 2,
+              "skill": "gun_rifle",
+              "time": 29.7000000000003
+            },
+            {
+              "collected_xp": 395.0,
+              "kills": 101,
+              "rank": 3,
+              "skill": "gun_rifle",
+              "time": 40.9999999999998
+            },
+            {
+              "collected_xp": 625.0,
+              "kills": 203,
+              "rank": 4,
+              "skill": "gun_rifle",
+              "time": 82.1499999999975
+            },
+            {
+              "collected_xp": 985.0,
+              "kills": 262,
+              "rank": 5,
+              "skill": "gun_rifle",
+              "time": 90.699999999997
+            },
+            {
+              "collected_xp": 1495.0,
+              "kills": 366,
+              "rank": 2,
+              "skill": "gun_scatter",
+              "time": 122.849999999995
+            },
+            {
+              "collected_xp": 2200.0,
+              "kills": 515,
+              "rank": 3,
+              "skill": "gun_scatter",
+              "time": 152.900000000001
+            },
+            {
+              "collected_xp": 3085.0,
+              "kills": 738,
+              "rank": 4,
+              "skill": "gun_scatter",
+              "time": 201.450000000012
+            },
+            {
+              "collected_xp": 4225.0,
+              "kills": 890,
+              "rank": 5,
+              "skill": "gun_scatter",
+              "time": 242.500000000021
+            }
+          ]
+        },
+        {
+          "boss_defeated_at": 318.000000000038,
+          "boss_distance_left": 0.0,
+          "boss_hp_left": 0,
+          "choices": 12,
+          "elapsed": 360.0,
+          "enemy_pattern_version": 0,
+          "evolved": [
+            "gun_rifle",
+            "gun_ricochet"
+          ],
+          "evolved_at": {
+            "gun_ricochet": 227.150000000017,
+            "gun_rifle": 72.949999999998
+          },
+          "gold_reward": 13603,
+          "hammer_hits": 0,
+          "hammer_hp_lost": 0,
+          "hammer_strikes": 0,
+          "hp": 100,
+          "kills": 1459,
+          "map_id": "outskirts_trial",
+          "milestones": [
+            {
+              "choices": 6,
+              "collected_gold": 1223,
+              "hp": 100,
+              "kills": 158,
+              "mp": 35.3000000000001,
+              "time": 59.9999999999987,
+              "xp": 655.0
+            },
+            {
+              "choices": 8,
+              "collected_gold": 2801,
+              "hp": 100,
+              "kills": 346,
+              "mp": 45.1999999999995,
+              "time": 119.999999999995,
+              "xp": 1585.0
+            },
+            {
+              "choices": 9,
+              "collected_gold": 5687,
+              "hp": 100,
+              "kills": 650,
+              "mp": 25.1499999999994,
+              "time": 180.000000000007,
+              "xp": 2930.0
+            },
+            {
+              "choices": 11,
+              "collected_gold": 8465,
+              "hp": 100,
+              "kills": 913,
+              "mp": 5.04999999999999,
+              "time": 240.00000000002,
+              "xp": 4475.0
+            },
+            {
+              "choices": 11,
+              "collected_gold": 10483,
+              "hp": 100,
+              "kills": 1161,
+              "mp": 15.049999999999,
+              "time": 300.000000000034,
+              "xp": 5600.0
+            },
+            {
+              "choices": 12,
+              "collected_gold": 13503,
+              "hp": 100,
+              "kills": 1459,
+              "mp": 25.0000000000002,
+              "time": 360.0,
+              "xp": 7275.0
+            }
+          ],
+          "mp": 25.0000000000002,
+          "outcome": "cleared",
+          "owned": {
+            "gun_grenade": 2,
+            "gun_ricochet": 5,
+            "gun_rifle": 5,
+            "gun_suppress": 1
+          },
+          "pacing_version": 1,
+          "peak_enemies": 96,
+          "seed": 7,
+          "talents": "none",
+          "total_collected_xp": 7275.0,
+          "trace": [
+            {
+              "collected_xp": 30.0,
+              "kills": 7,
+              "rank": 1,
+              "skill": "gun_grenade",
+              "time": 10.35
+            },
+            {
+              "collected_xp": 80.0,
+              "kills": 21,
+              "rank": 1,
+              "skill": "gun_suppress",
+              "time": 21.9000000000002
+            },
+            {
+              "collected_xp": 155.0,
+              "kills": 55,
+              "rank": 1,
+              "skill": "gun_ricochet",
+              "time": 25.3000000000002
+            },
+            {
+              "collected_xp": 230.0,
+              "kills": 55,
+              "rank": 2,
+              "skill": "gun_rifle",
+              "time": 25.7500000000002
+            },
+            {
+              "collected_xp": 385.0,
+              "kills": 88,
+              "rank": 3,
+              "skill": "gun_rifle",
+              "time": 32.7000000000003
+            },
+            {
+              "collected_xp": 625.0,
+              "kills": 151,
+              "rank": 4,
+              "skill": "gun_rifle",
+              "time": 58.2999999999988
+            },
+            {
+              "collected_xp": 985.0,
+              "kills": 222,
+              "rank": 5,
+              "skill": "gun_rifle",
+              "time": 72.949999999998
+            },
+            {
+              "collected_xp": 1495.0,
+              "kills": 333,
+              "rank": 2,
+              "skill": "gun_ricochet",
+              "time": 107.749999999996
+            },
+            {
+              "collected_xp": 2195.0,
+              "kills": 522,
+              "rank": 3,
+              "skill": "gun_ricochet",
+              "time": 156.750000000001
+            },
+            {
+              "collected_xp": 3085.0,
+              "kills": 767,
+              "rank": 4,
+              "skill": "gun_ricochet",
+              "time": 205.450000000012
+            },
+            {
+              "collected_xp": 4225.0,
+              "kills": 860,
+              "rank": 5,
+              "skill": "gun_ricochet",
+              "time": 227.150000000017
+            },
+            {
+              "collected_xp": 6625.0,
+              "kills": 1382,
+              "rank": 2,
+              "skill": "gun_grenade",
+              "time": 340.150000000043
+            }
+          ]
+        },
+        {
+          "boss_defeated_at": 324.60000000004,
+          "boss_distance_left": 0.0,
+          "boss_hp_left": 0,
+          "choices": 12,
+          "elapsed": 360.0,
+          "enemy_pattern_version": 0,
+          "evolved": [
+            "gun_rifle",
+            "gun_scatter"
+          ],
+          "evolved_at": {
+            "gun_rifle": 77.2499999999978,
+            "gun_scatter": 235.100000000019
+          },
+          "gold_reward": 12968,
+          "hammer_hits": 0,
+          "hammer_hp_lost": 0,
+          "hammer_strikes": 0,
+          "hp": 92,
+          "kills": 1356,
+          "map_id": "outskirts_trial",
+          "milestones": [
+            {
+              "choices": 6,
+              "collected_gold": 1113,
+              "hp": 100,
+              "kills": 172,
+              "mp": 28.6500000000003,
+              "time": 59.9999999999987,
+              "xp": 745.0
+            },
+            {
+              "choices": 8,
+              "collected_gold": 2733,
+              "hp": 100,
+              "kills": 389,
+              "mp": 8.54999999999955,
+              "time": 119.999999999995,
+              "xp": 1640.0
+            },
+            {
+              "choices": 9,
+              "collected_gold": 5084,
+              "hp": 100,
+              "kills": 659,
+              "mp": 28.4999999999988,
+              "time": 180.000000000007,
+              "xp": 2785.0
+            },
+            {
+              "choices": 11,
+              "collected_gold": 7601,
+              "hp": 100,
+              "kills": 890,
+              "mp": 38.3999999999984,
+              "time": 240.00000000002,
+              "xp": 4245.0
+            },
+            {
+              "choices": 11,
+              "collected_gold": 8974,
+              "hp": 92,
+              "kills": 1132,
+              "mp": 38.3999999999976,
+              "time": 300.000000000034,
+              "xp": 5035.0
+            },
+            {
+              "choices": 12,
+              "collected_gold": 12868,
+              "hp": 92,
+              "kills": 1356,
+              "mp": 18.3499999999973,
+              "time": 360.0,
+              "xp": 6700.0
+            }
+          ],
+          "mp": 18.3499999999973,
+          "outcome": "cleared",
+          "owned": {
+            "gun_grenade": 1,
+            "gun_rifle": 5,
+            "gun_scatter": 5,
+            "gun_suppress": 2
+          },
+          "pacing_version": 1,
+          "peak_enemies": 71,
+          "seed": 407,
+          "talents": "none",
+          "total_collected_xp": 6700.0,
+          "trace": [
+            {
+              "collected_xp": 30.0,
+              "kills": 8,
+              "rank": 1,
+              "skill": "gun_suppress",
+              "time": 11.4
+            },
+            {
+              "collected_xp": 80.0,
+              "kills": 23,
+              "rank": 1,
+              "skill": "gun_scatter",
+              "time": 21.9000000000002
+            },
+            {
+              "collected_xp": 145.0,
+              "kills": 86,
+              "rank": 1,
+              "skill": "gun_grenade",
+              "time": 31.7500000000003
+            },
+            {
+              "collected_xp": 230.0,
+              "kills": 89,
+              "rank": 2,
+              "skill": "gun_rifle",
+              "time": 33.6000000000002
+            },
+            {
+              "collected_xp": 385.0,
+              "kills": 99,
+              "rank": 3,
+              "skill": "gun_rifle",
+              "time": 39.6499999999999
+            },
+            {
+              "collected_xp": 625.0,
+              "kills": 159,
+              "rank": 4,
+              "skill": "gun_rifle",
+              "time": 52.3499999999992
+            },
+            {
+              "collected_xp": 985.0,
+              "kills": 236,
+              "rank": 5,
+              "skill": "gun_rifle",
+              "time": 77.2499999999978
+            },
+            {
+              "collected_xp": 1495.0,
+              "kills": 348,
+              "rank": 2,
+              "skill": "gun_scatter",
+              "time": 109.499999999996
+            },
+            {
+              "collected_xp": 2205.0,
+              "kills": 508,
+              "rank": 3,
+              "skill": "gun_scatter",
+              "time": 142.699999999998
+            },
+            {
+              "collected_xp": 3500.0,
+              "kills": 700,
+              "rank": 4,
+              "skill": "gun_scatter",
+              "time": 193.50000000001
+            },
+            {
+              "collected_xp": 4225.0,
+              "kills": 877,
+              "rank": 5,
+              "skill": "gun_scatter",
+              "time": 235.100000000019
+            },
+            {
+              "collected_xp": 6630.0,
+              "kills": 1326,
+              "rank": 2,
+              "skill": "gun_suppress",
+              "time": 348.150000000045
+            }
+          ]
+        },
+        {
+          "boss_defeated_at": 318.000000000038,
+          "boss_distance_left": 0.0,
+          "boss_hp_left": 0,
+          "choices": 12,
+          "elapsed": 360.0,
+          "enemy_pattern_version": 1,
+          "evolved": [
+            "gun_rifle",
+            "gun_ricochet"
+          ],
+          "evolved_at": {
+            "gun_ricochet": 227.150000000017,
+            "gun_rifle": 72.949999999998
+          },
+          "gold_reward": 13603,
+          "hammer_hits": 0,
+          "hammer_hp_lost": 0,
+          "hammer_strikes": 0,
+          "hp": 100,
+          "kills": 1459,
+          "map_id": "outskirts_trial",
+          "milestones": [
+            {
+              "choices": 6,
+              "collected_gold": 1223,
+              "hp": 100,
+              "kills": 158,
+              "mp": 35.3000000000001,
+              "time": 59.9999999999987,
+              "xp": 655.0
+            },
+            {
+              "choices": 8,
+              "collected_gold": 2801,
+              "hp": 100,
+              "kills": 346,
+              "mp": 45.1999999999995,
+              "time": 119.999999999995,
+              "xp": 1585.0
+            },
+            {
+              "choices": 9,
+              "collected_gold": 5687,
+              "hp": 100,
+              "kills": 650,
+              "mp": 25.1499999999994,
+              "time": 180.000000000007,
+              "xp": 2930.0
+            },
+            {
+              "choices": 11,
+              "collected_gold": 8465,
+              "hp": 100,
+              "kills": 913,
+              "mp": 5.04999999999999,
+              "time": 240.00000000002,
+              "xp": 4475.0
+            },
+            {
+              "choices": 11,
+              "collected_gold": 10483,
+              "hp": 100,
+              "kills": 1161,
+              "mp": 15.049999999999,
+              "time": 300.000000000034,
+              "xp": 5600.0
+            },
+            {
+              "choices": 12,
+              "collected_gold": 13503,
+              "hp": 100,
+              "kills": 1459,
+              "mp": 25.0000000000002,
+              "time": 360.0,
+              "xp": 7275.0
+            }
+          ],
+          "mp": 25.0000000000002,
+          "outcome": "cleared",
+          "owned": {
+            "gun_grenade": 2,
+            "gun_ricochet": 5,
+            "gun_rifle": 5,
+            "gun_suppress": 1
+          },
+          "pacing_version": 1,
+          "peak_enemies": 96,
+          "seed": 7,
+          "talents": "none",
+          "total_collected_xp": 7275.0,
+          "trace": [
+            {
+              "collected_xp": 30.0,
+              "kills": 7,
+              "rank": 1,
+              "skill": "gun_grenade",
+              "time": 10.35
+            },
+            {
+              "collected_xp": 80.0,
+              "kills": 21,
+              "rank": 1,
+              "skill": "gun_suppress",
+              "time": 21.9000000000002
+            },
+            {
+              "collected_xp": 155.0,
+              "kills": 55,
+              "rank": 1,
+              "skill": "gun_ricochet",
+              "time": 25.3000000000002
+            },
+            {
+              "collected_xp": 230.0,
+              "kills": 55,
+              "rank": 2,
+              "skill": "gun_rifle",
+              "time": 25.7500000000002
+            },
+            {
+              "collected_xp": 385.0,
+              "kills": 88,
+              "rank": 3,
+              "skill": "gun_rifle",
+              "time": 32.7000000000003
+            },
+            {
+              "collected_xp": 625.0,
+              "kills": 151,
+              "rank": 4,
+              "skill": "gun_rifle",
+              "time": 58.2999999999988
+            },
+            {
+              "collected_xp": 985.0,
+              "kills": 222,
+              "rank": 5,
+              "skill": "gun_rifle",
+              "time": 72.949999999998
+            },
+            {
+              "collected_xp": 1495.0,
+              "kills": 333,
+              "rank": 2,
+              "skill": "gun_ricochet",
+              "time": 107.749999999996
+            },
+            {
+              "collected_xp": 2195.0,
+              "kills": 522,
+              "rank": 3,
+              "skill": "gun_ricochet",
+              "time": 156.750000000001
+            },
+            {
+              "collected_xp": 3085.0,
+              "kills": 767,
+              "rank": 4,
+              "skill": "gun_ricochet",
+              "time": 205.450000000012
+            },
+            {
+              "collected_xp": 4225.0,
+              "kills": 860,
+              "rank": 5,
+              "skill": "gun_ricochet",
+              "time": 227.150000000017
+            },
+            {
+              "collected_xp": 6625.0,
+              "kills": 1382,
+              "rank": 2,
+              "skill": "gun_grenade",
+              "time": 340.150000000043
+            }
+          ]
+        },
+        {
+          "boss_defeated_at": 324.60000000004,
+          "boss_distance_left": 0.0,
+          "boss_hp_left": 0,
+          "choices": 12,
+          "elapsed": 360.0,
+          "enemy_pattern_version": 1,
+          "evolved": [
+            "gun_rifle",
+            "gun_scatter"
+          ],
+          "evolved_at": {
+            "gun_rifle": 77.2499999999978,
+            "gun_scatter": 235.100000000019
+          },
+          "gold_reward": 12968,
+          "hammer_hits": 0,
+          "hammer_hp_lost": 0,
+          "hammer_strikes": 0,
+          "hp": 92,
+          "kills": 1356,
+          "map_id": "outskirts_trial",
+          "milestones": [
+            {
+              "choices": 6,
+              "collected_gold": 1113,
+              "hp": 100,
+              "kills": 172,
+              "mp": 28.6500000000003,
+              "time": 59.9999999999987,
+              "xp": 745.0
+            },
+            {
+              "choices": 8,
+              "collected_gold": 2733,
+              "hp": 100,
+              "kills": 389,
+              "mp": 8.54999999999955,
+              "time": 119.999999999995,
+              "xp": 1640.0
+            },
+            {
+              "choices": 9,
+              "collected_gold": 5084,
+              "hp": 100,
+              "kills": 659,
+              "mp": 28.4999999999988,
+              "time": 180.000000000007,
+              "xp": 2785.0
+            },
+            {
+              "choices": 11,
+              "collected_gold": 7601,
+              "hp": 100,
+              "kills": 890,
+              "mp": 38.3999999999984,
+              "time": 240.00000000002,
+              "xp": 4245.0
+            },
+            {
+              "choices": 11,
+              "collected_gold": 8974,
+              "hp": 92,
+              "kills": 1132,
+              "mp": 38.3999999999976,
+              "time": 300.000000000034,
+              "xp": 5035.0
+            },
+            {
+              "choices": 12,
+              "collected_gold": 12868,
+              "hp": 92,
+              "kills": 1356,
+              "mp": 18.3499999999973,
+              "time": 360.0,
+              "xp": 6700.0
+            }
+          ],
+          "mp": 18.3499999999973,
+          "outcome": "cleared",
+          "owned": {
+            "gun_grenade": 1,
+            "gun_rifle": 5,
+            "gun_scatter": 5,
+            "gun_suppress": 2
+          },
+          "pacing_version": 1,
+          "peak_enemies": 71,
+          "seed": 407,
+          "talents": "none",
+          "total_collected_xp": 6700.0,
+          "trace": [
+            {
+              "collected_xp": 30.0,
+              "kills": 8,
+              "rank": 1,
+              "skill": "gun_suppress",
+              "time": 11.4
+            },
+            {
+              "collected_xp": 80.0,
+              "kills": 23,
+              "rank": 1,
+              "skill": "gun_scatter",
+              "time": 21.9000000000002
+            },
+            {
+              "collected_xp": 145.0,
+              "kills": 86,
+              "rank": 1,
+              "skill": "gun_grenade",
+              "time": 31.7500000000003
+            },
+            {
+              "collected_xp": 230.0,
+              "kills": 89,
+              "rank": 2,
+              "skill": "gun_rifle",
+              "time": 33.6000000000002
+            },
+            {
+              "collected_xp": 385.0,
+              "kills": 99,
+              "rank": 3,
+              "skill": "gun_rifle",
+              "time": 39.6499999999999
+            },
+            {
+              "collected_xp": 625.0,
+              "kills": 159,
+              "rank": 4,
+              "skill": "gun_rifle",
+              "time": 52.3499999999992
+            },
+            {
+              "collected_xp": 985.0,
+              "kills": 236,
+              "rank": 5,
+              "skill": "gun_rifle",
+              "time": 77.2499999999978
+            },
+            {
+              "collected_xp": 1495.0,
+              "kills": 348,
+              "rank": 2,
+              "skill": "gun_scatter",
+              "time": 109.499999999996
+            },
+            {
+              "collected_xp": 2205.0,
+              "kills": 508,
+              "rank": 3,
+              "skill": "gun_scatter",
+              "time": 142.699999999998
+            },
+            {
+              "collected_xp": 3500.0,
+              "kills": 700,
+              "rank": 4,
+              "skill": "gun_scatter",
+              "time": 193.50000000001
+            },
+            {
+              "collected_xp": 4225.0,
+              "kills": 877,
+              "rank": 5,
+              "skill": "gun_scatter",
+              "time": 235.100000000019
+            },
+            {
+              "collected_xp": 6630.0,
+              "kills": 1326,
+              "rank": 2,
+              "skill": "gun_suppress",
+              "time": 348.150000000045
+            }
+          ]
+        },
+        {
+          "boss_defeated_at": 323.050000000039,
+          "boss_distance_left": 0.0,
+          "boss_hp_left": 0,
+          "choices": 12,
+          "elapsed": 360.0,
+          "enemy_pattern_version": 0,
+          "evolved": [
+            "gun_rifle",
+            "gun_ricochet"
+          ],
+          "evolved_at": {
+            "gun_ricochet": 248.450000000022,
+            "gun_rifle": 73.449999999998
+          },
+          "gold_reward": 13902,
+          "hammer_hits": 0,
+          "hammer_hp_lost": 0,
+          "hammer_strikes": 0,
+          "hp": 115,
+          "kills": 1490,
+          "map_id": "outskirts_trial",
+          "milestones": [
+            {
+              "choices": 6,
+              "collected_gold": 1416,
+              "hp": 115,
+              "kills": 178,
+              "mp": 20.2599999999998,
+              "time": 59.9999999999987,
+              "xp": 780.0
+            },
+            {
+              "choices": 8,
+              "collected_gold": 2970,
+              "hp": 97,
+              "kills": 373,
+              "mp": 10.8449999999992,
+              "time": 119.999999999995,
+              "xp": 1625.0
+            },
+            {
+              "choices": 10,
+              "collected_gold": 5828,
+              "hp": 115,
+              "kills": 677,
+              "mp": 39.0299999999987,
+              "time": 180.000000000007,
+              "xp": 3115.0
+            },
+            {
+              "choices": 10,
+              "collected_gold": 7582,
+              "hp": 108,
+              "kills": 885,
+              "mp": 32.8299999999977,
+              "time": 240.00000000002,
+              "xp": 3895.0
+            },
+            {
+              "choices": 11,
+              "collected_gold": 10696,
+              "hp": 115,
+              "kills": 1216,
+              "mp": 26.5724999999969,
+              "time": 300.000000000034,
+              "xp": 5830.0
+            },
+            {
+              "choices": 12,
+              "collected_gold": 13802,
+              "hp": 115,
+              "kills": 1490,
+              "mp": 20.3149999999966,
+              "time": 360.0,
+              "xp": 7400.0
+            }
+          ],
+          "mp": 20.3149999999966,
+          "outcome": "cleared",
+          "owned": {
+            "gun_grenade": 2,
+            "gun_ricochet": 5,
+            "gun_rifle": 5,
+            "gun_suppress": 1
+          },
+          "pacing_version": 1,
+          "peak_enemies": 80,
+          "seed": 7,
+          "talents": "full",
+          "total_collected_xp": 7400.0,
+          "trace": [
+            {
+              "collected_xp": 30.0,
+              "kills": 7,
+              "rank": 1,
+              "skill": "gun_grenade",
+              "time": 11.3
+            },
+            {
+              "collected_xp": 80.0,
+              "kills": 36,
+              "rank": 1,
+              "skill": "gun_suppress",
+              "time": 16.0500000000001
+            },
+            {
+              "collected_xp": 145.0,
+              "kills": 46,
+              "rank": 1,
+              "skill": "gun_ricochet",
+              "time": 17.4000000000001
+            },
+            {
+              "collected_xp": 230.0,
+              "kills": 49,
+              "rank": 2,
+              "skill": "gun_rifle",
+              "time": 21.8500000000002
+            },
+            {
+              "collected_xp": 395.0,
+              "kills": 86,
+              "rank": 3,
+              "skill": "gun_rifle",
+              "time": 31.8500000000003
+            },
+            {
+              "collected_xp": 625.0,
+              "kills": 144,
+              "rank": 4,
+              "skill": "gun_rifle",
+              "time": 53.3499999999991
+            },
+            {
+              "collected_xp": 990.0,
+              "kills": 231,
+              "rank": 5,
+              "skill": "gun_rifle",
+              "time": 73.449999999998
+            },
+            {
+              "collected_xp": 1495.0,
+              "kills": 318,
+              "rank": 2,
+              "skill": "gun_ricochet",
+              "time": 96.3499999999967
+            },
+            {
+              "collected_xp": 2195.0,
+              "kills": 533,
+              "rank": 3,
+              "skill": "gun_ricochet",
+              "time": 149.7
+            },
+            {
+              "collected_xp": 3085.0,
+              "kills": 673,
+              "rank": 4,
+              "skill": "gun_ricochet",
+              "time": 178.350000000006
+            },
+            {
+              "collected_xp": 4810.0,
+              "kills": 962,
+              "rank": 5,
+              "skill": "gun_ricochet",
+              "time": 248.450000000022
+            },
+            {
+              "collected_xp": 6625.0,
+              "kills": 1387,
+              "rank": 2,
+              "skill": "gun_grenade",
+              "time": 340.500000000043
+            }
+          ]
+        },
+        {
+          "boss_defeated_at": 325.20000000004,
+          "boss_distance_left": 0.0,
+          "boss_hp_left": 0,
+          "choices": 12,
+          "elapsed": 360.0,
+          "enemy_pattern_version": 0,
+          "evolved": [
+            "gun_rifle",
+            "gun_scatter"
+          ],
+          "evolved_at": {
+            "gun_rifle": 78.1499999999977,
+            "gun_scatter": 259.400000000025
+          },
+          "gold_reward": 13293,
+          "hammer_hits": 0,
+          "hammer_hp_lost": 0,
+          "hammer_strikes": 0,
+          "hp": 115,
+          "kills": 1418,
+          "map_id": "outskirts_trial",
+          "milestones": [
+            {
+              "choices": 6,
+              "collected_gold": 1238,
+              "hp": 115,
+              "kills": 171,
+              "mp": 30.6674999999995,
+              "time": 59.9999999999987,
+              "xp": 780.0
+            },
+            {
+              "choices": 8,
+              "collected_gold": 3347,
+              "hp": 115,
+              "kills": 376,
+              "mp": 24.3524999999988,
+              "time": 119.999999999995,
+              "xp": 1745.0
+            },
+            {
+              "choices": 9,
+              "collected_gold": 5795,
+              "hp": 115,
+              "kills": 672,
+              "mp": 14.9949999999982,
+              "time": 180.000000000007,
+              "xp": 2965.0
+            },
+            {
+              "choices": 10,
+              "collected_gold": 6268,
+              "hp": 98,
+              "kills": 889,
+              "mp": 8.73749999999723,
+              "time": 240.00000000002,
+              "xp": 3300.0
+            },
+            {
+              "choices": 11,
+              "collected_gold": 10685,
+              "hp": 115,
+              "kills": 1164,
+              "mp": 36.9799999999971,
+              "time": 300.000000000034,
+              "xp": 5755.0
+            },
+            {
+              "choices": 12,
+              "collected_gold": 13193,
+              "hp": 115,
+              "kills": 1418,
+              "mp": 65.2224999999965,
+              "time": 360.0,
+              "xp": 6810.0
+            }
+          ],
+          "mp": 65.2224999999965,
+          "outcome": "cleared",
+          "owned": {
+            "gun_grenade": 1,
+            "gun_rifle": 5,
+            "gun_scatter": 5,
+            "gun_suppress": 2
+          },
+          "pacing_version": 1,
+          "peak_enemies": 75,
+          "seed": 407,
+          "talents": "full",
+          "total_collected_xp": 6810.0,
+          "trace": [
+            {
+              "collected_xp": 30.0,
+              "kills": 10,
+              "rank": 1,
+              "skill": "gun_suppress",
+              "time": 9.2
+            },
+            {
+              "collected_xp": 80.0,
+              "kills": 42,
+              "rank": 1,
+              "skill": "gun_scatter",
+              "time": 16.4000000000001
+            },
+            {
+              "collected_xp": 150.0,
+              "kills": 45,
+              "rank": 1,
+              "skill": "gun_grenade",
+              "time": 17.7500000000001
+            },
+            {
+              "collected_xp": 230.0,
+              "kills": 51,
+              "rank": 2,
+              "skill": "gun_rifle",
+              "time": 24.1000000000002
+            },
+            {
+              "collected_xp": 385.0,
+              "kills": 87,
+              "rank": 3,
+              "skill": "gun_rifle",
+              "time": 31.5500000000003
+            },
+            {
+              "collected_xp": 625.0,
+              "kills": 137,
+              "rank": 4,
+              "skill": "gun_rifle",
+              "time": 47.5999999999994
+            },
+            {
+              "collected_xp": 985.0,
+              "kills": 226,
+              "rank": 5,
+              "skill": "gun_rifle",
+              "time": 78.1499999999977
+            },
+            {
+              "collected_xp": 1495.0,
+              "kills": 343,
+              "rank": 2,
+              "skill": "gun_scatter",
+              "time": 100.299999999996
+            },
+            {
+              "collected_xp": 2185.0,
+              "kills": 492,
+              "rank": 3,
+              "skill": "gun_scatter",
+              "time": 139.699999999998
+            },
+            {
+              "collected_xp": 3085.0,
+              "kills": 690,
+              "rank": 4,
+              "skill": "gun_scatter",
+              "time": 185.150000000008
+            },
+            {
+              "collected_xp": 4225.0,
+              "kills": 1003,
+              "rank": 5,
+              "skill": "gun_scatter",
+              "time": 259.400000000025
+            },
+            {
+              "collected_xp": 6625.0,
+              "kills": 1381,
+              "rank": 2,
+              "skill": "gun_suppress",
+              "time": 348.600000000045
+            }
+          ]
+        },
+        {
+          "boss_defeated_at": 323.050000000039,
+          "boss_distance_left": 0.0,
+          "boss_hp_left": 0,
+          "choices": 12,
+          "elapsed": 360.0,
+          "enemy_pattern_version": 1,
+          "evolved": [
+            "gun_rifle",
+            "gun_ricochet"
+          ],
+          "evolved_at": {
+            "gun_ricochet": 248.450000000022,
+            "gun_rifle": 73.449999999998
+          },
+          "gold_reward": 13902,
+          "hammer_hits": 0,
+          "hammer_hp_lost": 0,
+          "hammer_strikes": 0,
+          "hp": 115,
+          "kills": 1490,
+          "map_id": "outskirts_trial",
+          "milestones": [
+            {
+              "choices": 6,
+              "collected_gold": 1416,
+              "hp": 115,
+              "kills": 178,
+              "mp": 20.2599999999998,
+              "time": 59.9999999999987,
+              "xp": 780.0
+            },
+            {
+              "choices": 8,
+              "collected_gold": 2970,
+              "hp": 97,
+              "kills": 373,
+              "mp": 10.8449999999992,
+              "time": 119.999999999995,
+              "xp": 1625.0
+            },
+            {
+              "choices": 10,
+              "collected_gold": 5828,
+              "hp": 115,
+              "kills": 677,
+              "mp": 39.0299999999987,
+              "time": 180.000000000007,
+              "xp": 3115.0
+            },
+            {
+              "choices": 10,
+              "collected_gold": 7582,
+              "hp": 108,
+              "kills": 885,
+              "mp": 32.8299999999977,
+              "time": 240.00000000002,
+              "xp": 3895.0
+            },
+            {
+              "choices": 11,
+              "collected_gold": 10696,
+              "hp": 115,
+              "kills": 1216,
+              "mp": 26.5724999999969,
+              "time": 300.000000000034,
+              "xp": 5830.0
+            },
+            {
+              "choices": 12,
+              "collected_gold": 13802,
+              "hp": 115,
+              "kills": 1490,
+              "mp": 20.3149999999966,
+              "time": 360.0,
+              "xp": 7400.0
+            }
+          ],
+          "mp": 20.3149999999966,
+          "outcome": "cleared",
+          "owned": {
+            "gun_grenade": 2,
+            "gun_ricochet": 5,
+            "gun_rifle": 5,
+            "gun_suppress": 1
+          },
+          "pacing_version": 1,
+          "peak_enemies": 80,
+          "seed": 7,
+          "talents": "full",
+          "total_collected_xp": 7400.0,
+          "trace": [
+            {
+              "collected_xp": 30.0,
+              "kills": 7,
+              "rank": 1,
+              "skill": "gun_grenade",
+              "time": 11.3
+            },
+            {
+              "collected_xp": 80.0,
+              "kills": 36,
+              "rank": 1,
+              "skill": "gun_suppress",
+              "time": 16.0500000000001
+            },
+            {
+              "collected_xp": 145.0,
+              "kills": 46,
+              "rank": 1,
+              "skill": "gun_ricochet",
+              "time": 17.4000000000001
+            },
+            {
+              "collected_xp": 230.0,
+              "kills": 49,
+              "rank": 2,
+              "skill": "gun_rifle",
+              "time": 21.8500000000002
+            },
+            {
+              "collected_xp": 395.0,
+              "kills": 86,
+              "rank": 3,
+              "skill": "gun_rifle",
+              "time": 31.8500000000003
+            },
+            {
+              "collected_xp": 625.0,
+              "kills": 144,
+              "rank": 4,
+              "skill": "gun_rifle",
+              "time": 53.3499999999991
+            },
+            {
+              "collected_xp": 990.0,
+              "kills": 231,
+              "rank": 5,
+              "skill": "gun_rifle",
+              "time": 73.449999999998
+            },
+            {
+              "collected_xp": 1495.0,
+              "kills": 318,
+              "rank": 2,
+              "skill": "gun_ricochet",
+              "time": 96.3499999999967
+            },
+            {
+              "collected_xp": 2195.0,
+              "kills": 533,
+              "rank": 3,
+              "skill": "gun_ricochet",
+              "time": 149.7
+            },
+            {
+              "collected_xp": 3085.0,
+              "kills": 673,
+              "rank": 4,
+              "skill": "gun_ricochet",
+              "time": 178.350000000006
+            },
+            {
+              "collected_xp": 4810.0,
+              "kills": 962,
+              "rank": 5,
+              "skill": "gun_ricochet",
+              "time": 248.450000000022
+            },
+            {
+              "collected_xp": 6625.0,
+              "kills": 1387,
+              "rank": 2,
+              "skill": "gun_grenade",
+              "time": 340.500000000043
+            }
+          ]
+        },
+        {
+          "boss_defeated_at": 325.20000000004,
+          "boss_distance_left": 0.0,
+          "boss_hp_left": 0,
+          "choices": 12,
+          "elapsed": 360.0,
+          "enemy_pattern_version": 1,
+          "evolved": [
+            "gun_rifle",
+            "gun_scatter"
+          ],
+          "evolved_at": {
+            "gun_rifle": 78.1499999999977,
+            "gun_scatter": 259.400000000025
+          },
+          "gold_reward": 13293,
+          "hammer_hits": 0,
+          "hammer_hp_lost": 0,
+          "hammer_strikes": 0,
+          "hp": 115,
+          "kills": 1418,
+          "map_id": "outskirts_trial",
+          "milestones": [
+            {
+              "choices": 6,
+              "collected_gold": 1238,
+              "hp": 115,
+              "kills": 171,
+              "mp": 30.6674999999995,
+              "time": 59.9999999999987,
+              "xp": 780.0
+            },
+            {
+              "choices": 8,
+              "collected_gold": 3347,
+              "hp": 115,
+              "kills": 376,
+              "mp": 24.3524999999988,
+              "time": 119.999999999995,
+              "xp": 1745.0
+            },
+            {
+              "choices": 9,
+              "collected_gold": 5795,
+              "hp": 115,
+              "kills": 672,
+              "mp": 14.9949999999982,
+              "time": 180.000000000007,
+              "xp": 2965.0
+            },
+            {
+              "choices": 10,
+              "collected_gold": 6268,
+              "hp": 98,
+              "kills": 889,
+              "mp": 8.73749999999723,
+              "time": 240.00000000002,
+              "xp": 3300.0
+            },
+            {
+              "choices": 11,
+              "collected_gold": 10685,
+              "hp": 115,
+              "kills": 1164,
+              "mp": 36.9799999999971,
+              "time": 300.000000000034,
+              "xp": 5755.0
+            },
+            {
+              "choices": 12,
+              "collected_gold": 13193,
+              "hp": 115,
+              "kills": 1418,
+              "mp": 65.2224999999965,
+              "time": 360.0,
+              "xp": 6810.0
+            }
+          ],
+          "mp": 65.2224999999965,
+          "outcome": "cleared",
+          "owned": {
+            "gun_grenade": 1,
+            "gun_rifle": 5,
+            "gun_scatter": 5,
+            "gun_suppress": 2
+          },
+          "pacing_version": 1,
+          "peak_enemies": 75,
+          "seed": 407,
+          "talents": "full",
+          "total_collected_xp": 6810.0,
+          "trace": [
+            {
+              "collected_xp": 30.0,
+              "kills": 10,
+              "rank": 1,
+              "skill": "gun_suppress",
+              "time": 9.2
+            },
+            {
+              "collected_xp": 80.0,
+              "kills": 42,
+              "rank": 1,
+              "skill": "gun_scatter",
+              "time": 16.4000000000001
+            },
+            {
+              "collected_xp": 150.0,
+              "kills": 45,
+              "rank": 1,
+              "skill": "gun_grenade",
+              "time": 17.7500000000001
+            },
+            {
+              "collected_xp": 230.0,
+              "kills": 51,
+              "rank": 2,
+              "skill": "gun_rifle",
+              "time": 24.1000000000002
+            },
+            {
+              "collected_xp": 385.0,
+              "kills": 87,
+              "rank": 3,
+              "skill": "gun_rifle",
+              "time": 31.5500000000003
+            },
+            {
+              "collected_xp": 625.0,
+              "kills": 137,
+              "rank": 4,
+              "skill": "gun_rifle",
+              "time": 47.5999999999994
+            },
+            {
+              "collected_xp": 985.0,
+              "kills": 226,
+              "rank": 5,
+              "skill": "gun_rifle",
+              "time": 78.1499999999977
+            },
+            {
+              "collected_xp": 1495.0,
+              "kills": 343,
+              "rank": 2,
+              "skill": "gun_scatter",
+              "time": 100.299999999996
+            },
+            {
+              "collected_xp": 2185.0,
+              "kills": 492,
+              "rank": 3,
+              "skill": "gun_scatter",
+              "time": 139.699999999998
+            },
+            {
+              "collected_xp": 3085.0,
+              "kills": 690,
+              "rank": 4,
+              "skill": "gun_scatter",
+              "time": 185.150000000008
+            },
+            {
+              "collected_xp": 4225.0,
+              "kills": 1003,
+              "rank": 5,
+              "skill": "gun_scatter",
+              "time": 259.400000000025
+            },
+            {
+              "collected_xp": 6625.0,
+              "kills": 1381,
+              "rank": 2,
+              "skill": "gun_suppress",
+              "time": 348.600000000045
+            }
+          ]
+        }
+      ],
+      "scope": "16complete real simulation runs,two seeds7/407 per map/talent/version,unchanged original evolve controller and spawn geometry;not human/device or final balance approval",
+      "unaffected_outskirts_equal": true
+    },
+    "balance_findings": "16total=2maps*2talentprofiles*2versions*2seeds(7,407),original move/evolve controller with no telegraph-aware avoidance or HP/MP gifts. Old7/8clear and new7/8clear. Prologue none407 changes clear360s/HP100 to defeat353.8s/HP0 after boss already killed,with0hammerstrikes/0directhammerhits. Prologue full407 changes timeout with1380bossHP to clear/HP106,2hammerstrikes/0directhits. Other compared prologue samples clear;new all8campaign samples choose11~12 and evolve2attacks. Untargeted outskirts none/full bothseeds are byte-equal result dictionaries except declared version. Small sample does not establish balance equivalence;next unit investigates crowd/pursuit/loot-path effects before adding more special patterns.",
+    "input_scope": "23actual X11 images,two renderers/1280x720,853x393safeinsets,1920x1080,scheduledorc with explicit approach fixture,windup/dodge/impact/recovery,missionpause/choice,wall/dense/terminal.11native mousecontrols+1native mission touch+1native movement dodge. No older screen-count carryover.",
+    "fixture_and_development_notes": "GUI clock/actor approach/cooldown0/dense180/custom wall are explicit QA,not natural player or performance evidence. Automatic6min samples use full actual steps with original controller and no clock jumps. Earlier regression test failures were historical generic-profile fixtures still marked with modernpattern1;they now explicitly use0 and exact schema assertions move15->16 without removing behavior checks. Initial import regenerates previously cleaned UID files. Recovery exit diagnostic identified AudioStreamWAV/PlaybackWAV still held by mixer at0.1s;final cold harness uses original prior1s shutdown flush,all3clean. Initial development regression/import/exit diagnostic logs excluded from final evidence index.",
+    "warnings": "Final full engine/GUI/restore have no script/leak errors. GUI retains existing software-driverunsupportedVSync only. No new FPS/thermal/mixer/economy approval."
+  },
+  "limits": {
+    "android_device": "NOT_VERIFIED",
+    "ios_device": "NOT_VERIFIED",
+    "windows_f5_export": "NOT_VERIFIED",
+    "physical_audio_human_readability": "NOT_VERIFIED",
+    "new_performance_mixer": "NOT_RUN",
+    "automatic_six_minute_samples": 16,
+    "final_art_audio": "NOT_APPROVED",
+    "final_pattern_balance": "OPEN_REGRESSION_NONE407",
+    "other_special_patterns": "NOT_IMPLEMENTED"
+  },
+  "next": "공성파괴자 패턴의 프롤로그 실전 균형 보완",
+  "artifacts": {
+    ".local_validation/GAME038/balance-results.json": {
+      "sha256": "e55e20ce0821fc1a4f17c9b9d726c9c846cf2e65b092cc0d9a78b1b85b9669ec",
+      "bytes": 66677
+    },
+    ".local_validation/GAME038/balance.log": {
+      "sha256": "9254909fb6d4ca625eee373245b9a3b0de87819fd03e7fd174cc3b0d560c964a",
+      "bytes": 37290
+    },
+    ".local_validation/GAME038/cold/recovery/battle.save": {
+      "sha256": "4e84015882f1e1af538ec24fffb67927d16a744caa10949419563a0f8ae8a711",
+      "bytes": 9676
+    },
+    ".local_validation/GAME038/cold/strike/battle.save": {
+      "sha256": "0fa2db26713fabfddb1c87b674808c57361f6144254304e9fc6c2879dd6805b0",
+      "bytes": 9676
+    },
+    ".local_validation/GAME038/cold/windup/battle.save": {
+      "sha256": "89c2525f23dc55df16960880c8a32d19889bfdeab836ca185d408316850302d5",
+      "bytes": 9672
+    },
+    ".local_validation/GAME038/engine_0.log": {
+      "sha256": "edff16c1721dd4ae989cadf29a01f574ae8d51b118221f664725bd6980bbba5d",
+      "bytes": 32
+    },
+    ".local_validation/GAME038/engine_1.log": {
+      "sha256": "bd175cdf7c9db6376ff16d7e39ebc7f084e899ed5358467e834bf6e8bdbe9165",
+      "bytes": 1352
+    },
+    ".local_validation/GAME038/engine_2.log": {
+      "sha256": "1938b93b03756e658dd6fc29e699189d67afb2aec05905c840e9c22f5b89a6cd",
+      "bytes": 117
+    },
+    ".local_validation/GAME038/engine_3.log": {
+      "sha256": "190487dfb2bdf99cdccfff084fd5d95b81eac04fcfe3ec43e502d524daacb8eb",
+      "bytes": 117
+    },
+    ".local_validation/GAME038/engine_4.log": {
+      "sha256": "0dc80f41a9d961a6b4d962614c905af0b7c3bc209f569871d09048860b58f7ff",
+      "bytes": 118
+    },
+    ".local_validation/GAME038/engine_5.log": {
+      "sha256": "c5a9e5b87c0439795f9d5bcfe6c17d74bce134acc53d7f341cfb55a11bdb1e1d",
+      "bytes": 117
+    },
+    ".local_validation/GAME038/engine_6.log": {
+      "sha256": "570a42343d370c104902d16c9ff0b402573f94ed3076772afb70e6bce96084fc",
+      "bytes": 119
+    },
+    ".local_validation/GAME038/engine_7.log": {
+      "sha256": "025f863c84ce84466e9269a07033239400176c7aad50ada31ff794c6e59b0837",
+      "bytes": 117
+    },
+    ".local_validation/GAME038/engine_8.log": {
+      "sha256": "1a0725f18fd97251ef4cc97cd1332254b588d6692f76aab91816a661e2a3407a",
+      "bytes": 119
+    },
+    ".local_validation/GAME038/engine_9.log": {
+      "sha256": "6d1c065383a27c36804949b6ffa4b09714470b112e5dacc0bd5aeb7b9c147c4e",
+      "bytes": 73
+    },
+    ".local_validation/GAME038/full-check.log": {
+      "sha256": "d4feb41094e707a504072a5e9e49d3b4ac5ede56376d7b8b6af5f617c5a6d61b",
+      "bytes": 27509
+    },
+    ".local_validation/GAME038/guard.json": {
+      "sha256": "c94e3c8fcb55063f3047503d91742f9ebf8c98b0d633af4b07d131bb3d3ef9b1",
+      "bytes": 3645
+    },
+    ".local_validation/GAME038/hammer_choice.png": {
+      "sha256": "1286febc54e46cc89130f00e90dbbcea8d5436b44afded8d86700f41d69552c5",
+      "bytes": 132945
+    },
+    ".local_validation/GAME038/hammer_choice_return.png": {
+      "sha256": "bf813938e3d99574d0232fee35f00b0b188398ce1c9e2f31f083d02ed617e2ba",
+      "bytes": 77208
+    },
+    ".local_validation/GAME038/hammer_dense_false.png": {
+      "sha256": "5e15ecff2d37287298b155274d7d929d75dfe2eba4032991147f586a6a035bbf",
+      "bytes": 77257
+    },
+    ".local_validation/GAME038/hammer_dense_true.png": {
+      "sha256": "897e0d4b98e575d7e65a32e28514bc3f16bc476810577d3613b0a7996ffc41dd",
+      "bytes": 137354
+    },
+    ".local_validation/GAME038/hammer_mission_pause.png": {
+      "sha256": "3606c0290d194eaab55f67a47d656466314a5ae857db49d573f80b34246aea21",
+      "bytes": 45252
+    },
+    ".local_validation/GAME038/hammer_native_dodge.png": {
+      "sha256": "57383a6e535d082a1a143855faf8c15a782bbeee8520e75aed76452c5ce7e1bf",
+      "bytes": 36914
+    },
+    ".local_validation/GAME038/hammer_recovery.png": {
+      "sha256": "c298ec16d7d0f0d8cfe94ef1577ee9bc807e4be10aca4f8afa4b047b435c5866",
+      "bytes": 67277
+    },
+    ".local_validation/GAME038/hammer_strike_false_1280.png": {
+      "sha256": "9d0a23814fa1c88c6d430fb5bceb303dce01ec630439849746c695e645b54179",
+      "bytes": 74803
+    },
+    ".local_validation/GAME038/hammer_strike_false_1920.png": {
+      "sha256": "151b2e6902be347ac39cd6dd7d78e7362badea4abe47c592598fd2ee7af4c486",
+      "bytes": 83651
+    },
+    ".local_validation/GAME038/hammer_strike_false_853.png": {
+      "sha256": "e45bda7757bafe38c7ea8d696f873df2ffd1977298ce2d5dbdc0cc76669f7b77",
+      "bytes": 50756
+    },
+    ".local_validation/GAME038/hammer_strike_true_1280.png": {
+      "sha256": "6f00c1affc8849d7e4c8d2c9803253821b9a6353743b1a3fc15bb2708647ba30",
+      "bytes": 179529
+    },
+    ".local_validation/GAME038/hammer_strike_true_1920.png": {
+      "sha256": "c641e8f04e448fafac3e8235a1a439e39cd2d09dc3f2639f37fd9c5837365e50",
+      "bytes": 263980
+    },
+    ".local_validation/GAME038/hammer_strike_true_853.png": {
+      "sha256": "eca2b4117ee177a5ac154afda8ef65eeecb074d18e2429a538c5ca70a556c955",
+      "bytes": 105315
+    },
+    ".local_validation/GAME038/hammer_terminal.png": {
+      "sha256": "df939aea3dd79ed4155106228c53c998d8e032c0069f653530f8f095798a9614",
+      "bytes": 28934
+    },
+    ".local_validation/GAME038/hammer_wall_blocked.png": {
+      "sha256": "c92dd9b8874c185991780a5c9bee418903937d35d57db3ce0e2c527be4971960",
+      "bytes": 67674
+    },
+    ".local_validation/GAME038/hammer_wall_false.png": {
+      "sha256": "1871c4107f49c9adf5421063a629615c5574f393b91bd61a09b7dc3699c2287b",
+      "bytes": 67896
+    },
+    ".local_validation/GAME038/hammer_wall_true.png": {
+      "sha256": "8f1c1fbb839cd52099bcb444541c7ee7ba26a05d2d227bafd888bac71877ce2b",
+      "bytes": 169939
+    },
+    ".local_validation/GAME038/hammer_windup_false_1280.png": {
+      "sha256": "0e9da616daf1a3c5e7539611b57804b7edd567d03d952f99a396914abeb77563",
+      "bytes": 74017
+    },
+    ".local_validation/GAME038/hammer_windup_false_1920.png": {
+      "sha256": "156bb11037218ec60335cceff53f81f6de60392035b6ccb684d95b67c9d0cbc5",
+      "bytes": 82810
+    },
+    ".local_validation/GAME038/hammer_windup_false_853.png": {
+      "sha256": "fb2682fbcbb499022258409e521f7456e19b80760ba12059702b4b3ee9fd723f",
+      "bytes": 50051
+    },
+    ".local_validation/GAME038/hammer_windup_true_1280.png": {
+      "sha256": "374e9a016b59c89c612296a999ef466e62bfbb757e7bf92e3969d04325179e84",
+      "bytes": 179643
+    },
+    ".local_validation/GAME038/hammer_windup_true_1920.png": {
+      "sha256": "6f1ac35db22eb868c85b23e5c28f1086451aa2dc096cb22ee776b99608fe1b03",
+      "bytes": 263861
+    },
+    ".local_validation/GAME038/hammer_windup_true_853.png": {
+      "sha256": "65bd94581af980c4a198724acd1358175e94208e98db799bf5cf699255f0c9b3",
+      "bytes": 105343
+    },
+    ".local_validation/GAME038/historical-inputs.json": {
+      "sha256": "b1623da9589fbd8d0513f1280411df1e621121da449b709d39150b2764c6ead1",
+      "bytes": 2594
+    },
+    ".local_validation/GAME038/pattern-inputs.json": {
+      "sha256": "47095d5be7759ac49dd3a51b005441174b77f1a0c9874da960a8755b5623ed6d",
+      "bytes": 424
+    },
+    ".local_validation/GAME038/pattern-process-results.json": {
+      "sha256": "c9138ae1b2187b8b6f7301fd6dbaafc762f04c618bbb816f90201e9e3ab1ce88",
+      "bytes": 1253
+    },
+    ".local_validation/GAME038/pattern-process-runner.log": {
+      "sha256": "819ffd7a80a0349e01151871c0a034e121ac7f96ee71c5a3ffa354d0ff81cf28",
+      "bytes": 1076
+    },
+    ".local_validation/GAME038/pattern-recovery-process.log": {
+      "sha256": "49bf9b671841faef2f321de9e041d2bf6fc526f4807232f2ee9d7f0adae57b82",
+      "bytes": 385
+    },
+    ".local_validation/GAME038/pattern-runner.log": {
+      "sha256": "323b3653c81fb40037467b4d76dc256f1376148b9b253c632718f65a73dc279f",
+      "bytes": 117
+    },
+    ".local_validation/GAME038/pattern-strike-process.log": {
+      "sha256": "a26aa5d86e6a966ff0f9cb4fd942e379f76faec34e345d212b770f438c323e91",
+      "bytes": 380
+    },
+    ".local_validation/GAME038/pattern-windup-process.log": {
+      "sha256": "305a1b12728b177806e58bc5d1da25eea7b797c14f6c2b2b38b3198af37b16a3",
+      "bytes": 380
+    },
+    ".local_validation/GAME038/pattern_probe.gd": {
+      "sha256": "d838613cd62c4b48110304c7137bef768fcc63bb9260a5db7822f33ccb2c6c62",
+      "bytes": 3932
+    },
+    ".local_validation/GAME038/pattern_runner.gd": {
+      "sha256": "cf82c5ae87868da7721fc5982d247141afcc83e0e6b7138296dffc409a3ad76d",
+      "bytes": 565
+    },
+    ".local_validation/GAME038/process-results.json": {
+      "sha256": "97940120cf4a805cc1f22e26155b434426b8ada16bf82dc2f0ebbd02af50e4bc",
+      "bytes": 48528
+    },
+    ".local_validation/GAME038/process-runner.log": {
+      "sha256": "8750613ed71c2a97e83eac7496028ddc5be141a3c8aa176a2ffb383552af8b8f",
+      "bytes": 406
+    },
+    ".local_validation/GAME038/process-v1.log": {
+      "sha256": "ec6d43a2ca9181c22acaebfd1fc0e2f2bc6f8fbc924ac8a53790adc020bf7a09",
+      "bytes": 1176
+    },
+    ".local_validation/GAME038/process-v10.log": {
+      "sha256": "75832071974a23b40e8e79aa6548bb22ed0ea91653d8c49c4acdf69861d19d02",
+      "bytes": 1520
+    },
+    ".local_validation/GAME038/process-v11.log": {
+      "sha256": "e78db3f2559bf83136992034e74ced9a920b201fecd9a7be7c32c2af31fe3ca4",
+      "bytes": 1354
+    },
+    ".local_validation/GAME038/process-v12.log": {
+      "sha256": "2802d169e5c19361b8fe3e2de52e783396e4f80d97d3bbb4a97738492f0c489e",
+      "bytes": 1391
+    },
+    ".local_validation/GAME038/process-v13.log": {
+      "sha256": "75768bed6e8333432b28dbc1d660dbbef9cef7f6b3846e9afa977cf9493f926f",
+      "bytes": 3555
+    },
+    ".local_validation/GAME038/process-v14-campaign.log": {
+      "sha256": "12a1004df1b61bb1514aca6e8301b2dc750c11f42795bf5ad9f611d7980e559f",
+      "bytes": 1825
+    },
+    ".local_validation/GAME038/process-v14-dungeon.log": {
+      "sha256": "9bad70c8a944bd6e9cad55a99550054633a6dd497d83b8167940c653f4b664ec",
+      "bytes": 3963
+    },
+    ".local_validation/GAME038/process-v15-campaign.log": {
+      "sha256": "759def044d1b09431b28a0d9b8a8f8334055902bcdb367a3c6309075b38faeb3",
+      "bytes": 1485
+    },
+    ".local_validation/GAME038/process-v15-dungeon.log": {
+      "sha256": "7cc37c73e403e73bb124e4d2035a95d9de4e8d899cd19a1a0cc850cc9127f52f",
+      "bytes": 3963
+    },
+    ".local_validation/GAME038/process-v2.log": {
+      "sha256": "0f6acccfb73d3392caf9ecff4cf7561e79bddd60048ab6dcdfc98de26819940c",
+      "bytes": 1599
+    },
+    ".local_validation/GAME038/process-v3.log": {
+      "sha256": "1c2c41f0f017fd3f85dcfb7f2d17e7bc8af3c7929b6ec3f7fec9b983755af8f9",
+      "bytes": 3228
+    },
+    ".local_validation/GAME038/process-v4.log": {
+      "sha256": "d1fa3e3248867c3ea0e503b6e37dbe5f07beddbaacc4eb8a387052ff82b6e731",
+      "bytes": 1333
+    },
+    ".local_validation/GAME038/process-v5.log": {
+      "sha256": "38227c24bdf353353072e7dd5a2f84fc676f4ec7b6ba909f5892dac7a1fbd623",
+      "bytes": 1334
+    },
+    ".local_validation/GAME038/process-v6.log": {
+      "sha256": "00aa30a763256e286c5f46353f7f4505a687f138a2491e468d4227a83b0fbfad",
+      "bytes": 1329
+    },
+    ".local_validation/GAME038/process-v7.log": {
+      "sha256": "14d7db7db8b39fc76ac891c182776bb247db474a1e471d6641b1157051b1e4b2",
+      "bytes": 2840
+    },
+    ".local_validation/GAME038/process-v8.log": {
+      "sha256": "faf56bbdaeb36ac49cb4c536805cc48bd49c937b9b6495fb371dc17878b3ecfe",
+      "bytes": 1729
+    },
+    ".local_validation/GAME038/process-v9.log": {
+      "sha256": "8c7c15085f5c41466864101aa03add99a48bf459fb4bfe07cd5faf56bbb11b2c",
+      "bytes": 1346
+    },
+    ".local_validation/GAME038/process_probe.gd": {
+      "sha256": "d387bc7d39396d6103531a02eaf0e2d8809f2953f338bd2a527efcd45036b305",
+      "bytes": 5287
+    },
+    ".local_validation/GAME038/python.log": {
+      "sha256": "03df5411f36261af9568ca31701bca68ba372d0eb0d1d2dff8ec1f61e24a7621",
+      "bytes": 111
+    },
+    ".local_validation/GAME038/render-live/battle.save": {
+      "sha256": "8689d82f6f17a15d1aa5de3482bebce5bb26def853f8a35d35758f5fee557f14",
+      "bytes": 67164
+    },
+    ".local_validation/GAME038/render-live/recovery.save": {
+      "sha256": "14d36a687b6c995caf5f6dcb12cbaa2b2c7de7ff5a9bfc48443a1a529a284f87",
+      "bytes": 9676
+    },
+    ".local_validation/GAME038/render-live/strike.save": {
+      "sha256": "6953fb4d1bd3194ab94a1d3f3017c4b6499adc938256451a8839f1acaa3ca02e",
+      "bytes": 9676
+    },
+    ".local_validation/GAME038/render-live/windup.save": {
+      "sha256": "95d1dbbe7d1482916115a70b2551ce015ac0963f0e2120eeabcae591715e074b",
+      "bytes": 9672
+    },
+    ".local_validation/GAME038/render-results.json": {
+      "sha256": "427e5271da8a8803106dc4a1263f064f361ee8a3cde9f4693dfa4b6f7f9c970f",
+      "bytes": 31070
+    },
+    ".local_validation/GAME038/render.log": {
+      "sha256": "91d45ff92044149b3a84784cf75ab7c87736f3a2a7dda725b61984c95fa1b0e6",
+      "bytes": 438
+    },
+    ".local_validation/GAME038/render_probe.gd": {
+      "sha256": "e9ad3f563857a5b45df9dd76ef912b3be59ee66e0d913a1fac9001c443bda42b",
+      "bytes": 9831
+    },
+    ".local_validation/GAME038/report.json": {
+      "sha256": "d4feb41094e707a504072a5e9e49d3b4ac5ede56376d7b8b6af5f617c5a6d61b",
+      "bytes": 27509
+    },
+    ".local_validation/GAME038/source-proof.json": {
+      "sha256": "e156b9a4ba77d0c9cf076f0af94c5e5a91bbe8be042973c9fb636f20a4f7fb7a",
+      "bytes": 11247
+    },
+    ".local_validation/GAME038/v1-gold.cfg": {
+      "sha256": "19c9c8680d5b33d3582f5e42a5dceaa8a93ec559344a0b8204394c17d3fc6a3f",
+      "bytes": 75
+    },
+    ".local_validation/GAME038/v1.save": {
+      "sha256": "51f9390593e16448f575dce33311e65dc6f813540ccbc795da6676e03afaad7e",
+      "bytes": 4164
+    },
+    ".local_validation/GAME038/v10.save": {
+      "sha256": "40b41258c2cc7824464809e077a4dcb751f974b39e9aecbdad1b2b770bb8ffa2",
+      "bytes": 15896
+    },
+    ".local_validation/GAME038/v11.save": {
+      "sha256": "2e017a5b49e0282f69a708ec5f26638f2a28399f43736a25d9ea79b2c1ca29e1",
+      "bytes": 14948
+    },
+    ".local_validation/GAME038/v12-gold.cfg": {
+      "sha256": "2d771f338d36154158c886b5ad905d3d1eb3a974ea23f325850d69ccfc3653bf",
+      "bytes": 461
+    },
+    ".local_validation/GAME038/v12.save": {
+      "sha256": "72c97b631500fdbcd359239cfa2900ffc1251817683058c3ede24a482e6d4fec",
+      "bytes": 10208
+    },
+    ".local_validation/GAME038/v13-gold.cfg": {
+      "sha256": "b01c0ebfd465b09558f1ba064ae353307c2b511284784a1f6aa2776b0c3c99bd",
+      "bytes": 3062
+    },
+    ".local_validation/GAME038/v13.save": {
+      "sha256": "2b877e9c371d4ff34b77175d06189aac23e65de2c261178c9b735519186b9381",
+      "bytes": 56984
+    },
+    ".local_validation/GAME038/v14-campaign.save": {
+      "sha256": "f0fd0548d7c217653028f944c20c39d60cfd88f0924d52e76ef11b8a35f98155",
+      "bytes": 24620
+    },
+    ".local_validation/GAME038/v14-dungeon-gold.cfg": {
+      "sha256": "e41d9ae5611f8ebfa7140cc18bc78bfdd10d8f34caeeb2b955ac33ac1a04facf",
+      "bytes": 3076
+    },
+    ".local_validation/GAME038/v14-dungeon.save": {
+      "sha256": "19486279ecf011b4006fddb79ea64687c16d924ded06dd7e7954ec87e6449ed2",
+      "bytes": 56684
+    },
+    ".local_validation/GAME038/v15-campaign.save": {
+      "sha256": "3087d1e66f9a9cae045fab64a0a5bcebaf8faebb267fb1519e5e785f5461d909",
+      "bytes": 12068
+    },
+    ".local_validation/GAME038/v15-dungeon-gold.cfg": {
+      "sha256": "520cefe6dd42fee7320249c75a6fca3a935c16359535947cb866b73102574b87",
+      "bytes": 3102
+    },
+    ".local_validation/GAME038/v15-dungeon.save": {
+      "sha256": "301ab640bae662f0fac5be7f14fdc8abae54132644be909597b213ebdf590bfd",
+      "bytes": 57976
+    },
+    ".local_validation/GAME038/v2.save": {
+      "sha256": "853a637b17fede1c904e6a86b35575e2a98da42ce9d85ec39065b1cd881f1fc7",
+      "bytes": 10780
+    },
+    ".local_validation/GAME038/v3.save": {
+      "sha256": "107f643bdd12b6c5ba960de154b739b6eb68de18072ef3256d272f121be09c42",
+      "bytes": 48948
+    },
+    ".local_validation/GAME038/v4-gold.cfg": {
+      "sha256": "9d6232a14127d855fe39dffce42a8243323a66cdf8945168becc71170b0cd757",
+      "bytes": 97
+    },
+    ".local_validation/GAME038/v4.save": {
+      "sha256": "b75705fb2ed833d50d87ba71a129aa56bbc40808f2a3bd9a1635fb37fc2fcc41",
+      "bytes": 3344
+    },
+    ".local_validation/GAME038/v5-gold.cfg": {
+      "sha256": "d74306940ed9a119fd77b381fc52d9109149cf54f2d21ea5d9ce2c4bdcbce12e",
+      "bytes": 216
+    },
+    ".local_validation/GAME038/v5.save": {
+      "sha256": "e2829877b4e103012dba19ee48bf1cb351d7cc6f73f5bea0410a2d97ea621205",
+      "bytes": 3368
+    },
+    ".local_validation/GAME038/v6-gold.cfg": {
+      "sha256": "064e5d7170081ee940f7937067443cfc7729163b617861313581619b6725d8d9",
+      "bytes": 459
+    },
+    ".local_validation/GAME038/v6.save": {
+      "sha256": "4d6ba4a6a042196b1b58ca4af58e0c18570aee0baa3dbdd1a53a3d048cd58b32",
+      "bytes": 3488
+    },
+    ".local_validation/GAME038/v7.save": {
+      "sha256": "abf7d30a52c363cc61bfc0929327767a207558c00897145ef33fc3c4374cfe77",
+      "bytes": 40104
+    },
+    ".local_validation/GAME038/v8-gold.cfg": {
+      "sha256": "61fee1fc485c37b252db36ded6d15cfe1e45ba255e6d50202debbf3b4d6748c9",
+      "bytes": 474
+    },
+    ".local_validation/GAME038/v8.save": {
+      "sha256": "764e41c9cd2bc426a9f478ca63bd03c46242a6e1f0fab2bc795acaf2bfc50cc8",
+      "bytes": 12356
+    },
+    ".local_validation/GAME038/v9.save": {
+      "sha256": "e0a453487de59c5ab505ffd4560b12ff024212d82d60cfb4632ed555e9cc9279",
+      "bytes": 9588
+    }
+  }
+}
