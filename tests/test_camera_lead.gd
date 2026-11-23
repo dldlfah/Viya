@@ -99,7 +99,7 @@ static func run(host,verify:Callable)->void:
 	var restored=State.new()
 	var loaded:bool=Snapshot.restore(current,restored)
 	if loaded:restored.set_paused(false)
-	verify.call(Snapshot.VERSION==15 and loaded and Campaign.comparable(restored)==Campaign.comparable(state),"Lead needs no new save field/version and restores gameplay exactly")
+	verify.call(Snapshot.VERSION==16 and loaded and Campaign.comparable(restored)==Campaign.comparable(state),"Lead remains cosmetic while current v16 restores gameplay exactly")
 	ui.queue_free()
 	await host.get_tree().process_frame
 	for file in ["battle.save","gold.cfg","settings.cfg"]:DirAccess.remove_absolute(folder.path_join(file))

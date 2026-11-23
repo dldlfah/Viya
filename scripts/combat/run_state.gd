@@ -12,6 +12,9 @@ const WeaponModules = preload("res://scripts/combat/weapon_modules.gd")
 const AccountTalents = preload("res://scripts/progression/account_talents.gd")
 const DefenseRules = preload("res://scripts/combat/defense_rules.gd")
 const CombatProfiles = preload("res://scripts/combat/combat_profiles.gd")
+const EnemyPatterns = preload("res://scripts/combat/enemy_patterns.gd")
+var enemy_patterns = EnemyPatterns.new()
+var enemy_pattern_version:int=0
 enum Phase { READY, RUNNING, PAUSED, DEFEAT, CHOOSING, ABANDONED, CLEARED }
 const WORLD_SIZE := Vector2(1800.0, 1200.0) # Legacy API; mapped runs use world_size.
 const PLAYER_SPEED := 235.0
@@ -118,7 +121,7 @@ var dungeon = preload("res://scripts/combat/gold_dungeon.gd").new()
 func enemy_definition(id: String) -> Dictionary:
 	return dungeon.species(wave_profile()) if id=="gold_slime" and run_mode=="gold_slime" else profiles.species(id)
 
-func start(seed_value: int = 0, character_id: String = "viya", account_level: Variant = null, selected_map: String = "legacy_arena", skill_ruleset: String = "legacy", support_loadout: Dictionary = {}, mode: String = "campaign", entry_day: int = -1, pacing_version:int=-1) -> bool:
+func start(seed_value: int = 0, character_id: String = "viya", account_level: Variant = null, selected_map: String = "legacy_arena", skill_ruleset: String = "legacy", support_loadout: Dictionary = {}, mode: String = "campaign", entry_day: int = -1, pacing_version:int=-1, pattern_version:int=-1) -> bool:
 	# Validate the complete selected character before changing the previous run.
 	var selected_levels: Dictionary = account_talent_levels.duplicate(true)
 	if account_level is int:
@@ -156,6 +159,8 @@ func start(seed_value: int = 0, character_id: String = "viya", account_level: Va
 		return false
 	var hero: Dictionary = growth.catalog.hero(character_id,skill_ruleset)
 	var selected_profile := 1 if skill_ruleset=="weapons_v1" else 0
+	var selected_pattern:int=(1 if selected_profile==1 and mode=="campaign" else 0) if pattern_version==-1 else pattern_version
+	if selected_pattern not in [0,1] or (selected_pattern==1 and (selected_profile!=1 or mode!="campaign" or not enemy_patterns.error.is_empty())):return false
 	if selected_profile==1 and (not profiles.error.is_empty() or profiles.hero(character_id).is_empty() or (mode=="campaign" and not profiles.data.maps.has(selected_map))):
 		return false
 	var candidate: Dictionary = magic_configuration(hero,selected_profile,character_id)
@@ -176,6 +181,7 @@ func start(seed_value: int = 0, character_id: String = "viya", account_level: Va
 	account_talent_levels = selected_levels
 	armor_enabled = skill_ruleset == "weapons_v1"
 	combat_profile_version = selected_profile
+	enemy_pattern_version = selected_pattern
 	var previous_mode: String=run_mode
 	run_mode = mode
 	dungeon_day = entry_day
@@ -339,6 +345,7 @@ func add_enemy(at: Vector2, kind: String = "normal", variant: String = "normal",
 		enemy.merge({"fire_clock": float(stage_rules.ranged.interval), "windup": 0.0, "aim": at})
 	elif variant == "flier":
 		enemy.merge({"velocity": Vector2.RIGHT * float(enemy.speed if combat_profile_version==1 else stage_rules.swarm.speed), "life": float(stage_rules.swarm.life), "group": _swarm_serial})
+	enemy_patterns.attach(self,enemy)
 	enemies.append(enemy)
 	return true
 
@@ -627,6 +634,9 @@ func _spawn_enemy(kind: String = "normal") -> bool:
 func _move_enemies(dt: float) -> void:
 	# Ground movement happens first so fly-bys cannot be undone by pursuit this frame.
 	for enemy in enemies:
+		var pattern_locked:bool=enemy_patterns.tick(self,enemy,dt)
+		if phase!=Phase.RUNNING:return
+		if pattern_locked:continue
 		if enemy.variant == "flier":
 			continue
 		var speed: float = float(enemy.get("speed", wave_profile().speed)) * WeaponModules.speed_scale(enemy)
@@ -652,6 +662,7 @@ func _move_enemies(dt: float) -> void:
 			_tick_ranged(enemy, dt)
 	_move_fliers(dt)
 	for enemy in enemies:
+		if enemy_patterns.locked(self,enemy):continue
 		if enemy.p.distance_squared_to(player) <= pow(PLAYER_RADIUS + ENEMY_RADIUS, 2.0):
 			var accepted := damage_player(int(enemy.get("contact_damage",12)), "physical", 0.0, {"kind":"contact", "id":int(enemy.id), "p":enemy.p})
 			if accepted and enemy.variant == "flier":

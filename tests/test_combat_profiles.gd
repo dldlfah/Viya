@@ -150,6 +150,7 @@ static func recovery_checks(verify: Callable) -> void:
 		verify.call(not Snapshot.restore(bad,copy) and frozen==Campaign.comparable(copy),"Malformed species state rejected atomically: "+mutation)
 	state=quiet()
 	state.combat_profile_version=0 # Reconstruct actual GAME019 generic actors.
+	state.enemy_pattern_version=0 # GAME019 had no special attack patterns.
 	state.add_enemy(state.player+Vector2(200,0),"normal","heavy")
 	state.enemies[0].hp=27
 	state.hp=73

@@ -30,8 +30,8 @@ func record_received(at: Vector2, hp_lost: int, source: Dictionary = {}) -> void
 	var id := 0
 	var origin := at
 	var direction := Vector2.ZERO
-	if source.get("kind","")=="contact" and source.get("p") is Vector2 and source.p.is_finite() and int(source.get("id",0))>0:
-		kind = "contact"
+	if source.get("kind","") in ["contact","melee"] and source.get("p") is Vector2 and source.p.is_finite() and int(source.get("id",0))>0:
+		kind = str(source.kind)
 		id = int(source.id)
 		origin = source.p
 		direction = (origin-at).normalized()

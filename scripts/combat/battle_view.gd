@@ -293,6 +293,7 @@ func _draw_foreground_threats() -> void:
 		else:draw_circle(at,5,Color("ffd2a3"))
 
 func _draw_combat_cues() -> void:
+	preload("res://scripts/combat/enemy_pattern_visuals.gd").draw(self)
 	if not simulation.cues.enabled:return
 	preload("res://scripts/combat/structure_feedback.gd").draw(self,display_plan.get("structures",[]))
 	var font:Font=get_theme_default_font()

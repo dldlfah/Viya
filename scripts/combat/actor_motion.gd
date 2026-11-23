@@ -40,7 +40,7 @@ func sync(state, hero_displacement:Vector2, active:bool, track_enemies:bool=true
 		hero.hurt_until=state.elapsed+.12
 		hero.erase("hurt_aim")
 		if not hit.direction.is_zero_approx():hero.hurt_aim=hit.direction
-		if hit.kind=="contact":contacts[int(hit.id)]=hit.p
+		if hit.kind in ["contact","melee"]:contacts[int(hit.id)]=hit.p
 	if state.hp<float(hero.hp) and not received_now:hero.erase("hurt_aim")
 	if state.shots>int(hero.get("shots",state.shots)):
 		for index in range(state.bullets.size()-1,-1,-1):
@@ -62,6 +62,10 @@ func sync(state, hero_displacement:Vector2, active:bool, track_enemies:bool=true
 		var windup:float=enemy.get("windup",0)
 		var attacking:bool=windup>0 or float(enemy.get("fire_clock",0))>float(previous.get("fire_clock",enemy.get("fire_clock",0)))
 		var aim_at:Vector2=enemy.get("aim",state.player) if attacking else state.player
+		if enemy.get("pattern",{}).get("phase","") in ["windup","strike"]:
+			attacking=true
+			windup=float(enemy.pattern.left) if enemy.pattern.phase=="windup" else 0
+			aim_at=enemy.p+enemy.pattern.direction
 		if contacts.has(id):
 			attacking=true
 			windup=0

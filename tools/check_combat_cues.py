@@ -10,7 +10,13 @@ import re
 ROOT = Path(__file__).resolve().parents[1]
 FILES = ('scripts/combat/run_state.gd', 'scripts/combat/battle_view.gd',
          'scripts/combat/combat_cues.gd', 'tests/test_combat_cues.gd',
-         'tools/check_project.py', 'tools/check_combat_cues.py')
+         'tools/check_project.py', 'tools/check_combat_cues.py',
+         'scripts/combat/enemy_patterns.gd',
+         'scripts/combat/enemy_pattern_visuals.gd',
+         'scripts/progression/run_snapshot.gd',
+         'scripts/combat/actor_motion.gd',
+         'data/enemy_patterns.json',
+)
 # GAME-024: reviewed enemy variants, formations and hostile projectile integration. Exact source baselines retain mutation guards.
 BASE_RUN_BLOB = '673d75a748fa5f1f9ac72ec73bbd9120fdcfce02'
 BASE_VIEW_BLOB = '9e5c23c321e53f3ccb948d5dc7f1a2f101ffcd32'
@@ -34,6 +40,26 @@ SUPPLY_RUN_LINES = ('\t# Observe committed deltas only; keep the existing effect
 SUPPLY_RECEIPT = ('\tcues.record_item(player, str(SupplyCatalog.ITEM_NAMES[kind]), {"kind":kind,"hp":hp-int(supply_before.hp),"mp":magic.mana-float(supply_before.mp),"gold":gold_collected-int(supply_before.gold),"kills":kills-int(supply_before.kills),"bullets":int(supply_before.bullets)-enemy_bullets.size(),"xp":supply_xp})', '\tcues.record_item(player, str(SupplyCatalog.ITEM_NAMES[kind]))')
 SUPPLY_VIEW_ADAPTER = ('\t_draw_supply_items()\n\nfunc _draw_supply_items() -> void:\n\tvar visible:=Rect2(Vector2.ZERO,size).grow(22)\n\tvar compact:bool=size.x<900 or size.y<350\n\tfor item in simulation.item_pickups:\n\t\tvar at:=_screen(item.p)\n\t\tif visible.has_point(at):SupplyFeedback.draw_item(self,at,str(item.kind),compact)\n', '\tfor item in simulation.item_pickups:\n\t\tvar at := _screen(item.p)\n\t\tif not visible.has_point(at):\n\t\t\tcontinue\n\t\tvar color: Color = {"hp":Color("f58c9c"),"mp":Color("7abcf3"),"magnet":Color("f3ce79"),"purge":Color("cea2fa")}[item.kind]\n\t\tdraw_circle(at,17,Color("20252c"))\n\t\tdraw_arc(at,18,0,TAU,24,color,2,true)\n\t\tmatch item.kind:\n\t\t\t"hp":\n\t\t\t\tdraw_line(at+Vector2(-9,0),at+Vector2(9,0),color,5)\n\t\t\t\tdraw_line(at+Vector2(0,-9),at+Vector2(0,9),color,5)\n\t\t\t"mp":\n\t\t\t\tdraw_colored_polygon(PackedVector2Array([at+Vector2(0,-11),at+Vector2(8,3),at+Vector2(0,10),at+Vector2(-8,3)]),color)\n\t\t\t"magnet":\n\t\t\t\tdraw_arc(at,8,0,PI,14,color,5,true)\n\t\t\t\tdraw_line(at+Vector2(-8,0),at+Vector2(-8,-9),color,5)\n\t\t\t\tdraw_line(at+Vector2(8,0),at+Vector2(8,-9),color,5)\n\t\t\t"purge":\n\t\t\t\tdraw_line(at-Vector2(8,8),at+Vector2(8,8),color,4)\n\t\t\t\tdraw_line(at+Vector2(-8,8),at+Vector2(8,-8),color,4)\n')
 SUPPLY_VIEW_IMPORT = 'const SupplyFeedback=preload("res://scripts/combat/supply_feedback.gd")\n'
+
+
+# GAME038: exact reviewed gameplay adapters. Removing only these additions must
+# still recover the original GAME024 mutation-protected RunState byte for byte.
+PATTERN_RUN_LINES = (
+    'const EnemyPatterns = preload("res://scripts/combat/enemy_patterns.gd")',
+    'var enemy_patterns = EnemyPatterns.new()',
+    'var enemy_pattern_version:int=0',
+    '\tvar selected_pattern:int=(1 if selected_profile==1 and mode=="campaign" else 0) if pattern_version==-1 else pattern_version',
+    '\tif selected_pattern not in [0,1] or (selected_pattern==1 and (selected_profile!=1 or mode!="campaign" or not enemy_patterns.error.is_empty())):return false',
+    '\tenemy_pattern_version = selected_pattern',
+    '\tenemy_patterns.attach(self,enemy)',
+    '\t\tvar pattern_locked:bool=enemy_patterns.tick(self,enemy,dt)',
+    '\t\tif phase!=Phase.RUNNING:return',
+    '\t\tif pattern_locked:continue',
+    '\t\tif enemy_patterns.locked(self,enemy):continue',
+)
+PATTERN_START_SIGNATURE = (', pacing_version:int=-1, pattern_version:int=-1) -> bool:', ', pacing_version:int=-1) -> bool:')
+# Pin the reviewed new AI/migration/render adapters as well as the historical baseline.
+PATTERN_REVIEWED_SHA256 = {'scripts/combat/enemy_patterns.gd': '4059f30002b56fa0ccb73ed38b4fe4af9c0fe8092a8f5836ad53f6e3cef5a4af', 'scripts/combat/enemy_pattern_visuals.gd': '7ffd0cbb0b3e50bbdd2c344618522b0f1ebd792f187f10ac32d5393444eedb74', 'scripts/progression/run_snapshot.gd': '61703b550b07ee8eab71dbdef2237066a7997ebb26313d90e948d2dda1dcceb8', 'scripts/combat/actor_motion.gd': 'f54f9db4346617b1a6c589fd58ef30d53d3e4ee18cc1bafd2aa2c4bd43cf0045', 'data/enemy_patterns.json': 'ba04c2b3076746724a09cf212576886edfa33821f666daa97a541d5042680bec'}
 
 
 def blob(text: str) -> str:
@@ -60,8 +86,22 @@ def engine_function_digest(source: str) -> str:
 
 def validate(sources: dict[str, str]) -> list[str]:
     errors: list[str] = []
-    run, view, cues, tests, runner, _ = [sources[x] for x in FILES]
+    run, view, cues, tests, runner, _ = [sources[x] for x in FILES[:6]]
+    for path, expected in PATTERN_REVIEWED_SHA256.items():
+        if hashlib.sha256(sources[path].encode('utf-8')).hexdigest() != expected:
+            errors.append('Reviewed GAME038 pattern/compatibility source changed: ' + path)
+    if 'res://tests/test_enemy_patterns.gd' not in tests:
+        errors.append('Pattern runtime tests are not registered')
+    if view.count('preload("res://scripts/combat/enemy_pattern_visuals.gd").draw(self)') != 1:
+        errors.append('Shared hostile telegraph hook changed')
     restored = run
+    if restored.count(PATTERN_START_SIGNATURE[0]) != 1:
+        errors.append('Missing/changed reviewed pattern start gate')
+    restored = restored.replace(*PATTERN_START_SIGNATURE, 1)
+    for line in PATTERN_RUN_LINES:
+        if restored.splitlines().count(line) != 1:
+            errors.append('Missing/changed reviewed pattern adapter: ' + line.strip())
+        restored = restored.replace(line + '\n', '', 1)
     if restored.count(SUPPLY_RECEIPT[0]) != 1:
         errors.append('Missing/changed committed supply receipt hook')
     restored = restored.replace(*SUPPLY_RECEIPT, 1)
@@ -155,6 +195,8 @@ def check() -> dict:
                 names = re.findall(r'^func (\w+)\(', text, re.M)
                 if len(names) != len(set(names)):
                     errors.append(name + ': duplicate function')
+            elif name.endswith('.json'):
+                json.loads(text)
             else:
                 ast.parse(text, name)
             for number, line in enumerate(text.splitlines(), 1):
@@ -164,6 +206,13 @@ def check() -> dict:
             errors.append(f'{name}: {error}')
     negative = []
     cases = [
+        ('pattern_single_hit', 'scripts/combat/enemy_patterns.gd', 'p.phase="strike"', 'p.phase="windup"'),
+        ('pattern_old_ai', 'scripts/progression/run_snapshot.gd', 'data.run.enemy_pattern_version=0', 'data.run.enemy_pattern_version=1'),
+        ('pattern_visual_mutation', 'scripts/combat/enemy_pattern_visuals.gd', 'var result:Array=[]', 'var result:Array=[]\n\tview.simulation.hp=1'),
+        ('pattern_unregistered', FILES[3], 'res://tests/test_enemy_patterns.gd', 'res://tests/missing_pattern.gd'),
+        ('pattern_gate', FILES[0], 'if selected_pattern not in [0,1]', 'if false'),
+        ('pattern_contact_guard', FILES[0], '\t\tif enemy_patterns.locked(self,enemy):continue', ''),
+        ('pattern_stop_on_defeat', FILES[0], '\t\tif phase!=Phase.RUNNING:return', ''),
         ('missing_reset', FILES[0], '\tcues.reset()\n', ''),
         ('early_clock', FILES[0], '\tvar dt := minf(delta, 0.05)\n', '\tvar dt := minf(delta, 0.05)\n\tcues.advance(dt)\n'),
         ('changed_damage', FILES[0], 'damage *= float(stats.get("crit_damage", 2.0))', 'damage *= 99.0'),
@@ -202,7 +251,7 @@ def check() -> dict:
             'baseline_run_blob': BASE_RUN_BLOB, 'baseline_runner_blob': BASE_RUNNER_BLOB,
             'baseline_engine_function_sha256': BASE_ENGINE_FUNCTION_SHA256,
             'scope': 'Changed-source UTF-8/delimiters/Python syntax, hook order, bounds, isolation, '
-                     'reviewed GAME-024 RunState/GAME-030 view baselines with exact GAME-033 read-only adapters and preserved engine runner. '
+                     'reviewed GAME-024 RunState/GAME-030 view baselines with exact GAME-033 observations and GAME-038 version-gated pattern adapters, preserved engine runner. '
                      'NOT Godot parser/type/runtime, visual quality, input dispatch, or FPS.'}
 
 
