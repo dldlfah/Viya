@@ -12,6 +12,7 @@ var battle_chrome
 var combat_audio=preload("res://scripts/combat/combat_audio.gd").new()
 const SaveNotice=preload("res://scripts/ui/battle_save_notice.gd")
 var save_notice=SaveNotice.new()
+var encounter_notice=preload("res://scripts/ui/encounter_notice.gd").new()
 var _restoring_battle:bool=false
 var _saved_context_label:Label
 var mission_button:Button
@@ -687,6 +688,7 @@ func begin_run() -> void:
 
 func _after_run_started() -> void:
 	save_notice.reset(simulation.run_id)
+	encounter_notice.seed(simulation)
 	_overview_open = false
 	_overview_origin = ""
 	_final_growth.clear()
@@ -1108,6 +1110,7 @@ func _resume_saved_run() -> void:
 	_restoring_battle=true
 	super._resume_saved_run()
 	_restoring_battle=false
+	encounter_notice.seed(simulation)
 	_apply_layout()
 
 func _abandon_saved_run() -> void:
@@ -1324,6 +1327,7 @@ func _update_feedback_hud() -> void:
 func _update_hud() -> void:
 	super._update_hud()
 	combat_audio.guard(simulation,not overlay.visible)
+	encounter_notice.observe(simulation,save_notice.until if save_notice.visible(simulation,battle_save_error) else -1)
 	if not is_instance_valid(boss_bar):
 		return
 	var bosses: Array = simulation.enemies.filter(func(enemy): return enemy.kind == "boss")
@@ -1370,6 +1374,9 @@ func _update_hud() -> void:
 	mission_button.visible=simulation.has_active_run() and not overlay.visible
 	mission_button.text="임무 ▸" if layout_data.get("compact",false) else ("최후의 성벽 방어 ▸" if simulation.map_id=="prologue_wall" else "전투 임무 ▸")
 	mission_button.tooltip_text=stage_text.text
+	if encounter_notice.visible(simulation):
+		mission_button.text=encounter_notice.caption(simulation,layout_data.get("compact",false))
+		mission_button.tooltip_text=encounter_notice.summary(simulation)+"\n"+stage_text.text
 	if save_notice.visible(simulation,battle_save_error):
 		mission_button.text="저장됨 ▸" if layout_data.get("compact",false) else "전투 저장됨 · 임무 ▸"
 		mission_button.tooltip_text=stage_text.text+"\n체크포인트 %d 전투 저장됨 · 임무에서 저장 정보 확인" % save_notice.checkpoint
@@ -1423,6 +1430,8 @@ func _open_mission(ticket:int,revision:int) -> void:
 	dialog_body.add_child(_label("전투 임무 · "+str(simulation.map_space.definition.name),23))
 	var duration:int=int(simulation.stage_duration)
 	dialog_body.add_child(_label("생존 %.1f / %d초" % [simulation.elapsed,duration],19))
+	var arrival:String=encounter_notice.summary(simulation)
+	if not arrival.is_empty():dialog_body.add_child(_label(arrival,16))
 	if simulation.run_mode=="gold_slime":
 		dialog_body.add_child(_label("3분 생존 시 획득 금화 전액 정산 · 캠페인 해금 없음",18))
 	else:
