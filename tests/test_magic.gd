@@ -194,5 +194,7 @@ func _run() -> void:
 	scene.queue_free()
 	await process_frame
 	await process_frame
+	# Let the asynchronous audio mixer release stopped playback before engine exit.
+	await create_timer(.25).timeout
 	print(JSON.stringify({"checks": checks, "failures": failures, "status": "PASS" if failures.is_empty() else "FAIL"}))
 	quit(0 if failures.is_empty() else 1)

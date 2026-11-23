@@ -10,6 +10,10 @@ const CombatSlot=preload("res://scripts/ui/combat_slot_button.gd")
 var combat_skin=CombatSkin.new()
 var battle_chrome
 var combat_audio=preload("res://scripts/combat/combat_audio.gd").new()
+const SaveNotice=preload("res://scripts/ui/battle_save_notice.gd")
+var save_notice=SaveNotice.new()
+var _restoring_battle:bool=false
+var _saved_context_label:Label
 var mission_button:Button
 var mission_return_button:Button
 var _mission_open:bool=false
@@ -70,6 +74,7 @@ var _dungeon_notice: String = ""
 func _ready() -> void:
 	add_child(combat_audio)
 	super._ready()
+	save_notice.seed(run_store.pending,battle_save_error)
 	# Recover/pay terminal intent first, then start at the lobby with its frozen result.
 	if battle_save_error == OK and gold_error == OK and simulation.phase in [RunState.Phase.CLEARED, RunState.Phase.DEFEAT, RunState.Phase.ABANDONED]:
 		if simulation.return_to_ready(simulation.navigation_ticket):
@@ -100,6 +105,31 @@ func _cast_magic(expected_ticket:int=-1) -> void:
 func _set_volume(value:float) -> void:
 	super._set_volume(value)
 	combat_audio.guard(simulation,not overlay.visible)
+
+func _saved_battle_text() -> String:
+	return SaveNotice.summary(run_store.pending,simulation.map_catalog) if battle_save_error==OK else "저장 정보 확인 불가 · 불러오기 오류를 확인하세요"
+
+func _refresh_save_context() -> void:
+	if not is_instance_valid(_saved_context_label):return
+	var valid:bool=battle_save_error==OK and SaveNotice.resumable(run_store.pending) and str(run_store.pending.run.run_id)==simulation.run_id
+	_saved_context_label.visible=valid
+	_saved_context_label.text="마지막 전투 저장\n"+_saved_battle_text() if valid else ""
+
+func _add_save_context(before_control:Control=null) -> void:
+	_saved_context_label=_label("",16)
+	_saved_context_label.name="SavedBattleSummary"
+	_saved_context_label.mouse_filter=Control.MOUSE_FILTER_IGNORE
+	dialog_body.add_child(_saved_context_label)
+	if is_instance_valid(before_control):dialog_body.move_child(_saved_context_label,dialog_body.get_children().find(before_control))
+	_refresh_save_context()
+
+func _persist_battle() -> bool:
+	var active:bool=simulation.has_active_run()
+	var success:bool=super._persist_battle()
+	if active:save_notice.confirmed(run_store.pending,battle_save_error,simulation,not _restoring_battle)
+	else:save_notice.until=-1
+	_refresh_save_context()
+	return success
 
 func _build_interface() -> void:
 	root_ui = Control.new()
@@ -384,6 +414,7 @@ func _apply_layout() -> void:
 
 func _clear_dialog() -> void:
 	combat_audio.stop_all()
+	_saved_context_label=null
 	dungeon_button=null
 	dungeon_launch_button=null
 	talents_button = null
@@ -464,6 +495,10 @@ func _show_menu(kind: String) -> void:
 		dialog_body.add_child(talents_button)
 	if kind == "ready":
 		_decorate_lobby()
+	if kind=="paused":
+		_add_save_context(resume_button)
+		dialog_body.move_child(resume_button,1)
+		dialog_body.move_child(_saved_context_label,2)
 	_add_growth_access(kind)
 	_scroll.scroll_vertical = 0
 	_fit_dialog()
@@ -605,6 +640,7 @@ func begin_run() -> void:
 	_after_run_started()
 
 func _after_run_started() -> void:
+	save_notice.reset(simulation.run_id)
 	_overview_open = false
 	_overview_origin = ""
 	_final_growth.clear()
@@ -1017,7 +1053,10 @@ func _resume_saved_run() -> void:
 	_final_growth.clear()
 	_overview_open = false
 	_detail_open = false
+	save_notice.seed(run_store.pending,battle_save_error)
+	_restoring_battle=true
 	super._resume_saved_run()
+	_restoring_battle=false
 	_apply_layout()
 
 func _abandon_saved_run() -> void:
@@ -1238,11 +1277,11 @@ func _update_hud() -> void:
 		if simulation._elites_spawned < 2 and not simulation._boss_spawned:
 			next = "정예 %d초" % maxi(0,int(ceil(float(simulation.stage_rules.elites[simulation._elites_spawned])-simulation.elapsed)))
 		stage_text.add_theme_font_size_override("font_size",14)
-		stage_text.text = "S%d %s · %02d:%02d · 생존+보스 · %s · 저장 %d/2" % [simulation.stage,simulation.map_space.definition.get("short_name","전장"),left/60,left%60,next,simulation.checkpoint_index]
+		stage_text.text = "S%d %s · %02d:%02d · 생존+보스 · %s · 저장 %d/2" % [simulation.stage,simulation.map_space.definition.get("short_name","전장"),left/60,left%60,next,save_notice.count_for(simulation.run_id)]
 		stage_text.tooltip_text = simulation.map_space.definition.name
 	if simulation.run_mode=="gold_slime":
 		var left:=maxi(0,int(ceil(simulation.stage_duration-simulation.elapsed)))
-		stage_text.text="골드 슬라임 던전 · %02d:%02d · 생존 · 저장 %d/2" % [left/60,left%60,simulation.checkpoint_index]
+		stage_text.text="골드 슬라임 던전 · %02d:%02d · 생존 · 저장 %d/2" % [left/60,left%60,save_notice.count_for(simulation.run_id)]
 		stats_text.text="던전 %02d:%02d | 처치 %d | 금화 %d" % [int(simulation.elapsed)/60,int(simulation.elapsed)%60,simulation.kills,simulation.gold_collected]
 		stats_text.tooltip_text="3분 생존 시 획득 금화 정산 · 캠페인 해금 없음"
 	if _modal_kind=="gold_dungeon" and is_instance_valid(dungeon_launch_button):
@@ -1267,6 +1306,9 @@ func _update_hud() -> void:
 	mission_button.visible=simulation.has_active_run() and not overlay.visible
 	mission_button.text="임무 ▸" if layout_data.get("compact",false) else ("최후의 성벽 방어 ▸" if simulation.map_id=="prologue_wall" else "전투 임무 ▸")
 	mission_button.tooltip_text=stage_text.text
+	if save_notice.visible(simulation,battle_save_error):
+		mission_button.text="저장됨 ▸" if layout_data.get("compact",false) else "전투 저장됨 · 임무 ▸"
+		mission_button.tooltip_text=stage_text.text+"\n체크포인트 %d 전투 저장됨 · 임무에서 저장 정보 확인" % save_notice.checkpoint
 	battle_chrome.queue_redraw()
 
 func _handle_mobile_back() -> bool:
@@ -1323,6 +1365,7 @@ func _open_mission(ticket:int,revision:int) -> void:
 		dialog_body.add_child(_label("보스 격파: "+("완료" if simulation._boss_defeated else "진행 중"),19))
 		dialog_body.add_child(_label("생존 시간과 보스 처치를 모두 달성하면 클리어합니다.",18))
 	dialog_body.add_child(_label("체크포인트 %d/2 · 획득 금화 %d" % [simulation.checkpoint_index,simulation.gold_collected],18))
+	_add_save_context()
 	mission_return_button=_button("닫기 · 전투로",_close_mission.bind(simulation.navigation_ticket,_menu_revision))
 	dialog_body.add_child(mission_return_button)
 	overlay.show()

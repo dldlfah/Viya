@@ -461,8 +461,9 @@ func _show_menu(kind: String) -> void:
 		_add_gold_status()
 		if _has_saved_battle():
 			start_button.text = "이어하기"
-			var saved: Dictionary = run_store.pending.run
-			dialog_body.add_child(_label("저장된 스테이지 %d · %.1f초 · 체크포인트 %d/2" % [saved.stage, saved.elapsed, saved.checkpoint_index], 18))
+			var summary_label := _label(_saved_battle_text(), 18)
+			summary_label.name = "SavedBattleSummary"
+			dialog_body.add_child(summary_label)
 			dialog_body.add_child(_button("저장 전투 포기", _abandon_saved_run))
 		if battle_save_error != OK:
 			start_button.disabled = true
@@ -647,6 +648,10 @@ func _set_display_option(value: bool, key: String) -> void:
 func _update_settings_message() -> void:
 	if is_instance_valid(settings_message):
 		settings_message.text = "설정은 변경 시 자동 저장됩니다." if settings_error == OK else "설정 저장 실패 · %s" % error_string(settings_error)
+
+func _saved_battle_text() -> String:
+	var saved:Dictionary=run_store.pending.run
+	return "저장된 스테이지 %d · %.1f초 · 체크포인트 %d/2" % [saved.stage,saved.elapsed,saved.checkpoint_index]
 
 func _add_gold_status() -> void:
 	dialog_body.add_child(_label("보유 금화 %d · 다음 스테이지 %d" % [gold_progress.total, gold_progress.next_stage], 19))
