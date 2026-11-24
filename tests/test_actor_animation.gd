@@ -189,7 +189,7 @@ static func run(host,verify:Callable)->void:
 	var same:=true
 	for frame in range(180):
 		ui.movement.axis=Vector2.RIGHT if frame<60 else Vector2.ZERO
-		reference.step(.05,ui.movement.axis)
+		reference.step(.05,ui.view.input_direction(ui.movement.axis))
 		ui._physics_process(.05)
 		ui.view.actor_visual()
 		same=same and Campaign.comparable(state)==Campaign.comparable(reference) and state.cues.snapshot()==reference.cues.snapshot()

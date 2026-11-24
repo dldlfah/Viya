@@ -88,7 +88,7 @@ func _recover_dungeon_admission() -> void:
 	battle_save_error=run_store.write_snapshot(initial)
 
 func _physics_process(delta: float) -> void:
-	simulation.step(delta, movement.direction())
+	simulation.step(delta, view.input_direction(movement.direction()))
 	_sync_phase_ui()
 	if simulation.has_active_run() and simulation.checkpoint_index > _saved_checkpoint and battle_save_error == OK:
 		_ensure_battle_saved()

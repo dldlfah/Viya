@@ -7,6 +7,8 @@ const Approaches = preload("res://scripts/combat/approach_cues.gd")
 const CombatSkin=preload("res://scripts/ui/combat_skin.gd")
 const Forms=preload("res://scripts/combat/battle_forms.gd")
 const Battlefield=preload("res://scripts/combat/battlefield_presentation.gd")
+const ObliqueScenery=preload("res://scripts/combat/oblique_scenery.gd")
+const ObliqueProjection=preload("res://scripts/combat/oblique_projection.gd")
 var materials=CombatSkin.new()
 var detail_actors:bool=true
 var canvas
@@ -20,18 +22,18 @@ var stats: Dictionary = {}
 func screen(at: Vector2) -> Vector2:
 	return ground * at
 
-func depth_commands(simulation, area: Rect2) -> Array:
+func depth_commands(simulation, area: Rect2, oblique:bool=false) -> Array:
 	var commands: Array = []
 	for enemy in simulation.enemies:
-		if area.grow(120).has_point(enemy.p):commands.append({"layer":"enemy", "depth":float(enemy.p.y), "id":int(enemy.id), "value":enemy})
+		if area.grow(120).has_point(enemy.p):commands.append({"layer":"enemy", "depth":ObliqueProjection.depth(enemy.p) if oblique else float(enemy.p.y), "id":int(enemy.id), "value":enemy})
 	for prop in simulation.structures:
-		if area.grow(80).has_point(prop.p):commands.append({"layer":"prop", "depth":float(prop.p.y), "id":int(prop.id), "value":prop})
+		if area.grow(80).has_point(prop.p):commands.append({"layer":"prop", "depth":ObliqueProjection.depth(prop.p) if oblique else float(prop.p.y), "id":int(prop.id), "value":prop})
 	var serial := 0
 	for obstacle in simulation.map_space.definition.obstacles:
 		var box: Rect2 = simulation.MapCatalog.rectangle(obstacle.rect)
-		if area.grow(180).intersects(box):commands.append({"layer":"obstacle", "depth":box.end.y, "id":serial, "value":obstacle})
+		if area.grow(260 if oblique else 180).intersects(box):commands.append({"layer":"obstacle", "depth":ObliqueProjection.depth(Vector2(box.position.x,box.end.y)) if oblique else box.end.y, "id":serial, "value":obstacle})
 		serial += 1
-	commands.append({"layer":"hero", "depth":float(simulation.player.y), "id":-1, "value":{}})
+	commands.append({"layer":"hero", "depth":ObliqueProjection.depth(simulation.player) if oblique else float(simulation.player.y), "id":-1, "value":{}})
 	commands.sort_custom(func(a,b):return a.depth < b.depth if a.depth != b.depth else a.id < b.id)
 	return commands
 
@@ -39,8 +41,8 @@ func draw(view) -> void:
 	canvas = view
 	state = view.simulation
 	camera = canvas.camera_center()
-	ground = BattleProjection.transform(camera, view.size)
-	visible = BattleProjection.visible_world(camera, view.size)
+	ground = view.ground_transform()
+	visible = view.ground_visible()
 	viewport = Rect2(Vector2.ZERO, view.size)
 	stats = {"tiles":0, "actors":0, "occluders":0, "commands":0}
 	canvas.draw_rect(viewport, Color("171c20"))
@@ -48,7 +50,7 @@ func draw(view) -> void:
 	_draw_ground()
 	_draw_floor_effects()
 	canvas.draw_set_transform_matrix(Transform2D.IDENTITY)
-	var commands := depth_commands(state, visible)
+	var commands := depth_commands(state, visible, view.uses_oblique())
 	stats.commands = commands.size()
 	detail_actors=not view.display_plan.simple and commands.size()<=125
 	stats.detailed_actors=detail_actors
@@ -172,7 +174,7 @@ func _draw_hero() -> void:
 	var visual:Dictionary=canvas.actor_visual()
 	if not visual.sample.is_empty():canvas.draw_texture_rect(visual.sample.texture,canvas.actor_art.rectangle(visual.sample,feet),false)
 	else:
-		var direction: Vector2 = Vector2(visual.facing.x,visual.facing.y*BattleProjection.GROUND_Y).normalized()
+		var direction: Vector2 = canvas.project_direction(visual.facing).normalized()
 		Forms.hero(canvas,feet,direction,state.hurt_clock>.5,visual)
 
 func _draw_prop(prop: Dictionary) -> void:
@@ -243,6 +245,9 @@ static func top_material_regions(world:Rect2,top:Rect2,window:Rect2,texture_size
 	return result
 
 func _draw_obstacle(obstacle: Dictionary) -> void:
+	if canvas.uses_oblique():
+		if ObliqueScenery.draw(self,obstacle):stats.occluders += 1
+		return
 	var box: Rect2 = state.MapCatalog.rectangle(obstacle.rect)
 	var height: float = float(obstacle.get("visual_height",122 if obstacle.kind=="wall" else 65))
 	var alpha := .28 if BattleProjection.occludes_player(box,height,state.player,camera,canvas.size) else 1.0
@@ -309,7 +314,7 @@ func _draw_obstacle(obstacle: Dictionary) -> void:
 			canvas.draw_colored_polygon(PackedVector2Array([light+Vector2(-5,6),light+Vector2(0,-10),light+Vector2(4,6)]),Color("efad68",alpha))
 
 func _draw_approaches() -> void:
-	for cue in Approaches.build(state,visible):
+	for cue in canvas.approach_cues():
 		var raw := screen(cue.at)
 		var at := raw.clamp(Vector2.ONE*20,canvas.size-Vector2.ONE*20)
 		var direction := (raw-at).normalized()

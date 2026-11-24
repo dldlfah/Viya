@@ -35,11 +35,13 @@ func _radar() -> void:
 	var dots:=0
 	for enemy in enemies:
 		var delta:Vector2=(enemy.p-player)/900*radius
-		delta.y*=.8660254037844386
+		if hud.view.uses_oblique():delta=hud.view.project_direction(delta)/hud.view.ObliqueProjection.basis(hud.view.size).x.length()
+		else:delta.y*=.8660254037844386
 		if delta.length()>radius-5:continue
 		if dots>=48:break
 		draw_circle(center+delta,2.5 if enemy.kind=="boss" else 1.5,Color("ed796f") if enemy.kind!="elite" else Color("c49be0"))
 		dots+=1
 	draw_colored_polygon(PackedVector2Array([center+Vector2(0,-5),center+Vector2(4,4),center+Vector2(0,2),center+Vector2(-4,4)]),CombatSkin.LIGHT)
-	draw_string(get_theme_default_font(),center+Vector2(-4,-radius-4),"N",HORIZONTAL_ALIGNMENT_LEFT,-1,11,CombatSkin.LIGHT)
+	var north:Vector2=hud.view.project_direction(Vector2.UP).normalized() if hud.view.uses_oblique() else Vector2.UP
+	draw_string(get_theme_default_font(),center+north*(radius+4)+Vector2(-4,0),"N",HORIZONTAL_ALIGNMENT_LEFT,-1,11,CombatSkin.LIGHT)
 	draw_string(get_theme_default_font(),center+Vector2(-23,radius+13),"주변 전장",HORIZONTAL_ALIGNMENT_LEFT,-1,10,CombatSkin.GOLD)

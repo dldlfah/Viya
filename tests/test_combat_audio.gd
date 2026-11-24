@@ -184,7 +184,7 @@ static func run(host,verify:Callable)->void:
 	var same:=true
 	for frame in range(100):
 		var direction:=Vector2.RIGHT if frame<50 else Vector2.ZERO
-		reference.step(.05,direction)
+		reference.step(.05,ui.view.input_direction(direction))
 		ui.movement.axis=direction
 		ui._physics_process(.05)
 		same=same and Campaign.comparable(reference)==Campaign.comparable(state)

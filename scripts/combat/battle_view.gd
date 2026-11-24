@@ -3,6 +3,13 @@ extends Control
 const AttackVisuals = preload("res://scripts/combat/attack_visuals.gd")
 const ApproachCues = preload("res://scripts/combat/approach_cues.gd")
 const BattleProjection = preload("res://scripts/combat/battle_projection.gd")
+const ObliqueProjection = preload("res://scripts/combat/oblique_projection.gd")
+var oblique_enabled:bool=true # Diagnostic only; no saved rule or rotating camera.
+var _tilt_player:=Vector2.INF
+var _tilt_offset:=Vector2.INF
+var _tilt_size:=Vector2.ZERO
+var _tilt_run:String=""
+var _tilt_matrix:=Transform2D.IDENTITY # One derived transform, never one per actor.
 const Display=preload("res://scripts/combat/combat_display.gd")
 const BossGuidance=preload("res://scripts/combat/boss_guidance.gd")
 const SupplyFeedback=preload("res://scripts/combat/supply_feedback.gd")
@@ -28,6 +35,12 @@ func _ready() -> void:
 	clip_contents = true
 
 func camera_center() -> Vector2:
+	if uses_oblique():
+		var extent:Vector2=BattleProjection.world_view_size(size)
+		var lag:Vector2=camera.offset*extent if camera.run_id==simulation.run_id and camera._initialized and camera._viewport==size else Vector2.ZERO
+		var projected:Vector2=ObliqueProjection.screen_direction(lag,size)
+		var fraction:float=minf(1,minf(size.x*.08/maxf(.001,absf(projected.x)),size.y*.08/maxf(.001,absf(projected.y))))
+		return simulation.map_space.camera_center(simulation.player+lag*fraction,extent)
 	return camera.center(simulation,size)
 
 func spawn_guard_size() -> Vector2:
@@ -36,11 +49,37 @@ func spawn_guard_size() -> Vector2:
 func advance_camera(delta: float, displacement: Vector2, active: bool) -> void:
 	camera.advance(simulation,size,displacement,delta,active)
 
+func uses_oblique() -> bool:
+	return high_angle and oblique_enabled and simulation!=null and simulation.map_id=="siege_battlefield"
+
+func ground_transform() -> Transform2D:
+	if not uses_oblique():return BattleProjection.transform(camera_center(),size)
+	if _tilt_player!=simulation.player or _tilt_offset!=camera.offset or _tilt_size!=size or _tilt_run!=simulation.run_id:
+		_tilt_player=simulation.player;_tilt_offset=camera.offset;_tilt_size=size;_tilt_run=simulation.run_id
+		_tilt_matrix=ObliqueProjection.transform(camera_center(),size)
+	return _tilt_matrix
+
+func ground_visible() -> Rect2:
+	return ground_transform().affine_inverse()*Rect2(Vector2.ZERO,size) if uses_oblique() else BattleProjection.visible_world(camera_center(),size)
+
+func approach_cues() -> Array:
+	var area:Rect2=ground_visible() if high_angle else Rect2(camera_center()-size*.5,size)
+	var test:Callable=func(at:Vector2):return Rect2(Vector2.ZERO,size).has_point(world_to_screen(at))
+	return ApproachCues.build(simulation,area,test) if uses_oblique() else ApproachCues.build(simulation,area)
+
+func input_direction(value:Vector2) -> Vector2:
+	return ObliqueProjection.input_direction(value,size) if uses_oblique() else value
+
+func project_direction(value:Vector2) -> Vector2:
+	if not high_angle:return value
+	var basis:Transform2D=ground_transform()
+	return basis.x*value.x+basis.y*value.y
+
 func world_to_screen(at: Vector2) -> Vector2:
-	return BattleProjection.world_to_screen(at,camera_center(),size) if high_angle else at-camera_center()+size*.5
+	return ground_transform()*at if high_angle else at-camera_center()+size*.5
 
 func screen_to_world(at: Vector2) -> Vector2:
-	return BattleProjection.screen_to_world(at,camera_center(),size) if high_angle else at+camera_center()-size*.5
+	return ground_transform().affine_inverse()*at if high_angle else at+camera_center()-size*.5
 
 func world_view_size() -> Vector2:
 	# The comparison toggle does not change saved viewport geometry or spawn RNG.
@@ -52,6 +91,7 @@ func _screen(at: Vector2) -> Vector2:
 
 func actor_visual(enemy:Dictionary={}) -> Dictionary:
 	var data:Dictionary=actors.pose(simulation,int(enemy.get("id",0)))
+	if uses_oblique():data.direction=actors.DIRECTIONS[posmod(roundi(project_direction(data.facing).angle()/(PI/4)),8)]
 	var keys:Array=["viya_battle"]
 	if not enemy.is_empty():keys=[str(enemy.get("species","")),str(enemy.kind if enemy.kind!="normal" else enemy.get("variant","normal"))]
 	data.sample=actor_art.frame(art,keys,data.pose,data.direction,data.clock)

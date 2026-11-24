@@ -1322,7 +1322,7 @@ func _update_feedback_hud() -> void:
 	super._update_feedback_hud()
 	if not is_instance_valid(feedback_panel):return
 	var notice:String=""
-	if simulation.phase==RunState.Phase.RUNNING and feedback_panel.state_key=="hurt":notice=view.IncomingFeedback.notice(simulation,view.high_angle)
+	if simulation.phase==RunState.Phase.RUNNING and feedback_panel.state_key=="hurt":notice=view.IncomingFeedback.notice(simulation,view.high_angle,view.project_direction)
 	feedback_panel.reaction_text.text=notice if not notice.is_empty() else str(simulation.feedback.PRESENTATION[feedback_panel.state_key].label)
 
 func _update_hud() -> void:

@@ -8,9 +8,9 @@ static func arrow(direction:Vector2, high_angle:bool=true) -> String:
 	var projected:Vector2=Ground.transform(Vector2.ZERO,Vector2.ZERO)*direction if high_angle else direction
 	return ARROWS[posmod(roundi(projected.angle()/(PI/4)),8)]
 
-static func notice(state, high_angle:bool=true) -> String:
+static func notice(state, high_angle:bool=true, project:Callable=Callable()) -> String:
 	var hit:Dictionary=state.cues.latest_received()
-	return "" if hit.is_empty() else "%s −%d" % [arrow(hit.direction,high_angle),int(hit.amount)]
+	return "" if hit.is_empty() else "%s −%d" % [(arrow(project.call(hit.direction),false) if project.is_valid() else arrow(hit.direction,high_angle)),int(hit.amount)]
 
 static func build(view) -> Dictionary:
 	var state=view.simulation
@@ -20,7 +20,7 @@ static func build(view) -> Dictionary:
 	for index in range(state.cues.received.size()-1,maxi(-1,state.cues.received.size()-4),-1):
 		var hit:Dictionary=state.cues.received[index]
 		# Transform the vector itself; subtracting large world positions loses precision.
-		var direction:Vector2=Ground.transform(Vector2.ZERO,Vector2.ZERO)*hit.direction if view.high_angle else hit.direction
+		var direction:Vector2=view.project_direction(hit.direction)
 		result.marks.append({"direction":direction.normalized(),"alpha":clampf(float(hit.life)/float(hit.duration),0,1),
 			"origin":view.world_to_screen(hit.origin),"contact":hit.kind=="contact" and float(hit.duration)-float(hit.life)<.16})
 	var latest:Dictionary=state.cues.latest_received()

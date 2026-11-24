@@ -100,7 +100,7 @@ static func run(host,verify:Callable)->void:
 	verify.call(ui.view.camera.offset.x<0 and ui.view.world_to_screen(state.player).x>ui.view.size.x*.5 and ui.view.world_to_screen(state.player).x<=ui.view.size.x*.581,"Actual mobile physics uses the stable dead zone instead of forward camera lead")
 	var point:Vector2=state.player+Vector2(0,460)
 	var edge:Vector2=ui.view.world_to_screen(point)-ui.view.world_to_screen(state.player)
-	verify.call(ui.view.screen_to_world(ui.view.world_to_screen(point)).is_equal_approx(point) and is_equal_approx(edge.y,460*Ground.GROUND_Y),"Stable tracking preserves inverse mapping and the actual460ultimate ellipse")
+	verify.call(ui.view.screen_to_world(ui.view.world_to_screen(point)).is_equal_approx(point) and edge.is_equal_approx(ui.view.project_direction(Vector2(0,460))),"Stable tracking preserves inverse mapping and the actual460ultimate ellipse")
 	var saved:Dictionary=Snapshot.capture(state)
 	ui.view.advance_camera(.05,Vector2.ZERO,true)
 	ui.view.queue_redraw()
@@ -130,7 +130,7 @@ static func run(host,verify:Callable)->void:
 	ui._choose_skill(state.growth.offer[0],state.growth.ticket)
 	# A player pushing a solid wall has no actual displacement.
 	state.player=Vector2(31,1700)
-	ui.movement.axis=Vector2.LEFT
+	ui.movement.axis=ui.view.project_direction(Vector2.LEFT).normalized()
 	ui._physics_process(.05)
 	var blocked_center:Vector2=ui.view.camera_center()
 	for frame in range(40):ui._physics_process(.05)

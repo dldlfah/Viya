@@ -52,7 +52,7 @@ static func build(view) -> Dictionary:
 	# Use the real displayed camera, not RunState's larger spawn envelope.
 	var visible:Rect2=Ground.visible_world(view.camera_center(),view.size) if view.high_angle else Rect2(view.camera_center()-view.size*.5,view.size)
 	var occupied:Array=[result.status_rect.grow(8),Rect2(view.world_to_screen(view.simulation.player)-Vector2(30,70),Vector2(60,100))]
-	for cue in Approaches.build(view.simulation,visible):
+	for cue in view.approach_cues():
 		var at:Vector2=view.world_to_screen(cue.at).clamp(Vector2.ONE*20,view.size-Vector2.ONE*20)
 		occupied.append(Rect2(at-Vector2.ONE*42,Vector2.ONE*84))
 	# Keep away from the mission, boss HP, radar, and the outer pack/shot cues.

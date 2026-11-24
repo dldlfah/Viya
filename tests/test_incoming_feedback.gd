@@ -140,7 +140,7 @@ static func run(host,verify:Callable)->void:
 		ui.view.high_angle=high
 		ui.view.queue_redraw()
 		await host.get_tree().process_frame
-		var expected:=Vector2(1,.8660254037844386 if high else 1).normalized()
+		var expected:Vector2=(ui.view.world_to_screen(state.player+Vector2(100,100))-ui.view.world_to_screen(state.player)).normalized()
 		verify.call(ui.view.incoming_plan.marks[0].direction.is_equal_approx(expected),"Received direction shares the actual ground projection: "+str(high))
 		verify.call(ui.view.display_plan.labels.any(func(label):return label.event.kind=="received"),"Actual received HP text enters the bounded collision-aware label plan")
 	ui.view.show_damage=false
