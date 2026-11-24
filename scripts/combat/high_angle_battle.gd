@@ -6,6 +6,7 @@ const Visuals = preload("res://scripts/combat/attack_visuals.gd")
 const Approaches = preload("res://scripts/combat/approach_cues.gd")
 const CombatSkin=preload("res://scripts/ui/combat_skin.gd")
 const Forms=preload("res://scripts/combat/battle_forms.gd")
+const Battlefield=preload("res://scripts/combat/battlefield_presentation.gd")
 var materials=CombatSkin.new()
 var detail_actors:bool=true
 var canvas
@@ -102,6 +103,7 @@ func _draw_ground() -> void:
 		if not visible.intersects(box):continue
 		var color := Color("6e614a",.07) if decor.kind=="lane" else Color("668e80",.13)
 		canvas.draw_rect(box,color)
+	if state.map_id=="siege_battlefield":Battlefield.draw_ground(self)
 	canvas.draw_rect(Rect2(Vector2.ZERO,state.world_size),Color("927753"),false,3)
 
 func _draw_floor_effects() -> void:
@@ -238,11 +240,14 @@ static func top_material_regions(world:Rect2,top:Rect2,window:Rect2,texture_size
 
 func _draw_obstacle(obstacle: Dictionary) -> void:
 	var box: Rect2 = state.MapCatalog.rectangle(obstacle.rect)
-	var height: float = 122 if obstacle.kind=="wall" else 65
+	var height: float = float(obstacle.get("visual_height",122 if obstacle.kind=="wall" else 65))
 	var alpha := .28 if BattleProjection.occludes_player(box,height,state.player,camera,canvas.size) else 1.0
 	if alpha<1:stats.occluders += 1
 	var base := Rect2(screen(box.position),Vector2(box.size.x,box.size.y*BattleProjection.GROUND_Y))
 	if not viewport.intersects(Rect2(base.position-Vector2(0,height),base.size+Vector2(0,height))):return
+	if state.map_id=="siege_battlefield" and obstacle.kind=="barricade":
+		Battlefield.draw_barricade(self,box,base,height,alpha)
+		return
 	var top := Rect2(base.position-Vector2(0,height),base.size)
 	var stone := Color("56575b",alpha)
 	var top_texture:Texture2D=canvas.art.map_texture("wall_top_tile" if obstacle.kind=="wall" else "ruin_top_tile",state.map_id)
@@ -277,6 +282,8 @@ func _draw_obstacle(obstacle: Dictionary) -> void:
 				canvas.draw_line(p+Vector2(20,17),p+Vector2(20,43),Color("d1b783",alpha),2,true)
 				canvas.draw_line(p+Vector2(10,29),p+Vector2(30,29),Color("d1b783",alpha),2,true)
 
+	if state.map_id=="siege_battlefield" and obstacle.has("appearance"):
+		Battlefield.draw_facility(self,obstacle,top,Rect2(Vector2(base.position.x,top.end.y),Vector2(base.size.x,height)),alpha)
 	for decor in state.map_space.definition.get("decor",[]):
 		if decor.kind!="gate":continue
 		var door: Rect2 = state.MapCatalog.rectangle(decor.rect)

@@ -15,6 +15,8 @@ func _init() -> void:
 	if parsed is Dictionary:
 		layouts = parsed
 		layouts["gold_slime"]=[] # No campaign supply/respawn changes in this mode.
+	var catalog=preload("res://scripts/world/map_catalog.gd").new()
+	layouts[catalog.BATTLEFIELD_ID]=catalog.battlefield.get("destructibles")
 
 func create(map_id: String, space) -> Array[Dictionary]:
 	var result: Array[Dictionary] = []

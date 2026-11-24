@@ -11,6 +11,9 @@ func _init() -> void:
 		error = "Invalid character/species profile data"
 		return
 	data = parsed
+	# The stage field reuses locked species/stats; published maps stay byte-identical.
+	if data.maps.has("prologue_wall"):
+		data.maps["siege_battlefield"]=data.maps.prologue_wall.duplicate(true)
 
 static func number(value: Variant, minimum: float, maximum: float) -> bool:
 	return (value is int or value is float) and is_finite(value) and value >= minimum and value <= maximum

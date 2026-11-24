@@ -29,7 +29,7 @@ static func run(host,verify:Callable) -> void:
 	state._scatter_clock=999
 	state._swarm_clock=999
 	var prop:Dictionary=state.structures[0]
-	state.player=prop.p+Vector2(120,0)
+	state.player=prop.p-Vector2(120,0) # Approach the cluster from its outer edge; this prop is nearest.
 	var current:Dictionary=plan(ui)
 	verify.call(not marker(current,int(prop.id)).is_empty() and not marker(current,int(prop.id)).waiting,"Existing production structure receives a breakable marker before damage")
 	verify.call(current.structures.size()<=8 and labels(current).is_empty(),"Intact structures do not invent respawn countdowns")

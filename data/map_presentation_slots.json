@@ -12,5 +12,19 @@
     "prop_crate_broken": "res://assets/maps/pilot_04/prop_crate_broken.png",
     "prop_urn_broken": "res://assets/maps/pilot_04/prop_urn_broken.png",
     "prop_debris_broken": "res://assets/maps/pilot_04/prop_debris_broken.png"
+  },
+  "siege_battlefield": {
+    "stone_floor_tile": "res://assets/maps/pilot_01/stone_floor_tile.png",
+    "wall_segment": "res://assets/maps/pilot_01/wall_segment.png",
+    "prop_crate": "res://assets/maps/pilot_01/prop_crate.png",
+    "ruin_block": "res://assets/maps/pilot_02/ruin_block.png",
+    "prop_urn": "res://assets/maps/pilot_02/prop_urn.png",
+    "prop_debris": "res://assets/maps/pilot_02/prop_debris.png",
+    "wall_top_tile": "res://assets/maps/pilot_03/wall_top_tile.png",
+    "ruin_top_tile": "res://assets/maps/pilot_03/ruin_top_tile.png",
+    "gate_front": "res://assets/maps/pilot_03/gate_front.png",
+    "prop_crate_broken": "res://assets/maps/pilot_04/prop_crate_broken.png",
+    "prop_urn_broken": "res://assets/maps/pilot_04/prop_urn_broken.png",
+    "prop_debris_broken": "res://assets/maps/pilot_04/prop_debris_broken.png"
   }
 }

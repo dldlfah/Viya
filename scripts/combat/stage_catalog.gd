@@ -19,6 +19,13 @@ func for_stage(number: int) -> Dictionary:
 	result.merge(custom, true)
 	return result if valid(result) else {}
 
+func for_departure(number: int) -> Dictionary:
+	# Only fresh campaign departures use this map. Saved runs keep their map_id.
+	var rules:=for_stage(number)
+	if not rules.is_empty() and number==1:
+		rules.map_id="siege_battlefield"
+	return rules if not rules.is_empty() and valid(rules) else {}
+
 func for_run(number: int, mode: String = "campaign") -> Dictionary:
 	var rules:=for_stage(number)
 	if mode=="campaign":return rules

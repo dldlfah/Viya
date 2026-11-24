@@ -1,12 +1,18 @@
 extends RefCounted
 const PATH := "res://data/maps.json"
+const BATTLEFIELD_PATH := "res://data/campaign_battlefield.json"
+const BATTLEFIELD_ID := "siege_battlefield"
 var data: Dictionary = {}
+var battlefield: Dictionary = {}
 func _init() -> void:
 	var parsed: Variant = JSON.parse_string(FileAccess.get_file_as_string(PATH))
 	if parsed is Dictionary:
 		data = parsed
+	var stage_map:Variant=JSON.parse_string(FileAccess.get_file_as_string(BATTLEFIELD_PATH))
+	if stage_map is Dictionary and stage_map.get("schema_version")==1 and stage_map.get("map_id")==BATTLEFIELD_ID:
+		battlefield=stage_map
 func definition(id: String) -> Dictionary:
-	var found: Variant = preload("res://scripts/combat/gold_dungeon.gd").new().data.get("map") if id=="gold_slime" else data.get(id)
+	var found: Variant = preload("res://scripts/combat/gold_dungeon.gd").new().data.get("map") if id=="gold_slime" else (battlefield.get("map") if id==BATTLEFIELD_ID else data.get(id))
 	return found.duplicate(true) if valid(found) else {}
 static func pair(value: Variant) -> bool:
 	return value is Array and value.size() == 2 and value.all(func(v): return (v is float or v is int) and is_finite(v))

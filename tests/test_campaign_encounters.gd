@@ -161,7 +161,7 @@ static func run(host,verify:Callable):
 		verify.call(not Snapshot.restore(bad,target) and untouched==Snapshot.capture(target),"Corrupt chest rejected without partial mutation:"+mutation)
 	# The complete original v18 states were captured with the previous production code.
 	var baseline:Dictionary=JSON.parse_string(FileAccess.get_file_as_string(LEGACY_MANIFEST))
-	verify.call(Snapshot.VERSION==20 and Snapshot.fingerprint_for_v18()==baseline.fingerprint18,"New schema keeps the exact published18 fingerprint")
+	verify.call(Snapshot.VERSION==21 and Snapshot.fingerprint_for_v18()==baseline.fingerprint18,"New schema keeps the exact published18 fingerprint")
 	for row in baseline.records:
 		var old:Dictionary=FileAccess.open(LEGACY_MANIFEST.get_base_dir().path_join("old_"+row.tag+".bin"),FileAccess.READ).get_var(false)
 		var previous=State.new()

@@ -1,6 +1,7 @@
 extends RefCounted
 ## Exact gameplay data. Cosmetic effects/cues are rebuilt after a restore.
-const VERSION := 20
+const VERSION := 21
+const GAME048_RULES := "695c4691c0d6cad598c66fa825388aee5cc04b373f120c99332d622fc525adb0"
 const GAME047_RULES := "453182097a89e5b3da2dc52a7253ba68f33f50a2cf1fad91a4c23123cfcb3ed8"
 const GAME045_RULES := "d19d8361edf34b139b7e6d6416a70eec5f47eb7c34c5e757170d0b7ff53f51d1"
 const GAME039_RULES := "e537044ffa111e582b2762d59fbb56dbe0fc36968af297be831ae62aecc1c186"
@@ -63,8 +64,14 @@ static func fingerprint_for_v18()->String:
 static func fingerprint_for_v19()->String:
 	return (fingerprint_for_v18()+FileAccess.get_file_as_string("res://data/campaign_encounters.json").replace("\r\n","\n")+FileAccess.get_file_as_string("res://scripts/combat/campaign_encounters_v19.gd").replace("\r\n","\n")).sha256_text()
 
-static func fingerprint()->String:
+static func fingerprint_for_v20()->String:
 	return (fingerprint_for_v19()+FileAccess.get_file_as_string("res://scripts/combat/campaign_encounters.gd").replace("\r\n","\n")+FileAccess.get_file_as_string("res://data/campaign_pressure.json").replace("\r\n","\n")+FileAccess.get_file_as_string("res://scripts/combat/campaign_pressure.gd").replace("\r\n","\n")).sha256_text()
+
+static func fingerprint()->String:
+	var source:=fingerprint_for_v20()
+	for path in ["res://data/campaign_battlefield.json","res://scripts/world/map_catalog.gd","res://scripts/world/supply_catalog.gd","res://scripts/combat/combat_profiles.gd","res://scripts/combat/stage_catalog.gd"]:
+		source+=FileAccess.get_file_as_string(path).replace("\r\n","\n")
+	return source.sha256_text()
 
 static func capture(state) -> Dictionary:
 	var result := {"version": VERSION, "rules": fingerprint(), "run": {}, "growth": {}, "magic": {}, "rng": []}
@@ -81,6 +88,12 @@ static func capture(state) -> Dictionary:
 static func upgrade_legacy(data:Dictionary,state)->Dictionary:
 	var version:Variant=data.get("version")
 	var candidate:Dictionary
+	if version is int and version<=20 and data.get("run") is Dictionary and data.run.get("map_id")=="siege_battlefield":return {}
+	if version is int and version==20 and data.get("rules")==GAME048_RULES:
+		candidate=data.duplicate(true)
+		candidate.version=VERSION
+		candidate.rules=fingerprint()
+		return candidate # Preserve the exact published20 map, positions and RNG.
 	if version==19 and data.get("rules")==GAME047_RULES:
 		candidate=data.duplicate(true)
 		candidate.version=VERSION

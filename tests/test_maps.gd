@@ -35,7 +35,7 @@ static func run(scene, verify: Callable) -> void:
 	recovery_checks(verify)
 	# Production stage UI applies stage->map data, never a second simulation.
 	scene.begin_run()
-	verify.call(scene.simulation.map_id == str(scene.simulation.stage_catalog.for_stage(scene.simulation.stage).map_id), "Actual existing start scene applies its configured stage map")
+	verify.call(scene.simulation.map_id == str(scene.simulation.stage_catalog.for_departure(scene.simulation.stage).map_id), "Actual existing start scene applies its configured stage map")
 	var frozen: Dictionary = Campaign.comparable(scene.simulation)
 	scene.view.queue_redraw()
 	await scene.get_tree().process_frame

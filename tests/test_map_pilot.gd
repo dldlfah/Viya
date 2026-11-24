@@ -14,7 +14,7 @@ static func source_at(regions:Array,point:Vector2) -> Vector2:
 static func run(host,verify:Callable) -> void:
 	var slots=Slots.new()
 	verify.call(slots.definitions.size()==53 and slots.definitions.values().all(func(p):return p==""),"Map pilot leaves every shared/character presentation path blank")
-	verify.call(slots.map_definitions.keys()==["prologue_wall"] and slots.map_definitions.prologue_wall.size()==12,"Only the prologue receives the twelve pilot overrides")
+	verify.call(slots.map_definitions.keys()==["prologue_wall","siege_battlefield"] and slots.map_definitions.prologue_wall.size()==12 and slots.map_definitions.siege_battlefield==slots.map_definitions.prologue_wall,"Prologue and the separate stage field share the twelve original pilot overrides")
 	var manifest:Dictionary=JSON.parse_string(FileAccess.get_file_as_string("res://assets/maps/pilot_01/source_manifest.json"))
 	var second:Dictionary=JSON.parse_string(FileAccess.get_file_as_string("res://assets/maps/pilot_02/source_manifest.json"))
 	manifest.assets.append_array(second.assets)
@@ -80,7 +80,7 @@ static func run(host,verify:Callable) -> void:
 			plain.queue_redraw()
 			if frame%20==0:await host.get_tree().process_frame
 			same=same and Campaign.comparable(a)==Campaign.comparable(b)
-		verify.call(same and Snapshot.VERSION==20 and Snapshot.valid(Snapshot.capture(a),a),"Pilot/placeholder views preserve all authoritative fields and seven RNG over100production steps: "+map_id)
+		verify.call(same and Snapshot.VERSION==21 and Snapshot.valid(Snapshot.capture(a),a),"Pilot/placeholder views preserve all authoritative fields and seven RNG over100production steps: "+map_id)
 		pilot.queue_free()
 		plain.queue_free()
 		await host.get_tree().process_frame
