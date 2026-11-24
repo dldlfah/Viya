@@ -4,7 +4,11 @@
 
 ## 세션 필수 문서
 
-[CURRENT_WORK](docs/CURRENT_WORK.md)와 **[누적 DEVELOPMENT_STATUS](docs/DEVELOPMENT_STATUS.md)**를 함께 읽는다. [PLANNED_WORK](docs/PLANNED_WORK.md) · [NEXT_TASK](docs/NEXT_TASK.md) · [AGENTS](AGENTS.md) · [제작 스킬](.agents/skills/viya-game-production/SKILL.md). GAME-049 코드 **`1a20a2552cf1c94f70a666acafa3b0bf9376ed73`**, 브랜치 `work/viya-turnaround-qa-20261117`. 문서 HEAD는 코드 뒤에 오며 main 자동 병합은 하지 않는다.
+[CURRENT_WORK](docs/CURRENT_WORK.md)와 **[누적 DEVELOPMENT_STATUS](docs/DEVELOPMENT_STATUS.md)**를 함께 읽는다. [PLANNED_WORK](docs/PLANNED_WORK.md) · [NEXT_TASK](docs/NEXT_TASK.md) · [AGENTS](AGENTS.md) · [제작 스킬](.agents/skills/viya-game-production/SKILL.md). GAME-050 코드 **`07ab9ccd862e200595f2abcc4f1876f4dbcfa5a3`**, 브랜치 `work/viya-turnaround-qa-20261117`. 문서 HEAD는 코드 뒤에 오며 main 자동 병합은 하지 않는다.
+
+## 대량 전투 최적화
+
+PC Godot의 몬스터 누적 렉을 줄이기 위해 경로·벽 캐시,순서를 보존하는 비행 밀기/탄환의 주변 표적 검색과 화면 밖 애니메이션 관찰 제한을 적용했다. 몬스터 수/스폰·전투 수치/보상·저장21은 유지한다. 실제Linux 소프트웨어 렌더링 창의CPU 중앙값은640개체138.32→24.69ms,1,540개체392.59→52.81ms다. 사용자PC FPS·모바일/자연6분 검증과 구분한다. [상세 측정·검증](docs/validation/GAME050_REPORT.json) · [실제 대량전투 화면](docs/validation/GAME050_DENSE.png).
 
 ## 시안 기반 1스테이지 배치
 
