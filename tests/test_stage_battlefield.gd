@@ -50,7 +50,7 @@ static func run(host,verify:Callable):
 	verify.call(successes>=3,"Thirty-actor formations still enter through multiple places/times around the new structures")
 	# Exact old published20 payloads and subsequent behavior, not recaptured fixtures.
 	var baseline:Dictionary=JSON.parse_string(FileAccess.get_file_as_string(MANIFEST))
-	verify.call(Snapshot.VERSION==21 and Snapshot.fingerprint_for_v20()==baseline.fingerprint20,"Schema21 keeps the exact published20 fingerprint")
+	verify.call(Snapshot.VERSION==22 and Snapshot.fingerprint_for_v20()==baseline.fingerprint20,"Schema21 keeps the exact published20 fingerprint")
 	for row in baseline.records:
 		var data:Dictionary=FileAccess.open(MANIFEST.get_base_dir().path_join("old_"+row.tag+".bin"),FileAccess.READ).get_var(false)
 		var old=State.new()

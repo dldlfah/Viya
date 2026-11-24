@@ -681,7 +681,7 @@ func begin_run() -> void:
 		return
 	var previous_stage: int = simulation.stage
 	simulation.stage = gold_progress.next_stage
-	if not simulation.start(0, simulation.growth.character_id, gold_progress.talent_levels, str(simulation.stage_catalog.for_departure(simulation.stage).map_id), new_run_ruleset, {}, "campaign", -1, -1, -1, new_run_encounter_version if new_run_ruleset=="weapons_v1" else 0):
+	if not simulation.start(0, simulation.growth.character_id, gold_progress.talent_levels, str(simulation.stage_catalog.for_departure(simulation.stage).map_id), new_run_ruleset, {}, "campaign", -1, -1, -1, new_run_encounter_version if new_run_ruleset=="weapons_v1" else 0, 1):
 		simulation.stage = previous_stage
 		push_error("Invalid character data; current run retained")
 		return
@@ -1193,7 +1193,7 @@ func _open_gold_dungeon() -> void:
 	var revision: int=_menu_revision
 	dialog_body.add_child(_label("골드 슬라임 던전",28))
 	dialog_body.add_child(_label("3분 생존 · 보스 없음 · 1분/2분 자동 저장\n느린 슬라임의 대량 군집을 피해 금화를 모으세요.",19))
-	dialog_body.add_child(_label("하루 2회 · 한국시간 자정 초기화 · 남은 입장 %d/2\n처치 시 %d~%d금화 확정 · 클리어 평균 약 10만 금화 목표\n실패/포기는 보상 없음 · 이어하기는 추가 소모 없음\n입장 시 횟수 차감 · 캠페인 진행은 유지됩니다." % [gold_progress.dungeon_remaining(),simulation.dungeon.drop_range(1).x,simulation.dungeon.drop_range(1).y],18))
+	dialog_body.add_child(_label("하루 2회 · 한국시간 자정 초기화 · 남은 입장 %d/2\n처치 시 %d~%d금화 확정 · 클리어 시 획득 금화 전액 지급\n실패/포기는 보상 없음 · 이어하기는 추가 소모 없음\n입장 시 횟수 차감 · 캠페인 진행은 유지됩니다." % [gold_progress.dungeon_remaining(),simulation.dungeon.drop_range(1).x / 2,simulation.dungeon.drop_range(1).y / 2],18))
 	if not _dungeon_notice.is_empty():
 		var notice:=_label(_dungeon_notice,17)
 		notice.name="DungeonAdmissionNotice"
@@ -1217,7 +1217,7 @@ func _launch_gold_dungeon(ticket: int, revision: int) -> void:
 	var previous_result: Dictionary=simulation.result_summary()
 	simulation.stage=gold_progress.next_stage
 	var today: int=simulation.dungeon.day_index(int(Time.get_unix_time_from_system()))
-	if not simulation.start(0,"viya",gold_progress.talent_levels,"gold_slime","weapons_v1",{},"gold_slime",today):
+	if not simulation.start(0,"viya",gold_progress.talent_levels,"gold_slime","weapons_v1",{},"gold_slime",today,-1,-1,0,1):
 		simulation.stage=int(previous.run.stage)
 		_dungeon_notice="던전 데이터를 확인할 수 없습니다. 입장 횟수는 사용하지 않았습니다."
 		_open_gold_dungeon()

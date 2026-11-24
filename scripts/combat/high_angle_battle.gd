@@ -113,11 +113,14 @@ func _draw_floor_effects() -> void:
 
 	canvas.draw_circle(state.player,19,Color(0,0,0,.35))
 	for pickup in state.pickups:
-		if visible.grow(10).has_point(pickup.p):
+		if visible.grow(32).has_point(pickup.p):
 			var at: Vector2 = pickup.p
+			state.LootAttraction.draw_trail(canvas,pickup,state.player,false)
 			canvas.draw_colored_polygon(PackedVector2Array([at+Vector2(0,-6),at+Vector2(5,0),at+Vector2(0,6),at-Vector2(5,0)]),Color("8ad4c5"))
 	for gold in state.gold_pickups:
-		if visible.grow(10).has_point(gold.p):canvas.draw_circle(gold.p,6,Color("efc364"))
+		if visible.grow(32).has_point(gold.p):
+			state.LootAttraction.draw_trail(canvas,gold,state.player,true)
+			canvas.draw_circle(gold.p,6,Color("efc364"))
 	# Supply badges stay upright and the same screen size in both renderers.
 	canvas.draw_set_transform_matrix(Transform2D.IDENTITY)
 	canvas._draw_supply_items()

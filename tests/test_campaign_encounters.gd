@@ -40,6 +40,7 @@ static func old_digest(state)->String:
 	var d:Dictionary=Campaign.comparable(state)
 	d.erase("version")
 	d.erase("rules")
+	d.run.erase("loot_rules_version")
 	for key in ["encounter_version","chest_pickups","_chest_serial","_chests_opened","_chest_bonus_ranks"]:d.run.erase(key)
 	var h:=HashingContext.new()
 	h.start(HashingContext.HASH_SHA256)
@@ -161,7 +162,7 @@ static func run(host,verify:Callable):
 		verify.call(not Snapshot.restore(bad,target) and untouched==Snapshot.capture(target),"Corrupt chest rejected without partial mutation:"+mutation)
 	# The complete original v18 states were captured with the previous production code.
 	var baseline:Dictionary=JSON.parse_string(FileAccess.get_file_as_string(LEGACY_MANIFEST))
-	verify.call(Snapshot.VERSION==21 and Snapshot.fingerprint_for_v18()==baseline.fingerprint18,"New schema keeps the exact published18 fingerprint")
+	verify.call(Snapshot.VERSION==22 and Snapshot.fingerprint_for_v18()==baseline.fingerprint18,"New schema keeps the exact published18 fingerprint")
 	for row in baseline.records:
 		var old:Dictionary=FileAccess.open(LEGACY_MANIFEST.get_base_dir().path_join("old_"+row.tag+".bin"),FileAccess.READ).get_var(false)
 		var previous=State.new()

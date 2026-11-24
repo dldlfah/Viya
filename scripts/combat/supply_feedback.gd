@@ -12,6 +12,8 @@ static func text(receipt:Dictionary) -> String:
 		"hp":return "HP +%d" % int(receipt.hp) if receipt.hp>0 else "HP 가득 참"
 		"mp":return "MP +%s" % number(float(receipt.mp)) if receipt.mp>0 else "MP 가득 참"
 		"magnet":
+			if receipt.has("attracting"):
+				return "전체 자석 · 금화·보석 %d개 끌어오는 중" % int(receipt.attracting) if receipt.attracting>0 else "전체 자석 · 회수할 XP·금화 없음"
 			var parts:PackedStringArray=[]
 			if receipt.xp>0:parts.append("+%s XP" % number(float(receipt.xp)))
 			if receipt.gold>0:parts.append("+%d 금화" % int(receipt.gold))

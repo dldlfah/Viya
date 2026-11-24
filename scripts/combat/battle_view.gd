@@ -82,6 +82,8 @@ func _draw() -> void:
 	draw_rect(Rect2(origin, simulation.world_size), Color("6c5c43"), false, 4.0)
 	for pickup in simulation.pickups:
 		var pos := _screen(pickup["p"])
+		if Rect2(Vector2.ZERO,size).grow(32).has_point(pos):
+			_draw_loot_trail(pickup,false)
 		draw_colored_polygon(PackedVector2Array([pos + Vector2(0, -7),
 			pos + Vector2(5, 0), pos + Vector2(0, 7), pos + Vector2(-5, 0)]), Color("7cd3c1"))
 	var names_left := 8
@@ -130,6 +132,8 @@ func _draw() -> void:
 
 	for gold in simulation.gold_pickups:
 		var at := _screen(gold["p"])
+		if Rect2(Vector2.ZERO,size).grow(32).has_point(at):
+			_draw_loot_trail(gold,true)
 		draw_circle(at, 7.0, Color("edbc54"))
 		draw_arc(at, 4.0, 0.0, TAU, 12, Color("fff0b3"), 1.2, true)
 	for bullet in simulation.bullets:
@@ -204,6 +208,11 @@ func _draw_supplies() -> void:
 			draw_rect(Rect2(at+Vector2(-20,-33),Vector2(40,4)),Color("302b2e"))
 			draw_rect(Rect2(at+Vector2(-20,-33),Vector2(40.0*structure.hp/structure.max_hp,4)),Color("c7b187"))
 	_draw_supply_items()
+
+func _draw_loot_trail(pickup:Dictionary,gold:bool) -> void:
+	draw_set_transform(_screen(Vector2.ZERO))
+	simulation.LootAttraction.draw_trail(self,pickup,simulation.player,gold)
+	draw_set_transform(Vector2.ZERO)
 
 func _draw_supply_items() -> void:
 	var visible:=Rect2(Vector2.ZERO,size).grow(22)

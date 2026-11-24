@@ -1,6 +1,7 @@
 extends RefCounted
 ## Exact gameplay data. Cosmetic effects/cues are rebuilt after a restore.
-const VERSION := 21
+const VERSION := 22
+const GAME050_RULES := "e75a6c9be169029062a23741a93208e3088c2fef2b305f674d10f0d2353525de"
 const GAME048_RULES := "695c4691c0d6cad598c66fa825388aee5cc04b373f120c99332d622fc525adb0"
 const GAME047_RULES := "453182097a89e5b3da2dc52a7253ba68f33f50a2cf1fad91a4c23123cfcb3ed8"
 const GAME045_RULES := "d19d8361edf34b139b7e6d6416a70eec5f47eb7c34c5e757170d0b7ff53f51d1"
@@ -26,7 +27,7 @@ const RUN_FIELDS := ["phase", "player", "facing", "hp", "elapsed", "kills", "sho
 	"_enemy_serial", "_regen_remainder", "navigation_ticket", "stage", "run_id",
 	"gold_collected", "gold_drop_chance", "_elites_spawned", "_boss_spawned", "_boss_defeated", "checkpoint_index", "end_reason",
 	"account_attack_level", "account_talent_levels", "_damage_reduction_remainder", "_slow_left", "_kill_heal_clock", "_kill_heal_used", "enemies", "bullets", "pickups", "gold_pickups", "enemy_bullets", "_swarm_clock", "_swarm_pending", "_swarm_serial", "_scatter_clock", "_scatter_index", "map_id", "spawn_view_size", "structures", "item_pickups", "_loot_serial", "weapon_events",
-	"armor_enabled", "support_attack_ids", "support_passive_ids", "combat_profile_version", "run_mode", "dungeon_day", "gold_reward_version", "enemy_pattern_version", "encounter_version", "chest_pickups", "_chest_serial", "_chests_opened", "_chest_bonus_ranks"]
+	"armor_enabled", "support_attack_ids", "support_passive_ids", "combat_profile_version", "run_mode", "dungeon_day", "gold_reward_version", "enemy_pattern_version", "encounter_version", "chest_pickups", "_chest_serial", "_chests_opened", "_chest_bonus_ranks", "loot_rules_version"]
 const GROWTH_FIELDS := ["ruleset", "character_id", "owned", "level", "xp", "pending", "offer", "ticket", "revision", "pacing_version"]
 const MAGIC_FIELDS := ["mana", "cooldown_left", "casts", "ticket"]
 
@@ -67,11 +68,14 @@ static func fingerprint_for_v19()->String:
 static func fingerprint_for_v20()->String:
 	return (fingerprint_for_v19()+FileAccess.get_file_as_string("res://scripts/combat/campaign_encounters.gd").replace("\r\n","\n")+FileAccess.get_file_as_string("res://data/campaign_pressure.json").replace("\r\n","\n")+FileAccess.get_file_as_string("res://scripts/combat/campaign_pressure.gd").replace("\r\n","\n")).sha256_text()
 
-static func fingerprint()->String:
+static func fingerprint_for_v21()->String:
 	var source:=fingerprint_for_v20()
 	for path in ["res://data/campaign_battlefield.json","res://scripts/world/map_catalog.gd","res://scripts/world/supply_catalog.gd","res://scripts/combat/combat_profiles.gd","res://scripts/combat/stage_catalog.gd"]:
 		source+=FileAccess.get_file_as_string(path).replace("\r\n","\n")
 	return source.sha256_text()
+
+static func fingerprint()->String:
+	return (fingerprint_for_v21()+FileAccess.get_file_as_string("res://scripts/combat/loot_attraction.gd").replace("\r\n","\n")+"loot-rules-1:gold-floor-half;magnet-arrival").sha256_text()
 
 static func capture(state) -> Dictionary:
 	var result := {"version": VERSION, "rules": fingerprint(), "run": {}, "growth": {}, "magic": {}, "rng": []}
@@ -86,6 +90,21 @@ static func capture(state) -> Dictionary:
 	return result.duplicate(true)
 
 static func upgrade_legacy(data:Dictionary,state)->Dictionary:
+	var version:Variant=data.get("version")
+	var candidate:Dictionary
+	if version is int and version==21 and data.get("rules")==GAME050_RULES:
+		candidate=data.duplicate(true)
+		candidate.version=VERSION
+		candidate.rules=fingerprint()
+	else:candidate=_upgrade_before_loot(data,state)
+	if version is int and version>=1 and version<=21 and candidate.get("version")==VERSION and candidate.get("rules")==fingerprint():
+		if not candidate.get("run") is Dictionary:return {}
+		if candidate.run.has("loot_rules_version") and (not candidate.run.loot_rules_version is int or candidate.run.loot_rules_version!=0):return {}
+		candidate=candidate.duplicate(true)
+		candidate.run.loot_rules_version=0
+	return candidate
+
+static func _upgrade_before_loot(data:Dictionary,state)->Dictionary:
 	var version:Variant=data.get("version")
 	var candidate:Dictionary
 	if version is int and version<=20 and data.get("run") is Dictionary and data.run.get("map_id")=="siege_battlefield":return {}
@@ -347,7 +366,7 @@ static func vector(value: Variant) -> bool:
 	return value is Vector2 and value.is_finite() and value.length() < 100000.0
 
 static func valid(data: Dictionary, state) -> bool:
-	if data.get("version") != VERSION or data.get("rules") != fingerprint():
+	if not data.get("version") is int or data.get("version") != VERSION or data.get("rules") != fingerprint():
 		return false
 	for key in ["run", "growth", "magic"]:
 		if not data.get(key) is Dictionary:
@@ -359,6 +378,7 @@ static func valid(data: Dictionary, state) -> bool:
 		if not run.has(key):
 			return false
 	if not run.enemy_pattern_version is int or run.enemy_pattern_version not in [0,1,2,3] or (run.enemy_pattern_version>0 and (run.run_mode!="campaign" or run.combat_profile_version!=1 or not state.enemy_patterns.available(run.enemy_pattern_version))):return false
+	if not run.loot_rules_version is int or run.loot_rules_version not in [0,1]:return false
 	if not run.gold_reward_version is int or run.gold_reward_version not in [0,1] or (run.gold_reward_version==1 and (run.run_mode!="gold_slime" or state.dungeon.rewards.is_empty())):return false
 	if not growth.get("pacing_version") is int or growth.pacing_version not in [0,1] or (growth.pacing_version==1 and (growth.get("ruleset")!="weapons_v1" or state.growth.pacing.data.is_empty())):return false
 	if run.run_mode not in ["campaign","gold_slime"] or not run.dungeon_day is int or (run.run_mode=="campaign" and (run.dungeon_day!=-1 or run.map_id=="gold_slime")) or (run.run_mode=="gold_slime" and (run.map_id!="gold_slime" or run.dungeon_day<0 or run.dungeon_day>100000000 or run.combat_profile_version!=1 or growth.get("ruleset")!="weapons_v1" or run.gold_drop_chance!=1.0 or run._elites_spawned!=0 or run._boss_spawned!=false or run._boss_defeated!=false or (not run.enemy_bullets is Array or not run.enemy_bullets.is_empty()))):
@@ -644,9 +664,11 @@ static func valid_actors(run: Dictionary, state) -> bool:
 			if not id is int or id in [-1, 0] or id > run._enemy_serial or id < -run.structures.size() - 1 or bullet.seen[id] != true:
 				return false
 	for pickup in run.pickups:
+		if not state.LootAttraction.valid(pickup,run.loot_rules_version):return false
 		if not finite_number(pickup.get("value"), 0.000001, 1000000000):
 			return false
 	for pickup in run.gold_pickups:
+		if not state.LootAttraction.valid(pickup,run.loot_rules_version):return false
 		if not pickup.get("value") is int or pickup.value < 1 or pickup.value > 1000000000:
 			return false
 	for bullet in run.enemy_bullets:

@@ -12,7 +12,7 @@ static func fresh(policy:int=2):
 	return state
 static func digest(state)->String:
 	var data:Dictionary=Campaign.comparable(state)
-	data.erase("version");data.erase("rules")
+	data.erase("version");data.erase("rules");data.run.erase("loot_rules_version")
 	var hash:=HashingContext.new();hash.start(HashingContext.HASH_SHA256);hash.update(var_to_bytes(data));return hash.finish().hex_encode()
 static func run(host,verify:Callable):
 	var state=fresh()
@@ -92,7 +92,7 @@ static func run(host,verify:Callable):
 		verify.call(state.enemy_bullets.size()==(0 if policy==2 else 1),"Submicrosecond ranged lifetime is retired only in newpolicy2;published1 physics remains frozen")
 		if policy==2:verify.call(Snapshot.valid(Snapshot.capture(state),state),"Live pressure snapshot remains valid at an enemy-projectile expiry boundary without relaxing the validator")
 	var baseline:Dictionary=JSON.parse_string(FileAccess.get_file_as_string(MANIFEST))
-	verify.call(Snapshot.VERSION==21 and Snapshot.fingerprint_for_v19()==baseline.fingerprint19,"Schema20 retains the exact published19 fingerprint")
+	verify.call(Snapshot.VERSION==22 and Snapshot.fingerprint_for_v19()==baseline.fingerprint19,"Schema20 retains the exact published19 fingerprint")
 	for row in baseline.records:
 		var original:Dictionary=FileAccess.open(MANIFEST.get_base_dir().path_join("old_"+row.tag+".bin"),FileAccess.READ).get_var(false)
 		var previous=State.new()

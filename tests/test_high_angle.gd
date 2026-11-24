@@ -68,7 +68,7 @@ static func run(host, verify: Callable) -> void:
 	var sorted:=true
 	for index in range(1,commands.size()):sorted=sorted and commands[index-1].depth<=commands[index].depth
 	verify.call(sorted and commands.any(func(c):return c.layer=="hero") and commands.any(func(c):return c.layer=="obstacle"),"Actor/structure commands share a deterministic foot-depth order")
-	verify.call(Snapshot.VERSION==21 and Snapshot.valid(Snapshot.capture(a),a),"Presentation remains compatible with current version18snapshot rules")
+	verify.call(Snapshot.VERSION==22 and Snapshot.valid(Snapshot.capture(a),a),"Presentation remains compatible with current version18snapshot rules")
 	high.queue_free()
 	legacy.queue_free()
 	await host.get_tree().process_frame

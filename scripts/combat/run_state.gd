@@ -130,12 +130,15 @@ var species_rng := RandomNumberGenerator.new()
 var run_mode: String = "campaign"
 var dungeon_day: int = -1
 var gold_reward_version:int=0 # Published1-14 keep original drops throughout Continue.
+const LootAttraction=preload("res://scripts/combat/loot_attraction.gd")
+var loot_rules_version:int=0 # Existing entries keep their amounts and instant magnet.
 var dungeon = preload("res://scripts/combat/gold_dungeon.gd").new()
 func enemy_definition(id: String) -> Dictionary:
 	return dungeon.species(wave_profile()) if id=="gold_slime" and run_mode=="gold_slime" else profiles.species(id)
 
-func start(seed_value: int = 0, character_id: String = "viya", account_level: Variant = null, selected_map: String = "legacy_arena", skill_ruleset: String = "legacy", support_loadout: Dictionary = {}, mode: String = "campaign", entry_day: int = -1, pacing_version:int=-1, pattern_version:int=-1, encounter_rules:int=0) -> bool:
+func start(seed_value: int = 0, character_id: String = "viya", account_level: Variant = null, selected_map: String = "legacy_arena", skill_ruleset: String = "legacy", support_loadout: Dictionary = {}, mode: String = "campaign", entry_day: int = -1, pacing_version:int=-1, pattern_version:int=-1, encounter_rules:int=0, loot_rules:int=0) -> bool:
 	# Validate the complete selected character before changing the previous run.
+	if loot_rules not in [0,1]:return false
 	var selected_levels: Dictionary = account_talent_levels.duplicate(true)
 	if account_level is int:
 		if account_level != -1:
@@ -205,6 +208,7 @@ func start(seed_value: int = 0, character_id: String = "viya", account_level: Va
 	run_mode = mode
 	dungeon_day = entry_day
 	gold_reward_version=1 if mode=="gold_slime" else 0
+	loot_rules_version=loot_rules
 	gold_drop_chance = 1.0 if mode=="gold_slime" else (0.30 if previous_mode=="gold_slime" else gold_drop_chance)
 	support_attack_ids = loadout.attack.duplicate()
 	support_passive_ids = loadout.passive.duplicate()
@@ -617,7 +621,10 @@ func _collect_pickups(dt: float) -> void:
 	var reward: float = 0.0
 	for i in range(pickups.size() - 1, -1, -1):
 		var pos: Vector2 = pickups[i]["p"]
-		if pos.distance_squared_to(player) <= pow(float(stats["pickup"]), 2.0):
+		if loot_rules_version==1 and pickups[i].get("magnet",false):
+			pos = LootAttraction.move(pickups[i], player, float(stats["pickup"]), dt)
+			pickups[i]["p"] = pos
+		elif pos.distance_squared_to(player) <= pow(float(stats["pickup"]), 2.0):
 			pos = pos.move_toward(player, 420.0 * dt)
 			pickups[i]["p"] = pos
 		if pos.distance_squared_to(player) <= pow(PLAYER_RADIUS + 10.0, 2.0):
@@ -1128,7 +1135,7 @@ func confirm_transition(expected_ticket: int, account_level: Variant = null) -> 
 	if transition_action == "restart" and run_mode=="gold_slime":return false # UI must settle/forfeit before a fresh charged admission.
 	if transition_action == "restart":
 		# start() validates first. On failure keep the old run and confirmation.
-		return start(0, growth.character_id, account_level, map_id, growth.ruleset,{},run_mode,dungeon_day,growth.pacing_version,-1,encounter_version)
+		return start(0, growth.character_id, account_level, map_id, growth.ruleset,{},run_mode,dungeon_day,growth.pacing_version,-1,encounter_version,loot_rules_version)
 	_finish_run("abandoned")
 	return true
 
@@ -1166,15 +1173,20 @@ func return_to_ready(expected_ticket: int) -> bool:
 	# Keep the frozen result until the next explicit start; do not start timers.
 	return true
 
-func gold_drop_range(kind:String="normal")->Vector2i:
+func _original_gold_range(kind:String)->Vector2i:
 	if kind!="normal":return Vector2i(100,1000)
 	return dungeon.drop_range(gold_reward_version) if run_mode=="gold_slime" else Vector2i(10,50)
+
+func gold_drop_range(kind:String="normal")->Vector2i:
+	var limits:=_original_gold_range(kind)
+	return Vector2i(limits.x / 2, limits.y / 2) if loot_rules_version==1 else limits
 
 func _drop_gold(at: Vector2, kind: String) -> void:
 	if gold_drop_chance < 1.0 and gold_rng.randf() >= gold_drop_chance:
 		return
-	var limits:Vector2i=gold_drop_range(kind)
+	var limits:Vector2i=_original_gold_range(kind)
 	var amount:int=gold_rng.randi_range(limits.x,limits.y)
+	if loot_rules_version==1:amount=maxi(1,amount / 2) # Same roll/chance; floor half to whole coins.
 	if gold_pickups.size() >= MAX_PICKUPS:
 		gold_pickups[-1]["value"] += amount
 	else:
@@ -1183,7 +1195,10 @@ func _drop_gold(at: Vector2, kind: String) -> void:
 func _collect_gold(dt: float) -> void:
 	for i in range(gold_pickups.size() - 1, -1, -1):
 		var pos: Vector2 = gold_pickups[i]["p"]
-		if pos.distance_squared_to(player) <= pow(float(stats["pickup"]), 2.0):
+		if loot_rules_version==1 and gold_pickups[i].get("magnet",false):
+			pos = LootAttraction.move(gold_pickups[i], player, float(stats["pickup"]), dt)
+			gold_pickups[i]["p"] = pos
+		elif pos.distance_squared_to(player) <= pow(float(stats["pickup"]), 2.0):
 			pos = pos.move_toward(player, 420.0 * dt)
 			gold_pickups[i]["p"] = pos
 		if pos.distance_squared_to(player) <= pow(PLAYER_RADIUS + 10.0, 2.0):
@@ -1248,6 +1263,10 @@ func _apply_supply(kind: String) -> void:
 		"mp":
 			magic.mana = minf(magic.maximum_mana(), magic.mana + magic.maximum_mana() * SupplyCatalog.RECOVERY_FRACTION)
 		"magnet":
+			if loot_rules_version==1:
+				var count:int=LootAttraction.activate(pickups)+LootAttraction.activate(gold_pickups)
+				cues.record_item(player, str(SupplyCatalog.ITEM_NAMES[kind]), {"kind":kind,"attracting":count})
+				return # Credit only on arrival; a save retains each flagged pickup.
 			var xp := 0.0
 			for pickup in pickups:
 				xp += float(pickup.value) * float(stats.xp)

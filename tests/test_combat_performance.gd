@@ -8,7 +8,9 @@ const Index=preload("res://scripts/combat/spatial_candidates.gd")
 const MANIFEST:="res://tests/fixtures/game050_v21/baseline.json"
 static func digest(state)->String:
 	var hash:=HashingContext.new();hash.start(HashingContext.HASH_SHA256)
-	hash.update(var_to_bytes(Campaign.comparable(state)))
+	var data:Dictionary=Campaign.comparable(state)
+	data.version=21;data.rules=Snapshot.fingerprint_for_v21();data.run.erase("loot_rules_version")
+	hash.update(var_to_bytes(data))
 	return hash.finish().hex_encode()
 static func run(host,verify:Callable):
 	var catalog=preload("res://scripts/world/map_catalog.gd").new()
@@ -76,7 +78,7 @@ static func run(host,verify:Callable):
 	verify.call(not motion.entries.has(1) and motion.entries.has(3),"Offscreen ordinary observations are released while remote elite tells remain tracked")
 	# Real captures and all subsequent authority/RNG hashes from GAME049 code.
 	var baseline:Dictionary=JSON.parse_string(FileAccess.get_file_as_string(MANIFEST))
-	verify.call(Snapshot.VERSION==21 and Snapshot.fingerprint()==baseline.fingerprint21,"Optimization changes neither save schema21 nor gameplay fingerprint")
+	verify.call(Snapshot.VERSION==22 and Snapshot.fingerprint_for_v21()==baseline.fingerprint21,"Save22 retains the exact published21 gameplay fingerprint")
 	for row in baseline.records:
 		var state=State.new()
 		var data:Dictionary=FileAccess.open(MANIFEST.get_base_dir().path_join(row.tag+".bin"),FileAccess.READ).get_var(false)
