@@ -70,3 +70,15 @@
 | 정상 상자 | [prop_crate.png](../assets/maps/pilot_01/prop_crate.png) |92×86 RGBA / `7a0fefb9f935a5026e1bb9ded4029542e9f33323bbac87481f22144ece712edc` |
 
 준비 PNG는 업로드 원본과 바이트 동일하다. 생성 로그의 Higgsfield 표기는 동봉 출처 기록이며 이번 세션에서 재생성·유료 호출하지 않았다. 대형 masters/준비 스크립트는 게임에 복사하거나 실행하지 않았으며 출처 명세/ZIP 식별은 [자산 README](../assets/maps/pilot_01/README.md)와 [원본 manifest](../assets/maps/pilot_01/source_manifest.json)에 남겼다.3개의 Godot2D 임포트 설정을 보존했다. 코드/검증은 CURRENT·DEVELOPMENT_STATUS8.34를 따른다.
+
+## 2026-11-24 — MAP-PILOT-002 사용자 맵 파일럿 추가
+
+사용자선택으로기존프롤로그고각에3종을추가했다. 시범적용이며최종아트/실기승인은아니다. ZIP SHA256 `49557ccb6ed1efb40341004da82518438fe077aa8f25cdfad33598005637e24f`. 기존파일럿01·공용53빈칸/다른맵/F8·캐릭터승인경계를유지한다.
+
+| 파일 | 실제 등록 경로 | 규격 / SHA256 |
+| --- | --- | --- |
+| 폐허 수직 앞면 | [ruin_block.png](../assets/maps/pilot_02/ruin_block.png) | 192×130 / `1cfc847408ab4cdf6783f1dcc1c13db5251187fc4525afd4f0bdaaf991b7d9a2` |
+| 정상 항아리 | [prop_urn.png](../assets/maps/pilot_02/prop_urn.png) | 92×86 / `81973f42653a6a3008ff11aaf5f18b1c4aaf6389577d1c8c1248aaf4b1feb94e` |
+| 정상 잔해 더미 | [prop_debris.png](../assets/maps/pilot_02/prop_debris.png) | 92×86 / `ab0cccf2713543f0bd127a7f76ef1a4854695473ba7f0eca58bc1f919fe4b9d5` |
+
+준비PNG3개/51025바이트는업로드원본과동일하다. 3개의2D무손실임포트설정·[출처README](../assets/maps/pilot_02/README.md)/[원본명세](../assets/maps/pilot_02/source_manifest.json)를보존했다. 동봉준비스크립트/생성작업을실행하거나대형masters를런타임에복사하지않았다. 원본명세의c412d1d/후보상태는제작당시출처기록이고현재게임적용결과와구분한다. 검증은DEVELOPMENT_STATUS8.37을따른다.
