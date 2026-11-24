@@ -213,6 +213,25 @@ static func material_regions(world:Rect2,front:Rect2,window:Rect2,texture_size:V
 		result.append({"destination":destination,"source":Rect2((destination.position-tile.position)*scale,destination.size*scale)})
 	return result
 
+static func top_material_regions(world:Rect2,top:Rect2,window:Rect2,texture_size:Vector2) -> Array:
+	# The screen top is already projected. Anchor both UV axes to world space,
+	# and crop source pixels together with each visible destination rectangle.
+	var result:Array=[]
+	if not world.has_area() or not top.has_area() or texture_size.x<=0 or texture_size.y<=0:return result
+	var clipped:Rect2=top.intersection(window)
+	if not clipped.has_area():return result
+	var projection:Vector2=top.size/world.size
+	var first:Vector2=world.position+(clipped.position-top.position)/projection
+	var last:Vector2=world.position+(clipped.end-top.position)/projection
+	var tile_size:=Vector2(96,80)*projection
+	var scale:Vector2=texture_size/tile_size
+	for y in range(floori(first.y/80)*80,ceili(last.y),80):
+		for x in range(floori(first.x/96)*96,ceili(last.x),96):
+			var tile:=Rect2(top.position+(Vector2(x,y)-world.position)*projection,tile_size)
+			var destination:Rect2=tile.intersection(top).intersection(window)
+			if destination.has_area():result.append({"destination":destination,"source":Rect2((destination.position-tile.position)*scale,destination.size*scale)})
+	return result
+
 func _draw_obstacle(obstacle: Dictionary) -> void:
 	var box: Rect2 = state.MapCatalog.rectangle(obstacle.rect)
 	var height: float = 122 if obstacle.kind=="wall" else 65
@@ -222,7 +241,11 @@ func _draw_obstacle(obstacle: Dictionary) -> void:
 	if not viewport.intersects(Rect2(base.position-Vector2(0,height),base.size+Vector2(0,height))):return
 	var top := Rect2(base.position-Vector2(0,height),base.size)
 	var stone := Color("56575b",alpha)
-	canvas.draw_rect(top,stone.lightened(.13))
+	var top_texture:Texture2D=canvas.art.map_texture("wall_top_tile" if obstacle.kind=="wall" else "ruin_top_tile",state.map_id)
+	if top_texture:
+		for region in top_material_regions(box,top,viewport,top_texture.get_size()):
+			canvas.draw_texture_rect_region(top_texture,region.destination,region.source,Color(1,1,1,alpha))
+	else:canvas.draw_rect(top,stone.lightened(.13))
 	canvas.draw_rect(Rect2(Vector2(base.position.x,top.end.y),Vector2(base.size.x,height)),stone.darkened(.16))
 	canvas.draw_rect(top,Color("b39b73",alpha),false,2)
 	var texture: Texture2D = canvas.art.map_texture("wall_segment" if obstacle.kind=="wall" else "ruin_block",state.map_id)
@@ -255,7 +278,14 @@ func _draw_obstacle(obstacle: Dictionary) -> void:
 		var door: Rect2 = state.MapCatalog.rectangle(decor.rect)
 		if not box.encloses(door):continue
 		var at := screen(Vector2(door.position.x,door.end.y))
-		canvas.draw_rect(Rect2(at-Vector2(0,height-8),Vector2(door.size.x,height-8)),Color("473b32",alpha))
+		var gate_rect:=Rect2(at-Vector2(0,height-8),Vector2(door.size.x,height-8))
+		var gate_texture:Texture2D=canvas.art.map_texture("gate_front",state.map_id)
+		if gate_texture:
+			var clipped:Rect2=gate_rect.intersection(viewport)
+			if clipped.has_area():
+				var scale:Vector2=gate_texture.get_size()/gate_rect.size
+				canvas.draw_texture_rect_region(gate_texture,clipped,Rect2((clipped.position-gate_rect.position)*scale,clipped.size*scale),Color(1,1,1,alpha))
+		else:canvas.draw_rect(gate_rect,Color("473b32",alpha))
 		canvas.draw_rect(Rect2(at-Vector2(0,height-8),Vector2(door.size.x,height-8)),Color("b39b73",alpha),false,3)
 		for offset in [-16.0,door.size.x+16]:
 			var light:=at+Vector2(offset,-height*.55)
