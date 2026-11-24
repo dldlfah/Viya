@@ -204,6 +204,7 @@ func _run() -> void:
 	preload("res://tests/test_loot_attraction.gd").run(scene, verify)
 	preload("res://tests/test_route_queries.gd").run(scene, verify)
 	await preload("res://tests/test_purge_feedback.gd").run(scene, verify)
+	await preload("res://tests/test_portrait_reactions.gd").run(scene, verify)
 	scene.queue_free()
 	await process_frame
 	await process_frame

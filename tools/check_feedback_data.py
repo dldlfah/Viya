@@ -24,7 +24,7 @@ def validate(sources: dict[str, str]) -> list[str]:
         durations = ast.literal_eval(re.search(r'^const DURATIONS := (.+)$', feedback, re.M)[1])
         order = ast.literal_eval(re.search(r'^const ORDER := (.+)$', feedback, re.M)[1])
         ratio = float(re.search(r'^const LOW_HP_RATIO := (.+)$', feedback, re.M)[1])
-        if order != ['hurt', 'magic', 'levelup'] or set(durations) != set(order):
+        if order != ['hurt', 'heal', 'magic', 'levelup'] or set(durations) != set(order):
             errors.append('reaction priority/duration keys mismatch')
         if any(not isinstance(x, (int, float)) or not math.isfinite(x) or x <= 0 for x in durations.values()):
             errors.append('invalid reaction duration')
@@ -36,6 +36,8 @@ def validate(sources: dict[str, str]) -> list[str]:
         ('feedback.reset()', run), ('feedback.finish()', run),
         ('feedback.trigger("hurt")', run), ('feedback.trigger("magic")', run),
         ('feedback.level_up(growth.ticket)', run), ('feedback.advance(dt, true)', run),
+        ('feedback.trigger("heal")', run), ('result["expression"] = EXPRESSIONS[key]', feedback),
+        ('if persistent_pain:return', feedback),
         ('if not running or defeated or delta <= 0.0 or not is_finite(delta)', feedback),
         ('offer_ticket <= _last_level_ticket', feedback),
         ('if defeated or hp <= 0:', feedback), ('result["low_hp"] = is_low(hp, maximum)', feedback),
@@ -48,6 +50,13 @@ def validate(sources: dict[str, str]) -> list[str]:
     for marker, source in requirements:
         if marker not in source:
             errors.append('missing integration: ' + marker)
+    supply = run.split('func _apply_supply(', 1)[1].split('\nfunc ', 1)[0]
+    hp = supply.split('\n\t\t"hp":', 1)[1].split('\n\t\t"mp":', 1)[0]
+    if 'feedback.trigger("heal")' not in hp or hp.find('_heal_hp(') > hp.find('feedback.trigger("heal")'):
+        errors.append('Recovery reaction must follow HP supply consumption/healing')
+    heal = run.split('func _heal_hp(', 1)[1].split('\nfunc ', 1)[0]
+    if 'feedback.trigger("heal")' in heal:
+        errors.append('Ordinary regeneration must not trigger HP item reaction')
     step = run.split('func step(', 1)[1].split('\nfunc ', 1)[0]
     if step.find('if phase != Phase.RUNNING') > step.find('feedback.advance('):
         errors.append('feedback advanced before phase guard')
@@ -100,6 +109,8 @@ def check() -> dict:
             errors.append('missing new runtime dependency: ' + name)
     negative = []
     for name, file, old, new in [
+        ('missing_hp_item_hook', SOURCES[1], 'feedback.trigger("heal")', 'pass'),
+        ('missing_expression_mapping', SOURCES[0], 'result["expression"] = EXPRESSIONS[key]', 'pass'),
         ('missing_damage_hook', SOURCES[1], 'feedback.trigger("hurt")', 'pass'),
         ('missing_reset', SOURCES[1], 'feedback.reset()', 'pass'),
         ('negative_duration', SOURCES[0], '"hurt": 0.55', '"hurt": -0.55'),

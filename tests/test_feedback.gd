@@ -63,7 +63,7 @@ func _run() -> void:
 	feedback.reset()
 	for event in range(100):
 		feedback.trigger("hurt")
-	verify(feedback.clocks.size() == 3, "Repeated events keep a bounded three-kind store")
+	verify(feedback.clocks.size() == 4, "Repeated events keep a bounded four-kind store")
 
 	# Real state owner, not a duplicate Python simulation.
 	var state = quiet_state()

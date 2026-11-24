@@ -1263,6 +1263,7 @@ func _apply_supply(kind: String) -> void:
 	match kind:
 		"hp":
 			_heal_hp(max_hp * SupplyCatalog.RECOVERY_FRACTION)
+			feedback.trigger("heal") # Consumed HP supply, including full HP; never ordinary regeneration.
 		"mp":
 			magic.mana = minf(magic.maximum_mana(), magic.mana + magic.maximum_mana() * SupplyCatalog.RECOVERY_FRACTION)
 		"magnet":

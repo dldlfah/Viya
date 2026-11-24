@@ -2,12 +2,16 @@ extends PanelContainer
 ## Deliberately text/border placeholders, not new character artwork.
 ## No Timer/Tween/process clock: drawing cannot change the simulation.
 var state_key: String = "normal"
+var expression_key: String = "normal"
+var expression_has_art: bool = false
+var compact_mode: bool = false
 var reaction_text: Label
 var context_text: Label
 var danger_text: Label
 var frame_style: StyleBoxFlat
 var _signature: String = ""
 var art = preload("res://scripts/ui/asset_slots.gd").new()
+var portrait_assets = preload("res://scripts/ui/portrait_assets.gd").new(art)
 var portrait: TextureRect
 
 func _ready() -> void:
@@ -37,11 +41,14 @@ func _ready() -> void:
 	danger_text.custom_minimum_size.y = 16
 	danger_text.add_theme_color_override("font_color", Color("efae77"))
 	column.add_child(danger_text)
+	for caption in [reaction_text,danger_text]:
+		caption.add_theme_color_override("font_outline_color",Color("17131c"))
+		caption.add_theme_constant_override("outline_size",2)
 	portrait = TextureRect.new()
 	portrait.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	portrait.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 	portrait.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	portrait.modulate.a = 0.35
+	portrait.modulate.a = 1.0
 	add_child(portrait)
 	move_child(portrait,0)
 	portrait.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
@@ -58,9 +65,16 @@ func present(data: Dictionary, context: String = "") -> void:
 	if not is_instance_valid(reaction_text):
 		return
 	state_key = str(data["key"])
-	portrait.texture = art.texture("viya_portrait",state_key)
+	expression_key = str(data.get("expression", "normal"))
+	var resolved: Dictionary = portrait_assets.resolve(expression_key)
+	expression_has_art = bool(resolved.exact)
+	if portrait.texture != resolved.texture:portrait.texture = resolved.texture
 	portrait.visible = portrait.texture != null
-	var signature: String = "%s|%s|%s" % [state_key, data["low_hp"], context]
+	var column: VBoxContainer = get_node("ReactionColumn")
+	column.alignment = BoxContainer.ALIGNMENT_END if portrait.visible else BoxContainer.ALIGNMENT_BEGIN
+	column.get_child(0).visible = not compact_mode and not portrait.visible
+	context_text.visible = not compact_mode and not portrait.visible
+	var signature: String = "%s|%s|%s|%s|%s|%s" % [state_key, data["low_hp"], context, expression_key, portrait.visible, data["detail"]]
 	if signature == _signature:
 		return
 	_signature = signature
