@@ -4,7 +4,11 @@
 
 ## 세션 필수 문서
 
-[CURRENT_WORK](docs/CURRENT_WORK.md)와 **[누적 DEVELOPMENT_STATUS](docs/DEVELOPMENT_STATUS.md)**를 함께 읽는다. [PLANNED_WORK](docs/PLANNED_WORK.md) · [NEXT_TASK](docs/NEXT_TASK.md) · [AGENTS](AGENTS.md) · [제작 스킬](.agents/skills/viya-game-production/SKILL.md). GAME-052 코드 **`bc237521b4c8e578de05f3c9e286e2f82414e7f3`**, 브랜치 `work/viya-turnaround-qa-20261117`. 문서 HEAD는 코드 뒤에 오며 main 자동 병합은 하지 않는다.
+[CURRENT_WORK](docs/CURRENT_WORK.md)와 **[누적 DEVELOPMENT_STATUS](docs/DEVELOPMENT_STATUS.md)**를 함께 읽는다. [PLANNED_WORK](docs/PLANNED_WORK.md) · [NEXT_TASK](docs/NEXT_TASK.md) · [AGENTS](AGENTS.md) · [제작 스킬](.agents/skills/viya-game-production/SKILL.md). GAME-053 코드 **`73bd1a148ab5b932cfb6833914370df60a804768`**, 브랜치 `work/viya-turnaround-qa-20261117`. 문서 HEAD는 코드 뒤에 오며 main 자동 병합은 하지 않는다.
+
+## 적 전멸 아이템 연출
+
+전멸 아이템을 먹으면 진홍 룬이 발현되고 붉은 파동/상승 파편과 짧은 폭발음이 나온다. 보스에는 보호 문양을 표시하며 기존 보스 제외/처치 보상·이후 정상 증원은 유지한다. 파편 최대12곳/단순6곳과 기존6음성풀을 재사용해 부하를 제한했다. [실제 연출 미리보기](docs/validation/GAME053_PURGE.mp4) · [효과 화면](docs/validation/GAME053_IMPACT.png) · [검증](docs/validation/GAME053_REPORT.json). 저장22는 그대로며 WindowsPC/모바일 실기·최종아트 승인은 별도다.
 
 ## 4분 이후 렉 점검
 
