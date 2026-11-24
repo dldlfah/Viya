@@ -94,3 +94,15 @@
 | 닫힌 성문 앞면 | [gate_front.png](../assets/maps/pilot_03/gate_front.png) | 480×228 RGB / `a0f5bc29d4187798a1af025fb0b08fc909a1b556f2e615036d83514c3c4d5872` |
 
 준비PNG3개/225560바이트는 업로드 원본과 같다. [출처README](../assets/maps/pilot_03/README.md)·[원본명세](../assets/maps/pilot_03/source_manifest.json)와 무손실2D임포트3개를 보존했다. 원본명세의적용대기 상태는 제작당시 출처기록이며 현재연결 결과와 구분한다. masters/준비·생성 스크립트 실행·이미지 편집/재생성·유료호출은하지않았다. 검증은DEVELOPMENT_STATUS8.38을따른다.
+
+## 2026-11-24 — MAP-PILOT-004 파괴 잔해3종
+
+사용자가 프롤로그 파괴 상태3종 추가를 선택했다. 원본92×86RGBA를HP0분기의기존46×43화면/하단중앙에연결했으며맵PNG총12종이다. 기존정상/다른맵/F8·공유53빈칸은유지한다. ZIP SHA256 `89ea7d5d44fcb42ebcbbf989887b27c9f520ce31c2d28761b12ad5b12b164eba`,HASHES23항목·알파영역/크기/해시를확인했다. 원본PNG3개20943바이트와무손실2D임포트3개를보존했다.
+
+| 파일 | 실제 등록 경로 | 원본/실제표시 / SHA256 |
+| --- | --- | --- |
+| 부서진 상자 | [prop_crate_broken.png](../assets/maps/pilot_04/prop_crate_broken.png) | 92×86/가시46×15 / `13b2efa02cbe6f085125f2b7c94ecad406d2fc51bee3baf2e357af772cb4e030` |
+| 깨진 항아리 | [prop_urn_broken.png](../assets/maps/pilot_04/prop_urn_broken.png) | 92×86/가시44×16 / `aed6316a83fbf7b41b451644ae547b373d1096fe01c2e73d3610ac4ab508ac0f` |
+| 흩어진 돌조각 | [prop_debris_broken.png](../assets/maps/pilot_04/prop_debris_broken.png) | 92×86/가시46×12 / `c9ff22710bd078ee80c5747568ce83e889b20efafaf6d09baf994314e4d2c364` |
+
+[출처README](../assets/maps/pilot_04/README.md)·[원본명세](../assets/maps/pilot_04/source_manifest.json)의GAME045/3142eb7/적용대기는제작당시출처다. 실제적용은GAME046이후를보존한GAME047이며DEVELOPMENT_STATUS8.40/GAME047_REPORT를따른다. masters/준비·생성스크립트를실행/복사하거나이미지편집/유료생성을하지않았다. 시범적용과최종아트/실기승인은구분한다.
