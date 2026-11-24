@@ -4,7 +4,11 @@
 
 ## 세션 필수 문서
 
-[CURRENT_WORK](docs/CURRENT_WORK.md)와 **[누적 DEVELOPMENT_STATUS](docs/DEVELOPMENT_STATUS.md)**를 함께 읽는다. [PLANNED_WORK](docs/PLANNED_WORK.md) · [NEXT_TASK](docs/NEXT_TASK.md) · [AGENTS](AGENTS.md) · [제작 스킬](.agents/skills/viya-game-production/SKILL.md). GAME-054 코드 **`d3152934278263ca3889a6eba1f5f83f160257c4`**, 브랜치 `work/viya-turnaround-qa-20261117`. 문서 HEAD는 코드 뒤에 오며 main 자동 병합은 하지 않는다.
+[CURRENT_WORK](docs/CURRENT_WORK.md)와 **[누적 DEVELOPMENT_STATUS](docs/DEVELOPMENT_STATUS.md)**를 함께 읽는다. [PLANNED_WORK](docs/PLANNED_WORK.md) · [NEXT_TASK](docs/NEXT_TASK.md) · [AGENTS](AGENTS.md) · [제작 스킬](.agents/skills/viya-game-production/SKILL.md). GAME-055 코드 **`137f506821ee74136f4deb1256ad7cd4bb5539a2`**, 브랜치 `work/viya-turnaround-qa-20261117`. 문서 HEAD는 코드 뒤에 오며 main 자동 병합은 하지 않는다.
+
+## 1스테이지 사선 시점·구조물 높이
+
+초기 전투 시안에 맞춰 1스테이지를 고정 −18도 사선/55도 고각으로 표시하고, 성벽·폐허의 윗면/앞면/측면·명암과 가림 투명화를 연결했다. 화면 방향 입력·탄환/범위/피격·레이더·무리/보스 안내도 맞췄다. 생성 보호를 유지하기 위한 가까운 표시 시야이며, 프롤로그·외곽·던전은 기존 시점을 유지한다. [적용 전](docs/validation/GAME055_BEFORE.png) · [적용 후](docs/validation/GAME055_AFTER.png) · [설계/한계](docs/design/OBLIQUE_STAGE.md) · [검증](docs/validation/GAME055_REPORT.json). 최종 아트/실기 FPS 승인은 별도다.
 
 ## 비야 반응형 초상화 준비
 
@@ -58,7 +62,7 @@ PC Godot의 몬스터 누적 렉을 줄이기 위해 경로·벽 캐시,순서�
 
 신규 출격은 `combat_pacing.json`의 모드별 요구XP표×기존3배를 사용하며 드롭5XP는 유지한다. Lv5부터 보유 공격 강화1후보를 우선 포함해3선택을 유지하고,기본무기는 사거리 내 보스를 우선 조준한다. 구1~13저장은pacing0의 기존XP/후보/조준·HP/MP를 유지한다. 진화는 플레이어의 강화 선택으로 진행한다.
 
-기본 전투 화면은 **고각60도 2.5D 시제품**이다. 반복 바닥/입체벽·발 기준 정렬·비야 가림 완화·고정 HUD를 연결했고,시험 화면의 예약 전투 높이는 안전영역의72.7~74.7%다. 디버그 **F8**로 기존 렌더러와 비교한다. ART-001·GEN-005를 새 스프라이트로 자동 채택하지 않았으며 정식 아트/모바일8~9점 승인은 별도다.
+기본 전투 화면은 **고각2.5D 시제품**이다. GAME055의1스테이지는고정−18도/55도사선시점을사용하고다른맵의기존60도는유지한다. 반복 바닥/입체벽·발 기준 정렬·비야 가림 완화·고정 HUD를 연결했고,시험 화면의 예약 전투 높이는 안전영역의72.7~74.7%다. 디버그 **F8**로 기존 렌더러와 비교한다. ART-001·GEN-005를 새 스프라이트로 자동 채택하지 않았으며 정식 아트/모바일8~9점 승인은 별도다.
 
 사용자 가이드에 맞춰 **차콜/황동 전투 HUD·진홍 룬 MP 버튼·두 줄 아이콘/단계·모바일 임무 펼침/복귀**를 연결했다. 상단 시간/공세·금화와 표준 폭의 작은 레이더는 실제 상태만 표시한다. 바닥/벽/몬스터는 교체 가능한 임시 표현이며 가이드 그림은 최종 아트로 승인되지 않았다. ART-001 기준/GEN-005 승인 대기·게임 미연결·3D보류를 유지한다.
 
