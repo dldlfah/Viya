@@ -14,6 +14,8 @@ var _radius: float = -1.0
 var _goal := Vector2(INF,INF)
 # Derived geometry only; excluded from saves and rebuilt after data changes.
 const MAX_WALL_RADII := 16
+const WALL_BIN_SIZE := 256.0
+const MAX_AXIS_BIN_ENTRIES := 4096
 var _wall_solids: Array[Rect2] = []
 var _wall_cache: Dictionary = {}
 func _walls(radius: float) -> Dictionary:
@@ -31,7 +33,24 @@ func _walls(radius: float) -> Dictionary:
 			boxes.append(wall)
 			corners.append([wall.position,Vector2(wall.end.x,wall.position.y),wall.end,Vector2(wall.position.x,wall.end.y)])
 			limits.append_array(PackedFloat64Array([wall.position.x,wall.end.x,wall.position.y,wall.end.y]))
-		_wall_cache[radius] = {"boxes":boxes,"corners":corners,"limits":limits}
+		var axes:Array=[{},{}]
+		var entries:=0
+		for axis in range(2):
+			for wall in boxes:
+				var low:float=wall.position[1-axis]
+				var high:float=wall.end[1-axis]
+				if not is_finite(low) or not is_finite(high) or absf(low/WALL_BIN_SIZE)>1000000000 or absf(high/WALL_BIN_SIZE)>1000000000 or (high-low)/WALL_BIN_SIZE>MAX_AXIS_BIN_ENTRIES:
+					entries=MAX_AXIS_BIN_ENTRIES+1
+					break
+				for cell in range(floori(low/WALL_BIN_SIZE),floori(high/WALL_BIN_SIZE)+1):
+					entries+=1
+					if entries>MAX_AXIS_BIN_ENTRIES:break
+					if not axes[axis].has(cell):axes[axis][cell]=[]
+					axes[axis][cell].append(wall)
+				if entries>MAX_AXIS_BIN_ENTRIES:break
+			if entries>MAX_AXIS_BIN_ENTRIES:break
+		if entries>MAX_AXIS_BIN_ENTRIES:axes=[] # Preserve full sweeps for oversized/diagnostic geometry.
+		_wall_cache[radius] = {"boxes":boxes,"corners":corners,"limits":limits,"axes":axes}
 	return _wall_cache[radius]
 func _init(data: Dictionary) -> void:
 	definition = data.duplicate(true)
@@ -57,10 +76,11 @@ func valid_position(at: Vector2, radius: float) -> bool:
 func move(at: Vector2, displacement: Vector2, radius: float) -> Vector2:
 	# Axis sweeps slide along walls and stop large-frame tunnelling.
 	var result := at.clamp(play_bounds.position+Vector2.ONE * radius,play_bounds.end - Vector2.ONE * radius)
-	var boxes:Array[Rect2]=_walls(radius+.01).boxes
+	var walls:Dictionary=_walls(radius+.01)
 	for axis in range(2):
 		var other := 1 - axis
 		var next := clampf(result[axis] + displacement[axis],play_bounds.position[axis]+radius,play_bounds.end[axis]-radius)
+		var boxes:Array=walls.axes[axis].get(floori(result[other]/WALL_BIN_SIZE),[]) if not walls.axes.is_empty() and is_finite(result[other]) else walls.boxes
 		for wall in boxes:
 			if result[other] < wall.position[other] or result[other] > wall.end[other]:
 				continue
@@ -89,6 +109,25 @@ func wall_fraction(from: Vector2, to: Vector2, radius: float = 0.0) -> float:
 			var hit: Variant = Geometry2D.segment_intersects_segment(from,to,points[i],points[(i+1)%4])
 			if hit is Vector2:first = minf(first,from.distance_to(hit)/maxf(distance,0.000001))
 	return first
+func line_clear(from: Vector2, to: Vector2, radius: float) -> bool:
+	# Exact same intersection arithmetic as wall_fraction, ending at the first
+	# blocking hit. Route queries only need its >=1 predicate, never the fraction.
+	var distance:=maxf(from.distance_to(to),0.000001)
+	var low:=Vector2(minf(from.x,to.x),minf(from.y,to.y))-Vector2.ONE*.01
+	var high:=Vector2(maxf(from.x,to.x),maxf(from.y,to.y))+Vector2.ONE*.01
+	var walls:=_walls(radius)
+	var limits:PackedFloat64Array=walls.limits
+	for index in range(walls.boxes.size()):
+		var offset:=index*4
+		if high.x < limits[offset] or low.x > limits[offset+1] or high.y < limits[offset+2] or low.y > limits[offset+3]:continue
+		var wall:Rect2=walls.boxes[index]
+		if wall.has_point(from):return false
+		var points:Array=walls.corners[index]
+		for i in range(4):
+			var hit:Variant=Geometry2D.segment_intersects_segment(from,to,points[i],points[(i+1)%4])
+			if hit is Vector2 and from.distance_to(hit)/distance<1.0:return false
+	return true
+
 func prepare_routes(goal: Vector2, radius: float) -> void:
 	_walls(radius)
 	if radius != _radius:
@@ -103,7 +142,7 @@ func prepare_routes(goal: Vector2, radius: float) -> void:
 		for a in range(_nodes.size()):
 			var adjacent := {}
 			for b in range(_nodes.size()):
-				if a != b and wall_fraction(_nodes[a],_nodes[b],radius) >= 1.0:
+				if a != b and line_clear(_nodes[a],_nodes[b],radius):
 					adjacent[b] = _nodes[a].distance_to(_nodes[b])
 			_edges.append(adjacent)
 		_goal = Vector2(INF,INF)
@@ -113,7 +152,7 @@ func prepare_routes(goal: Vector2, radius: float) -> void:
 	_costs.clear()
 	var visited := {}
 	for at in _nodes:
-		_costs.append(at.distance_to(goal) if wall_fraction(at,goal,radius) >= 1.0 else INF)
+		_costs.append(at.distance_to(goal) if line_clear(at,goal,radius) else INF)
 	for iteration in range(_nodes.size()):
 		var nearest := -1
 		var best := INF
@@ -127,7 +166,7 @@ func prepare_routes(goal: Vector2, radius: float) -> void:
 		for target in _edges[nearest]:
 			_costs[target] = minf(_costs[target],best + float(_edges[nearest][target]))
 func route_target(from: Vector2, goal: Vector2, radius: float) -> Vector2:
-	if solids.is_empty() or wall_fraction(from,goal,radius) >= 1.0:return goal
+	if solids.is_empty() or line_clear(from,goal,radius):return goal
 	prepare_routes(goal,radius)
 	# Test the cheapest complete route first. Float64 costs retain the original
 	# arithmetic; equal costs resolve in original node order, never sort order.
@@ -144,7 +183,7 @@ func route_target(from: Vector2, goal: Vector2, radius: float) -> Vector2:
 		var index := costs.find(cost,next_index if cost==previous else 0)
 		previous = cost
 		next_index = index+1
-		if wall_fraction(from,_nodes[index],radius) >= 1.0:return _nodes[index]
+		if line_clear(from,_nodes[index],radius):return _nodes[index]
 	return from
 func spawn_anchor(generator: RandomNumberGenerator, player: Vector2, elapsed: float, role: String, visible: Rect2, footprint: float = 0.0) -> Variant:
 	var eligible: Array = definition.zones.filter(func(zone): return role in zone.roles and elapsed >= zone.from)
