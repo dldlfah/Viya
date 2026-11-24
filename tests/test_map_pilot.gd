@@ -14,12 +14,14 @@ static func source_at(regions:Array,point:Vector2) -> Vector2:
 static func run(host,verify:Callable) -> void:
 	var slots=Slots.new()
 	verify.call(slots.definitions.size()==53 and slots.definitions.values().all(func(p):return p==""),"Map pilot leaves every shared/character presentation path blank")
-	verify.call(slots.map_definitions.keys()==["prologue_wall"] and slots.map_definitions.prologue_wall.size()==9,"Only the prologue receives the nine pilot overrides")
+	verify.call(slots.map_definitions.keys()==["prologue_wall"] and slots.map_definitions.prologue_wall.size()==12,"Only the prologue receives the twelve pilot overrides")
 	var manifest:Dictionary=JSON.parse_string(FileAccess.get_file_as_string("res://assets/maps/pilot_01/source_manifest.json"))
 	var second:Dictionary=JSON.parse_string(FileAccess.get_file_as_string("res://assets/maps/pilot_02/source_manifest.json"))
 	manifest.assets.append_array(second.assets)
 	var third:Dictionary=JSON.parse_string(FileAccess.get_file_as_string("res://assets/maps/pilot_03/source_manifest.json"))
 	manifest.assets.append_array(third.assets)
+	var fourth:Dictionary=JSON.parse_string(FileAccess.get_file_as_string("res://assets/maps/pilot_04/source_manifest.json"))
+	manifest.assets.append_array(fourth.assets)
 	for asset in manifest.assets:
 		var source_size:Array=asset.get("source_size",asset.get("size_px",[]))
 		var texture:Texture2D=slots.map_texture(asset.slot,"prologue_wall")

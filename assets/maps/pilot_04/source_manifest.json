@@ -1,0 +1,230 @@
+{
+  "schema": "viya-map-pilot-art-1",
+  "name": "VIYA Map Pilot 04",
+  "date_kst": "2026-11-24",
+  "status": "assets_prepared_integration_pending",
+  "art_approval": "not_final_approved",
+  "repo": "dldlfah/Viya",
+  "branch": "work/viya-turnaround-qa-20261117",
+  "repo_head_checked": "3142eb73a4cf9645ef933dea0dc0fdb9d5ae42e9",
+  "game_code_basis": "5b1e6c0e997547707b9d638eb2c316d89613ac74",
+  "existing_game_unit": "GAME-045",
+  "existing_next_game_unit": "GAME-046",
+  "scope": "Destroyed-state prop sprites and integration handoff only; no repository modification or Godot execution",
+  "intended_map": "prologue_wall",
+  "existing_map_assets_applied": 9,
+  "preserve_existing_slots": [
+    "stone_floor_tile",
+    "wall_segment",
+    "prop_crate",
+    "ruin_block",
+    "prop_urn",
+    "prop_debris",
+    "wall_top_tile",
+    "ruin_top_tile",
+    "gate_front"
+  ],
+  "assets": [
+    {
+      "file": "textures/prop_crate_broken.png",
+      "slot": "prop_crate_broken",
+      "title_ko": "부서진 상자",
+      "proposed_resource_path": "res://assets/maps/pilot_04/prop_crate_broken.png",
+      "existing_normal_slot": "prop_crate",
+      "master": "masters/prop_crate_broken_master.png",
+      "master_size": [
+        1024,
+        1024
+      ],
+      "master_crop_alpha_ge_4": [
+        129,
+        402,
+        903,
+        657
+      ],
+      "source_size": [
+        92,
+        86
+      ],
+      "mode": "RGBA",
+      "color_profile": "sRGB",
+      "display_size": [
+        46,
+        43
+      ],
+      "display_space": "screen",
+      "pivot": [
+        0.5,
+        1.0
+      ],
+      "visible_bbox": [
+        0,
+        56,
+        92,
+        86
+      ],
+      "visible_shape_size": [
+        92,
+        30
+      ],
+      "uniform_scale": 0.11886304909560723,
+      "placed_size": [
+        92,
+        30
+      ],
+      "transparency": "straight_alpha",
+      "source_alpha_noise_cutoff": 4,
+      "projection": "high_front_orthographic_baked_in_sprite_no_extra_y_scale",
+      "sha256": "13b2efa02cbe6f085125f2b7c94ecad406d2fc51bee3baf2e357af772cb4e030",
+      "bytes": 7291,
+      "generation_job_id": "11e515e4-5746-4881-bb8d-ae2c7c2ead2c",
+      "generation_status": "completed",
+      "generation_result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3LHdo37hN3iiYXd8WT9stnWXw4M/hf_20261124_062827_11e515e4-5746-4881-bb8d-ae2c7c2ead2c.png",
+      "master_sha256": "ba1f84664b7e7e397e569d2fc551356e0b087d595eb4f1824f789ff9e3211f70",
+      "fully_transparent_pixels": 5776,
+      "nonzero_alpha_pixels": 2136
+    },
+    {
+      "file": "textures/prop_urn_broken.png",
+      "slot": "prop_urn_broken",
+      "title_ko": "깨진 항아리",
+      "proposed_resource_path": "res://assets/maps/pilot_04/prop_urn_broken.png",
+      "existing_normal_slot": "prop_urn",
+      "master": "masters/prop_urn_broken_master.png",
+      "master_size": [
+        1024,
+        1024
+      ],
+      "master_crop_alpha_ge_4": [
+        77,
+        374,
+        942,
+        687
+      ],
+      "source_size": [
+        92,
+        86
+      ],
+      "mode": "RGBA",
+      "color_profile": "sRGB",
+      "display_size": [
+        46,
+        43
+      ],
+      "display_space": "screen",
+      "pivot": [
+        0.5,
+        1.0
+      ],
+      "visible_bbox": [
+        2,
+        54,
+        90,
+        86
+      ],
+      "visible_shape_size": [
+        88,
+        32
+      ],
+      "uniform_scale": 0.10223642172523961,
+      "placed_size": [
+        88,
+        32
+      ],
+      "transparency": "straight_alpha",
+      "source_alpha_noise_cutoff": 4,
+      "projection": "high_front_orthographic_baked_in_sprite_no_extra_y_scale",
+      "sha256": "aed6316a83fbf7b41b451644ae547b373d1096fe01c2e73d3610ac4ab508ac0f",
+      "bytes": 7669,
+      "generation_job_id": "299c902f-8cc6-483a-8941-b406da48081e",
+      "generation_status": "completed",
+      "generation_result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3LHdo37hN3iiYXd8WT9stnWXw4M/hf_20261124_062827_299c902f-8cc6-483a-8941-b406da48081e.png",
+      "master_sha256": "3158f27a344236c2edbdcbf6b0525511379f600600ee5f95a4d8e44f974ac6f0",
+      "fully_transparent_pixels": 5742,
+      "nonzero_alpha_pixels": 2170
+    },
+    {
+      "file": "textures/prop_debris_broken.png",
+      "slot": "prop_debris_broken",
+      "title_ko": "흩어진 돌조각",
+      "proposed_resource_path": "res://assets/maps/pilot_04/prop_debris_broken.png",
+      "existing_normal_slot": "prop_debris",
+      "master": "masters/prop_debris_broken_master.png",
+      "master_size": [
+        1024,
+        1024
+      ],
+      "master_crop_alpha_ge_4": [
+        124,
+        443,
+        878,
+        638
+      ],
+      "source_size": [
+        92,
+        86
+      ],
+      "mode": "RGBA",
+      "color_profile": "sRGB",
+      "display_size": [
+        46,
+        43
+      ],
+      "display_space": "screen",
+      "pivot": [
+        0.5,
+        1.0
+      ],
+      "visible_bbox": [
+        0,
+        62,
+        92,
+        86
+      ],
+      "visible_shape_size": [
+        92,
+        24
+      ],
+      "uniform_scale": 0.1220159151193634,
+      "placed_size": [
+        92,
+        24
+      ],
+      "transparency": "straight_alpha",
+      "source_alpha_noise_cutoff": 4,
+      "projection": "high_front_orthographic_baked_in_sprite_no_extra_y_scale",
+      "sha256": "c9ff22710bd078ee80c5747568ce83e889b20efafaf6d09baf994314e4d2c364",
+      "bytes": 5983,
+      "generation_job_id": "33c68f67-e476-49e5-a921-cfd97eaa9661",
+      "generation_status": "completed",
+      "generation_result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3LHdo37hN3iiYXd8WT9stnWXw4M/hf_20261124_062827_33c68f67-e476-49e5-a921-cfd97eaa9661.png",
+      "master_sha256": "6c02b5e5d942d506adb296fbb94be6cd26d6d2c8c40adb951ebefeeeb41441d7",
+      "fully_transparent_pixels": 6276,
+      "nonzero_alpha_pixels": 1636
+    }
+  ],
+  "renderer_hook_required": "high_angle_battle.gd::_draw_prop hp<=0 branch; lookup prop_<style>_broken; draw at existing 46x43 screen rectangle or retain current line fallback",
+  "placement": "bottom-centre pivot; full 92x86 transparent canvas; no additional ground-Y compression",
+  "simulation_contract": "Read existing hp only; preserve existing p/id/depth ordering, 45 active battle second respawn, drop RNG and save data",
+  "generation_provider": "Higgsfield",
+  "generation_model": "gpt_image_2_6",
+  "generation_attempts_submitted": 3,
+  "generation_attempts_completed": 3,
+  "paid_regeneration_attempts": 0,
+  "quoted_generation_cost_credits": 3.75,
+  "actual_billing_debit_independently_verified": false,
+  "preview": "VIYA_map_pilot_04_preview.png",
+  "preview_is_game_capture": false,
+  "generation_record": "generation_log.json",
+  "integration_handoff": "docs/INTEGRATION_HANDOFF_ko.txt",
+  "session_record": "docs/SESSION_RECORD_20261124.txt",
+  "reproduction_script": "prepare_assets.py",
+  "image_checks": "Three 1024x1024 RGBA masters; native transparency; uniform premultiplied-alpha downsampling; full final canvas 92x86; alpha edge composites and actual proposed display-size floor composites visually inspected",
+  "game_integration_verification": "NOT_PERFORMED",
+  "mobile_device_verification": "NOT_PERFORMED",
+  "source_references": [
+    "https://github.com/dldlfah/Viya/blob/3142eb73a4cf9645ef933dea0dc0fdb9d5ae42e9/docs/CURRENT_WORK.md",
+    "https://github.com/dldlfah/Viya/blob/3142eb73a4cf9645ef933dea0dc0fdb9d5ae42e9/data/map_presentation_slots.json",
+    "https://github.com/dldlfah/Viya/blob/3142eb73a4cf9645ef933dea0dc0fdb9d5ae42e9/scripts/combat/high_angle_battle.gd"
+  ]
+}

@@ -8,6 +8,9 @@
     "prop_debris": "res://assets/maps/pilot_02/prop_debris.png",
     "wall_top_tile": "res://assets/maps/pilot_03/wall_top_tile.png",
     "ruin_top_tile": "res://assets/maps/pilot_03/ruin_top_tile.png",
-    "gate_front": "res://assets/maps/pilot_03/gate_front.png"
+    "gate_front": "res://assets/maps/pilot_03/gate_front.png",
+    "prop_crate_broken": "res://assets/maps/pilot_04/prop_crate_broken.png",
+    "prop_urn_broken": "res://assets/maps/pilot_04/prop_urn_broken.png",
+    "prop_debris_broken": "res://assets/maps/pilot_04/prop_debris_broken.png"
   }
 }

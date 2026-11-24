@@ -172,6 +172,10 @@ func _draw_hero() -> void:
 func _draw_prop(prop: Dictionary) -> void:
 	var feet := screen(prop.p)
 	if prop.hp<=0:
+		var broken: Texture2D = canvas.art.map_texture("prop_"+prop.style+"_broken",state.map_id)
+		if broken:
+			canvas.draw_texture_rect(broken,Rect2(feet-Vector2(23,43),Vector2(46,43)),false)
+			return
 		canvas.draw_line(feet-Vector2(14,2),feet+Vector2(16,3),Color("756c5c"),4,true)
 		return
 	var color := Color("a48254") if prop.style=="crate" else (Color("9c7159") if prop.style=="urn" else Color("8d8d7e"))
