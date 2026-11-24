@@ -211,6 +211,9 @@ func _draw_supply_items() -> void:
 	for item in simulation.item_pickups:
 		var at:=_screen(item.p)
 		if visible.has_point(at):SupplyFeedback.draw_item(self,at,str(item.kind),compact)
+	for chest in simulation.chest_pickups:
+		var at:=_screen(chest.p)
+		if visible.has_point(at):SupplyFeedback.draw_item(self,at,"chest",compact)
 
 func _draw_weapon_fields() -> void:
 	for event in simulation.weapon_events:

@@ -1,6 +1,6 @@
 extends RefCounted
 ## Replaceable upright glyphs and committed pickup receipts; no gameplay or RNG.
-const COLORS := {"hp":Color("f58c9c"),"mp":Color("7abcf3"),"magnet":Color("f3ce79"),"purge":Color("cea2fa")}
+const COLORS := {"hp":Color("f58c9c"),"mp":Color("7abcf3"),"magnet":Color("f3ce79"),"purge":Color("cea2fa"),"chest":Color("f4cd77")}
 
 static func number(value:float) -> String:
 	if value>0 and value<.001:return "<0.001"
@@ -8,6 +8,7 @@ static func number(value:float) -> String:
 
 static func text(receipt:Dictionary) -> String:
 	match str(receipt.get("kind","")):
+		"chest":return "강화 상자 · %d종 +1" % receipt.upgrades.size() if not receipt.upgrades.is_empty() else "강화 가능한 보유 스킬 없음"
 		"hp":return "HP +%d" % int(receipt.hp) if receipt.hp>0 else "HP 가득 참"
 		"mp":return "MP +%s" % number(float(receipt.mp)) if receipt.mp>0 else "MP 가득 참"
 		"magnet":
@@ -38,6 +39,11 @@ static func draw_item(canvas,at:Vector2,kind:String,compact:bool) -> void:
 	canvas.draw_arc(at,r,0,TAU,24,tint,2,true)
 	var scale:float=r/17.0
 	match kind:
+		"chest":
+			canvas.draw_rect(Rect2(at+Vector2(-11,-7)*scale,Vector2(22,16)*scale),Color("86572f"))
+			canvas.draw_rect(Rect2(at+Vector2(-11,-7)*scale,Vector2(22,16)*scale),tint,false,2)
+			canvas.draw_line(at+Vector2(-10,-1)*scale,at+Vector2(10,-1)*scale,tint,2,true)
+			canvas.draw_rect(Rect2(at+Vector2(-2,-3)*scale,Vector2(4,7)*scale),tint)
 		"hp":
 			canvas.draw_line(at+Vector2(-9,0)*scale,at+Vector2(9,0)*scale,tint,4,true)
 			canvas.draw_line(at+Vector2(0,-9)*scale,at+Vector2(0,9)*scale,tint,4,true)

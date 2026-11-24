@@ -1,0 +1,8 @@
+{
+  "minute_seconds": 60.0,
+  "spawn_multipliers": [1, 2, 4, 8, 16, 32],
+  "ground_limits": [160, 320, 640, 640, 640, 640],
+  "chest_drop_chance": 0.30,
+  "chest_min_upgrades": 1,
+  "chest_max_upgrades": 5
+}

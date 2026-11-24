@@ -47,6 +47,9 @@ static func build(view) -> Dictionary:
 		if view.boss_guidance.marker_rect.has_area():reserved.append(view.boss_guidance.marker_rect.grow(3))
 	var hero_art:Dictionary=view.actor_visual().sample
 	if not hero_art.is_empty():reserved[0]=reserved[0].merge(view.actor_art.rectangle(hero_art,view.world_to_screen(state.player)))
+	for chest in state.chest_pickups:
+		var at:Vector2=view.world_to_screen(chest.p)
+		if Rect2(Vector2.ZERO,view.size).grow(22).has_point(at):reserved.append(SupplyFeedback.bounds(at,compact))
 	for item in state.item_pickups:
 		var at:Vector2=view.world_to_screen(item.p)
 		if Rect2(Vector2.ZERO,view.size).grow(22).has_point(at):reserved.append(SupplyFeedback.bounds(at,compact))

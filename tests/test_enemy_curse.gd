@@ -23,7 +23,7 @@ static func launch(state) -> void:
 static func run(host,verify:Callable) -> void:
 	var state=State.new()
 	verify.call(state.start(4002,"viya",null,"prologue_wall","weapons_v1") and state.enemy_pattern_version==3,"Production campaign start connects curse revision3")
-	verify.call(Snapshot.VERSION==18 and Snapshot.fingerprint_for_v17()==Snapshot.GAME039_RULES and Snapshot.fingerprint_for_v16()==Snapshot.GAME038_RULES,"Save18 retains exact published16/17 fingerprints")
+	verify.call(Snapshot.VERSION==19 and Snapshot.fingerprint_for_v17()==Snapshot.GAME039_RULES and Snapshot.fingerprint_for_v16()==Snapshot.GAME038_RULES,"Save18 retains exact published16/17 fingerprints")
 	state=Hammer.fresh(3)
 	verify.call(state.enemies[0].has("pattern") and state.enemy_patterns.specification(3).damage==24,"New rule initializes the inherited immutable hammer catalog")
 	Hammer.arm(state)

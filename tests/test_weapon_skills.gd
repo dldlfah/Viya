@@ -72,7 +72,7 @@ static func defense_checks(verify: Callable) -> void:
 	Modules.impact(state,enemy,spoof)
 	verify.call(enemy.hp==hp_before and not enemy.has("weapon_status") and state.rng.state==rng_before, "Undeployed attack support cannot inflict damage or status or spend RNG")
 	var snap: Dictionary = Snapshot.capture(state)
-	verify.call(snap.version==18 and Snapshot.valid(snap,state) and snap.run.armor_enabled, "New armor-enabled run snapshots retain the branch rule")
+	verify.call(snap.version==19 and Snapshot.valid(snap,state) and snap.run.armor_enabled, "New armor-enabled run snapshots retain the branch rule")
 	var old: Dictionary = snap.duplicate(true)
 	old.version=10
 	old.rng.resize(6)
@@ -82,7 +82,7 @@ static func defense_checks(verify: Callable) -> void:
 	old.run.erase("support_attack_ids")
 	old.run.erase("support_passive_ids")
 	var migrated: Dictionary = Snapshot.upgrade_legacy(old,state)
-	verify.call(migrated.version==18 and not migrated.run.armor_enabled and Snapshot.valid(migrated,state), "Existing v10 saves continue unchanged without retroactive armor")
+	verify.call(migrated.version==19 and not migrated.run.armor_enabled and Snapshot.valid(migrated,state), "Existing v10 saves continue unchanged without retroactive armor")
 	var legacy = State.new()
 	legacy.start(125,"viya",null,"legacy_arena","legacy")
 	verify.call(not legacy.armor_enabled and float(legacy.stats.physical_penetration)==0.0, "Legacy damage semantics remain intact")

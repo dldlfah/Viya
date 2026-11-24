@@ -680,7 +680,7 @@ func begin_run() -> void:
 		return
 	var previous_stage: int = simulation.stage
 	simulation.stage = gold_progress.next_stage
-	if not simulation.start(0, simulation.growth.character_id, gold_progress.talent_levels, str(simulation.stage_catalog.for_stage(simulation.stage).map_id), new_run_ruleset):
+	if not simulation.start(0, simulation.growth.character_id, gold_progress.talent_levels, str(simulation.stage_catalog.for_stage(simulation.stage).map_id), new_run_ruleset, {}, "campaign", -1, -1, -1, new_run_encounter_version if new_run_ruleset=="weapons_v1" else 0):
 		simulation.stage = previous_stage
 		push_error("Invalid character data; current run retained")
 		return
@@ -1342,8 +1342,8 @@ func _update_hud() -> void:
 	if not simulation.stage_rules.is_empty():
 		var left: int = maxi(0,int(ceil(simulation.stage_duration-simulation.elapsed)))
 		var next := "보스 처치" if simulation._boss_spawned and not simulation._boss_defeated else ("생존 유지" if simulation._boss_defeated else "보스 %d초" % maxi(0,int(ceil(float(simulation.stage_rules.boss_at)-simulation.elapsed))))
-		if simulation._elites_spawned < 2 and not simulation._boss_spawned:
-			next = "정예 %d초" % maxi(0,int(ceil(float(simulation.stage_rules.elites[simulation._elites_spawned])-simulation.elapsed)))
+		if simulation._elites_spawned < simulation.elite_schedule().size() and not simulation._boss_spawned:
+			next = "정예 %d초" % maxi(0,int(ceil(float(simulation.elite_schedule()[simulation._elites_spawned])-simulation.elapsed)))
 		stage_text.add_theme_font_size_override("font_size",14)
 		stage_text.text = "S%d %s · %02d:%02d · 생존+보스 · %s · 저장 %d/2" % [simulation.stage,simulation.map_space.definition.get("short_name","전장"),left/60,left%60,next,save_notice.count_for(simulation.run_id)]
 		stage_text.tooltip_text = simulation.map_space.definition.name

@@ -48,6 +48,7 @@ var settings_error: Error = OK
 var run_store = RunStore.new()
 var battle_save_error: Error = OK
 var _saved_checkpoint: int = 0
+var new_run_encounter_version:int=1
 var stage_text: Label
 
 func _ready() -> void:
@@ -91,6 +92,9 @@ func _physics_process(delta: float) -> void:
 	_sync_phase_ui()
 	if simulation.has_active_run() and simulation.checkpoint_index > _saved_checkpoint and battle_save_error == OK:
 		_ensure_battle_saved()
+	if simulation.has_active_run() and simulation.encounter_version==1 and battle_save_error==OK:
+		var saved:Dictionary=run_store.pending.get("run",{})
+		if saved.get("_chest_serial",-1)!=simulation._chest_serial or saved.get("_chests_opened",-1)!=simulation._chests_opened:_ensure_battle_saved()
 	_update_hud()
 	view.queue_redraw()
 
@@ -178,7 +182,7 @@ func begin_run() -> void:
 	_magic_touch_id = -1
 	var previous_stage: int = simulation.stage
 	simulation.stage = gold_progress.next_stage
-	if not simulation.start(0, simulation.growth.character_id, gold_progress.talent_levels, str(simulation.stage_catalog.for_stage(simulation.stage).map_id), new_run_ruleset):
+	if not simulation.start(0, simulation.growth.character_id, gold_progress.talent_levels, str(simulation.stage_catalog.for_stage(simulation.stage).map_id), new_run_ruleset, {}, "campaign", -1, -1, -1, new_run_encounter_version if new_run_ruleset=="weapons_v1" else 0):
 		simulation.stage = previous_stage
 		push_error("Invalid character skill catalog; run not started")
 		return

@@ -15,6 +15,13 @@ const CombatProfiles = preload("res://scripts/combat/combat_profiles.gd")
 const EnemyPatterns = preload("res://scripts/combat/enemy_patterns.gd")
 var enemy_patterns = EnemyPatterns.new()
 var enemy_pattern_version:int=0
+const CampaignEncounters=preload("res://scripts/combat/campaign_encounters.gd")
+var encounters=CampaignEncounters.new()
+var encounter_version:int=0 # Published battles keep their original population/rewards.
+var chest_pickups:Array[Dictionary]=[]
+var _chest_serial:int=0
+var _chests_opened:int=0
+var _chest_bonus_ranks:int=0
 enum Phase { READY, RUNNING, PAUSED, DEFEAT, CHOOSING, ABANDONED, CLEARED }
 const WORLD_SIZE := Vector2(1800.0, 1200.0) # Legacy API; mapped runs use world_size.
 const PLAYER_SPEED := 235.0
@@ -121,7 +128,7 @@ var dungeon = preload("res://scripts/combat/gold_dungeon.gd").new()
 func enemy_definition(id: String) -> Dictionary:
 	return dungeon.species(wave_profile()) if id=="gold_slime" and run_mode=="gold_slime" else profiles.species(id)
 
-func start(seed_value: int = 0, character_id: String = "viya", account_level: Variant = null, selected_map: String = "legacy_arena", skill_ruleset: String = "legacy", support_loadout: Dictionary = {}, mode: String = "campaign", entry_day: int = -1, pacing_version:int=-1, pattern_version:int=-1) -> bool:
+func start(seed_value: int = 0, character_id: String = "viya", account_level: Variant = null, selected_map: String = "legacy_arena", skill_ruleset: String = "legacy", support_loadout: Dictionary = {}, mode: String = "campaign", entry_day: int = -1, pacing_version:int=-1, pattern_version:int=-1, encounter_rules:int=0) -> bool:
 	# Validate the complete selected character before changing the previous run.
 	var selected_levels: Dictionary = account_talent_levels.duplicate(true)
 	if account_level is int:
@@ -161,6 +168,7 @@ func start(seed_value: int = 0, character_id: String = "viya", account_level: Va
 	var selected_profile := 1 if skill_ruleset=="weapons_v1" else 0
 	var selected_pattern:int=(3 if selected_profile==1 and mode=="campaign" else 0) if pattern_version==-1 else pattern_version
 	if selected_pattern not in [0,1,2,3] or (selected_pattern>0 and (selected_profile!=1 or mode!="campaign" or not enemy_patterns.available(selected_pattern))):return false
+	if encounter_rules not in [0,1] or (encounter_rules==1 and (mode!="campaign" or selected_profile!=1 or encounters.data.is_empty())):return false
 	if selected_profile==1 and (not profiles.error.is_empty() or profiles.hero(character_id).is_empty() or (mode=="campaign" and not profiles.data.maps.has(selected_map))):
 		return false
 	var candidate: Dictionary = magic_configuration(hero,selected_profile,character_id)
@@ -182,6 +190,11 @@ func start(seed_value: int = 0, character_id: String = "viya", account_level: Va
 	armor_enabled = skill_ruleset == "weapons_v1"
 	combat_profile_version = selected_profile
 	enemy_pattern_version = selected_pattern
+	encounter_version=encounter_rules
+	chest_pickups.clear()
+	_chest_serial=0
+	_chests_opened=0
+	_chest_bonus_ranks=0
 	var previous_mode: String=run_mode
 	run_mode = mode
 	dungeon_day = entry_day
@@ -304,7 +317,7 @@ func add_enemy(at: Vector2, kind: String = "normal", variant: String = "normal",
 		return false
 	if scatter_group < 0 or scatter_group > _scatter_index or (scatter_group > 0 and (kind != "normal" or variant not in SCATTER_VARIANTS)):
 		return false
-	if scatter_group == 0 and variant != "flier" and _ground_count() >= MAX_ENEMIES:
+	if scatter_group == 0 and variant != "flier" and _ground_count() >= population_limit():
 		return false
 	if run_mode=="gold_slime" and (kind!="normal" or variant!="normal" or species_id not in ["","gold_slime"] or enemies.size()>=int(dungeon.data.max_enemies)):
 		return false
@@ -314,14 +327,14 @@ func add_enemy(at: Vector2, kind: String = "normal", variant: String = "normal",
 	if not species_id.is_empty() and (combat_profile_version!=1 or definition.is_empty() or definition.kind!=kind or definition.variant!=variant):
 		return false
 	if combat_profile_version==1 and species_id.is_empty():
-		species_id = profiles.select(map_id,kind,variant,_elites_spawned,species_rng)
+		species_id = profiles.select(map_id,kind,variant,encounters.elite_index(encounter_version,_elites_spawned),species_rng)
 		definition = profiles.species(species_id)
 		if definition.is_empty():return false
 	_enemy_serial += 1
 	var wave := wave_profile()
 	var life: int = int(wave.hp)
 	if kind == "elite":
-		life = int(stage_rules.elite_hp[mini(_elites_spawned, 1)])
+		life = int(stage_rules.elite_hp[mini(encounters.elite_index(encounter_version,_elites_spawned), 1)])
 	elif kind == "boss":
 		life = int(stage_rules.boss_hp)
 	var speed: float = float(wave.speed)
@@ -533,12 +546,12 @@ func step(delta: float, direction: Vector2) -> void:
 	spawn_clock -= dt
 	if run_mode=="campaign" and elapsed >= float(stage_rules.boss_at) and not _boss_spawned:
 		_boss_spawned = _spawn_enemy("boss")
-	elif run_mode=="campaign" and _elites_spawned < 2 and elapsed >= float(stage_rules.elites[_elites_spawned]):
+	elif run_mode=="campaign" and _elites_spawned < elite_schedule().size() and elapsed >= float(elite_schedule()[_elites_spawned]):
 		if _spawn_enemy("elite"):
 			_elites_spawned += 1
 	if spawn_clock <= 0.0:
 		var wave := wave_profile()
-		for index in range(int(wave.batch)):
+		for index in range(encounters.batch(self,wave)):
 			_spawn_enemy()
 		spawn_clock = float(wave.interval)
 	_tick_swarm(dt)
@@ -591,6 +604,7 @@ func _heal_on_kill() -> void:
 func _collect_pickups(dt: float) -> void:
 	_collect_gold(dt)
 	_collect_items(dt)
+	encounters.collect(self,dt)
 	if phase != Phase.RUNNING:
 		return # A global magnet may open an exact, saved level-up offer.
 	var reward: float = 0.0
@@ -616,9 +630,10 @@ func _ground_count() -> int:
 func _spawn_enemy(kind: String = "normal") -> bool:
 	if run_mode=="gold_slime" and (kind!="normal" or enemies.size()>=int(dungeon.data.max_enemies)):return false
 	# Flying formations have their own lifetime; only reserve the ground boss slot.
-	var limit: int = MAX_ENEMIES - (0 if _boss_spawned else 1)
+	var limit: int = population_limit() - (0 if _boss_spawned else 1)
+	if encounter_version==1 and kind=="normal":limit-=elite_schedule().size()-_elites_spawned
 	if kind == "boss":
-		limit = MAX_ENEMIES
+		limit = population_limit()
 	if _ground_count() >= limit:
 		return false
 	if map_id != "legacy_arena":
@@ -912,6 +927,7 @@ func _defeat_enemy(index: int) -> void:
 	enemies.remove_at(index)
 	kills += 1
 	cues.record_kill(int(enemy.id), enemy.p)
+	encounters.drop(self,enemy)
 	_heal_on_kill()
 	if enemy.kind == "boss" and _boss_spawned:
 		_boss_defeated = true
@@ -1084,7 +1100,7 @@ func confirm_transition(expected_ticket: int, account_level: Variant = null) -> 
 	if transition_action == "restart" and run_mode=="gold_slime":return false # UI must settle/forfeit before a fresh charged admission.
 	if transition_action == "restart":
 		# start() validates first. On failure keep the old run and confirmation.
-		return start(0, growth.character_id, account_level, map_id, growth.ruleset,{},run_mode,dungeon_day,growth.pacing_version)
+		return start(0, growth.character_id, account_level, map_id, growth.ruleset,{},run_mode,dungeon_day,growth.pacing_version,-1,encounter_version)
 	_finish_run("abandoned")
 	return true
 
@@ -1238,6 +1254,10 @@ func _resolve_deadline() -> void:
 		_clear_stage()
 	else:
 		_finish_run("timeout")
+
+func population_limit()->int:return encounters.population_limit(encounter_version,elapsed)
+
+func elite_schedule()->Array:return encounters.elite_times(stage_rules,encounter_version)
 
 func wave_profile() -> Dictionary:
 	var selected: Dictionary = stage_rules.get("waves", [{"hp": 20, "speed": 68.0}])[0]
