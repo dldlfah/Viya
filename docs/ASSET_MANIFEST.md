@@ -58,3 +58,15 @@
 - 출처는 사용자 첨부 `비야 캐릭터 모델링 제작 시트(2).png`를 참조해 채팅에서 생성한 `비야의 다크 판타지 전투 포즈.png`다.
 - 원본은 PNG RGB **1024×1536**, **1,921,148바이트**다. SHA-256은 `d3c0084c73aff9a706a50a6cac760d124c0647d23fa36e6ae30635dc6929a730`이다.
 - 사용 권한은 사용자 지시에 따른 Viya 저장소 등록이다. 상업 배포 권한은 별도 검토 대상이다.
+
+## 2026-11-24 — MAP-PILOT-001 사용자 맵 파일럿
+
+사용자가 `VIYA_map_pilot_01.zip`의 구성·호환성 검토 뒤 ‘작업해’로 시범 적용을 지시했다. 준비 PNG3개를 프롤로그 기본 고각 화면에만 연결했다. **시범 적용 허용이며 최종 아트 승인으로 간주하지 않는다.** ART001/GEN005/3D·캐릭터 승인 경계는 그대로다. 입력 ZIP SHA256은 `6c200744a153aff6f99f107443b1efc5d3e6e373ee164a95568ccfc5d9cb7ab9`다.
+
+| 파일 | 실제 등록 경로 | 규격 / SHA256 |
+| --- | --- | --- |
+| 바닥 | [stone_floor_tile.png](../assets/maps/pilot_01/stone_floor_tile.png) |224×160 RGB / `9beefd01712a5c45b71908ad679d105b00a7ce6b99e61a639e384b7de06257e6` |
+| 성벽 앞면 | [wall_segment.png](../assets/maps/pilot_01/wall_segment.png) |192×244 RGB / `15b4a1a6f64b88df88424075d6710c0761cac7e7ac30dfc3ff889d0b3705d11a` |
+| 정상 상자 | [prop_crate.png](../assets/maps/pilot_01/prop_crate.png) |92×86 RGBA / `7a0fefb9f935a5026e1bb9ded4029542e9f33323bbac87481f22144ece712edc` |
+
+준비 PNG는 업로드 원본과 바이트 동일하다. 생성 로그의 Higgsfield 표기는 동봉 출처 기록이며 이번 세션에서 재생성·유료 호출하지 않았다. 대형 masters/준비 스크립트는 게임에 복사하거나 실행하지 않았으며 출처 명세/ZIP 식별은 [자산 README](../assets/maps/pilot_01/README.md)와 [원본 manifest](../assets/maps/pilot_01/source_manifest.json)에 남겼다.3개의 Godot2D 임포트 설정을 보존했다. 코드/검증은 CURRENT·DEVELOPMENT_STATUS8.34를 따른다.
