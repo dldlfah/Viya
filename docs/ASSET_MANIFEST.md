@@ -82,3 +82,15 @@
 | 정상 잔해 더미 | [prop_debris.png](../assets/maps/pilot_02/prop_debris.png) | 92×86 / `ab0cccf2713543f0bd127a7f76ef1a4854695473ba7f0eca58bc1f919fe4b9d5` |
 
 준비PNG3개/51025바이트는업로드원본과동일하다. 3개의2D무손실임포트설정·[출처README](../assets/maps/pilot_02/README.md)/[원본명세](../assets/maps/pilot_02/source_manifest.json)를보존했다. 동봉준비스크립트/생성작업을실행하거나대형masters를런타임에복사하지않았다. 원본명세의c412d1d/후보상태는제작당시출처기록이고현재게임적용결과와구분한다. 검증은DEVELOPMENT_STATUS8.37을따른다.
+
+## 2026-11-24 — MAP-PILOT-003 윗면·닫힌 성문
+
+사용자 선택으로 프롤로그에3종을 추가해 맵 파일럿 총9종을 연결했다. 시범 적용이며 최종아트/실기 승인은 아니다. ZIP SHA256 `887357f23b29a1226d6d49190fd58de113ea67039be75fa09be22cd411e60864`. 동봉HASHES28항목을검토했다. 기존6PNG·공유53빈칸·캐릭터/다른맵/F8을유지한다.
+
+| 파일 | 실제 등록 경로 | 규격 / SHA256 |
+| --- | --- | --- |
+| 성벽 윗면 | [wall_top_tile.png](../assets/maps/pilot_03/wall_top_tile.png) | 192×160 RGB / `77173228a87824927c1d01f17b62bcaaf4a855fe39d8e5132c03f1eb5a3a4c33` |
+| 폐허 윗면 | [ruin_top_tile.png](../assets/maps/pilot_03/ruin_top_tile.png) | 192×160 RGB / `b99c7efffbbad26c8fe9ce3a7c84014faf3c2cd069d46ca5662b26b314cfb127` |
+| 닫힌 성문 앞면 | [gate_front.png](../assets/maps/pilot_03/gate_front.png) | 480×228 RGB / `a0f5bc29d4187798a1af025fb0b08fc909a1b556f2e615036d83514c3c4d5872` |
+
+준비PNG3개/225560바이트는 업로드 원본과 같다. [출처README](../assets/maps/pilot_03/README.md)·[원본명세](../assets/maps/pilot_03/source_manifest.json)와 무손실2D임포트3개를 보존했다. 원본명세의적용대기 상태는 제작당시 출처기록이며 현재연결 결과와 구분한다. masters/준비·생성 스크립트 실행·이미지 편집/재생성·유료호출은하지않았다. 검증은DEVELOPMENT_STATUS8.38을따른다.

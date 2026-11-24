@@ -1,10 +1,10 @@
 # Viya — 모바일 서바이버 게임
 
-기존 BREAKERS와 독립된 프로젝트. **프롤로그 기본 고각 전장에 사용자 맵 파일럿6종을 적용했으며, 캐릭터/UI·나머지 전장은 임시 그래픽이다. ART-001 이후 캐릭터 원화·3D 제작은 보류**한다.
+기존 BREAKERS와 독립된 프로젝트. **프롤로그 기본 고각 전장에 사용자 맵 파일럿9종을 적용했으며, 캐릭터/UI·나머지 전장은 임시 그래픽이다. ART-001 이후 캐릭터 원화·3D 제작은 보류**한다.
 
 ## 세션 필수 문서
 
-[CURRENT_WORK](docs/CURRENT_WORK.md)와 **[누적 DEVELOPMENT_STATUS](docs/DEVELOPMENT_STATUS.md)**를 함께 읽는다. [PLANNED_WORK](docs/PLANNED_WORK.md) · [NEXT_TASK](docs/NEXT_TASK.md) · [AGENTS](AGENTS.md) · [제작 스킬](.agents/skills/viya-game-production/SKILL.md). GAME-044 코드 **`40ce43923e50871b676ca6fbff9d920f48ef41c3`**, 브랜치 `work/viya-turnaround-qa-20261117`. 문서 HEAD는 코드 뒤에 오며 main 자동 병합은 하지 않는다.
+[CURRENT_WORK](docs/CURRENT_WORK.md)와 **[누적 DEVELOPMENT_STATUS](docs/DEVELOPMENT_STATUS.md)**를 함께 읽는다. [PLANNED_WORK](docs/PLANNED_WORK.md) · [NEXT_TASK](docs/NEXT_TASK.md) · [AGENTS](AGENTS.md) · [제작 스킬](.agents/skills/viya-game-production/SKILL.md). GAME-045 코드 **`5b1e6c0e997547707b9d638eb2c316d89613ac74`**, 브랜치 `work/viya-turnaround-qa-20261117`. 문서 HEAD는 코드 뒤에 오며 main 자동 병합은 하지 않는다.
 
 ## 실제 플레이 경로
 
@@ -17,7 +17,7 @@
 
 `maps.json`이 맵 ID/크기/시작/이동·카메라 범위/장애물/생성 구역·시간·비중을, `stages.json`이 스테이지 맵/6분/적 수치를 관리한다. 카메라는 경계에서 멈추고 지상 적은 장애물을 우회하며 투사체는 지형에서 차단된다. 비행은 지형 위 직선 이동/적 밀기, 기존 범위 마법 판정은 유지한다. 새 맵 생성은 화면/지형 밖 유효 지점을 요구하며30무리를 부분 생성하지 않는다.
 
-실제 보스 HP·등장 안내·둔화·HP/MP/반응·두 줄 스킬·서포터2+2 빈칸·터치 이동/필살기·안전영역/compact를 연결했다. 공유 `presentation_slots.json`의53경로는 그대로 빈칸이며,별도 `map_presentation_slots.json`에 프롤로그의 바닥/성벽/상자·폐허앞면/항아리/잔해6종만 연결했다. 임시 도형은 최종 비야/몬스터 디자인이 아니다.
+실제 보스 HP·등장 안내·둔화·HP/MP/반응·두 줄 스킬·서포터2+2 빈칸·터치 이동/필살기·안전영역/compact를 연결했다. 공유 `presentation_slots.json`의53경로는 그대로 빈칸이며,별도 `map_presentation_slots.json`에 프롤로그의 바닥/성벽/상자·폐허앞면/항아리/잔해·성벽윗면/폐허윗면/닫힌성문9종만 연결했다. 임시 도형은 최종 비야/몬스터 디자인이 아니다.
 
 저장18은 공개1~17의 진행·자원·특성·보상과 기존 AI/수치를 보존한다. 구1~15는 패턴0,저장16의0/1·저장17의0/1/2를 그대로 이어가며 신규 캠페인만 패턴3을 사용한다. 기존 망치는 유지하고 주술사의 고정 방향 저주탄을 연결했다. 공격4필드와 실제 탄환을 저장해 소모한 발사/타격을 반복하지 않는다. 구1~10 방어미적용/구11 방어적용·종족/7난수 호환도 유지한다. 기존4인자 `RunState.start`는 레거시 호환용이며 실제 UI는 맵과5번째 규칙 인자를 넘긴다. 실행은 기존 `main.tscn → mobile_main/main → 단일 RunState`다.
 
@@ -63,11 +63,11 @@
 
 신규 캠페인의 주술사는1.1초 고정 방향 예고 후 마법18 저주탄1발을 발사한다. 기존 벽/적탄64·방어/무적과 처치/보상을 사용하며,밀침은 재예고를 요구하고 발사 뒤 저장·복원은 중복 발사하지 않는다. 수치는 시제품이고 실제 자동전투19/20·무강화407패배로 교전/재추적 균형은 미완성이다.
 
-사용자 맵 파일럿 01/02의 6종을 준비 PNG 원본 그대로 프롤로그 고각 화면에만 적용한다. 기존 폐허/성벽 앞면의 월드 기준 반복·윗면/가림·끝단 클리핑과 3종 소품의 접지/손상/파괴·45초 재생성을 재사용한다. 외곽·골드 던전·F8은 기존 재질/도형을 유지한다. 시범 적용이며 최종 아트/모바일 승인은 별도다.
+사용자 맵 파일럿01/02/03의9종을 준비 PNG 원본 그대로 프롤로그 고각 화면에만 적용한다. 윗면은96×80월드 격자에 고정해 반복/클리핑하고 기존 투영을 한 번 적용한다. 닫힌 성문은 기존240×114앞면·문틀/횃불에 연결했다. 기존 높이·충돌/가림·앞면·3소품/45초 재생성·숨긴 재생성 안내를 유지한다. 외곽·골드 던전·F8은 기존 표시이며 시범 적용/최종 아트·실기 승인은 구분한다.
 
 ## 검증
 
-Godot4.7.2 임포트·기존7묶음/부트3810native(추가9)·139소스/6계약·negative33/Python12 PASS. 실제X11의3크기/23화면·40연속 이동 렌더 프레임을 확인했다. 맵파일럿6종의실제로드/규격·해시·캐시/격리를확인했고외곽/골드던전/F8의3쌍픽셀은같다. [적용 화면](docs/validation/GAME044_AFTER.png) · [이전 화면](docs/validation/GAME044_BEFORE.png) · [정확한 소스와 근거](docs/validation/GAME044_REPORT.json). 기존카메라안정화/재생성안내제거를유지하며,새6분/성능·경제/실기표본은실행하지않았다. GAME040의19/20·407패배/균형OPEN은남아있다.
+Godot4.7.2 임포트·기존7묶음/부트3830개 검사(추가20)·139소스/6계약·negative33/Python12 PASS. 실제X11의3가지 화면 크기/41화면·60연속 이동 렌더 프레임을 확인했다. 2축 윗면UV/부분타일·성문영역·기존 도형복귀와 다른맵/F8의픽셀동일을 확인했다. [성벽·성문](docs/validation/GAME045_AFTER.png) · [폐허 윗면](docs/validation/GAME045_RUIN.png) · [이전 화면](docs/validation/GAME045_BEFORE.png) · [정확한 소스와 근거](docs/validation/GAME045_REPORT.json). 새6분/성능·경제/실기표본은실행하지않았고 GAME040의19/20·407패배/균형OPEN은남아있다.
 
 ```sh
 python3 tools/check_project.py --godot /actual/path/to/Godot
@@ -82,7 +82,7 @@ Godot --headless --path . --script res://tests/measure_enemy_curse.gd
 Godot --headless --audio-driver Dummy --path . --script res://tests/measure_combat_audio.gd
 ```
 
-GAME-022 당시 공격 강화 우선 선택의 동일 조작 대조에서 캠페인은20회 모두11~12선택/공격Lv5 2종,19클리어·1시간초과였다. 골드던전10회는모두8선택/Lv5 1종·클리어다. 선택 시점/관통별 실제TTK/가격1000·50000·1000000의42경제시나리오를 기록했다. 하루던전2+캠페인1의고정수입가정에서첫특성Lv3약5~6일/전체18Lv3약89~91일이다. 모바일 기기가없어실기FPS/발열은미검증이며Linux부하계측을그것으로대체하지않는다. 구설정407시간초과는 재현되며 GAME-029의4표본 클리어를 전체 균형·안내 효과로 확대하지 않는다. 다음 GAME-045는 주술사 패턴의 실전 교전·재추적 균형 보완이다.
+GAME-022 당시 공격 강화 우선 선택의 동일 조작 대조에서 캠페인은20회 모두11~12선택/공격Lv5 2종,19클리어·1시간초과였다. 골드던전10회는모두8선택/Lv5 1종·클리어다. 선택 시점/관통별 실제TTK/가격1000·50000·1000000의42경제시나리오를 기록했다. 하루던전2+캠페인1의고정수입가정에서첫특성Lv3약5~6일/전체18Lv3약89~91일이다. 모바일 기기가없어실기FPS/발열은미검증이며Linux부하계측을그것으로대체하지않는다. 구설정407시간초과는 재현되며 GAME-029의4표본 클리어를 전체 균형·안내 효과로 확대하지 않는다. 다음 GAME-046은 주술사 패턴의 실전 교전·재추적 균형 보완이다.
 
 ```sh
 Godot --headless --path . --script res://tests/measure_balance.gd -- --map=gold_slime --talents=none
