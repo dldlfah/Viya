@@ -106,3 +106,7 @@
 | 흩어진 돌조각 | [prop_debris_broken.png](../assets/maps/pilot_04/prop_debris_broken.png) | 92×86/가시46×12 / `c9ff22710bd078ee80c5747568ce83e889b20efafaf6d09baf994314e4d2c364` |
 
 [출처README](../assets/maps/pilot_04/README.md)·[원본명세](../assets/maps/pilot_04/source_manifest.json)의GAME045/3142eb7/적용대기는제작당시출처다. 실제적용은GAME046이후를보존한GAME047이며DEVELOPMENT_STATUS8.40/GAME047_REPORT를따른다. masters/준비·생성스크립트를실행/복사하거나이미지편집/유료생성을하지않았다. 시범적용과최종아트/실기승인은구분한다.
+
+## 2026-11-24 — GAME-049 1스테이지의 기존 맵 자산 재사용
+
+`map_presentation_slots.json`의 별도 `siege_battlefield`는 기존 `prologue_wall`의12PNG경로를 그대로 재사용한다. 새PNG/승인원본편집은 없고 공유캐릭터/전역53빈칸도 그대로다. `battlefield_presentation.gd`의 정적도형은 임시시설/방책/수레자국 표현이며,`docs/design/map_plan_001/concept.png`는 계속 문서용 미확정시안/게임미연결이다. 프롤로그/외곽의 이전/현재 렌더러6쌍픽셀동일과 모든원본자산바이트보존은GAME049_REPORT에기록했다. 최종캐릭터/건물아트·모바일품질승인은별도다.

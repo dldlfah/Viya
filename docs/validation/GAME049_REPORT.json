@@ -1,0 +1,720 @@
+{
+  "id": "GAME-049",
+  "date_kst": "2026-11-24",
+  "status": "IMPLEMENTED_ENGINE_AND_LINUX_RENDER_VERIFIED_PROVISIONAL_ART",
+  "source_commit": "1a20a2552cf1c94f70a666acafa3b0bf9376ed73",
+  "source_tree": "2923c1139edb0d784958a46d6599dd4136952896",
+  "basis": "f9891a0520471d14c5aa440a2eccf995240da0cb",
+  "user_scope": "Apply MAP-PLAN-001 to campaign stages; user corrected that prologue is a separate future design. Fresh stage1 only uses siege_battlefield. Original prologue/outskirts/gold dungeon remain.",
+  "implementation": {
+    "map_id": "siege_battlefield",
+    "new_departure_stage": 1,
+    "size": [
+      5000,
+      3200
+    ],
+    "solids": 20,
+    "facilities": 10,
+    "broken_barricades": 6,
+    "destructibles": 32,
+    "supply_groups": 8,
+    "exact_proposal_rectangles_and_prop_positions": true,
+    "separate_gameplay_state": false,
+    "species_pool": "unchanged prologue locked profiles reused for stage1",
+    "old_maps_overwritten": false,
+    "art": "12 existing original pilot PNG reused plus read-only procedural facility/barricade/rut scenery; concept.png is NOT a runtime backdrop"
+  },
+  "save": {
+    "version": 21,
+    "published20_fingerprint": "695c4691c0d6cad598c66fa825388aee5cc04b373f120c99332d622fc525adb0",
+    "published1_to20": "Keep saved map/coordinates/structures/items/chests/resources and7RNG; old runs are not migrated to new map. Six captured20 fixtures/policies1-2 each101authority hashes; existing18 and19 fixture comparisons also retained.",
+    "new_fields": [],
+    "new_map_old_schema_forgery": "rejected including float20.0",
+    "new_stage_restore": "Actual UI Continue100matchingsteps; two separate OS processes for current21/new map and actualold20/original map each100RUNNINGsteps, no account-entry duplicates."
+  },
+  "validation": {
+    "static_files": 149,
+    "source_contracts": 6,
+    "negative_controls": 49,
+    "python_tests": 12,
+    "engine": "official Godot4.7.2",
+    "engine_status": "PASS",
+    "native_checks": 4116,
+    "suite_counts": [
+      23,
+      70,
+      122,
+      57,
+      1336,
+      68,
+      2440
+    ],
+    "engine_commands": [
+      {
+        "command": [
+          "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+          "--headless",
+          "--version"
+        ],
+        "exit_code": 0,
+        "status": "PASS"
+      },
+      {
+        "command": [
+          "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+          "--headless",
+          "--path",
+          "/workspace/Viya",
+          "--editor",
+          "--import",
+          "--quit"
+        ],
+        "exit_code": 0,
+        "status": "PASS"
+      },
+      {
+        "command": [
+          "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+          "--headless",
+          "--path",
+          "/workspace/Viya",
+          "--script",
+          "res://tests/test_combat_foundation.gd"
+        ],
+        "exit_code": 0,
+        "status": "PASS"
+      },
+      {
+        "command": [
+          "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+          "--headless",
+          "--path",
+          "/workspace/Viya",
+          "--script",
+          "res://tests/test_growth.gd"
+        ],
+        "exit_code": 0,
+        "status": "PASS"
+      },
+      {
+        "command": [
+          "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+          "--headless",
+          "--path",
+          "/workspace/Viya",
+          "--script",
+          "res://tests/test_magic.gd"
+        ],
+        "exit_code": 0,
+        "status": "PASS"
+      },
+      {
+        "command": [
+          "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+          "--headless",
+          "--path",
+          "/workspace/Viya",
+          "--script",
+          "res://tests/test_feedback.gd"
+        ],
+        "exit_code": 0,
+        "status": "PASS"
+      },
+      {
+        "command": [
+          "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+          "--headless",
+          "--path",
+          "/workspace/Viya",
+          "--script",
+          "res://tests/test_mobile_hud.gd"
+        ],
+        "exit_code": 0,
+        "status": "PASS"
+      },
+      {
+        "command": [
+          "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+          "--headless",
+          "--path",
+          "/workspace/Viya",
+          "--script",
+          "res://tests/test_run_navigation.gd"
+        ],
+        "exit_code": 0,
+        "status": "PASS"
+      },
+      {
+        "command": [
+          "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+          "--headless",
+          "--path",
+          "/workspace/Viya",
+          "--script",
+          "res://tests/test_combat_cues.gd"
+        ],
+        "exit_code": 0,
+        "status": "PASS"
+      },
+      {
+        "command": [
+          "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+          "--headless",
+          "--path",
+          "/workspace/Viya",
+          "--quit-after",
+          "120"
+        ],
+        "exit_code": 0,
+        "status": "PASS"
+      }
+    ],
+    "new_battlefield_checks": 56,
+    "routes": "Actual swept collision across4routes with130radius/260wide clearance",
+    "formations": "3deployment pockets/297.095footprint and actual all30-or-none spawns; safe pressure anchors across4positions x3times",
+    "render": {
+      "errors": [],
+      "map_id": "siege_battlefield",
+      "mouse_controls": 3,
+      "native_move_frames": 100,
+      "native_mp": 1,
+      "records": [
+        {
+          "arrival_caption": "전투 임무 ▸",
+          "audio_active": 0,
+          "bonus_ranks": 0,
+          "bound_textures": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "chests": [],
+          "dense": false,
+          "encounter_version": 0,
+          "enemies": 0,
+          "enemy_bullets": [],
+          "high_angle": true,
+          "hp": 100,
+          "image": "stage_selection",
+          "incoming": {},
+          "label_overlaps": 0,
+          "labels": 0,
+          "map": "legacy_arena",
+          "mp": 0.0,
+          "occluders": 0,
+          "opened": 0,
+          "owned": {},
+          "patterns": [],
+          "phase": 0,
+          "pixels_sha256": "962702a908a0f6a9c68fcb31ae8f986e0b7770b6e465a290448a58ceed8db0e7",
+          "population_limit": 160,
+          "telegraph": [],
+          "viewport": "(1280, 720)"
+        },
+        {
+          "arrival_caption": "전투 임무 ▸",
+          "audio_active": 0,
+          "bonus_ranks": 0,
+          "bound_textures": [
+            "res://assets/maps/pilot_01/stone_floor_tile.png",
+            "res://assets/maps/pilot_01/wall_segment.png",
+            "res://assets/maps/pilot_01/prop_crate.png",
+            "res://assets/maps/pilot_02/ruin_block.png",
+            "res://assets/maps/pilot_02/prop_urn.png",
+            "res://assets/maps/pilot_02/prop_debris.png",
+            "res://assets/maps/pilot_03/wall_top_tile.png",
+            "res://assets/maps/pilot_03/ruin_top_tile.png",
+            "res://assets/maps/pilot_03/gate_front.png"
+          ],
+          "chests": [],
+          "dense": false,
+          "encounter_version": 2,
+          "enemies": 0,
+          "enemy_bullets": [],
+          "high_angle": true,
+          "hp": 100,
+          "image": "stage_start",
+          "incoming": {},
+          "label_overlaps": 0,
+          "labels": 0,
+          "map": "siege_battlefield",
+          "mp": 100.0,
+          "occluders": 0,
+          "opened": 0,
+          "owned": {
+            "gun_rifle": 1
+          },
+          "patterns": [],
+          "phase": 1,
+          "pixels_sha256": "7ef12579be4514b5875a430efefcaec77f4f717f6a7f443cf8e682ac3d9cbc8d",
+          "population_limit": 160,
+          "telegraph": [],
+          "viewport": "(1280, 720)"
+        },
+        {
+          "arrival_caption": "전투 임무 ▸",
+          "audio_active": 1,
+          "bonus_ranks": 0,
+          "bound_textures": [
+            "res://assets/maps/pilot_01/stone_floor_tile.png",
+            "res://assets/maps/pilot_01/wall_segment.png",
+            "res://assets/maps/pilot_01/prop_crate.png",
+            "res://assets/maps/pilot_02/ruin_block.png",
+            "res://assets/maps/pilot_02/prop_urn.png",
+            "res://assets/maps/pilot_02/prop_debris.png",
+            "res://assets/maps/pilot_03/wall_top_tile.png",
+            "res://assets/maps/pilot_03/ruin_top_tile.png",
+            "res://assets/maps/pilot_03/gate_front.png"
+          ],
+          "chests": [],
+          "dense": false,
+          "encounter_version": 2,
+          "enemies": 0,
+          "enemy_bullets": [],
+          "high_angle": true,
+          "hp": 100,
+          "image": "stage_play",
+          "incoming": {},
+          "label_overlaps": 0,
+          "labels": 2,
+          "map": "siege_battlefield",
+          "mp": 60.0,
+          "occluders": 0,
+          "opened": 0,
+          "owned": {
+            "gun_rifle": 1
+          },
+          "patterns": [],
+          "phase": 1,
+          "pixels_sha256": "63c494e3bb85ccb3f71b76c8fdfa3a40cde8e34e3fa73d9b4de00f4fd3b801d4",
+          "population_limit": 160,
+          "telegraph": [],
+          "viewport": "(1280, 720)"
+        },
+        {
+          "arrival_caption": "전투 임무 ▸",
+          "audio_active": 0,
+          "bonus_ranks": 0,
+          "bound_textures": [
+            "res://assets/maps/pilot_01/stone_floor_tile.png",
+            "res://assets/maps/pilot_01/wall_segment.png",
+            "res://assets/maps/pilot_01/prop_crate.png",
+            "res://assets/maps/pilot_02/ruin_block.png",
+            "res://assets/maps/pilot_02/prop_urn.png",
+            "res://assets/maps/pilot_02/prop_debris.png",
+            "res://assets/maps/pilot_03/wall_top_tile.png",
+            "res://assets/maps/pilot_03/ruin_top_tile.png",
+            "res://assets/maps/pilot_03/gate_front.png"
+          ],
+          "chests": [],
+          "dense": false,
+          "encounter_version": 2,
+          "enemies": 0,
+          "enemy_bullets": [],
+          "high_angle": true,
+          "hp": 100,
+          "image": "inspect_west",
+          "incoming": {},
+          "label_overlaps": 0,
+          "labels": 0,
+          "map": "siege_battlefield",
+          "mp": 60.0,
+          "occluders": 0,
+          "opened": 0,
+          "owned": {
+            "gun_rifle": 1
+          },
+          "patterns": [],
+          "phase": 1,
+          "pixels_sha256": "ae3d4a9dab2a3c6df313bb945fc1b5c12f4fd83fee5c99a77ebd183f1de87cd2",
+          "population_limit": 160,
+          "telegraph": [],
+          "viewport": "(1280, 720)"
+        },
+        {
+          "arrival_caption": "전투 임무 ▸",
+          "audio_active": 0,
+          "bonus_ranks": 0,
+          "bound_textures": [
+            "res://assets/maps/pilot_01/stone_floor_tile.png",
+            "res://assets/maps/pilot_01/wall_segment.png",
+            "res://assets/maps/pilot_01/prop_crate.png",
+            "res://assets/maps/pilot_02/ruin_block.png",
+            "res://assets/maps/pilot_02/prop_urn.png",
+            "res://assets/maps/pilot_02/prop_debris.png",
+            "res://assets/maps/pilot_03/wall_top_tile.png",
+            "res://assets/maps/pilot_03/ruin_top_tile.png",
+            "res://assets/maps/pilot_03/gate_front.png"
+          ],
+          "chests": [],
+          "dense": false,
+          "encounter_version": 2,
+          "enemies": 0,
+          "enemy_bullets": [],
+          "high_angle": true,
+          "hp": 100,
+          "image": "inspect_east",
+          "incoming": {},
+          "label_overlaps": 0,
+          "labels": 0,
+          "map": "siege_battlefield",
+          "mp": 60.0,
+          "occluders": 0,
+          "opened": 0,
+          "owned": {
+            "gun_rifle": 1
+          },
+          "patterns": [],
+          "phase": 1,
+          "pixels_sha256": "ecccc0895326d945d931a1bb434a43a02c3a4a6a3b5b24c5f7703f059d76a252",
+          "population_limit": 160,
+          "telegraph": [],
+          "viewport": "(1280, 720)"
+        },
+        {
+          "arrival_caption": "전투 임무 ▸",
+          "audio_active": 0,
+          "bonus_ranks": 0,
+          "bound_textures": [
+            "res://assets/maps/pilot_01/stone_floor_tile.png",
+            "res://assets/maps/pilot_01/wall_segment.png",
+            "res://assets/maps/pilot_01/prop_crate.png",
+            "res://assets/maps/pilot_02/ruin_block.png",
+            "res://assets/maps/pilot_02/prop_urn.png",
+            "res://assets/maps/pilot_02/prop_debris.png",
+            "res://assets/maps/pilot_03/wall_top_tile.png",
+            "res://assets/maps/pilot_03/ruin_top_tile.png",
+            "res://assets/maps/pilot_03/gate_front.png"
+          ],
+          "chests": [],
+          "dense": false,
+          "encounter_version": 2,
+          "enemies": 0,
+          "enemy_bullets": [],
+          "high_angle": true,
+          "hp": 100,
+          "image": "inspect_south",
+          "incoming": {},
+          "label_overlaps": 0,
+          "labels": 0,
+          "map": "siege_battlefield",
+          "mp": 60.0,
+          "occluders": 0,
+          "opened": 0,
+          "owned": {
+            "gun_rifle": 1
+          },
+          "patterns": [],
+          "phase": 1,
+          "pixels_sha256": "0f95a84d84f0bef078e1764385e5e70bb199b0d2e695902d353e6fcecc41f829",
+          "population_limit": 160,
+          "telegraph": [],
+          "viewport": "(1280, 720)"
+        },
+        {
+          "arrival_caption": "임무 ▸",
+          "audio_active": 0,
+          "bonus_ranks": 0,
+          "bound_textures": [
+            "res://assets/maps/pilot_01/stone_floor_tile.png",
+            "res://assets/maps/pilot_01/wall_segment.png",
+            "res://assets/maps/pilot_01/prop_crate.png",
+            "res://assets/maps/pilot_02/ruin_block.png",
+            "res://assets/maps/pilot_02/prop_urn.png",
+            "res://assets/maps/pilot_02/prop_debris.png",
+            "res://assets/maps/pilot_03/wall_top_tile.png",
+            "res://assets/maps/pilot_03/ruin_top_tile.png",
+            "res://assets/maps/pilot_03/gate_front.png"
+          ],
+          "chests": [],
+          "dense": false,
+          "encounter_version": 2,
+          "enemies": 0,
+          "enemy_bullets": [],
+          "high_angle": true,
+          "hp": 100,
+          "image": "stage_compact",
+          "incoming": {},
+          "label_overlaps": 0,
+          "labels": 0,
+          "map": "siege_battlefield",
+          "mp": 60.0,
+          "occluders": 0,
+          "opened": 0,
+          "owned": {
+            "gun_rifle": 1
+          },
+          "patterns": [],
+          "phase": 1,
+          "pixels_sha256": "74634449d4da1b98f33d0ef6c2dd87012f9cbad159ec73dbd6d47328ef7510cd",
+          "population_limit": 160,
+          "telegraph": [],
+          "viewport": "(854, 394)"
+        },
+        {
+          "arrival_caption": "전투 임무 ▸",
+          "audio_active": 0,
+          "bonus_ranks": 0,
+          "bound_textures": [
+            "res://assets/maps/pilot_01/stone_floor_tile.png",
+            "res://assets/maps/pilot_01/wall_segment.png",
+            "res://assets/maps/pilot_01/prop_crate.png",
+            "res://assets/maps/pilot_02/ruin_block.png",
+            "res://assets/maps/pilot_02/prop_urn.png",
+            "res://assets/maps/pilot_02/prop_debris.png",
+            "res://assets/maps/pilot_03/wall_top_tile.png",
+            "res://assets/maps/pilot_03/ruin_top_tile.png",
+            "res://assets/maps/pilot_03/gate_front.png"
+          ],
+          "chests": [],
+          "dense": false,
+          "encounter_version": 2,
+          "enemies": 0,
+          "enemy_bullets": [],
+          "high_angle": false,
+          "hp": 100,
+          "image": "stage_f8",
+          "incoming": {},
+          "label_overlaps": 0,
+          "labels": 0,
+          "map": "siege_battlefield",
+          "mp": 60.0,
+          "occluders": 0,
+          "opened": 0,
+          "owned": {
+            "gun_rifle": 1
+          },
+          "patterns": [],
+          "phase": 1,
+          "pixels_sha256": "f268d2f4a7b7d901f9056014a8be3a5921fa61d686c7f6d97465ededd361ceb9",
+          "population_limit": 160,
+          "telegraph": [],
+          "viewport": "(1280, 720)"
+        },
+        {
+          "arrival_caption": "전투 임무 ▸",
+          "audio_active": 0,
+          "bonus_ranks": 0,
+          "bound_textures": [
+            "res://assets/maps/pilot_01/stone_floor_tile.png",
+            "res://assets/maps/pilot_01/wall_segment.png",
+            "res://assets/maps/pilot_01/prop_crate.png",
+            "res://assets/maps/pilot_02/ruin_block.png",
+            "res://assets/maps/pilot_02/prop_urn.png",
+            "res://assets/maps/pilot_02/prop_debris.png",
+            "res://assets/maps/pilot_03/wall_top_tile.png",
+            "res://assets/maps/pilot_03/ruin_top_tile.png",
+            "res://assets/maps/pilot_03/gate_front.png"
+          ],
+          "chests": [],
+          "dense": false,
+          "encounter_version": 2,
+          "enemies": 0,
+          "enemy_bullets": [],
+          "high_angle": true,
+          "hp": 100,
+          "image": "stage_paused",
+          "incoming": {},
+          "label_overlaps": 0,
+          "labels": 0,
+          "map": "siege_battlefield",
+          "mp": 60.0,
+          "occluders": 0,
+          "opened": 0,
+          "owned": {
+            "gun_rifle": 1
+          },
+          "patterns": [],
+          "phase": 2,
+          "pixels_sha256": "2b923d056008e48e04c568f273b2fe833a6d964f1d8fb2ac01bb39e678173255",
+          "population_limit": 160,
+          "telegraph": [],
+          "viewport": "(1280, 720)"
+        }
+      ],
+      "restore_equal": true,
+      "restore_steps": 100,
+      "schema": 21,
+      "scope": "Actual main scene/native input and rendered stage. West/east/south/full-map are explicitly repositioned QA inspections. Not mobile performance,6min balance or final art approval.",
+      "status": "PASS"
+    },
+    "original_pixel_comparison": {
+      "errors": [],
+      "pairs": [
+        {
+          "equal": true,
+          "map": "prologue_wall",
+          "size": "(1280, 720)"
+        },
+        {
+          "equal": true,
+          "map": "prologue_wall",
+          "size": "(854, 394)"
+        },
+        {
+          "equal": true,
+          "map": "prologue_wall",
+          "size": "(1920, 1080)"
+        },
+        {
+          "equal": true,
+          "map": "outskirts_trial",
+          "size": "(1280, 720)"
+        },
+        {
+          "equal": true,
+          "map": "outskirts_trial",
+          "size": "(854, 394)"
+        },
+        {
+          "equal": true,
+          "map": "outskirts_trial",
+          "size": "(1920, 1080)"
+        }
+      ],
+      "scope": "Frozen f9891a0 high-angle renderer vs current, same simulation/view/resource inputs; original prologue and outskirts at3sizes.",
+      "status": "PASS"
+    },
+    "separate_os": [
+      {
+        "active_steps": 100,
+        "entries": 0,
+        "equal": true,
+        "errors": [],
+        "gold": 0,
+        "hp_after": 100,
+        "hp_before": 100,
+        "mp_after": 64.9999999999997,
+        "mp_before": 60.0,
+        "opened_after": 0,
+        "opened_before": 0,
+        "policy": 2,
+        "schema": 21,
+        "status": "PASS",
+        "tag": "current21"
+      },
+      {
+        "active_steps": 100,
+        "entries": 0,
+        "equal": true,
+        "errors": [],
+        "gold": 0,
+        "hp_after": 60,
+        "hp_before": 92,
+        "mp_after": 29.6999999999998,
+        "mp_before": 24.6999999999997,
+        "opened_after": 0,
+        "opened_before": 0,
+        "policy": 2,
+        "schema": 21,
+        "status": "PASS",
+        "tag": "old20"
+      }
+    ],
+    "audio_device": "GUI rerun with Dummy driver after detecting unavailable host ALSA output; no physical audio approval",
+    "environment_warnings": [
+      "X11 software V-Sync mode unsupported"
+    ],
+    "initial_failures_resolved": [
+      "Set writable XDG cache/data paths for managed workspace.",
+      "Updated old current-schema20 test expectations to21 and actual departure expectation to separate stage.",
+      "Approach the outer edge of a clustered supply in auto-fire regression so the intended structure is the nearest; production targeting unchanged."
+    ],
+    "not_verified": [
+      "Physical Android/iOS/FPS/thermal/touch latency",
+      "Windows F5/export",
+      "New natural6min growth/difficulty/economy approval",
+      "Final building/character art or player readability/fun"
+    ]
+  },
+  "preservation": {
+    "basis": "f9891a0520471d14c5aa440a2eccf995240da0cb",
+    "status": "PASS",
+    "untouched_files": [
+      "assets/characters/viya/spec/turnaround_contract.v1.json",
+      "assets/characters/viya/spec/turnaround_r1_result.json",
+      "assets/characters/viya/spec/turnaround_r2_result.json",
+      "assets/maps/pilot_01/README.md",
+      "assets/maps/pilot_01/prop_crate.png",
+      "assets/maps/pilot_01/prop_crate.png.import",
+      "assets/maps/pilot_01/source_manifest.json",
+      "assets/maps/pilot_01/stone_floor_tile.png",
+      "assets/maps/pilot_01/stone_floor_tile.png.import",
+      "assets/maps/pilot_01/wall_segment.png",
+      "assets/maps/pilot_01/wall_segment.png.import",
+      "assets/maps/pilot_02/README.md",
+      "assets/maps/pilot_02/prop_debris.png",
+      "assets/maps/pilot_02/prop_debris.png.import",
+      "assets/maps/pilot_02/prop_urn.png",
+      "assets/maps/pilot_02/prop_urn.png.import",
+      "assets/maps/pilot_02/ruin_block.png",
+      "assets/maps/pilot_02/ruin_block.png.import",
+      "assets/maps/pilot_02/source_manifest.json",
+      "assets/maps/pilot_03/README.md",
+      "assets/maps/pilot_03/gate_front.png",
+      "assets/maps/pilot_03/gate_front.png.import",
+      "assets/maps/pilot_03/ruin_top_tile.png",
+      "assets/maps/pilot_03/ruin_top_tile.png.import",
+      "assets/maps/pilot_03/source_manifest.json",
+      "assets/maps/pilot_03/wall_top_tile.png",
+      "assets/maps/pilot_03/wall_top_tile.png.import",
+      "assets/maps/pilot_04/README.md",
+      "assets/maps/pilot_04/prop_crate_broken.png",
+      "assets/maps/pilot_04/prop_crate_broken.png.import",
+      "assets/maps/pilot_04/prop_debris_broken.png",
+      "assets/maps/pilot_04/prop_debris_broken.png.import",
+      "assets/maps/pilot_04/prop_urn_broken.png",
+      "assets/maps/pilot_04/prop_urn_broken.png.import",
+      "assets/maps/pilot_04/source_manifest.json",
+      "assets/references/GEN-005_viya_combat_pose_three_quarter_front.png",
+      "assets/references/README.md",
+      "assets/references/qa/viya_4view_alignment_preview.jpg",
+      "assets/references/qa/viya_side_silhouette_comparison.jpg",
+      "data/actor_presentation.json",
+      "data/campaign_encounters.json",
+      "data/campaign_pressure.json",
+      "data/combat_pacing.json",
+      "data/combat_profiles.json",
+      "data/destructibles.json",
+      "data/enemy_curse_v3.json",
+      "data/enemy_patterns.json",
+      "data/enemy_patterns_v2.json",
+      "data/gold_dungeon.json",
+      "data/gold_rewards.json",
+      "data/maps.json",
+      "data/presentation_slots.json",
+      "data/prototype_skills.json",
+      "data/stages.json",
+      "data/weapon_skills.json",
+      "project.godot",
+      "scenes/main.tscn",
+      "scripts/combat/battle_view.gd",
+      "scripts/combat/campaign_encounters.gd",
+      "scripts/combat/campaign_pressure.gd",
+      "scripts/combat/combat_camera.gd",
+      "scripts/combat/run_state.gd",
+      "scripts/progression/run_store.gd"
+    ],
+    "original_map_sha256": "925638f794696b96fdf48df8c266654cef3af002f43e57f91daa80f8d70e8bd4",
+    "original_supply_sha256": "130421dd85d4dbf9ff9f70ab297b36586870e65fb9426cec0c2f58ce57a49b39",
+    "layout_rectangles_match": 20,
+    "layout_props_match": 32,
+    "target": "siege_battlefield",
+    "prologue_unchanged": true
+  },
+  "remaining": "GAME048 difficulty/early defeat/growth-economy OPEN retained. Clustered recovery/resource efficiency needs actual6min comparison. Prologue redesign, further-stage layout variants and final art are future work.",
+  "next": "GAME-050 새 전장과 실제 압박의 성장·교전 균형 보완",
+  "artifact_sha256": {
+    "GAME049_OVERVIEW.png": "ce3022158d574e5486300d410c2469b0d0d32a3c99523b57434ccbba62304303",
+    "GAME049_STAGE.png": "27d3029238810095263fb910f7cf7fc9133585058ebd2ad681fbf385b2aa59a7",
+    "GAME049_COMPACT.png": "ce7a40dbd79feb0ec07a75ad17d508b69665c908df17461a940efa114ecafcfa",
+    "GAME049_SELECTION.png": "5d33d31c82b22f37ab9469771e2a303c1a2c1ded3b8b08f572676d654876efe0"
+  },
+  "logs": "Full scripts/logs/working saves/screens remain .local_validation/GAME049; frozen20 fixtures tracked under tests/fixtures/game049_v20."
+}
