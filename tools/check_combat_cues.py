@@ -24,6 +24,7 @@ FILES = ('scripts/combat/run_state.gd', 'scripts/combat/battle_view.gd',
          'scripts/combat/curse_visuals.gd',
          'data/enemy_curse_v3.json',
          'scripts/combat/approach_cues.gd',
+         'scripts/combat/combat_camera.gd',
 )
 # GAME-024: reviewed enemy variants, formations and hostile projectile integration. Exact source baselines retain mutation guards.
 BASE_RUN_BLOB = '673d75a748fa5f1f9ac72ec73bbd9120fdcfce02'
@@ -67,9 +68,10 @@ PATTERN_RUN_LINES = (
 )
 CURSE_BULLET_ADAPTER = '\t\tif enemy_patterns.is_curse(self,bullet):\n\t\t\tif enemy_patterns.move_curse(self,bullet,dt):enemy_bullets.remove_at(index)\n\t\t\tif phase!=Phase.RUNNING:return\n\t\t\tcontinue\n'
 CURSE_VIEW_ADAPTER = '\t\tif simulation.enemy_patterns.is_curse(simulation,bullet):\n\t\t\tpreload("res://scripts/combat/curse_visuals.gd").draw_bullet(self,bullet)\n\t\t\tcontinue\n'
+STABLE_CAMERA_VIEW_ADAPTER = ('\tcamera.advance(simulation,size,displacement,delta,active)\n', '\tcamera.advance(simulation.run_id,displacement,delta,active)\n')
 PATTERN_START_SIGNATURE = (', pacing_version:int=-1, pattern_version:int=-1) -> bool:', ', pacing_version:int=-1) -> bool:')
 # Pin the reviewed new AI/migration/render adapters as well as the historical baseline.
-PATTERN_REVIEWED_SHA256 = {'scripts/combat/enemy_patterns.gd': 'a19cad533e9185a0bbca1671028349463a2c9c7c020c0e26dea1d5f59b3eebda', 'scripts/combat/enemy_pattern_visuals.gd': 'ffe5032905c8df738b2d7f2a92346206b7df14502b4d2f8babc88304adc5d666', 'scripts/progression/run_snapshot.gd': 'f6e6abd9dd2ff61e66505ee0e35ee6d208c9965d59f9e0681737c0ac14ca3bab', 'scripts/combat/actor_motion.gd': '77c63ca6327c28a4b99aafea6f104a0b0ae9a91c2e364914d79307d4e90b5261', 'data/enemy_patterns.json': 'ba04c2b3076746724a09cf212576886edfa33821f666daa97a541d5042680bec', 'scripts/combat/enemy_patterns_v1.gd': '4059f30002b56fa0ccb73ed38b4fe4af9c0fe8092a8f5836ad53f6e3cef5a4af', 'scripts/combat/enemy_patterns_v2.gd': '60ff5da133476bd9c851aaef695cd07ae748e313d9f654dd4b2b0e258af7ca1d', 'data/enemy_patterns_v2.json': '83bf0449e6dad16499af5a4c533c51d0ce3dc06fd73c02eb626de2d1e2e7ac21', 'scripts/combat/enemy_patterns_v17.gd': 'df42114040f4da370a67257445063fdb851033182108111eac609758334b81ab', 'scripts/combat/enemy_patterns_v3.gd': '1c5ea0cee251c0fda6a5a77b40201dba8d97b27f42f5ac92c93602e43c831114', 'scripts/combat/curse_visuals.gd': 'f6fd054527091a5631eb003a2ea38c8308d1bccc29098f5542250916ea0fb3ac', 'data/enemy_curse_v3.json': 'c1d23889286fe1f91d4ef3b206de5b6e910211a52e935162da42355dc5d39659', 'scripts/combat/approach_cues.gd': '3b61db842e2fced8e08c391e83fe342a2f349e7453d2d37421f51d1b340ce4fe'}
+PATTERN_REVIEWED_SHA256 = {'scripts/combat/enemy_patterns.gd': 'a19cad533e9185a0bbca1671028349463a2c9c7c020c0e26dea1d5f59b3eebda', 'scripts/combat/enemy_pattern_visuals.gd': 'ffe5032905c8df738b2d7f2a92346206b7df14502b4d2f8babc88304adc5d666', 'scripts/progression/run_snapshot.gd': 'f6e6abd9dd2ff61e66505ee0e35ee6d208c9965d59f9e0681737c0ac14ca3bab', 'scripts/combat/actor_motion.gd': '77c63ca6327c28a4b99aafea6f104a0b0ae9a91c2e364914d79307d4e90b5261', 'data/enemy_patterns.json': 'ba04c2b3076746724a09cf212576886edfa33821f666daa97a541d5042680bec', 'scripts/combat/enemy_patterns_v1.gd': '4059f30002b56fa0ccb73ed38b4fe4af9c0fe8092a8f5836ad53f6e3cef5a4af', 'scripts/combat/enemy_patterns_v2.gd': '60ff5da133476bd9c851aaef695cd07ae748e313d9f654dd4b2b0e258af7ca1d', 'data/enemy_patterns_v2.json': '83bf0449e6dad16499af5a4c533c51d0ce3dc06fd73c02eb626de2d1e2e7ac21', 'scripts/combat/enemy_patterns_v17.gd': 'df42114040f4da370a67257445063fdb851033182108111eac609758334b81ab', 'scripts/combat/enemy_patterns_v3.gd': '1c5ea0cee251c0fda6a5a77b40201dba8d97b27f42f5ac92c93602e43c831114', 'scripts/combat/curse_visuals.gd': 'f6fd054527091a5631eb003a2ea38c8308d1bccc29098f5542250916ea0fb3ac', 'data/enemy_curse_v3.json': 'c1d23889286fe1f91d4ef3b206de5b6e910211a52e935162da42355dc5d39659', 'scripts/combat/approach_cues.gd': '3b61db842e2fced8e08c391e83fe342a2f349e7453d2d37421f51d1b340ce4fe', 'scripts/combat/combat_camera.gd': '0039e471d576f4daeb00f6b453f54a29d32917fe71aef4490b3f0bd33e90f896'}
 
 
 def blob(text: str) -> str:
@@ -139,7 +141,11 @@ def validate(sources: dict[str, str]) -> list[str]:
         errors.append('Existing native engine commands or pass/fail criteria changed')
     if view.count(SUPPLY_VIEW_ADAPTER[0]) != 1 or view.count(SUPPLY_VIEW_IMPORT) != 1:
         errors.append('Missing/changed shared supply glyph adapter')
-    restored_view = view.replace(CURSE_VIEW_ADAPTER, '', 1).replace(*SUPPLY_VIEW_ADAPTER, 1).replace(SUPPLY_VIEW_IMPORT, '', 1)
+    if view.count(STABLE_CAMERA_VIEW_ADAPTER[0])!=1:
+        errors.append("Stable camera simulation/viewport adapter changed")
+    if "res://tests/test_camera_lead.gd" not in tests:
+        errors.append("Stable camera runtime checks are not registered")
+    restored_view = view.replace(*STABLE_CAMERA_VIEW_ADAPTER, 1).replace(CURSE_VIEW_ADAPTER, '', 1).replace(*SUPPLY_VIEW_ADAPTER, 1).replace(SUPPLY_VIEW_IMPORT, '', 1)
     restored_view = restored_view.split('\nfunc _draw_combat_cues() -> void:', 1)[0]
     restored_view = restored_view.replace('\t_draw_combat_cues()\n', '', 1)
     restored_view = restored_view.replace('\t\t\tvar flash: float = simulation.cues.flash_alpha(int(enemy["id"]))\n', '', 1)
@@ -222,6 +228,9 @@ def check() -> dict:
             errors.append(f'{name}: {error}')
     negative = []
     cases = [
+        ('stable_camera_unregistered', FILES[3], 'res://tests/test_camera_lead.gd', 'res://tests/missing_stable_camera.gd'),
+        ('stable_camera_adapter', FILES[1], STABLE_CAMERA_VIEW_ADAPTER[0], ''),
+        ('stable_camera_limit', 'scripts/combat/combat_camera.gd', 'const MAX_OFFSET_FRACTION := .08', 'const MAX_OFFSET_FRACTION := .8'),
         ('curse_unregistered', FILES[3], 'res://tests/test_enemy_curse.gd', 'res://tests/missing_curse.gd'),
         ('curse_doublefire', 'scripts/combat/enemy_patterns_v3.gd', 'p.phase="recovery"', 'p.phase="windup"'),
         ('v17_retrofit', 'scripts/progression/run_snapshot.gd', 'return data # Preserve published17 AI', 'data.run.enemy_pattern_version=3\n\treturn data # Preserve published17 AI'),

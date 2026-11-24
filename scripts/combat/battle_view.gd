@@ -33,7 +33,7 @@ func spawn_guard_size() -> Vector2:
 	return camera.guard_size(size)
 
 func advance_camera(delta: float, displacement: Vector2, active: bool) -> void:
-	camera.advance(simulation.run_id,displacement,delta,active)
+	camera.advance(simulation,size,displacement,delta,active)
 
 func world_to_screen(at: Vector2) -> Vector2:
 	return BattleProjection.world_to_screen(at,camera_center(),size) if high_angle else at-camera_center()+size*.5
