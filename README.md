@@ -4,7 +4,7 @@
 
 ## 세션 필수 문서
 
-[CURRENT_WORK](docs/CURRENT_WORK.md)와 **[누적 DEVELOPMENT_STATUS](docs/DEVELOPMENT_STATUS.md)**를 함께 읽는다. [PLANNED_WORK](docs/PLANNED_WORK.md) · [NEXT_TASK](docs/NEXT_TASK.md) · [AGENTS](AGENTS.md) · [제작 스킬](.agents/skills/viya-game-production/SKILL.md). GAME-042 코드 **`c63a5e40451e28a9642f08d7701920f95dcb46dd`**, 브랜치 `work/viya-turnaround-qa-20261117`. 문서 HEAD는 코드 뒤에 오며 main 자동 병합은 하지 않는다.
+[CURRENT_WORK](docs/CURRENT_WORK.md)와 **[누적 DEVELOPMENT_STATUS](docs/DEVELOPMENT_STATUS.md)**를 함께 읽는다. [PLANNED_WORK](docs/PLANNED_WORK.md) · [NEXT_TASK](docs/NEXT_TASK.md) · [AGENTS](AGENTS.md) · [제작 스킬](.agents/skills/viya-game-production/SKILL.md). GAME-043 코드 **`e1da24dfbd485c5519efd2802614372a76f63a59`**, 브랜치 `work/viya-turnaround-qa-20261117`. 문서 HEAD는 코드 뒤에 오며 main 자동 병합은 하지 않는다.
 
 ## 실제 플레이 경로
 
@@ -51,7 +51,7 @@
 
 4종 아이템은 두렌더러에서 같은 십자/물방울/자석/제거 기호로 표시한다. 기존 획득 문구에 실제회복량·자석XP/금화·제거수/보스제외를 연결했으며 가득찬 자원이나 바닥에 남은 보상을 과장하지 않는다. compact에서 보스 안내와 겹치면 캐릭터 아래에도 배치한다.
 
-파괴 가능한 상자/항아리/잔해는 작은 망치,파괴 뒤에는 모래시계/실제 재생성 진행을 표시한다. 가까운 잔해의 남은 시간만 제한적으로 안내하고 기존 중요 전투 표시·필드 아이템을 우선한다. 고각 손상 flash는 실제 피격에 연결하며,복원된 과거 파괴를 다시 연출하지 않는다.
+파괴 가능한 상자/항아리/잔해는 작은 망치로 표시한다. 사용자 요청으로 파괴 뒤의 재생성 문구·모래시계/진행 막대는 제거했다. 실제45초 재생성·필드 아이템/드롭·손상 flash와 저장/이어하기는 유지한다.
 
 결과와 기존 최종 성장·보상 내역에서 실제 지급완료/예정·미지급·지급기록확인을 구분한다. 예정금화와 확인된 잔액을 섞지 않고,기존 주요 저장재시도를 상단에서 누를 수 있다. 재실행/중복조회는 원래ID/정산으로 복구하며 보상/입장/해금을 중복 변경하지 않는다.
 
@@ -67,7 +67,7 @@
 
 ## 검증
 
-Godot4.7.2 임포트·기존7묶음 **3801native**·부트,139소스/6계약·negative33/Python12 PASS. 같은 실제터치 조작의기존/수정후각120렌더프레임(권위상태120개 일치),16화면·3별도복원을 확인했다.0.05초 비교에서최대카메라이동44.7986→11.75·정지후잔여이동64.1675→0이다. [수정 후 영상](docs/validation/GAME042_CAMERA_AFTER.mp4)·[이전 영상](docs/validation/GAME042_CAMERA_BEFORE.mp4)·[정확한 소스와 근거](docs/validation/GAME042_REPORT.json). 새6분/성능·경제 표본은 실행하지 않았고,GAME040의19/20·무강화407패배/균형OPEN과 모바일·사용자체감/최종아트 미검증은 남아 있다.
+Godot4.7.2 임포트·기존7묶음/부트3801native·139소스/6계약·negative33/Python12 PASS. 두 렌더러×2화면 크기의 파괴 상태4장과45초 뒤 재생성1장을 실제X11로 확인했다. 기존 구조물의 정지/저장·이어하기/재생성·세대별 드롭을 검증했다. [수정 화면](docs/validation/GAME043_AFTER.png) · [정확한 소스와 근거](docs/validation/GAME043_REPORT.json). 기존 [카메라 비교 영상](docs/validation/GAME042_CAMERA_AFTER.mp4)과 안정화는 유지한다. 새6분·성능/경제·실기 표본은 실행하지 않았고,GAME040의19/20·407패배/균형OPEN은 남아 있다.
 
 ```sh
 python3 tools/check_project.py --godot /actual/path/to/Godot
@@ -82,7 +82,7 @@ Godot --headless --path . --script res://tests/measure_enemy_curse.gd
 Godot --headless --audio-driver Dummy --path . --script res://tests/measure_combat_audio.gd
 ```
 
-GAME-022 당시 공격 강화 우선 선택의 동일 조작 대조에서 캠페인은20회 모두11~12선택/공격Lv5 2종,19클리어·1시간초과였다. 골드던전10회는모두8선택/Lv5 1종·클리어다. 선택 시점/관통별 실제TTK/가격1000·50000·1000000의42경제시나리오를 기록했다. 하루던전2+캠페인1의고정수입가정에서첫특성Lv3약5~6일/전체18Lv3약89~91일이다. 모바일 기기가없어실기FPS/발열은미검증이며Linux부하계측을그것으로대체하지않는다. 구설정407시간초과는 재현되며 GAME-029의4표본 클리어를 전체 균형·안내 효과로 확대하지 않는다. 다음 GAME-043은 주술사 패턴의 실전 교전·재추적 균형 보완이다.
+GAME-022 당시 공격 강화 우선 선택의 동일 조작 대조에서 캠페인은20회 모두11~12선택/공격Lv5 2종,19클리어·1시간초과였다. 골드던전10회는모두8선택/Lv5 1종·클리어다. 선택 시점/관통별 실제TTK/가격1000·50000·1000000의42경제시나리오를 기록했다. 하루던전2+캠페인1의고정수입가정에서첫특성Lv3약5~6일/전체18Lv3약89~91일이다. 모바일 기기가없어실기FPS/발열은미검증이며Linux부하계측을그것으로대체하지않는다. 구설정407시간초과는 재현되며 GAME-029의4표본 클리어를 전체 균형·안내 효과로 확대하지 않는다. 다음 GAME-044는 주술사 패턴의 실전 교전·재추적 균형 보완이다.
 
 ```sh
 Godot --headless --path . --script res://tests/measure_balance.gd -- --map=gold_slime --talents=none
