@@ -6,6 +6,10 @@
 
 [CURRENT_WORK](docs/CURRENT_WORK.md)와 **[누적 DEVELOPMENT_STATUS](docs/DEVELOPMENT_STATUS.md)**를 함께 읽는다. [PLANNED_WORK](docs/PLANNED_WORK.md) · [NEXT_TASK](docs/NEXT_TASK.md) · [AGENTS](AGENTS.md) · [제작 스킬](.agents/skills/viya-game-production/SKILL.md). GAME-048 코드 **`85ddb8282a46967bef9ec0dc54dcf903d6023729`**, 브랜치 `work/viya-turnaround-qa-20261117`. 문서 HEAD는 코드 뒤에 오며 main 자동 병합은 하지 않는다.
 
+## 전장 전체 배치 시안
+
+[MAP-PLAN-001 전체 배치도](docs/design/map_plan_001/layout.png) · [확대·비교 미리보기](docs/design/map_plan_001/preview.html) · [설계와 좌표](docs/design/map_plan_001/README.md). 프롤로그를 성문·불탄 양측 시설·돌파당한 남측 방어선으로 구성하고,소품32개를 시설 주변8묶음으로 정리한 **제안/게임 미적용/아트 미확정**이다. GAME-048 코드와 다음 GAME-049는 그대로다.
+
 ## 실제 플레이 경로
 
 도시 로비 → 챕터/스테이지 선택 → 출격 →6분 전투/3선택/필살기 →2·4분 저장·이어하기 →5분 보스 →클리어/금화·결과 →로비/다음 전장이다. 기존 계정18종·54구매/선행 잠금은 유지하며 수집·뽑기·도시·원정은 **준비 중**이다.

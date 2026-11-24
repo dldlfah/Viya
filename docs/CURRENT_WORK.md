@@ -2,6 +2,12 @@
 
 기록일 **2026-11-24 (KST)**. 브랜치 **`work/viya-turnaround-qa-20261117`**. [누적 DEVELOPMENT_STATUS](DEVELOPMENT_STATUS.md) · [후속 PLANNED_WORK](PLANNED_WORK.md) · [NEXT_TASK](NEXT_TASK.md).
 
+## 최신 별도 요청 — 전장 전체 배치 시안 (MAP-PLAN-001)
+
+사용자의 구조물 배치 시안 요청으로 프롤로그5000×3200의 [전체 배치도](design/map_plan_001/layout.png) · [확대·비교 HTML](design/map_plan_001/preview.html) · [설계/좌표·검증](design/map_plan_001/README.md)을 작성했다. 북쪽 성문→불탄 양측 거점→남측 돌파구로 파손이 강해지고,기존32소품을 시설 주변8묶음으로 배치하는 제안이다. 기존4충돌/성문·시작을 보존하고 건물10·방책6,중앙/외곽/양측 동선과30무리 전개 여유를 제시했다.
+
+**시안만 작성했으며 게임에는 미적용/아트 미확정**이다. [전체 분위기 그림](design/map_plan_001/concept.png)은 생성형 검토용이며,정확한 수량/충돌은 도식·JSON이 기준이다. 좌표·연결성 검사와 실제Chromium 미리보기 PASS는 Godot/실기/경제 승인과 다르다. 런타임·데이터·아트12종·저장20/7난수·GAME048의 난도OPEN은 그대로다. [DEVELOPMENT_STATUS8.42](DEVELOPMENT_STATUS.md),[PLANNED_WORK45](PLANNED_WORK.md)에 적용 시 호환·회복 효율·적 우회/가림 검토를 기록했다. 다음 게임 작업은 기존 **GAME-049**다.
+
 ## GAME-048 — 플레이어 주변 몬스터 진입·밀도 유지
 
 사용자의 ‘몹 증가가 여전히 체감되지 않음/다른 서바이버류 생성 방식 참고’ 요청으로 실제 화면 밀도를 수정했다. 기존 방식은 화면 대각선 길이로 먼 생성 반경을 잡고,실패하면 넓은 고정 구역에서 위치를 골랐다. 전장 총수만 늘어도 적이 화면 밖에 쌓이고 접근이 늦어질 수 있었다.

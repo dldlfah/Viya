@@ -1,0 +1,23 @@
+{
+  "id": "MAP-PLAN-001-CONCEPT",
+  "status": "UNAPPROVED_LAYOUT_MOOD_PROPOSAL_NOT_RUNTIME_ASSET",
+  "date_kst": "2026-11-24",
+  "tool": "image_gen.imagegen",
+  "original_file": "exec-25838144-9da5-45f8-aadf-d6da00722696.png",
+  "size": [
+    1568,
+    1003
+  ],
+  "sha256": "ad5e8cd4f923237e3e683af99b5cd18bcaab88e8925947f5a31d659a7628fd07",
+  "reference": "blockout.png",
+  "reference_sha256": "5f729401f8ea1c71d5ae2820d514ad4e4dbcdce71e202b03ae7379465c61b219",
+  "prompt_summary": "Full-map overhead dark-fantasy fortress battlefield; closed northern gate, empty assembly, broad central avenue and outer loop, small damaged buildings on both flanks, grouped supplies, breached southern defense. Remove diagram overlays and all UI/characters. Art undecided.",
+  "authority": "layout.json and layout.svg define exact count, geometry and coordinates. The generated illustration is approximate.",
+  "differences_to_resolve_on_implementation": [
+    "Painted crates and small ruin fragments do not represent exact destructible or collider counts.",
+    "Preserve the diagram's southern escape gaps; connected-looking painted palisades must not become new continuous collision walls.",
+    "Roof and tower silhouettes need actual high-angle renderer occlusion review."
+  ],
+  "runtime_binding": null,
+  "character_art_changed": false
+}
