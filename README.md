@@ -4,7 +4,7 @@
 
 ## 세션 필수 문서
 
-[CURRENT_WORK](docs/CURRENT_WORK.md)와 **[누적 DEVELOPMENT_STATUS](docs/DEVELOPMENT_STATUS.md)**를 함께 읽는다. [PLANNED_WORK](docs/PLANNED_WORK.md) · [NEXT_TASK](docs/NEXT_TASK.md) · [AGENTS](AGENTS.md) · [제작 스킬](.agents/skills/viya-game-production/SKILL.md). GAME-047 코드 **`d2dd2aedd609a59492cdbd284eba5200a377248c`**, 브랜치 `work/viya-turnaround-qa-20261117`. 문서 HEAD는 코드 뒤에 오며 main 자동 병합은 하지 않는다.
+[CURRENT_WORK](docs/CURRENT_WORK.md)와 **[누적 DEVELOPMENT_STATUS](docs/DEVELOPMENT_STATUS.md)**를 함께 읽는다. [PLANNED_WORK](docs/PLANNED_WORK.md) · [NEXT_TASK](docs/NEXT_TASK.md) · [AGENTS](AGENTS.md) · [제작 스킬](.agents/skills/viya-game-production/SKILL.md). GAME-048 코드 **`85ddb8282a46967bef9ec0dc54dcf903d6023729`**, 브랜치 `work/viya-turnaround-qa-20261117`. 문서 HEAD는 코드 뒤에 오며 main 자동 병합은 하지 않는다.
 
 ## 실제 플레이 경로
 
@@ -19,9 +19,9 @@
 
 실제 보스 HP·등장 안내·둔화·HP/MP/반응·두 줄 스킬·서포터2+2 빈칸·터치 이동/필살기·안전영역/compact를 연결했다. 공유 `presentation_slots.json`의53경로는 그대로 빈칸이며,별도 `map_presentation_slots.json`에 프롤로그의 바닥/성벽/상자·폐허앞면/항아리/잔해·성벽윗면/폐허윗면/닫힌성문과파괴소품3종의총12종만 연결했다. 임시 도형은 최종 비야/몬스터 디자인이 아니다.
 
-저장19는 공개1~18의 진행·자원·특성·보상과 기존 AI/수치를 보존한다. 구1~15는 패턴0,저장16의0/1·저장17의0/1/2를 그대로 이어가며 신규 캠페인만 패턴3을 사용한다. 기존 망치는 유지하고 주술사의 고정 방향 저주탄을 연결했다. 공격4필드와 실제 탄환을 저장해 소모한 발사/타격을 반복하지 않는다. 구1~10 방어미적용/구11 방어적용·종족/7난수 호환도 유지한다. 기존4인자 `RunState.start`는 레거시 호환용이며 실제 UI는 맵과5번째 규칙 인자를 넘긴다. 실행은 기존 `main.tscn → mobile_main/main → 단일 RunState`다.
+저장20은 공개1~19의 진행·자원·특성·보상과 기존 AI/수치를 보존한다. 구1~15는 패턴0,저장16의0/1·저장17의0/1/2를 그대로 이어가며 신규 캠페인만 패턴3을 사용한다. 기존 망치는 유지하고 주술사의 고정 방향 저주탄을 연결했다. 공격4필드와 실제 탄환을 저장해 소모한 발사/타격을 반복하지 않는다. 구1~10 방어미적용/구11 방어적용·종족/7난수 호환도 유지한다. 기존4인자 `RunState.start`는 레거시 호환용이며 실제 UI는 맵과5번째 규칙 인자를 넘긴다. 실행은 기존 `main.tscn → mobile_main/main → 단일 RunState`다.
 
-새 캠페인은 일반 생성량이 매분 **1→2→4→8→16→32배**로 증가한다. 일반 지상 동시 한도160→320→640과 정예/보스 자리를 확보하고 기존30산개·비행무리는 별도로 유지한다. 정예는 **55/110/170/230초**에 등장한다. 정예 처치 시 임시30% 강화 상자: 현재 보유한 최대Lv.5 미만의 서로 다른1~5종을 각+1하며,가능한 수가 적으면 그 수만 강화한다. 새스킬/XP레벨은 지급하지 않고 실제진화에연결한다. 상자개수/seed와획득제거·강화원장을즉시원자저장/재시도에연결했다. 구1~18의 이어하기는생성규칙0,새캠페인은1이며골드던전은기존생성/보상을유지한다. 설정은 `data/campaign_encounters.json`이다.
+새 캠페인은 일반 생성량이 매분 **1→2→4→8→16→32배**로 증가한다. 일반 지상 동시 한도160→320→640과 정예/보스 자리를 확보하고 기존30산개·비행무리는 별도로 유지한다. 정예는 **55/110/170/230초**에 등장한다. 정예 처치 시 임시30% 강화 상자: 현재 보유한 최대Lv.5 미만의 서로 다른1~5종을 각+1하며,가능한 수가 적으면 그 수만 강화한다. 새스킬/XP레벨은 지급하지 않고 실제진화에연결한다. 상자개수/seed와획득제거·강화원장을즉시원자저장/재시도에연결했다. 구1~18의이어하기는생성0,구19의0·1은그대로유지하고새캠페인은2이며골드던전은기존생성/보상을유지한다. 설정은 `data/campaign_encounters.json`이다. 새출격2는화면밖가까운진입/주변부족분보충·먼일반적동일ID재진입을함께쓴다. 첫6초뒤초당최대6보충·분별12/24/48/96/144/192목표이며정예/보스·30무리/비행은재배치하지않는다. 추가설정은 `data/campaign_pressure.json`이다. 구1~19이어하기는기존생성0·1을유지하므로새출격에서개선규칙을확인한다.
 
 두 맵에 상자/항아리/잔해 **각32개**를 자동 공격·스킬로 파괴할 수 있다. 매 파괴20%로1개 아이템: 성공 후HP40%/MP40%/전체 자석10%/보스 제외 제거10%다. 회복은 임시 최대치30%, 자석은 맵 전체XP/금화, 제거는 정예까지 기존 처치 보상·보스 면역이다. **파괴45초 후 재생성**하며 비활성 시간은 멈춘다. 이전 드롭과 새 회차 아이템/남은 시간·독립 난수를 저장한다. 소형 물체는 이동 비충돌이며 기존 성벽·성문 충돌을 유지한다.
 
@@ -69,7 +69,7 @@
 
 ## 검증
 
-Godot4.7.2 임포트·기존7묶음/부트3922검사(추가9)·142소스/6계약·negative38/Python12 PASS. 실제X11의34화면/3크기에서파괴잔해3종·정상/누락/다른맵/F8복귀를확인했다. 원래좌표의실제40MP파괴·유효저장19/같은프로세스복원·45활성초재생성의권위상태/7난수도일치했다. 스폰시계/관찰위치는QA이며새자연6분·모바일FPS근거가아니다. [상자잔해](docs/validation/GAME047_CRATE.png) · [항아리잔해](docs/validation/GAME047_URN.png) · [돌조각](docs/validation/GAME047_DEBRIS.png) · [정확한소스/실행범위](docs/validation/GAME047_REPORT.json).
+Godot4.7.2 임포트·기존7묶음/부트4060검사·146소스/6계약·negative43/Python12 PASS. 신규압력단독138·공개19의606권위해시·9실제GUI/2402이동프레임/MP6·진행중302단계대조·현재20/구19별도OS100단계씩과45초재생성을확인했다. 스폰을멈추거나적을배치하지않은실제첫1분GUI는화면안평균13.52→19.00/빈관측12→6이었다. [수정전](docs/validation/GAME048_BEFORE.png) · [수정후](docs/validation/GAME048_AFTER.png) · [조사/소스/검증범위](docs/validation/GAME048_REPORT.json). 새무강화자동전투의131.10/195.80초패배·빠른성장으로난도/6분성장·경제는OPEN이고실기FPS/최종재미승인은별도다.
 
 GAME046당시상자전후2별도OS각100단계·14GUI/터치획득·1540합성저장과606과거상태검증은[당시보고서](docs/validation/GAME046_REPORT.json)에보존한다. 이번파괴이미지연결은저장스키마/규칙을변경하거나새별도OS행렬·성능/경제표본을측정한작업이아니다.
 
@@ -79,8 +79,8 @@ GAME046당시 같은자동조작·무강화·시드7의두맵전후4전투에서
 python3 tools/check_project.py --godot /actual/path/to/Godot
 Godot --headless --path . --script res://tests/test_combat_cues.gd
 # map: prologue_wall / outskirts_trial / legacy_arena; talents: none / roots / full
-# New campaign density: measure_balance.gd -- --map=prologue_wall --talents=none --encounters=1
-# Historical encounter control: --encounters=0 (default)
+# New campaign density: measure_balance.gd -- --map=prologue_wall --talents=none --encounters=2
+# Historical encounter control: --encounters=0 (default) or 1 (GAME046 doubling)
 Godot --headless --path . --script res://tests/measure_campaign.gd -- --map=prologue_wall --talents=none
 # Historical407 versus exact current HUD extents,unchanged evolve controller
 Godot --headless --path . --script res://tests/measure_boss_guidance.gd
@@ -90,7 +90,7 @@ Godot --headless --path . --script res://tests/measure_enemy_curse.gd
 Godot --headless --audio-driver Dummy --path . --script res://tests/measure_combat_audio.gd
 ```
 
-GAME-022 당시 공격 강화 우선 선택의 동일 조작 대조에서 캠페인은20회 모두11~12선택/공격Lv5 2종,19클리어·1시간초과였다. 골드던전10회는모두8선택/Lv5 1종·클리어다. 선택 시점/관통별 실제TTK/가격1000·50000·1000000의42경제시나리오를 기록했다. 하루던전2+캠페인1의고정수입가정에서첫특성Lv3약5~6일/전체18Lv3약89~91일이다. 모바일 기기가없어실기FPS/발열은미검증이며Linux부하계측을그것으로대체하지않는다. 구설정407시간초과는 재현되며 GAME-029의4표본 클리어를 전체 균형·안내 효과로 확대하지 않는다. 다음 GAME-048은 증원·강화 상자를 포함한 실전 교전 균형 보완이다.
+GAME-022 당시 공격 강화 우선 선택의 동일 조작 대조에서 캠페인은20회 모두11~12선택/공격Lv5 2종,19클리어·1시간초과였다. 골드던전10회는모두8선택/Lv5 1종·클리어다. 선택 시점/관통별 실제TTK/가격1000·50000·1000000의42경제시나리오를 기록했다. 하루던전2+캠페인1의고정수입가정에서첫특성Lv3약5~6일/전체18Lv3약89~91일이다. 모바일 기기가없어실기FPS/발열은미검증이며Linux부하계측을그것으로대체하지않는다. 구설정407시간초과는 재현되며 GAME-029의4표본 클리어를 전체 균형·안내 효과로 확대하지 않는다. 다음 GAME-049는 실제 압박에 맞춘 성장·교전 균형 보완이다.
 
 ```sh
 Godot --headless --path . --script res://tests/measure_balance.gd -- --map=gold_slime --talents=none
