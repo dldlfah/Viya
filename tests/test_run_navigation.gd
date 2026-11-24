@@ -199,6 +199,8 @@ func _run() -> void:
 	scene.simulation.damage_player(1000)
 	scene._physics_process(0.0)
 	verify(scene.dialog_body.get_child(0).text == "전투 종료 · 패배" and is_instance_valid(scene.lobby_button), "Real defeat menu has separate heading and lobby route")
+	# Keep the full dense regression in a separate existing engine suite budget.
+	await preload("res://tests/test_combat_performance.gd").run(scene, verify)
 	scene.queue_free()
 	await process_frame
 	await process_frame

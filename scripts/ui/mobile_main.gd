@@ -88,12 +88,13 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	combat_audio.prepare(simulation,not overlay.visible)
 	var track_enemies:bool=view.tracks_enemy_motion()
-	view.actors.prepare(simulation,track_enemies)
+	var motion_region:Rect2=(view.BattleProjection.visible_world(view.camera_center(),view.size) if view.high_angle else Rect2(view.camera_center()-view.size*.5,view.size)).grow(180)
+	view.actors.prepare(simulation,track_enemies,motion_region)
 	var before:Vector2=simulation.player
 	var active:bool=simulation.phase==RunState.Phase.RUNNING and not overlay.visible
 	super._physics_process(delta)
 	view.advance_camera(delta,simulation.player-before,active and simulation.phase==RunState.Phase.RUNNING and not overlay.visible)
-	view.actors.sync(simulation,simulation.player-before,active and simulation.phase==RunState.Phase.RUNNING and not overlay.visible,track_enemies)
+	view.actors.sync(simulation,simulation.player-before,active and simulation.phase==RunState.Phase.RUNNING and not overlay.visible,track_enemies,motion_region)
 	combat_audio.finish(simulation,active,not overlay.visible)
 
 func _cast_magic(expected_ticket:int=-1) -> void:

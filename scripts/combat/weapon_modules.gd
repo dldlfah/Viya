@@ -179,6 +179,7 @@ static func impact(state, actor: Dictionary, p: Dictionary) -> void:
 		if p.knockback > 0.0:
 			var displacement: Vector2 = state.player.direction_to(actor.p)*float(p.knockback)*(0.25 if actor.kind=="boss" else 1.0)
 			actor.p = actor.p+displacement if actor.variant=="flier" else state.map_space.move(actor.p,displacement,24.0)
+			state.projectile_target_moved(actor)
 	state._damage_target(int(actor.id),float(p.damage),attack_type,source)
 	if marked and p.mark_burst > 0.0:
 		var burst: Dictionary = p.duplicate(true)
@@ -269,7 +270,7 @@ static func move_projectile(state, index: int, dt: float) -> void:
 	while bullet.remaining > 0:
 		var found := {}
 		var first := INF
-		for actor in actors(state):
+		for actor in state.projectile_candidates(old,next,float(p.width)):
 			if bullet.seen.has(actor.id):
 				continue
 			var nearest := Geometry2D.get_closest_point_to_segment(actor.p,old,next)

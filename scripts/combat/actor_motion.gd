@@ -15,16 +15,18 @@ func reset(id:String="") -> void:
 	clock=-1
 	entries.clear()
 
-func prepare(state, track_enemies:bool=true) -> void:
+func prepare(state, track_enemies:bool=true, motion_region:Rect2=Rect2()) -> void:
 	if state.run_id!=run_id or state.elapsed<clock:reset(state.run_id)
 	if not entries.has(0):entries[0]={"p":state.player,"hp":state.hp,"shots":state.shots,"casts":state.magic.casts,"pose":"idle","moving":false,"since":state.elapsed,"direction":direction(state.facing),"facing":state.facing}
 	entries[0].before_bullets=state.bullets.duplicate()
 	entries[0].before_received=state.cues.received_serial
 	if not track_enemies:return
+	var bounded:bool=motion_region.has_area()
 	for enemy in state.enemies:
+		if bounded and enemy.kind=="normal" and not motion_region.has_point(enemy.p):continue
 		if not entries.has(int(enemy.id)):entries[int(enemy.id)]={"p":enemy.p,"hp":enemy.hp,"fire_clock":enemy.get("fire_clock",0),"pose":"idle","moving":false,"since":state.elapsed,"direction":direction(state.player-enemy.p),"facing":enemy.p.direction_to(state.player)}
 
-func sync(state, hero_displacement:Vector2, active:bool, track_enemies:bool=true) -> void:
+func sync(state, hero_displacement:Vector2, active:bool, track_enemies:bool=true, motion_region:Rect2=Rect2()) -> void:
 	if state.run_id!=run_id or state.elapsed<clock:reset(state.run_id)
 	if not active or state.elapsed<=clock:return
 	clock=state.elapsed
@@ -53,7 +55,9 @@ func sync(state, hero_displacement:Vector2, active:bool, track_enemies:bool=true
 	entries[0].casts=state.magic.casts
 	entries[0].before_bullets=[]
 	entries[0].before_received=state.cues.received_serial
+	var bounded:bool=motion_region.has_area()
 	for enemy in (state.enemies if track_enemies else []):
+		if bounded and enemy.kind=="normal" and not motion_region.has_point(enemy.p):continue
 		var id:int=enemy.id
 		live[id]=true
 		var previous:Dictionary=entries.get(id,{"p":enemy.p,"hp":enemy.hp})

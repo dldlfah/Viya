@@ -25,6 +25,10 @@ var _chest_serial:int=0
 var _chests_opened:int=0
 var _chest_bonus_ranks:int=0
 enum Phase { READY, RUNNING, PAUSED, DEFEAT, CHOOSING, ABANDONED, CLEARED }
+const SpatialCandidates=preload("res://scripts/combat/spatial_candidates.gd")
+var _push_candidates = null # Frame-local derived query; never saved.
+var _bullet_candidates = null
+
 const WORLD_SIZE := Vector2(1800.0, 1200.0) # Legacy API; mapped runs use world_size.
 const PLAYER_SPEED := 235.0
 const PLAYER_RADIUS := 17.0
@@ -651,13 +655,14 @@ func _spawn_enemy(kind: String = "normal") -> bool:
 
 func _move_enemies(dt: float) -> void:
 	# Ground movement happens first so fly-bys cannot be undone by pursuit this frame.
+	var default_speed:float=wave_profile().speed
 	for enemy in enemies:
-		var pattern_locked:bool=enemy_patterns.tick(self,enemy,dt)
+		var pattern_locked:bool=enemy.has("pattern") and enemy_patterns.tick(self,enemy,dt)
 		if phase!=Phase.RUNNING:return
 		if pattern_locked:continue
 		if enemy.variant == "flier":
 			continue
-		var speed: float = float(enemy.get("speed", wave_profile().speed)) * WeaponModules.speed_scale(enemy)
+		var speed: float = float(enemy.get("speed", default_speed)) * WeaponModules.speed_scale(enemy)
 		var pos: Vector2 = enemy["p"]
 		var offset := player - pos
 		var variant: String = str(enemy.get("variant", "normal"))
@@ -668,7 +673,7 @@ func _move_enemies(dt: float) -> void:
 			elif distance < float(stage_rules.ranged.keep_distance) * 0.75:
 				pos -= offset.normalized() * speed * dt
 			pos = pos.clamp(Vector2.ONE * 24.0, world_size - Vector2.ONE * 24.0)
-		elif offset.length_squared() > 0.01:
+		elif map_id=="legacy_arena" and offset.length_squared() > 0.01:
 			pos += offset.normalized() * minf(speed * dt, offset.length())
 		if map_id != "legacy_arena":
 			if variant != "ranged" or offset.length() > float(stage_rules.ranged.range) * 0.85:
@@ -680,7 +685,7 @@ func _move_enemies(dt: float) -> void:
 			_tick_ranged(enemy, dt)
 	_move_fliers(dt)
 	for enemy in enemies:
-		if enemy_patterns.locked(self,enemy):continue
+		if enemy.has("pattern") and enemy_patterns.locked(self,enemy):continue
 		if enemy.p.distance_squared_to(player) <= pow(PLAYER_RADIUS + ENEMY_RADIUS, 2.0):
 			var accepted := damage_player(int(enemy.get("contact_damage",12)), "physical", 0.0, {"kind":"contact", "id":int(enemy.id), "p":enemy.p})
 			if accepted and enemy.variant == "flier":
@@ -689,6 +694,7 @@ func _move_enemies(dt: float) -> void:
 				return
 
 func _move_fliers(dt: float) -> void:
+	_push_candidates=null
 	for index in range(enemies.size() - 1, -1, -1):
 		var flier: Dictionary = enemies[index]
 		if flier.variant != "flier":
@@ -697,16 +703,21 @@ func _move_fliers(dt: float) -> void:
 		if flier.life <= 0.0:
 			enemies.remove_at(index) # Expiry never awards a kill or loot.
 			continue
+		if _push_candidates==null and enemies.size()>=96:
+			_push_candidates=SpatialCandidates.new()
+			if not _push_candidates.build([enemies],true):_push_candidates=null
 		var previous: Vector2 = flier.p
 		flier.p += flier.velocity * dt * WeaponModules.speed_scale(flier)
 		_push_ground(previous, flier.p)
+	_push_candidates=null
 
 func _push_ground(previous: Vector2, destination: Vector2) -> void:
 	var direction := previous.direction_to(destination)
 	if direction.is_zero_approx():
 		return
 	var radius := ENEMY_RADIUS * 2.0
-	for enemy in enemies:
+	var candidates:Array=_push_candidates.segment(previous,destination,radius) if _push_candidates!=null else enemies
+	for enemy in candidates:
 		if enemy.variant == "flier" or (enemy.p - previous).dot(direction) < 0.0:
 			continue
 		var nearest := Geometry2D.get_closest_point_to_segment(enemy.p, previous, destination)
@@ -719,6 +730,7 @@ func _push_ground(previous: Vector2, destination: Vector2) -> void:
 		if distance < front:
 			# Preserve the flying path and push every ground type, including bosses.
 			enemy.p = map_space.move(enemy.p, direction * (front - distance), 24.0)
+			if _push_candidates!=null:_push_candidates.moved(enemy)
 
 func _roll_variant() -> String:
 	var roll := encounter_rng.randf() * 100.0
@@ -1021,7 +1033,20 @@ func _tick_skills(dt: float) -> void:
 				_burst(at, float(profile["radius"]), float(profile["damage"]), "sigil", "magical")
 		skill_clocks[id] = float(profile["interval"])
 
+func projectile_candidates(from:Vector2,to:Vector2,width:float) -> Array[Dictionary]:
+	return _bullet_candidates.segment(from,to,maxf(ENEMY_RADIUS,SupplyCatalog.RADIUS)+width) if _bullet_candidates!=null else WeaponModules.actors(self)
+
+func projectile_target_moved(actor:Dictionary) -> void:
+	if _bullet_candidates!=null:_bullet_candidates.moved(actor)
+
 func _move_bullets(dt: float) -> void:
+	if not bullets.is_empty() and enemies.size()>=96:
+		_bullet_candidates=SpatialCandidates.new()
+		if not _bullet_candidates.build([enemies,structures]):_bullet_candidates=null
+	_move_bullets_indexed(dt)
+	_bullet_candidates=null
+
+func _move_bullets_indexed(dt: float) -> void:
 	for bullet_index in range(bullets.size() - 1, -1, -1):
 		var bullet: Dictionary = bullets[bullet_index]
 		if bullet.has("weapon"):
@@ -1039,7 +1064,7 @@ func _move_bullets(dt: float) -> void:
 		while int(bullet["remaining"]) > 0:
 			var victim := -1
 			var first_distance := INF
-			for actors in [enemies, structures]:
+			for actors in [projectile_candidates(old_pos,new_pos,4.0)]:
 				for actor in actors:
 					if actor.hp <= 0 or bullet["seen"].has(actor.id):
 						continue

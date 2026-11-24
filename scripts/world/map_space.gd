@@ -12,6 +12,27 @@ var _edges: Array = []
 var _costs: Array[float] = []
 var _radius: float = -1.0
 var _goal := Vector2(INF,INF)
+# Derived geometry only; excluded from saves and rebuilt after data changes.
+const MAX_WALL_RADII := 16
+var _wall_solids: Array[Rect2] = []
+var _wall_cache: Dictionary = {}
+func _walls(radius: float) -> Dictionary:
+	if _wall_solids != solids:
+		_wall_solids.assign(solids)
+		_wall_cache.clear()
+		_radius = -1.0
+	if not _wall_cache.has(radius):
+		if _wall_cache.size() >= MAX_WALL_RADII:_wall_cache.clear()
+		var boxes: Array[Rect2] = []
+		var corners: Array = []
+		var limits := PackedFloat64Array()
+		for solid in solids:
+			var wall := solid.grow(radius)
+			boxes.append(wall)
+			corners.append([wall.position,Vector2(wall.end.x,wall.position.y),wall.end,Vector2(wall.position.x,wall.end.y)])
+			limits.append_array(PackedFloat64Array([wall.position.x,wall.end.x,wall.position.y,wall.end.y]))
+		_wall_cache[radius] = {"boxes":boxes,"corners":corners,"limits":limits}
+	return _wall_cache[radius]
 func _init(data: Dictionary) -> void:
 	definition = data.duplicate(true)
 	world_size = Vector2(data["size"][0],data["size"][1])
@@ -36,11 +57,11 @@ func valid_position(at: Vector2, radius: float) -> bool:
 func move(at: Vector2, displacement: Vector2, radius: float) -> Vector2:
 	# Axis sweeps slide along walls and stop large-frame tunnelling.
 	var result := at.clamp(play_bounds.position+Vector2.ONE * radius,play_bounds.end - Vector2.ONE * radius)
+	var boxes:Array[Rect2]=_walls(radius+.01).boxes
 	for axis in range(2):
 		var other := 1 - axis
 		var next := clampf(result[axis] + displacement[axis],play_bounds.position[axis]+radius,play_bounds.end[axis]-radius)
-		for solid in solids:
-			var wall := solid.grow(radius + 0.01)
+		for wall in boxes:
 			if result[other] < wall.position[other] or result[other] > wall.end[other]:
 				continue
 			if displacement[axis] > 0 and result[axis] <= wall.position[axis] and next > wall.position[axis]:
@@ -52,17 +73,24 @@ func move(at: Vector2, displacement: Vector2, radius: float) -> Vector2:
 func wall_fraction(from: Vector2, to: Vector2, radius: float = 0.0) -> float:
 	var distance := from.distance_to(to)
 	var first := 1.0
-	for solid in solids:
-		var wall := solid.grow(radius)
-		if wall.has_point(from):
-			return 0.0
-		var points := [wall.position, Vector2(wall.end.x,wall.position.y),wall.end,Vector2(wall.position.x,wall.end.y)]
+	# Conservative rejection only. Actual intersections keep the published math,
+	# wall/edge order and endpoint handling, including starts inside a wall.
+	var low := Vector2(minf(from.x,to.x),minf(from.y,to.y))-Vector2.ONE*.01
+	var high := Vector2(maxf(from.x,to.x),maxf(from.y,to.y))+Vector2.ONE*.01
+	var walls:=_walls(radius)
+	var limits:PackedFloat64Array=walls.limits
+	for index in range(walls.boxes.size()):
+		var offset:=index*4
+		if high.x < limits[offset] or low.x > limits[offset+1] or high.y < limits[offset+2] or low.y > limits[offset+3]:continue
+		var wall:Rect2=walls.boxes[index]
+		if wall.has_point(from):return 0.0
+		var points:Array=walls.corners[index]
 		for i in range(4):
 			var hit: Variant = Geometry2D.segment_intersects_segment(from,to,points[i],points[(i+1)%4])
-			if hit is Vector2:
-				first = minf(first,from.distance_to(hit)/maxf(distance,0.000001))
+			if hit is Vector2:first = minf(first,from.distance_to(hit)/maxf(distance,0.000001))
 	return first
 func prepare_routes(goal: Vector2, radius: float) -> void:
+	_walls(radius)
 	if radius != _radius:
 		_radius = radius
 		_nodes.clear()
@@ -99,19 +127,25 @@ func prepare_routes(goal: Vector2, radius: float) -> void:
 		for target in _edges[nearest]:
 			_costs[target] = minf(_costs[target],best + float(_edges[nearest][target]))
 func route_target(from: Vector2, goal: Vector2, radius: float) -> Vector2:
-	if solids.is_empty() or wall_fraction(from,goal,radius) >= 1.0:
-		return goal
+	if solids.is_empty() or wall_fraction(from,goal,radius) >= 1.0:return goal
 	prepare_routes(goal,radius)
-	var best := INF
-	var target := from
+	# Test the cheapest complete route first. Float64 costs retain the original
+	# arithmetic; equal costs resolve in original node order, never sort order.
+	var costs := PackedFloat64Array()
+	costs.resize(_nodes.size())
 	for i in range(_nodes.size()):
-		if from.distance_squared_to(_nodes[i]) < 0.01:
-			continue
-		var cost := from.distance_to(_nodes[i]) + _costs[i]
-		if cost < best and wall_fraction(from,_nodes[i],radius) >= 1.0:
-			best = cost
-			target = _nodes[i]
-	return target
+		costs[i] = INF if from.distance_squared_to(_nodes[i]) < .01 else from.distance_to(_nodes[i]) + _costs[i]
+	var ordered := costs.duplicate()
+	ordered.sort()
+	var previous := -INF
+	var next_index := 0
+	for cost in ordered:
+		if not is_finite(cost):break
+		var index := costs.find(cost,next_index if cost==previous else 0)
+		previous = cost
+		next_index = index+1
+		if wall_fraction(from,_nodes[index],radius) >= 1.0:return _nodes[index]
+	return from
 func spawn_anchor(generator: RandomNumberGenerator, player: Vector2, elapsed: float, role: String, visible: Rect2, footprint: float = 0.0) -> Variant:
 	var eligible: Array = definition.zones.filter(func(zone): return role in zone.roles and elapsed >= zone.from)
 	var reach := maxf(590.0,visible.size.length()*0.5 + footprint + 96.0)
