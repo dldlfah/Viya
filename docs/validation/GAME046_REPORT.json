@@ -1,0 +1,3268 @@
+{
+  "work": "GAME-046",
+  "recorded_kst": "2026-11-24",
+  "repository": "dldlfah/Viya",
+  "branch": "work/viya-turnaround-qa-20261117",
+  "code_commit": "02c212775ec041bbf811e65e6074c28498692672",
+  "code_tree": "ca91c33bdbf5e8a2ee38683db2c9c8292c03ecf9",
+  "start_document_head": "3142eb73a4cf9645ef933dea0dc0fdb9d5ae42e9",
+  "previous_code": "5b1e6c0e997547707b9d638eb2c316d89613ac74",
+  "main_unchanged": "d7d8e7561adfb445653e1c49f92336d0701dc939",
+  "status": "IMPLEMENTED_AND_ENGINE_VERIFIED",
+  "balance": "OPEN",
+  "user_request": {
+    "minute_multiplier": "Explicit user choice: double every minute 1,2,4,8,16,32.",
+    "elite_frequency": "Double original 2 elites to 4.",
+    "elite_chests": "Chance to drop one chest granting 1-5 distinct currently owned skills one rank each.",
+    "provisional_chance": 0.3
+  },
+  "rules": {
+    "minute_seconds": 60.0,
+    "spawn_multipliers": [
+      1,
+      2,
+      4,
+      8,
+      16,
+      32
+    ],
+    "ground_limits": [
+      160,
+      320,
+      640,
+      640,
+      640,
+      640
+    ],
+    "chest_drop_chance": 0.3,
+    "chest_min_upgrades": 1,
+    "chest_max_upgrades": 5
+  },
+  "implementation": {
+    "owner": "Existing RunState;stateless RefCounted rules helper only.",
+    "roll": "Existing loot_rng rolls chance,count1-5 and uint32 seed on actual elite death.",
+    "open": "Remove chest first;sort eligible owned nonmax IDs;shuffle by saved local seed;grant each distinct chosen skill exactly one rank,up to maximum5.",
+    "too_few": "Grant only eligible count;all capped consumes with explicit zero-upgrade message.",
+    "growth": "No character XP/level gifts or new skill/slot grants;existing stat refresh,ticket/revision,selection HP rules,magic request invalidation and actualLv5 evolution.",
+    "ui": "Shared high-angle/F8 glyph and placement reservation;receipt reports actual upgrades,current HUD refresh.",
+    "save": "Same atomic RunStore;saved unopened seed/count;removal/ranks/free-rank budget/opened ledger committed together;Main autosaves on serial/opened change;existing pause/retry on failure.",
+    "freeze": "No pickup in pause/choosing;old skill choice remains unchanged.",
+    "population": "Scale ordinary wave batch at fixed existing interval;not instantaneous cloning of every live actor. Ordinary ground cap160/320/640 excludes original scatter/flying groups;reserve unspawned elites and boss.",
+    "elite_times": [
+      55,
+      110,
+      170,
+      230
+    ],
+    "existing_content": "Existing110/230 elite species and maxHP1600,5minboss/6mindeadline,30scatter/flyby schedules retained."
+  },
+  "save_compatibility": {
+    "schema": 19,
+    "old18_fingerprint": "d19d8361edf34b139b7e6d6416a70eec5f47eb7c34c5e757170d0b7ff53f51d1",
+    "new_fingerprint": "453182097a89e5b3da2dc52a7253ba68f33f50a2cf1fad91a4c23123cfcb3ed8",
+    "new_fields": [
+      "encounter_version",
+      "chest_pickups",
+      "_chest_serial",
+      "_chests_opened",
+      "_chest_bonus_ranks"
+    ],
+    "old1to18": "Migrate to neutral policy0;retain original spawning/elites/chest-free rewards. Old AI0-3/pacing/weapons/7RNG and exact published1-18 migration chain retained.",
+    "new_departures": "Main/Mobile explicitly opt campaign weapons_v1 into1;start API defaults0;restart preserves selected policy.",
+    "dungeon": "Always0;3min/daily2/old entry,loot,currency,rewards unchanged.",
+    "validation": "Reject malformed queue/count/seed/worldpos/live source/duplicate IDs-ledger/currentmissingfields and nonneutral legacy retrofits.",
+    "frozen18_cases": [
+      "minute",
+      "elite_first",
+      "elite_second",
+      "dungeon",
+      "actual_waiting",
+      "actual_curse"
+    ],
+    "frozen18_original_hashes": 606,
+    "frozen18_pass": "6 cases x101 original authoritative hashes/sevenRNG verified inside final83 native checks.",
+    "normalization": "Only schema/rules headers,legitimately invalidated UI tickets/revision,and five new neutral fields excluded;no gameplay fields omitted.",
+    "scope": "Not a new separate-OS matrix for all historical1-17 saves. Two fresh processes below cover actual current19 unopened/opened UI saves."
+  },
+  "verification": {
+    "godot": "4.7.2.stable.official.ed1daf0bf",
+    "native_total": 3913,
+    "native_per_original_suite": [
+      23,
+      70,
+      122,
+      57,
+      1336,
+      68,
+      2237
+    ],
+    "additional_encounter_checks": 83,
+    "static_sources": 142,
+    "source_contracts": 6,
+    "combat_negative_controls": 38,
+    "python_tests": 12,
+    "python_command": "python3 -m unittest discover -s tests -p test_*.py",
+    "python_result": "PASS after final navigation-contract marker update.",
+    "existing_guards": "Original7 engine command/error digest retained;original GAME024 RunState byte baseline recovered with12exact reviewed encounter adapters and1View adapter;old33negative retained plus5.",
+    "log_errors": "No final SCRIPT ERROR/ERROR/leaks. Only existing Mesa software-X11 unsupportedVSync warning.",
+    "raw_report": {
+      "static_integrity": {
+        "status": "PASS",
+        "files_checked": 142,
+        "resource_references_checked": 445,
+        "errors": [],
+        "source_sha256": {
+          "project.godot": "0d8f7fce157178f7bf31acc183593b40f23cff6d266ea5270f4b75f0899b79e5",
+          "scenes/main.tscn": "17a2e77db7cf47af860de3c263dc9119b0df349bafdf2a8b52a40f7450c9e22c",
+          "scripts/combat/actor_motion.gd": "77c63ca6327c28a4b99aafea6f104a0b0ae9a91c2e364914d79307d4e90b5261",
+          "scripts/combat/approach_cues.gd": "3b61db842e2fced8e08c391e83fe342a2f349e7453d2d37421f51d1b340ce4fe",
+          "scripts/combat/attack_visuals.gd": "49e9acdb93325368fbf4c6d2732d11877e25f9daa829e6b00a466b74d339556f",
+          "scripts/combat/battle_forms.gd": "a0e9ebcf2cb5d369c0db53f089ab9bb9df0163b1f171908a57bd63f7e285ab95",
+          "scripts/combat/battle_projection.gd": "f8abad51e46f2353d01cc6f1f4b904485621d00ccf75e854ab873bc688f160a0",
+          "scripts/combat/battle_view.gd": "88b02ce716ce577e6bb12138cb49accff363b67422a407048ab7f59dff8951e0",
+          "scripts/combat/boss_guidance.gd": "d7c1195590ce6fedd3cc8c90cbcdfdf4a2aaf7b994fdfe1a26206e3a9709fef9",
+          "scripts/combat/campaign_encounters.gd": "61c5baade67f4d98b6fddd438664beb957abddf80f9f6950a1f41a84947a0332",
+          "scripts/combat/combat_audio.gd": "9d8d1f2e1d6b617e63a5f8454d182b5e16f08b99b28ade31c1e24cb95be18d2b",
+          "scripts/combat/combat_audio_bank.gd": "589afc536b6514a10a86b5436bc5271ffa6c522452e12949842a1ba8ca65d9ce",
+          "scripts/combat/combat_camera.gd": "0039e471d576f4daeb00f6b453f54a29d32917fe71aef4490b3f0bd33e90f896",
+          "scripts/combat/combat_cues.gd": "04027c56be8fa43d6465a165569b1e209dd7782a630d97a6e96d0acc3235ebda",
+          "scripts/combat/combat_display.gd": "9e08022d0249aa66e3d4ea6489b5e49d20cd90275ebe592620a28ebe9c82893e",
+          "scripts/combat/combat_profiles.gd": "515689ca733856a0855739531ad4ebeddb20609839210df41c3b6f6202c898e0",
+          "scripts/combat/curse_visuals.gd": "f6fd054527091a5631eb003a2ea38c8308d1bccc29098f5542250916ea0fb3ac",
+          "scripts/combat/defense_rules.gd": "1fa247925d4d5a33dfdf7371285d9192b85b0cd83603efed33894693053691f8",
+          "scripts/combat/enemy_pattern_visuals.gd": "ffe5032905c8df738b2d7f2a92346206b7df14502b4d2f8babc88304adc5d666",
+          "scripts/combat/enemy_patterns.gd": "a19cad533e9185a0bbca1671028349463a2c9c7c020c0e26dea1d5f59b3eebda",
+          "scripts/combat/enemy_patterns_v1.gd": "4059f30002b56fa0ccb73ed38b4fe4af9c0fe8092a8f5836ad53f6e3cef5a4af",
+          "scripts/combat/enemy_patterns_v17.gd": "df42114040f4da370a67257445063fdb851033182108111eac609758334b81ab",
+          "scripts/combat/enemy_patterns_v2.gd": "60ff5da133476bd9c851aaef695cd07ae748e313d9f654dd4b2b0e258af7ca1d",
+          "scripts/combat/enemy_patterns_v3.gd": "1c5ea0cee251c0fda6a5a77b40201dba8d97b27f42f5ac92c93602e43c831114",
+          "scripts/combat/feedback_state.gd": "3ee19238fb9307bc9953fed3ecc266ecff420e2c74ceffe81409069372e87d88",
+          "scripts/combat/gold_dungeon.gd": "f7073b32297d4326a0abc973022d7280c53f92114d49db53933874118b3ccc0d",
+          "scripts/combat/high_angle_battle.gd": "1515ef0c1073305408049f906df4daabbc0c0ee224384de1e0ad9ac7b572a259",
+          "scripts/combat/incoming_feedback.gd": "71dfbafc9d3e58435afa40b2f1f427387ad899f118906cda72b028538fdb853b",
+          "scripts/combat/magic_state.gd": "41a9a7739edc46e98dda26986f23dddf1c0ff6bdf9b40d80640f797460b9223b",
+          "scripts/combat/run_state.gd": "1e46cdfc17b94f0d45767959052bcf1dc8342517bfde13011a9f317dee621096",
+          "scripts/combat/stage_catalog.gd": "8059f41d7134818deeea1978d2f81fddc2456d530e33479d458461004600516f",
+          "scripts/combat/structure_feedback.gd": "1ea626cf8ab47d9d8a5acf717f0a8d115bcf3ba18ed45a5c118e37728f1673c5",
+          "scripts/combat/supply_feedback.gd": "5eabc16e14b484d7c2eb1aa76e9cafbb64d980ce24658a9f78dced85722c2a47",
+          "scripts/combat/weapon_modules.gd": "a405c2ddad96a396c8e5e0820ac0d4ee4093a951c473ac7c849294e872616a2e",
+          "scripts/main.gd": "1ffa0c4071c27d168c734ef11fa25c0bc7d5e287b6bc10311173a717f94a4865",
+          "scripts/progression/account_talents.gd": "0774659235d3bea9276574996565b315156260274750ef8c7f9969f18550f43e",
+          "scripts/progression/combat_pacing.gd": "07f73dae843a7779f992976efb1901774782db1bd021bef01999a83ea7814826",
+          "scripts/progression/gold_progress.gd": "2289fc850fc5f856d674863de6119987da74ed6bd931ade50f0faa11ea0f7012",
+          "scripts/progression/growth_state.gd": "07287b03d12eac144dce6f1858ceb2b6561e6281b4c011ac6bc5d5d3c72a0e6e",
+          "scripts/progression/run_snapshot.gd": "8c415a77de869d0ce3241acc9ba7f39faaeada528e3d305d28d50df55f1fc704",
+          "scripts/progression/run_store.gd": "bab493f1963ea2a6d98770f9ef9686d70d4b257e0b49afb3386de661a6081986",
+          "scripts/progression/skill_catalog.gd": "ccd13a2b02f4b57497beae39e483edfca53617cc3a39e43cbaf8009535c820d8",
+          "scripts/progression/weapon_catalog.gd": "aced8b45e765780b4053bfa436e1dbbc1696d2173cb4cb762f21298d5f91421b",
+          "scripts/ui/account_bonus_summary.gd": "c75ffab9d10f7b73fa9b89df9c532a119f00431447651ca13a1f004122e4cee8",
+          "scripts/ui/actor_assets.gd": "f98126291f60e27b9d903999c61f6a1c03a34555eb824a5fdd3e51db18a359c1",
+          "scripts/ui/asset_slots.gd": "26ffa91b19932e5d123eb03d6b63cd41e0f42881961ab6d668ccc543513a114a",
+          "scripts/ui/battle_chrome.gd": "6be2ec2203a0517ce6842d3c7979135ec7c94afaa5b69b1fff2508f083473a2a",
+          "scripts/ui/battle_save_notice.gd": "4030876186c66ae7de4ec2b8808d8b905881c40d0c0af29bd241f659dcdf2189",
+          "scripts/ui/city_preview.gd": "d01c0ca26b7d812b2b7d6d63339788be98241f6a09ec58a1a8d35a6f7b788937",
+          "scripts/ui/combat_skin.gd": "b9ed37f5c7f1831095805e13c6e3eaa986e762081209372cf8a4e09ff6608c66",
+          "scripts/ui/combat_slot_button.gd": "91a02ab52e8ebcb26985ae143dd596fbd4b62bd3fa6e440e5b0d12e44132a81d",
+          "scripts/ui/encounter_notice.gd": "316faf9f8de95b3917268b4773092a205cb0019e5860044294e0f781cb640e3e",
+          "scripts/ui/feedback_panel.gd": "2103fd9b8692c5606273175b415447f35a995f9a18306a5e8f0abeeb7c5d465b",
+          "scripts/ui/growth_overview.gd": "43dfb9306f4e280b57c8445b179c0e797938bc9fd0e5fa070053474cadb53a42",
+          "scripts/ui/hud_layout.gd": "d9a5dacd8e3816611b1658557c5366e1dbd6caeded4312d8f2e5e5584becddb6",
+          "scripts/ui/mobile_main.gd": "89e3d706665ffdb3788514fc18c06f425ad21035ba9a00f417fc9dc71603ae6b",
+          "scripts/ui/move_input.gd": "cee8e709185740d1cb964fff13873a0818d14d0b3653f36d6416a1b17da40bd8",
+          "scripts/ui/responsive_feedback_panel.gd": "b36ce744a7378d696b91018935f637da0ae88beccdeddd85b1187a238958ed5b",
+          "scripts/ui/reward_payment.gd": "d3fc0b75e7f9fbb5f55ffdbfe708039ccb77e4a35231c58d6fdcd4996a246c11",
+          "scripts/ui/skill_preview.gd": "5c3de40b161d38de44234f6f1a2c63064bbc99021c4def95f7995382b02af5db",
+          "scripts/world/map_catalog.gd": "952abbc81d539817dfdd98ed4a59185f13fb8c1adac0210839d176ebee087ea6",
+          "scripts/world/map_space.gd": "8110f4a28e04e67fe738011ea888f31a9c74c450ed79148d88c1da602fa03ae8",
+          "scripts/world/supply_catalog.gd": "1af21cb685b8da0858491a961f007e8a0511c24e0f70b0165e0051d7fcb310a1",
+          "tests/measure_armor.gd": "19a42c9db8ac7b52b6bc2778f24e78ff05b433676c1443d3300a7d4bdd67c6af",
+          "tests/measure_balance.gd": "bf9963d42a6ef2e9fbfec06763e23705c3232b51de88823c593f94c4fa9e8858",
+          "tests/measure_boss_guidance.gd": "891bd7aba3c747e25b065acfd5ef45d9057e01047ff374656247e02744d46b13",
+          "tests/measure_campaign.gd": "acc9b093cdc59af87d11f342a88a537b7f0d35ac8745149eb1ca0046ac791e6c",
+          "tests/measure_combat_audio.gd": "727d34de154acb4bb080553683e423a5cdea35fcf4592ee23fe00540848d199c",
+          "tests/measure_enemy_curse.gd": "665ce8a3fcf0b981a1a7bf824cbe6a9da0a3efbebdf23d18385a2c3e1666d36e",
+          "tests/measure_enemy_patterns.gd": "d49f9091fcde4ca3fecf19d2263917a51d4e9cb84bda27f0fb2e788a7cbbd9e9",
+          "tests/measure_pattern_reacquire.gd": "5dceefb39529e718a12aa0068f0f769eec0f7b52aab51643e48cce16b7abc528",
+          "tests/profile_combat.gd": "1499a2a5db64c0869bca71f94582729a029bd7b240dd9ba1ad75a52e3333a2cf",
+          "tests/test_account_bonus_summary.gd": "8949dd854d50c6fbe4898180848c4b9377b91ff55bfd7e9b0c04a24e5bef64c7",
+          "tests/test_account_expansion.gd": "97d23a6d5bc708b9ebdcc76a492982d5b8e0e2fa4be6f2ad0c2ca501d5d35422",
+          "tests/test_account_talents.gd": "a85b5b84514323481e45137ab05e611af9d18f364393b9a6891fe45f1fe2b9f3",
+          "tests/test_actor_animation.gd": "a85f368b78cd6000f1b27407e3dc42ccd45852f794675aba5db32a174640ba44",
+          "tests/test_attack_visuals.gd": "b091e1672614637797907658c628e86bd6f16ca728ce7cb1dae67d1529f1b443",
+          "tests/test_battle_save_notice.gd": "2bbfd4ef99e616b4be393a204e7c99a1acd17e0c3c1fb0b90629166ae0dd178c",
+          "tests/test_boss_guidance.gd": "2f3e94e8c0cb9e61e9343a6fd87ac26fc3e77316d42da42e99fd4d32100329b3",
+          "tests/test_camera_lead.gd": "41be552e04f16a19f6113027f3b72816732b6c9ae8332fea88d863f062fcae30",
+          "tests/test_campaign.gd": "07c21cb62d12d5394b0864afe3ce47f62b3cd11146fa4bd2780957c54d3f1f49",
+          "tests/test_campaign_encounters.gd": "07298b32b9fd3e6f5ac30df79f74b0fe9bd2c8df23864870d3c28641fa6f31d6",
+          "tests/test_chapter_ui.gd": "b48b6813b9d8a5e8d98c4d1e7d6a9ba65f7c54c5995bee66b8afcb55348db984",
+          "tests/test_combat_audio.gd": "cd4b66cf0f8e48faf98fdcf6ea4b0c87d687d06b47e424bb1a3210857e2e2beb",
+          "tests/test_combat_cues.gd": "ab5938037812fcf3d8c7f74954c8d08bb215c592968f89e99e5008b22059ea10",
+          "tests/test_combat_display.gd": "15b28b0a80b539bf9ccdce23ee988777307bfb875a84e4429796ba32575dbcdf",
+          "tests/test_combat_foundation.gd": "57efe421768dad47bee7a560325214a0c8a30d5fdf8d015fc2648f2b8c71416d",
+          "tests/test_combat_pacing.gd": "d321ef8b3e01f9879b8240bb439d93eaae8b5b75e5962437ddd40f7e6298b600",
+          "tests/test_combat_profiles.gd": "b9bd77beba226279c7c4fb4825e4290dd078974abd96969b4785778995b12f95",
+          "tests/test_encounter_notice.gd": "3d300aafff042d777c4bec71fc481f039a2e1486975be8c360ad0810350e2488",
+          "tests/test_enemy_curse.gd": "ee142e661930189a697a6b0a491b9e67e158011bb29c8aa1f74294bb98f50987",
+          "tests/test_enemy_patterns.gd": "ce3ce23fed4224499efdb68e4b7bbd9b18879d254ce71b3dd161bcb47ce4d9a1",
+          "tests/test_enemy_variety.gd": "69dc7a56001ed3a7fbdaaf9df85c7298b4aaeea5f3e7b5e39f7ffe32391174ea",
+          "tests/test_feedback.gd": "a0558acd7ab6216ccceb597f90c823a1078b0cda9337392440fe6523f22fce86",
+          "tests/test_gold_dungeon.gd": "5bf6924c97cb1bb83bb3b9586e2a5ba97dc045dceb345aa2819f49fd4eda5709",
+          "tests/test_gold_rewards.gd": "ea84e51520721ad62e52416145f51163d541ef0c3eac40cc125ef343d08c28b4",
+          "tests/test_gold_settings.gd": "29358cc8bd690213f4fab1fde43cc0a921689983201cfbcbffa18dd872e047a9",
+          "tests/test_growth.gd": "98f63a46d71eeba5f8807655ba6bd9d87fe89b240fca92bbbc12f253fbe0ba72",
+          "tests/test_growth_overview.gd": "bd6706bf3253d25b8b41c6374a53732762af0d361d11c04aac47abee4f565e87",
+          "tests/test_guide_skin.gd": "50502dc737876e114d1443ad66af92d5973b131f746a2162952d7385797d1b6a",
+          "tests/test_high_angle.gd": "d72affc633146f330e5638a6cada4e1977e3e30d98bf03208fab8b047684991e",
+          "tests/test_incoming_feedback.gd": "19965b733e2e28451744a1af948a236631e3bc9d0b8bf83b3beb4f4a737e37ee",
+          "tests/test_magic.gd": "2969ef796d9255f7b4c79534c68ebabb1b2e349adb0828929d3450ab8f75a090",
+          "tests/test_map_pilot.gd": "b36dc284097f774dafdd2e003131f30e2da4a6fb4d5fc340e1529323fb871764",
+          "tests/test_maps.gd": "3c129f9fe4aac09e01ad4d7f380d03faebb67f8b9f45f0f2d84175d79be4e2f7",
+          "tests/test_mobile_hud.gd": "3d0234bea7a3883f6cb38fe127d8062cbd393b97c3132109e853e84c68e75a76",
+          "tests/test_pattern_reacquire.gd": "b1d3d6a4544ba48cf4394310fac3d4a41d3931594cb81a1b787b94adaed0b820",
+          "tests/test_reward_payment.gd": "3025a1882616b2d7fcdecb276a8b772d633bcbef93990d426ded5e733c3fded1",
+          "tests/test_run_navigation.gd": "14b88030cf3b84cdaed8c559e04c0f1b15552a9860f32c1c959be06bea9ee475",
+          "tests/test_scatter_packs.gd": "1d642ed432b31e509721d9867f5e7dde4d904499cf7555b163670ef9b5c07f2d",
+          "tests/test_skill_preview.gd": "0a62fc3bcdafeb525507f4107621d5c14a955e5d5270750a99d7de1e61f9ad9f",
+          "tests/test_structure_feedback.gd": "2c7c0cbb43202d8bcb6c06d266180b2e1beefa161f80ad4f316b9e27981c5224",
+          "tests/test_supplies.gd": "5de153bb81aaa06f5f6bbd321b8689d7afe59160d314a6cb06353fac39d8678d",
+          "tests/test_supply_feedback.gd": "72f6b9ea21ba920944c8148be4a376840f0b1c4a562fd8256fe4f6025c6c7597",
+          "tests/test_talent_tree.gd": "984fdf593f086254dd17fde222ac7cafa35d8b223195fd46bc04ee170ddada21",
+          "tests/test_weapon_skills.gd": "eff7725b7a775d3758053630e560385b91c8b96dc1ac630eed0a2f853a765024",
+          "data/actor_presentation.json": "e82ae99f672bd3e6979778f9a6201efb659b160a3407d9b1b6099eb0e0257f04",
+          "data/campaign_encounters.json": "bb95382de9a546f1f1ffb95e0b119cf311801e96e43f3929ecce0a02631178ce",
+          "data/chapter_one.json": "c32e288ddc61dc8193cd78de416d3682b7c11f1924bbaaa3ea4afe4b78104f76",
+          "data/combat_pacing.json": "d153666f7f77506da281d1f90ae5fbc5822cd997c6db76590f35ef8a6662d597",
+          "data/combat_profiles.json": "d36abf0b4d0feb950e6448474732decdac9f98035a9962e5f5287b09eb1d1144",
+          "data/destructibles.json": "130421dd85d4dbf9ff9f70ab297b36586870e65fb9426cec0c2f58ce57a49b39",
+          "data/enemy_curse_v3.json": "c1d23889286fe1f91d4ef3b206de5b6e910211a52e935162da42355dc5d39659",
+          "data/enemy_patterns.json": "ba04c2b3076746724a09cf212576886edfa33821f666daa97a541d5042680bec",
+          "data/enemy_patterns_v2.json": "83bf0449e6dad16499af5a4c533c51d0ce3dc06fd73c02eb626de2d1e2e7ac21",
+          "data/gold_dungeon.json": "9a3427a6ddfb3462123f92e6918966ff7b1887ff324f368c600a9ad5993b1f9e",
+          "data/gold_rewards.json": "8f465cd44d1bf712b0fa758b2b8ff7cd17ecb450cff7f8e567d27f0397154993",
+          "data/map_presentation_slots.json": "08ce35b6f4acf2a4d54d1f4f26bde5800e8ee133a7e2e93e0026a863e10c5fcd",
+          "data/maps.json": "925638f794696b96fdf48df8c266654cef3af002f43e57f91daa80f8d70e8bd4",
+          "data/presentation_slots.json": "d0a2e6ea1a55d37680bfa02ef9f9036f00deb03575ff9e9dcd10fa7179aa1001",
+          "data/prototype_skills.json": "a6ba197fe558d328e1fcab96506fa098465a4c72aebfe1a1b29cb98642628d1a",
+          "data/stages.json": "2e656d2dc155ad93c76b8a1303133992d95529283be7f5b16423738f4edaeeae",
+          "data/weapon_skills.json": "be23e1eb349958fcebf3dba088fcf389d50654fc31cb83523513c178ff81c659",
+          "tools/bootstrap_godot.py": "4c3ca17c3b90f9c5590d7a82a76ae71a353f4d15aae973cf37e03e745ebfdecc",
+          "tools/check_combat_cues.py": "c619009282a6946c5b9a2a3b8a59a448cb065e18258462524f2aeb3fa8c42c18",
+          "tools/check_feedback_data.py": "f1bd6f415e919a32faab1b403073e24dcdda4b819938b9b707dacfc32320bec7",
+          "tools/check_growth_data.py": "304be6a17484dd44525d94bad31f422bd13be315ba3309a366ca2bd5b9e2ebfd",
+          "tools/check_magic_data.py": "9405ac2a576b42d279944aacec82f00500ad50c70e5f141413a05e64b1f39e5b",
+          "tools/check_mobile_hud.py": "9e43cace28480d3aacb45dabaf67acb2ad24e1c8a9366aa5c011a279eba35487",
+          "tools/check_project.py": "eeafd73fc4503c7af952331c093272a5510aade3fbae04e42afb77eb23f55157",
+          "tools/check_run_navigation.py": "05969174ef677a1312ef983c8ac2b94a8e06b91a249e29c988501f8a44240712",
+          "tools/report_economy.py": "5c449e04b43847c57ec9617c7c43b2408566dbc7691e32b8d3e33d8b33b24bd6"
+        },
+        "source_fingerprint": "7b23d92d00bb07318d53ebbd3603fb7b71f05856272d686b1755b8f48e92ed43",
+        "scope": "UTF-8, delimiters, whitespace, JSON/Python syntax, resource existence, project settings; NOT GDScript parser/typechecking or gameplay."
+      },
+      "growth_data_contract": {
+        "status": "PASS",
+        "pool_count": 18,
+        "counts": {
+          "common_attack": 8,
+          "character_attack": 1,
+          "common_passive": 8,
+          "ultimate_enhancement": 1
+        },
+        "negative_controls": [
+          {
+            "fixture": "duplicate",
+            "rejected": true
+          },
+          {
+            "fixture": "resistance",
+            "rejected": true
+          },
+          {
+            "fixture": "foreign_owner",
+            "rejected": true
+          },
+          {
+            "fixture": "missing_ultimate",
+            "rejected": true
+          },
+          {
+            "fixture": "wrong_row",
+            "rejected": true
+          }
+        ],
+        "errors": [],
+        "scope": "JSON schema/content and source integration markers only; not GDScript runtime/behavior."
+      },
+      "magic_data_contract": {
+        "status": "PASS",
+        "errors": [],
+        "negative_controls": [
+          {
+            "fixture": "plain_name",
+            "rejected": true
+          },
+          {
+            "fixture": "foreign_owner",
+            "rejected": true
+          },
+          {
+            "fixture": "missing_magic",
+            "rejected": true
+          },
+          {
+            "fixture": "negative_cost",
+            "rejected": true
+          },
+          {
+            "fixture": "negative_cooldown",
+            "rejected": true
+          },
+          {
+            "fixture": "wrong_upgrade",
+            "rejected": true
+          },
+          {
+            "fixture": "nonfinite_radius",
+            "rejected": true
+          },
+          {
+            "fixture": "impossible_cost",
+            "rejected": true
+          }
+        ],
+        "temporary_skill_names": 18,
+        "required_xp_first_five": [
+          30,
+          48,
+          66,
+          84,
+          102
+        ],
+        "xp_drop_unchanged": 5.0,
+        "scope": "JSON validation, negative data controls and source markers/arithmetic; NOT GDScript runtime, UI, input dispatch or mobile tests."
+      },
+      "feedback_source_contract": {
+        "status": "PASS",
+        "errors": [],
+        "negative_controls": [
+          {
+            "fixture": "missing_damage_hook",
+            "rejected": true
+          },
+          {
+            "fixture": "missing_reset",
+            "rejected": true
+          },
+          {
+            "fixture": "negative_duration",
+            "rejected": true
+          },
+          {
+            "fixture": "missing_low_hp_warning",
+            "rejected": true
+          },
+          {
+            "fixture": "missing_stale_guard",
+            "rejected": true
+          }
+        ],
+        "files_checked": 7,
+        "source_sha256": {
+          "scripts/combat/feedback_state.gd": "3ee19238fb9307bc9953fed3ecc266ecff420e2c74ceffe81409069372e87d88",
+          "scripts/combat/run_state.gd": "1e46cdfc17b94f0d45767959052bcf1dc8342517bfde13011a9f317dee621096",
+          "scripts/ui/feedback_panel.gd": "2103fd9b8692c5606273175b415447f35a995f9a18306a5e8f0abeeb7c5d465b",
+          "scripts/main.gd": "1ffa0c4071c27d168c734ef11fa25c0bc7d5e287b6bc10311173a717f94a4865",
+          "tests/test_feedback.gd": "a0558acd7ab6216ccceb597f90c823a1078b0cda9337392440fe6523f22fce86",
+          "tools/check_project.py": "eeafd73fc4503c7af952331c093272a5510aade3fbae04e42afb77eb23f55157",
+          "tools/check_feedback_data.py": "f1bd6f415e919a32faab1b403073e24dcdda4b819938b9b707dacfc32320bec7"
+        },
+        "scope": "7 affected code/test/checker files: UTF-8, delimiters, whitespace, Python syntax, reaction constants, integration markers, engine-test registration and new dependency paths only. NOT the full project check or GDScript parser/type/runtime, rendering, or mobile input tests."
+      },
+      "mobile_hud_source_contract": {
+        "status": "PASS",
+        "files_checked": 8,
+        "errors": [],
+        "negative_controls": [
+          {
+            "fixture": "layout_detached",
+            "rejected": true
+          },
+          {
+            "fixture": "detail_not_paused",
+            "rejected": true
+          },
+          {
+            "fixture": "detail_mutates_skill",
+            "rejected": true
+          },
+          {
+            "fixture": "resize_retains_touch",
+            "rejected": true
+          },
+          {
+            "fixture": "test_not_registered",
+            "rejected": true
+          }
+        ],
+        "source_sha256": {
+          "scenes/main.tscn": "17a2e77db7cf47af860de3c263dc9119b0df349bafdf2a8b52a40f7450c9e22c",
+          "scripts/ui/mobile_main.gd": "89e3d706665ffdb3788514fc18c06f425ad21035ba9a00f417fc9dc71603ae6b",
+          "scripts/ui/hud_layout.gd": "d9a5dacd8e3816611b1658557c5366e1dbd6caeded4312d8f2e5e5584becddb6",
+          "scripts/ui/responsive_feedback_panel.gd": "b36ce744a7378d696b91018935f637da0ae88beccdeddd85b1187a238958ed5b",
+          "scripts/ui/move_input.gd": "cee8e709185740d1cb964fff13873a0818d14d0b3653f36d6416a1b17da40bd8",
+          "tests/test_mobile_hud.gd": "3d0234bea7a3883f6cb38fe127d8062cbd393b97c3132109e853e84c68e75a76",
+          "tools/check_project.py": "eeafd73fc4503c7af952331c093272a5510aade3fbae04e42afb77eb23f55157",
+          "tools/check_mobile_hud.py": "9e43cace28480d3aacb45dabaf67acb2ad24e1c8a9366aa5c011a279eba35487"
+        },
+        "source_fingerprint": "106d34da02aaa68892da523331da30354dcbcdd322834e4a7fa2a09f4737f064",
+        "scope": "Changed UTF-8 files, delimiters, Python syntax and integration source checks only. NOT GDScript parsing/typechecking, actual Control geometry, touch dispatch, rendering or mobile execution."
+      },
+      "run_navigation_source_contract": {
+        "status": "PASS",
+        "files_checked": 5,
+        "errors": [],
+        "negative_controls": [
+          {
+            "fixture": "unescaped_string_newline",
+            "rejected": true
+          },
+          {
+            "fixture": "unguarded_intent",
+            "rejected": true
+          },
+          {
+            "fixture": "confirmation_resets_hp",
+            "rejected": true
+          },
+          {
+            "fixture": "cancel_rerolls",
+            "rejected": true
+          },
+          {
+            "fixture": "leave_fakes_death",
+            "rejected": true
+          },
+          {
+            "fixture": "no_result_copy",
+            "rejected": true
+          },
+          {
+            "fixture": "stale_menu_revision",
+            "rejected": true
+          },
+          {
+            "fixture": "unregistered_engine_test",
+            "rejected": true
+          }
+        ],
+        "source_sha256": {
+          "scripts/combat/run_state.gd": "1e46cdfc17b94f0d45767959052bcf1dc8342517bfde13011a9f317dee621096",
+          "scripts/ui/mobile_main.gd": "89e3d706665ffdb3788514fc18c06f425ad21035ba9a00f417fc9dc71603ae6b",
+          "tests/test_run_navigation.gd": "14b88030cf3b84cdaed8c559e04c0f1b15552a9860f32c1c959be06bea9ee475",
+          "tools/check_project.py": "eeafd73fc4503c7af952331c093272a5510aade3fbae04e42afb77eb23f55157",
+          "tools/check_run_navigation.py": "05969174ef677a1312ef983c8ac2b94a8e06b91a249e29c988501f8a44240712"
+        },
+        "source_fingerprint": "b0a9c0c2b4e9164fc4843c9bec65c3b123fc1e5443cd426b54dc69a9bbc43bee",
+        "scope": "UTF-8/delimiters/Python syntax and navigation SOURCE contracts only; NOT GDScript parsing/types, native execution, actual UI/input, or mobile testing."
+      },
+      "combat_cues_source_contract": {
+        "status": "PASS",
+        "files_checked": 27,
+        "errors": [],
+        "negative_controls": [
+          {
+            "fixture": "encounters_unregistered",
+            "rejected": true
+          },
+          {
+            "fixture": "encounters_cap",
+            "rejected": true
+          },
+          {
+            "fixture": "encounters_retrofit",
+            "rejected": true
+          },
+          {
+            "fixture": "chest_double_grant",
+            "rejected": true
+          },
+          {
+            "fixture": "chest_persistence",
+            "rejected": true
+          },
+          {
+            "fixture": "stable_camera_unregistered",
+            "rejected": true
+          },
+          {
+            "fixture": "stable_camera_adapter",
+            "rejected": true
+          },
+          {
+            "fixture": "stable_camera_limit",
+            "rejected": true
+          },
+          {
+            "fixture": "curse_unregistered",
+            "rejected": true
+          },
+          {
+            "fixture": "curse_doublefire",
+            "rejected": true
+          },
+          {
+            "fixture": "v17_retrofit",
+            "rejected": true
+          },
+          {
+            "fixture": "curse_gate",
+            "rejected": true
+          },
+          {
+            "fixture": "curse_render",
+            "rejected": true
+          },
+          {
+            "fixture": "reacquire_unregistered",
+            "rejected": true
+          },
+          {
+            "fixture": "v16_retrofit",
+            "rejected": true
+          },
+          {
+            "fixture": "pattern_single_hit",
+            "rejected": true
+          },
+          {
+            "fixture": "pattern_old_ai",
+            "rejected": true
+          },
+          {
+            "fixture": "pattern_visual_mutation",
+            "rejected": true
+          },
+          {
+            "fixture": "pattern_unregistered",
+            "rejected": true
+          },
+          {
+            "fixture": "pattern_gate",
+            "rejected": true
+          },
+          {
+            "fixture": "pattern_contact_guard",
+            "rejected": true
+          },
+          {
+            "fixture": "pattern_stop_on_defeat",
+            "rejected": true
+          },
+          {
+            "fixture": "missing_reset",
+            "rejected": true
+          },
+          {
+            "fixture": "early_clock",
+            "rejected": true
+          },
+          {
+            "fixture": "changed_damage",
+            "rejected": true
+          },
+          {
+            "fixture": "drop_as_collection",
+            "rejected": true
+          },
+          {
+            "fixture": "unbounded_received",
+            "rejected": true
+          },
+          {
+            "fixture": "received_before_hp",
+            "rejected": true
+          },
+          {
+            "fixture": "unbounded_visuals",
+            "rejected": true
+          },
+          {
+            "fixture": "cosmetic_rng",
+            "rejected": true
+          },
+          {
+            "fixture": "mutable_view",
+            "rejected": true
+          },
+          {
+            "fixture": "supply_changes_rewards",
+            "rejected": true
+          },
+          {
+            "fixture": "supply_mutates_observation",
+            "rejected": true
+          },
+          {
+            "fixture": "supply_glyph_mutates_state",
+            "rejected": true
+          },
+          {
+            "fixture": "unregistered_test",
+            "rejected": true
+          },
+          {
+            "fixture": "ignored_engine_exit",
+            "rejected": true
+          },
+          {
+            "fixture": "ignored_engine_errors",
+            "rejected": true
+          },
+          {
+            "fixture": "ignored_test_result",
+            "rejected": true
+          }
+        ],
+        "source_sha256": {
+          "scripts/combat/run_state.gd": "1e46cdfc17b94f0d45767959052bcf1dc8342517bfde13011a9f317dee621096",
+          "scripts/combat/battle_view.gd": "88b02ce716ce577e6bb12138cb49accff363b67422a407048ab7f59dff8951e0",
+          "scripts/combat/combat_cues.gd": "04027c56be8fa43d6465a165569b1e209dd7782a630d97a6e96d0acc3235ebda",
+          "tests/test_combat_cues.gd": "ab5938037812fcf3d8c7f74954c8d08bb215c592968f89e99e5008b22059ea10",
+          "tools/check_project.py": "eeafd73fc4503c7af952331c093272a5510aade3fbae04e42afb77eb23f55157",
+          "tools/check_combat_cues.py": "c619009282a6946c5b9a2a3b8a59a448cb065e18258462524f2aeb3fa8c42c18",
+          "scripts/combat/enemy_patterns.gd": "a19cad533e9185a0bbca1671028349463a2c9c7c020c0e26dea1d5f59b3eebda",
+          "scripts/combat/enemy_pattern_visuals.gd": "ffe5032905c8df738b2d7f2a92346206b7df14502b4d2f8babc88304adc5d666",
+          "scripts/progression/run_snapshot.gd": "8c415a77de869d0ce3241acc9ba7f39faaeada528e3d305d28d50df55f1fc704",
+          "scripts/combat/actor_motion.gd": "77c63ca6327c28a4b99aafea6f104a0b0ae9a91c2e364914d79307d4e90b5261",
+          "data/enemy_patterns.json": "ba04c2b3076746724a09cf212576886edfa33821f666daa97a541d5042680bec",
+          "scripts/combat/enemy_patterns_v1.gd": "4059f30002b56fa0ccb73ed38b4fe4af9c0fe8092a8f5836ad53f6e3cef5a4af",
+          "scripts/combat/enemy_patterns_v2.gd": "60ff5da133476bd9c851aaef695cd07ae748e313d9f654dd4b2b0e258af7ca1d",
+          "data/enemy_patterns_v2.json": "83bf0449e6dad16499af5a4c533c51d0ce3dc06fd73c02eb626de2d1e2e7ac21",
+          "scripts/combat/enemy_patterns_v17.gd": "df42114040f4da370a67257445063fdb851033182108111eac609758334b81ab",
+          "scripts/combat/enemy_patterns_v3.gd": "1c5ea0cee251c0fda6a5a77b40201dba8d97b27f42f5ac92c93602e43c831114",
+          "scripts/combat/curse_visuals.gd": "f6fd054527091a5631eb003a2ea38c8308d1bccc29098f5542250916ea0fb3ac",
+          "data/enemy_curse_v3.json": "c1d23889286fe1f91d4ef3b206de5b6e910211a52e935162da42355dc5d39659",
+          "scripts/combat/approach_cues.gd": "3b61db842e2fced8e08c391e83fe342a2f349e7453d2d37421f51d1b340ce4fe",
+          "scripts/combat/combat_camera.gd": "0039e471d576f4daeb00f6b453f54a29d32917fe71aef4490b3f0bd33e90f896",
+          "scripts/combat/campaign_encounters.gd": "61c5baade67f4d98b6fddd438664beb957abddf80f9f6950a1f41a84947a0332",
+          "data/campaign_encounters.json": "bb95382de9a546f1f1ffb95e0b119cf311801e96e43f3929ecce0a02631178ce",
+          "scripts/combat/supply_feedback.gd": "5eabc16e14b484d7c2eb1aa76e9cafbb64d980ce24658a9f78dced85722c2a47",
+          "scripts/combat/combat_display.gd": "9e08022d0249aa66e3d4ea6489b5e49d20cd90275ebe592620a28ebe9c82893e",
+          "scripts/main.gd": "1ffa0c4071c27d168c734ef11fa25c0bc7d5e287b6bc10311173a717f94a4865",
+          "scripts/ui/mobile_main.gd": "89e3d706665ffdb3788514fc18c06f425ad21035ba9a00f417fc9dc71603ae6b",
+          "tests/fixtures/game046_v18/baseline.json": "08a2f204b02efe5e7da4018d9fc2c08f4fef8587be8cc0f4429c4e7ab1565b0b"
+        },
+        "source_fingerprint": "332f2ab248b67bdaa46c790bd8f381ced8424d2aaf575fb397aaddea54da5e05",
+        "baseline_run_blob": "673d75a748fa5f1f9ac72ec73bbd9120fdcfce02",
+        "baseline_runner_blob": "1ab68ad8a51271e3d47db8b02d433991f42e8d6c",
+        "baseline_engine_function_sha256": "9156043eaf896d72565563cc1e2f623cf0c8fbac7f032f19bffee7e4946a69ee",
+        "scope": "Changed-source UTF-8/delimiters/Python syntax, hook order, bounds, isolation, reviewed GAME-024 RunState/GAME-030 view baselines with exact GAME-033 observations and GAME-038/039/040 version-gated pattern adapters and frozen v1/v2/v17, preserved engine runner. NOT Godot parser/type/runtime, visual quality, input dispatch, or FPS."
+      },
+      "godot_runtime": {
+        "status": "PASS",
+        "commands": [
+          {
+            "command": [
+              "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+              "--headless",
+              "--version"
+            ],
+            "exit_code": 0,
+            "status": "PASS"
+          },
+          {
+            "command": [
+              "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+              "--headless",
+              "--path",
+              "/workspace/Viya",
+              "--editor",
+              "--import",
+              "--quit"
+            ],
+            "exit_code": 0,
+            "status": "PASS"
+          },
+          {
+            "command": [
+              "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+              "--headless",
+              "--path",
+              "/workspace/Viya",
+              "--script",
+              "res://tests/test_combat_foundation.gd"
+            ],
+            "exit_code": 0,
+            "status": "PASS"
+          },
+          {
+            "command": [
+              "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+              "--headless",
+              "--path",
+              "/workspace/Viya",
+              "--script",
+              "res://tests/test_growth.gd"
+            ],
+            "exit_code": 0,
+            "status": "PASS"
+          },
+          {
+            "command": [
+              "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+              "--headless",
+              "--path",
+              "/workspace/Viya",
+              "--script",
+              "res://tests/test_magic.gd"
+            ],
+            "exit_code": 0,
+            "status": "PASS"
+          },
+          {
+            "command": [
+              "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+              "--headless",
+              "--path",
+              "/workspace/Viya",
+              "--script",
+              "res://tests/test_feedback.gd"
+            ],
+            "exit_code": 0,
+            "status": "PASS"
+          },
+          {
+            "command": [
+              "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+              "--headless",
+              "--path",
+              "/workspace/Viya",
+              "--script",
+              "res://tests/test_mobile_hud.gd"
+            ],
+            "exit_code": 0,
+            "status": "PASS"
+          },
+          {
+            "command": [
+              "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+              "--headless",
+              "--path",
+              "/workspace/Viya",
+              "--script",
+              "res://tests/test_run_navigation.gd"
+            ],
+            "exit_code": 0,
+            "status": "PASS"
+          },
+          {
+            "command": [
+              "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+              "--headless",
+              "--path",
+              "/workspace/Viya",
+              "--script",
+              "res://tests/test_combat_cues.gd"
+            ],
+            "exit_code": 0,
+            "status": "PASS"
+          },
+          {
+            "command": [
+              "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+              "--headless",
+              "--path",
+              "/workspace/Viya",
+              "--quit-after",
+              "120"
+            ],
+            "exit_code": 0,
+            "status": "PASS"
+          }
+        ],
+        "scope": "headless import, actual foundation/growth/magic/feedback/mobile-HUD/run-navigation/combat-cues GDScript tests and main boot; visual/mobile approval separate"
+      },
+      "windows_f5": "NOT_VERIFIED",
+      "android_device": "NOT_VERIFIED",
+      "ios_device": "NOT_VERIFIED"
+    }
+  },
+  "original_source_preservation": {
+    "base_commit": "3142eb73a4cf9645ef933dea0dc0fdb9d5ae42e9",
+    "existing_production_files": 109,
+    "unchanged": 102,
+    "authorized_changes": [
+      "scripts/combat/battle_view.gd",
+      "scripts/combat/combat_display.gd",
+      "scripts/combat/run_state.gd",
+      "scripts/combat/supply_feedback.gd",
+      "scripts/main.gd",
+      "scripts/progression/run_snapshot.gd",
+      "scripts/ui/mobile_main.gd"
+    ],
+    "files": [
+      {
+        "path": "assets/characters/viya/spec/turnaround_contract.v1.json",
+        "sha256": "a8f65fa1637b49235d2158ef582f9d696a2cb13caddc86a5dd27dbeccbca117a",
+        "byte_identical": true
+      },
+      {
+        "path": "assets/characters/viya/spec/turnaround_r1_result.json",
+        "sha256": "6c337719be2f54e5ea35304cb32b4f5f6bf5b4cca987e00ce6b4d59a37983db8",
+        "byte_identical": true
+      },
+      {
+        "path": "assets/characters/viya/spec/turnaround_r2_result.json",
+        "sha256": "8ca504e6b4165cf9ced1addf06878c0bb7018030c070119c446345ac6ebcb421",
+        "byte_identical": true
+      },
+      {
+        "path": "assets/maps/pilot_01/README.md",
+        "sha256": "29bfa4c4393763c362dff9535e8eedd32895adb835b71ec39373a0b96a4fdf9b",
+        "byte_identical": true
+      },
+      {
+        "path": "assets/maps/pilot_01/prop_crate.png",
+        "sha256": "7a0fefb9f935a5026e1bb9ded4029542e9f33323bbac87481f22144ece712edc",
+        "byte_identical": true
+      },
+      {
+        "path": "assets/maps/pilot_01/prop_crate.png.import",
+        "sha256": "8dd47f11b17dcb4f9a82cbb50769882670f62d7edeb560c1e0040df21d21bf84",
+        "byte_identical": true
+      },
+      {
+        "path": "assets/maps/pilot_01/source_manifest.json",
+        "sha256": "b946ce97e1cd3e8dcefd3aca8946812b75de532a8506fd2ac2539f70e04f97e0",
+        "byte_identical": true
+      },
+      {
+        "path": "assets/maps/pilot_01/stone_floor_tile.png",
+        "sha256": "9beefd01712a5c45b71908ad679d105b00a7ce6b99e61a639e384b7de06257e6",
+        "byte_identical": true
+      },
+      {
+        "path": "assets/maps/pilot_01/stone_floor_tile.png.import",
+        "sha256": "6e5bf6315ac4134457cfc8fa4e77c23407b8285fdeb32ec8953c532b81093cf3",
+        "byte_identical": true
+      },
+      {
+        "path": "assets/maps/pilot_01/wall_segment.png",
+        "sha256": "15b4a1a6f64b88df88424075d6710c0761cac7e7ac30dfc3ff889d0b3705d11a",
+        "byte_identical": true
+      },
+      {
+        "path": "assets/maps/pilot_01/wall_segment.png.import",
+        "sha256": "3e3fc099910e77537d7b5d84b7ac5b7c90cb23f38b94f3e6fd316011e2a33f3d",
+        "byte_identical": true
+      },
+      {
+        "path": "assets/maps/pilot_02/README.md",
+        "sha256": "829770a2460e4c1e7a29de79ddb9b249e019c409b21e97ac68dbb477540d4a71",
+        "byte_identical": true
+      },
+      {
+        "path": "assets/maps/pilot_02/prop_debris.png",
+        "sha256": "ab0cccf2713543f0bd127a7f76ef1a4854695473ba7f0eca58bc1f919fe4b9d5",
+        "byte_identical": true
+      },
+      {
+        "path": "assets/maps/pilot_02/prop_debris.png.import",
+        "sha256": "0818403ffc0c13b29033f9ffa1e07cc0eda9b98f746203dcfe4c34c0b7be8af0",
+        "byte_identical": true
+      },
+      {
+        "path": "assets/maps/pilot_02/prop_urn.png",
+        "sha256": "81973f42653a6a3008ff11aaf5f18b1c4aaf6389577d1c8c1248aaf4b1feb94e",
+        "byte_identical": true
+      },
+      {
+        "path": "assets/maps/pilot_02/prop_urn.png.import",
+        "sha256": "1e7ec094e95c6657a9e65093f31da83719f23f45e1e7f5b02d0d9b81e146425d",
+        "byte_identical": true
+      },
+      {
+        "path": "assets/maps/pilot_02/ruin_block.png",
+        "sha256": "1cfc847408ab4cdf6783f1dcc1c13db5251187fc4525afd4f0bdaaf991b7d9a2",
+        "byte_identical": true
+      },
+      {
+        "path": "assets/maps/pilot_02/ruin_block.png.import",
+        "sha256": "da5cd79b6c307d48c9891df3a69beb10474e316e9046deccaf26aca77528db3a",
+        "byte_identical": true
+      },
+      {
+        "path": "assets/maps/pilot_02/source_manifest.json",
+        "sha256": "f0c3d8e35f9be9ea818b0f96bfa4692e2d6ef6a6041fd42186bf6550040591ea",
+        "byte_identical": true
+      },
+      {
+        "path": "assets/maps/pilot_03/README.md",
+        "sha256": "7474fa4a98b00501ac5db1be5468b3fa75ed6180a4079421085304a36cc4d378",
+        "byte_identical": true
+      },
+      {
+        "path": "assets/maps/pilot_03/gate_front.png",
+        "sha256": "a0f5bc29d4187798a1af025fb0b08fc909a1b556f2e615036d83514c3c4d5872",
+        "byte_identical": true
+      },
+      {
+        "path": "assets/maps/pilot_03/gate_front.png.import",
+        "sha256": "5961f6f84071a4cc771d45cbb34edaef618981b268eb89586767a49eedf4578c",
+        "byte_identical": true
+      },
+      {
+        "path": "assets/maps/pilot_03/ruin_top_tile.png",
+        "sha256": "b99c7efffbbad26c8fe9ce3a7c84014faf3c2cd069d46ca5662b26b314cfb127",
+        "byte_identical": true
+      },
+      {
+        "path": "assets/maps/pilot_03/ruin_top_tile.png.import",
+        "sha256": "e4630dfb90e879d2c90abfe2b56b35385e446094ce3dabab1ba1575ec818d8cb",
+        "byte_identical": true
+      },
+      {
+        "path": "assets/maps/pilot_03/source_manifest.json",
+        "sha256": "6334b0c9a94def4dc7bcf1f3d1929e530ad326b096967fefbf3618b4ec87ca2b",
+        "byte_identical": true
+      },
+      {
+        "path": "assets/maps/pilot_03/wall_top_tile.png",
+        "sha256": "77173228a87824927c1d01f17b62bcaaf4a855fe39d8e5132c03f1eb5a3a4c33",
+        "byte_identical": true
+      },
+      {
+        "path": "assets/maps/pilot_03/wall_top_tile.png.import",
+        "sha256": "c04aa157fe1394eacc5539a4ae04a497415e8498b2990750735cca8a6b0dbd26",
+        "byte_identical": true
+      },
+      {
+        "path": "assets/references/GEN-005_viya_combat_pose_three_quarter_front.png",
+        "sha256": "d3c0084c73aff9a706a50a6cac760d124c0647d23fa36e6ae30635dc6929a730",
+        "byte_identical": true
+      },
+      {
+        "path": "assets/references/README.md",
+        "sha256": "ccee5345d56bbe2ecdf03cc0a54eea7c61dd684f9582a3ec83284218742e18a5",
+        "byte_identical": true
+      },
+      {
+        "path": "assets/references/qa/viya_4view_alignment_preview.jpg",
+        "sha256": "8fbd8b3c99af7099de926ca3c39feae0217dd984ff959e314e51d2338786fd0c",
+        "byte_identical": true
+      },
+      {
+        "path": "assets/references/qa/viya_side_silhouette_comparison.jpg",
+        "sha256": "1f8fe11aa693d84ebec41db9b6bea3af2bf61f61fd80f2ffdd45f799acd23170",
+        "byte_identical": true
+      },
+      {
+        "path": "data/actor_presentation.json",
+        "sha256": "e82ae99f672bd3e6979778f9a6201efb659b160a3407d9b1b6099eb0e0257f04",
+        "byte_identical": true
+      },
+      {
+        "path": "data/chapter_one.json",
+        "sha256": "c32e288ddc61dc8193cd78de416d3682b7c11f1924bbaaa3ea4afe4b78104f76",
+        "byte_identical": true
+      },
+      {
+        "path": "data/combat_pacing.json",
+        "sha256": "d153666f7f77506da281d1f90ae5fbc5822cd997c6db76590f35ef8a6662d597",
+        "byte_identical": true
+      },
+      {
+        "path": "data/combat_profiles.json",
+        "sha256": "d36abf0b4d0feb950e6448474732decdac9f98035a9962e5f5287b09eb1d1144",
+        "byte_identical": true
+      },
+      {
+        "path": "data/destructibles.json",
+        "sha256": "130421dd85d4dbf9ff9f70ab297b36586870e65fb9426cec0c2f58ce57a49b39",
+        "byte_identical": true
+      },
+      {
+        "path": "data/enemy_curse_v3.json",
+        "sha256": "c1d23889286fe1f91d4ef3b206de5b6e910211a52e935162da42355dc5d39659",
+        "byte_identical": true
+      },
+      {
+        "path": "data/enemy_patterns.json",
+        "sha256": "ba04c2b3076746724a09cf212576886edfa33821f666daa97a541d5042680bec",
+        "byte_identical": true
+      },
+      {
+        "path": "data/enemy_patterns_v2.json",
+        "sha256": "83bf0449e6dad16499af5a4c533c51d0ce3dc06fd73c02eb626de2d1e2e7ac21",
+        "byte_identical": true
+      },
+      {
+        "path": "data/gold_dungeon.json",
+        "sha256": "9a3427a6ddfb3462123f92e6918966ff7b1887ff324f368c600a9ad5993b1f9e",
+        "byte_identical": true
+      },
+      {
+        "path": "data/gold_rewards.json",
+        "sha256": "8f465cd44d1bf712b0fa758b2b8ff7cd17ecb450cff7f8e567d27f0397154993",
+        "byte_identical": true
+      },
+      {
+        "path": "data/map_presentation_slots.json",
+        "sha256": "08ce35b6f4acf2a4d54d1f4f26bde5800e8ee133a7e2e93e0026a863e10c5fcd",
+        "byte_identical": true
+      },
+      {
+        "path": "data/maps.json",
+        "sha256": "925638f794696b96fdf48df8c266654cef3af002f43e57f91daa80f8d70e8bd4",
+        "byte_identical": true
+      },
+      {
+        "path": "data/presentation_slots.json",
+        "sha256": "d0a2e6ea1a55d37680bfa02ef9f9036f00deb03575ff9e9dcd10fa7179aa1001",
+        "byte_identical": true
+      },
+      {
+        "path": "data/prototype_skills.json",
+        "sha256": "a6ba197fe558d328e1fcab96506fa098465a4c72aebfe1a1b29cb98642628d1a",
+        "byte_identical": true
+      },
+      {
+        "path": "data/stages.json",
+        "sha256": "2e656d2dc155ad93c76b8a1303133992d95529283be7f5b16423738f4edaeeae",
+        "byte_identical": true
+      },
+      {
+        "path": "data/weapon_skills.json",
+        "sha256": "be23e1eb349958fcebf3dba088fcf389d50654fc31cb83523513c178ff81c659",
+        "byte_identical": true
+      },
+      {
+        "path": "project.godot",
+        "sha256": "0d8f7fce157178f7bf31acc183593b40f23cff6d266ea5270f4b75f0899b79e5",
+        "byte_identical": true
+      },
+      {
+        "path": "scenes/main.tscn",
+        "sha256": "17a2e77db7cf47af860de3c263dc9119b0df349bafdf2a8b52a40f7450c9e22c",
+        "byte_identical": true
+      },
+      {
+        "path": "scripts/combat/actor_motion.gd",
+        "sha256": "77c63ca6327c28a4b99aafea6f104a0b0ae9a91c2e364914d79307d4e90b5261",
+        "byte_identical": true
+      },
+      {
+        "path": "scripts/combat/approach_cues.gd",
+        "sha256": "3b61db842e2fced8e08c391e83fe342a2f349e7453d2d37421f51d1b340ce4fe",
+        "byte_identical": true
+      },
+      {
+        "path": "scripts/combat/attack_visuals.gd",
+        "sha256": "49e9acdb93325368fbf4c6d2732d11877e25f9daa829e6b00a466b74d339556f",
+        "byte_identical": true
+      },
+      {
+        "path": "scripts/combat/battle_forms.gd",
+        "sha256": "a0e9ebcf2cb5d369c0db53f089ab9bb9df0163b1f171908a57bd63f7e285ab95",
+        "byte_identical": true
+      },
+      {
+        "path": "scripts/combat/battle_projection.gd",
+        "sha256": "f8abad51e46f2353d01cc6f1f4b904485621d00ccf75e854ab873bc688f160a0",
+        "byte_identical": true
+      },
+      {
+        "path": "scripts/combat/battle_view.gd",
+        "sha256": "88b02ce716ce577e6bb12138cb49accff363b67422a407048ab7f59dff8951e0",
+        "byte_identical": false
+      },
+      {
+        "path": "scripts/combat/boss_guidance.gd",
+        "sha256": "d7c1195590ce6fedd3cc8c90cbcdfdf4a2aaf7b994fdfe1a26206e3a9709fef9",
+        "byte_identical": true
+      },
+      {
+        "path": "scripts/combat/combat_audio.gd",
+        "sha256": "9d8d1f2e1d6b617e63a5f8454d182b5e16f08b99b28ade31c1e24cb95be18d2b",
+        "byte_identical": true
+      },
+      {
+        "path": "scripts/combat/combat_audio_bank.gd",
+        "sha256": "589afc536b6514a10a86b5436bc5271ffa6c522452e12949842a1ba8ca65d9ce",
+        "byte_identical": true
+      },
+      {
+        "path": "scripts/combat/combat_camera.gd",
+        "sha256": "0039e471d576f4daeb00f6b453f54a29d32917fe71aef4490b3f0bd33e90f896",
+        "byte_identical": true
+      },
+      {
+        "path": "scripts/combat/combat_cues.gd",
+        "sha256": "04027c56be8fa43d6465a165569b1e209dd7782a630d97a6e96d0acc3235ebda",
+        "byte_identical": true
+      },
+      {
+        "path": "scripts/combat/combat_display.gd",
+        "sha256": "9e08022d0249aa66e3d4ea6489b5e49d20cd90275ebe592620a28ebe9c82893e",
+        "byte_identical": false
+      },
+      {
+        "path": "scripts/combat/combat_profiles.gd",
+        "sha256": "515689ca733856a0855739531ad4ebeddb20609839210df41c3b6f6202c898e0",
+        "byte_identical": true
+      },
+      {
+        "path": "scripts/combat/curse_visuals.gd",
+        "sha256": "f6fd054527091a5631eb003a2ea38c8308d1bccc29098f5542250916ea0fb3ac",
+        "byte_identical": true
+      },
+      {
+        "path": "scripts/combat/defense_rules.gd",
+        "sha256": "1fa247925d4d5a33dfdf7371285d9192b85b0cd83603efed33894693053691f8",
+        "byte_identical": true
+      },
+      {
+        "path": "scripts/combat/enemy_pattern_visuals.gd",
+        "sha256": "ffe5032905c8df738b2d7f2a92346206b7df14502b4d2f8babc88304adc5d666",
+        "byte_identical": true
+      },
+      {
+        "path": "scripts/combat/enemy_patterns.gd",
+        "sha256": "a19cad533e9185a0bbca1671028349463a2c9c7c020c0e26dea1d5f59b3eebda",
+        "byte_identical": true
+      },
+      {
+        "path": "scripts/combat/enemy_patterns_v1.gd",
+        "sha256": "4059f30002b56fa0ccb73ed38b4fe4af9c0fe8092a8f5836ad53f6e3cef5a4af",
+        "byte_identical": true
+      },
+      {
+        "path": "scripts/combat/enemy_patterns_v17.gd",
+        "sha256": "df42114040f4da370a67257445063fdb851033182108111eac609758334b81ab",
+        "byte_identical": true
+      },
+      {
+        "path": "scripts/combat/enemy_patterns_v2.gd",
+        "sha256": "60ff5da133476bd9c851aaef695cd07ae748e313d9f654dd4b2b0e258af7ca1d",
+        "byte_identical": true
+      },
+      {
+        "path": "scripts/combat/enemy_patterns_v3.gd",
+        "sha256": "1c5ea0cee251c0fda6a5a77b40201dba8d97b27f42f5ac92c93602e43c831114",
+        "byte_identical": true
+      },
+      {
+        "path": "scripts/combat/feedback_state.gd",
+        "sha256": "3ee19238fb9307bc9953fed3ecc266ecff420e2c74ceffe81409069372e87d88",
+        "byte_identical": true
+      },
+      {
+        "path": "scripts/combat/gold_dungeon.gd",
+        "sha256": "f7073b32297d4326a0abc973022d7280c53f92114d49db53933874118b3ccc0d",
+        "byte_identical": true
+      },
+      {
+        "path": "scripts/combat/high_angle_battle.gd",
+        "sha256": "1515ef0c1073305408049f906df4daabbc0c0ee224384de1e0ad9ac7b572a259",
+        "byte_identical": true
+      },
+      {
+        "path": "scripts/combat/incoming_feedback.gd",
+        "sha256": "71dfbafc9d3e58435afa40b2f1f427387ad899f118906cda72b028538fdb853b",
+        "byte_identical": true
+      },
+      {
+        "path": "scripts/combat/magic_state.gd",
+        "sha256": "41a9a7739edc46e98dda26986f23dddf1c0ff6bdf9b40d80640f797460b9223b",
+        "byte_identical": true
+      },
+      {
+        "path": "scripts/combat/run_state.gd",
+        "sha256": "1e46cdfc17b94f0d45767959052bcf1dc8342517bfde13011a9f317dee621096",
+        "byte_identical": false
+      },
+      {
+        "path": "scripts/combat/stage_catalog.gd",
+        "sha256": "8059f41d7134818deeea1978d2f81fddc2456d530e33479d458461004600516f",
+        "byte_identical": true
+      },
+      {
+        "path": "scripts/combat/structure_feedback.gd",
+        "sha256": "1ea626cf8ab47d9d8a5acf717f0a8d115bcf3ba18ed45a5c118e37728f1673c5",
+        "byte_identical": true
+      },
+      {
+        "path": "scripts/combat/supply_feedback.gd",
+        "sha256": "5eabc16e14b484d7c2eb1aa76e9cafbb64d980ce24658a9f78dced85722c2a47",
+        "byte_identical": false
+      },
+      {
+        "path": "scripts/combat/weapon_modules.gd",
+        "sha256": "a405c2ddad96a396c8e5e0820ac0d4ee4093a951c473ac7c849294e872616a2e",
+        "byte_identical": true
+      },
+      {
+        "path": "scripts/main.gd",
+        "sha256": "1ffa0c4071c27d168c734ef11fa25c0bc7d5e287b6bc10311173a717f94a4865",
+        "byte_identical": false
+      },
+      {
+        "path": "scripts/progression/account_talents.gd",
+        "sha256": "0774659235d3bea9276574996565b315156260274750ef8c7f9969f18550f43e",
+        "byte_identical": true
+      },
+      {
+        "path": "scripts/progression/combat_pacing.gd",
+        "sha256": "07f73dae843a7779f992976efb1901774782db1bd021bef01999a83ea7814826",
+        "byte_identical": true
+      },
+      {
+        "path": "scripts/progression/gold_progress.gd",
+        "sha256": "2289fc850fc5f856d674863de6119987da74ed6bd931ade50f0faa11ea0f7012",
+        "byte_identical": true
+      },
+      {
+        "path": "scripts/progression/growth_state.gd",
+        "sha256": "07287b03d12eac144dce6f1858ceb2b6561e6281b4c011ac6bc5d5d3c72a0e6e",
+        "byte_identical": true
+      },
+      {
+        "path": "scripts/progression/run_snapshot.gd",
+        "sha256": "8c415a77de869d0ce3241acc9ba7f39faaeada528e3d305d28d50df55f1fc704",
+        "byte_identical": false
+      },
+      {
+        "path": "scripts/progression/run_store.gd",
+        "sha256": "bab493f1963ea2a6d98770f9ef9686d70d4b257e0b49afb3386de661a6081986",
+        "byte_identical": true
+      },
+      {
+        "path": "scripts/progression/skill_catalog.gd",
+        "sha256": "ccd13a2b02f4b57497beae39e483edfca53617cc3a39e43cbaf8009535c820d8",
+        "byte_identical": true
+      },
+      {
+        "path": "scripts/progression/weapon_catalog.gd",
+        "sha256": "aced8b45e765780b4053bfa436e1dbbc1696d2173cb4cb762f21298d5f91421b",
+        "byte_identical": true
+      },
+      {
+        "path": "scripts/ui/account_bonus_summary.gd",
+        "sha256": "c75ffab9d10f7b73fa9b89df9c532a119f00431447651ca13a1f004122e4cee8",
+        "byte_identical": true
+      },
+      {
+        "path": "scripts/ui/actor_assets.gd",
+        "sha256": "f98126291f60e27b9d903999c61f6a1c03a34555eb824a5fdd3e51db18a359c1",
+        "byte_identical": true
+      },
+      {
+        "path": "scripts/ui/asset_slots.gd",
+        "sha256": "26ffa91b19932e5d123eb03d6b63cd41e0f42881961ab6d668ccc543513a114a",
+        "byte_identical": true
+      },
+      {
+        "path": "scripts/ui/battle_chrome.gd",
+        "sha256": "6be2ec2203a0517ce6842d3c7979135ec7c94afaa5b69b1fff2508f083473a2a",
+        "byte_identical": true
+      },
+      {
+        "path": "scripts/ui/battle_save_notice.gd",
+        "sha256": "4030876186c66ae7de4ec2b8808d8b905881c40d0c0af29bd241f659dcdf2189",
+        "byte_identical": true
+      },
+      {
+        "path": "scripts/ui/city_preview.gd",
+        "sha256": "d01c0ca26b7d812b2b7d6d63339788be98241f6a09ec58a1a8d35a6f7b788937",
+        "byte_identical": true
+      },
+      {
+        "path": "scripts/ui/combat_skin.gd",
+        "sha256": "b9ed37f5c7f1831095805e13c6e3eaa986e762081209372cf8a4e09ff6608c66",
+        "byte_identical": true
+      },
+      {
+        "path": "scripts/ui/combat_slot_button.gd",
+        "sha256": "91a02ab52e8ebcb26985ae143dd596fbd4b62bd3fa6e440e5b0d12e44132a81d",
+        "byte_identical": true
+      },
+      {
+        "path": "scripts/ui/encounter_notice.gd",
+        "sha256": "316faf9f8de95b3917268b4773092a205cb0019e5860044294e0f781cb640e3e",
+        "byte_identical": true
+      },
+      {
+        "path": "scripts/ui/feedback_panel.gd",
+        "sha256": "2103fd9b8692c5606273175b415447f35a995f9a18306a5e8f0abeeb7c5d465b",
+        "byte_identical": true
+      },
+      {
+        "path": "scripts/ui/growth_overview.gd",
+        "sha256": "43dfb9306f4e280b57c8445b179c0e797938bc9fd0e5fa070053474cadb53a42",
+        "byte_identical": true
+      },
+      {
+        "path": "scripts/ui/hud_layout.gd",
+        "sha256": "d9a5dacd8e3816611b1658557c5366e1dbd6caeded4312d8f2e5e5584becddb6",
+        "byte_identical": true
+      },
+      {
+        "path": "scripts/ui/mobile_main.gd",
+        "sha256": "89e3d706665ffdb3788514fc18c06f425ad21035ba9a00f417fc9dc71603ae6b",
+        "byte_identical": false
+      },
+      {
+        "path": "scripts/ui/move_input.gd",
+        "sha256": "cee8e709185740d1cb964fff13873a0818d14d0b3653f36d6416a1b17da40bd8",
+        "byte_identical": true
+      },
+      {
+        "path": "scripts/ui/responsive_feedback_panel.gd",
+        "sha256": "b36ce744a7378d696b91018935f637da0ae88beccdeddd85b1187a238958ed5b",
+        "byte_identical": true
+      },
+      {
+        "path": "scripts/ui/reward_payment.gd",
+        "sha256": "d3fc0b75e7f9fbb5f55ffdbfe708039ccb77e4a35231c58d6fdcd4996a246c11",
+        "byte_identical": true
+      },
+      {
+        "path": "scripts/ui/skill_preview.gd",
+        "sha256": "5c3de40b161d38de44234f6f1a2c63064bbc99021c4def95f7995382b02af5db",
+        "byte_identical": true
+      },
+      {
+        "path": "scripts/world/map_catalog.gd",
+        "sha256": "952abbc81d539817dfdd98ed4a59185f13fb8c1adac0210839d176ebee087ea6",
+        "byte_identical": true
+      },
+      {
+        "path": "scripts/world/map_space.gd",
+        "sha256": "8110f4a28e04e67fe738011ea888f31a9c74c450ed79148d88c1da602fa03ae8",
+        "byte_identical": true
+      },
+      {
+        "path": "scripts/world/supply_catalog.gd",
+        "sha256": "1af21cb685b8da0858491a961f007e8a0511c24e0f70b0165e0051d7fcb310a1",
+        "byte_identical": true
+      }
+    ]
+  },
+  "actual_gui": {
+    "density_fixtures": [
+      {
+        "limit": 160,
+        "minute": 0,
+        "multiplier": 1,
+        "placed_actors": 20
+      },
+      {
+        "limit": 320,
+        "minute": 1,
+        "multiplier": 2,
+        "placed_actors": 40
+      },
+      {
+        "limit": 640,
+        "minute": 2,
+        "multiplier": 4,
+        "placed_actors": 80
+      },
+      {
+        "limit": 640,
+        "minute": 3,
+        "multiplier": 8,
+        "placed_actors": 160
+      },
+      {
+        "limit": 640,
+        "minute": 4,
+        "multiplier": 16,
+        "placed_actors": 320
+      },
+      {
+        "limit": 640,
+        "minute": 5,
+        "multiplier": 32,
+        "placed_actors": 320
+      }
+    ],
+    "errors": [],
+    "mouse_controls": 2,
+    "native_magic_touches": 1,
+    "native_move_touches": 1,
+    "native_pickup_frames": 10,
+    "opened_owned": [
+      {
+        "from": 4,
+        "id": "gun_rifle",
+        "to": 5
+      },
+      {
+        "from": 1,
+        "id": "gun_scatter",
+        "to": 2
+      },
+      {
+        "from": 1,
+        "id": "gun_lance",
+        "to": 2
+      },
+      {
+        "from": 1,
+        "id": "gun_grenade",
+        "to": 2
+      },
+      {
+        "from": 1,
+        "id": "passive_power",
+        "to": 2
+      }
+    ],
+    "records": [
+      {
+        "arrival_caption": "정예 등장 · 임무 ▸",
+        "audio_active": 0,
+        "bonus_ranks": 0,
+        "bound_textures": [
+          "res://assets/maps/pilot_01/stone_floor_tile.png",
+          "res://assets/maps/pilot_01/wall_segment.png",
+          "res://assets/maps/pilot_01/prop_crate.png",
+          "res://assets/maps/pilot_02/ruin_block.png",
+          "res://assets/maps/pilot_02/prop_urn.png",
+          "res://assets/maps/pilot_02/prop_debris.png",
+          "res://assets/maps/pilot_03/wall_top_tile.png",
+          "res://assets/maps/pilot_03/ruin_top_tile.png",
+          "res://assets/maps/pilot_03/gate_front.png"
+        ],
+        "chests": [],
+        "dense": false,
+        "encounter_version": 1,
+        "enemies": 1,
+        "enemy_bullets": [],
+        "high_angle": true,
+        "hp": 100,
+        "image": "encounter_first_elite",
+        "incoming": {},
+        "label_overlaps": 0,
+        "labels": 0,
+        "map": "prologue_wall",
+        "mp": 100.0,
+        "occluders": 0,
+        "opened": 0,
+        "owned": {
+          "gun_rifle": 1
+        },
+        "patterns": [
+          {
+            "direction": "(0.0, 1.0)",
+            "left": 1.25,
+            "origin": "(2680.0, 1700.0)",
+            "phase": "chase"
+          }
+        ],
+        "phase": 1,
+        "pixels_sha256": "eb92f3e29be43c1107a71873dfee3506d7d39e48c19fbb997eb741e06cd1508d",
+        "population_limit": 160,
+        "telegraph": [],
+        "viewport": "(1280, 720)"
+      },
+      {
+        "arrival_caption": "최후의 성벽 방어 ▸",
+        "audio_active": 1,
+        "bonus_ranks": 0,
+        "bound_textures": [
+          "res://assets/maps/pilot_01/stone_floor_tile.png",
+          "res://assets/maps/pilot_01/wall_segment.png",
+          "res://assets/maps/pilot_01/prop_crate.png",
+          "res://assets/maps/pilot_02/ruin_block.png",
+          "res://assets/maps/pilot_02/prop_urn.png",
+          "res://assets/maps/pilot_02/prop_debris.png",
+          "res://assets/maps/pilot_03/wall_top_tile.png",
+          "res://assets/maps/pilot_03/ruin_top_tile.png",
+          "res://assets/maps/pilot_03/gate_front.png"
+        ],
+        "chests": [
+          {
+            "count": 5,
+            "id": 1,
+            "p": "(2680.0, 1700.0)",
+            "seed": 3076890047,
+            "source": 1
+          }
+        ],
+        "dense": false,
+        "encounter_version": 1,
+        "enemies": 0,
+        "enemy_bullets": [],
+        "high_angle": true,
+        "hp": 100,
+        "image": "chest_drop_high",
+        "incoming": {},
+        "label_overlaps": 0,
+        "labels": 4,
+        "map": "prologue_wall",
+        "mp": 60.05,
+        "occluders": 0,
+        "opened": 0,
+        "owned": {
+          "gun_grenade": 1,
+          "gun_lance": 1,
+          "gun_rifle": 4,
+          "gun_scatter": 1,
+          "passive_power": 1
+        },
+        "patterns": [],
+        "phase": 1,
+        "pixels_sha256": "568fadbe77f713c5d44d2c1a0ea1d41460e0e67e9ddbb08ea81d0616e522bdc1",
+        "population_limit": 160,
+        "telegraph": [],
+        "viewport": "(1280, 720)"
+      },
+      {
+        "arrival_caption": "최후의 성벽 방어 ▸",
+        "audio_active": 1,
+        "bonus_ranks": 0,
+        "bound_textures": [
+          "res://assets/maps/pilot_01/stone_floor_tile.png",
+          "res://assets/maps/pilot_01/wall_segment.png",
+          "res://assets/maps/pilot_01/prop_crate.png",
+          "res://assets/maps/pilot_02/ruin_block.png",
+          "res://assets/maps/pilot_02/prop_urn.png",
+          "res://assets/maps/pilot_02/prop_debris.png",
+          "res://assets/maps/pilot_03/wall_top_tile.png",
+          "res://assets/maps/pilot_03/ruin_top_tile.png",
+          "res://assets/maps/pilot_03/gate_front.png"
+        ],
+        "chests": [
+          {
+            "count": 5,
+            "id": 1,
+            "p": "(2680.0, 1700.0)",
+            "seed": 3076890047,
+            "source": 1
+          }
+        ],
+        "dense": false,
+        "encounter_version": 1,
+        "enemies": 0,
+        "enemy_bullets": [],
+        "high_angle": false,
+        "hp": 100,
+        "image": "chest_drop_f8",
+        "incoming": {},
+        "label_overlaps": 0,
+        "labels": 3,
+        "map": "prologue_wall",
+        "mp": 60.05,
+        "occluders": 0,
+        "opened": 0,
+        "owned": {
+          "gun_grenade": 1,
+          "gun_lance": 1,
+          "gun_rifle": 4,
+          "gun_scatter": 1,
+          "passive_power": 1
+        },
+        "patterns": [],
+        "phase": 1,
+        "pixels_sha256": "41e408651cd372aebc5a6b3080f4d2a485ff48a50806369f94644cfbe2d7a3a4",
+        "population_limit": 160,
+        "telegraph": [],
+        "viewport": "(1280, 720)"
+      },
+      {
+        "arrival_caption": "임무 ▸",
+        "audio_active": 0,
+        "bonus_ranks": 0,
+        "bound_textures": [
+          "res://assets/maps/pilot_01/stone_floor_tile.png",
+          "res://assets/maps/pilot_01/wall_segment.png",
+          "res://assets/maps/pilot_01/prop_crate.png",
+          "res://assets/maps/pilot_02/ruin_block.png",
+          "res://assets/maps/pilot_02/prop_urn.png",
+          "res://assets/maps/pilot_02/prop_debris.png",
+          "res://assets/maps/pilot_03/wall_top_tile.png",
+          "res://assets/maps/pilot_03/ruin_top_tile.png",
+          "res://assets/maps/pilot_03/gate_front.png"
+        ],
+        "chests": [
+          {
+            "count": 5,
+            "id": 1,
+            "p": "(2680.0, 1700.0)",
+            "seed": 3076890047,
+            "source": 1
+          }
+        ],
+        "dense": false,
+        "encounter_version": 1,
+        "enemies": 0,
+        "enemy_bullets": [],
+        "high_angle": true,
+        "hp": 100,
+        "image": "chest_drop_compact",
+        "incoming": {},
+        "label_overlaps": 0,
+        "labels": 2,
+        "map": "prologue_wall",
+        "mp": 60.05,
+        "occluders": 0,
+        "opened": 0,
+        "owned": {
+          "gun_grenade": 1,
+          "gun_lance": 1,
+          "gun_rifle": 4,
+          "gun_scatter": 1,
+          "passive_power": 1
+        },
+        "patterns": [],
+        "phase": 1,
+        "pixels_sha256": "3763bd818af420d61fe031261bdd142d0435ee518595bffafe4dfd4d898d54dc",
+        "population_limit": 160,
+        "telegraph": [],
+        "viewport": "(854, 394)"
+      },
+      {
+        "arrival_caption": "최후의 성벽 방어 ▸",
+        "audio_active": 0,
+        "bonus_ranks": 5,
+        "bound_textures": [
+          "res://assets/maps/pilot_01/stone_floor_tile.png",
+          "res://assets/maps/pilot_01/wall_segment.png",
+          "res://assets/maps/pilot_01/prop_crate.png",
+          "res://assets/maps/pilot_02/ruin_block.png",
+          "res://assets/maps/pilot_02/prop_urn.png",
+          "res://assets/maps/pilot_02/prop_debris.png",
+          "res://assets/maps/pilot_03/wall_top_tile.png",
+          "res://assets/maps/pilot_03/ruin_top_tile.png",
+          "res://assets/maps/pilot_03/gate_front.png"
+        ],
+        "chests": [],
+        "dense": false,
+        "encounter_version": 1,
+        "enemies": 0,
+        "enemy_bullets": [],
+        "high_angle": true,
+        "hp": 100,
+        "image": "chest_opened_high",
+        "incoming": {},
+        "label_overlaps": 0,
+        "labels": 1,
+        "map": "prologue_wall",
+        "mp": 60.55,
+        "occluders": 0,
+        "opened": 1,
+        "owned": {
+          "gun_grenade": 2,
+          "gun_lance": 2,
+          "gun_rifle": 5,
+          "gun_scatter": 2,
+          "passive_power": 2
+        },
+        "patterns": [],
+        "phase": 1,
+        "pixels_sha256": "ead2c95f47a6b6ba13e7659b2e3d1658e127931fbe2a8a3275c8dc9e541ceba7",
+        "population_limit": 160,
+        "telegraph": [],
+        "viewport": "(1280, 720)"
+      },
+      {
+        "arrival_caption": "임무 ▸",
+        "audio_active": 0,
+        "bonus_ranks": 5,
+        "bound_textures": [
+          "res://assets/maps/pilot_01/stone_floor_tile.png",
+          "res://assets/maps/pilot_01/wall_segment.png",
+          "res://assets/maps/pilot_01/prop_crate.png",
+          "res://assets/maps/pilot_02/ruin_block.png",
+          "res://assets/maps/pilot_02/prop_urn.png",
+          "res://assets/maps/pilot_02/prop_debris.png",
+          "res://assets/maps/pilot_03/wall_top_tile.png",
+          "res://assets/maps/pilot_03/ruin_top_tile.png",
+          "res://assets/maps/pilot_03/gate_front.png"
+        ],
+        "chests": [],
+        "dense": false,
+        "encounter_version": 1,
+        "enemies": 0,
+        "enemy_bullets": [],
+        "high_angle": true,
+        "hp": 100,
+        "image": "chest_opened_compact",
+        "incoming": {},
+        "label_overlaps": 0,
+        "labels": 1,
+        "map": "prologue_wall",
+        "mp": 60.55,
+        "occluders": 0,
+        "opened": 1,
+        "owned": {
+          "gun_grenade": 2,
+          "gun_lance": 2,
+          "gun_rifle": 5,
+          "gun_scatter": 2,
+          "passive_power": 2
+        },
+        "patterns": [],
+        "phase": 1,
+        "pixels_sha256": "31bb7ab2d6dff9231b87ad56fcec6d2b816c2c17c5383766e8fc48c48cc4db07",
+        "population_limit": 160,
+        "telegraph": [],
+        "viewport": "(854, 394)"
+      },
+      {
+        "arrival_caption": "최후의 성벽 방어 ▸",
+        "audio_active": 0,
+        "bonus_ranks": 5,
+        "bound_textures": [
+          "res://assets/maps/pilot_01/stone_floor_tile.png",
+          "res://assets/maps/pilot_01/wall_segment.png",
+          "res://assets/maps/pilot_01/prop_crate.png",
+          "res://assets/maps/pilot_02/ruin_block.png",
+          "res://assets/maps/pilot_02/prop_urn.png",
+          "res://assets/maps/pilot_02/prop_debris.png",
+          "res://assets/maps/pilot_03/wall_top_tile.png",
+          "res://assets/maps/pilot_03/ruin_top_tile.png",
+          "res://assets/maps/pilot_03/gate_front.png"
+        ],
+        "chests": [],
+        "dense": false,
+        "encounter_version": 1,
+        "enemies": 20,
+        "enemy_bullets": [],
+        "high_angle": true,
+        "hp": 100,
+        "image": "chest_evolved_attack",
+        "incoming": {},
+        "label_overlaps": 0,
+        "labels": 1,
+        "map": "prologue_wall",
+        "mp": 60.6,
+        "occluders": 0,
+        "opened": 1,
+        "owned": {
+          "gun_grenade": 2,
+          "gun_lance": 2,
+          "gun_rifle": 5,
+          "gun_scatter": 2,
+          "passive_power": 2
+        },
+        "patterns": [],
+        "phase": 1,
+        "pixels_sha256": "c4a3400ea463f496135f99086aec3ac6fdcf03ffb8e16a0c4b4e524c19df3a53",
+        "population_limit": 160,
+        "telegraph": [],
+        "viewport": "(1280, 720)"
+      },
+      {
+        "arrival_caption": "최후의 성벽 방어 ▸",
+        "audio_active": 0,
+        "bonus_ranks": 0,
+        "bound_textures": [
+          "res://assets/maps/pilot_01/stone_floor_tile.png",
+          "res://assets/maps/pilot_01/wall_segment.png",
+          "res://assets/maps/pilot_01/prop_crate.png",
+          "res://assets/maps/pilot_02/ruin_block.png",
+          "res://assets/maps/pilot_02/prop_urn.png",
+          "res://assets/maps/pilot_02/prop_debris.png",
+          "res://assets/maps/pilot_03/wall_top_tile.png",
+          "res://assets/maps/pilot_03/ruin_top_tile.png",
+          "res://assets/maps/pilot_03/gate_front.png"
+        ],
+        "chests": [],
+        "dense": false,
+        "encounter_version": 1,
+        "enemies": 20,
+        "enemy_bullets": [],
+        "high_angle": true,
+        "hp": 100,
+        "image": "density_minute_0",
+        "incoming": {},
+        "label_overlaps": 0,
+        "labels": 0,
+        "map": "prologue_wall",
+        "mp": 100.0,
+        "occluders": 0,
+        "opened": 0,
+        "owned": {
+          "gun_rifle": 1
+        },
+        "patterns": [],
+        "phase": 1,
+        "pixels_sha256": "36627a3ef6ced895c4b43bdc9d10c28c7bb1ec9a19ff30cfe667b5e64d24bce7",
+        "population_limit": 160,
+        "telegraph": [],
+        "viewport": "(1280, 720)"
+      },
+      {
+        "arrival_caption": "최후의 성벽 방어 ▸",
+        "audio_active": 0,
+        "bonus_ranks": 0,
+        "bound_textures": [
+          "res://assets/maps/pilot_01/stone_floor_tile.png",
+          "res://assets/maps/pilot_01/wall_segment.png",
+          "res://assets/maps/pilot_01/prop_crate.png",
+          "res://assets/maps/pilot_02/ruin_block.png",
+          "res://assets/maps/pilot_02/prop_urn.png",
+          "res://assets/maps/pilot_02/prop_debris.png",
+          "res://assets/maps/pilot_03/wall_top_tile.png",
+          "res://assets/maps/pilot_03/ruin_top_tile.png",
+          "res://assets/maps/pilot_03/gate_front.png"
+        ],
+        "chests": [],
+        "dense": false,
+        "encounter_version": 1,
+        "enemies": 40,
+        "enemy_bullets": [],
+        "high_angle": true,
+        "hp": 100,
+        "image": "density_minute_1",
+        "incoming": {},
+        "label_overlaps": 0,
+        "labels": 0,
+        "map": "prologue_wall",
+        "mp": 100.0,
+        "occluders": 0,
+        "opened": 0,
+        "owned": {
+          "gun_rifle": 1
+        },
+        "patterns": [],
+        "phase": 1,
+        "pixels_sha256": "5d9d0c32f6faa00302489b34df6a59cada9b5b19a390794b6d933edc48e31412",
+        "population_limit": 320,
+        "telegraph": [],
+        "viewport": "(1280, 720)"
+      },
+      {
+        "arrival_caption": "최후의 성벽 방어 ▸",
+        "audio_active": 0,
+        "bonus_ranks": 0,
+        "bound_textures": [
+          "res://assets/maps/pilot_01/stone_floor_tile.png",
+          "res://assets/maps/pilot_01/wall_segment.png",
+          "res://assets/maps/pilot_01/prop_crate.png",
+          "res://assets/maps/pilot_02/ruin_block.png",
+          "res://assets/maps/pilot_02/prop_urn.png",
+          "res://assets/maps/pilot_02/prop_debris.png",
+          "res://assets/maps/pilot_03/wall_top_tile.png",
+          "res://assets/maps/pilot_03/ruin_top_tile.png",
+          "res://assets/maps/pilot_03/gate_front.png"
+        ],
+        "chests": [],
+        "dense": true,
+        "encounter_version": 1,
+        "enemies": 80,
+        "enemy_bullets": [],
+        "high_angle": true,
+        "hp": 100,
+        "image": "density_minute_2",
+        "incoming": {},
+        "label_overlaps": 0,
+        "labels": 0,
+        "map": "prologue_wall",
+        "mp": 100.0,
+        "occluders": 0,
+        "opened": 0,
+        "owned": {
+          "gun_rifle": 1
+        },
+        "patterns": [],
+        "phase": 1,
+        "pixels_sha256": "5a471643b20846d40f3fbff45616ca6a1be7a94c5dfb898cecc7ffb09e5e9f15",
+        "population_limit": 640,
+        "telegraph": [],
+        "viewport": "(1280, 720)"
+      },
+      {
+        "arrival_caption": "최후의 성벽 방어 ▸",
+        "audio_active": 0,
+        "bonus_ranks": 0,
+        "bound_textures": [
+          "res://assets/maps/pilot_01/stone_floor_tile.png",
+          "res://assets/maps/pilot_01/wall_segment.png",
+          "res://assets/maps/pilot_01/prop_crate.png",
+          "res://assets/maps/pilot_02/ruin_block.png",
+          "res://assets/maps/pilot_02/prop_urn.png",
+          "res://assets/maps/pilot_02/prop_debris.png",
+          "res://assets/maps/pilot_03/wall_top_tile.png",
+          "res://assets/maps/pilot_03/ruin_top_tile.png",
+          "res://assets/maps/pilot_03/gate_front.png"
+        ],
+        "chests": [],
+        "dense": true,
+        "encounter_version": 1,
+        "enemies": 160,
+        "enemy_bullets": [],
+        "high_angle": true,
+        "hp": 100,
+        "image": "density_minute_3",
+        "incoming": {},
+        "label_overlaps": 0,
+        "labels": 0,
+        "map": "prologue_wall",
+        "mp": 100.0,
+        "occluders": 0,
+        "opened": 0,
+        "owned": {
+          "gun_rifle": 1
+        },
+        "patterns": [],
+        "phase": 1,
+        "pixels_sha256": "df967c963c20c7b653b021ba6d29a989f73b1350d208a1381832ea55bd408fa8",
+        "population_limit": 640,
+        "telegraph": [],
+        "viewport": "(1280, 720)"
+      },
+      {
+        "arrival_caption": "최후의 성벽 방어 ▸",
+        "audio_active": 0,
+        "bonus_ranks": 0,
+        "bound_textures": [
+          "res://assets/maps/pilot_01/stone_floor_tile.png",
+          "res://assets/maps/pilot_01/wall_segment.png",
+          "res://assets/maps/pilot_01/prop_crate.png",
+          "res://assets/maps/pilot_02/ruin_block.png",
+          "res://assets/maps/pilot_02/prop_urn.png",
+          "res://assets/maps/pilot_02/prop_debris.png",
+          "res://assets/maps/pilot_03/wall_top_tile.png",
+          "res://assets/maps/pilot_03/ruin_top_tile.png",
+          "res://assets/maps/pilot_03/gate_front.png"
+        ],
+        "chests": [],
+        "dense": true,
+        "encounter_version": 1,
+        "enemies": 320,
+        "enemy_bullets": [],
+        "high_angle": true,
+        "hp": 100,
+        "image": "density_minute_4",
+        "incoming": {},
+        "label_overlaps": 0,
+        "labels": 0,
+        "map": "prologue_wall",
+        "mp": 100.0,
+        "occluders": 0,
+        "opened": 0,
+        "owned": {
+          "gun_rifle": 1
+        },
+        "patterns": [],
+        "phase": 1,
+        "pixels_sha256": "e6d8e81dce936dd3dc96f060a337362565b93460b3531ca7df1e62ee1cfa127f",
+        "population_limit": 640,
+        "telegraph": [],
+        "viewport": "(1280, 720)"
+      },
+      {
+        "arrival_caption": "최후의 성벽 방어 ▸",
+        "audio_active": 0,
+        "bonus_ranks": 0,
+        "bound_textures": [
+          "res://assets/maps/pilot_01/stone_floor_tile.png",
+          "res://assets/maps/pilot_01/wall_segment.png",
+          "res://assets/maps/pilot_01/prop_crate.png",
+          "res://assets/maps/pilot_02/ruin_block.png",
+          "res://assets/maps/pilot_02/prop_urn.png",
+          "res://assets/maps/pilot_02/prop_debris.png",
+          "res://assets/maps/pilot_03/wall_top_tile.png",
+          "res://assets/maps/pilot_03/ruin_top_tile.png",
+          "res://assets/maps/pilot_03/gate_front.png"
+        ],
+        "chests": [],
+        "dense": true,
+        "encounter_version": 1,
+        "enemies": 320,
+        "enemy_bullets": [],
+        "high_angle": true,
+        "hp": 100,
+        "image": "density_minute_5",
+        "incoming": {},
+        "label_overlaps": 0,
+        "labels": 0,
+        "map": "prologue_wall",
+        "mp": 100.0,
+        "occluders": 0,
+        "opened": 0,
+        "owned": {
+          "gun_rifle": 1
+        },
+        "patterns": [],
+        "phase": 1,
+        "pixels_sha256": "cbd0b148947db119c95748d6821de31fb6dc59969250fa7e7300556c30391e61",
+        "population_limit": 640,
+        "telegraph": [],
+        "viewport": "(1280, 720)"
+      },
+      {
+        "arrival_caption": "임무 ▸",
+        "audio_active": 0,
+        "bonus_ranks": 0,
+        "bound_textures": [
+          "res://assets/maps/pilot_01/stone_floor_tile.png",
+          "res://assets/maps/pilot_01/wall_segment.png",
+          "res://assets/maps/pilot_01/prop_crate.png",
+          "res://assets/maps/pilot_02/ruin_block.png",
+          "res://assets/maps/pilot_02/prop_urn.png",
+          "res://assets/maps/pilot_02/prop_debris.png",
+          "res://assets/maps/pilot_03/wall_top_tile.png",
+          "res://assets/maps/pilot_03/ruin_top_tile.png",
+          "res://assets/maps/pilot_03/gate_front.png"
+        ],
+        "chests": [],
+        "dense": true,
+        "encounter_version": 1,
+        "enemies": 320,
+        "enemy_bullets": [],
+        "high_angle": true,
+        "hp": 100,
+        "image": "density_compact",
+        "incoming": {},
+        "label_overlaps": 0,
+        "labels": 0,
+        "map": "prologue_wall",
+        "mp": 100.0,
+        "occluders": 0,
+        "opened": 0,
+        "owned": {
+          "gun_rifle": 1
+        },
+        "patterns": [],
+        "phase": 1,
+        "pixels_sha256": "07514e647ec60f3caa74be853fc7c2de71026071a9b89b55836c3cc6d10d24c7",
+        "population_limit": 640,
+        "telegraph": [],
+        "viewport": "(854, 394)"
+      }
+    ],
+    "reward_seed": 13,
+    "rifle": "gun_rifle",
+    "scope": "Actual55second scheduledelite,one40MPfinish/currentHP1QA/owned5skills-rifleLv4QA+validgrowthbudget,unmodified30percent probability,preselected seedfor deterministicdrop5. Native movementopens5uniqueupgrades/Lv5,autoSave and real evolvedattack. Densityactors are placedQA,not natural6min or mobileFPS/approval.",
+    "status": "PASS"
+  },
+  "gui_limits": "HP1 elite finish/held5skills-rifle4+validgrowthbudget/preselected natural30percent count5 seed13/placed density fixtures are QA. First55sec elite is actual schedule/maxHP1600. Native40MPkill and10rendered movement steps truly open5unique+1,rifleLv5/evolvedprojectile,autosave. Density20/40/80/160/320/320 placement is presentation-only,not naturalpopulation/mobileFPS.",
+  "fresh_process_restores": {
+    "status": "PASS",
+    "method": "Each source UI save copied into isolated folder;newOS/headlessGodot instantiates real main scene at1280x720/same safearea,loads and explicitly Continues;compare100running authoritative states/sevenRNG against identical saved-state reference. Unopened reference+UI moved to box equally for deterministic collection;opened remains in place.",
+    "unopened_and_opened": [
+      {
+        "bonus_ranks": 5,
+        "entries": 0,
+        "errors": [],
+        "final_hp": 100,
+        "final_mp": 65.0499999999997,
+        "gold": 0,
+        "opened": 1,
+        "rank_delta": 5,
+        "rng_streams": 7,
+        "running100_equal": true,
+        "saved_hp": 100,
+        "saved_mp": 60.05,
+        "schema": 19,
+        "status": "PASS",
+        "tag": "unopened"
+      },
+      {
+        "bonus_ranks": 5,
+        "entries": 0,
+        "errors": [],
+        "final_hp": 100,
+        "final_mp": 65.5499999999997,
+        "gold": 0,
+        "opened": 1,
+        "rank_delta": 0,
+        "rng_streams": 7,
+        "running100_equal": true,
+        "saved_hp": 100,
+        "saved_mp": 60.55,
+        "schema": 19,
+        "status": "PASS",
+        "tag": "opened"
+      }
+    ],
+    "scope": "No fake XP level or account entry/gold duplication;HP/MP/skills/view preserved;no old cue/audio/arrival replay. This is exact saved-reference comparison,not another natural6min run."
+  },
+  "synthetic_capacity": {
+    "actors": 1540,
+    "bytes": 509412,
+    "file_limit": 2097152,
+    "ground": 640,
+    "read_error": 0,
+    "restored": true,
+    "scope": "Synthetic640regular+900formation backlog to validate original atomic store capacity,not natural gameplay or mobile performance.",
+    "status": "PASS",
+    "valid": true,
+    "write_error": 0
+  },
+  "natural_balance_comparison": {
+    "controller": "unchanged existing evolve controller,no HP/XP/stat gifts or clock jumps",
+    "runs": [
+      {
+        "boss_defeated_at": 356.750000000047,
+        "boss_distance_left": 0.0,
+        "boss_hp_left": 0,
+        "chest_bonus_ranks": 0,
+        "chests_opened": 0,
+        "choices": 11,
+        "elapsed": 360.0,
+        "encounter_version": 0,
+        "enemy_pattern_version": 3,
+        "evolved": [
+          "gun_rifle",
+          "gun_ricochet"
+        ],
+        "evolved_at": {
+          "gun_ricochet": 252.150000000023,
+          "gun_rifle": 75.4499999999979
+        },
+        "gold_reward": 11913,
+        "hammer_hits": 1,
+        "hammer_hp_lost": 24,
+        "hammer_strikes": 1,
+        "hp": 100,
+        "kills": 1304,
+        "map": "prologue_wall",
+        "milestones": [
+          {
+            "choices": 6,
+            "collected_gold": 1490,
+            "hp": 100,
+            "kills": 158,
+            "mp": 27.9500000000003,
+            "time": 59.9999999999987,
+            "xp": 745.0
+          },
+          {
+            "choices": 7,
+            "collected_gold": 2702,
+            "hp": 76,
+            "kills": 327,
+            "mp": 37.8999999999995,
+            "time": 119.999999999995,
+            "xp": 1475.0
+          },
+          {
+            "choices": 9,
+            "collected_gold": 4879,
+            "hp": 76,
+            "kills": 606,
+            "mp": 17.8,
+            "time": 180.000000000007,
+            "xp": 2660.0
+          },
+          {
+            "choices": 10,
+            "collected_gold": 7403,
+            "hp": 76,
+            "kills": 833,
+            "mp": 37.7499999999995,
+            "time": 240.00000000002,
+            "xp": 4025.0
+          },
+          {
+            "choices": 11,
+            "collected_gold": 8844,
+            "hp": 76,
+            "kills": 1049,
+            "mp": 17.6999999999987,
+            "time": 300.000000000034,
+            "xp": 4865.0
+          },
+          {
+            "choices": 11,
+            "collected_gold": 11813,
+            "hp": 100,
+            "kills": 1304,
+            "mp": 27.7000000000003,
+            "time": 360.0,
+            "xp": 5980.0
+          }
+        ],
+        "mp": 27.7000000000003,
+        "outcome": "cleared",
+        "owned": {
+          "gun_grenade": 1,
+          "gun_ricochet": 5,
+          "gun_rifle": 5,
+          "gun_suppress": 1
+        },
+        "pacing_version": 1,
+        "peak_enemies": 126,
+        "seed": 7,
+        "total_collected_xp": 5980.0,
+        "trace": [
+          {
+            "collected_xp": 30.0,
+            "kills": 7,
+            "rank": 1,
+            "skill": "gun_grenade",
+            "time": 7.74999999999998
+          },
+          {
+            "collected_xp": 80.0,
+            "kills": 16,
+            "rank": 1,
+            "skill": "gun_suppress",
+            "time": 15.3000000000001
+          },
+          {
+            "collected_xp": 145.0,
+            "kills": 48,
+            "rank": 1,
+            "skill": "gun_ricochet",
+            "time": 28.9000000000003
+          },
+          {
+            "collected_xp": 230.0,
+            "kills": 49,
+            "rank": 2,
+            "skill": "gun_rifle",
+            "time": 29.6000000000003
+          },
+          {
+            "collected_xp": 385.0,
+            "kills": 81,
+            "rank": 3,
+            "skill": "gun_rifle",
+            "time": 33.2500000000002
+          },
+          {
+            "collected_xp": 625.0,
+            "kills": 136,
+            "rank": 4,
+            "skill": "gun_rifle",
+            "time": 51.8499999999992
+          },
+          {
+            "collected_xp": 985.0,
+            "kills": 229,
+            "rank": 5,
+            "skill": "gun_rifle",
+            "time": 75.4499999999979
+          },
+          {
+            "collected_xp": 1495.0,
+            "kills": 328,
+            "rank": 2,
+            "skill": "gun_ricochet",
+            "time": 121.199999999995
+          },
+          {
+            "collected_xp": 2185.0,
+            "kills": 513,
+            "rank": 3,
+            "skill": "gun_ricochet",
+            "time": 163.600000000003
+          },
+          {
+            "collected_xp": 3085.0,
+            "kills": 691,
+            "rank": 4,
+            "skill": "gun_ricochet",
+            "time": 196.75000000001
+          },
+          {
+            "collected_xp": 4225.0,
+            "kills": 881,
+            "rank": 5,
+            "skill": "gun_ricochet",
+            "time": 252.150000000023
+          }
+        ],
+        "wall_seconds": 14.994
+      },
+      {
+        "boss_defeated_at": -1.0,
+        "boss_distance_left": 457.210815429688,
+        "boss_hp_left": 1664,
+        "chest_bonus_ranks": 1,
+        "chests_opened": 1,
+        "choices": 12,
+        "elapsed": 359.700000000048,
+        "encounter_version": 1,
+        "enemy_pattern_version": 3,
+        "evolved": [
+          "gun_rifle",
+          "gun_ricochet"
+        ],
+        "evolved_at": {
+          "gun_ricochet": 178.500000000006,
+          "gun_rifle": 73.9499999999979
+        },
+        "gold_reward": 0,
+        "hammer_hits": 1,
+        "hammer_hp_lost": 24,
+        "hammer_strikes": 2,
+        "hp": 0,
+        "kills": 4836,
+        "map": "prologue_wall",
+        "milestones": [
+          {
+            "choices": 6,
+            "collected_gold": 1490,
+            "hp": 100,
+            "kills": 158,
+            "mp": 27.9500000000003,
+            "time": 59.9999999999987,
+            "xp": 745.0
+          },
+          {
+            "choices": 8,
+            "collected_gold": 2831,
+            "hp": 68,
+            "kills": 390,
+            "mp": 37.85,
+            "time": 119.999999999995,
+            "xp": 1600.0
+          },
+          {
+            "choices": 10,
+            "collected_gold": 6054,
+            "hp": 98,
+            "kills": 917,
+            "mp": 17.7499999999996,
+            "time": 180.000000000007,
+            "xp": 3195.0
+          },
+          {
+            "choices": 11,
+            "collected_gold": 9709,
+            "hp": 100,
+            "kills": 1606,
+            "mp": 37.7,
+            "time": 240.00000000002,
+            "xp": 5655.0
+          },
+          {
+            "choices": 12,
+            "collected_gold": 12329,
+            "hp": 92,
+            "kills": 3187,
+            "mp": 7.65000000000006,
+            "time": 300.000000000034,
+            "xp": 8730.0
+          }
+        ],
+        "mp": 27.3000000000003,
+        "outcome": "defeat",
+        "owned": {
+          "gun_grenade": 1,
+          "gun_ricochet": 5,
+          "gun_rifle": 5,
+          "gun_suppress": 3
+        },
+        "pacing_version": 1,
+        "peak_enemies": 729,
+        "seed": 7,
+        "total_collected_xp": 9280.0,
+        "trace": [
+          {
+            "collected_xp": 30.0,
+            "kills": 7,
+            "rank": 1,
+            "skill": "gun_grenade",
+            "time": 7.74999999999998
+          },
+          {
+            "collected_xp": 80.0,
+            "kills": 16,
+            "rank": 1,
+            "skill": "gun_suppress",
+            "time": 15.3000000000001
+          },
+          {
+            "collected_xp": 145.0,
+            "kills": 48,
+            "rank": 1,
+            "skill": "gun_ricochet",
+            "time": 28.9000000000003
+          },
+          {
+            "collected_xp": 230.0,
+            "kills": 49,
+            "rank": 2,
+            "skill": "gun_rifle",
+            "time": 29.6000000000003
+          },
+          {
+            "collected_xp": 385.0,
+            "kills": 81,
+            "rank": 3,
+            "skill": "gun_rifle",
+            "time": 33.2500000000002
+          },
+          {
+            "collected_xp": 625.0,
+            "kills": 136,
+            "rank": 4,
+            "skill": "gun_rifle",
+            "time": 51.8499999999992
+          },
+          {
+            "collected_xp": 985.0,
+            "kills": 211,
+            "rank": 5,
+            "skill": "gun_rifle",
+            "time": 73.9499999999979
+          },
+          {
+            "collected_xp": 1495.0,
+            "kills": 343,
+            "rank": 3,
+            "skill": "gun_ricochet",
+            "time": 102.349999999996
+          },
+          {
+            "collected_xp": 2185.0,
+            "kills": 567,
+            "rank": 4,
+            "skill": "gun_ricochet",
+            "time": 138.199999999997
+          },
+          {
+            "collected_xp": 3140.0,
+            "kills": 899,
+            "rank": 5,
+            "skill": "gun_ricochet",
+            "time": 178.500000000006
+          },
+          {
+            "collected_xp": 4240.0,
+            "kills": 1118,
+            "rank": 2,
+            "skill": "gun_suppress",
+            "time": 199.750000000011
+          },
+          {
+            "collected_xp": 6865.0,
+            "kills": 2890,
+            "rank": 3,
+            "skill": "gun_suppress",
+            "time": 288.550000000031
+          }
+        ],
+        "wall_seconds": 62.902
+      },
+      {
+        "boss_defeated_at": 325.80000000004,
+        "boss_distance_left": 0.0,
+        "boss_hp_left": 0,
+        "chest_bonus_ranks": 0,
+        "chests_opened": 0,
+        "choices": 12,
+        "elapsed": 360.0,
+        "encounter_version": 0,
+        "enemy_pattern_version": 3,
+        "evolved": [
+          "gun_rifle",
+          "gun_ricochet"
+        ],
+        "evolved_at": {
+          "gun_ricochet": 245.300000000022,
+          "gun_rifle": 72.949999999998
+        },
+        "gold_reward": 12719,
+        "hammer_hits": 0,
+        "hammer_hp_lost": 0,
+        "hammer_strikes": 0,
+        "hp": 100,
+        "kills": 1392,
+        "map": "outskirts_trial",
+        "milestones": [
+          {
+            "choices": 6,
+            "collected_gold": 1223,
+            "hp": 100,
+            "kills": 158,
+            "mp": 35.3000000000001,
+            "time": 59.9999999999987,
+            "xp": 655.0
+          },
+          {
+            "choices": 8,
+            "collected_gold": 2801,
+            "hp": 100,
+            "kills": 346,
+            "mp": 45.1999999999995,
+            "time": 119.999999999995,
+            "xp": 1585.0
+          },
+          {
+            "choices": 9,
+            "collected_gold": 5460,
+            "hp": 100,
+            "kills": 624,
+            "mp": 25.1499999999993,
+            "time": 180.000000000007,
+            "xp": 2845.0
+          },
+          {
+            "choices": 10,
+            "collected_gold": 7701,
+            "hp": 100,
+            "kills": 851,
+            "mp": 65.0999999999968,
+            "time": 240.00000000002,
+            "xp": 4090.0
+          },
+          {
+            "choices": 11,
+            "collected_gold": 9715,
+            "hp": 100,
+            "kills": 1104,
+            "mp": 5.04999999999981,
+            "time": 300.000000000034,
+            "xp": 5260.0
+          },
+          {
+            "choices": 12,
+            "collected_gold": 12619,
+            "hp": 100,
+            "kills": 1392,
+            "mp": 24.9999999999997,
+            "time": 360.0,
+            "xp": 6955.0
+          }
+        ],
+        "mp": 24.9999999999997,
+        "outcome": "cleared",
+        "owned": {
+          "gun_grenade": 2,
+          "gun_ricochet": 5,
+          "gun_rifle": 5,
+          "gun_suppress": 1
+        },
+        "pacing_version": 1,
+        "peak_enemies": 103,
+        "seed": 7,
+        "total_collected_xp": 6955.0,
+        "trace": [
+          {
+            "collected_xp": 30.0,
+            "kills": 7,
+            "rank": 1,
+            "skill": "gun_grenade",
+            "time": 10.35
+          },
+          {
+            "collected_xp": 80.0,
+            "kills": 21,
+            "rank": 1,
+            "skill": "gun_suppress",
+            "time": 21.9000000000002
+          },
+          {
+            "collected_xp": 155.0,
+            "kills": 55,
+            "rank": 1,
+            "skill": "gun_ricochet",
+            "time": 25.3000000000002
+          },
+          {
+            "collected_xp": 230.0,
+            "kills": 55,
+            "rank": 2,
+            "skill": "gun_rifle",
+            "time": 25.7500000000002
+          },
+          {
+            "collected_xp": 385.0,
+            "kills": 88,
+            "rank": 3,
+            "skill": "gun_rifle",
+            "time": 32.7000000000003
+          },
+          {
+            "collected_xp": 625.0,
+            "kills": 151,
+            "rank": 4,
+            "skill": "gun_rifle",
+            "time": 58.2999999999988
+          },
+          {
+            "collected_xp": 985.0,
+            "kills": 222,
+            "rank": 5,
+            "skill": "gun_rifle",
+            "time": 72.949999999998
+          },
+          {
+            "collected_xp": 1495.0,
+            "kills": 333,
+            "rank": 2,
+            "skill": "gun_ricochet",
+            "time": 107.749999999996
+          },
+          {
+            "collected_xp": 2470.0,
+            "kills": 494,
+            "rank": 3,
+            "skill": "gun_ricochet",
+            "time": 153.100000000001
+          },
+          {
+            "collected_xp": 3090.0,
+            "kills": 659,
+            "rank": 4,
+            "skill": "gun_ricochet",
+            "time": 186.700000000008
+          },
+          {
+            "collected_xp": 4225.0,
+            "kills": 882,
+            "rank": 5,
+            "skill": "gun_ricochet",
+            "time": 245.300000000022
+          },
+          {
+            "collected_xp": 6955.0,
+            "kills": 1391,
+            "rank": 2,
+            "skill": "gun_grenade",
+            "time": 358.800000000047
+          }
+        ],
+        "wall_seconds": 11.797
+      },
+      {
+        "boss_defeated_at": -1.0,
+        "boss_distance_left": 0.0,
+        "boss_hp_left": 0,
+        "chest_bonus_ranks": 3,
+        "chests_opened": 1,
+        "choices": 12,
+        "elapsed": 285.050000000031,
+        "encounter_version": 1,
+        "enemy_pattern_version": 3,
+        "evolved": [
+          "gun_rifle",
+          "gun_ricochet"
+        ],
+        "evolved_at": {
+          "gun_ricochet": 165.650000000003,
+          "gun_rifle": 74.2499999999979
+        },
+        "gold_reward": 0,
+        "hammer_hits": 0,
+        "hammer_hp_lost": 0,
+        "hammer_strikes": 0,
+        "hp": 0,
+        "kills": 2938,
+        "map": "outskirts_trial",
+        "milestones": [
+          {
+            "choices": 6,
+            "collected_gold": 1223,
+            "hp": 100,
+            "kills": 158,
+            "mp": 35.3000000000001,
+            "time": 59.9999999999987,
+            "xp": 655.0
+          },
+          {
+            "choices": 8,
+            "collected_gold": 2909,
+            "hp": 76,
+            "kills": 424,
+            "mp": 15.1999999999999,
+            "time": 119.999999999995,
+            "xp": 1620.0
+          },
+          {
+            "choices": 10,
+            "collected_gold": 7429,
+            "hp": 100,
+            "kills": 935,
+            "mp": 25.1,
+            "time": 180.000000000007,
+            "xp": 3720.0
+          },
+          {
+            "choices": 11,
+            "collected_gold": 12869,
+            "hp": 100,
+            "kills": 1829,
+            "mp": 35.05,
+            "time": 240.00000000002,
+            "xp": 6100.0
+          }
+        ],
+        "mp": 30.0000000000003,
+        "outcome": "defeat",
+        "owned": {
+          "gun_grenade": 2,
+          "gun_ricochet": 5,
+          "gun_rifle": 5,
+          "gun_suppress": 4
+        },
+        "pacing_version": 1,
+        "peak_enemies": 688,
+        "seed": 7,
+        "total_collected_xp": 7465.0,
+        "trace": [
+          {
+            "collected_xp": 30.0,
+            "kills": 7,
+            "rank": 1,
+            "skill": "gun_grenade",
+            "time": 10.35
+          },
+          {
+            "collected_xp": 80.0,
+            "kills": 21,
+            "rank": 1,
+            "skill": "gun_suppress",
+            "time": 21.9000000000002
+          },
+          {
+            "collected_xp": 155.0,
+            "kills": 55,
+            "rank": 1,
+            "skill": "gun_ricochet",
+            "time": 25.3000000000002
+          },
+          {
+            "collected_xp": 230.0,
+            "kills": 55,
+            "rank": 2,
+            "skill": "gun_rifle",
+            "time": 25.7500000000002
+          },
+          {
+            "collected_xp": 385.0,
+            "kills": 88,
+            "rank": 3,
+            "skill": "gun_rifle",
+            "time": 32.7000000000003
+          },
+          {
+            "collected_xp": 625.0,
+            "kills": 151,
+            "rank": 4,
+            "skill": "gun_rifle",
+            "time": 58.2999999999988
+          },
+          {
+            "collected_xp": 985.0,
+            "kills": 223,
+            "rank": 5,
+            "skill": "gun_rifle",
+            "time": 74.2499999999979
+          },
+          {
+            "collected_xp": 1495.0,
+            "kills": 378,
+            "rank": 2,
+            "skill": "gun_ricochet",
+            "time": 103.199999999996
+          },
+          {
+            "collected_xp": 2185.0,
+            "kills": 600,
+            "rank": 3,
+            "skill": "gun_ricochet",
+            "time": 139.199999999997
+          },
+          {
+            "collected_xp": 3085.0,
+            "kills": 850,
+            "rank": 5,
+            "skill": "gun_ricochet",
+            "time": 165.650000000003
+          },
+          {
+            "collected_xp": 4240.0,
+            "kills": 1101,
+            "rank": 3,
+            "skill": "gun_suppress",
+            "time": 192.400000000009
+          },
+          {
+            "collected_xp": 6630.0,
+            "kills": 1999,
+            "rank": 4,
+            "skill": "gun_suppress",
+            "time": 249.300000000022
+          }
+        ],
+        "wall_seconds": 24.093
+      }
+    ],
+    "scope": "Four paired automatic runs,not human/mobile/global balance approval;historical10-12choice target not a new-rule approval.",
+    "seed": 7,
+    "status": "MEASURED",
+    "talents": "none"
+  },
+  "balance_assessment": "Four paired natural-clock runs,unchanged evolve controller,none talents,seed7;both policy0 clear360,policy1 prologue dies359.70/outskirts285.05. Peak126->729/103->688;choices11->12/12->12;one chest each,new bonus1/3. Requested doubling retained,late difficulty remainsOPEN. No new user/multi-seed/global approval or economy estimate. HistoricalGAME04019/20-NONE407 defeat remains separatelyOPEN.",
+  "not_verified": [
+    "Physical Android/iOS",
+    "Windows F5/export",
+    "Human comfort/readability/fun",
+    "Mobile FPS/thermal/touchlatency",
+    "All talent-seed cohorts",
+    "New economy-average/talent cost estimate",
+    "Final art/audio/global difficulty"
+  ],
+  "preserved_boundaries": [
+    "ART001 canonical/GEN005unapproved-unbound/3Dhold",
+    "Support2+2empty/shared53blank",
+    "Original9mapPNG/import/bindings;othermap/F8fallback",
+    "Camera±6%deadzone/no release drift/maxaxis8%/fixed1.16spawn",
+    "Hidden respawn UI/actual45active-second props",
+    "HP/MP/stats/XP3-drop5/weapons/accounttalents/currencyprices",
+    "Other game repos/main untouched"
+  ],
+  "cleanup": {
+    "scope": "Only untracked Godot auxiliary files absent at clean task start; new intended sources and old runtime imports preserved.",
+    "removed": [
+      "assets/references/GEN-005_viya_combat_pose_three_quarter_front.png.import",
+      "assets/references/qa/viya_4view_alignment_preview.jpg.import",
+      "assets/references/qa/viya_side_silhouette_comparison.jpg.import",
+      "docs/validation/GAME022_CHOICE_TIMING.choice.translation",
+      "docs/validation/GAME022_CHOICE_TIMING.collected.translation",
+      "docs/validation/GAME022_CHOICE_TIMING.csv.import",
+      "docs/validation/GAME022_CHOICE_TIMING.kills.translation",
+      "docs/validation/GAME022_CHOICE_TIMING.map.translation",
+      "docs/validation/GAME022_CHOICE_TIMING.rank.translation",
+      "docs/validation/GAME022_CHOICE_TIMING.seed.translation",
+      "docs/validation/GAME022_CHOICE_TIMING.skill.translation",
+      "docs/validation/GAME022_CHOICE_TIMING.talents.translation",
+      "docs/validation/GAME022_CHOICE_TIMING.time.translation",
+      "docs/validation/GAME022_ECONOMY.active.translation",
+      "docs/validation/GAME022_ECONOMY.campaign.translation",
+      "docs/validation/GAME022_ECONOMY.cost.translation",
+      "docs/validation/GAME022_ECONOMY.csv.import",
+      "docs/validation/GAME022_ECONOMY.daily.translation",
+      "docs/validation/GAME022_ECONOMY.days.translation",
+      "docs/validation/GAME022_ECONOMY.dungeon.translation",
+      "docs/validation/GAME022_ECONOMY.expected.translation",
+      "docs/validation/GAME022_ECONOMY.minutes.translation",
+      "docs/validation/GAME022_ECONOMY.target.translation",
+      "docs/validation/GAME023_ECONOMY.active.translation",
+      "docs/validation/GAME023_ECONOMY.campaign.translation",
+      "docs/validation/GAME023_ECONOMY.cost.translation",
+      "docs/validation/GAME023_ECONOMY.csv.import",
+      "docs/validation/GAME023_ECONOMY.daily.translation",
+      "docs/validation/GAME023_ECONOMY.days.translation",
+      "docs/validation/GAME023_ECONOMY.dungeon.translation",
+      "docs/validation/GAME023_ECONOMY.expected.translation",
+      "docs/validation/GAME023_ECONOMY.minutes.translation",
+      "docs/validation/GAME023_ECONOMY.target.translation",
+      "docs/validation/GAME041_AFTER.png.import",
+      "docs/validation/GAME041_BEFORE.png.import",
+      "docs/validation/GAME043_AFTER.png.import",
+      "docs/validation/GAME044_AFTER.png.import",
+      "docs/validation/GAME044_BEFORE.png.import",
+      "docs/validation/GAME045_AFTER.png.import",
+      "docs/validation/GAME045_BEFORE.png.import",
+      "docs/validation/GAME045_RUIN.png.import",
+      "scripts/combat/actor_motion.gd.uid",
+      "scripts/combat/approach_cues.gd.uid",
+      "scripts/combat/attack_visuals.gd.uid",
+      "scripts/combat/battle_forms.gd.uid",
+      "scripts/combat/battle_projection.gd.uid",
+      "scripts/combat/battle_view.gd.uid",
+      "scripts/combat/boss_guidance.gd.uid",
+      "scripts/combat/campaign_encounters.gd.uid",
+      "scripts/combat/combat_audio.gd.uid",
+      "scripts/combat/combat_audio_bank.gd.uid",
+      "scripts/combat/combat_camera.gd.uid",
+      "scripts/combat/combat_cues.gd.uid",
+      "scripts/combat/combat_display.gd.uid",
+      "scripts/combat/combat_profiles.gd.uid",
+      "scripts/combat/curse_visuals.gd.uid",
+      "scripts/combat/defense_rules.gd.uid",
+      "scripts/combat/enemy_pattern_visuals.gd.uid",
+      "scripts/combat/enemy_patterns.gd.uid",
+      "scripts/combat/enemy_patterns_v1.gd.uid",
+      "scripts/combat/enemy_patterns_v17.gd.uid",
+      "scripts/combat/enemy_patterns_v2.gd.uid",
+      "scripts/combat/enemy_patterns_v3.gd.uid",
+      "scripts/combat/feedback_state.gd.uid",
+      "scripts/combat/gold_dungeon.gd.uid",
+      "scripts/combat/high_angle_battle.gd.uid",
+      "scripts/combat/incoming_feedback.gd.uid",
+      "scripts/combat/magic_state.gd.uid",
+      "scripts/combat/run_state.gd.uid",
+      "scripts/combat/stage_catalog.gd.uid",
+      "scripts/combat/structure_feedback.gd.uid",
+      "scripts/combat/supply_feedback.gd.uid",
+      "scripts/combat/weapon_modules.gd.uid",
+      "scripts/main.gd.uid",
+      "scripts/progression/account_talents.gd.uid",
+      "scripts/progression/combat_pacing.gd.uid",
+      "scripts/progression/gold_progress.gd.uid",
+      "scripts/progression/growth_state.gd.uid",
+      "scripts/progression/run_snapshot.gd.uid",
+      "scripts/progression/run_store.gd.uid",
+      "scripts/progression/skill_catalog.gd.uid",
+      "scripts/progression/weapon_catalog.gd.uid",
+      "scripts/ui/account_bonus_summary.gd.uid",
+      "scripts/ui/actor_assets.gd.uid",
+      "scripts/ui/asset_slots.gd.uid",
+      "scripts/ui/battle_chrome.gd.uid",
+      "scripts/ui/battle_save_notice.gd.uid",
+      "scripts/ui/city_preview.gd.uid",
+      "scripts/ui/combat_skin.gd.uid",
+      "scripts/ui/combat_slot_button.gd.uid",
+      "scripts/ui/encounter_notice.gd.uid",
+      "scripts/ui/feedback_panel.gd.uid",
+      "scripts/ui/growth_overview.gd.uid",
+      "scripts/ui/hud_layout.gd.uid",
+      "scripts/ui/mobile_main.gd.uid",
+      "scripts/ui/move_input.gd.uid",
+      "scripts/ui/responsive_feedback_panel.gd.uid",
+      "scripts/ui/reward_payment.gd.uid",
+      "scripts/ui/skill_preview.gd.uid",
+      "scripts/world/map_catalog.gd.uid",
+      "scripts/world/map_space.gd.uid",
+      "scripts/world/supply_catalog.gd.uid",
+      "tests/measure_armor.gd.uid",
+      "tests/measure_balance.gd.uid",
+      "tests/measure_boss_guidance.gd.uid",
+      "tests/measure_campaign.gd.uid",
+      "tests/measure_combat_audio.gd.uid",
+      "tests/measure_enemy_curse.gd.uid",
+      "tests/measure_enemy_patterns.gd.uid",
+      "tests/measure_pattern_reacquire.gd.uid",
+      "tests/profile_combat.gd.uid",
+      "tests/test_account_bonus_summary.gd.uid",
+      "tests/test_account_expansion.gd.uid",
+      "tests/test_account_talents.gd.uid",
+      "tests/test_actor_animation.gd.uid",
+      "tests/test_attack_visuals.gd.uid",
+      "tests/test_battle_save_notice.gd.uid",
+      "tests/test_boss_guidance.gd.uid",
+      "tests/test_camera_lead.gd.uid",
+      "tests/test_campaign.gd.uid",
+      "tests/test_campaign_encounters.gd.uid",
+      "tests/test_chapter_ui.gd.uid",
+      "tests/test_combat_audio.gd.uid",
+      "tests/test_combat_cues.gd.uid",
+      "tests/test_combat_display.gd.uid",
+      "tests/test_combat_foundation.gd.uid",
+      "tests/test_combat_pacing.gd.uid",
+      "tests/test_combat_profiles.gd.uid",
+      "tests/test_encounter_notice.gd.uid",
+      "tests/test_enemy_curse.gd.uid",
+      "tests/test_enemy_patterns.gd.uid",
+      "tests/test_enemy_variety.gd.uid",
+      "tests/test_feedback.gd.uid",
+      "tests/test_gold_dungeon.gd.uid",
+      "tests/test_gold_rewards.gd.uid",
+      "tests/test_gold_settings.gd.uid",
+      "tests/test_growth.gd.uid",
+      "tests/test_growth_overview.gd.uid",
+      "tests/test_guide_skin.gd.uid",
+      "tests/test_high_angle.gd.uid",
+      "tests/test_incoming_feedback.gd.uid",
+      "tests/test_magic.gd.uid",
+      "tests/test_map_pilot.gd.uid",
+      "tests/test_maps.gd.uid",
+      "tests/test_mobile_hud.gd.uid",
+      "tests/test_pattern_reacquire.gd.uid",
+      "tests/test_reward_payment.gd.uid",
+      "tests/test_run_navigation.gd.uid",
+      "tests/test_scatter_packs.gd.uid",
+      "tests/test_skill_preview.gd.uid",
+      "tests/test_structure_feedback.gd.uid",
+      "tests/test_supplies.gd.uid",
+      "tests/test_supply_feedback.gd.uid",
+      "tests/test_talent_tree.gd.uid",
+      "tests/test_weapon_skills.gd.uid"
+    ]
+  },
+  "portable_screens": {
+    "docs/validation/GAME046_CHEST.png": "ActualcompactQA dropped box after native40MPelite finish;ownedskills properly refreshed.",
+    "docs/validation/GAME046_REWARD.png": "ActualstandardQA5uniqueupgrades receipt/currentranks/rifleLv5;no XPlevelgift."
+  },
+  "artifacts": [
+    {
+      "path": ".local_validation/GAME046/report.json",
+      "bytes": 32259,
+      "sha256": "b19e3ab5c5fbca85d667979aa25352c571654240ca66e4e715759ab6a7bcd00c"
+    },
+    {
+      "path": ".local_validation/GAME046/source-preservation.json",
+      "bytes": 19693,
+      "sha256": "6bcfa6052655bf57cf10745683ca3e600b52051240d3c94f0fa6a17f0a5e4172"
+    },
+    {
+      "path": ".local_validation/GAME046/generated-cleanup.json",
+      "bytes": 7234,
+      "sha256": "f3f1cb550963c94e1270d101cf8339a5fb39301e830c914584235f1a63190cf6"
+    },
+    {
+      "path": ".local_validation/GAME046/baseline_probe.gd",
+      "bytes": 2771,
+      "sha256": "a3cc6d7f4b453d31bc2452c2884030e3b5a3ff38c1e57566d8bf15ba1fe09551"
+    },
+    {
+      "path": ".local_validation/GAME046/baseline.log",
+      "bytes": 196,
+      "sha256": "495ead82de7a8527c00b1d296144007726789a7ee989f1f204f82be4e0d2316a"
+    },
+    {
+      "path": ".local_validation/GAME046/render_probe.gd",
+      "bytes": 12263,
+      "sha256": "465339a5f987d44b259699b442079f54ab449dc47ae8451dbad58a2a8f39f244"
+    },
+    {
+      "path": ".local_validation/GAME046/render-results.json",
+      "bytes": 14872,
+      "sha256": "333e7ee6aa8e0bcf191c1a9e5885c9877e87a146f59dec9f13a79ad0d8ec10ca"
+    },
+    {
+      "path": ".local_validation/GAME046/render.log",
+      "bytes": 803,
+      "sha256": "a36955e5895a990bc9bcb9ed2c1d0d3de0f58699f6378b25fef227e96871e02e"
+    },
+    {
+      "path": ".local_validation/GAME046/cold_probe.gd",
+      "bytes": 4214,
+      "sha256": "6ee13761aa2e04843541c279db7c13eceed7df1495f5298ae041da10238d1b7b"
+    },
+    {
+      "path": ".local_validation/GAME046/cold-results.json",
+      "bytes": 667,
+      "sha256": "876cbaaaca7357a52cde8dbba2a4f519c55ed8aea1d3dc4a34ef8a22344a60fa"
+    },
+    {
+      "path": ".local_validation/GAME046/cold_unopened.json",
+      "bytes": 236,
+      "sha256": "2f88015a50836e1506c931b760084adde822716d9a1bd9a937c7df85a2deb242"
+    },
+    {
+      "path": ".local_validation/GAME046/cold_opened.json",
+      "bytes": 234,
+      "sha256": "bbf24a05b13efc13822c64490a730ade9dcbbaf911dbc2139dd7a910c11a2972"
+    },
+    {
+      "path": ".local_validation/GAME046/cold_unopened.log",
+      "bytes": 310,
+      "sha256": "c5c6f4298600d5dea9f90242e4402137e3e99e1f92bbd65c0bbb431241df5303"
+    },
+    {
+      "path": ".local_validation/GAME046/cold_opened.log",
+      "bytes": 308,
+      "sha256": "ca6505ad11b2736da06d375cbb0efd8a7b1ecbf0b70584c831c14f6666420455"
+    },
+    {
+      "path": ".local_validation/GAME046/stress_probe.gd",
+      "bytes": 1756,
+      "sha256": "574cb0bc959d1a7282fc5e4fe30b792d6e2c8f332982947deed877deb7112c75"
+    },
+    {
+      "path": ".local_validation/GAME046/stress-results.json",
+      "bytes": 278,
+      "sha256": "5635407ff7b5aed824ddaad8591ab9faebcb3744195bbddf176087d5d2664ad0"
+    },
+    {
+      "path": ".local_validation/GAME046/stress.log",
+      "bytes": 352,
+      "sha256": "4c9bbff41e7227ba4f34fe021f0a3a11fdf4e0d15fcc53ea75b80e29d314e86c"
+    },
+    {
+      "path": ".local_validation/GAME046/stress.save",
+      "bytes": 509412,
+      "sha256": "04429b08b058c5d1a7ffff7a00ab4e147e968d0bd9faee5f43e7109e0563f389"
+    },
+    {
+      "path": ".local_validation/GAME046/measure_probe.gd",
+      "bytes": 1167,
+      "sha256": "ac29824026dca6c4a9af71496f747595ed67ab7b9ef2522ae483d4b03cd25da0"
+    },
+    {
+      "path": ".local_validation/GAME046/balance-results.json",
+      "bytes": 9484,
+      "sha256": "f1a7bb06af032d69bd966d7a763e3889a256adc23fbabce996e408619b78b160"
+    },
+    {
+      "path": ".local_validation/GAME046/balance.log",
+      "bytes": 753,
+      "sha256": "f45e838ca66f20b5330efd495f69dd8c6a2d42595ba82db1c9c55c1cb4f76b06"
+    },
+    {
+      "path": ".local_validation/GAME046/python.log",
+      "bytes": 111,
+      "sha256": "1e56d4a82a95e20708b5562efba64112ed1eff20782a4aad077508a369ab2380"
+    },
+    {
+      "path": ".local_validation/GAME046/engine_0.log",
+      "bytes": 32,
+      "sha256": "edff16c1721dd4ae989cadf29a01f574ae8d51b118221f664725bd6980bbba5d"
+    },
+    {
+      "path": ".local_validation/GAME046/engine_1.log",
+      "bytes": 1526,
+      "sha256": "eb25404de21ad55906dcfe3101eee66d42766766118a2510358fb618b9ba94fe"
+    },
+    {
+      "path": ".local_validation/GAME046/engine_2.log",
+      "bytes": 117,
+      "sha256": "1938b93b03756e658dd6fc29e699189d67afb2aec05905c840e9c22f5b89a6cd"
+    },
+    {
+      "path": ".local_validation/GAME046/engine_3.log",
+      "bytes": 117,
+      "sha256": "190487dfb2bdf99cdccfff084fd5d95b81eac04fcfe3ec43e502d524daacb8eb"
+    },
+    {
+      "path": ".local_validation/GAME046/engine_4.log",
+      "bytes": 118,
+      "sha256": "0dc80f41a9d961a6b4d962614c905af0b7c3bc209f569871d09048860b58f7ff"
+    },
+    {
+      "path": ".local_validation/GAME046/engine_5.log",
+      "bytes": 117,
+      "sha256": "c5a9e5b87c0439795f9d5bcfe6c17d74bce134acc53d7f341cfb55a11bdb1e1d"
+    },
+    {
+      "path": ".local_validation/GAME046/engine_6.log",
+      "bytes": 119,
+      "sha256": "570a42343d370c104902d16c9ff0b402573f94ed3076772afb70e6bce96084fc"
+    },
+    {
+      "path": ".local_validation/GAME046/engine_7.log",
+      "bytes": 117,
+      "sha256": "025f863c84ce84466e9269a07033239400176c7aad50ada31ff794c6e59b0837"
+    },
+    {
+      "path": ".local_validation/GAME046/engine_8.log",
+      "bytes": 119,
+      "sha256": "692e82860f6962cc8bca1e7ca2b0629cb38bf5798fd003f7f99420a31226acc5"
+    },
+    {
+      "path": ".local_validation/GAME046/engine_9.log",
+      "bytes": 73,
+      "sha256": "6d1c065383a27c36804949b6ffa4b09714470b112e5dacc0bd5aeb7b9c147c4e"
+    },
+    {
+      "path": ".local_validation/GAME046/encounter_first_elite.png",
+      "bytes": 306256,
+      "sha256": "2256dcbfc2fad419156640ded06eea3774b0814b7b00064a991b8584e3ddacae"
+    },
+    {
+      "path": ".local_validation/GAME046/chest_drop_high.png",
+      "bytes": 398270,
+      "sha256": "3cbbfb9afa5335ca94494ea1d06bf6cefefe321f454d2b0a3356490617f241db"
+    },
+    {
+      "path": ".local_validation/GAME046/chest_drop_f8.png",
+      "bytes": 97809,
+      "sha256": "1fb39d048bb71d0206b82dc36947fdce09c564e45eab17a073301ddf52faeb18"
+    },
+    {
+      "path": ".local_validation/GAME046/chest_drop_compact.png",
+      "bytes": 198787,
+      "sha256": "7be1e51ac6f6a89794e4a0ac631564187bbbd8938046685f81410072feb0e537"
+    },
+    {
+      "path": ".local_validation/GAME046/chest_opened_high.png",
+      "bytes": 391674,
+      "sha256": "a47908bd5bdffeea07cdeea5ee560f1bc6bac6449b4fd79f39b6c5a0fe73ddec"
+    },
+    {
+      "path": ".local_validation/GAME046/chest_opened_compact.png",
+      "bytes": 187933,
+      "sha256": "15e279dbe5df9737546defab313c93e53f05629e2b216e3669f5459273e91e94"
+    },
+    {
+      "path": ".local_validation/GAME046/chest_evolved_attack.png",
+      "bytes": 412473,
+      "sha256": "0d4f231ca5b6b590bfe3c763cc137daf9f2b55c8e04bd0b582550288e76fc2c4"
+    },
+    {
+      "path": ".local_validation/GAME046/density_minute_0.png",
+      "bytes": 346796,
+      "sha256": "0993a098cb51453eddaf8164331e7bc5edb18806de0d42ec72f83b56f31e5916"
+    },
+    {
+      "path": ".local_validation/GAME046/density_minute_1.png",
+      "bytes": 383495,
+      "sha256": "c6673fbb28e3177cdbac58ffbc3ab1140a09a8cacaa889669d4839765afaea04"
+    },
+    {
+      "path": ".local_validation/GAME046/density_minute_2.png",
+      "bytes": 420432,
+      "sha256": "a65ec5d752191787a6a35ad8a48a6ea5b907870632e365d956aa926e280f537a"
+    },
+    {
+      "path": ".local_validation/GAME046/density_minute_3.png",
+      "bytes": 448176,
+      "sha256": "193e2d93b44303d09556058e5418d040c8aa6a6d760f9e5ed77fd9acc88337d7"
+    },
+    {
+      "path": ".local_validation/GAME046/density_minute_4.png",
+      "bytes": 449113,
+      "sha256": "ae2bbbda26c65f01320cda99dc7a0130aeba2a45dda3357e59dc40e8f6f47229"
+    },
+    {
+      "path": ".local_validation/GAME046/density_minute_5.png",
+      "bytes": 448959,
+      "sha256": "99c93991d49c8a5e93d5695177ca15665507eb6190e21cfd8b2406568115a959"
+    },
+    {
+      "path": ".local_validation/GAME046/density_compact.png",
+      "bytes": 269869,
+      "sha256": "ca655a84c518f02896b34525b9b394b5a77f0362d2473c1c3600010b3fee99d6"
+    },
+    {
+      "path": ".local_validation/GAME046/render-live/unopened.save",
+      "bytes": 9892,
+      "sha256": "1544e81aa11799ec76b38d2f52ba5a22440f635259b194496343ccb66b2aac1f"
+    },
+    {
+      "path": ".local_validation/GAME046/render-live/opened.save",
+      "bytes": 9712,
+      "sha256": "5724802fe9e9c36b66a1e3498abec86899e0db8a5fb2da59d106b386efc97a10"
+    },
+    {
+      "path": "tests/fixtures/game046_v18/baseline.json",
+      "bytes": 47700,
+      "sha256": "08a2f204b02efe5e7da4018d9fc2c08f4fef8587be8cc0f4429c4e7ab1565b0b"
+    },
+    {
+      "path": "tests/fixtures/game046_v18/old_actual_curse.bin",
+      "bytes": 9808,
+      "sha256": "435ebe94d449cc938de5bc47666f8a37388663398c1156590fbc627ea92793d3"
+    },
+    {
+      "path": "tests/fixtures/game046_v18/old_actual_waiting.bin",
+      "bytes": 9136,
+      "sha256": "496b2da75463938b83e353d653033665558b8fe4c8d6f5af8be2bf7ba43ceb96"
+    },
+    {
+      "path": "tests/fixtures/game046_v18/old_dungeon.bin",
+      "bytes": 3252,
+      "sha256": "1eb39d6e85c4da812fe3e8fa69e08105f5723a81206fe46ee7b741f365fe5fcc"
+    },
+    {
+      "path": "tests/fixtures/game046_v18/old_elite_first.bin",
+      "bytes": 9112,
+      "sha256": "a6228c67671e357f39956e96a153906737d11162d0535ef9d832316ac8c0dd4b"
+    },
+    {
+      "path": "tests/fixtures/game046_v18/old_elite_second.bin",
+      "bytes": 9112,
+      "sha256": "e2524f5b1d56a3c871eb697b2ae09a19835d43440bb40f806a0b242428e94e87"
+    },
+    {
+      "path": "tests/fixtures/game046_v18/old_minute.bin",
+      "bytes": 9112,
+      "sha256": "070b7a1542287a7bdc3e06f805e3bb3746b7421c58330dd8c5f37ae6d39a933d"
+    },
+    {
+      "path": "docs/validation/GAME046_CHEST.png",
+      "bytes": 198787,
+      "sha256": "7be1e51ac6f6a89794e4a0ac631564187bbbd8938046685f81410072feb0e537"
+    },
+    {
+      "path": "docs/validation/GAME046_REWARD.png",
+      "bytes": 391674,
+      "sha256": "a47908bd5bdffeea07cdeea5ee560f1bc6bac6449b4fd79f39b6c5a0fe73ddec"
+    }
+  ],
+  "artifact_scope": "Portable report contains executed results/sourceproof and hash index. Original ignored QA scripts/logs/saves/screens remain in .local_validation/GAME046;raw historical18fixtures are tracked. Exclude initial prep failures/diagnostic script from PASS evidence.",
+  "next": "GAME-047: density/chest plus shaman engagement/rechase balance;preserve published1-19/encounters0-1/AI0-3 before behavior changes;samecontroller-view/two maps/none-full/5seeds/native dodge;do not silently lower userdoubling or giftHP."
+}
