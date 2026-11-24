@@ -4,7 +4,11 @@
 
 ## 세션 필수 문서
 
-[CURRENT_WORK](docs/CURRENT_WORK.md)와 **[누적 DEVELOPMENT_STATUS](docs/DEVELOPMENT_STATUS.md)**를 함께 읽는다. [PLANNED_WORK](docs/PLANNED_WORK.md) · [NEXT_TASK](docs/NEXT_TASK.md) · [AGENTS](AGENTS.md) · [제작 스킬](.agents/skills/viya-game-production/SKILL.md). GAME-051 코드 **`1e86555103da5de7278e8618651896f351d61371`**, 브랜치 `work/viya-turnaround-qa-20261117`. 문서 HEAD는 코드 뒤에 오며 main 자동 병합은 하지 않는다.
+[CURRENT_WORK](docs/CURRENT_WORK.md)와 **[누적 DEVELOPMENT_STATUS](docs/DEVELOPMENT_STATUS.md)**를 함께 읽는다. [PLANNED_WORK](docs/PLANNED_WORK.md) · [NEXT_TASK](docs/NEXT_TASK.md) · [AGENTS](AGENTS.md) · [제작 스킬](.agents/skills/viya-game-production/SKILL.md). GAME-052 코드 **`bc237521b4c8e578de05f3c9e286e2f82414e7f3`**, 브랜치 `work/viya-turnaround-qa-20261117`. 문서 HEAD는 코드 뒤에 오며 main 자동 병합은 하지 않는다.
+
+## 4분 이후 렉 점검
+
+4분에는 생성 묶음32→96/주기2.4→3초로 초당 생성 시도량이2.4배가 되고,적 이동/벽 우회와 몸체 그리기 부담이 커진다. 생성량과 전투 결과를 유지하면서 벽 검사를 줄여 실제Linux Godot CPU는640개체21.316→18.146ms/1540개체51.925→45.585ms로 부분 개선했다. 남은 표시/극단적 부하와 사용자PC·모바일 FPS는 후속이다. [측정/한계](docs/validation/GAME052_REPORT.json) · [4분 실제 화면](docs/validation/GAME052_FOUR_MINUTES.png).
 
 ## 전체 자석·금화 드롭 조정
 
