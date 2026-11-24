@@ -21,6 +21,7 @@ static func labels(data:Dictionary) -> Array:
 static func run(host,verify:Callable) -> void:
 	var folder:="user://structure-feedback-"+Crypto.new().generate_random_bytes(8).hex_encode()
 	var ui=NoticeTests.make_ui(host,folder)
+	ui.new_run_encounter_version=1 # Enemy-free legacy fixture isolates the45second timer;pressure2 is covered separately.
 	await host.get_tree().process_frame
 	Campaign.depart(ui)
 	var state=ui.simulation

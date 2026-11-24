@@ -143,7 +143,7 @@ static func run(host,verify:Callable)->void:
 	var restored=State.new()
 	var loaded:bool=Snapshot.restore(current,restored)
 	if loaded:restored.set_paused(false)
-	verify.call(Snapshot.VERSION==19 and loaded and Campaign.comparable(restored)==Campaign.comparable(state),"Stable camera remains cosmetic while current v18 restores gameplay exactly")
+	verify.call(Snapshot.VERSION==20 and loaded and Campaign.comparable(restored)==Campaign.comparable(state),"Stable camera remains cosmetic while current v18 restores gameplay exactly")
 	ui.queue_free()
 	await host.get_tree().process_frame
 	for file in ["battle.save","gold.cfg","settings.cfg"]:DirAccess.remove_absolute(folder.path_join(file))

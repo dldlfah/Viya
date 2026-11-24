@@ -1,6 +1,7 @@
 extends RefCounted
 ## Exact gameplay data. Cosmetic effects/cues are rebuilt after a restore.
-const VERSION := 19
+const VERSION := 20
+const GAME047_RULES := "453182097a89e5b3da2dc52a7253ba68f33f50a2cf1fad91a4c23123cfcb3ed8"
 const GAME045_RULES := "d19d8361edf34b139b7e6d6416a70eec5f47eb7c34c5e757170d0b7ff53f51d1"
 const GAME039_RULES := "e537044ffa111e582b2762d59fbb56dbe0fc36968af297be831ae62aecc1c186"
 const GAME038_RULES := "29f9c4404b89acd779d45598c859a8669e5d30c08fbfe218c7a9be7caa463a47"
@@ -59,8 +60,11 @@ static func fingerprint_for_v17()->String:
 static func fingerprint_for_v18()->String:
 	return (fingerprint_for_v17()+FileAccess.get_file_as_string("res://data/enemy_curse_v3.json").replace("\r\n","\n")+FileAccess.get_file_as_string("res://scripts/combat/enemy_patterns_v3.gd").replace("\r\n","\n")+FileAccess.get_file_as_string("res://scripts/combat/enemy_patterns.gd").replace("\r\n","\n")).sha256_text()
 
+static func fingerprint_for_v19()->String:
+	return (fingerprint_for_v18()+FileAccess.get_file_as_string("res://data/campaign_encounters.json").replace("\r\n","\n")+FileAccess.get_file_as_string("res://scripts/combat/campaign_encounters_v19.gd").replace("\r\n","\n")).sha256_text()
+
 static func fingerprint()->String:
-	return (fingerprint_for_v18()+FileAccess.get_file_as_string("res://data/campaign_encounters.json").replace("\r\n","\n")+FileAccess.get_file_as_string("res://scripts/combat/campaign_encounters.gd").replace("\r\n","\n")).sha256_text()
+	return (fingerprint_for_v19()+FileAccess.get_file_as_string("res://scripts/combat/campaign_encounters.gd").replace("\r\n","\n")+FileAccess.get_file_as_string("res://data/campaign_pressure.json").replace("\r\n","\n")+FileAccess.get_file_as_string("res://scripts/combat/campaign_pressure.gd").replace("\r\n","\n")).sha256_text()
 
 static func capture(state) -> Dictionary:
 	var result := {"version": VERSION, "rules": fingerprint(), "run": {}, "growth": {}, "magic": {}, "rng": []}
@@ -77,6 +81,11 @@ static func capture(state) -> Dictionary:
 static func upgrade_legacy(data:Dictionary,state)->Dictionary:
 	var version:Variant=data.get("version")
 	var candidate:Dictionary
+	if version==19 and data.get("rules")==GAME047_RULES:
+		candidate=data.duplicate(true)
+		candidate.version=VERSION
+		candidate.rules=fingerprint()
+		return candidate # Keep existing policy0/1, chest ledger and all seven streams.
 	if version==18 and data.get("rules")==GAME045_RULES:
 		candidate=data.duplicate(true)
 		candidate.version=VERSION
@@ -353,7 +362,7 @@ static func valid(data: Dictionary, state) -> bool:
 	if map_data.is_empty():
 		return false
 	var space = state.MapSpace.new(map_data)
-	if not state.encounters.valid_run(run,space.world_size):return false
+	if not state.encounters.valid_run(run,space.world_size) or (run.encounter_version==2 and state.pressure.data.is_empty()):return false
 	if not space.valid_position(run.player,30.0):
 		return false
 	if not state.AccountTalents.valid_levels(run.account_talent_levels) or not state.AccountTalents.valid_level(run.account_attack_level) or run.account_attack_level != run.account_talent_levels.attack_power:

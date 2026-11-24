@@ -20,7 +20,7 @@ static func interrupted():
 static func run(host,verify:Callable)->void:
 	var state=State.new()
 	verify.call(state.start(3901,"viya",null,"prologue_wall","weapons_v1",{},"campaign",-1,-1,2) and state.enemy_pattern_version==2,"The original production start retains explicit revision2 campaigns")
-	verify.call(Snapshot.VERSION==19 and Snapshot.fingerprint_for_v16()==Snapshot.GAME038_RULES,"Schema18 retains the exact published16 fingerprint")
+	verify.call(Snapshot.VERSION==20 and Snapshot.fingerprint_for_v16()==Snapshot.GAME038_RULES,"Schema18 retains the exact published16 fingerprint")
 	var frozen:String=FileAccess.get_file_as_string("res://scripts/combat/enemy_patterns_v1.gd")
 	verify.call(frozen.sha256_text()=="4059f30002b56fa0ccb73ed38b4fe4af9c0fe8092a8f5836ad53f6e3cef5a4af","Published v1 logic is preserved byte for byte")
 	var old:Dictionary=state.enemy_patterns.specification(1)

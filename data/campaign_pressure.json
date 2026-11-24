@@ -1,0 +1,18 @@
+{
+  "pulse_seconds": 1.0,
+  "near_targets": [
+    12,
+    24,
+    48,
+    96,
+    144,
+    192
+  ],
+  "near_padding": 0.0,
+  "edge_gap": 64.0,
+  "edge_jitter": 24.0,
+  "far_padding": 480.0,
+  "max_refill": 6,
+  "max_recycle": 12,
+  "warmup_seconds": 6.0
+}

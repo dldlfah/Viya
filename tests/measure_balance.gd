@@ -17,7 +17,7 @@ func _initialize()->void:
 			printerr("Unknown measurement argument: ",arg)
 			quit(2)
 			return
-	if map_name not in ["prologue_wall","outskirts_trial","gold_slime"] or profile_name not in ["none","full"] or pattern_override not in [-1,0,1,2,3] or pacing_override not in [-1,0,1] or strategy not in ["evolve","original"] or encounter_override not in [0,1]:
+	if map_name not in ["prologue_wall","outskirts_trial","gold_slime"] or profile_name not in ["none","full"] or pattern_override not in [-1,0,1,2,3] or pacing_override not in [-1,0,1] or strategy not in ["evolve","original"] or encounter_override not in [0,1,2]:
 		quit(2)
 		return
 	for id in (Talents.IDS if profile_name=="full" else []):account_levels[id]=3
@@ -33,6 +33,8 @@ func measure_balanced(seed_value:int)->Dictionary:
 	var state=RunState.new()
 	state.stage=2 if map_name=="outskirts_trial" else 1
 	if not state.start(seed_value,"viya",account_levels,map_name,"weapons_v1",{},"gold_slime" if map_name=="gold_slime" else "campaign",20000 if map_name=="gold_slime" else -1,pacing_override,pattern_override,encounter_override):return {"outcome":"invalid_start","choices":-1,"evolved":[]}
+	var density:Array=[]
+	var sampled_second:=0
 	var strikes:=0
 	var melee_hits:=0
 	var melee_hp:=0
@@ -63,12 +65,16 @@ func measure_balanced(seed_value:int)->Dictionary:
 			if hit.serial>received and hit.kind=="melee":
 				melee_hits+=1
 				melee_hp+=int(hit.amount)
+		if floori(state.elapsed+.000001)>sampled_second:
+			sampled_second=floori(state.elapsed+.000001)
+			var visible:Rect2=Rect2(state.camera_center()-state.spawn_view_size/1.16*.5,state.spawn_view_size/1.16)
+			density.append({"second":sampled_second,"visible":state.enemies.filter(func(e):return visible.has_point(e.p)).size(),"near":state.enemies.filter(func(e):return state.visible_world().grow(160).has_point(e.p)).size(),"total":state.enemies.size()})
 		peak=maxi(peak,state.enemies.size())
 		if state._boss_defeated and boss_defeated_at<0:boss_defeated_at=state.elapsed
 		if milestones.size()<(3 if map_name=="gold_slime" else 6) and state.elapsed+.000001>=(milestones.size()+1)*60:
 			milestones.append({"time":state.elapsed,"choices":trace.size(),"xp":collected_xp(state),"kills":state.kills,"hp":state.hp,"mp":state.magic.mana,"collected_gold":state.gold_collected})
 	var bosses:Array=state.enemies.filter(func(e):return e.kind=="boss")
-	return {"seed":seed_value,"encounter_version":state.encounter_version,"chests_opened":state._chests_opened,"chest_bonus_ranks":state._chest_bonus_ranks,"enemy_pattern_version":state.enemy_pattern_version,"hammer_strikes":strikes,"hammer_hits":melee_hits,"hammer_hp_lost":melee_hp,"outcome":state.result_summary().outcome,"pacing_version":state.growth.pacing_version,"elapsed":state.elapsed,"choices":trace.size(),"trace":trace,"evolved":evolved_at.keys(),"evolved_at":evolved_at,"boss_defeated_at":boss_defeated_at,"boss_hp_left":bosses[0].hp if not bosses.is_empty() else 0,"boss_distance_left":state.player.distance_to(bosses[0].p) if not bosses.is_empty() else 0.0,"gold_reward":state.result_summary().gold_reward,"hp":state.hp,"mp":state.magic.mana,"kills":state.kills,"total_collected_xp":collected_xp(state),"peak_enemies":peak,"owned":state.growth.owned.duplicate(true),"milestones":milestones}
+	return {"density_samples_1hz":density,"seed":seed_value,"encounter_version":state.encounter_version,"chests_opened":state._chests_opened,"chest_bonus_ranks":state._chest_bonus_ranks,"enemy_pattern_version":state.enemy_pattern_version,"hammer_strikes":strikes,"hammer_hits":melee_hits,"hammer_hp_lost":melee_hp,"outcome":state.result_summary().outcome,"pacing_version":state.growth.pacing_version,"elapsed":state.elapsed,"choices":trace.size(),"trace":trace,"evolved":evolved_at.keys(),"evolved_at":evolved_at,"boss_defeated_at":boss_defeated_at,"boss_hp_left":bosses[0].hp if not bosses.is_empty() else 0,"boss_distance_left":state.player.distance_to(bosses[0].p) if not bosses.is_empty() else 0.0,"gold_reward":state.result_summary().gold_reward,"hp":state.hp,"mp":state.magic.mana,"kills":state.kills,"total_collected_xp":collected_xp(state),"peak_enemies":peak,"owned":state.growth.owned.duplicate(true),"milestones":milestones}
 func pick_skill(state)->String:
 	if strategy=="original":return super.pick_skill(state)
 	var chosen:String=state.growth.offer[0]

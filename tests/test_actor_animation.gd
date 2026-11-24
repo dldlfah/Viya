@@ -179,6 +179,7 @@ static func run(host,verify:Callable)->void:
 	frozen=ui.view.actors.pose(state)
 	ui._physics_process(.5)
 	verify.call(state.phase==State.Phase.DEFEAT and frozen==ui.view.actors.pose(state),"Result screens hold animation frames without wall-time playback")
+	ui.new_run_encounter_version=1 # Isolate idle cache reset from real policy2 reinforcements.
 	ui.begin_run()
 	state.spawn_clock=999
 	state._scatter_clock=999

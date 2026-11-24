@@ -150,7 +150,7 @@ static func run(host,verify:Callable):
 	for mutation in ["version","count0","count6","seed","outside","ledger","duplicate","source"]:
 		var bad:Dictionary=valid.duplicate(true)
 		match mutation:
-			"version":bad.run.encounter_version=2
+			"version":bad.run.encounter_version=3
 			"count0":bad.run.chest_pickups[0].count=0
 			"count6":bad.run.chest_pickups[0].count=6
 			"seed":bad.run.chest_pickups[0].seed=-1
@@ -161,7 +161,7 @@ static func run(host,verify:Callable):
 		verify.call(not Snapshot.restore(bad,target) and untouched==Snapshot.capture(target),"Corrupt chest rejected without partial mutation:"+mutation)
 	# The complete original v18 states were captured with the previous production code.
 	var baseline:Dictionary=JSON.parse_string(FileAccess.get_file_as_string(LEGACY_MANIFEST))
-	verify.call(Snapshot.VERSION==19 and Snapshot.fingerprint_for_v18()==baseline.fingerprint18,"New schema keeps the exact published18 fingerprint")
+	verify.call(Snapshot.VERSION==20 and Snapshot.fingerprint_for_v18()==baseline.fingerprint18,"New schema keeps the exact published18 fingerprint")
 	for row in baseline.records:
 		var old:Dictionary=FileAccess.open(LEGACY_MANIFEST.get_base_dir().path_join("old_"+row.tag+".bin"),FileAccess.READ).get_var(false)
 		var previous=State.new()
@@ -179,7 +179,7 @@ static func run(host,verify:Callable):
 	var ui=preload("res://tests/test_battle_save_notice.gd").make_ui(host,folder.path_join("ui"))
 	await host.get_tree().process_frame
 	Campaign.depart(ui)
-	verify.call(ui.simulation.encounter_version==1 and ui.run_store.pending.run.encounter_version==1,"Real production departure and its initial saved admission enable new campaign rules")
+	verify.call(ui.simulation.encounter_version==2 and ui.run_store.pending.run.encounter_version==2,"Real production departure and its initial saved admission enable new campaign rules")
 	var actual=ui.simulation
 	actual.spawn_clock=999;actual.shot_clock=999;actual._scatter_clock=999;actual._swarm_clock=999
 	drop(actual,5)

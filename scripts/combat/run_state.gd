@@ -17,6 +17,8 @@ var enemy_patterns = EnemyPatterns.new()
 var enemy_pattern_version:int=0
 const CampaignEncounters=preload("res://scripts/combat/campaign_encounters.gd")
 var encounters=CampaignEncounters.new()
+const CampaignPressure=preload("res://scripts/combat/campaign_pressure.gd")
+var pressure=CampaignPressure.new()
 var encounter_version:int=0 # Published battles keep their original population/rewards.
 var chest_pickups:Array[Dictionary]=[]
 var _chest_serial:int=0
@@ -168,7 +170,7 @@ func start(seed_value: int = 0, character_id: String = "viya", account_level: Va
 	var selected_profile := 1 if skill_ruleset=="weapons_v1" else 0
 	var selected_pattern:int=(3 if selected_profile==1 and mode=="campaign" else 0) if pattern_version==-1 else pattern_version
 	if selected_pattern not in [0,1,2,3] or (selected_pattern>0 and (selected_profile!=1 or mode!="campaign" or not enemy_patterns.available(selected_pattern))):return false
-	if encounter_rules not in [0,1] or (encounter_rules==1 and (mode!="campaign" or selected_profile!=1 or encounters.data.is_empty())):return false
+	if encounter_rules not in [0,1,2] or (encounter_rules>0 and (mode!="campaign" or selected_profile!=1 or encounters.data.is_empty() or (encounter_rules==2 and pressure.data.is_empty()))):return false
 	if selected_profile==1 and (not profiles.error.is_empty() or profiles.hero(character_id).is_empty() or (mode=="campaign" and not profiles.data.maps.has(selected_map))):
 		return false
 	var candidate: Dictionary = magic_configuration(hero,selected_profile,character_id)
@@ -554,6 +556,7 @@ func step(delta: float, direction: Vector2) -> void:
 		for index in range(encounters.batch(self,wave)):
 			_spawn_enemy()
 		spawn_clock = float(wave.interval)
+	pressure.tick(self,dt)
 	_tick_swarm(dt)
 	_tick_scatter(dt)
 	_move_enemies(dt)
@@ -631,13 +634,13 @@ func _spawn_enemy(kind: String = "normal") -> bool:
 	if run_mode=="gold_slime" and (kind!="normal" or enemies.size()>=int(dungeon.data.max_enemies)):return false
 	# Flying formations have their own lifetime; only reserve the ground boss slot.
 	var limit: int = population_limit() - (0 if _boss_spawned else 1)
-	if encounter_version==1 and kind=="normal":limit-=elite_schedule().size()-_elites_spawned
+	if encounter_version>0 and kind=="normal":limit-=elite_schedule().size()-_elites_spawned
 	if kind == "boss":
 		limit = population_limit()
 	if _ground_count() >= limit:
 		return false
 	if map_id != "legacy_arena":
-		var at: Variant = map_space.spawn_anchor(rng, player, elapsed, kind, visible_world(), 24.0)
+		var at: Variant = pressure.anchor(self,kind) if encounter_version==2 else map_space.spawn_anchor(rng, player, elapsed, kind, visible_world(), 24.0)
 		return add_enemy(at, kind, _roll_variant() if kind == "normal" else "normal") if at is Vector2 else false
 	for attempt in range(8):
 		var candidate := player + Vector2.from_angle(rng.randf_range(0.0, TAU)) * 590.0
@@ -766,7 +769,7 @@ func _move_enemy_bullets(dt: float) -> void:
 		if hit:
 			if damage_player(int(bullet.damage), "physical", 0.0, {"kind":"projectile", "direction":-bullet.velocity.normalized()}):
 				apply_slow(RANGED_SLOW_DURATION)
-		if hit or bullet.life <= 0.0 or wall_hit < 1.0:
+		if hit or bullet.life <= (0.000001 if encounter_version==2 else 0.0) or wall_hit < 1.0:
 			enemy_bullets.remove_at(index)
 		if phase != Phase.RUNNING:
 			return

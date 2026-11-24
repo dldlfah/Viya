@@ -17,8 +17,8 @@ static func valid_data(value:Variant)->bool:
 			previous=int(n)
 	return value.spawn_multipliers[0]==1 and value.ground_limits[0]==LEGACY_LIMIT and value.get("chest_min_upgrades")==1 and value.get("chest_max_upgrades")==5 and value.get("chest_drop_chance") is float and is_finite(value.chest_drop_chance) and value.chest_drop_chance>=0 and value.chest_drop_chance<=1
 func tier(elapsed:float)->int:return clampi(floori((elapsed+.000001)/float(data.minute_seconds)),0,5)
-func multiplier(version:int,elapsed:float)->int:return int(data.spawn_multipliers[tier(elapsed)]) if version==1 else 1
-func population_limit(version:int,elapsed:float)->int:return int(data.ground_limits[tier(elapsed)]) if version==1 else LEGACY_LIMIT
+func multiplier(version:int,elapsed:float)->int:return int(data.spawn_multipliers[tier(elapsed)]) if version>0 else 1
+func population_limit(version:int,elapsed:float)->int:return int(data.ground_limits[tier(elapsed)]) if version>0 else LEGACY_LIMIT
 func elite_times(rules:Dictionary,version:int)->Array:
 	if version==0:return rules.elites.duplicate()
 	var result:Array=[]
@@ -28,18 +28,18 @@ func elite_times(rules:Dictionary,version:int)->Array:
 		result.append(float(at))
 		previous=float(at)
 	return result
-func elite_index(version:int,index:int)->int:return mini(int(index/2),1) if version==1 else index
+func elite_index(version:int,index:int)->int:return mini(int(index/2),1) if version>0 else index
 func batch(state,wave:Dictionary)->int:
 	var count:int=int(wave.batch)*multiplier(state.encounter_version,state.elapsed)
 	if state.encounter_version==0:return count
 	return mini(count,maxi(0,population_limit(1,state.elapsed)-state._ground_count()))
 func drop(state,enemy:Dictionary)->void:
-	if state.encounter_version!=1 or state.phase!=state.Phase.RUNNING or enemy.kind!="elite" or state.chest_pickups.size()>=MAX_CHESTS:return
+	if state.encounter_version==0 or state.phase!=state.Phase.RUNNING or enemy.kind!="elite" or state.chest_pickups.size()>=MAX_CHESTS:return
 	if state.loot_rng.randf()>=float(data.chest_drop_chance):return
 	state._chest_serial+=1
 	state.chest_pickups.append({"id":state._chest_serial,"source":int(enemy.id),"p":enemy.p,"count":state.loot_rng.randi_range(int(data.chest_min_upgrades),int(data.chest_max_upgrades)),"seed":state.loot_rng.randi()})
 func collect(state,dt:float)->void:
-	if state.encounter_version!=1 or state.phase!=state.Phase.RUNNING:return
+	if state.encounter_version==0 or state.phase!=state.Phase.RUNNING:return
 	for i in range(state.chest_pickups.size()-1,-1,-1):
 		var chest:Dictionary=state.chest_pickups[i]
 		if chest.p.distance_squared_to(state.player)<=pow(float(state.stats.pickup),2):chest.p=chest.p.move_toward(state.player,420*dt)
@@ -76,7 +76,7 @@ func collect(state,dt:float)->void:
 			state.magic.invalidate_requests()
 		state.cues.record_item(state.player,"강화 상자",{"kind":"chest","upgrades":upgrades})
 func valid_run(run:Dictionary,world_size:Vector2)->bool:
-	if not run.get("encounter_version") is int or run.encounter_version not in [0,1]:return false
+	if not run.get("encounter_version") is int or run.encounter_version not in [0,1,2]:return false
 	if not run.get("chest_pickups") is Array or run.chest_pickups.size()>MAX_CHESTS:return false
 	if not run.get("_chest_bonus_ranks") is int or run._chest_bonus_ranks<0:return false
 	if not run.get("_chest_serial") is int or not run.get("_chests_opened") is int or not run.get("kills") is int:return false

@@ -80,7 +80,7 @@ static func run(host,verify:Callable) -> void:
 			plain.queue_redraw()
 			if frame%20==0:await host.get_tree().process_frame
 			same=same and Campaign.comparable(a)==Campaign.comparable(b)
-		verify.call(same and Snapshot.VERSION==19 and Snapshot.valid(Snapshot.capture(a),a),"Pilot/placeholder views preserve all authoritative fields and seven RNG over100production steps: "+map_id)
+		verify.call(same and Snapshot.VERSION==20 and Snapshot.valid(Snapshot.capture(a),a),"Pilot/placeholder views preserve all authoritative fields and seven RNG over100production steps: "+map_id)
 		pilot.queue_free()
 		plain.queue_free()
 		await host.get_tree().process_frame
