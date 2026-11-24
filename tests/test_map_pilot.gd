@@ -14,8 +14,10 @@ static func source_at(regions:Array,point:Vector2) -> Vector2:
 static func run(host,verify:Callable) -> void:
 	var slots=Slots.new()
 	verify.call(slots.definitions.size()==53 and slots.definitions.values().all(func(p):return p==""),"Map pilot leaves every shared/character presentation path blank")
-	verify.call(slots.map_definitions.keys()==["prologue_wall"] and slots.map_definitions.prologue_wall.size()==3,"Only the prologue receives the three pilot overrides")
+	verify.call(slots.map_definitions.keys()==["prologue_wall"] and slots.map_definitions.prologue_wall.size()==6,"Only the prologue receives the six pilot overrides")
 	var manifest:Dictionary=JSON.parse_string(FileAccess.get_file_as_string("res://assets/maps/pilot_01/source_manifest.json"))
+	var second:Dictionary=JSON.parse_string(FileAccess.get_file_as_string("res://assets/maps/pilot_02/source_manifest.json"))
+	manifest.assets.append_array(second.assets)
 	for asset in manifest.assets:
 		var texture:Texture2D=slots.map_texture(asset.slot,"prologue_wall")
 		verify.call(texture!=null and texture.get_size()==Vector2(asset.source_size[0],asset.source_size[1]) and FileAccess.get_sha256(texture.resource_path)==asset.sha256,"Production pilot loads the exact supplied PNG: "+str(asset.slot))
