@@ -4,7 +4,7 @@
 
 ## 세션 필수 문서
 
-[CURRENT_WORK](docs/CURRENT_WORK.md)와 **[누적 DEVELOPMENT_STATUS](docs/DEVELOPMENT_STATUS.md)**를 함께 읽는다. [PLANNED_WORK](docs/PLANNED_WORK.md) · [NEXT_TASK](docs/NEXT_TASK.md) · [AGENTS](AGENTS.md) · [제작 스킬](.agents/skills/viya-game-production/SKILL.md). GAME-041 코드 **`cdf54a4d46a97b3605e817afc6242343aad69075`**, 브랜치 `work/viya-turnaround-qa-20261117`. 문서 HEAD는 코드 뒤에 오며 main 자동 병합은 하지 않는다.
+[CURRENT_WORK](docs/CURRENT_WORK.md)와 **[누적 DEVELOPMENT_STATUS](docs/DEVELOPMENT_STATUS.md)**를 함께 읽는다. [PLANNED_WORK](docs/PLANNED_WORK.md) · [NEXT_TASK](docs/NEXT_TASK.md) · [AGENTS](AGENTS.md) · [제작 스킬](.agents/skills/viya-game-production/SKILL.md). GAME-042 코드 **`c63a5e40451e28a9642f08d7701920f95dcb46dd`**, 브랜치 `work/viya-turnaround-qa-20261117`. 문서 HEAD는 코드 뒤에 오며 main 자동 병합은 하지 않는다.
 
 ## 실제 플레이 경로
 
@@ -35,7 +35,7 @@
 
 사용자 가이드에 맞춰 **차콜/황동 전투 HUD·진홍 룬 MP 버튼·두 줄 아이콘/단계·모바일 임무 펼침/복귀**를 연결했다. 상단 시간/공세·금화와 표준 폭의 작은 레이더는 실제 상태만 표시한다. 바닥/벽/몬스터는 교체 가능한 임시 표현이며 가이드 그림은 최종 아트로 승인되지 않았다. ART-001 기준/GEN-005 승인 대기·게임 미연결·3D보류를 유지한다.
 
-실제 이동 방향으로 **최대화면8% 전방 카메라**를 적용했다. 정지/반전은 부드럽게 보정하고 임무/선택/일시정지에서 멈춘다. 두 렌더러·좌표 변환/가림/경고가 표시 중심을 공유한다. 기존 생성에는1.16배 고정 안전영역을 적용하며 보간 이력은 저장/RNG에 넣지 않는다. 실제폰의 카메라 체감과 새 시야의6분 균형은 별도 검증이다.
+이동 카메라는 **중앙 여유 범위 안에서 고정**된다. 범위를 벗어나면 실제 이동 방향/속도 이내에서만 따라가며,방향 앞서 보기와 정지/반전 뒤 잔여 이동은 제거했다. 임무/선택/정지에서 유지하고Continue에서 추가 중앙 복귀를 하지 않는다. 두 렌더러·좌표 변환/위험 표시는 같은 중심을 쓰고 표시 각 축±8%/고정 생성 시야1.16과 전투·저장/RNG는 유지한다. 실제폰/사용자의 체감 확인은 별도다.
 
 밀집 전투에서는 아군 장식을 자동으로 줄이고 피해 숫자를 실제HP 기준으로 묶어 겹치지 않게 배치한다. 아이템/보스·정예/치명타를 우선하며 적 탄환·조준/접근 경고와 실제 범위 경계는 보존한다. 표시 제한은 실제 피해/적 수/보상을 바꾸지 않는다.
 
@@ -67,7 +67,7 @@
 
 ## 검증
 
-Godot4.7.2 임포트·기존7묶음 **3794native**·부트,139소스/6계약·기존negative30/Python12 PASS.27메인+성벽 전후6화면/실제입력·20연속렌더 이동과3별도 복원을 확인했다. 다른 맵/F8의3쌍 픽셀이 같고,저장18·전투 등82기존 파일과7난수/각100단계 진행을 보존했다. [정확한 소스와 근거](docs/validation/GAME041_REPORT.json). 이번에 새6분/성능·경제 표본은 실행하지 않았다. 이전 GAME040의 **기존20/20→신규19/20·무강화407패배/균형OPEN**과 모바일·최종 아트 미검증은 남아 있다.
+Godot4.7.2 임포트·기존7묶음 **3801native**·부트,139소스/6계약·negative33/Python12 PASS. 같은 실제터치 조작의기존/수정후각120렌더프레임(권위상태120개 일치),16화면·3별도복원을 확인했다.0.05초 비교에서최대카메라이동44.7986→11.75·정지후잔여이동64.1675→0이다. [수정 후 영상](docs/validation/GAME042_CAMERA_AFTER.mp4)·[이전 영상](docs/validation/GAME042_CAMERA_BEFORE.mp4)·[정확한 소스와 근거](docs/validation/GAME042_REPORT.json). 새6분/성능·경제 표본은 실행하지 않았고,GAME040의19/20·무강화407패배/균형OPEN과 모바일·사용자체감/최종아트 미검증은 남아 있다.
 
 ```sh
 python3 tools/check_project.py --godot /actual/path/to/Godot
@@ -82,7 +82,7 @@ Godot --headless --path . --script res://tests/measure_enemy_curse.gd
 Godot --headless --audio-driver Dummy --path . --script res://tests/measure_combat_audio.gd
 ```
 
-GAME-022 당시 공격 강화 우선 선택의 동일 조작 대조에서 캠페인은20회 모두11~12선택/공격Lv5 2종,19클리어·1시간초과였다. 골드던전10회는모두8선택/Lv5 1종·클리어다. 선택 시점/관통별 실제TTK/가격1000·50000·1000000의42경제시나리오를 기록했다. 하루던전2+캠페인1의고정수입가정에서첫특성Lv3약5~6일/전체18Lv3약89~91일이다. 모바일 기기가없어실기FPS/발열은미검증이며Linux부하계측을그것으로대체하지않는다. 구설정407시간초과는 재현되며 GAME-029의4표본 클리어를 전체 균형·안내 효과로 확대하지 않는다. 다음 GAME-042는 주술사 패턴의 실전 교전·재추적 균형 보완이다.
+GAME-022 당시 공격 강화 우선 선택의 동일 조작 대조에서 캠페인은20회 모두11~12선택/공격Lv5 2종,19클리어·1시간초과였다. 골드던전10회는모두8선택/Lv5 1종·클리어다. 선택 시점/관통별 실제TTK/가격1000·50000·1000000의42경제시나리오를 기록했다. 하루던전2+캠페인1의고정수입가정에서첫특성Lv3약5~6일/전체18Lv3약89~91일이다. 모바일 기기가없어실기FPS/발열은미검증이며Linux부하계측을그것으로대체하지않는다. 구설정407시간초과는 재현되며 GAME-029의4표본 클리어를 전체 균형·안내 효과로 확대하지 않는다. 다음 GAME-043은 주술사 패턴의 실전 교전·재추적 균형 보완이다.
 
 ```sh
 Godot --headless --path . --script res://tests/measure_balance.gd -- --map=gold_slime --talents=none
