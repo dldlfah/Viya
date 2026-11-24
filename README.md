@@ -4,7 +4,11 @@
 
 ## 세션 필수 문서
 
-[CURRENT_WORK](docs/CURRENT_WORK.md)와 **[누적 DEVELOPMENT_STATUS](docs/DEVELOPMENT_STATUS.md)**를 함께 읽는다. [PLANNED_WORK](docs/PLANNED_WORK.md) · [NEXT_TASK](docs/NEXT_TASK.md) · [AGENTS](AGENTS.md) · [제작 스킬](.agents/skills/viya-game-production/SKILL.md). GAME-053 코드 **`73bd1a148ab5b932cfb6833914370df60a804768`**, 브랜치 `work/viya-turnaround-qa-20261117`. 문서 HEAD는 코드 뒤에 오며 main 자동 병합은 하지 않는다.
+[CURRENT_WORK](docs/CURRENT_WORK.md)와 **[누적 DEVELOPMENT_STATUS](docs/DEVELOPMENT_STATUS.md)**를 함께 읽는다. [PLANNED_WORK](docs/PLANNED_WORK.md) · [NEXT_TASK](docs/NEXT_TASK.md) · [AGENTS](AGENTS.md) · [제작 스킬](.agents/skills/viya-game-production/SKILL.md). GAME-054 코드 **`d3152934278263ca3889a6eba1f5f83f160257c4`**, 브랜치 `work/viya-turnaround-qa-20261117`. 문서 HEAD는 코드 뒤에 오며 main 자동 병합은 하지 않는다.
+
+## 비야 반응형 초상화 준비
+
+전투 기본·피격 고통·HP 아이템 회복/안도·레벨업 기쁨의 네 표정 전환을 기존 전투에 연결했다. 정지/선택 동결·피격 우선·이어하기의 과거 반응 재생 방지를 확인했다. 이미지 경로는 비어 있으며 승인 원화가 준비되면 교체한다. [연결 안내](docs/design/PORTRAIT_SYSTEM.md) · [실제 임시 표시](docs/validation/GAME054_HEAL.png) · [검증](docs/validation/GAME054_REPORT.json). 표정 원화 제작/모바일 실기 검증은 후속이다.
 
 ## 적 전멸 아이템 연출
 
