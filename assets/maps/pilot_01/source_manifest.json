@@ -1,0 +1,86 @@
+{
+  "schema": "viya-map-pilot-art-1",
+  "name": "VIYA Map Pilot 01",
+  "date_kst": "2026-11-24",
+  "status": "pilot_integration_candidate",
+  "art_approval": "not_final_approved",
+  "repo": "dldlfah/Viya",
+  "branch": "work/viya-turnaround-qa-20261117",
+  "repo_head_checked": "fca5823db79e9810105719ee76f165a600dfa99f",
+  "scope": "Generated assets and handoff only; no repository modification or Godot run",
+  "intended_pilot_map": "prologue_wall",
+  "assets": [
+    {
+      "file": "textures/stone_floor_tile.png",
+      "slot": "stone_floor_tile",
+      "proposed_resource_path": "res://assets/maps/pilot_01/stone_floor_tile.png",
+      "source_size": [
+        224,
+        160
+      ],
+      "display_size": [
+        112,
+        80
+      ],
+      "display_space": "world",
+      "projection": "unprojected_top_down",
+      "transparency": "opaque",
+      "bytes": 47947,
+      "sha256": "9beefd01712a5c45b71908ad679d105b00a7ce6b99e61a639e384b7de06257e6"
+    },
+    {
+      "file": "textures/wall_segment.png",
+      "slot": "wall_segment",
+      "proposed_resource_path": "res://assets/maps/pilot_01/wall_segment.png",
+      "source_size": [
+        192,
+        244
+      ],
+      "display_size": [
+        96,
+        122
+      ],
+      "display_space": "screen",
+      "projection": "front_material_only",
+      "transparency": "opaque",
+      "bytes": 63500,
+      "sha256": "15b4a1a6f64b88df88424075d6710c0761cac7e7ac30dfc3ff889d0b3705d11a"
+    },
+    {
+      "file": "textures/prop_crate.png",
+      "slot": "prop_crate",
+      "proposed_resource_path": "res://assets/maps/pilot_01/prop_crate.png",
+      "source_size": [
+        92,
+        86
+      ],
+      "display_size": [
+        46,
+        43
+      ],
+      "display_space": "screen",
+      "projection": "high_front_orthographic",
+      "transparency": "alpha",
+      "bytes": 11929,
+      "sha256": "7a0fefb9f935a5026e1bb9ded4029542e9f33323bbac87481f22144ece712edc",
+      "pivot": [
+        0.5,
+        1.0
+      ],
+      "visible_bbox": [
+        0,
+        23,
+        92,
+        86
+      ]
+    }
+  ],
+  "constraints": [
+    "Floor is a global slot in the current renderer; scope the pilot override to prologue_wall.",
+    "Floor Y projection is applied by engine, approximately sin(60 degrees).",
+    "Wall texture contains only the vertical front; top geometry remains procedural.",
+    "Wall phase/cropping issues inferred from source require actual pan verification.",
+    "Crate is intact state only; existing destroyed prop visuals remain in use.",
+    "Mobile readability score and performance are not established by these image checks."
+  ]
+}

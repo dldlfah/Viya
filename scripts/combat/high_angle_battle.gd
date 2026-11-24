@@ -1,6 +1,6 @@
 extends RefCounted
 ## One shared canvas, bounded visible tile loops and sorted draw commands.
-## No actor nodes, RNG, simulation writes, dynamic lights or generated artwork.
+## No actor nodes, RNG, simulation writes or dynamic lights.
 const BattleProjection = preload("res://scripts/combat/battle_projection.gd")
 const Visuals = preload("res://scripts/combat/attack_visuals.gd")
 const Approaches = preload("res://scripts/combat/approach_cues.gd")
@@ -89,7 +89,7 @@ func draw(view) -> void:
 
 func _draw_ground() -> void:
 	var bounds := visible.grow(100).intersection(Rect2(Vector2.ZERO,state.world_size))
-	var tile: Texture2D = canvas.art.texture("stone_floor_tile")
+	var tile: Texture2D = canvas.art.map_texture("stone_floor_tile",state.map_id)
 	if not tile:tile=materials.floor_tile(state.map_id)
 	for y in range(floori(bounds.position.y/80), ceili(bounds.end.y/80)):
 		for x in range(floori(bounds.position.x/112), ceili(bounds.end.x/112)):
@@ -177,7 +177,7 @@ func _draw_prop(prop: Dictionary) -> void:
 	var color := Color("a48254") if prop.style=="crate" else (Color("9c7159") if prop.style=="urn" else Color("8d8d7e"))
 	var flash:float=state.cues.flash_alpha(int(prop.id))
 	color=color.lerp(Color("fff1db"),flash)
-	var texture: Texture2D = canvas.art.texture("prop_"+prop.style)
+	var texture: Texture2D = canvas.art.map_texture("prop_"+prop.style,state.map_id)
 	if texture:canvas.draw_texture_rect(texture,Rect2(feet-Vector2(23,43),Vector2(46,43)),false,Color.WHITE.lerp(Color(1.8,1.8,1.8),flash))
 	elif prop.style=="urn":
 		canvas.draw_circle(feet-Vector2(0,20),17,color.darkened(.15))
@@ -197,6 +197,22 @@ func _draw_prop(prop: Dictionary) -> void:
 		canvas.draw_rect(Rect2(feet-Vector2(20,49),Vector2(40,3)),Color("342b2b"))
 		canvas.draw_rect(Rect2(feet-Vector2(20,49),Vector2(40.0*prop.hp/prop.max_hp,3)),Color("c7a674"))
 
+static func material_regions(world:Rect2,front:Rect2,window:Rect2,texture_size:Vector2) -> Array:
+	# X is unrotated world distance. Clip both the wall face and the viewport,
+	# retaining the matching source subrectangle instead of stretching edge tiles.
+	var result:Array=[]
+	var visible_front:Rect2=front.intersection(window)
+	if not visible_front.has_area():return result
+	var first:float=world.position.x+visible_front.position.x-front.position.x
+	var last:float=world.position.x+visible_front.end.x-front.position.x
+	var scale:Vector2=texture_size/Vector2(96,front.size.y)
+	for x in range(floori(first/96)*96,ceili(last),96):
+		var tile:=Rect2(Vector2(front.position.x+x-world.position.x,front.position.y),Vector2(96,front.size.y))
+		var destination:Rect2=tile.intersection(front).intersection(window)
+		if not destination.has_area():continue
+		result.append({"destination":destination,"source":Rect2((destination.position-tile.position)*scale,destination.size*scale)})
+	return result
+
 func _draw_obstacle(obstacle: Dictionary) -> void:
 	var box: Rect2 = state.MapCatalog.rectangle(obstacle.rect)
 	var height: float = 122 if obstacle.kind=="wall" else 65
@@ -209,10 +225,11 @@ func _draw_obstacle(obstacle: Dictionary) -> void:
 	canvas.draw_rect(top,stone.lightened(.13))
 	canvas.draw_rect(Rect2(Vector2(base.position.x,top.end.y),Vector2(base.size.x,height)),stone.darkened(.16))
 	canvas.draw_rect(top,Color("b39b73",alpha),false,2)
-	var texture: Texture2D = canvas.art.texture("wall_segment" if obstacle.kind=="wall" else "ruin_block")
+	var texture: Texture2D = canvas.art.map_texture("wall_segment" if obstacle.kind=="wall" else "ruin_block",state.map_id)
 	if texture:
-		for x in range(floori(maxf(base.position.x,0)/96)*96,ceili(minf(base.end.x,canvas.size.x)),96):
-			canvas.draw_texture_rect(texture,Rect2(Vector2(x,top.end.y),Vector2(96,height)),false,Color(1,1,1,alpha))
+		var front:=Rect2(Vector2(base.position.x,top.end.y),Vector2(base.size.x,height))
+		for region in material_regions(box,front,viewport,texture.get_size()):
+			canvas.draw_texture_rect_region(texture,region.destination,region.source,Color(1,1,1,alpha))
 	else:
 		for row in range(4):
 			var y:float=top.end.y+row*height/4

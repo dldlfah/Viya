@@ -1,0 +1,7 @@
+{
+  "prologue_wall": {
+    "stone_floor_tile": "res://assets/maps/pilot_01/stone_floor_tile.png",
+    "wall_segment": "res://assets/maps/pilot_01/wall_segment.png",
+    "prop_crate": "res://assets/maps/pilot_01/prop_crate.png"
+  }
+}
