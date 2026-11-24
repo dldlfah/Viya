@@ -75,6 +75,7 @@ func draw(view) -> void:
 				var alpha:float=clampf(float(effect.life)/maxf(.001,float(effect.get("duration",.25))),0,1)
 				CombatSkin.rune(canvas,effect.p,reach*.78,Color("d95b75",alpha*.8),true)
 	canvas.draw_set_transform_matrix(Transform2D.IDENTITY)
+	canvas.PurgeFeedback.draw(canvas)
 	canvas._draw_combat_cues()
 	canvas.IncomingFeedback.draw(canvas,canvas.incoming_plan)
 	canvas._draw_foreground_threats()

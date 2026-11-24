@@ -131,6 +131,7 @@ var run_mode: String = "campaign"
 var dungeon_day: int = -1
 var gold_reward_version:int=0 # Published1-14 keep original drops throughout Continue.
 const LootAttraction=preload("res://scripts/combat/loot_attraction.gd")
+const PurgeFeedback=preload("res://scripts/combat/purge_feedback.gd")
 var loot_rules_version:int=0 # Existing entries keep their amounts and instant magnet.
 var dungeon = preload("res://scripts/combat/gold_dungeon.gd").new()
 func enemy_definition(id: String) -> Dictionary:
@@ -1257,6 +1258,8 @@ func _apply_supply(kind: String) -> void:
 	# Observe committed deltas only; keep the existing effect/reward order unchanged.
 	var supply_before:Dictionary={"hp":hp,"mp":magic.mana,"gold":gold_collected,"kills":kills,"bullets":enemy_bullets.size()}
 	var supply_xp:float=0.0
+	var purge_marks:Array[Vector2]=[]
+	if kind=="purge" and cues.enabled:purge_marks=PurgeFeedback.capture(enemies,visible_world())
 	match kind:
 		"hp":
 			_heal_hp(max_hp * SupplyCatalog.RECOVERY_FRACTION)
@@ -1284,6 +1287,7 @@ func _apply_supply(kind: String) -> void:
 					_defeat_enemy(index)
 			enemy_bullets.clear()
 	cues.record_item(player, str(SupplyCatalog.ITEM_NAMES[kind]), {"kind":kind,"hp":hp-int(supply_before.hp),"mp":magic.mana-float(supply_before.mp),"gold":gold_collected-int(supply_before.gold),"kills":kills-int(supply_before.kills),"bullets":int(supply_before.bullets)-enemy_bullets.size(),"xp":supply_xp})
+	if kind=="purge":PurgeFeedback.attach(cues,purge_marks)
 
 func _clear_stage() -> void:
 	if phase not in [Phase.RUNNING, Phase.CHOOSING] or (run_mode=="campaign" and not _boss_defeated) or elapsed + 0.000001 < stage_duration:

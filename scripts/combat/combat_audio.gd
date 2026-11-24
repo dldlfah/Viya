@@ -89,7 +89,7 @@ func finish(state, was_running:bool, foreground:bool=true) -> void:
 			if state.gold_collected>int(captured.gold):requests.append("pickup")
 			for event in state.cues.events:
 				if event.kind not in ["hit","xp","item"] or not grew(event):continue
-				var kind:String="hit" if event.kind=="hit" else "pickup"
+				var kind:String="purge" if event.kind=="item" and event.get("supply",{}).get("kind","")=="purge" else ("hit" if event.kind=="hit" else "pickup")
 				if not requests.has(kind):requests.append(kind)
 	requests.sort_custom(func(a,b):return Bank.SPECS[a].priority>Bank.SPECS[b].priority)
 	var count:=0

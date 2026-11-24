@@ -7,6 +7,7 @@ const SPECS := {
 	"hurt":{"seconds":.16,"gap":.15,"priority":80,"db":-3.0},
 	"magic":{"seconds":.42,"gap":.25,"priority":70,"db":-4.0},
 	"pickup":{"seconds":.085,"gap":.30,"priority":10,"db":-10.0},
+	"purge":{"seconds":.44,"gap":.35,"priority":75,"db":-6.0},
 	"level":{"seconds":.36,"gap":.25,"priority":90,"db":-4.0},
 	"clear":{"seconds":.52,"gap":.5,"priority":100,"db":-4.0},
 	"defeat":{"seconds":.46,"gap":.5,"priority":100,"db":-4.0}
@@ -38,6 +39,9 @@ static func stream(kind:String) -> AudioStreamWAV:
 				texture=noise*.45
 			"hurt":frequency=220-120*progress
 			"magic":frequency=160+780*progress*progress
+			"purge":
+				frequency=220*pow(.2,progress)
+				texture=noise*.55*(1-progress)
 			"pickup":frequency=880 if progress<.5 else 1320
 			"level":frequency=[523.25,659.25,783.99][mini(2,int(progress*3))]
 			"clear":frequency=[523.25,659.25,783.99,1046.5][mini(3,int(progress*4))]

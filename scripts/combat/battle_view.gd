@@ -6,6 +6,7 @@ const BattleProjection = preload("res://scripts/combat/battle_projection.gd")
 const Display=preload("res://scripts/combat/combat_display.gd")
 const BossGuidance=preload("res://scripts/combat/boss_guidance.gd")
 const SupplyFeedback=preload("res://scripts/combat/supply_feedback.gd")
+const PurgeFeedback=preload("res://scripts/combat/purge_feedback.gd")
 const IncomingFeedback=preload("res://scripts/combat/incoming_feedback.gd")
 var incoming_plan:Dictionary={}
 var boss_guidance:Dictionary={}
@@ -156,6 +157,7 @@ func _draw() -> void:
 		draw_circle(center, 16.0, player_color)
 		draw_line(center + direction * 6.0, center + direction * 34.0, Color("3a3e48"), 8.0, true)
 		draw_arc(center, 24.0, 0.0, TAU, 36, Color("b69a65"), 1.4, true)
+	PurgeFeedback.draw(self)
 	_draw_combat_cues()
 	IncomingFeedback.draw(self,incoming_plan)
 	_draw_foreground_threats()

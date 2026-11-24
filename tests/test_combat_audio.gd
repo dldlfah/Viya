@@ -31,7 +31,7 @@ static func run(host,verify:Callable)->void:
 		var peak:=0
 		for index in range(0,stream.data.size(),2):peak=maxi(peak,absi(stream.data.decode_s16(index)))
 		valid=valid and peak>1000 and peak<=5900 and stream.data.decode_s16(0)==0 and stream.data.decode_s16(stream.data.size()-2)==0
-	verify.call(valid and Bank.cache.size()==8,"Eight cached16bit PCM placeholders have audible nonzero data,bounded peaks and zero endpoints")
+	verify.call(valid and Bank.cache.size()==9,"Nine cached16bit PCM placeholders have audible nonzero data,bounded peaks and zero endpoints")
 	verify.call(is_same(Bank.stream("fire"),Bank.stream("fire")) and Snapshot.capture(state)==saved,"PCM caching allocates no repeated stream and touches no gameplay/RNG")
 	var audio=Audio.new()
 	host.get_tree().root.add_child(audio)
