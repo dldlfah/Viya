@@ -42,11 +42,12 @@ func camera_center() -> Vector2:
 		var projected:Vector2=ObliqueProjection.screen_direction(lag,size)
 		var fraction:float=minf(1,minf(size.x*.08/maxf(.001,absf(projected.x)),size.y*.08/maxf(.001,absf(projected.y))))
 		var target:Vector2=simulation.player+lag*fraction
-		return target if simulation.map_id=="legacy_arena" else simulation.map_space.camera_center(target,extent)
+		var center:Vector2=target if simulation.map_id=="legacy_arena" else simulation.map_space.camera_center(target,ObliqueProjection.world_view_size(size))
+		return ObliqueProjection.keep_player_visible(simulation.player,center,size)
 	return camera.center(simulation,size)
 
 func spawn_guard_size() -> Vector2:
-	return camera.guard_size(size)
+	return world_view_size()*(1.0+2.0*camera.MAX_OFFSET_FRACTION)
 
 func advance_camera(delta: float, displacement: Vector2, active: bool) -> void:
 	camera.advance(simulation,size,displacement,delta,active)
@@ -84,9 +85,8 @@ func screen_to_world(at: Vector2) -> Vector2:
 	return ground_transform().affine_inverse()*at if high_angle else at+camera_center()-size*.5
 
 func world_view_size() -> Vector2:
-	# The comparison toggle does not change saved viewport geometry or spawn RNG.
-	# Unshifted extent; spawn_guard_size also covers the entire possible lead.
-	return BattleProjection.world_view_size(size)
+	# Layout feeds this actual display footprint into the existing viewport input.
+	return ObliqueProjection.world_view_size(size) if uses_oblique() else BattleProjection.world_view_size(size)
 
 func _screen(at: Vector2) -> Vector2:
 	return world_to_screen(at)

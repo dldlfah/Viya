@@ -3,6 +3,7 @@ extends RefCounted
 ## No projectile, damage, clock, save, RNG or source-image mutation.
 var config:Dictionary=JSON.parse_string(FileAccess.get_file_as_string("res://data/viya_motion.json"))
 var _alpha:Dictionary={}
+static var _verified_alpha:Dictionary={} # Immutable texture instances; bounded across views.
 var _decoded:Dictionary={}
 var _shot_offsets:Dictionary={}
 var _run_id:String=""
@@ -16,6 +17,9 @@ func accepts(view) -> bool:
 func transparent(texture:Texture2D) -> bool:
 	var key:int=texture.get_instance_id()
 	if _alpha.has(key):return _alpha[key]
+	if _verified_alpha.has(key):
+		_alpha[key]=_verified_alpha[key]
+		return _alpha[key]
 	var pixels:Image=texture.get_image()
 	var valid:bool=pixels!=null and not pixels.is_empty() and pixels.detect_alpha()!=Image.ALPHA_NONE
 	if valid:
@@ -24,6 +28,8 @@ func transparent(texture:Texture2D) -> bool:
 		for uv in [Vector2(.04,.04),Vector2(.96,.04),Vector2(.04,.96),Vector2(.96,.96),Vector2(.08,.065),Vector2(.92,.065)]:
 			valid=valid and pixels.get_pixelv(Vector2i(uv*Vector2(pixels.get_size()-Vector2i.ONE))).a<.01
 	_alpha[key]=valid
+	if _verified_alpha.size()>=512:_verified_alpha.clear()
+	_verified_alpha[key]=valid
 	return valid
 
 func decoded(path:String) -> Texture2D:
@@ -95,16 +101,33 @@ static func draw(canvas, art, visual:Dictionary, feet:Vector2) -> void:
 	if not source.has_area():
 		canvas.draw_texture_rect(texture,box,false,Color.WHITE)
 		return
-	# Continuous strip edges keep the legs planted while only the upper body recoils.
+	# A single textured primitive avoids the independent strip boundaries that
+	# can show seams on compatibility drivers. Idle/run needs no mesh at all.
 	var recoil:Vector2=canvas.project_direction(visual.facing).normalized()*float(visual.get("recoil",0))*box.size.y*.009
-	for index in range(12):
-		var a:float=index/12.0
-		var b:float=(index+1)/12.0
-		var shift_a:Vector2=-recoil*(1-smoothstep(.25,.55,a))
-		var shift_b:Vector2=-recoil*(1-smoothstep(.25,.55,b))
-		var points:=PackedVector2Array([box.position+Vector2(0,a*box.size.y)+shift_a,box.position+Vector2(box.size.x,a*box.size.y)+shift_a,box.position+Vector2(box.size.x,b*box.size.y)+shift_b,box.position+Vector2(0,b*box.size.y)+shift_b])
-		var uv:=PackedVector2Array([source.position/texture.get_size()+Vector2(0,a*source.size.y/texture.get_height()),Vector2(source.end.x,source.position.y+a*source.size.y)/texture.get_size(),Vector2(source.end.x,source.position.y+b*source.size.y)/texture.get_size(),Vector2(source.position.x,source.position.y+b*source.size.y)/texture.get_size()])
-		canvas.draw_polygon(points,PackedColorArray([Color.WHITE]),uv,texture)
+	if recoil.is_zero_approx():canvas.draw_texture_rect_region(texture,box,source)
+	else:
+		var vertices:=PackedVector2Array()
+		var uv:=PackedVector2Array()
+		var indices:=PackedInt32Array()
+		for row in range(13):
+			var t:float=row/12.0
+			var shift:Vector2=-recoil*(1-smoothstep(.25,.55,t))
+			for side in range(2):
+				vertices.append(box.position+Vector2(side*box.size.x,t*box.size.y)+shift)
+				uv.append((source.position+Vector2(side*source.size.x,t*source.size.y))/texture.get_size())
+			if row<12:
+				var start:int=row*2
+				indices.append_array(PackedInt32Array([start,start+1,start+3,start,start+3,start+2]))
+		var arrays:=[]
+		arrays.resize(Mesh.ARRAY_MAX)
+		arrays[Mesh.ARRAY_VERTEX]=vertices
+		arrays[Mesh.ARRAY_TEX_UV]=uv
+		arrays[Mesh.ARRAY_INDEX]=indices
+		var mesh:=ArrayMesh.new()
+		mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES,arrays,[],{},Mesh.ARRAY_FLAG_USE_2D_VERTICES)
+		# Canvas draw commands keep a RID; retain its owner until the next redraw.
+		canvas.set_meta("viya_recoil_mesh",mesh)
+		canvas.draw_mesh(mesh,texture)
 	if visual.pose=="attack" and float(visual.get("shot_age",1000))<.075:
 		var at:Vector2=muzzle(art,visual,feet)
 		var aim:Vector2=canvas.project_direction(visual.facing).normalized()

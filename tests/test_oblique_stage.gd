@@ -8,13 +8,15 @@ const Snapshot=preload("res://scripts/progression/run_snapshot.gd")
 const Campaign=preload("res://tests/test_campaign.gd")
 
 static func run(host,verify:Callable) -> void:
+	var basis:=Oblique.basis(Vector2(1280,526))
+	verify.call(is_equal_approx(basis.x.x,cos(Oblique.YAW)) and is_equal_approx(basis.y.x,-sin(Oblique.YAW)),"Wide survivor view never zooms scenery/pickups to fit an old axis-aligned envelope")
 	var state=State.new()
 	state.start(5501,"viya",null,"siege_battlefield","weapons_v1")
 	var view=View.new();view.simulation=state
 	host.get_tree().root.add_child(view)
 	for size in [Vector2(1280,526),Vector2(960,396),Vector2(797,266),Vector2(1544,520)]:
 		view.size=size
-		var exact:=true;var covered:=true;var mapped:=true
+		var exact:=true;var covered:=true;var mapped:=true;var player_safe:=true
 		for player in [Vector2(31,31),Vector2(4969,3169),Vector2(2500,600),Vector2(2500,1700)]:
 			state.player=player;state.spawn_view_size=view.spawn_guard_size();view.camera.reset(state.run_id)
 			view.advance_camera(.05,Vector2.ZERO,true)
@@ -23,13 +25,15 @@ static func run(host,verify:Callable) -> void:
 				for point in [Vector2.ZERO,Vector2(size.x,0),size,Vector2(0,size.y),size*.5]:
 					var at:Vector2=view.screen_to_world(point)
 					exact=exact and view.world_to_screen(at).distance_to(point)<.01
-					covered=covered and state.visible_world().grow(.02).has_point(at) and state.map_space.camera_bounds.grow(.02).has_point(at)
+					covered=covered and (not state.map_space.camera_bounds.has_point(at) or state.visible_world().grow(.02).has_point(at))
+				player_safe=player_safe and Rect2(Vector2.ZERO,size).grow(-20).has_point(view.world_to_screen(player)) and view.world_to_screen(player).y>=size.y*.30
 		for index in range(8):
 			var input:=Vector2.from_angle(index*PI/4)*.5
 			var movement:Vector2=view.input_direction(input)
 			mapped=mapped and is_equal_approx(movement.length(),.5) and view.project_direction(movement).normalized().distance_to(input.normalized())<.001
 		verify.call(exact,"Oblique viewport corners/inverse roundtrip on four camera edges:"+str(size))
-		verify.call(covered,"All tilted corners remain inside unchanged1.16spawn guard/map bounds, including maximal camera lag:"+str(size))
+		verify.call(covered,"All on-map tilted corners remain inside the actual spawn guard, including maximal camera lag:"+str(size))
+		verify.call(player_safe,"At all four map edges the full hero stays above the HUD, including maximal camera lag:"+str(size))
 		verify.call(mapped and view.input_direction(Vector2.ZERO)==Vector2.ZERO,"Eight screen input directions/analog strength retain world speed:"+str(size))
 	view.size=Vector2(1280,526)
 	verify.call(view.uses_oblique() and absf(view.project_direction(Vector2.RIGHT).y)>0.1,"Stage1 world axes are actually slanted with a fixed azimuth")
@@ -71,9 +75,9 @@ static func run(host,verify:Callable) -> void:
 				state.player=edge;state.spawn_view_size=view.spawn_guard_size();view.camera.reset(state.run_id);view.advance_camera(.05,Vector2.ZERO,true)
 				for pixel in [Vector2.ZERO,Vector2(viewport.x,0),viewport,Vector2(0,viewport.y)]:
 					var world:Vector2=view.screen_to_world(pixel)
-					corners_ok=corners_ok and view.world_to_screen(world).distance_to(pixel)<.01 and state.visible_world().grow(.02).has_point(world)
-					if map!="legacy_arena":corners_ok=corners_ok and state.map_space.camera_bounds.grow(.02).has_point(world)
-			verify.call(corners_ok,"Every map's two camera edges fit inverse/spawn guard without changing legacy bounds:"+map+str(viewport))
+					corners_ok=corners_ok and view.world_to_screen(world).distance_to(pixel)<.01 and (not state.map_space.camera_bounds.has_point(world) or state.visible_world().grow(.02).has_point(world))
+					if map!="legacy_arena":corners_ok=corners_ok and Rect2(Vector2.ZERO,viewport).grow(-20).has_point(view.world_to_screen(edge))
+			verify.call(corners_ok,"Every map's two camera edges fit inverse/spawn guard using the actual wide viewport:"+map+str(viewport))
 	view.queue_free();await host.get_tree().process_frame
 	var ui=load("res://scenes/main.tscn").instantiate()
 	var folder:="user://oblique-"+Crypto.new().generate_random_bytes(8).hex_encode()

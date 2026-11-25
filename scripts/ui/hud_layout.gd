@@ -17,8 +17,8 @@ static func build(viewport_size: Vector2, safe_area: Rect2 = Rect2()) -> Diction
 	var inner := safe.grow(-margin)
 	var compact := inner.size.x < COMPACT_WIDTH
 	# The small-screen header folds secondary information instead of stealing FOV.
-	var top_height := clampf(safe.size.y * 0.067, 32.0, 48.0)
-	var bottom_height := clampf(safe.size.y * 0.16, 58.0, 112.0)
+	var top_height := clampf(safe.size.y * 0.059, 32.0, 42.0)
+	var bottom_height := clampf(safe.size.y * 0.133, 58.0, 96.0)
 	var top := Rect2(inner.position, Vector2(inner.size.x, top_height))
 	var bottom := Rect2(Vector2(inner.position.x, inner.end.y-bottom_height), Vector2(inner.size.x,bottom_height))
 	var battle := Rect2(Vector2(inner.position.x,top.end.y+gap),Vector2(inner.size.x,bottom.position.y-top.end.y-gap*2))

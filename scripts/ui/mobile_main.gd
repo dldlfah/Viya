@@ -91,7 +91,7 @@ func _physics_process(delta: float) -> void:
 	if _account_reset_pending:return
 	combat_audio.prepare(simulation,not overlay.visible)
 	var track_enemies:bool=view.tracks_enemy_motion()
-	var motion_region:Rect2=(view.BattleProjection.visible_world(view.camera_center(),view.size) if view.high_angle else Rect2(view.camera_center()-view.size*.5,view.size)).grow(180)
+	var motion_region:Rect2=(view.ground_visible() if view.high_angle else Rect2(view.camera_center()-view.size*.5,view.size)).grow(180)
 	view.actors.prepare(simulation,track_enemies,motion_region)
 	var before:Vector2=simulation.player
 	var active:bool=simulation.phase==RunState.Phase.RUNNING and not overlay.visible
@@ -393,7 +393,7 @@ func _apply_layout() -> void:
 	_resources.add_theme_constant_override("separation",0 if compact else 3)
 	magic_button.add_theme_font_size_override("font_size",12 if compact else 16)
 	_identity_title.visible = false
-	_settings_button.custom_minimum_size = Vector2(70 if compact else 116, 28 if layout_data.top.size.y < 40 else 40)
+	_settings_button.custom_minimum_size = Vector2(70 if compact else 116, 28 if layout_data.top.size.y < 40 else 34)
 	_settings_button.text = "설정" if compact else "환경설정"
 	_settings_button.icon=combat_skin.glyph("gear")
 	_settings_button.add_theme_constant_override("icon_max_width",18)

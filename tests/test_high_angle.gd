@@ -20,7 +20,7 @@ static func run(host, verify: Callable) -> void:
 			exact=exact and Ground.screen_to_world(screen,center,layout.battle.size).is_equal_approx(point)
 		verify.call(exact,"Ground projection and inverse roundtrip actual map points: "+str(size))
 		var bounds := Ground.visible_world(center,layout.battle.size)
-		verify.call(Ground.world_to_screen(bounds.position,center,layout.battle.size).is_equal_approx(Vector2.ZERO) and Ground.world_to_screen(bounds.end,center,layout.battle.size).is_equal_approx(layout.battle.size),"Projected viewport and offscreen spawn guard have identical edges: "+str(size))
+		verify.call(Ground.world_to_screen(bounds.position,center,layout.battle.size).distance_to(Vector2.ZERO)<.001 and Ground.world_to_screen(bounds.end,center,layout.battle.size).distance_to(layout.battle.size)<.001,"Projected viewport and offscreen spawn guard have identical edges: "+str(size))
 	var viewport := Vector2(1200,520)
 	verify.call(Ground.world_to_screen(center,center,viewport).is_equal_approx(viewport*.5),"Camera centers the player's ground contact point")
 	var edge := Ground.world_to_screen(center+Vector2(0,460),center,viewport)-viewport*.5

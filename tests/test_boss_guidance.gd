@@ -71,8 +71,7 @@ static func run(host,verify:Callable)->void:
 	ui.view.size=Vector2(1280,538)
 	state.spawn_view_size=ui.view.spawn_guard_size()
 	for frame in range(30):ui.view.advance_camera(.05,Vector2.RIGHT,true)
-	var visible:Rect2=preload("res://scripts/combat/battle_projection.gd").visible_world(ui.view.camera_center(),ui.view.size)
-	state.enemies[0].p=Vector2(visible.position.x-5,state.player.y)
+	state.enemies[0].p=ui.view.screen_to_world(Vector2(-5,ui.view.size.y*.5))
 	plan=Guidance.build(ui.view)
 	verify.call(plan.offscreen and state.visible_world().has_point(plan.p),"Boss tracking uses the actual led viewport even when the boss remains inside the spawn exclusion envelope")
 	state._scatter_index=1

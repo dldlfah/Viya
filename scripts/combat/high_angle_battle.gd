@@ -93,14 +93,21 @@ func draw(view) -> void:
 	state = null
 
 func _draw_ground() -> void:
-	var bounds := visible.grow(100).intersection(Rect2(Vector2.ZERO,state.world_size))
+	# Cosmetic edge padding keeps the wider camera off a black void. The world
+	# boundary and every collision/spawn coordinate remain the actual map data.
+	var bounds := visible.grow(100)
 	var tile: Texture2D = canvas.art.map_texture("stone_floor_tile",state.map_id)
 	if not tile:tile=materials.floor_tile(state.map_id)
-	for y in range(floori(bounds.position.y/80), ceili(bounds.end.y/80)):
-		for x in range(floori(bounds.position.x/112), ceili(bounds.end.x/112)):
-			var box := Rect2(Vector2(x*112,y*80),Vector2(112,80))
-			canvas.draw_texture_rect(tile,box,false)
-			stats.tiles += 1
+	var start:=Vector2(floorf(bounds.position.x/112)*112,floorf(bounds.position.y/80)*80)
+	var end:=Vector2(ceilf(bounds.end.x/112)*112,ceilf(bounds.end.y/80)*80)
+	var tile_scale:=Vector2(112,80)/tile.get_size()
+	# One repeated texture, with the same world origin/pitch as the former loop.
+	# A wider view must not multiply background draw commands by its tile count.
+	canvas.draw_set_transform_matrix(ground*Transform2D(Vector2(tile_scale.x,0),Vector2(0,tile_scale.y),Vector2.ZERO))
+	canvas.draw_texture_rect(tile,Rect2(start/tile_scale,(end-start)/tile_scale),true)
+	canvas.draw_set_transform_matrix(ground)
+	stats.tiles=roundi((end.x-start.x)/112)*roundi((end.y-start.y)/80)
+	stats.ground_draw_calls=1
 	for decor in state.map_space.definition.get("decor",[]):
 		if decor.kind in ["gate","arrival"]:continue
 		var box: Rect2 = state.MapCatalog.rectangle(decor.rect)
