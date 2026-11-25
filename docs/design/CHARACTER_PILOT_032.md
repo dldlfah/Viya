@@ -50,3 +50,7 @@ GAME058의 확대 표시·가림 조정은 [CURRENT](../CURRENT_WORK.md)·[DEVEL
 ## GAME061 — 고정 스케일·원본 전체 보행·전신 사격 (2026-11-26)
 
 현재 기준은60×74.4 고정 크기다. GAME058~060의125×155·화면높이 확대와GAME059의67장 선별·상체 메시 정책은 사용자 첨부 계획으로 대체됐다. 원본run88장을 모두 복구하고 고정200×248 캔버스·거리 증분 위상·방향5도 유지와 보폭 기준을 공유한다. 정지 burst는 원본attack8 후 조준 끝 자세, 이동은 전신run11/총구 발사이며 피격 뒤 과거 사격 재생을 막는다. 한 사각형/208원본·SpriteFrames·알파는 불변이다. 원본의 짧은 달리기 공중 자세·방향별 무기 품질을 새 IK/전용 이동 사격 원화로 해결했다는 뜻은 아니다. [비교](../validation/GAME061_COMPARISON.mp4)·[실제전투](../validation/GAME061_MOTION.mp4)·[정확한검증범위](../validation/GAME061_REPORT.json)·DEVELOPMENT_STATUS8.55가 최신이다. 후반 부하는GAME062에서 계속하며 실기/최종 아트 승인은 별도다.
+
+## GAME062 — 흰 테두리 보정과15% 확대 (2026-11-26)
+
+현재 고정 크기는69×85.56이다. 승인 원본208PNG/원본SpriteFrames는 그대로 보관하고 외곽 매트 RGB만 정리한200×248 풀해상도 표시용208장/32동작을 기존viya_battle에 연결한다. 알파와 외곽 밖 불투명 내부 색상·타이밍/순서·발pivot/총구·GAME061 보행/사격은 유지한다. 실제 머리/금속 하이라이트는 유지하며 전신 흐림/축소/이미지 생성으로 처리하지 않는다. 게임 중 픽셀 처리는 없고 버퍼 복구도 보정 PNG를 사용한다. `tools/build_viya_render_cache.gd`는 표시용 자료만 재생성하며 원본을 덮어쓰지 않는다. [같은크기비교](../validation/GAME062_EDGE_COMPARISON.png)·[검증/경계](../validation/GAME062_REPORT.json)·DEVELOPMENT_STATUS8.56이 최신이며 Windows/모바일/최종 아트는 별도다.

@@ -4,13 +4,15 @@
 
 ## 세션 필수 문서
 
-[CURRENT_WORK](docs/CURRENT_WORK.md)와 **[누적 DEVELOPMENT_STATUS](docs/DEVELOPMENT_STATUS.md)**를 함께 읽는다. [PLANNED_WORK](docs/PLANNED_WORK.md) · [NEXT_TASK](docs/NEXT_TASK.md) · [AGENTS](AGENTS.md) · [제작 스킬](.agents/skills/viya-game-production/SKILL.md). GAME-061 코드 **`bfa63b062dbd36c2e75adb232a14f6793487d4dd`**, 브랜치 `work/viya-turnaround-qa-20261117`. 문서 HEAD는 코드 뒤에 오며 main 자동 병합은 하지 않는다.
+[CURRENT_WORK](docs/CURRENT_WORK.md)와 **[누적 DEVELOPMENT_STATUS](docs/DEVELOPMENT_STATUS.md)**를 함께 읽는다. [PLANNED_WORK](docs/PLANNED_WORK.md) · [NEXT_TASK](docs/NEXT_TASK.md) · [AGENTS](AGENTS.md) · [제작 스킬](.agents/skills/viya-game-production/SKILL.md). GAME-062 코드 **`f01fc333261f7384af94dc3f586422a95b4be387`**, 브랜치 `work/viya-turnaround-qa-20261117`. 문서 HEAD는 코드 뒤에 오며 main 자동 병합은 하지 않는다.
 
 ## 비야 크기·보행·사격 보정
 
-비야를60×74.4 고정 크기로 맞추고 모든 전장에서 원본8방향run11장을 이어 쓴다. 고정 캔버스로 몸통 흔들림을 줄이고 전후진/표적 변경 때 보행 위상을 보존한다. 정지 사격은 원본 전신8장 후 조준 자세를 유지하고, 이동 사격은 보행과 총구 발사를 연결한다. 노란 발밑 표시 제거·투명도 검사/복구와 넓은 지면 배율1은 유지한다. [크기 비교](docs/validation/GAME061_SCALE.png) · [6장/11장 비교](docs/validation/GAME061_COMPARISON.mp4) · [실제 이동/사격](docs/validation/GAME061_MOTION.mp4) · [검증](docs/validation/GAME061_REPORT.json).
+비야를69×85.56 고정 크기(기존 대비15% 확대)로 맞추고 모든 전장에서 원본8방향run11장을 이어 쓴다. 고정 캔버스로 몸통 흔들림을 줄이고 전후진/표적 변경 때 보행 위상을 보존한다. 정지 사격은 원본 전신8장 후 조준 자세를 유지하고, 이동 사격은 보행과 총구 발사를 연결한다. 노란 발밑 표시 제거·투명도 검사/복구와 넓은 지면 배율1은 유지한다. [크기 비교](docs/validation/GAME061_SCALE.png) · [6장/11장 비교](docs/validation/GAME061_COMPARISON.mp4) · [실제 이동/사격](docs/validation/GAME061_MOTION.mp4) · [검증](docs/validation/GAME061_REPORT.json).
 
-Godot4.7.2 기존7묶음4,422검사·640렌더 픽셀 검사 PASS. 원본208장/32자세·전투/저장/보상은 유지한다. 후반 밀집 렌더 부하·사용자Windows/모바일·최종 아트는 별도다. 연결 구조와 과거 시범 이력은 [캐릭터 파일럿 문서](docs/design/CHARACTER_PILOT_032.md)를 참조한다.
+흰 매트 테두리를 보정한200×248 전체해상도208장/32동작을 기존 비야 한 슬롯에 연결했다. 원본·알파/내부 색상·발/총구와 전투/저장을 유지하며 게임 중 픽셀 처리나 전신 흐림은 없다. [테두리 전후 비교](docs/validation/GAME062_EDGE_COMPARISON.png) · [현재 화면](docs/validation/GAME062_AFTER.png) · [검증](docs/validation/GAME062_REPORT.json).
+
+Godot4.7.2 기존7묶음4,428검사·832렌더 픽셀 비교 PASS. 후반 밀집 부하·사용자Windows/모바일·최종 아트는 별도다. [캐릭터 연결/이력](docs/design/CHARACTER_PILOT_032.md).
 
 ## 전체 전장 시점·스테이지 선택·계정 초기화
 

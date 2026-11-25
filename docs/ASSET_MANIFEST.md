@@ -116,3 +116,7 @@
 사용자의‘기존전투에시범적용’선택으로기존viya_battle한경로에연결했다. 8방향×idle/run/attack/hurt32상태·208PNG이며공통200×248RGBA를50×62·하단pivot(0.5,1)로표시한다. [원본SpriteFrames](../assets/characters/pilot_32/resources/viya_directional_motion.tres)·[출처/208개해시](../assets/characters/pilot_32/source_manifest.json)·[제공당시인계문](../assets/characters/pilot_32/source_docs/INTEGRATION_HANDOFF_ko.txt)을보존한다. 리소스SHA256은`11254fff2baec6de74bce61988544a4296a9753007f27bef2950788aea8b6a19`,PNG합계10,269,848바이트다. 208무손실2D임포트설정을함께등록했다. 아틀라스24·masters/생성·검증스크립트를런타임에넣거나실행하지않았다.
 
 분할z01/z02/zip복원CRC와동봉395체크섬을독립확인했고원본208PNG/리소스는바이트동일하다. 공유53키중다른52와별도초상화4경로는빈칸이다. 시범사용이며최종아트승인/모바일검증을뜻하지않는다. 제공당시구성완비/미연결과현재실제시범연결을구분하고기존승인ART001·GEN005/3D보류·맵12PNG는유지한다. 현재실행/한계는DEVELOPMENT_STATUS8.50과[GAME056_REPORT](validation/GAME056_REPORT.json)를따른다.
+
+## RENDER-CACHE-062 — 비야 표시용 매트 보정 파생물 (2026-11-26)
+
+`assets/characters/pilot_32/render_cache`의208PNG/한SpriteFrames·manifest는 CHARACTER-PILOT-032 원본에서 생성한 기술적 표시 파생물이다. 원본200×248/알파·32동작/순서/타이밍과 승인 상태를 유지하고 흰 매트 외곽 RGB/투명 여백만 정리했다. 원본208장·원본Resource는 불변이고 새 승인 원화로 분류하지 않는다. 기존viya_battle슬롯은 이 표시용Resource에 연결하며 다른52/초상화4·ART001/GEN005미승인·3D보류/지원2+2는 유지한다. 빌드 도구/입출력 해시와 검증은GAME062_REPORT를 참조한다.
