@@ -1,10 +1,14 @@
 # Viya — 모바일 서바이버 게임
 
-기존 BREAKERS와 독립된 프로젝트. **프롤로그와 별도 1스테이지 고각 전장에 사용자 맵 파일럿12종을 활용했으며, 비야는 사용자8방향 스프라이트를 시범 사용하며 UI·몬스터/시설·나머지 전장은 임시 그래픽이다. ART-001 이후 캐릭터 원화·3D 제작은 보류**한다.
+기존 BREAKERS와 독립된 프로젝트. **프롤로그와 별도 1스테이지 고각 전장에 사용자 맵 파일럿12종을 활용했으며, 비야는 사용자8방향 스프라이트를 시범 사용하며 UI·몬스터/시설·나머지 전장은 임시 그래픽이다. Higgsfield 2D 원화 수정·재생성은 현재 허용하고, 3D 제작은 보류**한다.
 
 ## 세션 필수 문서
 
 [CURRENT_WORK](docs/CURRENT_WORK.md)와 **[누적 DEVELOPMENT_STATUS](docs/DEVELOPMENT_STATUS.md)**를 함께 읽는다. [PLANNED_WORK](docs/PLANNED_WORK.md) · [NEXT_TASK](docs/NEXT_TASK.md) · [AGENTS](AGENTS.md) · [제작 스킬](.agents/skills/viya-game-production/SKILL.md). GAME-062 코드 **`f01fc333261f7384af94dc3f586422a95b4be387`**, 브랜치 `work/viya-turnaround-qa-20261117`. 문서 HEAD는 코드 뒤에 오며 main 자동 병합은 하지 않는다.
+
+## Higgsfield 원화 작업
+
+[제작 스킬 v1.3](.agents/skills/viya-game-production/SKILL.md)에서 Higgsfield 원화 수정·필요한 재생성을 허용한다. 현재 비야 문제 원화 요청은 승인됐으며 같은 허가를 반복 요청하지 않는다. 실제 실행 도구 연결은 별도 확인한다. 원본/디자인·동작 연속성과3D 보류는 유지한다.
 
 ## 비야 크기·보행·사격 보정
 

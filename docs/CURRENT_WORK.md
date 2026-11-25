@@ -2,6 +2,12 @@
 
 기록일 **2026-11-26 (KST)**. 브랜치 **`work/viya-turnaround-qa-20261117`**. [DEVELOPMENT_STATUS](DEVELOPMENT_STATUS.md) · [PLANNED_WORK](PLANNED_WORK.md) · [NEXT_TASK](NEXT_TASK.md).
 
+## 최신 운영 지침 — Higgsfield 사용 허용
+
+2026-11-26 사용자 요청으로 [제작 스킬 v1.3](../.agents/skills/viya-game-production/SKILL.md)과 AGENTS/PLANNED3·60을 수정했다. 현재 비야 문제 원화의 Higgsfield 수정·필요한 재생성은 승인된 상태이며 같은 실행 허가를 다시 묻지 않는다. 원본/디자인·프레임 연속성, 기존 크레딧/비용 한도와3D/리그/코스튬 보류를 유지한다.
+
+**사용 허용 / 실행 도구 미연결 / 생성 미실행.** 현재 대화의 도구 목록에는 Higgsfield 호출 도구가 없다. 스킬 변경은 사용 정책을 수정하며 플러그인/API 연결을 생성하지 않는다. 이번 문서 개정은 게임 기능이나 원화 생성 완료로 계산하지 않는다. 실제 연결이 제공되면 승인된 문제 원화 수정을 이어가며, 후속 게임 작업 GAME063은 NEXT에 보존한다.
+
 ## GAME-062 — 비야 흰 테두리 보정·15% 확대
 
 사용자 스크린샷과 최신 요청을 GAME061에 적용했다. 코드 **`f01fc333261f7384af94dc3f586422a95b4be387`**, 트리 `816f81ff713c7de85a6b4fa026308ec8f36398ed`, 출발점 문서 HEAD `23b67bee547f67fb3eaa6b3897347f1c96307077`다. 예정된 밀집 렌더 부하 작업보다 이번 표시 결함/크기 요청을 우선했다.
