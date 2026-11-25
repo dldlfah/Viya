@@ -131,10 +131,11 @@ static func run(host,verify:Callable)->void:
 	ui.movement.axis=Vector2.RIGHT
 	ui._physics_process(.05)
 	verify.call(state.shots>0 and ui.view.actors.pose(state).pose=="attack" and ui.view.actor_visual().sample.animation=="attack_e","Actual committed projectile creation starts the connected attack animation")
-	ui.view.actor_art.specs.actors.viya_battle.size=[100,120]
+	var original_size:Array=ui.view.actor_art.specs.actors.viya_battle.size.duplicate()
+	ui.view.actor_art.specs.actors.viya_battle.size=[160,190]
 	var actual_body:Rect2=ui.view.actor_art.rectangle(ui.view.actor_visual().sample,ui.view.world_to_screen(state.player))
 	verify.call(preload("res://scripts/combat/combat_display.gd").build(ui.view).reserved[0].encloses(actual_body),"Damage labels protect the actual configured sprite rectangle as well as its foot marker")
-	ui.view.actor_art.specs.actors.viya_battle.size=[50,62]
+	ui.view.actor_art.specs.actors.viya_battle.size=original_size
 	state.shot_clock=999
 	for frame in range(4):ui._physics_process(.05)
 	verify.call(ui.view.actors.pose(state).pose=="run" and ui.view.actors.pose(state).moving,"Actual post-collision movement selects run after attack finishes")

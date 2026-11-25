@@ -16,6 +16,9 @@ func spec_for(id:String) -> Dictionary:
 	var spec:Variant=listing.get(id,specs.get("defaults",{}))
 	if not spec is Dictionary or not pair(spec.get("size"),1,512) or not pair(spec.get("pivot"),0,1) or not pair(spec.get("canvas"),0,8192):return {}
 	if (spec.canvas[0]==0)!=(spec.canvas[1]==0):return {}
+	if spec.has("reference_view_height"):
+		var reference:Variant=spec.reference_view_height
+		if str(id)!="viya_battle" or not (reference is int or reference is float) or not is_finite(reference) or reference<1 or reference>16384:return {}
 	return spec
 
 func consistent(asset:Resource, canvas:Vector2) -> bool:
@@ -37,7 +40,7 @@ func consistent(asset:Resource, canvas:Vector2) -> bool:
 	_checked[key]=valid
 	return valid
 
-func frame(slots, candidates:Array, pose:String, direction:String, clock:float) -> Dictionary:
+func frame(slots, candidates:Array, pose:String, direction:String, clock:float, viewport:Vector2=Vector2.ZERO) -> Dictionary:
 	if not is_finite(clock):return {}
 	for id in candidates:
 		var asset:Resource=slots.resource(str(id))
@@ -65,7 +68,13 @@ func frame(slots, candidates:Array, pose:String, direction:String, clock:float) 
 					tick-=asset.get_frame_duration(name,i)
 				texture=asset.get_frame_texture(name,index)
 				break
-		if texture:return {"texture":texture,"slot":str(id),"animation":animation,"index":index,"size":Vector2(spec["size"][0],spec["size"][1]),"pivot":Vector2(spec.pivot[0],spec.pivot[1])}
+		if texture:
+			var draw_size:=Vector2(spec["size"][0],spec["size"][1])
+			if spec.has("reference_view_height") and viewport.is_finite() and viewport.y>0:
+				# Keep the silhouette proportional to battle space, capped at source pixels.
+				var native:Vector2=texture.get_size()/draw_size
+				draw_size*=minf(viewport.y/float(spec.reference_view_height),minf(native.x,native.y))
+			return {"texture":texture,"slot":str(id),"animation":animation,"index":index,"size":draw_size,"pivot":Vector2(spec.pivot[0],spec.pivot[1])}
 	return {}
 
 static func rectangle(sample:Dictionary, feet:Vector2) -> Rect2:

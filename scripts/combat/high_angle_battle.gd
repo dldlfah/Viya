@@ -17,6 +17,7 @@ var ground: Transform2D
 var visible: Rect2
 var viewport: Rect2
 var camera: Vector2
+var hero_body:Rect2
 var stats: Dictionary = {}
 
 func screen(at: Vector2) -> Vector2:
@@ -44,6 +45,8 @@ func draw(view) -> void:
 	ground = view.ground_transform()
 	visible = view.ground_visible()
 	viewport = Rect2(Vector2.ZERO, view.size)
+	var hero_sample:Dictionary=canvas.actor_visual().sample
+	hero_body=canvas.actor_art.rectangle(hero_sample,screen(state.player)) if not hero_sample.is_empty() else Rect2(screen(state.player)-Vector2(19,57),Vector2(38,58))
 	stats = {"tiles":0, "actors":0, "occluders":0, "commands":0}
 	canvas.draw_rect(viewport, Color("171c20"))
 	canvas.draw_set_transform_matrix(ground)

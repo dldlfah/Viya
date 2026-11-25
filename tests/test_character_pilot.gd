@@ -3,6 +3,7 @@ const Slots=preload("res://scripts/ui/asset_slots.gd")
 const State=preload("res://scripts/combat/run_state.gd")
 const Snapshot=preload("res://scripts/progression/run_snapshot.gd")
 const Campaign=preload("res://tests/test_campaign.gd")
+const Scenery=preload("res://scripts/combat/oblique_scenery.gd")
 const MANIFEST:="res://assets/characters/pilot_32/source_manifest.json"
 const RESOURCE:="res://assets/characters/pilot_32/resources/viya_directional_motion.tres"
 const DIRECTIONS:=["e","se","s","sw","w","nw","n","ne"]
@@ -42,8 +43,32 @@ static func run(host,verify:Callable) -> void:
 	for direction in DIRECTIONS:
 		for pose in ["idle","run","attack","hurt"]:
 			var sample:Dictionary=ui.view.actor_art.frame(ui.view.art,["viya_battle"],pose,direction,0)
-			resolved=resolved and not sample.is_empty() and sample.animation==pose+"_"+direction and sample["size"]==Vector2(50,62) and sample.pivot==Vector2(.5,1)
-	verify.call(resolved,"Existing adapter resolves all32poses upright at50x62 with the original bottom pivot")
+			resolved=resolved and not sample.is_empty() and sample.animation==pose+"_"+direction and sample["size"]==Vector2(125,155) and sample.pivot==Vector2(.5,1)
+	verify.call(resolved,"Existing adapter resolves all32poses upright at125x155 with the original bottom pivot")
+	for viewport in [Vector2(1280,526),Vector2(960,396),Vector2(797,266),Vector2(3840,1700)]:
+		var fits:=true
+		var foot:=Vector2(390,210)
+		for direction in DIRECTIONS:
+			for pose in ["idle","run","attack","hurt"]:
+				var sample:Dictionary=ui.view.actor_art.frame(ui.view.art,["viya_battle"],pose,direction,.07,viewport)
+				var rect:Rect2=ui.view.actor_art.rectangle(sample,foot)
+				fits=fits and rect.end.y==foot.y and is_equal_approx(rect.get_center().x,foot.x) and is_equal_approx(rect.size.x/rect.size.y,200.0/248.0) and rect.size.x<=200 and rect.size.y<=248
+				fits=fits and is_equal_approx(rect.size.y,minf(155.0*viewport.y/526.0,248.0))
+		verify.call(fits,"All32frames keep source aspect/foot anchoring and a consistent battle-height share capped at native pixels:"+str(viewport))
+	ui.view.art.definitions.normal=RESOURCE
+	var enemy_sample:Dictionary=ui.view.actor_art.frame(ui.view.art,["normal"],"idle","e",0,Vector2(3840,1700))
+	verify.call(enemy_sample["size"]==Vector2(32,40),"Hero presentation enlargement cannot resize another actor that reuses the same texture resource")
+	ui.view.art.definitions.normal=""
+	var reference_height:Variant=ui.view.actor_art.specs.actors.viya_battle.reference_view_height
+	for invalid in [0,NAN,"bad"]:
+		ui.view.actor_art.specs.actors.viya_battle.reference_view_height=invalid
+		verify.call(ui.view.actor_art.frame(ui.view.art,["viya_battle"],"idle","e",0,Vector2(1280,526)).is_empty(),"Invalid responsive size metadata falls back without NaN geometry:"+str(invalid))
+	ui.view.actor_art.specs.actors.viya_battle.reference_view_height=reference_height
+	var side_feet:=Vector2(140,0)
+	var shape:Dictionary=Scenery.geometry(Rect2(0,0,100,20),200,Transform2D.IDENTITY)
+	var body:=Rect2(side_feet-Vector2(62.5,155),Vector2(125,155))
+	verify.call(not Scenery.occludes(shape,side_feet) and Scenery.occludes(shape,side_feet,body),"A wall touching the enlarged body triggers fading even when the old tiny body misses it")
+	verify.call(not Scenery.occludes(shape,side_feet+Vector2(0,40),Rect2(body.position+Vector2(0,40),body.size)),"A wall behind the enlarged hero remains opaque instead of fading just because bounding boxes overlap")
 	var run_sample:Dictionary=ui.view.actor_art.frame(ui.view.art,["viya_battle"],"run","ne",.661)
 	var attack_sample:Dictionary=ui.view.actor_art.frame(ui.view.art,["viya_battle"],"attack","ne",.2)
 	var hurt_sample:Dictionary=ui.view.actor_art.frame(ui.view.art,["viya_battle"],"hurt","ne",.3)

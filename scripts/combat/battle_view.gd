@@ -95,7 +95,7 @@ func actor_visual(enemy:Dictionary={}) -> Dictionary:
 	if uses_oblique():data.direction=actors.DIRECTIONS[posmod(roundi(project_direction(data.facing).angle()/(PI/4)),8)]
 	var keys:Array=["viya_battle"]
 	if not enemy.is_empty():keys=[str(enemy.get("species","")),str(enemy.kind if enemy.kind!="normal" else enemy.get("variant","normal"))]
-	data.sample=actor_art.frame(art,keys,data.pose,data.direction,data.clock)
+	data.sample=actor_art.frame(art,keys,data.pose,data.direction,data.clock,size)
 	return data
 
 func tracks_enemy_motion() -> bool:

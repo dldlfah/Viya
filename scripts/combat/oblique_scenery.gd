@@ -14,13 +14,13 @@ static func geometry(box: Rect2, height: float, ground: Transform2D) -> Dictiona
 	for at in base:top.append(at-Vector2(0,height))
 	return {"base":base,"top":top,"front":PackedVector2Array([top[3],top[2],base[2],base[3]]),"side":PackedVector2Array([top[0],top[3],base[3],base[0]]),"bounds":Rect2(ground*box.position,Vector2.ZERO).expand(top[0]).expand(top[1]).expand(top[2]).expand(top[3]).expand(base[0]).expand(base[1]).expand(base[2]).expand(base[3])}
 
-static func occludes(shape: Dictionary, player: Vector2) -> bool:
+static func occludes(shape: Dictionary, player: Vector2, actor_body:Rect2=Rect2()) -> bool:
 	# Test front-edge depth at this X, rather than fading a wall in front of feet.
-	var body:=Rect2(player-Vector2(19,57),Vector2(38,58))
+	var body:Rect2=actor_body if actor_body.has_area() else Rect2(player-Vector2(19,57),Vector2(38,58))
 	if not shape.bounds.intersects(body):return false
 	for face in [shape.front,shape.side]:
 		var a:Vector2=face[3];var b:Vector2=face[2]
-		if player.x<minf(a.x,b.x)-18 or player.x>maxf(a.x,b.x)+18:continue
+		if body.end.x<minf(a.x,b.x) or body.position.x>maxf(a.x,b.x):continue
 		var t:float=clampf((player.x-a.x)/(b.x-a.x),0,1) if absf(b.x-a.x)>.001 else .5
 		var edge:Vector2=a.lerp(b,t)
 		if player.y>edge.y+1:continue
@@ -65,7 +65,7 @@ static func draw(renderer, obstacle: Dictionary) -> bool:
 	var height:float=height_for(obstacle)
 	var shape:Dictionary=geometry(box,height,renderer.ground)
 	if not renderer.viewport.grow(30).intersects(shape.bounds):return false
-	var faded:bool=occludes(shape,renderer.screen(renderer.state.player))
+	var faded:bool=occludes(shape,renderer.screen(renderer.state.player),renderer.hero_body)
 	var alpha:float=.28 if faded else 1.0
 	var shadow:=PackedVector2Array()
 	for at in [shape.base[0],shape.base[1],shape.base[2],shape.base[2]+Vector2(24,22),shape.base[3]+Vector2(24,22),shape.base[3]]:shadow.append(at)
