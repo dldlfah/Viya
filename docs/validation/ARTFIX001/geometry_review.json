@@ -1,0 +1,252 @@
+{
+  "frame_count": 11,
+  "frame_duration_ms": 60,
+  "loop_duration_ms": 660,
+  "all_bbox_equal": true,
+  "all_foot_bottom_32_rows_alpha_equal": true,
+  "max_centroid_euclidean_shift": 0.494937629566018,
+  "frames": [
+    {
+      "name": "viya_run_e_00.png",
+      "original_bbox": [
+        15,
+        4,
+        185,
+        247
+      ],
+      "new_bbox": [
+        15,
+        4,
+        185,
+        247
+      ],
+      "bbox_equal": true,
+      "centroid_shift_xy": [
+        -0.062460833779439895,
+        0.08798718758684743
+      ],
+      "alpha_area_loss_equivalent_opaque_pixels": 111.34117647058824,
+      "foot_bottom_32_rows_alpha_equal": true
+    },
+    {
+      "name": "viya_run_e_01.png",
+      "original_bbox": [
+        18,
+        4,
+        183,
+        248
+      ],
+      "new_bbox": [
+        18,
+        4,
+        183,
+        248
+      ],
+      "bbox_equal": true,
+      "centroid_shift_xy": [
+        0.18996762937396738,
+        0.1495354517116425
+      ],
+      "alpha_area_loss_equivalent_opaque_pixels": 104.12156862745098,
+      "foot_bottom_32_rows_alpha_equal": true
+    },
+    {
+      "name": "viya_run_e_02.png",
+      "original_bbox": [
+        17,
+        6,
+        181,
+        248
+      ],
+      "new_bbox": [
+        17,
+        6,
+        181,
+        248
+      ],
+      "bbox_equal": true,
+      "centroid_shift_xy": [
+        0.07411473919516709,
+        0.1244439446735015
+      ],
+      "alpha_area_loss_equivalent_opaque_pixels": 71.26274509803922,
+      "foot_bottom_32_rows_alpha_equal": true
+    },
+    {
+      "name": "viya_run_e_03.png",
+      "original_bbox": [
+        18,
+        10,
+        181,
+        240
+      ],
+      "new_bbox": [
+        18,
+        10,
+        181,
+        240
+      ],
+      "bbox_equal": true,
+      "centroid_shift_xy": [
+        0.061870840245561,
+        0.13989231579435568
+      ],
+      "alpha_area_loss_equivalent_opaque_pixels": 67.3921568627451,
+      "foot_bottom_32_rows_alpha_equal": true
+    },
+    {
+      "name": "viya_run_e_04.png",
+      "original_bbox": [
+        16,
+        9,
+        183,
+        244
+      ],
+      "new_bbox": [
+        16,
+        9,
+        183,
+        244
+      ],
+      "bbox_equal": true,
+      "centroid_shift_xy": [
+        0.08076897752951595,
+        0.11261071804693756
+      ],
+      "alpha_area_loss_equivalent_opaque_pixels": 118.05882352941177,
+      "foot_bottom_32_rows_alpha_equal": true
+    },
+    {
+      "name": "viya_run_e_05.png",
+      "original_bbox": [
+        15,
+        8,
+        185,
+        247
+      ],
+      "new_bbox": [
+        15,
+        8,
+        185,
+        247
+      ],
+      "bbox_equal": true,
+      "centroid_shift_xy": [
+        0.0885243697558451,
+        0.0786152942786913
+      ],
+      "alpha_area_loss_equivalent_opaque_pixels": 181.4078431372549,
+      "foot_bottom_32_rows_alpha_equal": true
+    },
+    {
+      "name": "viya_run_e_06.png",
+      "original_bbox": [
+        16,
+        4,
+        185,
+        248
+      ],
+      "new_bbox": [
+        16,
+        4,
+        185,
+        248
+      ],
+      "bbox_equal": true,
+      "centroid_shift_xy": [
+        0.3713090172645508,
+        0.32725047113558503
+      ],
+      "alpha_area_loss_equivalent_opaque_pixels": 228.5686274509804,
+      "foot_bottom_32_rows_alpha_equal": true
+    },
+    {
+      "name": "viya_run_e_07.png",
+      "original_bbox": [
+        20,
+        4,
+        185,
+        248
+      ],
+      "new_bbox": [
+        20,
+        4,
+        185,
+        248
+      ],
+      "bbox_equal": true,
+      "centroid_shift_xy": [
+        0.0899009594240141,
+        0.09184549181547652
+      ],
+      "alpha_area_loss_equivalent_opaque_pixels": 155.8,
+      "foot_bottom_32_rows_alpha_equal": true
+    },
+    {
+      "name": "viya_run_e_08.png",
+      "original_bbox": [
+        20,
+        4,
+        185,
+        248
+      ],
+      "new_bbox": [
+        20,
+        4,
+        185,
+        248
+      ],
+      "bbox_equal": true,
+      "centroid_shift_xy": [
+        0.09464202858124793,
+        0.10144826640588178
+      ],
+      "alpha_area_loss_equivalent_opaque_pixels": 116.03137254901961,
+      "foot_bottom_32_rows_alpha_equal": true
+    },
+    {
+      "name": "viya_run_e_09.png",
+      "original_bbox": [
+        17,
+        4,
+        185,
+        248
+      ],
+      "new_bbox": [
+        17,
+        4,
+        185,
+        248
+      ],
+      "bbox_equal": true,
+      "centroid_shift_xy": [
+        0.21508110258386637,
+        0.21608890148148419
+      ],
+      "alpha_area_loss_equivalent_opaque_pixels": 123.56078431372549,
+      "foot_bottom_32_rows_alpha_equal": true
+    },
+    {
+      "name": "viya_run_e_10.png",
+      "original_bbox": [
+        17,
+        4,
+        185,
+        248
+      ],
+      "new_bbox": [
+        17,
+        4,
+        185,
+        248
+      ],
+      "bbox_equal": true,
+      "centroid_shift_xy": [
+        0.05085894769729293,
+        -0.14755757994097962
+      ],
+      "alpha_area_loss_equivalent_opaque_pixels": 127.70196078431373,
+      "foot_bottom_32_rows_alpha_equal": true
+    }
+  ]
+}

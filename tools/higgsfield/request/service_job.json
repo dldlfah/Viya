@@ -1,17 +1,53 @@
 {
-  "status": "NOT_SUBMITTED",
+  "status": "APPLIED_TO_ACTIVE_RENDER_CACHE",
+  "date_kst": "2026-11-26",
   "service_requested": "Higgsfield",
-  "reason": "Official Higgsfield SDK/CLI prepared; HF_KEY missing and API host blocked by current network policy",
-  "source_repository_head": "11a29cdcf8d1f19895a6f293838f11dd8d1a6cca",
-  "source_archive_sha256": "51d5972a9e818d275bc630f18489e37f893deef1ba6f5dce0467660c45dbc4b3",
-  "restored_archive_sha256": "51d5972a9e818d275bc630f18489e37f893deef1ba6f5dce0467660c45dbc4b3",
+  "execution_backend": "Connected Higgsfield app tools",
+  "source_repository_head": "b6340f553d8c10ec9eebc26537230decbd8ef23e",
+  "previous_session_status": "NOT_SUBMITTED",
+  "previous_session_note": "The separate official SDK path lacked credentials/network access. This execution used the connected app tools.",
+  "source_package": {
+    "name": "VIYA_character_pilot_06.zip",
+    "sha256": "bb0cb2fd0cc660d5417a03f3dc8e1826236522480117f1ade0ef390016990ef7"
+  },
   "first_candidate": "references/masters/viya_run_e_00.png",
   "reference_role": "Existing pilot32 game character, not newly approved ART001 artwork",
-  "model": null,
-  "supported_parameters": null,
-  "cost_estimate": null,
-  "task_id": null,
-  "credits_spent": 0,
+  "model": "gpt_image_2_6",
+  "supported_parameters_used": {
+    "quality": "high",
+    "resolution": "1k",
+    "size": "800x992",
+    "output_format": "png",
+    "background": "transparent",
+    "count": 1
+  },
+  "generation_requests": 12,
+  "completed_generations": 11,
+  "failed_generations": 1,
+  "submission_rate_limit_rejections": 2,
+  "successful_quoted_credits": 13.75,
+  "failed_trial_quoted_credits": 2,
+  "observed_balance_before": 1105,
+  "observed_balance_after": 1091.25,
+  "observed_balance_decrease": 13.75,
+  "actual_per_job_debit_or_refund_independently_verified": false,
+  "job_ids": [
+    "c53a42ad-651b-4f04-8e71-44d19fe51a50",
+    "fbb5dd3f-3b79-448a-b7ea-6eb432029d3a",
+    "66230f6a-dfb5-494d-be8b-f4590a991f59",
+    "6e1cf33c-01dc-48b6-9310-b24686ebb4e5",
+    "71fa0761-ec9e-4c93-a57d-ddb62b28b3cf",
+    "220b7c14-eaa9-45e2-9008-128bc2880438",
+    "93112e8a-c71e-4e27-9be3-f68e372007ad",
+    "e95687b5-23e0-426e-93d2-c39ac425e948",
+    "79dbac37-07e0-4c78-96aa-8d9f3036d57f",
+    "ea7d248f-e83a-4c04-b05e-2546fe1a8fbb",
+    "ad2c8d24-c1f1-4312-b5b1-2d153d5749d6"
+  ],
+  "generation_log": "assets/characters/pilot_32/edge_repair/generation_log.json",
+  "validated_manifest": "assets/characters/pilot_32/edge_repair/manifest.json",
+  "active_resource": "res://assets/characters/pilot_32/render_cache/viya_render_frames.tres",
+  "final_art_approval": "NOT_RECORDED; existing pilot artwork repaired and technically applied",
   "files": [
     {
       "path": "references/masters/viya_idle_e_master.png",
@@ -73,9 +109,5 @@
       "sha256": "10b86c1f69d168f24ae7e9c510abeec153f6b41019dbead1f0b167d91d887764",
       "bytes": 145977
     }
-  ],
-  "execution_backend": "higgsfield-client0.2.0 Agent API",
-  "api_host": "api.higgsfield.ai",
-  "agent_api_access": "NOT_VERIFIED",
-  "authentication": "MISSING_CREDENTIALS"
+  ]
 }

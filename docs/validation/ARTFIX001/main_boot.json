@@ -1,0 +1,15 @@
+{
+  "status": "PASS",
+  "exit_code": 0,
+  "command": [
+    "/usr/local/bin/godot",
+    "--headless",
+    "--path",
+    "/workspace/scratch/11ca321eb8ed/viya_whitefix",
+    "--quit-after",
+    "120"
+  ],
+  "timeout_seconds": 120,
+  "errors": [],
+  "scope": "Standalone headless main boot; does not change full-gate TIMEOUT result"
+}

@@ -1,0 +1,71 @@
+{
+  "date_kst": "2026-11-26",
+  "manual_hair_masks": [
+    {
+      "source": "res://assets/characters/pilot_32/frames/viya_run_e_00.png",
+      "path": "res://assets/characters/pilot_32/edge_repair/manual_hair_masks/viya_run_e_00.png",
+      "sha256": "8dbd86f9603defa88666742318c976b916583ec3882c772cba2a2896f65dad3f",
+      "pixels": 39
+    },
+    {
+      "source": "res://assets/characters/pilot_32/frames/viya_run_e_01.png",
+      "path": "res://assets/characters/pilot_32/edge_repair/manual_hair_masks/viya_run_e_01.png",
+      "sha256": "f29ec14a48f165dc44c4f6e410b2dc821ae31fc850480f5608dacc0d9f72f20e",
+      "pixels": 102
+    },
+    {
+      "source": "res://assets/characters/pilot_32/frames/viya_run_e_02.png",
+      "path": "res://assets/characters/pilot_32/edge_repair/manual_hair_masks/viya_run_e_02.png",
+      "sha256": "ea6635650dc219585fdcba06ec2dcd91238891ca0f263a4844f11c65a9c771e9",
+      "pixels": 55
+    },
+    {
+      "source": "res://assets/characters/pilot_32/frames/viya_run_e_03.png",
+      "path": "res://assets/characters/pilot_32/edge_repair/manual_hair_masks/viya_run_e_03.png",
+      "sha256": "0cac1749f42e3e339b6acf6e347c5acf230d3fe1879331b4817e0af986533f97",
+      "pixels": 47
+    },
+    {
+      "source": "res://assets/characters/pilot_32/frames/viya_run_e_04.png",
+      "path": "res://assets/characters/pilot_32/edge_repair/manual_hair_masks/viya_run_e_04.png",
+      "sha256": "266f4095f2003ec4558b609a2cc8aec50fd771ec81869b96866ca2b7bd0d11c1",
+      "pixels": 85
+    },
+    {
+      "source": "res://assets/characters/pilot_32/frames/viya_run_e_05.png",
+      "path": "res://assets/characters/pilot_32/edge_repair/manual_hair_masks/viya_run_e_05.png",
+      "sha256": "51fc97207d92de23dbd524b7658b3d29016a4310eddc82c73358155e11f042dd",
+      "pixels": 104
+    },
+    {
+      "source": "res://assets/characters/pilot_32/frames/viya_run_e_06.png",
+      "path": "res://assets/characters/pilot_32/edge_repair/manual_hair_masks/viya_run_e_06.png",
+      "sha256": "9c6ab68b848981bde146d76806e714ba8927aaffecb088c887135c10168cb2a5",
+      "pixels": 190
+    },
+    {
+      "source": "res://assets/characters/pilot_32/frames/viya_run_e_07.png",
+      "path": "res://assets/characters/pilot_32/edge_repair/manual_hair_masks/viya_run_e_07.png",
+      "sha256": "a9a655d70011c8749e6e52e0a79a1ce619c42560540a72657a8c50de034d44f3",
+      "pixels": 101
+    },
+    {
+      "source": "res://assets/characters/pilot_32/frames/viya_run_e_08.png",
+      "path": "res://assets/characters/pilot_32/edge_repair/manual_hair_masks/viya_run_e_08.png",
+      "sha256": "9c407d1c9e0e1035a56c0ce671a0779bcc175cd162e43ab50165485d54db8650",
+      "pixels": 71
+    },
+    {
+      "source": "res://assets/characters/pilot_32/frames/viya_run_e_09.png",
+      "path": "res://assets/characters/pilot_32/edge_repair/manual_hair_masks/viya_run_e_09.png",
+      "sha256": "3149858a450e976e5b6cc126a683f69ed6cda777d1faa3165ffdb91fb6bf5feb",
+      "pixels": 114
+    },
+    {
+      "source": "res://assets/characters/pilot_32/frames/viya_run_e_10.png",
+      "path": "res://assets/characters/pilot_32/edge_repair/manual_hair_masks/viya_run_e_10.png",
+      "sha256": "773f36aa076a9b7cc10c1463de3a985d0bfe9c50634bb7ecf076ca332d416a8e",
+      "pixels": 62
+    }
+  ]
+}

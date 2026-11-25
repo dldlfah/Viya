@@ -1,0 +1,576 @@
+{
+  "task": "ARTFIX001",
+  "date_kst": "2026-11-26",
+  "source_repository": "dldlfah/Viya",
+  "branch": "work/viya-turnaround-qa-20261117",
+  "base_commit": "b6340f553d8c10ec9eebc26537230decbd8ef23e",
+  "status": {
+    "generation": "COMPLETE_11",
+    "technical_application": "APPLIED_TO_ACTIVE_RENDER_CACHE",
+    "full_regression_gate": "TIMEOUT_FAIL",
+    "final_art_approval": "NOT_RECORDED",
+    "actual_display_render": "BLOCKED",
+    "windows_f5": "NOT_VERIFIED",
+    "android_device": "NOT_VERIFIED",
+    "ios_device": "NOT_VERIFIED"
+  },
+  "diagnosis": {
+    "source": "VIYA_character_pilot_06.zip / viya_run_e_opaque_attempt01.gif",
+    "source_generation_job": "8c49d630-1a30-4be3-8619-ada1e40111f9",
+    "original_gif": {
+      "original_native_gif_sha256": "d3744c7af9bd1fcf9938d45ad144c97b89e17c27aa61fee3078c06a9ba042a3f",
+      "size": [
+        400,
+        496
+      ],
+      "frames": 11,
+      "alpha_ranges": [
+        [
+          255,
+          255
+        ],
+        [
+          255,
+          255
+        ],
+        [
+          255,
+          255
+        ],
+        [
+          255,
+          255
+        ],
+        [
+          255,
+          255
+        ],
+        [
+          255,
+          255
+        ],
+        [
+          255,
+          255
+        ],
+        [
+          255,
+          255
+        ],
+        [
+          255,
+          255
+        ],
+        [
+          255,
+          255
+        ],
+        [
+          255,
+          255
+        ]
+      ],
+      "top_left_rgba": [
+        [
+          223,
+          214,
+          214,
+          255
+        ],
+        [
+          218,
+          207,
+          208,
+          255
+        ],
+        [
+          223,
+          214,
+          214,
+          255
+        ],
+        [
+          223,
+          214,
+          214,
+          255
+        ],
+        [
+          218,
+          207,
+          208,
+          255
+        ],
+        [
+          227,
+          220,
+          221,
+          255
+        ],
+        [
+          227,
+          220,
+          221,
+          255
+        ],
+        [
+          227,
+          220,
+          221,
+          255
+        ],
+        [
+          223,
+          214,
+          214,
+          255
+        ],
+        [
+          227,
+          220,
+          221,
+          255
+        ],
+        [
+          227,
+          220,
+          221,
+          255
+        ]
+      ],
+      "status": "CONFIRMED_OPAQUE_WHITE_SOURCE"
+    },
+    "cause": "Opaque warm-white GIF source followed by cutout left bright matte RGB and opaque background islands. Existing runtime PNGs already had transparent backgrounds; the defect was localized residue, not a full white rectangle.",
+    "affected_runtime_frames": "viya_run_e_00.png through viya_run_e_10.png",
+    "screenshot_white_cross": "Separate heavy bullet visual in scripts/combat/attack_visuals.gd, not a sprite background artifact."
+  },
+  "generation": {
+    "service": "Higgsfield",
+    "model": "gpt_image_2_6",
+    "settings": {
+      "quality": "high",
+      "resolution": "1k",
+      "size": "800x992",
+      "output_format": "png",
+      "background": "transparent",
+      "count": 1
+    },
+    "completed": 11,
+    "failed_generation_attempts": 1,
+    "pre_submission_rate_limit_rejections": 2,
+    "successful_job_ids": [
+      "c53a42ad-651b-4f04-8e71-44d19fe51a50",
+      "fbb5dd3f-3b79-448a-b7ea-6eb432029d3a",
+      "66230f6a-dfb5-494d-be8b-f4590a991f59",
+      "6e1cf33c-01dc-48b6-9310-b24686ebb4e5",
+      "71fa0761-ec9e-4c93-a57d-ddb62b28b3cf",
+      "220b7c14-eaa9-45e2-9008-128bc2880438",
+      "93112e8a-c71e-4e27-9be3-f68e372007ad",
+      "e95687b5-23e0-426e-93d2-c39ac425e948",
+      "79dbac37-07e0-4c78-96aa-8d9f3036d57f",
+      "ea7d248f-e83a-4c04-b05e-2546fe1a8fbb",
+      "ad2c8d24-c1f1-4312-b5b1-2d153d5749d6"
+    ],
+    "observed_credits_before": 1105,
+    "observed_credits_after": 1091.25,
+    "observed_decrease": 13.75,
+    "successful_quoted_credits": 13.75,
+    "failed_trial_quote": 2,
+    "individual_debit_or_refund_independently_verified": false,
+    "log": "assets/characters/pilot_32/edge_repair/generation_log.json",
+    "usage": "Generated PNGs provide registered local material colour and selected transparent gaps. The original frame anatomy, outfit, weapon, registration and gait poses remain the base."
+  },
+  "application": {
+    "active_resource": "res://assets/characters/pilot_32/render_cache/viya_render_frames.tres",
+    "canonical_source_frames_unchanged": 208,
+    "runtime_pngs_changed": 11,
+    "other_runtime_pngs_byte_unchanged": 197,
+    "animations": 32,
+    "canvas": [
+      200,
+      248
+    ],
+    "display_size": [
+      69,
+      85.56
+    ],
+    "frame_duration_ms": 60,
+    "e_run_frame_count": 11,
+    "e_run_loop_ms": 660,
+    "alpha_decreases": 1467,
+    "alpha_decreases_gun_and_legs": 497,
+    "alpha_decreases_manually_reviewed_hair_gaps": 970,
+    "alpha_increases": 0,
+    "alpha_changes_outside_mask": 0,
+    "pre_normalization_source_visible_rgb_changes_vs_baseline": 6159,
+    "runtime_source_visible_rgb_changes_vs_baseline": 6577,
+    "protected_interior_rgb_changes": 0,
+    "all_bbox_equal": true,
+    "all_foot_bottom_32_rows_alpha_equal": true,
+    "maximum_alpha_centroid_shift_runtime_px": 0.494937629566018,
+    "normalization": "Godot Image.fix_alpha_edges(), followed by the same alpha/mask/interior constraints. Existing process/fix_alpha_border=true import setting retained.",
+    "strict_face_roi_identity": "FAIL for four almost-transparent boundary RGB pixels only; exact audit retained. Alpha unchanged, pre-normalization face ROI unchanged.",
+    "face_roi_normalization_exception": {
+      "strict_broad_face_roi_byte_identity": "FAIL",
+      "strict_difference_count": 4,
+      "cause": "Godot fix_alpha_edges boundary RGB normalization; pre-normalization candidate byte-identical in broad ROI; alpha remains unchanged",
+      "coordinates_context": "Broad ROI bottom edge; not a semantic face segmentation",
+      "max_alpha": 3,
+      "max_composited_channel_delta_8bit": 1.011764705882353,
+      "pixels": [
+        {
+          "name": "viya_run_e_02.png",
+          "xy": [
+            134,
+            104
+          ],
+          "baseline_rgba": [
+            191,
+            168,
+            168,
+            3
+          ],
+          "pre_normalization_rgba": [
+            191,
+            168,
+            168,
+            3
+          ],
+          "runtime_rgba": [
+            110,
+            82,
+            82,
+            3
+          ],
+          "alpha_equal": true,
+          "max_composited_channel_delta_8bit": 1.011764705882353
+        },
+        {
+          "name": "viya_run_e_02.png",
+          "xy": [
+            135,
+            104
+          ],
+          "baseline_rgba": [
+            191,
+            168,
+            168,
+            1
+          ],
+          "pre_normalization_rgba": [
+            191,
+            168,
+            168,
+            1
+          ],
+          "runtime_rgba": [
+            110,
+            82,
+            82,
+            1
+          ],
+          "alpha_equal": true,
+          "max_composited_channel_delta_8bit": 0.33725490196078434
+        },
+        {
+          "name": "viya_run_e_04.png",
+          "xy": [
+            135,
+            103
+          ],
+          "baseline_rgba": [
+            151,
+            135,
+            135,
+            3
+          ],
+          "pre_normalization_rgba": [
+            151,
+            135,
+            135,
+            3
+          ],
+          "runtime_rgba": [
+            88,
+            68,
+            69,
+            3
+          ],
+          "alpha_equal": true,
+          "max_composited_channel_delta_8bit": 0.788235294117647
+        },
+        {
+          "name": "viya_run_e_04.png",
+          "xy": [
+            136,
+            103
+          ],
+          "baseline_rgba": [
+            151,
+            135,
+            135,
+            1
+          ],
+          "pre_normalization_rgba": [
+            151,
+            135,
+            135,
+            1
+          ],
+          "runtime_rgba": [
+            88,
+            68,
+            69,
+            1
+          ],
+          "alpha_equal": true,
+          "max_composited_channel_delta_8bit": 0.2627450980392157
+        }
+      ],
+      "recommendation": "Keep existing protected-interior and alpha/mask constraints. Record these four low-alpha RGB padding changes; do not claim final broad-ROI byte identity."
+    },
+    "source_loop_10_to_00": "Original gait discontinuity remains; no motion/performance fix claimed."
+  },
+  "verification": {
+    "reproduction": {
+      "status": "PASS",
+      "reproduced_artifacts": 44,
+      "all_byte_exact": true,
+      "canonical_source_changes": [],
+      "changed_cache_pngs": [
+        "assets/characters/pilot_32/render_cache/viya_run_e_00.png",
+        "assets/characters/pilot_32/render_cache/viya_run_e_01.png",
+        "assets/characters/pilot_32/render_cache/viya_run_e_02.png",
+        "assets/characters/pilot_32/render_cache/viya_run_e_03.png",
+        "assets/characters/pilot_32/render_cache/viya_run_e_04.png",
+        "assets/characters/pilot_32/render_cache/viya_run_e_05.png",
+        "assets/characters/pilot_32/render_cache/viya_run_e_06.png",
+        "assets/characters/pilot_32/render_cache/viya_run_e_07.png",
+        "assets/characters/pilot_32/render_cache/viya_run_e_08.png",
+        "assets/characters/pilot_32/render_cache/viya_run_e_09.png",
+        "assets/characters/pilot_32/render_cache/viya_run_e_10.png"
+      ],
+      "reproduced_frames": 11,
+      "generator_sha256": "03df0ecddf1f54cbb24034862d0a5e01ad7a2cf9ff29e5190730829e48b99ba8"
+    },
+    "source_integrity_files": 171,
+    "source_contracts_passed": 6,
+    "python_tests_passed": 20,
+    "native_suites_passed": 6,
+    "native_assertions_passed": 2000,
+    "targeted_edge_reconfirmation": {
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/11ca321eb8ed/viya_whitefix",
+        "--script",
+        "/workspace/scratch/11ca321eb8ed/white_qa/targeted_viya_edges.gd"
+      ],
+      "timeout_seconds": 120,
+      "scope": "Existing test_viya_edges.run only; full regression remains TIMEOUT",
+      "test_sha256": "cf5cbac0ccd4937a7080a215f3785afaa3f5b9b27c8b73a04369ae456717dfe2",
+      "helper_sha256": "68610e5a898033757fdecfee301406a80a1fbeb11c2368eee58a37a20321a693",
+      "cache_manifest_sha256": "939588e27baae07bce97017e53421accbca7d5117d982e684d70841e5df1a82f",
+      "exit_code": 0,
+      "status": "PASS",
+      "elapsed_seconds": 4.689232804000312,
+      "result": {
+        "checks": 18,
+        "failures": [],
+        "status": "PASS"
+      }
+    },
+    "targeted_assertion_count_is_subset_not_additional": true,
+    "import_png_rgba_equality": {
+      "status": "PASS",
+      "frames": 11,
+      "scope": "Actual cache PNG versus expected normalized image versus Godot imported texture; not a screen render."
+    },
+    "headless_main_boot": {
+      "status": "PASS",
+      "exit_code": 0,
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/11ca321eb8ed/viya_whitefix",
+        "--quit-after",
+        "120"
+      ],
+      "timeout_seconds": 120,
+      "errors": [],
+      "scope": "Standalone headless main boot; does not change full-gate TIMEOUT result"
+    },
+    "full_gate": {
+      "status": "TIMEOUT_FAIL",
+      "script": "tests/test_combat_cues.gd",
+      "timeout_seconds_unchanged": 120,
+      "baseline_same_timeout": true,
+      "baseline_commit": "b6340f553d8c10ec9eebc26537230decbd8ef23e",
+      "interpretation": "Baseline also exceeds the unchanged 120-second budget in this environment. The unfinished checks are not certified; no timeout or assertion was weakened.",
+      "baseline_related_sources_identical": [
+        {
+          "path": "tests/test_combat_cues.gd",
+          "sha256": "5aa634b86c55ba08d39883b39ecb77fc23d1e7990b30affd2743cd876f67c227",
+          "baseline_sha256": "5aa634b86c55ba08d39883b39ecb77fc23d1e7990b30affd2743cd876f67c227",
+          "identical": true
+        },
+        {
+          "path": "tests/test_actor_animation.gd",
+          "sha256": "f789abf7d0e01b90dc81d049adf2d19edc650d9866b3fe031d3e6517ae636a68",
+          "baseline_sha256": "f789abf7d0e01b90dc81d049adf2d19edc650d9866b3fe031d3e6517ae636a68",
+          "identical": true
+        },
+        {
+          "path": "tests/test_map_pilot.gd",
+          "sha256": "52d4017b7d492082c4a08fafca1f2c32b6e6efed58445782186537a17939976b",
+          "baseline_sha256": "52d4017b7d492082c4a08fafca1f2c32b6e6efed58445782186537a17939976b",
+          "identical": true
+        },
+        {
+          "path": "scripts/ui/actor_assets.gd",
+          "sha256": "c5a563587f7441a306d3a840442fddabf2a3e5d6b91bf6cc184b459ba86b7aaf",
+          "baseline_sha256": "c5a563587f7441a306d3a840442fddabf2a3e5d6b91bf6cc184b459ba86b7aaf",
+          "identical": true
+        },
+        {
+          "path": "scripts/combat/viya_presentation.gd",
+          "sha256": "f78acd52d837b329efbc08d63d653ad4a1b7898ed5fc0a798066ddd235585bad",
+          "baseline_sha256": "f78acd52d837b329efbc08d63d653ad4a1b7898ed5fc0a798066ddd235585bad",
+          "identical": true
+        },
+        {
+          "path": "scripts/combat/run_state.gd",
+          "sha256": "85aa2cf332bff819922356a65160e19cdec8f698ed64406f8e226ed4009beb77",
+          "baseline_sha256": "85aa2cf332bff819922356a65160e19cdec8f698ed64406f8e226ed4009beb77",
+          "identical": true
+        }
+      ]
+    },
+    "gui_render": {
+      "status": "BLOCKED",
+      "reason": "No active display; AF_UNIX socket creation prohibited. No new visual-render PASS claimed."
+    }
+  },
+  "evidence_directory": "docs/validation/ARTFIX001",
+  "comparison_images": [
+    "docs/validation/ARTFIX001_HAIR_DETAIL.png",
+    "docs/validation/ARTFIX001_COMPARE.png",
+    "docs/validation/ARTFIX001_ALPHA_MASKS.png",
+    "docs/validation/ARTFIX001_LOOP.png"
+  ],
+  "animation_preview": "docs/validation/ARTFIX001_RUN_COMPARISON.gif",
+  "next_game_task": "GAME063 late-combat dense render performance",
+  "provenance_manifest_sha256": "25125c0e0b4cbb7bc5d38fef7186a281124a5c6575b3f727d2dc91ebc14c0194",
+  "evidence_files": [
+    {
+      "path": "docs/validation/ARTFIX001/baseline_combat_cues.json",
+      "sha256": "dc0907482fdd65b682017f8fd0e31b6d169334a3cf83e67ae3065ef6821ed011"
+    },
+    {
+      "path": "docs/validation/ARTFIX001/baseline_command_0.log",
+      "sha256": "ac1c76a876988def4b014925c8dd4d4708a7940a0f8fa45223ffb1081db3bbc0"
+    },
+    {
+      "path": "docs/validation/ARTFIX001/baseline_command_1.log.json",
+      "sha256": "83fd5f365f7b67a2e16da5a87889ce6dfd5ca0502ed768433ca838e382576078"
+    },
+    {
+      "path": "docs/validation/ARTFIX001/build.log",
+      "sha256": "23e56ae4a76670a60b1b5b81dc03a996053b23653bc0523ebc0893d5be9c4f29"
+    },
+    {
+      "path": "docs/validation/ARTFIX001/diagnose_import_prepared.gd",
+      "sha256": "f32f1e8ca1710f7251d8592a39cf34b4c4887725378527664f629f8eb7b194ca"
+    },
+    {
+      "path": "docs/validation/ARTFIX001/engine_0.log",
+      "sha256": "edff16c1721dd4ae989cadf29a01f574ae8d51b118221f664725bd6980bbba5d"
+    },
+    {
+      "path": "docs/validation/ARTFIX001/engine_1.log",
+      "sha256": "f15ffd4c558b01611d562c8c257508942bdc2dc542124f423ae2a592a46edfa6"
+    },
+    {
+      "path": "docs/validation/ARTFIX001/engine_2.log",
+      "sha256": "1938b93b03756e658dd6fc29e699189d67afb2aec05905c840e9c22f5b89a6cd"
+    },
+    {
+      "path": "docs/validation/ARTFIX001/engine_3.log",
+      "sha256": "190487dfb2bdf99cdccfff084fd5d95b81eac04fcfe3ec43e502d524daacb8eb"
+    },
+    {
+      "path": "docs/validation/ARTFIX001/engine_4.log",
+      "sha256": "0dc80f41a9d961a6b4d962614c905af0b7c3bc209f569871d09048860b58f7ff"
+    },
+    {
+      "path": "docs/validation/ARTFIX001/engine_5.log",
+      "sha256": "c5a9e5b87c0439795f9d5bcfe6c17d74bce134acc53d7f341cfb55a11bdb1e1d"
+    },
+    {
+      "path": "docs/validation/ARTFIX001/engine_6.log",
+      "sha256": "570a42343d370c104902d16c9ff0b402573f94ed3076772afb70e6bce96084fc"
+    },
+    {
+      "path": "docs/validation/ARTFIX001/engine_7.log",
+      "sha256": "a9fe20b9286c90f6c2a689b71751aaaff8301599c1323b0bcb1ca74cec3116da"
+    },
+    {
+      "path": "docs/validation/ARTFIX001/engine_summary.json",
+      "sha256": "084af5c1b198ce518d965a2896f3fb94560ecad7051cc839df449332a18b605e"
+    },
+    {
+      "path": "docs/validation/ARTFIX001/geometry_review.json",
+      "sha256": "2751dbcd773d349e43856eccc9de568803986829fb192e0854488b26f083b92c"
+    },
+    {
+      "path": "docs/validation/ARTFIX001/import_pixel_equality.log",
+      "sha256": "0d74ed8461e75192daa7c35774e7630240105ede3587beca76682f1b4467e910"
+    },
+    {
+      "path": "docs/validation/ARTFIX001/low_alpha_face_roi_review.json",
+      "sha256": "a738e3b1f0fde8e77102716906e3b44baceb5fe5f7255f077843e0c131ccef4f"
+    },
+    {
+      "path": "docs/validation/ARTFIX001/main_boot.json",
+      "sha256": "e1ff6e5cb6faead6440a1afbfe57cbfc45114ebd7d671aed9cacde0b48f944d7"
+    },
+    {
+      "path": "docs/validation/ARTFIX001/main_boot.log.json",
+      "sha256": "83fd5f365f7b67a2e16da5a87889ce6dfd5ca0502ed768433ca838e382576078"
+    },
+    {
+      "path": "docs/validation/ARTFIX001/original_gif_evidence.json",
+      "sha256": "df2ca0da0261789a961c921d1804c9d532c388de1a02af293281f083a1d3d951"
+    },
+    {
+      "path": "docs/validation/ARTFIX001/project_gate_report.json",
+      "sha256": "1064280a37c9b9648fac6213264e011525ea57e9b466b6966c399dc1b6ac47f5"
+    },
+    {
+      "path": "docs/validation/ARTFIX001/python_tests.log",
+      "sha256": "2604f58d5fd186ad42d8c543e59bf587244590152531b6f54a3fdc9267075b02"
+    },
+    {
+      "path": "docs/validation/ARTFIX001/reproduction_result.json",
+      "sha256": "2647df9a08388ec4399472fffc952f18e6746b326c7f1d6cd9d993c56b654bfe"
+    },
+    {
+      "path": "docs/validation/ARTFIX001/runtime_bitmap_strict.json",
+      "sha256": "a1e7d362fa0364c8af6fdfa3b1e342736f3e6811fe2a8b177a8738d8a7c03789"
+    },
+    {
+      "path": "docs/validation/ARTFIX001/targeted_viya_edges.gd",
+      "sha256": "50848de970ac11a8f6cff3e7d28efbad930ff3e8011b94d929f8f73833525118"
+    },
+    {
+      "path": "docs/validation/ARTFIX001/targeted_viya_edges.log",
+      "sha256": "e4e38d6c5a7f6530fd45e8d4c975ebc70f6a2651ee9acd50de825c4bc5a94fee"
+    },
+    {
+      "path": "docs/validation/ARTFIX001/targeted_viya_edges_result.json",
+      "sha256": "ba2e0a7898d68f1a56018c1627f6825cdc46f46d1912a475e2dec28b55c1984c"
+    }
+  ]
+}

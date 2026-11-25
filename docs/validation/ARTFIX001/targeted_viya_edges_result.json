@@ -1,0 +1,23 @@
+{
+  "command": [
+    "/usr/local/bin/godot",
+    "--headless",
+    "--path",
+    "/workspace/scratch/11ca321eb8ed/viya_whitefix",
+    "--script",
+    "/workspace/scratch/11ca321eb8ed/white_qa/targeted_viya_edges.gd"
+  ],
+  "timeout_seconds": 120,
+  "scope": "Existing test_viya_edges.run only; full regression remains TIMEOUT",
+  "test_sha256": "cf5cbac0ccd4937a7080a215f3785afaa3f5b9b27c8b73a04369ae456717dfe2",
+  "helper_sha256": "68610e5a898033757fdecfee301406a80a1fbeb11c2368eee58a37a20321a693",
+  "cache_manifest_sha256": "939588e27baae07bce97017e53421accbca7d5117d982e684d70841e5df1a82f",
+  "exit_code": 0,
+  "status": "PASS",
+  "elapsed_seconds": 4.689232804000312,
+  "result": {
+    "checks": 18,
+    "failures": [],
+    "status": "PASS"
+  }
+}

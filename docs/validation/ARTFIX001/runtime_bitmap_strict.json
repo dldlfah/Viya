@@ -1,0 +1,128 @@
+{
+  "status": "FAIL",
+  "frames": [
+    {
+      "name": "viya_run_e_00.png",
+      "alpha_changed": 116,
+      "alpha_outside_mask": 0,
+      "alpha_increases": 0,
+      "source_visible_rgb_changed_vs_baseline": 629,
+      "protected_interior_rgb_changes": 0,
+      "face_ivory_visible_changes": 0,
+      "feet_alpha_exact": true,
+      "bbox_exact": true
+    },
+    {
+      "name": "viya_run_e_01.png",
+      "alpha_changed": 110,
+      "alpha_outside_mask": 0,
+      "alpha_increases": 0,
+      "source_visible_rgb_changed_vs_baseline": 570,
+      "protected_interior_rgb_changes": 0,
+      "face_ivory_visible_changes": 0,
+      "feet_alpha_exact": true,
+      "bbox_exact": true
+    },
+    {
+      "name": "viya_run_e_02.png",
+      "alpha_changed": 78,
+      "alpha_outside_mask": 0,
+      "alpha_increases": 0,
+      "source_visible_rgb_changed_vs_baseline": 579,
+      "protected_interior_rgb_changes": 0,
+      "face_ivory_visible_changes": 2,
+      "feet_alpha_exact": true,
+      "bbox_exact": true
+    },
+    {
+      "name": "viya_run_e_03.png",
+      "alpha_changed": 69,
+      "alpha_outside_mask": 0,
+      "alpha_increases": 0,
+      "source_visible_rgb_changed_vs_baseline": 462,
+      "protected_interior_rgb_changes": 0,
+      "face_ivory_visible_changes": 0,
+      "feet_alpha_exact": true,
+      "bbox_exact": true
+    },
+    {
+      "name": "viya_run_e_04.png",
+      "alpha_changed": 121,
+      "alpha_outside_mask": 0,
+      "alpha_increases": 0,
+      "source_visible_rgb_changed_vs_baseline": 608,
+      "protected_interior_rgb_changes": 0,
+      "face_ivory_visible_changes": 2,
+      "feet_alpha_exact": true,
+      "bbox_exact": true
+    },
+    {
+      "name": "viya_run_e_05.png",
+      "alpha_changed": 192,
+      "alpha_outside_mask": 0,
+      "alpha_increases": 0,
+      "source_visible_rgb_changed_vs_baseline": 691,
+      "protected_interior_rgb_changes": 0,
+      "face_ivory_visible_changes": 0,
+      "feet_alpha_exact": true,
+      "bbox_exact": true
+    },
+    {
+      "name": "viya_run_e_06.png",
+      "alpha_changed": 233,
+      "alpha_outside_mask": 0,
+      "alpha_increases": 0,
+      "source_visible_rgb_changed_vs_baseline": 772,
+      "protected_interior_rgb_changes": 0,
+      "face_ivory_visible_changes": 0,
+      "feet_alpha_exact": true,
+      "bbox_exact": true
+    },
+    {
+      "name": "viya_run_e_07.png",
+      "alpha_changed": 160,
+      "alpha_outside_mask": 0,
+      "alpha_increases": 0,
+      "source_visible_rgb_changed_vs_baseline": 541,
+      "protected_interior_rgb_changes": 0,
+      "face_ivory_visible_changes": 0,
+      "feet_alpha_exact": true,
+      "bbox_exact": true
+    },
+    {
+      "name": "viya_run_e_08.png",
+      "alpha_changed": 121,
+      "alpha_outside_mask": 0,
+      "alpha_increases": 0,
+      "source_visible_rgb_changed_vs_baseline": 571,
+      "protected_interior_rgb_changes": 0,
+      "face_ivory_visible_changes": 0,
+      "feet_alpha_exact": true,
+      "bbox_exact": true
+    },
+    {
+      "name": "viya_run_e_09.png",
+      "alpha_changed": 128,
+      "alpha_outside_mask": 0,
+      "alpha_increases": 0,
+      "source_visible_rgb_changed_vs_baseline": 647,
+      "protected_interior_rgb_changes": 0,
+      "face_ivory_visible_changes": 0,
+      "feet_alpha_exact": true,
+      "bbox_exact": true
+    },
+    {
+      "name": "viya_run_e_10.png",
+      "alpha_changed": 139,
+      "alpha_outside_mask": 0,
+      "alpha_increases": 0,
+      "source_visible_rgb_changed_vs_baseline": 507,
+      "protected_interior_rgb_changes": 0,
+      "face_ivory_visible_changes": 0,
+      "feet_alpha_exact": true,
+      "bbox_exact": true
+    }
+  ],
+  "alpha_changes_total": 1467,
+  "source_visible_rgb_changes_total": 6577
+}
