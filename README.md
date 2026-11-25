@@ -4,7 +4,11 @@
 
 ## 세션 필수 문서
 
-[CURRENT_WORK](docs/CURRENT_WORK.md)와 **[누적 DEVELOPMENT_STATUS](docs/DEVELOPMENT_STATUS.md)**를 함께 읽는다. [PLANNED_WORK](docs/PLANNED_WORK.md) · [NEXT_TASK](docs/NEXT_TASK.md) · [AGENTS](AGENTS.md) · [제작 스킬](.agents/skills/viya-game-production/SKILL.md). GAME-058 코드 **`35e258513643e0466aa6f73fe269035f8ed24072`**, 브랜치 `work/viya-turnaround-qa-20261117`. 문서 HEAD는 코드 뒤에 오며 main 자동 병합은 하지 않는다.
+[CURRENT_WORK](docs/CURRENT_WORK.md)와 **[누적 DEVELOPMENT_STATUS](docs/DEVELOPMENT_STATUS.md)**를 함께 읽는다. [PLANNED_WORK](docs/PLANNED_WORK.md) · [NEXT_TASK](docs/NEXT_TASK.md) · [AGENTS](AGENTS.md) · [제작 스킬](.agents/skills/viya-game-production/SKILL.md). GAME-059 코드 **`64ba096d6cb2e6b58c6de13cb51691522b01de92`**, 브랜치 `work/viya-turnaround-qa-20261117`. 문서 HEAD는 코드 뒤에 오며 main 자동 병합은 하지 않는다.
+
+## 비야 총구·보행·정지 사격 보정
+
+총/룬탄을 총 끝에서 표시하고, 실제 거리 기반의 접지 보행을 연사 중에도 이어 준다. 정지 사격은 발을 고정하고 상체 반동·총구 섬광을 사용한다. 노란 발밑 원을 제거했다. 좌우 투명도 검사와 손상 임포트의 원본 복구를 연결했으며 사용자PC의 정확한 흰 배경은미재현이다. [9초 움직임 영상](docs/validation/GAME059_MOTION.mp4) · [총구 화면](docs/validation/GAME059_MUZZLE_E.png) · [검증](docs/validation/GAME059_REPORT.json). 원본208프레임/비율·게임 판정과 저장은 유지한다. 최종 보행 아트/사용자Windows PC·모바일 검증은 별도다.
 
 ## 비야 표시 크기 조정
 
