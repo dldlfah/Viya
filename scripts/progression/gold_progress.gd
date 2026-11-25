@@ -6,6 +6,7 @@ var total: int = 0
 var next_stage: int = 1
 var last_run: String = ""
 var loaded: bool = false
+var paid_campaign: Dictionary = {} # All receipts, including replays of old stages.
 var dungeon: Dictionary = empty_dungeon()
 static func empty_dungeon() -> Dictionary:
 	return {"day":-1,"used":0,"initial":{},"closed_id":"","closed_outcome":"","closed_reward":0}
@@ -66,6 +67,7 @@ func load_progress() -> Error:
 		total = 0
 		next_stage = 1
 		last_run = ""
+		paid_campaign = {}
 		talent_levels = Talents.empty_levels()
 		dungeon = empty_dungeon()
 		loaded = true
@@ -81,6 +83,14 @@ func load_progress() -> Error:
 		return ERR_FILE_CORRUPT
 	if not saved_run is String or saved_run.is_empty():
 		return ERR_FILE_CORRUPT
+	var receipts:Variant=file.get_value("campaign","paid_runs",{})
+	if not receipts is Dictionary:return ERR_FILE_CORRUPT
+	for id in receipts:
+		var receipt:Variant=receipts[id]
+		if not id is String or id.is_empty() or not receipt is Dictionary or receipt.size()!=2 or not receipt.get("stage") is int or receipt.stage<1 or not receipt.get("reward") is int or receipt.reward< -1:return ERR_FILE_CORRUPT
+	# Older accounts have only one receipt. Preserve it without inventing a reward.
+	if not file.has_section_key("campaign","paid_runs") and saved_run!="account-created" and saved_stage>1:
+		receipts[saved_run]={"stage":saved_stage-1,"reward":-1}
 	var saved_levels := Talents.empty_levels()
 	if file.has_section("account"):
 		var schema: Variant = file.get_value("account", "schema", -1)
@@ -107,6 +117,7 @@ func load_progress() -> Error:
 	total = saved_total
 	next_stage = saved_stage
 	last_run = saved_run
+	paid_campaign = receipts.duplicate(true)
 	talent_levels = saved_levels
 	loaded = true
 	return OK
@@ -120,12 +131,29 @@ func settle(result: Dictionary) -> Error:
 	if run_id.is_empty():
 		return ERR_INVALID_PARAMETER
 	if run_id==dungeon.closed_id or (not dungeon.initial.is_empty() and run_id==dungeon.initial.run.run_id):return ERR_INVALID_PARAMETER
-	if run_id == last_run:
-		return OK
 	var reward: int = int(result.get("gold_reward", -1))
-	if int(result.get("stage", 0)) != next_stage or reward < 0:
+	var played:int=int(result.get("stage",0))
+	if played<1 or played>maxi(2,next_stage) or reward<0:return ERR_INVALID_PARAMETER
+	if run_id in paid_campaign:
+		var receipt:Dictionary=paid_campaign[run_id]
+		return OK if receipt.stage==played and (receipt.reward== -1 or receipt.reward==reward) else ERR_INVALID_PARAMETER
+	if run_id == last_run:
 		return ERR_INVALID_PARAMETER
-	return _commit(total + reward, next_stage + 1, run_id, talent_levels)
+	var receipts:=paid_campaign.duplicate(true)
+	receipts[run_id]={"stage":played,"reward":reward}
+	return _commit(total + reward, next_stage+1 if played==next_stage else next_stage, run_id, talent_levels, null, receipts)
+
+func has_cleared_stage(number:int) -> bool:
+	return number<next_stage or paid_campaign.values().any(func(receipt):return receipt.stage==number)
+
+func campaign_allows(run:Dictionary) -> bool:
+	var number:int=int(run.get("stage",0))
+	if number<1 or number>maxi(2,next_stage):return false
+	if run.get("run_id") in paid_campaign:
+		var receipt:Dictionary=paid_campaign[run.run_id]
+		var bonus:int=int(preload("res://scripts/combat/stage_catalog.gd").new().for_stage(number).get("clear_gold",-1))
+		return run.get("phase")==6 and receipt.stage==number and (receipt.reward== -1 or receipt.reward==int(run.get("gold_collected",0))+bonus)
+	return run.get("run_id")!=last_run
 
 func purchase_attack(expected_level: int) -> Error:
 	return purchase_talent("attack_power", expected_level)
@@ -149,9 +177,9 @@ func purchase_talent(id: String, expected_level: int) -> Error:
 	return _commit(total - int(Talents.ATTACK_COSTS[expected_level]), next_stage, last_run, next_levels)
 
 func _matches(other) -> bool:
-	return other.total == total and other.next_stage == next_stage and other.last_run == last_run and other.talent_levels == talent_levels and other.dungeon==dungeon
+	return other.total == total and other.next_stage == next_stage and other.last_run == last_run and other.talent_levels == talent_levels and other.dungeon==dungeon and other.paid_campaign==paid_campaign
 
-func _commit(balance: int, stage_number: int, run_id: String, levels: Dictionary, next_dungeon: Variant = null) -> Error:
+func _commit(balance: int, stage_number: int, run_id: String, levels: Dictionary, next_dungeon: Variant = null, next_receipts: Variant = null) -> Error:
 	var saved_dungeon: Dictionary=dungeon.duplicate(true) if next_dungeon==null else next_dungeon.duplicate(true)
 	if not valid_dungeon(saved_dungeon):return ERR_INVALID_PARAMETER
 	if run_id.is_empty():run_id="account-created"
@@ -172,6 +200,7 @@ func _commit(balance: int, stage_number: int, run_id: String, levels: Dictionary
 	file.set_value("gold", "total", balance)
 	file.set_value("gold", "next_stage", stage_number)
 	file.set_value("gold", "last_run", run_id)
+	file.set_value("campaign","paid_runs",paid_campaign if next_receipts==null else next_receipts)
 	file.set_value("account", "schema", Talents.SCHEMA)
 	file.set_value("account", "attack_level", levels.attack_power)
 	file.set_value("account", "talent_levels", levels.duplicate(true))
@@ -186,5 +215,6 @@ func _commit(balance: int, stage_number: int, run_id: String, levels: Dictionary
 	total = balance
 	next_stage = stage_number
 	last_run = run_id
+	if next_receipts!=null:paid_campaign=next_receipts.duplicate(true)
 	talent_levels = levels.duplicate(true)
 	return OK

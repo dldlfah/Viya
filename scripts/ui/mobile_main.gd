@@ -65,6 +65,8 @@ var stage_back_button: Button
 var lobby_settings_button: Button
 var stage_buttons: Array[Button] = []
 var _selected_stage: int = 1
+var account_reset_button:Button
+var _reset_origin:String="lobby_settings"
 var boss_bar: ProgressBar
 var boss_label: Label
 var ailment_text: Label
@@ -86,6 +88,7 @@ func _ready() -> void:
 	_apply_layout()
 
 func _physics_process(delta: float) -> void:
+	if _account_reset_pending:return
 	combat_audio.prepare(simulation,not overlay.visible)
 	var track_enemies:bool=view.tracks_enemy_motion()
 	var motion_region:Rect2=(view.BattleProjection.visible_world(view.camera_center(),view.size) if view.high_angle else Rect2(view.camera_center()-view.size*.5,view.size)).grow(180)
@@ -476,6 +479,9 @@ func _clear_dialog() -> void:
 	super._clear_dialog()
 
 func _show_menu(kind: String) -> void:
+	if _account_reset_pending:
+		_show_reset_recovery()
+		return
 	_mission_touch_id=-1
 	_mission_open=false
 	_talents_open = false
@@ -508,6 +514,7 @@ func _show_menu(kind: String) -> void:
 		leave_button = _button("전투 포기 · 결과 확인", _request_transition.bind("leave", ticket, revision))
 		dialog_body.add_child(leave_button)
 	elif kind in ["defeat", "abandoned", "cleared"]:
+		if kind=="cleared" and simulation.run_mode=="campaign":start_button.text="스테이지 선택"
 		var heading: Label = dialog_body.get_child(0) as Label
 		heading.text = {"abandoned": "전투 포기", "defeat": "전투 종료 · 패배", "cleared": "스테이지 %d 클리어" % simulation.stage}[kind]
 		if simulation.end_reason == "timeout":
@@ -543,6 +550,7 @@ func _show_menu(kind: String) -> void:
 		_decorate_lobby()
 		if _has_saved_battle():_add_account_summary(preload("res://scripts/ui/account_bonus_summary.gd").for_saved(run_store.pending,battle_save_error),"이어하기 · 출격 당시 계정 보너스","현재 계정의 변경 사항은 새 전투부터 적용됩니다.")
 	if kind=="paused":
+		_add_account_reset_button()
 		_add_save_context(resume_button)
 		dialog_body.move_child(resume_button,1)
 		dialog_body.move_child(_saved_context_label,2)
@@ -679,8 +687,12 @@ func begin_run() -> void:
 		return
 	if not _can_start_rewarded_run():
 		return
+	_begin_campaign(gold_progress.next_stage)
+
+func _begin_campaign(number:int) -> void:
+	if not _can_start_rewarded_run() or number not in _selectable_stages():return
 	var previous_stage: int = simulation.stage
-	simulation.stage = gold_progress.next_stage
+	simulation.stage = number
 	if not simulation.start(0, simulation.growth.character_id, gold_progress.talent_levels, str(simulation.stage_catalog.for_departure(simulation.stage).map_id), new_run_ruleset, {}, "campaign", -1, -1, -1, new_run_encounter_version if new_run_ruleset=="weapons_v1" else 0, 1):
 		simulation.stage = previous_stage
 		push_error("Invalid character data; current run retained")
@@ -801,6 +813,7 @@ func _return_to_lobby(ticket: int, revision: int) -> void:
 	_update_hud()
 
 func resume_game() -> void:
+	if _account_reset_pending or _modal_kind=="account_reset":return
 	if _mission_open:
 		return # The guarded mission return owns this modal.
 	if _overview_open:
@@ -838,6 +851,10 @@ func _input(event: InputEvent) -> void:
 	super._input(event)
 
 func _unhandled_key_input(event: InputEvent) -> void:
+	if _modal_kind in ["account_reset","reset_recovery"] and event is InputEventKey and event.pressed and not event.echo and event.keycode==KEY_ESCAPE:
+		_cancel_account_reset(simulation.navigation_ticket,_menu_revision)
+		get_viewport().set_input_as_handled()
+		return
 	if _mission_open and event is InputEventKey and event.pressed and not event.echo and event.keycode==KEY_ESCAPE:
 		_close_mission(simulation.navigation_ticket,_menu_revision)
 		get_viewport().set_input_as_handled()
@@ -874,6 +891,9 @@ func _unhandled_key_input(event: InputEvent) -> void:
 	super._unhandled_key_input(event)
 
 func pause_game() -> void:
+	if _modal_kind=="account_reset":
+		_cancel_account_reset(simulation.navigation_ticket,_menu_revision)
+		return
 	if _mission_open:
 		_mission_open=false
 		_magic_touch_id=-1
@@ -1241,16 +1261,22 @@ func _launch_gold_dungeon(ticket: int, revision: int) -> void:
 	_dungeon_notice=""
 	_after_run_started()
 
-func _open_stages() -> void:
+func _selectable_stages() -> Array:
+	var data:Dictionary=JSON.parse_string(FileAccess.get_file_as_string("res://data/chapter_one.json"))
+	var numbers:Array=data.stages.map(func(entry):return int(entry.number))
+	if gold_progress.next_stage>2:numbers.append(gold_progress.next_stage)
+	return numbers
+
+func _open_stages(selected:int=-1) -> void:
 	if simulation.phase in [RunState.Phase.CLEARED,RunState.Phase.DEFEAT,RunState.Phase.ABANDONED]:
 		if battle_save_error != OK or (simulation.phase == RunState.Phase.CLEARED and gold_error != OK) or not simulation.return_to_ready(simulation.navigation_ticket):
 			return
 	_clear_dialog()
 	_modal_kind = "stages"
-	_selected_stage = gold_progress.next_stage
+	_selected_stage = gold_progress.next_stage if selected not in _selectable_stages() else selected
 	var data: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://data/chapter_one.json"))
 	dialog_body.add_child(_label(data.chapter, 28))
-	dialog_body.add_child(_label("출격 S%d · 6분 생존 + 최종 보스 처치 · 2분/4분 자동 저장" % _selected_stage, 17))
+	dialog_body.add_child(_label("선택 S%d · 전장 자유 선택 / 재도전 · 6분 생존 + 보스\n2분/4분 자동 저장 · 클리어 보상은 매 전투 1회 지급" % _selected_stage, 17))
 	stage_buttons.clear()
 	var entries: Array = data.stages.duplicate(true)
 	if gold_progress.next_stage > 2:
@@ -1259,11 +1285,11 @@ func _open_stages() -> void:
 	var revision: int = _menu_revision
 	for entry in entries:
 		var number: int = int(entry.number)
-		var state := "선택됨" if number == _selected_stage else ("클리어" if number < _selected_stage else "잠김")
+		var state := "선택됨" if number == _selected_stage else ("클리어 · 재도전" if gold_progress.has_cleared_stage(number) else "출격 가능")
 		var rules: Dictionary = simulation.stage_catalog.for_stage(number)
 		var button := _button("%s · %s\n%s\n목표: 생존 + 보스 · 기본 %d골드 + 획득 금화" % [entry.name, state, entry.description, int(rules.get("clear_gold", 100))], _select_stage.bind(number, ticket, revision))
 		button.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-		button.disabled = number != gold_progress.next_stage
+		button.disabled = gold_error!=OK or battle_save_error!=OK or _has_saved_battle()
 		dialog_body.add_child(button)
 		stage_buttons.append(button)
 	dialog_body.add_child(_label("지역 후보 · 세부 구성 미확정", 15))
@@ -1271,8 +1297,8 @@ func _open_stages() -> void:
 		var button := _button(region + " · 준비 중", func(): pass)
 		button.disabled = true
 		dialog_body.add_child(button)
-	stage_launch_button = _button("선택한 전장으로 출격", _launch_stage.bind(ticket, revision))
-	stage_launch_button.disabled = gold_error != OK or battle_save_error != OK
+	stage_launch_button = _button("S%d · 선택한 전장으로 출격" % _selected_stage, _launch_stage.bind(ticket, revision))
+	stage_launch_button.disabled = gold_error != OK or battle_save_error != OK or _has_saved_battle()
 	dialog_body.add_child(stage_launch_button)
 	stage_back_button = _button("뒤로 · 메인 로비", _campaign_back.bind(ticket, revision))
 	dialog_body.add_child(stage_back_button)
@@ -1284,14 +1310,14 @@ func _open_stages() -> void:
 	_fit_dialog()
 
 func _select_stage(number: int, ticket: int, revision: int) -> void:
-	if _modal_kind != "stages" or not _menu_matches(ticket, revision) or number != gold_progress.next_stage:
+	if _modal_kind != "stages" or not _menu_matches(ticket, revision) or number not in _selectable_stages() or _has_saved_battle():
 		return
-	_selected_stage = number
+	_open_stages(number)
 
 func _launch_stage(ticket: int, revision: int) -> void:
-	if _modal_kind != "stages" or not _menu_matches(ticket, revision) or _selected_stage != gold_progress.next_stage or _has_saved_battle():
+	if _modal_kind != "stages" or not _menu_matches(ticket, revision) or _selected_stage not in _selectable_stages() or _has_saved_battle():
 		return
-	begin_run()
+	_begin_campaign(_selected_stage)
 
 func _campaign_back(ticket: int, revision: int) -> void:
 	if _menu_matches(ticket, revision) and _modal_kind in ["stages", "lobby_settings", "gold_dungeon"]:
@@ -1313,8 +1339,91 @@ func _open_lobby_settings(ticket: int, revision: int) -> void:
 	slider.value_changed.connect(_set_volume)
 	dialog_body.add_child(slider)
 	_add_display_settings()
+	_add_account_reset_button()
 	stage_back_button = _button("뒤로 · 메인 로비", _campaign_back.bind(simulation.navigation_ticket, _menu_revision))
 	dialog_body.add_child(stage_back_button)
+	overlay.show()
+	_fit_dialog()
+
+func _add_account_reset_button() -> void:
+	account_reset_button=_button("계정 초기화…",_ask_account_reset.bind(simulation.navigation_ticket,_menu_revision))
+	dialog_body.add_child(account_reset_button)
+
+func _ask_account_reset(ticket:int,revision:int) -> void:
+	if not _menu_matches(ticket,revision) or _modal_kind not in ["lobby_settings","paused"]:return
+	_reset_origin=_modal_kind
+	_clear_dialog()
+	_modal_kind="account_reset"
+	dialog_body.add_child(_label("이 기기의 계정을 초기화할까요?",25))
+	var warning:=_label("보유 금화, 모든 계정 특성, 스테이지 진행,\n던전 이용 기록과 진행 중인 전투가 삭제됩니다.\n되돌릴 수 없으며, 진행 중인 전투 보상은 지급되지 않습니다.\n음량·화면 설정은 유지됩니다.",18)
+	warning.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART
+	dialog_body.add_child(warning)
+	cancel_button=_button("취소 · 설정으로",_cancel_account_reset.bind(simulation.navigation_ticket,_menu_revision))
+	confirm_button=_button("확인 · 계정 초기화",_confirm_account_reset.bind(simulation.navigation_ticket,_menu_revision))
+	confirm_button.focus_mode=Control.FOCUS_NONE
+	dialog_body.add_child(cancel_button)
+	dialog_body.add_child(confirm_button)
+	if account_reset_error!=OK:dialog_body.add_child(_label("초기화 실패 · "+error_string(account_reset_error),17))
+	_fit_dialog()
+	cancel_button.grab_focus()
+
+func _cancel_account_reset(ticket:int,revision:int) -> void:
+	if _account_reset_pending or _modal_kind!="account_reset" or not _menu_matches(ticket,revision):return
+	if _reset_origin=="paused":_show_menu("paused")
+	else:_open_lobby_settings(ticket,revision)
+
+func _confirm_account_reset(ticket:int,revision:int) -> void:
+	if _modal_kind not in ["account_reset","reset_recovery"] or not _menu_matches(ticket,revision):return
+	_account_reset_pending=true # Stop all simulation, autosave and settlement first.
+	movement.set_enabled(false)
+	movement.clear_input()
+	_magic_touch_id=-1
+	combat_audio.stop_all()
+	account_reset_error=AccountReset.begin(gold_progress.path,run_store.path)
+	_account_reset_pending=AccountReset.pending(gold_progress.path)
+	if account_reset_error!=OK:
+		if _account_reset_pending:_show_reset_recovery()
+		else:
+			var origin:String=_reset_origin
+			_show_menu("paused" if origin=="paused" else "ready")
+			if origin!="paused":_open_lobby_settings(simulation.navigation_ticket,_menu_revision)
+			dialog_body.add_child(_label("초기화 실패 · "+error_string(account_reset_error),17))
+			_fit_dialog()
+		return
+	gold_error=gold_progress.load_progress()
+	battle_save_error=run_store.load_saved(simulation)
+	simulation.stage=1
+	# Reinitialize the existing authoritative owner; never replace it with another RunState.
+	if gold_error!=OK or battle_save_error!=OK or not simulation.start(1,"viya",gold_progress.talent_levels,"siege_battlefield",new_run_ruleset,{},"campaign",-1,-1,-1,new_run_encounter_version,1):
+		_account_reset_pending=true
+		account_reset_error=ERR_INVALID_DATA
+		_show_reset_recovery()
+		return
+	simulation.phase=RunState.Phase.READY
+	simulation.magic.invalidate_requests()
+	_saved_checkpoint=0
+	_slot_revision=-1
+	_selected_stage=1
+	_final_growth.clear()
+	view.camera.reset(simulation.run_id)
+	save_notice.reset(simulation.run_id)
+	last_phase=simulation.phase
+	last_ticket=-1
+	_show_menu("ready")
+	dialog_body.add_child(_label("계정 초기화 완료 · 새로운 출격을 시작할 수 있습니다.",17))
+	_update_hud()
+	_fit_dialog()
+
+func _show_reset_recovery() -> void:
+	_clear_dialog()
+	_modal_kind="reset_recovery"
+	dialog_body.add_child(_label("계정 초기화를 완료하지 못했습니다",25))
+	var explanation:=_label("삭제 중인 이전 전투와 보상이 복구되지 않도록 출격을 중단했습니다.\n저장 공간과 파일 접근을 확인한 후 초기화를 다시 시도해 주세요.\n"+error_string(account_reset_error),18)
+	explanation.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART
+	dialog_body.add_child(explanation)
+	confirm_button=_button("계정 초기화 다시 시도",_confirm_account_reset.bind(simulation.navigation_ticket,_menu_revision))
+	confirm_button.focus_mode=Control.FOCUS_NONE
+	dialog_body.add_child(confirm_button)
 	overlay.show()
 	_fit_dialog()
 
@@ -1384,6 +1493,9 @@ func _update_hud() -> void:
 	battle_chrome.queue_redraw()
 
 func _handle_mobile_back() -> bool:
+	if _modal_kind in ["account_reset","reset_recovery"]:
+		_cancel_account_reset(simulation.navigation_ticket,_menu_revision)
+		return true
 	if _mission_open:
 		_close_mission(simulation.navigation_ticket,_menu_revision)
 		return true

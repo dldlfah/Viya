@@ -206,6 +206,7 @@ func _run() -> void:
 	await preload("res://tests/test_purge_feedback.gd").run(scene, verify)
 	await preload("res://tests/test_portrait_reactions.gd").run(scene, verify)
 	await preload("res://tests/test_oblique_stage.gd").run(scene, verify)
+	await preload("res://tests/test_stage_access_reset.gd").run(scene, verify)
 	await preload("res://tests/test_character_pilot.gd").run(scene, verify)
 	scene.queue_free()
 	await process_frame

@@ -7,9 +7,9 @@ static func run(host, verify: Callable) -> void:
 	verify.call(ui.start_button.text == "출격" and is_instance_valid(ui.lobby_settings_button), "Lobby retains real departure/talents and adds settings")
 	ui.start_button.pressed.emit()
 	verify.call(ui._modal_kind == "stages" and ui.simulation.phase == ui.RunState.Phase.READY and ui.stage_buttons.size() == 2, "Departure opens chapter/stage selection without starting a battle")
-	verify.call(not ui.stage_buttons[0].disabled and ui.stage_buttons[1].disabled, "Only the current sequential stage is playable")
+	verify.call(not ui.stage_buttons[0].disabled and not ui.stage_buttons[1].disabled, "Both implemented stages are freely selectable")
 	ui.stage_buttons[1].pressed.emit()
-	verify.call(ui._selected_stage == 1, "Forged locked-stage press cannot change the selected stage")
+	verify.call(ui._selected_stage == 2 and ui.stage_launch_button.text.begins_with("S2"), "Selecting another stage refreshes the actual departure target")
 	var stale: Callable = ui.stage_launch_button.get_signal_connection_list("pressed")[0].callable
 	ui.stage_back_button.pressed.emit()
 	stale.call()

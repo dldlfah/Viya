@@ -57,10 +57,23 @@ static func run(host,verify:Callable) -> void:
 	view.high_angle=false
 	verify.call(not view.uses_oblique() and view.input_direction(Vector2.RIGHT)==Vector2.RIGHT and view.screen_to_world(view.world_to_screen(state.player))==state.player,"F8 keeps the original planar renderer/inverse/input path")
 	view.high_angle=true
-	for map in ["prologue_wall","outskirts_trial","gold_slime"]:
+	for map in ["prologue_wall","outskirts_trial","gold_slime","legacy_arena"]:
 		state.start(5502,"viya",null,map,"weapons_v1",{},"gold_slime" if map=="gold_slime" else "campaign",5502 if map=="gold_slime" else -1)
 		view.camera.reset(state.run_id)
-		verify.call(not view.uses_oblique() and view.ground_transform()==Ground.transform(view.camera_center(),view.size) and view.input_direction(Vector2.DOWN)==Vector2.DOWN,"Other maps retain their original projection/input:"+map)
+		var before:Dictionary=Snapshot.capture(state)
+		view.queue_redraw();await host.get_tree().process_frame
+		verify.call(view.uses_oblique() and view.ground_transform()==Oblique.transform(view.camera_center(),view.size) and view.project_direction(view.input_direction(Vector2.DOWN)).normalized().distance_to(Vector2.DOWN)<.001,"All existing maps share tilted projection and matching screen input:"+map)
+		verify.call(before==Snapshot.capture(state),"Global projection never mutates a resumed/other-map simulation:"+map)
+		for viewport in [Vector2(1280,526),Vector2(797,266)]:
+			view.size=viewport
+			var corners_ok:=true
+			for edge in [Vector2(31,31),state.world_size-Vector2(31,31)]:
+				state.player=edge;state.spawn_view_size=view.spawn_guard_size();view.camera.reset(state.run_id);view.advance_camera(.05,Vector2.ZERO,true)
+				for pixel in [Vector2.ZERO,Vector2(viewport.x,0),viewport,Vector2(0,viewport.y)]:
+					var world:Vector2=view.screen_to_world(pixel)
+					corners_ok=corners_ok and view.world_to_screen(world).distance_to(pixel)<.01 and state.visible_world().grow(.02).has_point(world)
+					if map!="legacy_arena":corners_ok=corners_ok and state.map_space.camera_bounds.grow(.02).has_point(world)
+			verify.call(corners_ok,"Every map's two camera edges fit inverse/spawn guard without changing legacy bounds:"+map+str(viewport))
 	view.queue_free();await host.get_tree().process_frame
 	var ui=load("res://scenes/main.tscn").instantiate()
 	var folder:="user://oblique-"+Crypto.new().generate_random_bytes(8).hex_encode()

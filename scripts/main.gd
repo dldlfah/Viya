@@ -6,6 +6,9 @@ const FeedbackPanel = preload("res://scripts/ui/feedback_panel.gd")
 const SkillPreview = preload("res://scripts/ui/skill_preview.gd")
 const GoldProgress = preload("res://scripts/progression/gold_progress.gd")
 const RunStore = preload("res://scripts/progression/run_store.gd")
+const AccountReset = preload("res://scripts/progression/account_reset.gd")
+var account_reset_error:Error=OK
+var _account_reset_pending:bool=false
 
 var simulation = RunState.new()
 var new_run_ruleset: String = "weapons_v1" # New sorties; resumed saves retain theirs.
@@ -53,9 +56,15 @@ var stage_text: Label
 
 func _ready() -> void:
 	_load_settings()
-	gold_error = gold_progress.load_progress()
-	battle_save_error = run_store.load_saved(simulation)
-	_recover_dungeon_admission()
+	account_reset_error=AccountReset.recover(gold_progress.path,run_store.path)
+	_account_reset_pending=AccountReset.pending(gold_progress.path)
+	if account_reset_error==OK:
+		gold_error = gold_progress.load_progress()
+		battle_save_error = run_store.load_saved(simulation)
+		_recover_dungeon_admission()
+	else:
+		gold_error=account_reset_error
+		battle_save_error=account_reset_error
 	_build_interface()
 	for key in ["show_damage", "show_xp", "simple_attacks"]:
 		view.set(key, get(key))
@@ -88,6 +97,7 @@ func _recover_dungeon_admission() -> void:
 	battle_save_error=run_store.write_snapshot(initial)
 
 func _physics_process(delta: float) -> void:
+	if _account_reset_pending:return
 	simulation.step(delta, view.input_direction(movement.direction()))
 	_sync_phase_ui()
 	if simulation.has_active_run() and simulation.checkpoint_index > _saved_checkpoint and battle_save_error == OK:
@@ -158,6 +168,9 @@ func _unhandled_key_input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 
 func _notification(what: int) -> void:
+	if _account_reset_pending:
+		if what==NOTIFICATION_WM_CLOSE_REQUEST:get_tree().quit()
+		return
 	if what == NOTIFICATION_WM_GO_BACK_REQUEST and is_instance_valid(overlay) and has_method("_handle_mobile_back"):
 		if call("_handle_mobile_back"):
 			return
@@ -670,6 +683,7 @@ func _add_gold_status() -> void:
 		dialog_body.add_child(_button("금화 불러오기 재시도", _retry_gold_load))
 
 func _retry_gold_load() -> void:
+	if _account_reset_pending:return
 	if simulation.phase != RunState.Phase.READY:
 		return
 	gold_error = gold_progress.load_progress()
@@ -683,6 +697,7 @@ func _retry_gold_save() -> void:
 	_show_menu({RunState.Phase.CLEARED:"cleared",RunState.Phase.DEFEAT:"defeat",RunState.Phase.ABANDONED:"abandoned"}[simulation.phase])
 
 func _can_start_rewarded_run() -> bool:
+	if _account_reset_pending:return false
 	if not gold_progress.loaded or battle_save_error != OK or not gold_progress.dungeon.initial.is_empty() or ((simulation.phase == RunState.Phase.CLEARED or simulation.run_mode=="gold_slime") and gold_error != OK):
 		return false
 	return true
@@ -691,6 +706,7 @@ func _has_saved_battle() -> bool:
 	return not run_store.pending.is_empty() and run_store.pending.run.phase in [RunState.Phase.RUNNING, RunState.Phase.PAUSED, RunState.Phase.CHOOSING]
 
 func _persist_battle() -> bool:
+	if _account_reset_pending:return false
 	if simulation.has_active_run() or simulation.phase in [RunState.Phase.CLEARED, RunState.Phase.DEFEAT, RunState.Phase.ABANDONED]:
 		battle_save_error = run_store.save_current(simulation)
 		if battle_save_error == OK:
@@ -721,6 +737,7 @@ func _add_battle_save_error() -> void:
 		dialog_body.add_child(_button("전투 저장 재시도", _retry_battle_save))
 
 func _retry_battle_load() -> void:
+	if _account_reset_pending:return
 	if simulation.phase == RunState.Phase.READY:
 		battle_save_error = run_store.load_saved(simulation)
 		_recover_dungeon_admission()
@@ -729,6 +746,7 @@ func _retry_battle_load() -> void:
 			_resume_saved_run()
 
 func _resume_saved_run() -> void:
+	if _account_reset_pending:return
 	if simulation.phase != RunState.Phase.READY or run_store.pending.is_empty() or not gold_progress.loaded:
 		return
 	var saved: Dictionary = run_store.pending.run
@@ -737,8 +755,7 @@ func _resume_saved_run() -> void:
 			battle_save_error=ERR_FILE_CORRUPT
 			_show_menu("ready")
 			return
-	var paid: bool = saved.phase == RunState.Phase.CLEARED and saved.run_id == gold_progress.last_run and saved.stage + 1 == gold_progress.next_stage
-	if saved.get("run_mode","campaign")=="campaign" and ((saved.stage != gold_progress.next_stage and not paid) or (saved.run_id == gold_progress.last_run and not paid)):
+	if saved.get("run_mode","campaign")=="campaign" and not gold_progress.campaign_allows(saved):
 		battle_save_error = ERR_FILE_CORRUPT
 		_show_menu("ready")
 		return

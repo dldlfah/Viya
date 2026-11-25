@@ -14,7 +14,7 @@ static func source_at(regions:Array,point:Vector2) -> Vector2:
 static func run(host,verify:Callable) -> void:
 	var slots=Slots.new()
 	verify.call(slots.definitions.size()==53 and slots.definitions.viya_battle=="res://assets/characters/pilot_32/resources/viya_directional_motion.tres" and slots.definitions.keys().all(func(k):return k=="viya_battle" or slots.definitions[k]==""),"Map pilot is unchanged; only the explicitly supplied Viya pilot occupies its shared slot")
-	verify.call(slots.map_definitions.keys()==["prologue_wall","siege_battlefield"] and slots.map_definitions.prologue_wall.size()==12 and slots.map_definitions.siege_battlefield==slots.map_definitions.prologue_wall,"Prologue and the separate stage field share the twelve original pilot overrides")
+	verify.call(slots.map_definitions.keys()==["prologue_wall","siege_battlefield","outskirts_trial"] and slots.map_definitions.prologue_wall.size()==12 and slots.map_definitions.siege_battlefield==slots.map_definitions.prologue_wall and slots.map_definitions.outskirts_trial.size()==2,"Prologue and stage1 share twelve originals; outskirts explicitly reuses only the two ruin face/top materials")
 	var manifest:Dictionary=JSON.parse_string(FileAccess.get_file_as_string("res://assets/maps/pilot_01/source_manifest.json"))
 	var second:Dictionary=JSON.parse_string(FileAccess.get_file_as_string("res://assets/maps/pilot_02/source_manifest.json"))
 	manifest.assets.append_array(second.assets)
@@ -27,7 +27,8 @@ static func run(host,verify:Callable) -> void:
 		var texture:Texture2D=slots.map_texture(asset.slot,"prologue_wall")
 		verify.call(texture!=null and texture.get_size()==Vector2(source_size[0],source_size[1]) and FileAccess.get_sha256(texture.resource_path)==asset.sha256,"Production pilot loads the exact supplied PNG: "+str(asset.slot))
 		verify.call(texture==slots.map_texture(asset.slot,"prologue_wall"),"Pilot resource is shared/cached: "+str(asset.slot))
-		verify.call(slots.texture(asset.slot)==null and ["outskirts_trial","legacy_arena","gold_slime"].all(func(id):return slots.map_texture(asset.slot,id)==null),"Pilot cannot leak into global slots or another map: "+str(asset.slot))
+		var ruin_slot:bool=asset.slot in ["ruin_block","ruin_top_tile"]
+		verify.call(slots.texture(asset.slot)==null and ["legacy_arena","gold_slime"].all(func(id):return slots.map_texture(asset.slot,id)==null) and (slots.map_texture(asset.slot,"outskirts_trial")==texture if ruin_slot else slots.map_texture(asset.slot,"outskirts_trial")==null),"Only explicitly shared ruin materials reach outskirts; all other map/global bindings stay isolated: "+str(asset.slot))
 	var crate:Image=slots.map_texture("prop_crate","prologue_wall").get_image()
 	verify.call(crate.get_pixel(46,0).a==0 and crate.get_pixel(46,85).a>0,"Original crate padding and bottom contact row survive import")
 	var path:="user://map-fallback-"+Crypto.new().generate_random_bytes(8).hex_encode()+".tres"

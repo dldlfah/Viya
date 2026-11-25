@@ -26,5 +26,9 @@
     "prop_crate_broken": "res://assets/maps/pilot_04/prop_crate_broken.png",
     "prop_urn_broken": "res://assets/maps/pilot_04/prop_urn_broken.png",
     "prop_debris_broken": "res://assets/maps/pilot_04/prop_debris_broken.png"
+  },
+  "outskirts_trial": {
+    "ruin_block": "res://assets/maps/pilot_02/ruin_block.png",
+    "ruin_top_tile": "res://assets/maps/pilot_03/ruin_top_tile.png"
   }
 }

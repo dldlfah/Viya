@@ -40,7 +40,8 @@ func camera_center() -> Vector2:
 		var lag:Vector2=camera.offset*extent if camera.run_id==simulation.run_id and camera._initialized and camera._viewport==size else Vector2.ZERO
 		var projected:Vector2=ObliqueProjection.screen_direction(lag,size)
 		var fraction:float=minf(1,minf(size.x*.08/maxf(.001,absf(projected.x)),size.y*.08/maxf(.001,absf(projected.y))))
-		return simulation.map_space.camera_center(simulation.player+lag*fraction,extent)
+		var target:Vector2=simulation.player+lag*fraction
+		return target if simulation.map_id=="legacy_arena" else simulation.map_space.camera_center(target,extent)
 	return camera.center(simulation,size)
 
 func spawn_guard_size() -> Vector2:
@@ -50,7 +51,7 @@ func advance_camera(delta: float, displacement: Vector2, active: bool) -> void:
 	camera.advance(simulation,size,displacement,delta,active)
 
 func uses_oblique() -> bool:
-	return high_angle and oblique_enabled and simulation!=null and simulation.map_id=="siege_battlefield"
+	return high_angle and oblique_enabled and simulation!=null
 
 func ground_transform() -> Transform2D:
 	if not uses_oblique():return BattleProjection.transform(camera_center(),size)
