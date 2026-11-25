@@ -1,0 +1,549 @@
+[gd_resource type="SpriteFrames" load_steps=209 format=3]
+
+[ext_resource type="Texture2D" path="../textures/viya_idle_se.png" id="1_idle_se_00"]
+[ext_resource type="Texture2D" path="../frames/viya_run_se_00.png" id="2_run_se_00"]
+[ext_resource type="Texture2D" path="../frames/viya_run_se_01.png" id="3_run_se_01"]
+[ext_resource type="Texture2D" path="../frames/viya_run_se_02.png" id="4_run_se_02"]
+[ext_resource type="Texture2D" path="../frames/viya_run_se_03.png" id="5_run_se_03"]
+[ext_resource type="Texture2D" path="../frames/viya_run_se_04.png" id="6_run_se_04"]
+[ext_resource type="Texture2D" path="../frames/viya_run_se_05.png" id="7_run_se_05"]
+[ext_resource type="Texture2D" path="../frames/viya_run_se_06.png" id="8_run_se_06"]
+[ext_resource type="Texture2D" path="../frames/viya_run_se_07.png" id="9_run_se_07"]
+[ext_resource type="Texture2D" path="../frames/viya_run_se_08.png" id="10_run_se_08"]
+[ext_resource type="Texture2D" path="../frames/viya_run_se_09.png" id="11_run_se_09"]
+[ext_resource type="Texture2D" path="../frames/viya_run_se_10.png" id="12_run_se_10"]
+[ext_resource type="Texture2D" path="../frames/viya_attack_se_00.png" id="13_attack_se_00"]
+[ext_resource type="Texture2D" path="../frames/viya_attack_se_01.png" id="14_attack_se_01"]
+[ext_resource type="Texture2D" path="../frames/viya_attack_se_02.png" id="15_attack_se_02"]
+[ext_resource type="Texture2D" path="../frames/viya_attack_se_03.png" id="16_attack_se_03"]
+[ext_resource type="Texture2D" path="../frames/viya_attack_se_04.png" id="17_attack_se_04"]
+[ext_resource type="Texture2D" path="../frames/viya_attack_se_05.png" id="18_attack_se_05"]
+[ext_resource type="Texture2D" path="../frames/viya_attack_se_06.png" id="19_attack_se_06"]
+[ext_resource type="Texture2D" path="../frames/viya_attack_se_07.png" id="20_attack_se_07"]
+[ext_resource type="Texture2D" path="../frames/viya_hurt_se_00.png" id="21_hurt_se_00"]
+[ext_resource type="Texture2D" path="../frames/viya_hurt_se_01.png" id="22_hurt_se_01"]
+[ext_resource type="Texture2D" path="../frames/viya_hurt_se_02.png" id="23_hurt_se_02"]
+[ext_resource type="Texture2D" path="../frames/viya_hurt_se_03.png" id="24_hurt_se_03"]
+[ext_resource type="Texture2D" path="../frames/viya_hurt_se_04.png" id="25_hurt_se_04"]
+[ext_resource type="Texture2D" path="../frames/viya_hurt_se_05.png" id="26_hurt_se_05"]
+[ext_resource type="Texture2D" path="../textures/viya_idle_e.png" id="27_idle_e_00"]
+[ext_resource type="Texture2D" path="../frames/viya_run_e_00.png" id="28_run_e_00"]
+[ext_resource type="Texture2D" path="../frames/viya_run_e_01.png" id="29_run_e_01"]
+[ext_resource type="Texture2D" path="../frames/viya_run_e_02.png" id="30_run_e_02"]
+[ext_resource type="Texture2D" path="../frames/viya_run_e_03.png" id="31_run_e_03"]
+[ext_resource type="Texture2D" path="../frames/viya_run_e_04.png" id="32_run_e_04"]
+[ext_resource type="Texture2D" path="../frames/viya_run_e_05.png" id="33_run_e_05"]
+[ext_resource type="Texture2D" path="../frames/viya_run_e_06.png" id="34_run_e_06"]
+[ext_resource type="Texture2D" path="../frames/viya_run_e_07.png" id="35_run_e_07"]
+[ext_resource type="Texture2D" path="../frames/viya_run_e_08.png" id="36_run_e_08"]
+[ext_resource type="Texture2D" path="../frames/viya_run_e_09.png" id="37_run_e_09"]
+[ext_resource type="Texture2D" path="../frames/viya_run_e_10.png" id="38_run_e_10"]
+[ext_resource type="Texture2D" path="../frames/viya_attack_e_00.png" id="39_attack_e_00"]
+[ext_resource type="Texture2D" path="../frames/viya_attack_e_01.png" id="40_attack_e_01"]
+[ext_resource type="Texture2D" path="../frames/viya_attack_e_02.png" id="41_attack_e_02"]
+[ext_resource type="Texture2D" path="../frames/viya_attack_e_03.png" id="42_attack_e_03"]
+[ext_resource type="Texture2D" path="../frames/viya_attack_e_04.png" id="43_attack_e_04"]
+[ext_resource type="Texture2D" path="../frames/viya_attack_e_05.png" id="44_attack_e_05"]
+[ext_resource type="Texture2D" path="../frames/viya_attack_e_06.png" id="45_attack_e_06"]
+[ext_resource type="Texture2D" path="../frames/viya_attack_e_07.png" id="46_attack_e_07"]
+[ext_resource type="Texture2D" path="../frames/viya_hurt_e_00.png" id="47_hurt_e_00"]
+[ext_resource type="Texture2D" path="../frames/viya_hurt_e_01.png" id="48_hurt_e_01"]
+[ext_resource type="Texture2D" path="../frames/viya_hurt_e_02.png" id="49_hurt_e_02"]
+[ext_resource type="Texture2D" path="../frames/viya_hurt_e_03.png" id="50_hurt_e_03"]
+[ext_resource type="Texture2D" path="../frames/viya_hurt_e_04.png" id="51_hurt_e_04"]
+[ext_resource type="Texture2D" path="../frames/viya_hurt_e_05.png" id="52_hurt_e_05"]
+[ext_resource type="Texture2D" path="../textures/viya_idle_s.png" id="53_idle_s_00"]
+[ext_resource type="Texture2D" path="../frames/viya_run_s_00.png" id="54_run_s_00"]
+[ext_resource type="Texture2D" path="../frames/viya_run_s_01.png" id="55_run_s_01"]
+[ext_resource type="Texture2D" path="../frames/viya_run_s_02.png" id="56_run_s_02"]
+[ext_resource type="Texture2D" path="../frames/viya_run_s_03.png" id="57_run_s_03"]
+[ext_resource type="Texture2D" path="../frames/viya_run_s_04.png" id="58_run_s_04"]
+[ext_resource type="Texture2D" path="../frames/viya_run_s_05.png" id="59_run_s_05"]
+[ext_resource type="Texture2D" path="../frames/viya_run_s_06.png" id="60_run_s_06"]
+[ext_resource type="Texture2D" path="../frames/viya_run_s_07.png" id="61_run_s_07"]
+[ext_resource type="Texture2D" path="../frames/viya_run_s_08.png" id="62_run_s_08"]
+[ext_resource type="Texture2D" path="../frames/viya_run_s_09.png" id="63_run_s_09"]
+[ext_resource type="Texture2D" path="../frames/viya_run_s_10.png" id="64_run_s_10"]
+[ext_resource type="Texture2D" path="../frames/viya_attack_s_00.png" id="65_attack_s_00"]
+[ext_resource type="Texture2D" path="../frames/viya_attack_s_01.png" id="66_attack_s_01"]
+[ext_resource type="Texture2D" path="../frames/viya_attack_s_02.png" id="67_attack_s_02"]
+[ext_resource type="Texture2D" path="../frames/viya_attack_s_03.png" id="68_attack_s_03"]
+[ext_resource type="Texture2D" path="../frames/viya_attack_s_04.png" id="69_attack_s_04"]
+[ext_resource type="Texture2D" path="../frames/viya_attack_s_05.png" id="70_attack_s_05"]
+[ext_resource type="Texture2D" path="../frames/viya_attack_s_06.png" id="71_attack_s_06"]
+[ext_resource type="Texture2D" path="../frames/viya_attack_s_07.png" id="72_attack_s_07"]
+[ext_resource type="Texture2D" path="../frames/viya_hurt_s_00.png" id="73_hurt_s_00"]
+[ext_resource type="Texture2D" path="../frames/viya_hurt_s_01.png" id="74_hurt_s_01"]
+[ext_resource type="Texture2D" path="../frames/viya_hurt_s_02.png" id="75_hurt_s_02"]
+[ext_resource type="Texture2D" path="../frames/viya_hurt_s_03.png" id="76_hurt_s_03"]
+[ext_resource type="Texture2D" path="../frames/viya_hurt_s_04.png" id="77_hurt_s_04"]
+[ext_resource type="Texture2D" path="../frames/viya_hurt_s_05.png" id="78_hurt_s_05"]
+[ext_resource type="Texture2D" path="../textures/viya_idle_sw.png" id="79_idle_sw_00"]
+[ext_resource type="Texture2D" path="../frames/viya_run_sw_00.png" id="80_run_sw_00"]
+[ext_resource type="Texture2D" path="../frames/viya_run_sw_01.png" id="81_run_sw_01"]
+[ext_resource type="Texture2D" path="../frames/viya_run_sw_02.png" id="82_run_sw_02"]
+[ext_resource type="Texture2D" path="../frames/viya_run_sw_03.png" id="83_run_sw_03"]
+[ext_resource type="Texture2D" path="../frames/viya_run_sw_04.png" id="84_run_sw_04"]
+[ext_resource type="Texture2D" path="../frames/viya_run_sw_05.png" id="85_run_sw_05"]
+[ext_resource type="Texture2D" path="../frames/viya_run_sw_06.png" id="86_run_sw_06"]
+[ext_resource type="Texture2D" path="../frames/viya_run_sw_07.png" id="87_run_sw_07"]
+[ext_resource type="Texture2D" path="../frames/viya_run_sw_08.png" id="88_run_sw_08"]
+[ext_resource type="Texture2D" path="../frames/viya_run_sw_09.png" id="89_run_sw_09"]
+[ext_resource type="Texture2D" path="../frames/viya_run_sw_10.png" id="90_run_sw_10"]
+[ext_resource type="Texture2D" path="../frames/viya_attack_sw_00.png" id="91_attack_sw_00"]
+[ext_resource type="Texture2D" path="../frames/viya_attack_sw_01.png" id="92_attack_sw_01"]
+[ext_resource type="Texture2D" path="../frames/viya_attack_sw_02.png" id="93_attack_sw_02"]
+[ext_resource type="Texture2D" path="../frames/viya_attack_sw_03.png" id="94_attack_sw_03"]
+[ext_resource type="Texture2D" path="../frames/viya_attack_sw_04.png" id="95_attack_sw_04"]
+[ext_resource type="Texture2D" path="../frames/viya_attack_sw_05.png" id="96_attack_sw_05"]
+[ext_resource type="Texture2D" path="../frames/viya_attack_sw_06.png" id="97_attack_sw_06"]
+[ext_resource type="Texture2D" path="../frames/viya_attack_sw_07.png" id="98_attack_sw_07"]
+[ext_resource type="Texture2D" path="../frames/viya_hurt_sw_00.png" id="99_hurt_sw_00"]
+[ext_resource type="Texture2D" path="../frames/viya_hurt_sw_01.png" id="100_hurt_sw_01"]
+[ext_resource type="Texture2D" path="../frames/viya_hurt_sw_02.png" id="101_hurt_sw_02"]
+[ext_resource type="Texture2D" path="../frames/viya_hurt_sw_03.png" id="102_hurt_sw_03"]
+[ext_resource type="Texture2D" path="../frames/viya_hurt_sw_04.png" id="103_hurt_sw_04"]
+[ext_resource type="Texture2D" path="../frames/viya_hurt_sw_05.png" id="104_hurt_sw_05"]
+[ext_resource type="Texture2D" path="../textures/viya_idle_w.png" id="105_idle_w_00"]
+[ext_resource type="Texture2D" path="../frames/viya_run_w_00.png" id="106_run_w_00"]
+[ext_resource type="Texture2D" path="../frames/viya_run_w_01.png" id="107_run_w_01"]
+[ext_resource type="Texture2D" path="../frames/viya_run_w_02.png" id="108_run_w_02"]
+[ext_resource type="Texture2D" path="../frames/viya_run_w_03.png" id="109_run_w_03"]
+[ext_resource type="Texture2D" path="../frames/viya_run_w_04.png" id="110_run_w_04"]
+[ext_resource type="Texture2D" path="../frames/viya_run_w_05.png" id="111_run_w_05"]
+[ext_resource type="Texture2D" path="../frames/viya_run_w_06.png" id="112_run_w_06"]
+[ext_resource type="Texture2D" path="../frames/viya_run_w_07.png" id="113_run_w_07"]
+[ext_resource type="Texture2D" path="../frames/viya_run_w_08.png" id="114_run_w_08"]
+[ext_resource type="Texture2D" path="../frames/viya_run_w_09.png" id="115_run_w_09"]
+[ext_resource type="Texture2D" path="../frames/viya_run_w_10.png" id="116_run_w_10"]
+[ext_resource type="Texture2D" path="../frames/viya_attack_w_00.png" id="117_attack_w_00"]
+[ext_resource type="Texture2D" path="../frames/viya_attack_w_01.png" id="118_attack_w_01"]
+[ext_resource type="Texture2D" path="../frames/viya_attack_w_02.png" id="119_attack_w_02"]
+[ext_resource type="Texture2D" path="../frames/viya_attack_w_03.png" id="120_attack_w_03"]
+[ext_resource type="Texture2D" path="../frames/viya_attack_w_04.png" id="121_attack_w_04"]
+[ext_resource type="Texture2D" path="../frames/viya_attack_w_05.png" id="122_attack_w_05"]
+[ext_resource type="Texture2D" path="../frames/viya_attack_w_06.png" id="123_attack_w_06"]
+[ext_resource type="Texture2D" path="../frames/viya_attack_w_07.png" id="124_attack_w_07"]
+[ext_resource type="Texture2D" path="../frames/viya_hurt_w_00.png" id="125_hurt_w_00"]
+[ext_resource type="Texture2D" path="../frames/viya_hurt_w_01.png" id="126_hurt_w_01"]
+[ext_resource type="Texture2D" path="../frames/viya_hurt_w_02.png" id="127_hurt_w_02"]
+[ext_resource type="Texture2D" path="../frames/viya_hurt_w_03.png" id="128_hurt_w_03"]
+[ext_resource type="Texture2D" path="../frames/viya_hurt_w_04.png" id="129_hurt_w_04"]
+[ext_resource type="Texture2D" path="../frames/viya_hurt_w_05.png" id="130_hurt_w_05"]
+[ext_resource type="Texture2D" path="../textures/viya_idle_nw.png" id="131_idle_nw_00"]
+[ext_resource type="Texture2D" path="../frames/viya_run_nw_00.png" id="132_run_nw_00"]
+[ext_resource type="Texture2D" path="../frames/viya_run_nw_01.png" id="133_run_nw_01"]
+[ext_resource type="Texture2D" path="../frames/viya_run_nw_02.png" id="134_run_nw_02"]
+[ext_resource type="Texture2D" path="../frames/viya_run_nw_03.png" id="135_run_nw_03"]
+[ext_resource type="Texture2D" path="../frames/viya_run_nw_04.png" id="136_run_nw_04"]
+[ext_resource type="Texture2D" path="../frames/viya_run_nw_05.png" id="137_run_nw_05"]
+[ext_resource type="Texture2D" path="../frames/viya_run_nw_06.png" id="138_run_nw_06"]
+[ext_resource type="Texture2D" path="../frames/viya_run_nw_07.png" id="139_run_nw_07"]
+[ext_resource type="Texture2D" path="../frames/viya_run_nw_08.png" id="140_run_nw_08"]
+[ext_resource type="Texture2D" path="../frames/viya_run_nw_09.png" id="141_run_nw_09"]
+[ext_resource type="Texture2D" path="../frames/viya_run_nw_10.png" id="142_run_nw_10"]
+[ext_resource type="Texture2D" path="../frames/viya_attack_nw_00.png" id="143_attack_nw_00"]
+[ext_resource type="Texture2D" path="../frames/viya_attack_nw_01.png" id="144_attack_nw_01"]
+[ext_resource type="Texture2D" path="../frames/viya_attack_nw_02.png" id="145_attack_nw_02"]
+[ext_resource type="Texture2D" path="../frames/viya_attack_nw_03.png" id="146_attack_nw_03"]
+[ext_resource type="Texture2D" path="../frames/viya_attack_nw_04.png" id="147_attack_nw_04"]
+[ext_resource type="Texture2D" path="../frames/viya_attack_nw_05.png" id="148_attack_nw_05"]
+[ext_resource type="Texture2D" path="../frames/viya_attack_nw_06.png" id="149_attack_nw_06"]
+[ext_resource type="Texture2D" path="../frames/viya_attack_nw_07.png" id="150_attack_nw_07"]
+[ext_resource type="Texture2D" path="../frames/viya_hurt_nw_00.png" id="151_hurt_nw_00"]
+[ext_resource type="Texture2D" path="../frames/viya_hurt_nw_01.png" id="152_hurt_nw_01"]
+[ext_resource type="Texture2D" path="../frames/viya_hurt_nw_02.png" id="153_hurt_nw_02"]
+[ext_resource type="Texture2D" path="../frames/viya_hurt_nw_03.png" id="154_hurt_nw_03"]
+[ext_resource type="Texture2D" path="../frames/viya_hurt_nw_04.png" id="155_hurt_nw_04"]
+[ext_resource type="Texture2D" path="../frames/viya_hurt_nw_05.png" id="156_hurt_nw_05"]
+[ext_resource type="Texture2D" path="../textures/viya_idle_n.png" id="157_idle_n_00"]
+[ext_resource type="Texture2D" path="../frames/viya_run_n_00.png" id="158_run_n_00"]
+[ext_resource type="Texture2D" path="../frames/viya_run_n_01.png" id="159_run_n_01"]
+[ext_resource type="Texture2D" path="../frames/viya_run_n_02.png" id="160_run_n_02"]
+[ext_resource type="Texture2D" path="../frames/viya_run_n_03.png" id="161_run_n_03"]
+[ext_resource type="Texture2D" path="../frames/viya_run_n_04.png" id="162_run_n_04"]
+[ext_resource type="Texture2D" path="../frames/viya_run_n_05.png" id="163_run_n_05"]
+[ext_resource type="Texture2D" path="../frames/viya_run_n_06.png" id="164_run_n_06"]
+[ext_resource type="Texture2D" path="../frames/viya_run_n_07.png" id="165_run_n_07"]
+[ext_resource type="Texture2D" path="../frames/viya_run_n_08.png" id="166_run_n_08"]
+[ext_resource type="Texture2D" path="../frames/viya_run_n_09.png" id="167_run_n_09"]
+[ext_resource type="Texture2D" path="../frames/viya_run_n_10.png" id="168_run_n_10"]
+[ext_resource type="Texture2D" path="../frames/viya_attack_n_00.png" id="169_attack_n_00"]
+[ext_resource type="Texture2D" path="../frames/viya_attack_n_01.png" id="170_attack_n_01"]
+[ext_resource type="Texture2D" path="../frames/viya_attack_n_02.png" id="171_attack_n_02"]
+[ext_resource type="Texture2D" path="../frames/viya_attack_n_03.png" id="172_attack_n_03"]
+[ext_resource type="Texture2D" path="../frames/viya_attack_n_04.png" id="173_attack_n_04"]
+[ext_resource type="Texture2D" path="../frames/viya_attack_n_05.png" id="174_attack_n_05"]
+[ext_resource type="Texture2D" path="../frames/viya_attack_n_06.png" id="175_attack_n_06"]
+[ext_resource type="Texture2D" path="../frames/viya_attack_n_07.png" id="176_attack_n_07"]
+[ext_resource type="Texture2D" path="../frames/viya_hurt_n_00.png" id="177_hurt_n_00"]
+[ext_resource type="Texture2D" path="../frames/viya_hurt_n_01.png" id="178_hurt_n_01"]
+[ext_resource type="Texture2D" path="../frames/viya_hurt_n_02.png" id="179_hurt_n_02"]
+[ext_resource type="Texture2D" path="../frames/viya_hurt_n_03.png" id="180_hurt_n_03"]
+[ext_resource type="Texture2D" path="../frames/viya_hurt_n_04.png" id="181_hurt_n_04"]
+[ext_resource type="Texture2D" path="../frames/viya_hurt_n_05.png" id="182_hurt_n_05"]
+[ext_resource type="Texture2D" path="../textures/viya_idle_ne.png" id="183_idle_ne_00"]
+[ext_resource type="Texture2D" path="../frames/viya_run_ne_00.png" id="184_run_ne_00"]
+[ext_resource type="Texture2D" path="../frames/viya_run_ne_01.png" id="185_run_ne_01"]
+[ext_resource type="Texture2D" path="../frames/viya_run_ne_02.png" id="186_run_ne_02"]
+[ext_resource type="Texture2D" path="../frames/viya_run_ne_03.png" id="187_run_ne_03"]
+[ext_resource type="Texture2D" path="../frames/viya_run_ne_04.png" id="188_run_ne_04"]
+[ext_resource type="Texture2D" path="../frames/viya_run_ne_05.png" id="189_run_ne_05"]
+[ext_resource type="Texture2D" path="../frames/viya_run_ne_06.png" id="190_run_ne_06"]
+[ext_resource type="Texture2D" path="../frames/viya_run_ne_07.png" id="191_run_ne_07"]
+[ext_resource type="Texture2D" path="../frames/viya_run_ne_08.png" id="192_run_ne_08"]
+[ext_resource type="Texture2D" path="../frames/viya_run_ne_09.png" id="193_run_ne_09"]
+[ext_resource type="Texture2D" path="../frames/viya_run_ne_10.png" id="194_run_ne_10"]
+[ext_resource type="Texture2D" path="../frames/viya_attack_ne_00.png" id="195_attack_ne_00"]
+[ext_resource type="Texture2D" path="../frames/viya_attack_ne_01.png" id="196_attack_ne_01"]
+[ext_resource type="Texture2D" path="../frames/viya_attack_ne_02.png" id="197_attack_ne_02"]
+[ext_resource type="Texture2D" path="../frames/viya_attack_ne_03.png" id="198_attack_ne_03"]
+[ext_resource type="Texture2D" path="../frames/viya_attack_ne_04.png" id="199_attack_ne_04"]
+[ext_resource type="Texture2D" path="../frames/viya_attack_ne_05.png" id="200_attack_ne_05"]
+[ext_resource type="Texture2D" path="../frames/viya_attack_ne_06.png" id="201_attack_ne_06"]
+[ext_resource type="Texture2D" path="../frames/viya_attack_ne_07.png" id="202_attack_ne_07"]
+[ext_resource type="Texture2D" path="../frames/viya_hurt_ne_00.png" id="203_hurt_ne_00"]
+[ext_resource type="Texture2D" path="../frames/viya_hurt_ne_01.png" id="204_hurt_ne_01"]
+[ext_resource type="Texture2D" path="../frames/viya_hurt_ne_02.png" id="205_hurt_ne_02"]
+[ext_resource type="Texture2D" path="../frames/viya_hurt_ne_03.png" id="206_hurt_ne_03"]
+[ext_resource type="Texture2D" path="../frames/viya_hurt_ne_04.png" id="207_hurt_ne_04"]
+[ext_resource type="Texture2D" path="../frames/viya_hurt_ne_05.png" id="208_hurt_ne_05"]
+
+[resource]
+animations = [{
+"frames": [{"duration": 1.0, "texture": ExtResource("1_idle_se_00")}],
+"loop": true,
+"name": &"idle_se",
+"speed": 1.0
+}, {
+"frames": [{"duration": 1.0, "texture": ExtResource("2_run_se_00")},
+{"duration": 1.0, "texture": ExtResource("3_run_se_01")},
+{"duration": 1.0, "texture": ExtResource("4_run_se_02")},
+{"duration": 1.0, "texture": ExtResource("5_run_se_03")},
+{"duration": 1.0, "texture": ExtResource("6_run_se_04")},
+{"duration": 1.0, "texture": ExtResource("7_run_se_05")},
+{"duration": 1.0, "texture": ExtResource("8_run_se_06")},
+{"duration": 1.0, "texture": ExtResource("9_run_se_07")},
+{"duration": 1.0, "texture": ExtResource("10_run_se_08")},
+{"duration": 1.0, "texture": ExtResource("11_run_se_09")},
+{"duration": 1.0, "texture": ExtResource("12_run_se_10")}],
+"loop": true,
+"name": &"run_se",
+"speed": 16.6666666667
+}, {
+"frames": [{"duration": 1.0, "texture": ExtResource("13_attack_se_00")},
+{"duration": 1.0, "texture": ExtResource("14_attack_se_01")},
+{"duration": 1.0, "texture": ExtResource("15_attack_se_02")},
+{"duration": 1.0, "texture": ExtResource("16_attack_se_03")},
+{"duration": 1.0, "texture": ExtResource("17_attack_se_04")},
+{"duration": 1.0, "texture": ExtResource("18_attack_se_05")},
+{"duration": 1.0, "texture": ExtResource("19_attack_se_06")},
+{"duration": 1.0, "texture": ExtResource("20_attack_se_07")}],
+"loop": false,
+"name": &"attack_se",
+"speed": 50.0
+}, {
+"frames": [{"duration": 1.0, "texture": ExtResource("21_hurt_se_00")},
+{"duration": 1.0, "texture": ExtResource("22_hurt_se_01")},
+{"duration": 1.0, "texture": ExtResource("23_hurt_se_02")},
+{"duration": 1.0, "texture": ExtResource("24_hurt_se_03")},
+{"duration": 1.0, "texture": ExtResource("25_hurt_se_04")},
+{"duration": 1.0, "texture": ExtResource("26_hurt_se_05")}],
+"loop": false,
+"name": &"hurt_se",
+"speed": 50.0
+}, {
+"frames": [{"duration": 1.0, "texture": ExtResource("27_idle_e_00")}],
+"loop": true,
+"name": &"idle_e",
+"speed": 1.0
+}, {
+"frames": [{"duration": 1.0, "texture": ExtResource("28_run_e_00")},
+{"duration": 1.0, "texture": ExtResource("29_run_e_01")},
+{"duration": 1.0, "texture": ExtResource("30_run_e_02")},
+{"duration": 1.0, "texture": ExtResource("31_run_e_03")},
+{"duration": 1.0, "texture": ExtResource("32_run_e_04")},
+{"duration": 1.0, "texture": ExtResource("33_run_e_05")},
+{"duration": 1.0, "texture": ExtResource("34_run_e_06")},
+{"duration": 1.0, "texture": ExtResource("35_run_e_07")},
+{"duration": 1.0, "texture": ExtResource("36_run_e_08")},
+{"duration": 1.0, "texture": ExtResource("37_run_e_09")},
+{"duration": 1.0, "texture": ExtResource("38_run_e_10")}],
+"loop": true,
+"name": &"run_e",
+"speed": 16.6666666667
+}, {
+"frames": [{"duration": 1.0, "texture": ExtResource("39_attack_e_00")},
+{"duration": 1.0, "texture": ExtResource("40_attack_e_01")},
+{"duration": 1.0, "texture": ExtResource("41_attack_e_02")},
+{"duration": 1.0, "texture": ExtResource("42_attack_e_03")},
+{"duration": 1.0, "texture": ExtResource("43_attack_e_04")},
+{"duration": 1.0, "texture": ExtResource("44_attack_e_05")},
+{"duration": 1.0, "texture": ExtResource("45_attack_e_06")},
+{"duration": 1.0, "texture": ExtResource("46_attack_e_07")}],
+"loop": false,
+"name": &"attack_e",
+"speed": 50.0
+}, {
+"frames": [{"duration": 1.0, "texture": ExtResource("47_hurt_e_00")},
+{"duration": 1.0, "texture": ExtResource("48_hurt_e_01")},
+{"duration": 1.0, "texture": ExtResource("49_hurt_e_02")},
+{"duration": 1.0, "texture": ExtResource("50_hurt_e_03")},
+{"duration": 1.0, "texture": ExtResource("51_hurt_e_04")},
+{"duration": 1.0, "texture": ExtResource("52_hurt_e_05")}],
+"loop": false,
+"name": &"hurt_e",
+"speed": 50.0
+}, {
+"frames": [{"duration": 1.0, "texture": ExtResource("53_idle_s_00")}],
+"loop": true,
+"name": &"idle_s",
+"speed": 1.0
+}, {
+"frames": [{"duration": 1.0, "texture": ExtResource("54_run_s_00")},
+{"duration": 1.0, "texture": ExtResource("55_run_s_01")},
+{"duration": 1.0, "texture": ExtResource("56_run_s_02")},
+{"duration": 1.0, "texture": ExtResource("57_run_s_03")},
+{"duration": 1.0, "texture": ExtResource("58_run_s_04")},
+{"duration": 1.0, "texture": ExtResource("59_run_s_05")},
+{"duration": 1.0, "texture": ExtResource("60_run_s_06")},
+{"duration": 1.0, "texture": ExtResource("61_run_s_07")},
+{"duration": 1.0, "texture": ExtResource("62_run_s_08")},
+{"duration": 1.0, "texture": ExtResource("63_run_s_09")},
+{"duration": 1.0, "texture": ExtResource("64_run_s_10")}],
+"loop": true,
+"name": &"run_s",
+"speed": 16.6666666667
+}, {
+"frames": [{"duration": 1.0, "texture": ExtResource("65_attack_s_00")},
+{"duration": 1.0, "texture": ExtResource("66_attack_s_01")},
+{"duration": 1.0, "texture": ExtResource("67_attack_s_02")},
+{"duration": 1.0, "texture": ExtResource("68_attack_s_03")},
+{"duration": 1.0, "texture": ExtResource("69_attack_s_04")},
+{"duration": 1.0, "texture": ExtResource("70_attack_s_05")},
+{"duration": 1.0, "texture": ExtResource("71_attack_s_06")},
+{"duration": 1.0, "texture": ExtResource("72_attack_s_07")}],
+"loop": false,
+"name": &"attack_s",
+"speed": 50.0
+}, {
+"frames": [{"duration": 1.0, "texture": ExtResource("73_hurt_s_00")},
+{"duration": 1.0, "texture": ExtResource("74_hurt_s_01")},
+{"duration": 1.0, "texture": ExtResource("75_hurt_s_02")},
+{"duration": 1.0, "texture": ExtResource("76_hurt_s_03")},
+{"duration": 1.0, "texture": ExtResource("77_hurt_s_04")},
+{"duration": 1.0, "texture": ExtResource("78_hurt_s_05")}],
+"loop": false,
+"name": &"hurt_s",
+"speed": 50.0
+}, {
+"frames": [{"duration": 1.0, "texture": ExtResource("79_idle_sw_00")}],
+"loop": true,
+"name": &"idle_sw",
+"speed": 1.0
+}, {
+"frames": [{"duration": 1.0, "texture": ExtResource("80_run_sw_00")},
+{"duration": 1.0, "texture": ExtResource("81_run_sw_01")},
+{"duration": 1.0, "texture": ExtResource("82_run_sw_02")},
+{"duration": 1.0, "texture": ExtResource("83_run_sw_03")},
+{"duration": 1.0, "texture": ExtResource("84_run_sw_04")},
+{"duration": 1.0, "texture": ExtResource("85_run_sw_05")},
+{"duration": 1.0, "texture": ExtResource("86_run_sw_06")},
+{"duration": 1.0, "texture": ExtResource("87_run_sw_07")},
+{"duration": 1.0, "texture": ExtResource("88_run_sw_08")},
+{"duration": 1.0, "texture": ExtResource("89_run_sw_09")},
+{"duration": 1.0, "texture": ExtResource("90_run_sw_10")}],
+"loop": true,
+"name": &"run_sw",
+"speed": 16.6666666667
+}, {
+"frames": [{"duration": 1.0, "texture": ExtResource("91_attack_sw_00")},
+{"duration": 1.0, "texture": ExtResource("92_attack_sw_01")},
+{"duration": 1.0, "texture": ExtResource("93_attack_sw_02")},
+{"duration": 1.0, "texture": ExtResource("94_attack_sw_03")},
+{"duration": 1.0, "texture": ExtResource("95_attack_sw_04")},
+{"duration": 1.0, "texture": ExtResource("96_attack_sw_05")},
+{"duration": 1.0, "texture": ExtResource("97_attack_sw_06")},
+{"duration": 1.0, "texture": ExtResource("98_attack_sw_07")}],
+"loop": false,
+"name": &"attack_sw",
+"speed": 50.0
+}, {
+"frames": [{"duration": 1.0, "texture": ExtResource("99_hurt_sw_00")},
+{"duration": 1.0, "texture": ExtResource("100_hurt_sw_01")},
+{"duration": 1.0, "texture": ExtResource("101_hurt_sw_02")},
+{"duration": 1.0, "texture": ExtResource("102_hurt_sw_03")},
+{"duration": 1.0, "texture": ExtResource("103_hurt_sw_04")},
+{"duration": 1.0, "texture": ExtResource("104_hurt_sw_05")}],
+"loop": false,
+"name": &"hurt_sw",
+"speed": 50.0
+}, {
+"frames": [{"duration": 1.0, "texture": ExtResource("105_idle_w_00")}],
+"loop": true,
+"name": &"idle_w",
+"speed": 1.0
+}, {
+"frames": [{"duration": 1.0, "texture": ExtResource("106_run_w_00")},
+{"duration": 1.0, "texture": ExtResource("107_run_w_01")},
+{"duration": 1.0, "texture": ExtResource("108_run_w_02")},
+{"duration": 1.0, "texture": ExtResource("109_run_w_03")},
+{"duration": 1.0, "texture": ExtResource("110_run_w_04")},
+{"duration": 1.0, "texture": ExtResource("111_run_w_05")},
+{"duration": 1.0, "texture": ExtResource("112_run_w_06")},
+{"duration": 1.0, "texture": ExtResource("113_run_w_07")},
+{"duration": 1.0, "texture": ExtResource("114_run_w_08")},
+{"duration": 1.0, "texture": ExtResource("115_run_w_09")},
+{"duration": 1.0, "texture": ExtResource("116_run_w_10")}],
+"loop": true,
+"name": &"run_w",
+"speed": 16.6666666667
+}, {
+"frames": [{"duration": 1.0, "texture": ExtResource("117_attack_w_00")},
+{"duration": 1.0, "texture": ExtResource("118_attack_w_01")},
+{"duration": 1.0, "texture": ExtResource("119_attack_w_02")},
+{"duration": 1.0, "texture": ExtResource("120_attack_w_03")},
+{"duration": 1.0, "texture": ExtResource("121_attack_w_04")},
+{"duration": 1.0, "texture": ExtResource("122_attack_w_05")},
+{"duration": 1.0, "texture": ExtResource("123_attack_w_06")},
+{"duration": 1.0, "texture": ExtResource("124_attack_w_07")}],
+"loop": false,
+"name": &"attack_w",
+"speed": 50.0
+}, {
+"frames": [{"duration": 1.0, "texture": ExtResource("125_hurt_w_00")},
+{"duration": 1.0, "texture": ExtResource("126_hurt_w_01")},
+{"duration": 1.0, "texture": ExtResource("127_hurt_w_02")},
+{"duration": 1.0, "texture": ExtResource("128_hurt_w_03")},
+{"duration": 1.0, "texture": ExtResource("129_hurt_w_04")},
+{"duration": 1.0, "texture": ExtResource("130_hurt_w_05")}],
+"loop": false,
+"name": &"hurt_w",
+"speed": 50.0
+}, {
+"frames": [{"duration": 1.0, "texture": ExtResource("131_idle_nw_00")}],
+"loop": true,
+"name": &"idle_nw",
+"speed": 1.0
+}, {
+"frames": [{"duration": 1.0, "texture": ExtResource("132_run_nw_00")},
+{"duration": 1.0, "texture": ExtResource("133_run_nw_01")},
+{"duration": 1.0, "texture": ExtResource("134_run_nw_02")},
+{"duration": 1.0, "texture": ExtResource("135_run_nw_03")},
+{"duration": 1.0, "texture": ExtResource("136_run_nw_04")},
+{"duration": 1.0, "texture": ExtResource("137_run_nw_05")},
+{"duration": 1.0, "texture": ExtResource("138_run_nw_06")},
+{"duration": 1.0, "texture": ExtResource("139_run_nw_07")},
+{"duration": 1.0, "texture": ExtResource("140_run_nw_08")},
+{"duration": 1.0, "texture": ExtResource("141_run_nw_09")},
+{"duration": 1.0, "texture": ExtResource("142_run_nw_10")}],
+"loop": true,
+"name": &"run_nw",
+"speed": 16.6666666667
+}, {
+"frames": [{"duration": 1.0, "texture": ExtResource("143_attack_nw_00")},
+{"duration": 1.0, "texture": ExtResource("144_attack_nw_01")},
+{"duration": 1.0, "texture": ExtResource("145_attack_nw_02")},
+{"duration": 1.0, "texture": ExtResource("146_attack_nw_03")},
+{"duration": 1.0, "texture": ExtResource("147_attack_nw_04")},
+{"duration": 1.0, "texture": ExtResource("148_attack_nw_05")},
+{"duration": 1.0, "texture": ExtResource("149_attack_nw_06")},
+{"duration": 1.0, "texture": ExtResource("150_attack_nw_07")}],
+"loop": false,
+"name": &"attack_nw",
+"speed": 50.0
+}, {
+"frames": [{"duration": 1.0, "texture": ExtResource("151_hurt_nw_00")},
+{"duration": 1.0, "texture": ExtResource("152_hurt_nw_01")},
+{"duration": 1.0, "texture": ExtResource("153_hurt_nw_02")},
+{"duration": 1.0, "texture": ExtResource("154_hurt_nw_03")},
+{"duration": 1.0, "texture": ExtResource("155_hurt_nw_04")},
+{"duration": 1.0, "texture": ExtResource("156_hurt_nw_05")}],
+"loop": false,
+"name": &"hurt_nw",
+"speed": 50.0
+}, {
+"frames": [{"duration": 1.0, "texture": ExtResource("157_idle_n_00")}],
+"loop": true,
+"name": &"idle_n",
+"speed": 1.0
+}, {
+"frames": [{"duration": 1.0, "texture": ExtResource("158_run_n_00")},
+{"duration": 1.0, "texture": ExtResource("159_run_n_01")},
+{"duration": 1.0, "texture": ExtResource("160_run_n_02")},
+{"duration": 1.0, "texture": ExtResource("161_run_n_03")},
+{"duration": 1.0, "texture": ExtResource("162_run_n_04")},
+{"duration": 1.0, "texture": ExtResource("163_run_n_05")},
+{"duration": 1.0, "texture": ExtResource("164_run_n_06")},
+{"duration": 1.0, "texture": ExtResource("165_run_n_07")},
+{"duration": 1.0, "texture": ExtResource("166_run_n_08")},
+{"duration": 1.0, "texture": ExtResource("167_run_n_09")},
+{"duration": 1.0, "texture": ExtResource("168_run_n_10")}],
+"loop": true,
+"name": &"run_n",
+"speed": 16.6666666667
+}, {
+"frames": [{"duration": 1.0, "texture": ExtResource("169_attack_n_00")},
+{"duration": 1.0, "texture": ExtResource("170_attack_n_01")},
+{"duration": 1.0, "texture": ExtResource("171_attack_n_02")},
+{"duration": 1.0, "texture": ExtResource("172_attack_n_03")},
+{"duration": 1.0, "texture": ExtResource("173_attack_n_04")},
+{"duration": 1.0, "texture": ExtResource("174_attack_n_05")},
+{"duration": 1.0, "texture": ExtResource("175_attack_n_06")},
+{"duration": 1.0, "texture": ExtResource("176_attack_n_07")}],
+"loop": false,
+"name": &"attack_n",
+"speed": 50.0
+}, {
+"frames": [{"duration": 1.0, "texture": ExtResource("177_hurt_n_00")},
+{"duration": 1.0, "texture": ExtResource("178_hurt_n_01")},
+{"duration": 1.0, "texture": ExtResource("179_hurt_n_02")},
+{"duration": 1.0, "texture": ExtResource("180_hurt_n_03")},
+{"duration": 1.0, "texture": ExtResource("181_hurt_n_04")},
+{"duration": 1.0, "texture": ExtResource("182_hurt_n_05")}],
+"loop": false,
+"name": &"hurt_n",
+"speed": 50.0
+}, {
+"frames": [{"duration": 1.0, "texture": ExtResource("183_idle_ne_00")}],
+"loop": true,
+"name": &"idle_ne",
+"speed": 1.0
+}, {
+"frames": [{"duration": 1.0, "texture": ExtResource("184_run_ne_00")},
+{"duration": 1.0, "texture": ExtResource("185_run_ne_01")},
+{"duration": 1.0, "texture": ExtResource("186_run_ne_02")},
+{"duration": 1.0, "texture": ExtResource("187_run_ne_03")},
+{"duration": 1.0, "texture": ExtResource("188_run_ne_04")},
+{"duration": 1.0, "texture": ExtResource("189_run_ne_05")},
+{"duration": 1.0, "texture": ExtResource("190_run_ne_06")},
+{"duration": 1.0, "texture": ExtResource("191_run_ne_07")},
+{"duration": 1.0, "texture": ExtResource("192_run_ne_08")},
+{"duration": 1.0, "texture": ExtResource("193_run_ne_09")},
+{"duration": 1.0, "texture": ExtResource("194_run_ne_10")}],
+"loop": true,
+"name": &"run_ne",
+"speed": 16.6666666667
+}, {
+"frames": [{"duration": 1.0, "texture": ExtResource("195_attack_ne_00")},
+{"duration": 1.0, "texture": ExtResource("196_attack_ne_01")},
+{"duration": 1.0, "texture": ExtResource("197_attack_ne_02")},
+{"duration": 1.0, "texture": ExtResource("198_attack_ne_03")},
+{"duration": 1.0, "texture": ExtResource("199_attack_ne_04")},
+{"duration": 1.0, "texture": ExtResource("200_attack_ne_05")},
+{"duration": 1.0, "texture": ExtResource("201_attack_ne_06")},
+{"duration": 1.0, "texture": ExtResource("202_attack_ne_07")}],
+"loop": false,
+"name": &"attack_ne",
+"speed": 50.0
+}, {
+"frames": [{"duration": 1.0, "texture": ExtResource("203_hurt_ne_00")},
+{"duration": 1.0, "texture": ExtResource("204_hurt_ne_01")},
+{"duration": 1.0, "texture": ExtResource("205_hurt_ne_02")},
+{"duration": 1.0, "texture": ExtResource("206_hurt_ne_03")},
+{"duration": 1.0, "texture": ExtResource("207_hurt_ne_04")},
+{"duration": 1.0, "texture": ExtResource("208_hurt_ne_05")}],
+"loop": false,
+"name": &"hurt_ne",
+"speed": 50.0
+}]

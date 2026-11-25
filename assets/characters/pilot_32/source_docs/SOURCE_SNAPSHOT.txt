@@ -1,0 +1,105 @@
+VIYA CHARACTER-PILOT-032 — NE 피격 계약과 출처
+기준일: 2026-11-25 KST
+상태: 원격 계약 확인·원본 관찰·1차 선정·출력·독립 기술 검사 완료
+시각 선정 상태: prepared_pilot
+새 HEAD 확인: 2026-11-25 07:13:12 UTC / 16:13:12 KST
+저장소: dldlfah/Viya
+브랜치: work/viya-turnaround-qa-20261117
+HEAD: bdb5d044ea8d8e963fa19053b5e79548fd24b5ab
+현재 게임: GAME-055 / 코드 137f506821ee74136f4deb1256ad7cd4bb5539a2
+저장 버전: 22 / 공식 다음 게임 작업: GAME-056 후반 공통 경로·몸체 그리기 부하 보완
+
+원문 재사용과 새 확인
+HEAD는 직전 PILOT-031과 같다. 최초 계약 원문 수신은 2026-11-25 04:07:54 UTC, 직전 HEAD 확인은 06:55:29 UTC다. 이번에는 같은 커밋의 원문 10개와 코드 산술 투영 결과를 viya_character_attack_ne_review에서 재사용했다. 이 10개를 새로 내려받았다고 기록하지 않는다. 후속 연결 제안에 필요한 NEXT_TASK/ART_APPROVAL/PRODUCTION_PIPELINE/PLANNED_WORK 4개는 같은 HEAD에서 별도로 읽었으며 수신 기록 시각은 07:13:58 UTC다. 원격·게임 파일 변경과 실제 게임 실행은 없다.
+
+피격 발생·방향·시계
+새 received cue 또는 HP 감소에서 hurt_until=now+0.12가 된다. pose 우선순위는 hurt > attack > run > idle다. hurt로 새로 진입할 때 since=now이며, 같은 hurt 중 다시 맞으면 종료 시각은 연장해도 since는 다시 시작하지 않는다. 따라서 비반복6프레임이 끝나도 피격 pose가 유지되는 동안 마지막 프레임에 머물 수 있다.
+
+각 새 cue에서 hurt_aim을 먼저 지우고 direction이 0이 아닐 때만 새 값을 넣는다. 마지막 cue의 방향이 우선하며, 마지막 cue 방향이 0이면 앞 cue의 방향을 남기지 않는다. 새 cue 없이 HP만 줄어도 오래된 hurt_aim을 제거한다. hurt_aim이 없으면 이동 중 displacement, 정지 중 전달 facing을 따른다. 이 방향을 최종 표시 단계에서 투영·양자화한다. 피격 판정·HP·무적·cue는 게임이 소유하며 이미지가 추가 피해나 새 규칙을 만들지 않는다.
+
+납품 hurt_ne는6장×20ms=120ms, 각 duration1·FPS50·loop=false다. native GIF의 컨테이너 반복과 게임 SpriteFrames 비반복은 별개다. 고각 _draw_hero()의 텍스처 분기는 draw_texture_rect(...,false)로 그리며, 절차형 Forms.hero에 전달하는 hurt_clock>.5를 PNG에 자동 전달하지 않는다. 이번 그림에 피격 플래시·피·총구 효과를 굽거나 같은 깜박임이 자동 구현됐다고 보고하지 않는다. 기존 피해 cue/표시와 자산 반응을 실제 연결 단계에서 구분한다.
+
+NE 투영·표시·슬롯
+NE는 e,se,s,sw,w,nw,n,ne 중 인덱스7, 투영된 화면 오른쪽 위 섹터다. 사선 siege_battlefield는 high_angle && oblique_enabled일 때 facing을 project_direction()으로 투영한 뒤8방향으로 다시 양자화한다. 고정 yaw −18도·지면 앙각55도에서 월드(1,-1)는 양의 zoom×(0.6420395219202062,-1.0321917922198198), 각도−58.117738386614도로 ne다. 정확한 화면−45도와 같은 월드축은 아니다. 계산은 코드 산술이며 게임 측정이 아니다.
+
+배우의 발 위치만 투영하고 IDENTITY 캔버스에서50×62, pivot(0.5,1)로 직립 표시한다. PNG 자체 회전·지면 Y압축·zoom·자동 좌우 반전은 없다. 원본400×496에서 공통200×248 RGBA/sRGB로 준비했다. 실측 공통 crop[103,7,324,467], 배율0.5304347826086957, 크기117×244, offset[41,4]를 전 프레임에 동일 적용했다. viya_battle은 빈 공용 슬롯이다. 조회 순서는 동작_방향 → 방향 없는 동작 → idle_방향 → idle → default다. 이번 누적 자산에 공통 idle/default와 방향 없는 동작은 넣지 않는다.
+
+직접 참조와 완료한 파일 구성
+직접 생성 참조는 PILOT-029 NE 대기 job b46f2d0f-4a9e-4f3a-b656-577bba46cf60 하나다. PILOT-030 run_ne, PILOT-031 attack_ne와 ART-001은 이번 직접 입력이 아니다. 기준은 NE 후면3/4의 기존 의상과 두 손 장비다. 피격은 짧은 몸 수축·회복 후보이며 실제6장을 직접 확인했다.
+
+선택 원본은 masters/viya_hurt_ne_master.gif, job 33adf6a8-7807-46d0-81c8-c82b990cfc43, 239355바이트, SHA256 43b9f1c773f473458f4428908eef2221955c2181de3085e604f0786a11aa13cd다. 생성1회에서1차를 선택했고 실제400×496·서로 다른6장×20ms=120ms·전 프레임 native alpha다. 원본 GIF loop=0과 게임 loop=false는 별도 설정이다.
+실제 원본00–05와 기존 NE 대기 PNG를 직접 봤다. 01에서 머리·어깨가 낮아지고02에서 상체가 전방/아래로 접히며 무릎도 굽혀지는 수축이 가장 크다. 03–05는 다시 펴지며 양손으로 낮게 든 총을 유지한다. 뒤로 젖히는 동작으로 표현하지 않는다. 큰 걸음·전신 위치 점프·손/총 분리·주요 잘림은 보이지 않으며 NE 후면3/4와 왼쪽 넓은 룬 천·오른쪽 스트랩 허벅지가 이어진다.05는 low-ready 계열로 돌아오지만 기존 idle과 정확히 같은 자세/픽셀, 완전 고정 접지·숨은 결합 구조·정확한3D 카메라를 보증하지 않는다.031의 높인 총 끝자세 한계는 이번 hurt에 자동 전가하지 않고 이전 attack 이력으로 유지한다.
+
+기준 PILOT-031은31항목·202게임프레임·핵심277파일(게임202+아틀라스23+원본·기존 컷아웃52)이다.생성1회에서6장 전체와 원본1개를 선정해32항목·208프레임·핵심285파일(게임208+아틀라스24+원본·기존 컷아웃53)을 준비했다. Godot4.7.2-stable 공식판 독립 import/load 및 독립 파일·픽셀 검사 PASS를 실제 결과에서 확인했다. 기존277파일·202게임PNG와 새 원본이 보존됐으며 공통변환·ICC·아틀라스6셀/빈2셀·미리보기12인코딩960ms의 픽셀/시간이 일치한다. 근거는 qa/resource_load_check.json, qa/final_asset_checks.json, qa/bitmap_checks.json이다. 이는8방향 각각 idle1/run11/attack8/hurt6의 기본4상태 구성이다. 자산 구성 준비와 실게임 연결·품질 승인은 구분한다. 기존 run_ne 위상/박자, attack_ne 무기축/높인 끝자세, N↔NE 무기 자세, NW/N 의상 및 이전 run/attack 한계는 별도 이력으로 보존한다.
+
+032 이후의 권장 단계 — recommended_not_started
+비야 8방향 4상태의 viya_battle 시범 연결 및 전환 확인
+PLANNED_WORK24절은 이미 양 렌더러의8방향 idle/run/attack/hurt, 발pivot·canvas·FPS/duration·반복/마지막 프레임 접점을 구현했다고 기록한다. 따라서 기본 파일 구성이 갖춰진 현재는 새 방향·death·추가 유료 생성으로 자동 확장하지 않고, 누적 SpriteFrames를 기존 viya_battle에 시범 연결해 실제 전환과 읽힘을 확인하는 단계가 합리적이다. 초기 E, NE 이동→공격→피격→대기와 재피격의 마지막 프레임 유지, 사선/기존 렌더러 방향, N↔NE 무기·NW↔N 천·방향 전환 발 위상 등 이미 알려진 이음에 범위를 둔다. 실제 적용 없이 연결 완료라고 하지 않는다.
+
+이 제안은 저장소 NEXT_TASK의 GAME-056을 자동 변경하지 않는다. ART_APPROVAL의 디자인 방향 기준과 최신 CURRENT_WORK의 ART001/GEN005 미승인·게임 미연결 표기를 구분한다. 최종 시각 승인 주체와 실제 모바일 검증은 기존 기준 그대로며 새 승인 절차를 만들지 않는다. 초기 문서의 원화 보류는 이후 사용자가 캐릭터 제작을 재개한 현재 지시를 중단하는 근거로 사용하지 않는다. 이번 세션은 파일 자산 준비와 인계이며 실제 코드·GitHub 변경은 없다.
+
+브랜치 API
+https://api.github.com/repos/dldlfah/Viya/branches?per_page=100
+
+재사용한 계약 원문10개
+
+docs/CURRENT_WORK.md
+Git blob SHA: 749ea01b14abc87ddc0b9483d7b49d3783fe4b7a
+https://github.com/dldlfah/Viya/blob/bdb5d044ea8d8e963fa19053b5e79548fd24b5ab/docs/CURRENT_WORK.md
+
+data/presentation_slots.json
+Git blob SHA: 0b445094d8bcfc52c54cc7517280c8fa9a0a32b1
+https://github.com/dldlfah/Viya/blob/bdb5d044ea8d8e963fa19053b5e79548fd24b5ab/data/presentation_slots.json
+
+data/actor_presentation.json
+Git blob SHA: cedcced26b92ac7b9ab9a94e724ebfd51ed52b05
+https://github.com/dldlfah/Viya/blob/bdb5d044ea8d8e963fa19053b5e79548fd24b5ab/data/actor_presentation.json
+
+scripts/combat/actor_motion.gd
+Git blob SHA: 9f7aa48dffb110a071d2b95f661a690f86c1e5b8
+https://github.com/dldlfah/Viya/blob/bdb5d044ea8d8e963fa19053b5e79548fd24b5ab/scripts/combat/actor_motion.gd
+
+scripts/ui/actor_assets.gd
+Git blob SHA: 1798e14b344bc0730bc5a5ae959668d4d3480c79
+https://github.com/dldlfah/Viya/blob/bdb5d044ea8d8e963fa19053b5e79548fd24b5ab/scripts/ui/actor_assets.gd
+
+scripts/combat/battle_projection.gd
+Git blob SHA: 94ba9873b05b470b6bee7062766edcb11ee7f35c
+https://github.com/dldlfah/Viya/blob/bdb5d044ea8d8e963fa19053b5e79548fd24b5ab/scripts/combat/battle_projection.gd
+
+scripts/combat/oblique_projection.gd
+Git blob SHA: badf432db2f39d6f903df8627bf89268520be949
+https://github.com/dldlfah/Viya/blob/bdb5d044ea8d8e963fa19053b5e79548fd24b5ab/scripts/combat/oblique_projection.gd
+
+scripts/combat/battle_view.gd
+Git blob SHA: 4e3a643264d345b950cc7526172b13c429a02ff5
+https://github.com/dldlfah/Viya/blob/bdb5d044ea8d8e963fa19053b5e79548fd24b5ab/scripts/combat/battle_view.gd
+
+scripts/combat/high_angle_battle.gd
+Git blob SHA: c831f40a3631e3b275a78859cd636cd8fbf19558
+https://github.com/dldlfah/Viya/blob/bdb5d044ea8d8e963fa19053b5e79548fd24b5ab/scripts/combat/high_angle_battle.gd
+
+docs/design/OBLIQUE_STAGE.md
+Git blob SHA: 4e5a1c81fc2708eeb9ce316a9607d0fe7ee0f11a
+https://github.com/dldlfah/Viya/blob/bdb5d044ea8d8e963fa19053b5e79548fd24b5ab/docs/design/OBLIQUE_STAGE.md
+
+같은 HEAD에서 새로 읽은 후속 계획 근거4개
+
+docs/NEXT_TASK.md
+Git blob SHA: 18ec9224d455b456b380b1009e71cb83372edb8d
+https://github.com/dldlfah/Viya/blob/bdb5d044ea8d8e963fa19053b5e79548fd24b5ab/docs/NEXT_TASK.md
+
+docs/ART_APPROVAL.md
+Git blob SHA: c8f292dba8f4309bbf6048b0766a970544088037
+https://github.com/dldlfah/Viya/blob/bdb5d044ea8d8e963fa19053b5e79548fd24b5ab/docs/ART_APPROVAL.md
+
+docs/PRODUCTION_PIPELINE.md
+Git blob SHA: 06d879a0532e97647fc3dbf37958dcc08f0fa164
+https://github.com/dldlfah/Viya/blob/bdb5d044ea8d8e963fa19053b5e79548fd24b5ab/docs/PRODUCTION_PIPELINE.md
+
+docs/PLANNED_WORK.md
+Git blob SHA: fe5a64ec26d1682eb3d240ee2da93bb5806bbdc5
+https://github.com/dldlfah/Viya/blob/bdb5d044ea8d8e963fa19053b5e79548fd24b5ab/docs/PLANNED_WORK.md
+
+검토 출력의 실제 범위
+최종 PNG와6프레임 시트를 직접 확인했다. preview는1000×916, 12인코딩프레임·총960ms이며 초기200ms 후 실제120ms/3배느림360ms, 마지막공통대기400ms다. t240ms PNG는 실제02/느린00이다. 대기 그림은 따로 삽입한 비교 연출이며 원본05와기존idle의정확한일치를뜻하지않는다. 새 이미지 생성 계획과 자동033 ID는없다. 실제게임/GitHub/슬롯미변경, 최종아트승인미기록을유지한다.

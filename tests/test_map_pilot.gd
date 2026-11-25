@@ -13,7 +13,7 @@ static func source_at(regions:Array,point:Vector2) -> Vector2:
 
 static func run(host,verify:Callable) -> void:
 	var slots=Slots.new()
-	verify.call(slots.definitions.size()==53 and slots.definitions.values().all(func(p):return p==""),"Map pilot leaves every shared/character presentation path blank")
+	verify.call(slots.definitions.size()==53 and slots.definitions.viya_battle=="res://assets/characters/pilot_32/resources/viya_directional_motion.tres" and slots.definitions.keys().all(func(k):return k=="viya_battle" or slots.definitions[k]==""),"Map pilot is unchanged; only the explicitly supplied Viya pilot occupies its shared slot")
 	verify.call(slots.map_definitions.keys()==["prologue_wall","siege_battlefield"] and slots.map_definitions.prologue_wall.size()==12 and slots.map_definitions.siege_battlefield==slots.map_definitions.prologue_wall,"Prologue and the separate stage field share the twelve original pilot overrides")
 	var manifest:Dictionary=JSON.parse_string(FileAccess.get_file_as_string("res://assets/maps/pilot_01/source_manifest.json"))
 	var second:Dictionary=JSON.parse_string(FileAccess.get_file_as_string("res://assets/maps/pilot_02/source_manifest.json"))
