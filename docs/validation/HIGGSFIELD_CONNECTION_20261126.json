@@ -14,7 +14,8 @@
     "official_wheel_sha256": "66a6310c2d9b210f021848eb9e03ed1a8c2991e2e8a1a328c470ce39a033f633",
     "installation": "PASS",
     "locked_dependencies": 8,
-    "lock_sha256": "20970b8837effe8f2d315ea8170703b9ec96e9eb713b5e27273c1a2a541847f7"
+    "lock_sha256": "5064261b997189d1d6881fe7234ffa1a6b20df224e00d52c25864bf7c42896f1",
+    "python_runtime_verified": "3.12.14"
   },
   "checks": {
     "official_sdk_import": "PASS",
