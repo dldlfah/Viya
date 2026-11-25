@@ -4,19 +4,13 @@
 
 ## 세션 필수 문서
 
-[CURRENT_WORK](docs/CURRENT_WORK.md)와 **[누적 DEVELOPMENT_STATUS](docs/DEVELOPMENT_STATUS.md)**를 함께 읽는다. [PLANNED_WORK](docs/PLANNED_WORK.md) · [NEXT_TASK](docs/NEXT_TASK.md) · [AGENTS](AGENTS.md) · [제작 스킬](.agents/skills/viya-game-production/SKILL.md). GAME-059 코드 **`64ba096d6cb2e6b58c6de13cb51691522b01de92`**, 브랜치 `work/viya-turnaround-qa-20261117`. 문서 HEAD는 코드 뒤에 오며 main 자동 병합은 하지 않는다.
+[CURRENT_WORK](docs/CURRENT_WORK.md)와 **[누적 DEVELOPMENT_STATUS](docs/DEVELOPMENT_STATUS.md)**를 함께 읽는다. [PLANNED_WORK](docs/PLANNED_WORK.md) · [NEXT_TASK](docs/NEXT_TASK.md) · [AGENTS](AGENTS.md) · [제작 스킬](.agents/skills/viya-game-production/SKILL.md). GAME-061 코드 **`bfa63b062dbd36c2e75adb232a14f6793487d4dd`**, 브랜치 `work/viya-turnaround-qa-20261117`. 문서 HEAD는 코드 뒤에 오며 main 자동 병합은 하지 않는다.
 
-## 비야 총구·보행·정지 사격 보정
+## 비야 크기·보행·사격 보정
 
-총/룬탄을 총 끝에서 표시하고, 실제 거리 기반의 접지 보행을 연사 중에도 이어 준다. 정지 사격은 발을 고정하고 상체 반동·총구 섬광을 사용한다. 노란 발밑 원을 제거했다. 좌우 투명도 검사와 손상 임포트의 원본 복구를 연결했으며 사용자PC의 정확한 흰 배경은미재현이다. [9초 움직임 영상](docs/validation/GAME059_MOTION.mp4) · [총구 화면](docs/validation/GAME059_MUZZLE_E.png) · [검증](docs/validation/GAME059_REPORT.json). 원본208프레임/비율·게임 판정과 저장은 유지한다. 최종 보행 아트/사용자Windows PC·모바일 검증은 별도다.
+비야를60×74.4 고정 크기로 맞추고 모든 전장에서 원본8방향run11장을 이어 쓴다. 고정 캔버스로 몸통 흔들림을 줄이고 전후진/표적 변경 때 보행 위상을 보존한다. 정지 사격은 원본 전신8장 후 조준 자세를 유지하고, 이동 사격은 보행과 총구 발사를 연결한다. 노란 발밑 표시 제거·투명도 검사/복구와 넓은 지면 배율1은 유지한다. [크기 비교](docs/validation/GAME061_SCALE.png) · [6장/11장 비교](docs/validation/GAME061_COMPARISON.mp4) · [실제 이동/사격](docs/validation/GAME061_MOTION.mp4) · [검증](docs/validation/GAME061_REPORT.json).
 
-## 비야 표시 크기 조정
-
-기획 시안의 인물 비율에 맞춰 비야 표시를 약2.5배 확대했다. 1280×720에서 실제 몸체는 약61→152픽셀, 작은960×540에서는 약113픽셀로 대응한다. 원본 비율/발 위치·전투 판정을 유지하고 건물 가림도 큰 몸체에 맞췄다. [확대 전](docs/validation/GAME058_BEFORE.png) · [확대 후](docs/validation/GAME058_AFTER.png) · [작은 화면](docs/validation/GAME058_COMPACT.png) · [검증](docs/validation/GAME058_REPORT.json). 최종 아트/사용자Windows PC·모바일/FPS 검증은 별도다.
-
-## 비야 8방향 스프라이트 시범 연결
-
-제공된 CHARACTER-PILOT-032의8방향×대기/이동/공격/피격32애니메이션·208프레임을 기존 전투 비야에 연결했다. 원본200×248을125×155 기준·전투영역에 비례해 표시하며(원본 해상도 상한/발 기준 유지) 기존 이동·발사/피격·정지/복원 코드를 재사용한다. [실제 대기 화면](docs/validation/GAME056_IDLE.png) · [공격 화면](docs/validation/GAME056_ATTACK.png) · [연결/알려진 한계](docs/design/CHARACTER_PILOT_032.md) · [검증](docs/validation/GAME056_REPORT.json). 최종 아트·모바일 실기 승인은 별도며 초상화 네 이미지 경로는 계속 비어 있다.
+Godot4.7.2 기존7묶음4,422검사·640렌더 픽셀 검사 PASS. 원본208장/32자세·전투/저장/보상은 유지한다. 후반 밀집 렌더 부하·사용자Windows/모바일·최종 아트는 별도다. 연결 구조와 과거 시범 이력은 [캐릭터 파일럿 문서](docs/design/CHARACTER_PILOT_032.md)를 참조한다.
 
 ## 전체 전장 시점·스테이지 선택·계정 초기화
 
