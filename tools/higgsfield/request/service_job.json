@@ -1,0 +1,81 @@
+{
+  "status": "NOT_SUBMITTED",
+  "service_requested": "Higgsfield",
+  "reason": "Official Higgsfield SDK/CLI prepared; HF_KEY missing and API host blocked by current network policy",
+  "source_repository_head": "11a29cdcf8d1f19895a6f293838f11dd8d1a6cca",
+  "source_archive_sha256": "51d5972a9e818d275bc630f18489e37f893deef1ba6f5dce0467660c45dbc4b3",
+  "restored_archive_sha256": "51d5972a9e818d275bc630f18489e37f893deef1ba6f5dce0467660c45dbc4b3",
+  "first_candidate": "references/masters/viya_run_e_00.png",
+  "reference_role": "Existing pilot32 game character, not newly approved ART001 artwork",
+  "model": null,
+  "supported_parameters": null,
+  "cost_estimate": null,
+  "task_id": null,
+  "credits_spent": 0,
+  "files": [
+    {
+      "path": "references/masters/viya_idle_e_master.png",
+      "sha256": "6e764a7d735f104be1464946a7887de78d43d9fae7c45cb543916f36c1f9f57c",
+      "bytes": 3114303
+    },
+    {
+      "path": "references/masters/viya_run_e_00.png",
+      "sha256": "81d7ddfb989e5b78286ce03eccaf416b7cc914b82bc07de8cbf195eca1ab0cfd",
+      "bytes": 145593
+    },
+    {
+      "path": "references/masters/viya_run_e_01.png",
+      "sha256": "44700c85d86dae1fd248dcbeca32dcf75a58cf86adcdd526fc6940a72fc5104c",
+      "bytes": 140388
+    },
+    {
+      "path": "references/masters/viya_run_e_02.png",
+      "sha256": "226e97338a04a03ee9c922b20bbc447e472f245ac41d2e8c4341e2f2a5a0f2cb",
+      "bytes": 139233
+    },
+    {
+      "path": "references/masters/viya_run_e_03.png",
+      "sha256": "ee6d589557c428011dfb9432f7b4894c9a83ee4adcb468e14920021c7932b1b4",
+      "bytes": 134191
+    },
+    {
+      "path": "references/masters/viya_run_e_04.png",
+      "sha256": "02c8780dfdea6f6ed572177faab32535423aa88c2b4024aeccee65c560cb062f",
+      "bytes": 137196
+    },
+    {
+      "path": "references/masters/viya_run_e_05.png",
+      "sha256": "60b96095657cdfbfa0369cf240d02fd6af58cc30e7e82fd32dc35026800b9816",
+      "bytes": 137471
+    },
+    {
+      "path": "references/masters/viya_run_e_06.png",
+      "sha256": "249e3dae50d5997584e79916f653dddeee80a33c2436da56a9b153be6a6140c9",
+      "bytes": 139882
+    },
+    {
+      "path": "references/masters/viya_run_e_07.png",
+      "sha256": "b84fd6ffd55565cafd45b31ffeede97e32aa60c528fc898a0f80c5e77e180d96",
+      "bytes": 138124
+    },
+    {
+      "path": "references/masters/viya_run_e_08.png",
+      "sha256": "022e976aae60ed1967f9a68e489afeed3fd00685e3ccb6d2de41da4d6ebcad82",
+      "bytes": 142637
+    },
+    {
+      "path": "references/masters/viya_run_e_09.png",
+      "sha256": "c90f60b08d67e1a5a4a36e01cccf57e1bd06483a15c1c01d5cd416968b2b4038",
+      "bytes": 144699
+    },
+    {
+      "path": "references/masters/viya_run_e_10.png",
+      "sha256": "10b86c1f69d168f24ae7e9c510abeec153f6b41019dbead1f0b167d91d887764",
+      "bytes": 145977
+    }
+  ],
+  "execution_backend": "higgsfield-client0.2.0 Agent API",
+  "api_host": "api.higgsfield.ai",
+  "agent_api_access": "NOT_VERIFIED",
+  "authentication": "MISSING_CREDENTIALS"
+}
