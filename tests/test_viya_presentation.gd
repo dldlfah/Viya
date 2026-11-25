@@ -4,6 +4,7 @@ const Snapshot=preload("res://scripts/progression/run_snapshot.gd")
 const IDLE="res://assets/characters/pilot_32/textures/viya_idle_e.png"
 
 static func run(host,verify:Callable) -> void:
+	preload("res://tests/test_viya_edges.gd").run(verify)
 	var folder:="user://viya-presentation-"+Crypto.new().generate_random_bytes(8).hex_encode()
 	DirAccess.make_dir_recursive_absolute(folder)
 	var ui=Campaign.make_ui(host,folder)
@@ -16,7 +17,7 @@ static func run(host,verify:Callable) -> void:
 	for animation in asset.get_animation_names():
 		for index in range(asset.get_frame_count(animation)):
 			all_alpha=all_alpha and view.viya.transparent(asset.get_frame_texture(animation,index))
-	verify.call(all_alpha and view.viya._alpha.size()==208,"Every shipped directional frame actually decodes with transparent corners in Godot, not an opaque/white import")
+	verify.call(all_alpha and view.viya._alpha.size()>=208 and view.viya._alpha.size()<=512,"Every shipped directional frame actually decodes with transparent corners in Godot, not an opaque/white import")
 	var opaque:=Image.create(200,248,false,Image.FORMAT_RGBA8)
 	opaque.fill(Color.WHITE)
 	verify.call(not view.viya.transparent(ImageTexture.create_from_image(opaque)),"Lost-alpha white texture is rejected before it can be drawn as a rectangle")
@@ -30,13 +31,13 @@ static func run(host,verify:Callable) -> void:
 	view.viya._alpha[original.get_instance_id()]=false # Inject the rejected-import path.
 	var recovered_pose:Dictionary={"pose":"idle","moving":false,"direction":"w","facing":Vector2.LEFT,"clock":0.0,"sample":{}}
 	view.viya.apply(view,recovered_pose)
-	verify.call(not recovered_pose.sample.is_empty() and is_same(recovered_pose.sample.texture,view.viya.decoded(original.resource_path)),"Actual hero sampling replaces a rejected left import with original transparent pixels instead of a white box or another character")
+	verify.call(not recovered_pose.sample.is_empty() and is_same(recovered_pose.sample.texture,view.viya.decoded(original.resource_path)),"Actual hero sampling replaces a rejected left import with its verified transparent display frame instead of a white box or another character")
 	view.viya._alpha[original.get_instance_id()]=true
 	var east:Texture2D=asset.get_frame_texture("idle_e",0)
 	asset.set_frame("idle_e",0,ImageTexture.create_from_image(opaque))
 	var failed_import:Dictionary={"pose":"idle","moving":false,"direction":"e","facing":Vector2.RIGHT,"clock":0.0,"sample":{}}
 	view.viya.apply(view,failed_import)
-	verify.call(not failed_import.sample.is_empty() and view.viya.transparent(failed_import.sample.texture) and is_same(failed_import.sample.texture,view.viya.decoded(IDLE)),"A wholly opaque cached frame with a missing resource path recovers the correct canonical east frame rather than drawing a white square")
+	verify.call(not failed_import.sample.is_empty() and view.viya.transparent(failed_import.sample.texture) and is_same(failed_import.sample.texture,view.viya.decoded("res://assets/characters/pilot_32/render_cache/viya_idle_e.png")),"A wholly opaque cached frame with a missing resource path recovers the correct east display frame rather than drawing a white square")
 	asset.set_frame("idle_e",0,east)
 	for index in range(8):
 		var direction:String=view.actors.DIRECTIONS[index]

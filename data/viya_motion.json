@@ -1,6 +1,6 @@
 {
   "schema": 2,
-  "resource": "res://assets/characters/pilot_32/resources/viya_directional_motion.tres",
+  "resource": "res://assets/characters/pilot_32/render_cache/viya_render_frames.tres",
   "stride_world": 155.0,
   "reference_canvas": [
     200,

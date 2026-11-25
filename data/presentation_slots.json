@@ -2,7 +2,7 @@
   "lobby_city": "",
   "viya_lobby": "",
   "viya_portrait": "",
-  "viya_battle": "res://assets/characters/pilot_32/resources/viya_directional_motion.tres",
+  "viya_battle": "res://assets/characters/pilot_32/render_cache/viya_render_frames.tres",
   "normal": "",
   "ranged": "",
   "fast": "",

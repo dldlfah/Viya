@@ -34,6 +34,7 @@ func accepts(view) -> bool:
 	return asset!=null and asset.resource_path==config.resource
 
 func transparent(texture:Texture2D) -> bool:
+	if texture==null:return false
 	var key:int=texture.get_instance_id()
 	if _alpha.has(key):return _alpha[key]
 	if _verified_alpha.has(key):
@@ -115,8 +116,8 @@ func apply(view, visual:Dictionary) -> void:
 	visual.sample=view.actor_art.frame(view.art,["viya_battle"],selected,visual.direction,clock,view.size)
 	if visual.sample.is_empty():return
 	if not transparent(visual.sample.texture):
-		var root:String=str(config.resource).get_base_dir().get_base_dir()
-		var expected:String=root.path_join("textures/viya_idle_"+str(visual.direction)+".png") if selected=="idle" else root.path_join("frames/viya_%s_%s_%02d.png" % [selected,visual.direction,int(visual.sample.index)])
+		var root:String=str(config.resource).get_base_dir()
+		var expected:String=root.path_join("viya_idle_"+str(visual.direction)+".png") if selected=="idle" else root.path_join("viya_%s_%s_%02d.png" % [selected,visual.direction,int(visual.sample.index)])
 		var repaired:Texture2D=decoded(expected)
 		if repaired==null:
 			visual.sample={}
@@ -152,7 +153,8 @@ static func draw(canvas, art, visual:Dictionary, feet:Vector2) -> void:
 		canvas.draw_texture_rect(texture,box,false,Color.WHITE)
 		return
 	# One primitive for every pose: no independent strips, seams or mesh churn.
-	canvas.draw_texture_rect_region(texture,box,source)
+	if source==Rect2(Vector2.ZERO,texture.get_size()):canvas.draw_texture_rect(texture,box,false,Color.WHITE)
+	else:canvas.draw_texture_rect_region(texture,box,source)
 	if visual.pose=="attack" and float(visual.get("shot_age",1000))<.075:
 		var at:Vector2=muzzle(art,visual,feet)
 		var aim:Vector2=canvas.project_direction(visual.facing).normalized()

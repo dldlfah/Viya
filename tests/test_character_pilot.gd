@@ -5,16 +5,17 @@ const Snapshot=preload("res://scripts/progression/run_snapshot.gd")
 const Campaign=preload("res://tests/test_campaign.gd")
 const Scenery=preload("res://scripts/combat/oblique_scenery.gd")
 const MANIFEST:="res://assets/characters/pilot_32/source_manifest.json"
-const RESOURCE:="res://assets/characters/pilot_32/resources/viya_directional_motion.tres"
+const SOURCE_RESOURCE:="res://assets/characters/pilot_32/resources/viya_directional_motion.tres"
+const RESOURCE:="res://assets/characters/pilot_32/render_cache/viya_render_frames.tres"
 const DIRECTIONS:=["e","se","s","sw","w","nw","n","ne"]
 
 static func run(host,verify:Callable) -> void:
 	var slots=Slots.new()
 	var asset:Resource=slots.resource("viya_battle")
-	verify.call(slots.definitions.viya_battle==RESOURCE and asset is SpriteFrames and is_same(asset,slots.resource("viya_battle")),"Supplied character resource is bound through the original cached Viya slot")
+	verify.call(slots.definitions.viya_battle==RESOURCE and asset is SpriteFrames and is_same(asset,slots.resource("viya_battle")),"Matte-corrected derivative uses the existing Viya slot and cached SpriteFrames resource")
 	if not asset is SpriteFrames:return
 	var manifest:Dictionary=JSON.parse_string(FileAccess.get_file_as_string(MANIFEST))
-	var exact:bool=FileAccess.get_sha256(RESOURCE)==manifest.source_package.resource_original_sha256
+	var exact:bool=FileAccess.get_sha256(SOURCE_RESOURCE)==manifest.source_package.resource_original_sha256
 	for entry in manifest.runtime_files:exact=exact and FileAccess.get_sha256(MANIFEST.get_base_dir().path_join(entry.path))==entry.sha256
 	verify.call(exact and manifest.runtime_files.size()==208,"Every shipped PNG and the relative-path resource match the supplied package bytes")
 	verify.call(asset.get_animation_names().size()==32 and not asset.has_animation("default") and not asset.has_animation("idle"),"Exactly32directional states are shipped without a generic or mirrored replacement")
@@ -43,8 +44,8 @@ static func run(host,verify:Callable) -> void:
 	for direction in DIRECTIONS:
 		for pose in ["idle","run","attack","hurt"]:
 			var sample:Dictionary=ui.view.actor_art.frame(ui.view.art,["viya_battle"],pose,direction,0)
-			resolved=resolved and not sample.is_empty() and sample.animation==pose+"_"+direction and sample["size"]==Vector2(60,74.4) and sample.pivot==Vector2(.5,1)
-	verify.call(resolved,"Existing adapter resolves all32poses upright at60x74.4 with the original bottom pivot")
+			resolved=resolved and not sample.is_empty() and sample.animation==pose+"_"+direction and sample["size"]==Vector2(69,85.56) and sample.pivot==Vector2(.5,1)
+	verify.call(resolved,"Existing adapter resolves all32poses upright at69x85.56 with the original bottom pivot")
 	for viewport in [Vector2(1280,526),Vector2(960,396),Vector2(797,266),Vector2(3840,1700)]:
 		var fits:=true
 		var foot:=Vector2(390,210)
@@ -53,7 +54,7 @@ static func run(host,verify:Callable) -> void:
 				var sample:Dictionary=ui.view.actor_art.frame(ui.view.art,["viya_battle"],pose,direction,.07,viewport)
 				var rect:Rect2=ui.view.actor_art.rectangle(sample,foot)
 				fits=fits and rect.end.y==foot.y and is_equal_approx(rect.get_center().x,foot.x) and is_equal_approx(rect.size.x/rect.size.y,200.0/248.0) and rect.size.x<=200 and rect.size.y<=248
-				fits=fits and is_equal_approx(rect.size.y,74.4)
+				fits=fits and is_equal_approx(rect.size.y,85.56)
 		verify.call(fits,"All32frames keep source aspect/foot anchoring and a fixed world size independent of viewport height:"+str(viewport))
 	ui.view.art.definitions.normal=RESOURCE
 	var enemy_sample:Dictionary=ui.view.actor_art.frame(ui.view.art,["normal"],"idle","e",0,Vector2(3840,1700))
@@ -65,7 +66,7 @@ static func run(host,verify:Callable) -> void:
 	ui.view.actor_art.specs.actors.viya_battle.erase("reference_view_height")
 	var side_feet:=Vector2(120,0)
 	var shape:Dictionary=Scenery.geometry(Rect2(0,0,100,20),200,Transform2D.IDENTITY)
-	var body:=Rect2(side_feet-Vector2(30,74.4),Vector2(60,74.4))
+	var body:=Rect2(side_feet-Vector2(34.5,85.56),Vector2(69,85.56))
 	verify.call(not Scenery.occludes(shape,side_feet) and Scenery.occludes(shape,side_feet,body),"A wall touching the enlarged body triggers fading even when the old tiny body misses it")
 	verify.call(not Scenery.occludes(shape,side_feet+Vector2(0,40),Rect2(body.position+Vector2(0,40),body.size)),"A wall behind the enlarged hero remains opaque instead of fading just because bounding boxes overlap")
 	var run_sample:Dictionary=ui.view.actor_art.frame(ui.view.art,["viya_battle"],"run","ne",.661)
