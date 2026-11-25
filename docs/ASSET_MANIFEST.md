@@ -110,3 +110,9 @@
 ## 2026-11-24 — GAME-049 1스테이지의 기존 맵 자산 재사용
 
 `map_presentation_slots.json`의 별도 `siege_battlefield`는 기존 `prologue_wall`의12PNG경로를 그대로 재사용한다. 새PNG/승인원본편집은 없고 공유캐릭터/전역53빈칸도 그대로다. `battlefield_presentation.gd`의 정적도형은 임시시설/방책/수레자국 표현이며,`docs/design/map_plan_001/concept.png`는 계속 문서용 미확정시안/게임미연결이다. 프롤로그/외곽의 이전/현재 렌더러6쌍픽셀동일과 모든원본자산바이트보존은GAME049_REPORT에기록했다. 최종캐릭터/건물아트·모바일품질승인은별도다.
+
+## 2026-11-25 — CHARACTER-PILOT-032 비야 8방향 전투 파일럿
+
+사용자의‘기존전투에시범적용’선택으로기존viya_battle한경로에연결했다. 8방향×idle/run/attack/hurt32상태·208PNG이며공통200×248RGBA를50×62·하단pivot(0.5,1)로표시한다. [원본SpriteFrames](../assets/characters/pilot_32/resources/viya_directional_motion.tres)·[출처/208개해시](../assets/characters/pilot_32/source_manifest.json)·[제공당시인계문](../assets/characters/pilot_32/source_docs/INTEGRATION_HANDOFF_ko.txt)을보존한다. 리소스SHA256은`11254fff2baec6de74bce61988544a4296a9753007f27bef2950788aea8b6a19`,PNG합계10,269,848바이트다. 208무손실2D임포트설정을함께등록했다. 아틀라스24·masters/생성·검증스크립트를런타임에넣거나실행하지않았다.
+
+분할z01/z02/zip복원CRC와동봉395체크섬을독립확인했고원본208PNG/리소스는바이트동일하다. 공유53키중다른52와별도초상화4경로는빈칸이다. 시범사용이며최종아트승인/모바일검증을뜻하지않는다. 제공당시구성완비/미연결과현재실제시범연결을구분하고기존승인ART001·GEN005/3D보류·맵12PNG는유지한다. 현재실행/한계는DEVELOPMENT_STATUS8.50과[GAME056_REPORT](validation/GAME056_REPORT.json)를따른다.
