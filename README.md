@@ -4,11 +4,15 @@
 
 ## 세션 필수 문서
 
-[CURRENT_WORK](docs/CURRENT_WORK.md)와 **[누적 DEVELOPMENT_STATUS](docs/DEVELOPMENT_STATUS.md)**를 함께 읽는다. [PLANNED_WORK](docs/PLANNED_WORK.md) · [NEXT_TASK](docs/NEXT_TASK.md) · [AGENTS](AGENTS.md) · [제작 스킬](.agents/skills/viya-game-production/SKILL.md). GAME-057 코드 **`1403828b745f18a48ad7cafd8e941b3576b93e11`**, 브랜치 `work/viya-turnaround-qa-20261117`. 문서 HEAD는 코드 뒤에 오며 main 자동 병합은 하지 않는다.
+[CURRENT_WORK](docs/CURRENT_WORK.md)와 **[누적 DEVELOPMENT_STATUS](docs/DEVELOPMENT_STATUS.md)**를 함께 읽는다. [PLANNED_WORK](docs/PLANNED_WORK.md) · [NEXT_TASK](docs/NEXT_TASK.md) · [AGENTS](AGENTS.md) · [제작 스킬](.agents/skills/viya-game-production/SKILL.md). GAME-058 코드 **`35e258513643e0466aa6f73fe269035f8ed24072`**, 브랜치 `work/viya-turnaround-qa-20261117`. 문서 HEAD는 코드 뒤에 오며 main 자동 병합은 하지 않는다.
+
+## 비야 표시 크기 조정
+
+기획 시안의 인물 비율에 맞춰 비야 표시를 약2.5배 확대했다. 1280×720에서 실제 몸체는 약61→152픽셀, 작은960×540에서는 약113픽셀로 대응한다. 원본 비율/발 위치·전투 판정을 유지하고 건물 가림도 큰 몸체에 맞췄다. [확대 전](docs/validation/GAME058_BEFORE.png) · [확대 후](docs/validation/GAME058_AFTER.png) · [작은 화면](docs/validation/GAME058_COMPACT.png) · [검증](docs/validation/GAME058_REPORT.json). 최종 아트/사용자Windows PC·모바일/FPS 검증은 별도다.
 
 ## 비야 8방향 스프라이트 시범 연결
 
-제공된 CHARACTER-PILOT-032의8방향×대기/이동/공격/피격32애니메이션·208프레임을 기존 전투 비야에 연결했다. 원본200×248을50×62/발 기준으로 표시하며 기존 이동·발사/피격·정지/복원 코드를 재사용한다. [실제 대기 화면](docs/validation/GAME056_IDLE.png) · [공격 화면](docs/validation/GAME056_ATTACK.png) · [연결/알려진 한계](docs/design/CHARACTER_PILOT_032.md) · [검증](docs/validation/GAME056_REPORT.json). 최종 아트·모바일 실기 승인은 별도며 초상화 네 이미지 경로는 계속 비어 있다.
+제공된 CHARACTER-PILOT-032의8방향×대기/이동/공격/피격32애니메이션·208프레임을 기존 전투 비야에 연결했다. 원본200×248을125×155 기준·전투영역에 비례해 표시하며(원본 해상도 상한/발 기준 유지) 기존 이동·발사/피격·정지/복원 코드를 재사용한다. [실제 대기 화면](docs/validation/GAME056_IDLE.png) · [공격 화면](docs/validation/GAME056_ATTACK.png) · [연결/알려진 한계](docs/design/CHARACTER_PILOT_032.md) · [검증](docs/validation/GAME056_REPORT.json). 최종 아트·모바일 실기 승인은 별도며 초상화 네 이미지 경로는 계속 비어 있다.
 
 ## 전체 전장 시점·스테이지 선택·계정 초기화
 
