@@ -4,15 +4,15 @@
 
 ## 세션 필수 문서
 
-[CURRENT_WORK](docs/CURRENT_WORK.md)와 **[누적 DEVELOPMENT_STATUS](docs/DEVELOPMENT_STATUS.md)**를 함께 읽는다. [PLANNED_WORK](docs/PLANNED_WORK.md) · [NEXT_TASK](docs/NEXT_TASK.md) · [AGENTS](AGENTS.md) · [제작 스킬](.agents/skills/viya-game-production/SKILL.md). GAME-056 코드 **`dc4d6492177dca04bd84620b48bc8b0e80daa270`**, 브랜치 `work/viya-turnaround-qa-20261117`. 문서 HEAD는 코드 뒤에 오며 main 자동 병합은 하지 않는다.
+[CURRENT_WORK](docs/CURRENT_WORK.md)와 **[누적 DEVELOPMENT_STATUS](docs/DEVELOPMENT_STATUS.md)**를 함께 읽는다. [PLANNED_WORK](docs/PLANNED_WORK.md) · [NEXT_TASK](docs/NEXT_TASK.md) · [AGENTS](AGENTS.md) · [제작 스킬](.agents/skills/viya-game-production/SKILL.md). GAME-057 코드 **`1403828b745f18a48ad7cafd8e941b3576b93e11`**, 브랜치 `work/viya-turnaround-qa-20261117`. 문서 HEAD는 코드 뒤에 오며 main 자동 병합은 하지 않는다.
 
 ## 비야 8방향 스프라이트 시범 연결
 
 제공된 CHARACTER-PILOT-032의8방향×대기/이동/공격/피격32애니메이션·208프레임을 기존 전투 비야에 연결했다. 원본200×248을50×62/발 기준으로 표시하며 기존 이동·발사/피격·정지/복원 코드를 재사용한다. [실제 대기 화면](docs/validation/GAME056_IDLE.png) · [공격 화면](docs/validation/GAME056_ATTACK.png) · [연결/알려진 한계](docs/design/CHARACTER_PILOT_032.md) · [검증](docs/validation/GAME056_REPORT.json). 최종 아트·모바일 실기 승인은 별도며 초상화 네 이미지 경로는 계속 비어 있다.
 
-## 1스테이지 사선 시점·구조물 높이
+## 전체 전장 시점·스테이지 선택·계정 초기화
 
-초기 전투 시안에 맞춰 1스테이지를 고정 −18도 사선/55도 고각으로 표시하고, 성벽·폐허의 윗면/앞면/측면·명암과 가림 투명화를 연결했다. 화면 방향 입력·탄환/범위/피격·레이더·무리/보스 안내도 맞췄다. 생성 보호를 유지하기 위한 가까운 표시 시야이며, 프롤로그·외곽·던전은 기존 시점을 유지한다. [적용 전](docs/validation/GAME055_BEFORE.png) · [적용 후](docs/validation/GAME055_AFTER.png) · [설계/한계](docs/design/OBLIQUE_STAGE.md) · [검증](docs/validation/GAME055_REPORT.json). 최종 아트/실기 FPS 승인은 별도다.
+모든 기존 맵에 고정 사선 시점과 공통 입력/높이·가림 처리를 적용했다. 각 맵의 배치는 유지하며 프롤로그는 별도 구성한다. 로비 출격에서 성벽 전장/S1과 도시 외곽/S2를 자유 선택·재도전할 수 있다. 매 새 클리어 보상을 한 번 지급하고 같은 전투 재정산은 영수증으로 막는다. 로비/전투 설정의 **계정 초기화**는 확인 후 금화·특성·진행/던전·전투 기록을 지우고 초기화 도중 중단되면 시작 시 복구한다. 음량·화면 설정은 유지한다. [외곽 실제 화면](docs/validation/GAME057_S2_AFTER.png) · [전장 선택](docs/validation/GAME057_STAGE_SELECT.png) · [초기화 확인](docs/validation/GAME057_RESET_WARNING_COMPACT.png) · [검증](docs/validation/GAME057_REPORT.json). 기기 로컬 계정용이며 최종 아트/모바일·Windows PC·FPS 승인은 별도다.
 
 ## 비야 반응형 초상화 준비
 
