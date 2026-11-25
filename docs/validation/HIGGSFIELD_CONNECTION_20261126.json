@@ -1,0 +1,64 @@
+{
+  "date_kst": "2026-11-26",
+  "status": "BLOCKED",
+  "bridge_commit": "0b738f76e2e6bb6ca57a8025668c03930250a1e4",
+  "bridge_tree": "4233660e2d9966ae1dee2fb517c6130a42cf12fe",
+  "game_code_unchanged": "f01fc333261f7384af94dc3f586422a95b4be387",
+  "service": "Higgsfield Cloud Agent API",
+  "native_chat_tool": "NOT_AVAILABLE_IN_THIS_CHAT",
+  "sdk": {
+    "name": "higgsfield-client",
+    "version": "0.2.0",
+    "source": "https://pypi.org/project/higgsfield-client/",
+    "official_repository": "https://github.com/higgsfield-ai/higgsfield-client",
+    "official_wheel_sha256": "66a6310c2d9b210f021848eb9e03ed1a8c2991e2e8a1a328c470ce39a033f633",
+    "installation": "PASS",
+    "locked_dependencies": 8,
+    "lock_sha256": "20970b8837effe8f2d315ea8170703b9ec96e9eb713b5e27273c1a2a541847f7"
+  },
+  "checks": {
+    "official_sdk_import": "PASS",
+    "official_sdk_missing_credentials_error": "CredentialsMissedError",
+    "bridge_offline_tests": {
+      "status": "PASS",
+      "count": 8
+    },
+    "python_suite": {
+      "status": "PASS",
+      "count": 20
+    },
+    "shell_syntax": "PASS",
+    "actual_png_inputs_hash_verified": 4,
+    "preserved_master_inputs": 12
+  },
+  "blockers": {
+    "credentials": {
+      "status": "MISSING",
+      "required": "HF_KEY",
+      "supported_alternative": [
+        "HF_API_KEY",
+        "HF_API_SECRET"
+      ],
+      "input_location": "Cloud environment secret settings, never chat or Git"
+    },
+    "network": {
+      "status": "BLOCKED",
+      "api_host": "api.higgsfield.ai",
+      "current_runtime_policy": "restricted/enforced, package-manager presets only",
+      "observed": "Unauthenticated CONNECT tunnel rejected by proxy with403; no API response received"
+    },
+    "account_agent_api_access": "NOT_VERIFIED",
+    "balance_and_model_availability": "NOT_VERIFIED"
+  },
+  "generation": {
+    "submitted": false,
+    "sessions_created": 0,
+    "images_created": 0,
+    "credits_consumed": 0,
+    "requested_trial_images": 1,
+    "server_side_cost_cap": "NOT_IMPLEMENTED",
+    "automatic_game_replacement": false
+  },
+  "input_archive_sha256": "51d5972a9e818d275bc630f18489e37f893deef1ba6f5dce0467660c45dbc4b3",
+  "scope": "SDK/CLI installation and offline behavior verified; account authentication, network grant, actual image generation/quality and environment publication/restoration remain unverified."
+}

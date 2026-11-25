@@ -120,3 +120,7 @@
 ## RENDER-CACHE-062 — 비야 표시용 매트 보정 파생물 (2026-11-26)
 
 `assets/characters/pilot_32/render_cache`의208PNG/한SpriteFrames·manifest는 CHARACTER-PILOT-032 원본에서 생성한 기술적 표시 파생물이다. 원본200×248/알파·32동작/순서/타이밍과 승인 상태를 유지하고 흰 매트 외곽 RGB/투명 여백만 정리했다. 원본208장·원본Resource는 불변이고 새 승인 원화로 분류하지 않는다. 기존viya_battle슬롯은 이 표시용Resource에 연결하며 다른52/초상화4·ART001/GEN005미승인·3D보류/지원2+2는 유지한다. 빌드 도구/입출력 해시와 검증은GAME062_REPORT를 참조한다.
+
+## Higgsfield 수정 입력 원본 보관 (2026-11-26)
+
+현재 환경의 비공개 `tools/higgsfield/request/references/masters`에 업로드 CHARACTER-PILOT-032 ZIP에서 복원한 E달리기400×496의11PNG와 E대기1600×1984 PNG를 원본 그대로 보관했다. 복원 ZIP SHA256 `51d5972a9e818d275bc630f18489e37f893deef1ba6f5dce0467660c45dbc4b3`는 기존 source_manifest와 일치하며 프레임 해시는 service_job.json에 기록한다. 제작 도구 입력이며 `.gitignore`로 Git에서, `.gdignore`로 게임 임포트에서 제외한다. 신규 생성/ART001 승인 승격·게임 연결은 없고 기존208런타임/표시용 파생물은 유지한다.

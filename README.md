@@ -8,7 +8,7 @@
 
 ## Higgsfield 원화 작업
 
-[제작 스킬 v1.3](.agents/skills/viya-game-production/SKILL.md)에서 Higgsfield 원화 수정·필요한 재생성을 허용한다. 현재 비야 문제 원화 요청은 승인됐으며 같은 허가를 반복 요청하지 않는다. 실제 실행 도구 연결은 별도 확인한다. 원본/디자인·동작 연속성과3D 보류는 유지한다.
+[제작 스킬 v1.3](.agents/skills/viya-game-production/SKILL.md)에서 Higgsfield 원화 수정·필요한 재생성을 허용한다. 현재 비야 문제 원화 요청은 승인됐으며 같은 허가를 반복 요청하지 않는다. [공식 API 실행기](tools/higgsfield/README.md)를 설치·검사했으며 현재는 환경 설정의HF_KEY 인증 값/API 호스트 접근 대기 상태다. 실제 생성은 미실행이고 원본/디자인·동작 연속성과3D 보류는 유지한다.
 
 ## 비야 크기·보행·사격 보정
 
