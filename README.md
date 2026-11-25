@@ -4,19 +4,21 @@
 
 ## 세션 필수 문서
 
-[CURRENT_WORK](docs/CURRENT_WORK.md)와 **[누적 DEVELOPMENT_STATUS](docs/DEVELOPMENT_STATUS.md)**를 함께 읽는다. [PLANNED_WORK](docs/PLANNED_WORK.md) · [NEXT_TASK](docs/NEXT_TASK.md) · [AGENTS](AGENTS.md) · [제작 스킬](.agents/skills/viya-game-production/SKILL.md). GAME-062 코드 **`f01fc333261f7384af94dc3f586422a95b4be387`**, 브랜치 `work/viya-turnaround-qa-20261117`. 문서 HEAD는 코드 뒤에 오며 main 자동 병합은 하지 않는다.
+[CURRENT_WORK](docs/CURRENT_WORK.md)와 **[누적 DEVELOPMENT_STATUS](docs/DEVELOPMENT_STATUS.md)**를 함께 읽는다. [PLANNED_WORK](docs/PLANNED_WORK.md) · [NEXT_TASK](docs/NEXT_TASK.md) · [AGENTS](AGENTS.md) · [제작 스킬](.agents/skills/viya-game-production/SKILL.md). ARTFIX001 코드 **`4793d743c1451131c91d0ffe3776c2f7cfec85fc`**, 브랜치 `work/viya-turnaround-qa-20261117`. 문서 HEAD는 코드 뒤에 오며 main 자동 병합은 하지 않는다.
 
-## Higgsfield 원화 작업
+## Higgsfield 원화 재생성·적용 완료
 
-[제작 스킬 v1.3](.agents/skills/viya-game-production/SKILL.md)에서 Higgsfield 원화 수정·필요한 재생성을 허용한다. 현재 비야 문제 원화 요청은 승인됐으며 같은 허가를 반복 요청하지 않는다. [공식 API 실행기](tools/higgsfield/README.md)를 설치·검사했으며 현재는 환경 설정의HF_KEY 인증 값/API 호스트 접근 대기 상태다. 실제 생성은 미실행이고 원본/디자인·동작 연속성과3D 보류는 유지한다.
+동쪽(E) 달리기 원화11장에 남은 머리 외곽·머리 뒤 틈·총 아래·다리 사이의 흰 배경 잔사를 확인했다. 실제 연결된 Higgsfield의 `gpt_image_2_6`로 투명 PNG11장을 생성하고, 원래 자세·얼굴·의상·무기를 유지하는 제한 영역 합성을 거쳐 **게임의 활성 표시 캐시에 적용했다.** [11장 전후 비교](docs/validation/ARTFIX001_COMPARE.png) · [머리 경계 확대](docs/validation/ARTFIX001_HAIR_DETAIL.png) · [보행 비교](docs/validation/ARTFIX001_RUN_COMPARISON.gif) · [검증 보고서](docs/validation/ARTFIX001_REPORT.json).
+
+원본208장과 다른 표시197장은 변경하지 않았다. E11의 확인된 배경 마스크1,467픽셀만 알파를 줄이고, 경계색을 보정한 뒤 Godot 임포트와 같은 방식으로 정규화했다. 기존69×85.56 크기·200×248 캔버스·32동작·달리기60ms×11을 유지한다. 실제 모델·입력·작업 ID·해시·마스크와 재현 도구는 [수정 패킷](assets/characters/pilot_32/edge_repair/README.md)에 보관했다. 잔액 조회 차이는13.75크레딧이며 새 결제는 없다. [SDK 실행기](tools/higgsfield/README.md)의 과거 인증 차단은 현재 생성 상태와 구분한다.
+
+**이번 검증:** 재현44파일·E11 저장/임포트 RGBA·소스171/6계약·Python20·네이티브6묶음2,000검사·별도 headless 부트 PASS. 전체 회귀는 전투 검사120초 TIMEOUT이며 수정 전 기준 `b6340f5`도 동일했다. 실제 GUI 렌더는 환경 제약으로 BLOCKED, Windows/모바일·최종 아트 승인은 미검증이다. 전후 이미지는 실제 캐시 비교이며 새 전투 화면 캡처가 아니다.
 
 ## 비야 크기·보행·사격 보정
 
-비야를69×85.56 고정 크기(기존 대비15% 확대)로 맞추고 모든 전장에서 원본8방향run11장을 이어 쓴다. 고정 캔버스로 몸통 흔들림을 줄이고 전후진/표적 변경 때 보행 위상을 보존한다. 정지 사격은 원본 전신8장 후 조준 자세를 유지하고, 이동 사격은 보행과 총구 발사를 연결한다. 노란 발밑 표시 제거·투명도 검사/복구와 넓은 지면 배율1은 유지한다. [크기 비교](docs/validation/GAME061_SCALE.png) · [6장/11장 비교](docs/validation/GAME061_COMPARISON.mp4) · [실제 이동/사격](docs/validation/GAME061_MOTION.mp4) · [검증](docs/validation/GAME061_REPORT.json).
+비야는69×85.56 고정 크기이며 원본8방향run11장을 사용한다. GAME061의 고정 캔버스·전후진 보행 위상·방향 유지·정지 전신 사격/조준 유지와 이동 보행/총구 연결을 보존했다. 노란 발밑 표시 제거·투명도 검사/보정 PNG 복구와 넓은 지면 배율1도 유지한다. 원본10→00 보행 루프 이음과 후반 밀집 부하는 여전히 후속이다. 다음은 **GAME063 밀집 렌더 부하 보완**이다.
 
-흰 매트 테두리를 보정한200×248 전체해상도208장/32동작을 기존 비야 한 슬롯에 연결했다. 원본·알파/내부 색상·발/총구와 전투/저장을 유지하며 게임 중 픽셀 처리나 전신 흐림은 없다. [테두리 전후 비교](docs/validation/GAME062_EDGE_COMPARISON.png) · [현재 화면](docs/validation/GAME062_AFTER.png) · [검증](docs/validation/GAME062_REPORT.json).
-
-Godot4.7.2 기존7묶음4,428검사·832렌더 픽셀 비교 PASS. 후반 밀집 부하·사용자Windows/모바일·최종 아트는 별도다. [캐릭터 연결/이력](docs/design/CHARACTER_PILOT_032.md).
+[GAME061 크기/동작 비교](docs/validation/GAME061_COMPARISON.mp4)와 [GAME062 테두리/15% 확대 검증](docs/validation/GAME062_REPORT.json)은 당시 기록이다. GAME062의4,428검사·832렌더 PASS를 이번 변경의 검증으로 재사용하지 않는다. [캐릭터 연결/이력](docs/design/CHARACTER_PILOT_032.md).
 
 ## 전체 전장 시점·스테이지 선택·계정 초기화
 
@@ -110,7 +112,9 @@ PC Godot의 몬스터 누적 렉을 줄이기 위해 경로·벽 캐시,순서�
 
 ## 검증
 
-Godot4.7.2 임포트·기존7묶음/부트4060검사·146소스/6계약·negative43/Python12 PASS. 신규압력단독138·공개19의606권위해시·9실제GUI/2402이동프레임/MP6·진행중302단계대조·현재20/구19별도OS100단계씩과45초재생성을확인했다. 스폰을멈추거나적을배치하지않은실제첫1분GUI는화면안평균13.52→19.00/빈관측12→6이었다. [수정전](docs/validation/GAME048_BEFORE.png) · [수정후](docs/validation/GAME048_AFTER.png) · [조사/소스/검증범위](docs/validation/GAME048_REPORT.json). 새무강화자동전투의131.10/195.80초패배·빠른성장으로난도/6분성장·경제는OPEN이고실기FPS/최종재미승인은별도다.
+최신 ARTFIX001 검증 범위와 미통과 항목은 위 요약 및 [ARTFIX001_REPORT](docs/validation/ARTFIX001_REPORT.json)를 따른다. 아래는 GAME048 등 **작성 당시의 검증·측정 이력**이며 이번 전체 회귀 PASS를 뜻하지 않는다.
+
+**GAME048 당시:** Godot4.7.2 임포트·기존7묶음/부트4060검사·146소스/6계약·negative43/Python12 PASS. 신규압력단독138·공개19의606권위해시·9실제GUI/2402이동프레임/MP6·진행중302단계대조·현재20/구19별도OS100단계씩과45초재생성을확인했다. 스폰을멈추거나적을배치하지않은실제첫1분GUI는화면안평균13.52→19.00/빈관측12→6이었다. [수정전](docs/validation/GAME048_BEFORE.png) · [수정후](docs/validation/GAME048_AFTER.png) · [조사/소스/검증범위](docs/validation/GAME048_REPORT.json). 새무강화자동전투의131.10/195.80초패배·빠른성장으로난도/6분성장·경제는OPEN이고실기FPS/최종재미승인은별도다.
 
 GAME046당시상자전후2별도OS각100단계·14GUI/터치획득·1540합성저장과606과거상태검증은[당시보고서](docs/validation/GAME046_REPORT.json)에보존한다. 이번파괴이미지연결은저장스키마/규칙을변경하거나새별도OS행렬·성능/경제표본을측정한작업이아니다.
 
@@ -131,7 +135,7 @@ Godot --headless --path . --script res://tests/measure_enemy_curse.gd
 Godot --headless --audio-driver Dummy --path . --script res://tests/measure_combat_audio.gd
 ```
 
-GAME-022 당시 공격 강화 우선 선택의 동일 조작 대조에서 캠페인은20회 모두11~12선택/공격Lv5 2종,19클리어·1시간초과였다. 골드던전10회는모두8선택/Lv5 1종·클리어다. 선택 시점/관통별 실제TTK/가격1000·50000·1000000의42경제시나리오를 기록했다. 하루던전2+캠페인1의고정수입가정에서첫특성Lv3약5~6일/전체18Lv3약89~91일이다. 모바일 기기가없어실기FPS/발열은미검증이며Linux부하계측을그것으로대체하지않는다. 구설정407시간초과는 재현되며 GAME-029의4표본 클리어를 전체 균형·안내 효과로 확대하지 않는다. 다음 GAME-049는 실제 압박에 맞춘 성장·교전 균형 보완이다.
+GAME-022 당시 공격 강화 우선 선택의 동일 조작 대조에서 캠페인은20회 모두11~12선택/공격Lv5 2종,19클리어·1시간초과였다. 골드던전10회는모두8선택/Lv5 1종·클리어다. 선택 시점/관통별 실제TTK/가격1000·50000·1000000의42경제시나리오를 기록했다. 하루던전2+캠페인1의고정수입가정에서첫특성Lv3약5~6일/전체18Lv3약89~91일이다. 모바일 기기가없어실기FPS/발열은미검증이며Linux부하계측을그것으로대체하지않는다. 구설정407시간초과는 재현되며 GAME-029의4표본 클리어를 전체 균형·안내 효과로 확대하지 않는다. 당시 다음 GAME-049 계획은 실제 압박에 맞춘 성장·교전 균형 보완이었다. 현재 다음 작업은 NEXT의 GAME063이다.
 
 ```sh
 Godot --headless --path . --script res://tests/measure_balance.gd -- --map=gold_slime --talents=none
