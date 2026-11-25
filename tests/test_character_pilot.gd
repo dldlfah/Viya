@@ -81,7 +81,7 @@ static func run(host,verify:Callable) -> void:
 	var toward:Vector2=ui.view.input_direction(Vector2(1,-1).normalized())
 	state.add_enemy(state.player+toward*250);state.enemies[-1].speed=0;state.shot_clock=0
 	ui._physics_process(.01)
-	verify.call(state.shots>0 and ui.view.actor_visual().sample.animation=="attack_ne","Actual shot creation selects the supplied attack; firing cadence stays owned by RunState")
+	verify.call(state.shots>0 and ui.view.actors.pose(state).pose=="attack" and ui.view.actor_visual().sample.animation=="idle_ne" and ui.view.actor_visual().recoil>0,"A committed stationary shot uses planted idle legs and upper-body recoil; firing cadence stays owned by RunState")
 	state.hurt_clock=0
 	state.damage_player(1,"physical",0,{"kind":"contact","id":state.enemies[-1].id,"p":state.player+toward*100})
 	ui._physics_process(.01)

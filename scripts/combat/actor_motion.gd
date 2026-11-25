@@ -26,7 +26,7 @@ func prepare(state, track_enemies:bool=true, motion_region:Rect2=Rect2()) -> voi
 		if bounded and enemy.kind=="normal" and not motion_region.has_point(enemy.p):continue
 		if not entries.has(int(enemy.id)):entries[int(enemy.id)]={"p":enemy.p,"hp":enemy.hp,"fire_clock":enemy.get("fire_clock",0),"pose":"idle","moving":false,"since":state.elapsed,"direction":direction(state.player-enemy.p),"facing":enemy.p.direction_to(state.player)}
 
-func sync(state, hero_displacement:Vector2, active:bool, track_enemies:bool=true, motion_region:Rect2=Rect2()) -> void:
+func sync(state, hero_displacement:Vector2, active:bool, track_enemies:bool=true, motion_region:Rect2=Rect2(), hero_intent:bool=true) -> void:
 	if state.run_id!=run_id or state.elapsed<clock:reset(state.run_id)
 	if not active or state.elapsed<=clock:return
 	clock=state.elapsed
@@ -49,8 +49,13 @@ func sync(state, hero_displacement:Vector2, active:bool, track_enemies:bool=true
 			var bullet:Dictionary=state.bullets[index]
 			if not hero.get("before_bullets",[]).any(func(old):return is_same(old,bullet)):
 				aim=bullet.direction
+				var source:String=str(bullet.get("source","rifle"))
+				if (source in ["rifle","scatter","lance","crossfire","heavy","viya_runebullet_v1"] or source.begins_with("gun_")) and not bullet.get("weapon",{}).get("fragment",false):
+					hero.gun_since=state.elapsed
+					hero.gun_aim=bullet.direction
 				break
-	update(0,hero,state.player,state.hp,hero_displacement,aim,fired,0,state)
+	update(0,hero,state.player,state.hp,hero_displacement if hero_intent else Vector2.ZERO,aim,fired,0,state)
+	entries[0].distance=float(hero.get("distance",0))+hero_displacement.length() if hero_intent else float(hero.get("distance",0))
 	entries[0].shots=state.shots
 	entries[0].casts=state.magic.casts
 	entries[0].before_bullets=[]
@@ -100,10 +105,10 @@ func update(id:int, previous:Dictionary, position:Vector2, hp:float, displacemen
 	if moving and not previous.get("moving",false):value.move_since=now
 	var face:Vector2=value.get("aim",facing) if pose=="attack" else (displacement if moving else facing)
 	if pose=="hurt":face=value.get("hurt_aim",face)
-	value.merge({"p":position,"hp":hp,"pose":pose,"moving":moving,"direction":direction(face),"facing":face.normalized()},true)
+	value.merge({"p":position,"hp":hp,"pose":pose,"moving":moving,"motion":displacement.normalized(),"direction":direction(face),"facing":face.normalized()},true)
 	entries[id]=value
 
 func pose(state, id:int=0) -> Dictionary:
-	if run_id!=state.run_id or not entries.has(id):return {"pose":"idle","direction":direction(state.facing if id==0 else Vector2.DOWN),"facing":state.facing if id==0 else Vector2.DOWN,"clock":0.0,"moving":false,"move_clock":0.0}
+	if run_id!=state.run_id or not entries.has(id):return {"pose":"idle","direction":direction(state.facing if id==0 else Vector2.DOWN),"facing":state.facing if id==0 else Vector2.DOWN,"clock":0.0,"moving":false,"move_clock":0.0,"distance":0.0}
 	var value:Dictionary=entries[id]
-	return {"pose":value.pose,"direction":value.direction,"facing":value.facing,"clock":maxf(0,state.elapsed-float(value.get("since",state.elapsed))),"moving":value.moving,"move_clock":maxf(0,state.elapsed-float(value.get("move_since",state.elapsed)))}
+	return {"pose":value.pose,"direction":value.direction,"facing":value.facing,"clock":maxf(0,state.elapsed-float(value.get("since",state.elapsed))),"moving":value.moving,"motion":value.get("motion",Vector2.ZERO),"move_clock":maxf(0,state.elapsed-float(value.get("move_since",state.elapsed))),"distance":float(value.get("distance",0)),"shot_age":state.elapsed-float(value.get("gun_since",-1000)),"gun_aim":value.get("gun_aim",Vector2.ZERO)}

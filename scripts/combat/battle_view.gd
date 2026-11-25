@@ -25,6 +25,7 @@ var high_renderer = preload("res://scripts/combat/high_angle_battle.gd").new()
 var art = preload("res://scripts/ui/asset_slots.gd").new()
 var actor_art=preload("res://scripts/ui/actor_assets.gd").new()
 var actors=preload("res://scripts/combat/actor_motion.gd").new()
+var viya=preload("res://scripts/combat/viya_presentation.gd").new()
 var simulation
 var show_damage: bool = true
 var show_xp: bool = true
@@ -96,6 +97,7 @@ func actor_visual(enemy:Dictionary={}) -> Dictionary:
 	var keys:Array=["viya_battle"]
 	if not enemy.is_empty():keys=[str(enemy.get("species","")),str(enemy.kind if enemy.kind!="normal" else enemy.get("variant","normal"))]
 	data.sample=actor_art.frame(art,keys,data.pose,data.direction,data.clock,size)
+	if enemy.is_empty() and not data.sample.is_empty():viya.apply(self,data)
 	return data
 
 func tracks_enemy_motion() -> bool:
@@ -180,7 +182,8 @@ func _draw() -> void:
 		draw_arc(at, 4.0, 0.0, TAU, 12, Color("fff0b3"), 1.2, true)
 	for bullet in simulation.bullets:
 		var at := _screen(bullet["p"])
-		AttackVisuals.draw_projectile(self, at, bullet["direction"], str(bullet.get("source", "rifle")), display_plan.simple, bool(bullet.get("weapon",{}).get("evolved",false)), bool(bullet.get("weapon",{}).get("fragment",false)))
+		var shown:Dictionary=viya.projectile(self,bullet)
+		AttackVisuals.draw_projectile(self, shown.p, shown.direction, str(bullet.get("source", "rifle")), display_plan.simple, bool(bullet.get("weapon",{}).get("evolved",false)), bool(bullet.get("weapon",{}).get("fragment",false)))
 
 	for effect in display_plan.effects:
 		var effect_at: Vector2 = _screen(effect["p"])
@@ -190,14 +193,13 @@ func _draw() -> void:
 	var hero:Dictionary=actor_visual()
 	var direction: Vector2 = hero.facing
 	if not hero.sample.is_empty():
-		draw_texture_rect(hero.sample.texture,actor_art.rectangle(hero.sample,center),false)
+		viya.draw(self,actor_art,hero,center)
 	else:
 		draw_circle(center + Vector2(0, 8), 23, Color(0, 0, 0, 0.5))
 		draw_colored_polygon(PackedVector2Array([center - direction * 26.0, center + direction.orthogonal() * 12.0, center - direction.orthogonal() * 12.0]), Color("8e2b47"))
 		var player_color := Color("fff1db") if simulation.hurt_clock > 0.5 else Color("cbbba1")
 		draw_circle(center, 16.0, player_color)
 		draw_line(center + direction * 6.0, center + direction * 34.0, Color("3a3e48"), 8.0, true)
-		draw_arc(center, 24.0, 0.0, TAU, 36, Color("b69a65"), 1.4, true)
 	PurgeFeedback.draw(self)
 	_draw_combat_cues()
 	IncomingFeedback.draw(self,incoming_plan)

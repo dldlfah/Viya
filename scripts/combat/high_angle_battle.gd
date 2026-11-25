@@ -69,8 +69,12 @@ func draw(view) -> void:
 			"obstacle":_draw_obstacle(command.value)
 	# Ground-space effects use the SAME transform as their actual damage geometry.
 	canvas.draw_set_transform_matrix(ground)
+	var inverse_ground:Transform2D=ground.affine_inverse()
 	for bullet in state.bullets:
-		if visible.grow(50).has_point(bullet.p):Visuals.draw_projectile(canvas, bullet.p, bullet.direction, str(bullet.get("source","rifle")), canvas.display_plan.simple, bool(bullet.get("weapon",{}).get("evolved",false)), bool(bullet.get("weapon",{}).get("fragment",false)))
+		if not visible.grow(50).has_point(bullet.p):continue
+		var shown:Dictionary=canvas.viya.projectile(canvas,bullet)
+		var heading:Vector2=(inverse_ground.x*shown.direction.x+inverse_ground.y*shown.direction.y).normalized()
+		Visuals.draw_projectile(canvas,inverse_ground*shown.p,heading,str(bullet.get("source","rifle")),canvas.display_plan.simple,bool(bullet.get("weapon",{}).get("evolved",false)),bool(bullet.get("weapon",{}).get("fragment",false)))
 
 	for effect in canvas.display_plan.effects:
 		var reach: float = float(effect.get("radius",0))
@@ -84,12 +88,6 @@ func draw(view) -> void:
 	canvas._draw_combat_cues()
 	canvas.IncomingFeedback.draw(canvas,canvas.incoming_plan)
 	canvas._draw_foreground_threats()
-	# Foreground identification remains visible even in a dense crowd.
-	var feet := screen(state.player)
-	canvas.draw_arc(feet, 20, 0, TAU, 28, Color("f5dc9c"), 2, true)
-	canvas.draw_line(feet+Vector2(-5,0),feet+Vector2(5,0),Color("fff3c5"),2,true)
-	if stats.occluders > 0:
-		canvas.draw_polyline(PackedVector2Array([feet+Vector2(-14,-6),feet+Vector2(-10,-38),feet+Vector2(0,-54),feet+Vector2(11,-38),feet+Vector2(15,-6)]),Color("fff0bc"),2,true)
 	_draw_approaches()
 	canvas = null
 	state = null
@@ -175,7 +173,7 @@ func _draw_enemy(enemy: Dictionary) -> void:
 func _draw_hero() -> void:
 	var feet := screen(state.player)
 	var visual:Dictionary=canvas.actor_visual()
-	if not visual.sample.is_empty():canvas.draw_texture_rect(visual.sample.texture,canvas.actor_art.rectangle(visual.sample,feet),false)
+	if not visual.sample.is_empty():canvas.viya.draw(canvas,canvas.actor_art,visual,feet)
 	else:
 		var direction: Vector2 = canvas.project_direction(visual.facing).normalized()
 		Forms.hero(canvas,feet,direction,state.hurt_clock>.5,visual)
