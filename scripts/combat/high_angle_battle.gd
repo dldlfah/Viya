@@ -25,14 +25,17 @@ func screen(at: Vector2) -> Vector2:
 
 func depth_commands(simulation, area: Rect2, oblique:bool=false) -> Array:
 	var commands: Array = []
+	var enemy_area:Rect2=area.grow(120)
+	var prop_area:Rect2=area.grow(80)
+	var obstacle_area:Rect2=area.grow(260 if oblique else 180)
 	for enemy in simulation.enemies:
-		if area.grow(120).has_point(enemy.p):commands.append({"layer":"enemy", "depth":ObliqueProjection.depth(enemy.p) if oblique else float(enemy.p.y), "id":int(enemy.id), "value":enemy})
+		if enemy_area.has_point(enemy.p):commands.append({"layer":"enemy", "depth":ObliqueProjection.depth(enemy.p) if oblique else float(enemy.p.y), "id":int(enemy.id), "value":enemy})
 	for prop in simulation.structures:
-		if area.grow(80).has_point(prop.p):commands.append({"layer":"prop", "depth":ObliqueProjection.depth(prop.p) if oblique else float(prop.p.y), "id":int(prop.id), "value":prop})
+		if prop_area.has_point(prop.p):commands.append({"layer":"prop", "depth":ObliqueProjection.depth(prop.p) if oblique else float(prop.p.y), "id":int(prop.id), "value":prop})
 	var serial := 0
 	for obstacle in simulation.map_space.definition.obstacles:
 		var box: Rect2 = simulation.MapCatalog.rectangle(obstacle.rect)
-		if area.grow(260 if oblique else 180).intersects(box):commands.append({"layer":"obstacle", "depth":ObliqueProjection.depth(Vector2(box.position.x,box.end.y)) if oblique else box.end.y, "id":serial, "value":obstacle})
+		if obstacle_area.intersects(box):commands.append({"layer":"obstacle", "depth":ObliqueProjection.depth(Vector2(box.position.x,box.end.y)) if oblique else box.end.y, "id":serial, "value":obstacle})
 		serial += 1
 	commands.append({"layer":"hero", "depth":ObliqueProjection.depth(simulation.player) if oblique else float(simulation.player.y), "id":-1, "value":{}})
 	commands.sort_custom(func(a,b):return a.depth < b.depth if a.depth != b.depth else a.id < b.id)

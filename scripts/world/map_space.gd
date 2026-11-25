@@ -110,12 +110,14 @@ func wall_fraction(from: Vector2, to: Vector2, radius: float = 0.0) -> float:
 			if hit is Vector2:first = minf(first,from.distance_to(hit)/maxf(distance,0.000001))
 	return first
 func line_clear(from: Vector2, to: Vector2, radius: float) -> bool:
+	return _line_clear(from,to,_walls(radius))
+
+func _line_clear(from:Vector2, to:Vector2, walls:Dictionary) -> bool:
 	# Exact same intersection arithmetic as wall_fraction, ending at the first
 	# blocking hit. Route queries only need its >=1 predicate, never the fraction.
 	var distance:=maxf(from.distance_to(to),0.000001)
 	var low:=Vector2(minf(from.x,to.x),minf(from.y,to.y))-Vector2.ONE*.01
 	var high:=Vector2(maxf(from.x,to.x),maxf(from.y,to.y))+Vector2.ONE*.01
-	var walls:=_walls(radius)
 	var limits:PackedFloat64Array=walls.limits
 	for index in range(walls.boxes.size()):
 		var offset:=index*4
@@ -129,7 +131,11 @@ func line_clear(from: Vector2, to: Vector2, radius: float) -> bool:
 	return true
 
 func prepare_routes(goal: Vector2, radius: float) -> void:
-	_walls(radius)
+	_prepare_routes(goal,radius,_walls(radius))
+
+func _prepare_routes(goal:Vector2, radius:float, walls:Dictionary) -> void:
+	# One immutable wall snapshot per query; nested node visibility checks need
+	# no repeated geometry comparisons/cache lookups. Arithmetic/order is exact.
 	if radius != _radius:
 		_radius = radius
 		_nodes.clear()
@@ -142,7 +148,7 @@ func prepare_routes(goal: Vector2, radius: float) -> void:
 		for a in range(_nodes.size()):
 			var adjacent := {}
 			for b in range(_nodes.size()):
-				if a != b and line_clear(_nodes[a],_nodes[b],radius):
+				if a != b and _line_clear(_nodes[a],_nodes[b],walls):
 					adjacent[b] = _nodes[a].distance_to(_nodes[b])
 			_edges.append(adjacent)
 		_goal = Vector2(INF,INF)
@@ -152,7 +158,7 @@ func prepare_routes(goal: Vector2, radius: float) -> void:
 	_costs.clear()
 	var visited := {}
 	for at in _nodes:
-		_costs.append(at.distance_to(goal) if line_clear(at,goal,radius) else INF)
+		_costs.append(at.distance_to(goal) if _line_clear(at,goal,walls) else INF)
 	for iteration in range(_nodes.size()):
 		var nearest := -1
 		var best := INF
@@ -166,8 +172,10 @@ func prepare_routes(goal: Vector2, radius: float) -> void:
 		for target in _edges[nearest]:
 			_costs[target] = minf(_costs[target],best + float(_edges[nearest][target]))
 func route_target(from: Vector2, goal: Vector2, radius: float) -> Vector2:
-	if solids.is_empty() or line_clear(from,goal,radius):return goal
-	prepare_routes(goal,radius)
+	if solids.is_empty():return goal
+	var walls:Dictionary=_walls(radius)
+	if _line_clear(from,goal,walls):return goal
+	_prepare_routes(goal,radius,walls)
 	# Test the cheapest complete route first. Float64 costs retain the original
 	# arithmetic; equal costs resolve in original node order, never sort order.
 	var costs := PackedFloat64Array()
@@ -183,7 +191,7 @@ func route_target(from: Vector2, goal: Vector2, radius: float) -> Vector2:
 		var index := costs.find(cost,next_index if cost==previous else 0)
 		previous = cost
 		next_index = index+1
-		if line_clear(from,_nodes[index],radius):return _nodes[index]
+		if _line_clear(from,_nodes[index],walls):return _nodes[index]
 	return from
 func spawn_anchor(generator: RandomNumberGenerator, player: Vector2, elapsed: float, role: String, visible: Rect2, footprint: float = 0.0) -> Variant:
 	var eligible: Array = definition.zones.filter(func(zone): return role in zone.roles and elapsed >= zone.from)

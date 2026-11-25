@@ -40,21 +40,27 @@ static func run(host,verify:Callable) -> void:
 	asset.set_frame("idle_e",0,east)
 	for index in range(8):
 		var direction:String=view.actors.DIRECTIONS[index]
-		var visual:Dictionary={"pose":"run","direction":direction,"facing":Vector2.from_angle(index*PI/4),"clock":.06,"moving":true,"distance":80.0,"sample":{}}
-		view.viya.apply(view,visual)
+		var facing:Vector2=view.input_direction(Vector2.from_angle(index*PI/4))
+		view.viya._gait_run="" # Independent directional trial, not a target turn.
+		var visual:Dictionary={"pose":"run","direction":direction,"facing":facing,"clock":.06,"moving":true,"motion":facing,"distance":0.0,"sample":{}}
+		var seen:Dictionary={}
+		for step in range(44):
+			visual.distance=step*155.0/44.0
+			view.viya.apply(view,visual)
+			seen[visual.sample.index]=true
 		var texture:Texture2D=visual.sample.texture
 		var region:Rect2=visual.region
 		var registered:Rect2=view.viya.body_rect(view.actor_art,visual,Vector2(200,180))
-		var grounded:=true
-		for frame in view.viya.config.directions[direction].run:
-			grounded=grounded and frame.region[1]+frame.region[3]>=240 and frame.region[3]>=230 and frame.index>=0 and frame.index<11
-		visual.pose="attack";visual.clock=.01;view.viya.apply(view,visual)
-		verify.call(grounded and registered.end.y==180 and is_equal_approx(registered.size.x/region.size.x,registered.size.y/region.size.y) and is_same(visual.sample.texture,texture) and visual.region==region and visual.recoil>0,"Distance gait plants feet without stretching source proportions and continues the same phase through auto fire:"+direction)
-		visual.moving=false;view.viya.apply(view,visual)
-		var idle:Texture2D=visual.sample.texture
-		visual.clock=.1;view.viya.apply(view,visual)
-		verify.call(visual.sample.animation=="idle_"+direction and visual.sample.index==0 and is_same(visual.sample.texture,idle),"Stationary fire never advances or replaces the planted leg frame:"+direction)
-		var world_direction:Vector2=view.input_direction(Vector2.from_angle(index*PI/4))
+		visual.pose="attack";visual.shot_age=0.0;visual.gun_aim=facing;view.viya.apply(view,visual)
+		verify.call(seen.size()==11 and registered.end.y==180 and is_equal_approx(registered.size.x/region.size.x,registered.size.y/region.size.y) and is_same(visual.sample.texture,texture) and visual.region==Rect2(0,0,200,248) and visual.recoil==0,"All11whole-body frames retain one canvas/root and gait phase through moving fire:"+direction)
+		visual.moving=false
+		var attack_frames:Dictionary={}
+		for step in range(8):
+			state.elapsed+=.020001;visual.shot_age=.01
+			view.viya.apply(view,visual);attack_frames[visual.sample.index]=true
+		state.elapsed+=.3;visual.shot_age=0.0;view.viya.apply(view,visual)
+		verify.call(visual.sample.animation=="attack_"+direction and visual.sample.index==7 and attack_frames.size()==8,"Stationary burst plays all8native whole-body poses then holds the aimed end frame across repeated shots:"+direction)
+		var world_direction:Vector2=facing
 		state.facing=world_direction;view.actors.reset(state.run_id)
 		var bullet:Dictionary={"p":state.player,"direction":world_direction,"life":.75,"speed":920.0,"source":"rifle"}
 		view.viya._shot_offsets.clear()
@@ -62,15 +68,28 @@ static func run(host,verify:Callable) -> void:
 		var shown:Dictionary=view.viya.projectile(view,bullet)
 		var current:Dictionary=view.actor_visual()
 		var muzzle:Vector2=view.viya.muzzle(view.actor_art,current,view.world_to_screen(state.player))
-		verify.call(shown.p.distance_to(muzzle)<.001 and shown.p.distance_to(view.world_to_screen(state.player))>45 and Snapshot.capture(state)==before,"Fresh visual bullet starts at the registered gun muzzle without changing authoritative projectile/player/RNG:"+direction)
+		verify.call(shown.p.distance_to(muzzle)<.001 and shown.p.distance_to(view.world_to_screen(state.player))>20 and Snapshot.capture(state)==before,"Fresh visual bullet starts at the registered gun muzzle without changing authoritative projectile/player/RNG:"+direction)
+
 	var before:Dictionary=Snapshot.capture(state)
 	var rune:Dictionary={"p":state.player,"direction":state.facing,"life":.75,"speed":920.0,"source":"viya_runebullet_v1"}
-	verify.call(view.viya.projectile(view,rune).p.distance_to(view.world_to_screen(state.player))>45,"Viya's exclusive rune bullet also emits at gun height rather than under her feet")
+	verify.call(view.viya.projectile(view,rune).p.distance_to(view.world_to_screen(state.player))>20,"Viya's exclusive rune bullet also emits at gun height rather than under her feet")
 	var held:Dictionary={"pose":"run","moving":true,"direction":"e","facing":view.input_direction(Vector2.RIGHT),"gun_aim":view.input_direction(Vector2.LEFT),"motion":view.input_direction(Vector2.RIGHT),"shot_age":.25,"clock":.25,"distance":40.0,"sample":{}}
+	view.viya._gait_run=""
 	view.viya.apply(view,held)
 	var held_index:int=held.sample.index
 	held.pose="attack";held.shot_age=0.0;view.viya.apply(view,held)
 	verify.call(held.direction=="w" and held.sample.index==held_index,"Automatic fire holds aim through attack/run transitions while backward movement keeps its distance-driven leg phase")
+	var phase:float=held.gait_phase
+	held.motion=-held.facing;view.viya.apply(view,held)
+	verify.call(is_equal_approx(held.gait_phase,phase),"Reversal at unchanged travel preserves the current phase rather than reflecting p to1-p")
+	held.distance+=5;view.viya.apply(view,held)
+	verify.call(is_equal_approx(held.gait_phase,fposmod(phase-5.0/155,1.0)),"Backward motion reverses only subsequent distance increments")
+	view.viya._direction="e"
+	var quiet:=true
+	for angle in [21.0,24.0,22.0,25.0,20.0]:
+		quiet=quiet and view.viya.direction_for(view,view.input_direction(Vector2.from_angle(deg_to_rad(angle))),"e")=="e"
+	verify.call(quiet and view.viya.direction_for(view,view.input_direction(Vector2.from_angle(deg_to_rad(29))),"e")=="se","Five-degree angular hysteresis rejects boundary chatter while a deliberate turn responds immediately")
+	view.actors.reset(state.run_id)
 	ui.movement.axis=Vector2.RIGHT
 	for i in range(6):ui._physics_process(.05)
 	var distance:float=view.actors.pose(state).distance

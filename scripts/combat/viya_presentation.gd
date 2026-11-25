@@ -9,6 +9,25 @@ var _shot_offsets:Dictionary={}
 var _run_id:String=""
 var _clock:float=-1
 var _view_key:String=""
+var _gait_run:String=""
+var _gait_time:float=-1.0
+var _distance:float=0.0
+var _phase:float=0.0
+var _direction:String=""
+var _burst_since:float=-1.0
+var _gun_until:float=-1.0
+var _interrupted_shot:float=-INF
+
+func direction_for(view, facing:Vector2, fallback:String) -> String:
+	var projected:Vector2=view.project_direction(facing)
+	if projected.is_zero_approx():return fallback
+	var angle:float=projected.angle()
+	var wanted:String=view.actors.DIRECTIONS[posmod(roundi(angle/(PI/4)),8)]
+	if _direction.is_empty():return wanted
+	var old_angle:float=view.actors.DIRECTIONS.find(_direction)*PI/4
+	# Angular Schmitt trigger: no delay for large turns, no boundary chatter.
+	if absf(wrapf(angle-old_angle,-PI,PI))<=PI/8+deg_to_rad(float(config.direction_hysteresis_degrees)):return _direction
+	return wanted
 
 func accepts(view) -> bool:
 	var asset:Resource=view.art.resource("viya_battle")
@@ -46,24 +65,53 @@ func decoded(path:String) -> Texture2D:
 
 func apply(view, visual:Dictionary) -> void:
 	if not accepts(view):return
+	var now:float=view.simulation.elapsed
+	var distance:float=float(visual.get("distance",0))
+	if _gait_run!=view.simulation.run_id or now<_gait_time or distance<_distance:
+		_gait_run=view.simulation.run_id
+		_distance=distance
+		_phase=0
+		_direction=""
+		_burst_since=-1
+		_gun_until=-1
+		_interrupted_shot=-INF
+	_gait_time=now
 	var gun_aim:Vector2=visual.get("gun_aim",Vector2.ZERO)
-	if visual.pose!="hurt" and float(visual.get("shot_age",1000))<.4 and not gun_aim.is_zero_approx():
+	var shot_age:float=float(visual.get("shot_age",1000))
+	var gun_active:bool=shot_age<.4 and not gun_aim.is_zero_approx()
+	if visual.pose=="hurt":
+		_interrupted_shot=maxf(_interrupted_shot,now-shot_age)
+		_burst_since=-1
+	gun_active=gun_active and now-shot_age>_interrupted_shot+.000001
+	if visual.pose!="hurt" and gun_active:
 		visual.facing=gun_aim
-		visual.direction=view.actors.DIRECTIONS[posmod(roundi(view.project_direction(gun_aim).angle()/(PI/4)),8)]
+	_direction=direction_for(view,visual.facing,visual.direction)
+	visual.direction=_direction
+	# Reverse only the next increment. Negating the accumulated travel reflected
+	# the current phase and teleported the legs whenever a target crossed behind.
+	var sign:float=-1.0 if visual.get("motion",Vector2.ZERO).dot(visual.facing)<-.2 else 1.0
+	if visual.moving:_phase=fposmod(_phase+sign*maxf(0,distance-_distance)/float(config.stride_world),1.0)
+	_distance=distance
+	visual.gait_phase=_phase
 	var row:Dictionary=config.directions[visual.direction]
 	var selected:String="hurt" if visual.pose=="hurt" else ("run" if visual.moving else "idle")
-	var region:Rect2
+	var region:=Rect2(0,0,200,248)
 	var muzzle_pixels:=Vector2(row.muzzle[0],row.muzzle[1])
 	var clock:float=visual.clock
 	if selected=="run":
-		var travel:float=float(visual.distance)
-		if visual.get("motion",Vector2.ZERO).dot(visual.facing)< -.2:travel= -travel
-		var index:int=floori(fposmod(travel,float(config.stride_world))/float(config.stride_world)*row.run.size())
+		var index:int=floori(fposmod(_phase+float(row.phase_origin),1.0)*row.run.size())
 		var frame:Dictionary=row.run[index]
 		clock=float(frame.index)/16.6666666667+.000001
-		region=Rect2(frame.region[0],frame.region[1],frame.region[2],frame.region[3])
 		muzzle_pixels=Vector2(frame.muzzle[0],frame.muzzle[1])
-	elif selected=="idle":region=Rect2(row.idle_region[0],row.idle_region[1],row.idle_region[2],row.idle_region[3])
+	# Play the original whole-body attack once per stationary burst, not per
+	# projectile. Continuous .3s fire holds the aimed end pose between shots.
+	if selected=="idle" and gun_active:
+		if _burst_since<0 or now>_gun_until:_burst_since=now-maxf(0,shot_age)
+		selected="attack"
+		clock=minf(maxf(0,now-_burst_since),float(row.attack_hold_frame)/50.0+.000001)
+		muzzle_pixels=Vector2(row.attack_muzzle[0],row.attack_muzzle[1])
+	elif selected!="hurt":_burst_since=-1
+	if gun_active:_gun_until=maxf(_gun_until,now-shot_age+.4)
 	visual.sample=view.actor_art.frame(view.art,["viya_battle"],selected,visual.direction,clock,view.size)
 	if visual.sample.is_empty():return
 	if not transparent(visual.sample.texture):
@@ -75,16 +123,18 @@ func apply(view, visual:Dictionary) -> void:
 			return # An opaque/stale import can never become a white rectangle.
 		visual.sample.texture=repaired # Same PNG pixels, bypassing a damaged import.
 	visual.region=region
-	visual.recoil=maxf(0,1-float(visual.get("shot_age",visual.clock))/.12) if visual.pose=="attack" else 0.0
+	visual.recoil=0.0 # Native whole-body frames; no upper-body mesh deformation.
 	visual.muzzle=muzzle_pixels
 
 static func body_rect(art, visual:Dictionary, feet:Vector2) -> Rect2:
 	var box:Rect2=art.rectangle(visual.sample,feet)
 	var source:Rect2=visual.get("region",Rect2())
 	if source.has_area():
-		# Translate the source contact to the ground; never stretch body proportions.
-		box.size.y*=source.size.y/248.0
-		box.position.y=feet.y-box.size.y
+		# Preserve the original canvas/root across poses. Pinning each changing
+		# alpha bounding box to the floor moved the entire head/torso every frame.
+		var full:Rect2=box
+		box.position=full.position+source.position/Vector2(200,248)*full.size
+		box.size=source.size/Vector2(200,248)*full.size
 	return box
 
 static func muzzle(art, visual:Dictionary, feet:Vector2) -> Vector2:
@@ -101,33 +151,8 @@ static func draw(canvas, art, visual:Dictionary, feet:Vector2) -> void:
 	if not source.has_area():
 		canvas.draw_texture_rect(texture,box,false,Color.WHITE)
 		return
-	# A single textured primitive avoids the independent strip boundaries that
-	# can show seams on compatibility drivers. Idle/run needs no mesh at all.
-	var recoil:Vector2=canvas.project_direction(visual.facing).normalized()*float(visual.get("recoil",0))*box.size.y*.009
-	if recoil.is_zero_approx():canvas.draw_texture_rect_region(texture,box,source)
-	else:
-		var vertices:=PackedVector2Array()
-		var uv:=PackedVector2Array()
-		var indices:=PackedInt32Array()
-		for row in range(13):
-			var t:float=row/12.0
-			var shift:Vector2=-recoil*(1-smoothstep(.25,.55,t))
-			for side in range(2):
-				vertices.append(box.position+Vector2(side*box.size.x,t*box.size.y)+shift)
-				uv.append((source.position+Vector2(side*source.size.x,t*source.size.y))/texture.get_size())
-			if row<12:
-				var start:int=row*2
-				indices.append_array(PackedInt32Array([start,start+1,start+3,start,start+3,start+2]))
-		var arrays:=[]
-		arrays.resize(Mesh.ARRAY_MAX)
-		arrays[Mesh.ARRAY_VERTEX]=vertices
-		arrays[Mesh.ARRAY_TEX_UV]=uv
-		arrays[Mesh.ARRAY_INDEX]=indices
-		var mesh:=ArrayMesh.new()
-		mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES,arrays,[],{},Mesh.ARRAY_FLAG_USE_2D_VERTICES)
-		# Canvas draw commands keep a RID; retain its owner until the next redraw.
-		canvas.set_meta("viya_recoil_mesh",mesh)
-		canvas.draw_mesh(mesh,texture)
+	# One primitive for every pose: no independent strips, seams or mesh churn.
+	canvas.draw_texture_rect_region(texture,box,source)
 	if visual.pose=="attack" and float(visual.get("shot_age",1000))<.075:
 		var at:Vector2=muzzle(art,visual,feet)
 		var aim:Vector2=canvas.project_direction(visual.facing).normalized()

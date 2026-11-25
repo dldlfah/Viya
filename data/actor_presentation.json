@@ -132,10 +132,9 @@
     },
     "viya_battle": {
       "size": [
-        125,
-        155
+        60,
+        74.4
       ],
-      "reference_view_height": 526,
       "pivot": [
         0.5,
         1
