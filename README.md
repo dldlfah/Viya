@@ -4,7 +4,7 @@
 
 ## 세션 필수 문서
 
-[CURRENT_WORK](docs/CURRENT_WORK.md)와 **[누적 DEVELOPMENT_STATUS](docs/DEVELOPMENT_STATUS.md)**를 함께 읽는다. [PLANNED_WORK](docs/PLANNED_WORK.md) · [NEXT_TASK](docs/NEXT_TASK.md) · [AGENTS](AGENTS.md) · [제작 스킬](.agents/skills/viya-game-production/SKILL.md). 현재 작업은 **GAME064 E 달리기 게임 연결**, 브랜치는 `work/viya-turnaround-qa-20261117`이다. 출발 HEAD는 `f5c4da84e00eaa5dcca67acfe7b94dcf854a893a`이며 main 자동 병합은 하지 않는다.
+[CURRENT_WORK](docs/CURRENT_WORK.md)와 **[누적 DEVELOPMENT_STATUS](docs/DEVELOPMENT_STATUS.md)**를 함께 읽는다. [PLANNED_WORK](docs/PLANNED_WORK.md) · [NEXT_TASK](docs/NEXT_TASK.md) · [AGENTS](AGENTS.md) · [제작 스킬](.agents/skills/viya-game-production/SKILL.md). 현재 E47 연결의 재검수를 마쳤고 다음 작업은 **GAME065 E 전용 이동사격**, 브랜치는 `work/viya-turnaround-qa-20261117`이다. 실제 게임 기준은 `fcbb37bfee4c8beb9343f618ff8f6e43a7373694`이며 이후 제작 자료/검증 문서 커밋과 구분한다. main 자동 병합은 하지 않는다.
 
 ## GAME064 — E 달리기 47프레임 연결
 
@@ -16,9 +16,11 @@
 
 영상은 고정1/60초 갱신의 실제 렌더 재현이며 실시간FPS 측정은 아니다. 최종 아트 승인·Windows/모바일 실기는 별도다. 이전 세션의 Higgsfield 실행 차단과 기준 영상은 [DEVELOPMENT_STATUS8.59](docs/DEVELOPMENT_STATUS.md)·[기준 보고서](docs/validation/GAME064_BASELINE_REPORT.json)에 당시 이력으로 보존한다.
 
-## 다음 제작 우선순위
+## 재검수와 다음 제작 — GAME065 E 이동사격
 
-바로 다음 범위는 **게임에 적용한 E 달리기의 최종 아트 검토와 필요한 E 수정**이다. [NEXT](docs/NEXT_TASK.md)를 따른다. E 달리기를 확인한 뒤 전용 이동 사격을 별도 단위로 진행하며, 다른 방향이나 신규 적을 이번 작업에 자동 포함하지 않는다. 전체 후속 순서는 [PLANNED_WORK63·66](docs/PLANNED_WORK.md)의 전투 부하·캐릭터 동작·대표 적1종·표시·초상화·1스테이지 마감 계획을 유지한다.
+완료된 E47/게임 연결을 다시 확인해 추가 수정이 필요한 오류를 발견하지 못했다. 기존 전체10명령/7묶음·120초의 **4,465네이티브**, Python20·실제GUI834검사/329그리기를 이번 소스에서 통과했다. 현재 자산/동작 코드는 유지한다. [재검수 근거](docs/validation/GAME064_REVIEW_REPORT.json).
+
+다음은 E 전용 이동사격 전신 주기 제작·검증이다. [기획 세션용 프롬프트](tools/higgsfield/requests/game065/PROMPT_KO.txt)와 [중성 회색 동작 참조](docs/validation/GAME065_E_RUN_REFERENCE.mp4)를 준비했다. 참조는 기존 달리기 재생이며 새 사격 원화/게임 연결은 아직 없다. 최종 아트·Windows/모바일 실기·FPS/발열과 기존 과부하/비행 저장 경계는 별도다. [NEXT](docs/NEXT_TASK.md)·[PLANNED63·67](docs/PLANNED_WORK.md)을 따른다.
 
 ## 밀집 전투 렌더 개선 — GAME063
 

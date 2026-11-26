@@ -1,0 +1,476 @@
+{
+  "status": "PASS",
+  "frames": [
+    {
+      "frame": 0,
+      "green_spill_pixels_above20percent_alpha": 0,
+      "opaque_bbox": [
+        25,
+        5,
+        182,
+        231
+      ]
+    },
+    {
+      "frame": 1,
+      "green_spill_pixels_above20percent_alpha": 0,
+      "opaque_bbox": [
+        25,
+        5,
+        182,
+        233
+      ]
+    },
+    {
+      "frame": 2,
+      "green_spill_pixels_above20percent_alpha": 0,
+      "opaque_bbox": [
+        24,
+        5,
+        182,
+        235
+      ]
+    },
+    {
+      "frame": 3,
+      "green_spill_pixels_above20percent_alpha": 0,
+      "opaque_bbox": [
+        24,
+        5,
+        182,
+        237
+      ]
+    },
+    {
+      "frame": 4,
+      "green_spill_pixels_above20percent_alpha": 0,
+      "opaque_bbox": [
+        22,
+        6,
+        182,
+        240
+      ]
+    },
+    {
+      "frame": 5,
+      "green_spill_pixels_above20percent_alpha": 0,
+      "opaque_bbox": [
+        21,
+        6,
+        182,
+        243
+      ]
+    },
+    {
+      "frame": 6,
+      "green_spill_pixels_above20percent_alpha": 0,
+      "opaque_bbox": [
+        20,
+        7,
+        182,
+        244
+      ]
+    },
+    {
+      "frame": 7,
+      "green_spill_pixels_above20percent_alpha": 0,
+      "opaque_bbox": [
+        18,
+        9,
+        182,
+        244
+      ]
+    },
+    {
+      "frame": 8,
+      "green_spill_pixels_above20percent_alpha": 0,
+      "opaque_bbox": [
+        18,
+        11,
+        182,
+        244
+      ]
+    },
+    {
+      "frame": 9,
+      "green_spill_pixels_above20percent_alpha": 0,
+      "opaque_bbox": [
+        18,
+        12,
+        182,
+        244
+      ]
+    },
+    {
+      "frame": 10,
+      "green_spill_pixels_above20percent_alpha": 0,
+      "opaque_bbox": [
+        19,
+        12,
+        182,
+        244
+      ]
+    },
+    {
+      "frame": 11,
+      "green_spill_pixels_above20percent_alpha": 0,
+      "opaque_bbox": [
+        19,
+        13,
+        181,
+        244
+      ]
+    },
+    {
+      "frame": 12,
+      "green_spill_pixels_above20percent_alpha": 0,
+      "opaque_bbox": [
+        21,
+        13,
+        181,
+        244
+      ]
+    },
+    {
+      "frame": 13,
+      "green_spill_pixels_above20percent_alpha": 0,
+      "opaque_bbox": [
+        23,
+        13,
+        181,
+        244
+      ]
+    },
+    {
+      "frame": 14,
+      "green_spill_pixels_above20percent_alpha": 0,
+      "opaque_bbox": [
+        27,
+        12,
+        181,
+        244
+      ]
+    },
+    {
+      "frame": 15,
+      "green_spill_pixels_above20percent_alpha": 0,
+      "opaque_bbox": [
+        29,
+        11,
+        181,
+        245
+      ]
+    },
+    {
+      "frame": 16,
+      "green_spill_pixels_above20percent_alpha": 0,
+      "opaque_bbox": [
+        32,
+        10,
+        181,
+        245
+      ]
+    },
+    {
+      "frame": 17,
+      "green_spill_pixels_above20percent_alpha": 0,
+      "opaque_bbox": [
+        34,
+        9,
+        181,
+        246
+      ]
+    },
+    {
+      "frame": 18,
+      "green_spill_pixels_above20percent_alpha": 0,
+      "opaque_bbox": [
+        34,
+        8,
+        181,
+        244
+      ]
+    },
+    {
+      "frame": 19,
+      "green_spill_pixels_above20percent_alpha": 0,
+      "opaque_bbox": [
+        34,
+        7,
+        181,
+        240
+      ]
+    },
+    {
+      "frame": 20,
+      "green_spill_pixels_above20percent_alpha": 0,
+      "opaque_bbox": [
+        33,
+        6,
+        181,
+        237
+      ]
+    },
+    {
+      "frame": 21,
+      "green_spill_pixels_above20percent_alpha": 0,
+      "opaque_bbox": [
+        32,
+        5,
+        181,
+        234
+      ]
+    },
+    {
+      "frame": 22,
+      "green_spill_pixels_above20percent_alpha": 0,
+      "opaque_bbox": [
+        30,
+        5,
+        181,
+        231
+      ]
+    },
+    {
+      "frame": 23,
+      "green_spill_pixels_above20percent_alpha": 0,
+      "opaque_bbox": [
+        27,
+        5,
+        181,
+        229
+      ]
+    },
+    {
+      "frame": 24,
+      "green_spill_pixels_above20percent_alpha": 0,
+      "opaque_bbox": [
+        25,
+        5,
+        182,
+        231
+      ]
+    },
+    {
+      "frame": 25,
+      "green_spill_pixels_above20percent_alpha": 0,
+      "opaque_bbox": [
+        24,
+        4,
+        182,
+        233
+      ]
+    },
+    {
+      "frame": 26,
+      "green_spill_pixels_above20percent_alpha": 0,
+      "opaque_bbox": [
+        24,
+        5,
+        182,
+        236
+      ]
+    },
+    {
+      "frame": 27,
+      "green_spill_pixels_above20percent_alpha": 0,
+      "opaque_bbox": [
+        24,
+        5,
+        182,
+        238
+      ]
+    },
+    {
+      "frame": 28,
+      "green_spill_pixels_above20percent_alpha": 0,
+      "opaque_bbox": [
+        23,
+        6,
+        182,
+        243
+      ]
+    },
+    {
+      "frame": 29,
+      "green_spill_pixels_above20percent_alpha": 0,
+      "opaque_bbox": [
+        21,
+        7,
+        182,
+        244
+      ]
+    },
+    {
+      "frame": 30,
+      "green_spill_pixels_above20percent_alpha": 0,
+      "opaque_bbox": [
+        19,
+        9,
+        182,
+        244
+      ]
+    },
+    {
+      "frame": 31,
+      "green_spill_pixels_above20percent_alpha": 0,
+      "opaque_bbox": [
+        19,
+        10,
+        182,
+        244
+      ]
+    },
+    {
+      "frame": 32,
+      "green_spill_pixels_above20percent_alpha": 0,
+      "opaque_bbox": [
+        18,
+        11,
+        182,
+        244
+      ]
+    },
+    {
+      "frame": 33,
+      "green_spill_pixels_above20percent_alpha": 0,
+      "opaque_bbox": [
+        18,
+        12,
+        182,
+        244
+      ]
+    },
+    {
+      "frame": 34,
+      "green_spill_pixels_above20percent_alpha": 0,
+      "opaque_bbox": [
+        19,
+        13,
+        181,
+        244
+      ]
+    },
+    {
+      "frame": 35,
+      "green_spill_pixels_above20percent_alpha": 0,
+      "opaque_bbox": [
+        19,
+        13,
+        181,
+        245
+      ]
+    },
+    {
+      "frame": 36,
+      "green_spill_pixels_above20percent_alpha": 0,
+      "opaque_bbox": [
+        21,
+        13,
+        181,
+        245
+      ]
+    },
+    {
+      "frame": 37,
+      "green_spill_pixels_above20percent_alpha": 0,
+      "opaque_bbox": [
+        23,
+        13,
+        181,
+        245
+      ]
+    },
+    {
+      "frame": 38,
+      "green_spill_pixels_above20percent_alpha": 0,
+      "opaque_bbox": [
+        27,
+        12,
+        181,
+        245
+      ]
+    },
+    {
+      "frame": 39,
+      "green_spill_pixels_above20percent_alpha": 0,
+      "opaque_bbox": [
+        30,
+        11,
+        181,
+        245
+      ]
+    },
+    {
+      "frame": 40,
+      "green_spill_pixels_above20percent_alpha": 0,
+      "opaque_bbox": [
+        33,
+        10,
+        181,
+        246
+      ]
+    },
+    {
+      "frame": 41,
+      "green_spill_pixels_above20percent_alpha": 0,
+      "opaque_bbox": [
+        34,
+        9,
+        181,
+        246
+      ]
+    },
+    {
+      "frame": 42,
+      "green_spill_pixels_above20percent_alpha": 0,
+      "opaque_bbox": [
+        34,
+        7,
+        181,
+        240
+      ]
+    },
+    {
+      "frame": 43,
+      "green_spill_pixels_above20percent_alpha": 0,
+      "opaque_bbox": [
+        34,
+        6,
+        181,
+        237
+      ]
+    },
+    {
+      "frame": 44,
+      "green_spill_pixels_above20percent_alpha": 0,
+      "opaque_bbox": [
+        33,
+        5,
+        181,
+        234
+      ]
+    },
+    {
+      "frame": 45,
+      "green_spill_pixels_above20percent_alpha": 0,
+      "opaque_bbox": [
+        30,
+        5,
+        181,
+        231
+      ]
+    },
+    {
+      "frame": 46,
+      "green_spill_pixels_above20percent_alpha": 0,
+      "opaque_bbox": [
+        28,
+        5,
+        182,
+        230
+      ]
+    }
+  ],
+  "scope": "All47hash/canvas/outer-alpha checks; green heuristic is diagnostic,not automatic image-edit rule."
+}
