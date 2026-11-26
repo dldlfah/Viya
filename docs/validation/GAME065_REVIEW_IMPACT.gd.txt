@@ -1,0 +1,54 @@
+extends SceneTree
+const Campaign=preload("res://tests/test_campaign.gd")
+const Snapshot=preload("res://scripts/progression/run_snapshot.gd")
+const Motion=preload("res://scripts/combat/actor_motion.gd")
+const Before=preload("res://.local_validation/GAME065_REVIEW/actor_motion_before.gd")
+const FOLDER="res://.local_validation/GAME065_REVIEW/impact"
+var ui
+var checks:int=0
+var errors:Array=[]
+var records:Array=[]
+func _initialize():call_deferred("run")
+func expect(ok:bool,label:String):
+	checks+=1
+	if not ok:errors.append(label);printerr(label)
+func capture(name:String):
+	ui._update_hud();ui.view.queue_redraw()
+	var state:Dictionary=Snapshot.capture(ui.simulation)
+	var cues:Dictionary=ui.simulation.cues.snapshot()
+	await process_frame;await RenderingServer.frame_post_draw
+	expect(state==Snapshot.capture(ui.simulation) and cues==ui.simulation.cues.snapshot(),"Read-only render: "+name)
+	var v:Dictionary=ui.view.actor_visual()
+	records.append({"name":name,"animation":v.sample.animation,"frame":v.sample.index,"phase":v.gait_phase,"body":str(ui.view.viya.body_rect(ui.view.actor_art,v,ui.view.world_to_screen(ui.simulation.player))),"gun_aim":str(v.get("gun_aim")),"shot_age":v.get("shot_age")})
+	expect(root.get_texture().get_image().save_png(FOLDER.path_join(name+".png"))==OK,"Saved "+name)
+func run():
+	DirAccess.make_dir_recursive_absolute(FOLDER)
+	root.size=Vector2i(1280,720);root.content_scale_mode=Window.CONTENT_SCALE_MODE_DISABLED
+	ui=load("res://scenes/main.tscn").instantiate()
+	ui.run_store.path=FOLDER.path_join("battle.save");ui.gold_progress.path=FOLDER.path_join("gold.cfg");ui.settings_path=FOLDER.path_join("settings.cfg")
+	for path in [ui.run_store.path,ui.gold_progress.path,ui.settings_path]:DirAccess.remove_absolute(path)
+	root.add_child(ui);ui.set_physics_process(false);await process_frame;Campaign.depart(ui)
+	var state=ui.simulation
+	state.player=Vector2(2500,1700);state.enemies.clear();state.bullets.clear();state.effects.clear()
+	state.spawn_clock=999;state._scatter_clock=999;state._swarm_clock=999;state.shot_clock=999
+	var east:Vector2=ui.view.input_direction(Vector2.RIGHT)
+	state.facing=east;state.add_enemy(state.player+east*120)
+	var old=Before.new();var fixed=Motion.new();old.prepare(state);fixed.prepare(state)
+	state._projectile(east,1,1,3000)
+	var previous:Vector2=state.player;state.step(.05,east)
+	old.sync(state,state.player-previous,true);fixed.sync(state,state.player-previous,true)
+	expect(state.bullets.is_empty() and state.shots==1,"Real immediate impact removes the new bullet")
+	ui.view.camera.reset();ui.view.actors=old;ui.view.viya._gait_run=""
+	var v:Dictionary=ui.view.actor_visual();expect(v.sample.animation=="run_e","Historical observer misses moving fire")
+	var phase:float=v.gait_phase
+	await capture("before")
+	ui.view.actors=fixed;v=ui.view.actor_visual()
+	expect(v.sample.animation=="run_fire_e" and v.gait_phase==phase,"Current observer shows moving fire at identical gait phase")
+	await capture("after")
+	state.enemies.clear();state.bullets.clear();state.map_space.solids.assign([Rect2(state.player+Vector2(80,-200),Vector2(10,400))])
+	fixed.prepare(state);state._projectile(east,1,1,3000)
+	previous=state.player;state.step(.05,east);fixed.sync(state,state.player-previous,true)
+	expect(state.bullets.is_empty() and ui.view.actor_visual().sample.animation=="run_fire_e","Real wall sweep also retains the firing pose")
+	await capture("wall")
+	FileAccess.open(FOLDER.path_join("report.json"),FileAccess.WRITE).store_string(JSON.stringify({"status":"PASS" if errors.is_empty() else "FAIL","checks":checks,"errors":errors,"draws":3,"records":records,"before_observer_commit":"c0c8301af495d70df9cd7680eedbac842a95a4e9","scope":"Same live production RunState and same phase, swap only old/new presentation observer. Open-area fixture and real swept impact; controlled wall geometry for last frame. Actual X11 renders, no image or authority changes."},"  "))
+	print(JSON.stringify({"checks":checks,"errors":errors}));ui.combat_audio.stop_all();ui.queue_free();await process_frame;await process_frame;quit(0 if errors.is_empty() else 1)

@@ -4,7 +4,13 @@
 
 ## 세션 필수 문서
 
-[CURRENT_WORK](docs/CURRENT_WORK.md)와 **[누적 DEVELOPMENT_STATUS](docs/DEVELOPMENT_STATUS.md)**를 함께 읽는다. [PLANNED_WORK](docs/PLANNED_WORK.md) · [NEXT_TASK](docs/NEXT_TASK.md) · [AGENTS](AGENTS.md) · [제작 스킬](.agents/skills/viya-game-production/SKILL.md). 현재 E47 연결의 재검수를 마쳤고 다음 작업은 **GAME065 E 전용 이동사격**, 브랜치는 `work/viya-turnaround-qa-20261117`이다. 실제 게임 기준은 `fcbb37bfee4c8beb9343f618ff8f6e43a7373694`이며 이후 제작 자료/검증 문서 커밋과 구분한다. main 자동 병합은 하지 않는다.
+[CURRENT_WORK](docs/CURRENT_WORK.md)와 **[누적 DEVELOPMENT_STATUS](docs/DEVELOPMENT_STATUS.md)**를 함께 읽는다. [PLANNED_WORK](docs/PLANNED_WORK.md) · [NEXT_TASK](docs/NEXT_TASK.md) · [AGENTS](AGENTS.md) · [제작 스킬](.agents/skills/viya-game-production/SKILL.md). 현재 GAME065 E 이동사격을 검수하고 즉시 명중/벽 충돌 때 사격 자세가 누락되는 관측을 보정했다. 실제 게임 코드 기준은 **`5bb73bf2b3863ee6c5275818aa95b240a8ea194a`**, 다음은 **GAME066 SE 달리기 한 방향**이다. 브랜치는 `work/viya-turnaround-qa-20261117`이며 문서/제작 참조 커밋과 구분한다. main 자동 병합은 하지 않는다.
+
+## GAME065 검수 — 즉시 명중 사격 자세 보정
+
+생성 직후 사라진 탄환도 실제 발사 방향을 기록해 E 이동사격을 표시한다. 뒤이어 나온 활 투사체가 총 조준을 덮어쓰지 않도록 했다. 발사 간격·피해·적 수·저장22/7난수·기존 원화는 유지한다. 기존 전체10명령/7묶음·120초의 **4,501검사**, Python20·6계약/131변이거부·실제GUI **1,554검사/492그리기**를 통과했다. [검수 보고서](docs/validation/GAME065_REVIEW_REPORT.json) · [실제 이동사격 영상](docs/validation/GAME065_REVIEW_MOVING_FIRE.mp4). 실시간FPS·Windows/모바일·최종 아트 승인은 별도다.
+
+다음 SE 한 방향의 [기획/Higgsfield 제작 지시](tools/higgsfield/requests/game066/PROMPT_KO.txt)와 [현재 SE 기준 영상](docs/validation/GAME066_SE_RUN_REFERENCE.mp4)을 준비했다. 현재11장을 그대로 재생한 참조이며 **새 SE 원화 생성/게임 적용은 아직 없다.** E47 달리기·E47 이동사격은 보존한다.
 
 ## GAME064 — E 달리기 47프레임 연결
 
@@ -16,17 +22,17 @@
 
 영상은 고정1/60초 갱신의 실제 렌더 재현이며 실시간FPS 측정은 아니다. 최종 아트 승인·Windows/모바일 실기는 별도다. 이전 세션의 Higgsfield 실행 차단과 기준 영상은 [DEVELOPMENT_STATUS8.59](docs/DEVELOPMENT_STATUS.md)·[기준 보고서](docs/validation/GAME064_BASELINE_REPORT.json)에 당시 이력으로 보존한다.
 
-## 재검수와 다음 제작 — GAME065 E 이동사격
+## GAME064 당시 재검수와 GAME065 제작 인계 이력
 
 완료된 E47/게임 연결을 다시 확인해 추가 수정이 필요한 오류를 발견하지 못했다. 기존 전체10명령/7묶음·120초의 **4,465네이티브**, Python20·실제GUI834검사/329그리기를 이번 소스에서 통과했다. 현재 자산/동작 코드는 유지한다. [재검수 근거](docs/validation/GAME064_REVIEW_REPORT.json).
 
-다음은 E 전용 이동사격 전신 주기 제작·검증이다. [기획 세션용 프롬프트](tools/higgsfield/requests/game065/PROMPT_KO.txt)와 [중성 회색 동작 참조](docs/validation/GAME065_E_RUN_REFERENCE.mp4)를 준비했다. 참조는 기존 달리기 재생이며 새 사격 원화/게임 연결은 아직 없다. 최종 아트·Windows/모바일 실기·FPS/발열과 기존 과부하/비행 저장 경계는 별도다. [NEXT](docs/NEXT_TASK.md)·[PLANNED63·67](docs/PLANNED_WORK.md)을 따른다.
+당시 다음은 E 전용 이동사격 전신 주기 제작·검증이었다. 현재 완료/검수 상태는 위 GAME065 절을 따른다. [기획 세션용 프롬프트](tools/higgsfield/requests/game065/PROMPT_KO.txt)와 [중성 회색 동작 참조](docs/validation/GAME065_E_RUN_REFERENCE.mp4)를 준비했다. 참조는 기존 달리기 재생이며 새 사격 원화/게임 연결은 아직 없다. 최종 아트·Windows/모바일 실기·FPS/발열과 기존 과부하/비행 저장 경계는 별도다. [NEXT](docs/NEXT_TASK.md)·[PLANNED63·67](docs/PLANNED_WORK.md)을 따른다.
 
 ## 밀집 전투 렌더 개선 — GAME063
 
 고정된 임시 적 몸체를 공유 벡터 메시로 재사용한다. 같은6저장/3회 A/B에서 몸체 CPU16~28%·그리기 명령 준비7~14%를 줄였고 적 수/스폰·AI·깊이/가림·피격/예고·보스 보호와 비야 동작을 유지했다. 실제 Linux300초의 반복 중앙값은83.483→77.421ms다. 합성1,540개체의 계산 약44ms·자동 처리 지연/일부p95는 남으며 사용자 Windows/모바일 FPS나 렉 전면 해결을 의미하지 않는다.
 
-기존10명령/7묶음·120초/4,456네이티브, Python20·6계약/118negative와 실제 GUI100몸체자세/6전투쌍을 확인했다. [실제 전투](docs/validation/GAME063_AFTER.png) · [전후 측정/한계](docs/validation/GAME063_REPORT.json) · [구현과 재현](docs/design/DENSE_RENDER_CACHE.md). 현재 E 달리기 적용과 다음 한 단위는 [NEXT](docs/NEXT_TASK.md)를 따른다.
+기존10명령/7묶음·120초/4,456네이티브, Python20·6계약/118negative와 실제 GUI100몸체자세/6전투쌍을 확인했다. [실제 전투](docs/validation/GAME063_AFTER.png) · [전후 측정/한계](docs/validation/GAME063_REPORT.json) · [구현과 재현](docs/design/DENSE_RENDER_CACHE.md). 현재 E 달리기/이동사격 적용과 다음 한 단위는 [NEXT](docs/NEXT_TASK.md)를 따른다.
 
 ## ARTFIX001 — 기존 흰 배경 잔사 수정 이력
 

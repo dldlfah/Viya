@@ -1,0 +1,117 @@
+{
+  "task": "GAME066_SE_RUN",
+  "status": "PREPARED_NOT_GENERATED",
+  "authorization": "User asked to review completed GAME065, fix concrete issues and move to the next unit. Planning/Higgsfield handles artwork.",
+  "base_game_commit": "c0c8301af495d70df9cd7680eedbac842a95a4e9",
+  "references": [
+    {
+      "path": "assets/characters/pilot_32/render_cache/viya_run_se_00.png",
+      "role": "existing_SE_gait_direction",
+      "sha256": "47dd67bdb257eb8fa60788ece2da714cf80f466ef78797fbe92e5e47b3e93be1"
+    },
+    {
+      "path": "assets/characters/pilot_32/render_cache/viya_run_se_01.png",
+      "role": "existing_SE_gait_direction",
+      "sha256": "341407f67b2afe8f53fb86659a8558c30c4c9d5ddcc1e6969ba92da4232d653b"
+    },
+    {
+      "path": "assets/characters/pilot_32/render_cache/viya_run_se_02.png",
+      "role": "existing_SE_gait_direction",
+      "sha256": "43a29beb3d6a6ed41a5cbfeae510f3e655ae0d881e2f76fcc186dfbfbb883055"
+    },
+    {
+      "path": "assets/characters/pilot_32/render_cache/viya_run_se_03.png",
+      "role": "existing_SE_gait_direction",
+      "sha256": "591f1d8793c2b1dff0644fb0247bb6777eeaf7416348e58508ec0960379a83e3"
+    },
+    {
+      "path": "assets/characters/pilot_32/render_cache/viya_run_se_04.png",
+      "role": "existing_SE_gait_direction",
+      "sha256": "2ed81912bc012042bbd400ba7df2297bacc7e9d11b7cc07aeec1acde1914ab19"
+    },
+    {
+      "path": "assets/characters/pilot_32/render_cache/viya_run_se_05.png",
+      "role": "existing_SE_gait_direction",
+      "sha256": "478a058d0d2ecbd54ff8308e75066c97acd59b863145433cee9cce363f7b5ff6"
+    },
+    {
+      "path": "assets/characters/pilot_32/render_cache/viya_run_se_06.png",
+      "role": "existing_SE_gait_direction",
+      "sha256": "36de1839d95348d4f45d9ed5fec6c185e19f2c9d8c56b66c7e04601e74d9a52f"
+    },
+    {
+      "path": "assets/characters/pilot_32/render_cache/viya_run_se_07.png",
+      "role": "existing_SE_gait_direction",
+      "sha256": "cbd464daf230331f294ca1f9387291a4ff8b260d937b558cf78041d4f704b56a"
+    },
+    {
+      "path": "assets/characters/pilot_32/render_cache/viya_run_se_08.png",
+      "role": "existing_SE_gait_direction",
+      "sha256": "0b47dbb0eba3b262d4ea98c77188c5065b98b5e46816d5bf3d43e58b24206355"
+    },
+    {
+      "path": "assets/characters/pilot_32/render_cache/viya_run_se_09.png",
+      "role": "existing_SE_gait_direction",
+      "sha256": "e71eea39bbb0cdec94065001a1e675b877962aa4fe447de5e2c2b52ea7708cfa"
+    },
+    {
+      "path": "assets/characters/pilot_32/render_cache/viya_run_se_10.png",
+      "role": "existing_SE_gait_direction",
+      "sha256": "2d3f2d7601ae595585176db385108be0b0f2aebc1b03d3187a8a2ce720049c02"
+    },
+    {
+      "path": "assets/characters/pilot_32/render_cache/viya_idle_se.png",
+      "role": "existing_SE_identity_and_camera",
+      "sha256": "5217cd8e7107cbe69d365a0dbd7665babbcf9fdb10d4f00206d0a849cccff212"
+    },
+    {
+      "path": "assets/characters/pilot_32/game064_e_run/frames/viya_run_e_000.png",
+      "role": "accepted_E_quality_reference",
+      "sha256": "d7925db10bcca60854fb3ee5392930d052be359c123288cbe35ea43f40a56c20"
+    },
+    {
+      "path": "assets/characters/pilot_32/game064_e_run/frames/viya_run_e_023.png",
+      "role": "accepted_E_quality_reference",
+      "sha256": "77a13fa44c65c10fcedce0b50c443a46bb67865301acdf4d2f6cc875b3f91ac4"
+    }
+  ],
+  "reference_video": "docs/validation/GAME066_SE_RUN_REFERENCE.mp4",
+  "preserve": {
+    "active_resource": "res://assets/characters/pilot_32/game065_e_run_fire/viya_game065_frames.tres",
+    "display": [
+      69,
+      85.56
+    ],
+    "canvas": [
+      200,
+      248
+    ],
+    "pivot": [
+      100,
+      248
+    ],
+    "movement": 235,
+    "stride_world": 155,
+    "save_version": 22,
+    "rng_streams": 7
+  },
+  "current_SE": {
+    "frames": 11,
+    "frame_seconds": 0.06,
+    "nominal_cycle_ms": 660,
+    "phase_origin": 0.2727272727272727
+  },
+  "deliverables": [
+    "SE full-body RGBA frames, fixed registration",
+    "Actual variable frame timing, measured muzzle per frame, measured gait landmark",
+    "Original supported output plus model/settings/job/cost/hash provenance"
+  ],
+  "new_generated_frames": 0,
+  "higgsfield_submission": null,
+  "cost_this_session": 0,
+  "current_model_price_balance": "NOT_QUERIED: creation is assigned to planning session, no generation was performed",
+  "art_approval": "NOT_VERIFIED",
+  "reviewed_code_commit": "5bb73bf2b3863ee6c5275818aa95b240a8ea194a",
+  "reference_video_sha256": "3b7c2cedac864cf84953b0b583d3628e6de3cd55ef89ba3d550dc51f4e8fabeb",
+  "reference_export_report": "docs/validation/GAME066_REFERENCE_REPORT.json"
+}
