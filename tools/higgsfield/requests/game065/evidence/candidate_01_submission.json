@@ -1,0 +1,322 @@
+{
+  "task": "GAME065_E_MOVING_FIRE",
+  "candidate": 1,
+  "source_game_commit": "2b5238992431f53e7742e3bc7cd5309d3b75b2b2",
+  "balance_before": {
+    "status": "fulfilled",
+    "value": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Credits: 966.25 | Plan: plus\nFree trial: pending\nFree generations: Higgsfield Genjutsu (ai_influencer_motion_control, ai_influencer_replace_object, hf_mult_motion_control, hf_mult_replace_object): 0 left — resolution: 480p, 720p; up to 30s\nFree generations: AI Influencer Builder (ai_influencer_sheet): 5 left"
+        }
+      ],
+      "structuredContent": {
+        "credits": 966.25,
+        "subscription_plan_type": "plus",
+        "free_trial": {
+          "status": "pending",
+          "eligible": false,
+          "offered_kind": null,
+          "kind": "mcp",
+          "trial_credits": 100,
+          "ends_at": null,
+          "unlim_available": false,
+          "unlim_remaining": null,
+          "unlim_expires_at": null
+        },
+        "free_gens": [
+          {
+            "job_set_types": [
+              "ai_influencer_motion_control",
+              "ai_influencer_replace_object",
+              "hf_mult_motion_control",
+              "hf_mult_replace_object"
+            ],
+            "remaining": 0,
+            "parameters": {
+              "resolution": [
+                "480p",
+                "720p"
+              ]
+            },
+            "max_duration": 30
+          },
+          {
+            "job_set_types": [
+              "ai_influencer_sheet"
+            ],
+            "remaining": 5,
+            "parameters": {},
+            "max_duration": null
+          }
+        ]
+      },
+      "isError": false
+    }
+  },
+  "model": {
+    "status": "fulfilled",
+    "value": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"id\":\"seedance_2_5\",\"name\":\"Seedance 2.5\",\"provider_name\":\"Bytedance\",\"description\":\"Seedance 2.5 text-to-video, multimodal omni-reference generation, video edit, and video extension\",\"output_type\":\"video\",\"parameters\":[{\"name\":\"mode\",\"required\":\"optional\",\"type\":\"string\",\"description\":\"Generation mode: 't2v' for prompt-only generation, 'omni_reference' for image, video, or audio references, 'video_edit' to edit one reference video (billed by that video's duration; 'duration' and 'aspect_ratio' are ignored), or 'video_extension' to extend a reference video ('aspect_ratio' is ignored — the output follows the extended video).\",\"options\":[\"t2v\",\"omni_reference\",\"video_edit\",\"video_extension\"],\"default\":\"t2v\"},{\"name\":\"duration\",\"required\":\"optional\",\"type\":\"number\",\"description\":\"Duration in seconds (4-30). Whole number.\",\"min\":4,\"max\":30,\"default\":5},{\"name\":\"resolution\",\"required\":\"optional\",\"type\":\"string\",\"description\":\"Output resolution.\",\"options\":[\"480p\",\"720p\",\"1080p\",\"4k\"],\"default\":\"720p\"},{\"name\":\"generate_audio\",\"required\":\"optional\",\"type\":\"bool\",\"description\":\"Generate audio for the output video.\",\"default\":true},{\"name\":\"bitrate_mode\",\"required\":\"optional\",\"type\":\"string\",\"description\":\"'standard' = normal output bitrate; 'high' = higher bitrate output.\",\"options\":[\"standard\",\"high\"],\"default\":\"standard\"},{\"name\":\"extension_mode\",\"required\":\"optional\",\"type\":\"string\",\"description\":\"Extension direction; required for mode 'video_extension' and not allowed otherwise.\",\"options\":[\"backward\",\"forward\"],\"nullable\":true},{\"name\":\"draft\",\"required\":\"optional\",\"type\":\"bool\",\"description\":\"Generate a 480p draft that can be finalized within seven days.\",\"default\":false},{\"name\":\"draft_job_id\",\"required\":\"optional\",\"type\":\"string\",\"description\":\"Completed draft job to finalize at the selected resolution. The final renders the draft's full duration and is billed for it; 'duration' is ignored.\",\"nullable\":true}],\"medias\":[{\"name\":\"medias\",\"type\":\"image\",\"roles\":[\"start_image\",\"end_image\",\"image_references\",\"video_references\",\"audio_references\"],\"description\":\"Media roles: start_image — First frame of the output video (mode 'omni_reference' only). | end_image — Last frame of the output video (mode 'omni_reference' only). | image_references — Reference images for subject, style, or composition (max 30 across image_references + start_image + end_image). (array, max 30) | video_references — Reference video clips (max 10). (array, max 10) | audio_references — Reference audio clips (max 10). (array, max 10)\"}],\"aspect_ratios\":[\"auto\",\"21:9\",\"16:9\",\"4:3\",\"1:1\",\"3:4\",\"9:16\"],\"tags\":[\"text-to-video\",\"reference\",\"identity\",\"audio-reference\",\"video-reference\",\"video-edit\",\"video-extension\",\"480p\",\"720p\",\"1080p\",\"unlim\"],\"supports_unlim\":true,\"free_gens\":[{\"job_set_types\":[\"ai_influencer_motion_control\",\"ai_influencer_replace_object\",\"hf_mult_motion_control\",\"hf_mult_replace_object\"],\"remaining\":0,\"parameters\":{\"resolution\":[\"480p\",\"720p\"]},\"max_duration\":30},{\"job_set_types\":[\"ai_influencer_sheet\"],\"remaining\":5,\"parameters\":{},\"max_duration\":null}]}"
+        },
+        {
+          "type": "text",
+          "text": "Free-trial unlim: not spendable right now. Passing use_unlim returns a typed rejection rather than a charge, so it is still the right thing to send when the user asks for their free generations.\n\nUnlim configs: none sent — coverage detail is unknown, which is not the same as 'nothing is covered'. Pass use_unlim when the user asks and let the backend answer.\n\nFree generations — one counter per line, shared by every model id on it; a run through any of them spends one. Pass use_free_gens: true on generate_video for Genjutsu or execute_preset for Viral when the user asks to use a free generation. For ai_influencer_sheet, prepare with ai_influencer_prepare, then use ai_influencer_generate with use_free_gens:true and max_credits:0; never generate_image. A request outside the listed values is refused, never silently billed.\n- Higgsfield Genjutsu (ai_influencer_motion_control, ai_influencer_replace_object, hf_mult_motion_control, hf_mult_replace_object): 0 left — resolution: 480p, 720p; up to 30s\n- AI Influencer Builder (ai_influencer_sheet): 5 left"
+        }
+      ],
+      "structuredContent": {
+        "id": "seedance_2_5",
+        "name": "Seedance 2.5",
+        "provider_name": "Bytedance",
+        "description": "Seedance 2.5 text-to-video, multimodal omni-reference generation, video edit, and video extension",
+        "output_type": "video",
+        "parameters": [
+          {
+            "name": "mode",
+            "required": "optional",
+            "type": "string",
+            "description": "Generation mode: 't2v' for prompt-only generation, 'omni_reference' for image, video, or audio references, 'video_edit' to edit one reference video (billed by that video's duration; 'duration' and 'aspect_ratio' are ignored), or 'video_extension' to extend a reference video ('aspect_ratio' is ignored — the output follows the extended video).",
+            "options": [
+              "t2v",
+              "omni_reference",
+              "video_edit",
+              "video_extension"
+            ],
+            "default": "t2v"
+          },
+          {
+            "name": "duration",
+            "required": "optional",
+            "type": "number",
+            "description": "Duration in seconds (4-30). Whole number.",
+            "min": 4,
+            "max": 30,
+            "default": 5
+          },
+          {
+            "name": "resolution",
+            "required": "optional",
+            "type": "string",
+            "description": "Output resolution.",
+            "options": [
+              "480p",
+              "720p",
+              "1080p",
+              "4k"
+            ],
+            "default": "720p"
+          },
+          {
+            "name": "generate_audio",
+            "required": "optional",
+            "type": "bool",
+            "description": "Generate audio for the output video.",
+            "default": true
+          },
+          {
+            "name": "bitrate_mode",
+            "required": "optional",
+            "type": "string",
+            "description": "'standard' = normal output bitrate; 'high' = higher bitrate output.",
+            "options": [
+              "standard",
+              "high"
+            ],
+            "default": "standard"
+          },
+          {
+            "name": "extension_mode",
+            "required": "optional",
+            "type": "string",
+            "description": "Extension direction; required for mode 'video_extension' and not allowed otherwise.",
+            "options": [
+              "backward",
+              "forward"
+            ],
+            "nullable": true
+          },
+          {
+            "name": "draft",
+            "required": "optional",
+            "type": "bool",
+            "description": "Generate a 480p draft that can be finalized within seven days.",
+            "default": false
+          },
+          {
+            "name": "draft_job_id",
+            "required": "optional",
+            "type": "string",
+            "description": "Completed draft job to finalize at the selected resolution. The final renders the draft's full duration and is billed for it; 'duration' is ignored.",
+            "nullable": true
+          }
+        ],
+        "medias": [
+          {
+            "name": "medias",
+            "type": "image",
+            "roles": [
+              "start_image",
+              "end_image",
+              "image_references",
+              "video_references",
+              "audio_references"
+            ],
+            "description": "Media roles: start_image — First frame of the output video (mode 'omni_reference' only). | end_image — Last frame of the output video (mode 'omni_reference' only). | image_references — Reference images for subject, style, or composition (max 30 across image_references + start_image + end_image). (array, max 30) | video_references — Reference video clips (max 10). (array, max 10) | audio_references — Reference audio clips (max 10). (array, max 10)"
+          }
+        ],
+        "aspect_ratios": [
+          "auto",
+          "21:9",
+          "16:9",
+          "4:3",
+          "1:1",
+          "3:4",
+          "9:16"
+        ],
+        "tags": [
+          "text-to-video",
+          "reference",
+          "identity",
+          "audio-reference",
+          "video-reference",
+          "video-edit",
+          "video-extension",
+          "480p",
+          "720p",
+          "1080p",
+          "unlim"
+        ],
+        "supports_unlim": true,
+        "free_gens": [
+          {
+            "job_set_types": [
+              "ai_influencer_motion_control",
+              "ai_influencer_replace_object",
+              "hf_mult_motion_control",
+              "hf_mult_replace_object"
+            ],
+            "remaining": 0,
+            "parameters": {
+              "resolution": [
+                "480p",
+                "720p"
+              ]
+            },
+            "max_duration": 30
+          },
+          {
+            "job_set_types": [
+              "ai_influencer_sheet"
+            ],
+            "remaining": 5,
+            "parameters": {},
+            "max_duration": null
+          }
+        ]
+      },
+      "isError": false
+    }
+  },
+  "params": {
+    "model": "seedance_2_5",
+    "mode": "video_edit",
+    "resolution": "720p",
+    "generate_audio": false,
+    "bitrate_mode": "high",
+    "count": 1,
+    "use_unlim": false,
+    "prompt": "Edit this exact source video into ONE coherent EAST-facing full-body running-and-firing animation of the SAME VIYA. The input is the accepted slow-motion running gait; retain its exact timing, leg trajectories, alternating foot plants, push-offs, leg recovery and toe clearance, original root, body size, framing and fixed camera. Every output instant must correspond to the SAME gait phase in the input. Keep both boots visible.\n\nMake a clear but restrained change to the FULL-BODY pose: she is actively aiming and firing her ORIGINAL rune-decorated rifle while running. Firm two-handed grip, one hand supporting the fore-end and trigger hand gripping the stock, the original long barrel pointing EAST/right nearly horizontally, held slightly higher and more firmly than the input carry. Show subtle anatomically coherent shoulder, elbow and rifle recoil-and-recovery, with controlled torso movement. Preserve her lower-body running motion and root throughout; do not restart the gait with each shot. Do not leave the running pose unchanged. Do not add muzzle flashes, bullets, smoke, cartridge cases, sparks or any visible firing effects; those are supplied by the game.\n\nPreserve exactly her mature adult face and proportions, long dark-brown wavy hair, ivory top, fitted black corset, partial gloves, brass/gold ornaments, short lower garments, thigh straps, bare upper thigh regions, tall original decorated boots, asymmetric crimson cloth and SAME slim original rune-decorated firearm. Preserve every asymmetric detail, painted dark-fantasy anime style and continuous hair/cloth motion. No redesign, sleeves, replacement armor, extra clothing, new weapon, extra limbs, or mirrored details.\n\nThis is a seamless gait cycle for a sprite game. The final distinct pose must lead naturally into the first as consecutive phases. Keep the exact source's source-time gait and last-to-first continuity. Do not duplicate the first pose at the end, ping-pong, freeze the legs, crossfade, ghost, assemble cutout body parts, or warp the body. Keep the source's fixed full-body root and ground plane; no camera zoom, rotation, pan or reframing. Render full complete character in every frame. Keep the flat saturated green background from the input completely uniform. No shadow, scenery, text, logos, floor line or other characters. Silent video. Preserve sharp painted hands, boots and weapon structure. The game will separately retime this slow-motion master to its accepted approximately 0.66-second gait cycle.",
+    "medias": [
+      {
+        "role": "video",
+        "value": "fbf2fd2d-8596-4ca4-87e7-875712a2f7c9"
+      }
+    ]
+  },
+  "quote": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Cost preflight for seedance_2_5: 31 credits (31 exact). No job submitted."
+      },
+      {
+        "type": "text",
+        "text": "quote_ref quote:TIIfcevyn9zMM0kE2Wm8_w: to generate exactly this request, send params: {\"ref\": \"quote:TIIfcevyn9zMM0kE2Wm8_w\"} and nothing else. A key sent next to ref replaces the quoted one."
+      }
+    ],
+    "structuredContent": {
+      "cost": {
+        "credits": 31,
+        "credits_exact": 31
+      },
+      "adjustments": {
+        "medias[0].role": {
+          "requested": "video",
+          "used": "video_references",
+          "reason": "Seedance 2.5 backend expects schema-key media roles"
+        }
+      },
+      "quote_ref": "quote:TIIfcevyn9zMM0kE2Wm8_w"
+    },
+    "isError": false
+  },
+  "submission": {
+    "content": [
+      {
+        "type": "text",
+        "text": "This tool provides an auto-updating generation widget for these jobs. Do not call job_display, show_generations, or show_generation_by_ids to display these jobs again, either before or after completion, unless the user explicitly requests a separate display. If you need to await completion, use jobs_wait with timeout_seconds <= 15. Use job_display only if the user explicitly requests a separate re-display of one specific job."
+      },
+      {
+        "type": "text",
+        "text": "Note: adjustments applied — medias[0].role: \"video\" → \"video_references\" (Seedance 2.5 backend expects schema-key media roles).\n\nSubmitted 1 job. If a widget is visible, it polls automatically — do not call job_status or show_generations as a follow-up poll. In text-only clients, use job_status with sync:true to poll for completion.\n- 163de9a9-72ef-459e-8953-11cb99e3a104  \"Edit this exact source video into ONE coherent EAST-facing full-body running-and-firing animation of the SAME VIYA. The input is the accepted slow-motion running gait; retain its exact timing, leg trajectories, alternating foot plants, push-offs, leg recovery and toe clearance, original root, body size, framing and fixed camera. Every output instant must correspond to the SAME gait phase in the input. Keep both boots visible.\n\nMake a clear but restrained change to the FULL-BODY pose: she is actively aiming and firing her ORIGINAL rune-decorated rifle while running. Firm two-handed grip, one hand supporting the fore-end and trigger hand gripping the stock, the original long barrel pointing EAST/right nearly horizontally, held slightly higher and more firmly than the input carry. Show subtle anatomically coherent shoulder, elbow and rifle recoil-and-recovery, with controlled torso movement. Preserve her lower-body running motion and root throughout; do not restart the gait with each shot. Do not leave the running pose unchanged. Do not add muzzle flashes, bullets, smoke, cartridge cases, sparks or any visible firing effects; those are supplied by the game.\n\nPreserve exactly her mature adult face and proportions, long dark-brown wavy hair, ivory top, fitted black corset, partial gloves, brass/gold ornaments, short lower garments, thigh straps, bare upper thigh regions, tall original decorated boots, asymmetric crimson cloth and SAME slim original rune-decorated firearm. Preserve every asymmetric detail, painted dark-fantasy anime style and continuous hair/cloth motion. No redesign, sleeves, replacement armor, extra clothing, new weapon, extra limbs, or mirrored details.\n\nThis is a seamless gait cycle for a sprite game. The final distinct pose must lead naturally into the first as consecutive phases. Keep the exact source's source-time gait and last-to-first continuity. Do not duplicate the first pose at the end, ping-pong, freeze the legs, crossfade, ghost, assemble cutout body parts, or warp the body. Keep the source's fixed full-body root and ground plane; no camera zoom, rotation, pan or reframing. Render full complete character in every frame. Keep the flat saturated green background from the input completely uniform. No shadow, scenery, text, logos, floor line or other characters. Silent video. Preserve sharp painted hands, boots and weapon structure. The game will separately retime this slow-motion master to its accepted approximately 0.66-second gait cycle.\""
+      },
+      {
+        "type": "text",
+        "text": "If the user requests a combined display of multiple generations, including jobs submitted through separate generate_* calls, collect all requested job IDs, wait for the complete set with jobs_wait, then call show_generation_by_ids with jobs: [{\"index\":0,\"job_id\":\"<first actual job ID>\"},{\"index\":1,\"job_id\":\"<second actual job ID>\"}, ...]. job_display accepts only one id: never pass ids to it or loop over it to show a group. Do not create an extra display when the existing generation widgets already satisfy the request."
+      },
+      {
+        "type": "text",
+        "text": "References read by the server:\n- quote:TIIfcevyn9zMM0kE2Wm8_w: 2735 chars, sha256 bb52dc32e9b72497703cd9963622f8fa6d14d5303cd32d33557bd2cf7e294440"
+      }
+    ],
+    "structuredContent": {
+      "results": [
+        {
+          "id": "163de9a9-72ef-459e-8953-11cb99e3a104",
+          "type": "video",
+          "status": "pending",
+          "model": "seedance_2_5",
+          "params": {
+            "prompt": "Edit this exact source video into ONE coherent EAST-facing full-body running-and-firing animation of the SAME VIYA. The input is the accepted slow-motion running gait; retain its exact timing, leg trajectories, alternating foot plants, push-offs, leg recovery and toe clearance, original root, body size, framing and fixed camera. Every output instant must correspond to the SAME gait phase in the input. Keep both boots visible.\n\nMake a clear but restrained change to the FULL-BODY pose: she is actively aiming and firing her ORIGINAL rune-decorated rifle while running. Firm two-handed grip, one hand supporting the fore-end and trigger hand gripping the stock, the original long barrel pointing EAST/right nearly horizontally, held slightly higher and more firmly than the input carry. Show subtle anatomically coherent shoulder, elbow and rifle recoil-and-recovery, with controlled torso movement. Preserve her lower-body running motion and root throughout; do not restart the gait with each shot. Do not leave the running pose unchanged. Do not add muzzle flashes, bullets, smoke, cartridge cases, sparks or any visible firing effects; those are supplied by the game.\n\nPreserve exactly her mature adult face and proportions, long dark-brown wavy hair, ivory top, fitted black corset, partial gloves, brass/gold ornaments, short lower garments, thigh straps, bare upper thigh regions, tall original decorated boots, asymmetric crimson cloth and SAME slim original rune-decorated firearm. Preserve every asymmetric detail, painted dark-fantasy anime style and continuous hair/cloth motion. No redesign, sleeves, replacement armor, extra clothing, new weapon, extra limbs, or mirrored details.\n\nThis is a seamless gait cycle for a sprite game. The final distinct pose must lead naturally into the first as consecutive phases. Keep the exact source's source-time gait and last-to-first continuity. Do not duplicate the first pose at the end, ping-pong, freeze the legs, crossfade, ghost, assemble cutout body parts, or warp the body. Keep the source's fixed full-body root and ground plane; no camera zoom, rotation, pan or reframing. Render full complete character in every frame. Keep the flat saturated green background from the input completely uniform. No shadow, scenery, text, logos, floor line or other characters. Silent video. Preserve sharp painted hands, boots and weapon structure. The game will separately retime this slow-motion master to its accepted approximately 0.66-second gait cycle.",
+            "reference_images": [
+              "fbf2fd2d-8596-4ca4-87e7-875712a2f7c9"
+            ],
+            "mode": "video_edit",
+            "resolution": "720p",
+            "generate_audio": false,
+            "bitrate_mode": "high"
+          }
+        }
+      ],
+      "adjustments": {
+        "medias[0].role": {
+          "requested": "video",
+          "used": "video_references",
+          "reason": "Seedance 2.5 backend expects schema-key media roles"
+        }
+      },
+      "references_read": [
+        {
+          "ref": "quote:TIIfcevyn9zMM0kE2Wm8_w",
+          "chars": 2735,
+          "sha256": "bb52dc32e9b72497703cd9963622f8fa6d14d5303cd32d33557bd2cf7e294440"
+        }
+      ]
+    },
+    "isError": false
+  }
+}

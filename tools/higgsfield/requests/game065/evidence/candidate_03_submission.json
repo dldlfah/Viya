@@ -1,0 +1,110 @@
+{
+  "task": "GAME065_E_MOVING_FIRE",
+  "candidate": 3,
+  "correction_reason": "Candidate2 leaves small yellow flashes in source13..16 and60..63. Rephrase as unfired aiming artwork; real firing effects belong to game.",
+  "balance_before": {
+    "credits": 904.25,
+    "subscription_plan_type": "plus",
+    "free_trial": {
+      "status": "pending",
+      "eligible": false,
+      "offered_kind": null,
+      "kind": "mcp",
+      "trial_credits": 100,
+      "ends_at": null,
+      "unlim_available": false,
+      "unlim_remaining": null,
+      "unlim_expires_at": null
+    },
+    "free_gens": [
+      {
+        "job_set_types": [
+          "ai_influencer_motion_control",
+          "ai_influencer_replace_object",
+          "hf_mult_motion_control",
+          "hf_mult_replace_object"
+        ],
+        "remaining": 0,
+        "parameters": {
+          "resolution": [
+            "480p",
+            "720p"
+          ]
+        },
+        "max_duration": 30
+      },
+      {
+        "job_set_types": [
+          "ai_influencer_sheet"
+        ],
+        "remaining": 5,
+        "parameters": {},
+        "max_duration": null
+      }
+    ]
+  },
+  "params": {
+    "model": "seedance_2_5",
+    "mode": "video_edit",
+    "resolution": "720p",
+    "generate_audio": false,
+    "bitrate_mode": "high",
+    "count": 1,
+    "use_unlim": false,
+    "medias": [
+      {
+        "role": "video",
+        "value": "d1817f67-fb19-4b70-b4a9-605f82981497"
+      }
+    ],
+    "prompt": "The rifle is NOT firing at any moment. This character is RUNNING WHILE AIMING an UNFIRED weapon. Edit this video to show only the intact painted character against clean flat green.\n\nRemove the small yellow/white muzzle flashes that still occur twice, around 0.54–0.71 seconds and 2.50–2.67 seconds. Replace ALL light, particles, flares, sparks and glow OUTSIDE the metal barrel with plain green. The barrel is dark unlit metal at every instant. There must be zero discharge, zero bullets and zero muzzle effects throughout. Preserve the original red rune panels ON the weapon. Do not confuse those red painted rune panels with the unwanted yellow flashes outside its tip.\n\nKeep the same ORIGINAL rifle and its two-handed aiming hold, but draw her hold slightly more compact, pulled naturally into the shoulder, leaving a clearly visible strip of green between the COMPLETE muzzle tip and the right video edge. No weapon redesign or shortening. Keep gentle existing shoulder/arm/weapon movement, but never discharge the weapon.\n\nEverything else stays exactly as the input: her mature face, hair, ivory top, black corset, bare thigh regions and straps, decorated boots, asymmetric crimson cloth, full-body proportions, painted art style, camera, scale, exact body/root and foot positions, leg trajectories, source-time gait phases and loop seam. Do not move or scale the whole character. No new clothes or sleeves. Both boots visible. Continuous full-body running, not frozen legs, not a cutout puppet, no warping or blending. No shadow, floor, text or other objects. Silent.\n\nResult: the same full-body running-and-aiming pose, completely clean unlit muzzle with visible green margin. The game engine, not this artwork, adds real firing effects."
+  },
+  "quote": {
+    "cost": {
+      "credits": 31,
+      "credits_exact": 31
+    },
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "video",
+        "used": "video_references",
+        "reason": "Seedance 2.5 backend expects schema-key media roles"
+      }
+    },
+    "quote_ref": "quote:1_MvsjE27w3Dkkmzbw6VeQ"
+  },
+  "submission": {
+    "results": [
+      {
+        "id": "293f45c6-1226-4a36-8b44-617fdad53850",
+        "type": "video",
+        "status": "pending",
+        "model": "seedance_2_5",
+        "params": {
+          "prompt": "The rifle is NOT firing at any moment. This character is RUNNING WHILE AIMING an UNFIRED weapon. Edit this video to show only the intact painted character against clean flat green.\n\nRemove the small yellow/white muzzle flashes that still occur twice, around 0.54–0.71 seconds and 2.50–2.67 seconds. Replace ALL light, particles, flares, sparks and glow OUTSIDE the metal barrel with plain green. The barrel is dark unlit metal at every instant. There must be zero discharge, zero bullets and zero muzzle effects throughout. Preserve the original red rune panels ON the weapon. Do not confuse those red painted rune panels with the unwanted yellow flashes outside its tip.\n\nKeep the same ORIGINAL rifle and its two-handed aiming hold, but draw her hold slightly more compact, pulled naturally into the shoulder, leaving a clearly visible strip of green between the COMPLETE muzzle tip and the right video edge. No weapon redesign or shortening. Keep gentle existing shoulder/arm/weapon movement, but never discharge the weapon.\n\nEverything else stays exactly as the input: her mature face, hair, ivory top, black corset, bare thigh regions and straps, decorated boots, asymmetric crimson cloth, full-body proportions, painted art style, camera, scale, exact body/root and foot positions, leg trajectories, source-time gait phases and loop seam. Do not move or scale the whole character. No new clothes or sleeves. Both boots visible. Continuous full-body running, not frozen legs, not a cutout puppet, no warping or blending. No shadow, floor, text or other objects. Silent.\n\nResult: the same full-body running-and-aiming pose, completely clean unlit muzzle with visible green margin. The game engine, not this artwork, adds real firing effects.",
+          "reference_images": [
+            "d1817f67-fb19-4b70-b4a9-605f82981497"
+          ],
+          "mode": "video_edit",
+          "resolution": "720p",
+          "generate_audio": false,
+          "bitrate_mode": "high"
+        }
+      }
+    ],
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "video",
+        "used": "video_references",
+        "reason": "Seedance 2.5 backend expects schema-key media roles"
+      }
+    },
+    "references_read": [
+      {
+        "ref": "quote:1_MvsjE27w3Dkkmzbw6VeQ",
+        "chars": 1976,
+        "sha256": "9222c57b7584dd0649d8eaa148623a94b15f3da74ef19b3548281870ef892743"
+      }
+    ]
+  }
+}

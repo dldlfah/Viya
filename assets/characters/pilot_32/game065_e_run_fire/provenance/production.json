@@ -1,0 +1,262 @@
+{
+  "schema": 1,
+  "task": "GAME065_E_MOVING_FIRE",
+  "recorded_at_utc": "2026-11-26T12:49:09.563781+00:00",
+  "generation_status": "COMPLETED_THREE_JOBS",
+  "technical_asset_status": "ACCEPT_PREPARED_RGBA_TECHNICAL_QA",
+  "runtime_status_report": "docs/validation/GAME065_INTEGRATION_REPORT.json",
+  "final_user_art_approval": "NOT_RECORDED",
+  "selected_job_id": "d1817f67-fb19-4b70-b4a9-605f82981497",
+  "actual_model": "seedance_2_5",
+  "mode": "video_edit",
+  "source_lineage": [
+    "GAME064 fbf2fd2d-8596-4ca4-87e7-875712a2f7c9",
+    "163de9a9-72ef-459e-8953-11cb99e3a104",
+    "d1817f67-fb19-4b70-b4a9-605f82981497",
+    "293f45c6-1226-4a36-8b44-617fdad53850"
+  ],
+  "lineage_note": "Candidate1 edits the accepted GAME064 video; candidate2 edits candidate1; candidate3 edits candidate2 but is rejected. Delivered PNGs derive only from candidate2.",
+  "capabilities_observed": {
+    "evidence": "tools/higgsfield/requests/game065/evidence/candidate_01_submission.json",
+    "reference_input": "One existing Higgsfield video job per edit. Backend normalized media role video to video_references.",
+    "service_output": "RGB H264 yuv420p MP4, 720x1280, 24fps, 97 decoded frames, 4.041667 seconds, no audio.",
+    "genuine_rgba_png_sequence_from_service": false,
+    "alpha_output_note": "Connected video_edit schema offers no transparent PNG-sequence output. Genuine per-pixel RGBA was prepared separately from the green-backed result.",
+    "duration_note": "video_edit bills input duration; requested duration/aspect ratio are not used in this mode."
+  },
+  "cost": {
+    "currency": "Higgsfield credits",
+    "generation_count": 3,
+    "quoted_each": 31,
+    "actual_observed_total": 93.0,
+    "balance_before": 966.25,
+    "last_observed_balance_after": 873.25,
+    "new_payment": false,
+    "automatic_recharge": false,
+    "plan_changed": false,
+    "note": "Actual debit is the sequential observed balance difference and matches all three quotes. Balance is the post-candidate3 observation.",
+    "final_balance_rechecked": 873.25,
+    "final_balance_rechecked_at_utc": "2026-11-26T12:57:56.787935+00:00",
+    "final_balance_evidence": "tools/higgsfield/requests/game065/evidence/balance_final.json"
+  },
+  "candidates": [
+    {
+      "candidate": 1,
+      "job_id": "163de9a9-72ef-459e-8953-11cb99e3a104",
+      "service_status": "completed",
+      "disposition": "REJECTED_RAW_MUZZLE_FLASH_AND_MARGIN",
+      "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3LHdo37hN3iiYXd8WT9stnWXw4M/hf_20261126_114943_163de9a9-72ef-459e-8953-11cb99e3a104.mp4",
+      "source_sha256": "9dbd85d4910e5a82b2ec8fcc0f8e1525962ae31ffd24b37de0878a05bac1c926",
+      "quoted_credits": 31,
+      "observed_credits_before": 966.25,
+      "observed_credits_after": 935.25,
+      "observed_credit_debit": 31.0,
+      "request_evidence": "tools/higgsfield/requests/game065/evidence/candidate_01_submission.json",
+      "result_evidence": "tools/higgsfield/requests/game065/evidence/candidate_01_result.json",
+      "actual_settings": {
+        "model": "seedance_2_5",
+        "mode": "video_edit",
+        "resolution": "720p",
+        "generate_audio": false,
+        "bitrate_mode": "high",
+        "count": 1,
+        "use_unlim": false,
+        "prompt": "Edit this exact source video into ONE coherent EAST-facing full-body running-and-firing animation of the SAME VIYA. The input is the accepted slow-motion running gait; retain its exact timing, leg trajectories, alternating foot plants, push-offs, leg recovery and toe clearance, original root, body size, framing and fixed camera. Every output instant must correspond to the SAME gait phase in the input. Keep both boots visible.\n\nMake a clear but restrained change to the FULL-BODY pose: she is actively aiming and firing her ORIGINAL rune-decorated rifle while running. Firm two-handed grip, one hand supporting the fore-end and trigger hand gripping the stock, the original long barrel pointing EAST/right nearly horizontally, held slightly higher and more firmly than the input carry. Show subtle anatomically coherent shoulder, elbow and rifle recoil-and-recovery, with controlled torso movement. Preserve her lower-body running motion and root throughout; do not restart the gait with each shot. Do not leave the running pose unchanged. Do not add muzzle flashes, bullets, smoke, cartridge cases, sparks or any visible firing effects; those are supplied by the game.\n\nPreserve exactly her mature adult face and proportions, long dark-brown wavy hair, ivory top, fitted black corset, partial gloves, brass/gold ornaments, short lower garments, thigh straps, bare upper thigh regions, tall original decorated boots, asymmetric crimson cloth and SAME slim original rune-decorated firearm. Preserve every asymmetric detail, painted dark-fantasy anime style and continuous hair/cloth motion. No redesign, sleeves, replacement armor, extra clothing, new weapon, extra limbs, or mirrored details.\n\nThis is a seamless gait cycle for a sprite game. The final distinct pose must lead naturally into the first as consecutive phases. Keep the exact source's source-time gait and last-to-first continuity. Do not duplicate the first pose at the end, ping-pong, freeze the legs, crossfade, ghost, assemble cutout body parts, or warp the body. Keep the source's fixed full-body root and ground plane; no camera zoom, rotation, pan or reframing. Render full complete character in every frame. Keep the flat saturated green background from the input completely uniform. No shadow, scenery, text, logos, floor line or other characters. Silent video. Preserve sharp painted hands, boots and weapon structure. The game will separately retime this slow-motion master to its accepted approximately 0.66-second gait cycle.",
+        "medias": [
+          {
+            "role": "video",
+            "value": "fbf2fd2d-8596-4ca4-87e7-875712a2f7c9"
+          }
+        ]
+      },
+      "quoted_adjustments": {
+        "medias[0].role": {
+          "requested": "video",
+          "used": "video_references",
+          "reason": "Seedance 2.5 backend expects schema-key media roles"
+        }
+      }
+    },
+    {
+      "candidate": 2,
+      "job_id": "d1817f67-fb19-4b70-b4a9-605f82981497",
+      "service_status": "completed",
+      "disposition": "SELECTED_SOURCE_FOR_ACCEPTED_RGBA_DERIVATIVE_RAW_FLASHES_REMOVED",
+      "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3LHdo37hN3iiYXd8WT9stnWXw4M/hf_20261126_115806_d1817f67-fb19-4b70-b4a9-605f82981497.mp4",
+      "source_sha256": "688216786b493658922568c6f010c0b5bb5c9a77481c9b9488f0cfe320e9cef6",
+      "quoted_credits": 31,
+      "observed_credits_before": 935.25,
+      "observed_credits_after": 904.25,
+      "observed_credit_debit": 31.0,
+      "request_evidence": "tools/higgsfield/requests/game065/evidence/candidate_02_submission.json",
+      "result_evidence": "tools/higgsfield/requests/game065/evidence/candidate_02_result.json",
+      "actual_settings": {
+        "model": "seedance_2_5",
+        "mode": "video_edit",
+        "resolution": "720p",
+        "generate_audio": false,
+        "bitrate_mode": "high",
+        "count": 1,
+        "use_unlim": false,
+        "medias": [
+          {
+            "role": "video",
+            "value": "163de9a9-72ef-459e-8953-11cb99e3a104"
+          }
+        ],
+        "prompt": "Make only this precise cleanup to this complete VIYA running-and-aiming video. Retain the exact character, original costume, original rifle design, face, camera, root, hair, cloth, source-time gait, feet, body size, full-body framing and every lower-body pose.\n\n1. REMOVE EVERY visible muzzle flash, yellow flare, spark, projectile, smoke, glow cast by a shot and all firing visual effects throughout the entire video. The green background immediately around and in front of the barrel must be clean uniform green on EVERY frame. No firing effects whatsoever, even momentarily. Keep the original red rune detail inside the rifle; do not remove that design detail. The game supplies its own muzzle flash and projectiles.\n2. Keep her new firm two-handed aiming posture and subtle mechanical shoulder/rifle recoil. Seat the buttstock snugly at her shoulder and keep the ORIGINAL slim rifle at its exact original physical scale. Pull only the two-handed rifle hold slightly closer into her shoulder so the muzzle tip remains at least 20 pixels inside the RIGHT edge of this 720-pixel-wide source frame throughout. Preserve the entire original barrel and muzzle; do not shorten, redesign or crop the weapon. Natural intact arms/hands must follow the closer hold. Do not move, shrink or reframe her body or the legs.\n3. Every lower-body pose, foot contact, hip/root position and gait timing must match this input video exactly. Preserve original bare upper thigh regions, straps and tall decorated boots. Preserve the seam and the last distinct pose leading naturally to the first, with no duplicate closing pose. No frozen legs, ping-pong, ghosted blends, cutout assembly, body warping, camera movement, floor/shadow, text or scenery.\n\nThis is a full-frame video edit for a sprite game, not a redesign. Retain the existing painted dark-fantasy anime detail. Silent, uniform green background, complete original character in every frame."
+      },
+      "quoted_adjustments": {
+        "medias[0].role": {
+          "requested": "video",
+          "used": "video_references",
+          "reason": "Seedance 2.5 backend expects schema-key media roles"
+        }
+      }
+    },
+    {
+      "candidate": 3,
+      "job_id": "293f45c6-1226-4a36-8b44-617fdad53850",
+      "service_status": "completed",
+      "disposition": "REJECTED_RESIDUAL_FLASH_AND_DIMMED_RIFLE_RUNES",
+      "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3LHdo37hN3iiYXd8WT9stnWXw4M/hf_20261126_120802_293f45c6-1226-4a36-8b44-617fdad53850.mp4",
+      "source_sha256": "8ace9c7590a74e43405b448ac83ef15df12a69222f69e041140b48e66768c1f1",
+      "quoted_credits": 31,
+      "observed_credits_before": 904.25,
+      "observed_credits_after": 873.25,
+      "observed_credit_debit": 31.0,
+      "request_evidence": "tools/higgsfield/requests/game065/evidence/candidate_03_submission.json",
+      "result_evidence": "tools/higgsfield/requests/game065/evidence/candidate_03_result.json",
+      "actual_settings": {
+        "model": "seedance_2_5",
+        "mode": "video_edit",
+        "resolution": "720p",
+        "generate_audio": false,
+        "bitrate_mode": "high",
+        "count": 1,
+        "use_unlim": false,
+        "medias": [
+          {
+            "role": "video",
+            "value": "d1817f67-fb19-4b70-b4a9-605f82981497"
+          }
+        ],
+        "prompt": "The rifle is NOT firing at any moment. This character is RUNNING WHILE AIMING an UNFIRED weapon. Edit this video to show only the intact painted character against clean flat green.\n\nRemove the small yellow/white muzzle flashes that still occur twice, around 0.54–0.71 seconds and 2.50–2.67 seconds. Replace ALL light, particles, flares, sparks and glow OUTSIDE the metal barrel with plain green. The barrel is dark unlit metal at every instant. There must be zero discharge, zero bullets and zero muzzle effects throughout. Preserve the original red rune panels ON the weapon. Do not confuse those red painted rune panels with the unwanted yellow flashes outside its tip.\n\nKeep the same ORIGINAL rifle and its two-handed aiming hold, but draw her hold slightly more compact, pulled naturally into the shoulder, leaving a clearly visible strip of green between the COMPLETE muzzle tip and the right video edge. No weapon redesign or shortening. Keep gentle existing shoulder/arm/weapon movement, but never discharge the weapon.\n\nEverything else stays exactly as the input: her mature face, hair, ivory top, black corset, bare thigh regions and straps, decorated boots, asymmetric crimson cloth, full-body proportions, painted art style, camera, scale, exact body/root and foot positions, leg trajectories, source-time gait phases and loop seam. Do not move or scale the whole character. No new clothes or sleeves. Both boots visible. Continuous full-body running, not frozen legs, not a cutout puppet, no warping or blending. No shadow, floor, text or other objects. Silent.\n\nResult: the same full-body running-and-aiming pose, completely clean unlit muzzle with visible green margin. The game engine, not this artwork, adds real firing effects."
+      },
+      "quoted_adjustments": {
+        "medias[0].role": {
+          "requested": "video",
+          "used": "video_references",
+          "reason": "Seedance 2.5 backend expects schema-key media roles"
+        }
+      }
+    }
+  ],
+  "final_asset": {
+    "animation": "run_fire_e",
+    "new_distinct_frames": 47,
+    "active_animations": 33,
+    "active_frames": 291,
+    "preserved_existing_frames": 244,
+    "canvas": [
+      200,
+      248
+    ],
+    "display_size": [
+      69,
+      85.56
+    ],
+    "pivot": [
+      100,
+      248
+    ],
+    "nominal_cycle_ms": 660,
+    "actual_distance_driven_cycle_ms": 659.5744680851063,
+    "speed_world_per_second": 235,
+    "stride_world": 155,
+    "source_cycle_interval": [
+      0,
+      94
+    ],
+    "source_frames": [
+      0,
+      2,
+      4,
+      6,
+      8,
+      10,
+      12,
+      14,
+      16,
+      18,
+      20,
+      22,
+      24,
+      26,
+      28,
+      30,
+      32,
+      34,
+      36,
+      38,
+      40,
+      42,
+      44,
+      46,
+      48,
+      50,
+      52,
+      54,
+      56,
+      58,
+      60,
+      62,
+      64,
+      66,
+      68,
+      70,
+      72,
+      74,
+      76,
+      78,
+      80,
+      82,
+      84,
+      86,
+      88,
+      90,
+      92
+    ],
+    "frame_timing_csv": "provenance/frame_timing.csv",
+    "fixed_registration": {
+      "scale": 0.26247288503253796,
+      "translation": [
+        11.334056399132322,
+        -46.39479392624729
+      ],
+      "relative_to_accepted_run_canvas_shift": [
+        -1,
+        0
+      ],
+      "relative_to_accepted_run_display_shift": [
+        -0.345,
+        0
+      ]
+    },
+    "rgba_preparation": "One fixed transform for every complete frame. Verified clear left background, chroma/edge matte, same-frame observed metal regions protect source pixels from external-FX mask; no new paint or limb/body assembly. External flash pixels removed on delivered source14/16/60/62.",
+    "import": "Lossless PNG; process/fix_alpha_border=false on all47 files."
+  },
+  "technical_review": {
+    "report": "provenance/review/final_qa.json",
+    "status": "PASS",
+    "muzzle_measurement_review": "All47 measured tip overlays visually inspected by root on final source-preserving matte; follows actual barrel tip, no prior run muzzle coordinates reused.",
+    "preparation_log_note": "frame_preparation.json and muzzle_landmarks.json retain pre-review export statuses. This later acceptance preserves their evidence hashes.",
+    "final_art_approval": false
+  },
+  "reproducible_tools": [
+    "tools/prepare_viya_game065.py",
+    "tools/measure_viya_game065.py",
+    "tools/build_viya_game065.py"
+  ],
+  "preservation": "Existing original208, ARTFIX001 and GAME064 preserved; final byte comparison evidence in integration report. New derivative connected through existing presentation slot."
+}

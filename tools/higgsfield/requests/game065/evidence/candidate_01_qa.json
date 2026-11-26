@@ -1,0 +1,192 @@
+{
+  "candidate": 1,
+  "job_id": "163de9a9-72ef-459e-8953-11cb99e3a104",
+  "decision": "REJECTED_FOR_DELIVERY_RETAINED_AS_EDIT_SOURCE",
+  "reasons": [
+    "Baked muzzle flashes and residual light touch right edge in source13..31 and60..78.",
+    "Three-frame registered alpha probe has max border alpha174; muzzle requires additional margin."
+  ],
+  "identity_review": "Same mature VIYA, costume/asymmetry and original rifle retained in reviewed poses; no concrete weapon replacement found.",
+  "gait_review": {
+    "candidate_job": "163de9a9-72ef-459e-8953-11cb99e3a104",
+    "gait_verdict": "ACCEPT",
+    "candidate_delivery_verdict": "REJECT_BAKED_MUZZLE_FLASH",
+    "basis": [
+      "Inspected all47 paired phases and identified near/far legs by thigh straps and occlusion.",
+      "Near contact source12..34 and far58..80, opposite-leg half stride around48, both recoveries and92to0 continuity match accepted source.",
+      "Measured24 forefoot endpoints in fixed native sole band and visually checked every marker; maximum recorded same-phase display-space distance0.2263828633.",
+      "Unchanged global registration fits head and both boots; foreground union[18,192,720,1114] extends to right edge because of baked muzzle flash/glow. Other native image borders have no foreground."
+    ],
+    "same_index_source_map_verified_for_gait": true,
+    "cycle_source_interval": [
+      0,
+      94
+    ],
+    "reference_frame_selection": [
+      0,
+      2,
+      4,
+      6,
+      8,
+      10,
+      12,
+      14,
+      16,
+      18,
+      20,
+      22,
+      24,
+      26,
+      28,
+      30,
+      32,
+      34,
+      36,
+      38,
+      40,
+      42,
+      44,
+      46,
+      48,
+      50,
+      52,
+      54,
+      56,
+      58,
+      60,
+      62,
+      64,
+      66,
+      68,
+      70,
+      72,
+      74,
+      76,
+      78,
+      80,
+      82,
+      84,
+      86,
+      88,
+      90,
+      92
+    ],
+    "weighted47timing_reuse_for_this_candidate": true,
+    "conditional_note": "A subsequent edited candidate must be checked again; this result does not transfer automatically.",
+    "samephase_forefoot_max_display_distance": 0.22638286334055713,
+    "contact_boundary_residuals": {
+      "near": {
+        "slide_authored_660ms_world": {
+          "net": 0.041540766437586196,
+          "max_interval_abs": 0.3313192638629423,
+          "max_cumulative_abs": 0.23521561722707318
+        },
+        "slide_distance_stride155_world": {
+          "net": 0.020612612474456116,
+          "max_interval_abs": 0.33170628375489386,
+          "max_cumulative_abs": 0.239851427865593
+        }
+      },
+      "far": {
+        "slide_authored_660ms_world": {
+          "net": 0.06050275873218691,
+          "max_interval_abs": 0.3580717360983279,
+          "max_cumulative_abs": 0.2192639605188309
+        },
+        "slide_distance_stride155_world": {
+          "net": 0.04061328602228542,
+          "max_interval_abs": 0.3563228943737369,
+          "max_cumulative_abs": 0.2045266618118151
+        }
+      }
+    },
+    "known_delivery_failure": "Baked visible flash at source14..20 and62..68; extended glow reaches native right edge across13..31 and60..78. Engine must own flash.",
+    "final_art_approval": false,
+    "files_modified": "Review artifacts only; accepted/run assets and game repository unchanged.",
+    "seam_forefoot_edge_comparison": {
+      "method": "Rightmost foreground column with>=2pixels in native y970..1120; centroid of that column. Same method for reference and candidate; distinct from the ground-contact sole-edge landmark.",
+      "rows": {
+        "90": {
+          "reference": [
+            579,
+            1029.5
+          ],
+          "candidate": [
+            579,
+            1030.5
+          ],
+          "display_distance": 0.09055314533622559
+        },
+        "92": {
+          "reference": [
+            595,
+            1037.5
+          ],
+          "candidate": [
+            595,
+            1036.5
+          ],
+          "display_distance": 0.09055314533622559
+        },
+        "0": {
+          "reference": [
+            601,
+            1041.5
+          ],
+          "candidate": [
+            601,
+            1041.5
+          ],
+          "display_distance": 0.0
+        },
+        "2": {
+          "reference": [
+            607,
+            1046.5
+          ],
+          "candidate": [
+            607,
+            1047.5
+          ],
+          "display_distance": 0.09055314533622559
+        },
+        "4": {
+          "reference": [
+            611,
+            1052.5
+          ],
+          "candidate": [
+            611,
+            1052.5
+          ],
+          "display_distance": 0.0
+        },
+        "94": {
+          "reference": [
+            601,
+            1040.5
+          ],
+          "candidate": [
+            603,
+            1042.5
+          ],
+          "display_distance": 0.25612297250006444
+        },
+        "96": {
+          "reference": [
+            611,
+            1050.5
+          ],
+          "candidate": [
+            611,
+            1050.5
+          ],
+          "display_distance": 0.0
+        }
+      }
+    }
+  },
+  "actual_observed_credit_debit": 31,
+  "game_integration": false,
+  "final_art_approval": false
+}

@@ -1,0 +1,17 @@
+{
+  "status": "REJECT_PREPARED_ASSET_INITIAL_MATTE",
+  "scope": "Independent visual QA before corrected-background regeneration",
+  "gait": "PASS source0..92 selected even phases; full near/far cycle and closing46to0 preserved",
+  "blocking_issue": "Matte removed visible opaque rifle metal around barrel connection in source14/60/62; source14/60 especially conspicuous on dark and light backgrounds. Raw source2 remains rejected for baked muzzle flashes.",
+  "evidence": "muzzle_before_after.png",
+  "suspected_cause": "Right16px edge key contaminated by near-edge rifle/flash rows; root independently confirmed and is correcting background estimator.",
+  "approved": false,
+  "pixel_references": {
+    "viya_run_fire_e_007.png": "ea606b32be8f08c7a57dd96347b4d6353870111b41479ae4fb1a2bad152b6355",
+    "viya_run_fire_e_008.png": "58bd5f5fcada0b949d9190c546448a7089e46451416405e37f945278927a3e0d",
+    "viya_run_fire_e_030.png": "a0e80ef959f2f0d70d9a30ebae8085c427436fee9ee4a0554fe2d3a8e2d6d998",
+    "viya_run_fire_e_031.png": "829c8708c35ed08717c49d1510b7584c09fd2c3fdcdec239e1607d5ed4554b10"
+  },
+  "game_execution": false,
+  "user_art_approval": false
+}

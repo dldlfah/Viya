@@ -1,0 +1,587 @@
+{
+  "status": "MEASURED_REQUIRES_VISUAL_REVIEW",
+  "method": "Rightmost opaque metal core(alpha>180) in the inspected native muzzle ROI, with alpha-weighted center over its last3columns. No old run muzzle coordinates are reused.",
+  "registration": {
+    "scale": 0.26247288503253796,
+    "translation": [
+      11.334056399132322,
+      -46.39479392624729
+    ],
+    "canvas": [
+      200,
+      248
+    ],
+    "pivot": [
+      100,
+      248
+    ],
+    "fixed_transform": true
+  },
+  "reference_timing_sha256": "f176f222b516cf7a7aa08a609ceee7717b4cae7bca962628991477e10ee744b0",
+  "frames": [
+    {
+      "index": 0,
+      "source_frame": 0,
+      "native_muzzle": [
+        713.5,
+        386.71128054381774
+      ],
+      "muzzle": [
+        198.6085,
+        55.1064
+      ]
+    },
+    {
+      "index": 1,
+      "source_frame": 2,
+      "native_muzzle": [
+        713.5,
+        388.1617647058824
+      ],
+      "muzzle": [
+        198.6085,
+        55.4871
+      ]
+    },
+    {
+      "index": 2,
+      "source_frame": 4,
+      "native_muzzle": [
+        713.5,
+        390.17045258991567
+      ],
+      "muzzle": [
+        198.6085,
+        56.0144
+      ]
+    },
+    {
+      "index": 3,
+      "source_frame": 6,
+      "native_muzzle": [
+        713.5,
+        392.742673847616
+      ],
+      "muzzle": [
+        198.6085,
+        56.6895
+      ]
+    },
+    {
+      "index": 4,
+      "source_frame": 8,
+      "native_muzzle": [
+        713.5,
+        395.34984371243087
+      ],
+      "muzzle": [
+        198.6085,
+        57.3738
+      ]
+    },
+    {
+      "index": 5,
+      "source_frame": 10,
+      "native_muzzle": [
+        715.5,
+        399.78063943161635
+      ],
+      "muzzle": [
+        199.1334,
+        58.5368
+      ]
+    },
+    {
+      "index": 6,
+      "source_frame": 12,
+      "native_muzzle": [
+        713.5,
+        399.5952090946001
+      ],
+      "muzzle": [
+        198.6085,
+        58.4881
+      ]
+    },
+    {
+      "index": 7,
+      "source_frame": 14,
+      "native_muzzle": [
+        707.5,
+        412.0998257011567
+      ],
+      "muzzle": [
+        197.0336,
+        61.7702
+      ]
+    },
+    {
+      "index": 8,
+      "source_frame": 16,
+      "native_muzzle": [
+        703.5,
+        412.01766740795654
+      ],
+      "muzzle": [
+        195.9837,
+        61.7487
+      ]
+    },
+    {
+      "index": 9,
+      "source_frame": 18,
+      "native_muzzle": [
+        695.5,
+        412.2836391437309
+      ],
+      "muzzle": [
+        193.8839,
+        61.8185
+      ]
+    },
+    {
+      "index": 10,
+      "source_frame": 20,
+      "native_muzzle": [
+        701.5,
+        411.8840972130498
+      ],
+      "muzzle": [
+        195.4588,
+        61.7136
+      ]
+    },
+    {
+      "index": 11,
+      "source_frame": 22,
+      "native_muzzle": [
+        705.5,
+        412.95499711149625
+      ],
+      "muzzle": [
+        196.5087,
+        61.9947
+      ]
+    },
+    {
+      "index": 12,
+      "source_frame": 24,
+      "native_muzzle": [
+        709.5,
+        413.07062350119907
+      ],
+      "muzzle": [
+        197.5586,
+        62.025
+      ]
+    },
+    {
+      "index": 13,
+      "source_frame": 26,
+      "native_muzzle": [
+        711.5,
+        410.8342552350849
+      ],
+      "muzzle": [
+        198.0835,
+        61.4381
+      ]
+    },
+    {
+      "index": 14,
+      "source_frame": 28,
+      "native_muzzle": [
+        713.5,
+        406.2493618008819
+      ],
+      "muzzle": [
+        198.6085,
+        60.2346
+      ]
+    },
+    {
+      "index": 15,
+      "source_frame": 30,
+      "native_muzzle": [
+        713.5,
+        402.656378600823
+      ],
+      "muzzle": [
+        198.6085,
+        59.2916
+      ]
+    },
+    {
+      "index": 16,
+      "source_frame": 32,
+      "native_muzzle": [
+        713.5,
+        396.82590805902385
+      ],
+      "muzzle": [
+        198.6085,
+        57.7612
+      ]
+    },
+    {
+      "index": 17,
+      "source_frame": 34,
+      "native_muzzle": [
+        713.5,
+        394.1541459957477
+      ],
+      "muzzle": [
+        198.6085,
+        57.06
+      ]
+    },
+    {
+      "index": 18,
+      "source_frame": 36,
+      "native_muzzle": [
+        713.5,
+        389.30690324369283
+      ],
+      "muzzle": [
+        198.6085,
+        55.7877
+      ]
+    },
+    {
+      "index": 19,
+      "source_frame": 38,
+      "native_muzzle": [
+        713.5,
+        386.57466320402534
+      ],
+      "muzzle": [
+        198.6085,
+        55.0706
+      ]
+    },
+    {
+      "index": 20,
+      "source_frame": 40,
+      "native_muzzle": [
+        713.5,
+        383.9712345490615
+      ],
+      "muzzle": [
+        198.6085,
+        54.3872
+      ]
+    },
+    {
+      "index": 21,
+      "source_frame": 42,
+      "native_muzzle": [
+        713.5,
+        383.5687969924812
+      ],
+      "muzzle": [
+        198.6085,
+        54.2816
+      ]
+    },
+    {
+      "index": 22,
+      "source_frame": 44,
+      "native_muzzle": [
+        713.5,
+        384.8771452490582
+      ],
+      "muzzle": [
+        198.6085,
+        54.625
+      ]
+    },
+    {
+      "index": 23,
+      "source_frame": 46,
+      "native_muzzle": [
+        713.5,
+        385.09722222222223
+      ],
+      "muzzle": [
+        198.6085,
+        54.6828
+      ]
+    },
+    {
+      "index": 24,
+      "source_frame": 48,
+      "native_muzzle": [
+        713.5,
+        385.5198885038421
+      ],
+      "muzzle": [
+        198.6085,
+        54.7937
+      ]
+    },
+    {
+      "index": 25,
+      "source_frame": 50,
+      "native_muzzle": [
+        713.5,
+        387.0262295081967
+      ],
+      "muzzle": [
+        198.6085,
+        55.1891
+      ]
+    },
+    {
+      "index": 26,
+      "source_frame": 52,
+      "native_muzzle": [
+        713.5,
+        390.09030333798705
+      ],
+      "muzzle": [
+        198.6085,
+        55.9933
+      ]
+    },
+    {
+      "index": 27,
+      "source_frame": 54,
+      "native_muzzle": [
+        713.5,
+        392.28169377743353
+      ],
+      "muzzle": [
+        198.6085,
+        56.5685
+      ]
+    },
+    {
+      "index": 28,
+      "source_frame": 56,
+      "native_muzzle": [
+        713.5,
+        396.86444862450037
+      ],
+      "muzzle": [
+        198.6085,
+        57.7714
+      ]
+    },
+    {
+      "index": 29,
+      "source_frame": 58,
+      "native_muzzle": [
+        715.5,
+        402.86517615176155
+      ],
+      "muzzle": [
+        199.1334,
+        59.3464
+      ]
+    },
+    {
+      "index": 30,
+      "source_frame": 60,
+      "native_muzzle": [
+        708.5,
+        409.22340425531917
+      ],
+      "muzzle": [
+        197.2961,
+        61.0153
+      ]
+    },
+    {
+      "index": 31,
+      "source_frame": 62,
+      "native_muzzle": [
+        702.5,
+        410.23210877862596
+      ],
+      "muzzle": [
+        195.7213,
+        61.28
+      ]
+    },
+    {
+      "index": 32,
+      "source_frame": 64,
+      "native_muzzle": [
+        695.5,
+        412.5438397581255
+      ],
+      "muzzle": [
+        193.8839,
+        61.8868
+      ]
+    },
+    {
+      "index": 33,
+      "source_frame": 66,
+      "native_muzzle": [
+        701.5,
+        413.2427989525749
+      ],
+      "muzzle": [
+        195.4588,
+        62.0702
+      ]
+    },
+    {
+      "index": 34,
+      "source_frame": 68,
+      "native_muzzle": [
+        707.5,
+        413.7799336650083
+      ],
+      "muzzle": [
+        197.0336,
+        62.2112
+      ]
+    },
+    {
+      "index": 35,
+      "source_frame": 70,
+      "native_muzzle": [
+        709.5,
+        413.958617620884
+      ],
+      "muzzle": [
+        197.5586,
+        62.2581
+      ]
+    },
+    {
+      "index": 36,
+      "source_frame": 72,
+      "native_muzzle": [
+        711.5,
+        412.1861781076067
+      ],
+      "muzzle": [
+        198.0835,
+        61.7929
+      ]
+    },
+    {
+      "index": 37,
+      "source_frame": 74,
+      "native_muzzle": [
+        713.5,
+        408.4859864243486
+      ],
+      "muzzle": [
+        198.6085,
+        60.8217
+      ]
+    },
+    {
+      "index": 38,
+      "source_frame": 76,
+      "native_muzzle": [
+        713.5,
+        402.24277879341867
+      ],
+      "muzzle": [
+        198.6085,
+        59.183
+      ]
+    },
+    {
+      "index": 39,
+      "source_frame": 78,
+      "native_muzzle": [
+        713.5,
+        398.7056794055202
+      ],
+      "muzzle": [
+        198.6085,
+        58.2546
+      ]
+    },
+    {
+      "index": 40,
+      "source_frame": 80,
+      "native_muzzle": [
+        713.5,
+        393.1789532920653
+      ],
+      "muzzle": [
+        198.6085,
+        56.804
+      ]
+    },
+    {
+      "index": 41,
+      "source_frame": 82,
+      "native_muzzle": [
+        713.5,
+        389.7141770225716
+      ],
+      "muzzle": [
+        198.6085,
+        55.8946
+      ]
+    },
+    {
+      "index": 42,
+      "source_frame": 84,
+      "native_muzzle": [
+        713.5,
+        386.83365477338475
+      ],
+      "muzzle": [
+        198.6085,
+        55.1386
+      ]
+    },
+    {
+      "index": 43,
+      "source_frame": 86,
+      "native_muzzle": [
+        713.5,
+        384.31328216252297
+      ],
+      "muzzle": [
+        198.6085,
+        54.477
+      ]
+    },
+    {
+      "index": 44,
+      "source_frame": 88,
+      "native_muzzle": [
+        713.5,
+        382.2614588467225
+      ],
+      "muzzle": [
+        198.6085,
+        53.9385
+      ]
+    },
+    {
+      "index": 45,
+      "source_frame": 90,
+      "native_muzzle": [
+        713.5,
+        384.1685285903278
+      ],
+      "muzzle": [
+        198.6085,
+        54.439
+      ]
+    },
+    {
+      "index": 46,
+      "source_frame": 92,
+      "native_muzzle": [
+        713.5,
+        385.5996706286696
+      ],
+      "muzzle": [
+        198.6085,
+        54.8147
+      ]
+    }
+  ]
+}

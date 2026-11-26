@@ -6,6 +6,7 @@ var _alpha:Dictionary={}
 static var _verified_alpha:Dictionary={} # Immutable texture instances; bounded across views.
 var _decoded:Dictionary={}
 var _run_seconds:Dictionary={}
+var _fire_clips:Dictionary={}
 var _shot_offsets:Dictionary={}
 var _run_id:String=""
 var _clock:float=-1
@@ -65,20 +66,82 @@ func decoded(path:String) -> Texture2D:
 	_decoded[path]=texture
 	return texture
 
-func run_clock(asset:SpriteFrames, direction:String, phase:float) -> float:
-	var animation:String="run_"+direction
+func phase_clock(asset:SpriteFrames, animation:String, phase:float) -> float:
+	if asset==null or not asset.has_animation(animation):return 0.0
 	var key:String=str(asset.get_instance_id())+":"+animation
 	if not _run_seconds.has(key):
+		var speed:float=asset.get_animation_speed(animation)
+		if not is_finite(speed) or speed<=0:return 0.0
 		var duration:float=0.0
 		for index in range(asset.get_frame_count(animation)):
 			duration+=asset.get_frame_duration(animation,index)
-		_run_seconds[key]=duration/asset.get_animation_speed(animation)
+		if not is_finite(duration) or duration<=0:return 0.0
+		_run_seconds[key]=duration/speed
 	# Distance owns the gait. The shared sampler resolves the actual weighted
 	# frame durations; no second animation clock or equal-frame phase mapping.
 	var seconds:float=float(_run_seconds[key])
 	# Round-trip floating point must not move an exact authored boundary to
 	# the previous frame (e.g. 3/11). Keep the seam on the final distinct frame.
 	return minf(fposmod(phase,1.0)*seconds+.000000001,seconds-.000000001)
+
+func run_clock(asset:SpriteFrames, direction:String, phase:float) -> float:
+	return phase_clock(asset,"run_"+direction,phase)
+
+func moving_fire_ready(asset:SpriteFrames, row:Dictionary) -> bool:
+	# Optional whole-body art: absence must keep the accepted run, never fall
+	# through the shared sampler's generic idle fallback.
+	if asset==null or not asset.has_animation("run_fire_e"):return false
+	var rows:Variant=row.get("run_fire")
+	if not rows is Array or rows.is_empty() or rows.size()!=asset.get_frame_count("run_fire_e"):return false
+	var speed:float=asset.get_animation_speed("run_fire_e")
+	if not asset.get_animation_loop("run_fire_e") or not is_finite(speed) or speed<=0:return false
+	var origin:Variant=row.get("run_fire_phase_origin",row.get("phase_origin",0.0))
+	if not (origin is int or origin is float) or not is_finite(float(origin)):return false
+	var key:String=str(asset.get_instance_id())+":"+str(rows.hash())+":"+str(speed)
+	if _fire_clips.has(key):return _fire_clips[key]
+	var valid:=true
+	var root:String=str(config.resource).get_base_dir().get_base_dir()+"/"
+	for index in range(rows.size()):
+		var item:Variant=rows[index]
+		if not item is Dictionary:
+			valid=false
+			break
+		var frame_index:Variant=item.get("index")
+		var region:Variant=item.get("region")
+		var muzzle:Variant=item.get("muzzle")
+		var path:Variant=item.get("texture")
+		var texture:Texture2D=asset.get_frame_texture("run_fire_e",index)
+		var duration:float=asset.get_frame_duration("run_fire_e",index)
+		if not (frame_index is int or frame_index is float) or float(frame_index)!=index or not region is Array or region.size()!=4 or not muzzle is Array or muzzle.size()!=2 or not path is String:
+			valid=false
+			break
+		# JSON numbers are floats; Array equality also compares element types.
+		if not region.all(func(value):return (value is int or value is float) and is_finite(float(value))) or float(region[0])!=0.0 or float(region[1])!=0.0 or float(region[2])!=200.0 or float(region[3])!=248.0:
+			valid=false
+			break
+		if not muzzle.all(func(value):return (value is int or value is float) and is_finite(float(value))) or float(muzzle[0])<0 or float(muzzle[0])>200 or float(muzzle[1])<0 or float(muzzle[1])>248:
+			valid=false
+			break
+		if not path.begins_with(root) or not path.ends_with(".png") or ".." in path or not FileAccess.file_exists(path) or texture==null or texture.get_size()!=Vector2(200,248) or not is_finite(duration) or duration<=0:
+			valid=false
+			break
+		if not texture.resource_path.is_empty() and texture.resource_path!=path:
+			valid=false
+			break
+	if _fire_clips.size()>=8:_fire_clips.clear()
+	_fire_clips[key]=valid
+	return valid
+
+func repair_sample(visual:Dictionary, selected:String, run_frame:Dictionary) -> bool:
+	if visual.sample.is_empty() or visual.sample.texture.get_size()!=Vector2(200,248):return false
+	if not transparent(visual.sample.texture):
+		var root:String=str(config.get("fallback_texture_root",str(config.resource).get_base_dir()))
+		var expected:String=root.path_join("viya_idle_"+str(visual.direction)+".png") if selected=="idle" else root.path_join("viya_%s_%s_%02d.png" % [selected,visual.direction,int(visual.sample.index)])
+		if run_frame.has("texture"):expected=str(run_frame.texture)
+		var repaired:Texture2D=decoded(expected)
+		if repaired==null or repaired.get_size()!=Vector2(200,248):return false
+		visual.sample.texture=repaired # Same PNG pixels, bypassing a damaged import.
+	return true
 
 func apply(view, visual:Dictionary) -> void:
 	if not accepts(view):return
@@ -117,6 +180,9 @@ func apply(view, visual:Dictionary) -> void:
 	var clock:float=visual.clock
 	if selected=="run":
 		clock=run_clock(view.art.resource("viya_battle"),visual.direction,_phase+float(row.phase_origin))
+		if visual.direction=="e" and gun_active and moving_fire_ready(view.art.resource("viya_battle"),row):
+			selected="run_fire"
+			clock=phase_clock(view.art.resource("viya_battle"),"run_fire_e",_phase+float(row.get("run_fire_phase_origin",row.phase_origin)))
 	# Play the original whole-body attack once per stationary burst, not per
 	# projectile. Continuous .3s fire holds the aimed end pose between shots.
 	if selected=="idle" and gun_active:
@@ -127,20 +193,23 @@ func apply(view, visual:Dictionary) -> void:
 	elif selected!="hurt":_burst_since=-1
 	if gun_active:_gun_until=maxf(_gun_until,now-shot_age+.4)
 	visual.sample=view.actor_art.frame(view.art,["viya_battle"],selected,visual.direction,clock,view.size)
-	if visual.sample.is_empty():return
 	var run_frame:Dictionary={}
-	if selected=="run":
-		run_frame=row.run[int(visual.sample.index)]
-		muzzle_pixels=Vector2(run_frame.muzzle[0],run_frame.muzzle[1])
-	if not transparent(visual.sample.texture):
-		var root:String=str(config.get("fallback_texture_root",str(config.resource).get_base_dir()))
-		var expected:String=root.path_join("viya_idle_"+str(visual.direction)+".png") if selected=="idle" else root.path_join("viya_%s_%s_%02d.png" % [selected,visual.direction,int(visual.sample.index)])
-		if run_frame.has("texture"):expected=str(run_frame.texture)
-		var repaired:Texture2D=decoded(expected)
-		if repaired==null:
+	if selected=="run_fire" and visual.sample.get("animation","")!="run_fire_e":visual.sample={}
+	if not visual.sample.is_empty() and selected in ["run","run_fire"]:run_frame=row[selected][int(visual.sample.index)]
+	if not repair_sample(visual,selected,run_frame):
+		if selected!="run_fire":
 			visual.sample={}
 			return # An opaque/stale import can never become a white rectangle.
-		visual.sample.texture=repaired # Same PNG pixels, bypassing a damaged import.
+		# An unavailable firing texture must not freeze the feet or reset gait.
+		selected="run"
+		clock=run_clock(view.art.resource("viya_battle"),visual.direction,_phase+float(row.phase_origin))
+		visual.sample=view.actor_art.frame(view.art,["viya_battle"],selected,visual.direction,clock,view.size)
+		if visual.sample.is_empty():return
+		run_frame=row.run[int(visual.sample.index)]
+		if not repair_sample(visual,selected,run_frame):
+			visual.sample={}
+			return
+	if not run_frame.is_empty():muzzle_pixels=Vector2(run_frame.muzzle[0],run_frame.muzzle[1])
 	visual.region=region
 	visual.recoil=0.0 # Native whole-body frames; no upper-body mesh deformation.
 	visual.muzzle=muzzle_pixels

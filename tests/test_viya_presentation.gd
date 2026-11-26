@@ -15,10 +15,12 @@ static func run(host,verify:Callable) -> void:
 	state.player=Vector2(2500,1700);state.spawn_clock=999;state.shot_clock=999;state._scatter_clock=999;state._swarm_clock=999
 	var asset:SpriteFrames=view.art.resource("viya_battle")
 	var all_alpha:=true
+	var active_count:=0
 	for animation in asset.get_animation_names():
 		for index in range(asset.get_frame_count(animation)):
+			active_count+=1
 			all_alpha=all_alpha and view.viya.transparent(asset.get_frame_texture(animation,index))
-	verify.call(all_alpha and view.viya._alpha.size()>=244 and view.viya._alpha.size()<=512,"Every active244directional frame actually decodes with transparent corners in Godot, not an opaque/white import")
+	verify.call(all_alpha and view.viya._alpha.size()>=active_count and view.viya._alpha.size()<=512,"Every active directional frame actually decodes with transparent corners in Godot within the512entry bound: "+str(active_count))
 	var opaque:=Image.create(200,248,false,Image.FORMAT_RGBA8)
 	opaque.fill(Color.WHITE)
 	verify.call(not view.viya.transparent(ImageTexture.create_from_image(opaque)),"Lost-alpha white texture is rejected before it can be drawn as a rectangle")
@@ -41,6 +43,7 @@ static func run(host,verify:Callable) -> void:
 	verify.call(not failed_import.sample.is_empty() and view.viya.transparent(failed_import.sample.texture) and is_same(failed_import.sample.texture,view.viya.decoded("res://assets/characters/pilot_32/render_cache/viya_idle_e.png")),"A wholly opaque cached frame with a missing resource path recovers the correct east display frame rather than drawing a white square")
 	asset.set_frame("idle_e",0,east)
 	verify_e_cycle(view,asset,verify)
+	preload("res://tests/test_viya_game065.gd").run(view,asset,verify)
 	for index in range(8):
 		var direction:String=view.actors.DIRECTIONS[index]
 		var facing:Vector2=view.input_direction(Vector2.from_angle(index*PI/4))
@@ -56,8 +59,10 @@ static func run(host,verify:Callable) -> void:
 		var texture:Texture2D=visual.sample.texture
 		var region:Rect2=visual.region
 		var registered:Rect2=view.viya.body_rect(view.actor_art,visual,Vector2(200,180))
+		var held_phase:float=visual.gait_phase
 		visual.pose="attack";visual.shot_age=0.0;visual.gun_aim=facing;view.viya.apply(view,visual)
-		verify.call(seen.size()==expected_count and expected_count==(47 if direction=="e" else 11) and registered.end.y==180 and is_equal_approx(registered.size.x/region.size.x,registered.size.y/region.size.y) and is_same(visual.sample.texture,texture) and visual.region==Rect2(0,0,200,248) and visual.recoil==0,"Every whole-body frame retains one canvas/root and gait phase through moving fire:"+direction)
+		var firing_pose_ok:bool=(visual.sample.animation=="run_fire_e" and not is_same(visual.sample.texture,texture)) if direction=="e" else is_same(visual.sample.texture,texture)
+		verify.call(seen.size()==expected_count and expected_count==(47 if direction=="e" else 11) and registered.end.y==180 and is_equal_approx(registered.size.x/region.size.x,registered.size.y/region.size.y) and firing_pose_ok and is_equal_approx(visual.gait_phase,held_phase) and visual.region==Rect2(0,0,200,248) and visual.recoil==0,"Every whole-body frame retains one canvas/root and gait phase through moving fire:"+direction)
 		visual.moving=false
 		var attack_frames:Dictionary={}
 		for step in range(8):
