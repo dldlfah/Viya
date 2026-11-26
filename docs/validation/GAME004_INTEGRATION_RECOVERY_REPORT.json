@@ -1,0 +1,57 @@
+{
+  "base_commit": "83ca47e4d3918a348866745f5df09e3288e40efc",
+  "branch": "work/viya-turnaround-qa-20261117",
+  "scope": "Publish previously pending integration code and tests. Not a native engine execution.",
+  "pending_patch_sha256": "6712fe8a733b771fe035412dffcc5acbc48fe5904b1113277a737c0c7a61c43e",
+  "baseline_git_blobs_verified": {
+    "scripts/ui/mobile_main.gd": "612bf7f8cfb4636c33601df4049fc70852274d87",
+    "tools/check_project.py": "a37a29e3446909e4bdcd631dd11f414cf5383ef8",
+    "tools/check_combat_cues.py": "aae93be3eb1433832729ab6773af63bd6d833d9d",
+    "tests/test_mobile_hud.gd": "c32f36fb4528fa725d12c51b5e5b338c0173348f"
+  },
+  "application": "git apply --check and git apply on exact baseline source files; final LF removed on four existing files to retain baseline EOF style. Stale-detail regression invocation placed before the existing final restart assertion so that reset is checked after that regression; no existing assertions removed.",
+  "runner_unit_tests": {
+    "status": "PASS",
+    "count": 12,
+    "command": "python -m unittest discover -s tests -p test_check_project.py -v",
+    "exit_code": 0,
+    "python_version": "3.13.5",
+    "scope": "Actual Python runner unit tests; delegated suite and engine responses are explicit mocks. NOT full-project or Godot tests."
+  },
+  "godot_binary_available": false,
+  "download_environment": "Local DNS lookup failed for github.com, api.github.com and downloads.godotengine.org.",
+  "full_project_regression": "NOT_RUN",
+  "godot_runtime": "NOT_VERIFIED",
+  "render": "NOT_VERIFIED",
+  "windows_f5": "NOT_VERIFIED",
+  "android_device": "NOT_VERIFIED",
+  "codex_cloud_environment": "NOT_CREATED",
+  "source_git_blobs": {
+    "scripts/ui/mobile_main.gd": "731628a802726e201faf52edcd1f080ad5a26513",
+    "tools/check_project.py": "5c8fecbd25da0020711750020871c02efeeef101",
+    "tools/check_combat_cues.py": "a636d27b9ff59eda40ef90f3d103c390c92ee1be",
+    "tests/test_mobile_hud.gd": "6dd994a65bd8bba7cecb1d5afa1ee183e1d71893",
+    "tests/test_check_project.py": "79c68add041492eb081a267e2f4ec04e52534d6e",
+    "tools/bootstrap_godot.py": "1392f8af184e51585a1f508ad19218e95db1a1ee"
+  },
+  "source_sha256": {
+    "scripts/ui/mobile_main.gd": "992058fe78d0594db9831448269936578f03387c8373d25b66bb6da80f82288e",
+    "tools/check_project.py": "eeafd73fc4503c7af952331c093272a5510aade3fbae04e42afb77eb23f55157",
+    "tools/check_combat_cues.py": "116137cc8b6fe104f8e54d1d1f2b5d4233eb3922c4fba6ac434075d62c019245",
+    "tests/test_mobile_hud.gd": "b3a8196f336c60979900d29355092fb4f59b959d6487c55f7c16e3b54704f356",
+    "tests/test_check_project.py": "6e29b436f54ef9b6fd1660f7a5b973558708b805286df3c08411bf3aaf5a538f",
+    "tools/bootstrap_godot.py": "4c3ca17c3b90f9c5590d7a82a76ae71a353f4d15aae973cf37e03e745ebfdecc"
+  },
+  "engine_setup_script": {
+    "path": "tools/bootstrap_godot.py",
+    "target": "Godot 4.7.2 stable / Linux x86_64",
+    "official_archive_sha256": "cadd3204e728a35d3f13adb7fd0d7902636b79f6b95c40c265eb73b6c35329e4",
+    "python_compile": "PASS",
+    "help_invocation": "PASS",
+    "download_attempt_exit_code": 2,
+    "download_attempt_result": "ENVIRONMENT_NOT_READY: Temporary failure in name resolution",
+    "engine_installed": false,
+    "native_version_execution": "NOT_RUN",
+    "scope": "Pinned setup script prepared; actual environment and engine remain unavailable. No Codex account environment was created."
+  }
+}

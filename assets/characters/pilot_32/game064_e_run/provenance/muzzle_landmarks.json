@@ -1,0 +1,605 @@
+{
+  "status": "VISUALLY_REVIEWED_PROPOSAL",
+  "source_job_id": "fbf2fd2d-8596-4ca4-87e7-875712a2f7c9",
+  "source_package": "/workspace/scratch/e2f5b3e224d3/viya_game064_recovery/VIYA_GAME064_E_RUN_DERIVATIVE_20261126",
+  "reference_canvas": [
+    200,
+    248
+  ],
+  "display_size": [
+    69,
+    85.56
+  ],
+  "coordinate_space": "Continuous source-canvas coordinates; pixel centers are integer pixel indices plus 0.5. No world/pivot offset applied.",
+  "method": "For each original RGBA PNG, restrict to weapon-tip ROI x=[164,195), y=[106,152). Find the rightmost column with alpha>=128. Place x at that pixel center; y is the alpha-weighted mean of pixel centers in the two rightmost qualifying columns. Visually inspected all 47 enlarged muzzle crops with crosshair overlays; all points lie on the right-hand barrel opening/tip. Existing E11 coordinates were not reused.",
+  "roi_xyxy": [
+    164,
+    106,
+    195,
+    152
+  ],
+  "alpha_threshold": 128,
+  "count": 47,
+  "summary": {
+    "range_x": [
+      180.5,
+      182.5
+    ],
+    "range_y": [
+      126.5528,
+      139.8525
+    ],
+    "seam_46_to_0_distance_canvas_pixels": 0.006199999999992656,
+    "max_adjacent_distance_canvas_pixels": 3.762812279399543,
+    "max_alpha_threshold_64_to_192_sensitivity_canvas_pixels": 1.1673855234019432,
+    "max_alpha_threshold_sensitivity_at_display_scale": 0.4027480055736704
+  },
+  "verification": "Actual final-package bitmaps inspected; no image, repository or game-code edits. Frame indices are delivered indices, source frame=2*index.",
+  "limitation": "This registers the painted muzzle-tip center for existing visual bullet/flash placement; it does not introduce a moving-fire animation, alter projectile authority, or validate the firearm bore direction. Coordinate precision is limited by the 200x248 raster/antialiasing; approximately one source pixel.",
+  "frames": [
+    {
+      "index": 0,
+      "filename": "viya_run_e_000.png",
+      "source_frame": 0,
+      "muzzle": [
+        181.5,
+        127.5328
+      ],
+      "rightmost_alpha128_column": 181,
+      "png_sha256": "d7925db10bcca60854fb3ee5392930d052be359c123288cbe35ea43f40a56c20",
+      "threshold_sensitivity_max_canvas_pixels": 0.3056879725085935
+    },
+    {
+      "index": 1,
+      "filename": "viya_run_e_001.png",
+      "source_frame": 2,
+      "muzzle": [
+        181.5,
+        127.9251
+      ],
+      "rightmost_alpha128_column": 181,
+      "png_sha256": "6b37b06ef9ebed3df2348d4ba8fc1d4b535171a06d8974ba760075ce926f6bf3",
+      "threshold_sensitivity_max_canvas_pixels": 1.001207631006169
+    },
+    {
+      "index": 2,
+      "filename": "viya_run_e_002.png",
+      "source_frame": 4,
+      "muzzle": [
+        181.5,
+        128.8859
+      ],
+      "rightmost_alpha128_column": 181,
+      "png_sha256": "db40e71e2b9793f6e98b9d7653f4dc5be04c563fa635554f8b51d9d776a4c503",
+      "threshold_sensitivity_max_canvas_pixels": 0.38688716683117264
+    },
+    {
+      "index": 3,
+      "filename": "viya_run_e_003.png",
+      "source_frame": 6,
+      "muzzle": [
+        181.5,
+        129.7764
+      ],
+      "rightmost_alpha128_column": 181,
+      "png_sha256": "240dd342ac97b18389216592dc4af2c83056d73ba515ce0b87c89598bec31f86",
+      "threshold_sensitivity_max_canvas_pixels": 1.0139329230011613
+    },
+    {
+      "index": 4,
+      "filename": "viya_run_e_004.png",
+      "source_frame": 8,
+      "muzzle": [
+        182.5,
+        131.053
+      ],
+      "rightmost_alpha128_column": 182,
+      "png_sha256": "eaf58840666d3b334f18b3066b20a9ee7d4ecc00b025d1c167d4ba1096771285",
+      "threshold_sensitivity_max_canvas_pixels": 1.140146839827359
+    },
+    {
+      "index": 5,
+      "filename": "viya_run_e_005.png",
+      "source_frame": 10,
+      "muzzle": [
+        181.5,
+        132.7337
+      ],
+      "rightmost_alpha128_column": 181,
+      "png_sha256": "c12a4e33aeaa15ec0ec932ea51c78953ae3a8decae7801d08cef59ca52d00517",
+      "threshold_sensitivity_max_canvas_pixels": 1.008762407353296
+    },
+    {
+      "index": 6,
+      "filename": "viya_run_e_006.png",
+      "source_frame": 12,
+      "muzzle": [
+        181.5,
+        133.2965
+      ],
+      "rightmost_alpha128_column": 181,
+      "png_sha256": "ec7a0506111508032527b1f64d2e11be42dcc070c82feed6c1bbcee7a6916349",
+      "threshold_sensitivity_max_canvas_pixels": 1.0069026056150572
+    },
+    {
+      "index": 7,
+      "filename": "viya_run_e_007.png",
+      "source_frame": 14,
+      "muzzle": [
+        182.5,
+        136.924
+      ],
+      "rightmost_alpha128_column": 182,
+      "png_sha256": "61fa49b6040e6db018f4144c98995c70e58f775b75970cb2e8fbeb5e84287912",
+      "threshold_sensitivity_max_canvas_pixels": 1.002864191675783
+    },
+    {
+      "index": 8,
+      "filename": "viya_run_e_008.png",
+      "source_frame": 16,
+      "muzzle": [
+        181.5,
+        139.2438
+      ],
+      "rightmost_alpha128_column": 181,
+      "png_sha256": "2cec3461e2626ad8fce9f1c2bab97db2926316600703141fd67c29b391d20b69",
+      "threshold_sensitivity_max_canvas_pixels": 1.039544122220702
+    },
+    {
+      "index": 9,
+      "filename": "viya_run_e_009.png",
+      "source_frame": 18,
+      "muzzle": [
+        181.5,
+        139.8198
+      ],
+      "rightmost_alpha128_column": 181,
+      "png_sha256": "9b43923d0d4df348a5ec6672c34f77a798c67b545adfdf08d774884e837fb193",
+      "threshold_sensitivity_max_canvas_pixels": 0.2593227096057831
+    },
+    {
+      "index": 10,
+      "filename": "viya_run_e_010.png",
+      "source_frame": 20,
+      "muzzle": [
+        181.5,
+        139.8525
+      ],
+      "rightmost_alpha128_column": 181,
+      "png_sha256": "8515bd13a446f510b670b803a2e314586d4dad42eb82079b142d77942654dadb",
+      "threshold_sensitivity_max_canvas_pixels": 0.10338464260436808
+    },
+    {
+      "index": 11,
+      "filename": "viya_run_e_011.png",
+      "source_frame": 22,
+      "muzzle": [
+        181.5,
+        139.294
+      ],
+      "rightmost_alpha128_column": 181,
+      "png_sha256": "34b8b508ca372609c18581cc304c5641479e3d4a96023719f2214dc3037ac11f",
+      "threshold_sensitivity_max_canvas_pixels": 1.0000199360379767
+    },
+    {
+      "index": 12,
+      "filename": "viya_run_e_012.png",
+      "source_frame": 24,
+      "muzzle": [
+        180.5,
+        138.3646
+      ],
+      "rightmost_alpha128_column": 180,
+      "png_sha256": "1f2069447c3d8d98ee2f74c3657c24839250e553c1a20354cb58d28820310fb5",
+      "threshold_sensitivity_max_canvas_pixels": 1.0010378685880668
+    },
+    {
+      "index": 13,
+      "filename": "viya_run_e_013.png",
+      "source_frame": 26,
+      "muzzle": [
+        180.5,
+        137.3294
+      ],
+      "rightmost_alpha128_column": 180,
+      "png_sha256": "d95b5e965cf12ea108dd1159f4245d453250622561558c2e56988cd91b6c8ac5",
+      "threshold_sensitivity_max_canvas_pixels": 1.0485840429363804
+    },
+    {
+      "index": 14,
+      "filename": "viya_run_e_014.png",
+      "source_frame": 28,
+      "muzzle": [
+        180.5,
+        135.4984
+      ],
+      "rightmost_alpha128_column": 180,
+      "png_sha256": "5e885eb00520c4fe898836e80623affccdea14ded3d6add20b3e18c95e969ad2",
+      "threshold_sensitivity_max_canvas_pixels": 0.10257715148466673
+    },
+    {
+      "index": 15,
+      "filename": "viya_run_e_015.png",
+      "source_frame": 30,
+      "muzzle": [
+        180.5,
+        133.563
+      ],
+      "rightmost_alpha128_column": 180,
+      "png_sha256": "89070d18cb00a83229af96fe0fa8151124688acdc9928e21736ce43976669563",
+      "threshold_sensitivity_max_canvas_pixels": 1.0855052335852584
+    },
+    {
+      "index": 16,
+      "filename": "viya_run_e_016.png",
+      "source_frame": 32,
+      "muzzle": [
+        180.5,
+        131.5712
+      ],
+      "rightmost_alpha128_column": 180,
+      "png_sha256": "4cf636c355e1835002e7b86cdeb358b52b47ffb727024ec289364ae794525163",
+      "threshold_sensitivity_max_canvas_pixels": 0.11390986745215059
+    },
+    {
+      "index": 17,
+      "filename": "viya_run_e_017.png",
+      "source_frame": 34,
+      "muzzle": [
+        180.5,
+        130.2787
+      ],
+      "rightmost_alpha128_column": 180,
+      "png_sha256": "965d9e8c09ed525a09356085d14cd3fffdcf440e8db7a2497e7b0bce3c5b6e12",
+      "threshold_sensitivity_max_canvas_pixels": 0.39117947454843716
+    },
+    {
+      "index": 18,
+      "filename": "viya_run_e_018.png",
+      "source_frame": 36,
+      "muzzle": [
+        180.5,
+        128.5821
+      ],
+      "rightmost_alpha128_column": 180,
+      "png_sha256": "66467baf3e08e23bf7f4720aad41608dcff59fa377fba8ec3bbcb59c80a96c69",
+      "threshold_sensitivity_max_canvas_pixels": 1.096870272876466
+    },
+    {
+      "index": 19,
+      "filename": "viya_run_e_019.png",
+      "source_frame": 38,
+      "muzzle": [
+        180.5,
+        127.5669
+      ],
+      "rightmost_alpha128_column": 180,
+      "png_sha256": "9a59e0350179f4954e3e360500464691c6699752419d2f5f36384cdf75703156",
+      "threshold_sensitivity_max_canvas_pixels": 1.071358878880976
+    },
+    {
+      "index": 20,
+      "filename": "viya_run_e_020.png",
+      "source_frame": 40,
+      "muzzle": [
+        180.5,
+        127.0862
+      ],
+      "rightmost_alpha128_column": 180,
+      "png_sha256": "0b66b8037e66788daa57c1fa009e72641b84daeabe19a4f6db83ccd858a4e7ad",
+      "threshold_sensitivity_max_canvas_pixels": 1.0625290446590603
+    },
+    {
+      "index": 21,
+      "filename": "viya_run_e_021.png",
+      "source_frame": 42,
+      "muzzle": [
+        180.5,
+        126.6535
+      ],
+      "rightmost_alpha128_column": 180,
+      "png_sha256": "a202914c4e28908871b224c3fea281e9212933c42bccc40526162e5dc4b7fc1c",
+      "threshold_sensitivity_max_canvas_pixels": 0.0955362903225705
+    },
+    {
+      "index": 22,
+      "filename": "viya_run_e_022.png",
+      "source_frame": 44,
+      "muzzle": [
+        180.5,
+        126.8047
+      ],
+      "rightmost_alpha128_column": 180,
+      "png_sha256": "361a85c9adda4db76491313898cb4c89041e75c86cd31b61d90bffebd47dbe8c",
+      "threshold_sensitivity_max_canvas_pixels": 0.15003041709054799
+    },
+    {
+      "index": 23,
+      "filename": "viya_run_e_023.png",
+      "source_frame": 46,
+      "muzzle": [
+        181.5,
+        127.1158
+      ],
+      "rightmost_alpha128_column": 181,
+      "png_sha256": "77a13fa44c65c10fcedce0b50c443a46bb67865301acdf4d2f6cc875b3f91ac4",
+      "threshold_sensitivity_max_canvas_pixels": 1.0050226492759187
+    },
+    {
+      "index": 24,
+      "filename": "viya_run_e_024.png",
+      "source_frame": 48,
+      "muzzle": [
+        181.5,
+        127.5585
+      ],
+      "rightmost_alpha128_column": 181,
+      "png_sha256": "aede13296a0d7679f41c325d6c44feca89f52decd01f2fe75ae835c82673f9fc",
+      "threshold_sensitivity_max_canvas_pixels": 1.102055245465371
+    },
+    {
+      "index": 25,
+      "filename": "viya_run_e_025.png",
+      "source_frame": 50,
+      "muzzle": [
+        181.5,
+        128.3381
+      ],
+      "rightmost_alpha128_column": 181,
+      "png_sha256": "58e7aae2febe16297ba31f2c507d3f9e36b37c3c926cda2551e036b4a5a4c6a4",
+      "threshold_sensitivity_max_canvas_pixels": 0.8216390946502088
+    },
+    {
+      "index": 26,
+      "filename": "viya_run_e_026.png",
+      "source_frame": 52,
+      "muzzle": [
+        181.5,
+        129.4767
+      ],
+      "rightmost_alpha128_column": 181,
+      "png_sha256": "6ba4d7682e9e39c83f73a6947ce0b06522774ccfec915f431bb299bd45d0a229",
+      "threshold_sensitivity_max_canvas_pixels": 1.0810381562172442
+    },
+    {
+      "index": 27,
+      "filename": "viya_run_e_027.png",
+      "source_frame": 54,
+      "muzzle": [
+        182.5,
+        130.0352
+      ],
+      "rightmost_alpha128_column": 182,
+      "png_sha256": "d0e4acb7698b0cf9685e060a77d47ef0a778f0af95aa46e411b6315a6f1e4e53",
+      "threshold_sensitivity_max_canvas_pixels": 1.0787451196712134
+    },
+    {
+      "index": 28,
+      "filename": "viya_run_e_028.png",
+      "source_frame": 56,
+      "muzzle": [
+        181.5,
+        132.1837
+      ],
+      "rightmost_alpha128_column": 181,
+      "png_sha256": "ba539a7b684e2bd186d9b42325888bf1790836f8c90e9ca0d92f8f895ffb0143",
+      "threshold_sensitivity_max_canvas_pixels": 0.24634341441026208
+    },
+    {
+      "index": 29,
+      "filename": "viya_run_e_029.png",
+      "source_frame": 58,
+      "muzzle": [
+        181.5,
+        133.6945
+      ],
+      "rightmost_alpha128_column": 181,
+      "png_sha256": "aa42f4270605ce94aa438b70fd9632c78f284bb5d43997f0ea71e87acc0af7ea",
+      "threshold_sensitivity_max_canvas_pixels": 1.0000927346252682
+    },
+    {
+      "index": 30,
+      "filename": "viya_run_e_030.png",
+      "source_frame": 60,
+      "muzzle": [
+        181.5,
+        136.2185
+      ],
+      "rightmost_alpha128_column": 181,
+      "png_sha256": "908fbf6175958927369f8f53c11fd210ec1664586873e980440a7432fbe62ad8",
+      "threshold_sensitivity_max_canvas_pixels": 1.0318708796924558
+    },
+    {
+      "index": 31,
+      "filename": "viya_run_e_031.png",
+      "source_frame": 62,
+      "muzzle": [
+        181.5,
+        137.8595
+      ],
+      "rightmost_alpha128_column": 181,
+      "png_sha256": "4981e9e178c4a505f5e564306a12c4a389e48741f6432d0a1f75ec8f689daf5a",
+      "threshold_sensitivity_max_canvas_pixels": 1.012804831513016
+    },
+    {
+      "index": 32,
+      "filename": "viya_run_e_032.png",
+      "source_frame": 64,
+      "muzzle": [
+        182.5,
+        139.2171
+      ],
+      "rightmost_alpha128_column": 182,
+      "png_sha256": "d6b324cecf47be9b5e84f8c171342e20326207895ef13ee0c2567d32b2582146",
+      "threshold_sensitivity_max_canvas_pixels": 1.0788563314850184
+    },
+    {
+      "index": 33,
+      "filename": "viya_run_e_033.png",
+      "source_frame": 66,
+      "muzzle": [
+        181.5,
+        139.8449
+      ],
+      "rightmost_alpha128_column": 181,
+      "png_sha256": "48150f67bd61bd6d26e5cc283fde73cc60a9749397ffb1e4a711a670f9b89a5e",
+      "threshold_sensitivity_max_canvas_pixels": 1.0023704133388105
+    },
+    {
+      "index": 34,
+      "filename": "viya_run_e_034.png",
+      "source_frame": 68,
+      "muzzle": [
+        180.5,
+        139.7983
+      ],
+      "rightmost_alpha128_column": 180,
+      "png_sha256": "6a6557d4cbe15764f98428c134408cd9a8fd1a407bf816ccd6f09ffd36ff05e1",
+      "threshold_sensitivity_max_canvas_pixels": 1.0003477684044326
+    },
+    {
+      "index": 35,
+      "filename": "viya_run_e_035.png",
+      "source_frame": 70,
+      "muzzle": [
+        181.5,
+        139.0464
+      ],
+      "rightmost_alpha128_column": 181,
+      "png_sha256": "ba2eeb6c10ac1aa448eefc9be9949296ff423f3dd8a069b27bf9751475bc2878",
+      "threshold_sensitivity_max_canvas_pixels": 1.0899142409734055
+    },
+    {
+      "index": 36,
+      "filename": "viya_run_e_036.png",
+      "source_frame": 72,
+      "muzzle": [
+        180.5,
+        138.3203
+      ],
+      "rightmost_alpha128_column": 180,
+      "png_sha256": "dd94cfe7fbf695979f9cc04d381010fb5a38e995464a499c41b451cd3433a45a",
+      "threshold_sensitivity_max_canvas_pixels": 1.0324227290290617
+    },
+    {
+      "index": 37,
+      "filename": "viya_run_e_037.png",
+      "source_frame": 74,
+      "muzzle": [
+        180.5,
+        136.7381
+      ],
+      "rightmost_alpha128_column": 180,
+      "png_sha256": "bc026186c5d3d3b84199b7c7bbdf69f1047386a488ef92298a3192fd4b6a7b67",
+      "threshold_sensitivity_max_canvas_pixels": 1.0340444744958874
+    },
+    {
+      "index": 38,
+      "filename": "viya_run_e_038.png",
+      "source_frame": 76,
+      "muzzle": [
+        180.5,
+        134.5759
+      ],
+      "rightmost_alpha128_column": 180,
+      "png_sha256": "c0bae25f88ff1aeb8b320bb71bafb267583dd1ac399e07637b5aaa911c3bb718",
+      "threshold_sensitivity_max_canvas_pixels": 0.11585257731960041
+    },
+    {
+      "index": 39,
+      "filename": "viya_run_e_039.png",
+      "source_frame": 78,
+      "muzzle": [
+        180.5,
+        132.6184
+      ],
+      "rightmost_alpha128_column": 180,
+      "png_sha256": "5aac843d512ef0d705ae597d3feb443ac78e5b22a10c4ff7d2a7c2022a903855",
+      "threshold_sensitivity_max_canvas_pixels": 1.1100725343689641
+    },
+    {
+      "index": 40,
+      "filename": "viya_run_e_040.png",
+      "source_frame": 80,
+      "muzzle": [
+        180.5,
+        130.5326
+      ],
+      "rightmost_alpha128_column": 180,
+      "png_sha256": "59b111a6a0be9045f47411e93fced3806ace45b7d60e79e0b133d4e6370fc499",
+      "threshold_sensitivity_max_canvas_pixels": 1.0716338102079523
+    },
+    {
+      "index": 41,
+      "filename": "viya_run_e_041.png",
+      "source_frame": 82,
+      "muzzle": [
+        180.5,
+        129.4084
+      ],
+      "rightmost_alpha128_column": 180,
+      "png_sha256": "d2c325ee7544550c4225d0c357a3219b2d26f5966502fd21e10f5eb52130ebea",
+      "threshold_sensitivity_max_canvas_pixels": 1.0693121909478667
+    },
+    {
+      "index": 42,
+      "filename": "viya_run_e_042.png",
+      "source_frame": 84,
+      "muzzle": [
+        180.5,
+        127.5997
+      ],
+      "rightmost_alpha128_column": 180,
+      "png_sha256": "fb99901b9848f6349ab554509fe26342d35d4ca3bc40762d188167218d3f36b5",
+      "threshold_sensitivity_max_canvas_pixels": 1.0059829462742242
+    },
+    {
+      "index": 43,
+      "filename": "viya_run_e_043.png",
+      "source_frame": 86,
+      "muzzle": [
+        180.5,
+        127.2076
+      ],
+      "rightmost_alpha128_column": 180,
+      "png_sha256": "85a2ff3924549a46829c22dfc99206e6f761efe84f4b175786004314bd4f5616",
+      "threshold_sensitivity_max_canvas_pixels": 0.07080434487440357
+    },
+    {
+      "index": 44,
+      "filename": "viya_run_e_044.png",
+      "source_frame": 88,
+      "muzzle": [
+        180.5,
+        126.6649
+      ],
+      "rightmost_alpha128_column": 180,
+      "png_sha256": "f81e323bb32015e8e4411d890a5fdb49482ef0297806396157ddcab081eda9d9",
+      "threshold_sensitivity_max_canvas_pixels": 1.0049194311601855
+    },
+    {
+      "index": 45,
+      "filename": "viya_run_e_045.png",
+      "source_frame": 90,
+      "muzzle": [
+        181.5,
+        126.5528
+      ],
+      "rightmost_alpha128_column": 181,
+      "png_sha256": "33144da1be57e8ea815dee1a757d93380c314b1aa1873c38ca1a4a18312a0b87",
+      "threshold_sensitivity_max_canvas_pixels": 1.0805890182731044
+    },
+    {
+      "index": 46,
+      "filename": "viya_run_e_046.png",
+      "source_frame": 92,
+      "muzzle": [
+        181.5,
+        127.5266
+      ],
+      "rightmost_alpha128_column": 181,
+      "png_sha256": "b761ecffc83e349059db66b93f22de9a64b7797181605f90ed21f2f76565040c",
+      "threshold_sensitivity_max_canvas_pixels": 1.1673855234019432
+    }
+  ]
+}

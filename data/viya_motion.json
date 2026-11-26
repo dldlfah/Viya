@@ -1,0 +1,2549 @@
+{
+  "schema": 4,
+  "resource": "res://assets/characters/pilot_32/game065_e_run_fire/viya_game065_frames.tres",
+  "stride_world": 155.0,
+  "reference_canvas": [
+    200,
+    248
+  ],
+  "notice": "원본208장·ARTFIX001·GAME064 E47/기존197 보존. GAME065 E 전신 이동사격47장/실제 가변시간·독립총구 추가.69×85.56 표시·200×248 고정캔버스·155월드 거리위상·전후진 연속누적. 실제 사격 관측 창에서만 run_fire_e를 선택하며 정지사격과 다른7방향은 유지.",
+  "directions": {
+    "e": {
+      "muzzle": [
+        169,
+        138
+      ],
+      "idle_region": [
+        0,
+        0,
+        200,
+        248
+      ],
+      "run": [
+        {
+          "index": 0,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            181.5,
+            127.5328
+          ],
+          "texture": "res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_000.png"
+        },
+        {
+          "index": 1,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            181.5,
+            127.9251
+          ],
+          "texture": "res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_001.png"
+        },
+        {
+          "index": 2,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            181.5,
+            128.8859
+          ],
+          "texture": "res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_002.png"
+        },
+        {
+          "index": 3,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            181.5,
+            129.7764
+          ],
+          "texture": "res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_003.png"
+        },
+        {
+          "index": 4,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            182.5,
+            131.053
+          ],
+          "texture": "res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_004.png"
+        },
+        {
+          "index": 5,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            181.5,
+            132.7337
+          ],
+          "texture": "res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_005.png"
+        },
+        {
+          "index": 6,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            181.5,
+            133.2965
+          ],
+          "texture": "res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_006.png"
+        },
+        {
+          "index": 7,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            182.5,
+            136.924
+          ],
+          "texture": "res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_007.png"
+        },
+        {
+          "index": 8,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            181.5,
+            139.2438
+          ],
+          "texture": "res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_008.png"
+        },
+        {
+          "index": 9,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            181.5,
+            139.8198
+          ],
+          "texture": "res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_009.png"
+        },
+        {
+          "index": 10,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            181.5,
+            139.8525
+          ],
+          "texture": "res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_010.png"
+        },
+        {
+          "index": 11,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            181.5,
+            139.294
+          ],
+          "texture": "res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_011.png"
+        },
+        {
+          "index": 12,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            180.5,
+            138.3646
+          ],
+          "texture": "res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_012.png"
+        },
+        {
+          "index": 13,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            180.5,
+            137.3294
+          ],
+          "texture": "res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_013.png"
+        },
+        {
+          "index": 14,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            180.5,
+            135.4984
+          ],
+          "texture": "res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_014.png"
+        },
+        {
+          "index": 15,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            180.5,
+            133.563
+          ],
+          "texture": "res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_015.png"
+        },
+        {
+          "index": 16,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            180.5,
+            131.5712
+          ],
+          "texture": "res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_016.png"
+        },
+        {
+          "index": 17,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            180.5,
+            130.2787
+          ],
+          "texture": "res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_017.png"
+        },
+        {
+          "index": 18,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            180.5,
+            128.5821
+          ],
+          "texture": "res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_018.png"
+        },
+        {
+          "index": 19,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            180.5,
+            127.5669
+          ],
+          "texture": "res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_019.png"
+        },
+        {
+          "index": 20,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            180.5,
+            127.0862
+          ],
+          "texture": "res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_020.png"
+        },
+        {
+          "index": 21,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            180.5,
+            126.6535
+          ],
+          "texture": "res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_021.png"
+        },
+        {
+          "index": 22,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            180.5,
+            126.8047
+          ],
+          "texture": "res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_022.png"
+        },
+        {
+          "index": 23,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            181.5,
+            127.1158
+          ],
+          "texture": "res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_023.png"
+        },
+        {
+          "index": 24,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            181.5,
+            127.5585
+          ],
+          "texture": "res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_024.png"
+        },
+        {
+          "index": 25,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            181.5,
+            128.3381
+          ],
+          "texture": "res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_025.png"
+        },
+        {
+          "index": 26,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            181.5,
+            129.4767
+          ],
+          "texture": "res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_026.png"
+        },
+        {
+          "index": 27,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            182.5,
+            130.0352
+          ],
+          "texture": "res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_027.png"
+        },
+        {
+          "index": 28,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            181.5,
+            132.1837
+          ],
+          "texture": "res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_028.png"
+        },
+        {
+          "index": 29,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            181.5,
+            133.6945
+          ],
+          "texture": "res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_029.png"
+        },
+        {
+          "index": 30,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            181.5,
+            136.2185
+          ],
+          "texture": "res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_030.png"
+        },
+        {
+          "index": 31,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            181.5,
+            137.8595
+          ],
+          "texture": "res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_031.png"
+        },
+        {
+          "index": 32,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            182.5,
+            139.2171
+          ],
+          "texture": "res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_032.png"
+        },
+        {
+          "index": 33,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            181.5,
+            139.8449
+          ],
+          "texture": "res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_033.png"
+        },
+        {
+          "index": 34,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            180.5,
+            139.7983
+          ],
+          "texture": "res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_034.png"
+        },
+        {
+          "index": 35,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            181.5,
+            139.0464
+          ],
+          "texture": "res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_035.png"
+        },
+        {
+          "index": 36,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            180.5,
+            138.3203
+          ],
+          "texture": "res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_036.png"
+        },
+        {
+          "index": 37,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            180.5,
+            136.7381
+          ],
+          "texture": "res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_037.png"
+        },
+        {
+          "index": 38,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            180.5,
+            134.5759
+          ],
+          "texture": "res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_038.png"
+        },
+        {
+          "index": 39,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            180.5,
+            132.6184
+          ],
+          "texture": "res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_039.png"
+        },
+        {
+          "index": 40,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            180.5,
+            130.5326
+          ],
+          "texture": "res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_040.png"
+        },
+        {
+          "index": 41,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            180.5,
+            129.4084
+          ],
+          "texture": "res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_041.png"
+        },
+        {
+          "index": 42,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            180.5,
+            127.5997
+          ],
+          "texture": "res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_042.png"
+        },
+        {
+          "index": 43,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            180.5,
+            127.2076
+          ],
+          "texture": "res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_043.png"
+        },
+        {
+          "index": 44,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            180.5,
+            126.6649
+          ],
+          "texture": "res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_044.png"
+        },
+        {
+          "index": 45,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            181.5,
+            126.5528
+          ],
+          "texture": "res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_045.png"
+        },
+        {
+          "index": 46,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            181.5,
+            127.5266
+          ],
+          "texture": "res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_046.png"
+        }
+      ],
+      "phase_origin": 0.0,
+      "phase_landmark": "near_leg_forward_recovery_before_contact",
+      "attack_muzzle": [
+        169,
+        130
+      ],
+      "attack_hold_frame": 7,
+      "run_fire_phase_origin": 0.0,
+      "run_fire": [
+        {
+          "index": 0,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            198.6085,
+            55.1064
+          ],
+          "texture": "res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_000.png",
+          "normalized_phase": 0.0
+        },
+        {
+          "index": 1,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            198.6085,
+            55.4871
+          ],
+          "texture": "res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_001.png",
+          "normalized_phase": 0.02614011290920447
+        },
+        {
+          "index": 2,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            198.6085,
+            56.0144
+          ],
+          "texture": "res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_002.png",
+          "normalized_phase": 0.05238265961286499
+        },
+        {
+          "index": 3,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            198.6085,
+            56.6895
+          ],
+          "texture": "res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_003.png",
+          "normalized_phase": 0.07864446683841339
+        },
+        {
+          "index": 4,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            198.6085,
+            57.3738
+          ],
+          "texture": "res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_004.png",
+          "normalized_phase": 0.1048452523723118
+        },
+        {
+          "index": 5,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            199.1334,
+            58.5368
+          ],
+          "texture": "res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_005.png",
+          "normalized_phase": 0.1308955800289738
+        },
+        {
+          "index": 6,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            198.6085,
+            58.4881
+          ],
+          "texture": "res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_006.png",
+          "normalized_phase": 0.156683445679251
+        },
+        {
+          "index": 7,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            197.0336,
+            61.7702
+          ],
+          "texture": "res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_007.png",
+          "normalized_phase": 0.1820574756417403
+        },
+        {
+          "index": 8,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            195.9837,
+            61.7487
+          ],
+          "texture": "res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_008.png",
+          "normalized_phase": 0.2030415520644433
+        },
+        {
+          "index": 9,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            193.8839,
+            61.8185
+          ],
+          "texture": "res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_009.png",
+          "normalized_phase": 0.2184669959774478
+        },
+        {
+          "index": 10,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            195.4588,
+            61.7136
+          ],
+          "texture": "res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_010.png",
+          "normalized_phase": 0.2416392634895796
+        },
+        {
+          "index": 11,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            196.5087,
+            61.9947
+          ],
+          "texture": "res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_011.png",
+          "normalized_phase": 0.258241356198378
+        },
+        {
+          "index": 12,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            197.5586,
+            62.025
+          ],
+          "texture": "res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_012.png",
+          "normalized_phase": 0.2816684708854719
+        },
+        {
+          "index": 13,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            198.0835,
+            61.4381
+          ],
+          "texture": "res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_013.png",
+          "normalized_phase": 0.3001520771606309
+        },
+        {
+          "index": 14,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            198.6085,
+            60.2346
+          ],
+          "texture": "res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_014.png",
+          "normalized_phase": 0.3225490179371899
+        },
+        {
+          "index": 15,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            198.6085,
+            59.2916
+          ],
+          "texture": "res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_015.png",
+          "normalized_phase": 0.3384657688848974
+        },
+        {
+          "index": 16,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            198.6085,
+            57.7612
+          ],
+          "texture": "res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_016.png",
+          "normalized_phase": 0.3544441103603717
+        },
+        {
+          "index": 17,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            198.6085,
+            57.06
+          ],
+          "texture": "res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_017.png",
+          "normalized_phase": 0.3659649853104958
+        },
+        {
+          "index": 18,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            198.6085,
+            55.7877
+          ],
+          "texture": "res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_018.png",
+          "normalized_phase": 0.3823183875031836
+        },
+        {
+          "index": 19,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            198.6085,
+            55.0706
+          ],
+          "texture": "res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_019.png",
+          "normalized_phase": 0.4019377735415518
+        },
+        {
+          "index": 20,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            198.6085,
+            54.3872
+          ],
+          "texture": "res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_020.png",
+          "normalized_phase": 0.4237464949832623
+        },
+        {
+          "index": 21,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            198.6085,
+            54.2816
+          ],
+          "texture": "res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_021.png",
+          "normalized_phase": 0.4469963051545517
+        },
+        {
+          "index": 22,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            198.6085,
+            54.625
+          ],
+          "texture": "res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_022.png",
+          "normalized_phase": 0.4711551243692561
+        },
+        {
+          "index": 23,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            198.6085,
+            54.6828
+          ],
+          "texture": "res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_023.png",
+          "normalized_phase": 0.4958272223224621
+        },
+        {
+          "index": 24,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            198.6085,
+            54.7937
+          ],
+          "texture": "res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_024.png",
+          "normalized_phase": 0.5206938595199924
+        },
+        {
+          "index": 25,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            198.6085,
+            55.1891
+          ],
+          "texture": "res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_025.png",
+          "normalized_phase": 0.5454654767731347
+        },
+        {
+          "index": 26,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            198.6085,
+            55.9933
+          ],
+          "texture": "res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_026.png",
+          "normalized_phase": 0.5698382646816603
+        },
+        {
+          "index": 27,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            198.6085,
+            56.5685
+          ],
+          "texture": "res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_027.png",
+          "normalized_phase": 0.593448589291977
+        },
+        {
+          "index": 28,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            198.6085,
+            57.7714
+          ],
+          "texture": "res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_028.png",
+          "normalized_phase": 0.6158184451543663
+        },
+        {
+          "index": 29,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            199.1334,
+            59.3464
+          ],
+          "texture": "res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_029.png",
+          "normalized_phase": 0.6362837554933404
+        },
+        {
+          "index": 30,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            197.2961,
+            61.0153
+          ],
+          "texture": "res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_030.png",
+          "normalized_phase": 0.6538947633115707
+        },
+        {
+          "index": 31,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            195.7213,
+            61.28
+          ],
+          "texture": "res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_031.png",
+          "normalized_phase": 0.668782331107451
+        },
+        {
+          "index": 32,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            193.8839,
+            61.8868
+          ],
+          "texture": "res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_032.png",
+          "normalized_phase": 0.6888731544148661
+        },
+        {
+          "index": 33,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            195.4588,
+            62.0702
+          ],
+          "texture": "res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_033.png",
+          "normalized_phase": 0.7040660191903781
+        },
+        {
+          "index": 34,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            197.0336,
+            62.2112
+          ],
+          "texture": "res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_034.png",
+          "normalized_phase": 0.7253405862253341
+        },
+        {
+          "index": 35,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            197.5586,
+            62.2581
+          ],
+          "texture": "res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_035.png",
+          "normalized_phase": 0.7427563382166614
+        },
+        {
+          "index": 36,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            198.0835,
+            61.7929
+          ],
+          "texture": "res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_036.png",
+          "normalized_phase": 0.7661683253175506
+        },
+        {
+          "index": 37,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            198.6085,
+            60.8217
+          ],
+          "texture": "res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_037.png",
+          "normalized_phase": 0.7836567425634583
+        },
+        {
+          "index": 38,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            198.6085,
+            59.183
+          ],
+          "texture": "res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_038.png",
+          "normalized_phase": 0.8058032911873309
+        },
+        {
+          "index": 39,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            198.6085,
+            58.2546
+          ],
+          "texture": "res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_039.png",
+          "normalized_phase": 0.8197105206682322
+        },
+        {
+          "index": 40,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            198.6085,
+            56.804
+          ],
+          "texture": "res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_040.png",
+          "normalized_phase": 0.8351784825923021
+        },
+        {
+          "index": 41,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            198.6085,
+            55.8946
+          ],
+          "texture": "res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_041.png",
+          "normalized_phase": 0.8542610638708974
+        },
+        {
+          "index": 42,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            198.6085,
+            55.1386
+          ],
+          "texture": "res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_042.png",
+          "normalized_phase": 0.8758010978585109
+        },
+        {
+          "index": 43,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            198.6085,
+            54.477
+          ],
+          "texture": "res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_043.png",
+          "normalized_phase": 0.8990100368530806
+        },
+        {
+          "index": 44,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            198.6085,
+            53.9385
+          ],
+          "texture": "res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_044.png",
+          "normalized_phase": 0.9233496660549472
+        },
+        {
+          "index": 45,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            198.6085,
+            54.439
+          ],
+          "texture": "res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_045.png",
+          "normalized_phase": 0.9484513730202576
+        },
+        {
+          "index": 46,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            198.6085,
+            54.8147
+          ],
+          "texture": "res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_046.png",
+          "normalized_phase": 0.9740608599224682
+        }
+      ]
+    },
+    "se": {
+      "muzzle": [
+        165,
+        147
+      ],
+      "idle_region": [
+        0,
+        0,
+        200,
+        248
+      ],
+      "run": [
+        {
+          "index": 0,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            175,
+            147
+          ]
+        },
+        {
+          "index": 1,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            176,
+            141
+          ]
+        },
+        {
+          "index": 2,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            176,
+            141
+          ]
+        },
+        {
+          "index": 3,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            176,
+            141
+          ]
+        },
+        {
+          "index": 4,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            175,
+            141
+          ]
+        },
+        {
+          "index": 5,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            175,
+            141
+          ]
+        },
+        {
+          "index": 6,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            176,
+            143
+          ]
+        },
+        {
+          "index": 7,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            175,
+            146
+          ]
+        },
+        {
+          "index": 8,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            175,
+            146
+          ]
+        },
+        {
+          "index": 9,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            175,
+            147
+          ]
+        },
+        {
+          "index": 10,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            175,
+            147
+          ]
+        }
+      ],
+      "phase_origin": 0.2727272727272727,
+      "phase_landmark": "extended_stride",
+      "attack_muzzle": [
+        168,
+        145
+      ],
+      "attack_hold_frame": 7
+    },
+    "s": {
+      "muzzle": [
+        147,
+        164
+      ],
+      "idle_region": [
+        0,
+        0,
+        200,
+        248
+      ],
+      "run": [
+        {
+          "index": 0,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            122,
+            181
+          ]
+        },
+        {
+          "index": 1,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            128,
+            188
+          ]
+        },
+        {
+          "index": 2,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            128,
+            188
+          ]
+        },
+        {
+          "index": 3,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            124,
+            184
+          ]
+        },
+        {
+          "index": 4,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            124,
+            184
+          ]
+        },
+        {
+          "index": 5,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            126,
+            186
+          ]
+        },
+        {
+          "index": 6,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            124,
+            186
+          ]
+        },
+        {
+          "index": 7,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            124,
+            186
+          ]
+        },
+        {
+          "index": 8,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            152,
+            152
+          ]
+        },
+        {
+          "index": 9,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            151,
+            153
+          ]
+        },
+        {
+          "index": 10,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            151,
+            152
+          ]
+        }
+      ],
+      "phase_origin": 0.2727272727272727,
+      "phase_landmark": "extended_stride",
+      "attack_muzzle": [
+        149,
+        148
+      ],
+      "attack_hold_frame": 7
+    },
+    "sw": {
+      "muzzle": [
+        45,
+        164
+      ],
+      "idle_region": [
+        0,
+        0,
+        200,
+        248
+      ],
+      "run": [
+        {
+          "index": 0,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            30,
+            162
+          ]
+        },
+        {
+          "index": 1,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            30,
+            162
+          ]
+        },
+        {
+          "index": 2,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            32,
+            160
+          ]
+        },
+        {
+          "index": 3,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            32,
+            160
+          ]
+        },
+        {
+          "index": 4,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            32,
+            160
+          ]
+        },
+        {
+          "index": 5,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            31,
+            161
+          ]
+        },
+        {
+          "index": 6,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            31,
+            161
+          ]
+        },
+        {
+          "index": 7,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            31,
+            161
+          ]
+        },
+        {
+          "index": 8,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            32,
+            164
+          ]
+        },
+        {
+          "index": 9,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            32,
+            164
+          ]
+        },
+        {
+          "index": 10,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            32,
+            164
+          ]
+        }
+      ],
+      "phase_origin": 0.0,
+      "phase_landmark": "extended_stride",
+      "attack_muzzle": [
+        43,
+        154
+      ],
+      "attack_hold_frame": 7
+    },
+    "w": {
+      "muzzle": [
+        33,
+        145
+      ],
+      "idle_region": [
+        0,
+        0,
+        200,
+        248
+      ],
+      "run": [
+        {
+          "index": 0,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            25,
+            149
+          ]
+        },
+        {
+          "index": 1,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            25,
+            148
+          ]
+        },
+        {
+          "index": 2,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            25,
+            149
+          ]
+        },
+        {
+          "index": 3,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            24,
+            148
+          ]
+        },
+        {
+          "index": 4,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            24,
+            148
+          ]
+        },
+        {
+          "index": 5,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            24,
+            148
+          ]
+        },
+        {
+          "index": 6,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            25,
+            148
+          ]
+        },
+        {
+          "index": 7,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            24,
+            147
+          ]
+        },
+        {
+          "index": 8,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            25,
+            148
+          ]
+        },
+        {
+          "index": 9,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            25,
+            148
+          ]
+        },
+        {
+          "index": 10,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            24,
+            146
+          ]
+        }
+      ],
+      "phase_origin": 0.0,
+      "phase_landmark": "extended_stride",
+      "attack_muzzle": [
+        27,
+        142
+      ],
+      "attack_hold_frame": 7
+    },
+    "nw": {
+      "muzzle": [
+        30,
+        128
+      ],
+      "idle_region": [
+        0,
+        0,
+        200,
+        248
+      ],
+      "run": [
+        {
+          "index": 0,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            17,
+            132
+          ]
+        },
+        {
+          "index": 1,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            18,
+            132
+          ]
+        },
+        {
+          "index": 2,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            19,
+            130
+          ]
+        },
+        {
+          "index": 3,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            21,
+            125
+          ]
+        },
+        {
+          "index": 4,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            21,
+            125
+          ]
+        },
+        {
+          "index": 5,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            20,
+            129
+          ]
+        },
+        {
+          "index": 6,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            20,
+            130
+          ]
+        },
+        {
+          "index": 7,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            20,
+            131
+          ]
+        },
+        {
+          "index": 8,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            19,
+            132
+          ]
+        },
+        {
+          "index": 9,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            19,
+            132
+          ]
+        },
+        {
+          "index": 10,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            17,
+            133
+          ]
+        }
+      ],
+      "phase_origin": 0.0,
+      "phase_landmark": "extended_stride",
+      "attack_muzzle": [
+        23,
+        122
+      ],
+      "attack_hold_frame": 7
+    },
+    "n": {
+      "muzzle": [
+        48,
+        113
+      ],
+      "idle_region": [
+        0,
+        0,
+        200,
+        248
+      ],
+      "run": [
+        {
+          "index": 0,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            49,
+            112
+          ]
+        },
+        {
+          "index": 1,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            49,
+            111
+          ]
+        },
+        {
+          "index": 2,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            49,
+            107
+          ]
+        },
+        {
+          "index": 3,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            49,
+            107
+          ]
+        },
+        {
+          "index": 4,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            47,
+            104
+          ]
+        },
+        {
+          "index": 5,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            47,
+            104
+          ]
+        },
+        {
+          "index": 6,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            47,
+            105
+          ]
+        },
+        {
+          "index": 7,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            47,
+            106
+          ]
+        },
+        {
+          "index": 8,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            47,
+            108
+          ]
+        },
+        {
+          "index": 9,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            47,
+            108
+          ]
+        },
+        {
+          "index": 10,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            48,
+            112
+          ]
+        }
+      ],
+      "phase_origin": 0.0,
+      "phase_landmark": "extended_stride",
+      "attack_muzzle": [
+        44,
+        106
+      ],
+      "attack_hold_frame": 7
+    },
+    "ne": {
+      "muzzle": [
+        155,
+        98
+      ],
+      "idle_region": [
+        0,
+        0,
+        200,
+        248
+      ],
+      "run": [
+        {
+          "index": 0,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            169,
+            111
+          ]
+        },
+        {
+          "index": 1,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            172,
+            108
+          ]
+        },
+        {
+          "index": 2,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            175,
+            108
+          ]
+        },
+        {
+          "index": 3,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            177,
+            106
+          ]
+        },
+        {
+          "index": 4,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            177,
+            106
+          ]
+        },
+        {
+          "index": 5,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            177,
+            108
+          ]
+        },
+        {
+          "index": 6,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            177,
+            107
+          ]
+        },
+        {
+          "index": 7,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            176,
+            108
+          ]
+        },
+        {
+          "index": 8,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            178,
+            107
+          ]
+        },
+        {
+          "index": 9,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            175,
+            110
+          ]
+        },
+        {
+          "index": 10,
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            173,
+            112
+          ]
+        }
+      ],
+      "phase_origin": 0.45454545454545453,
+      "phase_landmark": "extended_stride",
+      "attack_muzzle": [
+        174,
+        61
+      ],
+      "attack_hold_frame": 7
+    }
+  },
+  "direction_hysteresis_degrees": 5.0,
+  "fallback_texture_root": "res://assets/characters/pilot_32/render_cache"
+}

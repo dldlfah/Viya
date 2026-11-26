@@ -1,0 +1,80 @@
+{
+  "status": "PASS",
+  "scope": "Proposal geometry only: original-source anchors, exact32 style/HP/ID mapping,collision clearance,continuous routes and50-unit-grid reachability. Not Godot/navigation/mobile/performance/game approval.",
+  "existing_solids_preserved": 4,
+  "total_solids": 20,
+  "props": 32,
+  "style_counts": {
+    "crate": 16,
+    "urn": 8,
+    "debris": 8
+  },
+  "minimum_prop_spacing": 98.49,
+  "route_checks": [
+    {
+      "id": "R1",
+      "centerline_clearance": 130,
+      "result": "PASS"
+    },
+    {
+      "id": "R2",
+      "centerline_clearance": 130,
+      "result": "PASS"
+    },
+    {
+      "id": "R3",
+      "centerline_clearance": 130,
+      "result": "PASS"
+    },
+    {
+      "id": "R4",
+      "centerline_clearance": 130,
+      "result": "PASS"
+    }
+  ],
+  "waypoints": [
+    [
+      2500,
+      600
+    ],
+    [
+      650,
+      1540
+    ],
+    [
+      4450,
+      1560
+    ],
+    [
+      2500,
+      2820
+    ],
+    [
+      200,
+      800
+    ],
+    [
+      200,
+      3030
+    ],
+    [
+      4800,
+      3030
+    ],
+    [
+      4800,
+      800
+    ],
+    [
+      1100,
+      2100
+    ],
+    [
+      3750,
+      2350
+    ]
+  ],
+  "reachable_clearance130_grid_cells": 2832,
+  "formation_footprint_radius297095": "3centers clear",
+  "approx_open_fraction_below_wall": 0.9059
+}

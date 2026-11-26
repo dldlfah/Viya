@@ -1,0 +1,973 @@
+{
+  "schema_version": 1,
+  "map_id": "siege_battlefield",
+  "stage": 1,
+  "profile_map": "prologue_wall",
+  "map": {
+    "name": "스테이지 1 · 성벽 전장",
+    "size": [
+      5000,
+      3200
+    ],
+    "start": [
+      2500,
+      600
+    ],
+    "camera": [
+      0,
+      0,
+      5000,
+      3200
+    ],
+    "mode": "frontline",
+    "obstacles": [
+      {
+        "rect": [
+          0,
+          0,
+          5000,
+          420
+        ],
+        "solid": true,
+        "kind": "wall",
+        "name": "최후의 도시 성벽"
+      },
+      {
+        "rect": [
+          1300,
+          1250,
+          360,
+          120
+        ],
+        "solid": true,
+        "kind": "ruin",
+        "name": "무너진 방어진지"
+      },
+      {
+        "rect": [
+          3200,
+          1500,
+          420,
+          140
+        ],
+        "solid": true,
+        "kind": "ruin",
+        "name": "폐허 방벽"
+      },
+      {
+        "rect": [
+          2100,
+          2200,
+          300,
+          100
+        ],
+        "solid": true,
+        "kind": "ruin",
+        "name": "옛 방어진지"
+      },
+      {
+        "rect": [
+          630,
+          940,
+          460,
+          260
+        ],
+        "solid": true,
+        "kind": "ruin",
+        "name": "불탄 병참창고",
+        "layout_key": "B1",
+        "appearance": "warehouse",
+        "visual_height": 80
+      },
+      {
+        "rect": [
+          370,
+          1900,
+          460,
+          250
+        ],
+        "solid": true,
+        "kind": "ruin",
+        "name": "서측 경비막사",
+        "layout_key": "B2",
+        "appearance": "barracks",
+        "visual_height": 68
+      },
+      {
+        "rect": [
+          1260,
+          1810,
+          360,
+          230
+        ],
+        "solid": true,
+        "kind": "ruin",
+        "name": "붕괴한 숙영동",
+        "layout_key": "B3",
+        "appearance": "lodging",
+        "visual_height": 54
+      },
+      {
+        "rect": [
+          650,
+          2450,
+          440,
+          230
+        ],
+        "solid": true,
+        "kind": "ruin",
+        "name": "부서진 수레 정비소",
+        "layout_key": "B4",
+        "appearance": "wagon",
+        "visual_height": 42
+      },
+      {
+        "rect": [
+          3650,
+          980,
+          650,
+          240
+        ],
+        "solid": true,
+        "kind": "ruin",
+        "name": "반파된 동측 병영",
+        "layout_key": "B5",
+        "appearance": "barracks",
+        "visual_height": 68
+      },
+      {
+        "rect": [
+          3920,
+          1990,
+          460,
+          260
+        ],
+        "solid": true,
+        "kind": "ruin",
+        "name": "버려진 야전 구호소",
+        "layout_key": "B6",
+        "appearance": "aid",
+        "visual_height": 58
+      },
+      {
+        "rect": [
+          3240,
+          2230,
+          370,
+          250
+        ],
+        "solid": true,
+        "kind": "ruin",
+        "name": "무너진 대기소",
+        "layout_key": "B7",
+        "appearance": "lodging",
+        "visual_height": 54
+      },
+      {
+        "rect": [
+          3790,
+          2580,
+          480,
+          200
+        ],
+        "solid": true,
+        "kind": "ruin",
+        "name": "파손된 병기 정비터",
+        "layout_key": "B8",
+        "appearance": "workshop",
+        "visual_height": 42
+      },
+      {
+        "rect": [
+          1530,
+          2610,
+          230,
+          230
+        ],
+        "solid": true,
+        "kind": "ruin",
+        "name": "기울어진 서측 망루",
+        "layout_key": "B9",
+        "appearance": "tower",
+        "visual_height": 100
+      },
+      {
+        "rect": [
+          2950,
+          2660,
+          230,
+          230
+        ],
+        "solid": true,
+        "kind": "ruin",
+        "name": "부러진 동측 망루",
+        "layout_key": "B10",
+        "appearance": "tower",
+        "visual_height": 100
+      },
+      {
+        "rect": [
+          1750,
+          1040,
+          370,
+          100
+        ],
+        "solid": true,
+        "kind": "barricade",
+        "name": "마지막 서측 방책",
+        "layout_key": "L1",
+        "appearance": "barricade",
+        "visual_height": 30
+      },
+      {
+        "rect": [
+          2840,
+          1100,
+          380,
+          100
+        ],
+        "solid": true,
+        "kind": "barricade",
+        "name": "마지막 동측 방책",
+        "layout_key": "L2",
+        "appearance": "barricade",
+        "visual_height": 30
+      },
+      {
+        "rect": [
+          1830,
+          1820,
+          330,
+          100
+        ],
+        "solid": true,
+        "kind": "barricade",
+        "name": "끊어진 서측 방어선",
+        "layout_key": "L3",
+        "appearance": "barricade",
+        "visual_height": 30
+      },
+      {
+        "rect": [
+          2810,
+          1950,
+          330,
+          100
+        ],
+        "solid": true,
+        "kind": "barricade",
+        "name": "끊어진 동측 방어선",
+        "layout_key": "L4",
+        "appearance": "barricade",
+        "visual_height": 30
+      },
+      {
+        "rect": [
+          1880,
+          2590,
+          250,
+          90
+        ],
+        "solid": true,
+        "kind": "barricade",
+        "name": "돌파구 서측 잔해",
+        "layout_key": "L5",
+        "appearance": "barricade",
+        "visual_height": 30
+      },
+      {
+        "rect": [
+          2850,
+          2500,
+          260,
+          90
+        ],
+        "solid": true,
+        "kind": "barricade",
+        "name": "돌파구 동측 잔해",
+        "layout_key": "L6",
+        "appearance": "barricade",
+        "visual_height": 30
+      }
+    ],
+    "zones": [
+      {
+        "side": "front",
+        "from": 0.0,
+        "roles": [
+          "normal",
+          "elite",
+          "boss"
+        ],
+        "rect": [
+          120,
+          1100,
+          4760,
+          1980
+        ],
+        "weights": [
+          {
+            "from": 0.0,
+            "weight": 1.0
+          },
+          {
+            "from": 120.0,
+            "weight": 4.0
+          },
+          {
+            "from": 240.0,
+            "weight": 2.0
+          }
+        ]
+      },
+      {
+        "side": "left",
+        "from": 120.0,
+        "roles": [
+          "normal",
+          "elite"
+        ],
+        "rect": [
+          120,
+          600,
+          1800,
+          2480
+        ],
+        "weights": [
+          {
+            "from": 0.0,
+            "weight": 1.0
+          }
+        ]
+      },
+      {
+        "side": "right",
+        "from": 240.0,
+        "roles": [
+          "normal",
+          "elite"
+        ],
+        "rect": [
+          3080,
+          600,
+          1800,
+          2480
+        ],
+        "weights": [
+          {
+            "from": 0.0,
+            "weight": 1.0
+          }
+        ]
+      }
+    ],
+    "decor": [
+      {
+        "rect": [
+          2380,
+          160,
+          240,
+          260
+        ],
+        "kind": "gate",
+        "name": "성문"
+      }
+    ],
+    "short_name": "성벽 전장",
+    "walkable": [
+      0,
+      0,
+      5000,
+      3200
+    ],
+    "layout_id": "MAP-PLAN-001",
+    "layout_version": 1,
+    "routes": [
+      {
+        "id": "R1",
+        "name": "중앙 진격·후퇴로",
+        "width": 260,
+        "points": [
+          [
+            2500,
+            600
+          ],
+          [
+            2500,
+            1400
+          ],
+          [
+            2600,
+            1800
+          ],
+          [
+            2650,
+            2350
+          ],
+          [
+            2500,
+            2770
+          ],
+          [
+            2500,
+            3030
+          ]
+        ],
+        "story": "보이는 노면 폭 680, 기존 유적 옆 최소 440. 끊기지 않는 주 동선."
+      },
+      {
+        "id": "R2",
+        "name": "외곽 순환 회피로",
+        "width": 260,
+        "points": [
+          [
+            200,
+            800
+          ],
+          [
+            200,
+            3030
+          ],
+          [
+            4800,
+            3030
+          ],
+          [
+            4800,
+            800
+          ],
+          [
+            200,
+            800
+          ]
+        ],
+        "story": "한 방향으로 쫓길 때 옆 구역으로 탈출할 수 있는 순환로."
+      },
+      {
+        "id": "R3",
+        "name": "서측 연결로",
+        "width": 260,
+        "points": [
+          [
+            650,
+            1540
+          ],
+          [
+            1100,
+            1580
+          ],
+          [
+            2200,
+            1580
+          ],
+          [
+            2500,
+            1500
+          ]
+        ],
+        "story": "병참 구역에서 중앙으로 복귀하는 횡단 동선."
+      },
+      {
+        "id": "R4",
+        "name": "동측 연결로",
+        "width": 260,
+        "points": [
+          [
+            4450,
+            1560
+          ],
+          [
+            3900,
+            1780
+          ],
+          [
+            3700,
+            1820
+          ],
+          [
+            3020,
+            1790
+          ],
+          [
+            2750,
+            1720
+          ],
+          [
+            2500,
+            1500
+          ]
+        ],
+        "story": "구호 구역과 중앙을 잇는 횡단 동선."
+      }
+    ],
+    "supply_clusters": [
+      {
+        "id": "C1",
+        "name": "성문 보급 수레",
+        "district": "A",
+        "count": 4,
+        "center": [
+          1990.0,
+          835.0
+        ],
+        "story": "상자 2 · 항아리 1 · 잔해 1. 주변 시설의 사용·철수 이유가 보이게 배치한다."
+      },
+      {
+        "id": "C2",
+        "name": "창고 출고 물자",
+        "district": "B",
+        "count": 4,
+        "center": [
+          1202.5,
+          1080.0
+        ],
+        "story": "상자 2 · 항아리 1 · 잔해 1. 주변 시설의 사용·철수 이유가 보이게 배치한다."
+      },
+      {
+        "id": "C3",
+        "name": "막사 철수 장비",
+        "district": "C",
+        "count": 4,
+        "center": [
+          1002.5,
+          2127.5
+        ],
+        "story": "상자 2 · 항아리 1 · 잔해 1. 주변 시설의 사용·철수 이유가 보이게 배치한다."
+      },
+      {
+        "id": "C4",
+        "name": "방책 후퇴 잔해",
+        "district": "F",
+        "count": 4,
+        "center": [
+          1920.0,
+          2010.0
+        ],
+        "story": "상자 2 · 항아리 1 · 잔해 1. 주변 시설의 사용·철수 이유가 보이게 배치한다."
+      },
+      {
+        "id": "C5",
+        "name": "병영 보급 묶음",
+        "district": "D",
+        "count": 4,
+        "center": [
+          3470.0,
+          1327.5
+        ],
+        "story": "상자 2 · 항아리 1 · 잔해 1. 주변 시설의 사용·철수 이유가 보이게 배치한다."
+      },
+      {
+        "id": "C6",
+        "name": "구호소 이송 물자",
+        "district": "E",
+        "count": 4,
+        "center": [
+          3717.5,
+          2192.5
+        ],
+        "story": "상자 2 · 항아리 1 · 잔해 1. 주변 시설의 사용·철수 이유가 보이게 배치한다."
+      },
+      {
+        "id": "C7",
+        "name": "전진 수레 잔해",
+        "district": "C",
+        "count": 4,
+        "center": [
+          1282.5,
+          2782.5
+        ],
+        "story": "상자 2 · 항아리 1 · 잔해 1. 주변 시설의 사용·철수 이유가 보이게 배치한다."
+      },
+      {
+        "id": "C8",
+        "name": "병기터 파편 묶음",
+        "district": "E",
+        "count": 4,
+        "center": [
+          3515.0,
+          2720.0
+        ],
+        "story": "상자 2 · 항아리 1 · 잔해 1. 주변 시설의 사용·철수 이유가 보이게 배치한다."
+      }
+    ],
+    "formation_pockets": [
+      {
+        "id": "P1",
+        "name": "남측 전개 여유",
+        "p": [
+          2500,
+          2820
+        ],
+        "radius": 300
+      },
+      {
+        "id": "P2",
+        "name": "서측 전개 여유",
+        "p": [
+          650,
+          1540
+        ],
+        "radius": 300
+      },
+      {
+        "id": "P3",
+        "name": "동측 전개 여유",
+        "p": [
+          4450,
+          1560
+        ],
+        "radius": 300
+      }
+    ],
+    "districts": [
+      {
+        "id": "A",
+        "name": "마지막 성문 · 집결지",
+        "rect": [
+          1750,
+          420,
+          1500,
+          520
+        ],
+        "label": [
+          2500,
+          485
+        ],
+        "story": "아직 버티는 북쪽 성벽. 시작 주변은 비워 상황을 읽을 시간을 준다."
+      },
+      {
+        "id": "B",
+        "name": "불탄 병참 구역",
+        "rect": [
+          300,
+          900,
+          1450,
+          800
+        ],
+        "label": [
+          1000,
+          700
+        ],
+        "story": "창고 옆 보급품과 탄 흔적을 묶어, 성문을 지키려던 준비가 끊겼음을 보여준다."
+      },
+      {
+        "id": "C",
+        "name": "무너진 서측 거점",
+        "rect": [
+          250,
+          1750,
+          1500,
+          1150
+        ],
+        "label": [
+          960,
+          2320
+        ],
+        "story": "막사·숙영동·수레 정비터를 지나며 측면 방어가 붕괴한 흔적을 읽는다."
+      },
+      {
+        "id": "D",
+        "name": "반파된 동측 병영",
+        "rect": [
+          3100,
+          900,
+          1600,
+          850
+        ],
+        "label": [
+          3900,
+          700
+        ],
+        "story": "질서 있던 병영 앞 공간과 부서진 벽을 대비해 전투 전후를 읽게 한다."
+      },
+      {
+        "id": "E",
+        "name": "철수한 구호·병기 구역",
+        "rect": [
+          3200,
+          1900,
+          1400,
+          1000
+        ],
+        "label": [
+          4000,
+          2410
+        ],
+        "story": "항아리·물자·견인 흔적을 시설 근처에 모아, 급히 철수한 장면을 만든다."
+      },
+      {
+        "id": "F",
+        "name": "돌파당한 전진 방어선",
+        "rect": [
+          1750,
+          1700,
+          1500,
+          1400
+        ],
+        "label": [
+          2500,
+          2400
+        ],
+        "story": "남쪽으로 갈수록 파손과 흔적이 심해진다. 중앙은 전투와 큰 무리가 펼쳐질 공간으로 남긴다."
+      }
+    ]
+  },
+  "destructibles": [
+    {
+      "p": [
+        1840,
+        820
+      ],
+      "style": "crate",
+      "hp": 30
+    },
+    {
+      "p": [
+        2040,
+        820
+      ],
+      "style": "urn",
+      "hp": 30
+    },
+    {
+      "p": [
+        1940,
+        840
+      ],
+      "style": "crate",
+      "hp": 30
+    },
+    {
+      "p": [
+        2140,
+        860
+      ],
+      "style": "debris",
+      "hp": 50
+    },
+    {
+      "p": [
+        1160,
+        950
+      ],
+      "style": "crate",
+      "hp": 30
+    },
+    {
+      "p": [
+        1180,
+        1130
+      ],
+      "style": "urn",
+      "hp": 30
+    },
+    {
+      "p": [
+        1220,
+        1040
+      ],
+      "style": "crate",
+      "hp": 30
+    },
+    {
+      "p": [
+        1250,
+        1200
+      ],
+      "style": "debris",
+      "hp": 50
+    },
+    {
+      "p": [
+        860,
+        2100
+      ],
+      "style": "crate",
+      "hp": 30
+    },
+    {
+      "p": [
+        1060,
+        2100
+      ],
+      "style": "urn",
+      "hp": 30
+    },
+    {
+      "p": [
+        960,
+        2140
+      ],
+      "style": "crate",
+      "hp": 30
+    },
+    {
+      "p": [
+        1130,
+        2170
+      ],
+      "style": "debris",
+      "hp": 50
+    },
+    {
+      "p": [
+        1770,
+        1990
+      ],
+      "style": "crate",
+      "hp": 30
+    },
+    {
+      "p": [
+        1970,
+        1990
+      ],
+      "style": "urn",
+      "hp": 30
+    },
+    {
+      "p": [
+        1870,
+        2010
+      ],
+      "style": "crate",
+      "hp": 30
+    },
+    {
+      "p": [
+        2070,
+        2050
+      ],
+      "style": "debris",
+      "hp": 50
+    },
+    {
+      "p": [
+        3320,
+        1320
+      ],
+      "style": "crate",
+      "hp": 30
+    },
+    {
+      "p": [
+        3520,
+        1360
+      ],
+      "style": "urn",
+      "hp": 30
+    },
+    {
+      "p": [
+        3420,
+        1320
+      ],
+      "style": "crate",
+      "hp": 30
+    },
+    {
+      "p": [
+        3620,
+        1310
+      ],
+      "style": "debris",
+      "hp": 50
+    },
+    {
+      "p": [
+        3680,
+        2070
+      ],
+      "style": "crate",
+      "hp": 30
+    },
+    {
+      "p": [
+        3670,
+        2230
+      ],
+      "style": "urn",
+      "hp": 30
+    },
+    {
+      "p": [
+        3760,
+        2150
+      ],
+      "style": "crate",
+      "hp": 30
+    },
+    {
+      "p": [
+        3760,
+        2320
+      ],
+      "style": "debris",
+      "hp": 50
+    },
+    {
+      "p": [
+        1140,
+        2750
+      ],
+      "style": "crate",
+      "hp": 30
+    },
+    {
+      "p": [
+        1340,
+        2750
+      ],
+      "style": "urn",
+      "hp": 30
+    },
+    {
+      "p": [
+        1240,
+        2790
+      ],
+      "style": "crate",
+      "hp": 30
+    },
+    {
+      "p": [
+        1410,
+        2840
+      ],
+      "style": "debris",
+      "hp": 50
+    },
+    {
+      "p": [
+        3390,
+        2680
+      ],
+      "style": "crate",
+      "hp": 30
+    },
+    {
+      "p": [
+        3610,
+        2680
+      ],
+      "style": "urn",
+      "hp": 30
+    },
+    {
+      "p": [
+        3500,
+        2700
+      ],
+      "style": "crate",
+      "hp": 30
+    },
+    {
+      "p": [
+        3560,
+        2820
+      ],
+      "style": "debris",
+      "hp": 50
+    }
+  ]
+}

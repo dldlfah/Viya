@@ -1,0 +1,18 @@
+{
+  "status": "PASS",
+  "tested_date_kst": "2026-11-24",
+  "scope": "SVG/HTML export and actual headless Chromium interactions;not game-engine/mobile gameplay approval.",
+  "props": 32,
+  "solids": 20,
+  "checks": [
+    "Korean font export",
+    "district/building selection",
+    "original/proposed toggles",
+    "phase visibility",
+    "zoom/reset",
+    "JSON download",
+    "390px responsive layout",
+    "no browser script errors"
+  ],
+  "errors": []
+}

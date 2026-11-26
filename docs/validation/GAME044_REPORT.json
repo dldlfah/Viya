@@ -1,0 +1,2012 @@
+{
+  "unit": "GAME-044",
+  "date_kst": "2026-11-24",
+  "status": "PILOT02_CONNECTED_TECHNICAL_PASS",
+  "art_approval": "PILOT_NOT_FINAL_APPROVED",
+  "code_commit": "40ce43923e50871b676ca6fbff9d920f48ef41c3",
+  "code_tree": "ce15466d1e09185d605e39ecab97ec4ade7d55d9",
+  "starting_document_head": "18402289ea914a8b39022d01c92295205526c0cb",
+  "branch": "work/viya-turnaround-qa-20261117",
+  "user_scope": "Explicit answer: existing prologue map add3assets. Archive documents/prompts inspected as reference, not executed as user commands.",
+  "archive_sha256": "49557ccb6ed1efb40341004da82518438fe077aa8f25cdfad33598005637e24f",
+  "original_manifest": {
+    "schema": "viya-map-pilot-art-1",
+    "name": "VIYA Map Pilot 02",
+    "date_kst": "2026-11-24",
+    "status": "pilot_integration_candidate",
+    "art_approval": "not_final_approved",
+    "repo": "dldlfah/Viya",
+    "branch": "work/viya-turnaround-qa-20261117",
+    "repo_head_checked": "c412d1d8768273c5fb06b16fb33115cc96b99b11",
+    "scope": "Assets and handoff only; no repository modification or Godot run",
+    "intended_map": "prologue_wall",
+    "preserve_existing_slots": [
+      "stone_floor_tile",
+      "wall_segment",
+      "prop_crate"
+    ],
+    "assets": [
+      {
+        "file": "textures/ruin_block.png",
+        "slot": "ruin_block",
+        "proposed_resource_path": "res://assets/maps/pilot_02/ruin_block.png",
+        "source_size": [
+          192,
+          130
+        ],
+        "display_size": [
+          96,
+          65
+        ],
+        "display_space": "screen",
+        "projection": "front_material_only",
+        "transparency": "opaque",
+        "bytes": 32075,
+        "sha256": "1cfc847408ab4cdf6783f1dcc1c13db5251187fc4525afd4f0bdaaf991b7d9a2"
+      },
+      {
+        "file": "textures/prop_urn.png",
+        "slot": "prop_urn",
+        "proposed_resource_path": "res://assets/maps/pilot_02/prop_urn.png",
+        "source_size": [
+          92,
+          86
+        ],
+        "display_size": [
+          46,
+          43
+        ],
+        "display_space": "screen",
+        "projection": "high_front_orthographic",
+        "transparency": "alpha",
+        "bytes": 11598,
+        "sha256": "81973f42653a6a3008ff11aaf5f18b1c4aaf6389577d1c8c1248aaf4b1feb94e",
+        "pivot": [
+          0.5,
+          1.0
+        ],
+        "visible_bbox": [
+          10,
+          0,
+          81,
+          86
+        ],
+        "visible_shape_size": [
+          71,
+          86
+        ]
+      },
+      {
+        "file": "textures/prop_debris.png",
+        "slot": "prop_debris",
+        "proposed_resource_path": "res://assets/maps/pilot_02/prop_debris.png",
+        "source_size": [
+          92,
+          86
+        ],
+        "display_size": [
+          46,
+          43
+        ],
+        "display_space": "screen",
+        "projection": "high_angle_low_cluster",
+        "transparency": "alpha",
+        "bytes": 7352,
+        "sha256": "ab0cccf2713543f0bd127a7f76ef1a4854695473ba7f0eca58bc1f919fe4b9d5",
+        "pivot": [
+          0.5,
+          1.0
+        ],
+        "visible_bbox": [
+          0,
+          40,
+          92,
+          86
+        ],
+        "visible_shape_size": [
+          92,
+          46
+        ]
+      }
+    ],
+    "constraints": [
+      "Append only these three slots under prologue_wall in data/map_presentation_slots.json.",
+      "Keep pilot_01 paths and other maps unchanged.",
+      "The current renderer already supports map-specific overrides and world-anchored clipped material regions.",
+      "Ruin texture is a front material only; existing top geometry and collision stay in use.",
+      "Urn and debris are intact nonblocking destructible props, not destroyed-state sprites.",
+      "Preserve current central camera dead zone; no camera or simulation changes for this asset handoff.",
+      "Image checks do not establish mobile play suitability or FPS."
+    ]
+  },
+  "production_source_proof": {
+    "base": "18402289ea914a8b39022d01c92295205526c0cb",
+    "changed_existing_production": [
+      "data/map_presentation_slots.json"
+    ],
+    "unchanged_count": 92,
+    "unchanged_sha256": {
+      "assets/characters/viya/spec/turnaround_contract.v1.json": "a8f65fa1637b49235d2158ef582f9d696a2cb13caddc86a5dd27dbeccbca117a",
+      "assets/characters/viya/spec/turnaround_r1_result.json": "6c337719be2f54e5ea35304cb32b4f5f6bf5b4cca987e00ce6b4d59a37983db8",
+      "assets/characters/viya/spec/turnaround_r2_result.json": "8ca504e6b4165cf9ced1addf06878c0bb7018030c070119c446345ac6ebcb421",
+      "assets/maps/pilot_01/README.md": "29bfa4c4393763c362dff9535e8eedd32895adb835b71ec39373a0b96a4fdf9b",
+      "assets/maps/pilot_01/prop_crate.png": "7a0fefb9f935a5026e1bb9ded4029542e9f33323bbac87481f22144ece712edc",
+      "assets/maps/pilot_01/prop_crate.png.import": "8dd47f11b17dcb4f9a82cbb50769882670f62d7edeb560c1e0040df21d21bf84",
+      "assets/maps/pilot_01/source_manifest.json": "b946ce97e1cd3e8dcefd3aca8946812b75de532a8506fd2ac2539f70e04f97e0",
+      "assets/maps/pilot_01/stone_floor_tile.png": "9beefd01712a5c45b71908ad679d105b00a7ce6b99e61a639e384b7de06257e6",
+      "assets/maps/pilot_01/stone_floor_tile.png.import": "6e5bf6315ac4134457cfc8fa4e77c23407b8285fdeb32ec8953c532b81093cf3",
+      "assets/maps/pilot_01/wall_segment.png": "15b4a1a6f64b88df88424075d6710c0761cac7e7ac30dfc3ff889d0b3705d11a",
+      "assets/maps/pilot_01/wall_segment.png.import": "3e3fc099910e77537d7b5d84b7ac5b7c90cb23f38b94f3e6fd316011e2a33f3d",
+      "assets/references/GEN-005_viya_combat_pose_three_quarter_front.png": "d3c0084c73aff9a706a50a6cac760d124c0647d23fa36e6ae30635dc6929a730",
+      "assets/references/README.md": "ccee5345d56bbe2ecdf03cc0a54eea7c61dd684f9582a3ec83284218742e18a5",
+      "assets/references/qa/viya_4view_alignment_preview.jpg": "8fbd8b3c99af7099de926ca3c39feae0217dd984ff959e314e51d2338786fd0c",
+      "assets/references/qa/viya_side_silhouette_comparison.jpg": "1f8fe11aa693d84ebec41db9b6bea3af2bf61f61fd80f2ffdd45f799acd23170",
+      "data/actor_presentation.json": "e82ae99f672bd3e6979778f9a6201efb659b160a3407d9b1b6099eb0e0257f04",
+      "data/chapter_one.json": "c32e288ddc61dc8193cd78de416d3682b7c11f1924bbaaa3ea4afe4b78104f76",
+      "data/combat_pacing.json": "d153666f7f77506da281d1f90ae5fbc5822cd997c6db76590f35ef8a6662d597",
+      "data/combat_profiles.json": "d36abf0b4d0feb950e6448474732decdac9f98035a9962e5f5287b09eb1d1144",
+      "data/destructibles.json": "130421dd85d4dbf9ff9f70ab297b36586870e65fb9426cec0c2f58ce57a49b39",
+      "data/enemy_curse_v3.json": "c1d23889286fe1f91d4ef3b206de5b6e910211a52e935162da42355dc5d39659",
+      "data/enemy_patterns.json": "ba04c2b3076746724a09cf212576886edfa33821f666daa97a541d5042680bec",
+      "data/enemy_patterns_v2.json": "83bf0449e6dad16499af5a4c533c51d0ce3dc06fd73c02eb626de2d1e2e7ac21",
+      "data/gold_dungeon.json": "9a3427a6ddfb3462123f92e6918966ff7b1887ff324f368c600a9ad5993b1f9e",
+      "data/gold_rewards.json": "8f465cd44d1bf712b0fa758b2b8ff7cd17ecb450cff7f8e567d27f0397154993",
+      "data/maps.json": "925638f794696b96fdf48df8c266654cef3af002f43e57f91daa80f8d70e8bd4",
+      "data/presentation_slots.json": "d0a2e6ea1a55d37680bfa02ef9f9036f00deb03575ff9e9dcd10fa7179aa1001",
+      "data/prototype_skills.json": "a6ba197fe558d328e1fcab96506fa098465a4c72aebfe1a1b29cb98642628d1a",
+      "data/stages.json": "2e656d2dc155ad93c76b8a1303133992d95529283be7f5b16423738f4edaeeae",
+      "data/weapon_skills.json": "be23e1eb349958fcebf3dba088fcf389d50654fc31cb83523513c178ff81c659",
+      "project.godot": "0d8f7fce157178f7bf31acc183593b40f23cff6d266ea5270f4b75f0899b79e5",
+      "scenes/main.tscn": "17a2e77db7cf47af860de3c263dc9119b0df349bafdf2a8b52a40f7450c9e22c",
+      "scripts/combat/actor_motion.gd": "77c63ca6327c28a4b99aafea6f104a0b0ae9a91c2e364914d79307d4e90b5261",
+      "scripts/combat/approach_cues.gd": "3b61db842e2fced8e08c391e83fe342a2f349e7453d2d37421f51d1b340ce4fe",
+      "scripts/combat/attack_visuals.gd": "49e9acdb93325368fbf4c6d2732d11877e25f9daa829e6b00a466b74d339556f",
+      "scripts/combat/battle_forms.gd": "a0e9ebcf2cb5d369c0db53f089ab9bb9df0163b1f171908a57bd63f7e285ab95",
+      "scripts/combat/battle_projection.gd": "f8abad51e46f2353d01cc6f1f4b904485621d00ccf75e854ab873bc688f160a0",
+      "scripts/combat/battle_view.gd": "412e4d6b12bb97bb2a6c89903d5b6ba731eed19683010e1ebae664a44e6b4ed7",
+      "scripts/combat/boss_guidance.gd": "d7c1195590ce6fedd3cc8c90cbcdfdf4a2aaf7b994fdfe1a26206e3a9709fef9",
+      "scripts/combat/combat_audio.gd": "9d8d1f2e1d6b617e63a5f8454d182b5e16f08b99b28ade31c1e24cb95be18d2b",
+      "scripts/combat/combat_audio_bank.gd": "589afc536b6514a10a86b5436bc5271ffa6c522452e12949842a1ba8ca65d9ce",
+      "scripts/combat/combat_camera.gd": "0039e471d576f4daeb00f6b453f54a29d32917fe71aef4490b3f0bd33e90f896",
+      "scripts/combat/combat_cues.gd": "04027c56be8fa43d6465a165569b1e209dd7782a630d97a6e96d0acc3235ebda",
+      "scripts/combat/combat_display.gd": "dbb2493bf333b9972603f6cc5ae123010f5cd57e660133e44b4a9110a935d4f7",
+      "scripts/combat/combat_profiles.gd": "515689ca733856a0855739531ad4ebeddb20609839210df41c3b6f6202c898e0",
+      "scripts/combat/curse_visuals.gd": "f6fd054527091a5631eb003a2ea38c8308d1bccc29098f5542250916ea0fb3ac",
+      "scripts/combat/defense_rules.gd": "1fa247925d4d5a33dfdf7371285d9192b85b0cd83603efed33894693053691f8",
+      "scripts/combat/enemy_pattern_visuals.gd": "ffe5032905c8df738b2d7f2a92346206b7df14502b4d2f8babc88304adc5d666",
+      "scripts/combat/enemy_patterns.gd": "a19cad533e9185a0bbca1671028349463a2c9c7c020c0e26dea1d5f59b3eebda",
+      "scripts/combat/enemy_patterns_v1.gd": "4059f30002b56fa0ccb73ed38b4fe4af9c0fe8092a8f5836ad53f6e3cef5a4af",
+      "scripts/combat/enemy_patterns_v17.gd": "df42114040f4da370a67257445063fdb851033182108111eac609758334b81ab",
+      "scripts/combat/enemy_patterns_v2.gd": "60ff5da133476bd9c851aaef695cd07ae748e313d9f654dd4b2b0e258af7ca1d",
+      "scripts/combat/enemy_patterns_v3.gd": "1c5ea0cee251c0fda6a5a77b40201dba8d97b27f42f5ac92c93602e43c831114",
+      "scripts/combat/feedback_state.gd": "3ee19238fb9307bc9953fed3ecc266ecff420e2c74ceffe81409069372e87d88",
+      "scripts/combat/gold_dungeon.gd": "f7073b32297d4326a0abc973022d7280c53f92114d49db53933874118b3ccc0d",
+      "scripts/combat/high_angle_battle.gd": "9fa791f763965d6f49ea0ed0dfaebf7da0180b761d342749824d54c8e2d56240",
+      "scripts/combat/incoming_feedback.gd": "71dfbafc9d3e58435afa40b2f1f427387ad899f118906cda72b028538fdb853b",
+      "scripts/combat/magic_state.gd": "41a9a7739edc46e98dda26986f23dddf1c0ff6bdf9b40d80640f797460b9223b",
+      "scripts/combat/run_state.gd": "2797a9052386f5c5d331bb7437bd4fa610dfcd25293ad754dcac10157efbf635",
+      "scripts/combat/stage_catalog.gd": "8059f41d7134818deeea1978d2f81fddc2456d530e33479d458461004600516f",
+      "scripts/combat/structure_feedback.gd": "1ea626cf8ab47d9d8a5acf717f0a8d115bcf3ba18ed45a5c118e37728f1673c5",
+      "scripts/combat/supply_feedback.gd": "09731b47d1cd26ed58fac503525ca349006efd8f3542545b4dd61f381c1f8287",
+      "scripts/combat/weapon_modules.gd": "a405c2ddad96a396c8e5e0820ac0d4ee4093a951c473ac7c849294e872616a2e",
+      "scripts/main.gd": "ca74e6a3a4030b2ad9e505a63f118f4558e8b366585a79a4abd0b2b202d995a4",
+      "scripts/progression/account_talents.gd": "0774659235d3bea9276574996565b315156260274750ef8c7f9969f18550f43e",
+      "scripts/progression/combat_pacing.gd": "07f73dae843a7779f992976efb1901774782db1bd021bef01999a83ea7814826",
+      "scripts/progression/gold_progress.gd": "2289fc850fc5f856d674863de6119987da74ed6bd931ade50f0faa11ea0f7012",
+      "scripts/progression/growth_state.gd": "07287b03d12eac144dce6f1858ceb2b6561e6281b4c011ac6bc5d5d3c72a0e6e",
+      "scripts/progression/run_snapshot.gd": "f6e6abd9dd2ff61e66505ee0e35ee6d208c9965d59f9e0681737c0ac14ca3bab",
+      "scripts/progression/run_store.gd": "bab493f1963ea2a6d98770f9ef9686d70d4b257e0b49afb3386de661a6081986",
+      "scripts/progression/skill_catalog.gd": "ccd13a2b02f4b57497beae39e483edfca53617cc3a39e43cbaf8009535c820d8",
+      "scripts/progression/weapon_catalog.gd": "aced8b45e765780b4053bfa436e1dbbc1696d2173cb4cb762f21298d5f91421b",
+      "scripts/ui/account_bonus_summary.gd": "c75ffab9d10f7b73fa9b89df9c532a119f00431447651ca13a1f004122e4cee8",
+      "scripts/ui/actor_assets.gd": "f98126291f60e27b9d903999c61f6a1c03a34555eb824a5fdd3e51db18a359c1",
+      "scripts/ui/asset_slots.gd": "26ffa91b19932e5d123eb03d6b63cd41e0f42881961ab6d668ccc543513a114a",
+      "scripts/ui/battle_chrome.gd": "6be2ec2203a0517ce6842d3c7979135ec7c94afaa5b69b1fff2508f083473a2a",
+      "scripts/ui/battle_save_notice.gd": "4030876186c66ae7de4ec2b8808d8b905881c40d0c0af29bd241f659dcdf2189",
+      "scripts/ui/city_preview.gd": "d01c0ca26b7d812b2b7d6d63339788be98241f6a09ec58a1a8d35a6f7b788937",
+      "scripts/ui/combat_skin.gd": "b9ed37f5c7f1831095805e13c6e3eaa986e762081209372cf8a4e09ff6608c66",
+      "scripts/ui/combat_slot_button.gd": "91a02ab52e8ebcb26985ae143dd596fbd4b62bd3fa6e440e5b0d12e44132a81d",
+      "scripts/ui/encounter_notice.gd": "316faf9f8de95b3917268b4773092a205cb0019e5860044294e0f781cb640e3e",
+      "scripts/ui/feedback_panel.gd": "2103fd9b8692c5606273175b415447f35a995f9a18306a5e8f0abeeb7c5d465b",
+      "scripts/ui/growth_overview.gd": "43dfb9306f4e280b57c8445b179c0e797938bc9fd0e5fa070053474cadb53a42",
+      "scripts/ui/hud_layout.gd": "d9a5dacd8e3816611b1658557c5366e1dbd6caeded4312d8f2e5e5584becddb6",
+      "scripts/ui/mobile_main.gd": "9b2cbd89a9f6b735ff5c7f1443bb9cc652a5e456e6ec320a7855212412bca367",
+      "scripts/ui/move_input.gd": "cee8e709185740d1cb964fff13873a0818d14d0b3653f36d6416a1b17da40bd8",
+      "scripts/ui/responsive_feedback_panel.gd": "b36ce744a7378d696b91018935f637da0ae88beccdeddd85b1187a238958ed5b",
+      "scripts/ui/reward_payment.gd": "d3fc0b75e7f9fbb5f55ffdbfe708039ccb77e4a35231c58d6fdcd4996a246c11",
+      "scripts/ui/skill_preview.gd": "5c3de40b161d38de44234f6f1a2c63064bbc99021c4def95f7995382b02af5db",
+      "scripts/world/map_catalog.gd": "952abbc81d539817dfdd98ed4a59185f13fb8c1adac0210839d176ebee087ea6",
+      "scripts/world/map_space.gd": "8110f4a28e04e67fe738011ea888f31a9c74c450ed79148d88c1da602fa03ae8",
+      "scripts/world/supply_catalog.gd": "1af21cb685b8da0858491a961f007e8a0511c24e0f70b0165e0051d7fcb310a1"
+    }
+  },
+  "runtime": {
+    "static_integrity": {
+      "status": "PASS",
+      "files_checked": 139,
+      "resource_references_checked": 431,
+      "errors": [],
+      "source_sha256": {
+        "project.godot": "0d8f7fce157178f7bf31acc183593b40f23cff6d266ea5270f4b75f0899b79e5",
+        "scenes/main.tscn": "17a2e77db7cf47af860de3c263dc9119b0df349bafdf2a8b52a40f7450c9e22c",
+        "scripts/combat/actor_motion.gd": "77c63ca6327c28a4b99aafea6f104a0b0ae9a91c2e364914d79307d4e90b5261",
+        "scripts/combat/approach_cues.gd": "3b61db842e2fced8e08c391e83fe342a2f349e7453d2d37421f51d1b340ce4fe",
+        "scripts/combat/attack_visuals.gd": "49e9acdb93325368fbf4c6d2732d11877e25f9daa829e6b00a466b74d339556f",
+        "scripts/combat/battle_forms.gd": "a0e9ebcf2cb5d369c0db53f089ab9bb9df0163b1f171908a57bd63f7e285ab95",
+        "scripts/combat/battle_projection.gd": "f8abad51e46f2353d01cc6f1f4b904485621d00ccf75e854ab873bc688f160a0",
+        "scripts/combat/battle_view.gd": "412e4d6b12bb97bb2a6c89903d5b6ba731eed19683010e1ebae664a44e6b4ed7",
+        "scripts/combat/boss_guidance.gd": "d7c1195590ce6fedd3cc8c90cbcdfdf4a2aaf7b994fdfe1a26206e3a9709fef9",
+        "scripts/combat/combat_audio.gd": "9d8d1f2e1d6b617e63a5f8454d182b5e16f08b99b28ade31c1e24cb95be18d2b",
+        "scripts/combat/combat_audio_bank.gd": "589afc536b6514a10a86b5436bc5271ffa6c522452e12949842a1ba8ca65d9ce",
+        "scripts/combat/combat_camera.gd": "0039e471d576f4daeb00f6b453f54a29d32917fe71aef4490b3f0bd33e90f896",
+        "scripts/combat/combat_cues.gd": "04027c56be8fa43d6465a165569b1e209dd7782a630d97a6e96d0acc3235ebda",
+        "scripts/combat/combat_display.gd": "dbb2493bf333b9972603f6cc5ae123010f5cd57e660133e44b4a9110a935d4f7",
+        "scripts/combat/combat_profiles.gd": "515689ca733856a0855739531ad4ebeddb20609839210df41c3b6f6202c898e0",
+        "scripts/combat/curse_visuals.gd": "f6fd054527091a5631eb003a2ea38c8308d1bccc29098f5542250916ea0fb3ac",
+        "scripts/combat/defense_rules.gd": "1fa247925d4d5a33dfdf7371285d9192b85b0cd83603efed33894693053691f8",
+        "scripts/combat/enemy_pattern_visuals.gd": "ffe5032905c8df738b2d7f2a92346206b7df14502b4d2f8babc88304adc5d666",
+        "scripts/combat/enemy_patterns.gd": "a19cad533e9185a0bbca1671028349463a2c9c7c020c0e26dea1d5f59b3eebda",
+        "scripts/combat/enemy_patterns_v1.gd": "4059f30002b56fa0ccb73ed38b4fe4af9c0fe8092a8f5836ad53f6e3cef5a4af",
+        "scripts/combat/enemy_patterns_v17.gd": "df42114040f4da370a67257445063fdb851033182108111eac609758334b81ab",
+        "scripts/combat/enemy_patterns_v2.gd": "60ff5da133476bd9c851aaef695cd07ae748e313d9f654dd4b2b0e258af7ca1d",
+        "scripts/combat/enemy_patterns_v3.gd": "1c5ea0cee251c0fda6a5a77b40201dba8d97b27f42f5ac92c93602e43c831114",
+        "scripts/combat/feedback_state.gd": "3ee19238fb9307bc9953fed3ecc266ecff420e2c74ceffe81409069372e87d88",
+        "scripts/combat/gold_dungeon.gd": "f7073b32297d4326a0abc973022d7280c53f92114d49db53933874118b3ccc0d",
+        "scripts/combat/high_angle_battle.gd": "9fa791f763965d6f49ea0ed0dfaebf7da0180b761d342749824d54c8e2d56240",
+        "scripts/combat/incoming_feedback.gd": "71dfbafc9d3e58435afa40b2f1f427387ad899f118906cda72b028538fdb853b",
+        "scripts/combat/magic_state.gd": "41a9a7739edc46e98dda26986f23dddf1c0ff6bdf9b40d80640f797460b9223b",
+        "scripts/combat/run_state.gd": "2797a9052386f5c5d331bb7437bd4fa610dfcd25293ad754dcac10157efbf635",
+        "scripts/combat/stage_catalog.gd": "8059f41d7134818deeea1978d2f81fddc2456d530e33479d458461004600516f",
+        "scripts/combat/structure_feedback.gd": "1ea626cf8ab47d9d8a5acf717f0a8d115bcf3ba18ed45a5c118e37728f1673c5",
+        "scripts/combat/supply_feedback.gd": "09731b47d1cd26ed58fac503525ca349006efd8f3542545b4dd61f381c1f8287",
+        "scripts/combat/weapon_modules.gd": "a405c2ddad96a396c8e5e0820ac0d4ee4093a951c473ac7c849294e872616a2e",
+        "scripts/main.gd": "ca74e6a3a4030b2ad9e505a63f118f4558e8b366585a79a4abd0b2b202d995a4",
+        "scripts/progression/account_talents.gd": "0774659235d3bea9276574996565b315156260274750ef8c7f9969f18550f43e",
+        "scripts/progression/combat_pacing.gd": "07f73dae843a7779f992976efb1901774782db1bd021bef01999a83ea7814826",
+        "scripts/progression/gold_progress.gd": "2289fc850fc5f856d674863de6119987da74ed6bd931ade50f0faa11ea0f7012",
+        "scripts/progression/growth_state.gd": "07287b03d12eac144dce6f1858ceb2b6561e6281b4c011ac6bc5d5d3c72a0e6e",
+        "scripts/progression/run_snapshot.gd": "f6e6abd9dd2ff61e66505ee0e35ee6d208c9965d59f9e0681737c0ac14ca3bab",
+        "scripts/progression/run_store.gd": "bab493f1963ea2a6d98770f9ef9686d70d4b257e0b49afb3386de661a6081986",
+        "scripts/progression/skill_catalog.gd": "ccd13a2b02f4b57497beae39e483edfca53617cc3a39e43cbaf8009535c820d8",
+        "scripts/progression/weapon_catalog.gd": "aced8b45e765780b4053bfa436e1dbbc1696d2173cb4cb762f21298d5f91421b",
+        "scripts/ui/account_bonus_summary.gd": "c75ffab9d10f7b73fa9b89df9c532a119f00431447651ca13a1f004122e4cee8",
+        "scripts/ui/actor_assets.gd": "f98126291f60e27b9d903999c61f6a1c03a34555eb824a5fdd3e51db18a359c1",
+        "scripts/ui/asset_slots.gd": "26ffa91b19932e5d123eb03d6b63cd41e0f42881961ab6d668ccc543513a114a",
+        "scripts/ui/battle_chrome.gd": "6be2ec2203a0517ce6842d3c7979135ec7c94afaa5b69b1fff2508f083473a2a",
+        "scripts/ui/battle_save_notice.gd": "4030876186c66ae7de4ec2b8808d8b905881c40d0c0af29bd241f659dcdf2189",
+        "scripts/ui/city_preview.gd": "d01c0ca26b7d812b2b7d6d63339788be98241f6a09ec58a1a8d35a6f7b788937",
+        "scripts/ui/combat_skin.gd": "b9ed37f5c7f1831095805e13c6e3eaa986e762081209372cf8a4e09ff6608c66",
+        "scripts/ui/combat_slot_button.gd": "91a02ab52e8ebcb26985ae143dd596fbd4b62bd3fa6e440e5b0d12e44132a81d",
+        "scripts/ui/encounter_notice.gd": "316faf9f8de95b3917268b4773092a205cb0019e5860044294e0f781cb640e3e",
+        "scripts/ui/feedback_panel.gd": "2103fd9b8692c5606273175b415447f35a995f9a18306a5e8f0abeeb7c5d465b",
+        "scripts/ui/growth_overview.gd": "43dfb9306f4e280b57c8445b179c0e797938bc9fd0e5fa070053474cadb53a42",
+        "scripts/ui/hud_layout.gd": "d9a5dacd8e3816611b1658557c5366e1dbd6caeded4312d8f2e5e5584becddb6",
+        "scripts/ui/mobile_main.gd": "9b2cbd89a9f6b735ff5c7f1443bb9cc652a5e456e6ec320a7855212412bca367",
+        "scripts/ui/move_input.gd": "cee8e709185740d1cb964fff13873a0818d14d0b3653f36d6416a1b17da40bd8",
+        "scripts/ui/responsive_feedback_panel.gd": "b36ce744a7378d696b91018935f637da0ae88beccdeddd85b1187a238958ed5b",
+        "scripts/ui/reward_payment.gd": "d3fc0b75e7f9fbb5f55ffdbfe708039ccb77e4a35231c58d6fdcd4996a246c11",
+        "scripts/ui/skill_preview.gd": "5c3de40b161d38de44234f6f1a2c63064bbc99021c4def95f7995382b02af5db",
+        "scripts/world/map_catalog.gd": "952abbc81d539817dfdd98ed4a59185f13fb8c1adac0210839d176ebee087ea6",
+        "scripts/world/map_space.gd": "8110f4a28e04e67fe738011ea888f31a9c74c450ed79148d88c1da602fa03ae8",
+        "scripts/world/supply_catalog.gd": "1af21cb685b8da0858491a961f007e8a0511c24e0f70b0165e0051d7fcb310a1",
+        "tests/measure_armor.gd": "19a42c9db8ac7b52b6bc2778f24e78ff05b433676c1443d3300a7d4bdd67c6af",
+        "tests/measure_balance.gd": "40b9f4cb6f528e5e40c72e20785f5fc094773ebec5022dc4890617054e232a6d",
+        "tests/measure_boss_guidance.gd": "891bd7aba3c747e25b065acfd5ef45d9057e01047ff374656247e02744d46b13",
+        "tests/measure_campaign.gd": "acc9b093cdc59af87d11f342a88a537b7f0d35ac8745149eb1ca0046ac791e6c",
+        "tests/measure_combat_audio.gd": "727d34de154acb4bb080553683e423a5cdea35fcf4592ee23fe00540848d199c",
+        "tests/measure_enemy_curse.gd": "665ce8a3fcf0b981a1a7bf824cbe6a9da0a3efbebdf23d18385a2c3e1666d36e",
+        "tests/measure_enemy_patterns.gd": "d49f9091fcde4ca3fecf19d2263917a51d4e9cb84bda27f0fb2e788a7cbbd9e9",
+        "tests/measure_pattern_reacquire.gd": "5dceefb39529e718a12aa0068f0f769eec0f7b52aab51643e48cce16b7abc528",
+        "tests/profile_combat.gd": "1499a2a5db64c0869bca71f94582729a029bd7b240dd9ba1ad75a52e3333a2cf",
+        "tests/test_account_bonus_summary.gd": "8949dd854d50c6fbe4898180848c4b9377b91ff55bfd7e9b0c04a24e5bef64c7",
+        "tests/test_account_expansion.gd": "97d23a6d5bc708b9ebdcc76a492982d5b8e0e2fa4be6f2ad0c2ca501d5d35422",
+        "tests/test_account_talents.gd": "a85b5b84514323481e45137ab05e611af9d18f364393b9a6891fe45f1fe2b9f3",
+        "tests/test_actor_animation.gd": "a85f368b78cd6000f1b27407e3dc42ccd45852f794675aba5db32a174640ba44",
+        "tests/test_attack_visuals.gd": "b091e1672614637797907658c628e86bd6f16ca728ce7cb1dae67d1529f1b443",
+        "tests/test_battle_save_notice.gd": "2bbfd4ef99e616b4be393a204e7c99a1acd17e0c3c1fb0b90629166ae0dd178c",
+        "tests/test_boss_guidance.gd": "2f3e94e8c0cb9e61e9343a6fd87ac26fc3e77316d42da42e99fd4d32100329b3",
+        "tests/test_camera_lead.gd": "858cb6e2db1ca9b7d95df7e41ecfb08e16074d129fbd68c5a5c6d3d9be7b9587",
+        "tests/test_campaign.gd": "07c21cb62d12d5394b0864afe3ce47f62b3cd11146fa4bd2780957c54d3f1f49",
+        "tests/test_chapter_ui.gd": "b48b6813b9d8a5e8d98c4d1e7d6a9ba65f7c54c5995bee66b8afcb55348db984",
+        "tests/test_combat_audio.gd": "cd4b66cf0f8e48faf98fdcf6ea4b0c87d687d06b47e424bb1a3210857e2e2beb",
+        "tests/test_combat_cues.gd": "04166b18e6f5e6a34cd6e9154ee5fab5efad5f052e019854aa9affd9f43dd399",
+        "tests/test_combat_display.gd": "15b28b0a80b539bf9ccdce23ee988777307bfb875a84e4429796ba32575dbcdf",
+        "tests/test_combat_foundation.gd": "57efe421768dad47bee7a560325214a0c8a30d5fdf8d015fc2648f2b8c71416d",
+        "tests/test_combat_pacing.gd": "d321ef8b3e01f9879b8240bb439d93eaae8b5b75e5962437ddd40f7e6298b600",
+        "tests/test_combat_profiles.gd": "b9bd77beba226279c7c4fb4825e4290dd078974abd96969b4785778995b12f95",
+        "tests/test_encounter_notice.gd": "3d300aafff042d777c4bec71fc481f039a2e1486975be8c360ad0810350e2488",
+        "tests/test_enemy_curse.gd": "2094a238b45a1ecec918598b725289913a3535618d704dc5df39312aa396adc2",
+        "tests/test_enemy_patterns.gd": "f3d70f9cc5f66471cc0cc51c568d25d88e2690d8ab3979af1f612e59fb4f9624",
+        "tests/test_enemy_variety.gd": "1cf96b74184dd2cc8fcfc93513d4308fe9f2d50b7c870c54459e73f99a7f8b6a",
+        "tests/test_feedback.gd": "a0558acd7ab6216ccceb597f90c823a1078b0cda9337392440fe6523f22fce86",
+        "tests/test_gold_dungeon.gd": "5bf6924c97cb1bb83bb3b9586e2a5ba97dc045dceb345aa2819f49fd4eda5709",
+        "tests/test_gold_rewards.gd": "ea84e51520721ad62e52416145f51163d541ef0c3eac40cc125ef343d08c28b4",
+        "tests/test_gold_settings.gd": "29358cc8bd690213f4fab1fde43cc0a921689983201cfbcbffa18dd872e047a9",
+        "tests/test_growth.gd": "98f63a46d71eeba5f8807655ba6bd9d87fe89b240fca92bbbc12f253fbe0ba72",
+        "tests/test_growth_overview.gd": "bd6706bf3253d25b8b41c6374a53732762af0d361d11c04aac47abee4f565e87",
+        "tests/test_guide_skin.gd": "50502dc737876e114d1443ad66af92d5973b131f746a2162952d7385797d1b6a",
+        "tests/test_high_angle.gd": "ea73c65df5d875d9bf9f62dea1ecdd0dcf29c7eb9c5163b1448bc5a9bfbf2046",
+        "tests/test_incoming_feedback.gd": "19965b733e2e28451744a1af948a236631e3bc9d0b8bf83b3beb4f4a737e37ee",
+        "tests/test_magic.gd": "2969ef796d9255f7b4c79534c68ebabb1b2e349adb0828929d3450ab8f75a090",
+        "tests/test_map_pilot.gd": "9a79d528f5d437ff5fd2422070dc876ec93401e9b4a8ca091f48b344607ac0e2",
+        "tests/test_maps.gd": "3c129f9fe4aac09e01ad4d7f380d03faebb67f8b9f45f0f2d84175d79be4e2f7",
+        "tests/test_mobile_hud.gd": "3d0234bea7a3883f6cb38fe127d8062cbd393b97c3132109e853e84c68e75a76",
+        "tests/test_pattern_reacquire.gd": "13af5d2bd9698a7208c019abdee7649afdd9596b95b5cc056eae38c44253cba7",
+        "tests/test_reward_payment.gd": "3025a1882616b2d7fcdecb276a8b772d633bcbef93990d426ded5e733c3fded1",
+        "tests/test_run_navigation.gd": "14b88030cf3b84cdaed8c559e04c0f1b15552a9860f32c1c959be06bea9ee475",
+        "tests/test_scatter_packs.gd": "1d642ed432b31e509721d9867f5e7dde4d904499cf7555b163670ef9b5c07f2d",
+        "tests/test_skill_preview.gd": "0a62fc3bcdafeb525507f4107621d5c14a955e5d5270750a99d7de1e61f9ad9f",
+        "tests/test_structure_feedback.gd": "2c7c0cbb43202d8bcb6c06d266180b2e1beefa161f80ad4f316b9e27981c5224",
+        "tests/test_supplies.gd": "5de153bb81aaa06f5f6bbd321b8689d7afe59160d314a6cb06353fac39d8678d",
+        "tests/test_supply_feedback.gd": "72f6b9ea21ba920944c8148be4a376840f0b1c4a562fd8256fe4f6025c6c7597",
+        "tests/test_talent_tree.gd": "984fdf593f086254dd17fde222ac7cafa35d8b223195fd46bc04ee170ddada21",
+        "tests/test_weapon_skills.gd": "c3982eea863bca99f046b8f9e35823f244a792fd00d6ac9ff91808dd7f4c92cb",
+        "data/actor_presentation.json": "e82ae99f672bd3e6979778f9a6201efb659b160a3407d9b1b6099eb0e0257f04",
+        "data/chapter_one.json": "c32e288ddc61dc8193cd78de416d3682b7c11f1924bbaaa3ea4afe4b78104f76",
+        "data/combat_pacing.json": "d153666f7f77506da281d1f90ae5fbc5822cd997c6db76590f35ef8a6662d597",
+        "data/combat_profiles.json": "d36abf0b4d0feb950e6448474732decdac9f98035a9962e5f5287b09eb1d1144",
+        "data/destructibles.json": "130421dd85d4dbf9ff9f70ab297b36586870e65fb9426cec0c2f58ce57a49b39",
+        "data/enemy_curse_v3.json": "c1d23889286fe1f91d4ef3b206de5b6e910211a52e935162da42355dc5d39659",
+        "data/enemy_patterns.json": "ba04c2b3076746724a09cf212576886edfa33821f666daa97a541d5042680bec",
+        "data/enemy_patterns_v2.json": "83bf0449e6dad16499af5a4c533c51d0ce3dc06fd73c02eb626de2d1e2e7ac21",
+        "data/gold_dungeon.json": "9a3427a6ddfb3462123f92e6918966ff7b1887ff324f368c600a9ad5993b1f9e",
+        "data/gold_rewards.json": "8f465cd44d1bf712b0fa758b2b8ff7cd17ecb450cff7f8e567d27f0397154993",
+        "data/map_presentation_slots.json": "313acbeaad8026d01c8a86c3a4707690bcb1656679816060f4752913b563a48f",
+        "data/maps.json": "925638f794696b96fdf48df8c266654cef3af002f43e57f91daa80f8d70e8bd4",
+        "data/presentation_slots.json": "d0a2e6ea1a55d37680bfa02ef9f9036f00deb03575ff9e9dcd10fa7179aa1001",
+        "data/prototype_skills.json": "a6ba197fe558d328e1fcab96506fa098465a4c72aebfe1a1b29cb98642628d1a",
+        "data/stages.json": "2e656d2dc155ad93c76b8a1303133992d95529283be7f5b16423738f4edaeeae",
+        "data/weapon_skills.json": "be23e1eb349958fcebf3dba088fcf389d50654fc31cb83523513c178ff81c659",
+        "tools/bootstrap_godot.py": "4c3ca17c3b90f9c5590d7a82a76ae71a353f4d15aae973cf37e03e745ebfdecc",
+        "tools/check_combat_cues.py": "271dbb3ee2705efb985a6ebe6888a8dfbc375417556986a1d21f27a83d247474",
+        "tools/check_feedback_data.py": "f1bd6f415e919a32faab1b403073e24dcdda4b819938b9b707dacfc32320bec7",
+        "tools/check_growth_data.py": "304be6a17484dd44525d94bad31f422bd13be315ba3309a366ca2bd5b9e2ebfd",
+        "tools/check_magic_data.py": "9405ac2a576b42d279944aacec82f00500ad50c70e5f141413a05e64b1f39e5b",
+        "tools/check_mobile_hud.py": "9e43cace28480d3aacb45dabaf67acb2ad24e1c8a9366aa5c011a279eba35487",
+        "tools/check_project.py": "eeafd73fc4503c7af952331c093272a5510aade3fbae04e42afb77eb23f55157",
+        "tools/check_run_navigation.py": "82fbdd522682329e597017bf5fc80e40df104169c0463a492f265354ba734518",
+        "tools/report_economy.py": "5c449e04b43847c57ec9617c7c43b2408566dbc7691e32b8d3e33d8b33b24bd6"
+      },
+      "source_fingerprint": "e02ce3d9ff6825eb815d19990f655d1986bf69c6b6feedcd63e9175d00bd6a5e",
+      "scope": "UTF-8, delimiters, whitespace, JSON/Python syntax, resource existence, project settings; NOT GDScript parser/typechecking or gameplay."
+    },
+    "growth_data_contract": {
+      "status": "PASS",
+      "pool_count": 18,
+      "counts": {
+        "common_attack": 8,
+        "character_attack": 1,
+        "common_passive": 8,
+        "ultimate_enhancement": 1
+      },
+      "negative_controls": [
+        {
+          "fixture": "duplicate",
+          "rejected": true
+        },
+        {
+          "fixture": "resistance",
+          "rejected": true
+        },
+        {
+          "fixture": "foreign_owner",
+          "rejected": true
+        },
+        {
+          "fixture": "missing_ultimate",
+          "rejected": true
+        },
+        {
+          "fixture": "wrong_row",
+          "rejected": true
+        }
+      ],
+      "errors": [],
+      "scope": "JSON schema/content and source integration markers only; not GDScript runtime/behavior."
+    },
+    "magic_data_contract": {
+      "status": "PASS",
+      "errors": [],
+      "negative_controls": [
+        {
+          "fixture": "plain_name",
+          "rejected": true
+        },
+        {
+          "fixture": "foreign_owner",
+          "rejected": true
+        },
+        {
+          "fixture": "missing_magic",
+          "rejected": true
+        },
+        {
+          "fixture": "negative_cost",
+          "rejected": true
+        },
+        {
+          "fixture": "negative_cooldown",
+          "rejected": true
+        },
+        {
+          "fixture": "wrong_upgrade",
+          "rejected": true
+        },
+        {
+          "fixture": "nonfinite_radius",
+          "rejected": true
+        },
+        {
+          "fixture": "impossible_cost",
+          "rejected": true
+        }
+      ],
+      "temporary_skill_names": 18,
+      "required_xp_first_five": [
+        30,
+        48,
+        66,
+        84,
+        102
+      ],
+      "xp_drop_unchanged": 5.0,
+      "scope": "JSON validation, negative data controls and source markers/arithmetic; NOT GDScript runtime, UI, input dispatch or mobile tests."
+    },
+    "feedback_source_contract": {
+      "status": "PASS",
+      "errors": [],
+      "negative_controls": [
+        {
+          "fixture": "missing_damage_hook",
+          "rejected": true
+        },
+        {
+          "fixture": "missing_reset",
+          "rejected": true
+        },
+        {
+          "fixture": "negative_duration",
+          "rejected": true
+        },
+        {
+          "fixture": "missing_low_hp_warning",
+          "rejected": true
+        },
+        {
+          "fixture": "missing_stale_guard",
+          "rejected": true
+        }
+      ],
+      "files_checked": 7,
+      "source_sha256": {
+        "scripts/combat/feedback_state.gd": "3ee19238fb9307bc9953fed3ecc266ecff420e2c74ceffe81409069372e87d88",
+        "scripts/combat/run_state.gd": "2797a9052386f5c5d331bb7437bd4fa610dfcd25293ad754dcac10157efbf635",
+        "scripts/ui/feedback_panel.gd": "2103fd9b8692c5606273175b415447f35a995f9a18306a5e8f0abeeb7c5d465b",
+        "scripts/main.gd": "ca74e6a3a4030b2ad9e505a63f118f4558e8b366585a79a4abd0b2b202d995a4",
+        "tests/test_feedback.gd": "a0558acd7ab6216ccceb597f90c823a1078b0cda9337392440fe6523f22fce86",
+        "tools/check_project.py": "eeafd73fc4503c7af952331c093272a5510aade3fbae04e42afb77eb23f55157",
+        "tools/check_feedback_data.py": "f1bd6f415e919a32faab1b403073e24dcdda4b819938b9b707dacfc32320bec7"
+      },
+      "scope": "7 affected code/test/checker files: UTF-8, delimiters, whitespace, Python syntax, reaction constants, integration markers, engine-test registration and new dependency paths only. NOT the full project check or GDScript parser/type/runtime, rendering, or mobile input tests."
+    },
+    "mobile_hud_source_contract": {
+      "status": "PASS",
+      "files_checked": 8,
+      "errors": [],
+      "negative_controls": [
+        {
+          "fixture": "layout_detached",
+          "rejected": true
+        },
+        {
+          "fixture": "detail_not_paused",
+          "rejected": true
+        },
+        {
+          "fixture": "detail_mutates_skill",
+          "rejected": true
+        },
+        {
+          "fixture": "resize_retains_touch",
+          "rejected": true
+        },
+        {
+          "fixture": "test_not_registered",
+          "rejected": true
+        }
+      ],
+      "source_sha256": {
+        "scenes/main.tscn": "17a2e77db7cf47af860de3c263dc9119b0df349bafdf2a8b52a40f7450c9e22c",
+        "scripts/ui/mobile_main.gd": "9b2cbd89a9f6b735ff5c7f1443bb9cc652a5e456e6ec320a7855212412bca367",
+        "scripts/ui/hud_layout.gd": "d9a5dacd8e3816611b1658557c5366e1dbd6caeded4312d8f2e5e5584becddb6",
+        "scripts/ui/responsive_feedback_panel.gd": "b36ce744a7378d696b91018935f637da0ae88beccdeddd85b1187a238958ed5b",
+        "scripts/ui/move_input.gd": "cee8e709185740d1cb964fff13873a0818d14d0b3653f36d6416a1b17da40bd8",
+        "tests/test_mobile_hud.gd": "3d0234bea7a3883f6cb38fe127d8062cbd393b97c3132109e853e84c68e75a76",
+        "tools/check_project.py": "eeafd73fc4503c7af952331c093272a5510aade3fbae04e42afb77eb23f55157",
+        "tools/check_mobile_hud.py": "9e43cace28480d3aacb45dabaf67acb2ad24e1c8a9366aa5c011a279eba35487"
+      },
+      "source_fingerprint": "ac282af6e6dbe5a7aaca12f1b34b0fc4b94072bbfccfcf852491d99e74502f40",
+      "scope": "Changed UTF-8 files, delimiters, Python syntax and integration source checks only. NOT GDScript parsing/typechecking, actual Control geometry, touch dispatch, rendering or mobile execution."
+    },
+    "run_navigation_source_contract": {
+      "status": "PASS",
+      "files_checked": 5,
+      "errors": [],
+      "negative_controls": [
+        {
+          "fixture": "unescaped_string_newline",
+          "rejected": true
+        },
+        {
+          "fixture": "unguarded_intent",
+          "rejected": true
+        },
+        {
+          "fixture": "confirmation_resets_hp",
+          "rejected": true
+        },
+        {
+          "fixture": "cancel_rerolls",
+          "rejected": true
+        },
+        {
+          "fixture": "leave_fakes_death",
+          "rejected": true
+        },
+        {
+          "fixture": "no_result_copy",
+          "rejected": true
+        },
+        {
+          "fixture": "stale_menu_revision",
+          "rejected": true
+        },
+        {
+          "fixture": "unregistered_engine_test",
+          "rejected": true
+        }
+      ],
+      "source_sha256": {
+        "scripts/combat/run_state.gd": "2797a9052386f5c5d331bb7437bd4fa610dfcd25293ad754dcac10157efbf635",
+        "scripts/ui/mobile_main.gd": "9b2cbd89a9f6b735ff5c7f1443bb9cc652a5e456e6ec320a7855212412bca367",
+        "tests/test_run_navigation.gd": "14b88030cf3b84cdaed8c559e04c0f1b15552a9860f32c1c959be06bea9ee475",
+        "tools/check_project.py": "eeafd73fc4503c7af952331c093272a5510aade3fbae04e42afb77eb23f55157",
+        "tools/check_run_navigation.py": "82fbdd522682329e597017bf5fc80e40df104169c0463a492f265354ba734518"
+      },
+      "source_fingerprint": "97c18abd9b48b20dd5b2373f9eebafb3cd937b374e95189fcd7abd44e1a29dcc",
+      "scope": "UTF-8/delimiters/Python syntax and navigation SOURCE contracts only; NOT GDScript parsing/types, native execution, actual UI/input, or mobile testing."
+    },
+    "combat_cues_source_contract": {
+      "status": "PASS",
+      "files_checked": 20,
+      "errors": [],
+      "negative_controls": [
+        {
+          "fixture": "stable_camera_unregistered",
+          "rejected": true
+        },
+        {
+          "fixture": "stable_camera_adapter",
+          "rejected": true
+        },
+        {
+          "fixture": "stable_camera_limit",
+          "rejected": true
+        },
+        {
+          "fixture": "curse_unregistered",
+          "rejected": true
+        },
+        {
+          "fixture": "curse_doublefire",
+          "rejected": true
+        },
+        {
+          "fixture": "v17_retrofit",
+          "rejected": true
+        },
+        {
+          "fixture": "curse_gate",
+          "rejected": true
+        },
+        {
+          "fixture": "curse_render",
+          "rejected": true
+        },
+        {
+          "fixture": "reacquire_unregistered",
+          "rejected": true
+        },
+        {
+          "fixture": "v16_retrofit",
+          "rejected": true
+        },
+        {
+          "fixture": "pattern_single_hit",
+          "rejected": true
+        },
+        {
+          "fixture": "pattern_old_ai",
+          "rejected": true
+        },
+        {
+          "fixture": "pattern_visual_mutation",
+          "rejected": true
+        },
+        {
+          "fixture": "pattern_unregistered",
+          "rejected": true
+        },
+        {
+          "fixture": "pattern_gate",
+          "rejected": true
+        },
+        {
+          "fixture": "pattern_contact_guard",
+          "rejected": true
+        },
+        {
+          "fixture": "pattern_stop_on_defeat",
+          "rejected": true
+        },
+        {
+          "fixture": "missing_reset",
+          "rejected": true
+        },
+        {
+          "fixture": "early_clock",
+          "rejected": true
+        },
+        {
+          "fixture": "changed_damage",
+          "rejected": true
+        },
+        {
+          "fixture": "drop_as_collection",
+          "rejected": true
+        },
+        {
+          "fixture": "unbounded_received",
+          "rejected": true
+        },
+        {
+          "fixture": "received_before_hp",
+          "rejected": true
+        },
+        {
+          "fixture": "unbounded_visuals",
+          "rejected": true
+        },
+        {
+          "fixture": "cosmetic_rng",
+          "rejected": true
+        },
+        {
+          "fixture": "mutable_view",
+          "rejected": true
+        },
+        {
+          "fixture": "supply_changes_rewards",
+          "rejected": true
+        },
+        {
+          "fixture": "supply_mutates_observation",
+          "rejected": true
+        },
+        {
+          "fixture": "supply_glyph_mutates_state",
+          "rejected": true
+        },
+        {
+          "fixture": "unregistered_test",
+          "rejected": true
+        },
+        {
+          "fixture": "ignored_engine_exit",
+          "rejected": true
+        },
+        {
+          "fixture": "ignored_engine_errors",
+          "rejected": true
+        },
+        {
+          "fixture": "ignored_test_result",
+          "rejected": true
+        }
+      ],
+      "source_sha256": {
+        "scripts/combat/run_state.gd": "2797a9052386f5c5d331bb7437bd4fa610dfcd25293ad754dcac10157efbf635",
+        "scripts/combat/battle_view.gd": "412e4d6b12bb97bb2a6c89903d5b6ba731eed19683010e1ebae664a44e6b4ed7",
+        "scripts/combat/combat_cues.gd": "04027c56be8fa43d6465a165569b1e209dd7782a630d97a6e96d0acc3235ebda",
+        "tests/test_combat_cues.gd": "04166b18e6f5e6a34cd6e9154ee5fab5efad5f052e019854aa9affd9f43dd399",
+        "tools/check_project.py": "eeafd73fc4503c7af952331c093272a5510aade3fbae04e42afb77eb23f55157",
+        "tools/check_combat_cues.py": "271dbb3ee2705efb985a6ebe6888a8dfbc375417556986a1d21f27a83d247474",
+        "scripts/combat/enemy_patterns.gd": "a19cad533e9185a0bbca1671028349463a2c9c7c020c0e26dea1d5f59b3eebda",
+        "scripts/combat/enemy_pattern_visuals.gd": "ffe5032905c8df738b2d7f2a92346206b7df14502b4d2f8babc88304adc5d666",
+        "scripts/progression/run_snapshot.gd": "f6e6abd9dd2ff61e66505ee0e35ee6d208c9965d59f9e0681737c0ac14ca3bab",
+        "scripts/combat/actor_motion.gd": "77c63ca6327c28a4b99aafea6f104a0b0ae9a91c2e364914d79307d4e90b5261",
+        "data/enemy_patterns.json": "ba04c2b3076746724a09cf212576886edfa33821f666daa97a541d5042680bec",
+        "scripts/combat/enemy_patterns_v1.gd": "4059f30002b56fa0ccb73ed38b4fe4af9c0fe8092a8f5836ad53f6e3cef5a4af",
+        "scripts/combat/enemy_patterns_v2.gd": "60ff5da133476bd9c851aaef695cd07ae748e313d9f654dd4b2b0e258af7ca1d",
+        "data/enemy_patterns_v2.json": "83bf0449e6dad16499af5a4c533c51d0ce3dc06fd73c02eb626de2d1e2e7ac21",
+        "scripts/combat/enemy_patterns_v17.gd": "df42114040f4da370a67257445063fdb851033182108111eac609758334b81ab",
+        "scripts/combat/enemy_patterns_v3.gd": "1c5ea0cee251c0fda6a5a77b40201dba8d97b27f42f5ac92c93602e43c831114",
+        "scripts/combat/curse_visuals.gd": "f6fd054527091a5631eb003a2ea38c8308d1bccc29098f5542250916ea0fb3ac",
+        "data/enemy_curse_v3.json": "c1d23889286fe1f91d4ef3b206de5b6e910211a52e935162da42355dc5d39659",
+        "scripts/combat/approach_cues.gd": "3b61db842e2fced8e08c391e83fe342a2f349e7453d2d37421f51d1b340ce4fe",
+        "scripts/combat/combat_camera.gd": "0039e471d576f4daeb00f6b453f54a29d32917fe71aef4490b3f0bd33e90f896"
+      },
+      "source_fingerprint": "6f0f0cbf435389e8a86e18757bac1e430f6e984c927311b917ae2eec303d105b",
+      "baseline_run_blob": "673d75a748fa5f1f9ac72ec73bbd9120fdcfce02",
+      "baseline_runner_blob": "1ab68ad8a51271e3d47db8b02d433991f42e8d6c",
+      "baseline_engine_function_sha256": "9156043eaf896d72565563cc1e2f623cf0c8fbac7f032f19bffee7e4946a69ee",
+      "scope": "Changed-source UTF-8/delimiters/Python syntax, hook order, bounds, isolation, reviewed GAME-024 RunState/GAME-030 view baselines with exact GAME-033 observations and GAME-038/039/040 version-gated pattern adapters and frozen v1/v2/v17, preserved engine runner. NOT Godot parser/type/runtime, visual quality, input dispatch, or FPS."
+    },
+    "godot_runtime": {
+      "status": "PASS",
+      "commands": [
+        {
+          "command": [
+            "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+            "--headless",
+            "--version"
+          ],
+          "exit_code": 0,
+          "status": "PASS"
+        },
+        {
+          "command": [
+            "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+            "--headless",
+            "--path",
+            "/workspace/Viya",
+            "--editor",
+            "--import",
+            "--quit"
+          ],
+          "exit_code": 0,
+          "status": "PASS"
+        },
+        {
+          "command": [
+            "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+            "--headless",
+            "--path",
+            "/workspace/Viya",
+            "--script",
+            "res://tests/test_combat_foundation.gd"
+          ],
+          "exit_code": 0,
+          "status": "PASS"
+        },
+        {
+          "command": [
+            "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+            "--headless",
+            "--path",
+            "/workspace/Viya",
+            "--script",
+            "res://tests/test_growth.gd"
+          ],
+          "exit_code": 0,
+          "status": "PASS"
+        },
+        {
+          "command": [
+            "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+            "--headless",
+            "--path",
+            "/workspace/Viya",
+            "--script",
+            "res://tests/test_magic.gd"
+          ],
+          "exit_code": 0,
+          "status": "PASS"
+        },
+        {
+          "command": [
+            "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+            "--headless",
+            "--path",
+            "/workspace/Viya",
+            "--script",
+            "res://tests/test_feedback.gd"
+          ],
+          "exit_code": 0,
+          "status": "PASS"
+        },
+        {
+          "command": [
+            "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+            "--headless",
+            "--path",
+            "/workspace/Viya",
+            "--script",
+            "res://tests/test_mobile_hud.gd"
+          ],
+          "exit_code": 0,
+          "status": "PASS"
+        },
+        {
+          "command": [
+            "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+            "--headless",
+            "--path",
+            "/workspace/Viya",
+            "--script",
+            "res://tests/test_run_navigation.gd"
+          ],
+          "exit_code": 0,
+          "status": "PASS"
+        },
+        {
+          "command": [
+            "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+            "--headless",
+            "--path",
+            "/workspace/Viya",
+            "--script",
+            "res://tests/test_combat_cues.gd"
+          ],
+          "exit_code": 0,
+          "status": "PASS"
+        },
+        {
+          "command": [
+            "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+            "--headless",
+            "--path",
+            "/workspace/Viya",
+            "--quit-after",
+            "120"
+          ],
+          "exit_code": 0,
+          "status": "PASS"
+        }
+      ],
+      "scope": "headless import, actual foundation/growth/magic/feedback/mobile-HUD/run-navigation/combat-cues GDScript tests and main boot; visual/mobile approval separate"
+    },
+    "windows_f5": "NOT_VERIFIED",
+    "android_device": "NOT_VERIFIED",
+    "ios_device": "NOT_VERIFIED"
+  },
+  "native_total": 3810,
+  "native_checks": [
+    23,
+    70,
+    122,
+    57,
+    1336,
+    68,
+    2134
+  ],
+  "native_increase": 9,
+  "python": {
+    "status": "PASS",
+    "tests": 12
+  },
+  "render": {
+    "active_steps_before_last": 898,
+    "actual_rendered_pan_frames": [
+      {
+        "camera": "(1470.0, 1420.0)",
+        "frame": 0,
+        "player": "(1481.75, 1420.0)"
+      },
+      {
+        "camera": "(1470.0, 1420.0)",
+        "frame": 1,
+        "player": "(1493.5, 1420.0)"
+      },
+      {
+        "camera": "(1470.0, 1420.0)",
+        "frame": 2,
+        "player": "(1505.25, 1420.0)"
+      },
+      {
+        "camera": "(1470.0, 1420.0)",
+        "frame": 3,
+        "player": "(1517.0, 1420.0)"
+      },
+      {
+        "camera": "(1470.0, 1420.0)",
+        "frame": 4,
+        "player": "(1528.75, 1420.0)"
+      },
+      {
+        "camera": "(1470.0, 1420.0)",
+        "frame": 5,
+        "player": "(1540.5, 1420.0)"
+      },
+      {
+        "camera": "(1471.587, 1420.0)",
+        "frame": 6,
+        "player": "(1552.25, 1420.0)"
+      },
+      {
+        "camera": "(1475.808, 1420.0)",
+        "frame": 7,
+        "player": "(1564.0, 1420.0)"
+      },
+      {
+        "camera": "(1481.981, 1420.0)",
+        "frame": 8,
+        "player": "(1575.75, 1420.0)"
+      },
+      {
+        "camera": "(1489.599, 1420.0)",
+        "frame": 9,
+        "player": "(1587.5, 1420.0)"
+      },
+      {
+        "camera": "(1498.288, 1420.0)",
+        "frame": 10,
+        "player": "(1599.25, 1420.0)"
+      },
+      {
+        "camera": "(1509.499, 1420.0)",
+        "frame": 11,
+        "player": "(1611.0, 1420.0)"
+      },
+      {
+        "camera": "(1521.249, 1420.0)",
+        "frame": 12,
+        "player": "(1622.75, 1420.0)"
+      },
+      {
+        "camera": "(1532.999, 1420.0)",
+        "frame": 13,
+        "player": "(1634.5, 1420.0)"
+      },
+      {
+        "camera": "(1544.749, 1420.0)",
+        "frame": 14,
+        "player": "(1646.25, 1420.0)"
+      },
+      {
+        "camera": "(1556.499, 1420.0)",
+        "frame": 15,
+        "player": "(1658.0, 1420.0)"
+      },
+      {
+        "camera": "(1568.249, 1420.0)",
+        "frame": 16,
+        "player": "(1669.75, 1420.0)"
+      },
+      {
+        "camera": "(1579.999, 1420.0)",
+        "frame": 17,
+        "player": "(1681.5, 1420.0)"
+      },
+      {
+        "camera": "(1591.749, 1420.0)",
+        "frame": 18,
+        "player": "(1693.25, 1420.0)"
+      },
+      {
+        "camera": "(1603.499, 1420.0)",
+        "frame": 19,
+        "player": "(1705.0, 1420.0)"
+      },
+      {
+        "camera": "(1615.249, 1420.0)",
+        "frame": 20,
+        "player": "(1716.75, 1420.0)"
+      },
+      {
+        "camera": "(1626.999, 1420.0)",
+        "frame": 21,
+        "player": "(1728.5, 1420.0)"
+      },
+      {
+        "camera": "(1638.749, 1420.0)",
+        "frame": 22,
+        "player": "(1740.25, 1420.0)"
+      },
+      {
+        "camera": "(1650.499, 1420.0)",
+        "frame": 23,
+        "player": "(1752.0, 1420.0)"
+      },
+      {
+        "camera": "(1662.249, 1420.0)",
+        "frame": 24,
+        "player": "(1763.75, 1420.0)"
+      },
+      {
+        "camera": "(1673.999, 1420.0)",
+        "frame": 25,
+        "player": "(1775.5, 1420.0)"
+      },
+      {
+        "camera": "(1685.749, 1420.0)",
+        "frame": 26,
+        "player": "(1787.25, 1420.0)"
+      },
+      {
+        "camera": "(1697.499, 1420.0)",
+        "frame": 27,
+        "player": "(1799.0, 1420.0)"
+      },
+      {
+        "camera": "(1709.249, 1420.0)",
+        "frame": 28,
+        "player": "(1810.75, 1420.0)"
+      },
+      {
+        "camera": "(1720.999, 1420.0)",
+        "frame": 29,
+        "player": "(1822.5, 1420.0)"
+      },
+      {
+        "camera": "(1732.749, 1420.0)",
+        "frame": 30,
+        "player": "(1834.25, 1420.0)"
+      },
+      {
+        "camera": "(1744.499, 1420.0)",
+        "frame": 31,
+        "player": "(1846.0, 1420.0)"
+      },
+      {
+        "camera": "(1756.249, 1420.0)",
+        "frame": 32,
+        "player": "(1857.75, 1420.0)"
+      },
+      {
+        "camera": "(1767.999, 1420.0)",
+        "frame": 33,
+        "player": "(1869.5, 1420.0)"
+      },
+      {
+        "camera": "(1779.749, 1420.0)",
+        "frame": 34,
+        "player": "(1881.25, 1420.0)"
+      },
+      {
+        "camera": "(1791.499, 1420.0)",
+        "frame": 35,
+        "player": "(1893.0, 1420.0)"
+      },
+      {
+        "camera": "(1803.249, 1420.0)",
+        "frame": 36,
+        "player": "(1904.75, 1420.0)"
+      },
+      {
+        "camera": "(1814.999, 1420.0)",
+        "frame": 37,
+        "player": "(1916.5, 1420.0)"
+      },
+      {
+        "camera": "(1826.749, 1420.0)",
+        "frame": 38,
+        "player": "(1928.25, 1420.0)"
+      },
+      {
+        "camera": "(1838.499, 1420.0)",
+        "frame": 39,
+        "player": "(1940.0, 1420.0)"
+      }
+    ],
+    "errors": [],
+    "mouse_controls": 3,
+    "native_magic_touches": 1,
+    "native_move_touches": 1,
+    "records": [
+      {
+        "arrival_caption": "최후의 성벽 방어 ▸",
+        "audio_active": 0,
+        "bound_textures": [
+          "res://assets/maps/pilot_01/stone_floor_tile.png",
+          "res://assets/maps/pilot_01/wall_segment.png",
+          "res://assets/maps/pilot_01/prop_crate.png",
+          "",
+          "",
+          ""
+        ],
+        "dense": false,
+        "enemy_bullets": [],
+        "high_angle": true,
+        "hp": 100,
+        "image": "pilot02_before_1280",
+        "incoming": {},
+        "label_overlaps": 0,
+        "labels": 0,
+        "map": "prologue_wall",
+        "mp": 100.0,
+        "occluders": 0,
+        "patterns": [],
+        "phase": 1,
+        "pixels_sha256": "0280e94aa0a14e7d80f84c10bf4f2498d7abce10479341b798bb214372a5e82d",
+        "telegraph": [],
+        "viewport": "(1280, 720)"
+      },
+      {
+        "arrival_caption": "최후의 성벽 방어 ▸",
+        "audio_active": 0,
+        "bound_textures": [
+          "res://assets/maps/pilot_01/stone_floor_tile.png",
+          "res://assets/maps/pilot_01/wall_segment.png",
+          "res://assets/maps/pilot_01/prop_crate.png",
+          "res://assets/maps/pilot_02/ruin_block.png",
+          "res://assets/maps/pilot_02/prop_urn.png",
+          "res://assets/maps/pilot_02/prop_debris.png"
+        ],
+        "dense": false,
+        "enemy_bullets": [],
+        "high_angle": true,
+        "hp": 100,
+        "image": "pilot02_after_1280",
+        "incoming": {},
+        "label_overlaps": 0,
+        "labels": 0,
+        "map": "prologue_wall",
+        "mp": 100.0,
+        "occluders": 0,
+        "patterns": [],
+        "phase": 1,
+        "pixels_sha256": "35138de8928330d1c4b1f8aea321f6129eec0ae006140a629c1cbef3d30e3513",
+        "telegraph": [],
+        "viewport": "(1280, 720)"
+      },
+      {
+        "arrival_caption": "임무 ▸",
+        "audio_active": 0,
+        "bound_textures": [
+          "res://assets/maps/pilot_01/stone_floor_tile.png",
+          "res://assets/maps/pilot_01/wall_segment.png",
+          "res://assets/maps/pilot_01/prop_crate.png",
+          "",
+          "",
+          ""
+        ],
+        "dense": false,
+        "enemy_bullets": [],
+        "high_angle": true,
+        "hp": 100,
+        "image": "pilot02_before_854",
+        "incoming": {},
+        "label_overlaps": 0,
+        "labels": 0,
+        "map": "prologue_wall",
+        "mp": 100.0,
+        "occluders": 0,
+        "patterns": [],
+        "phase": 1,
+        "pixels_sha256": "8f89e1c6ef9f1ec21fd71ca59941476c6b13e3144a9ec0f15c3bab182569a542",
+        "telegraph": [],
+        "viewport": "(854, 394)"
+      },
+      {
+        "arrival_caption": "임무 ▸",
+        "audio_active": 0,
+        "bound_textures": [
+          "res://assets/maps/pilot_01/stone_floor_tile.png",
+          "res://assets/maps/pilot_01/wall_segment.png",
+          "res://assets/maps/pilot_01/prop_crate.png",
+          "res://assets/maps/pilot_02/ruin_block.png",
+          "res://assets/maps/pilot_02/prop_urn.png",
+          "res://assets/maps/pilot_02/prop_debris.png"
+        ],
+        "dense": false,
+        "enemy_bullets": [],
+        "high_angle": true,
+        "hp": 100,
+        "image": "pilot02_after_854",
+        "incoming": {},
+        "label_overlaps": 0,
+        "labels": 0,
+        "map": "prologue_wall",
+        "mp": 100.0,
+        "occluders": 0,
+        "patterns": [],
+        "phase": 1,
+        "pixels_sha256": "f5ddd9b003ed56e6d9294f5bdd2d4f71f6313fdca739cfa389cdf8e2d4527fef",
+        "telegraph": [],
+        "viewport": "(854, 394)"
+      },
+      {
+        "arrival_caption": "최후의 성벽 방어 ▸",
+        "audio_active": 0,
+        "bound_textures": [
+          "res://assets/maps/pilot_01/stone_floor_tile.png",
+          "res://assets/maps/pilot_01/wall_segment.png",
+          "res://assets/maps/pilot_01/prop_crate.png",
+          "",
+          "",
+          ""
+        ],
+        "dense": false,
+        "enemy_bullets": [],
+        "high_angle": true,
+        "hp": 100,
+        "image": "pilot02_before_1920",
+        "incoming": {},
+        "label_overlaps": 0,
+        "labels": 0,
+        "map": "prologue_wall",
+        "mp": 100.0,
+        "occluders": 0,
+        "patterns": [],
+        "phase": 1,
+        "pixels_sha256": "4202f158a7be6c1f2893f9b7a045e7d1fa4fb96c7afd0da0fbdc1e68907a9731",
+        "telegraph": [],
+        "viewport": "(1920, 1080)"
+      },
+      {
+        "arrival_caption": "최후의 성벽 방어 ▸",
+        "audio_active": 0,
+        "bound_textures": [
+          "res://assets/maps/pilot_01/stone_floor_tile.png",
+          "res://assets/maps/pilot_01/wall_segment.png",
+          "res://assets/maps/pilot_01/prop_crate.png",
+          "res://assets/maps/pilot_02/ruin_block.png",
+          "res://assets/maps/pilot_02/prop_urn.png",
+          "res://assets/maps/pilot_02/prop_debris.png"
+        ],
+        "dense": false,
+        "enemy_bullets": [],
+        "high_angle": true,
+        "hp": 100,
+        "image": "pilot02_after_1920",
+        "incoming": {},
+        "label_overlaps": 0,
+        "labels": 0,
+        "map": "prologue_wall",
+        "mp": 100.0,
+        "occluders": 0,
+        "patterns": [],
+        "phase": 1,
+        "pixels_sha256": "00ecd3d8e5a7987cc81fc5a1c416b674a51f6f158b109d425977d46009392136",
+        "telegraph": [],
+        "viewport": "(1920, 1080)"
+      },
+      {
+        "arrival_caption": "최후의 성벽 방어 ▸",
+        "audio_active": 0,
+        "bound_textures": [
+          "res://assets/maps/pilot_01/stone_floor_tile.png",
+          "res://assets/maps/pilot_01/wall_segment.png",
+          "res://assets/maps/pilot_01/prop_crate.png",
+          "res://assets/maps/pilot_02/ruin_block.png",
+          "res://assets/maps/pilot_02/prop_urn.png",
+          "res://assets/maps/pilot_02/prop_debris.png"
+        ],
+        "dense": false,
+        "enemy_bullets": [],
+        "high_angle": true,
+        "hp": 100,
+        "image": "pilot02_pan_5",
+        "incoming": {},
+        "label_overlaps": 0,
+        "labels": 0,
+        "map": "prologue_wall",
+        "mp": 100.0,
+        "occluders": 0,
+        "patterns": [],
+        "phase": 1,
+        "pixels_sha256": "c3399f5323dc27ccf72d6a29c722546e85b9aefddd104d4a64673259490ba22b",
+        "telegraph": [],
+        "viewport": "(1280, 720)"
+      },
+      {
+        "arrival_caption": "최후의 성벽 방어 ▸",
+        "audio_active": 0,
+        "bound_textures": [
+          "res://assets/maps/pilot_01/stone_floor_tile.png",
+          "res://assets/maps/pilot_01/wall_segment.png",
+          "res://assets/maps/pilot_01/prop_crate.png",
+          "res://assets/maps/pilot_02/ruin_block.png",
+          "res://assets/maps/pilot_02/prop_urn.png",
+          "res://assets/maps/pilot_02/prop_debris.png"
+        ],
+        "dense": false,
+        "enemy_bullets": [],
+        "high_angle": true,
+        "hp": 100,
+        "image": "pilot02_pan_20",
+        "incoming": {},
+        "label_overlaps": 0,
+        "labels": 0,
+        "map": "prologue_wall",
+        "mp": 100.0,
+        "occluders": 0,
+        "patterns": [],
+        "phase": 1,
+        "pixels_sha256": "c62da1fd3bbcdfa0178ae828bc8c67da9f36752fe913e91cad5bd15a08a888f7",
+        "telegraph": [],
+        "viewport": "(1280, 720)"
+      },
+      {
+        "arrival_caption": "최후의 성벽 방어 ▸",
+        "audio_active": 0,
+        "bound_textures": [
+          "res://assets/maps/pilot_01/stone_floor_tile.png",
+          "res://assets/maps/pilot_01/wall_segment.png",
+          "res://assets/maps/pilot_01/prop_crate.png",
+          "res://assets/maps/pilot_02/ruin_block.png",
+          "res://assets/maps/pilot_02/prop_urn.png",
+          "res://assets/maps/pilot_02/prop_debris.png"
+        ],
+        "dense": false,
+        "enemy_bullets": [],
+        "high_angle": true,
+        "hp": 100,
+        "image": "pilot02_pan_40",
+        "incoming": {},
+        "label_overlaps": 0,
+        "labels": 0,
+        "map": "prologue_wall",
+        "mp": 100.0,
+        "occluders": 0,
+        "patterns": [],
+        "phase": 1,
+        "pixels_sha256": "c492e5a2e2c779dc621b4851926ddfd55c8a0efe417ffc85828d4463eaacf464",
+        "telegraph": [],
+        "viewport": "(1280, 720)"
+      },
+      {
+        "arrival_caption": "최후의 성벽 방어 ▸",
+        "audio_active": 0,
+        "bound_textures": [
+          "res://assets/maps/pilot_01/stone_floor_tile.png",
+          "res://assets/maps/pilot_01/wall_segment.png",
+          "res://assets/maps/pilot_01/prop_crate.png",
+          "res://assets/maps/pilot_02/ruin_block.png",
+          "res://assets/maps/pilot_02/prop_urn.png",
+          "res://assets/maps/pilot_02/prop_debris.png"
+        ],
+        "dense": false,
+        "enemy_bullets": [],
+        "high_angle": true,
+        "hp": 100,
+        "image": "pilot02_stopped",
+        "incoming": {},
+        "label_overlaps": 0,
+        "labels": 0,
+        "map": "prologue_wall",
+        "mp": 100.0,
+        "occluders": 0,
+        "patterns": [],
+        "phase": 1,
+        "pixels_sha256": "b1de23a1230dfb86b3893a9a564fd710246d5bf8d337f07a25b24a6960e2fb63",
+        "telegraph": [],
+        "viewport": "(1280, 720)"
+      },
+      {
+        "arrival_caption": "최후의 성벽 방어 ▸",
+        "audio_active": 0,
+        "bound_textures": [
+          "res://assets/maps/pilot_01/stone_floor_tile.png",
+          "res://assets/maps/pilot_01/wall_segment.png",
+          "res://assets/maps/pilot_01/prop_crate.png",
+          "res://assets/maps/pilot_02/ruin_block.png",
+          "res://assets/maps/pilot_02/prop_urn.png",
+          "res://assets/maps/pilot_02/prop_debris.png"
+        ],
+        "dense": false,
+        "enemy_bullets": [],
+        "high_angle": true,
+        "hp": 100,
+        "image": "pilot02_occlusion",
+        "incoming": {},
+        "label_overlaps": 0,
+        "labels": 0,
+        "map": "prologue_wall",
+        "mp": 100.0,
+        "occluders": 1,
+        "patterns": [],
+        "phase": 1,
+        "pixels_sha256": "70d431b3435ab0dc28c6498c9769f944ba172eba6a255070e20b15c72165f51f",
+        "telegraph": [],
+        "viewport": "(1280, 720)"
+      },
+      {
+        "arrival_caption": "최후의 성벽 방어 ▸",
+        "audio_active": 0,
+        "bound_textures": [
+          "res://assets/maps/pilot_01/stone_floor_tile.png",
+          "res://assets/maps/pilot_01/wall_segment.png",
+          "res://assets/maps/pilot_01/prop_crate.png",
+          "res://assets/maps/pilot_02/ruin_block.png",
+          "res://assets/maps/pilot_02/prop_urn.png",
+          "res://assets/maps/pilot_02/prop_debris.png"
+        ],
+        "dense": false,
+        "enemy_bullets": [],
+        "high_angle": true,
+        "hp": 100,
+        "image": "pilot02_damaged",
+        "incoming": {},
+        "label_overlaps": 0,
+        "labels": 3,
+        "map": "prologue_wall",
+        "mp": 100.0,
+        "occluders": 0,
+        "patterns": [],
+        "phase": 1,
+        "pixels_sha256": "ee8e544f808cb3ac3e2812f4f7ab7502a0dddc3addffcdb3688fd9772c62ec93",
+        "telegraph": [],
+        "viewport": "(1280, 720)"
+      },
+      {
+        "arrival_caption": "최후의 성벽 방어 ▸",
+        "audio_active": 1,
+        "bound_textures": [
+          "res://assets/maps/pilot_01/stone_floor_tile.png",
+          "res://assets/maps/pilot_01/wall_segment.png",
+          "res://assets/maps/pilot_01/prop_crate.png",
+          "res://assets/maps/pilot_02/ruin_block.png",
+          "res://assets/maps/pilot_02/prop_urn.png",
+          "res://assets/maps/pilot_02/prop_debris.png"
+        ],
+        "dense": false,
+        "enemy_bullets": [],
+        "high_angle": true,
+        "hp": 100,
+        "image": "pilot02_broken",
+        "incoming": {},
+        "label_overlaps": 0,
+        "labels": 3,
+        "map": "prologue_wall",
+        "mp": 60.05,
+        "occluders": 0,
+        "patterns": [],
+        "phase": 1,
+        "pixels_sha256": "1303784670676b5471ff0d18dd8b46dc41db056dc19e0c15101d7e646a8f4e49",
+        "telegraph": [],
+        "viewport": "(1280, 720)"
+      },
+      {
+        "arrival_caption": "최후의 성벽 방어 ▸",
+        "audio_active": 0,
+        "bound_textures": [
+          "res://assets/maps/pilot_01/stone_floor_tile.png",
+          "res://assets/maps/pilot_01/wall_segment.png",
+          "res://assets/maps/pilot_01/prop_crate.png",
+          "res://assets/maps/pilot_02/ruin_block.png",
+          "res://assets/maps/pilot_02/prop_urn.png",
+          "res://assets/maps/pilot_02/prop_debris.png"
+        ],
+        "dense": false,
+        "enemy_bullets": [],
+        "high_angle": true,
+        "hp": 100,
+        "image": "pilot02_waiting_pause",
+        "incoming": {},
+        "label_overlaps": 0,
+        "labels": 0,
+        "map": "prologue_wall",
+        "mp": 100.0,
+        "occluders": 0,
+        "patterns": [],
+        "phase": 2,
+        "pixels_sha256": "6377a72f7a49aab23bad7b6d82413a3f7f4dceff0b29b49ff760d671e27c60f8",
+        "telegraph": [],
+        "viewport": "(1280, 720)"
+      },
+      {
+        "arrival_caption": "최후의 성벽 방어 ▸",
+        "audio_active": 0,
+        "bound_textures": [
+          "res://assets/maps/pilot_01/stone_floor_tile.png",
+          "res://assets/maps/pilot_01/wall_segment.png",
+          "res://assets/maps/pilot_01/prop_crate.png",
+          "res://assets/maps/pilot_02/ruin_block.png",
+          "res://assets/maps/pilot_02/prop_urn.png",
+          "res://assets/maps/pilot_02/prop_debris.png"
+        ],
+        "dense": false,
+        "enemy_bullets": [],
+        "high_angle": true,
+        "hp": 100,
+        "image": "pilot02_regrown",
+        "incoming": {},
+        "label_overlaps": 0,
+        "labels": 0,
+        "map": "prologue_wall",
+        "mp": 100.0,
+        "occluders": 0,
+        "patterns": [],
+        "phase": 1,
+        "pixels_sha256": "d6c9c948d3d7b72385633e31bce320954bd83fe1ddaa4021c3f0ea861ac972dd",
+        "telegraph": [],
+        "viewport": "(1280, 720)"
+      },
+      {
+        "arrival_caption": "전투 임무 ▸",
+        "audio_active": 0,
+        "bound_textures": [
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        "dense": false,
+        "enemy_bullets": [],
+        "high_angle": true,
+        "hp": 100,
+        "image": "pilot02_unchanged_outskirts_trial_before",
+        "incoming": {},
+        "label_overlaps": 0,
+        "labels": 0,
+        "map": "outskirts_trial",
+        "mp": 100.0,
+        "occluders": 0,
+        "patterns": [],
+        "phase": 1,
+        "pixels_sha256": "1bdec494b9240d8aaa1f20fbc7d04a785e67a4abcca6e977c97c6332d6a0f595",
+        "telegraph": [],
+        "viewport": "(1280, 720)"
+      },
+      {
+        "arrival_caption": "전투 임무 ▸",
+        "audio_active": 0,
+        "bound_textures": [
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        "dense": false,
+        "enemy_bullets": [],
+        "high_angle": true,
+        "hp": 100,
+        "image": "pilot02_unchanged_outskirts_trial_after",
+        "incoming": {},
+        "label_overlaps": 0,
+        "labels": 0,
+        "map": "outskirts_trial",
+        "mp": 100.0,
+        "occluders": 0,
+        "patterns": [],
+        "phase": 1,
+        "pixels_sha256": "1bdec494b9240d8aaa1f20fbc7d04a785e67a4abcca6e977c97c6332d6a0f595",
+        "telegraph": [],
+        "viewport": "(1280, 720)"
+      },
+      {
+        "arrival_caption": "전투 임무 ▸",
+        "audio_active": 0,
+        "bound_textures": [
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        "dense": false,
+        "enemy_bullets": [],
+        "high_angle": true,
+        "hp": 100,
+        "image": "pilot02_unchanged_gold_slime_before",
+        "incoming": {},
+        "label_overlaps": 0,
+        "labels": 0,
+        "map": "gold_slime",
+        "mp": 100.0,
+        "occluders": 0,
+        "patterns": [],
+        "phase": 1,
+        "pixels_sha256": "3d0748751a21b79fcb6cd695dd47a7399c88edc3a5a40341c3573ea317f682d6",
+        "telegraph": [],
+        "viewport": "(1280, 720)"
+      },
+      {
+        "arrival_caption": "전투 임무 ▸",
+        "audio_active": 0,
+        "bound_textures": [
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        "dense": false,
+        "enemy_bullets": [],
+        "high_angle": true,
+        "hp": 100,
+        "image": "pilot02_unchanged_gold_slime_after",
+        "incoming": {},
+        "label_overlaps": 0,
+        "labels": 0,
+        "map": "gold_slime",
+        "mp": 100.0,
+        "occluders": 0,
+        "patterns": [],
+        "phase": 1,
+        "pixels_sha256": "3d0748751a21b79fcb6cd695dd47a7399c88edc3a5a40341c3573ea317f682d6",
+        "telegraph": [],
+        "viewport": "(1280, 720)"
+      },
+      {
+        "arrival_caption": "최후의 성벽 방어 ▸",
+        "audio_active": 0,
+        "bound_textures": [
+          "res://assets/maps/pilot_01/stone_floor_tile.png",
+          "res://assets/maps/pilot_01/wall_segment.png",
+          "res://assets/maps/pilot_01/prop_crate.png",
+          "",
+          "",
+          ""
+        ],
+        "dense": false,
+        "enemy_bullets": [],
+        "high_angle": false,
+        "hp": 100,
+        "image": "pilot02_unchanged_prologue_wall_before",
+        "incoming": {},
+        "label_overlaps": 0,
+        "labels": 0,
+        "map": "prologue_wall",
+        "mp": 100.0,
+        "occluders": 0,
+        "patterns": [],
+        "phase": 1,
+        "pixels_sha256": "acba00c89276ab093531472b53dd68eb6ba360b526c32f21d6cf557ab99c9da7",
+        "telegraph": [],
+        "viewport": "(1280, 720)"
+      },
+      {
+        "arrival_caption": "최후의 성벽 방어 ▸",
+        "audio_active": 0,
+        "bound_textures": [
+          "res://assets/maps/pilot_01/stone_floor_tile.png",
+          "res://assets/maps/pilot_01/wall_segment.png",
+          "res://assets/maps/pilot_01/prop_crate.png",
+          "res://assets/maps/pilot_02/ruin_block.png",
+          "res://assets/maps/pilot_02/prop_urn.png",
+          "res://assets/maps/pilot_02/prop_debris.png"
+        ],
+        "dense": false,
+        "enemy_bullets": [],
+        "high_angle": false,
+        "hp": 100,
+        "image": "pilot02_unchanged_prologue_wall_after",
+        "incoming": {},
+        "label_overlaps": 0,
+        "labels": 0,
+        "map": "prologue_wall",
+        "mp": 100.0,
+        "occluders": 0,
+        "patterns": [],
+        "phase": 1,
+        "pixels_sha256": "acba00c89276ab093531472b53dd68eb6ba360b526c32f21d6cf557ab99c9da7",
+        "telegraph": [],
+        "viewport": "(1280, 720)"
+      },
+      {
+        "arrival_caption": "전투 저장됨 · 임무 ▸",
+        "audio_active": 0,
+        "bound_textures": [
+          "res://assets/maps/pilot_01/stone_floor_tile.png",
+          "res://assets/maps/pilot_01/wall_segment.png",
+          "res://assets/maps/pilot_01/prop_crate.png",
+          "res://assets/maps/pilot_02/ruin_block.png",
+          "res://assets/maps/pilot_02/prop_urn.png",
+          "res://assets/maps/pilot_02/prop_debris.png"
+        ],
+        "dense": false,
+        "enemy_bullets": [],
+        "high_angle": true,
+        "hp": 100,
+        "image": "pilot02_threats",
+        "incoming": {},
+        "label_overlaps": 0,
+        "labels": 0,
+        "map": "prologue_wall",
+        "mp": 100.0,
+        "occluders": 0,
+        "patterns": [
+          {
+            "direction": "(1.0, 0.0)",
+            "left": 0.9,
+            "origin": "(1350.0, 1420.0)",
+            "phase": "windup"
+          },
+          {
+            "direction": "(-1.0, 0.0)",
+            "left": 1.1,
+            "origin": "(1750.0, 1420.0)",
+            "phase": "windup"
+          }
+        ],
+        "phase": 1,
+        "pixels_sha256": "57c77eaac3b3b9edac84c87bca14a9ba9c1886ea5a0035b745890426da7f8bc7",
+        "telegraph": [
+          {
+            "id": 1,
+            "origin": "(514.384, 262.3571)",
+            "phase": "windup",
+            "points": "[(514.384, 262.3571), (549.3943, 219.0558), (552.4622, 219.0558), (555.7231, 219.0558), (559.2071, 219.0558), (562.9503, 219.0558), (566.9963, 219.0558), (571.398, 219.0558), (576.2208, 219.0558), (581.5457, 219.0558), (587.4755, 219.0558), (594.1423, 219.0558), (601.7184, 219.0558), (610.433, 219.0558), (620.5993, 219.0558), (632.6545, 219.0558), (647.2308, 219.0558), (656.7703, 221.4965), (658.5432, 226.4598), (660.0853, 231.4807), (661.3943, 236.5509), (662.4683, 241.6625), (663.3054, 246.807), (663.9042, 251.9766), (664.264, 257.1626), (664.384, 262.3571), (664.264, 267.5514), (663.9042, 272.7374), (663.3054, 277.907), (662.4683, 283.0515), (661.3943, 288.1631), (660.0853, 293.2333), (658.5432, 298.2542), (656.7703, 303.2177), (654.7698, 308.1156), (652.5449, 312.9406), (650.0987, 317.6844), (647.4356, 322.34), (644.5596, 326.8994), (641.4754, 331.3557), (638.1879, 335.7015), (634.7025, 339.9302), (631.0245, 344.0347), (627.16, 348.0085), (623.1151, 351.8453), (618.8962, 355.5391), (614.5102, 359.0837), (609.9639, 362.4736), (605.2648, 365.7035), (600.4205, 368.7679)]",
+            "progress": 0.0
+          },
+          {
+            "end": "(254.384, 262.3571)",
+            "id": 2,
+            "origin": "(914.384, 262.3571)",
+            "phase": "curse_windup",
+            "points": "[(914.384, 255.4288), (254.384, 255.4288), (254.384, 269.2852), (914.384, 269.2852)]",
+            "progress": 0.0
+          }
+        ],
+        "viewport": "(1280, 720)"
+      },
+      {
+        "arrival_caption": "저장됨 ▸",
+        "audio_active": 0,
+        "bound_textures": [
+          "res://assets/maps/pilot_01/stone_floor_tile.png",
+          "res://assets/maps/pilot_01/wall_segment.png",
+          "res://assets/maps/pilot_01/prop_crate.png",
+          "res://assets/maps/pilot_02/ruin_block.png",
+          "res://assets/maps/pilot_02/prop_urn.png",
+          "res://assets/maps/pilot_02/prop_debris.png"
+        ],
+        "dense": true,
+        "enemy_bullets": [],
+        "high_angle": true,
+        "hp": 100,
+        "image": "pilot02_dense_compact",
+        "incoming": {},
+        "label_overlaps": 0,
+        "labels": 0,
+        "map": "prologue_wall",
+        "mp": 100.0,
+        "occluders": 0,
+        "patterns": [
+          {
+            "direction": "(1.0, 0.0)",
+            "left": 0.9,
+            "origin": "(1350.0, 1420.0)",
+            "phase": "windup"
+          },
+          {
+            "direction": "(-1.0, 0.0)",
+            "left": 1.1,
+            "origin": "(1750.0, 1420.0)",
+            "phase": "windup"
+          }
+        ],
+        "phase": 1,
+        "pixels_sha256": "5776751412a93de1611dd8cc8828489e3388ce90eebddaeb35c2d3c835182e91",
+        "telegraph": [
+          {
+            "id": 1,
+            "origin": "(283.9919, 137.032)",
+            "phase": "windup",
+            "points": "[(283.9919, 137.032), (319.0023, 93.73071), (322.0702, 93.73071), (325.3311, 93.73071), (328.8151, 93.73071), (332.5582, 93.73071), (336.6042, 93.73071), (341.006, 93.73071), (345.8287, 93.73071), (351.1537, 93.73071), (357.0835, 93.73071), (363.7502, 93.73071), (371.3264, 93.73071), (380.041, 93.73071), (390.2073, 93.73071), (402.2625, 93.73071), (416.8387, 93.73071), (426.3783, 96.17139), (428.1511, 101.1348), (429.6932, 106.1556), (431.0023, 111.2258), (432.0763, 116.3374), (432.9133, 121.4819), (433.5122, 126.6515), (433.8719, 131.8375), (433.9919, 137.032), (433.8719, 142.2263), (433.5122, 147.4124), (432.9133, 152.5819), (432.0763, 157.7264), (431.0023, 162.838), (429.6932, 167.9082), (428.1511, 172.9291), (426.3783, 177.8926), (424.3778, 182.7905), (422.1528, 187.6155), (419.7067, 192.3594), (417.0436, 197.0149), (414.1676, 201.5743), (411.0834, 206.0306), (407.7959, 210.3765), (404.3104, 214.6051), (400.6324, 218.7096), (396.7679, 222.6835), (392.723, 226.5203), (388.5042, 230.214), (384.1182, 233.7587), (379.5719, 237.1486), (374.8728, 240.3784), (370.0284, 243.4429)]",
+            "progress": 0.0
+          },
+          {
+            "end": "(23.99194, 137.032)",
+            "id": 2,
+            "origin": "(683.9919, 137.032)",
+            "phase": "curse_windup",
+            "points": "[(683.9919, 130.1038), (23.99194, 130.1038), (23.99194, 143.9601), (683.9919, 143.9601)]",
+            "progress": 0.0
+          }
+        ],
+        "viewport": "(854, 394)"
+      }
+    ],
+    "saved_inputs": {
+      "waiting": {
+        "hp": 100,
+        "mp": 100.0,
+        "prop": {
+          "generation": 1,
+          "hp": 0,
+          "id": -2,
+          "max_hp": 30,
+          "p": "(1270.0, 1510.0)",
+          "respawn_left": 0.050000000000418,
+          "style": "crate"
+        }
+      }
+    },
+    "scope": "Supplied PNG bindings only; native start/launch,move,40MP,pause/Continue;QA positions/quietclocks/elapsed250/density not natural6min,deviceFPS or final art approval. Othermap/F8 compare original3 versus appended6 bindings at identical states.",
+    "status": "PASS"
+  },
+  "new_runtime_png_bytes": 51025,
+  "preserved": [
+    "92existing production/data/asset files",
+    "all production GDScript",
+    "pilot01 original3bindings/PNG",
+    "othermaps/F8pixels",
+    "shared53blank",
+    "camera1.16spawnextent",
+    "hiddenrespawnUI/45active-second regeneration",
+    "SAVE18/7RNG/account/admission/rewards/economy/AI0-3/art-audio"
+  ],
+  "artifact_index": {
+    ".local_validation/GAME044/engine_0.log": {
+      "bytes": 32,
+      "sha256": "edff16c1721dd4ae989cadf29a01f574ae8d51b118221f664725bd6980bbba5d"
+    },
+    ".local_validation/GAME044/engine_1.log": {
+      "bytes": 25397,
+      "sha256": "b30739db399a04d47bdd9e9b249971320ca4be76e6df82957fe1ddfe3b6937cb"
+    },
+    ".local_validation/GAME044/engine_2.log": {
+      "bytes": 117,
+      "sha256": "1938b93b03756e658dd6fc29e699189d67afb2aec05905c840e9c22f5b89a6cd"
+    },
+    ".local_validation/GAME044/engine_3.log": {
+      "bytes": 117,
+      "sha256": "190487dfb2bdf99cdccfff084fd5d95b81eac04fcfe3ec43e502d524daacb8eb"
+    },
+    ".local_validation/GAME044/engine_4.log": {
+      "bytes": 118,
+      "sha256": "0dc80f41a9d961a6b4d962614c905af0b7c3bc209f569871d09048860b58f7ff"
+    },
+    ".local_validation/GAME044/engine_5.log": {
+      "bytes": 117,
+      "sha256": "c5a9e5b87c0439795f9d5bcfe6c17d74bce134acc53d7f341cfb55a11bdb1e1d"
+    },
+    ".local_validation/GAME044/engine_6.log": {
+      "bytes": 119,
+      "sha256": "570a42343d370c104902d16c9ff0b402573f94ed3076772afb70e6bce96084fc"
+    },
+    ".local_validation/GAME044/engine_7.log": {
+      "bytes": 117,
+      "sha256": "025f863c84ce84466e9269a07033239400176c7aad50ada31ff794c6e59b0837"
+    },
+    ".local_validation/GAME044/engine_8.log": {
+      "bytes": 119,
+      "sha256": "042fd4eba02311b0971a4d776b34ac98da1c52d71cccd141c87c1cb131ba656b"
+    },
+    ".local_validation/GAME044/engine_9.log": {
+      "bytes": 73,
+      "sha256": "6d1c065383a27c36804949b6ffa4b09714470b112e5dacc0bd5aeb7b9c147c4e"
+    },
+    ".local_validation/GAME044/generated-cleanup.json": {
+      "bytes": 21249,
+      "sha256": "005123840bf12829a653c32928124da4fe3a1960325eaf318c987ec079cc9dab"
+    },
+    ".local_validation/GAME044/pilot02_after_1280.png": {
+      "bytes": 234316,
+      "sha256": "47d6fa04a2a5327df8f8142dadd5b31f0fb88821d508c6b9f66bdf064dbd2159"
+    },
+    ".local_validation/GAME044/pilot02_after_1920.png": {
+      "bytes": 404172,
+      "sha256": "9e43bde3693e8ddae63a3eac2e86920d29ba85c85009b38fd11a38cf4ead7b5a"
+    },
+    ".local_validation/GAME044/pilot02_after_854.png": {
+      "bytes": 133875,
+      "sha256": "3f55f703561f39febd2f8f13888dd3ad96cf08995c2f2ca9826562f236e84237"
+    },
+    ".local_validation/GAME044/pilot02_before_1280.png": {
+      "bytes": 221674,
+      "sha256": "97dd91a6dcec8c61c928f862a46a6bcc5401b7094019436db4f652a024f6affa"
+    },
+    ".local_validation/GAME044/pilot02_before_1920.png": {
+      "bytes": 392066,
+      "sha256": "5071c95360be43f873821a91175571423e433bb7731f6a537ee6eedff46f692b"
+    },
+    ".local_validation/GAME044/pilot02_before_854.png": {
+      "bytes": 121639,
+      "sha256": "1a7b97a5e514c821255bdbf8aa73b5504024d71c71e6a6ff2b6fd060cce29586"
+    },
+    ".local_validation/GAME044/pilot02_broken.png": {
+      "bytes": 326390,
+      "sha256": "452a71d514d53c87ab928499aeebc05cbf041d0cb23c1f6512afe520e5985ea4"
+    },
+    ".local_validation/GAME044/pilot02_damaged.png": {
+      "bytes": 236925,
+      "sha256": "44a112169092f45c812ab0513de918a9c7130ebe296571b004ad64b3049d5eef"
+    },
+    ".local_validation/GAME044/pilot02_dense_compact.png": {
+      "bytes": 195185,
+      "sha256": "3c2a22990c0e34c714a1f974bf86618878d8c1a2d40caf7b879fbcc3f169939a"
+    },
+    ".local_validation/GAME044/pilot02_occlusion.png": {
+      "bytes": 273272,
+      "sha256": "20b92515be62b750c784c25f21b53a23a5e97e14094e0c4c594e290426a372a2"
+    },
+    ".local_validation/GAME044/pilot02_pan_20.png": {
+      "bytes": 237093,
+      "sha256": "e8be87c025d863e225aaa16574d13c0fd88071d8cb4582d8fd77141adcfbde42"
+    },
+    ".local_validation/GAME044/pilot02_pan_40.png": {
+      "bytes": 297909,
+      "sha256": "49da9054be992b4ca972af2d15a0f87170a0b49456145ee142fb2dbb9dcd8ecb"
+    },
+    ".local_validation/GAME044/pilot02_pan_5.png": {
+      "bytes": 234953,
+      "sha256": "3e7b13d6568638132869a0f1e72b4406cc5c0c6aaf4514968975b04e60c118eb"
+    },
+    ".local_validation/GAME044/pilot02_regrown.png": {
+      "bytes": 234598,
+      "sha256": "d2f017ed9d9119ab938ff57403bb8f5e79d001e2ca66ce8e0d4c7eecccdb18dc"
+    },
+    ".local_validation/GAME044/pilot02_stopped.png": {
+      "bytes": 299451,
+      "sha256": "0a99b21d2ac59b1e92e8feb1ecd02bf0b7a61f390775104aff766ee5eb43d41d"
+    },
+    ".local_validation/GAME044/pilot02_threats.png": {
+      "bytes": 268749,
+      "sha256": "d7c7da513b727c054eccc2eb443f71c7dc3fbabb7ebec2bdef5ba0acdb8ac2e4"
+    },
+    ".local_validation/GAME044/pilot02_unchanged_gold_slime_after.png": {
+      "bytes": 128399,
+      "sha256": "05b53f03815914bd0db3fb857404106b31c2dc2e04f5255aa9bc73c9187264ce"
+    },
+    ".local_validation/GAME044/pilot02_unchanged_gold_slime_before.png": {
+      "bytes": 128399,
+      "sha256": "05b53f03815914bd0db3fb857404106b31c2dc2e04f5255aa9bc73c9187264ce"
+    },
+    ".local_validation/GAME044/pilot02_unchanged_outskirts_trial_after.png": {
+      "bytes": 132061,
+      "sha256": "71e9464427b4ac0268ad03dee1df1266c10e52e1695b50d7108a48cc53f417f7"
+    },
+    ".local_validation/GAME044/pilot02_unchanged_outskirts_trial_before.png": {
+      "bytes": 132061,
+      "sha256": "71e9464427b4ac0268ad03dee1df1266c10e52e1695b50d7108a48cc53f417f7"
+    },
+    ".local_validation/GAME044/pilot02_unchanged_prologue_wall_after.png": {
+      "bytes": 63444,
+      "sha256": "78ade522b32e93ca4db365c4c2c41d919cf20e809921e684bfdc5c4f52b5bf0a"
+    },
+    ".local_validation/GAME044/pilot02_unchanged_prologue_wall_before.png": {
+      "bytes": 63444,
+      "sha256": "78ade522b32e93ca4db365c4c2c41d919cf20e809921e684bfdc5c4f52b5bf0a"
+    },
+    ".local_validation/GAME044/pilot02_waiting_pause.png": {
+      "bytes": 134636,
+      "sha256": "28ce59e424ea4a792ae09378c72eeb51a6dd7783213a6a2200dd60130d855ea8"
+    },
+    ".local_validation/GAME044/python.log": {
+      "bytes": 98,
+      "sha256": "4b1ce295bfbcc0ca7e1073955ff32406f98beb7b30a8926b6fd38ed76983a0aa"
+    },
+    ".local_validation/GAME044/render-results.json": {
+      "bytes": 20758,
+      "sha256": "6a764345c16884ce386e22ac2fc37bcac4ddcb0f00fd944ee2b13ae039622d5d"
+    },
+    ".local_validation/GAME044/render.log": {
+      "bytes": 439,
+      "sha256": "ac9ef0e1359c2a22bb1d1b9b583b171f7a6166c039f0b56ad65d1b502c293cf7"
+    },
+    ".local_validation/GAME044/render_probe.gd": {
+      "bytes": 11226,
+      "sha256": "6a9282aa5f8322581541ddc4c224f1839fbd2fa10cdcab2b6e82aa8820147eaf"
+    },
+    ".local_validation/GAME044/report.json": {
+      "bytes": 30753,
+      "sha256": "99d86d5a1ed1d54299772bdff4f0a42ded8dda2f6b6e901c648bf68500df9fcb"
+    },
+    ".local_validation/GAME044/source-proof.json": {
+      "bytes": 10106,
+      "sha256": "639441d485a83ad8429319fcba699ce35d5a10729c89008133ea20d14cfab068"
+    }
+  },
+  "portable_images": {
+    "docs/validation/GAME044_BEFORE.png": {
+      "sha256": "97dd91a6dcec8c61c928f862a46a6bcc5401b7094019436db4f652a024f6affa",
+      "bytes": 221674
+    },
+    "docs/validation/GAME044_AFTER.png": {
+      "sha256": "47d6fa04a2a5327df8f8142dadd5b31f0fb88821d508c6b9f66bdf064dbd2159",
+      "bytes": 234316
+    }
+  },
+  "not_run_or_verified": [
+    "new separateOS historical restore matrix",
+    "new natural6min balance/performance/mixer/economy",
+    "physical Android/iOS",
+    "WindowsF5/export",
+    "human camera comfort/readability/touchlatency",
+    "mobileFPS/thermal",
+    "final art/audio"
+  ],
+  "prior_balance": "GAME04019/20,none407defeat277.55 OPEN",
+  "next_single_unit": "GAME-045 주술사 패턴의 실전 교전·재추적 균형 보완"
+}

@@ -1,0 +1,35 @@
+{
+  "source_commit": "b6340f553d8c10ec9eebc26537230decbd8ef23e",
+  "timeout_seconds_per_command": 120,
+  "records": [
+    {
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/11ca321eb8ed/white_qa/baseline_repo",
+        "--editor",
+        "--import",
+        "--quit"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "elapsed_seconds": 11.049232399000175
+    },
+    {
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/11ca321eb8ed/white_qa/baseline_repo",
+        "--script",
+        "res://tests/test_combat_cues.gd"
+      ],
+      "status": "TIMEOUT",
+      "elapsed_seconds": 120.07321548100026,
+      "error": "Command '['/usr/local/bin/godot', '--headless', '--path', '/workspace/scratch/11ca321eb8ed/white_qa/baseline_repo', '--script', 'res://tests/test_combat_cues.gd']' timed out after 120 seconds"
+    }
+  ],
+  "test_sha256": "5aa634b86c55ba08d39883b39ecb77fc23d1e7990b30affd2743cd876f67c227",
+  "status": "TIMEOUT"
+}

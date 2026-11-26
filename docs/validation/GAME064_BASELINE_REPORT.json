@@ -1,0 +1,82 @@
+{
+  "task": "GAME064",
+  "date_kst": "2026-11-26",
+  "status": "BLOCKED_NEW_ANIMATION_NOT_PRODUCED",
+  "tool_commit": "52af01d34cd7734e202f0b4a1ee1bdeea4cc2a26",
+  "runtime_game_code": "d7d72cffec61f88deb5aa72ba59b0c84e3c088f6",
+  "base_document_head": "eebfba100f0fc3bf74ac2c3dc8d61beaf5e2dee7",
+  "implemented": "Read-only cycle analysis and actual-game scale/gait baseline tools; no corrected loop or new moving-fire asset is connected.",
+  "completed_independent_work": [
+    "Read current remote/documents;existing branch was clean and current.",
+    "Rendered existing stage gate,ordinary enemy,existing crate and VIYA in the same native camera/ground at69x85.56;no size change.",
+    "Native Input.parse_input_event D movement90fixed1/60updates:all11 E frames,2wraps,release returns idle_e;all draws preserve authority/cues.",
+    "Measured original frame transitions and prepared Higgsfield one-cycle prompt with12 immutable current-frame/idle reference hashes.",
+    "Decoded all30frames of the1600x900,20FPS,1.5second baseline clip;sampling is not real-time FPS."
+  ],
+  "analysis": {
+    "wrap_10_to_00": {
+      "from": 10,
+      "to": 0,
+      "silhouette_iou": 0.6901218537754694,
+      "lower_silhouette_iou": 0.42863725377260686,
+      "premult_rgb_mae_255": 47.4459869072146,
+      "muzzle_delta_display_px": 0.345,
+      "lower_opaque_centroid_delta_display_px": 30.983877585431653
+    },
+    "minimum_internal_lower_iou": 0.3365309537088678,
+    "interpretation": "The wrap and internal phases need anatomical/ground-contact review. Pixel IoU/opaque lower-band centroids are descriptive,not proof of foot identity,teleportation or final art acceptance. Do not optimize metrics by freezing,duplicating,ping-ponging or warping limbs."
+  },
+  "blocker": {
+    "callable_higgsfield_tool_present": false,
+    "sdk_check": "MISSING_CREDENTIALS",
+    "credential_binding_names": [],
+    "environment_observations_current": true,
+    "api_host": "api.higgsfield.ai",
+    "network_policy_state": "enforced",
+    "api_host_allowed": false,
+    "existing_local_browser_session": "No Chrome page/CDP endpoint found;does not establish user account state.",
+    "required_external_step": "Provide a callable Higgsfield connection for this chat OR securely bind HF_KEY and apply api.higgsfield.ai access in environment settings. Do not send credentials in chat.",
+    "prior_artfix": "ARTFIX001 is already generated/applied;this session availability must not roll it back or repeat its requests."
+  },
+  "new_generation": {
+    "requests": 0,
+    "credits_used": 0,
+    "model": null,
+    "quote": null,
+    "job_ids": [],
+    "new_frames": 0,
+    "new_active_resource": false
+  },
+  "verification": {
+    "baseline_gui_status": "PASS",
+    "source_status": {
+      "static_integrity": "PASS",
+      "growth_data_contract": "PASS",
+      "magic_data_contract": "PASS",
+      "feedback_source_contract": "PASS",
+      "mobile_hud_source_contract": "PASS",
+      "run_navigation_source_contract": "PASS",
+      "combat_cues_source_contract": "PASS"
+    },
+    "source_files": 176,
+    "existing_runtime_data_asset_files_unchanged": 1079,
+    "full_engine_suite": "NOT_RERUN_FOR_READONLY_TOOLS;GAME0634456result is historical,not a new GAME064PASS",
+    "windows_mobile_final_art": "NOT_VERIFIED"
+  },
+  "remaining": [
+    "Query live Higgsfield capabilities/inputs/pricing/balance and produce one consistent E full-body run cycle.",
+    "Inspect anatomy/identity/alpha/root/foot/muzzle/last-first;create a derived resource and actual E sampler based on real output timings.",
+    "Run same-scene before/after movement/stop/reversal/firing and appropriate native regressions.",
+    "Keep NEXT on GAME064;E moving-fire and other directions/goblin/portraits are later units."
+  ],
+  "artifacts": {
+    "docs/validation/GAME064/cycle_metrics.json": "ea94664532381cd49d23e5680520cb1e5a0708737c18d7e67ed73daa53c44f56",
+    "docs/validation/GAME064/game_baseline.json": "4d14f7714ba652ba449054e032edf8e7a67e47074ed8970db30644fad89433b6",
+    "docs/validation/GAME064/inspect.log": "0f995056783beb8f6fb34a2e3a0bd54178e15bbf7234dd07b7dcabf5270f7589",
+    "docs/validation/GAME064/source_checks.json": "9b08997c63d6eb0a349a0b44cbb20559c1c68ce314cc1c83e23092f44c86d316",
+    "docs/validation/GAME064/unchanged_runtime.json": "a646842056e23e642a7564f3bc50d9ea4dba632c66ac2f4777d7441588641d93",
+    "docs/validation/GAME064_E_CYCLE_BASELINE.png": "2ab7e04046138ee57656c6cff61a8c7f0b92571972c20217b59ccac7c5b27732",
+    "docs/validation/GAME064_E_RUN_BASELINE.mp4": "e00a148905f9d0235a1810ca774f2b6d1ddf6a196820b0b0572280b98fdedad2",
+    "docs/validation/GAME064_SCALE_REFERENCE.png": "68c8d8899fbc1cd0f5187caec7c3d5e0f90d064e1c5e3651508469c722f406e3"
+  }
+}

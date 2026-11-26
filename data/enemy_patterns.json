@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "status": "prototype_not_final_balance",
+  "orc_siege": {
+    "damage": 24,
+    "trigger_range": 145.0,
+    "reach": 150.0,
+    "half_angle_degrees": 55.0,
+    "windup": 0.9,
+    "strike": 0.16,
+    "recovery": 0.75,
+    "cooldown": 3.0,
+    "initial_delay": 1.25
+  }
+}

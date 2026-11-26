@@ -1,0 +1,219 @@
+{
+  "status": "ACCEPT_PREPARED_RGBA_TECHNICAL_QA",
+  "reviewed_at_utc": "2026-11-26T12:39:29.644806+00:00",
+  "reviewer": "Independent gait_review agent",
+  "candidate_job": "d1817f67-fb19-4b70-b4a9-605f82981497",
+  "scope": "Registered47 RGBA moving-aim/E-run derivative, shared gait timing and mode-switch compatibility. Not runtime integration or final user art approval.",
+  "raw_candidate_status": "REJECTED_FOR_RESIDUAL_BAKED_MUZZLE_FLASHES; original raw master/decoded source not approved by this derivative acceptance.",
+  "initial_prepared_matte_status": "REJECTED_FOR_OPAQUE_BARREL_LOSS; preserved in initial_matte_rejection.json and muzzle_before_after.png.",
+  "reviewed_frame_preparation_sha256": "d2ec912df6bf63fc34855d601738d501596c7f02dfc3f02b20e90f7eb77d164d",
+  "bitmap_summary": {
+    "count": 47,
+    "unique_rgba_pngs": 47,
+    "all_rgba_200x248": true,
+    "max_border_alpha": 0,
+    "fixed_transform_alpha_exact_all47": true
+  },
+  "registration": {
+    "scale": 0.26247288503253796,
+    "translation": [
+      11.334056399132322,
+      -46.39479392624729
+    ],
+    "canvas": [
+      200,
+      248
+    ],
+    "pivot": [
+      100,
+      248
+    ],
+    "fixed_transform": true
+  },
+  "phase_and_seam": {
+    "verdict": "PASS",
+    "source_cycle_interval": [
+      0,
+      94
+    ],
+    "endpoint94_excluded": true,
+    "delivered_source_frames": [
+      0,
+      2,
+      4,
+      6,
+      8,
+      10,
+      12,
+      14,
+      16,
+      18,
+      20,
+      22,
+      24,
+      26,
+      28,
+      30,
+      32,
+      34,
+      36,
+      38,
+      40,
+      42,
+      44,
+      46,
+      48,
+      50,
+      52,
+      54,
+      56,
+      58,
+      60,
+      62,
+      64,
+      66,
+      68,
+      70,
+      72,
+      74,
+      76,
+      78,
+      80,
+      82,
+      84,
+      86,
+      88,
+      90,
+      92
+    ],
+    "near_stance_sources": [
+      12,
+      34
+    ],
+    "far_stance_sources": [
+      58,
+      80
+    ],
+    "visual_observation": "Full-cycle sheet shows near and far leg alternating forward plant, backward stance, toe-off and recovery. Source48 is opposite-leg half-cycle, not closing endpoint. Final44,45,46,0,1,2 progression retains forward-recovering lead boot and trailing folded boot across wrap; no last-to-first huge stride jump or duplicated closing image.",
+    "fixed_root": "One clip-wide affine only; all47 output alpha planes exactly match declared global reprojection. Canvas200x248, pivot100x248, native ground1108 gives fixed canvas ground244.42516269. No per-frame floor/bbox registration.",
+    "current_gait_timing_reuse": true,
+    "cycle_ms": 660.0000000000022,
+    "duration_range_ms": [
+      7.603777467082,
+      17.332792768862
+    ],
+    "distance_driven_cycle_ms": 659.5744680851063,
+    "timing_requirement": "Switch RUN/AIM on the shared normalized distance phase using cumulative variable frame durations. Do not reset phase or use floor(phase*47)."
+  },
+  "mode_switch": {
+    "verdict": "PASS_FOR_LOWER_BODY_PHASE_COMPATIBILITY",
+    "constant_translation_canvas": [
+      -1.0,
+      0.0
+    ],
+    "constant_translation_display_pixels": [
+      -0.345,
+      0.0
+    ],
+    "max_measured_forefoot_landmark_distance_display_pixels": 0.5338423936101492,
+    "max_final_raster_sole_edge_distance_display_pixels": 0.7112357204190464,
+    "interpretation": "One constant leftward offset of1 canvas pixel equals0.345 display pixel; final raster edge measurement is quantized. It changes neither y/ground nor stride timing. Arms/rifle deliberately switch pose; this is not a transition animation.",
+    "visual_evidence": "registered_phase_and_seam_pairs.jpg; same_phase_mode_switch.mp4; mode_switch_sample.png"
+  },
+  "contact": {
+    "verdict": "COMPATIBLE_WITH_EXISTING_REGULARIZED_TIMING",
+    "method": "Final native RGBA alpha>=128; rightmost sole column with >=2 pixels in fixed native y1093..1115, on visually identified near/far stance. Final raster secondary edge measurement uses fixed canvas y240..246 and is pixel-quantized. No bbox alignment.",
+    "residuals": {
+      "near": {
+        "authored660ms": {
+          "interval_count": 11,
+          "net_world": 0.22264705711010602,
+          "max_interval_abs_world": 0.5124255545353127,
+          "max_cumulative_abs_world": 0.3381235713957347
+        },
+        "distance155_speed235": {
+          "interval_count": 11,
+          "net_world": 0.20171890314697594,
+          "max_interval_abs_world": 0.512812574427266,
+          "max_cumulative_abs_world": 0.32377670824759264
+        }
+      },
+      "far": {
+        "authored660ms": {
+          "interval_count": 11,
+          "net_world": 0.24160904940499672,
+          "max_interval_abs_world": 0.368302412558827,
+          "max_cumulative_abs_world": 0.40037025119139047
+        },
+        "distance155_speed235": {
+          "interval_count": 11,
+          "net_world": 0.22171957669509568,
+          "max_interval_abs_world": 0.3705170674212148,
+          "max_cumulative_abs_world": 0.3856329524843751
+        }
+      }
+    },
+    "limitation": "Frame-start material-point approximations; held sprites have within-frame travel and this does not prove zero slip or skeleton identity."
+  },
+  "alpha_and_weapon": {
+    "verdict": "PASS_AFTER_LEFT_KEY_AND_OBSERVED_METAL_TRIMAP_CORRECTION",
+    "resolved_issue": "Original edge estimator sampled the near-edge barrel/flare and deleted opaque metal. Corrected matte samples clean left green background; same-frame observed metal polygons exclude metal from external-FX mask only. Ordinary chroma/edge alpha still runs; no new metal paint or local geometry edits.",
+    "examined_sources": [
+      12,
+      14,
+      16,
+      18,
+      58,
+      60,
+      62,
+      64
+    ],
+    "observation": "Final native dark/light-background crops and registered200px crops show continuous barrel highlights and rims in source14/60, no deep transparent notch, no detached white component, and no obvious external yellow flare. The source16/62 tips remain coherent. Small warm reflected coloring at tip is retained source paint, not an external flash shape.",
+    "all47_background_review": "Full sheet and black/gray/white composites show both boots and hair/cape inside canvas, no baked floor/checkerboard/white background, and no obvious green fringe. Fine hair alpha remains semitransparent; native codec softness is not new painted detail.",
+    "green_excess_pixel_count_from_preparation": 0,
+    "evidence": "final_muzzle_verified.jpg; ../previews/alpha_review.jpg; ../previews/contact_sheet.jpg; final_seam_sequence.jpg"
+  },
+  "preview": {
+    "path": "/workspace/scratch/e2f5b3e224d3/viya_game065_work/candidate_02/final_rgba/review/same_phase_mode_switch.mp4",
+    "ffprobe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "width": 1080,
+          "height": 570,
+          "avg_frame_rate": "60/1",
+          "nb_frames": "396"
+        }
+      ],
+      "format": {
+        "duration": "6.600000"
+      }
+    },
+    "switch_interval_s": 0.3,
+    "game_execution": false,
+    "display_scales": [
+      1,
+      3
+    ],
+    "world_speed": 235,
+    "exact_gait_duration_table": true,
+    "phase_reset_on_switch": false
+  },
+  "preview_inspection": "Decoded sample at0.300s checked: correct shared frame21, RUN/AIM/switch panels, 1x and3x, correct ground and complete character. Full registered phase/seam sheet separately inspected; MP4 encoding/396frames/60fps/duration6.6s verified.",
+  "files": {
+    "metrics": "final_measurements.json",
+    "video": "same_phase_mode_switch.mp4",
+    "build_script": "build_final_comparison.py",
+    "metal_repair_evidence": "final_muzzle_verified.jpg",
+    "seam_evidence": "final_seam_sequence.jpg"
+  },
+  "game_execution": false,
+  "game_integration_approved_by_this_review": false,
+  "user_final_art_approval": false,
+  "limits": [
+    "Forefoot landmarks and silhouette provide image-level gait evidence, not skeletal reconstruction.",
+    "Frame-start residuals do not eliminate within-hold travel at60fps.",
+    "Prepared asset technical acceptance does not approve raw rejected master, runtime behavior, bullet synchronization or final user art."
+  ]
+}

@@ -1,0 +1,110 @@
+{
+  "schema": "viya-map-pilot-art-1",
+  "name": "VIYA Map Pilot 02",
+  "date_kst": "2026-11-24",
+  "status": "pilot_integration_candidate",
+  "art_approval": "not_final_approved",
+  "repo": "dldlfah/Viya",
+  "branch": "work/viya-turnaround-qa-20261117",
+  "repo_head_checked": "c412d1d8768273c5fb06b16fb33115cc96b99b11",
+  "scope": "Assets and handoff only; no repository modification or Godot run",
+  "intended_map": "prologue_wall",
+  "preserve_existing_slots": [
+    "stone_floor_tile",
+    "wall_segment",
+    "prop_crate"
+  ],
+  "assets": [
+    {
+      "file": "textures/ruin_block.png",
+      "slot": "ruin_block",
+      "proposed_resource_path": "res://assets/maps/pilot_02/ruin_block.png",
+      "source_size": [
+        192,
+        130
+      ],
+      "display_size": [
+        96,
+        65
+      ],
+      "display_space": "screen",
+      "projection": "front_material_only",
+      "transparency": "opaque",
+      "bytes": 32075,
+      "sha256": "1cfc847408ab4cdf6783f1dcc1c13db5251187fc4525afd4f0bdaaf991b7d9a2"
+    },
+    {
+      "file": "textures/prop_urn.png",
+      "slot": "prop_urn",
+      "proposed_resource_path": "res://assets/maps/pilot_02/prop_urn.png",
+      "source_size": [
+        92,
+        86
+      ],
+      "display_size": [
+        46,
+        43
+      ],
+      "display_space": "screen",
+      "projection": "high_front_orthographic",
+      "transparency": "alpha",
+      "bytes": 11598,
+      "sha256": "81973f42653a6a3008ff11aaf5f18b1c4aaf6389577d1c8c1248aaf4b1feb94e",
+      "pivot": [
+        0.5,
+        1.0
+      ],
+      "visible_bbox": [
+        10,
+        0,
+        81,
+        86
+      ],
+      "visible_shape_size": [
+        71,
+        86
+      ]
+    },
+    {
+      "file": "textures/prop_debris.png",
+      "slot": "prop_debris",
+      "proposed_resource_path": "res://assets/maps/pilot_02/prop_debris.png",
+      "source_size": [
+        92,
+        86
+      ],
+      "display_size": [
+        46,
+        43
+      ],
+      "display_space": "screen",
+      "projection": "high_angle_low_cluster",
+      "transparency": "alpha",
+      "bytes": 7352,
+      "sha256": "ab0cccf2713543f0bd127a7f76ef1a4854695473ba7f0eca58bc1f919fe4b9d5",
+      "pivot": [
+        0.5,
+        1.0
+      ],
+      "visible_bbox": [
+        0,
+        40,
+        92,
+        86
+      ],
+      "visible_shape_size": [
+        92,
+        46
+      ]
+    }
+  ],
+  "constraints": [
+    "Append only these three slots under prologue_wall in data/map_presentation_slots.json.",
+    "Keep pilot_01 paths and other maps unchanged.",
+    "The current renderer already supports map-specific overrides and world-anchored clipped material regions.",
+    "Ruin texture is a front material only; existing top geometry and collision stay in use.",
+    "Urn and debris are intact nonblocking destructible props, not destroyed-state sprites.",
+    "Preserve current central camera dead zone; no camera or simulation changes for this asset handoff.",
+    "Image checks do not establish mobile play suitability or FPS."
+  ]
+}

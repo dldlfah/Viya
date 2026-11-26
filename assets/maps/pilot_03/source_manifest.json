@@ -1,0 +1,181 @@
+{
+  "schema": "viya-map-pilot-art-2",
+  "name": "VIYA Map Pilot 03",
+  "date_kst": "2026-11-24",
+  "status": "assets_prepared_integration_pending",
+  "art_approval": "not_final_approved",
+  "repo": "dldlfah/Viya",
+  "branch": "work/viya-turnaround-qa-20261117",
+  "repo_head_checked": "8919a24e9a78708afe379ede14bbb53161fc7310",
+  "game_code_basis": "40ce43923e50871b676ca6fbff9d920f48ef41c3",
+  "existing_game_unit": "GAME-044",
+  "scope": "Create three art assets and development handoff. No game or GitHub modification.",
+  "intended_map": "prologue_wall",
+  "preserve_existing_slots": [
+    "stone_floor_tile",
+    "wall_segment",
+    "prop_crate",
+    "ruin_block",
+    "prop_urn",
+    "prop_debris"
+  ],
+  "assets": [
+    {
+      "file": "textures/wall_top_tile.png",
+      "slot": "wall_top_tile",
+      "slot_status": "proposed_new_slot_renderer_hook_required",
+      "proposed_resource_path": "res://assets/maps/pilot_03/wall_top_tile.png",
+      "size_px": [
+        192,
+        160
+      ],
+      "mode": "RGB",
+      "color_space": "sRGB",
+      "transparency": "opaque",
+      "bytes": 39278,
+      "sha256": "77173228a87824927c1d01f17b62bcaaf4a855fe39d8e5132c03f1eb5a3a4c33",
+      "master_file": "masters/wall_top_tile_master.png",
+      "master_sha256": "a068e086afda32ef258e4717c30ba80279c96de1bcc0e7b8ab295e39f298e134",
+      "generation_job_id": "a94fd1f8-8e4a-4e8d-8fdf-c6482c513bba",
+      "generation_status": "completed",
+      "model": "gpt_image_2_6",
+      "preparation": "Lanczos resize preserving 6:5 aspect ratio; symmetric blend confined to outer 6 pixels on each edge",
+      "tile_world_size": [
+        96,
+        80
+      ],
+      "projected_tile_screen_size": [
+        96,
+        69.2820323027551
+      ],
+      "projection": "none_in_png; ground Y*0.8660254037844386 exactly once in renderer",
+      "tiling": "both axes, world-anchored, clipped to existing top and viewport"
+    },
+    {
+      "file": "textures/ruin_top_tile.png",
+      "slot": "ruin_top_tile",
+      "slot_status": "proposed_new_slot_renderer_hook_required",
+      "proposed_resource_path": "res://assets/maps/pilot_03/ruin_top_tile.png",
+      "size_px": [
+        192,
+        160
+      ],
+      "mode": "RGB",
+      "color_space": "sRGB",
+      "transparency": "opaque",
+      "bytes": 37348,
+      "sha256": "b99c7efffbbad26c8fe9ce3a7c84014faf3c2cd069d46ca5662b26b314cfb127",
+      "master_file": "masters/ruin_top_tile_master.png",
+      "master_sha256": "0a7b25b5c2c8108939d0debefae844b832fa8a1e90f22dd905107e6d7e039064",
+      "generation_job_id": "c987a8d5-1757-4bb7-8532-b02798c96ec8",
+      "generation_status": "completed",
+      "model": "gpt_image_2_6",
+      "preparation": "Lanczos resize preserving 6:5 aspect ratio; symmetric blend confined to outer 6 pixels on each edge",
+      "tile_world_size": [
+        96,
+        80
+      ],
+      "projected_tile_screen_size": [
+        96,
+        69.2820323027551
+      ],
+      "projection": "none_in_png; ground Y*0.8660254037844386 exactly once in renderer",
+      "tiling": "both axes, world-anchored, clipped to existing top and viewport"
+    },
+    {
+      "file": "textures/gate_front.png",
+      "slot": "gate_front",
+      "slot_status": "proposed_new_slot_renderer_hook_required",
+      "proposed_resource_path": "res://assets/maps/pilot_03/gate_front.png",
+      "size_px": [
+        480,
+        228
+      ],
+      "mode": "RGB",
+      "color_space": "sRGB",
+      "transparency": "opaque",
+      "bytes": 148934,
+      "sha256": "a0f5bc29d4187798a1af025fb0b08fc909a1b556f2e615036d83514c3c4d5872",
+      "master_file": "masters/gate_front_master.png",
+      "master_sha256": "61743647f0321074eb7dbe0a7c32bea9f25c8d1caa6e6fc4f672e832a594c863",
+      "generation_job_id": "9acd690d-9e84-498a-a62d-ec0ffd799cbe",
+      "generation_status": "completed",
+      "model": "gpt_image_2_6",
+      "preparation": "Lanczos resize preserving 40:19 aspect ratio; no seam processing",
+      "display_screen_size": [
+        240,
+        114
+      ],
+      "projection": "vertical_front_no_ground_y_compression",
+      "repeat": false,
+      "pivot": [
+        0.5,
+        1.0
+      ],
+      "anchor_world": [
+        2500,
+        420
+      ],
+      "function": "closed decorative facade, no new opening or collision"
+    }
+  ],
+  "quoted_generation_cost_credits": 4.5,
+  "actual_billing_debit_independently_verified": false,
+  "generation_attempts_submitted": 3,
+  "paid_regeneration_attempts": 0,
+  "review": {
+    "review_scope": "Generated PNGs, final-size images, 3x3 repeats and composited preview only",
+    "generation_completed": true,
+    "dimensions_modes_and_hashes_checked": true,
+    "visual_review": "Suitable for pilot integration candidate; no blocking visual issue observed",
+    "observations": [
+      "Flat top textures do not contain baked perspective or building sides",
+      "Closed gate remains identifiable at240x114",
+      "No conspicuous hard edge gaps or brightness bands in final3x3 repeats",
+      "Large ruin wear marks repeat periodically; acceptable for this pilot, subject to in-game review"
+    ],
+    "game_integration": "NOT_PERFORMED",
+    "godot_execution": "NOT_PERFORMED",
+    "physical_mobile_validation": "NOT_PERFORMED",
+    "final_art_approval": "PENDING_USER_REVIEW"
+  },
+  "preview": "VIYA_map_pilot_03_preview.png",
+  "preview_is_game_capture": false,
+  "integration_handoff": "docs/INTEGRATION_HANDOFF_ko.txt",
+  "session_record": "docs/SESSION_RECORD_20261124.txt",
+  "reproduction_script": "prepare_assets.py",
+  "generation_record": "generation_log.json",
+  "source_reference_note": "references/source_*.png are the generation inputs copied from prior Higgsfield pilot masters; other reference PNGs are unchanged existing game textures.",
+  "source_references": [
+    {
+      "file": "references/ruin_block.png",
+      "sha256": "1cfc847408ab4cdf6783f1dcc1c13db5251187fc4525afd4f0bdaaf991b7d9a2",
+      "bytes": 32075
+    },
+    {
+      "file": "references/source_floor.png",
+      "sha256": "3ba90000bc1d0c020f0d3463f2f93e194aec573e4b2f9c1839c65efb30308392",
+      "bytes": 1644858
+    },
+    {
+      "file": "references/source_ruin.png",
+      "sha256": "1089cd477fafb2d3ad56e20adad43c1490800150bc1f7b47fdedf49137aa4f27",
+      "bytes": 1002795
+    },
+    {
+      "file": "references/source_wall.png",
+      "sha256": "3a13823764523ffe30a08d7e66b021423876876b251cc3c62c3cafaca703ff11",
+      "bytes": 1559320
+    },
+    {
+      "file": "references/stone_floor_tile.png",
+      "sha256": "9beefd01712a5c45b71908ad679d105b00a7ce6b99e61a639e384b7de06257e6",
+      "bytes": 47947
+    },
+    {
+      "file": "references/wall_segment.png",
+      "sha256": "15b4a1a6f64b88df88424075d6710c0761cac7e7ac30dfc3ff889d0b3705d11a",
+      "bytes": 63500
+    }
+  ]
+}

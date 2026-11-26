@@ -1,0 +1,65 @@
+{
+  "source_base_commit": "5820376e65de9957c6dbbc449759c12c9a5e30bb",
+  "command": "python tools/check_mobile_hud.py",
+  "exit_code": 0,
+  "python_version": "3.13.5",
+  "changed_source_contract": {
+    "status": "PASS",
+    "files_checked": 8,
+    "errors": [],
+    "negative_controls": [
+      {
+        "fixture": "layout_detached",
+        "rejected": true
+      },
+      {
+        "fixture": "detail_not_paused",
+        "rejected": true
+      },
+      {
+        "fixture": "detail_mutates_skill",
+        "rejected": true
+      },
+      {
+        "fixture": "resize_retains_touch",
+        "rejected": true
+      },
+      {
+        "fixture": "test_not_registered",
+        "rejected": true
+      }
+    ],
+    "source_sha256": {
+      "scenes/main.tscn": "17a2e77db7cf47af860de3c263dc9119b0df349bafdf2a8b52a40f7450c9e22c",
+      "scripts/ui/mobile_main.gd": "09bf3e13f5861a7dd2901430dbf8a2ad0eef1309f43f66b5fc10ec4362b87263",
+      "scripts/ui/hud_layout.gd": "f85a7fdc757693b55909c93957b235ff0f343e50396ee2365edf353866c07da5",
+      "scripts/ui/responsive_feedback_panel.gd": "60efa5e9a99e3a9d4f66c23b3ebb2f7954379cf26f3a2d4d759b5d19584e94ea",
+      "scripts/ui/move_input.gd": "cee8e709185740d1cb964fff13873a0818d14d0b3653f36d6416a1b17da40bd8",
+      "tests/test_mobile_hud.gd": "b34925b8535662f4966a1dd0d3a5f60a2a059cf66b2fef9a3a59a30d3342f984",
+      "tools/check_project.py": "d69f00af055fb7ae794bb54c63a59ccfa35ea83be3e8f0e3aab4295fdbbcef54",
+      "tools/check_mobile_hud.py": "9e43cace28480d3aacb45dabaf67acb2ad24e1c8a9366aa5c011a279eba35487"
+    },
+    "source_fingerprint": "33038279ceff744d0f49327b3df7807ad69f6a3d7fe728722f444d93dc5ec515",
+    "scope": "Changed UTF-8 files, delimiters, Python syntax and integration source checks only. NOT GDScript parsing/typechecking, actual Control geometry, touch dispatch, rendering or mobile execution."
+  },
+  "baseline_check_project_blob_verified": "4c6269f6470183babf8c4e8eabacebaf097999c8",
+  "godot_runtime": {
+    "status": "NOT_VERIFIED",
+    "reason": "No Godot executable was found in the active runtime. Official binary download was not obtained. Native GDScript suites were authored, not executed."
+  },
+  "full_project_regression": "NOT_RUN",
+  "actual_control_geometry": "NOT_VERIFIED",
+  "rendered_screen": "NOT_VERIFIED",
+  "native_input_dispatch": "NOT_VERIFIED",
+  "windows_f5": "NOT_VERIFIED",
+  "android_device": "NOT_VERIFIED",
+  "ios_device": "NOT_VERIFIED",
+  "native_test_configurations_authored": [
+    "853x384",
+    "960x540",
+    "1280x720",
+    "1600x720",
+    "1920x1080"
+  ],
+  "source_scope": "Changed files only; preserved main/combat/growth/magic/feedback/data are carried through the Git base tree, not reconstructed as substitute implementations."
+}

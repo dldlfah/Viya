@@ -1,0 +1,541 @@
+{
+  "task": "VIYA_HIGGSFIELD_WHITE_EDGE_REPAIR_20261126",
+  "date_kst": "2026-11-26",
+  "source_repository": "dldlfah/Viya",
+  "branch": "work/viya-turnaround-qa-20261117",
+  "base_commit": "b6340f553d8c10ec9eebc26537230decbd8ef23e",
+  "source_package": {
+    "name": "VIYA_character_pilot_06.zip",
+    "sha256": "bb0cb2fd0cc660d5417a03f3dc8e1826236522480117f1ade0ef390016990ef7"
+  },
+  "source_generation_job": "8c49d630-1a30-4be3-8619-ada1e40111f9",
+  "source_generation_problem": "The original native GIF was opaque white. Subsequent cutout retained pale matte RGB at silhouette.",
+  "model": "gpt_image_2_6",
+  "starting_balance": {
+    "credits": 1105
+  },
+  "attempts": [
+    {
+      "scope": "E run00 trial1",
+      "params": {
+        "model": "gpt_image_2_6",
+        "quality": "high",
+        "resolution": "2k",
+        "size": "400x496",
+        "output_format": "png",
+        "background": "transparent",
+        "count": 1,
+        "medias": [
+          {
+            "role": "image",
+            "value": "add01ff2-94af-4b74-b21d-7ef2dcdb8492"
+          },
+          {
+            "role": "image",
+            "value": "b2cec2df-4462-4781-bc18-9a86d32689e3"
+          },
+          {
+            "role": "image",
+            "value": "f89fd309-fefd-4f25-b1db-933ab12cc68a"
+          },
+          {
+            "role": "image",
+            "value": "de8b3303-c047-4b75-86b9-4460303daf86"
+          }
+        ],
+        "prompt": "VIYA STRICT REGISTERED SPRITE EDGE REPAIR. Edit ONLY the FIRST reference: existing right-facing running frame 00, a 400x496 RGBA game sprite. Keep exactly its running pose, silhouette, scale, framing, origin, hair strands, hands, rifle angle, boot positions, and all interior character details. Second reference is idle identity/material guidance ONLY; third and fourth are neighbouring run frames 01 and 10 for continuity ONLY. Do not change the pose to any other reference.\nRepair the incorrect pale white/gray matte residue hugging the outer hair, loose strands, exposed arm, crimson cape edges, inner-leg opening, boots, and firearm. Repaint contaminated outline pixels with the correct adjoining dark-brown hair, crimson cloth, leather, skin and metal colours. The matte came from a removed white background and is NOT a rim light. Remove it without deleting fine hair/cloth tips. Preserve genuine ivory blouse, skin highlights, brass/gold ornament, warm hair highlights, and red runes. No new costume, no mirrored asymmetry, no redesign, no extra limbs, no white stroke or glow.\nOutput ONE corrected frame on REAL transparent alpha. Exact 400x496 full canvas, same pixel registration and fixed ground/muzzle anchors. No background, no checkerboard pixels, no shadow, no scenery, no captions. Pixel-locked silhouette boundary edit; preserve image interior outside the narrow contaminated edge. Keep sharp painted dark-fantasy anime rendering, existing mature adult face and proportions. This is a restoration of an existing animation frame, not a new character illustration."
+      },
+      "quote": {
+        "cost": {
+          "credits": 2,
+          "credits_exact": 2
+        },
+        "adjustments": {
+          "medias[0].role": {
+            "requested": "image",
+            "used": "image_references",
+            "reason": "GPT Image 2.6 backend expects schema-key media roles"
+          },
+          "medias[1].role": {
+            "requested": "image",
+            "used": "image_references",
+            "reason": "GPT Image 2.6 backend expects schema-key media roles"
+          },
+          "medias[2].role": {
+            "requested": "image",
+            "used": "image_references",
+            "reason": "GPT Image 2.6 backend expects schema-key media roles"
+          },
+          "medias[3].role": {
+            "requested": "image",
+            "used": "image_references",
+            "reason": "GPT Image 2.6 backend expects schema-key media roles"
+          }
+        },
+        "quote_ref": "quote:Ok4dnuQrLLpYfTCExcbxBA"
+      },
+      "job_id": "006214a8-bd11-45fd-bec9-fc58c38d86b5",
+      "status": "failed",
+      "error": "Generic provider error; no result media"
+    },
+    {
+      "scope": "E run00 trial2",
+      "params": {
+        "model": "gpt_image_2_6",
+        "quality": "high",
+        "resolution": "1k",
+        "size": "800x992",
+        "output_format": "png",
+        "background": "transparent",
+        "count": 1,
+        "medias": [
+          {
+            "role": "image",
+            "value": "add01ff2-94af-4b74-b21d-7ef2dcdb8492"
+          }
+        ],
+        "prompt": "Restore this existing right-facing running game sprite. Keep the EXACT character, pose, face, hairstyle, costume, weapon, body proportions, scale within the canvas, and framing. Output the same full canvas at exactly twice the source pixel dimensions: 800x992. Remove the unwanted white/gray matte fringe along hair, crimson cape, arms, inner legs, boots and rifle. Replace only contaminated boundary colours with their adjoining true character colours, keeping fine strands and cloth tips. Preserve real ivory cloth and painted skin/metal highlights. No white outline, rim glow, new details, design changes or pose changes. Genuine transparent RGBA PNG background, no floor, no shadow, no checkerboard, no text. Match the reference pixel registration at 2x scale."
+      },
+      "quote": {
+        "cost": {
+          "credits": 1.25,
+          "credits_exact": 1.25
+        },
+        "adjustments": {
+          "medias[0].role": {
+            "requested": "image",
+            "used": "image_references",
+            "reason": "GPT Image 2.6 backend expects schema-key media roles"
+          }
+        },
+        "quote_ref": "quote:3TxqyMJ2xFKmKr-eIpR7Ag"
+      },
+      "job_id": "c53a42ad-651b-4f04-8e71-44d19fe51a50",
+      "status": "completed",
+      "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3LHdo37hN3iiYXd8WT9stnWXw4M/hf_20261125_192045_c53a42ad-651b-4f04-8e71-44d19fe51a50.png"
+    },
+    {
+      "scope": "E run01",
+      "params": {
+        "model": "gpt_image_2_6",
+        "quality": "high",
+        "resolution": "1k",
+        "size": "800x992",
+        "output_format": "png",
+        "background": "transparent",
+        "count": 1,
+        "medias": [
+          {
+            "role": "image",
+            "value": "f89fd309-fefd-4f25-b1db-933ab12cc68a"
+          }
+        ],
+        "prompt": "Restore this existing right-facing running game sprite. Keep the EXACT character, pose, face, hairstyle, costume, weapon, body proportions, scale within the canvas, and framing. Output the same full canvas at exactly twice the source pixel dimensions: 800x992. Remove the unwanted white/gray matte fringe along hair, crimson cape, arms, inner legs, boots and rifle. Replace only contaminated boundary colours with their adjoining true character colours, keeping fine strands and cloth tips. Preserve real ivory cloth and painted skin/metal highlights. No white outline, rim glow, new details, design changes or pose changes. Genuine transparent RGBA PNG background, no floor, no shadow, no checkerboard, no text. Match the reference pixel registration at 2x scale.\nAlso clear wrongly retained WHITE BACKGROUND trapped in the open gap beneath the rifle, beside the magazine, and between the running legs. Those small open-air gaps should be transparent; preserve real pale skin, ivory clothes, gold ornament, metal and boot shape. Do not change the stride phase."
+      },
+      "quote": {
+        "cost": {
+          "credits": 1.25,
+          "credits_exact": 1.25
+        },
+        "adjustments": {
+          "medias[0].role": {
+            "requested": "image",
+            "used": "image_references",
+            "reason": "GPT Image 2.6 backend expects schema-key media roles"
+          }
+        },
+        "quote_ref": "quote:E8Zr6ZmhAqGBi2Ej5kaCqQ"
+      },
+      "index": 1,
+      "job_id": "fbb5dd3f-3b79-448a-b7ea-6eb432029d3a",
+      "status": "completed",
+      "type": "image",
+      "model": "gpt_image_2_6",
+      "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3LHdo37hN3iiYXd8WT9stnWXw4M/hf_20261125_192928_fbb5dd3f-3b79-448a-b7ea-6eb432029d3a.png"
+    },
+    {
+      "scope": "E run02",
+      "params": {
+        "model": "gpt_image_2_6",
+        "quality": "high",
+        "resolution": "1k",
+        "size": "800x992",
+        "output_format": "png",
+        "background": "transparent",
+        "count": 1,
+        "medias": [
+          {
+            "role": "image",
+            "value": "3cf53d62-624f-4def-b9cd-d2211d688978"
+          }
+        ],
+        "prompt": "Restore this existing right-facing running game sprite. Keep the EXACT character, pose, face, hairstyle, costume, weapon, body proportions, scale within the canvas, and framing. Output the same full canvas at exactly twice the source pixel dimensions: 800x992. Remove the unwanted white/gray matte fringe along hair, crimson cape, arms, inner legs, boots and rifle. Replace only contaminated boundary colours with their adjoining true character colours, keeping fine strands and cloth tips. Preserve real ivory cloth and painted skin/metal highlights. No white outline, rim glow, new details, design changes or pose changes. Genuine transparent RGBA PNG background, no floor, no shadow, no checkerboard, no text. Match the reference pixel registration at 2x scale.\nAlso clear wrongly retained WHITE BACKGROUND trapped in the open gap beneath the rifle, beside the magazine, and between the running legs. Those small open-air gaps should be transparent; preserve real pale skin, ivory clothes, gold ornament, metal and boot shape. Do not change the stride phase."
+      },
+      "quote": {
+        "cost": {
+          "credits": 1.25,
+          "credits_exact": 1.25
+        },
+        "adjustments": {
+          "medias[0].role": {
+            "requested": "image",
+            "used": "image_references",
+            "reason": "GPT Image 2.6 backend expects schema-key media roles"
+          }
+        },
+        "quote_ref": "quote:PmxNhxkKqJiNoUfNGr9eag"
+      },
+      "index": 2,
+      "job_id": "66230f6a-dfb5-494d-be8b-f4590a991f59",
+      "status": "completed",
+      "type": "image",
+      "model": "gpt_image_2_6",
+      "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3LHdo37hN3iiYXd8WT9stnWXw4M/hf_20261125_192928_66230f6a-dfb5-494d-be8b-f4590a991f59.png"
+    },
+    {
+      "scope": "E run03",
+      "params": {
+        "model": "gpt_image_2_6",
+        "quality": "high",
+        "resolution": "1k",
+        "size": "800x992",
+        "output_format": "png",
+        "background": "transparent",
+        "count": 1,
+        "medias": [
+          {
+            "role": "image",
+            "value": "fb38001f-7a3f-4292-a3ba-69d3a9a58298"
+          }
+        ],
+        "prompt": "Restore this existing right-facing running game sprite. Keep the EXACT character, pose, face, hairstyle, costume, weapon, body proportions, scale within the canvas, and framing. Output the same full canvas at exactly twice the source pixel dimensions: 800x992. Remove the unwanted white/gray matte fringe along hair, crimson cape, arms, inner legs, boots and rifle. Replace only contaminated boundary colours with their adjoining true character colours, keeping fine strands and cloth tips. Preserve real ivory cloth and painted skin/metal highlights. No white outline, rim glow, new details, design changes or pose changes. Genuine transparent RGBA PNG background, no floor, no shadow, no checkerboard, no text. Match the reference pixel registration at 2x scale.\nAlso clear wrongly retained WHITE BACKGROUND trapped in the open gap beneath the rifle, beside the magazine, and between the running legs. Those small open-air gaps should be transparent; preserve real pale skin, ivory clothes, gold ornament, metal and boot shape. Do not change the stride phase."
+      },
+      "quote": {
+        "cost": {
+          "credits": 1.25,
+          "credits_exact": 1.25
+        },
+        "adjustments": {
+          "medias[0].role": {
+            "requested": "image",
+            "used": "image_references",
+            "reason": "GPT Image 2.6 backend expects schema-key media roles"
+          }
+        },
+        "quote_ref": "quote:Vfn1wOtrTRI0hyRcJVCbAw"
+      },
+      "index": 3,
+      "job_id": "6e1cf33c-01dc-48b6-9310-b24686ebb4e5",
+      "status": "completed",
+      "type": "image",
+      "model": "gpt_image_2_6",
+      "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3LHdo37hN3iiYXd8WT9stnWXw4M/hf_20261125_192928_6e1cf33c-01dc-48b6-9310-b24686ebb4e5.png"
+    },
+    {
+      "scope": "E run04",
+      "params": {
+        "model": "gpt_image_2_6",
+        "quality": "high",
+        "resolution": "1k",
+        "size": "800x992",
+        "output_format": "png",
+        "background": "transparent",
+        "count": 1,
+        "medias": [
+          {
+            "role": "image",
+            "value": "a7a223aa-ead3-4754-8060-969306a5bd05"
+          }
+        ],
+        "prompt": "Restore this existing right-facing running game sprite. Keep the EXACT character, pose, face, hairstyle, costume, weapon, body proportions, scale within the canvas, and framing. Output the same full canvas at exactly twice the source pixel dimensions: 800x992. Remove the unwanted white/gray matte fringe along hair, crimson cape, arms, inner legs, boots and rifle. Replace only contaminated boundary colours with their adjoining true character colours, keeping fine strands and cloth tips. Preserve real ivory cloth and painted skin/metal highlights. No white outline, rim glow, new details, design changes or pose changes. Genuine transparent RGBA PNG background, no floor, no shadow, no checkerboard, no text. Match the reference pixel registration at 2x scale.\nAlso clear wrongly retained WHITE BACKGROUND trapped in the open gap beneath the rifle, beside the magazine, and between the running legs. Those small open-air gaps should be transparent; preserve real pale skin, ivory clothes, gold ornament, metal and boot shape. Do not change the stride phase."
+      },
+      "quote": {
+        "cost": {
+          "credits": 1.25,
+          "credits_exact": 1.25
+        },
+        "adjustments": {
+          "medias[0].role": {
+            "requested": "image",
+            "used": "image_references",
+            "reason": "GPT Image 2.6 backend expects schema-key media roles"
+          }
+        },
+        "quote_ref": "quote:oRqlQXPf4CMmKhdFy0KD7Q"
+      },
+      "index": 4,
+      "job_id": "71fa0761-ec9e-4c93-a57d-ddb62b28b3cf",
+      "status": "completed",
+      "type": "image",
+      "model": "gpt_image_2_6",
+      "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3LHdo37hN3iiYXd8WT9stnWXw4M/hf_20261125_192927_71fa0761-ec9e-4c93-a57d-ddb62b28b3cf.png"
+    },
+    {
+      "scope": "E run05",
+      "params": {
+        "model": "gpt_image_2_6",
+        "quality": "high",
+        "resolution": "1k",
+        "size": "800x992",
+        "output_format": "png",
+        "background": "transparent",
+        "count": 1,
+        "medias": [
+          {
+            "role": "image",
+            "value": "5bfcf3c9-9cd3-4307-8a65-10071bd782e5"
+          }
+        ],
+        "prompt": "Restore this existing right-facing running game sprite. Keep the EXACT character, pose, face, hairstyle, costume, weapon, body proportions, scale within the canvas, and framing. Output the same full canvas at exactly twice the source pixel dimensions: 800x992. Remove the unwanted white/gray matte fringe along hair, crimson cape, arms, inner legs, boots and rifle. Replace only contaminated boundary colours with their adjoining true character colours, keeping fine strands and cloth tips. Preserve real ivory cloth and painted skin/metal highlights. No white outline, rim glow, new details, design changes or pose changes. Genuine transparent RGBA PNG background, no floor, no shadow, no checkerboard, no text. Match the reference pixel registration at 2x scale.\nAlso clear wrongly retained WHITE BACKGROUND trapped in the open gap beneath the rifle, beside the magazine, and between the running legs. Those small open-air gaps should be transparent; preserve real pale skin, ivory clothes, gold ornament, metal and boot shape. Do not change the stride phase."
+      },
+      "quote": {
+        "cost": {
+          "credits": 1.25,
+          "credits_exact": 1.25
+        },
+        "adjustments": {
+          "medias[0].role": {
+            "requested": "image",
+            "used": "image_references",
+            "reason": "GPT Image 2.6 backend expects schema-key media roles"
+          }
+        },
+        "quote_ref": "quote:jjZQfVI0iQ_7uocW9lvu_w"
+      },
+      "index": 5,
+      "job_id": "220b7c14-eaa9-45e2-9008-128bc2880438",
+      "status": "completed",
+      "type": "image",
+      "model": "gpt_image_2_6",
+      "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3LHdo37hN3iiYXd8WT9stnWXw4M/hf_20261125_192927_220b7c14-eaa9-45e2-9008-128bc2880438.png"
+    },
+    {
+      "scope": "E run06",
+      "params": {
+        "model": "gpt_image_2_6",
+        "quality": "high",
+        "resolution": "1k",
+        "size": "800x992",
+        "output_format": "png",
+        "background": "transparent",
+        "count": 1,
+        "medias": [
+          {
+            "role": "image",
+            "value": "6cfec835-a2b3-4f32-a19c-b952574b2c11"
+          }
+        ],
+        "prompt": "Restore this existing right-facing running game sprite. Keep the EXACT character, pose, face, hairstyle, costume, weapon, body proportions, scale within the canvas, and framing. Output the same full canvas at exactly twice the source pixel dimensions: 800x992. Remove the unwanted white/gray matte fringe along hair, crimson cape, arms, inner legs, boots and rifle. Replace only contaminated boundary colours with their adjoining true character colours, keeping fine strands and cloth tips. Preserve real ivory cloth and painted skin/metal highlights. No white outline, rim glow, new details, design changes or pose changes. Genuine transparent RGBA PNG background, no floor, no shadow, no checkerboard, no text. Match the reference pixel registration at 2x scale.\nAlso clear wrongly retained WHITE BACKGROUND trapped in the open gap beneath the rifle, beside the magazine, and between the running legs. Those small open-air gaps should be transparent; preserve real pale skin, ivory clothes, gold ornament, metal and boot shape. Do not change the stride phase."
+      },
+      "quote": {
+        "cost": {
+          "credits": 1.25,
+          "credits_exact": 1.25
+        },
+        "adjustments": {
+          "medias[0].role": {
+            "requested": "image",
+            "used": "image_references",
+            "reason": "GPT Image 2.6 backend expects schema-key media roles"
+          }
+        },
+        "quote_ref": "quote:hSIr5t3Oh8W5gYEuPHZSTw"
+      },
+      "index": 6,
+      "job_id": "93112e8a-c71e-4e27-9be3-f68e372007ad",
+      "status": "completed",
+      "type": "image",
+      "model": "gpt_image_2_6",
+      "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3LHdo37hN3iiYXd8WT9stnWXw4M/hf_20261125_192928_93112e8a-c71e-4e27-9be3-f68e372007ad.png"
+    },
+    {
+      "scope": "E run07",
+      "params": {
+        "model": "gpt_image_2_6",
+        "quality": "high",
+        "resolution": "1k",
+        "size": "800x992",
+        "output_format": "png",
+        "background": "transparent",
+        "count": 1,
+        "medias": [
+          {
+            "role": "image",
+            "value": "e5424312-326a-4f10-9958-da4cf72f2b99"
+          }
+        ],
+        "prompt": "Restore this existing right-facing running game sprite. Keep the EXACT character, pose, face, hairstyle, costume, weapon, body proportions, scale within the canvas, and framing. Output the same full canvas at exactly twice the source pixel dimensions: 800x992. Remove the unwanted white/gray matte fringe along hair, crimson cape, arms, inner legs, boots and rifle. Replace only contaminated boundary colours with their adjoining true character colours, keeping fine strands and cloth tips. Preserve real ivory cloth and painted skin/metal highlights. No white outline, rim glow, new details, design changes or pose changes. Genuine transparent RGBA PNG background, no floor, no shadow, no checkerboard, no text. Match the reference pixel registration at 2x scale.\nAlso clear wrongly retained WHITE BACKGROUND trapped in the open gap beneath the rifle, beside the magazine, and between the running legs. Those small open-air gaps should be transparent; preserve real pale skin, ivory clothes, gold ornament, metal and boot shape. Do not change the stride phase."
+      },
+      "quote": {
+        "cost": {
+          "credits": 1.25,
+          "credits_exact": 1.25
+        },
+        "adjustments": {
+          "medias[0].role": {
+            "requested": "image",
+            "used": "image_references",
+            "reason": "GPT Image 2.6 backend expects schema-key media roles"
+          }
+        },
+        "quote_ref": "quote:claDS2dPOfkYb2k4-bGIHw"
+      },
+      "index": 7,
+      "job_id": "e95687b5-23e0-426e-93d2-c39ac425e948",
+      "status": "completed",
+      "type": "image",
+      "model": "gpt_image_2_6",
+      "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3LHdo37hN3iiYXd8WT9stnWXw4M/hf_20261125_193041_e95687b5-23e0-426e-93d2-c39ac425e948.png"
+    },
+    {
+      "scope": "E run08",
+      "params": {
+        "model": "gpt_image_2_6",
+        "quality": "high",
+        "resolution": "1k",
+        "size": "800x992",
+        "output_format": "png",
+        "background": "transparent",
+        "count": 1,
+        "medias": [
+          {
+            "role": "image",
+            "value": "189c6cd9-84f7-4e50-93d7-5b134325c05e"
+          }
+        ],
+        "prompt": "Restore this existing right-facing running game sprite. Keep the EXACT character, pose, face, hairstyle, costume, weapon, body proportions, scale within the canvas, and framing. Output the same full canvas at exactly twice the source pixel dimensions: 800x992. Remove the unwanted white/gray matte fringe along hair, crimson cape, arms, inner legs, boots and rifle. Replace only contaminated boundary colours with their adjoining true character colours, keeping fine strands and cloth tips. Preserve real ivory cloth and painted skin/metal highlights. No white outline, rim glow, new details, design changes or pose changes. Genuine transparent RGBA PNG background, no floor, no shadow, no checkerboard, no text. Match the reference pixel registration at 2x scale.\nAlso clear wrongly retained WHITE BACKGROUND trapped in the open gap beneath the rifle, beside the magazine, and between the running legs. Those small open-air gaps should be transparent; preserve real pale skin, ivory clothes, gold ornament, metal and boot shape. Do not change the stride phase."
+      },
+      "quote": {
+        "cost": {
+          "credits": 1.25,
+          "credits_exact": 1.25
+        },
+        "adjustments": {
+          "medias[0].role": {
+            "requested": "image",
+            "used": "image_references",
+            "reason": "GPT Image 2.6 backend expects schema-key media roles"
+          }
+        },
+        "quote_ref": "quote:7kdrwoe-Rudlb07Sc-97Bw"
+      },
+      "index": 8,
+      "job_id": "79dbac37-07e0-4c78-96aa-8d9f3036d57f",
+      "status": "completed",
+      "type": "image",
+      "model": "gpt_image_2_6",
+      "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3LHdo37hN3iiYXd8WT9stnWXw4M/hf_20261125_192931_79dbac37-07e0-4c78-96aa-8d9f3036d57f.png"
+    },
+    {
+      "scope": "E run09",
+      "params": {
+        "model": "gpt_image_2_6",
+        "quality": "high",
+        "resolution": "1k",
+        "size": "800x992",
+        "output_format": "png",
+        "background": "transparent",
+        "count": 1,
+        "medias": [
+          {
+            "role": "image",
+            "value": "0f5f0a26-7e9c-40fc-a310-a6bcdd057032"
+          }
+        ],
+        "prompt": "Restore this existing right-facing running game sprite. Keep the EXACT character, pose, face, hairstyle, costume, weapon, body proportions, scale within the canvas, and framing. Output the same full canvas at exactly twice the source pixel dimensions: 800x992. Remove the unwanted white/gray matte fringe along hair, crimson cape, arms, inner legs, boots and rifle. Replace only contaminated boundary colours with their adjoining true character colours, keeping fine strands and cloth tips. Preserve real ivory cloth and painted skin/metal highlights. No white outline, rim glow, new details, design changes or pose changes. Genuine transparent RGBA PNG background, no floor, no shadow, no checkerboard, no text. Match the reference pixel registration at 2x scale.\nAlso clear wrongly retained WHITE BACKGROUND trapped in the open gap beneath the rifle, beside the magazine, and between the running legs. Those small open-air gaps should be transparent; preserve real pale skin, ivory clothes, gold ornament, metal and boot shape. Do not change the stride phase."
+      },
+      "quote": {
+        "cost": {
+          "credits": 1.25,
+          "credits_exact": 1.25
+        },
+        "adjustments": {
+          "medias[0].role": {
+            "requested": "image",
+            "used": "image_references",
+            "reason": "GPT Image 2.6 backend expects schema-key media roles"
+          }
+        },
+        "quote_ref": "quote:mhfPnkOKRTRgy3F42s-qmA"
+      },
+      "index": 9,
+      "job_id": "ea7d248f-e83a-4c04-b05e-2546fe1a8fbb",
+      "status": "completed",
+      "type": "image",
+      "model": "gpt_image_2_6",
+      "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3LHdo37hN3iiYXd8WT9stnWXw4M/hf_20261125_192932_ea7d248f-e83a-4c04-b05e-2546fe1a8fbb.png"
+    },
+    {
+      "scope": "E run10",
+      "params": {
+        "model": "gpt_image_2_6",
+        "quality": "high",
+        "resolution": "1k",
+        "size": "800x992",
+        "output_format": "png",
+        "background": "transparent",
+        "count": 1,
+        "medias": [
+          {
+            "role": "image",
+            "value": "de8b3303-c047-4b75-86b9-4460303daf86"
+          }
+        ],
+        "prompt": "Restore this existing right-facing running game sprite. Keep the EXACT character, pose, face, hairstyle, costume, weapon, body proportions, scale within the canvas, and framing. Output the same full canvas at exactly twice the source pixel dimensions: 800x992. Remove the unwanted white/gray matte fringe along hair, crimson cape, arms, inner legs, boots and rifle. Replace only contaminated boundary colours with their adjoining true character colours, keeping fine strands and cloth tips. Preserve real ivory cloth and painted skin/metal highlights. No white outline, rim glow, new details, design changes or pose changes. Genuine transparent RGBA PNG background, no floor, no shadow, no checkerboard, no text. Match the reference pixel registration at 2x scale.\nAlso clear wrongly retained WHITE BACKGROUND trapped in the open gap beneath the rifle, beside the magazine, and between the running legs. Those small open-air gaps should be transparent; preserve real pale skin, ivory clothes, gold ornament, metal and boot shape. Do not change the stride phase."
+      },
+      "quote": {
+        "cost": {
+          "credits": 1.25,
+          "credits_exact": 1.25
+        },
+        "adjustments": {
+          "medias[0].role": {
+            "requested": "image",
+            "used": "image_references",
+            "reason": "GPT Image 2.6 backend expects schema-key media roles"
+          }
+        },
+        "quote_ref": "quote:CXFGDVIbHVbftny1iSIjxw"
+      },
+      "index": 10,
+      "job_id": "ad2c8d24-c1f1-4312-b5b1-2d153d5749d6",
+      "status": "completed",
+      "type": "image",
+      "model": "gpt_image_2_6",
+      "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3LHdo37hN3iiYXd8WT9stnWXw4M/hf_20261125_193040_ad2c8d24-c1f1-4312-b5b1-2d153d5749d6.png"
+    }
+  ],
+  "submission_rejections": [
+    {
+      "index": 7,
+      "status": "submission_failed",
+      "error": "Rate limit reached: max 8 concurrent job(s). Wait for a running generation to finish, then try again.",
+      "adjustments": {
+        "medias[0].role": {
+          "requested": "image",
+          "used": "image_references",
+          "reason": "GPT Image 2.6 backend expects schema-key media roles"
+        }
+      }
+    },
+    {
+      "index": 10,
+      "status": "submission_failed",
+      "error": "Rate limit reached: max 8 concurrent job(s). Wait for a running generation to finish, then try again.",
+      "adjustments": {
+        "medias[0].role": {
+          "requested": "image",
+          "used": "image_references",
+          "reason": "GPT Image 2.6 backend expects schema-key media roles"
+        }
+      }
+    }
+  ],
+  "ending_balance": {
+    "credits": 1091.25
+  },
+  "successful_quoted_credits": 13.75,
+  "failed_generation_quoted_credits": 2,
+  "account_balance_change": 13.75,
+  "actual_per_job_debit_or_refund_independently_verified": false
+}

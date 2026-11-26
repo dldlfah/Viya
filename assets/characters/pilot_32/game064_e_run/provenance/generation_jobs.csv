@@ -1,0 +1,13 @@
+job_id,model,service_status,selection,output_format,quoted_credits,observed_debit_credits,free_generations_used,registered_KST,notes
+7c02fb12-33b0-409e-8ccf-ddc97d10580b,gpt_image_2_6,failed,not_selected,gif,not quoted in this session,unknown,unknown,2026-11-26T14:04:38.339129+09:00,Recovered prior job; prior actual debit unavailable. Quote is not a receipt.
+ec2a160b-26c6-4d4e-a56a-fb85a0b6e5f1,gpt_image_2_6,completed,not_selected,gif,not quoted in this session,unknown,unknown,2026-11-26T14:06:05.589817+09:00,Recovered prior job; prior actual debit unavailable. Quote is not a receipt.
+07816b73-6d84-4eca-9b0a-e76af3cc5ca2,gpt_image_2_6,completed,not_selected,gif,not quoted in this session,unknown,unknown,2026-11-26T14:12:01.752358+09:00,Recovered prior job; prior actual debit unavailable. Quote is not a receipt.
+53c6d51d-5f60-4a4c-a8df-585766953738,gpt_image_2_6,completed,not_selected,png,not quoted in this session,unknown,unknown,2026-11-26T14:16:44.935974+09:00,Recovered prior job; prior actual debit unavailable. Quote is not a receipt.
+5dd83a52-e6cd-4b77-8ad8-2a57568a9813,gpt_image_2_6,completed,not_selected,gif,1.25,unknown,unknown,2026-11-26T14:20:51.942415+09:00,Recovered prior job; prior actual debit unavailable. Quote is not a receipt.
+2f8c530d-5c49-41a7-a5f3-18293f544f4e,gpt_image_2_6,completed,not_selected,png,2,unknown,unknown,2026-11-26T14:25:41.677534+09:00,Recovered prior job; prior actual debit unavailable. Quote is not a receipt.
+ecd48160-456b-4a9e-aaa2-540c7d9f3ef7,seedance_2_5,completed,not_selected,video,not quoted in this session,unknown,unknown,2026-11-26T14:35:05.980571+09:00,Recovered prior job; prior actual debit unavailable. Quote is not a receipt.
+6346bcec-ef79-4339-bb39-9d1fb272fd68,seedance_2_5,completed,motion_reference_only,video,28,unknown,unknown,2026-11-26T15:07:12.808674+09:00,Recovered prior job; prior actual debit unavailable. Quote is not a receipt.
+1d0fa95f-ef9f-49d2-b987-6b819a7ae2bd,seedance_2_5,completed,rejected,mp4,31,31,0,2026-11-26,Rifle/boot mismatch and altered leg coverage; wrong donor reference identified.
+e95e57bc-552a-4c03-b39d-6f25faac156d,seedance_2_5,completed,rejected,mp4,31,31,0,2026-11-26,Canonical-only rifle edit did not restore rifle construction.
+9d163ce1-eeda-4922-ac48-769f1c77cef8,hf_mult_replace_object,completed,rejected,mp4,0,0,1,2026-11-26,Original red rune identity weakened.
+fbf2fd2d-8596-4ca4-87e7-875712a2f7c9,hf_mult_motion_control,completed,selected,mp4,0,0,1,2026-11-26,Canonical character imagery with6346 motion reference; final derivative source.

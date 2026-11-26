@@ -1,0 +1,956 @@
+{
+  "id": "GAME-050",
+  "date_kst": "2026-11-24",
+  "status": "IMPLEMENTED_ENGINE_LINUX_CPU_AND_RENDER_VERIFIED",
+  "source_commit": "07ab9ccd862e200595f2abcc4f1876f4dbcfa5a3",
+  "source_tree": "f324e187c4fc949aee4957edadd58202ea439645",
+  "basis": "a222d91a0f4f3d62d3aa879d48e3c15347194eb4",
+  "user_observed_platform": "PC의 Godot 실행 화면",
+  "measured_platform": "Linux Godot4.7.2; X11 Mesa llvmpipe software rendering/Dummy audio. User Windows-PC FPS NOT_VERIFIED.",
+  "findings": "Instrumented same valid160/640/1540actor stage states: repeated wall/route work dominated; flyby push scanned every ground actor for every flier; projectiles scanned every actor; hidden ordinary animation observers added UI CPU.",
+  "changes": [
+    "Bounded16radius cache of grown walls/corners and conservative segment AABB rejection,original intersection math/order.",
+    "Rank complete route costs with Float64; equal costs resolve in original node order. Existing path decisions retained.",
+    "Frame-local128unit spatial candidates for flyby pushes/projectiles. Original actor order and narrowphase retained; knockback rebuckets immediately and committed deaths are filtered. Small workloads use old scans; no population/attack/damage reductions.",
+    "Skip ordinary actors without pattern state in special-pattern dispatch; avoid computing the overwritten legacy pursuit vector and repeated default-wave lookup.",
+    "Animation observation limited to visible world+180margin for ordinary enemies; hero and all elites/bosses stay observed. Ordinary actors still simulate offscreen. Renderers/attack warnings themselves unchanged."
+  ],
+  "preservation": {
+    "status": "PASS",
+    "basis": "a222d91a0f4f3d62d3aa879d48e3c15347194eb4",
+    "protected_files": [
+      "assets/characters/viya/spec/turnaround_contract.v1.json",
+      "assets/characters/viya/spec/turnaround_r1_result.json",
+      "assets/characters/viya/spec/turnaround_r2_result.json",
+      "assets/maps/pilot_01/README.md",
+      "assets/maps/pilot_01/prop_crate.png",
+      "assets/maps/pilot_01/prop_crate.png.import",
+      "assets/maps/pilot_01/source_manifest.json",
+      "assets/maps/pilot_01/stone_floor_tile.png",
+      "assets/maps/pilot_01/stone_floor_tile.png.import",
+      "assets/maps/pilot_01/wall_segment.png",
+      "assets/maps/pilot_01/wall_segment.png.import",
+      "assets/maps/pilot_02/README.md",
+      "assets/maps/pilot_02/prop_debris.png",
+      "assets/maps/pilot_02/prop_debris.png.import",
+      "assets/maps/pilot_02/prop_urn.png",
+      "assets/maps/pilot_02/prop_urn.png.import",
+      "assets/maps/pilot_02/ruin_block.png",
+      "assets/maps/pilot_02/ruin_block.png.import",
+      "assets/maps/pilot_02/source_manifest.json",
+      "assets/maps/pilot_03/README.md",
+      "assets/maps/pilot_03/gate_front.png",
+      "assets/maps/pilot_03/gate_front.png.import",
+      "assets/maps/pilot_03/ruin_top_tile.png",
+      "assets/maps/pilot_03/ruin_top_tile.png.import",
+      "assets/maps/pilot_03/source_manifest.json",
+      "assets/maps/pilot_03/wall_top_tile.png",
+      "assets/maps/pilot_03/wall_top_tile.png.import",
+      "assets/maps/pilot_04/README.md",
+      "assets/maps/pilot_04/prop_crate_broken.png",
+      "assets/maps/pilot_04/prop_crate_broken.png.import",
+      "assets/maps/pilot_04/prop_debris_broken.png",
+      "assets/maps/pilot_04/prop_debris_broken.png.import",
+      "assets/maps/pilot_04/prop_urn_broken.png",
+      "assets/maps/pilot_04/prop_urn_broken.png.import",
+      "assets/maps/pilot_04/source_manifest.json",
+      "assets/references/GEN-005_viya_combat_pose_three_quarter_front.png",
+      "assets/references/README.md",
+      "assets/references/qa/viya_4view_alignment_preview.jpg",
+      "assets/references/qa/viya_side_silhouette_comparison.jpg",
+      "data/actor_presentation.json",
+      "data/campaign_battlefield.json",
+      "data/campaign_encounters.json",
+      "data/campaign_pressure.json",
+      "data/chapter_one.json",
+      "data/combat_pacing.json",
+      "data/combat_profiles.json",
+      "data/destructibles.json",
+      "data/enemy_curse_v3.json",
+      "data/enemy_patterns.json",
+      "data/enemy_patterns_v2.json",
+      "data/gold_dungeon.json",
+      "data/gold_rewards.json",
+      "data/map_presentation_slots.json",
+      "data/maps.json",
+      "data/presentation_slots.json",
+      "data/prototype_skills.json",
+      "data/stages.json",
+      "data/weapon_skills.json",
+      "project.godot",
+      "scenes/main.tscn",
+      "scripts/combat/battle_view.gd",
+      "scripts/combat/campaign_encounters.gd",
+      "scripts/combat/campaign_pressure.gd",
+      "scripts/combat/combat_camera.gd",
+      "scripts/combat/enemy_patterns.gd",
+      "scripts/combat/enemy_patterns_v1.gd",
+      "scripts/combat/enemy_patterns_v2.gd",
+      "scripts/combat/enemy_patterns_v3.gd",
+      "scripts/combat/high_angle_battle.gd",
+      "scripts/main.gd",
+      "scripts/progression/run_snapshot.gd",
+      "scripts/progression/run_store.gd"
+    ],
+    "fingerprint_source_files_changed": false,
+    "frozen_map_reference_sha256": "8110f4a28e04e67fe738011ea888f31a9c74c450ed79148d88c1da602fa03ae8",
+    "original_map_source_sha256": "8110f4a28e04e67fe738011ea888f31a9c74c450ed79148d88c1da602fa03ae8",
+    "ui_observer_hook_only": true,
+    "offscreen_animation_observation": "Only ordinary offscreen observers outside viewport+180world margin are skipped; hero and elites/bosses remain tracked. Simulation and actual render draw/attack-warning logic unchanged.",
+    "data_caps_stats_economy_camera_art_changed": false,
+    "runtime_changed_paths": [
+      "scripts/combat/actor_motion.gd",
+      "scripts/combat/run_state.gd",
+      "scripts/combat/spatial_candidates.gd",
+      "scripts/combat/weapon_modules.gd",
+      "scripts/ui/mobile_main.gd",
+      "scripts/world/map_space.gd"
+    ]
+  },
+  "save": {
+    "schema": 21,
+    "fingerprint_unchanged": "e75a6c9be169029062a23741a93208e3088c2fef2b305f674d10f0d2353525de",
+    "new_authority_fields": [],
+    "new_rng_streams": 0,
+    "applicability": "Fresh and existing1-21 battles use equivalent optimized calculations; no map/stat/timing/cap/economy migration.",
+    "frozen_current21": "6valid synthetic scenarios(stage640/fly1540/cluster640/outskirts640/legacy160/dungeon360),all100RUNNINGsteps/101authority hashes each match GAME049 source; includes 4Lv5/movement/MP/damage/deaths/push/rewards.",
+    "known_preexisting_boundary": "fly1540 after100x.05sec leaves original tiny-positive flier.life below strict1microsecond save minimum. Both original and optimized snapshots are rejected identically. This existing expiry/save boundary remains OPEN,not a new regression or a completed save fix.",
+    "cold_processes": [
+      {
+        "active_steps": 100,
+        "entries": 0,
+        "equal": true,
+        "errors": [],
+        "gold": 0,
+        "hp_after": 100,
+        "hp_before": 100,
+        "mp_after": 64.9999999999997,
+        "mp_before": 60.0,
+        "opened_after": 0,
+        "opened_before": 0,
+        "policy": 2,
+        "schema": 21,
+        "status": "PASS",
+        "tag": "current21"
+      },
+      {
+        "active_steps": 100,
+        "entries": 0,
+        "equal": true,
+        "errors": [],
+        "gold": 0,
+        "hp_after": 60,
+        "hp_before": 92,
+        "mp_after": 29.6999999999998,
+        "mp_before": 24.6999999999997,
+        "opened_after": 0,
+        "opened_before": 0,
+        "policy": 2,
+        "schema": 21,
+        "status": "PASS",
+        "tag": "old20"
+      },
+      {
+        "active_steps": 100,
+        "entries": 0,
+        "equal": true,
+        "errors": [],
+        "gold": 0,
+        "hp_after": 88,
+        "hp_before": 100,
+        "mp_after": 100.0,
+        "mp_before": 100.0,
+        "opened_after": 0,
+        "opened_before": 0,
+        "policy": 2,
+        "schema": 21,
+        "status": "PASS",
+        "tag": "dense21"
+      }
+    ]
+  },
+  "measurements": {
+    "actual_game_window": [
+      {
+        "scenario": "stage640",
+        "start_actors": 640,
+        "same_counts": [
+          625,
+          640
+        ],
+        "cpu_before_ms": {
+          "max": 159.785,
+          "p50": 138.315,
+          "p95": 150.755
+        },
+        "cpu_after_ms": {
+          "max": 45.868,
+          "p50": 24.685,
+          "p95": 33.345
+        },
+        "cpu_p50_reduction_percent": 82.15,
+        "rendered_iteration_before_ms": {
+          "max": 204.03,
+          "p50": 180.316,
+          "p95": 195.684
+        },
+        "rendered_iteration_after_ms": {
+          "max": 91.562,
+          "p50": 63.38,
+          "p95": 82.208
+        },
+        "animation_entries_before": 626,
+        "animation_entries_after": 92,
+        "same_authority": true
+      },
+      {
+        "scenario": "fly1540",
+        "start_actors": 1540,
+        "same_counts": [
+          1520,
+          1540
+        ],
+        "cpu_before_ms": {
+          "max": 427.84,
+          "p50": 392.589,
+          "p95": 419.069
+        },
+        "cpu_after_ms": {
+          "max": 63.385,
+          "p50": 52.812,
+          "p95": 61.374
+        },
+        "cpu_p50_reduction_percent": 86.55,
+        "rendered_iteration_before_ms": {
+          "max": 484.599,
+          "p50": 443.822,
+          "p95": 465.284
+        },
+        "rendered_iteration_after_ms": {
+          "max": 113.257,
+          "p50": 100.087,
+          "p95": 108.898
+        },
+        "animation_entries_before": 1521,
+        "animation_entries_after": 218,
+        "same_authority": true
+      },
+      {
+        "scenario": "dungeon360",
+        "start_actors": 360,
+        "same_counts": [
+          263,
+          360
+        ],
+        "cpu_before_ms": {
+          "max": 12.084,
+          "p50": 6.079,
+          "p95": 9.659
+        },
+        "cpu_after_ms": {
+          "max": 9.718,
+          "p50": 3.345,
+          "p95": 4.864
+        },
+        "cpu_p50_reduction_percent": 44.97,
+        "rendered_iteration_before_ms": {
+          "max": 96.176,
+          "p50": 54.676,
+          "p95": 71.224
+        },
+        "rendered_iteration_after_ms": {
+          "max": 89.811,
+          "p50": 54.89,
+          "p95": 74.238
+        },
+        "animation_entries_before": 1,
+        "animation_entries_after": 1,
+        "same_authority": true
+      }
+    ],
+    "full_render_record": {
+      "display": "X11",
+      "errors": [],
+      "mouse_controls": 3,
+      "native_move_frames": 288,
+      "native_mp": 1,
+      "os": "Linux",
+      "records": [
+        {
+          "arrival_caption": "전투 저장됨 · 임무 ▸",
+          "audio_active": 0,
+          "bonus_ranks": 0,
+          "bound_textures": [
+            "res://assets/maps/pilot_01/stone_floor_tile.png",
+            "res://assets/maps/pilot_01/wall_segment.png",
+            "res://assets/maps/pilot_01/prop_crate.png",
+            "res://assets/maps/pilot_02/ruin_block.png",
+            "res://assets/maps/pilot_02/prop_urn.png",
+            "res://assets/maps/pilot_02/prop_debris.png",
+            "res://assets/maps/pilot_03/wall_top_tile.png",
+            "res://assets/maps/pilot_03/ruin_top_tile.png",
+            "res://assets/maps/pilot_03/gate_front.png"
+          ],
+          "chests": [],
+          "dense": false,
+          "encounter_version": 2,
+          "enemies": 625,
+          "enemy_bullets": [],
+          "high_angle": true,
+          "hp": 88,
+          "image": "dense_stage640",
+          "incoming": {
+            "alpha": 0.424242424242424,
+            "center": "(715.6182, 304.3341)",
+            "marks": [
+              {
+                "alpha": 0.424242424242424,
+                "contact": false,
+                "direction": "(0.821304, -0.570491)",
+                "origin": "(725.8096, 266.8335)"
+              }
+            ],
+            "text": "−12 HP"
+          },
+          "label_overlaps": 0,
+          "labels": 13,
+          "map": "siege_battlefield",
+          "mp": 100.0,
+          "occluders": 0,
+          "opened": 0,
+          "owned": {
+            "gun_grenade": 5,
+            "gun_lance": 5,
+            "gun_rifle": 5,
+            "gun_scatter": 5
+          },
+          "patterns": [],
+          "phase": 1,
+          "pixels_sha256": "200c644d8fdc636b4e5471420296d7dd0edd9c28a530064025f754b3aacdc6bc",
+          "population_limit": 640,
+          "telegraph": [],
+          "viewport": "(1280, 720)"
+        },
+        {
+          "arrival_caption": "전투 임무 ▸",
+          "audio_active": 0,
+          "bonus_ranks": 0,
+          "bound_textures": [
+            "res://assets/maps/pilot_01/stone_floor_tile.png",
+            "res://assets/maps/pilot_01/wall_segment.png",
+            "res://assets/maps/pilot_01/prop_crate.png",
+            "res://assets/maps/pilot_02/ruin_block.png",
+            "res://assets/maps/pilot_02/prop_urn.png",
+            "res://assets/maps/pilot_02/prop_debris.png",
+            "res://assets/maps/pilot_03/wall_top_tile.png",
+            "res://assets/maps/pilot_03/ruin_top_tile.png",
+            "res://assets/maps/pilot_03/gate_front.png"
+          ],
+          "chests": [],
+          "dense": true,
+          "encounter_version": 2,
+          "enemies": 1520,
+          "enemy_bullets": [],
+          "high_angle": true,
+          "hp": 88,
+          "image": "dense_fly1540",
+          "incoming": {
+            "alpha": 0.181818181818182,
+            "center": "(715.6182, 304.3341)",
+            "marks": [
+              {
+                "alpha": 0.181818181818182,
+                "contact": false,
+                "direction": "(0.32806, 0.944657)",
+                "origin": "(690.1165, 291.7061)"
+              }
+            ],
+            "text": "−12 HP"
+          },
+          "label_overlaps": 0,
+          "labels": 12,
+          "map": "siege_battlefield",
+          "mp": 100.0,
+          "occluders": 0,
+          "opened": 0,
+          "owned": {
+            "gun_grenade": 5,
+            "gun_lance": 5,
+            "gun_rifle": 5,
+            "gun_scatter": 5
+          },
+          "patterns": [],
+          "phase": 1,
+          "pixels_sha256": "89681eeadd18c48bb54d768edeb9815d6a8d5cff9b8a8ea29cdee6df5c684b19",
+          "population_limit": 640,
+          "telegraph": [],
+          "viewport": "(1280, 720)"
+        },
+        {
+          "arrival_caption": "전투 임무 ▸",
+          "audio_active": 0,
+          "bonus_ranks": 0,
+          "bound_textures": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "chests": [],
+          "dense": true,
+          "encounter_version": 0,
+          "enemies": 263,
+          "enemy_bullets": [],
+          "high_angle": true,
+          "hp": 94,
+          "image": "dense_dungeon360",
+          "incoming": {
+            "alpha": 0.424242424242424,
+            "center": "(715.6146, 304.3341)",
+            "marks": [
+              {
+                "alpha": 0.424242424242424,
+                "contact": false,
+                "direction": "(-0.58058, 0.814203)",
+                "origin": "(680.9674, 310.8594)"
+              }
+            ],
+            "text": "−6 HP"
+          },
+          "label_overlaps": 0,
+          "labels": 12,
+          "map": "gold_slime",
+          "mp": 100.0,
+          "occluders": 0,
+          "opened": 0,
+          "owned": {
+            "gun_grenade": 5,
+            "gun_lance": 5,
+            "gun_rifle": 5,
+            "gun_scatter": 5
+          },
+          "patterns": [],
+          "phase": 1,
+          "pixels_sha256": "c6af1de79dd8bc792fc21a2362fa828e0e06e950d29b59de90883c24368795c2",
+          "population_limit": 160,
+          "telegraph": [],
+          "viewport": "(1280, 720)"
+        },
+        {
+          "arrival_caption": "전투 임무 ▸",
+          "audio_active": 0,
+          "bonus_ranks": 0,
+          "bound_textures": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "chests": [],
+          "dense": false,
+          "encounter_version": 0,
+          "enemies": 1,
+          "enemy_bullets": [],
+          "high_angle": true,
+          "hp": 94,
+          "image": "dense_pause",
+          "incoming": {},
+          "label_overlaps": 0,
+          "labels": 24,
+          "map": "gold_slime",
+          "mp": 60.0,
+          "occluders": 0,
+          "opened": 0,
+          "owned": {
+            "gun_grenade": 5,
+            "gun_lance": 5,
+            "gun_rifle": 5,
+            "gun_scatter": 5
+          },
+          "patterns": [],
+          "phase": 2,
+          "pixels_sha256": "033ab8d8b51ecc4944d20aac9fdf513ec395edeb0dfc3f14747a805f11d8b26d",
+          "population_limit": 160,
+          "telegraph": [],
+          "viewport": "(1280, 720)"
+        },
+        {
+          "arrival_caption": "저장됨 ▸",
+          "audio_active": 0,
+          "bonus_ranks": 0,
+          "bound_textures": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "chests": [],
+          "dense": false,
+          "encounter_version": 0,
+          "enemies": 1,
+          "enemy_bullets": [],
+          "high_angle": true,
+          "hp": 94,
+          "image": "dense_compact",
+          "incoming": {
+            "alpha": 0.424242424242424,
+            "center": "(403.9921, 137.032)",
+            "marks": [
+              {
+                "alpha": 0.424242424242424,
+                "contact": false,
+                "direction": "(-0.58058, 0.814203)",
+                "origin": "(369.3448, 143.5573)"
+              }
+            ],
+            "text": "−6 HP"
+          },
+          "label_overlaps": 0,
+          "labels": 12,
+          "map": "gold_slime",
+          "mp": 60.0,
+          "occluders": 0,
+          "opened": 0,
+          "owned": {
+            "gun_grenade": 5,
+            "gun_lance": 5,
+            "gun_rifle": 5,
+            "gun_scatter": 5
+          },
+          "patterns": [],
+          "phase": 1,
+          "pixels_sha256": "1c26d386519ce283b716bee9a7973b126e20a331dceccfd13894e268578a885f",
+          "population_limit": 160,
+          "telegraph": [],
+          "viewport": "(854, 394)"
+        }
+      ],
+      "renderer": "llvmpipe (LLVM 19.1.7, 256 bits)",
+      "rows": [
+        {
+          "active_steps": 48,
+          "authority_equal": true,
+          "cpu_step_ms": {
+            "max": 159.785,
+            "p50": 138.315,
+            "p95": 150.755
+          },
+          "initial_actors": 640,
+          "mode": "before",
+          "observed_max": 640,
+          "observed_min": 625,
+          "rendered_frame_ms": {
+            "max": 204.03,
+            "p50": 180.316,
+            "p95": 195.684
+          },
+          "samples": 40,
+          "tag": "stage640",
+          "tracked_animation_entries": 626,
+          "warmup": 8
+        },
+        {
+          "active_steps": 48,
+          "authority_equal": true,
+          "cpu_step_ms": {
+            "max": 45.868,
+            "p50": 24.685,
+            "p95": 33.345
+          },
+          "initial_actors": 640,
+          "mode": "after",
+          "observed_max": 640,
+          "observed_min": 625,
+          "rendered_frame_ms": {
+            "max": 91.562,
+            "p50": 63.38,
+            "p95": 82.208
+          },
+          "samples": 40,
+          "tag": "stage640",
+          "tracked_animation_entries": 92,
+          "warmup": 8
+        },
+        {
+          "active_steps": 48,
+          "authority_equal": true,
+          "cpu_step_ms": {
+            "max": 427.84,
+            "p50": 392.589,
+            "p95": 419.069
+          },
+          "initial_actors": 1540,
+          "mode": "before",
+          "observed_max": 1540,
+          "observed_min": 1520,
+          "rendered_frame_ms": {
+            "max": 484.599,
+            "p50": 443.822,
+            "p95": 465.284
+          },
+          "samples": 40,
+          "tag": "fly1540",
+          "tracked_animation_entries": 1521,
+          "warmup": 8
+        },
+        {
+          "active_steps": 48,
+          "authority_equal": true,
+          "cpu_step_ms": {
+            "max": 63.385,
+            "p50": 52.812,
+            "p95": 61.374
+          },
+          "initial_actors": 1540,
+          "mode": "after",
+          "observed_max": 1540,
+          "observed_min": 1520,
+          "rendered_frame_ms": {
+            "max": 113.257,
+            "p50": 100.087,
+            "p95": 108.898
+          },
+          "samples": 40,
+          "tag": "fly1540",
+          "tracked_animation_entries": 218,
+          "warmup": 8
+        },
+        {
+          "active_steps": 48,
+          "authority_equal": true,
+          "cpu_step_ms": {
+            "max": 12.084,
+            "p50": 6.079,
+            "p95": 9.659
+          },
+          "initial_actors": 360,
+          "mode": "before",
+          "observed_max": 360,
+          "observed_min": 263,
+          "rendered_frame_ms": {
+            "max": 96.176,
+            "p50": 54.676,
+            "p95": 71.224
+          },
+          "samples": 40,
+          "tag": "dungeon360",
+          "tracked_animation_entries": 1,
+          "warmup": 8
+        },
+        {
+          "active_steps": 48,
+          "authority_equal": true,
+          "cpu_step_ms": {
+            "max": 9.718,
+            "p50": 3.345,
+            "p95": 4.864
+          },
+          "initial_actors": 360,
+          "mode": "after",
+          "observed_max": 360,
+          "observed_min": 263,
+          "rendered_frame_ms": {
+            "max": 89.811,
+            "p50": 54.89,
+            "p95": 74.238
+          },
+          "samples": 40,
+          "tag": "dungeon360",
+          "tracked_animation_entries": 1,
+          "warmup": 8
+        }
+      ],
+      "scope": "Same original valid dense snapshots,production main scene at1280x720,actual native joystick input. Exact authority equality48steps perpair. Synthetic load,desktop llvmpipe/Dummy audio,not mobile FPS/thermal/human approval. Whole frame includes scheduler/render/input,CPU excludes hash verification.",
+      "status": "PASS"
+    },
+    "paired_headless": {
+      "display": "headless",
+      "dt": 0.0166666666666667,
+      "errors": [],
+      "os": "Linux",
+      "processor": "AMD EPYC 9V74 80-Core Processor",
+      "rows": [
+        {
+          "after_cpu_ms": {
+            "max": 24.691,
+            "p50": 19.32,
+            "p95": 22.246
+          },
+          "authority_equal_all68": true,
+          "before_cpu_ms": {
+            "max": 150.13,
+            "p50": 129.609,
+            "p95": 142.999
+          },
+          "cold_step_ms": [
+            206.982,
+            57.306
+          ],
+          "initial_actors": 640,
+          "observed_max": 640,
+          "observed_min": 623,
+          "p50_reduction_percent": 85.0936277573317,
+          "running_steps": 68,
+          "samples": 60,
+          "tag": "stage640",
+          "warmup": 8
+        },
+        {
+          "after_cpu_ms": {
+            "max": 86.94,
+            "p50": 48.476,
+            "p95": 64.338
+          },
+          "authority_equal_all68": true,
+          "before_cpu_ms": {
+            "max": 487.521,
+            "p50": 355.693,
+            "p95": 408.458
+          },
+          "cold_step_ms": [
+            425.755,
+            87.868
+          ],
+          "initial_actors": 1540,
+          "observed_max": 1540,
+          "observed_min": 1518,
+          "p50_reduction_percent": 86.3713933082743,
+          "running_steps": 68,
+          "samples": 60,
+          "tag": "fly1540",
+          "warmup": 8
+        },
+        {
+          "after_cpu_ms": {
+            "max": 11.962,
+            "p50": 6.449,
+            "p95": 10.701
+          },
+          "authority_equal_all68": true,
+          "before_cpu_ms": {
+            "max": 36.257,
+            "p50": 15.482,
+            "p95": 27.252
+          },
+          "cold_step_ms": [
+            25.831,
+            9.035
+          ],
+          "initial_actors": 640,
+          "observed_max": 640,
+          "observed_min": 493,
+          "p50_reduction_percent": 58.3451750419842,
+          "running_steps": 68,
+          "samples": 60,
+          "tag": "cluster640",
+          "warmup": 8
+        },
+        {
+          "after_cpu_ms": {
+            "max": 4.008,
+            "p50": 1.677,
+            "p95": 2.898
+          },
+          "authority_equal_all68": true,
+          "before_cpu_ms": {
+            "max": 8.695,
+            "p50": 3.351,
+            "p95": 7.478
+          },
+          "cold_step_ms": [
+            6.226,
+            2.936
+          ],
+          "initial_actors": 360,
+          "observed_max": 360,
+          "observed_min": 255,
+          "p50_reduction_percent": 49.9552372426141,
+          "running_steps": 68,
+          "samples": 60,
+          "tag": "dungeon360",
+          "warmup": 8
+        }
+      ],
+      "scope": "Synthetic valid saved battles,4Lv5 attacks; alternating execution order and full authority/sevenRNG equality each step. Headless CPU only,not real-world FPS or device/thermal/human approval.",
+      "source_before": "a222d91a0f4f3d62d3aa879d48e3c15347194eb4",
+      "status": "PASS"
+    },
+    "scope": "Same synthetic valid snapshots and inputs. Native UI starts640/1540/360actors; actual counts fall identically through combat. Warmup8/40rendered samples and8/60headless samples; CPU and rendered iteration timings are separate. These are NOT user-PC FPS,real-device performance or natural6minute balance approval."
+  },
+  "validation": {
+    "engine": "official Godot4.7.2",
+    "engine_commands": [
+      {
+        "command": [
+          "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+          "--headless",
+          "--version"
+        ],
+        "exit_code": 0,
+        "status": "PASS"
+      },
+      {
+        "command": [
+          "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+          "--headless",
+          "--path",
+          "/workspace/Viya",
+          "--editor",
+          "--import",
+          "--quit"
+        ],
+        "exit_code": 0,
+        "status": "PASS"
+      },
+      {
+        "command": [
+          "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+          "--headless",
+          "--path",
+          "/workspace/Viya",
+          "--script",
+          "res://tests/test_combat_foundation.gd"
+        ],
+        "exit_code": 0,
+        "status": "PASS"
+      },
+      {
+        "command": [
+          "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+          "--headless",
+          "--path",
+          "/workspace/Viya",
+          "--script",
+          "res://tests/test_growth.gd"
+        ],
+        "exit_code": 0,
+        "status": "PASS"
+      },
+      {
+        "command": [
+          "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+          "--headless",
+          "--path",
+          "/workspace/Viya",
+          "--script",
+          "res://tests/test_magic.gd"
+        ],
+        "exit_code": 0,
+        "status": "PASS"
+      },
+      {
+        "command": [
+          "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+          "--headless",
+          "--path",
+          "/workspace/Viya",
+          "--script",
+          "res://tests/test_feedback.gd"
+        ],
+        "exit_code": 0,
+        "status": "PASS"
+      },
+      {
+        "command": [
+          "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+          "--headless",
+          "--path",
+          "/workspace/Viya",
+          "--script",
+          "res://tests/test_mobile_hud.gd"
+        ],
+        "exit_code": 0,
+        "status": "PASS"
+      },
+      {
+        "command": [
+          "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+          "--headless",
+          "--path",
+          "/workspace/Viya",
+          "--script",
+          "res://tests/test_run_navigation.gd"
+        ],
+        "exit_code": 0,
+        "status": "PASS"
+      },
+      {
+        "command": [
+          "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+          "--headless",
+          "--path",
+          "/workspace/Viya",
+          "--script",
+          "res://tests/test_combat_cues.gd"
+        ],
+        "exit_code": 0,
+        "status": "PASS"
+      },
+      {
+        "command": [
+          "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+          "--headless",
+          "--path",
+          "/workspace/Viya",
+          "--quit-after",
+          "120"
+        ],
+        "exit_code": 0,
+        "status": "PASS"
+      }
+    ],
+    "native_checks": 4165,
+    "suite_counts": [
+      23,
+      70,
+      122,
+      57,
+      1336,
+      117,
+      2440
+    ],
+    "new_regression_checks": 49,
+    "static_files": 152,
+    "source_contracts": 6,
+    "negative_controls": 57,
+    "python_tests": 12,
+    "existing18_19_20_hashes": "Each606retained in the original suites",
+    "current21_hashes": 606,
+    "original7enginecommands_and_error_criteria": "unchanged; whole49dense regressions registered in existing navigation suite to fit original120second per-command budget,none skipped",
+    "geometry": "1000random wall fractions plus corner/start-inside/zero/grazing segments;40route/move samples per4maps; bounded-cache and diagnostic geometry invalidation; stable index order/death/rebucket/fallback; visible/elite animation and pause/enter/leave margin",
+    "actual_ui": "288native joystick steps/3paired48runningstep scenarios x2; all exact authority matches,3mouse controls/1MPcast/pause/Continue/5screens; synthetic load explicit",
+    "resolved_validation_setup": [
+      "First editor import aborted in allocator while recreating missing cachedUIDs; complete retry after regeneration passed.",
+      "Moved the complete new49check regression from crowded combat-cues to existing navigation suite after combined suite exceeded its unchanged120second runner budget.",
+      "Dense cold fixture rebuilt using actual1280x720/safe-area UI spawn guard instead of headless default; same-view100step comparison passed."
+    ],
+    "not_verified": [
+      "User Windows PC Godot/F5/export/FPS",
+      "Android/iOS/FPS/thermal",
+      "New natural6minute difficulty/growth/economy approval",
+      "Final art/audio/human readability or fun"
+    ]
+  },
+  "remaining": "Baseline flier expiry/save boundary OPEN; balance/growth/economy and actualPC verification remain separate. No new content/art/camera/gold-system changes.",
+  "next": "GAME-051 비행 수명 경계의 전투 저장 보완",
+  "artifact_sha256": {
+    "GAME050_DENSE.png": "c97218a8a6b0585f62244811deb6a67f5f0bce0af23918c9111f54588b761f33",
+    "GAME050_COMPACT.png": "55aa1f0ee7aa095f1c70ff99ac27e539b2aecf91e50ffc7a693eeaecfa0df922"
+  },
+  "local_logs": ".local_validation/GAME050 contains exact scripts/frozen before sources/logs/raw trajectories/saves/images,including failed diagnostic attempts. Public original21 fixtures and map reference are tracked."
+}

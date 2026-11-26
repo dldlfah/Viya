@@ -1,0 +1,3709 @@
+{
+  "work": "GAME-048",
+  "recorded_kst": "2026-11-24",
+  "repository": "dldlfah/Viya",
+  "branch": "work/viya-turnaround-qa-20261117",
+  "code_commit": "85ddb8282a46967bef9ec0dc54dcf903d6023729",
+  "code_tree": "3f7d0bcf7a9ddfde9a6ea60c6b88168cf20901e8",
+  "start_document_head": "571602ef476f262c673b3d3773251ee06041c072",
+  "previous_code": "d2dd2aedd609a59492cdbd284eba5200a377248c",
+  "main_unchanged": "d7d8e7561adfb445653e1c49f92336d0701dc939",
+  "status": "IMPLEMENTED_ENGINE_RENDER_SAVE_VERIFIED",
+  "balance_status": "OPEN",
+  "request": "Research other survivor spawning and fix weak felt increase. Existing minute doubling retained;actual player-near pressure rather than distant global population.",
+  "research": {
+    "checked_kst": "2026-11-24",
+    "sources": [
+      {
+        "repository": "a327ex/SNKRX",
+        "commit": "6b93a64d694d59472375467648868ae4521d6706",
+        "path": "arena.lua",
+        "url": "https://github.com/a327ex/SNKRX/blob/6b93a64d694d59472375467648868ae4521d6706/arena.lua",
+        "sha256": "6250465be51e08927e0408b6b8d748b9828ede4b98b3b0c8f17571e07b02ccb4",
+        "local": "research_snkrx.lua"
+      },
+      {
+        "repository": "DarkRewar/SurvivorsStarterKit",
+        "commit": "a26c6cbc58bf0d693edd6966c19634459938b66c",
+        "path": "Scripts/Enemies/EnemyManager.cs",
+        "url": "https://github.com/DarkRewar/SurvivorsStarterKit/blob/a26c6cbc58bf0d693edd6966c19634459938b66c/Scripts/Enemies/EnemyManager.cs",
+        "sha256": "88941d31a7b01742a35a0751f5daed58d4b507c8360d9a66cd222d71dc53b01c",
+        "local": "research_starterkit.cs"
+      },
+      {
+        "repository": "SarutobiSasuke8/BrotatoLike",
+        "commit": "22ceba99f329064a78010faff88b3d540bd41176",
+        "path": "scenes/game/Game.gd",
+        "url": "https://github.com/SarutobiSasuke8/BrotatoLike/blob/22ceba99f329064a78010faff88b3d540bd41176/scenes/game/Game.gd",
+        "sha256": "e112e1c9fa7944b7af5782a301369593bb6a51776183c4dd38c847f7e2953ff3",
+        "local": "research_brotatolike.gd"
+      },
+      {
+        "repository": "SarutobiSasuke8/BrotatoLike",
+        "commit": "22ceba99f329064a78010faff88b3d540bd41176",
+        "path": "scripts/logic/WaveRules.gd",
+        "url": "https://github.com/SarutobiSasuke8/BrotatoLike/blob/22ceba99f329064a78010faff88b3d540bd41176/scripts/logic/WaveRules.gd",
+        "sha256": "f165c91fbf06cdd5878fc2d602a1e7b6909a70411af1ac33722b570bc31b9161",
+        "local": "research_brotatolike_wave.gd"
+      }
+    ],
+    "limits": "SNKRX is original publicly released source;SurvivorsStarterKit andBrotatoLike are independent starter/prototype implementations,not originalcommercial VampireSurvivors/Brotato source. DirectVS/Brotatowiki requests were blocked403;no numericalclaimsabout their closedoriginalcode.",
+    "design": "Use localedge approach/player-relative range/continuousrefill. Preserve VIYA original30formations;farordinary identity recycling is our own correction,not claimed asSNKRX behavior."
+  },
+  "diagnosis": "OriginalMapSpace uses halfdiagonal+margin reach and falls back to arbitrarylarge fixedworldzones. Largeglobalcount can coexist with fewvisibleenemies/delayedapproach. Initialextra nearpadding also counted toomany waitingoffscreenactors;finalpadding0 targets guardedvisiblearea.",
+  "pressure_data": {
+    "pulse_seconds": 1.0,
+    "near_targets": [
+      12,
+      24,
+      48,
+      96,
+      144,
+      192
+    ],
+    "near_padding": 0.0,
+    "edge_gap": 64.0,
+    "edge_jitter": 24.0,
+    "far_padding": 480.0,
+    "max_refill": 6,
+    "max_recycle": 12,
+    "warmup_seconds": 6.0
+  },
+  "implementation": {
+    "owner": "ExistingsoleRunState/sevenRNG;statelessRefCountedPressure helper,no newauthoritativefields/timer.",
+    "policy": "NewMain/Mobilecampaigndeparture selects2;oldAPIdefaults0;restartsretain savedpolicy;goldalways0.",
+    "anchor": "Intersect ray with existingguardedvisible rectangle,then edge_gap64+radius24+random0..24;reject insidevisible.grow56,worldbounds/wall24radius and unsafeplayerdistance. Respect activezone roles/side/time/weights,relaxblocked direction after32attempts;no distantworldrectangle fallback.",
+    "density": "After6sec grace,every1sec elapsedboundary countordinarygroundnongroup in guardedvisiblearea (padding0). Fill deficit toward12/24/48/96/144/192 withatmost6actual_spawn_enemy calls. Existingwavebatch x1/2/4/8/16/32/interval remainsseparate.",
+    "recycle": "Atmost12ordinarygroundnongroup enemies persecond from outsidevisible.grow480;move samep only,retain ID/HP/status/cooldowns. Excludeelite/boss/flying/30formations/active rangedwindup. No kill/XP/gold/loot/heal callbacks.",
+    "bounds": "Existingground160/320/640,reserved4elites+boss and30scatter/flyby schedules unchanged.",
+    "presentation": "No camera/render/art or attackanimationacceleration changes;fixed1.16spawnguard andoriginalmapcollisions retained."
+  },
+  "save_compatibility": {
+    "schema": 20,
+    "no_new_run_fields": true,
+    "public19_fingerprint": "453182097a89e5b3da2dc52a7253ba68f33f50a2cf1fad91a4c23123cfcb3ed8",
+    "frozen19_helper": "scripts/combat/campaign_encounters_v19.gd",
+    "frozen19_helper_sha256": "61c5baade67f4d98b6fddd438664beb957abddf80f9f6950a1f41a84947a0332",
+    "fingerprint20": "695c4691c0d6cad598c66fa825388aee5cc04b373f120c99332d622fc525adb0",
+    "old1to19": "Keep exact priorpolicy0/1,AI0-3,HP-MP-growth/owned/chestqueue+ledger/7RNG/currency-entry-rewards. Published19migration does notoptin2. Newsortie required for newpressure.",
+    "frozen19_cases": [
+      "minute",
+      "elite",
+      "boss",
+      "unopened",
+      "opened",
+      "waiting"
+    ],
+    "frozen19_hashes": 606,
+    "normalization": "Only schema/rules headers plus existing Campaign.comparable UIinvalidatedtickets/revisions;ALL19gameplayfields/7RNG compared.",
+    "old18": "Existing606hash regression still in fullsuite;not a new fullseparateOSmatrix.",
+    "boundaries": "Elapsedalready saved;pause-choice noadvance/consumption,Continue requires explicitresume anddoesnotrepeatboundary."
+  },
+  "actual_bug_fixed": {
+    "trigger": "Actualpressure2nativeGUI44.95sec pausedsnapshot contained an ordinaryenemy projectile with tinypositive floating-point liferesidue below strictsnapshot1microsecondminimum;reader rejected save.",
+    "fix": "Only encounter2 removes ordinaryenemybullets when remaininglife<=.000001 aftermovement. Original0/1condition<=0 and strictsnapshotvalidator unchanged.",
+    "regression": "Same tinyresidue isremoved andsnapshotvalid on2;originalretained on1. No validatorweakening/HP-resourcepatch."
+  },
+  "verification": {
+    "godot": "4.7.2.stable.official.ed1daf0bf",
+    "native_total": 4060,
+    "native_per_original_suite": [
+      23,
+      70,
+      122,
+      57,
+      1336,
+      68,
+      2384
+    ],
+    "dedicated_pressure_runner": {
+      "status": "PASS",
+      "checks": 138
+    },
+    "static_sources": 146,
+    "source_contracts": 6,
+    "combat_negative_controls": 43,
+    "python_tests": 12,
+    "guards": "Original7enginecommands/error digest/GAME024bytebaseline retained. FiveexactpressureRunState adapters precede original12encounter adapters. Existing38negative retained plus5=43. New/frozencompatfiles pinned.",
+    "fixture_corrections": "Encounterversion2 is now valid:invalidfixture moves to3. Enemy-free45timer/idlecache fixtures explicitlyselectlegacy1;realnew2regen/idlecombat tested inactualGUI/cold. Existingassertionsnotremoved or loosened.",
+    "raw_report": {
+      "static_integrity": {
+        "status": "PASS",
+        "files_checked": 146,
+        "resource_references_checked": 459,
+        "errors": [],
+        "source_sha256": {
+          "project.godot": "0d8f7fce157178f7bf31acc183593b40f23cff6d266ea5270f4b75f0899b79e5",
+          "scenes/main.tscn": "17a2e77db7cf47af860de3c263dc9119b0df349bafdf2a8b52a40f7450c9e22c",
+          "scripts/combat/actor_motion.gd": "77c63ca6327c28a4b99aafea6f104a0b0ae9a91c2e364914d79307d4e90b5261",
+          "scripts/combat/approach_cues.gd": "3b61db842e2fced8e08c391e83fe342a2f349e7453d2d37421f51d1b340ce4fe",
+          "scripts/combat/attack_visuals.gd": "49e9acdb93325368fbf4c6d2732d11877e25f9daa829e6b00a466b74d339556f",
+          "scripts/combat/battle_forms.gd": "a0e9ebcf2cb5d369c0db53f089ab9bb9df0163b1f171908a57bd63f7e285ab95",
+          "scripts/combat/battle_projection.gd": "f8abad51e46f2353d01cc6f1f4b904485621d00ccf75e854ab873bc688f160a0",
+          "scripts/combat/battle_view.gd": "88b02ce716ce577e6bb12138cb49accff363b67422a407048ab7f59dff8951e0",
+          "scripts/combat/boss_guidance.gd": "d7c1195590ce6fedd3cc8c90cbcdfdf4a2aaf7b994fdfe1a26206e3a9709fef9",
+          "scripts/combat/campaign_encounters.gd": "210d49f4065cc6fe0e5bf960ce97762bc25529d7542d5f93a5ff85d2452490ca",
+          "scripts/combat/campaign_encounters_v19.gd": "61c5baade67f4d98b6fddd438664beb957abddf80f9f6950a1f41a84947a0332",
+          "scripts/combat/campaign_pressure.gd": "594b6a781d5d067027f5d3f0008a784e1779871672c66d001dc794a7aa5433f4",
+          "scripts/combat/combat_audio.gd": "9d8d1f2e1d6b617e63a5f8454d182b5e16f08b99b28ade31c1e24cb95be18d2b",
+          "scripts/combat/combat_audio_bank.gd": "589afc536b6514a10a86b5436bc5271ffa6c522452e12949842a1ba8ca65d9ce",
+          "scripts/combat/combat_camera.gd": "0039e471d576f4daeb00f6b453f54a29d32917fe71aef4490b3f0bd33e90f896",
+          "scripts/combat/combat_cues.gd": "04027c56be8fa43d6465a165569b1e209dd7782a630d97a6e96d0acc3235ebda",
+          "scripts/combat/combat_display.gd": "9e08022d0249aa66e3d4ea6489b5e49d20cd90275ebe592620a28ebe9c82893e",
+          "scripts/combat/combat_profiles.gd": "515689ca733856a0855739531ad4ebeddb20609839210df41c3b6f6202c898e0",
+          "scripts/combat/curse_visuals.gd": "f6fd054527091a5631eb003a2ea38c8308d1bccc29098f5542250916ea0fb3ac",
+          "scripts/combat/defense_rules.gd": "1fa247925d4d5a33dfdf7371285d9192b85b0cd83603efed33894693053691f8",
+          "scripts/combat/enemy_pattern_visuals.gd": "ffe5032905c8df738b2d7f2a92346206b7df14502b4d2f8babc88304adc5d666",
+          "scripts/combat/enemy_patterns.gd": "a19cad533e9185a0bbca1671028349463a2c9c7c020c0e26dea1d5f59b3eebda",
+          "scripts/combat/enemy_patterns_v1.gd": "4059f30002b56fa0ccb73ed38b4fe4af9c0fe8092a8f5836ad53f6e3cef5a4af",
+          "scripts/combat/enemy_patterns_v17.gd": "df42114040f4da370a67257445063fdb851033182108111eac609758334b81ab",
+          "scripts/combat/enemy_patterns_v2.gd": "60ff5da133476bd9c851aaef695cd07ae748e313d9f654dd4b2b0e258af7ca1d",
+          "scripts/combat/enemy_patterns_v3.gd": "1c5ea0cee251c0fda6a5a77b40201dba8d97b27f42f5ac92c93602e43c831114",
+          "scripts/combat/feedback_state.gd": "3ee19238fb9307bc9953fed3ecc266ecff420e2c74ceffe81409069372e87d88",
+          "scripts/combat/gold_dungeon.gd": "f7073b32297d4326a0abc973022d7280c53f92114d49db53933874118b3ccc0d",
+          "scripts/combat/high_angle_battle.gd": "77e1406af88b619e172d4170d9c0d5d4ee404bfcd78d27f50e86c75c6aba89cb",
+          "scripts/combat/incoming_feedback.gd": "71dfbafc9d3e58435afa40b2f1f427387ad899f118906cda72b028538fdb853b",
+          "scripts/combat/magic_state.gd": "41a9a7739edc46e98dda26986f23dddf1c0ff6bdf9b40d80640f797460b9223b",
+          "scripts/combat/run_state.gd": "daea55c71d178cc748360dc990ba624d16c23dfe6388aa0ad5e7256a767910e4",
+          "scripts/combat/stage_catalog.gd": "8059f41d7134818deeea1978d2f81fddc2456d530e33479d458461004600516f",
+          "scripts/combat/structure_feedback.gd": "1ea626cf8ab47d9d8a5acf717f0a8d115bcf3ba18ed45a5c118e37728f1673c5",
+          "scripts/combat/supply_feedback.gd": "5eabc16e14b484d7c2eb1aa76e9cafbb64d980ce24658a9f78dced85722c2a47",
+          "scripts/combat/weapon_modules.gd": "a405c2ddad96a396c8e5e0820ac0d4ee4093a951c473ac7c849294e872616a2e",
+          "scripts/main.gd": "73f99452b25385ca7dff6a46e7bd448a73f389fd478eb6215fa9b315e2debab3",
+          "scripts/progression/account_talents.gd": "0774659235d3bea9276574996565b315156260274750ef8c7f9969f18550f43e",
+          "scripts/progression/combat_pacing.gd": "07f73dae843a7779f992976efb1901774782db1bd021bef01999a83ea7814826",
+          "scripts/progression/gold_progress.gd": "2289fc850fc5f856d674863de6119987da74ed6bd931ade50f0faa11ea0f7012",
+          "scripts/progression/growth_state.gd": "07287b03d12eac144dce6f1858ceb2b6561e6281b4c011ac6bc5d5d3c72a0e6e",
+          "scripts/progression/run_snapshot.gd": "82c49237a85c198f09a007a718b59591adb43d7f277c900799c1b1c9d9014015",
+          "scripts/progression/run_store.gd": "bab493f1963ea2a6d98770f9ef9686d70d4b257e0b49afb3386de661a6081986",
+          "scripts/progression/skill_catalog.gd": "ccd13a2b02f4b57497beae39e483edfca53617cc3a39e43cbaf8009535c820d8",
+          "scripts/progression/weapon_catalog.gd": "aced8b45e765780b4053bfa436e1dbbc1696d2173cb4cb762f21298d5f91421b",
+          "scripts/ui/account_bonus_summary.gd": "c75ffab9d10f7b73fa9b89df9c532a119f00431447651ca13a1f004122e4cee8",
+          "scripts/ui/actor_assets.gd": "f98126291f60e27b9d903999c61f6a1c03a34555eb824a5fdd3e51db18a359c1",
+          "scripts/ui/asset_slots.gd": "26ffa91b19932e5d123eb03d6b63cd41e0f42881961ab6d668ccc543513a114a",
+          "scripts/ui/battle_chrome.gd": "6be2ec2203a0517ce6842d3c7979135ec7c94afaa5b69b1fff2508f083473a2a",
+          "scripts/ui/battle_save_notice.gd": "4030876186c66ae7de4ec2b8808d8b905881c40d0c0af29bd241f659dcdf2189",
+          "scripts/ui/city_preview.gd": "d01c0ca26b7d812b2b7d6d63339788be98241f6a09ec58a1a8d35a6f7b788937",
+          "scripts/ui/combat_skin.gd": "b9ed37f5c7f1831095805e13c6e3eaa986e762081209372cf8a4e09ff6608c66",
+          "scripts/ui/combat_slot_button.gd": "91a02ab52e8ebcb26985ae143dd596fbd4b62bd3fa6e440e5b0d12e44132a81d",
+          "scripts/ui/encounter_notice.gd": "316faf9f8de95b3917268b4773092a205cb0019e5860044294e0f781cb640e3e",
+          "scripts/ui/feedback_panel.gd": "2103fd9b8692c5606273175b415447f35a995f9a18306a5e8f0abeeb7c5d465b",
+          "scripts/ui/growth_overview.gd": "43dfb9306f4e280b57c8445b179c0e797938bc9fd0e5fa070053474cadb53a42",
+          "scripts/ui/hud_layout.gd": "d9a5dacd8e3816611b1658557c5366e1dbd6caeded4312d8f2e5e5584becddb6",
+          "scripts/ui/mobile_main.gd": "89e3d706665ffdb3788514fc18c06f425ad21035ba9a00f417fc9dc71603ae6b",
+          "scripts/ui/move_input.gd": "cee8e709185740d1cb964fff13873a0818d14d0b3653f36d6416a1b17da40bd8",
+          "scripts/ui/responsive_feedback_panel.gd": "b36ce744a7378d696b91018935f637da0ae88beccdeddd85b1187a238958ed5b",
+          "scripts/ui/reward_payment.gd": "d3fc0b75e7f9fbb5f55ffdbfe708039ccb77e4a35231c58d6fdcd4996a246c11",
+          "scripts/ui/skill_preview.gd": "5c3de40b161d38de44234f6f1a2c63064bbc99021c4def95f7995382b02af5db",
+          "scripts/world/map_catalog.gd": "952abbc81d539817dfdd98ed4a59185f13fb8c1adac0210839d176ebee087ea6",
+          "scripts/world/map_space.gd": "8110f4a28e04e67fe738011ea888f31a9c74c450ed79148d88c1da602fa03ae8",
+          "scripts/world/supply_catalog.gd": "1af21cb685b8da0858491a961f007e8a0511c24e0f70b0165e0051d7fcb310a1",
+          "tests/measure_armor.gd": "19a42c9db8ac7b52b6bc2778f24e78ff05b433676c1443d3300a7d4bdd67c6af",
+          "tests/measure_balance.gd": "358f85456890a86892888fb67a6f3d2a32c58a6c0be40b338f0a3970077d8678",
+          "tests/measure_boss_guidance.gd": "891bd7aba3c747e25b065acfd5ef45d9057e01047ff374656247e02744d46b13",
+          "tests/measure_campaign.gd": "acc9b093cdc59af87d11f342a88a537b7f0d35ac8745149eb1ca0046ac791e6c",
+          "tests/measure_combat_audio.gd": "727d34de154acb4bb080553683e423a5cdea35fcf4592ee23fe00540848d199c",
+          "tests/measure_enemy_curse.gd": "665ce8a3fcf0b981a1a7bf824cbe6a9da0a3efbebdf23d18385a2c3e1666d36e",
+          "tests/measure_enemy_patterns.gd": "d49f9091fcde4ca3fecf19d2263917a51d4e9cb84bda27f0fb2e788a7cbbd9e9",
+          "tests/measure_pattern_reacquire.gd": "5dceefb39529e718a12aa0068f0f769eec0f7b52aab51643e48cce16b7abc528",
+          "tests/profile_combat.gd": "1499a2a5db64c0869bca71f94582729a029bd7b240dd9ba1ad75a52e3333a2cf",
+          "tests/test_account_bonus_summary.gd": "8949dd854d50c6fbe4898180848c4b9377b91ff55bfd7e9b0c04a24e5bef64c7",
+          "tests/test_account_expansion.gd": "97d23a6d5bc708b9ebdcc76a492982d5b8e0e2fa4be6f2ad0c2ca501d5d35422",
+          "tests/test_account_talents.gd": "a85b5b84514323481e45137ab05e611af9d18f364393b9a6891fe45f1fe2b9f3",
+          "tests/test_actor_animation.gd": "33fc1e8ed402bb2a7a1da1a8505eda77ef8a47dfbb5e5370c84640c943a03151",
+          "tests/test_attack_visuals.gd": "b091e1672614637797907658c628e86bd6f16ca728ce7cb1dae67d1529f1b443",
+          "tests/test_battle_save_notice.gd": "2bbfd4ef99e616b4be393a204e7c99a1acd17e0c3c1fb0b90629166ae0dd178c",
+          "tests/test_boss_guidance.gd": "2f3e94e8c0cb9e61e9343a6fd87ac26fc3e77316d42da42e99fd4d32100329b3",
+          "tests/test_camera_lead.gd": "2772c1623de41b8f0e6feae5f18e540304c3258116677ec65d2b455edb87d658",
+          "tests/test_campaign.gd": "07c21cb62d12d5394b0864afe3ce47f62b3cd11146fa4bd2780957c54d3f1f49",
+          "tests/test_campaign_encounters.gd": "69542cd4f420daa3ad17d6811a867ad2010776336d27851255dfdb6d2b4550aa",
+          "tests/test_campaign_pressure.gd": "bbe54d269c8c703a9680c6115ddd4ef800769403a7a856baf084c33abcdbab65",
+          "tests/test_chapter_ui.gd": "b48b6813b9d8a5e8d98c4d1e7d6a9ba65f7c54c5995bee66b8afcb55348db984",
+          "tests/test_combat_audio.gd": "cd4b66cf0f8e48faf98fdcf6ea4b0c87d687d06b47e424bb1a3210857e2e2beb",
+          "tests/test_combat_cues.gd": "496d50236817dca97d5821a21d164991b42b997813fbb548c5b5e8513929faed",
+          "tests/test_combat_display.gd": "15b28b0a80b539bf9ccdce23ee988777307bfb875a84e4429796ba32575dbcdf",
+          "tests/test_combat_foundation.gd": "57efe421768dad47bee7a560325214a0c8a30d5fdf8d015fc2648f2b8c71416d",
+          "tests/test_combat_pacing.gd": "d321ef8b3e01f9879b8240bb439d93eaae8b5b75e5962437ddd40f7e6298b600",
+          "tests/test_combat_profiles.gd": "b9bd77beba226279c7c4fb4825e4290dd078974abd96969b4785778995b12f95",
+          "tests/test_encounter_notice.gd": "3d300aafff042d777c4bec71fc481f039a2e1486975be8c360ad0810350e2488",
+          "tests/test_enemy_curse.gd": "e635da3904bd4462996e7db124417ef72b25c4fb6b221ec7f5e6e56649b6627d",
+          "tests/test_enemy_patterns.gd": "d5520609b2a7c0044d36e4d3cd54ffb1bf31aa899a89900bc21c78c64b3acfd8",
+          "tests/test_enemy_variety.gd": "e38318608ed91dc92d51a3e6c1310e052676a26604434e93e395e9fa118b53b7",
+          "tests/test_feedback.gd": "a0558acd7ab6216ccceb597f90c823a1078b0cda9337392440fe6523f22fce86",
+          "tests/test_gold_dungeon.gd": "5bf6924c97cb1bb83bb3b9586e2a5ba97dc045dceb345aa2819f49fd4eda5709",
+          "tests/test_gold_rewards.gd": "ea84e51520721ad62e52416145f51163d541ef0c3eac40cc125ef343d08c28b4",
+          "tests/test_gold_settings.gd": "29358cc8bd690213f4fab1fde43cc0a921689983201cfbcbffa18dd872e047a9",
+          "tests/test_growth.gd": "98f63a46d71eeba5f8807655ba6bd9d87fe89b240fca92bbbc12f253fbe0ba72",
+          "tests/test_growth_overview.gd": "bd6706bf3253d25b8b41c6374a53732762af0d361d11c04aac47abee4f565e87",
+          "tests/test_guide_skin.gd": "50502dc737876e114d1443ad66af92d5973b131f746a2162952d7385797d1b6a",
+          "tests/test_high_angle.gd": "7bb0a68423b550546136005864fbae0293fcc4290496517ad83ef531d9ea064c",
+          "tests/test_incoming_feedback.gd": "19965b733e2e28451744a1af948a236631e3bc9d0b8bf83b3beb4f4a737e37ee",
+          "tests/test_magic.gd": "2969ef796d9255f7b4c79534c68ebabb1b2e349adb0828929d3450ab8f75a090",
+          "tests/test_map_pilot.gd": "c5f46cef178538b017b4b9f7b5dafb6237e49662c5a68f60c94c3269419cf60b",
+          "tests/test_maps.gd": "3c129f9fe4aac09e01ad4d7f380d03faebb67f8b9f45f0f2d84175d79be4e2f7",
+          "tests/test_mobile_hud.gd": "3d0234bea7a3883f6cb38fe127d8062cbd393b97c3132109e853e84c68e75a76",
+          "tests/test_pattern_reacquire.gd": "2a1bc66078292a9a0cdd27672464f65acd413e4c46181d4a118973f14651ce4a",
+          "tests/test_reward_payment.gd": "3025a1882616b2d7fcdecb276a8b772d633bcbef93990d426ded5e733c3fded1",
+          "tests/test_run_navigation.gd": "14b88030cf3b84cdaed8c559e04c0f1b15552a9860f32c1c959be06bea9ee475",
+          "tests/test_scatter_packs.gd": "1d642ed432b31e509721d9867f5e7dde4d904499cf7555b163670ef9b5c07f2d",
+          "tests/test_skill_preview.gd": "0a62fc3bcdafeb525507f4107621d5c14a955e5d5270750a99d7de1e61f9ad9f",
+          "tests/test_structure_feedback.gd": "8237886b420171175d806732d742b46e79930341de5e15f82dafde4afce28c0c",
+          "tests/test_supplies.gd": "5de153bb81aaa06f5f6bbd321b8689d7afe59160d314a6cb06353fac39d8678d",
+          "tests/test_supply_feedback.gd": "72f6b9ea21ba920944c8148be4a376840f0b1c4a562fd8256fe4f6025c6c7597",
+          "tests/test_talent_tree.gd": "984fdf593f086254dd17fde222ac7cafa35d8b223195fd46bc04ee170ddada21",
+          "tests/test_weapon_skills.gd": "758e27ab6f31ecb396fe5ad102c8ed8c0232c39245644a21aeddeacc8949c361",
+          "data/actor_presentation.json": "e82ae99f672bd3e6979778f9a6201efb659b160a3407d9b1b6099eb0e0257f04",
+          "data/campaign_encounters.json": "bb95382de9a546f1f1ffb95e0b119cf311801e96e43f3929ecce0a02631178ce",
+          "data/campaign_pressure.json": "071bd8be7adefa32668d23d4127fe6a83e5692f67217df27b2ae9be1275d1203",
+          "data/chapter_one.json": "c32e288ddc61dc8193cd78de416d3682b7c11f1924bbaaa3ea4afe4b78104f76",
+          "data/combat_pacing.json": "d153666f7f77506da281d1f90ae5fbc5822cd997c6db76590f35ef8a6662d597",
+          "data/combat_profiles.json": "d36abf0b4d0feb950e6448474732decdac9f98035a9962e5f5287b09eb1d1144",
+          "data/destructibles.json": "130421dd85d4dbf9ff9f70ab297b36586870e65fb9426cec0c2f58ce57a49b39",
+          "data/enemy_curse_v3.json": "c1d23889286fe1f91d4ef3b206de5b6e910211a52e935162da42355dc5d39659",
+          "data/enemy_patterns.json": "ba04c2b3076746724a09cf212576886edfa33821f666daa97a541d5042680bec",
+          "data/enemy_patterns_v2.json": "83bf0449e6dad16499af5a4c533c51d0ce3dc06fd73c02eb626de2d1e2e7ac21",
+          "data/gold_dungeon.json": "9a3427a6ddfb3462123f92e6918966ff7b1887ff324f368c600a9ad5993b1f9e",
+          "data/gold_rewards.json": "8f465cd44d1bf712b0fa758b2b8ff7cd17ecb450cff7f8e567d27f0397154993",
+          "data/map_presentation_slots.json": "538c900b975eda5245ab0f2c296088ea7edfd365e2254fac7f270bb419e6fbdc",
+          "data/maps.json": "925638f794696b96fdf48df8c266654cef3af002f43e57f91daa80f8d70e8bd4",
+          "data/presentation_slots.json": "d0a2e6ea1a55d37680bfa02ef9f9036f00deb03575ff9e9dcd10fa7179aa1001",
+          "data/prototype_skills.json": "a6ba197fe558d328e1fcab96506fa098465a4c72aebfe1a1b29cb98642628d1a",
+          "data/stages.json": "2e656d2dc155ad93c76b8a1303133992d95529283be7f5b16423738f4edaeeae",
+          "data/weapon_skills.json": "be23e1eb349958fcebf3dba088fcf389d50654fc31cb83523513c178ff81c659",
+          "tools/bootstrap_godot.py": "4c3ca17c3b90f9c5590d7a82a76ae71a353f4d15aae973cf37e03e745ebfdecc",
+          "tools/check_combat_cues.py": "e95a643f6b374a20c43bfb0737d8ba61b570853a0d6347d412b18bf05ffe60d3",
+          "tools/check_feedback_data.py": "f1bd6f415e919a32faab1b403073e24dcdda4b819938b9b707dacfc32320bec7",
+          "tools/check_growth_data.py": "304be6a17484dd44525d94bad31f422bd13be315ba3309a366ca2bd5b9e2ebfd",
+          "tools/check_magic_data.py": "9405ac2a576b42d279944aacec82f00500ad50c70e5f141413a05e64b1f39e5b",
+          "tools/check_mobile_hud.py": "9e43cace28480d3aacb45dabaf67acb2ad24e1c8a9366aa5c011a279eba35487",
+          "tools/check_project.py": "eeafd73fc4503c7af952331c093272a5510aade3fbae04e42afb77eb23f55157",
+          "tools/check_run_navigation.py": "05969174ef677a1312ef983c8ac2b94a8e06b91a249e29c988501f8a44240712",
+          "tools/report_economy.py": "5c449e04b43847c57ec9617c7c43b2408566dbc7691e32b8d3e33d8b33b24bd6"
+        },
+        "source_fingerprint": "78fc0e3443c515ad0182c1481e600184d30eace2fd2fd8a8a09daa4e1730a853",
+        "scope": "UTF-8, delimiters, whitespace, JSON/Python syntax, resource existence, project settings; NOT GDScript parser/typechecking or gameplay."
+      },
+      "growth_data_contract": {
+        "status": "PASS",
+        "pool_count": 18,
+        "counts": {
+          "common_attack": 8,
+          "character_attack": 1,
+          "common_passive": 8,
+          "ultimate_enhancement": 1
+        },
+        "negative_controls": [
+          {
+            "fixture": "duplicate",
+            "rejected": true
+          },
+          {
+            "fixture": "resistance",
+            "rejected": true
+          },
+          {
+            "fixture": "foreign_owner",
+            "rejected": true
+          },
+          {
+            "fixture": "missing_ultimate",
+            "rejected": true
+          },
+          {
+            "fixture": "wrong_row",
+            "rejected": true
+          }
+        ],
+        "errors": [],
+        "scope": "JSON schema/content and source integration markers only; not GDScript runtime/behavior."
+      },
+      "magic_data_contract": {
+        "status": "PASS",
+        "errors": [],
+        "negative_controls": [
+          {
+            "fixture": "plain_name",
+            "rejected": true
+          },
+          {
+            "fixture": "foreign_owner",
+            "rejected": true
+          },
+          {
+            "fixture": "missing_magic",
+            "rejected": true
+          },
+          {
+            "fixture": "negative_cost",
+            "rejected": true
+          },
+          {
+            "fixture": "negative_cooldown",
+            "rejected": true
+          },
+          {
+            "fixture": "wrong_upgrade",
+            "rejected": true
+          },
+          {
+            "fixture": "nonfinite_radius",
+            "rejected": true
+          },
+          {
+            "fixture": "impossible_cost",
+            "rejected": true
+          }
+        ],
+        "temporary_skill_names": 18,
+        "required_xp_first_five": [
+          30,
+          48,
+          66,
+          84,
+          102
+        ],
+        "xp_drop_unchanged": 5.0,
+        "scope": "JSON validation, negative data controls and source markers/arithmetic; NOT GDScript runtime, UI, input dispatch or mobile tests."
+      },
+      "feedback_source_contract": {
+        "status": "PASS",
+        "errors": [],
+        "negative_controls": [
+          {
+            "fixture": "missing_damage_hook",
+            "rejected": true
+          },
+          {
+            "fixture": "missing_reset",
+            "rejected": true
+          },
+          {
+            "fixture": "negative_duration",
+            "rejected": true
+          },
+          {
+            "fixture": "missing_low_hp_warning",
+            "rejected": true
+          },
+          {
+            "fixture": "missing_stale_guard",
+            "rejected": true
+          }
+        ],
+        "files_checked": 7,
+        "source_sha256": {
+          "scripts/combat/feedback_state.gd": "3ee19238fb9307bc9953fed3ecc266ecff420e2c74ceffe81409069372e87d88",
+          "scripts/combat/run_state.gd": "daea55c71d178cc748360dc990ba624d16c23dfe6388aa0ad5e7256a767910e4",
+          "scripts/ui/feedback_panel.gd": "2103fd9b8692c5606273175b415447f35a995f9a18306a5e8f0abeeb7c5d465b",
+          "scripts/main.gd": "73f99452b25385ca7dff6a46e7bd448a73f389fd478eb6215fa9b315e2debab3",
+          "tests/test_feedback.gd": "a0558acd7ab6216ccceb597f90c823a1078b0cda9337392440fe6523f22fce86",
+          "tools/check_project.py": "eeafd73fc4503c7af952331c093272a5510aade3fbae04e42afb77eb23f55157",
+          "tools/check_feedback_data.py": "f1bd6f415e919a32faab1b403073e24dcdda4b819938b9b707dacfc32320bec7"
+        },
+        "scope": "7 affected code/test/checker files: UTF-8, delimiters, whitespace, Python syntax, reaction constants, integration markers, engine-test registration and new dependency paths only. NOT the full project check or GDScript parser/type/runtime, rendering, or mobile input tests."
+      },
+      "mobile_hud_source_contract": {
+        "status": "PASS",
+        "files_checked": 8,
+        "errors": [],
+        "negative_controls": [
+          {
+            "fixture": "layout_detached",
+            "rejected": true
+          },
+          {
+            "fixture": "detail_not_paused",
+            "rejected": true
+          },
+          {
+            "fixture": "detail_mutates_skill",
+            "rejected": true
+          },
+          {
+            "fixture": "resize_retains_touch",
+            "rejected": true
+          },
+          {
+            "fixture": "test_not_registered",
+            "rejected": true
+          }
+        ],
+        "source_sha256": {
+          "scenes/main.tscn": "17a2e77db7cf47af860de3c263dc9119b0df349bafdf2a8b52a40f7450c9e22c",
+          "scripts/ui/mobile_main.gd": "89e3d706665ffdb3788514fc18c06f425ad21035ba9a00f417fc9dc71603ae6b",
+          "scripts/ui/hud_layout.gd": "d9a5dacd8e3816611b1658557c5366e1dbd6caeded4312d8f2e5e5584becddb6",
+          "scripts/ui/responsive_feedback_panel.gd": "b36ce744a7378d696b91018935f637da0ae88beccdeddd85b1187a238958ed5b",
+          "scripts/ui/move_input.gd": "cee8e709185740d1cb964fff13873a0818d14d0b3653f36d6416a1b17da40bd8",
+          "tests/test_mobile_hud.gd": "3d0234bea7a3883f6cb38fe127d8062cbd393b97c3132109e853e84c68e75a76",
+          "tools/check_project.py": "eeafd73fc4503c7af952331c093272a5510aade3fbae04e42afb77eb23f55157",
+          "tools/check_mobile_hud.py": "9e43cace28480d3aacb45dabaf67acb2ad24e1c8a9366aa5c011a279eba35487"
+        },
+        "source_fingerprint": "106d34da02aaa68892da523331da30354dcbcdd322834e4a7fa2a09f4737f064",
+        "scope": "Changed UTF-8 files, delimiters, Python syntax and integration source checks only. NOT GDScript parsing/typechecking, actual Control geometry, touch dispatch, rendering or mobile execution."
+      },
+      "run_navigation_source_contract": {
+        "status": "PASS",
+        "files_checked": 5,
+        "errors": [],
+        "negative_controls": [
+          {
+            "fixture": "unescaped_string_newline",
+            "rejected": true
+          },
+          {
+            "fixture": "unguarded_intent",
+            "rejected": true
+          },
+          {
+            "fixture": "confirmation_resets_hp",
+            "rejected": true
+          },
+          {
+            "fixture": "cancel_rerolls",
+            "rejected": true
+          },
+          {
+            "fixture": "leave_fakes_death",
+            "rejected": true
+          },
+          {
+            "fixture": "no_result_copy",
+            "rejected": true
+          },
+          {
+            "fixture": "stale_menu_revision",
+            "rejected": true
+          },
+          {
+            "fixture": "unregistered_engine_test",
+            "rejected": true
+          }
+        ],
+        "source_sha256": {
+          "scripts/combat/run_state.gd": "daea55c71d178cc748360dc990ba624d16c23dfe6388aa0ad5e7256a767910e4",
+          "scripts/ui/mobile_main.gd": "89e3d706665ffdb3788514fc18c06f425ad21035ba9a00f417fc9dc71603ae6b",
+          "tests/test_run_navigation.gd": "14b88030cf3b84cdaed8c559e04c0f1b15552a9860f32c1c959be06bea9ee475",
+          "tools/check_project.py": "eeafd73fc4503c7af952331c093272a5510aade3fbae04e42afb77eb23f55157",
+          "tools/check_run_navigation.py": "05969174ef677a1312ef983c8ac2b94a8e06b91a249e29c988501f8a44240712"
+        },
+        "source_fingerprint": "f06c33a033206ee1692ddfcfd29c3c54fea14802bd6d06f49a52e9f6777f77c2",
+        "scope": "UTF-8/delimiters/Python syntax and navigation SOURCE contracts only; NOT GDScript parsing/types, native execution, actual UI/input, or mobile testing."
+      },
+      "combat_cues_source_contract": {
+        "status": "PASS",
+        "files_checked": 31,
+        "errors": [],
+        "negative_controls": [
+          {
+            "fixture": "pressure_unregistered",
+            "rejected": true
+          },
+          {
+            "fixture": "pressure_spawn_guard",
+            "rejected": true
+          },
+          {
+            "fixture": "pressure_identity",
+            "rejected": true
+          },
+          {
+            "fixture": "pressure_legacy_rules",
+            "rejected": true
+          },
+          {
+            "fixture": "pressure_save_policy",
+            "rejected": true
+          },
+          {
+            "fixture": "encounters_unregistered",
+            "rejected": true
+          },
+          {
+            "fixture": "encounters_cap",
+            "rejected": true
+          },
+          {
+            "fixture": "encounters_retrofit",
+            "rejected": true
+          },
+          {
+            "fixture": "chest_double_grant",
+            "rejected": true
+          },
+          {
+            "fixture": "chest_persistence",
+            "rejected": true
+          },
+          {
+            "fixture": "stable_camera_unregistered",
+            "rejected": true
+          },
+          {
+            "fixture": "stable_camera_adapter",
+            "rejected": true
+          },
+          {
+            "fixture": "stable_camera_limit",
+            "rejected": true
+          },
+          {
+            "fixture": "curse_unregistered",
+            "rejected": true
+          },
+          {
+            "fixture": "curse_doublefire",
+            "rejected": true
+          },
+          {
+            "fixture": "v17_retrofit",
+            "rejected": true
+          },
+          {
+            "fixture": "curse_gate",
+            "rejected": true
+          },
+          {
+            "fixture": "curse_render",
+            "rejected": true
+          },
+          {
+            "fixture": "reacquire_unregistered",
+            "rejected": true
+          },
+          {
+            "fixture": "v16_retrofit",
+            "rejected": true
+          },
+          {
+            "fixture": "pattern_single_hit",
+            "rejected": true
+          },
+          {
+            "fixture": "pattern_old_ai",
+            "rejected": true
+          },
+          {
+            "fixture": "pattern_visual_mutation",
+            "rejected": true
+          },
+          {
+            "fixture": "pattern_unregistered",
+            "rejected": true
+          },
+          {
+            "fixture": "pattern_gate",
+            "rejected": true
+          },
+          {
+            "fixture": "pattern_contact_guard",
+            "rejected": true
+          },
+          {
+            "fixture": "pattern_stop_on_defeat",
+            "rejected": true
+          },
+          {
+            "fixture": "missing_reset",
+            "rejected": true
+          },
+          {
+            "fixture": "early_clock",
+            "rejected": true
+          },
+          {
+            "fixture": "changed_damage",
+            "rejected": true
+          },
+          {
+            "fixture": "drop_as_collection",
+            "rejected": true
+          },
+          {
+            "fixture": "unbounded_received",
+            "rejected": true
+          },
+          {
+            "fixture": "received_before_hp",
+            "rejected": true
+          },
+          {
+            "fixture": "unbounded_visuals",
+            "rejected": true
+          },
+          {
+            "fixture": "cosmetic_rng",
+            "rejected": true
+          },
+          {
+            "fixture": "mutable_view",
+            "rejected": true
+          },
+          {
+            "fixture": "supply_changes_rewards",
+            "rejected": true
+          },
+          {
+            "fixture": "supply_mutates_observation",
+            "rejected": true
+          },
+          {
+            "fixture": "supply_glyph_mutates_state",
+            "rejected": true
+          },
+          {
+            "fixture": "unregistered_test",
+            "rejected": true
+          },
+          {
+            "fixture": "ignored_engine_exit",
+            "rejected": true
+          },
+          {
+            "fixture": "ignored_engine_errors",
+            "rejected": true
+          },
+          {
+            "fixture": "ignored_test_result",
+            "rejected": true
+          }
+        ],
+        "source_sha256": {
+          "scripts/combat/run_state.gd": "daea55c71d178cc748360dc990ba624d16c23dfe6388aa0ad5e7256a767910e4",
+          "scripts/combat/battle_view.gd": "88b02ce716ce577e6bb12138cb49accff363b67422a407048ab7f59dff8951e0",
+          "scripts/combat/combat_cues.gd": "04027c56be8fa43d6465a165569b1e209dd7782a630d97a6e96d0acc3235ebda",
+          "tests/test_combat_cues.gd": "496d50236817dca97d5821a21d164991b42b997813fbb548c5b5e8513929faed",
+          "tools/check_project.py": "eeafd73fc4503c7af952331c093272a5510aade3fbae04e42afb77eb23f55157",
+          "tools/check_combat_cues.py": "e95a643f6b374a20c43bfb0737d8ba61b570853a0d6347d412b18bf05ffe60d3",
+          "scripts/combat/enemy_patterns.gd": "a19cad533e9185a0bbca1671028349463a2c9c7c020c0e26dea1d5f59b3eebda",
+          "scripts/combat/enemy_pattern_visuals.gd": "ffe5032905c8df738b2d7f2a92346206b7df14502b4d2f8babc88304adc5d666",
+          "scripts/progression/run_snapshot.gd": "82c49237a85c198f09a007a718b59591adb43d7f277c900799c1b1c9d9014015",
+          "scripts/combat/actor_motion.gd": "77c63ca6327c28a4b99aafea6f104a0b0ae9a91c2e364914d79307d4e90b5261",
+          "data/enemy_patterns.json": "ba04c2b3076746724a09cf212576886edfa33821f666daa97a541d5042680bec",
+          "scripts/combat/enemy_patterns_v1.gd": "4059f30002b56fa0ccb73ed38b4fe4af9c0fe8092a8f5836ad53f6e3cef5a4af",
+          "scripts/combat/enemy_patterns_v2.gd": "60ff5da133476bd9c851aaef695cd07ae748e313d9f654dd4b2b0e258af7ca1d",
+          "data/enemy_patterns_v2.json": "83bf0449e6dad16499af5a4c533c51d0ce3dc06fd73c02eb626de2d1e2e7ac21",
+          "scripts/combat/enemy_patterns_v17.gd": "df42114040f4da370a67257445063fdb851033182108111eac609758334b81ab",
+          "scripts/combat/enemy_patterns_v3.gd": "1c5ea0cee251c0fda6a5a77b40201dba8d97b27f42f5ac92c93602e43c831114",
+          "scripts/combat/curse_visuals.gd": "f6fd054527091a5631eb003a2ea38c8308d1bccc29098f5542250916ea0fb3ac",
+          "data/enemy_curse_v3.json": "c1d23889286fe1f91d4ef3b206de5b6e910211a52e935162da42355dc5d39659",
+          "scripts/combat/approach_cues.gd": "3b61db842e2fced8e08c391e83fe342a2f349e7453d2d37421f51d1b340ce4fe",
+          "scripts/combat/combat_camera.gd": "0039e471d576f4daeb00f6b453f54a29d32917fe71aef4490b3f0bd33e90f896",
+          "scripts/combat/campaign_encounters.gd": "210d49f4065cc6fe0e5bf960ce97762bc25529d7542d5f93a5ff85d2452490ca",
+          "data/campaign_encounters.json": "bb95382de9a546f1f1ffb95e0b119cf311801e96e43f3929ecce0a02631178ce",
+          "scripts/combat/supply_feedback.gd": "5eabc16e14b484d7c2eb1aa76e9cafbb64d980ce24658a9f78dced85722c2a47",
+          "scripts/combat/combat_display.gd": "9e08022d0249aa66e3d4ea6489b5e49d20cd90275ebe592620a28ebe9c82893e",
+          "scripts/main.gd": "73f99452b25385ca7dff6a46e7bd448a73f389fd478eb6215fa9b315e2debab3",
+          "scripts/ui/mobile_main.gd": "89e3d706665ffdb3788514fc18c06f425ad21035ba9a00f417fc9dc71603ae6b",
+          "tests/fixtures/game046_v18/baseline.json": "08a2f204b02efe5e7da4018d9fc2c08f4fef8587be8cc0f4429c4e7ab1565b0b",
+          "scripts/combat/campaign_pressure.gd": "594b6a781d5d067027f5d3f0008a784e1779871672c66d001dc794a7aa5433f4",
+          "data/campaign_pressure.json": "071bd8be7adefa32668d23d4127fe6a83e5692f67217df27b2ae9be1275d1203",
+          "scripts/combat/campaign_encounters_v19.gd": "61c5baade67f4d98b6fddd438664beb957abddf80f9f6950a1f41a84947a0332",
+          "tests/fixtures/game048_v19/baseline.json": "adbea21957b68c33ad324445c9af7f252dbd9fd3d60e53e639e66e3ec5e35952"
+        },
+        "source_fingerprint": "9da23d4f12d8eca10648cdb3594ce210ba6614c6d5ab216e4138510af4e64d9e",
+        "baseline_run_blob": "673d75a748fa5f1f9ac72ec73bbd9120fdcfce02",
+        "baseline_runner_blob": "1ab68ad8a51271e3d47db8b02d433991f42e8d6c",
+        "baseline_engine_function_sha256": "9156043eaf896d72565563cc1e2f623cf0c8fbac7f032f19bffee7e4946a69ee",
+        "scope": "Changed-source UTF-8/delimiters/Python syntax, hook order, bounds, isolation, reviewed GAME-024 RunState/GAME-030 view baselines with exact GAME-033 observations and GAME-038/039/040 version-gated pattern adapters and frozen v1/v2/v17, preserved engine runner. NOT Godot parser/type/runtime, visual quality, input dispatch, or FPS."
+      },
+      "godot_runtime": {
+        "status": "PASS",
+        "commands": [
+          {
+            "command": [
+              "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+              "--headless",
+              "--version"
+            ],
+            "exit_code": 0,
+            "status": "PASS"
+          },
+          {
+            "command": [
+              "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+              "--headless",
+              "--path",
+              "/workspace/Viya",
+              "--editor",
+              "--import",
+              "--quit"
+            ],
+            "exit_code": 0,
+            "status": "PASS"
+          },
+          {
+            "command": [
+              "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+              "--headless",
+              "--path",
+              "/workspace/Viya",
+              "--script",
+              "res://tests/test_combat_foundation.gd"
+            ],
+            "exit_code": 0,
+            "status": "PASS"
+          },
+          {
+            "command": [
+              "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+              "--headless",
+              "--path",
+              "/workspace/Viya",
+              "--script",
+              "res://tests/test_growth.gd"
+            ],
+            "exit_code": 0,
+            "status": "PASS"
+          },
+          {
+            "command": [
+              "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+              "--headless",
+              "--path",
+              "/workspace/Viya",
+              "--script",
+              "res://tests/test_magic.gd"
+            ],
+            "exit_code": 0,
+            "status": "PASS"
+          },
+          {
+            "command": [
+              "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+              "--headless",
+              "--path",
+              "/workspace/Viya",
+              "--script",
+              "res://tests/test_feedback.gd"
+            ],
+            "exit_code": 0,
+            "status": "PASS"
+          },
+          {
+            "command": [
+              "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+              "--headless",
+              "--path",
+              "/workspace/Viya",
+              "--script",
+              "res://tests/test_mobile_hud.gd"
+            ],
+            "exit_code": 0,
+            "status": "PASS"
+          },
+          {
+            "command": [
+              "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+              "--headless",
+              "--path",
+              "/workspace/Viya",
+              "--script",
+              "res://tests/test_run_navigation.gd"
+            ],
+            "exit_code": 0,
+            "status": "PASS"
+          },
+          {
+            "command": [
+              "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+              "--headless",
+              "--path",
+              "/workspace/Viya",
+              "--script",
+              "res://tests/test_combat_cues.gd"
+            ],
+            "exit_code": 0,
+            "status": "PASS"
+          },
+          {
+            "command": [
+              "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+              "--headless",
+              "--path",
+              "/workspace/Viya",
+              "--quit-after",
+              "120"
+            ],
+            "exit_code": 0,
+            "status": "PASS"
+          }
+        ],
+        "scope": "headless import, actual foundation/growth/magic/feedback/mobile-HUD/run-navigation/combat-cues GDScript tests and main boot; visual/mobile approval separate"
+      },
+      "windows_f5": "NOT_VERIFIED",
+      "android_device": "NOT_VERIFIED",
+      "ios_device": "NOT_VERIFIED"
+    },
+    "logs": "No final SCRIPT ERROR/ERROR/leaks. ExistingsoftwareX11unsupportedVSync warning only."
+  },
+  "source_preservation": {
+    "base_commit": "571602ef476f262c673b3d3773251ee06041c072",
+    "existing_files": 119,
+    "unchanged": 115,
+    "authorized_changes": [
+      "scripts/combat/campaign_encounters.gd",
+      "scripts/combat/run_state.gd",
+      "scripts/main.gd",
+      "scripts/progression/run_snapshot.gd"
+    ],
+    "files": [
+      {
+        "path": "assets/characters/viya/spec/turnaround_contract.v1.json",
+        "byte_identical": true,
+        "sha256": "a8f65fa1637b49235d2158ef582f9d696a2cb13caddc86a5dd27dbeccbca117a"
+      },
+      {
+        "path": "assets/characters/viya/spec/turnaround_r1_result.json",
+        "byte_identical": true,
+        "sha256": "6c337719be2f54e5ea35304cb32b4f5f6bf5b4cca987e00ce6b4d59a37983db8"
+      },
+      {
+        "path": "assets/characters/viya/spec/turnaround_r2_result.json",
+        "byte_identical": true,
+        "sha256": "8ca504e6b4165cf9ced1addf06878c0bb7018030c070119c446345ac6ebcb421"
+      },
+      {
+        "path": "assets/maps/pilot_01/README.md",
+        "byte_identical": true,
+        "sha256": "29bfa4c4393763c362dff9535e8eedd32895adb835b71ec39373a0b96a4fdf9b"
+      },
+      {
+        "path": "assets/maps/pilot_01/prop_crate.png",
+        "byte_identical": true,
+        "sha256": "7a0fefb9f935a5026e1bb9ded4029542e9f33323bbac87481f22144ece712edc"
+      },
+      {
+        "path": "assets/maps/pilot_01/prop_crate.png.import",
+        "byte_identical": true,
+        "sha256": "8dd47f11b17dcb4f9a82cbb50769882670f62d7edeb560c1e0040df21d21bf84"
+      },
+      {
+        "path": "assets/maps/pilot_01/source_manifest.json",
+        "byte_identical": true,
+        "sha256": "b946ce97e1cd3e8dcefd3aca8946812b75de532a8506fd2ac2539f70e04f97e0"
+      },
+      {
+        "path": "assets/maps/pilot_01/stone_floor_tile.png",
+        "byte_identical": true,
+        "sha256": "9beefd01712a5c45b71908ad679d105b00a7ce6b99e61a639e384b7de06257e6"
+      },
+      {
+        "path": "assets/maps/pilot_01/stone_floor_tile.png.import",
+        "byte_identical": true,
+        "sha256": "6e5bf6315ac4134457cfc8fa4e77c23407b8285fdeb32ec8953c532b81093cf3"
+      },
+      {
+        "path": "assets/maps/pilot_01/wall_segment.png",
+        "byte_identical": true,
+        "sha256": "15b4a1a6f64b88df88424075d6710c0761cac7e7ac30dfc3ff889d0b3705d11a"
+      },
+      {
+        "path": "assets/maps/pilot_01/wall_segment.png.import",
+        "byte_identical": true,
+        "sha256": "3e3fc099910e77537d7b5d84b7ac5b7c90cb23f38b94f3e6fd316011e2a33f3d"
+      },
+      {
+        "path": "assets/maps/pilot_02/README.md",
+        "byte_identical": true,
+        "sha256": "829770a2460e4c1e7a29de79ddb9b249e019c409b21e97ac68dbb477540d4a71"
+      },
+      {
+        "path": "assets/maps/pilot_02/prop_debris.png",
+        "byte_identical": true,
+        "sha256": "ab0cccf2713543f0bd127a7f76ef1a4854695473ba7f0eca58bc1f919fe4b9d5"
+      },
+      {
+        "path": "assets/maps/pilot_02/prop_debris.png.import",
+        "byte_identical": true,
+        "sha256": "0818403ffc0c13b29033f9ffa1e07cc0eda9b98f746203dcfe4c34c0b7be8af0"
+      },
+      {
+        "path": "assets/maps/pilot_02/prop_urn.png",
+        "byte_identical": true,
+        "sha256": "81973f42653a6a3008ff11aaf5f18b1c4aaf6389577d1c8c1248aaf4b1feb94e"
+      },
+      {
+        "path": "assets/maps/pilot_02/prop_urn.png.import",
+        "byte_identical": true,
+        "sha256": "1e7ec094e95c6657a9e65093f31da83719f23f45e1e7f5b02d0d9b81e146425d"
+      },
+      {
+        "path": "assets/maps/pilot_02/ruin_block.png",
+        "byte_identical": true,
+        "sha256": "1cfc847408ab4cdf6783f1dcc1c13db5251187fc4525afd4f0bdaaf991b7d9a2"
+      },
+      {
+        "path": "assets/maps/pilot_02/ruin_block.png.import",
+        "byte_identical": true,
+        "sha256": "da5cd79b6c307d48c9891df3a69beb10474e316e9046deccaf26aca77528db3a"
+      },
+      {
+        "path": "assets/maps/pilot_02/source_manifest.json",
+        "byte_identical": true,
+        "sha256": "f0c3d8e35f9be9ea818b0f96bfa4692e2d6ef6a6041fd42186bf6550040591ea"
+      },
+      {
+        "path": "assets/maps/pilot_03/README.md",
+        "byte_identical": true,
+        "sha256": "7474fa4a98b00501ac5db1be5468b3fa75ed6180a4079421085304a36cc4d378"
+      },
+      {
+        "path": "assets/maps/pilot_03/gate_front.png",
+        "byte_identical": true,
+        "sha256": "a0f5bc29d4187798a1af025fb0b08fc909a1b556f2e615036d83514c3c4d5872"
+      },
+      {
+        "path": "assets/maps/pilot_03/gate_front.png.import",
+        "byte_identical": true,
+        "sha256": "5961f6f84071a4cc771d45cbb34edaef618981b268eb89586767a49eedf4578c"
+      },
+      {
+        "path": "assets/maps/pilot_03/ruin_top_tile.png",
+        "byte_identical": true,
+        "sha256": "b99c7efffbbad26c8fe9ce3a7c84014faf3c2cd069d46ca5662b26b314cfb127"
+      },
+      {
+        "path": "assets/maps/pilot_03/ruin_top_tile.png.import",
+        "byte_identical": true,
+        "sha256": "e4630dfb90e879d2c90abfe2b56b35385e446094ce3dabab1ba1575ec818d8cb"
+      },
+      {
+        "path": "assets/maps/pilot_03/source_manifest.json",
+        "byte_identical": true,
+        "sha256": "6334b0c9a94def4dc7bcf1f3d1929e530ad326b096967fefbf3618b4ec87ca2b"
+      },
+      {
+        "path": "assets/maps/pilot_03/wall_top_tile.png",
+        "byte_identical": true,
+        "sha256": "77173228a87824927c1d01f17b62bcaaf4a855fe39d8e5132c03f1eb5a3a4c33"
+      },
+      {
+        "path": "assets/maps/pilot_03/wall_top_tile.png.import",
+        "byte_identical": true,
+        "sha256": "c04aa157fe1394eacc5539a4ae04a497415e8498b2990750735cca8a6b0dbd26"
+      },
+      {
+        "path": "assets/maps/pilot_04/README.md",
+        "byte_identical": true,
+        "sha256": "1ea9a364d902d58ba0b635288a66fc6577ee164000c80ed43dcbf2bcf4b063da"
+      },
+      {
+        "path": "assets/maps/pilot_04/prop_crate_broken.png",
+        "byte_identical": true,
+        "sha256": "13b2efa02cbe6f085125f2b7c94ecad406d2fc51bee3baf2e357af772cb4e030"
+      },
+      {
+        "path": "assets/maps/pilot_04/prop_crate_broken.png.import",
+        "byte_identical": true,
+        "sha256": "4bad15e44f5aeb31e8eb6b23a9f375918f0984d3f11d5364f2fd11cfa78a6710"
+      },
+      {
+        "path": "assets/maps/pilot_04/prop_debris_broken.png",
+        "byte_identical": true,
+        "sha256": "c9ff22710bd078ee80c5747568ce83e889b20efafaf6d09baf994314e4d2c364"
+      },
+      {
+        "path": "assets/maps/pilot_04/prop_debris_broken.png.import",
+        "byte_identical": true,
+        "sha256": "c89de2f598b1c0f12efdc127ab5e1f01add47117bc5e756d71cf7a2e17fb5aa7"
+      },
+      {
+        "path": "assets/maps/pilot_04/prop_urn_broken.png",
+        "byte_identical": true,
+        "sha256": "aed6316a83fbf7b41b451644ae547b373d1096fe01c2e73d3610ac4ab508ac0f"
+      },
+      {
+        "path": "assets/maps/pilot_04/prop_urn_broken.png.import",
+        "byte_identical": true,
+        "sha256": "8467c911b9cae48cd758b8dbe8dc31bddf9ff2bd90709521e71eedfaad783191"
+      },
+      {
+        "path": "assets/maps/pilot_04/source_manifest.json",
+        "byte_identical": true,
+        "sha256": "13e8913fa77615a33079b22288fca1c7ed85454de4f678b1f5119b344bf097ad"
+      },
+      {
+        "path": "assets/references/GEN-005_viya_combat_pose_three_quarter_front.png",
+        "byte_identical": true,
+        "sha256": "d3c0084c73aff9a706a50a6cac760d124c0647d23fa36e6ae30635dc6929a730"
+      },
+      {
+        "path": "assets/references/README.md",
+        "byte_identical": true,
+        "sha256": "ccee5345d56bbe2ecdf03cc0a54eea7c61dd684f9582a3ec83284218742e18a5"
+      },
+      {
+        "path": "assets/references/qa/viya_4view_alignment_preview.jpg",
+        "byte_identical": true,
+        "sha256": "8fbd8b3c99af7099de926ca3c39feae0217dd984ff959e314e51d2338786fd0c"
+      },
+      {
+        "path": "assets/references/qa/viya_side_silhouette_comparison.jpg",
+        "byte_identical": true,
+        "sha256": "1f8fe11aa693d84ebec41db9b6bea3af2bf61f61fd80f2ffdd45f799acd23170"
+      },
+      {
+        "path": "data/actor_presentation.json",
+        "byte_identical": true,
+        "sha256": "e82ae99f672bd3e6979778f9a6201efb659b160a3407d9b1b6099eb0e0257f04"
+      },
+      {
+        "path": "data/campaign_encounters.json",
+        "byte_identical": true,
+        "sha256": "bb95382de9a546f1f1ffb95e0b119cf311801e96e43f3929ecce0a02631178ce"
+      },
+      {
+        "path": "data/chapter_one.json",
+        "byte_identical": true,
+        "sha256": "c32e288ddc61dc8193cd78de416d3682b7c11f1924bbaaa3ea4afe4b78104f76"
+      },
+      {
+        "path": "data/combat_pacing.json",
+        "byte_identical": true,
+        "sha256": "d153666f7f77506da281d1f90ae5fbc5822cd997c6db76590f35ef8a6662d597"
+      },
+      {
+        "path": "data/combat_profiles.json",
+        "byte_identical": true,
+        "sha256": "d36abf0b4d0feb950e6448474732decdac9f98035a9962e5f5287b09eb1d1144"
+      },
+      {
+        "path": "data/destructibles.json",
+        "byte_identical": true,
+        "sha256": "130421dd85d4dbf9ff9f70ab297b36586870e65fb9426cec0c2f58ce57a49b39"
+      },
+      {
+        "path": "data/enemy_curse_v3.json",
+        "byte_identical": true,
+        "sha256": "c1d23889286fe1f91d4ef3b206de5b6e910211a52e935162da42355dc5d39659"
+      },
+      {
+        "path": "data/enemy_patterns.json",
+        "byte_identical": true,
+        "sha256": "ba04c2b3076746724a09cf212576886edfa33821f666daa97a541d5042680bec"
+      },
+      {
+        "path": "data/enemy_patterns_v2.json",
+        "byte_identical": true,
+        "sha256": "83bf0449e6dad16499af5a4c533c51d0ce3dc06fd73c02eb626de2d1e2e7ac21"
+      },
+      {
+        "path": "data/gold_dungeon.json",
+        "byte_identical": true,
+        "sha256": "9a3427a6ddfb3462123f92e6918966ff7b1887ff324f368c600a9ad5993b1f9e"
+      },
+      {
+        "path": "data/gold_rewards.json",
+        "byte_identical": true,
+        "sha256": "8f465cd44d1bf712b0fa758b2b8ff7cd17ecb450cff7f8e567d27f0397154993"
+      },
+      {
+        "path": "data/map_presentation_slots.json",
+        "byte_identical": true,
+        "sha256": "538c900b975eda5245ab0f2c296088ea7edfd365e2254fac7f270bb419e6fbdc"
+      },
+      {
+        "path": "data/maps.json",
+        "byte_identical": true,
+        "sha256": "925638f794696b96fdf48df8c266654cef3af002f43e57f91daa80f8d70e8bd4"
+      },
+      {
+        "path": "data/presentation_slots.json",
+        "byte_identical": true,
+        "sha256": "d0a2e6ea1a55d37680bfa02ef9f9036f00deb03575ff9e9dcd10fa7179aa1001"
+      },
+      {
+        "path": "data/prototype_skills.json",
+        "byte_identical": true,
+        "sha256": "a6ba197fe558d328e1fcab96506fa098465a4c72aebfe1a1b29cb98642628d1a"
+      },
+      {
+        "path": "data/stages.json",
+        "byte_identical": true,
+        "sha256": "2e656d2dc155ad93c76b8a1303133992d95529283be7f5b16423738f4edaeeae"
+      },
+      {
+        "path": "data/weapon_skills.json",
+        "byte_identical": true,
+        "sha256": "be23e1eb349958fcebf3dba088fcf389d50654fc31cb83523513c178ff81c659"
+      },
+      {
+        "path": "project.godot",
+        "byte_identical": true,
+        "sha256": "0d8f7fce157178f7bf31acc183593b40f23cff6d266ea5270f4b75f0899b79e5"
+      },
+      {
+        "path": "scenes/main.tscn",
+        "byte_identical": true,
+        "sha256": "17a2e77db7cf47af860de3c263dc9119b0df349bafdf2a8b52a40f7450c9e22c"
+      },
+      {
+        "path": "scripts/combat/actor_motion.gd",
+        "byte_identical": true,
+        "sha256": "77c63ca6327c28a4b99aafea6f104a0b0ae9a91c2e364914d79307d4e90b5261"
+      },
+      {
+        "path": "scripts/combat/approach_cues.gd",
+        "byte_identical": true,
+        "sha256": "3b61db842e2fced8e08c391e83fe342a2f349e7453d2d37421f51d1b340ce4fe"
+      },
+      {
+        "path": "scripts/combat/attack_visuals.gd",
+        "byte_identical": true,
+        "sha256": "49e9acdb93325368fbf4c6d2732d11877e25f9daa829e6b00a466b74d339556f"
+      },
+      {
+        "path": "scripts/combat/battle_forms.gd",
+        "byte_identical": true,
+        "sha256": "a0e9ebcf2cb5d369c0db53f089ab9bb9df0163b1f171908a57bd63f7e285ab95"
+      },
+      {
+        "path": "scripts/combat/battle_projection.gd",
+        "byte_identical": true,
+        "sha256": "f8abad51e46f2353d01cc6f1f4b904485621d00ccf75e854ab873bc688f160a0"
+      },
+      {
+        "path": "scripts/combat/battle_view.gd",
+        "byte_identical": true,
+        "sha256": "88b02ce716ce577e6bb12138cb49accff363b67422a407048ab7f59dff8951e0"
+      },
+      {
+        "path": "scripts/combat/boss_guidance.gd",
+        "byte_identical": true,
+        "sha256": "d7c1195590ce6fedd3cc8c90cbcdfdf4a2aaf7b994fdfe1a26206e3a9709fef9"
+      },
+      {
+        "path": "scripts/combat/campaign_encounters.gd",
+        "byte_identical": false,
+        "sha256": "210d49f4065cc6fe0e5bf960ce97762bc25529d7542d5f93a5ff85d2452490ca"
+      },
+      {
+        "path": "scripts/combat/combat_audio.gd",
+        "byte_identical": true,
+        "sha256": "9d8d1f2e1d6b617e63a5f8454d182b5e16f08b99b28ade31c1e24cb95be18d2b"
+      },
+      {
+        "path": "scripts/combat/combat_audio_bank.gd",
+        "byte_identical": true,
+        "sha256": "589afc536b6514a10a86b5436bc5271ffa6c522452e12949842a1ba8ca65d9ce"
+      },
+      {
+        "path": "scripts/combat/combat_camera.gd",
+        "byte_identical": true,
+        "sha256": "0039e471d576f4daeb00f6b453f54a29d32917fe71aef4490b3f0bd33e90f896"
+      },
+      {
+        "path": "scripts/combat/combat_cues.gd",
+        "byte_identical": true,
+        "sha256": "04027c56be8fa43d6465a165569b1e209dd7782a630d97a6e96d0acc3235ebda"
+      },
+      {
+        "path": "scripts/combat/combat_display.gd",
+        "byte_identical": true,
+        "sha256": "9e08022d0249aa66e3d4ea6489b5e49d20cd90275ebe592620a28ebe9c82893e"
+      },
+      {
+        "path": "scripts/combat/combat_profiles.gd",
+        "byte_identical": true,
+        "sha256": "515689ca733856a0855739531ad4ebeddb20609839210df41c3b6f6202c898e0"
+      },
+      {
+        "path": "scripts/combat/curse_visuals.gd",
+        "byte_identical": true,
+        "sha256": "f6fd054527091a5631eb003a2ea38c8308d1bccc29098f5542250916ea0fb3ac"
+      },
+      {
+        "path": "scripts/combat/defense_rules.gd",
+        "byte_identical": true,
+        "sha256": "1fa247925d4d5a33dfdf7371285d9192b85b0cd83603efed33894693053691f8"
+      },
+      {
+        "path": "scripts/combat/enemy_pattern_visuals.gd",
+        "byte_identical": true,
+        "sha256": "ffe5032905c8df738b2d7f2a92346206b7df14502b4d2f8babc88304adc5d666"
+      },
+      {
+        "path": "scripts/combat/enemy_patterns.gd",
+        "byte_identical": true,
+        "sha256": "a19cad533e9185a0bbca1671028349463a2c9c7c020c0e26dea1d5f59b3eebda"
+      },
+      {
+        "path": "scripts/combat/enemy_patterns_v1.gd",
+        "byte_identical": true,
+        "sha256": "4059f30002b56fa0ccb73ed38b4fe4af9c0fe8092a8f5836ad53f6e3cef5a4af"
+      },
+      {
+        "path": "scripts/combat/enemy_patterns_v17.gd",
+        "byte_identical": true,
+        "sha256": "df42114040f4da370a67257445063fdb851033182108111eac609758334b81ab"
+      },
+      {
+        "path": "scripts/combat/enemy_patterns_v2.gd",
+        "byte_identical": true,
+        "sha256": "60ff5da133476bd9c851aaef695cd07ae748e313d9f654dd4b2b0e258af7ca1d"
+      },
+      {
+        "path": "scripts/combat/enemy_patterns_v3.gd",
+        "byte_identical": true,
+        "sha256": "1c5ea0cee251c0fda6a5a77b40201dba8d97b27f42f5ac92c93602e43c831114"
+      },
+      {
+        "path": "scripts/combat/feedback_state.gd",
+        "byte_identical": true,
+        "sha256": "3ee19238fb9307bc9953fed3ecc266ecff420e2c74ceffe81409069372e87d88"
+      },
+      {
+        "path": "scripts/combat/gold_dungeon.gd",
+        "byte_identical": true,
+        "sha256": "f7073b32297d4326a0abc973022d7280c53f92114d49db53933874118b3ccc0d"
+      },
+      {
+        "path": "scripts/combat/high_angle_battle.gd",
+        "byte_identical": true,
+        "sha256": "77e1406af88b619e172d4170d9c0d5d4ee404bfcd78d27f50e86c75c6aba89cb"
+      },
+      {
+        "path": "scripts/combat/incoming_feedback.gd",
+        "byte_identical": true,
+        "sha256": "71dfbafc9d3e58435afa40b2f1f427387ad899f118906cda72b028538fdb853b"
+      },
+      {
+        "path": "scripts/combat/magic_state.gd",
+        "byte_identical": true,
+        "sha256": "41a9a7739edc46e98dda26986f23dddf1c0ff6bdf9b40d80640f797460b9223b"
+      },
+      {
+        "path": "scripts/combat/run_state.gd",
+        "byte_identical": false,
+        "sha256": "daea55c71d178cc748360dc990ba624d16c23dfe6388aa0ad5e7256a767910e4"
+      },
+      {
+        "path": "scripts/combat/stage_catalog.gd",
+        "byte_identical": true,
+        "sha256": "8059f41d7134818deeea1978d2f81fddc2456d530e33479d458461004600516f"
+      },
+      {
+        "path": "scripts/combat/structure_feedback.gd",
+        "byte_identical": true,
+        "sha256": "1ea626cf8ab47d9d8a5acf717f0a8d115bcf3ba18ed45a5c118e37728f1673c5"
+      },
+      {
+        "path": "scripts/combat/supply_feedback.gd",
+        "byte_identical": true,
+        "sha256": "5eabc16e14b484d7c2eb1aa76e9cafbb64d980ce24658a9f78dced85722c2a47"
+      },
+      {
+        "path": "scripts/combat/weapon_modules.gd",
+        "byte_identical": true,
+        "sha256": "a405c2ddad96a396c8e5e0820ac0d4ee4093a951c473ac7c849294e872616a2e"
+      },
+      {
+        "path": "scripts/main.gd",
+        "byte_identical": false,
+        "sha256": "73f99452b25385ca7dff6a46e7bd448a73f389fd478eb6215fa9b315e2debab3"
+      },
+      {
+        "path": "scripts/progression/account_talents.gd",
+        "byte_identical": true,
+        "sha256": "0774659235d3bea9276574996565b315156260274750ef8c7f9969f18550f43e"
+      },
+      {
+        "path": "scripts/progression/combat_pacing.gd",
+        "byte_identical": true,
+        "sha256": "07f73dae843a7779f992976efb1901774782db1bd021bef01999a83ea7814826"
+      },
+      {
+        "path": "scripts/progression/gold_progress.gd",
+        "byte_identical": true,
+        "sha256": "2289fc850fc5f856d674863de6119987da74ed6bd931ade50f0faa11ea0f7012"
+      },
+      {
+        "path": "scripts/progression/growth_state.gd",
+        "byte_identical": true,
+        "sha256": "07287b03d12eac144dce6f1858ceb2b6561e6281b4c011ac6bc5d5d3c72a0e6e"
+      },
+      {
+        "path": "scripts/progression/run_snapshot.gd",
+        "byte_identical": false,
+        "sha256": "82c49237a85c198f09a007a718b59591adb43d7f277c900799c1b1c9d9014015"
+      },
+      {
+        "path": "scripts/progression/run_store.gd",
+        "byte_identical": true,
+        "sha256": "bab493f1963ea2a6d98770f9ef9686d70d4b257e0b49afb3386de661a6081986"
+      },
+      {
+        "path": "scripts/progression/skill_catalog.gd",
+        "byte_identical": true,
+        "sha256": "ccd13a2b02f4b57497beae39e483edfca53617cc3a39e43cbaf8009535c820d8"
+      },
+      {
+        "path": "scripts/progression/weapon_catalog.gd",
+        "byte_identical": true,
+        "sha256": "aced8b45e765780b4053bfa436e1dbbc1696d2173cb4cb762f21298d5f91421b"
+      },
+      {
+        "path": "scripts/ui/account_bonus_summary.gd",
+        "byte_identical": true,
+        "sha256": "c75ffab9d10f7b73fa9b89df9c532a119f00431447651ca13a1f004122e4cee8"
+      },
+      {
+        "path": "scripts/ui/actor_assets.gd",
+        "byte_identical": true,
+        "sha256": "f98126291f60e27b9d903999c61f6a1c03a34555eb824a5fdd3e51db18a359c1"
+      },
+      {
+        "path": "scripts/ui/asset_slots.gd",
+        "byte_identical": true,
+        "sha256": "26ffa91b19932e5d123eb03d6b63cd41e0f42881961ab6d668ccc543513a114a"
+      },
+      {
+        "path": "scripts/ui/battle_chrome.gd",
+        "byte_identical": true,
+        "sha256": "6be2ec2203a0517ce6842d3c7979135ec7c94afaa5b69b1fff2508f083473a2a"
+      },
+      {
+        "path": "scripts/ui/battle_save_notice.gd",
+        "byte_identical": true,
+        "sha256": "4030876186c66ae7de4ec2b8808d8b905881c40d0c0af29bd241f659dcdf2189"
+      },
+      {
+        "path": "scripts/ui/city_preview.gd",
+        "byte_identical": true,
+        "sha256": "d01c0ca26b7d812b2b7d6d63339788be98241f6a09ec58a1a8d35a6f7b788937"
+      },
+      {
+        "path": "scripts/ui/combat_skin.gd",
+        "byte_identical": true,
+        "sha256": "b9ed37f5c7f1831095805e13c6e3eaa986e762081209372cf8a4e09ff6608c66"
+      },
+      {
+        "path": "scripts/ui/combat_slot_button.gd",
+        "byte_identical": true,
+        "sha256": "91a02ab52e8ebcb26985ae143dd596fbd4b62bd3fa6e440e5b0d12e44132a81d"
+      },
+      {
+        "path": "scripts/ui/encounter_notice.gd",
+        "byte_identical": true,
+        "sha256": "316faf9f8de95b3917268b4773092a205cb0019e5860044294e0f781cb640e3e"
+      },
+      {
+        "path": "scripts/ui/feedback_panel.gd",
+        "byte_identical": true,
+        "sha256": "2103fd9b8692c5606273175b415447f35a995f9a18306a5e8f0abeeb7c5d465b"
+      },
+      {
+        "path": "scripts/ui/growth_overview.gd",
+        "byte_identical": true,
+        "sha256": "43dfb9306f4e280b57c8445b179c0e797938bc9fd0e5fa070053474cadb53a42"
+      },
+      {
+        "path": "scripts/ui/hud_layout.gd",
+        "byte_identical": true,
+        "sha256": "d9a5dacd8e3816611b1658557c5366e1dbd6caeded4312d8f2e5e5584becddb6"
+      },
+      {
+        "path": "scripts/ui/mobile_main.gd",
+        "byte_identical": true,
+        "sha256": "89e3d706665ffdb3788514fc18c06f425ad21035ba9a00f417fc9dc71603ae6b"
+      },
+      {
+        "path": "scripts/ui/move_input.gd",
+        "byte_identical": true,
+        "sha256": "cee8e709185740d1cb964fff13873a0818d14d0b3653f36d6416a1b17da40bd8"
+      },
+      {
+        "path": "scripts/ui/responsive_feedback_panel.gd",
+        "byte_identical": true,
+        "sha256": "b36ce744a7378d696b91018935f637da0ae88beccdeddd85b1187a238958ed5b"
+      },
+      {
+        "path": "scripts/ui/reward_payment.gd",
+        "byte_identical": true,
+        "sha256": "d3fc0b75e7f9fbb5f55ffdbfe708039ccb77e4a35231c58d6fdcd4996a246c11"
+      },
+      {
+        "path": "scripts/ui/skill_preview.gd",
+        "byte_identical": true,
+        "sha256": "5c3de40b161d38de44234f6f1a2c63064bbc99021c4def95f7995382b02af5db"
+      },
+      {
+        "path": "scripts/world/map_catalog.gd",
+        "byte_identical": true,
+        "sha256": "952abbc81d539817dfdd98ed4a59185f13fb8c1adac0210839d176ebee087ea6"
+      },
+      {
+        "path": "scripts/world/map_space.gd",
+        "byte_identical": true,
+        "sha256": "8110f4a28e04e67fe738011ea888f31a9c74c450ed79148d88c1da602fa03ae8"
+      },
+      {
+        "path": "scripts/world/supply_catalog.gd",
+        "byte_identical": true,
+        "sha256": "1af21cb685b8da0858491a961f007e8a0511c24e0f70b0165e0051d7fcb310a1"
+      }
+    ]
+  },
+  "natural_balance_comparison": {
+    "controller": "unchanged existing evolve controller,no HP/XP/stat gifts or clock jumps",
+    "runs": [
+      {
+        "boss_defeated_at": -1.0,
+        "boss_distance_left": 457.210815429688,
+        "boss_hp_left": 1664,
+        "chest_bonus_ranks": 1,
+        "chests_opened": 1,
+        "choices": 12,
+        "elapsed": 359.700000000048,
+        "encounter_version": 1,
+        "enemy_pattern_version": 3,
+        "evolved": [
+          "gun_rifle",
+          "gun_ricochet"
+        ],
+        "evolved_at": {
+          "gun_ricochet": 178.500000000006,
+          "gun_rifle": 73.9499999999979
+        },
+        "gold_reward": 0,
+        "hammer_hits": 1,
+        "hammer_hp_lost": 24,
+        "hammer_strikes": 2,
+        "hp": 0,
+        "kills": 4836,
+        "map": "prologue_wall",
+        "milestones": [
+          {
+            "choices": 6,
+            "collected_gold": 1490,
+            "hp": 100,
+            "kills": 158,
+            "mp": 27.9500000000003,
+            "time": 59.9999999999987,
+            "xp": 745.0
+          },
+          {
+            "choices": 8,
+            "collected_gold": 2831,
+            "hp": 68,
+            "kills": 390,
+            "mp": 37.85,
+            "time": 119.999999999995,
+            "xp": 1600.0
+          },
+          {
+            "choices": 10,
+            "collected_gold": 6054,
+            "hp": 98,
+            "kills": 917,
+            "mp": 17.7499999999996,
+            "time": 180.000000000007,
+            "xp": 3195.0
+          },
+          {
+            "choices": 11,
+            "collected_gold": 9709,
+            "hp": 100,
+            "kills": 1606,
+            "mp": 37.7,
+            "time": 240.00000000002,
+            "xp": 5655.0
+          },
+          {
+            "choices": 12,
+            "collected_gold": 12329,
+            "hp": 92,
+            "kills": 3187,
+            "mp": 7.65000000000006,
+            "time": 300.000000000034,
+            "xp": 8730.0
+          }
+        ],
+        "mp": 27.3000000000003,
+        "outcome": "defeat",
+        "owned": {
+          "gun_grenade": 1,
+          "gun_ricochet": 5,
+          "gun_rifle": 5,
+          "gun_suppress": 3
+        },
+        "pacing_version": 1,
+        "peak_enemies": 729,
+        "seed": 7,
+        "total_collected_xp": 9280.0,
+        "wall_seconds": 72.447,
+        "density_by_minute": [
+          {
+            "minute": 0,
+            "samples": 60,
+            "mean_visible": 5.85,
+            "mean_near": 10.85,
+            "mean_total": 29.533333333333335,
+            "zero_visible_samples": 18
+          },
+          {
+            "minute": 1,
+            "samples": 60,
+            "mean_visible": 3.1166666666666667,
+            "mean_near": 11.733333333333333,
+            "mean_total": 52.2,
+            "zero_visible_samples": 16
+          },
+          {
+            "minute": 2,
+            "samples": 60,
+            "mean_visible": 3.1166666666666667,
+            "mean_near": 15.666666666666666,
+            "mean_total": 78.11666666666666,
+            "zero_visible_samples": 19
+          },
+          {
+            "minute": 3,
+            "samples": 60,
+            "mean_visible": 12.833333333333334,
+            "mean_near": 43.06666666666667,
+            "mean_total": 244.85,
+            "zero_visible_samples": 4
+          },
+          {
+            "minute": 4,
+            "samples": 60,
+            "mean_visible": 97.6,
+            "mean_near": 250.53333333333333,
+            "mean_total": 554.0166666666667,
+            "zero_visible_samples": 1
+          },
+          {
+            "minute": 5,
+            "samples": 59,
+            "mean_visible": 134.67796610169492,
+            "mean_near": 360.2881355932203,
+            "mean_total": 645.6610169491526,
+            "zero_visible_samples": 0
+          }
+        ]
+      },
+      {
+        "boss_defeated_at": -1.0,
+        "boss_distance_left": 0.0,
+        "boss_hp_left": 0,
+        "chest_bonus_ranks": 2,
+        "chests_opened": 1,
+        "choices": 11,
+        "elapsed": 131.099999999996,
+        "encounter_version": 2,
+        "enemy_pattern_version": 3,
+        "evolved": [
+          "gun_rifle",
+          "gun_ricochet"
+        ],
+        "evolved_at": {
+          "gun_ricochet": 104.699999999996,
+          "gun_rifle": 73.9999999999979
+        },
+        "gold_reward": 0,
+        "hammer_hits": 4,
+        "hammer_hp_lost": 76,
+        "hammer_strikes": 6,
+        "hp": 0,
+        "kills": 1025,
+        "map": "prologue_wall",
+        "milestones": [
+          {
+            "choices": 4,
+            "collected_gold": 657,
+            "hp": 84,
+            "kills": 221,
+            "mp": 38.9499999999999,
+            "time": 59.9999999999987,
+            "xp": 310.0
+          },
+          {
+            "choices": 10,
+            "collected_gold": 8167,
+            "hp": 28,
+            "kills": 863,
+            "mp": 18.6500000000001,
+            "time": 119.999999999995,
+            "xp": 3835.0
+          }
+        ],
+        "mp": 29.6500000000003,
+        "outcome": "defeat",
+        "owned": {
+          "gun_grenade": 1,
+          "gun_ricochet": 5,
+          "gun_rifle": 5,
+          "gun_suppress": 3
+        },
+        "pacing_version": 1,
+        "peak_enemies": 138,
+        "seed": 7,
+        "total_collected_xp": 4350.0,
+        "wall_seconds": 5.556,
+        "density_by_minute": [
+          {
+            "minute": 0,
+            "samples": 60,
+            "mean_visible": 20.216666666666665,
+            "mean_near": 44.93333333333333,
+            "mean_total": 63.36666666666667,
+            "zero_visible_samples": 6
+          },
+          {
+            "minute": 1,
+            "samples": 60,
+            "mean_visible": 12.733333333333333,
+            "mean_near": 37.53333333333333,
+            "mean_total": 60.86666666666667,
+            "zero_visible_samples": 9
+          },
+          {
+            "minute": 2,
+            "samples": 11,
+            "mean_visible": 15.818181818181818,
+            "mean_near": 48.63636363636363,
+            "mean_total": 56.90909090909091,
+            "zero_visible_samples": 0
+          }
+        ]
+      },
+      {
+        "boss_defeated_at": -1.0,
+        "boss_distance_left": 0.0,
+        "boss_hp_left": 0,
+        "chest_bonus_ranks": 3,
+        "chests_opened": 1,
+        "choices": 12,
+        "elapsed": 285.050000000031,
+        "encounter_version": 1,
+        "enemy_pattern_version": 3,
+        "evolved": [
+          "gun_rifle",
+          "gun_ricochet"
+        ],
+        "evolved_at": {
+          "gun_ricochet": 165.650000000003,
+          "gun_rifle": 74.2499999999979
+        },
+        "gold_reward": 0,
+        "hammer_hits": 0,
+        "hammer_hp_lost": 0,
+        "hammer_strikes": 0,
+        "hp": 0,
+        "kills": 2938,
+        "map": "outskirts_trial",
+        "milestones": [
+          {
+            "choices": 6,
+            "collected_gold": 1223,
+            "hp": 100,
+            "kills": 158,
+            "mp": 35.3000000000001,
+            "time": 59.9999999999987,
+            "xp": 655.0
+          },
+          {
+            "choices": 8,
+            "collected_gold": 2909,
+            "hp": 76,
+            "kills": 424,
+            "mp": 15.1999999999999,
+            "time": 119.999999999995,
+            "xp": 1620.0
+          },
+          {
+            "choices": 10,
+            "collected_gold": 7429,
+            "hp": 100,
+            "kills": 935,
+            "mp": 25.1,
+            "time": 180.000000000007,
+            "xp": 3720.0
+          },
+          {
+            "choices": 11,
+            "collected_gold": 12869,
+            "hp": 100,
+            "kills": 1829,
+            "mp": 35.05,
+            "time": 240.00000000002,
+            "xp": 6100.0
+          }
+        ],
+        "mp": 30.0000000000003,
+        "outcome": "defeat",
+        "owned": {
+          "gun_grenade": 2,
+          "gun_ricochet": 5,
+          "gun_rifle": 5,
+          "gun_suppress": 4
+        },
+        "pacing_version": 1,
+        "peak_enemies": 688,
+        "seed": 7,
+        "total_collected_xp": 7465.0,
+        "wall_seconds": 26.699,
+        "density_by_minute": [
+          {
+            "minute": 0,
+            "samples": 60,
+            "mean_visible": 5.083333333333333,
+            "mean_near": 12.75,
+            "mean_total": 29.55,
+            "zero_visible_samples": 16
+          },
+          {
+            "minute": 1,
+            "samples": 60,
+            "mean_visible": 9.066666666666666,
+            "mean_near": 25.666666666666668,
+            "mean_total": 41.35,
+            "zero_visible_samples": 1
+          },
+          {
+            "minute": 2,
+            "samples": 60,
+            "mean_visible": 7.533333333333333,
+            "mean_near": 29.733333333333334,
+            "mean_total": 72.83333333333333,
+            "zero_visible_samples": 2
+          },
+          {
+            "minute": 3,
+            "samples": 60,
+            "mean_visible": 22.266666666666666,
+            "mean_near": 68.41666666666667,
+            "mean_total": 154.53333333333333,
+            "zero_visible_samples": 2
+          },
+          {
+            "minute": 4,
+            "samples": 45,
+            "mean_visible": 114.66666666666667,
+            "mean_near": 246.75555555555556,
+            "mean_total": 430.02222222222224,
+            "zero_visible_samples": 0
+          }
+        ]
+      },
+      {
+        "boss_defeated_at": -1.0,
+        "boss_distance_left": 0.0,
+        "boss_hp_left": 0,
+        "chest_bonus_ranks": 0,
+        "chests_opened": 0,
+        "choices": 11,
+        "elapsed": 195.80000000001,
+        "encounter_version": 2,
+        "enemy_pattern_version": 3,
+        "evolved": [
+          "gun_rifle",
+          "gun_ricochet"
+        ],
+        "evolved_at": {
+          "gun_ricochet": 152.6,
+          "gun_rifle": 103.649999999996
+        },
+        "gold_reward": 0,
+        "hammer_hits": 0,
+        "hammer_hp_lost": 0,
+        "hammer_strikes": 0,
+        "hp": 0,
+        "kills": 1855,
+        "map": "outskirts_trial",
+        "milestones": [
+          {
+            "choices": 4,
+            "collected_gold": 499,
+            "hp": 68,
+            "kills": 169,
+            "mp": 38.35,
+            "time": 59.9999999999987,
+            "xp": 250.0
+          },
+          {
+            "choices": 9,
+            "collected_gold": 3755,
+            "hp": 56,
+            "kills": 662,
+            "mp": 18.1000000000001,
+            "time": 119.999999999995,
+            "xp": 2435.0
+          },
+          {
+            "choices": 11,
+            "collected_gold": 9556,
+            "hp": 32,
+            "kills": 1526,
+            "mp": 28.0000000000004,
+            "time": 180.000000000007,
+            "xp": 5835.0
+          }
+        ],
+        "mp": 3.74999999999999,
+        "outcome": "defeat",
+        "owned": {
+          "gun_grenade": 1,
+          "gun_ricochet": 5,
+          "gun_rifle": 5,
+          "gun_suppress": 1
+        },
+        "pacing_version": 1,
+        "peak_enemies": 169,
+        "seed": 7,
+        "total_collected_xp": 6575.0,
+        "wall_seconds": 10.41,
+        "density_by_minute": [
+          {
+            "minute": 0,
+            "samples": 60,
+            "mean_visible": 16.35,
+            "mean_near": 38.38333333333333,
+            "mean_total": 62.03333333333333,
+            "zero_visible_samples": 8
+          },
+          {
+            "minute": 1,
+            "samples": 60,
+            "mean_visible": 27.983333333333334,
+            "mean_near": 66.65,
+            "mean_total": 97.11666666666666,
+            "zero_visible_samples": 0
+          },
+          {
+            "minute": 2,
+            "samples": 60,
+            "mean_visible": 21.416666666666668,
+            "mean_near": 63.416666666666664,
+            "mean_total": 85.95,
+            "zero_visible_samples": 0
+          },
+          {
+            "minute": 3,
+            "samples": 15,
+            "mean_visible": 56.0,
+            "mean_near": 108.33333333333333,
+            "mean_total": 131.73333333333332,
+            "zero_visible_samples": 0
+          }
+        ]
+      }
+    ],
+    "scope": "Four paired automatic runs,not human/mobile/global balance approval;historical10-12choice target not a new-rule approval.",
+    "seed": 7,
+    "status": "MEASURED",
+    "talents": "none"
+  },
+  "metrics_scope": "1Hzbenchmarkvisible rectangle is originalspawn_view_size/1.16 atsimulationcamera,not actualpixelmeasure or mobileFPS. Samecontroller/none/seed7,originalHP-XP-stats/no clockjumps/gifts. Peakcounts aretotalactors;perminute samplelength varies when a runends.",
+  "actual_native_gui": {
+    "crate_regen_at": 44.9999999999996,
+    "errors": [],
+    "mouse_controls": 3,
+    "native_magic_casts": 6,
+    "native_move_frames": 2402,
+    "natural_runs": [
+      {
+        "density": [
+          {
+            "hp": 100,
+            "second": 1,
+            "total": 2,
+            "visible": 0
+          },
+          {
+            "hp": 100,
+            "second": 2,
+            "total": 4,
+            "visible": 0
+          },
+          {
+            "hp": 100,
+            "second": 3,
+            "total": 3,
+            "visible": 1
+          },
+          {
+            "hp": 100,
+            "second": 4,
+            "total": 4,
+            "visible": 0
+          },
+          {
+            "hp": 100,
+            "second": 5,
+            "total": 2,
+            "visible": 0
+          },
+          {
+            "hp": 100,
+            "second": 6,
+            "total": 4,
+            "visible": 1
+          },
+          {
+            "hp": 100,
+            "second": 7,
+            "total": 5,
+            "visible": 1
+          },
+          {
+            "hp": 100,
+            "second": 8,
+            "total": 4,
+            "visible": 2
+          },
+          {
+            "hp": 100,
+            "second": 9,
+            "total": 4,
+            "visible": 1
+          },
+          {
+            "hp": 100,
+            "second": 10,
+            "total": 5,
+            "visible": 0
+          },
+          {
+            "hp": 100,
+            "second": 11,
+            "total": 5,
+            "visible": 0
+          },
+          {
+            "hp": 100,
+            "second": 12,
+            "total": 6,
+            "visible": 0
+          },
+          {
+            "hp": 100,
+            "second": 13,
+            "total": 36,
+            "visible": 0
+          },
+          {
+            "hp": 100,
+            "second": 14,
+            "total": 37,
+            "visible": 2
+          },
+          {
+            "hp": 100,
+            "second": 15,
+            "total": 37,
+            "visible": 2
+          },
+          {
+            "hp": 100,
+            "second": 16,
+            "total": 36,
+            "visible": 2
+          },
+          {
+            "hp": 100,
+            "second": 17,
+            "total": 37,
+            "visible": 2
+          },
+          {
+            "hp": 100,
+            "second": 18,
+            "total": 39,
+            "visible": 3
+          },
+          {
+            "hp": 100,
+            "second": 19,
+            "total": 38,
+            "visible": 2
+          },
+          {
+            "hp": 100,
+            "second": 20,
+            "total": 39,
+            "visible": 1
+          },
+          {
+            "hp": 100,
+            "second": 21,
+            "total": 38,
+            "visible": 0
+          },
+          {
+            "hp": 100,
+            "second": 22,
+            "total": 40,
+            "visible": 0
+          },
+          {
+            "hp": 100,
+            "second": 23,
+            "total": 41,
+            "visible": 0
+          },
+          {
+            "hp": 100,
+            "second": 24,
+            "total": 41,
+            "visible": 0
+          },
+          {
+            "hp": 100,
+            "second": 25,
+            "total": 73,
+            "visible": 1
+          },
+          {
+            "hp": 100,
+            "second": 26,
+            "total": 75,
+            "visible": 2
+          },
+          {
+            "hp": 100,
+            "second": 27,
+            "total": 75,
+            "visible": 2
+          },
+          {
+            "hp": 100,
+            "second": 28,
+            "total": 76,
+            "visible": 1
+          },
+          {
+            "hp": 100,
+            "second": 29,
+            "total": 76,
+            "visible": 1
+          },
+          {
+            "hp": 100,
+            "second": 30,
+            "total": 78,
+            "visible": 2
+          },
+          {
+            "hp": 100,
+            "second": 31,
+            "total": 80,
+            "visible": 2
+          },
+          {
+            "hp": 100,
+            "second": 32,
+            "total": 79,
+            "visible": 12
+          },
+          {
+            "hp": 100,
+            "second": 33,
+            "total": 81,
+            "visible": 25
+          },
+          {
+            "hp": 100,
+            "second": 34,
+            "total": 83,
+            "visible": 42
+          },
+          {
+            "hp": 100,
+            "second": 35,
+            "total": 83,
+            "visible": 50
+          },
+          {
+            "hp": 92,
+            "second": 36,
+            "total": 84,
+            "visible": 57
+          },
+          {
+            "hp": 84,
+            "second": 37,
+            "total": 112,
+            "visible": 61
+          },
+          {
+            "hp": 72,
+            "second": 38,
+            "total": 109,
+            "visible": 59
+          },
+          {
+            "hp": 60,
+            "second": 39,
+            "total": 106,
+            "visible": 56
+          },
+          {
+            "hp": 48,
+            "second": 40,
+            "total": 102,
+            "visible": 52
+          },
+          {
+            "hp": 36,
+            "second": 41,
+            "total": 103,
+            "visible": 54
+          },
+          {
+            "hp": 24,
+            "second": 42,
+            "total": 87,
+            "visible": 37
+          },
+          {
+            "hp": 24,
+            "second": 43,
+            "total": 85,
+            "visible": 35
+          },
+          {
+            "hp": 24,
+            "second": 44,
+            "total": 80,
+            "visible": 28
+          },
+          {
+            "hp": 24,
+            "second": 45,
+            "total": 75,
+            "visible": 24
+          },
+          {
+            "hp": 24,
+            "second": 46,
+            "total": 70,
+            "visible": 19
+          },
+          {
+            "hp": 24,
+            "second": 47,
+            "total": 67,
+            "visible": 15
+          },
+          {
+            "hp": 24,
+            "second": 48,
+            "total": 60,
+            "visible": 9
+          },
+          {
+            "hp": 24,
+            "second": 49,
+            "total": 90,
+            "visible": 7
+          },
+          {
+            "hp": 24,
+            "second": 50,
+            "total": 86,
+            "visible": 9
+          },
+          {
+            "hp": 24,
+            "second": 51,
+            "total": 86,
+            "visible": 17
+          },
+          {
+            "hp": 24,
+            "second": 52,
+            "total": 86,
+            "visible": 39
+          },
+          {
+            "hp": 24,
+            "second": 53,
+            "total": 83,
+            "visible": 39
+          },
+          {
+            "hp": 24,
+            "second": 54,
+            "total": 55,
+            "visible": 8
+          },
+          {
+            "hp": 24,
+            "second": 55,
+            "total": 54,
+            "visible": 5
+          },
+          {
+            "hp": 24,
+            "second": 56,
+            "total": 51,
+            "visible": 3
+          },
+          {
+            "hp": 24,
+            "second": 57,
+            "total": 48,
+            "visible": 3
+          },
+          {
+            "hp": 24,
+            "second": 58,
+            "total": 44,
+            "visible": 6
+          },
+          {
+            "hp": 24,
+            "second": 59,
+            "total": 43,
+            "visible": 6
+          },
+          {
+            "hp": 24,
+            "second": 60,
+            "total": 42,
+            "visible": 3
+          }
+        ],
+        "elapsed": 60.0499999999987,
+        "frames": 1201,
+        "hp": 24,
+        "kills": 127,
+        "owned": {
+          "gun_grenade": 1,
+          "gun_ricochet": 1,
+          "gun_rifle": 3,
+          "gun_suppress": 1
+        },
+        "policy": 1
+      },
+      {
+        "density": [
+          {
+            "hp": 100,
+            "second": 1,
+            "total": 1,
+            "visible": 1
+          },
+          {
+            "hp": 100,
+            "second": 2,
+            "total": 2,
+            "visible": 0
+          },
+          {
+            "hp": 100,
+            "second": 3,
+            "total": 1,
+            "visible": 0
+          },
+          {
+            "hp": 100,
+            "second": 4,
+            "total": 2,
+            "visible": 0
+          },
+          {
+            "hp": 100,
+            "second": 5,
+            "total": 0,
+            "visible": 0
+          },
+          {
+            "hp": 100,
+            "second": 6,
+            "total": 1,
+            "visible": 1
+          },
+          {
+            "hp": 100,
+            "second": 7,
+            "total": 8,
+            "visible": 0
+          },
+          {
+            "hp": 100,
+            "second": 8,
+            "total": 12,
+            "visible": 6
+          },
+          {
+            "hp": 100,
+            "second": 9,
+            "total": 18,
+            "visible": 7
+          },
+          {
+            "hp": 100,
+            "second": 10,
+            "total": 19,
+            "visible": 7
+          },
+          {
+            "hp": 100,
+            "second": 11,
+            "total": 18,
+            "visible": 13
+          },
+          {
+            "hp": 100,
+            "second": 12,
+            "total": 18,
+            "visible": 13
+          },
+          {
+            "hp": 100,
+            "second": 13,
+            "total": 47,
+            "visible": 14
+          },
+          {
+            "hp": 100,
+            "second": 14,
+            "total": 48,
+            "visible": 16
+          },
+          {
+            "hp": 100,
+            "second": 15,
+            "total": 49,
+            "visible": 15
+          },
+          {
+            "hp": 100,
+            "second": 16,
+            "total": 47,
+            "visible": 13
+          },
+          {
+            "hp": 100,
+            "second": 17,
+            "total": 48,
+            "visible": 13
+          },
+          {
+            "hp": 100,
+            "second": 18,
+            "total": 49,
+            "visible": 17
+          },
+          {
+            "hp": 100,
+            "second": 19,
+            "total": 48,
+            "visible": 16
+          },
+          {
+            "hp": 100,
+            "second": 20,
+            "total": 48,
+            "visible": 14
+          },
+          {
+            "hp": 100,
+            "second": 21,
+            "total": 68,
+            "visible": 0
+          },
+          {
+            "hp": 100,
+            "second": 22,
+            "total": 72,
+            "visible": 31
+          },
+          {
+            "hp": 100,
+            "second": 23,
+            "total": 79,
+            "visible": 29
+          },
+          {
+            "hp": 100,
+            "second": 24,
+            "total": 78,
+            "visible": 15
+          },
+          {
+            "hp": 100,
+            "second": 25,
+            "total": 107,
+            "visible": 17
+          },
+          {
+            "hp": 100,
+            "second": 26,
+            "total": 79,
+            "visible": 14
+          },
+          {
+            "hp": 100,
+            "second": 27,
+            "total": 76,
+            "visible": 11
+          },
+          {
+            "hp": 100,
+            "second": 28,
+            "total": 76,
+            "visible": 9
+          },
+          {
+            "hp": 100,
+            "second": 29,
+            "total": 74,
+            "visible": 9
+          },
+          {
+            "hp": 92,
+            "second": 30,
+            "total": 74,
+            "visible": 22
+          },
+          {
+            "hp": 92,
+            "second": 31,
+            "total": 74,
+            "visible": 39
+          },
+          {
+            "hp": 92,
+            "second": 32,
+            "total": 74,
+            "visible": 62
+          },
+          {
+            "hp": 92,
+            "second": 33,
+            "total": 72,
+            "visible": 61
+          },
+          {
+            "hp": 92,
+            "second": 34,
+            "total": 63,
+            "visible": 59
+          },
+          {
+            "hp": 92,
+            "second": 35,
+            "total": 62,
+            "visible": 55
+          },
+          {
+            "hp": 92,
+            "second": 36,
+            "total": 63,
+            "visible": 57
+          },
+          {
+            "hp": 92,
+            "second": 37,
+            "total": 91,
+            "visible": 54
+          },
+          {
+            "hp": 92,
+            "second": 38,
+            "total": 85,
+            "visible": 46
+          },
+          {
+            "hp": 92,
+            "second": 39,
+            "total": 87,
+            "visible": 39
+          },
+          {
+            "hp": 92,
+            "second": 40,
+            "total": 79,
+            "visible": 32
+          },
+          {
+            "hp": 92,
+            "second": 41,
+            "total": 77,
+            "visible": 35
+          },
+          {
+            "hp": 92,
+            "second": 42,
+            "total": 66,
+            "visible": 24
+          },
+          {
+            "hp": 92,
+            "second": 43,
+            "total": 63,
+            "visible": 18
+          },
+          {
+            "hp": 92,
+            "second": 44,
+            "total": 59,
+            "visible": 13
+          },
+          {
+            "hp": 92,
+            "second": 45,
+            "total": 55,
+            "visible": 15
+          },
+          {
+            "hp": 92,
+            "second": 46,
+            "total": 52,
+            "visible": 15
+          },
+          {
+            "hp": 92,
+            "second": 47,
+            "total": 52,
+            "visible": 19
+          },
+          {
+            "hp": 92,
+            "second": 48,
+            "total": 49,
+            "visible": 16
+          },
+          {
+            "hp": 92,
+            "second": 49,
+            "total": 77,
+            "visible": 14
+          },
+          {
+            "hp": 92,
+            "second": 50,
+            "total": 75,
+            "visible": 13
+          },
+          {
+            "hp": 92,
+            "second": 51,
+            "total": 75,
+            "visible": 14
+          },
+          {
+            "hp": 92,
+            "second": 52,
+            "total": 77,
+            "visible": 26
+          },
+          {
+            "hp": 92,
+            "second": 53,
+            "total": 74,
+            "visible": 22
+          },
+          {
+            "hp": 92,
+            "second": 54,
+            "total": 48,
+            "visible": 11
+          },
+          {
+            "hp": 92,
+            "second": 55,
+            "total": 47,
+            "visible": 13
+          },
+          {
+            "hp": 92,
+            "second": 56,
+            "total": 47,
+            "visible": 10
+          },
+          {
+            "hp": 92,
+            "second": 57,
+            "total": 48,
+            "visible": 6
+          },
+          {
+            "hp": 92,
+            "second": 58,
+            "total": 47,
+            "visible": 4
+          },
+          {
+            "hp": 92,
+            "second": 59,
+            "total": 45,
+            "visible": 15
+          },
+          {
+            "hp": 92,
+            "second": 60,
+            "total": 48,
+            "visible": 10
+          }
+        ],
+        "elapsed": 60.0499999999987,
+        "frames": 1201,
+        "hp": 92,
+        "kills": 197,
+        "owned": {
+          "gun_grenade": 1,
+          "gun_ricochet": 1,
+          "gun_rifle": 4,
+          "gun_suppress": 1
+        },
+        "policy": 2
+      }
+    ],
+    "records": [
+      {
+        "actual_visible": 0,
+        "arrival_caption": "최후의 성벽 방어 ▸",
+        "audio_active": 0,
+        "bonus_ranks": 0,
+        "bound_textures": [
+          "res://assets/maps/pilot_01/stone_floor_tile.png",
+          "res://assets/maps/pilot_01/wall_segment.png",
+          "res://assets/maps/pilot_01/prop_crate.png",
+          "res://assets/maps/pilot_02/ruin_block.png",
+          "res://assets/maps/pilot_02/prop_urn.png",
+          "res://assets/maps/pilot_02/prop_debris.png",
+          "res://assets/maps/pilot_03/wall_top_tile.png",
+          "res://assets/maps/pilot_03/ruin_top_tile.png",
+          "res://assets/maps/pilot_03/gate_front.png"
+        ],
+        "chests": [],
+        "dense": false,
+        "encounter_version": 1,
+        "enemies": 5,
+        "enemy_bullets": [],
+        "high_angle": true,
+        "hp": 100,
+        "image": "natural_policy1_10",
+        "incoming": {},
+        "label_overlaps": 0,
+        "labels": 0,
+        "map": "prologue_wall",
+        "mp": 29.9499999999996,
+        "occluders": 0,
+        "opened": 0,
+        "owned": {
+          "gun_grenade": 1,
+          "gun_rifle": 1
+        },
+        "patterns": [],
+        "phase": 1,
+        "pixels_sha256": "c34d44250712976a4d6955a82dc3b1aadff53fd5e1ef12b485e8d0f217319786",
+        "population_limit": 160,
+        "telegraph": [],
+        "viewport": "(1280, 720)"
+      },
+      {
+        "actual_visible": 2,
+        "arrival_caption": "최후의 성벽 방어 ▸",
+        "audio_active": 0,
+        "bonus_ranks": 0,
+        "bound_textures": [
+          "res://assets/maps/pilot_01/stone_floor_tile.png",
+          "res://assets/maps/pilot_01/wall_segment.png",
+          "res://assets/maps/pilot_01/prop_crate.png",
+          "res://assets/maps/pilot_02/ruin_block.png",
+          "res://assets/maps/pilot_02/prop_urn.png",
+          "res://assets/maps/pilot_02/prop_debris.png",
+          "res://assets/maps/pilot_03/wall_top_tile.png",
+          "res://assets/maps/pilot_03/ruin_top_tile.png",
+          "res://assets/maps/pilot_03/gate_front.png"
+        ],
+        "chests": [],
+        "dense": false,
+        "encounter_version": 1,
+        "enemies": 78,
+        "enemy_bullets": [],
+        "high_angle": true,
+        "hp": 100,
+        "image": "natural_policy1_30",
+        "incoming": {},
+        "label_overlaps": 0,
+        "labels": 0,
+        "map": "prologue_wall",
+        "mp": 9.89999999999912,
+        "occluders": 0,
+        "opened": 0,
+        "owned": {
+          "gun_grenade": 1,
+          "gun_rifle": 1,
+          "gun_suppress": 1
+        },
+        "patterns": [],
+        "phase": 1,
+        "pixels_sha256": "6880de679a40bc429443d78ba248313c3eef2fd1797be50169e7283dc04d0f23",
+        "population_limit": 160,
+        "telegraph": [],
+        "viewport": "(1280, 720)"
+      },
+      {
+        "actual_visible": 3,
+        "arrival_caption": "최후의 성벽 방어 ▸",
+        "audio_active": 0,
+        "bonus_ranks": 0,
+        "bound_textures": [
+          "res://assets/maps/pilot_01/stone_floor_tile.png",
+          "res://assets/maps/pilot_01/wall_segment.png",
+          "res://assets/maps/pilot_01/prop_crate.png",
+          "res://assets/maps/pilot_02/ruin_block.png",
+          "res://assets/maps/pilot_02/prop_urn.png",
+          "res://assets/maps/pilot_02/prop_debris.png",
+          "res://assets/maps/pilot_03/wall_top_tile.png",
+          "res://assets/maps/pilot_03/ruin_top_tile.png",
+          "res://assets/maps/pilot_03/gate_front.png"
+        ],
+        "chests": [],
+        "dense": false,
+        "encounter_version": 1,
+        "enemies": 42,
+        "enemy_bullets": [],
+        "high_angle": true,
+        "hp": 24,
+        "image": "natural_policy1_60",
+        "incoming": {},
+        "label_overlaps": 0,
+        "labels": 2,
+        "map": "prologue_wall",
+        "mp": 39.749999999999,
+        "occluders": 0,
+        "opened": 0,
+        "owned": {
+          "gun_grenade": 1,
+          "gun_ricochet": 1,
+          "gun_rifle": 3,
+          "gun_suppress": 1
+        },
+        "patterns": [
+          {
+            "direction": "(0.0, 1.0)",
+            "left": 0.0,
+            "origin": "(2866.863, 2757.162)",
+            "phase": "chase"
+          }
+        ],
+        "phase": 1,
+        "pixels_sha256": "fdd3a45a2c64a0f36359636868449054188ccdc9521b30d1fbe2671316af5ff9",
+        "population_limit": 320,
+        "telegraph": [],
+        "viewport": "(1280, 720)"
+      },
+      {
+        "actual_visible": 7,
+        "arrival_caption": "최후의 성벽 방어 ▸",
+        "audio_active": 0,
+        "bonus_ranks": 0,
+        "bound_textures": [
+          "res://assets/maps/pilot_01/stone_floor_tile.png",
+          "res://assets/maps/pilot_01/wall_segment.png",
+          "res://assets/maps/pilot_01/prop_crate.png",
+          "res://assets/maps/pilot_02/ruin_block.png",
+          "res://assets/maps/pilot_02/prop_urn.png",
+          "res://assets/maps/pilot_02/prop_debris.png",
+          "res://assets/maps/pilot_03/wall_top_tile.png",
+          "res://assets/maps/pilot_03/ruin_top_tile.png",
+          "res://assets/maps/pilot_03/gate_front.png"
+        ],
+        "chests": [],
+        "dense": false,
+        "encounter_version": 2,
+        "enemies": 19,
+        "enemy_bullets": [],
+        "high_angle": true,
+        "hp": 100,
+        "image": "natural_policy2_10",
+        "incoming": {},
+        "label_overlaps": 0,
+        "labels": 3,
+        "map": "prologue_wall",
+        "mp": 29.9499999999999,
+        "occluders": 0,
+        "opened": 0,
+        "owned": {
+          "gun_grenade": 1,
+          "gun_rifle": 1
+        },
+        "patterns": [],
+        "phase": 1,
+        "pixels_sha256": "aba95f154ceba5d3e160cd97884c2aa75e76f3e7270e8f609ab9c20015360e24",
+        "population_limit": 160,
+        "telegraph": [],
+        "viewport": "(1280, 720)"
+      },
+      {
+        "actual_visible": 22,
+        "arrival_caption": "최후의 성벽 방어 ▸",
+        "audio_active": 0,
+        "bonus_ranks": 0,
+        "bound_textures": [
+          "res://assets/maps/pilot_01/stone_floor_tile.png",
+          "res://assets/maps/pilot_01/wall_segment.png",
+          "res://assets/maps/pilot_01/prop_crate.png",
+          "res://assets/maps/pilot_02/ruin_block.png",
+          "res://assets/maps/pilot_02/prop_urn.png",
+          "res://assets/maps/pilot_02/prop_debris.png",
+          "res://assets/maps/pilot_03/wall_top_tile.png",
+          "res://assets/maps/pilot_03/ruin_top_tile.png",
+          "res://assets/maps/pilot_03/gate_front.png"
+        ],
+        "chests": [],
+        "dense": false,
+        "encounter_version": 2,
+        "enemies": 74,
+        "enemy_bullets": [
+          {
+            "damage": 8,
+            "life": 2.95,
+            "p": "(3044.674, 2498.662)",
+            "shot": "javelin",
+            "species": "goblin_javelin",
+            "velocity": "(-226.6766, -78.85255)"
+          }
+        ],
+        "high_angle": true,
+        "hp": 92,
+        "image": "natural_policy2_30",
+        "incoming": {},
+        "label_overlaps": 0,
+        "labels": 4,
+        "map": "prologue_wall",
+        "mp": 9.79999999999948,
+        "occluders": 0,
+        "opened": 0,
+        "owned": {
+          "gun_grenade": 1,
+          "gun_ricochet": 1,
+          "gun_rifle": 2,
+          "gun_suppress": 1
+        },
+        "patterns": [],
+        "phase": 1,
+        "pixels_sha256": "7c7b425f7b848f5bdd66abbb12a6ab29b9bdd1d4687a48caa01d4c38f804ab89",
+        "population_limit": 160,
+        "telegraph": [],
+        "viewport": "(1280, 720)"
+      },
+      {
+        "arrival_caption": "최후의 성벽 방어 ▸",
+        "audio_active": 0,
+        "bonus_ranks": 0,
+        "bound_textures": [
+          "res://assets/maps/pilot_01/stone_floor_tile.png",
+          "res://assets/maps/pilot_01/wall_segment.png",
+          "res://assets/maps/pilot_01/prop_crate.png",
+          "res://assets/maps/pilot_02/ruin_block.png",
+          "res://assets/maps/pilot_02/prop_urn.png",
+          "res://assets/maps/pilot_02/prop_debris.png",
+          "res://assets/maps/pilot_03/wall_top_tile.png",
+          "res://assets/maps/pilot_03/ruin_top_tile.png",
+          "res://assets/maps/pilot_03/gate_front.png"
+        ],
+        "chests": [],
+        "dense": false,
+        "encounter_version": 2,
+        "enemies": 74,
+        "enemy_bullets": [
+          {
+            "damage": 8,
+            "life": 2.95,
+            "p": "(3044.674, 2498.662)",
+            "shot": "javelin",
+            "species": "goblin_javelin",
+            "velocity": "(-226.6766, -78.85255)"
+          }
+        ],
+        "high_angle": false,
+        "hp": 92,
+        "image": "natural_policy2_30_f8",
+        "incoming": {},
+        "label_overlaps": 0,
+        "labels": 4,
+        "map": "prologue_wall",
+        "mp": 9.79999999999948,
+        "occluders": 0,
+        "opened": 0,
+        "owned": {
+          "gun_grenade": 1,
+          "gun_ricochet": 1,
+          "gun_rifle": 2,
+          "gun_suppress": 1
+        },
+        "patterns": [],
+        "phase": 1,
+        "pixels_sha256": "b9a630670df6e893dead9e8e4cd7b2581bdd835c9134a37c6dc384178395a861",
+        "population_limit": 160,
+        "telegraph": [],
+        "viewport": "(1280, 720)"
+      },
+      {
+        "arrival_caption": "임무 ▸",
+        "audio_active": 0,
+        "bonus_ranks": 0,
+        "bound_textures": [
+          "res://assets/maps/pilot_01/stone_floor_tile.png",
+          "res://assets/maps/pilot_01/wall_segment.png",
+          "res://assets/maps/pilot_01/prop_crate.png",
+          "res://assets/maps/pilot_02/ruin_block.png",
+          "res://assets/maps/pilot_02/prop_urn.png",
+          "res://assets/maps/pilot_02/prop_debris.png",
+          "res://assets/maps/pilot_03/wall_top_tile.png",
+          "res://assets/maps/pilot_03/ruin_top_tile.png",
+          "res://assets/maps/pilot_03/gate_front.png"
+        ],
+        "chests": [],
+        "dense": false,
+        "encounter_version": 2,
+        "enemies": 74,
+        "enemy_bullets": [
+          {
+            "damage": 8,
+            "life": 2.95,
+            "p": "(3044.674, 2498.662)",
+            "shot": "javelin",
+            "species": "goblin_javelin",
+            "velocity": "(-226.6766, -78.85255)"
+          }
+        ],
+        "high_angle": true,
+        "hp": 92,
+        "image": "natural_policy2_30_compact",
+        "incoming": {},
+        "label_overlaps": 0,
+        "labels": 4,
+        "map": "prologue_wall",
+        "mp": 9.79999999999948,
+        "occluders": 0,
+        "opened": 0,
+        "owned": {
+          "gun_grenade": 1,
+          "gun_ricochet": 1,
+          "gun_rifle": 2,
+          "gun_suppress": 1
+        },
+        "patterns": [],
+        "phase": 1,
+        "pixels_sha256": "47614e4b47b65af729bc1f2540f66d5cfd513953deff440ea5657f48837abdbd",
+        "population_limit": 160,
+        "telegraph": [],
+        "viewport": "(854, 394)"
+      },
+      {
+        "arrival_caption": "최후의 성벽 방어 ▸",
+        "audio_active": 0,
+        "bonus_ranks": 0,
+        "bound_textures": [
+          "res://assets/maps/pilot_01/stone_floor_tile.png",
+          "res://assets/maps/pilot_01/wall_segment.png",
+          "res://assets/maps/pilot_01/prop_crate.png",
+          "res://assets/maps/pilot_02/ruin_block.png",
+          "res://assets/maps/pilot_02/prop_urn.png",
+          "res://assets/maps/pilot_02/prop_debris.png",
+          "res://assets/maps/pilot_03/wall_top_tile.png",
+          "res://assets/maps/pilot_03/ruin_top_tile.png",
+          "res://assets/maps/pilot_03/gate_front.png"
+        ],
+        "chests": [],
+        "dense": false,
+        "encounter_version": 2,
+        "enemies": 55,
+        "enemy_bullets": [
+          {
+            "damage": 8,
+            "life": 0.0500000000000023,
+            "p": "(3062.435, 2543.67)",
+            "shot": "javelin",
+            "species": "goblin_javelin",
+            "velocity": "(239.5372, -14.89703)"
+          },
+          {
+            "damage": 8,
+            "life": 0.500000000000002,
+            "p": "(2464.716, 2350.771)",
+            "shot": "javelin",
+            "species": "goblin_javelin",
+            "velocity": "(-169.2843, -170.1259)"
+          },
+          {
+            "damage": 8,
+            "life": 0.500000000000002,
+            "p": "(2497.592, 2314.017)",
+            "shot": "javelin",
+            "species": "goblin_javelin",
+            "velocity": "(-130.9888, -201.1018)"
+          },
+          {
+            "damage": 8,
+            "life": 1.15,
+            "p": "(2531.973, 2410.32)",
+            "shot": "javelin",
+            "species": "goblin_javelin",
+            "velocity": "(-227.0194, -77.85995)"
+          },
+          {
+            "damage": 8,
+            "life": 2.55,
+            "p": "(2776.852, 2692.118)",
+            "shot": "javelin",
+            "species": "goblin_javelin",
+            "velocity": "(-49.99306, -234.7354)"
+          },
+          {
+            "damage": 8,
+            "life": 2.65,
+            "p": "(2851.034, 2685.851)",
+            "shot": "javelin",
+            "species": "goblin_javelin",
+            "velocity": "(-90.9596, -222.0954)"
+          },
+          {
+            "damage": 8,
+            "life": 2.85,
+            "p": "(2805.168, 2759.407)",
+            "shot": "javelin",
+            "species": "goblin_javelin",
+            "velocity": "(-19.72384, -239.1881)"
+          }
+        ],
+        "high_angle": true,
+        "hp": 92,
+        "image": "pressure_saved_pause",
+        "incoming": {},
+        "label_overlaps": 0,
+        "labels": 6,
+        "map": "prologue_wall",
+        "mp": 24.6999999999997,
+        "occluders": 0,
+        "opened": 0,
+        "owned": {
+          "gun_grenade": 1,
+          "gun_ricochet": 1,
+          "gun_rifle": 3,
+          "gun_suppress": 1
+        },
+        "patterns": [],
+        "phase": 2,
+        "pixels_sha256": "2c56a9a4caa1236462fc9eea53fc1bb47fb58924361b79d3ce62b6a191906c1e",
+        "population_limit": 160,
+        "telegraph": [],
+        "viewport": "(1280, 720)"
+      },
+      {
+        "actual_visible": 10,
+        "arrival_caption": "최후의 성벽 방어 ▸",
+        "audio_active": 0,
+        "bonus_ranks": 0,
+        "bound_textures": [
+          "res://assets/maps/pilot_01/stone_floor_tile.png",
+          "res://assets/maps/pilot_01/wall_segment.png",
+          "res://assets/maps/pilot_01/prop_crate.png",
+          "res://assets/maps/pilot_02/ruin_block.png",
+          "res://assets/maps/pilot_02/prop_urn.png",
+          "res://assets/maps/pilot_02/prop_debris.png",
+          "res://assets/maps/pilot_03/wall_top_tile.png",
+          "res://assets/maps/pilot_03/ruin_top_tile.png",
+          "res://assets/maps/pilot_03/gate_front.png"
+        ],
+        "chests": [],
+        "dense": false,
+        "encounter_version": 2,
+        "enemies": 48,
+        "enemy_bullets": [],
+        "high_angle": true,
+        "hp": 92,
+        "image": "natural_policy2_60",
+        "incoming": {},
+        "label_overlaps": 0,
+        "labels": 7,
+        "map": "prologue_wall",
+        "mp": 39.6999999999994,
+        "occluders": 0,
+        "opened": 0,
+        "owned": {
+          "gun_grenade": 1,
+          "gun_ricochet": 1,
+          "gun_rifle": 4,
+          "gun_suppress": 1
+        },
+        "patterns": [
+          {
+            "direction": "(0.0, 1.0)",
+            "left": 0.0,
+            "origin": "(2808.612, 3111.898)",
+            "phase": "chase"
+          }
+        ],
+        "phase": 1,
+        "pixels_sha256": "8abdc87af77c2d4e28a958aead0202305ab01cfb6fef122493ab269f75586be8",
+        "population_limit": 320,
+        "telegraph": [],
+        "viewport": "(1280, 720)"
+      }
+    ],
+    "restored_equal": true,
+    "restored_running_steps": 302,
+    "scope": "ActualnativeUI/currentpressure2,policy1vs2naturalfirst60sec,seed7/originalHP-stats-XP/sameevolvecontroller,actualjoystickdirections/MP. No quietspawns,placedmonsters,timejumps,HPgifts. InitialnativeMPandinspectioncompact-F8areQAcaptureinputs;capturelooprateisnotmobileFPS/humanfunapproval.",
+    "status": "PASS"
+  },
+  "actual_gui_assessment": {
+    "policy1_visible_mean_first60": 13.516666666666667,
+    "policy2_visible_mean_first60": 19.0,
+    "zero_visible_samples": [
+      12,
+      6
+    ],
+    "kills": [
+      127,
+      197
+    ],
+    "final_hp": [
+      24,
+      92
+    ],
+    "native_joystick_frames": 2402,
+    "actual_mp_casts": 6,
+    "native_mouse_controls": 3,
+    "saved_reference_steps": 302,
+    "actual_crate_regen_at": 44.9999999999996,
+    "scope": "Two natural~60second prefixes atreal1280x720,originalHP/normalXP/sameevolvecontroller throughnativejoystick/MP. No placedactors/quietspawns/timejumps/HPgifts. OneinitialMPandcompact-F8inspection areexplicit captureinputs. Samecontroller+seed stillproduceslegitimate differentpositions/growth;not pixel-identicalstates. Nothumanfun/mobileFPS approval.",
+    "measurement": "Projected enemy feet inside actual View rectangle;not pixel segmentation or occlusion visibility."
+  },
+  "fresh_os_restores": {
+    "method": "Two distinct freshheadlessGodot processes/realmain scene/same1280x720safearea,actualcurrent20pressurewaitingsave and published19unopenedchestsource. ExplicitContinue then100running authoritative/sevenRNG comparisons against identicalsavedreference. Zero direction isactual additionalcombat;currentHP92->60 is legitimate matchingdamage,not restore reset.",
+    "runs": [
+      {
+        "active_steps": 100,
+        "entries": 0,
+        "equal": true,
+        "errors": [],
+        "gold": 0,
+        "hp_after": 60,
+        "hp_before": 92,
+        "mp_after": 29.6999999999998,
+        "mp_before": 24.6999999999997,
+        "opened_after": 0,
+        "opened_before": 0,
+        "policy": 2,
+        "schema": 20,
+        "status": "PASS",
+        "tag": "current20"
+      },
+      {
+        "active_steps": 100,
+        "entries": 0,
+        "equal": true,
+        "errors": [],
+        "gold": 0,
+        "hp_after": 100,
+        "hp_before": 100,
+        "mp_after": 65.0499999999997,
+        "mp_before": 60.05,
+        "opened_after": 0,
+        "opened_before": 0,
+        "policy": 1,
+        "schema": 20,
+        "status": "PASS",
+        "tag": "legacy19"
+      }
+    ]
+  },
+  "synthetic_capacity": {
+    "actors": 1540,
+    "bytes": 509412,
+    "file_limit": 2097152,
+    "ground": 640,
+    "read_error": 0,
+    "restored": true,
+    "scope": "Synthetic640regular+900formation backlog to validate original atomic store capacity,not natural gameplay or mobile performance.",
+    "status": "PASS",
+    "valid": true,
+    "write_error": 0
+  },
+  "balance_assessment": "Feltlocaldensity improves but globaldifficulty/growth/economy OPEN. New2none seed7 dies131.10/195.80 versus1dies359.70/285.05;11choices by2-3min isnot6min targetapproval. No forcedpasses/HP-healinggifts/botretune. OldGAME04019/20-NONE407 remains separateOPEN. No newgold-dungeonincome/economy estimate.",
+  "preserved": [
+    "Campaignminute2xdoubling/elites55-110-170-230/chest30percenthelddistinct1-5+1/max5",
+    "OriginalspeciesHP/MP40+1persec/XP3-drop5/weapons/talents/currencyprices/dungeon3min-daily2",
+    "Original12mapPNG/import/bindings/shared53blank",
+    "Stablecamera±6deadzone/maxaxis8/no releasedrift/fixed1.16spawn",
+    "HiddenrespawnUI/45active-secondprops/oldunclaimeditems",
+    "ART001canonical/GEN005unapproved-unbound/3Dhold/support2+2empty/otherrepos-mainunchanged"
+  ],
+  "not_verified": [
+    "PhysicalAndroid/iOS",
+    "MobileFPS/thermal/touchlatency",
+    "Humanreadability-camera comfort/fun",
+    "WindowsF5/export",
+    "All talent-seed cohorts",
+    "Finaldifficulty-growth-economy/art/audio"
+  ],
+  "cleanup": {
+    "removed": [
+      "assets/references/GEN-005_viya_combat_pose_three_quarter_front.png.import",
+      "assets/references/qa/viya_4view_alignment_preview.jpg.import",
+      "assets/references/qa/viya_side_silhouette_comparison.jpg.import",
+      "docs/validation/GAME022_CHOICE_TIMING.choice.translation",
+      "docs/validation/GAME022_CHOICE_TIMING.collected.translation",
+      "docs/validation/GAME022_CHOICE_TIMING.csv.import",
+      "docs/validation/GAME022_CHOICE_TIMING.kills.translation",
+      "docs/validation/GAME022_CHOICE_TIMING.map.translation",
+      "docs/validation/GAME022_CHOICE_TIMING.rank.translation",
+      "docs/validation/GAME022_CHOICE_TIMING.seed.translation",
+      "docs/validation/GAME022_CHOICE_TIMING.skill.translation",
+      "docs/validation/GAME022_CHOICE_TIMING.talents.translation",
+      "docs/validation/GAME022_CHOICE_TIMING.time.translation",
+      "docs/validation/GAME022_ECONOMY.active.translation",
+      "docs/validation/GAME022_ECONOMY.campaign.translation",
+      "docs/validation/GAME022_ECONOMY.cost.translation",
+      "docs/validation/GAME022_ECONOMY.csv.import",
+      "docs/validation/GAME022_ECONOMY.daily.translation",
+      "docs/validation/GAME022_ECONOMY.days.translation",
+      "docs/validation/GAME022_ECONOMY.dungeon.translation",
+      "docs/validation/GAME022_ECONOMY.expected.translation",
+      "docs/validation/GAME022_ECONOMY.minutes.translation",
+      "docs/validation/GAME022_ECONOMY.target.translation",
+      "docs/validation/GAME023_ECONOMY.active.translation",
+      "docs/validation/GAME023_ECONOMY.campaign.translation",
+      "docs/validation/GAME023_ECONOMY.cost.translation",
+      "docs/validation/GAME023_ECONOMY.csv.import",
+      "docs/validation/GAME023_ECONOMY.daily.translation",
+      "docs/validation/GAME023_ECONOMY.days.translation",
+      "docs/validation/GAME023_ECONOMY.dungeon.translation",
+      "docs/validation/GAME023_ECONOMY.expected.translation",
+      "docs/validation/GAME023_ECONOMY.minutes.translation",
+      "docs/validation/GAME023_ECONOMY.target.translation",
+      "docs/validation/GAME041_AFTER.png.import",
+      "docs/validation/GAME041_BEFORE.png.import",
+      "docs/validation/GAME043_AFTER.png.import",
+      "docs/validation/GAME044_AFTER.png.import",
+      "docs/validation/GAME044_BEFORE.png.import",
+      "docs/validation/GAME045_AFTER.png.import",
+      "docs/validation/GAME045_BEFORE.png.import",
+      "docs/validation/GAME045_RUIN.png.import",
+      "docs/validation/GAME046_CHEST.png.import",
+      "docs/validation/GAME046_REWARD.png.import",
+      "docs/validation/GAME047_BEFORE.png.import",
+      "docs/validation/GAME047_CRATE.png.import",
+      "docs/validation/GAME047_DEBRIS.png.import",
+      "docs/validation/GAME047_URN.png.import",
+      "scripts/combat/actor_motion.gd.uid",
+      "scripts/combat/approach_cues.gd.uid",
+      "scripts/combat/attack_visuals.gd.uid",
+      "scripts/combat/battle_forms.gd.uid",
+      "scripts/combat/battle_projection.gd.uid",
+      "scripts/combat/battle_view.gd.uid",
+      "scripts/combat/boss_guidance.gd.uid",
+      "scripts/combat/campaign_encounters.gd.uid",
+      "scripts/combat/campaign_encounters_v19.gd.uid",
+      "scripts/combat/campaign_pressure.gd.uid",
+      "scripts/combat/combat_audio.gd.uid",
+      "scripts/combat/combat_audio_bank.gd.uid",
+      "scripts/combat/combat_camera.gd.uid",
+      "scripts/combat/combat_cues.gd.uid",
+      "scripts/combat/combat_display.gd.uid",
+      "scripts/combat/combat_profiles.gd.uid",
+      "scripts/combat/curse_visuals.gd.uid",
+      "scripts/combat/defense_rules.gd.uid",
+      "scripts/combat/enemy_pattern_visuals.gd.uid",
+      "scripts/combat/enemy_patterns.gd.uid",
+      "scripts/combat/enemy_patterns_v1.gd.uid",
+      "scripts/combat/enemy_patterns_v17.gd.uid",
+      "scripts/combat/enemy_patterns_v2.gd.uid",
+      "scripts/combat/enemy_patterns_v3.gd.uid",
+      "scripts/combat/feedback_state.gd.uid",
+      "scripts/combat/gold_dungeon.gd.uid",
+      "scripts/combat/high_angle_battle.gd.uid",
+      "scripts/combat/incoming_feedback.gd.uid",
+      "scripts/combat/magic_state.gd.uid",
+      "scripts/combat/run_state.gd.uid",
+      "scripts/combat/stage_catalog.gd.uid",
+      "scripts/combat/structure_feedback.gd.uid",
+      "scripts/combat/supply_feedback.gd.uid",
+      "scripts/combat/weapon_modules.gd.uid",
+      "scripts/main.gd.uid",
+      "scripts/progression/account_talents.gd.uid",
+      "scripts/progression/combat_pacing.gd.uid",
+      "scripts/progression/gold_progress.gd.uid",
+      "scripts/progression/growth_state.gd.uid",
+      "scripts/progression/run_snapshot.gd.uid",
+      "scripts/progression/run_store.gd.uid",
+      "scripts/progression/skill_catalog.gd.uid",
+      "scripts/progression/weapon_catalog.gd.uid",
+      "scripts/ui/account_bonus_summary.gd.uid",
+      "scripts/ui/actor_assets.gd.uid",
+      "scripts/ui/asset_slots.gd.uid",
+      "scripts/ui/battle_chrome.gd.uid",
+      "scripts/ui/battle_save_notice.gd.uid",
+      "scripts/ui/city_preview.gd.uid",
+      "scripts/ui/combat_skin.gd.uid",
+      "scripts/ui/combat_slot_button.gd.uid",
+      "scripts/ui/encounter_notice.gd.uid",
+      "scripts/ui/feedback_panel.gd.uid",
+      "scripts/ui/growth_overview.gd.uid",
+      "scripts/ui/hud_layout.gd.uid",
+      "scripts/ui/mobile_main.gd.uid",
+      "scripts/ui/move_input.gd.uid",
+      "scripts/ui/responsive_feedback_panel.gd.uid",
+      "scripts/ui/reward_payment.gd.uid",
+      "scripts/ui/skill_preview.gd.uid",
+      "scripts/world/map_catalog.gd.uid",
+      "scripts/world/map_space.gd.uid",
+      "scripts/world/supply_catalog.gd.uid",
+      "tests/measure_armor.gd.uid",
+      "tests/measure_balance.gd.uid",
+      "tests/measure_boss_guidance.gd.uid",
+      "tests/measure_campaign.gd.uid",
+      "tests/measure_combat_audio.gd.uid",
+      "tests/measure_enemy_curse.gd.uid",
+      "tests/measure_enemy_patterns.gd.uid",
+      "tests/measure_pattern_reacquire.gd.uid",
+      "tests/profile_combat.gd.uid",
+      "tests/test_account_bonus_summary.gd.uid",
+      "tests/test_account_expansion.gd.uid",
+      "tests/test_account_talents.gd.uid",
+      "tests/test_actor_animation.gd.uid",
+      "tests/test_attack_visuals.gd.uid",
+      "tests/test_battle_save_notice.gd.uid",
+      "tests/test_boss_guidance.gd.uid",
+      "tests/test_camera_lead.gd.uid",
+      "tests/test_campaign.gd.uid",
+      "tests/test_campaign_encounters.gd.uid",
+      "tests/test_campaign_pressure.gd.uid",
+      "tests/test_chapter_ui.gd.uid",
+      "tests/test_combat_audio.gd.uid",
+      "tests/test_combat_cues.gd.uid",
+      "tests/test_combat_display.gd.uid",
+      "tests/test_combat_foundation.gd.uid",
+      "tests/test_combat_pacing.gd.uid",
+      "tests/test_combat_profiles.gd.uid",
+      "tests/test_encounter_notice.gd.uid",
+      "tests/test_enemy_curse.gd.uid",
+      "tests/test_enemy_patterns.gd.uid",
+      "tests/test_enemy_variety.gd.uid",
+      "tests/test_feedback.gd.uid",
+      "tests/test_gold_dungeon.gd.uid",
+      "tests/test_gold_rewards.gd.uid",
+      "tests/test_gold_settings.gd.uid",
+      "tests/test_growth.gd.uid",
+      "tests/test_growth_overview.gd.uid",
+      "tests/test_guide_skin.gd.uid",
+      "tests/test_high_angle.gd.uid",
+      "tests/test_incoming_feedback.gd.uid",
+      "tests/test_magic.gd.uid",
+      "tests/test_map_pilot.gd.uid",
+      "tests/test_maps.gd.uid",
+      "tests/test_mobile_hud.gd.uid",
+      "tests/test_pattern_reacquire.gd.uid",
+      "tests/test_reward_payment.gd.uid",
+      "tests/test_run_navigation.gd.uid",
+      "tests/test_scatter_packs.gd.uid",
+      "tests/test_skill_preview.gd.uid",
+      "tests/test_structure_feedback.gd.uid",
+      "tests/test_supplies.gd.uid",
+      "tests/test_supply_feedback.gd.uid",
+      "tests/test_talent_tree.gd.uid",
+      "tests/test_weapon_skills.gd.uid"
+    ],
+    "scope": "Only generated untracked auxiliaries absent at clean start;all12runtime imports retained."
+  },
+  "artifact_index": [
+    {
+      "path": ".local_validation/GAME048/report.json",
+      "bytes": 33584,
+      "sha256": "56c8bc05f99ebd26e8570466db230880226e75f6012365dda4b63685736e4f23"
+    },
+    {
+      "path": ".local_validation/GAME048/source-proof.json",
+      "bytes": 21421,
+      "sha256": "4dc64310f0f3408b9ac52c2813afdff0511a704ed21e2d2832b90fb5c2a35209"
+    },
+    {
+      "path": ".local_validation/GAME048/generated-cleanup.json",
+      "bytes": 7635,
+      "sha256": "1fb280770729e662ab3f3feff0c2d1d954db8df93167af558a586540b292bdda"
+    },
+    {
+      "path": ".local_validation/GAME048/baseline_probe.gd",
+      "bytes": 2170,
+      "sha256": "029b60ebbbe44e3efc20b70e0a8a588f555c1fc77e4ecd875d5ed10dae354556"
+    },
+    {
+      "path": ".local_validation/GAME048/baseline.log",
+      "bytes": 196,
+      "sha256": "ae04440d40b7a88c849b6d284342a08bb4d2d55192b2cb092a0be1b2cec0d0db"
+    },
+    {
+      "path": ".local_validation/GAME048/pressure_runner.gd",
+      "bytes": 529,
+      "sha256": "d758c0f2857c81c3766062f3a17b88bdea54f1db44f892c7f1c8248d765fde0a"
+    },
+    {
+      "path": ".local_validation/GAME048/pressure-runner.log",
+      "bytes": 116,
+      "sha256": "75bd96f36f044d1c853318e01510247c49cacf9ea795458baa1c21e4bf92d40b"
+    },
+    {
+      "path": ".local_validation/GAME048/render_probe.gd",
+      "bytes": 11315,
+      "sha256": "df44223c5829fbd5cc5d56a30d82c0052a96d3135e5cd74513a97d7662843333"
+    },
+    {
+      "path": ".local_validation/GAME048/render-results.json",
+      "bytes": 16905,
+      "sha256": "f2025ccd05ddbf1ba793bcaa5a19f9c01c1abccf9c85773dc349a5c3fac3fb84"
+    },
+    {
+      "path": ".local_validation/GAME048/render.log",
+      "bytes": 479,
+      "sha256": "3b760c0e81ef414f732814c34c03716cb8afbf9e8d89e4289bf381a70bb62123"
+    },
+    {
+      "path": ".local_validation/GAME048/render-live/pressure_waiting.save",
+      "bytes": 37092,
+      "sha256": "5ff22c3fc111e55efff1649dcecb23f98582cc12ef184fc494225c763f6159a5"
+    },
+    {
+      "path": ".local_validation/GAME048/cold_probe.gd",
+      "bytes": 4097,
+      "sha256": "3969e5e6942ed27414ec30e08fa16a2b4392fafcd23153511ec7c61b3688cba7"
+    },
+    {
+      "path": ".local_validation/GAME048/cold-results.json",
+      "bytes": 675,
+      "sha256": "8c969f4ced2453f38794476018cd0de7b03c0b6c2443886b8ab10df6912c7dad"
+    },
+    {
+      "path": ".local_validation/GAME048/cold_current20.log",
+      "bytes": 318,
+      "sha256": "189d04629a7192e113665c0414ca040d7d386517d4ff94f2c8ab0bd163bf74d3"
+    },
+    {
+      "path": ".local_validation/GAME048/cold_legacy19.log",
+      "bytes": 308,
+      "sha256": "79973a037dc76759c7cddb3252230dfa056b00a7ff089e968b8fda8cd0aae9f6"
+    },
+    {
+      "path": ".local_validation/GAME048/cold_current20.json",
+      "bytes": 244,
+      "sha256": "a3d4c6d836eb60be2a6b1dad021f1119baa243e2992f4c2b33c7f167bfb5659b"
+    },
+    {
+      "path": ".local_validation/GAME048/cold_legacy19.json",
+      "bytes": 234,
+      "sha256": "251041c24ca9373a4eafd28091e878bf50caccb77bdb55ff203604daf04a24c7"
+    },
+    {
+      "path": ".local_validation/GAME048/stress_probe.gd",
+      "bytes": 1756,
+      "sha256": "133fc318196cdbf59df34a936ea020fa41fb24e5fcb67bb40b613932b8adcb65"
+    },
+    {
+      "path": ".local_validation/GAME048/stress-results.json",
+      "bytes": 278,
+      "sha256": "5635407ff7b5aed824ddaad8591ab9faebcb3744195bbddf176087d5d2664ad0"
+    },
+    {
+      "path": ".local_validation/GAME048/stress.log",
+      "bytes": 352,
+      "sha256": "4c9bbff41e7227ba4f34fe021f0a3a11fdf4e0d15fcc53ea75b80e29d314e86c"
+    },
+    {
+      "path": ".local_validation/GAME048/stress.save",
+      "bytes": 509412,
+      "sha256": "400a844ce798f0a693a33800c731da1a97bb0cb525f12c2291687adda2d83550"
+    },
+    {
+      "path": ".local_validation/GAME048/measure_probe.gd",
+      "bytes": 1167,
+      "sha256": "b7f31613c64fe6214dc48e03ac6b9897a477dd0db78f22175f5334d295722c36"
+    },
+    {
+      "path": ".local_validation/GAME048/balance-results.json",
+      "bytes": 55771,
+      "sha256": "af23e5a169f58029ef4886924cff85d7f1353e190f82201a2ea6985452cea000"
+    },
+    {
+      "path": ".local_validation/GAME048/balance.log",
+      "bytes": 770,
+      "sha256": "83a7be4b67cc69099525156575a13f34306686fdf5f0951c385d47eb4f1043a9"
+    },
+    {
+      "path": ".local_validation/GAME048/python.log",
+      "bytes": 111,
+      "sha256": "d32e122ffe790748a6fb1382a6a573b63904f2cadcea19c168e4a7e3c3139334"
+    },
+    {
+      "path": ".local_validation/GAME048/research-pinned.json",
+      "bytes": 2195,
+      "sha256": "d2d122732f2882a6c8acf04e6805411dd09075c1bea780b20339a51908c8c0e8"
+    },
+    {
+      "path": ".local_validation/GAME048/engine_0.log",
+      "bytes": 32,
+      "sha256": "edff16c1721dd4ae989cadf29a01f574ae8d51b118221f664725bd6980bbba5d"
+    },
+    {
+      "path": ".local_validation/GAME048/engine_1.log",
+      "bytes": 1294,
+      "sha256": "1f6afb48483d4997cd847c536fbb5ab3c08008392a93a71193c35c4da347bca3"
+    },
+    {
+      "path": ".local_validation/GAME048/engine_2.log",
+      "bytes": 117,
+      "sha256": "1938b93b03756e658dd6fc29e699189d67afb2aec05905c840e9c22f5b89a6cd"
+    },
+    {
+      "path": ".local_validation/GAME048/engine_3.log",
+      "bytes": 117,
+      "sha256": "190487dfb2bdf99cdccfff084fd5d95b81eac04fcfe3ec43e502d524daacb8eb"
+    },
+    {
+      "path": ".local_validation/GAME048/engine_4.log",
+      "bytes": 118,
+      "sha256": "0dc80f41a9d961a6b4d962614c905af0b7c3bc209f569871d09048860b58f7ff"
+    },
+    {
+      "path": ".local_validation/GAME048/engine_5.log",
+      "bytes": 117,
+      "sha256": "c5a9e5b87c0439795f9d5bcfe6c17d74bce134acc53d7f341cfb55a11bdb1e1d"
+    },
+    {
+      "path": ".local_validation/GAME048/engine_6.log",
+      "bytes": 119,
+      "sha256": "570a42343d370c104902d16c9ff0b402573f94ed3076772afb70e6bce96084fc"
+    },
+    {
+      "path": ".local_validation/GAME048/engine_7.log",
+      "bytes": 117,
+      "sha256": "025f863c84ce84466e9269a07033239400176c7aad50ada31ff794c6e59b0837"
+    },
+    {
+      "path": ".local_validation/GAME048/engine_8.log",
+      "bytes": 119,
+      "sha256": "d6a2d4debb5471683cce201c73acef7b4ea9cb476152f10978f1cf21f065a4f3"
+    },
+    {
+      "path": ".local_validation/GAME048/engine_9.log",
+      "bytes": 73,
+      "sha256": "6d1c065383a27c36804949b6ffa4b09714470b112e5dacc0bd5aeb7b9c147c4e"
+    },
+    {
+      "path": ".local_validation/GAME048/natural_policy1_10.png",
+      "bytes": 332481,
+      "sha256": "9bb5bfcf38bd52d90182447cbea1617595faf66960ead3acb8b79a66c26d448d"
+    },
+    {
+      "path": ".local_validation/GAME048/natural_policy1_30.png",
+      "bytes": 330846,
+      "sha256": "a348824ca63e05146d348f3289f1ed61829c0cb757383f9218001c86f84f89c1"
+    },
+    {
+      "path": ".local_validation/GAME048/natural_policy1_60.png",
+      "bytes": 349147,
+      "sha256": "edd07af87ddd649a89d9fafb16116197f389bea312cf42d337afdd0f34405327"
+    },
+    {
+      "path": ".local_validation/GAME048/natural_policy2_10.png",
+      "bytes": 360100,
+      "sha256": "f341644ade135fb2fdba00b5bef527a4c5dc0dc45611a04eabb1d8afdc6962f7"
+    },
+    {
+      "path": ".local_validation/GAME048/natural_policy2_30.png",
+      "bytes": 389439,
+      "sha256": "eb03319851d01838b059d3dca88295ea3529e9a1a9a5cb5fad22076ae37e1911"
+    },
+    {
+      "path": ".local_validation/GAME048/natural_policy2_30_f8.png",
+      "bytes": 96347,
+      "sha256": "cc4555c47051c449b8a8be0d6a4ffa83f87bf2a9f577a2d97769869e4f29cd6c"
+    },
+    {
+      "path": ".local_validation/GAME048/natural_policy2_30_compact.png",
+      "bytes": 179131,
+      "sha256": "27c1711dc1d7da533b2a41eb1f2ba618c134fa3b00f389aedccd192a6c42f0ed"
+    },
+    {
+      "path": ".local_validation/GAME048/pressure_saved_pause.png",
+      "bytes": 145296,
+      "sha256": "10dc62d99d946a6ca3c2e4d6e41cda887f108540943d88c00c7036eaa52f1863"
+    },
+    {
+      "path": ".local_validation/GAME048/natural_policy2_60.png",
+      "bytes": 328141,
+      "sha256": "1961a8b9b46283a7e3a248dffbdef6b75513bb099deeb16385be7d179f1c10a6"
+    },
+    {
+      "path": ".local_validation/GAME048/research_snkrx.lua",
+      "bytes": 62961,
+      "sha256": "6250465be51e08927e0408b6b8d748b9828ede4b98b3b0c8f17571e07b02ccb4"
+    },
+    {
+      "path": ".local_validation/GAME048/research_starterkit.cs",
+      "bytes": 4592,
+      "sha256": "88941d31a7b01742a35a0751f5daed58d4b507c8360d9a66cd222d71dc53b01c"
+    },
+    {
+      "path": ".local_validation/GAME048/research_brotatolike.gd",
+      "bytes": 12953,
+      "sha256": "e112e1c9fa7944b7af5782a301369593bb6a51776183c4dd38c847f7e2953ff3"
+    },
+    {
+      "path": ".local_validation/GAME048/research_brotatolike_wave.gd",
+      "bytes": 1155,
+      "sha256": "f165c91fbf06cdd5878fc2d602a1e7b6909a70411af1ac33722b570bc31b9161"
+    },
+    {
+      "path": "tests/fixtures/game048_v19/baseline.json",
+      "bytes": 47286,
+      "sha256": "adbea21957b68c33ad324445c9af7f252dbd9fd3d60e53e639e66e3ec5e35952"
+    },
+    {
+      "path": "tests/fixtures/game048_v19/old_boss.bin",
+      "bytes": 9284,
+      "sha256": "37e67aee698bd5bfa3b218a52b2b822118381ee5b84f9f2bef3dbfb8c1d13181"
+    },
+    {
+      "path": "tests/fixtures/game048_v19/old_elite.bin",
+      "bytes": 9284,
+      "sha256": "f18c9d62d39390fdef5e475071c676469135d974836cbaf8f25fd775bb39995c"
+    },
+    {
+      "path": "tests/fixtures/game048_v19/old_minute.bin",
+      "bytes": 9284,
+      "sha256": "8a90945526c02494036812e648e93fa1258d05e57bbacf527ace05b9fd4ffd53"
+    },
+    {
+      "path": "tests/fixtures/game048_v19/old_opened.bin",
+      "bytes": 9640,
+      "sha256": "2f6697f66facd355e68ec906ba1f8d60e6d34fe91d6ecf38af16992dcef389d1"
+    },
+    {
+      "path": "tests/fixtures/game048_v19/old_unopened.bin",
+      "bytes": 9820,
+      "sha256": "048ab434d35e4cc553e66fcaf435eb0fa74a86d40f0429d18ea493374b27ce8f"
+    },
+    {
+      "path": "tests/fixtures/game048_v19/old_waiting.bin",
+      "bytes": 9316,
+      "sha256": "84baa9c2c0fef26bde4f3ceff366890d8b4155a506bd260d62f79e6c45f8a3f0"
+    },
+    {
+      "path": "docs/validation/GAME048_BEFORE.png",
+      "bytes": 330846,
+      "sha256": "a348824ca63e05146d348f3289f1ed61829c0cb757383f9218001c86f84f89c1"
+    },
+    {
+      "path": "docs/validation/GAME048_AFTER.png",
+      "bytes": 389439,
+      "sha256": "eb03319851d01838b059d3dca88295ea3529e9a1a9a5cb5fad22076ae37e1911"
+    },
+    {
+      "path": "docs/validation/GAME048_COMPACT.png",
+      "bytes": 179131,
+      "sha256": "27c1711dc1d7da533b2a41eb1f2ba618c134fa3b00f389aedccd192a6c42f0ed"
+    }
+  ],
+  "artifact_scope": "Portable report embeds finalresults/sourceproof/minuteaggregates/sourcecitations andhashindex. Full1Hztrajectories and original logs/scripts/screens/saves stayignored in.local_validation/GAME048;frozen19fixtures tracked. Initialvariants/prepdiagnostics excluded from PASS evidence.",
+  "next": "GAME-049: evidence-based growth/liveengagement plus shamanrecovery-rechasebalance. Preserve published1-20/encounter0-2/AI0-3 BEFORE behavior changes. Samecontroller-view/twomaps/none-full/5seeds/native dodge;do not silently changeuserdoubling/confirmedstats or hide regressions withgifts."
+}

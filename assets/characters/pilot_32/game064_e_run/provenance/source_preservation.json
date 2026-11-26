@@ -1,0 +1,79 @@
+{
+  "current_game_sources": [
+    {
+      "file": "viya_run_e_00.png",
+      "expected_sha256": "09b7f0f62a2daa178f4f3f182fc6c0884b7c1e719e0623a28d53ae89d203a16f",
+      "observed_sha256": "09b7f0f62a2daa178f4f3f182fc6c0884b7c1e719e0623a28d53ae89d203a16f",
+      "unchanged": true
+    },
+    {
+      "file": "viya_run_e_01.png",
+      "expected_sha256": "9a48bcdc0d8aaf05801ca6e9cfca56ad2d8cb8958599652e0e3fb6c81c32fc5d",
+      "observed_sha256": "9a48bcdc0d8aaf05801ca6e9cfca56ad2d8cb8958599652e0e3fb6c81c32fc5d",
+      "unchanged": true
+    },
+    {
+      "file": "viya_run_e_02.png",
+      "expected_sha256": "b8e8cc2c01248f8a16a097b553e4b278e8ccde66233c6b3a72b4f3f06106bd48",
+      "observed_sha256": "b8e8cc2c01248f8a16a097b553e4b278e8ccde66233c6b3a72b4f3f06106bd48",
+      "unchanged": true
+    },
+    {
+      "file": "viya_run_e_03.png",
+      "expected_sha256": "ecf571520141e50832eabc87529f89d631b9bcdb414da307b0bd0aba438e469e",
+      "observed_sha256": "ecf571520141e50832eabc87529f89d631b9bcdb414da307b0bd0aba438e469e",
+      "unchanged": true
+    },
+    {
+      "file": "viya_run_e_04.png",
+      "expected_sha256": "d64faa20f6cbcb312f633d1831c84405bc7e69ef17852a5b2a2974e2d8c536c6",
+      "observed_sha256": "d64faa20f6cbcb312f633d1831c84405bc7e69ef17852a5b2a2974e2d8c536c6",
+      "unchanged": true
+    },
+    {
+      "file": "viya_run_e_05.png",
+      "expected_sha256": "e48687cfe29d0e80b2e90ff75d94fec4690ba6b786093a3c6d231dbda28c9b5d",
+      "observed_sha256": "e48687cfe29d0e80b2e90ff75d94fec4690ba6b786093a3c6d231dbda28c9b5d",
+      "unchanged": true
+    },
+    {
+      "file": "viya_run_e_06.png",
+      "expected_sha256": "bd1c420925e8281dd9d05c617b0c2adcf1ac77b34edf1af0b9ef17b135813051",
+      "observed_sha256": "bd1c420925e8281dd9d05c617b0c2adcf1ac77b34edf1af0b9ef17b135813051",
+      "unchanged": true
+    },
+    {
+      "file": "viya_run_e_07.png",
+      "expected_sha256": "b992937f93981f6d76ce66d52662fdbdc0cb7cd9548b55427ddf0e709bd6ead4",
+      "observed_sha256": "b992937f93981f6d76ce66d52662fdbdc0cb7cd9548b55427ddf0e709bd6ead4",
+      "unchanged": true
+    },
+    {
+      "file": "viya_run_e_08.png",
+      "expected_sha256": "08c2d1ec202e2402c1eb0560ff420d39ac90f261b04ef4fa83dcd0a862c124e4",
+      "observed_sha256": "08c2d1ec202e2402c1eb0560ff420d39ac90f261b04ef4fa83dcd0a862c124e4",
+      "unchanged": true
+    },
+    {
+      "file": "viya_run_e_09.png",
+      "expected_sha256": "8a9d1d2cde0e0ab0852bfd2f2191c5765a16997b5fac85a2c9e0baefc1787183",
+      "observed_sha256": "8a9d1d2cde0e0ab0852bfd2f2191c5765a16997b5fac85a2c9e0baefc1787183",
+      "unchanged": true
+    },
+    {
+      "file": "viya_run_e_10.png",
+      "expected_sha256": "7a88914b0bb6e035a7b08f9ee46ae462e48ac5edeb79521a69ab9cf2b2a20703",
+      "observed_sha256": "7a88914b0bb6e035a7b08f9ee46ae462e48ac5edeb79521a69ab9cf2b2a20703",
+      "unchanged": true
+    },
+    {
+      "file": "viya_idle_e.png",
+      "expected_sha256": "99daf52484511e3f6aa329cb3a7546d7a74f854a70295865606808e5ab705a81",
+      "observed_sha256": "99daf52484511e3f6aa329cb3a7546d7a74f854a70295865606808e5ab705a81",
+      "unchanged": true
+    }
+  ],
+  "native400_sha256": "81d7ddfb989e5b78286ce03eccaf416b7cc914b82bc07de8cbf195eca1ab0cfd",
+  "source_repo_writes_performed": false,
+  "old_white_fringe_task_repeated": false
+}

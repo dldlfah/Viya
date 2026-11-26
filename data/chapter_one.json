@@ -1,0 +1,22 @@
+{
+  "chapter": "챕터 1 · 최후의 도시",
+  "stages": [
+    {
+      "number": 1,
+      "name": "스테이지 1 · 성벽 전장",
+      "map_id": "siege_battlefield",
+      "description": "불탄 병참·병영과 무너진 남측 방어선 사이에서 공세를 막습니다."
+    },
+    {
+      "number": 2,
+      "name": "[시험] 도시 외곽",
+      "map_id": "outskirts_trial",
+      "description": "다방향 공세가 발생하는 일반 지역 시험 전장입니다."
+    }
+  ],
+  "future_regions": [
+    "폐허 마을",
+    "숲길·보급로",
+    "옛 방어진지"
+  ]
+}

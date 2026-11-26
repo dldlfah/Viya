@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "notice": "VIYA four expression slots. Leave paths empty until approved portrait art is supplied. Texture2D or a SpriteFrames expression/idle first frame; no new art is approved by this file.",
+  "viya": {
+    "normal": "",
+    "hurt": "",
+    "heal": "",
+    "levelup": ""
+  }
+}

@@ -1,0 +1,164 @@
+{
+  "headless_gate_status": "FAIL",
+  "gate_error": "Command '['/usr/local/bin/godot', '--headless', '--path', '/workspace/scratch/11ca321eb8ed/viya_whitefix', '--script', 'res://tests/test_combat_cues.gd']' timed out after 120 seconds",
+  "engine_commands_completed": 8,
+  "native_groups_completed": 6,
+  "native_checks_completed": 2000,
+  "native_group_results": [
+    {
+      "log": "engine_2.log",
+      "checks": 23,
+      "failures": [],
+      "status": "PASS"
+    },
+    {
+      "log": "engine_3.log",
+      "checks": 70,
+      "failures": [],
+      "status": "PASS"
+    },
+    {
+      "log": "engine_4.log",
+      "checks": 122,
+      "failures": [],
+      "status": "PASS"
+    },
+    {
+      "log": "engine_5.log",
+      "checks": 57,
+      "failures": [],
+      "status": "PASS"
+    },
+    {
+      "log": "engine_6.log",
+      "checks": 1336,
+      "failures": [],
+      "status": "PASS"
+    },
+    {
+      "log": "engine_7.log",
+      "checks": 392,
+      "failures": [],
+      "status": "PASS"
+    }
+  ],
+  "source_contracts": {
+    "static_integrity": "PASS",
+    "growth_data_contract": "PASS",
+    "magic_data_contract": "PASS",
+    "feedback_source_contract": "PASS",
+    "mobile_hud_source_contract": "PASS",
+    "run_navigation_source_contract": "PASS",
+    "combat_cues_source_contract": "PASS"
+  },
+  "python_unittest": {
+    "status": "PASS",
+    "tests": 20
+  },
+  "import_e11_exact_rgba": "PASS",
+  "actual_display_render": "BLOCKED",
+  "actual_display_reason": "AF_UNIX sockets prohibited; no active display",
+  "windows_f5": "NOT_VERIFIED",
+  "mobile_devices": "NOT_VERIFIED",
+  "current_combat_cues_test_sha256": "5aa634b86c55ba08d39883b39ecb77fc23d1e7990b30affd2743cd876f67c227",
+  "standalone_main_boot": {
+    "status": "PASS",
+    "exit_code": 0,
+    "command": [
+      "/usr/local/bin/godot",
+      "--headless",
+      "--path",
+      "/workspace/scratch/11ca321eb8ed/viya_whitefix",
+      "--quit-after",
+      "120"
+    ],
+    "timeout_seconds": 120,
+    "errors": [],
+    "scope": "Standalone headless main boot; does not change full-gate TIMEOUT result"
+  },
+  "baseline_combat_cues": {
+    "source_commit": "b6340f553d8c10ec9eebc26537230decbd8ef23e",
+    "timeout_seconds_per_command": 120,
+    "records": [
+      {
+        "command": [
+          "/usr/local/bin/godot",
+          "--headless",
+          "--path",
+          "/workspace/scratch/11ca321eb8ed/white_qa/baseline_repo",
+          "--editor",
+          "--import",
+          "--quit"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "elapsed_seconds": 11.049232399000175
+      },
+      {
+        "command": [
+          "/usr/local/bin/godot",
+          "--headless",
+          "--path",
+          "/workspace/scratch/11ca321eb8ed/white_qa/baseline_repo",
+          "--script",
+          "res://tests/test_combat_cues.gd"
+        ],
+        "status": "TIMEOUT",
+        "elapsed_seconds": 120.07321548100026,
+        "error": "Command '['/usr/local/bin/godot', '--headless', '--path', '/workspace/scratch/11ca321eb8ed/white_qa/baseline_repo', '--script', 'res://tests/test_combat_cues.gd']' timed out after 120 seconds"
+      }
+    ],
+    "test_sha256": "5aa634b86c55ba08d39883b39ecb77fc23d1e7990b30affd2743cd876f67c227",
+    "status": "TIMEOUT"
+  },
+  "baseline_comparison": {
+    "conclusion": "The unchanged baseline also times out at 120 seconds in this execution environment; full regression remains TIMEOUT/FAIL. This does not identify the exact slow subtest or certify equivalence of the uncompleted checks.",
+    "partial_output_has_explicit_test_failure": false,
+    "related_source_identity": [
+      {
+        "path": "tests/test_combat_cues.gd",
+        "sha256": "5aa634b86c55ba08d39883b39ecb77fc23d1e7990b30affd2743cd876f67c227",
+        "baseline_sha256": "5aa634b86c55ba08d39883b39ecb77fc23d1e7990b30affd2743cd876f67c227",
+        "identical": true
+      },
+      {
+        "path": "tests/test_actor_animation.gd",
+        "sha256": "f789abf7d0e01b90dc81d049adf2d19edc650d9866b3fe031d3e6517ae636a68",
+        "baseline_sha256": "f789abf7d0e01b90dc81d049adf2d19edc650d9866b3fe031d3e6517ae636a68",
+        "identical": true
+      },
+      {
+        "path": "tests/test_map_pilot.gd",
+        "sha256": "52d4017b7d492082c4a08fafca1f2c32b6e6efed58445782186537a17939976b",
+        "baseline_sha256": "52d4017b7d492082c4a08fafca1f2c32b6e6efed58445782186537a17939976b",
+        "identical": true
+      },
+      {
+        "path": "scripts/ui/actor_assets.gd",
+        "sha256": "c5a563587f7441a306d3a840442fddabf2a3e5d6b91bf6cc184b459ba86b7aaf",
+        "baseline_sha256": "c5a563587f7441a306d3a840442fddabf2a3e5d6b91bf6cc184b459ba86b7aaf",
+        "identical": true
+      },
+      {
+        "path": "scripts/combat/viya_presentation.gd",
+        "sha256": "f78acd52d837b329efbc08d63d653ad4a1b7898ed5fc0a798066ddd235585bad",
+        "baseline_sha256": "f78acd52d837b329efbc08d63d653ad4a1b7898ed5fc0a798066ddd235585bad",
+        "identical": true
+      },
+      {
+        "path": "scripts/combat/run_state.gd",
+        "sha256": "85aa2cf332bff819922356a65160e19cdec8f698ed64406f8e226ed4009beb77",
+        "baseline_sha256": "85aa2cf332bff819922356a65160e19cdec8f698ed64406f8e226ed4009beb77",
+        "identical": true
+      }
+    ],
+    "baseline_worktree_clean": false,
+    "baseline_tracked_source_unchanged": true,
+    "baseline_import_generated_untracked_count": 150,
+    "baseline_import_generated_extensions": [
+      ".import",
+      ".uid"
+    ],
+    "test_progress_location": "Unidentified: original test prints PASS only at the end and failure lines when checks fail; captured baseline timeout output contains only the Godot banner. Static execution order includes actor_animation and map_pilot, but no direct generated-edge helper/test call."
+  }
+}

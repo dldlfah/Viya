@@ -1,0 +1,33 @@
+{
+  "status": "PASS",
+  "tested_date_kst": "2026-11-24",
+  "scope": "Design files and preservation only; no new Godot or device run.",
+  "baseline": "84c9718d9c71ff410749975d76d6d1b773fa7570",
+  "unchanged_tracked_outside_docs_and_readme": 204,
+  "production_changed": false,
+  "map_source_sha256": "925638f794696b96fdf48df8c266654cef3af002f43e57f91daa80f8d70e8bd4",
+  "destructibles_source_sha256": "130421dd85d4dbf9ff9f70ab297b36586870e65fb9426cec0c2f58ce57a49b39",
+  "artifacts": {
+    "README.md": "6764c6dfdb98078e19cda2c98efe1535fd253ad6af9b2202927df0cc367bfe28",
+    "blockout.png": "5f729401f8ea1c71d5ae2820d514ad4e4dbcdce71e202b03ae7379465c61b219",
+    "blockout.svg": "2247eefa68f2050a9e1656810b69bd17a1d0b35a482849e45595b456384d1b36",
+    "browser-check.json": "a633749cd589b115f7dd01233a6bf80714d4dd1d62fc4f9ff8f471af6185667e",
+    "build_plan.py": "850cd2ccdb2e4b55956cf2fecf9299153f5bb72b4e0710d70672a9b9daf31c64",
+    "concept.png": "ad5e8cd4f923237e3e683af99b5cd18bcaab88e8925947f5a31d659a7628fd07",
+    "concept_provenance.json": "5005717d5656c207feec57ae6e7bd8e45b1c0f957d3061bf31ed0c343d76488d",
+    "layout.json": "582fe12eef10a85df4659df6bf83a86a88ba7b7d25e0638d16fb1af62802683b",
+    "layout.png": "a9dc133941dc49acf6c2c88800698dceae1e2c73596cd84c4a58d5ec0c8fc30e",
+    "layout.svg": "6890f134acd9951075122d9e0fac600d0fa966f85d52bd5c5f7c859e3547db5e",
+    "map.svg": "c53bf9c03e3bd866c5dfd068fe8f66c22e1c3a23d611b1e53d14e84e22137620",
+    "preview.html": "104dd69818a1efd141f030e4ab55cc6c34a328d1944186d7014d607c0fd6be92",
+    "validation.json": "b761429b448b6940190c06a173616fa40c086c79406b24ce0ab83030a330d64b",
+    "verify_preview.py": "9cfb50bc45109ab2e34ae9ddd0ff1b13fd42555c8930e056e45bde7dd247692d"
+  },
+  "additional_checks": [
+    "Python AST",
+    "SVG XML",
+    "JSON readback",
+    "PNG decode",
+    "relative Markdown links"
+  ]
+}

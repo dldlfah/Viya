@@ -1,0 +1,11 @@
+VIYA: STRICT FRAME-LOCKED EDGE REPAIR
+
+Edit references/masters/viya_run_e_00.png. This is the existing game character in the EXACT existing right-facing running pose. Use viya_idle_e_master.png only for identity/material/detail continuity, never to replace the running pose with standing.
+
+Repair the pale/white matte outline around the outer hair, arm, cape, legs, boots and firearm. Repaint contaminated boundary pixels with the correct adjoining character colours and reconstruct clean, natural anti-aliased transparency. Preserve genuine ivory clothing, skin highlights, brass/gold details, red runes and intentional highlights. Preserve small hair strands and cloth tips.
+
+Preserve the SAME mature adult anime face, dark brown wavy hair, body proportions, asymmetric costume, all accessories and the existing rune firearm. Keep facial expression, pose, anatomical left/right, weapon angle, hand positions, boot contacts, framing, canvas origin and pixel registration. Keep the existing hand-painted dark-fantasy style, palette and sharpness. No new sleeves/armour/accessories, mirroring, glow, white stroke, rim-light outline, blur, body redesign, text, panels or scenery.
+
+Output one RGBA PNG on genuinely transparent background. The target source canvas is400x496; retain its full framing and original ground/muzzle anchors. Final registration must match this canvas. Do not bake a checkerboard, solid background or background glow into the sprite. Keep the neighbouring run_e_01/run_e_10 frames as motion context and maintain the existing stride phase. Edit the silhouette boundary only; preserve interior character pixels outside the approved edit band through explicit compositing/verification.
+
+First deliver a single trial frame for edge/identity/registration checks. Expand correction across the11-frame sequence after confirming continuity, not by independently redesigning each frame. Current runtime canvas200x248 and display69x85.56 remain unchanged.

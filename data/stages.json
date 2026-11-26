@@ -1,0 +1,80 @@
+{
+  "default": {
+    "duration": 360.0,
+    "checkpoints": [
+      120.0,
+      240.0
+    ],
+    "elites": [
+      110.0,
+      230.0
+    ],
+    "elite_hp": [
+      1600,
+      1600
+    ],
+    "boss_at": 300.0,
+    "boss_hp": 3200,
+    "clear_gold": 100,
+    "waves": [
+      {
+        "from": 0.0,
+        "interval": 1.6,
+        "batch": 2,
+        "hp": 20,
+        "speed": 68.0
+      },
+      {
+        "from": 120.0,
+        "interval": 2.4,
+        "batch": 4,
+        "hp": 28,
+        "speed": 80.0
+      },
+      {
+        "from": 240.0,
+        "interval": 3.0,
+        "batch": 6,
+        "hp": 36,
+        "speed": 96.0
+      }
+    ],
+    "enemy_mix": {
+      "normal": 55.0,
+      "ranged": 15.0,
+      "fast": 15.0,
+      "heavy": 15.0
+    },
+    "fast_speed_scale": 1.7,
+    "heavy_speed_scale": 0.55,
+    "ranged": {
+      "speed_scale": 0.85,
+      "range": 460.0,
+      "keep_distance": 300.0,
+      "interval": 2.8,
+      "windup": 0.65,
+      "bullet_speed": 240.0,
+      "bullet_life": 3.0,
+      "damage": 8.0
+    },
+    "swarm": {
+      "interval": 20.0,
+      "chance": 0.2,
+      "speed": 360.0,
+      "life": 5.0,
+      "spacing": 22.0
+    },
+    "scatter": {
+      "interval": 12.0,
+      "spacing": 80.0,
+      "jitter": 12.0,
+      "approach": 590.0
+    },
+    "map_id": "outskirts_trial"
+  },
+  "overrides": {
+    "1": {
+      "map_id": "prologue_wall"
+    }
+  }
+}

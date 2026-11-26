@@ -1,0 +1,6 @@
+.godot/
+*.tmp
+*.bak
+builds/
+.local_validation/
+__pycache__/

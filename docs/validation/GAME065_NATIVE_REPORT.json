@@ -1,0 +1,39 @@
+{
+  "command": [
+    "godot",
+    "--headless",
+    "--path",
+    "/workspace/scratch/e2f5b3e224d3/viya_game064_integration",
+    "--script",
+    "res://tests/test_run_navigation.gd"
+  ],
+  "exit_code": 0,
+  "elapsed_seconds": 29.630903569996008,
+  "log": "/workspace/scratch/e2f5b3e224d3/viya_game065_work/runtime_support_qa/game065_connected_final_run_navigation.log",
+  "status": "PASS",
+  "engine_error_lines": [],
+  "test_result": {
+    "checks": 435,
+    "failures": [],
+    "status": "PASS"
+  },
+  "source_sha256_before": {
+    "scripts/combat/viya_presentation.gd": "ada816cc3b82a02e9a8798263bae37bca9124359f706e82ccfac801863310062",
+    "tests/test_viya_game065.gd": "0e9d4158c0dd8eebc8e374836ccd8eda68af7e8a09b298ad84f425ce3cc1c8fc",
+    "tests/test_viya_presentation.gd": "bc28e4fde33ea0d906db308231efbf025418a3c350ebc7a79c9e9fa1d4f17bb7",
+    "tests/test_character_pilot.gd": "a64954034e61051c0a498a7f04d3e7b2244c5876c1b604928c461bf350d3c206",
+    "data/viya_motion.json": "bc5b4b933dddb2439ab71ee1370405d47d7c1340e6df499531d4d2dd1ff75d04",
+    "data/presentation_slots.json": "d6e3628a61b87ac35566dafd568630a42545b763a86a15ccd7e8929cf575ef48",
+    "assets/characters/pilot_32/game065_e_run_fire/viya_game065_frames.tres": "95886e3b759e8fc8b7d6be0afbc741230f3ab0bd72c1931722a533415e7a5210"
+  },
+  "source_sha256_after": {
+    "scripts/combat/viya_presentation.gd": "ada816cc3b82a02e9a8798263bae37bca9124359f706e82ccfac801863310062",
+    "tests/test_viya_game065.gd": "0e9d4158c0dd8eebc8e374836ccd8eda68af7e8a09b298ad84f425ce3cc1c8fc",
+    "tests/test_viya_presentation.gd": "bc28e4fde33ea0d906db308231efbf025418a3c350ebc7a79c9e9fa1d4f17bb7",
+    "tests/test_character_pilot.gd": "a64954034e61051c0a498a7f04d3e7b2244c5876c1b604928c461bf350d3c206",
+    "data/viya_motion.json": "bc5b4b933dddb2439ab71ee1370405d47d7c1340e6df499531d4d2dd1ff75d04",
+    "data/presentation_slots.json": "d6e3628a61b87ac35566dafd568630a42545b763a86a15ccd7e8929cf575ef48",
+    "assets/characters/pilot_32/game065_e_run_fire/viya_game065_frames.tres": "95886e3b759e8fc8b7d6be0afbc741230f3ab0bd72c1931722a533415e7a5210"
+  },
+  "source_unchanged": true
+}

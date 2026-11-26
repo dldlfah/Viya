@@ -1,0 +1,44 @@
+{
+  "balance_at_recovery_start": 1028.25,
+  "balance_at_continuation_start": 997.25,
+  "balance_after_all_jobs": 966.25,
+  "observed_debit_this_continuation": 31,
+  "observed_debit_since_recovery": 62,
+  "new_generation_requests_since_recovery": 4,
+  "new_generation_requests_this_continuation": 3,
+  "selected_job_id": "fbf2fd2d-8596-4ca4-87e7-875712a2f7c9",
+  "selected_job_credit_cost": 0,
+  "selected_job_used_free_generation": true,
+  "new_purchase_or_auto_recharge": false,
+  "prior_session_job_actual_debits": "not independently available",
+  "jobs": [
+    {
+      "id": "1d0fa95f-ef9f-49d2-b987-6b819a7ae2bd",
+      "quote_credits": 31,
+      "observed_debit_credits": 31,
+      "selected": false
+    },
+    {
+      "id": "e95e57bc-552a-4c03-b39d-6f25faac156d",
+      "quote_credits": 31,
+      "observed_debit_credits": 31,
+      "selected": false
+    },
+    {
+      "id": "9d163ce1-eeda-4922-ac48-769f1c77cef8",
+      "quote_credits": 0,
+      "observed_debit_credits": 0,
+      "free_generation_used": 1,
+      "selected": false
+    },
+    {
+      "id": "fbf2fd2d-8596-4ca4-87e7-875712a2f7c9",
+      "quote_credits": 0,
+      "observed_debit_credits": 0,
+      "free_generation_used": 1,
+      "selected": true
+    }
+  ],
+  "genjutsu_free_generations_remaining": 0,
+  "genjutsu_free_generations_used_this_continuation": 2
+}

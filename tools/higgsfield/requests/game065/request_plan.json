@@ -1,0 +1,292 @@
+{
+  "task": "GAME065_E_MOVING_FIRE",
+  "status": "PREPARED_FOR_PLANNING_HIGGSFIELD_PRODUCTION",
+  "authorization": "User asked to review completed GAME064,fix concrete issues and move to next unit; external Higgsfield work is assigned to planning session.",
+  "base_game_commit": "fcbb37bfee4c8beb9343f618ff8f6e43a7373694",
+  "source_gait_job": "fbf2fd2d-8596-4ca4-87e7-875712a2f7c9",
+  "references": [
+    {
+      "path": "assets/characters/pilot_32/game064_e_run/frames/viya_run_e_000.png",
+      "role": "accepted_gait_phase",
+      "sha256": "d7925db10bcca60854fb3ee5392930d052be359c123288cbe35ea43f40a56c20"
+    },
+    {
+      "path": "assets/characters/pilot_32/game064_e_run/frames/viya_run_e_001.png",
+      "role": "accepted_gait_phase",
+      "sha256": "6b37b06ef9ebed3df2348d4ba8fc1d4b535171a06d8974ba760075ce926f6bf3"
+    },
+    {
+      "path": "assets/characters/pilot_32/game064_e_run/frames/viya_run_e_002.png",
+      "role": "accepted_gait_phase",
+      "sha256": "db40e71e2b9793f6e98b9d7653f4dc5be04c563fa635554f8b51d9d776a4c503"
+    },
+    {
+      "path": "assets/characters/pilot_32/game064_e_run/frames/viya_run_e_003.png",
+      "role": "accepted_gait_phase",
+      "sha256": "240dd342ac97b18389216592dc4af2c83056d73ba515ce0b87c89598bec31f86"
+    },
+    {
+      "path": "assets/characters/pilot_32/game064_e_run/frames/viya_run_e_004.png",
+      "role": "accepted_gait_phase",
+      "sha256": "eaf58840666d3b334f18b3066b20a9ee7d4ecc00b025d1c167d4ba1096771285"
+    },
+    {
+      "path": "assets/characters/pilot_32/game064_e_run/frames/viya_run_e_005.png",
+      "role": "accepted_gait_phase",
+      "sha256": "c12a4e33aeaa15ec0ec932ea51c78953ae3a8decae7801d08cef59ca52d00517"
+    },
+    {
+      "path": "assets/characters/pilot_32/game064_e_run/frames/viya_run_e_006.png",
+      "role": "accepted_gait_phase",
+      "sha256": "ec7a0506111508032527b1f64d2e11be42dcc070c82feed6c1bbcee7a6916349"
+    },
+    {
+      "path": "assets/characters/pilot_32/game064_e_run/frames/viya_run_e_007.png",
+      "role": "accepted_gait_phase",
+      "sha256": "61fa49b6040e6db018f4144c98995c70e58f775b75970cb2e8fbeb5e84287912"
+    },
+    {
+      "path": "assets/characters/pilot_32/game064_e_run/frames/viya_run_e_008.png",
+      "role": "accepted_gait_phase",
+      "sha256": "2cec3461e2626ad8fce9f1c2bab97db2926316600703141fd67c29b391d20b69"
+    },
+    {
+      "path": "assets/characters/pilot_32/game064_e_run/frames/viya_run_e_009.png",
+      "role": "accepted_gait_phase",
+      "sha256": "9b43923d0d4df348a5ec6672c34f77a798c67b545adfdf08d774884e837fb193"
+    },
+    {
+      "path": "assets/characters/pilot_32/game064_e_run/frames/viya_run_e_010.png",
+      "role": "accepted_gait_phase",
+      "sha256": "8515bd13a446f510b670b803a2e314586d4dad42eb82079b142d77942654dadb"
+    },
+    {
+      "path": "assets/characters/pilot_32/game064_e_run/frames/viya_run_e_011.png",
+      "role": "accepted_gait_phase",
+      "sha256": "34b8b508ca372609c18581cc304c5641479e3d4a96023719f2214dc3037ac11f"
+    },
+    {
+      "path": "assets/characters/pilot_32/game064_e_run/frames/viya_run_e_012.png",
+      "role": "accepted_gait_phase",
+      "sha256": "1f2069447c3d8d98ee2f74c3657c24839250e553c1a20354cb58d28820310fb5"
+    },
+    {
+      "path": "assets/characters/pilot_32/game064_e_run/frames/viya_run_e_013.png",
+      "role": "accepted_gait_phase",
+      "sha256": "d95b5e965cf12ea108dd1159f4245d453250622561558c2e56988cd91b6c8ac5"
+    },
+    {
+      "path": "assets/characters/pilot_32/game064_e_run/frames/viya_run_e_014.png",
+      "role": "accepted_gait_phase",
+      "sha256": "5e885eb00520c4fe898836e80623affccdea14ded3d6add20b3e18c95e969ad2"
+    },
+    {
+      "path": "assets/characters/pilot_32/game064_e_run/frames/viya_run_e_015.png",
+      "role": "accepted_gait_phase",
+      "sha256": "89070d18cb00a83229af96fe0fa8151124688acdc9928e21736ce43976669563"
+    },
+    {
+      "path": "assets/characters/pilot_32/game064_e_run/frames/viya_run_e_016.png",
+      "role": "accepted_gait_phase",
+      "sha256": "4cf636c355e1835002e7b86cdeb358b52b47ffb727024ec289364ae794525163"
+    },
+    {
+      "path": "assets/characters/pilot_32/game064_e_run/frames/viya_run_e_017.png",
+      "role": "accepted_gait_phase",
+      "sha256": "965d9e8c09ed525a09356085d14cd3fffdcf440e8db7a2497e7b0bce3c5b6e12"
+    },
+    {
+      "path": "assets/characters/pilot_32/game064_e_run/frames/viya_run_e_018.png",
+      "role": "accepted_gait_phase",
+      "sha256": "66467baf3e08e23bf7f4720aad41608dcff59fa377fba8ec3bbcb59c80a96c69"
+    },
+    {
+      "path": "assets/characters/pilot_32/game064_e_run/frames/viya_run_e_019.png",
+      "role": "accepted_gait_phase",
+      "sha256": "9a59e0350179f4954e3e360500464691c6699752419d2f5f36384cdf75703156"
+    },
+    {
+      "path": "assets/characters/pilot_32/game064_e_run/frames/viya_run_e_020.png",
+      "role": "accepted_gait_phase",
+      "sha256": "0b66b8037e66788daa57c1fa009e72641b84daeabe19a4f6db83ccd858a4e7ad"
+    },
+    {
+      "path": "assets/characters/pilot_32/game064_e_run/frames/viya_run_e_021.png",
+      "role": "accepted_gait_phase",
+      "sha256": "a202914c4e28908871b224c3fea281e9212933c42bccc40526162e5dc4b7fc1c"
+    },
+    {
+      "path": "assets/characters/pilot_32/game064_e_run/frames/viya_run_e_022.png",
+      "role": "accepted_gait_phase",
+      "sha256": "361a85c9adda4db76491313898cb4c89041e75c86cd31b61d90bffebd47dbe8c"
+    },
+    {
+      "path": "assets/characters/pilot_32/game064_e_run/frames/viya_run_e_023.png",
+      "role": "accepted_gait_phase",
+      "sha256": "77a13fa44c65c10fcedce0b50c443a46bb67865301acdf4d2f6cc875b3f91ac4"
+    },
+    {
+      "path": "assets/characters/pilot_32/game064_e_run/frames/viya_run_e_024.png",
+      "role": "accepted_gait_phase",
+      "sha256": "aede13296a0d7679f41c325d6c44feca89f52decd01f2fe75ae835c82673f9fc"
+    },
+    {
+      "path": "assets/characters/pilot_32/game064_e_run/frames/viya_run_e_025.png",
+      "role": "accepted_gait_phase",
+      "sha256": "58e7aae2febe16297ba31f2c507d3f9e36b37c3c926cda2551e036b4a5a4c6a4"
+    },
+    {
+      "path": "assets/characters/pilot_32/game064_e_run/frames/viya_run_e_026.png",
+      "role": "accepted_gait_phase",
+      "sha256": "6ba4d7682e9e39c83f73a6947ce0b06522774ccfec915f431bb299bd45d0a229"
+    },
+    {
+      "path": "assets/characters/pilot_32/game064_e_run/frames/viya_run_e_027.png",
+      "role": "accepted_gait_phase",
+      "sha256": "d0e4acb7698b0cf9685e060a77d47ef0a778f0af95aa46e411b6315a6f1e4e53"
+    },
+    {
+      "path": "assets/characters/pilot_32/game064_e_run/frames/viya_run_e_028.png",
+      "role": "accepted_gait_phase",
+      "sha256": "ba539a7b684e2bd186d9b42325888bf1790836f8c90e9ca0d92f8f895ffb0143"
+    },
+    {
+      "path": "assets/characters/pilot_32/game064_e_run/frames/viya_run_e_029.png",
+      "role": "accepted_gait_phase",
+      "sha256": "aa42f4270605ce94aa438b70fd9632c78f284bb5d43997f0ea71e87acc0af7ea"
+    },
+    {
+      "path": "assets/characters/pilot_32/game064_e_run/frames/viya_run_e_030.png",
+      "role": "accepted_gait_phase",
+      "sha256": "908fbf6175958927369f8f53c11fd210ec1664586873e980440a7432fbe62ad8"
+    },
+    {
+      "path": "assets/characters/pilot_32/game064_e_run/frames/viya_run_e_031.png",
+      "role": "accepted_gait_phase",
+      "sha256": "4981e9e178c4a505f5e564306a12c4a389e48741f6432d0a1f75ec8f689daf5a"
+    },
+    {
+      "path": "assets/characters/pilot_32/game064_e_run/frames/viya_run_e_032.png",
+      "role": "accepted_gait_phase",
+      "sha256": "d6b324cecf47be9b5e84f8c171342e20326207895ef13ee0c2567d32b2582146"
+    },
+    {
+      "path": "assets/characters/pilot_32/game064_e_run/frames/viya_run_e_033.png",
+      "role": "accepted_gait_phase",
+      "sha256": "48150f67bd61bd6d26e5cc283fde73cc60a9749397ffb1e4a711a670f9b89a5e"
+    },
+    {
+      "path": "assets/characters/pilot_32/game064_e_run/frames/viya_run_e_034.png",
+      "role": "accepted_gait_phase",
+      "sha256": "6a6557d4cbe15764f98428c134408cd9a8fd1a407bf816ccd6f09ffd36ff05e1"
+    },
+    {
+      "path": "assets/characters/pilot_32/game064_e_run/frames/viya_run_e_035.png",
+      "role": "accepted_gait_phase",
+      "sha256": "ba2eeb6c10ac1aa448eefc9be9949296ff423f3dd8a069b27bf9751475bc2878"
+    },
+    {
+      "path": "assets/characters/pilot_32/game064_e_run/frames/viya_run_e_036.png",
+      "role": "accepted_gait_phase",
+      "sha256": "dd94cfe7fbf695979f9cc04d381010fb5a38e995464a499c41b451cd3433a45a"
+    },
+    {
+      "path": "assets/characters/pilot_32/game064_e_run/frames/viya_run_e_037.png",
+      "role": "accepted_gait_phase",
+      "sha256": "bc026186c5d3d3b84199b7c7bbdf69f1047386a488ef92298a3192fd4b6a7b67"
+    },
+    {
+      "path": "assets/characters/pilot_32/game064_e_run/frames/viya_run_e_038.png",
+      "role": "accepted_gait_phase",
+      "sha256": "c0bae25f88ff1aeb8b320bb71bafb267583dd1ac399e07637b5aaa911c3bb718"
+    },
+    {
+      "path": "assets/characters/pilot_32/game064_e_run/frames/viya_run_e_039.png",
+      "role": "accepted_gait_phase",
+      "sha256": "5aac843d512ef0d705ae597d3feb443ac78e5b22a10c4ff7d2a7c2022a903855"
+    },
+    {
+      "path": "assets/characters/pilot_32/game064_e_run/frames/viya_run_e_040.png",
+      "role": "accepted_gait_phase",
+      "sha256": "59b111a6a0be9045f47411e93fced3806ace45b7d60e79e0b133d4e6370fc499"
+    },
+    {
+      "path": "assets/characters/pilot_32/game064_e_run/frames/viya_run_e_041.png",
+      "role": "accepted_gait_phase",
+      "sha256": "d2c325ee7544550c4225d0c357a3219b2d26f5966502fd21e10f5eb52130ebea"
+    },
+    {
+      "path": "assets/characters/pilot_32/game064_e_run/frames/viya_run_e_042.png",
+      "role": "accepted_gait_phase",
+      "sha256": "fb99901b9848f6349ab554509fe26342d35d4ca3bc40762d188167218d3f36b5"
+    },
+    {
+      "path": "assets/characters/pilot_32/game064_e_run/frames/viya_run_e_043.png",
+      "role": "accepted_gait_phase",
+      "sha256": "85a2ff3924549a46829c22dfc99206e6f761efe84f4b175786004314bd4f5616"
+    },
+    {
+      "path": "assets/characters/pilot_32/game064_e_run/frames/viya_run_e_044.png",
+      "role": "accepted_gait_phase",
+      "sha256": "f81e323bb32015e8e4411d890a5fdb49482ef0297806396157ddcab081eda9d9"
+    },
+    {
+      "path": "assets/characters/pilot_32/game064_e_run/frames/viya_run_e_045.png",
+      "role": "accepted_gait_phase",
+      "sha256": "33144da1be57e8ea815dee1a757d93380c314b1aa1873c38ca1a4a18312a0b87"
+    },
+    {
+      "path": "assets/characters/pilot_32/game064_e_run/frames/viya_run_e_046.png",
+      "role": "accepted_gait_phase",
+      "sha256": "b761ecffc83e349059db66b93f22de9a64b7797181605f90ed21f2f76565040c"
+    },
+    {
+      "path": "assets/characters/pilot_32/render_cache/viya_idle_e.png",
+      "role": "identity_and_weapon",
+      "sha256": "99daf52484511e3f6aa329cb3a7546d7a74f854a70295865606808e5ab705a81"
+    },
+    {
+      "path": "assets/characters/pilot_32/render_cache/viya_attack_e_00.png",
+      "role": "stationary_fire_posture_only",
+      "sha256": "550f264c0dfa9d50befce70d63ec98c5a657181515ef96c93e549247e600fbf1"
+    },
+    {
+      "path": "assets/characters/pilot_32/render_cache/viya_attack_e_03.png",
+      "role": "stationary_fire_posture_only",
+      "sha256": "8baa08ab10d33c683c65e037133a2802371e0a58b4a357ec3d7c80603127f581"
+    },
+    {
+      "path": "assets/characters/pilot_32/render_cache/viya_attack_e_07.png",
+      "role": "stationary_fire_posture_only",
+      "sha256": "8d9bd417e592e379265b4c18babe5b0d4525009bf42608f20e755107ad727b77"
+    }
+  ],
+  "desired_scope": "East full-body moving-fire only,phase-compatible with accepted E gait.",
+  "new_generation_requests": 0,
+  "credits_used": 0,
+  "model": null,
+  "quote": null,
+  "new_frames": 0,
+  "game_integration": false,
+  "technical_review_of_run": "See GAME064_REVIEW_REPORT; not final producer art approval.",
+  "next_integration_rules": "Use real delivered full-body firing frames at the existing gait phase only when the existing committed firing window is active;otherwise keep run_e. Derive each sequence from actual timings/muzzles. Do not create a run_fire animation by copying run_e or restart gait per shot. Actual bullets/flash/cadence/damage remain owned by existing engine.",
+  "clean_motion_reference": {
+    "delivered_path": "docs/validation/GAME065_E_RUN_REFERENCE.mp4",
+    "sha256": "5478f82fa404d6454ca52cf061d1b3b293e3eb852bc099c71504bfebbf05f1e5",
+    "role": "Existing accepted run motion only;not new firing art",
+    "frames": 198,
+    "fps": 60,
+    "duration_seconds": 3.3,
+    "nominal_cycles": 5,
+    "canvas": [
+      600,
+      744
+    ],
+    "source_canvas": [
+      200,
+      248
+    ],
+    "display_export_scale": 3,
+    "source_pngs_modified": false
+  }
+}

@@ -1,0 +1,2602 @@
+{
+  "schema": 1,
+  "status": "validated",
+  "service": "Higgsfield",
+  "model": "gpt_image_2_6",
+  "date_kst": "2026-11-26",
+  "source_commit": "b6340f553d8c10ec9eebc26537230decbd8ef23e",
+  "canvas": [
+    200,
+    248
+  ],
+  "display_size": [
+    69,
+    85.56
+  ],
+  "edit_band": {
+    "kind": "source_alpha_neighborhood",
+    "radius_px": 3,
+    "transparent_threshold": 16
+  },
+  "registration": {
+    "native_canvas": [
+      400,
+      496
+    ],
+    "crop": [
+      43,
+      13,
+      369,
+      480
+    ],
+    "placed_size": [
+      170,
+      244
+    ],
+    "offset": [
+      15,
+      4
+    ],
+    "canvas": [
+      200,
+      248
+    ],
+    "resample": "Pillow RGBa premultiplied Lanczos"
+  },
+  "alpha_rule": {
+    "original_alpha_gt": 16,
+    "min_rgb_gte": 200,
+    "rgb_range_lte": 35,
+    "component_connectivity": 8,
+    "component_min_pixels": 3,
+    "component_seed_min_rgb_gte": 220,
+    "component_seed_rgb_range_lte": 25,
+    "registered_generation_alpha_lt": 16,
+    "rois": {
+      "gun_gap": [
+        108,
+        111,
+        144,
+        145
+      ],
+      "inner_legs": [
+        70,
+        145,
+        130,
+        212
+      ],
+      "hair_upper": [
+        18,
+        28,
+        95,
+        88
+      ],
+      "hair_lower": [
+        18,
+        88,
+        82,
+        140
+      ]
+    },
+    "operation": "decrease to min(original alpha, registered generated alpha); no increases. Manually reviewed hair neutral-white components in the two narrow behind-hair ROIs are set to alpha0, including generated-hair overlap. Face/outfit excluded.",
+    "generated_alpha_overlap_required_regions": [
+      "gun_gap",
+      "inner_legs"
+    ],
+    "manual_reviewed_alpha_zero_regions": [
+      "hair_upper",
+      "hair_lower"
+    ],
+    "manual_hair_review_basis": "Native original and generated reference enlarged comparison; clear original background in brown-hair gaps; source RGB threshold and component seeds unchanged; face, arm, ivory and warm hair pixels excluded"
+  },
+  "rgb_rule": {
+    "band": "Chebyshev radius3 around original alpha<16 or approved alpha mask",
+    "base": "immutable GAME062 edge_repair/baseline",
+    "crown_y_lt": 28,
+    "crown_min_rgb_gte": 205,
+    "crown_rgb_range_lte": 25,
+    "crown_mixed_halo": "One-pixel Chebyshev neighbours of strict-white pixels, still minRGB>=135/range<=75 and local material/luma safety gates",
+    "face_ivory_exclusion": {
+      "x_gte": 100,
+      "y_gte": 28,
+      "y_lt": 105
+    },
+    "usual_target_min_rgb_gte": 135,
+    "usual_target_rgb_range_lte": 75,
+    "donor_max_radius": 8,
+    "original_donor_alpha_5x5_min": 240,
+    "original_donor_alpha_min": 250,
+    "generated_donor_alpha_min": 230,
+    "original_and_generated_material_luma_max": 155,
+    "minimum_luma_drop": 35,
+    "maximum_material_rgb_rms_delta": 45
+  },
+  "generator": "res://tools/higgsfield/build_edge_repair.py",
+  "generator_sha256": "03df0ecddf1f54cbb24034862d0a5e01ad7a2cf9ff29e5190730829e48b99ba8",
+  "generation_log": "res://assets/characters/pilot_32/edge_repair/generation_log.json",
+  "generation_log_sha256": "48b43d5f91f03f8bc14ff33ec007afe30c39e53af83e4e27ae9e5b56db266227",
+  "final_art_approval": "NOT_RECORDED; technical integration of the existing pilot only",
+  "frames": [
+    {
+      "source": "res://assets/characters/pilot_32/frames/viya_run_e_00.png",
+      "source_sha256": "d9c8b65a999ca0bf0ce1c345cffb37c2d89dcaabf9e7586c616354e3b7ddbf28",
+      "approved_output": "res://assets/characters/pilot_32/edge_repair/final/viya_run_e_00.png",
+      "approved_output_sha256": "78e1e0b5e17d7f452d0aee353b2d7ac2e89692bbb19d14d49ba3442b60227fee",
+      "status": "validated",
+      "native_source": "res://assets/characters/pilot_32/edge_repair/native/viya_run_e_00.png",
+      "native_source_sha256": "81d7ddfb989e5b78286ce03eccaf416b7cc914b82bc07de8cbf195eca1ab0cfd",
+      "baseline": "res://assets/characters/pilot_32/edge_repair/baseline/viya_run_e_00.png",
+      "baseline_sha256": "92a407a14b49b3b3154dadd5111cbe14eae8500487a70fd5cdf77dc31b5eed0d",
+      "generated_image": "res://assets/characters/pilot_32/edge_repair/generated/viya_run_e_00.png",
+      "generated_sha256": "768bc5d9103db7b05366531557ac0f0d1d3ce8920409db9b18975077ccb6130d",
+      "registered_donor": "res://assets/characters/pilot_32/edge_repair/registered/viya_run_e_00.png",
+      "registered_donor_sha256": "435671219de02459d2e45f6baf48e3a2872b5cc3956cb17482b6cb888bb1851b",
+      "alpha_repair_mask_path": "res://assets/characters/pilot_32/edge_repair/alpha_masks/viya_run_e_00.png",
+      "alpha_repair_mask_sha256": "d7ee3d88985c4f3afa3c0c331451ed538a6129734cf702dc51603d7e031345d6",
+      "rgb_edit_mask_path": "res://assets/characters/pilot_32/edge_repair/rgb_masks/viya_run_e_00.png",
+      "rgb_edit_mask_sha256": "991687d57ae605a9e6ca90c0860138a78bfb0727b42c70b10aaaa05b6ceb82fd",
+      "stats": {
+        "alpha_changed_pixels": 116,
+        "alpha_increased_pixels": 0,
+        "alpha_changed_outside_mask": 0,
+        "alpha_mask_pixels": 116,
+        "manual_hair_alpha_pixels": 39,
+        "changed_visible_rgb_vs_current_cache": 562,
+        "changed_rgb_outside_allowed_band": 0,
+        "raw_rgb_exact_outside_allowed_band": true,
+        "face_ivory_visible_rgb_changes": 0,
+        "crown_mixed_matte_rgb_changes": 43,
+        "crown_unselected_rgb_changes": 0,
+        "target_pixels": 569,
+        "targets_without_safe_donor": 11,
+        "raw": {
+          "strict_white_on_original_edge": 103,
+          "strict_white_in_gap_rois": 45,
+          "strict_white_on_crown": 17
+        },
+        "current_cache": {
+          "strict_white_on_original_edge": 61,
+          "strict_white_in_gap_rois": 34,
+          "strict_white_on_crown": 17
+        },
+        "trial": {
+          "strict_white_on_original_edge": 0,
+          "strict_white_in_gap_rois": 1,
+          "strict_white_on_crown": 0
+        },
+        "alpha_components": [
+          {
+            "region": "gun_gap",
+            "bbox": [
+              117,
+              123,
+              126,
+              135
+            ],
+            "white_component_pixels": 70,
+            "strict_white_seed_pixels": 22,
+            "generated_background_overlap_pixels": 51,
+            "selected_pixels": 51,
+            "manual_reviewed_hair_background": false
+          },
+          {
+            "region": "inner_legs",
+            "bbox": [
+              96,
+              156,
+              108,
+              168
+            ],
+            "white_component_pixels": 48,
+            "strict_white_seed_pixels": 12,
+            "generated_background_overlap_pixels": 25,
+            "selected_pixels": 25,
+            "manual_reviewed_hair_background": false
+          },
+          {
+            "region": "inner_legs",
+            "bbox": [
+              111,
+              162,
+              119,
+              168
+            ],
+            "white_component_pixels": 10,
+            "strict_white_seed_pixels": 3,
+            "generated_background_overlap_pixels": 1,
+            "selected_pixels": 1,
+            "manual_reviewed_hair_background": false
+          },
+          {
+            "region": "inner_legs",
+            "bbox": [
+              89,
+              173,
+              93,
+              180
+            ],
+            "white_component_pixels": 10,
+            "strict_white_seed_pixels": 3,
+            "generated_background_overlap_pixels": 0,
+            "selected_pixels": 0,
+            "manual_reviewed_hair_background": false
+          },
+          {
+            "region": "inner_legs",
+            "bbox": [
+              79,
+              184,
+              84,
+              187
+            ],
+            "white_component_pixels": 7,
+            "strict_white_seed_pixels": 3,
+            "generated_background_overlap_pixels": 0,
+            "selected_pixels": 0,
+            "manual_reviewed_hair_background": false
+          },
+          {
+            "region": "hair_upper",
+            "bbox": [
+              70,
+              30,
+              76,
+              36
+            ],
+            "white_component_pixels": 21,
+            "strict_white_seed_pixels": 9,
+            "generated_background_overlap_pixels": 17,
+            "selected_pixels": 21,
+            "manual_reviewed_hair_background": true
+          },
+          {
+            "region": "hair_upper",
+            "bbox": [
+              69,
+              38,
+              73,
+              42
+            ],
+            "white_component_pixels": 10,
+            "strict_white_seed_pixels": 2,
+            "generated_background_overlap_pixels": 6,
+            "selected_pixels": 10,
+            "manual_reviewed_hair_background": true
+          },
+          {
+            "region": "hair_lower",
+            "bbox": [
+              37,
+              101,
+              40,
+              107
+            ],
+            "white_component_pixels": 8,
+            "strict_white_seed_pixels": 5,
+            "generated_background_overlap_pixels": 2,
+            "selected_pixels": 8,
+            "manual_reviewed_hair_background": true
+          }
+        ]
+      },
+      "generation_job_id": "c53a42ad-651b-4f04-8e71-44d19fe51a50"
+    },
+    {
+      "source": "res://assets/characters/pilot_32/frames/viya_run_e_01.png",
+      "source_sha256": "7ee7a0893f77a5a2dc938fe1a798233a9d96ba18d01e3eb02a3750005f4cdf08",
+      "approved_output": "res://assets/characters/pilot_32/edge_repair/final/viya_run_e_01.png",
+      "approved_output_sha256": "cd47efb0e2a8e31e8b888ef7bd1bfbed9294b350cf2cb7c50162777eb56b326d",
+      "status": "validated",
+      "native_source": "res://assets/characters/pilot_32/edge_repair/native/viya_run_e_01.png",
+      "native_source_sha256": "44700c85d86dae1fd248dcbeca32dcf75a58cf86adcdd526fc6940a72fc5104c",
+      "baseline": "res://assets/characters/pilot_32/edge_repair/baseline/viya_run_e_01.png",
+      "baseline_sha256": "bb6d85a4eaf0a9f400f69ee7a0273826e7d25d9cf2d28772304e8e0b554c9135",
+      "generated_image": "res://assets/characters/pilot_32/edge_repair/generated/viya_run_e_01.png",
+      "generated_sha256": "664aa7b0bbadf2700fa0a18072b19df8cea47e1f8555cc1833024160257c1a4b",
+      "registered_donor": "res://assets/characters/pilot_32/edge_repair/registered/viya_run_e_01.png",
+      "registered_donor_sha256": "ed074991b6f89c65e5b4f0f036c1eeff9cf56d04b42a37cd524d61e2e490aacd",
+      "alpha_repair_mask_path": "res://assets/characters/pilot_32/edge_repair/alpha_masks/viya_run_e_01.png",
+      "alpha_repair_mask_sha256": "78019150339603754c77aa3c9062ccd9c67e859821261dd1676b873b0008af0f",
+      "rgb_edit_mask_path": "res://assets/characters/pilot_32/edge_repair/rgb_masks/viya_run_e_01.png",
+      "rgb_edit_mask_sha256": "7c795c6c1c0039b4c667b54f1ec8b1806b29c06888d0264faf08d3ba832a6099",
+      "stats": {
+        "alpha_changed_pixels": 110,
+        "alpha_increased_pixels": 0,
+        "alpha_changed_outside_mask": 0,
+        "alpha_mask_pixels": 110,
+        "manual_hair_alpha_pixels": 102,
+        "changed_visible_rgb_vs_current_cache": 533,
+        "changed_rgb_outside_allowed_band": 0,
+        "raw_rgb_exact_outside_allowed_band": true,
+        "face_ivory_visible_rgb_changes": 0,
+        "crown_mixed_matte_rgb_changes": 44,
+        "crown_unselected_rgb_changes": 0,
+        "target_pixels": 558,
+        "targets_without_safe_donor": 37,
+        "raw": {
+          "strict_white_on_original_edge": 126,
+          "strict_white_in_gap_rois": 28,
+          "strict_white_on_crown": 19
+        },
+        "current_cache": {
+          "strict_white_on_original_edge": 74,
+          "strict_white_in_gap_rois": 13,
+          "strict_white_on_crown": 19
+        },
+        "trial": {
+          "strict_white_on_original_edge": 1,
+          "strict_white_in_gap_rois": 2,
+          "strict_white_on_crown": 0
+        },
+        "alpha_components": [
+          {
+            "region": "gun_gap",
+            "bbox": [
+              135,
+              126,
+              141,
+              133
+            ],
+            "white_component_pixels": 25,
+            "strict_white_seed_pixels": 10,
+            "generated_background_overlap_pixels": 8,
+            "selected_pixels": 8,
+            "manual_reviewed_hair_background": false
+          },
+          {
+            "region": "inner_legs",
+            "bbox": [
+              115,
+              187,
+              119,
+              195
+            ],
+            "white_component_pixels": 10,
+            "strict_white_seed_pixels": 4,
+            "generated_background_overlap_pixels": 0,
+            "selected_pixels": 0,
+            "manual_reviewed_hair_background": false
+          },
+          {
+            "region": "inner_legs",
+            "bbox": [
+              71,
+              198,
+              76,
+              205
+            ],
+            "white_component_pixels": 17,
+            "strict_white_seed_pixels": 5,
+            "generated_background_overlap_pixels": 0,
+            "selected_pixels": 0,
+            "manual_reviewed_hair_background": false
+          },
+          {
+            "region": "inner_legs",
+            "bbox": [
+              105,
+              199,
+              112,
+              212
+            ],
+            "white_component_pixels": 18,
+            "strict_white_seed_pixels": 7,
+            "generated_background_overlap_pixels": 0,
+            "selected_pixels": 0,
+            "manual_reviewed_hair_background": false
+          },
+          {
+            "region": "hair_upper",
+            "bbox": [
+              70,
+              39,
+              74,
+              43
+            ],
+            "white_component_pixels": 10,
+            "strict_white_seed_pixels": 3,
+            "generated_background_overlap_pixels": 4,
+            "selected_pixels": 10,
+            "manual_reviewed_hair_background": true
+          },
+          {
+            "region": "hair_upper",
+            "bbox": [
+              62,
+              49,
+              64,
+              53
+            ],
+            "white_component_pixels": 5,
+            "strict_white_seed_pixels": 1,
+            "generated_background_overlap_pixels": 0,
+            "selected_pixels": 5,
+            "manual_reviewed_hair_background": true
+          },
+          {
+            "region": "hair_upper",
+            "bbox": [
+              56,
+              52,
+              62,
+              57
+            ],
+            "white_component_pixels": 11,
+            "strict_white_seed_pixels": 2,
+            "generated_background_overlap_pixels": 5,
+            "selected_pixels": 11,
+            "manual_reviewed_hair_background": true
+          },
+          {
+            "region": "hair_upper",
+            "bbox": [
+              49,
+              60,
+              52,
+              64
+            ],
+            "white_component_pixels": 4,
+            "strict_white_seed_pixels": 2,
+            "generated_background_overlap_pixels": 0,
+            "selected_pixels": 4,
+            "manual_reviewed_hair_background": true
+          },
+          {
+            "region": "hair_upper",
+            "bbox": [
+              48,
+              74,
+              57,
+              77
+            ],
+            "white_component_pixels": 21,
+            "strict_white_seed_pixels": 12,
+            "generated_background_overlap_pixels": 3,
+            "selected_pixels": 21,
+            "manual_reviewed_hair_background": true
+          },
+          {
+            "region": "hair_upper",
+            "bbox": [
+              40,
+              84,
+              42,
+              86
+            ],
+            "white_component_pixels": 3,
+            "strict_white_seed_pixels": 1,
+            "generated_background_overlap_pixels": 3,
+            "selected_pixels": 3,
+            "manual_reviewed_hair_background": true
+          },
+          {
+            "region": "hair_lower",
+            "bbox": [
+              35,
+              108,
+              36,
+              111
+            ],
+            "white_component_pixels": 3,
+            "strict_white_seed_pixels": 3,
+            "generated_background_overlap_pixels": 2,
+            "selected_pixels": 3,
+            "manual_reviewed_hair_background": true
+          },
+          {
+            "region": "hair_lower",
+            "bbox": [
+              38,
+              116,
+              41,
+              119
+            ],
+            "white_component_pixels": 6,
+            "strict_white_seed_pixels": 3,
+            "generated_background_overlap_pixels": 2,
+            "selected_pixels": 6,
+            "manual_reviewed_hair_background": true
+          },
+          {
+            "region": "hair_lower",
+            "bbox": [
+              40,
+              132,
+              48,
+              140
+            ],
+            "white_component_pixels": 39,
+            "strict_white_seed_pixels": 16,
+            "generated_background_overlap_pixels": 8,
+            "selected_pixels": 39,
+            "manual_reviewed_hair_background": true
+          }
+        ]
+      },
+      "generation_job_id": "fbb5dd3f-3b79-448a-b7ea-6eb432029d3a"
+    },
+    {
+      "source": "res://assets/characters/pilot_32/frames/viya_run_e_02.png",
+      "source_sha256": "ba504afedf438d0c8b37c6d43eea3a47c8c78c7d26006a16891a546da7bc1a8d",
+      "approved_output": "res://assets/characters/pilot_32/edge_repair/final/viya_run_e_02.png",
+      "approved_output_sha256": "0516b518af89c98e3cb47b900cd5050cd7bc1a4bde9c45580cc11ce8edfe7072",
+      "status": "validated",
+      "native_source": "res://assets/characters/pilot_32/edge_repair/native/viya_run_e_02.png",
+      "native_source_sha256": "226e97338a04a03ee9c922b20bbc447e472f245ac41d2e8c4341e2f2a5a0f2cb",
+      "baseline": "res://assets/characters/pilot_32/edge_repair/baseline/viya_run_e_02.png",
+      "baseline_sha256": "243bc9f3a21c78dfedba42740e1ed0d1daa99f94b2db07ed3dcfdc8690ab819c",
+      "generated_image": "res://assets/characters/pilot_32/edge_repair/generated/viya_run_e_02.png",
+      "generated_sha256": "0c36c874fc59e5975437638f3fe252996097abd5b26251f1722aa1f0d277df88",
+      "registered_donor": "res://assets/characters/pilot_32/edge_repair/registered/viya_run_e_02.png",
+      "registered_donor_sha256": "791f75887b729fb8ba3853333bedc1568ec55ae4529095e2aa8ddaaf76863687",
+      "alpha_repair_mask_path": "res://assets/characters/pilot_32/edge_repair/alpha_masks/viya_run_e_02.png",
+      "alpha_repair_mask_sha256": "4a0dcba82329f6bebfb5f5c99b64a92d42901aa22788658586b630169f7698ac",
+      "rgb_edit_mask_path": "res://assets/characters/pilot_32/edge_repair/rgb_masks/viya_run_e_02.png",
+      "rgb_edit_mask_sha256": "88524d41f5fdc8b6aeec7a43669d3cf6e55b04011783120118e851730b85210f",
+      "stats": {
+        "alpha_changed_pixels": 78,
+        "alpha_increased_pixels": 0,
+        "alpha_changed_outside_mask": 0,
+        "alpha_mask_pixels": 78,
+        "manual_hair_alpha_pixels": 55,
+        "changed_visible_rgb_vs_current_cache": 538,
+        "changed_rgb_outside_allowed_band": 0,
+        "raw_rgb_exact_outside_allowed_band": true,
+        "face_ivory_visible_rgb_changes": 0,
+        "crown_mixed_matte_rgb_changes": 39,
+        "crown_unselected_rgb_changes": 0,
+        "target_pixels": 556,
+        "targets_without_safe_donor": 40,
+        "raw": {
+          "strict_white_on_original_edge": 114,
+          "strict_white_in_gap_rois": 23,
+          "strict_white_on_crown": 28
+        },
+        "current_cache": {
+          "strict_white_on_original_edge": 59,
+          "strict_white_in_gap_rois": 3,
+          "strict_white_on_crown": 26
+        },
+        "trial": {
+          "strict_white_on_original_edge": 0,
+          "strict_white_in_gap_rois": 0,
+          "strict_white_on_crown": 0
+        },
+        "alpha_components": [
+          {
+            "region": "gun_gap",
+            "bbox": [
+              117,
+              126,
+              122,
+              135
+            ],
+            "white_component_pixels": 28,
+            "strict_white_seed_pixels": 1,
+            "generated_background_overlap_pixels": 7,
+            "selected_pixels": 7,
+            "manual_reviewed_hair_background": false
+          },
+          {
+            "region": "inner_legs",
+            "bbox": [
+              84,
+              151,
+              93,
+              156
+            ],
+            "white_component_pixels": 22,
+            "strict_white_seed_pixels": 8,
+            "generated_background_overlap_pixels": 9,
+            "selected_pixels": 9,
+            "manual_reviewed_hair_background": false
+          },
+          {
+            "region": "inner_legs",
+            "bbox": [
+              77,
+              157,
+              81,
+              165
+            ],
+            "white_component_pixels": 13,
+            "strict_white_seed_pixels": 6,
+            "generated_background_overlap_pixels": 0,
+            "selected_pixels": 0,
+            "manual_reviewed_hair_background": false
+          },
+          {
+            "region": "inner_legs",
+            "bbox": [
+              90,
+              187,
+              96,
+              190
+            ],
+            "white_component_pixels": 7,
+            "strict_white_seed_pixels": 3,
+            "generated_background_overlap_pixels": 7,
+            "selected_pixels": 7,
+            "manual_reviewed_hair_background": false
+          },
+          {
+            "region": "inner_legs",
+            "bbox": [
+              112,
+              197,
+              118,
+              200
+            ],
+            "white_component_pixels": 8,
+            "strict_white_seed_pixels": 3,
+            "generated_background_overlap_pixels": 0,
+            "selected_pixels": 0,
+            "manual_reviewed_hair_background": false
+          },
+          {
+            "region": "inner_legs",
+            "bbox": [
+              106,
+              202,
+              109,
+              205
+            ],
+            "white_component_pixels": 4,
+            "strict_white_seed_pixels": 1,
+            "generated_background_overlap_pixels": 0,
+            "selected_pixels": 0,
+            "manual_reviewed_hair_background": false
+          },
+          {
+            "region": "inner_legs",
+            "bbox": [
+              100,
+              209,
+              103,
+              212
+            ],
+            "white_component_pixels": 4,
+            "strict_white_seed_pixels": 1,
+            "generated_background_overlap_pixels": 0,
+            "selected_pixels": 0,
+            "manual_reviewed_hair_background": false
+          },
+          {
+            "region": "hair_upper",
+            "bbox": [
+              74,
+              35,
+              77,
+              39
+            ],
+            "white_component_pixels": 7,
+            "strict_white_seed_pixels": 2,
+            "generated_background_overlap_pixels": 6,
+            "selected_pixels": 7,
+            "manual_reviewed_hair_background": true
+          },
+          {
+            "region": "hair_upper",
+            "bbox": [
+              70,
+              43,
+              75,
+              46
+            ],
+            "white_component_pixels": 11,
+            "strict_white_seed_pixels": 4,
+            "generated_background_overlap_pixels": 11,
+            "selected_pixels": 11,
+            "manual_reviewed_hair_background": true
+          },
+          {
+            "region": "hair_upper",
+            "bbox": [
+              60,
+              50,
+              66,
+              56
+            ],
+            "white_component_pixels": 13,
+            "strict_white_seed_pixels": 1,
+            "generated_background_overlap_pixels": 3,
+            "selected_pixels": 13,
+            "manual_reviewed_hair_background": true
+          },
+          {
+            "region": "hair_upper",
+            "bbox": [
+              48,
+              76,
+              53,
+              80
+            ],
+            "white_component_pixels": 11,
+            "strict_white_seed_pixels": 2,
+            "generated_background_overlap_pixels": 6,
+            "selected_pixels": 11,
+            "manual_reviewed_hair_background": true
+          },
+          {
+            "region": "hair_lower",
+            "bbox": [
+              46,
+              132,
+              48,
+              139
+            ],
+            "white_component_pixels": 8,
+            "strict_white_seed_pixels": 5,
+            "generated_background_overlap_pixels": 2,
+            "selected_pixels": 8,
+            "manual_reviewed_hair_background": true
+          },
+          {
+            "region": "hair_lower",
+            "bbox": [
+              58,
+              134,
+              61,
+              137
+            ],
+            "white_component_pixels": 5,
+            "strict_white_seed_pixels": 2,
+            "generated_background_overlap_pixels": 1,
+            "selected_pixels": 5,
+            "manual_reviewed_hair_background": true
+          }
+        ]
+      },
+      "generation_job_id": "66230f6a-dfb5-494d-be8b-f4590a991f59"
+    },
+    {
+      "source": "res://assets/characters/pilot_32/frames/viya_run_e_03.png",
+      "source_sha256": "8fa15e97c3bec1fcaf62848190908dba4f6f88830f470aea12884d5a14bdae0e",
+      "approved_output": "res://assets/characters/pilot_32/edge_repair/final/viya_run_e_03.png",
+      "approved_output_sha256": "46c35a740920733256b0e01cdb43f22d1ae775e4039d3e3571921ed3df2e3dd8",
+      "status": "validated",
+      "native_source": "res://assets/characters/pilot_32/edge_repair/native/viya_run_e_03.png",
+      "native_source_sha256": "ee6d589557c428011dfb9432f7b4894c9a83ee4adcb468e14920021c7932b1b4",
+      "baseline": "res://assets/characters/pilot_32/edge_repair/baseline/viya_run_e_03.png",
+      "baseline_sha256": "9f54a8e5926d3f27cbbf1ce15eba08a6a9123e3ac2d2a3e56a1e4ba852f41b99",
+      "generated_image": "res://assets/characters/pilot_32/edge_repair/generated/viya_run_e_03.png",
+      "generated_sha256": "d7beec4e47d41c0bcaa0d10a0f03f3bda7c08b7b3c92d444436520e38abcf576",
+      "registered_donor": "res://assets/characters/pilot_32/edge_repair/registered/viya_run_e_03.png",
+      "registered_donor_sha256": "84b3f054a8dacd47acda1b4651a8d8107c2390de4c8b2508537e75df8375163f",
+      "alpha_repair_mask_path": "res://assets/characters/pilot_32/edge_repair/alpha_masks/viya_run_e_03.png",
+      "alpha_repair_mask_sha256": "98e704e625776d9317b521afd2bf7afade1b300d4caba1425824161aaa407335",
+      "rgb_edit_mask_path": "res://assets/characters/pilot_32/edge_repair/rgb_masks/viya_run_e_03.png",
+      "rgb_edit_mask_sha256": "3affa537a2ded1aed72deae162d73c2175c440cbbf81952c07de60b1a4acbc02",
+      "stats": {
+        "alpha_changed_pixels": 69,
+        "alpha_increased_pixels": 0,
+        "alpha_changed_outside_mask": 0,
+        "alpha_mask_pixels": 69,
+        "manual_hair_alpha_pixels": 47,
+        "changed_visible_rgb_vs_current_cache": 439,
+        "changed_rgb_outside_allowed_band": 0,
+        "raw_rgb_exact_outside_allowed_band": true,
+        "face_ivory_visible_rgb_changes": 0,
+        "crown_mixed_matte_rgb_changes": 43,
+        "crown_unselected_rgb_changes": 0,
+        "target_pixels": 445,
+        "targets_without_safe_donor": 14,
+        "raw": {
+          "strict_white_on_original_edge": 95,
+          "strict_white_in_gap_rois": 8,
+          "strict_white_on_crown": 26
+        },
+        "current_cache": {
+          "strict_white_on_original_edge": 54,
+          "strict_white_in_gap_rois": 2,
+          "strict_white_on_crown": 25
+        },
+        "trial": {
+          "strict_white_on_original_edge": 2,
+          "strict_white_in_gap_rois": 0,
+          "strict_white_on_crown": 0
+        },
+        "alpha_components": [
+          {
+            "region": "gun_gap",
+            "bbox": [
+              115,
+              129,
+              122,
+              135
+            ],
+            "white_component_pixels": 30,
+            "strict_white_seed_pixels": 1,
+            "generated_background_overlap_pixels": 18,
+            "selected_pixels": 18,
+            "manual_reviewed_hair_background": false
+          },
+          {
+            "region": "gun_gap",
+            "bbox": [
+              134,
+              131,
+              139,
+              135
+            ],
+            "white_component_pixels": 10,
+            "strict_white_seed_pixels": 4,
+            "generated_background_overlap_pixels": 4,
+            "selected_pixels": 4,
+            "manual_reviewed_hair_background": false
+          },
+          {
+            "region": "inner_legs",
+            "bbox": [
+              97,
+              207,
+              100,
+              210
+            ],
+            "white_component_pixels": 5,
+            "strict_white_seed_pixels": 1,
+            "generated_background_overlap_pixels": 0,
+            "selected_pixels": 0,
+            "manual_reviewed_hair_background": false
+          },
+          {
+            "region": "hair_upper",
+            "bbox": [
+              78,
+              33,
+              79,
+              36
+            ],
+            "white_component_pixels": 3,
+            "strict_white_seed_pixels": 1,
+            "generated_background_overlap_pixels": 0,
+            "selected_pixels": 3,
+            "manual_reviewed_hair_background": true
+          },
+          {
+            "region": "hair_upper",
+            "bbox": [
+              61,
+              50,
+              64,
+              54
+            ],
+            "white_component_pixels": 7,
+            "strict_white_seed_pixels": 5,
+            "generated_background_overlap_pixels": 3,
+            "selected_pixels": 7,
+            "manual_reviewed_hair_background": true
+          },
+          {
+            "region": "hair_upper",
+            "bbox": [
+              44,
+              71,
+              50,
+              78
+            ],
+            "white_component_pixels": 26,
+            "strict_white_seed_pixels": 13,
+            "generated_background_overlap_pixels": 9,
+            "selected_pixels": 26,
+            "manual_reviewed_hair_background": true
+          },
+          {
+            "region": "hair_upper",
+            "bbox": [
+              39,
+              78,
+              42,
+              80
+            ],
+            "white_component_pixels": 4,
+            "strict_white_seed_pixels": 1,
+            "generated_background_overlap_pixels": 4,
+            "selected_pixels": 4,
+            "manual_reviewed_hair_background": true
+          },
+          {
+            "region": "hair_lower",
+            "bbox": [
+              44,
+              88,
+              47,
+              93
+            ],
+            "white_component_pixels": 7,
+            "strict_white_seed_pixels": 5,
+            "generated_background_overlap_pixels": 1,
+            "selected_pixels": 7,
+            "manual_reviewed_hair_background": true
+          }
+        ]
+      },
+      "generation_job_id": "6e1cf33c-01dc-48b6-9310-b24686ebb4e5"
+    },
+    {
+      "source": "res://assets/characters/pilot_32/frames/viya_run_e_04.png",
+      "source_sha256": "1c322195928cd19579d33403f08a191035764ccc02e54c2944d049a739719b9a",
+      "approved_output": "res://assets/characters/pilot_32/edge_repair/final/viya_run_e_04.png",
+      "approved_output_sha256": "a4fe7db35199aa6f16d7c231c57b018e5dbbe22f16cefc657bd10a3d1e3060b7",
+      "status": "validated",
+      "native_source": "res://assets/characters/pilot_32/edge_repair/native/viya_run_e_04.png",
+      "native_source_sha256": "02c8780dfdea6f6ed572177faab32535423aa88c2b4024aeccee65c560cb062f",
+      "baseline": "res://assets/characters/pilot_32/edge_repair/baseline/viya_run_e_04.png",
+      "baseline_sha256": "30c0a59273ead0617d74c8c3cb62d608db73414fc1e51f8eb017ac86f04feef8",
+      "generated_image": "res://assets/characters/pilot_32/edge_repair/generated/viya_run_e_04.png",
+      "generated_sha256": "3fa4f639b3e403e8d9cb4c6e04f43f0e5f4a6fec07419b9abee39a628c9d52d6",
+      "registered_donor": "res://assets/characters/pilot_32/edge_repair/registered/viya_run_e_04.png",
+      "registered_donor_sha256": "e4ae07b3cbada8985b62edbf0110fd7034c745080e8c4229c95ea70e4be344b9",
+      "alpha_repair_mask_path": "res://assets/characters/pilot_32/edge_repair/alpha_masks/viya_run_e_04.png",
+      "alpha_repair_mask_sha256": "4b9954e8145a00ea935532a7bebf79959cd23d6b0907f310632f5bb35f85fafb",
+      "rgb_edit_mask_path": "res://assets/characters/pilot_32/edge_repair/rgb_masks/viya_run_e_04.png",
+      "rgb_edit_mask_sha256": "9120f4a2ef3c1daf041f18288d63ec60da31dde921b52713da7c68d6f3573cd3",
+      "stats": {
+        "alpha_changed_pixels": 121,
+        "alpha_increased_pixels": 0,
+        "alpha_changed_outside_mask": 0,
+        "alpha_mask_pixels": 121,
+        "manual_hair_alpha_pixels": 85,
+        "changed_visible_rgb_vs_current_cache": 570,
+        "changed_rgb_outside_allowed_band": 0,
+        "raw_rgb_exact_outside_allowed_band": true,
+        "face_ivory_visible_rgb_changes": 0,
+        "crown_mixed_matte_rgb_changes": 38,
+        "crown_unselected_rgb_changes": 0,
+        "target_pixels": 611,
+        "targets_without_safe_donor": 47,
+        "raw": {
+          "strict_white_on_original_edge": 111,
+          "strict_white_in_gap_rois": 23,
+          "strict_white_on_crown": 51
+        },
+        "current_cache": {
+          "strict_white_on_original_edge": 81,
+          "strict_white_in_gap_rois": 17,
+          "strict_white_on_crown": 51
+        },
+        "trial": {
+          "strict_white_on_original_edge": 0,
+          "strict_white_in_gap_rois": 1,
+          "strict_white_on_crown": 0
+        },
+        "alpha_components": [
+          {
+            "region": "gun_gap",
+            "bbox": [
+              117,
+              126,
+              123,
+              135
+            ],
+            "white_component_pixels": 40,
+            "strict_white_seed_pixels": 8,
+            "generated_background_overlap_pixels": 29,
+            "selected_pixels": 29,
+            "manual_reviewed_hair_background": false
+          },
+          {
+            "region": "gun_gap",
+            "bbox": [
+              135,
+              127,
+              140,
+              135
+            ],
+            "white_component_pixels": 22,
+            "strict_white_seed_pixels": 8,
+            "generated_background_overlap_pixels": 6,
+            "selected_pixels": 6,
+            "manual_reviewed_hair_background": false
+          },
+          {
+            "region": "inner_legs",
+            "bbox": [
+              106,
+              179,
+              109,
+              182
+            ],
+            "white_component_pixels": 5,
+            "strict_white_seed_pixels": 3,
+            "generated_background_overlap_pixels": 0,
+            "selected_pixels": 0,
+            "manual_reviewed_hair_background": false
+          },
+          {
+            "region": "inner_legs",
+            "bbox": [
+              99,
+              192,
+              101,
+              195
+            ],
+            "white_component_pixels": 4,
+            "strict_white_seed_pixels": 1,
+            "generated_background_overlap_pixels": 1,
+            "selected_pixels": 1,
+            "manual_reviewed_hair_background": false
+          },
+          {
+            "region": "inner_legs",
+            "bbox": [
+              72,
+              209,
+              75,
+              212
+            ],
+            "white_component_pixels": 3,
+            "strict_white_seed_pixels": 1,
+            "generated_background_overlap_pixels": 0,
+            "selected_pixels": 0,
+            "manual_reviewed_hair_background": false
+          },
+          {
+            "region": "hair_upper",
+            "bbox": [
+              78,
+              32,
+              79,
+              35
+            ],
+            "white_component_pixels": 3,
+            "strict_white_seed_pixels": 2,
+            "generated_background_overlap_pixels": 0,
+            "selected_pixels": 3,
+            "manual_reviewed_hair_background": true
+          },
+          {
+            "region": "hair_upper",
+            "bbox": [
+              53,
+              62,
+              61,
+              68
+            ],
+            "white_component_pixels": 19,
+            "strict_white_seed_pixels": 4,
+            "generated_background_overlap_pixels": 0,
+            "selected_pixels": 19,
+            "manual_reviewed_hair_background": true
+          },
+          {
+            "region": "hair_upper",
+            "bbox": [
+              45,
+              73,
+              51,
+              79
+            ],
+            "white_component_pixels": 22,
+            "strict_white_seed_pixels": 9,
+            "generated_background_overlap_pixels": 0,
+            "selected_pixels": 22,
+            "manual_reviewed_hair_background": true
+          },
+          {
+            "region": "hair_lower",
+            "bbox": [
+              44,
+              93,
+              47,
+              95
+            ],
+            "white_component_pixels": 4,
+            "strict_white_seed_pixels": 2,
+            "generated_background_overlap_pixels": 0,
+            "selected_pixels": 4,
+            "manual_reviewed_hair_background": true
+          },
+          {
+            "region": "hair_lower",
+            "bbox": [
+              51,
+              127,
+              54,
+              131
+            ],
+            "white_component_pixels": 6,
+            "strict_white_seed_pixels": 3,
+            "generated_background_overlap_pixels": 1,
+            "selected_pixels": 6,
+            "manual_reviewed_hair_background": true
+          },
+          {
+            "region": "hair_lower",
+            "bbox": [
+              55,
+              133,
+              62,
+              140
+            ],
+            "white_component_pixels": 31,
+            "strict_white_seed_pixels": 7,
+            "generated_background_overlap_pixels": 0,
+            "selected_pixels": 31,
+            "manual_reviewed_hair_background": true
+          }
+        ]
+      },
+      "generation_job_id": "71fa0761-ec9e-4c93-a57d-ddb62b28b3cf"
+    },
+    {
+      "source": "res://assets/characters/pilot_32/frames/viya_run_e_05.png",
+      "source_sha256": "bba10d987f0c6c071b7aa8d5abc438b86e969b025820a570aebcaf299472b11b",
+      "approved_output": "res://assets/characters/pilot_32/edge_repair/final/viya_run_e_05.png",
+      "approved_output_sha256": "16305bd731926e710eecdb8333f92693aa75c869139aeea7ffe5dd4d7cd8fca9",
+      "status": "validated",
+      "native_source": "res://assets/characters/pilot_32/edge_repair/native/viya_run_e_05.png",
+      "native_source_sha256": "60b96095657cdfbfa0369cf240d02fd6af58cc30e7e82fd32dc35026800b9816",
+      "baseline": "res://assets/characters/pilot_32/edge_repair/baseline/viya_run_e_05.png",
+      "baseline_sha256": "0b121c5e893f00eb78e14a9b8f3b9fe935a6ef59efcd00a2b8613b53b2b1b74b",
+      "generated_image": "res://assets/characters/pilot_32/edge_repair/generated/viya_run_e_05.png",
+      "generated_sha256": "3fba67f06f79cfd92043f508a68c30318710953d80298900c4a54851afb3aaa1",
+      "registered_donor": "res://assets/characters/pilot_32/edge_repair/registered/viya_run_e_05.png",
+      "registered_donor_sha256": "ab8bf6ebe72edbaf6a6d1dab4630da3b92d40ce07a29690300a39a4111767522",
+      "alpha_repair_mask_path": "res://assets/characters/pilot_32/edge_repair/alpha_masks/viya_run_e_05.png",
+      "alpha_repair_mask_sha256": "edac502a48def3677672604ae08bd484672032bae05258563809548250747c8c",
+      "rgb_edit_mask_path": "res://assets/characters/pilot_32/edge_repair/rgb_masks/viya_run_e_05.png",
+      "rgb_edit_mask_sha256": "66582828a648dbb0747a42ddd92e8631266e97aa1684f354705424b0177f5536",
+      "stats": {
+        "alpha_changed_pixels": 192,
+        "alpha_increased_pixels": 0,
+        "alpha_changed_outside_mask": 0,
+        "alpha_mask_pixels": 192,
+        "manual_hair_alpha_pixels": 104,
+        "changed_visible_rgb_vs_current_cache": 654,
+        "changed_rgb_outside_allowed_band": 0,
+        "raw_rgb_exact_outside_allowed_band": true,
+        "face_ivory_visible_rgb_changes": 0,
+        "crown_mixed_matte_rgb_changes": 39,
+        "crown_unselected_rgb_changes": 0,
+        "target_pixels": 644,
+        "targets_without_safe_donor": 15,
+        "raw": {
+          "strict_white_on_original_edge": 118,
+          "strict_white_in_gap_rois": 35,
+          "strict_white_on_crown": 36
+        },
+        "current_cache": {
+          "strict_white_on_original_edge": 68,
+          "strict_white_in_gap_rois": 19,
+          "strict_white_on_crown": 35
+        },
+        "trial": {
+          "strict_white_on_original_edge": 0,
+          "strict_white_in_gap_rois": 1,
+          "strict_white_on_crown": 0
+        },
+        "alpha_components": [
+          {
+            "region": "gun_gap",
+            "bbox": [
+              116,
+              124,
+              125,
+              135
+            ],
+            "white_component_pixels": 74,
+            "strict_white_seed_pixels": 9,
+            "generated_background_overlap_pixels": 56,
+            "selected_pixels": 56,
+            "manual_reviewed_hair_background": false
+          },
+          {
+            "region": "gun_gap",
+            "bbox": [
+              140,
+              126,
+              143,
+              129
+            ],
+            "white_component_pixels": 3,
+            "strict_white_seed_pixels": 1,
+            "generated_background_overlap_pixels": 1,
+            "selected_pixels": 1,
+            "manual_reviewed_hair_background": false
+          },
+          {
+            "region": "inner_legs",
+            "bbox": [
+              103,
+              162,
+              106,
+              166
+            ],
+            "white_component_pixels": 4,
+            "strict_white_seed_pixels": 1,
+            "generated_background_overlap_pixels": 0,
+            "selected_pixels": 0,
+            "manual_reviewed_hair_background": false
+          },
+          {
+            "region": "inner_legs",
+            "bbox": [
+              99,
+              183,
+              114,
+              198
+            ],
+            "white_component_pixels": 49,
+            "strict_white_seed_pixels": 19,
+            "generated_background_overlap_pixels": 24,
+            "selected_pixels": 24,
+            "manual_reviewed_hair_background": false
+          },
+          {
+            "region": "inner_legs",
+            "bbox": [
+              85,
+              186,
+              95,
+              189
+            ],
+            "white_component_pixels": 11,
+            "strict_white_seed_pixels": 1,
+            "generated_background_overlap_pixels": 0,
+            "selected_pixels": 0,
+            "manual_reviewed_hair_background": false
+          },
+          {
+            "region": "inner_legs",
+            "bbox": [
+              77,
+              190,
+              80,
+              192
+            ],
+            "white_component_pixels": 3,
+            "strict_white_seed_pixels": 1,
+            "generated_background_overlap_pixels": 0,
+            "selected_pixels": 0,
+            "manual_reviewed_hair_background": false
+          },
+          {
+            "region": "inner_legs",
+            "bbox": [
+              117,
+              205,
+              121,
+              212
+            ],
+            "white_component_pixels": 8,
+            "strict_white_seed_pixels": 2,
+            "generated_background_overlap_pixels": 7,
+            "selected_pixels": 7,
+            "manual_reviewed_hair_background": false
+          },
+          {
+            "region": "hair_upper",
+            "bbox": [
+              72,
+              34,
+              76,
+              38
+            ],
+            "white_component_pixels": 9,
+            "strict_white_seed_pixels": 3,
+            "generated_background_overlap_pixels": 5,
+            "selected_pixels": 9,
+            "manual_reviewed_hair_background": true
+          },
+          {
+            "region": "hair_upper",
+            "bbox": [
+              70,
+              41,
+              75,
+              45
+            ],
+            "white_component_pixels": 13,
+            "strict_white_seed_pixels": 6,
+            "generated_background_overlap_pixels": 6,
+            "selected_pixels": 13,
+            "manual_reviewed_hair_background": true
+          },
+          {
+            "region": "hair_upper",
+            "bbox": [
+              60,
+              54,
+              61,
+              57
+            ],
+            "white_component_pixels": 3,
+            "strict_white_seed_pixels": 2,
+            "generated_background_overlap_pixels": 0,
+            "selected_pixels": 3,
+            "manual_reviewed_hair_background": true
+          },
+          {
+            "region": "hair_upper",
+            "bbox": [
+              51,
+              71,
+              55,
+              74
+            ],
+            "white_component_pixels": 7,
+            "strict_white_seed_pixels": 2,
+            "generated_background_overlap_pixels": 0,
+            "selected_pixels": 7,
+            "manual_reviewed_hair_background": true
+          },
+          {
+            "region": "hair_upper",
+            "bbox": [
+              36,
+              75,
+              45,
+              80
+            ],
+            "white_component_pixels": 25,
+            "strict_white_seed_pixels": 5,
+            "generated_background_overlap_pixels": 3,
+            "selected_pixels": 25,
+            "manual_reviewed_hair_background": true
+          },
+          {
+            "region": "hair_lower",
+            "bbox": [
+              32,
+              88,
+              35,
+              95
+            ],
+            "white_component_pixels": 10,
+            "strict_white_seed_pixels": 7,
+            "generated_background_overlap_pixels": 0,
+            "selected_pixels": 10,
+            "manual_reviewed_hair_background": true
+          },
+          {
+            "region": "hair_lower",
+            "bbox": [
+              27,
+              101,
+              30,
+              105
+            ],
+            "white_component_pixels": 5,
+            "strict_white_seed_pixels": 2,
+            "generated_background_overlap_pixels": 4,
+            "selected_pixels": 5,
+            "manual_reviewed_hair_background": true
+          },
+          {
+            "region": "hair_lower",
+            "bbox": [
+              36,
+              105,
+              40,
+              112
+            ],
+            "white_component_pixels": 17,
+            "strict_white_seed_pixels": 4,
+            "generated_background_overlap_pixels": 6,
+            "selected_pixels": 17,
+            "manual_reviewed_hair_background": true
+          },
+          {
+            "region": "hair_lower",
+            "bbox": [
+              62,
+              120,
+              68,
+              128
+            ],
+            "white_component_pixels": 15,
+            "strict_white_seed_pixels": 3,
+            "generated_background_overlap_pixels": 4,
+            "selected_pixels": 15,
+            "manual_reviewed_hair_background": true
+          }
+        ]
+      },
+      "generation_job_id": "220b7c14-eaa9-45e2-9008-128bc2880438"
+    },
+    {
+      "source": "res://assets/characters/pilot_32/frames/viya_run_e_06.png",
+      "source_sha256": "6f9febbb3693a98759460654a13f1049a108e9411cccc853655a5a245234a388",
+      "approved_output": "res://assets/characters/pilot_32/edge_repair/final/viya_run_e_06.png",
+      "approved_output_sha256": "a45c0031f6f12068c863de6c066ffa166060dfc9e6c04690fad4fa388880a2ae",
+      "status": "validated",
+      "native_source": "res://assets/characters/pilot_32/edge_repair/native/viya_run_e_06.png",
+      "native_source_sha256": "249e3dae50d5997584e79916f653dddeee80a33c2436da56a9b153be6a6140c9",
+      "baseline": "res://assets/characters/pilot_32/edge_repair/baseline/viya_run_e_06.png",
+      "baseline_sha256": "5b74f25b7f59c6dc0a7b47fd4188da407755be9cf6284d045cdb2852f3ed1f94",
+      "generated_image": "res://assets/characters/pilot_32/edge_repair/generated/viya_run_e_06.png",
+      "generated_sha256": "4b57dbff597a701160e6b25d87832b188e212c6a1cd475d9073b443ba766c255",
+      "registered_donor": "res://assets/characters/pilot_32/edge_repair/registered/viya_run_e_06.png",
+      "registered_donor_sha256": "2cbb1aca3ff793b972e6c62c57b8bbf4a4308a729dfb1c9137b59aa1fb0b8b79",
+      "alpha_repair_mask_path": "res://assets/characters/pilot_32/edge_repair/alpha_masks/viya_run_e_06.png",
+      "alpha_repair_mask_sha256": "c9e8ed0cc2c9294d8a32a6910228c23706db00b47c81eaec1dc6082d05bd4a6b",
+      "rgb_edit_mask_path": "res://assets/characters/pilot_32/edge_repair/rgb_masks/viya_run_e_06.png",
+      "rgb_edit_mask_sha256": "970660af81371dd600a4ac5507fe7353db4632a8d326f66989f8271ad88bae2a",
+      "stats": {
+        "alpha_changed_pixels": 233,
+        "alpha_increased_pixels": 0,
+        "alpha_changed_outside_mask": 0,
+        "alpha_mask_pixels": 233,
+        "manual_hair_alpha_pixels": 190,
+        "changed_visible_rgb_vs_current_cache": 735,
+        "changed_rgb_outside_allowed_band": 0,
+        "raw_rgb_exact_outside_allowed_band": true,
+        "face_ivory_visible_rgb_changes": 0,
+        "crown_mixed_matte_rgb_changes": 33,
+        "crown_unselected_rgb_changes": 0,
+        "target_pixels": 754,
+        "targets_without_safe_donor": 31,
+        "raw": {
+          "strict_white_on_original_edge": 140,
+          "strict_white_in_gap_rois": 61,
+          "strict_white_on_crown": 18
+        },
+        "current_cache": {
+          "strict_white_on_original_edge": 86,
+          "strict_white_in_gap_rois": 45,
+          "strict_white_on_crown": 18
+        },
+        "trial": {
+          "strict_white_on_original_edge": 0,
+          "strict_white_in_gap_rois": 1,
+          "strict_white_on_crown": 0
+        },
+        "alpha_components": [
+          {
+            "region": "gun_gap",
+            "bbox": [
+              117,
+              121,
+              126,
+              139
+            ],
+            "white_component_pixels": 81,
+            "strict_white_seed_pixels": 43,
+            "generated_background_overlap_pixels": 39,
+            "selected_pixels": 39,
+            "manual_reviewed_hair_background": false
+          },
+          {
+            "region": "gun_gap",
+            "bbox": [
+              138,
+              122,
+              143,
+              128
+            ],
+            "white_component_pixels": 20,
+            "strict_white_seed_pixels": 8,
+            "generated_background_overlap_pixels": 4,
+            "selected_pixels": 4,
+            "manual_reviewed_hair_background": false
+          },
+          {
+            "region": "inner_legs",
+            "bbox": [
+              74,
+              186,
+              86,
+              191
+            ],
+            "white_component_pixels": 18,
+            "strict_white_seed_pixels": 8,
+            "generated_background_overlap_pixels": 0,
+            "selected_pixels": 0,
+            "manual_reviewed_hair_background": false
+          },
+          {
+            "region": "hair_upper",
+            "bbox": [
+              73,
+              32,
+              77,
+              35
+            ],
+            "white_component_pixels": 8,
+            "strict_white_seed_pixels": 3,
+            "generated_background_overlap_pixels": 3,
+            "selected_pixels": 8,
+            "manual_reviewed_hair_background": true
+          },
+          {
+            "region": "hair_upper",
+            "bbox": [
+              71,
+              39,
+              75,
+              43
+            ],
+            "white_component_pixels": 8,
+            "strict_white_seed_pixels": 3,
+            "generated_background_overlap_pixels": 1,
+            "selected_pixels": 8,
+            "manual_reviewed_hair_background": true
+          },
+          {
+            "region": "hair_upper",
+            "bbox": [
+              58,
+              49,
+              63,
+              59
+            ],
+            "white_component_pixels": 17,
+            "strict_white_seed_pixels": 8,
+            "generated_background_overlap_pixels": 0,
+            "selected_pixels": 17,
+            "manual_reviewed_hair_background": true
+          },
+          {
+            "region": "hair_upper",
+            "bbox": [
+              52,
+              66,
+              57,
+              71
+            ],
+            "white_component_pixels": 17,
+            "strict_white_seed_pixels": 2,
+            "generated_background_overlap_pixels": 0,
+            "selected_pixels": 17,
+            "manual_reviewed_hair_background": true
+          },
+          {
+            "region": "hair_upper",
+            "bbox": [
+              33,
+              70,
+              50,
+              79
+            ],
+            "white_component_pixels": 48,
+            "strict_white_seed_pixels": 30,
+            "generated_background_overlap_pixels": 3,
+            "selected_pixels": 48,
+            "manual_reviewed_hair_background": true
+          },
+          {
+            "region": "hair_lower",
+            "bbox": [
+              31,
+              100,
+              33,
+              103
+            ],
+            "white_component_pixels": 4,
+            "strict_white_seed_pixels": 1,
+            "generated_background_overlap_pixels": 0,
+            "selected_pixels": 4,
+            "manual_reviewed_hair_background": true
+          },
+          {
+            "region": "hair_lower",
+            "bbox": [
+              35,
+              101,
+              42,
+              109
+            ],
+            "white_component_pixels": 37,
+            "strict_white_seed_pixels": 7,
+            "generated_background_overlap_pixels": 22,
+            "selected_pixels": 37,
+            "manual_reviewed_hair_background": true
+          },
+          {
+            "region": "hair_lower",
+            "bbox": [
+              40,
+              114,
+              42,
+              119
+            ],
+            "white_component_pixels": 6,
+            "strict_white_seed_pixels": 4,
+            "generated_background_overlap_pixels": 2,
+            "selected_pixels": 6,
+            "manual_reviewed_hair_background": true
+          },
+          {
+            "region": "hair_lower",
+            "bbox": [
+              50,
+              126,
+              62,
+              138
+            ],
+            "white_component_pixels": 45,
+            "strict_white_seed_pixels": 29,
+            "generated_background_overlap_pixels": 6,
+            "selected_pixels": 45,
+            "manual_reviewed_hair_background": true
+          }
+        ]
+      },
+      "generation_job_id": "93112e8a-c71e-4e27-9be3-f68e372007ad"
+    },
+    {
+      "source": "res://assets/characters/pilot_32/frames/viya_run_e_07.png",
+      "source_sha256": "f0b2f6fec34d979393fbd2ac0ed944c0934a85a64cd5dc90b9567a6d5845ef4a",
+      "approved_output": "res://assets/characters/pilot_32/edge_repair/final/viya_run_e_07.png",
+      "approved_output_sha256": "f6f1cad53cb8f26dccf2147845e6a88bc168412fb0544423c23202e682fa1677",
+      "status": "validated",
+      "native_source": "res://assets/characters/pilot_32/edge_repair/native/viya_run_e_07.png",
+      "native_source_sha256": "b84fd6ffd55565cafd45b31ffeede97e32aa60c528fc898a0f80c5e77e180d96",
+      "baseline": "res://assets/characters/pilot_32/edge_repair/baseline/viya_run_e_07.png",
+      "baseline_sha256": "b8d086475204ec1f79aefbec1e8405a94eb7b13747efac215b521647aad1145e",
+      "generated_image": "res://assets/characters/pilot_32/edge_repair/generated/viya_run_e_07.png",
+      "generated_sha256": "dede9fd644bff7c6dff4515248920b7fbd2cdf182cea3157fd29999dfe2d919b",
+      "registered_donor": "res://assets/characters/pilot_32/edge_repair/registered/viya_run_e_07.png",
+      "registered_donor_sha256": "b89fcf78c8baca826245c790376b162c1c31b47e5ae2e56f1f7dc639f22997d7",
+      "alpha_repair_mask_path": "res://assets/characters/pilot_32/edge_repair/alpha_masks/viya_run_e_07.png",
+      "alpha_repair_mask_sha256": "64f05c0d3c0bbe1eaf291f165f46cd103a003ff239a03008063d0fc893d9d8fa",
+      "rgb_edit_mask_path": "res://assets/characters/pilot_32/edge_repair/rgb_masks/viya_run_e_07.png",
+      "rgb_edit_mask_sha256": "275454a81daf1396a313f658af874405a03a5c969c7cbad25414b0beee269d8a",
+      "stats": {
+        "alpha_changed_pixels": 160,
+        "alpha_increased_pixels": 0,
+        "alpha_changed_outside_mask": 0,
+        "alpha_mask_pixels": 160,
+        "manual_hair_alpha_pixels": 101,
+        "changed_visible_rgb_vs_current_cache": 508,
+        "changed_rgb_outside_allowed_band": 0,
+        "raw_rgb_exact_outside_allowed_band": true,
+        "face_ivory_visible_rgb_changes": 0,
+        "crown_mixed_matte_rgb_changes": 32,
+        "crown_unselected_rgb_changes": 0,
+        "target_pixels": 535,
+        "targets_without_safe_donor": 38,
+        "raw": {
+          "strict_white_on_original_edge": 91,
+          "strict_white_in_gap_rois": 25,
+          "strict_white_on_crown": 20
+        },
+        "current_cache": {
+          "strict_white_on_original_edge": 58,
+          "strict_white_in_gap_rois": 21,
+          "strict_white_on_crown": 20
+        },
+        "trial": {
+          "strict_white_on_original_edge": 1,
+          "strict_white_in_gap_rois": 0,
+          "strict_white_on_crown": 0
+        },
+        "alpha_components": [
+          {
+            "region": "gun_gap",
+            "bbox": [
+              120,
+              122,
+              129,
+              135
+            ],
+            "white_component_pixels": 72,
+            "strict_white_seed_pixels": 16,
+            "generated_background_overlap_pixels": 57,
+            "selected_pixels": 57,
+            "manual_reviewed_hair_background": false
+          },
+          {
+            "region": "gun_gap",
+            "bbox": [
+              141,
+              123,
+              144,
+              126
+            ],
+            "white_component_pixels": 8,
+            "strict_white_seed_pixels": 6,
+            "generated_background_overlap_pixels": 2,
+            "selected_pixels": 2,
+            "manual_reviewed_hair_background": false
+          },
+          {
+            "region": "inner_legs",
+            "bbox": [
+              105,
+              206,
+              108,
+              212
+            ],
+            "white_component_pixels": 9,
+            "strict_white_seed_pixels": 3,
+            "generated_background_overlap_pixels": 0,
+            "selected_pixels": 0,
+            "manual_reviewed_hair_background": false
+          },
+          {
+            "region": "hair_upper",
+            "bbox": [
+              70,
+              38,
+              76,
+              43
+            ],
+            "white_component_pixels": 15,
+            "strict_white_seed_pixels": 4,
+            "generated_background_overlap_pixels": 14,
+            "selected_pixels": 15,
+            "manual_reviewed_hair_background": true
+          },
+          {
+            "region": "hair_upper",
+            "bbox": [
+              61,
+              48,
+              64,
+              55
+            ],
+            "white_component_pixels": 11,
+            "strict_white_seed_pixels": 8,
+            "generated_background_overlap_pixels": 8,
+            "selected_pixels": 11,
+            "manual_reviewed_hair_background": true
+          },
+          {
+            "region": "hair_lower",
+            "bbox": [
+              47,
+              92,
+              51,
+              99
+            ],
+            "white_component_pixels": 10,
+            "strict_white_seed_pixels": 3,
+            "generated_background_overlap_pixels": 2,
+            "selected_pixels": 10,
+            "manual_reviewed_hair_background": true
+          },
+          {
+            "region": "hair_lower",
+            "bbox": [
+              41,
+              99,
+              44,
+              103
+            ],
+            "white_component_pixels": 10,
+            "strict_white_seed_pixels": 8,
+            "generated_background_overlap_pixels": 4,
+            "selected_pixels": 10,
+            "manual_reviewed_hair_background": true
+          },
+          {
+            "region": "hair_lower",
+            "bbox": [
+              39,
+              113,
+              43,
+              122
+            ],
+            "white_component_pixels": 22,
+            "strict_white_seed_pixels": 10,
+            "generated_background_overlap_pixels": 18,
+            "selected_pixels": 22,
+            "manual_reviewed_hair_background": true
+          },
+          {
+            "region": "hair_lower",
+            "bbox": [
+              51,
+              130,
+              60,
+              139
+            ],
+            "white_component_pixels": 33,
+            "strict_white_seed_pixels": 8,
+            "generated_background_overlap_pixels": 15,
+            "selected_pixels": 33,
+            "manual_reviewed_hair_background": true
+          }
+        ]
+      },
+      "generation_job_id": "e95687b5-23e0-426e-93d2-c39ac425e948"
+    },
+    {
+      "source": "res://assets/characters/pilot_32/frames/viya_run_e_08.png",
+      "source_sha256": "faa8681af95681153d8bbc2a7f245446dbb757a582d2bda81560a75dd0d25caa",
+      "approved_output": "res://assets/characters/pilot_32/edge_repair/final/viya_run_e_08.png",
+      "approved_output_sha256": "9487d27c65b757e99763ca33bd2d06aef17147b37332833aff07bc7f211484b8",
+      "status": "validated",
+      "native_source": "res://assets/characters/pilot_32/edge_repair/native/viya_run_e_08.png",
+      "native_source_sha256": "022e976aae60ed1967f9a68e489afeed3fd00685e3ccb6d2de41da4d6ebcad82",
+      "baseline": "res://assets/characters/pilot_32/edge_repair/baseline/viya_run_e_08.png",
+      "baseline_sha256": "670a3c899d19502bc4257815ff628213cc331a27e20de11cc0ba60d20867f09a",
+      "generated_image": "res://assets/characters/pilot_32/edge_repair/generated/viya_run_e_08.png",
+      "generated_sha256": "073fd6e8ebe0b60990c204cde0e23e391e52a295a1fc21f251cdd9c0f03e94b9",
+      "registered_donor": "res://assets/characters/pilot_32/edge_repair/registered/viya_run_e_08.png",
+      "registered_donor_sha256": "396bb4831c49ed33858d345747879ac8a9174ebbbd2bf33017e0467dfbb92e8b",
+      "alpha_repair_mask_path": "res://assets/characters/pilot_32/edge_repair/alpha_masks/viya_run_e_08.png",
+      "alpha_repair_mask_sha256": "e853dd9385b8f558bf93669b8a63b6d1571dffda42e743515fd2a6dc29c7b1dc",
+      "rgb_edit_mask_path": "res://assets/characters/pilot_32/edge_repair/rgb_masks/viya_run_e_08.png",
+      "rgb_edit_mask_sha256": "66857dd83ff57eb779a4bf1b2a0e351bc68fe10c1ccce5848faf5a36c20418eb",
+      "stats": {
+        "alpha_changed_pixels": 121,
+        "alpha_increased_pixels": 0,
+        "alpha_changed_outside_mask": 0,
+        "alpha_mask_pixels": 121,
+        "manual_hair_alpha_pixels": 71,
+        "changed_visible_rgb_vs_current_cache": 530,
+        "changed_rgb_outside_allowed_band": 0,
+        "raw_rgb_exact_outside_allowed_band": true,
+        "face_ivory_visible_rgb_changes": 0,
+        "crown_mixed_matte_rgb_changes": 33,
+        "crown_unselected_rgb_changes": 0,
+        "target_pixels": 557,
+        "targets_without_safe_donor": 43,
+        "raw": {
+          "strict_white_on_original_edge": 95,
+          "strict_white_in_gap_rois": 32,
+          "strict_white_on_crown": 31
+        },
+        "current_cache": {
+          "strict_white_on_original_edge": 53,
+          "strict_white_in_gap_rois": 15,
+          "strict_white_on_crown": 30
+        },
+        "trial": {
+          "strict_white_on_original_edge": 2,
+          "strict_white_in_gap_rois": 0,
+          "strict_white_on_crown": 0
+        },
+        "alpha_components": [
+          {
+            "region": "gun_gap",
+            "bbox": [
+              120,
+              122,
+              129,
+              132
+            ],
+            "white_component_pixels": 47,
+            "strict_white_seed_pixels": 7,
+            "generated_background_overlap_pixels": 25,
+            "selected_pixels": 25,
+            "manual_reviewed_hair_background": false
+          },
+          {
+            "region": "gun_gap",
+            "bbox": [
+              132,
+              134,
+              137,
+              139
+            ],
+            "white_component_pixels": 10,
+            "strict_white_seed_pixels": 2,
+            "generated_background_overlap_pixels": 2,
+            "selected_pixels": 2,
+            "manual_reviewed_hair_background": false
+          },
+          {
+            "region": "inner_legs",
+            "bbox": [
+              80,
+              145,
+              88,
+              150
+            ],
+            "white_component_pixels": 25,
+            "strict_white_seed_pixels": 8,
+            "generated_background_overlap_pixels": 10,
+            "selected_pixels": 10,
+            "manual_reviewed_hair_background": false
+          },
+          {
+            "region": "inner_legs",
+            "bbox": [
+              96,
+              164,
+              99,
+              170
+            ],
+            "white_component_pixels": 13,
+            "strict_white_seed_pixels": 8,
+            "generated_background_overlap_pixels": 13,
+            "selected_pixels": 13,
+            "manual_reviewed_hair_background": false
+          },
+          {
+            "region": "inner_legs",
+            "bbox": [
+              70,
+              172,
+              72,
+              177
+            ],
+            "white_component_pixels": 5,
+            "strict_white_seed_pixels": 2,
+            "generated_background_overlap_pixels": 0,
+            "selected_pixels": 0,
+            "manual_reviewed_hair_background": false
+          },
+          {
+            "region": "inner_legs",
+            "bbox": [
+              120,
+              178,
+              124,
+              180
+            ],
+            "white_component_pixels": 5,
+            "strict_white_seed_pixels": 1,
+            "generated_background_overlap_pixels": 0,
+            "selected_pixels": 0,
+            "manual_reviewed_hair_background": false
+          },
+          {
+            "region": "inner_legs",
+            "bbox": [
+              77,
+              207,
+              80,
+              212
+            ],
+            "white_component_pixels": 7,
+            "strict_white_seed_pixels": 3,
+            "generated_background_overlap_pixels": 0,
+            "selected_pixels": 0,
+            "manual_reviewed_hair_background": false
+          },
+          {
+            "region": "hair_upper",
+            "bbox": [
+              75,
+              30,
+              77,
+              34
+            ],
+            "white_component_pixels": 7,
+            "strict_white_seed_pixels": 2,
+            "generated_background_overlap_pixels": 0,
+            "selected_pixels": 7,
+            "manual_reviewed_hair_background": true
+          },
+          {
+            "region": "hair_upper",
+            "bbox": [
+              66,
+              48,
+              73,
+              58
+            ],
+            "white_component_pixels": 22,
+            "strict_white_seed_pixels": 3,
+            "generated_background_overlap_pixels": 4,
+            "selected_pixels": 22,
+            "manual_reviewed_hair_background": true
+          },
+          {
+            "region": "hair_lower",
+            "bbox": [
+              40,
+              97,
+              48,
+              110
+            ],
+            "white_component_pixels": 35,
+            "strict_white_seed_pixels": 7,
+            "generated_background_overlap_pixels": 20,
+            "selected_pixels": 35,
+            "manual_reviewed_hair_background": true
+          },
+          {
+            "region": "hair_lower",
+            "bbox": [
+              39,
+              118,
+              43,
+              121
+            ],
+            "white_component_pixels": 7,
+            "strict_white_seed_pixels": 2,
+            "generated_background_overlap_pixels": 0,
+            "selected_pixels": 7,
+            "manual_reviewed_hair_background": true
+          }
+        ]
+      },
+      "generation_job_id": "79dbac37-07e0-4c78-96aa-8d9f3036d57f"
+    },
+    {
+      "source": "res://assets/characters/pilot_32/frames/viya_run_e_09.png",
+      "source_sha256": "6672ab76aa5a13b667b08934a6a03694a3912f9c90cc3279ba6872dcd3d43f84",
+      "approved_output": "res://assets/characters/pilot_32/edge_repair/final/viya_run_e_09.png",
+      "approved_output_sha256": "bddd408a12b67d6a893720a9df57ec4a08b49c274e89bb5709cb19adb7bcbc40",
+      "status": "validated",
+      "native_source": "res://assets/characters/pilot_32/edge_repair/native/viya_run_e_09.png",
+      "native_source_sha256": "c90f60b08d67e1a5a4a36e01cccf57e1bd06483a15c1c01d5cd416968b2b4038",
+      "baseline": "res://assets/characters/pilot_32/edge_repair/baseline/viya_run_e_09.png",
+      "baseline_sha256": "237d01a7383133d92efa676ae9c890fdc9f562e0743b5d1d9fe463c8f3582c97",
+      "generated_image": "res://assets/characters/pilot_32/edge_repair/generated/viya_run_e_09.png",
+      "generated_sha256": "d694d2adb3131bedbf747dbbdf8f673c7b53c6ff5f7aa9e14cb8d87aaa3115ba",
+      "registered_donor": "res://assets/characters/pilot_32/edge_repair/registered/viya_run_e_09.png",
+      "registered_donor_sha256": "4286a9206c732567995c64dbc8ebebf58c8757de7f289ecd79148b43dfc283ec",
+      "alpha_repair_mask_path": "res://assets/characters/pilot_32/edge_repair/alpha_masks/viya_run_e_09.png",
+      "alpha_repair_mask_sha256": "a1b5b86d24deda62b53168e22302b78e83acee1faefb828ef08aa9ea34a9708e",
+      "rgb_edit_mask_path": "res://assets/characters/pilot_32/edge_repair/rgb_masks/viya_run_e_09.png",
+      "rgb_edit_mask_sha256": "dda5800500500261a0591f85449144ea459457a199c9fafb0b97fdd88dfcd1ba",
+      "stats": {
+        "alpha_changed_pixels": 128,
+        "alpha_increased_pixels": 0,
+        "alpha_changed_outside_mask": 0,
+        "alpha_mask_pixels": 128,
+        "manual_hair_alpha_pixels": 114,
+        "changed_visible_rgb_vs_current_cache": 606,
+        "changed_rgb_outside_allowed_band": 0,
+        "raw_rgb_exact_outside_allowed_band": true,
+        "face_ivory_visible_rgb_changes": 0,
+        "crown_mixed_matte_rgb_changes": 48,
+        "crown_unselected_rgb_changes": 0,
+        "target_pixels": 616,
+        "targets_without_safe_donor": 28,
+        "raw": {
+          "strict_white_on_original_edge": 131,
+          "strict_white_in_gap_rois": 41,
+          "strict_white_on_crown": 23
+        },
+        "current_cache": {
+          "strict_white_on_original_edge": 72,
+          "strict_white_in_gap_rois": 17,
+          "strict_white_on_crown": 18
+        },
+        "trial": {
+          "strict_white_on_original_edge": 0,
+          "strict_white_in_gap_rois": 1,
+          "strict_white_on_crown": 0
+        },
+        "alpha_components": [
+          {
+            "region": "gun_gap",
+            "bbox": [
+              118,
+              122,
+              125,
+              128
+            ],
+            "white_component_pixels": 25,
+            "strict_white_seed_pixels": 4,
+            "generated_background_overlap_pixels": 7,
+            "selected_pixels": 7,
+            "manual_reviewed_hair_background": false
+          },
+          {
+            "region": "gun_gap",
+            "bbox": [
+              137,
+              123,
+              142,
+              129
+            ],
+            "white_component_pixels": 22,
+            "strict_white_seed_pixels": 6,
+            "generated_background_overlap_pixels": 1,
+            "selected_pixels": 1,
+            "manual_reviewed_hair_background": false
+          },
+          {
+            "region": "gun_gap",
+            "bbox": [
+              131,
+              133,
+              137,
+              139
+            ],
+            "white_component_pixels": 19,
+            "strict_white_seed_pixels": 8,
+            "generated_background_overlap_pixels": 3,
+            "selected_pixels": 3,
+            "manual_reviewed_hair_background": false
+          },
+          {
+            "region": "inner_legs",
+            "bbox": [
+              101,
+              167,
+              103,
+              172
+            ],
+            "white_component_pixels": 7,
+            "strict_white_seed_pixels": 2,
+            "generated_background_overlap_pixels": 0,
+            "selected_pixels": 0,
+            "manual_reviewed_hair_background": false
+          },
+          {
+            "region": "inner_legs",
+            "bbox": [
+              92,
+              181,
+              97,
+              186
+            ],
+            "white_component_pixels": 13,
+            "strict_white_seed_pixels": 7,
+            "generated_background_overlap_pixels": 0,
+            "selected_pixels": 0,
+            "manual_reviewed_hair_background": false
+          },
+          {
+            "region": "inner_legs",
+            "bbox": [
+              118,
+              184,
+              122,
+              191
+            ],
+            "white_component_pixels": 8,
+            "strict_white_seed_pixels": 4,
+            "generated_background_overlap_pixels": 0,
+            "selected_pixels": 0,
+            "manual_reviewed_hair_background": false
+          },
+          {
+            "region": "inner_legs",
+            "bbox": [
+              84,
+              190,
+              88,
+              193
+            ],
+            "white_component_pixels": 5,
+            "strict_white_seed_pixels": 1,
+            "generated_background_overlap_pixels": 0,
+            "selected_pixels": 0,
+            "manual_reviewed_hair_background": false
+          },
+          {
+            "region": "inner_legs",
+            "bbox": [
+              94,
+              200,
+              96,
+              202
+            ],
+            "white_component_pixels": 3,
+            "strict_white_seed_pixels": 1,
+            "generated_background_overlap_pixels": 3,
+            "selected_pixels": 3,
+            "manual_reviewed_hair_background": false
+          },
+          {
+            "region": "inner_legs",
+            "bbox": [
+              117,
+              201,
+              119,
+              207
+            ],
+            "white_component_pixels": 6,
+            "strict_white_seed_pixels": 3,
+            "generated_background_overlap_pixels": 0,
+            "selected_pixels": 0,
+            "manual_reviewed_hair_background": false
+          },
+          {
+            "region": "inner_legs",
+            "bbox": [
+              70,
+              206,
+              73,
+              210
+            ],
+            "white_component_pixels": 5,
+            "strict_white_seed_pixels": 3,
+            "generated_background_overlap_pixels": 0,
+            "selected_pixels": 0,
+            "manual_reviewed_hair_background": false
+          },
+          {
+            "region": "inner_legs",
+            "bbox": [
+              100,
+              207,
+              105,
+              212
+            ],
+            "white_component_pixels": 14,
+            "strict_white_seed_pixels": 2,
+            "generated_background_overlap_pixels": 0,
+            "selected_pixels": 0,
+            "manual_reviewed_hair_background": false
+          },
+          {
+            "region": "hair_upper",
+            "bbox": [
+              68,
+              39,
+              75,
+              43
+            ],
+            "white_component_pixels": 11,
+            "strict_white_seed_pixels": 6,
+            "generated_background_overlap_pixels": 2,
+            "selected_pixels": 11,
+            "manual_reviewed_hair_background": true
+          },
+          {
+            "region": "hair_upper",
+            "bbox": [
+              62,
+              48,
+              66,
+              58
+            ],
+            "white_component_pixels": 15,
+            "strict_white_seed_pixels": 6,
+            "generated_background_overlap_pixels": 3,
+            "selected_pixels": 15,
+            "manual_reviewed_hair_background": true
+          },
+          {
+            "region": "hair_upper",
+            "bbox": [
+              50,
+              66,
+              52,
+              68
+            ],
+            "white_component_pixels": 3,
+            "strict_white_seed_pixels": 3,
+            "generated_background_overlap_pixels": 0,
+            "selected_pixels": 3,
+            "manual_reviewed_hair_background": true
+          },
+          {
+            "region": "hair_upper",
+            "bbox": [
+              39,
+              79,
+              50,
+              88
+            ],
+            "white_component_pixels": 36,
+            "strict_white_seed_pixels": 20,
+            "generated_background_overlap_pixels": 5,
+            "selected_pixels": 36,
+            "manual_reviewed_hair_background": true
+          },
+          {
+            "region": "hair_lower",
+            "bbox": [
+              50,
+              90,
+              57,
+              97
+            ],
+            "white_component_pixels": 15,
+            "strict_white_seed_pixels": 1,
+            "generated_background_overlap_pixels": 0,
+            "selected_pixels": 15,
+            "manual_reviewed_hair_background": true
+          },
+          {
+            "region": "hair_lower",
+            "bbox": [
+              41,
+              115,
+              47,
+              124
+            ],
+            "white_component_pixels": 26,
+            "strict_white_seed_pixels": 5,
+            "generated_background_overlap_pixels": 8,
+            "selected_pixels": 26,
+            "manual_reviewed_hair_background": true
+          },
+          {
+            "region": "hair_lower",
+            "bbox": [
+              61,
+              128,
+              63,
+              130
+            ],
+            "white_component_pixels": 4,
+            "strict_white_seed_pixels": 3,
+            "generated_background_overlap_pixels": 0,
+            "selected_pixels": 4,
+            "manual_reviewed_hair_background": true
+          },
+          {
+            "region": "hair_lower",
+            "bbox": [
+              45,
+              131,
+              48,
+              135
+            ],
+            "white_component_pixels": 4,
+            "strict_white_seed_pixels": 2,
+            "generated_background_overlap_pixels": 0,
+            "selected_pixels": 4,
+            "manual_reviewed_hair_background": true
+          }
+        ]
+      },
+      "generation_job_id": "ea7d248f-e83a-4c04-b05e-2546fe1a8fbb"
+    },
+    {
+      "source": "res://assets/characters/pilot_32/frames/viya_run_e_10.png",
+      "source_sha256": "fed1bf20a19e888361446edca1bd1bfb1b9f30399a12f7d7c8d3d73e512a2dab",
+      "approved_output": "res://assets/characters/pilot_32/edge_repair/final/viya_run_e_10.png",
+      "approved_output_sha256": "f52cb4648b92a05ef483dc79f0895d447624c6c09b074568588cadb400b453cf",
+      "status": "validated",
+      "native_source": "res://assets/characters/pilot_32/edge_repair/native/viya_run_e_10.png",
+      "native_source_sha256": "10b86c1f69d168f24ae7e9c510abeec153f6b41019dbead1f0b167d91d887764",
+      "baseline": "res://assets/characters/pilot_32/edge_repair/baseline/viya_run_e_10.png",
+      "baseline_sha256": "b785fb764d471f32ed3fcb1db6b98c114140b26dd06696677ac80dc4a45b0f40",
+      "generated_image": "res://assets/characters/pilot_32/edge_repair/generated/viya_run_e_10.png",
+      "generated_sha256": "7209d3df9cf2655701a7e5fa1dd7b087594afae765e2bafa33d0e4d70e3dbc87",
+      "registered_donor": "res://assets/characters/pilot_32/edge_repair/registered/viya_run_e_10.png",
+      "registered_donor_sha256": "29c052b8eb2da92b10a73c1735b28cbb2f117bbb8b41c48757ab1efeb5b8ba87",
+      "alpha_repair_mask_path": "res://assets/characters/pilot_32/edge_repair/alpha_masks/viya_run_e_10.png",
+      "alpha_repair_mask_sha256": "1a269fa857c7bbb30e7ad552b15b7b283d012f87f1448f2375c1261f08dbfb0e",
+      "rgb_edit_mask_path": "res://assets/characters/pilot_32/edge_repair/rgb_masks/viya_run_e_10.png",
+      "rgb_edit_mask_sha256": "44d87f38e0f6816513047b659aa7b7aea8fe0f21efd23a53999fecb827e55bb9",
+      "stats": {
+        "alpha_changed_pixels": 139,
+        "alpha_increased_pixels": 0,
+        "alpha_changed_outside_mask": 0,
+        "alpha_mask_pixels": 139,
+        "manual_hair_alpha_pixels": 62,
+        "changed_visible_rgb_vs_current_cache": 484,
+        "changed_rgb_outside_allowed_band": 0,
+        "raw_rgb_exact_outside_allowed_band": true,
+        "face_ivory_visible_rgb_changes": 0,
+        "crown_mixed_matte_rgb_changes": 47,
+        "crown_unselected_rgb_changes": 0,
+        "target_pixels": 474,
+        "targets_without_safe_donor": 31,
+        "raw": {
+          "strict_white_on_original_edge": 142,
+          "strict_white_in_gap_rois": 73,
+          "strict_white_on_crown": 22
+        },
+        "current_cache": {
+          "strict_white_on_original_edge": 63,
+          "strict_white_in_gap_rois": 29,
+          "strict_white_on_crown": 19
+        },
+        "trial": {
+          "strict_white_on_original_edge": 3,
+          "strict_white_in_gap_rois": 1,
+          "strict_white_on_crown": 0
+        },
+        "alpha_components": [
+          {
+            "region": "gun_gap",
+            "bbox": [
+              123,
+              120,
+              126,
+              125
+            ],
+            "white_component_pixels": 11,
+            "strict_white_seed_pixels": 4,
+            "generated_background_overlap_pixels": 5,
+            "selected_pixels": 5,
+            "manual_reviewed_hair_background": false
+          },
+          {
+            "region": "inner_legs",
+            "bbox": [
+              101,
+              146,
+              110,
+              154
+            ],
+            "white_component_pixels": 15,
+            "strict_white_seed_pixels": 7,
+            "generated_background_overlap_pixels": 0,
+            "selected_pixels": 0,
+            "manual_reviewed_hair_background": false
+          },
+          {
+            "region": "inner_legs",
+            "bbox": [
+              98,
+              158,
+              100,
+              162
+            ],
+            "white_component_pixels": 5,
+            "strict_white_seed_pixels": 1,
+            "generated_background_overlap_pixels": 0,
+            "selected_pixels": 0,
+            "manual_reviewed_hair_background": false
+          },
+          {
+            "region": "inner_legs",
+            "bbox": [
+              78,
+              165,
+              97,
+              189
+            ],
+            "white_component_pixels": 50,
+            "strict_white_seed_pixels": 22,
+            "generated_background_overlap_pixels": 1,
+            "selected_pixels": 1,
+            "manual_reviewed_hair_background": false
+          },
+          {
+            "region": "inner_legs",
+            "bbox": [
+              99,
+              167,
+              113,
+              186
+            ],
+            "white_component_pixels": 54,
+            "strict_white_seed_pixels": 21,
+            "generated_background_overlap_pixels": 54,
+            "selected_pixels": 54,
+            "manual_reviewed_hair_background": false
+          },
+          {
+            "region": "inner_legs",
+            "bbox": [
+              118,
+              179,
+              124,
+              186
+            ],
+            "white_component_pixels": 7,
+            "strict_white_seed_pixels": 3,
+            "generated_background_overlap_pixels": 0,
+            "selected_pixels": 0,
+            "manual_reviewed_hair_background": false
+          },
+          {
+            "region": "inner_legs",
+            "bbox": [
+              91,
+              188,
+              96,
+              194
+            ],
+            "white_component_pixels": 10,
+            "strict_white_seed_pixels": 2,
+            "generated_background_overlap_pixels": 10,
+            "selected_pixels": 10,
+            "manual_reviewed_hair_background": false
+          },
+          {
+            "region": "inner_legs",
+            "bbox": [
+              70,
+              191,
+              76,
+              199
+            ],
+            "white_component_pixels": 13,
+            "strict_white_seed_pixels": 3,
+            "generated_background_overlap_pixels": 0,
+            "selected_pixels": 0,
+            "manual_reviewed_hair_background": false
+          },
+          {
+            "region": "inner_legs",
+            "bbox": [
+              115,
+              191,
+              117,
+              195
+            ],
+            "white_component_pixels": 4,
+            "strict_white_seed_pixels": 1,
+            "generated_background_overlap_pixels": 0,
+            "selected_pixels": 0,
+            "manual_reviewed_hair_background": false
+          },
+          {
+            "region": "inner_legs",
+            "bbox": [
+              93,
+              203,
+              98,
+              210
+            ],
+            "white_component_pixels": 19,
+            "strict_white_seed_pixels": 7,
+            "generated_background_overlap_pixels": 7,
+            "selected_pixels": 7,
+            "manual_reviewed_hair_background": false
+          },
+          {
+            "region": "hair_upper",
+            "bbox": [
+              74,
+              29,
+              76,
+              34
+            ],
+            "white_component_pixels": 6,
+            "strict_white_seed_pixels": 2,
+            "generated_background_overlap_pixels": 0,
+            "selected_pixels": 6,
+            "manual_reviewed_hair_background": true
+          },
+          {
+            "region": "hair_upper",
+            "bbox": [
+              72,
+              38,
+              75,
+              42
+            ],
+            "white_component_pixels": 6,
+            "strict_white_seed_pixels": 4,
+            "generated_background_overlap_pixels": 0,
+            "selected_pixels": 6,
+            "manual_reviewed_hair_background": true
+          },
+          {
+            "region": "hair_upper",
+            "bbox": [
+              61,
+              48,
+              65,
+              53
+            ],
+            "white_component_pixels": 8,
+            "strict_white_seed_pixels": 4,
+            "generated_background_overlap_pixels": 0,
+            "selected_pixels": 8,
+            "manual_reviewed_hair_background": true
+          },
+          {
+            "region": "hair_lower",
+            "bbox": [
+              35,
+              115,
+              42,
+              126
+            ],
+            "white_component_pixels": 31,
+            "strict_white_seed_pixels": 6,
+            "generated_background_overlap_pixels": 20,
+            "selected_pixels": 31,
+            "manual_reviewed_hair_background": true
+          },
+          {
+            "region": "hair_lower",
+            "bbox": [
+              35,
+              132,
+              37,
+              135
+            ],
+            "white_component_pixels": 5,
+            "strict_white_seed_pixels": 2,
+            "generated_background_overlap_pixels": 0,
+            "selected_pixels": 5,
+            "manual_reviewed_hair_background": true
+          },
+          {
+            "region": "hair_lower",
+            "bbox": [
+              45,
+              136,
+              47,
+              140
+            ],
+            "white_component_pixels": 6,
+            "strict_white_seed_pixels": 5,
+            "generated_background_overlap_pixels": 3,
+            "selected_pixels": 6,
+            "manual_reviewed_hair_background": true
+          }
+        ]
+      },
+      "generation_job_id": "ad2c8d24-c1f1-4312-b5b1-2d153d5749d6"
+    }
+  ],
+  "dependencies": {
+    "Pillow": "13.0.0",
+    "NumPy": "2.3.5",
+    "SciPy": "1.17.0"
+  }
+}

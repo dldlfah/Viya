@@ -1,0 +1,856 @@
+{
+  "task": "GAME-053",
+  "recorded_kst": "2026-11-24",
+  "status": "PASS_WITH_DEVICE_LIMITS",
+  "code_commit": "73bd1a148ab5b932cfb6833914370df60a804768",
+  "code_tree": "c6cb7d74477e8642873f4dcbc3958be8eb92c63f",
+  "parent_document_head": "5666a65ee6e4f58114f44a0746f9fadf71f45b2c",
+  "branch": "work/viya-turnaround-qa-20261117",
+  "main_unchanged": "d7d8e7561adfb445653e1c49f92336d0701dc939",
+  "behavior": {
+    "visual": "Crimson activation sigil,expanding double shock ring,rising shards at defeated actor samples,gold protection symbol on live bosses. No camera shake/white flash. Overlays precede existing numbers/boss guidance and stay within battlefield. Same renderer hooks support high-angle andF8.",
+    "sampling": {
+      "screen_grid": [
+        4,
+        3
+      ],
+      "maximum_marks": 12,
+      "simple_marks": 6,
+      "maximum_boss_symbols": 2,
+      "duration_max_seconds": 1.3,
+      "global_effects_displayed": 1,
+      "owner": "Existing committed item receipt in bounded48events;no new nodes/timers/RNG/save fields. Old visuals can be evicted by existing buffer policy."
+    },
+    "gameplay": "Purge still kills all current nonboss variants/elites,clears enemy bullets and awards original per-death rewards. Boss HP/AI/position untouched. Subsequent normal reinforcements survive the cosmetic wave. Pause/choice freeze receipt time;restore clears historical visuals. Existing public policies keep their original resources/rolls and receive the same cosmetic effect.",
+    "audio": {
+      "kind": "purge",
+      "cached_pcm_seconds": 0.44,
+      "minimum_gap": 0.35,
+      "priority": 75,
+      "voice_db": -6,
+      "total_cached_specs": 9,
+      "voices": 6,
+      "max_per_batch": 3,
+      "policy": "Existing Master volume/mute and modal/result priority preserved;only newly committed observed receipt requests boom,not render/restore. Generated placeholderPCM,no external asset/service."
+    },
+    "save_schema": 22,
+    "save_fingerprint": "35f0decb9771de4a030f1b5c31c830edbce29be55de2b911a569b6b70750f99c"
+  },
+  "validation": {
+    "native_total": 4237,
+    "native_suites": [
+      {
+        "checks": 23,
+        "failures": [],
+        "status": "PASS"
+      },
+      {
+        "checks": 70,
+        "failures": [],
+        "status": "PASS"
+      },
+      {
+        "checks": 122,
+        "failures": [],
+        "status": "PASS"
+      },
+      {
+        "checks": 57,
+        "failures": [],
+        "status": "PASS"
+      },
+      {
+        "checks": 1336,
+        "failures": [],
+        "status": "PASS"
+      },
+      {
+        "checks": 189,
+        "failures": [],
+        "status": "PASS"
+      },
+      {
+        "checks": 2440,
+        "failures": [],
+        "status": "PASS"
+      }
+    ],
+    "new_purge_checks": 24,
+    "runtime": {
+      "status": "PASS",
+      "commands": [
+        {
+          "command": [
+            "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+            "--headless",
+            "--version"
+          ],
+          "exit_code": 0,
+          "status": "PASS"
+        },
+        {
+          "command": [
+            "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+            "--headless",
+            "--path",
+            "/workspace/Viya",
+            "--editor",
+            "--import",
+            "--quit"
+          ],
+          "exit_code": 0,
+          "status": "PASS"
+        },
+        {
+          "command": [
+            "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+            "--headless",
+            "--path",
+            "/workspace/Viya",
+            "--script",
+            "res://tests/test_combat_foundation.gd"
+          ],
+          "exit_code": 0,
+          "status": "PASS"
+        },
+        {
+          "command": [
+            "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+            "--headless",
+            "--path",
+            "/workspace/Viya",
+            "--script",
+            "res://tests/test_growth.gd"
+          ],
+          "exit_code": 0,
+          "status": "PASS"
+        },
+        {
+          "command": [
+            "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+            "--headless",
+            "--path",
+            "/workspace/Viya",
+            "--script",
+            "res://tests/test_magic.gd"
+          ],
+          "exit_code": 0,
+          "status": "PASS"
+        },
+        {
+          "command": [
+            "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+            "--headless",
+            "--path",
+            "/workspace/Viya",
+            "--script",
+            "res://tests/test_feedback.gd"
+          ],
+          "exit_code": 0,
+          "status": "PASS"
+        },
+        {
+          "command": [
+            "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+            "--headless",
+            "--path",
+            "/workspace/Viya",
+            "--script",
+            "res://tests/test_mobile_hud.gd"
+          ],
+          "exit_code": 0,
+          "status": "PASS"
+        },
+        {
+          "command": [
+            "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+            "--headless",
+            "--path",
+            "/workspace/Viya",
+            "--script",
+            "res://tests/test_run_navigation.gd"
+          ],
+          "exit_code": 0,
+          "status": "PASS"
+        },
+        {
+          "command": [
+            "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+            "--headless",
+            "--path",
+            "/workspace/Viya",
+            "--script",
+            "res://tests/test_combat_cues.gd"
+          ],
+          "exit_code": 0,
+          "status": "PASS"
+        },
+        {
+          "command": [
+            "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+            "--headless",
+            "--path",
+            "/workspace/Viya",
+            "--quit-after",
+            "120"
+          ],
+          "exit_code": 0,
+          "status": "PASS"
+        }
+      ],
+      "scope": "headless import, actual foundation/growth/magic/feedback/mobile-HUD/run-navigation/combat-cues GDScript tests and main boot; visual/mobile approval separate"
+    },
+    "static_sources": 157,
+    "contracts": {
+      "growth_data_contract": "PASS",
+      "magic_data_contract": "PASS",
+      "feedback_source_contract": "PASS",
+      "mobile_hud_source_contract": "PASS",
+      "run_navigation_source_contract": "PASS",
+      "combat_cues_source_contract": "PASS"
+    },
+    "negative_controls": [
+      {
+        "fixture": "purge_unregistered",
+        "rejected": true
+      },
+      {
+        "fixture": "purge_actor_mutation",
+        "rejected": true
+      },
+      {
+        "fixture": "purge_mark_bound",
+        "rejected": true
+      },
+      {
+        "fixture": "purge_boss_sampling",
+        "rejected": true
+      },
+      {
+        "fixture": "purge_render_mutation",
+        "rejected": true
+      },
+      {
+        "fixture": "purge_audio_duplicate",
+        "rejected": true
+      },
+      {
+        "fixture": "route_unregistered",
+        "rejected": true
+      },
+      {
+        "fixture": "route_blocking_hit",
+        "rejected": true
+      },
+      {
+        "fixture": "route_bin_bound",
+        "rejected": true
+      },
+      {
+        "fixture": "route_bin_inclusive",
+        "rejected": true
+      },
+      {
+        "fixture": "loot_unregistered",
+        "rejected": true
+      },
+      {
+        "fixture": "loot_early_credit",
+        "rejected": true
+      },
+      {
+        "fixture": "loot_double_amount",
+        "rejected": true
+      },
+      {
+        "fixture": "loot_global_range",
+        "rejected": true
+      },
+      {
+        "fixture": "loot_unsafe_flag",
+        "rejected": true
+      },
+      {
+        "fixture": "loot_retrofit",
+        "rejected": true
+      },
+      {
+        "fixture": "loot_forgot_production",
+        "rejected": true
+      },
+      {
+        "fixture": "optimization_elite_observation",
+        "rejected": true
+      },
+      {
+        "fixture": "optimization_visibility_margin",
+        "rejected": true
+      },
+      {
+        "fixture": "optimization_unregistered",
+        "rejected": true
+      },
+      {
+        "fixture": "optimization_order",
+        "rejected": true
+      },
+      {
+        "fixture": "optimization_knockback",
+        "rejected": true
+      },
+      {
+        "fixture": "optimization_cache_boundary",
+        "rejected": true
+      },
+      {
+        "fixture": "optimization_route_tie",
+        "rejected": true
+      },
+      {
+        "fixture": "optimization_cache_bound",
+        "rejected": true
+      },
+      {
+        "fixture": "stage_unregistered",
+        "rejected": true
+      },
+      {
+        "fixture": "stage_old_map_retrofit",
+        "rejected": true
+      },
+      {
+        "fixture": "stage_all_departures",
+        "rejected": true
+      },
+      {
+        "fixture": "stage_prologue_overwrite",
+        "rejected": true
+      },
+      {
+        "fixture": "stage_visual_mutation",
+        "rejected": true
+      },
+      {
+        "fixture": "stage_supply_rules",
+        "rejected": true
+      },
+      {
+        "fixture": "pressure_unregistered",
+        "rejected": true
+      },
+      {
+        "fixture": "pressure_spawn_guard",
+        "rejected": true
+      },
+      {
+        "fixture": "pressure_identity",
+        "rejected": true
+      },
+      {
+        "fixture": "pressure_legacy_rules",
+        "rejected": true
+      },
+      {
+        "fixture": "pressure_save_policy",
+        "rejected": true
+      },
+      {
+        "fixture": "encounters_unregistered",
+        "rejected": true
+      },
+      {
+        "fixture": "encounters_cap",
+        "rejected": true
+      },
+      {
+        "fixture": "encounters_retrofit",
+        "rejected": true
+      },
+      {
+        "fixture": "chest_double_grant",
+        "rejected": true
+      },
+      {
+        "fixture": "chest_persistence",
+        "rejected": true
+      },
+      {
+        "fixture": "stable_camera_unregistered",
+        "rejected": true
+      },
+      {
+        "fixture": "stable_camera_adapter",
+        "rejected": true
+      },
+      {
+        "fixture": "stable_camera_limit",
+        "rejected": true
+      },
+      {
+        "fixture": "curse_unregistered",
+        "rejected": true
+      },
+      {
+        "fixture": "curse_doublefire",
+        "rejected": true
+      },
+      {
+        "fixture": "v17_retrofit",
+        "rejected": true
+      },
+      {
+        "fixture": "curse_gate",
+        "rejected": true
+      },
+      {
+        "fixture": "curse_render",
+        "rejected": true
+      },
+      {
+        "fixture": "reacquire_unregistered",
+        "rejected": true
+      },
+      {
+        "fixture": "v16_retrofit",
+        "rejected": true
+      },
+      {
+        "fixture": "pattern_single_hit",
+        "rejected": true
+      },
+      {
+        "fixture": "pattern_old_ai",
+        "rejected": true
+      },
+      {
+        "fixture": "pattern_visual_mutation",
+        "rejected": true
+      },
+      {
+        "fixture": "pattern_unregistered",
+        "rejected": true
+      },
+      {
+        "fixture": "pattern_gate",
+        "rejected": true
+      },
+      {
+        "fixture": "pattern_contact_guard",
+        "rejected": true
+      },
+      {
+        "fixture": "pattern_stop_on_defeat",
+        "rejected": true
+      },
+      {
+        "fixture": "missing_reset",
+        "rejected": true
+      },
+      {
+        "fixture": "early_clock",
+        "rejected": true
+      },
+      {
+        "fixture": "changed_damage",
+        "rejected": true
+      },
+      {
+        "fixture": "drop_as_collection",
+        "rejected": true
+      },
+      {
+        "fixture": "unbounded_received",
+        "rejected": true
+      },
+      {
+        "fixture": "received_before_hp",
+        "rejected": true
+      },
+      {
+        "fixture": "unbounded_visuals",
+        "rejected": true
+      },
+      {
+        "fixture": "cosmetic_rng",
+        "rejected": true
+      },
+      {
+        "fixture": "mutable_view",
+        "rejected": true
+      },
+      {
+        "fixture": "supply_changes_rewards",
+        "rejected": true
+      },
+      {
+        "fixture": "supply_mutates_observation",
+        "rejected": true
+      },
+      {
+        "fixture": "supply_glyph_mutates_state",
+        "rejected": true
+      },
+      {
+        "fixture": "unregistered_test",
+        "rejected": true
+      },
+      {
+        "fixture": "ignored_engine_exit",
+        "rejected": true
+      },
+      {
+        "fixture": "ignored_engine_errors",
+        "rejected": true
+      },
+      {
+        "fixture": "ignored_test_result",
+        "rejected": true
+      }
+    ],
+    "python": {
+      "tests": 12,
+      "status": "PASS",
+      "command": "python -m unittest discover -s tests -p test_check_project.py"
+    },
+    "source_sha256": {
+      "project.godot": "0d8f7fce157178f7bf31acc183593b40f23cff6d266ea5270f4b75f0899b79e5",
+      "scenes/main.tscn": "17a2e77db7cf47af860de3c263dc9119b0df349bafdf2a8b52a40f7450c9e22c",
+      "scripts/combat/actor_motion.gd": "fea6dfdac7f7b296689e99bca549777d721438bcd0c1efeafa47edfc1175f190",
+      "scripts/combat/approach_cues.gd": "3b61db842e2fced8e08c391e83fe342a2f349e7453d2d37421f51d1b340ce4fe",
+      "scripts/combat/attack_visuals.gd": "49e9acdb93325368fbf4c6d2732d11877e25f9daa829e6b00a466b74d339556f",
+      "scripts/combat/battle_forms.gd": "a0e9ebcf2cb5d369c0db53f089ab9bb9df0163b1f171908a57bd63f7e285ab95",
+      "scripts/combat/battle_projection.gd": "f8abad51e46f2353d01cc6f1f4b904485621d00ccf75e854ab873bc688f160a0",
+      "scripts/combat/battle_view.gd": "6b1eac313904be048ba2753b70f8b6f5571f94e734e8b0b945c6a15e77da4a20",
+      "scripts/combat/battlefield_presentation.gd": "359b189334ab7539b25587cc82629394c389380432f209dfc67e5cfc35e3734a",
+      "scripts/combat/boss_guidance.gd": "d7c1195590ce6fedd3cc8c90cbcdfdf4a2aaf7b994fdfe1a26206e3a9709fef9",
+      "scripts/combat/campaign_encounters.gd": "210d49f4065cc6fe0e5bf960ce97762bc25529d7542d5f93a5ff85d2452490ca",
+      "scripts/combat/campaign_encounters_v19.gd": "61c5baade67f4d98b6fddd438664beb957abddf80f9f6950a1f41a84947a0332",
+      "scripts/combat/campaign_pressure.gd": "594b6a781d5d067027f5d3f0008a784e1779871672c66d001dc794a7aa5433f4",
+      "scripts/combat/combat_audio.gd": "4eccf16086332645866e4d71b3805bcba1de6c0d09ae42a8e67ca3fb515e1302",
+      "scripts/combat/combat_audio_bank.gd": "4dd99aff553c2eb3526694121d48fe70965c631d899643c7381201ad21d503cc",
+      "scripts/combat/combat_camera.gd": "0039e471d576f4daeb00f6b453f54a29d32917fe71aef4490b3f0bd33e90f896",
+      "scripts/combat/combat_cues.gd": "04027c56be8fa43d6465a165569b1e209dd7782a630d97a6e96d0acc3235ebda",
+      "scripts/combat/combat_display.gd": "9e08022d0249aa66e3d4ea6489b5e49d20cd90275ebe592620a28ebe9c82893e",
+      "scripts/combat/combat_profiles.gd": "8dc9e65ddef8bf8a57a4304c1b9d5e7f196d6d846b2a5048874b1579a1279e5f",
+      "scripts/combat/curse_visuals.gd": "f6fd054527091a5631eb003a2ea38c8308d1bccc29098f5542250916ea0fb3ac",
+      "scripts/combat/defense_rules.gd": "1fa247925d4d5a33dfdf7371285d9192b85b0cd83603efed33894693053691f8",
+      "scripts/combat/enemy_pattern_visuals.gd": "ffe5032905c8df738b2d7f2a92346206b7df14502b4d2f8babc88304adc5d666",
+      "scripts/combat/enemy_patterns.gd": "a19cad533e9185a0bbca1671028349463a2c9c7c020c0e26dea1d5f59b3eebda",
+      "scripts/combat/enemy_patterns_v1.gd": "4059f30002b56fa0ccb73ed38b4fe4af9c0fe8092a8f5836ad53f6e3cef5a4af",
+      "scripts/combat/enemy_patterns_v17.gd": "df42114040f4da370a67257445063fdb851033182108111eac609758334b81ab",
+      "scripts/combat/enemy_patterns_v2.gd": "60ff5da133476bd9c851aaef695cd07ae748e313d9f654dd4b2b0e258af7ca1d",
+      "scripts/combat/enemy_patterns_v3.gd": "1c5ea0cee251c0fda6a5a77b40201dba8d97b27f42f5ac92c93602e43c831114",
+      "scripts/combat/feedback_state.gd": "3ee19238fb9307bc9953fed3ecc266ecff420e2c74ceffe81409069372e87d88",
+      "scripts/combat/gold_dungeon.gd": "f7073b32297d4326a0abc973022d7280c53f92114d49db53933874118b3ccc0d",
+      "scripts/combat/high_angle_battle.gd": "a90f4c00eb8a7c86fcd5e2d8ee3a54a9c11071edae4a46ede26326f1c565ea6c",
+      "scripts/combat/incoming_feedback.gd": "71dfbafc9d3e58435afa40b2f1f427387ad899f118906cda72b028538fdb853b",
+      "scripts/combat/loot_attraction.gd": "7220bce58431c07c9ac53e8ee8882becd3de799e3bb6ca22dd38a154fc5d57d8",
+      "scripts/combat/magic_state.gd": "41a9a7739edc46e98dda26986f23dddf1c0ff6bdf9b40d80640f797460b9223b",
+      "scripts/combat/purge_feedback.gd": "f9d31b42cc7e5eb72d5b9c6793dc1c937383b8a862807794e699dc12624caed8",
+      "scripts/combat/run_state.gd": "8774af74f51f4df16769cd442236fce1bde82ccf5f08ef478a6121eea504a5b5",
+      "scripts/combat/spatial_candidates.gd": "a8b2c35980801036c0a2471cb6662bb64160090988161221f43133187f63be9a",
+      "scripts/combat/stage_catalog.gd": "618ad3e28458dd3bde18507139abacea84a5084ca8e85b15a64badc63682b4ca",
+      "scripts/combat/structure_feedback.gd": "1ea626cf8ab47d9d8a5acf717f0a8d115bcf3ba18ed45a5c118e37728f1673c5",
+      "scripts/combat/supply_feedback.gd": "32651a49a6f9d0581390406837a9fed170e265251d403e54c2d6f87cc628241d",
+      "scripts/combat/weapon_modules.gd": "b38ed89c5459ef37aff85553fd5f08856c3e6b8665e81d79f926639f1a60a6bd",
+      "scripts/main.gd": "b78001e0f8d4d4190d43a6418a752a020b3d8774fd0f1c43a40afd355d0ecc32",
+      "scripts/progression/account_talents.gd": "0774659235d3bea9276574996565b315156260274750ef8c7f9969f18550f43e",
+      "scripts/progression/combat_pacing.gd": "07f73dae843a7779f992976efb1901774782db1bd021bef01999a83ea7814826",
+      "scripts/progression/gold_progress.gd": "2289fc850fc5f856d674863de6119987da74ed6bd931ade50f0faa11ea0f7012",
+      "scripts/progression/growth_state.gd": "07287b03d12eac144dce6f1858ceb2b6561e6281b4c011ac6bc5d5d3c72a0e6e",
+      "scripts/progression/run_snapshot.gd": "74dde47c7790fff4fceb16555c86e3440411382d956a5c5106d78d414b3a1602",
+      "scripts/progression/run_store.gd": "bab493f1963ea2a6d98770f9ef9686d70d4b257e0b49afb3386de661a6081986",
+      "scripts/progression/skill_catalog.gd": "ccd13a2b02f4b57497beae39e483edfca53617cc3a39e43cbaf8009535c820d8",
+      "scripts/progression/weapon_catalog.gd": "aced8b45e765780b4053bfa436e1dbbc1696d2173cb4cb762f21298d5f91421b",
+      "scripts/ui/account_bonus_summary.gd": "c75ffab9d10f7b73fa9b89df9c532a119f00431447651ca13a1f004122e4cee8",
+      "scripts/ui/actor_assets.gd": "f98126291f60e27b9d903999c61f6a1c03a34555eb824a5fdd3e51db18a359c1",
+      "scripts/ui/asset_slots.gd": "26ffa91b19932e5d123eb03d6b63cd41e0f42881961ab6d668ccc543513a114a",
+      "scripts/ui/battle_chrome.gd": "6be2ec2203a0517ce6842d3c7979135ec7c94afaa5b69b1fff2508f083473a2a",
+      "scripts/ui/battle_save_notice.gd": "4030876186c66ae7de4ec2b8808d8b905881c40d0c0af29bd241f659dcdf2189",
+      "scripts/ui/city_preview.gd": "d01c0ca26b7d812b2b7d6d63339788be98241f6a09ec58a1a8d35a6f7b788937",
+      "scripts/ui/combat_skin.gd": "b9ed37f5c7f1831095805e13c6e3eaa986e762081209372cf8a4e09ff6608c66",
+      "scripts/ui/combat_slot_button.gd": "91a02ab52e8ebcb26985ae143dd596fbd4b62bd3fa6e440e5b0d12e44132a81d",
+      "scripts/ui/encounter_notice.gd": "316faf9f8de95b3917268b4773092a205cb0019e5860044294e0f781cb640e3e",
+      "scripts/ui/feedback_panel.gd": "2103fd9b8692c5606273175b415447f35a995f9a18306a5e8f0abeeb7c5d465b",
+      "scripts/ui/growth_overview.gd": "43dfb9306f4e280b57c8445b179c0e797938bc9fd0e5fa070053474cadb53a42",
+      "scripts/ui/hud_layout.gd": "d9a5dacd8e3816611b1658557c5366e1dbd6caeded4312d8f2e5e5584becddb6",
+      "scripts/ui/mobile_main.gd": "625fc31df52921c7a3cccb476717bc5a3f0dfc402f708e990db31eef31c5e481",
+      "scripts/ui/move_input.gd": "cee8e709185740d1cb964fff13873a0818d14d0b3653f36d6416a1b17da40bd8",
+      "scripts/ui/responsive_feedback_panel.gd": "b36ce744a7378d696b91018935f637da0ae88beccdeddd85b1187a238958ed5b",
+      "scripts/ui/reward_payment.gd": "d3fc0b75e7f9fbb5f55ffdbfe708039ccb77e4a35231c58d6fdcd4996a246c11",
+      "scripts/ui/skill_preview.gd": "5c3de40b161d38de44234f6f1a2c63064bbc99021c4def95f7995382b02af5db",
+      "scripts/world/map_catalog.gd": "e2cd8e50be728d455d0ea9f793ed7413a403c29cb41769a59b273e6ff07d2c50",
+      "scripts/world/map_space.gd": "0f105af73914844e8e0290ae0282f97de6ce3e27d796c39b56dc8485e340ec4e",
+      "scripts/world/supply_catalog.gd": "9dab0562ce196819d64647ba75deb8d9b89d3710b0edffcc45b6cb00325e874c",
+      "tests/fixtures/game050_v21/map_space_before.gd": "8110f4a28e04e67fe738011ea888f31a9c74c450ed79148d88c1da602fa03ae8",
+      "tests/measure_armor.gd": "19a42c9db8ac7b52b6bc2778f24e78ff05b433676c1443d3300a7d4bdd67c6af",
+      "tests/measure_balance.gd": "358f85456890a86892888fb67a6f3d2a32c58a6c0be40b338f0a3970077d8678",
+      "tests/measure_boss_guidance.gd": "891bd7aba3c747e25b065acfd5ef45d9057e01047ff374656247e02744d46b13",
+      "tests/measure_campaign.gd": "acc9b093cdc59af87d11f342a88a537b7f0d35ac8745149eb1ca0046ac791e6c",
+      "tests/measure_combat_audio.gd": "727d34de154acb4bb080553683e423a5cdea35fcf4592ee23fe00540848d199c",
+      "tests/measure_enemy_curse.gd": "665ce8a3fcf0b981a1a7bf824cbe6a9da0a3efbebdf23d18385a2c3e1666d36e",
+      "tests/measure_enemy_patterns.gd": "d49f9091fcde4ca3fecf19d2263917a51d4e9cb84bda27f0fb2e788a7cbbd9e9",
+      "tests/measure_pattern_reacquire.gd": "5dceefb39529e718a12aa0068f0f769eec0f7b52aab51643e48cce16b7abc528",
+      "tests/profile_combat.gd": "1499a2a5db64c0869bca71f94582729a029bd7b240dd9ba1ad75a52e3333a2cf",
+      "tests/test_account_bonus_summary.gd": "8949dd854d50c6fbe4898180848c4b9377b91ff55bfd7e9b0c04a24e5bef64c7",
+      "tests/test_account_expansion.gd": "97d23a6d5bc708b9ebdcc76a492982d5b8e0e2fa4be6f2ad0c2ca501d5d35422",
+      "tests/test_account_talents.gd": "a85b5b84514323481e45137ab05e611af9d18f364393b9a6891fe45f1fe2b9f3",
+      "tests/test_actor_animation.gd": "33fc1e8ed402bb2a7a1da1a8505eda77ef8a47dfbb5e5370c84640c943a03151",
+      "tests/test_attack_visuals.gd": "b091e1672614637797907658c628e86bd6f16ca728ce7cb1dae67d1529f1b443",
+      "tests/test_battle_save_notice.gd": "2bbfd4ef99e616b4be393a204e7c99a1acd17e0c3c1fb0b90629166ae0dd178c",
+      "tests/test_boss_guidance.gd": "2f3e94e8c0cb9e61e9343a6fd87ac26fc3e77316d42da42e99fd4d32100329b3",
+      "tests/test_camera_lead.gd": "739f655f3b66662588590a12ae88dd823898d5df482f786b4bf5c7355b3f5bfa",
+      "tests/test_campaign.gd": "07c21cb62d12d5394b0864afe3ce47f62b3cd11146fa4bd2780957c54d3f1f49",
+      "tests/test_campaign_encounters.gd": "78ef8b4ffa62dbe7f7fbf110742c7fad4fca6783b2fd4ae8a69d845f79dc57c7",
+      "tests/test_campaign_pressure.gd": "3c9d722cf5307bf0742a3026dfa3efff55e16fa3050b5259ae2a29f072fc7664",
+      "tests/test_chapter_ui.gd": "b48b6813b9d8a5e8d98c4d1e7d6a9ba65f7c54c5995bee66b8afcb55348db984",
+      "tests/test_combat_audio.gd": "0a6b8148cca69f45ee295e92ce1dcc796719b3a650100366dab3e3f19b098346",
+      "tests/test_combat_cues.gd": "5aa634b86c55ba08d39883b39ecb77fc23d1e7990b30affd2743cd876f67c227",
+      "tests/test_combat_display.gd": "15b28b0a80b539bf9ccdce23ee988777307bfb875a84e4429796ba32575dbcdf",
+      "tests/test_combat_foundation.gd": "57efe421768dad47bee7a560325214a0c8a30d5fdf8d015fc2648f2b8c71416d",
+      "tests/test_combat_pacing.gd": "d321ef8b3e01f9879b8240bb439d93eaae8b5b75e5962437ddd40f7e6298b600",
+      "tests/test_combat_performance.gd": "c02202ecffa9dd4ff6b88acc43e6cf9c257f6aa9e2d0c8738fb300b9de1c6b47",
+      "tests/test_combat_profiles.gd": "b9bd77beba226279c7c4fb4825e4290dd078974abd96969b4785778995b12f95",
+      "tests/test_encounter_notice.gd": "3d300aafff042d777c4bec71fc481f039a2e1486975be8c360ad0810350e2488",
+      "tests/test_enemy_curse.gd": "396b33357a0654515bf5ff00c3318d10bf7a808a995cb81a181e39d24d9b3837",
+      "tests/test_enemy_patterns.gd": "95cdfc32da2788cd28bb39abaf5d05326c1dec7d5d253c3e96e68de8b6033b45",
+      "tests/test_enemy_variety.gd": "5d36634e1b4803c859f6b9786b023d2b1fc8b90e28bfd4ad3d9d69e5896d5306",
+      "tests/test_feedback.gd": "a0558acd7ab6216ccceb597f90c823a1078b0cda9337392440fe6523f22fce86",
+      "tests/test_gold_dungeon.gd": "5bf6924c97cb1bb83bb3b9586e2a5ba97dc045dceb345aa2819f49fd4eda5709",
+      "tests/test_gold_rewards.gd": "ea84e51520721ad62e52416145f51163d541ef0c3eac40cc125ef343d08c28b4",
+      "tests/test_gold_settings.gd": "29358cc8bd690213f4fab1fde43cc0a921689983201cfbcbffa18dd872e047a9",
+      "tests/test_growth.gd": "98f63a46d71eeba5f8807655ba6bd9d87fe89b240fca92bbbc12f253fbe0ba72",
+      "tests/test_growth_overview.gd": "bd6706bf3253d25b8b41c6374a53732762af0d361d11c04aac47abee4f565e87",
+      "tests/test_guide_skin.gd": "50502dc737876e114d1443ad66af92d5973b131f746a2162952d7385797d1b6a",
+      "tests/test_high_angle.gd": "1ee753048d73d0349cb79cd55d37f8f9c618802b74e2b90f37a918bfeb60bcf6",
+      "tests/test_incoming_feedback.gd": "19965b733e2e28451744a1af948a236631e3bc9d0b8bf83b3beb4f4a737e37ee",
+      "tests/test_loot_attraction.gd": "a645d982e12defd2265d0a434cf4397a019a2c79bdfba55e51c0d381d79ecce2",
+      "tests/test_magic.gd": "2969ef796d9255f7b4c79534c68ebabb1b2e349adb0828929d3450ab8f75a090",
+      "tests/test_map_pilot.gd": "1969e6dc859b07d844ad043846b05fb1e11d1d237ab96c2841ce4fd5ea7d22fd",
+      "tests/test_maps.gd": "90e47dd59c5728dc772c962c852b51aa7689a82c6645195cb1273dc396526601",
+      "tests/test_mobile_hud.gd": "3d0234bea7a3883f6cb38fe127d8062cbd393b97c3132109e853e84c68e75a76",
+      "tests/test_pattern_reacquire.gd": "e86e6dccb76be58ab6318fe66ad4134b20a3e77561051ed3bacb7f584d8b918c",
+      "tests/test_purge_feedback.gd": "8d71e53f81d07901eec980f9c9e92fc6e2ee5422f9e4292c8aa82162f2c14d52",
+      "tests/test_reward_payment.gd": "3025a1882616b2d7fcdecb276a8b772d633bcbef93990d426ded5e733c3fded1",
+      "tests/test_route_queries.gd": "04db6708e68a1da892cb61f29c5ed0fc20675095b1634c550e8a07facc9d28ff",
+      "tests/test_run_navigation.gd": "a62e0e30c2c925bd09044bf34073c16a51e234e56d235e24dbea403d238f5311",
+      "tests/test_scatter_packs.gd": "1d642ed432b31e509721d9867f5e7dde4d904499cf7555b163670ef9b5c07f2d",
+      "tests/test_skill_preview.gd": "0a62fc3bcdafeb525507f4107621d5c14a955e5d5270750a99d7de1e61f9ad9f",
+      "tests/test_stage_battlefield.gd": "0d3b33ef9a8c13eb1f2012a77d5393a412859ce8ff74d6ebffde9cfc6dab8163",
+      "tests/test_structure_feedback.gd": "9bd09ac68b0c6cbb72d568f4f97f1f2c2a90c7fe1151172c0db834ab3fd10267",
+      "tests/test_supplies.gd": "5de153bb81aaa06f5f6bbd321b8689d7afe59160d314a6cb06353fac39d8678d",
+      "tests/test_supply_feedback.gd": "72f6b9ea21ba920944c8148be4a376840f0b1c4a562fd8256fe4f6025c6c7597",
+      "tests/test_talent_tree.gd": "984fdf593f086254dd17fde222ac7cafa35d8b223195fd46bc04ee170ddada21",
+      "tests/test_weapon_skills.gd": "34cf11c395a8ab3b5d7e9090d93f106881ec9efa3042981ed237f1bc0df81bf2",
+      "data/actor_presentation.json": "e82ae99f672bd3e6979778f9a6201efb659b160a3407d9b1b6099eb0e0257f04",
+      "data/campaign_battlefield.json": "743c2062876ec3b4818fc73a40cad93ba907707e23fc052edeff4a0eaab2eb06",
+      "data/campaign_encounters.json": "bb95382de9a546f1f1ffb95e0b119cf311801e96e43f3929ecce0a02631178ce",
+      "data/campaign_pressure.json": "071bd8be7adefa32668d23d4127fe6a83e5692f67217df27b2ae9be1275d1203",
+      "data/chapter_one.json": "d2265967ac28989d69b394eb784785caf0df0cfe9bb81d0c9fdb1c25cb00c4d2",
+      "data/combat_pacing.json": "d153666f7f77506da281d1f90ae5fbc5822cd997c6db76590f35ef8a6662d597",
+      "data/combat_profiles.json": "d36abf0b4d0feb950e6448474732decdac9f98035a9962e5f5287b09eb1d1144",
+      "data/destructibles.json": "130421dd85d4dbf9ff9f70ab297b36586870e65fb9426cec0c2f58ce57a49b39",
+      "data/enemy_curse_v3.json": "c1d23889286fe1f91d4ef3b206de5b6e910211a52e935162da42355dc5d39659",
+      "data/enemy_patterns.json": "ba04c2b3076746724a09cf212576886edfa33821f666daa97a541d5042680bec",
+      "data/enemy_patterns_v2.json": "83bf0449e6dad16499af5a4c533c51d0ce3dc06fd73c02eb626de2d1e2e7ac21",
+      "data/gold_dungeon.json": "9a3427a6ddfb3462123f92e6918966ff7b1887ff324f368c600a9ad5993b1f9e",
+      "data/gold_rewards.json": "8f465cd44d1bf712b0fa758b2b8ff7cd17ecb450cff7f8e567d27f0397154993",
+      "data/map_presentation_slots.json": "a223bf76c455a8afa5f085e28261660ccd10972aba2efd49bdff85b1849b404d",
+      "data/maps.json": "925638f794696b96fdf48df8c266654cef3af002f43e57f91daa80f8d70e8bd4",
+      "data/presentation_slots.json": "d0a2e6ea1a55d37680bfa02ef9f9036f00deb03575ff9e9dcd10fa7179aa1001",
+      "data/prototype_skills.json": "a6ba197fe558d328e1fcab96506fa098465a4c72aebfe1a1b29cb98642628d1a",
+      "data/stages.json": "2e656d2dc155ad93c76b8a1303133992d95529283be7f5b16423738f4edaeeae",
+      "data/weapon_skills.json": "be23e1eb349958fcebf3dba088fcf389d50654fc31cb83523513c178ff81c659",
+      "tools/bootstrap_godot.py": "4c3ca17c3b90f9c5590d7a82a76ae71a353f4d15aae973cf37e03e745ebfdecc",
+      "tools/check_combat_cues.py": "ef95b918d999c7951aeeb24b7d5d5ea933521af76a980cd6bcb6ac33a60f4959",
+      "tools/check_feedback_data.py": "f1bd6f415e919a32faab1b403073e24dcdda4b819938b9b707dacfc32320bec7",
+      "tools/check_growth_data.py": "304be6a17484dd44525d94bad31f422bd13be315ba3309a366ca2bd5b9e2ebfd",
+      "tools/check_magic_data.py": "9405ac2a576b42d279944aacec82f00500ad50c70e5f141413a05e64b1f39e5b",
+      "tools/check_mobile_hud.py": "9e43cace28480d3aacb45dabaf67acb2ad24e1c8a9366aa5c011a279eba35487",
+      "tools/check_project.py": "eeafd73fc4503c7af952331c093272a5510aade3fbae04e42afb77eb23f55157",
+      "tools/check_run_navigation.py": "e05aca7cda6442a1c0d7b4213b79f4540a6d5fa3e2a7639dd3f43ae8e35a3cd9",
+      "tools/report_economy.py": "5c449e04b43847c57ec9617c7c43b2408566dbc7691e32b8d3e33d8b33b24bd6"
+    },
+    "historical_authority": "Original18/19/20/21each606state+7RNG comparisons retained. Original flier tiny-positive strict-save rejection remains expected OPEN;no validator relaxation. New pre/post-purge enabled/disabled and7paired1540 reference states agree.",
+    "new_checks": "Real pickup/committed receipt,5variants+elite/boss/bullets/rewards;no gameplay/RNG/render mutation,double consumption,pause/choice/restore/offer,expiry/reset/repeated wave/simple cap,1540sample bounds,dedicated6voice playback/no duplicate/mute.",
+    "command": "XDG_CACHE_HOME=/workspace/.viya-tools/godot-4.7.2/cache XDG_CONFIG_HOME=/workspace/.viya-tools/godot-4.7.2/config XDG_DATA_HOME=/workspace/.viya-tools/godot-4.7.2/data python tools/check_project.py --godot /workspace/.viya-tools/godot-4.7.2/bin/godot --output .local_validation/GAME053/check",
+    "implementation_corrections": [
+      "Typed ternary empty-array assignment was corrected to explicit typed initialization/conditional capture before final runs.",
+      "Audio test startup/teardown was changed to await real process/mixer callbacks instead of play/stop/free in one frame. Final standalone,all native suites,and fresh OS reader have no ObjectDB leaks or script errors.",
+      "GUI initially assumed no later reinforcement;assertion corrected to preserve normal pressure respawns. Gameplay stayed unchanged."
+    ]
+  },
+  "real_gui": {
+    "environment": "Linux X11 DISPLAY99,Godot4.7.2,Mesa llvmpipe,Dummy audio",
+    "report": {
+      "boss_hp": 3195,
+      "boss_hp_initial": 3200,
+      "errors": [],
+      "fingerprint": "35f0decb9771de4a030f1b5c31c830edbce29be55de2b911a569b6b70750f99c",
+      "initial_actors": 160,
+      "kills": 165,
+      "mouse_controls": 4,
+      "purge_plays": 2,
+      "root_nodes_unchanged": true,
+      "schema": 22,
+      "screens": [
+        {
+          "age": -1,
+          "boss_hp": -1,
+          "bosses": 0,
+          "kills": 0,
+          "marks": 0,
+          "phase": 1,
+          "tag": "before",
+          "viewport": "(1280, 720)",
+          "sha256": "af3dd1a5df8a19a11910206c50935e14cfbe53b468e756c1330bcc02510ff6d9"
+        },
+        {
+          "age": 0.0,
+          "boss_hp": 3200,
+          "bosses": 1,
+          "kills": 159,
+          "marks": 12,
+          "phase": 1,
+          "tag": "activation",
+          "viewport": "(1280, 720)",
+          "sha256": "0ef653bab4089e110f57d949f999d88aed6421a6256371f9d613e0e02a42055d"
+        },
+        {
+          "age": 0.233333333333334,
+          "boss_hp": 3200,
+          "bosses": 1,
+          "kills": 159,
+          "marks": 12,
+          "phase": 1,
+          "tag": "impact",
+          "viewport": "(1280, 720)",
+          "sha256": "97e2ae4f9a9da3fae77db5f1508567b01cc205a69834358c6c708ee080ae4409"
+        },
+        {
+          "age": 0.500000000000001,
+          "boss_hp": 3200,
+          "bosses": 1,
+          "kills": 159,
+          "marks": 12,
+          "phase": 1,
+          "tag": "wave",
+          "viewport": "(1280, 720)",
+          "sha256": "027c12f5893ee5ebe4513bc5429fe11fceec725522d9f568d514cce1737a3b47"
+        },
+        {
+          "age": 0.199999999999999,
+          "boss_hp": 3200,
+          "bosses": 1,
+          "kills": 165,
+          "marks": 0,
+          "phase": 1,
+          "tag": "legacy",
+          "viewport": "(1280, 720)",
+          "sha256": "5d2031f65dfe8e699c11248aa85d0ca7bbcd9d49df43f6ac621cc12898e48abc"
+        },
+        {
+          "age": 0.199999999999999,
+          "boss_hp": 3200,
+          "bosses": 1,
+          "kills": 165,
+          "marks": 0,
+          "phase": 1,
+          "tag": "simple",
+          "viewport": "(1280, 720)",
+          "sha256": "4ce27ac511ff10c44c50764b11f7e9448551ba342f1a58d909fc9be692f9460c"
+        },
+        {
+          "age": 0.199999999999999,
+          "boss_hp": 3200,
+          "bosses": 1,
+          "kills": 165,
+          "marks": 0,
+          "phase": 1,
+          "tag": "compact",
+          "viewport": "(960, 540)",
+          "sha256": "d5d4dcedd21016226252a380bc606c373aa3e963ddfe20113d498fe92abfa1eb"
+        }
+      ],
+      "status": "PASS"
+    },
+    "scope": "Controlled crowd on original stage and actual item destruction/pickup,not a natural6min balance/FPS recording.159kills from160actors withboss3200HP;6new regular reinforcements are killed only by legitimate second purge. After later skill choice normal combat resumes;finalboss3195is NOT purge damage.",
+    "cold_process": {
+      "authority_equal": true,
+      "errors": [],
+      "final_kills": 165,
+      "phase": 1,
+      "purge_audio_plays": 0,
+      "running_steps": 100,
+      "saved_kills": 165,
+      "schema": 22,
+      "status": "PASS",
+      "steps": 100
+    },
+    "cold_scope": "Actual original atomic reader loads post-purge22save,requiresContinue,100RUNNING states/all7RNG match reference with zero historical purge playback or duplicated kills/settlement/admissions.",
+    "environment_warning": "Software driver cannot change VSync mode. Actual speaker/headphone audition not verified;play requests and PCM data validated."
+  },
+  "cost": {
+    "actors": 1540,
+    "after_p50_ms": 6.679,
+    "after_purge_ms": [
+      6.438,
+      6.261,
+      6.679,
+      6.133,
+      6.944,
+      10.134
+    ],
+    "authority_equal_all7": true,
+    "before_p50_ms": 6.123,
+    "before_purge_ms": [
+      7.511,
+      5.664,
+      6.123,
+      5.773,
+      9.025,
+      5.831
+    ],
+    "capture_p50_ms": 0.509,
+    "max_sampled_marks": 12,
+    "scope": "Alternating old/current committed death path,same archived1540actors/full7RNG;capture is bounded overlay sampling;headless CPU only."
+  },
+  "cost_limit": "Headless single-activation CPU at1540actors,alternating old/current,not overallFPS/mobile guarantee. Additional sampling median0.509ms;total6.123->6.679ms. Existing later movement/rendering bottlenecks remain OPEN.",
+  "preview": {
+    "path": "docs/validation/GAME053_PURGE.mp4",
+    "sha256": "49fd265eeccd708684f818650416555b7fff0ad2416c1b196a8a8fefbc00113b",
+    "width": 1280,
+    "height": 720,
+    "fps": 30,
+    "frames": 52,
+    "duration_seconds": 1.733333,
+    "codec": "H264/AAC",
+    "construction": "8held actual before-pickup frames +44native effect frames;the same generated purgePCM is mixed at-6dB with267ms delay. Controlled preview encoding,not live FPS/microphone recording."
+  },
+  "screens": {
+    "GAME053_IMPACT.png": {
+      "path": "docs/validation/GAME053_IMPACT.png",
+      "sha256": "97e2ae4f9a9da3fae77db5f1508567b01cc205a69834358c6c708ee080ae4409"
+    },
+    "GAME053_COMPACT.png": {
+      "path": "docs/validation/GAME053_COMPACT.png",
+      "sha256": "d5d4dcedd21016226252a380bc606c373aa3e963ddfe20113d498fe92abfa1eb"
+    }
+  },
+  "probes_sha256": {
+    "render_probe.gd": "f0613cf42de9539a5948582d8c1f1d6ba57f56ac291d27e2ed61b2df76f70e2c",
+    "cost_probe.gd": "0f1df53c4f3d46d3032f723e9a8a442664cd811831386a325a17c2cc945aee38",
+    "cold_probe.gd": "e2f7a29324313fefa25bb03ce26ea074987ba4cfcababef10adc59111301a53c"
+  },
+  "protected_paths_changed": [],
+  "generated_artifacts_removed": 193,
+  "tracked_runtime_imports_preserved": 12,
+  "not_verified": [
+    "Windows userPC Godot F5/export",
+    "Android/iOS physical devices/performance/thermal",
+    "Physical speaker/headphone listening",
+    "New6min balance/economy/final art approval",
+    "Full elimination of GAME052 late-game lag;next GAME054",
+    "Original tiny-positive flier lifetime strict-save boundary remains OPEN"
+  ]
+}

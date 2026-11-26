@@ -1,0 +1,3889 @@
+{
+  "unit": "GAME-034",
+  "recorded_date_kst": "2026-11-23",
+  "branch": "work/viya-turnaround-qa-20261117",
+  "code_commit": "488c52fad5a58e5bb7dc286ae98192c71a9024d2",
+  "code_tree": "becba1348bbfee46ccf638176c02a3897604d85f",
+  "base_document_head": "4d871bcd6197b66f2ea4c3a47fbae974ec7c74ee",
+  "base_game_code": "a520147f0f3f6f11a2c7907d02581b669e5d088a",
+  "overall": "Read-only breakable identity,actual damage flash and bounded nearby respawn feedback connected to the existing structures and frame/font planner. Full Godot3483/GUI112/19fresh-process restore PASS. Entire RunState/Cues/Main/storage/progression/audio/data/assets unchanged;no new timer,history or gameplay state.",
+  "implementation": {
+    "planner": "structure_feedback.gd samples current visible prop HP/position/respawn_left through the existing shared camera transform. Stable nearest-distance/id ordering. Detaches scalar marker data;no state writes,randomness,per-prop nodes,clock,Timer or history. Existing permanent terrain unchanged. Blank old maps/gold dungeon and inactive result/lobby produce no markers.",
+    "identification": "Small upright dark/brass hammer badge identifies alive breakable crate/urn/debris,not target selection or a guaranteed drop. Damaged badge and original HP bars read actual HP. High-angle body/optional texture now uses the existing committed negative-prop-ID hit flash,matching legacy behavior. No art-path activation or new assets.",
+    "waiting": "Broken prop uses a neutral hourglass plus progress strip1-respawn_left/45. Nearby numeric caption ceil(remaining),minimum1while HPis0;no premature0/ready. Actual HP restoration alone changes back to the intact badge/body. Old generation never generates a fake break/rebuild celebration. First-generation field items remain separate from regenerated structure and later drops.",
+    "budgets": "Normal standard/compact markers at most8/4;dense4/2. Countdown candidates at most2standard or1compact/dense,within320world units. Existing24/12dense standard or16/8compact font limits remain;structure priority5after real incoming/items/boss/critical/XP/hits. Skip geometry when protected UI/hero/items/special bodies or canvas edges conflict;omit optional countdowns if no safe slot. Reserve visible marker/progress and actual damaged-HP-bar rectangles. Same single canvas,hostile/incoming/boss foreground preserved.",
+    "lifecycle": "Current snapshot only. Existing simulation freezes timer in pause/choice,original explicit Continue resumes it. No persistent display fields,cue writes or replays. No change to targeting,LOS/projectiles/collision/dropRNG/generation/rewards/respawn."
+  },
+  "validation": {
+    "final_engine_run": {
+      "static_integrity": {
+        "status": "PASS",
+        "files_checked": 115,
+        "resource_references_checked": 340,
+        "errors": [],
+        "source_sha256": {
+          "project.godot": "0d8f7fce157178f7bf31acc183593b40f23cff6d266ea5270f4b75f0899b79e5",
+          "scenes/main.tscn": "17a2e77db7cf47af860de3c263dc9119b0df349bafdf2a8b52a40f7450c9e22c",
+          "scripts/combat/actor_motion.gd": "e75bfd25a61446500f5e4f9494bff583dd4d9dbcc4050c25d69ea9a435b53bb7",
+          "scripts/combat/approach_cues.gd": "a30074eec96a887c5fbdd99c96ea3ff247303974bd93fb7ef288eed2eaac6131",
+          "scripts/combat/attack_visuals.gd": "49e9acdb93325368fbf4c6d2732d11877e25f9daa829e6b00a466b74d339556f",
+          "scripts/combat/battle_forms.gd": "a0e9ebcf2cb5d369c0db53f089ab9bb9df0163b1f171908a57bd63f7e285ab95",
+          "scripts/combat/battle_projection.gd": "f8abad51e46f2353d01cc6f1f4b904485621d00ccf75e854ab873bc688f160a0",
+          "scripts/combat/battle_view.gd": "966d0e7fb608b0de067f6cfa02d0c611d2fba52be482a97ff76d6c139e25af34",
+          "scripts/combat/boss_guidance.gd": "d7c1195590ce6fedd3cc8c90cbcdfdf4a2aaf7b994fdfe1a26206e3a9709fef9",
+          "scripts/combat/combat_audio.gd": "9d8d1f2e1d6b617e63a5f8454d182b5e16f08b99b28ade31c1e24cb95be18d2b",
+          "scripts/combat/combat_audio_bank.gd": "589afc536b6514a10a86b5436bc5271ffa6c522452e12949842a1ba8ca65d9ce",
+          "scripts/combat/combat_camera.gd": "ecb81da9ebb62e9f2b84f9ba7ffb4de578646d5c3d5accad647fd63c74b09567",
+          "scripts/combat/combat_cues.gd": "990db858f95f0f0e109bc45d4a1382fcf843d01712be909640e6fa799a5734cf",
+          "scripts/combat/combat_display.gd": "dbb2493bf333b9972603f6cc5ae123010f5cd57e660133e44b4a9110a935d4f7",
+          "scripts/combat/combat_profiles.gd": "515689ca733856a0855739531ad4ebeddb20609839210df41c3b6f6202c898e0",
+          "scripts/combat/defense_rules.gd": "1fa247925d4d5a33dfdf7371285d9192b85b0cd83603efed33894693053691f8",
+          "scripts/combat/feedback_state.gd": "3ee19238fb9307bc9953fed3ecc266ecff420e2c74ceffe81409069372e87d88",
+          "scripts/combat/gold_dungeon.gd": "f7073b32297d4326a0abc973022d7280c53f92114d49db53933874118b3ccc0d",
+          "scripts/combat/high_angle_battle.gd": "3ae7b64f8cc7b8351ca147c40855041093d9d74fd3109ca531a54f5a7137c6e4",
+          "scripts/combat/incoming_feedback.gd": "71dfbafc9d3e58435afa40b2f1f427387ad899f118906cda72b028538fdb853b",
+          "scripts/combat/magic_state.gd": "41a9a7739edc46e98dda26986f23dddf1c0ff6bdf9b40d80640f797460b9223b",
+          "scripts/combat/run_state.gd": "6637a163edd9b7c0167c1867ff90e716ccd1ff12297c246258fd612d402f4773",
+          "scripts/combat/stage_catalog.gd": "8059f41d7134818deeea1978d2f81fddc2456d530e33479d458461004600516f",
+          "scripts/combat/structure_feedback.gd": "5eb5b6acd005b04652a1c337caaacfa47de2dfb0ca5a758ea06c5b4e3b4d6d11",
+          "scripts/combat/supply_feedback.gd": "09731b47d1cd26ed58fac503525ca349006efd8f3542545b4dd61f381c1f8287",
+          "scripts/combat/weapon_modules.gd": "a405c2ddad96a396c8e5e0820ac0d4ee4093a951c473ac7c849294e872616a2e",
+          "scripts/main.gd": "22ea88e62b6f24fb1964d2fd8d790ace2c23db8931fd930b953c98fc81b67533",
+          "scripts/progression/account_talents.gd": "0774659235d3bea9276574996565b315156260274750ef8c7f9969f18550f43e",
+          "scripts/progression/combat_pacing.gd": "07f73dae843a7779f992976efb1901774782db1bd021bef01999a83ea7814826",
+          "scripts/progression/gold_progress.gd": "2289fc850fc5f856d674863de6119987da74ed6bd931ade50f0faa11ea0f7012",
+          "scripts/progression/growth_state.gd": "07287b03d12eac144dce6f1858ceb2b6561e6281b4c011ac6bc5d5d3c72a0e6e",
+          "scripts/progression/run_snapshot.gd": "068e7dc82a6ec7cec87075e7f64e2eb553752679f22ef88d84db0bfc33a11389",
+          "scripts/progression/run_store.gd": "bab493f1963ea2a6d98770f9ef9686d70d4b257e0b49afb3386de661a6081986",
+          "scripts/progression/skill_catalog.gd": "ccd13a2b02f4b57497beae39e483edfca53617cc3a39e43cbaf8009535c820d8",
+          "scripts/progression/weapon_catalog.gd": "aced8b45e765780b4053bfa436e1dbbc1696d2173cb4cb762f21298d5f91421b",
+          "scripts/ui/actor_assets.gd": "f98126291f60e27b9d903999c61f6a1c03a34555eb824a5fdd3e51db18a359c1",
+          "scripts/ui/asset_slots.gd": "b6f7edc881a4a4f658d3df115a2b7444fd2d8731cbc11fdb8048eddb56dc7353",
+          "scripts/ui/battle_chrome.gd": "6be2ec2203a0517ce6842d3c7979135ec7c94afaa5b69b1fff2508f083473a2a",
+          "scripts/ui/battle_save_notice.gd": "4030876186c66ae7de4ec2b8808d8b905881c40d0c0af29bd241f659dcdf2189",
+          "scripts/ui/city_preview.gd": "d01c0ca26b7d812b2b7d6d63339788be98241f6a09ec58a1a8d35a6f7b788937",
+          "scripts/ui/combat_skin.gd": "b9ed37f5c7f1831095805e13c6e3eaa986e762081209372cf8a4e09ff6608c66",
+          "scripts/ui/combat_slot_button.gd": "91a02ab52e8ebcb26985ae143dd596fbd4b62bd3fa6e440e5b0d12e44132a81d",
+          "scripts/ui/feedback_panel.gd": "2103fd9b8692c5606273175b415447f35a995f9a18306a5e8f0abeeb7c5d465b",
+          "scripts/ui/growth_overview.gd": "43dfb9306f4e280b57c8445b179c0e797938bc9fd0e5fa070053474cadb53a42",
+          "scripts/ui/hud_layout.gd": "d9a5dacd8e3816611b1658557c5366e1dbd6caeded4312d8f2e5e5584becddb6",
+          "scripts/ui/mobile_main.gd": "da8e8d4b3540533db0c0debe54db70b225d9b57cfe532dc2529489f1b11e3d3f",
+          "scripts/ui/move_input.gd": "cee8e709185740d1cb964fff13873a0818d14d0b3653f36d6416a1b17da40bd8",
+          "scripts/ui/responsive_feedback_panel.gd": "b36ce744a7378d696b91018935f637da0ae88beccdeddd85b1187a238958ed5b",
+          "scripts/ui/skill_preview.gd": "5c3de40b161d38de44234f6f1a2c63064bbc99021c4def95f7995382b02af5db",
+          "scripts/world/map_catalog.gd": "952abbc81d539817dfdd98ed4a59185f13fb8c1adac0210839d176ebee087ea6",
+          "scripts/world/map_space.gd": "8110f4a28e04e67fe738011ea888f31a9c74c450ed79148d88c1da602fa03ae8",
+          "scripts/world/supply_catalog.gd": "1af21cb685b8da0858491a961f007e8a0511c24e0f70b0165e0051d7fcb310a1",
+          "tests/measure_armor.gd": "19a42c9db8ac7b52b6bc2778f24e78ff05b433676c1443d3300a7d4bdd67c6af",
+          "tests/measure_balance.gd": "d5b57b7f3370a007df2a54475d7c5c63b70cae614c4f3ce0981c5a18f99f24fc",
+          "tests/measure_boss_guidance.gd": "891bd7aba3c747e25b065acfd5ef45d9057e01047ff374656247e02744d46b13",
+          "tests/measure_campaign.gd": "acc9b093cdc59af87d11f342a88a537b7f0d35ac8745149eb1ca0046ac791e6c",
+          "tests/measure_combat_audio.gd": "727d34de154acb4bb080553683e423a5cdea35fcf4592ee23fe00540848d199c",
+          "tests/profile_combat.gd": "1499a2a5db64c0869bca71f94582729a029bd7b240dd9ba1ad75a52e3333a2cf",
+          "tests/test_account_expansion.gd": "97d23a6d5bc708b9ebdcc76a492982d5b8e0e2fa4be6f2ad0c2ca501d5d35422",
+          "tests/test_account_talents.gd": "a85b5b84514323481e45137ab05e611af9d18f364393b9a6891fe45f1fe2b9f3",
+          "tests/test_actor_animation.gd": "a85f368b78cd6000f1b27407e3dc42ccd45852f794675aba5db32a174640ba44",
+          "tests/test_attack_visuals.gd": "b091e1672614637797907658c628e86bd6f16ca728ce7cb1dae67d1529f1b443",
+          "tests/test_battle_save_notice.gd": "2bbfd4ef99e616b4be393a204e7c99a1acd17e0c3c1fb0b90629166ae0dd178c",
+          "tests/test_boss_guidance.gd": "2f3e94e8c0cb9e61e9343a6fd87ac26fc3e77316d42da42e99fd4d32100329b3",
+          "tests/test_camera_lead.gd": "9334aa9bf5ccae3770b6677e16c8b7717df6c31e4772ff852d2a39f2f65cd1be",
+          "tests/test_campaign.gd": "07c21cb62d12d5394b0864afe3ce47f62b3cd11146fa4bd2780957c54d3f1f49",
+          "tests/test_chapter_ui.gd": "b48b6813b9d8a5e8d98c4d1e7d6a9ba65f7c54c5995bee66b8afcb55348db984",
+          "tests/test_combat_audio.gd": "cd4b66cf0f8e48faf98fdcf6ea4b0c87d687d06b47e424bb1a3210857e2e2beb",
+          "tests/test_combat_cues.gd": "e24540ac7c5740145f69aeceaf87be15a8afceddfbeef067f09c765286c45472",
+          "tests/test_combat_display.gd": "15b28b0a80b539bf9ccdce23ee988777307bfb875a84e4429796ba32575dbcdf",
+          "tests/test_combat_foundation.gd": "57efe421768dad47bee7a560325214a0c8a30d5fdf8d015fc2648f2b8c71416d",
+          "tests/test_combat_pacing.gd": "d321ef8b3e01f9879b8240bb439d93eaae8b5b75e5962437ddd40f7e6298b600",
+          "tests/test_combat_profiles.gd": "42b9e84e68307362dc9859a25c2d99cba259863bb7545e0ae3615411c865064a",
+          "tests/test_enemy_variety.gd": "76049646b0e67b54e9e2b53ddaa5a7b339806fefc7c197a95164f3666fcc6c4d",
+          "tests/test_feedback.gd": "a0558acd7ab6216ccceb597f90c823a1078b0cda9337392440fe6523f22fce86",
+          "tests/test_gold_dungeon.gd": "5bf6924c97cb1bb83bb3b9586e2a5ba97dc045dceb345aa2819f49fd4eda5709",
+          "tests/test_gold_rewards.gd": "ea84e51520721ad62e52416145f51163d541ef0c3eac40cc125ef343d08c28b4",
+          "tests/test_gold_settings.gd": "29358cc8bd690213f4fab1fde43cc0a921689983201cfbcbffa18dd872e047a9",
+          "tests/test_growth.gd": "98f63a46d71eeba5f8807655ba6bd9d87fe89b240fca92bbbc12f253fbe0ba72",
+          "tests/test_growth_overview.gd": "bd6706bf3253d25b8b41c6374a53732762af0d361d11c04aac47abee4f565e87",
+          "tests/test_guide_skin.gd": "50502dc737876e114d1443ad66af92d5973b131f746a2162952d7385797d1b6a",
+          "tests/test_high_angle.gd": "b1122832611f7fc1bbe9b45a33d3925e6278a54323f7d962c9b32fe143cdb666",
+          "tests/test_incoming_feedback.gd": "19965b733e2e28451744a1af948a236631e3bc9d0b8bf83b3beb4f4a737e37ee",
+          "tests/test_magic.gd": "2969ef796d9255f7b4c79534c68ebabb1b2e349adb0828929d3450ab8f75a090",
+          "tests/test_maps.gd": "3c129f9fe4aac09e01ad4d7f380d03faebb67f8b9f45f0f2d84175d79be4e2f7",
+          "tests/test_mobile_hud.gd": "3d0234bea7a3883f6cb38fe127d8062cbd393b97c3132109e853e84c68e75a76",
+          "tests/test_run_navigation.gd": "14b88030cf3b84cdaed8c559e04c0f1b15552a9860f32c1c959be06bea9ee475",
+          "tests/test_scatter_packs.gd": "1d642ed432b31e509721d9867f5e7dde4d904499cf7555b163670ef9b5c07f2d",
+          "tests/test_skill_preview.gd": "0a62fc3bcdafeb525507f4107621d5c14a955e5d5270750a99d7de1e61f9ad9f",
+          "tests/test_structure_feedback.gd": "99ccd533fc5acb0071a33b4a6e54ac8bc575cd86b2ca7568546a37b01edcd833",
+          "tests/test_supplies.gd": "5de153bb81aaa06f5f6bbd321b8689d7afe59160d314a6cb06353fac39d8678d",
+          "tests/test_supply_feedback.gd": "72f6b9ea21ba920944c8148be4a376840f0b1c4a562fd8256fe4f6025c6c7597",
+          "tests/test_talent_tree.gd": "984fdf593f086254dd17fde222ac7cafa35d8b223195fd46bc04ee170ddada21",
+          "tests/test_weapon_skills.gd": "a5385a7c03cc22962679b8d8e86f800ff81462a742d5f9fba01be4ee80ddb4eb",
+          "data/actor_presentation.json": "e82ae99f672bd3e6979778f9a6201efb659b160a3407d9b1b6099eb0e0257f04",
+          "data/chapter_one.json": "c32e288ddc61dc8193cd78de416d3682b7c11f1924bbaaa3ea4afe4b78104f76",
+          "data/combat_pacing.json": "d153666f7f77506da281d1f90ae5fbc5822cd997c6db76590f35ef8a6662d597",
+          "data/combat_profiles.json": "d36abf0b4d0feb950e6448474732decdac9f98035a9962e5f5287b09eb1d1144",
+          "data/destructibles.json": "130421dd85d4dbf9ff9f70ab297b36586870e65fb9426cec0c2f58ce57a49b39",
+          "data/gold_dungeon.json": "9a3427a6ddfb3462123f92e6918966ff7b1887ff324f368c600a9ad5993b1f9e",
+          "data/gold_rewards.json": "8f465cd44d1bf712b0fa758b2b8ff7cd17ecb450cff7f8e567d27f0397154993",
+          "data/maps.json": "925638f794696b96fdf48df8c266654cef3af002f43e57f91daa80f8d70e8bd4",
+          "data/presentation_slots.json": "d0a2e6ea1a55d37680bfa02ef9f9036f00deb03575ff9e9dcd10fa7179aa1001",
+          "data/prototype_skills.json": "a6ba197fe558d328e1fcab96506fa098465a4c72aebfe1a1b29cb98642628d1a",
+          "data/stages.json": "2e656d2dc155ad93c76b8a1303133992d95529283be7f5b16423738f4edaeeae",
+          "data/weapon_skills.json": "be23e1eb349958fcebf3dba088fcf389d50654fc31cb83523513c178ff81c659",
+          "tools/bootstrap_godot.py": "4c3ca17c3b90f9c5590d7a82a76ae71a353f4d15aae973cf37e03e745ebfdecc",
+          "tools/check_combat_cues.py": "65b4bfde02d3b6bfca1de997df13b303867145602fd436f3f0e759887d332709",
+          "tools/check_feedback_data.py": "f1bd6f415e919a32faab1b403073e24dcdda4b819938b9b707dacfc32320bec7",
+          "tools/check_growth_data.py": "304be6a17484dd44525d94bad31f422bd13be315ba3309a366ca2bd5b9e2ebfd",
+          "tools/check_magic_data.py": "9405ac2a576b42d279944aacec82f00500ad50c70e5f141413a05e64b1f39e5b",
+          "tools/check_mobile_hud.py": "9e43cace28480d3aacb45dabaf67acb2ad24e1c8a9366aa5c011a279eba35487",
+          "tools/check_project.py": "eeafd73fc4503c7af952331c093272a5510aade3fbae04e42afb77eb23f55157",
+          "tools/check_run_navigation.py": "82fbdd522682329e597017bf5fc80e40df104169c0463a492f265354ba734518",
+          "tools/report_economy.py": "5c449e04b43847c57ec9617c7c43b2408566dbc7691e32b8d3e33d8b33b24bd6"
+        },
+        "source_fingerprint": "ba4a2253e74c850f9d4ab8fb50527e4dedd64b1daf572c57213aff9e6d24ce02",
+        "scope": "UTF-8, delimiters, whitespace, JSON/Python syntax, resource existence, project settings; NOT GDScript parser/typechecking or gameplay."
+      },
+      "growth_data_contract": {
+        "status": "PASS",
+        "pool_count": 18,
+        "counts": {
+          "common_attack": 8,
+          "character_attack": 1,
+          "common_passive": 8,
+          "ultimate_enhancement": 1
+        },
+        "negative_controls": [
+          {
+            "fixture": "duplicate",
+            "rejected": true
+          },
+          {
+            "fixture": "resistance",
+            "rejected": true
+          },
+          {
+            "fixture": "foreign_owner",
+            "rejected": true
+          },
+          {
+            "fixture": "missing_ultimate",
+            "rejected": true
+          },
+          {
+            "fixture": "wrong_row",
+            "rejected": true
+          }
+        ],
+        "errors": [],
+        "scope": "JSON schema/content and source integration markers only; not GDScript runtime/behavior."
+      },
+      "magic_data_contract": {
+        "status": "PASS",
+        "errors": [],
+        "negative_controls": [
+          {
+            "fixture": "plain_name",
+            "rejected": true
+          },
+          {
+            "fixture": "foreign_owner",
+            "rejected": true
+          },
+          {
+            "fixture": "missing_magic",
+            "rejected": true
+          },
+          {
+            "fixture": "negative_cost",
+            "rejected": true
+          },
+          {
+            "fixture": "negative_cooldown",
+            "rejected": true
+          },
+          {
+            "fixture": "wrong_upgrade",
+            "rejected": true
+          },
+          {
+            "fixture": "nonfinite_radius",
+            "rejected": true
+          },
+          {
+            "fixture": "impossible_cost",
+            "rejected": true
+          }
+        ],
+        "temporary_skill_names": 18,
+        "required_xp_first_five": [
+          30,
+          48,
+          66,
+          84,
+          102
+        ],
+        "xp_drop_unchanged": 5.0,
+        "scope": "JSON validation, negative data controls and source markers/arithmetic; NOT GDScript runtime, UI, input dispatch or mobile tests."
+      },
+      "feedback_source_contract": {
+        "status": "PASS",
+        "errors": [],
+        "negative_controls": [
+          {
+            "fixture": "missing_damage_hook",
+            "rejected": true
+          },
+          {
+            "fixture": "missing_reset",
+            "rejected": true
+          },
+          {
+            "fixture": "negative_duration",
+            "rejected": true
+          },
+          {
+            "fixture": "missing_low_hp_warning",
+            "rejected": true
+          },
+          {
+            "fixture": "missing_stale_guard",
+            "rejected": true
+          }
+        ],
+        "files_checked": 7,
+        "source_sha256": {
+          "scripts/combat/feedback_state.gd": "3ee19238fb9307bc9953fed3ecc266ecff420e2c74ceffe81409069372e87d88",
+          "scripts/combat/run_state.gd": "6637a163edd9b7c0167c1867ff90e716ccd1ff12297c246258fd612d402f4773",
+          "scripts/ui/feedback_panel.gd": "2103fd9b8692c5606273175b415447f35a995f9a18306a5e8f0abeeb7c5d465b",
+          "scripts/main.gd": "22ea88e62b6f24fb1964d2fd8d790ace2c23db8931fd930b953c98fc81b67533",
+          "tests/test_feedback.gd": "a0558acd7ab6216ccceb597f90c823a1078b0cda9337392440fe6523f22fce86",
+          "tools/check_project.py": "eeafd73fc4503c7af952331c093272a5510aade3fbae04e42afb77eb23f55157",
+          "tools/check_feedback_data.py": "f1bd6f415e919a32faab1b403073e24dcdda4b819938b9b707dacfc32320bec7"
+        },
+        "scope": "7 affected code/test/checker files: UTF-8, delimiters, whitespace, Python syntax, reaction constants, integration markers, engine-test registration and new dependency paths only. NOT the full project check or GDScript parser/type/runtime, rendering, or mobile input tests."
+      },
+      "mobile_hud_source_contract": {
+        "status": "PASS",
+        "files_checked": 8,
+        "errors": [],
+        "negative_controls": [
+          {
+            "fixture": "layout_detached",
+            "rejected": true
+          },
+          {
+            "fixture": "detail_not_paused",
+            "rejected": true
+          },
+          {
+            "fixture": "detail_mutates_skill",
+            "rejected": true
+          },
+          {
+            "fixture": "resize_retains_touch",
+            "rejected": true
+          },
+          {
+            "fixture": "test_not_registered",
+            "rejected": true
+          }
+        ],
+        "source_sha256": {
+          "scenes/main.tscn": "17a2e77db7cf47af860de3c263dc9119b0df349bafdf2a8b52a40f7450c9e22c",
+          "scripts/ui/mobile_main.gd": "da8e8d4b3540533db0c0debe54db70b225d9b57cfe532dc2529489f1b11e3d3f",
+          "scripts/ui/hud_layout.gd": "d9a5dacd8e3816611b1658557c5366e1dbd6caeded4312d8f2e5e5584becddb6",
+          "scripts/ui/responsive_feedback_panel.gd": "b36ce744a7378d696b91018935f637da0ae88beccdeddd85b1187a238958ed5b",
+          "scripts/ui/move_input.gd": "cee8e709185740d1cb964fff13873a0818d14d0b3653f36d6416a1b17da40bd8",
+          "tests/test_mobile_hud.gd": "3d0234bea7a3883f6cb38fe127d8062cbd393b97c3132109e853e84c68e75a76",
+          "tools/check_project.py": "eeafd73fc4503c7af952331c093272a5510aade3fbae04e42afb77eb23f55157",
+          "tools/check_mobile_hud.py": "9e43cace28480d3aacb45dabaf67acb2ad24e1c8a9366aa5c011a279eba35487"
+        },
+        "source_fingerprint": "fe793f3f1abdbe43a57bfe2654590cf2735037217406168a9319cc149eead406",
+        "scope": "Changed UTF-8 files, delimiters, Python syntax and integration source checks only. NOT GDScript parsing/typechecking, actual Control geometry, touch dispatch, rendering or mobile execution."
+      },
+      "run_navigation_source_contract": {
+        "status": "PASS",
+        "files_checked": 5,
+        "errors": [],
+        "negative_controls": [
+          {
+            "fixture": "unescaped_string_newline",
+            "rejected": true
+          },
+          {
+            "fixture": "unguarded_intent",
+            "rejected": true
+          },
+          {
+            "fixture": "confirmation_resets_hp",
+            "rejected": true
+          },
+          {
+            "fixture": "cancel_rerolls",
+            "rejected": true
+          },
+          {
+            "fixture": "leave_fakes_death",
+            "rejected": true
+          },
+          {
+            "fixture": "no_result_copy",
+            "rejected": true
+          },
+          {
+            "fixture": "stale_menu_revision",
+            "rejected": true
+          },
+          {
+            "fixture": "unregistered_engine_test",
+            "rejected": true
+          }
+        ],
+        "source_sha256": {
+          "scripts/combat/run_state.gd": "6637a163edd9b7c0167c1867ff90e716ccd1ff12297c246258fd612d402f4773",
+          "scripts/ui/mobile_main.gd": "da8e8d4b3540533db0c0debe54db70b225d9b57cfe532dc2529489f1b11e3d3f",
+          "tests/test_run_navigation.gd": "14b88030cf3b84cdaed8c559e04c0f1b15552a9860f32c1c959be06bea9ee475",
+          "tools/check_project.py": "eeafd73fc4503c7af952331c093272a5510aade3fbae04e42afb77eb23f55157",
+          "tools/check_run_navigation.py": "82fbdd522682329e597017bf5fc80e40df104169c0463a492f265354ba734518"
+        },
+        "source_fingerprint": "72d4c631f077451fbc3de47d8e2d6c44289e2c9cbcbfab67eb1876cbe5af4214",
+        "scope": "UTF-8/delimiters/Python syntax and navigation SOURCE contracts only; NOT GDScript parsing/types, native execution, actual UI/input, or mobile testing."
+      },
+      "combat_cues_source_contract": {
+        "status": "PASS",
+        "files_checked": 6,
+        "errors": [],
+        "negative_controls": [
+          {
+            "fixture": "missing_reset",
+            "rejected": true
+          },
+          {
+            "fixture": "early_clock",
+            "rejected": true
+          },
+          {
+            "fixture": "changed_damage",
+            "rejected": true
+          },
+          {
+            "fixture": "drop_as_collection",
+            "rejected": true
+          },
+          {
+            "fixture": "unbounded_received",
+            "rejected": true
+          },
+          {
+            "fixture": "received_before_hp",
+            "rejected": true
+          },
+          {
+            "fixture": "unbounded_visuals",
+            "rejected": true
+          },
+          {
+            "fixture": "cosmetic_rng",
+            "rejected": true
+          },
+          {
+            "fixture": "mutable_view",
+            "rejected": true
+          },
+          {
+            "fixture": "supply_changes_rewards",
+            "rejected": true
+          },
+          {
+            "fixture": "supply_mutates_observation",
+            "rejected": true
+          },
+          {
+            "fixture": "supply_glyph_mutates_state",
+            "rejected": true
+          },
+          {
+            "fixture": "unregistered_test",
+            "rejected": true
+          },
+          {
+            "fixture": "ignored_engine_exit",
+            "rejected": true
+          },
+          {
+            "fixture": "ignored_engine_errors",
+            "rejected": true
+          },
+          {
+            "fixture": "ignored_test_result",
+            "rejected": true
+          }
+        ],
+        "source_sha256": {
+          "scripts/combat/run_state.gd": "6637a163edd9b7c0167c1867ff90e716ccd1ff12297c246258fd612d402f4773",
+          "scripts/combat/battle_view.gd": "966d0e7fb608b0de067f6cfa02d0c611d2fba52be482a97ff76d6c139e25af34",
+          "scripts/combat/combat_cues.gd": "990db858f95f0f0e109bc45d4a1382fcf843d01712be909640e6fa799a5734cf",
+          "tests/test_combat_cues.gd": "e24540ac7c5740145f69aeceaf87be15a8afceddfbeef067f09c765286c45472",
+          "tools/check_project.py": "eeafd73fc4503c7af952331c093272a5510aade3fbae04e42afb77eb23f55157",
+          "tools/check_combat_cues.py": "65b4bfde02d3b6bfca1de997df13b303867145602fd436f3f0e759887d332709"
+        },
+        "source_fingerprint": "5e36e7895f704bfa4c2498b36cca8a6d894fde3e0ed0cc57933c090b32aa3371",
+        "baseline_run_blob": "673d75a748fa5f1f9ac72ec73bbd9120fdcfce02",
+        "baseline_runner_blob": "1ab68ad8a51271e3d47db8b02d433991f42e8d6c",
+        "baseline_engine_function_sha256": "9156043eaf896d72565563cc1e2f623cf0c8fbac7f032f19bffee7e4946a69ee",
+        "scope": "Changed-source UTF-8/delimiters/Python syntax, hook order, bounds, isolation, reviewed GAME-024 RunState/GAME-030 view baselines with exact GAME-033 read-only adapters and preserved engine runner. NOT Godot parser/type/runtime, visual quality, input dispatch, or FPS."
+      },
+      "godot_runtime": {
+        "status": "PASS",
+        "commands": [
+          {
+            "command": [
+              "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+              "--headless",
+              "--version"
+            ],
+            "exit_code": 0,
+            "status": "PASS"
+          },
+          {
+            "command": [
+              "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+              "--headless",
+              "--path",
+              "/workspace/Viya",
+              "--editor",
+              "--import",
+              "--quit"
+            ],
+            "exit_code": 0,
+            "status": "PASS"
+          },
+          {
+            "command": [
+              "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+              "--headless",
+              "--path",
+              "/workspace/Viya",
+              "--script",
+              "res://tests/test_combat_foundation.gd"
+            ],
+            "exit_code": 0,
+            "status": "PASS"
+          },
+          {
+            "command": [
+              "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+              "--headless",
+              "--path",
+              "/workspace/Viya",
+              "--script",
+              "res://tests/test_growth.gd"
+            ],
+            "exit_code": 0,
+            "status": "PASS"
+          },
+          {
+            "command": [
+              "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+              "--headless",
+              "--path",
+              "/workspace/Viya",
+              "--script",
+              "res://tests/test_magic.gd"
+            ],
+            "exit_code": 0,
+            "status": "PASS"
+          },
+          {
+            "command": [
+              "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+              "--headless",
+              "--path",
+              "/workspace/Viya",
+              "--script",
+              "res://tests/test_feedback.gd"
+            ],
+            "exit_code": 0,
+            "status": "PASS"
+          },
+          {
+            "command": [
+              "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+              "--headless",
+              "--path",
+              "/workspace/Viya",
+              "--script",
+              "res://tests/test_mobile_hud.gd"
+            ],
+            "exit_code": 0,
+            "status": "PASS"
+          },
+          {
+            "command": [
+              "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+              "--headless",
+              "--path",
+              "/workspace/Viya",
+              "--script",
+              "res://tests/test_run_navigation.gd"
+            ],
+            "exit_code": 0,
+            "status": "PASS"
+          },
+          {
+            "command": [
+              "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+              "--headless",
+              "--path",
+              "/workspace/Viya",
+              "--script",
+              "res://tests/test_combat_cues.gd"
+            ],
+            "exit_code": 0,
+            "status": "PASS"
+          },
+          {
+            "command": [
+              "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+              "--headless",
+              "--path",
+              "/workspace/Viya",
+              "--quit-after",
+              "120"
+            ],
+            "exit_code": 0,
+            "status": "PASS"
+          }
+        ],
+        "scope": "headless import, actual foundation/growth/magic/feedback/mobile-HUD/run-navigation/combat-cues GDScript tests and main boot; visual/mobile approval separate"
+      },
+      "windows_f5": "NOT_VERIFIED",
+      "android_device": "NOT_VERIFIED",
+      "ios_device": "NOT_VERIFIED"
+    },
+    "native_results": [
+      {
+        "log": ".local_validation/GAME034/engine_2.log",
+        "status": "PASS",
+        "checks": 23,
+        "failures": []
+      },
+      {
+        "log": ".local_validation/GAME034/engine_3.log",
+        "status": "PASS",
+        "checks": 70,
+        "failures": []
+      },
+      {
+        "log": ".local_validation/GAME034/engine_4.log",
+        "status": "PASS",
+        "checks": 122,
+        "failures": []
+      },
+      {
+        "log": ".local_validation/GAME034/engine_5.log",
+        "status": "PASS",
+        "checks": 57,
+        "failures": []
+      },
+      {
+        "log": ".local_validation/GAME034/engine_6.log",
+        "status": "PASS",
+        "checks": 1336,
+        "failures": []
+      },
+      {
+        "log": ".local_validation/GAME034/engine_7.log",
+        "status": "PASS",
+        "checks": 68,
+        "failures": []
+      },
+      {
+        "log": ".local_validation/GAME034/engine_8.log",
+        "status": "PASS",
+        "checks": 1807,
+        "failures": []
+      }
+    ],
+    "native_total": 3483,
+    "new_structure_assertions": 28,
+    "python": {
+      "tests": 12,
+      "status": "PASS"
+    },
+    "source_proof": {
+      "base": "4d871bcd6197b66f2ea4c3a47fbae974ec7c74ee",
+      "protected_count": 67,
+      "protected_files": {
+        "assets/characters/viya/spec/turnaround_contract.v1.json": "a8f65fa1637b49235d2158ef582f9d696a2cb13caddc86a5dd27dbeccbca117a",
+        "assets/characters/viya/spec/turnaround_r1_result.json": "6c337719be2f54e5ea35304cb32b4f5f6bf5b4cca987e00ce6b4d59a37983db8",
+        "assets/characters/viya/spec/turnaround_r2_result.json": "8ca504e6b4165cf9ced1addf06878c0bb7018030c070119c446345ac6ebcb421",
+        "assets/references/GEN-005_viya_combat_pose_three_quarter_front.png": "d3c0084c73aff9a706a50a6cac760d124c0647d23fa36e6ae30635dc6929a730",
+        "assets/references/README.md": "ccee5345d56bbe2ecdf03cc0a54eea7c61dd684f9582a3ec83284218742e18a5",
+        "assets/references/qa/viya_4view_alignment_preview.jpg": "8fbd8b3c99af7099de926ca3c39feae0217dd984ff959e314e51d2338786fd0c",
+        "assets/references/qa/viya_side_silhouette_comparison.jpg": "1f8fe11aa693d84ebec41db9b6bea3af2bf61f61fd80f2ffdd45f799acd23170",
+        "data/actor_presentation.json": "e82ae99f672bd3e6979778f9a6201efb659b160a3407d9b1b6099eb0e0257f04",
+        "data/chapter_one.json": "c32e288ddc61dc8193cd78de416d3682b7c11f1924bbaaa3ea4afe4b78104f76",
+        "data/combat_pacing.json": "d153666f7f77506da281d1f90ae5fbc5822cd997c6db76590f35ef8a6662d597",
+        "data/combat_profiles.json": "d36abf0b4d0feb950e6448474732decdac9f98035a9962e5f5287b09eb1d1144",
+        "data/destructibles.json": "130421dd85d4dbf9ff9f70ab297b36586870e65fb9426cec0c2f58ce57a49b39",
+        "data/gold_dungeon.json": "9a3427a6ddfb3462123f92e6918966ff7b1887ff324f368c600a9ad5993b1f9e",
+        "data/gold_rewards.json": "8f465cd44d1bf712b0fa758b2b8ff7cd17ecb450cff7f8e567d27f0397154993",
+        "data/maps.json": "925638f794696b96fdf48df8c266654cef3af002f43e57f91daa80f8d70e8bd4",
+        "data/presentation_slots.json": "d0a2e6ea1a55d37680bfa02ef9f9036f00deb03575ff9e9dcd10fa7179aa1001",
+        "data/prototype_skills.json": "a6ba197fe558d328e1fcab96506fa098465a4c72aebfe1a1b29cb98642628d1a",
+        "data/stages.json": "2e656d2dc155ad93c76b8a1303133992d95529283be7f5b16423738f4edaeeae",
+        "data/weapon_skills.json": "be23e1eb349958fcebf3dba088fcf389d50654fc31cb83523513c178ff81c659",
+        "project.godot": "0d8f7fce157178f7bf31acc183593b40f23cff6d266ea5270f4b75f0899b79e5",
+        "scenes/main.tscn": "17a2e77db7cf47af860de3c263dc9119b0df349bafdf2a8b52a40f7450c9e22c",
+        "scripts/combat/actor_motion.gd": "e75bfd25a61446500f5e4f9494bff583dd4d9dbcc4050c25d69ea9a435b53bb7",
+        "scripts/combat/approach_cues.gd": "a30074eec96a887c5fbdd99c96ea3ff247303974bd93fb7ef288eed2eaac6131",
+        "scripts/combat/attack_visuals.gd": "49e9acdb93325368fbf4c6d2732d11877e25f9daa829e6b00a466b74d339556f",
+        "scripts/combat/battle_forms.gd": "a0e9ebcf2cb5d369c0db53f089ab9bb9df0163b1f171908a57bd63f7e285ab95",
+        "scripts/combat/battle_projection.gd": "f8abad51e46f2353d01cc6f1f4b904485621d00ccf75e854ab873bc688f160a0",
+        "scripts/combat/boss_guidance.gd": "d7c1195590ce6fedd3cc8c90cbcdfdf4a2aaf7b994fdfe1a26206e3a9709fef9",
+        "scripts/combat/combat_audio.gd": "9d8d1f2e1d6b617e63a5f8454d182b5e16f08b99b28ade31c1e24cb95be18d2b",
+        "scripts/combat/combat_audio_bank.gd": "589afc536b6514a10a86b5436bc5271ffa6c522452e12949842a1ba8ca65d9ce",
+        "scripts/combat/combat_camera.gd": "ecb81da9ebb62e9f2b84f9ba7ffb4de578646d5c3d5accad647fd63c74b09567",
+        "scripts/combat/combat_cues.gd": "990db858f95f0f0e109bc45d4a1382fcf843d01712be909640e6fa799a5734cf",
+        "scripts/combat/combat_profiles.gd": "515689ca733856a0855739531ad4ebeddb20609839210df41c3b6f6202c898e0",
+        "scripts/combat/defense_rules.gd": "1fa247925d4d5a33dfdf7371285d9192b85b0cd83603efed33894693053691f8",
+        "scripts/combat/feedback_state.gd": "3ee19238fb9307bc9953fed3ecc266ecff420e2c74ceffe81409069372e87d88",
+        "scripts/combat/gold_dungeon.gd": "f7073b32297d4326a0abc973022d7280c53f92114d49db53933874118b3ccc0d",
+        "scripts/combat/incoming_feedback.gd": "71dfbafc9d3e58435afa40b2f1f427387ad899f118906cda72b028538fdb853b",
+        "scripts/combat/magic_state.gd": "41a9a7739edc46e98dda26986f23dddf1c0ff6bdf9b40d80640f797460b9223b",
+        "scripts/combat/run_state.gd": "6637a163edd9b7c0167c1867ff90e716ccd1ff12297c246258fd612d402f4773",
+        "scripts/combat/stage_catalog.gd": "8059f41d7134818deeea1978d2f81fddc2456d530e33479d458461004600516f",
+        "scripts/combat/supply_feedback.gd": "09731b47d1cd26ed58fac503525ca349006efd8f3542545b4dd61f381c1f8287",
+        "scripts/combat/weapon_modules.gd": "a405c2ddad96a396c8e5e0820ac0d4ee4093a951c473ac7c849294e872616a2e",
+        "scripts/main.gd": "22ea88e62b6f24fb1964d2fd8d790ace2c23db8931fd930b953c98fc81b67533",
+        "scripts/progression/account_talents.gd": "0774659235d3bea9276574996565b315156260274750ef8c7f9969f18550f43e",
+        "scripts/progression/combat_pacing.gd": "07f73dae843a7779f992976efb1901774782db1bd021bef01999a83ea7814826",
+        "scripts/progression/gold_progress.gd": "2289fc850fc5f856d674863de6119987da74ed6bd931ade50f0faa11ea0f7012",
+        "scripts/progression/growth_state.gd": "07287b03d12eac144dce6f1858ceb2b6561e6281b4c011ac6bc5d5d3c72a0e6e",
+        "scripts/progression/run_snapshot.gd": "068e7dc82a6ec7cec87075e7f64e2eb553752679f22ef88d84db0bfc33a11389",
+        "scripts/progression/run_store.gd": "bab493f1963ea2a6d98770f9ef9686d70d4b257e0b49afb3386de661a6081986",
+        "scripts/progression/skill_catalog.gd": "ccd13a2b02f4b57497beae39e483edfca53617cc3a39e43cbaf8009535c820d8",
+        "scripts/progression/weapon_catalog.gd": "aced8b45e765780b4053bfa436e1dbbc1696d2173cb4cb762f21298d5f91421b",
+        "scripts/ui/actor_assets.gd": "f98126291f60e27b9d903999c61f6a1c03a34555eb824a5fdd3e51db18a359c1",
+        "scripts/ui/asset_slots.gd": "b6f7edc881a4a4f658d3df115a2b7444fd2d8731cbc11fdb8048eddb56dc7353",
+        "scripts/ui/battle_chrome.gd": "6be2ec2203a0517ce6842d3c7979135ec7c94afaa5b69b1fff2508f083473a2a",
+        "scripts/ui/battle_save_notice.gd": "4030876186c66ae7de4ec2b8808d8b905881c40d0c0af29bd241f659dcdf2189",
+        "scripts/ui/city_preview.gd": "d01c0ca26b7d812b2b7d6d63339788be98241f6a09ec58a1a8d35a6f7b788937",
+        "scripts/ui/combat_skin.gd": "b9ed37f5c7f1831095805e13c6e3eaa986e762081209372cf8a4e09ff6608c66",
+        "scripts/ui/combat_slot_button.gd": "91a02ab52e8ebcb26985ae143dd596fbd4b62bd3fa6e440e5b0d12e44132a81d",
+        "scripts/ui/feedback_panel.gd": "2103fd9b8692c5606273175b415447f35a995f9a18306a5e8f0abeeb7c5d465b",
+        "scripts/ui/growth_overview.gd": "43dfb9306f4e280b57c8445b179c0e797938bc9fd0e5fa070053474cadb53a42",
+        "scripts/ui/hud_layout.gd": "d9a5dacd8e3816611b1658557c5366e1dbd6caeded4312d8f2e5e5584becddb6",
+        "scripts/ui/mobile_main.gd": "da8e8d4b3540533db0c0debe54db70b225d9b57cfe532dc2529489f1b11e3d3f",
+        "scripts/ui/move_input.gd": "cee8e709185740d1cb964fff13873a0818d14d0b3653f36d6416a1b17da40bd8",
+        "scripts/ui/responsive_feedback_panel.gd": "b36ce744a7378d696b91018935f637da0ae88beccdeddd85b1187a238958ed5b",
+        "scripts/ui/skill_preview.gd": "5c3de40b161d38de44234f6f1a2c63064bbc99021c4def95f7995382b02af5db",
+        "scripts/world/map_catalog.gd": "952abbc81d539817dfdd98ed4a59185f13fb8c1adac0210839d176ebee087ea6",
+        "scripts/world/map_space.gd": "8110f4a28e04e67fe738011ea888f31a9c74c450ed79148d88c1da602fa03ae8",
+        "scripts/world/supply_catalog.gd": "1af21cb685b8da0858491a961f007e8a0511c24e0f70b0165e0051d7fcb310a1"
+      },
+      "unchanged_runstate": true,
+      "unchanged_save_schema": 15,
+      "unchanged_rng_streams": 7,
+      "unchanged_original_source_baseline_guard": true,
+      "source_identity": "Final source hashes match the completed115-file engine run. Entire RunState/Cues/Main/mobile_main/progression/audio/data/assets unchanged. Only existing display/view/high-angle prop tint adapters and a new stateless frame planner change production."
+    },
+    "gui": {
+      "extra_native_audio_magic": 3,
+      "failures": [],
+      "native_dispatched_parallel_touch_cases": 100,
+      "native_master_slider_clicks": 2,
+      "save_native_continue_clicks": 5,
+      "save_native_retry_clicks": 1,
+      "scope": "Actual X11/native input and original structure auto-hit/MP break/drop/899active simulation steps/pause/Continue/45second respawn/rebreak,plus inherited supply/save/UI regression. QA clocks/positions/seeds/resources are explicit;not natural6minute/economy/physical-device proof.",
+      "status": "PASS",
+      "structure_native_continue_clicks": 1,
+      "structure_native_magic_touches": 2,
+      "supply_native_choice_clicks": 1
+    },
+    "gui_capture_count": 112,
+    "main_gui_capture_count": 108,
+    "detail_capture_count": 4,
+    "new_structure_capture_count": 24,
+    "new_structure_records": [
+      {
+        "actor_animation": "shape",
+        "actor_cache": 0,
+        "actor_frame": -1,
+        "actor_pose": "idle",
+        "audio_active": 0,
+        "audio_played": {},
+        "battle_ratio": 0.747455912098246,
+        "boss_guidance": "{  }",
+        "camera_offset": "(0.0, 0.0)",
+        "display_dense": false,
+        "display_labels": 0,
+        "draw_counts": {
+          "actors": 0,
+          "commands": 7,
+          "detailed_actors": true,
+          "display_dense": false,
+          "effects": 0,
+          "labels": 0,
+          "occluders": 0,
+          "skipped_links": 0,
+          "tiles": 154
+        },
+        "image": "structure_intact_high",
+        "incoming": "{  }",
+        "master_muted": false,
+        "mission_caption": "최후의 성벽 방어 ▸",
+        "planned_overlaps": 0,
+        "raw_events": 0,
+        "raw_label_boxes": 0,
+        "raw_label_overlaps": 0,
+        "reaction": "전투 집중",
+        "received": "[]",
+        "render_center": "(2320.0, 620.0)",
+        "renderer_high": true,
+        "save_checkpoint": 0,
+        "save_context": "",
+        "save_sequence": 0,
+        "save_until": -1.0,
+        "spawn_guard": "[P: (1584.115, 268.5852), S: (1471.771, 702.8296)]",
+        "structure_labels": [],
+        "structure_markers": [
+          {
+            "at": "(484.384, 240.357)",
+            "bar": "[P: (0.0, 0.0), S: (0.0, 0.0)]",
+            "boxes": [
+              "[P: (477.384, 233.357), S: (14.0, 14.0)]"
+            ],
+            "damaged": false,
+            "id": -2,
+            "progress": 1.0,
+            "waiting": false
+          },
+          {
+            "at": "(1074.384, 266.3378)",
+            "bar": "[P: (0.0, 0.0), S: (0.0, 0.0)]",
+            "boxes": [
+              "[P: (1067.384, 259.3378), S: (14.0, 14.0)]"
+            ],
+            "damaged": false,
+            "id": -3,
+            "progress": 1.0,
+            "waiting": false
+          }
+        ],
+        "supply_items": [],
+        "supply_receipts": [],
+        "viewport": "(1280, 720)"
+      },
+      {
+        "actor_animation": "shape",
+        "actor_cache": 0,
+        "actor_frame": -1,
+        "actor_pose": "idle",
+        "audio_active": 0,
+        "audio_played": {},
+        "battle_ratio": 0.747455912098246,
+        "boss_guidance": "{  }",
+        "camera_offset": "(0.0, 0.0)",
+        "display_dense": false,
+        "display_labels": 0,
+        "draw_counts": {
+          "actors": 0,
+          "commands": 7,
+          "detailed_actors": true,
+          "display_dense": false,
+          "effects": 0,
+          "labels": 0,
+          "occluders": 0,
+          "skipped_links": 0,
+          "tiles": 154
+        },
+        "image": "structure_intact_legacy",
+        "incoming": "{  }",
+        "master_muted": false,
+        "mission_caption": "최후의 성벽 방어 ▸",
+        "planned_overlaps": 0,
+        "raw_events": 0,
+        "raw_label_boxes": 0,
+        "raw_label_overlaps": 0,
+        "reaction": "전투 집중",
+        "received": "[]",
+        "render_center": "(2320.0, 620.0)",
+        "renderer_high": false,
+        "save_checkpoint": 0,
+        "save_context": "",
+        "save_sequence": 0,
+        "save_until": -1.0,
+        "spawn_guard": "[P: (1584.115, 268.5852), S: (1471.771, 702.8296)]",
+        "structure_labels": [],
+        "structure_markers": [
+          {
+            "at": "(484.384, 240.357)",
+            "bar": "[P: (0.0, 0.0), S: (0.0, 0.0)]",
+            "boxes": [
+              "[P: (477.384, 233.357), S: (14.0, 14.0)]"
+            ],
+            "damaged": false,
+            "id": -2,
+            "progress": 1.0,
+            "waiting": false
+          },
+          {
+            "at": "(1074.384, 270.357)",
+            "bar": "[P: (0.0, 0.0), S: (0.0, 0.0)]",
+            "boxes": [
+              "[P: (1067.384, 263.357), S: (14.0, 14.0)]"
+            ],
+            "damaged": false,
+            "id": -3,
+            "progress": 1.0,
+            "waiting": false
+          }
+        ],
+        "supply_items": [],
+        "supply_receipts": [],
+        "viewport": "(1280, 720)"
+      },
+      {
+        "actor_animation": "shape",
+        "actor_cache": 0,
+        "actor_frame": -1,
+        "actor_pose": "idle",
+        "audio_active": 0,
+        "audio_played": {},
+        "battle_ratio": 0.72656833669527,
+        "boss_guidance": "{  }",
+        "camera_offset": "(0.0, 0.0)",
+        "display_dense": false,
+        "display_labels": 0,
+        "draw_counts": {
+          "actors": 0,
+          "commands": 4,
+          "detailed_actors": true,
+          "display_dense": false,
+          "effects": 0,
+          "labels": 0,
+          "occluders": 0,
+          "skipped_links": 0,
+          "tiles": 70
+        },
+        "image": "structure_intact_compact",
+        "incoming": "{  }",
+        "master_muted": false,
+        "mission_caption": "임무 ▸",
+        "planned_overlaps": 0,
+        "raw_events": 0,
+        "raw_label_boxes": 0,
+        "raw_label_overlaps": 0,
+        "reaction": "전투 집중",
+        "received": "[]",
+        "render_center": "(2320.0, 620.0)",
+        "renderer_high": true,
+        "save_checkpoint": 0,
+        "save_context": "",
+        "save_sequence": 0,
+        "save_until": -1.0,
+        "spawn_guard": "[P: (1861.136, 441.9037), S: (917.727, 356.1926)]",
+        "structure_labels": [],
+        "structure_markers": [
+          {
+            "at": "(245.572, 110.962)",
+            "bar": "[P: (0.0, 0.0), S: (0.0, 0.0)]",
+            "boxes": [
+              "[P: (238.572, 103.962), S: (14.0, 14.0)]"
+            ],
+            "damaged": false,
+            "id": -2,
+            "progress": 1.0,
+            "waiting": false
+          }
+        ],
+        "supply_items": [],
+        "supply_receipts": [],
+        "viewport": "(853, 384)"
+      },
+      {
+        "actor_animation": "shape",
+        "actor_cache": 0,
+        "actor_frame": -1,
+        "actor_pose": "idle",
+        "audio_active": 0,
+        "audio_played": {},
+        "battle_ratio": 0.747455912098246,
+        "boss_guidance": "{  }",
+        "camera_offset": "(0.0, 0.0)",
+        "display_dense": false,
+        "display_labels": 0,
+        "draw_counts": {
+          "actors": 0,
+          "commands": 7,
+          "detailed_actors": true,
+          "display_dense": false,
+          "effects": 0,
+          "labels": 0,
+          "occluders": 0,
+          "skipped_links": 0,
+          "tiles": 187
+        },
+        "image": "structure_intact_wide",
+        "incoming": "{  }",
+        "master_muted": false,
+        "mission_caption": "최후의 성벽 방어 ▸",
+        "planned_overlaps": 0,
+        "raw_events": 0,
+        "raw_label_boxes": 0,
+        "raw_label_overlaps": 0,
+        "reaction": "전투 집중",
+        "received": "[]",
+        "render_center": "(2320.0, 620.0)",
+        "renderer_high": true,
+        "save_checkpoint": 0,
+        "save_context": "",
+        "save_sequence": 0,
+        "save_until": -1.0,
+        "spawn_guard": "[P: (1430.995, 268.5852), S: (1778.011, 702.8296)]",
+        "structure_labels": [],
+        "structure_markers": [
+          {
+            "at": "(616.384, 240.357)",
+            "bar": "[P: (0.0, 0.0), S: (0.0, 0.0)]",
+            "boxes": [
+              "[P: (609.384, 233.357), S: (14.0, 14.0)]"
+            ],
+            "damaged": false,
+            "id": -2,
+            "progress": 1.0,
+            "waiting": false
+          },
+          {
+            "at": "(1206.384, 266.3378)",
+            "bar": "[P: (0.0, 0.0), S: (0.0, 0.0)]",
+            "boxes": [
+              "[P: (1199.384, 259.3378), S: (14.0, 14.0)]"
+            ],
+            "damaged": false,
+            "id": -3,
+            "progress": 1.0,
+            "waiting": false
+          },
+          {
+            "at": "(116.384, 171.075)",
+            "bar": "[P: (0.0, 0.0), S: (0.0, 0.0)]",
+            "boxes": [
+              "[P: (109.384, 164.075), S: (14.0, 14.0)]"
+            ],
+            "damaged": false,
+            "id": -22,
+            "progress": 1.0,
+            "waiting": false
+          }
+        ],
+        "supply_items": [],
+        "supply_receipts": [],
+        "viewport": "(1600, 720)"
+      },
+      {
+        "actor_animation": "shape",
+        "actor_cache": 1,
+        "actor_frame": -1,
+        "actor_pose": "attack",
+        "audio_active": 0,
+        "audio_played": {
+          "fire": 1,
+          "hit": 1
+        },
+        "battle_ratio": 0.747455912098246,
+        "boss_guidance": "{  }",
+        "camera_offset": "(0.0, 0.0)",
+        "display_dense": false,
+        "display_labels": 1,
+        "draw_counts": {
+          "actors": 0,
+          "commands": 7,
+          "detailed_actors": true,
+          "display_dense": false,
+          "effects": 0,
+          "labels": 1,
+          "occluders": 0,
+          "skipped_links": 0,
+          "tiles": 154
+        },
+        "image": "structure_hit_high",
+        "incoming": "{  }",
+        "master_muted": false,
+        "mission_caption": "최후의 성벽 방어 ▸",
+        "planned_overlaps": 0,
+        "raw_events": 1,
+        "raw_label_boxes": 1,
+        "raw_label_overlaps": 0,
+        "reaction": "전투 집중",
+        "received": "[]",
+        "render_center": "(2320.0, 620.0)",
+        "renderer_high": true,
+        "save_checkpoint": 0,
+        "save_context": "",
+        "save_sequence": 0,
+        "save_until": -1.0,
+        "spawn_guard": "[P: (1584.115, 268.5852), S: (1471.771, 702.8296)]",
+        "structure_labels": [],
+        "structure_markers": [
+          {
+            "at": "(484.384, 240.357)",
+            "bar": "[P: (0.0, 0.0), S: (0.0, 0.0)]",
+            "boxes": [
+              "[P: (477.384, 233.357), S: (14.0, 14.0)]"
+            ],
+            "damaged": true,
+            "id": -2,
+            "progress": 1.0,
+            "waiting": false
+          },
+          {
+            "at": "(1074.384, 266.3378)",
+            "bar": "[P: (0.0, 0.0), S: (0.0, 0.0)]",
+            "boxes": [
+              "[P: (1067.384, 259.3378), S: (14.0, 14.0)]"
+            ],
+            "damaged": false,
+            "id": -3,
+            "progress": 1.0,
+            "waiting": false
+          }
+        ],
+        "supply_items": [],
+        "supply_receipts": [],
+        "viewport": "(1280, 720)"
+      },
+      {
+        "actor_animation": "shape",
+        "actor_cache": 1,
+        "actor_frame": -1,
+        "actor_pose": "attack",
+        "audio_active": 0,
+        "audio_played": {
+          "fire": 1,
+          "hit": 1
+        },
+        "battle_ratio": 0.747455912098246,
+        "boss_guidance": "{  }",
+        "camera_offset": "(0.0, 0.0)",
+        "display_dense": false,
+        "display_labels": 1,
+        "draw_counts": {
+          "actors": 0,
+          "commands": 7,
+          "detailed_actors": true,
+          "display_dense": false,
+          "effects": 0,
+          "labels": 1,
+          "occluders": 0,
+          "skipped_links": 0,
+          "tiles": 154
+        },
+        "image": "structure_hit_legacy",
+        "incoming": "{  }",
+        "master_muted": false,
+        "mission_caption": "최후의 성벽 방어 ▸",
+        "planned_overlaps": 0,
+        "raw_events": 1,
+        "raw_label_boxes": 1,
+        "raw_label_overlaps": 0,
+        "reaction": "전투 집중",
+        "received": "[]",
+        "render_center": "(2320.0, 620.0)",
+        "renderer_high": false,
+        "save_checkpoint": 0,
+        "save_context": "",
+        "save_sequence": 0,
+        "save_until": -1.0,
+        "spawn_guard": "[P: (1584.115, 268.5852), S: (1471.771, 702.8296)]",
+        "structure_labels": [],
+        "structure_markers": [
+          {
+            "at": "(484.384, 240.357)",
+            "bar": "[P: (0.0, 0.0), S: (0.0, 0.0)]",
+            "boxes": [
+              "[P: (477.384, 233.357), S: (14.0, 14.0)]"
+            ],
+            "damaged": true,
+            "id": -2,
+            "progress": 1.0,
+            "waiting": false
+          },
+          {
+            "at": "(1074.384, 270.357)",
+            "bar": "[P: (0.0, 0.0), S: (0.0, 0.0)]",
+            "boxes": [
+              "[P: (1067.384, 263.357), S: (14.0, 14.0)]"
+            ],
+            "damaged": false,
+            "id": -3,
+            "progress": 1.0,
+            "waiting": false
+          }
+        ],
+        "supply_items": [],
+        "supply_receipts": [],
+        "viewport": "(1280, 720)"
+      },
+      {
+        "actor_animation": "shape",
+        "actor_cache": 1,
+        "actor_frame": -1,
+        "actor_pose": "attack",
+        "audio_active": 1,
+        "audio_played": {
+          "fire": 1,
+          "hit": 1,
+          "magic": 1
+        },
+        "battle_ratio": 0.747455912098246,
+        "boss_guidance": "{  }",
+        "camera_offset": "(0.0, 0.0)",
+        "display_dense": false,
+        "display_labels": 2,
+        "draw_counts": {
+          "actors": 0,
+          "commands": 7,
+          "detailed_actors": true,
+          "display_dense": false,
+          "effects": 4,
+          "labels": 2,
+          "occluders": 0,
+          "skipped_links": 0,
+          "tiles": 154
+        },
+        "image": "structure_broken_high",
+        "incoming": "{  }",
+        "master_muted": false,
+        "mission_caption": "최후의 성벽 방어 ▸",
+        "planned_overlaps": 0,
+        "raw_events": 2,
+        "raw_label_boxes": 2,
+        "raw_label_overlaps": 0,
+        "reaction": "마법 · 결의",
+        "received": "[]",
+        "render_center": "(2320.0, 620.0)",
+        "renderer_high": true,
+        "save_checkpoint": 0,
+        "save_context": "",
+        "save_sequence": 0,
+        "save_until": -1.0,
+        "spawn_guard": "[P: (1584.115, 268.5852), S: (1471.771, 702.8296)]",
+        "structure_labels": [
+          {
+            "at": "(483.884, 190.357)",
+            "color": "(0.8157, 0.7725, 0.6745, 1.0)",
+            "event": {
+              "duration": 1.0,
+              "id": -2,
+              "kind": "structure",
+              "label": "재생성 45초",
+              "life": 1.0,
+              "p": "(2200.0, 620.0)"
+            },
+            "font_size": 12,
+            "rect": "[P: (480.884, 174.357), S: (67.0, 22.0)]",
+            "text": "재생성 45초"
+          }
+        ],
+        "structure_markers": [
+          {
+            "at": "(479.384, 256.357)",
+            "bar": "[P: (498.384, 286.357), S: (32.0, 3.0)]",
+            "boxes": [
+              "[P: (472.384, 249.357), S: (14.0, 14.0)]",
+              "[P: (497.384, 285.357), S: (34.0, 5.0)]"
+            ],
+            "damaged": false,
+            "id": -2,
+            "progress": 0.0,
+            "waiting": true
+          },
+          {
+            "at": "(1074.384, 266.3378)",
+            "bar": "[P: (0.0, 0.0), S: (0.0, 0.0)]",
+            "boxes": [
+              "[P: (1067.384, 259.3378), S: (14.0, 14.0)]"
+            ],
+            "damaged": false,
+            "id": -3,
+            "progress": 1.0,
+            "waiting": false
+          }
+        ],
+        "supply_items": [
+          {
+            "generation": 1,
+            "id": 1,
+            "kind": "hp",
+            "p": "(2200.0, 620.0)",
+            "source": -2
+          }
+        ],
+        "supply_receipts": [],
+        "viewport": "(1280, 720)"
+      },
+      {
+        "actor_animation": "shape",
+        "actor_cache": 1,
+        "actor_frame": -1,
+        "actor_pose": "attack",
+        "audio_active": 1,
+        "audio_played": {
+          "fire": 1,
+          "hit": 1,
+          "magic": 1
+        },
+        "battle_ratio": 0.747455912098246,
+        "boss_guidance": "{  }",
+        "camera_offset": "(0.0, 0.0)",
+        "display_dense": false,
+        "display_labels": 2,
+        "draw_counts": {
+          "actors": 0,
+          "commands": 7,
+          "detailed_actors": true,
+          "display_dense": false,
+          "effects": 4,
+          "labels": 2,
+          "occluders": 0,
+          "skipped_links": 0,
+          "tiles": 154
+        },
+        "image": "structure_broken_legacy",
+        "incoming": "{  }",
+        "master_muted": false,
+        "mission_caption": "최후의 성벽 방어 ▸",
+        "planned_overlaps": 0,
+        "raw_events": 2,
+        "raw_label_boxes": 1,
+        "raw_label_overlaps": 0,
+        "reaction": "마법 · 결의",
+        "received": "[]",
+        "render_center": "(2320.0, 620.0)",
+        "renderer_high": false,
+        "save_checkpoint": 0,
+        "save_context": "",
+        "save_sequence": 0,
+        "save_until": -1.0,
+        "spawn_guard": "[P: (1584.115, 268.5852), S: (1471.771, 702.8296)]",
+        "structure_labels": [
+          {
+            "at": "(483.884, 190.357)",
+            "color": "(0.8157, 0.7725, 0.6745, 1.0)",
+            "event": {
+              "duration": 1.0,
+              "id": -2,
+              "kind": "structure",
+              "label": "재생성 45초",
+              "life": 1.0,
+              "p": "(2200.0, 620.0)"
+            },
+            "font_size": 12,
+            "rect": "[P: (480.884, 174.357), S: (67.0, 22.0)]",
+            "text": "재생성 45초"
+          }
+        ],
+        "structure_markers": [
+          {
+            "at": "(479.384, 256.357)",
+            "bar": "[P: (498.384, 286.357), S: (32.0, 3.0)]",
+            "boxes": [
+              "[P: (472.384, 249.357), S: (14.0, 14.0)]",
+              "[P: (497.384, 285.357), S: (34.0, 5.0)]"
+            ],
+            "damaged": false,
+            "id": -2,
+            "progress": 0.0,
+            "waiting": true
+          },
+          {
+            "at": "(1074.384, 270.357)",
+            "bar": "[P: (0.0, 0.0), S: (0.0, 0.0)]",
+            "boxes": [
+              "[P: (1067.384, 263.357), S: (14.0, 14.0)]"
+            ],
+            "damaged": false,
+            "id": -3,
+            "progress": 1.0,
+            "waiting": false
+          }
+        ],
+        "supply_items": [
+          {
+            "generation": 1,
+            "id": 1,
+            "kind": "hp",
+            "p": "(2200.0, 620.0)",
+            "source": -2
+          }
+        ],
+        "supply_receipts": [],
+        "viewport": "(1280, 720)"
+      },
+      {
+        "actor_animation": "shape",
+        "actor_cache": 1,
+        "actor_frame": -1,
+        "actor_pose": "attack",
+        "audio_active": 1,
+        "audio_played": {
+          "fire": 1,
+          "hit": 1,
+          "magic": 1
+        },
+        "battle_ratio": 0.72656833669527,
+        "boss_guidance": "{  }",
+        "camera_offset": "(0.0, 0.0)",
+        "display_dense": false,
+        "display_labels": 2,
+        "draw_counts": {
+          "actors": 0,
+          "commands": 4,
+          "detailed_actors": true,
+          "display_dense": false,
+          "effects": 3,
+          "labels": 2,
+          "occluders": 0,
+          "skipped_links": 0,
+          "tiles": 70
+        },
+        "image": "structure_broken_compact",
+        "incoming": "{  }",
+        "master_muted": false,
+        "mission_caption": "임무 ▸",
+        "planned_overlaps": 0,
+        "raw_events": 2,
+        "raw_label_boxes": 1,
+        "raw_label_overlaps": 0,
+        "reaction": "마법 · 결의",
+        "received": "[]",
+        "render_center": "(2320.0, 620.0)",
+        "renderer_high": true,
+        "save_checkpoint": 0,
+        "save_context": "",
+        "save_sequence": 0,
+        "save_until": -1.0,
+        "spawn_guard": "[P: (1861.136, 441.9037), S: (917.727, 356.1926)]",
+        "structure_labels": [
+          {
+            "at": "(247.572, 60.96201)",
+            "color": "(0.8157, 0.7725, 0.6745, 1.0)",
+            "event": {
+              "duration": 1.0,
+              "id": -2,
+              "kind": "structure",
+              "label": "재생성 45초",
+              "life": 1.0,
+              "p": "(2200.0, 620.0)"
+            },
+            "font_size": 11,
+            "rect": "[P: (244.572, 45.96201), S: (62.0, 21.0)]",
+            "text": "재생성 45초"
+          }
+        ],
+        "structure_markers": [
+          {
+            "at": "(240.572, 126.962)",
+            "bar": "[P: (259.572, 156.962), S: (32.0, 3.0)]",
+            "boxes": [
+              "[P: (233.572, 119.962), S: (14.0, 14.0)]",
+              "[P: (258.572, 155.962), S: (34.0, 5.0)]"
+            ],
+            "damaged": false,
+            "id": -2,
+            "progress": 0.0,
+            "waiting": true
+          }
+        ],
+        "supply_items": [
+          {
+            "generation": 1,
+            "id": 1,
+            "kind": "hp",
+            "p": "(2200.0, 620.0)",
+            "source": -2
+          }
+        ],
+        "supply_receipts": [],
+        "viewport": "(853, 384)"
+      },
+      {
+        "actor_animation": "shape",
+        "actor_cache": 1,
+        "actor_frame": -1,
+        "actor_pose": "attack",
+        "audio_active": 0,
+        "audio_played": {
+          "fire": 1,
+          "hit": 1,
+          "magic": 1
+        },
+        "battle_ratio": 0.747455912098246,
+        "boss_guidance": "{  }",
+        "camera_offset": "(0.0, 0.0)",
+        "display_dense": false,
+        "display_labels": 1,
+        "draw_counts": {
+          "actors": 0,
+          "commands": 7,
+          "detailed_actors": true,
+          "display_dense": false,
+          "effects": 0,
+          "labels": 1,
+          "occluders": 0,
+          "skipped_links": 0,
+          "tiles": 154
+        },
+        "image": "structure_last_second",
+        "incoming": "{  }",
+        "master_muted": false,
+        "mission_caption": "최후의 성벽 방어 ▸",
+        "planned_overlaps": 0,
+        "raw_events": 0,
+        "raw_label_boxes": 0,
+        "raw_label_overlaps": 0,
+        "reaction": "전투 집중",
+        "received": "[]",
+        "render_center": "(2320.0, 620.0)",
+        "renderer_high": true,
+        "save_checkpoint": 0,
+        "save_context": "",
+        "save_sequence": 0,
+        "save_until": -1.0,
+        "spawn_guard": "[P: (1584.115, 268.5852), S: (1471.771, 702.8296)]",
+        "structure_labels": [
+          {
+            "at": "(487.384, 234.357)",
+            "color": "(0.8157, 0.7725, 0.6745, 1.0)",
+            "event": {
+              "duration": 1.0,
+              "id": -2,
+              "kind": "structure",
+              "label": "재생성 1초",
+              "life": 1.0,
+              "p": "(2200.0, 620.0)"
+            },
+            "font_size": 12,
+            "rect": "[P: (484.384, 218.357), S: (60.0, 22.0)]",
+            "text": "재생성 1초"
+          }
+        ],
+        "structure_markers": [
+          {
+            "at": "(479.384, 256.357)",
+            "bar": "[P: (498.384, 286.357), S: (32.0, 3.0)]",
+            "boxes": [
+              "[P: (472.384, 249.357), S: (14.0, 14.0)]",
+              "[P: (497.384, 285.357), S: (34.0, 5.0)]"
+            ],
+            "damaged": false,
+            "id": -2,
+            "progress": 0.99888888888888,
+            "waiting": true
+          },
+          {
+            "at": "(1074.384, 266.3378)",
+            "bar": "[P: (0.0, 0.0), S: (0.0, 0.0)]",
+            "boxes": [
+              "[P: (1067.384, 259.3378), S: (14.0, 14.0)]"
+            ],
+            "damaged": false,
+            "id": -3,
+            "progress": 1.0,
+            "waiting": false
+          }
+        ],
+        "supply_items": [
+          {
+            "generation": 1,
+            "id": 1,
+            "kind": "hp",
+            "p": "(2200.0, 620.0)",
+            "source": -2
+          }
+        ],
+        "supply_receipts": [],
+        "viewport": "(1280, 720)"
+      },
+      {
+        "actor_animation": "shape",
+        "actor_cache": 1,
+        "actor_frame": -1,
+        "actor_pose": "attack",
+        "audio_active": 0,
+        "audio_played": {
+          "fire": 1,
+          "hit": 1,
+          "magic": 1
+        },
+        "battle_ratio": 0.747455912098246,
+        "boss_guidance": "{  }",
+        "camera_offset": "(0.0, 0.0)",
+        "display_dense": false,
+        "display_labels": 1,
+        "draw_counts": {
+          "actors": 0,
+          "commands": 7,
+          "detailed_actors": true,
+          "display_dense": false,
+          "effects": 0,
+          "labels": 1,
+          "occluders": 0,
+          "skipped_links": 0,
+          "tiles": 154
+        },
+        "image": "structure_paused1",
+        "incoming": "{  }",
+        "master_muted": false,
+        "mission_caption": "최후의 성벽 방어 ▸",
+        "planned_overlaps": 0,
+        "raw_events": 0,
+        "raw_label_boxes": 0,
+        "raw_label_overlaps": 0,
+        "reaction": "전투 집중",
+        "received": "[]",
+        "render_center": "(2320.0, 620.0)",
+        "renderer_high": true,
+        "save_checkpoint": 0,
+        "save_context": "마지막 전투 저장\n저장된 전투 · 캠페인 S1\n프롤로그 · 최후의 도시 성벽\n진행 00:45 · 체크포인트 0/2 · Lv.1\nHP 100 · MP 100.0 · 획득 금화 0",
+        "save_sequence": 0,
+        "save_until": -1.0,
+        "spawn_guard": "[P: (1584.115, 268.5852), S: (1471.771, 702.8296)]",
+        "structure_labels": [
+          {
+            "at": "(487.384, 234.357)",
+            "color": "(0.8157, 0.7725, 0.6745, 1.0)",
+            "event": {
+              "duration": 1.0,
+              "id": -2,
+              "kind": "structure",
+              "label": "재생성 1초",
+              "life": 1.0,
+              "p": "(2200.0, 620.0)"
+            },
+            "font_size": 12,
+            "rect": "[P: (484.384, 218.357), S: (60.0, 22.0)]",
+            "text": "재생성 1초"
+          }
+        ],
+        "structure_markers": [
+          {
+            "at": "(479.384, 256.357)",
+            "bar": "[P: (498.384, 286.357), S: (32.0, 3.0)]",
+            "boxes": [
+              "[P: (472.384, 249.357), S: (14.0, 14.0)]",
+              "[P: (497.384, 285.357), S: (34.0, 5.0)]"
+            ],
+            "damaged": false,
+            "id": -2,
+            "progress": 0.99888888888888,
+            "waiting": true
+          },
+          {
+            "at": "(1074.384, 266.3378)",
+            "bar": "[P: (0.0, 0.0), S: (0.0, 0.0)]",
+            "boxes": [
+              "[P: (1067.384, 259.3378), S: (14.0, 14.0)]"
+            ],
+            "damaged": false,
+            "id": -3,
+            "progress": 1.0,
+            "waiting": false
+          }
+        ],
+        "supply_items": [
+          {
+            "generation": 1,
+            "id": 1,
+            "kind": "hp",
+            "p": "(2200.0, 620.0)",
+            "source": -2
+          }
+        ],
+        "supply_receipts": [],
+        "viewport": "(1280, 720)"
+      },
+      {
+        "actor_animation": "shape",
+        "actor_cache": 1,
+        "actor_frame": -1,
+        "actor_pose": "attack",
+        "audio_active": 0,
+        "audio_played": {
+          "fire": 1,
+          "hit": 1,
+          "magic": 1
+        },
+        "battle_ratio": 0.747455912098246,
+        "boss_guidance": "{  }",
+        "camera_offset": "(0.0, 0.0)",
+        "display_dense": false,
+        "display_labels": 1,
+        "draw_counts": {
+          "actors": 0,
+          "commands": 7,
+          "detailed_actors": true,
+          "display_dense": false,
+          "effects": 0,
+          "labels": 1,
+          "occluders": 0,
+          "skipped_links": 0,
+          "tiles": 154
+        },
+        "image": "structure_paused2",
+        "incoming": "{  }",
+        "master_muted": false,
+        "mission_caption": "최후의 성벽 방어 ▸",
+        "planned_overlaps": 0,
+        "raw_events": 0,
+        "raw_label_boxes": 0,
+        "raw_label_overlaps": 0,
+        "reaction": "전투 집중",
+        "received": "[]",
+        "render_center": "(2320.0, 620.0)",
+        "renderer_high": true,
+        "save_checkpoint": 0,
+        "save_context": "마지막 전투 저장\n저장된 전투 · 캠페인 S1\n프롤로그 · 최후의 도시 성벽\n진행 00:45 · 체크포인트 0/2 · Lv.1\nHP 100 · MP 100.0 · 획득 금화 0",
+        "save_sequence": 0,
+        "save_until": -1.0,
+        "spawn_guard": "[P: (1584.115, 268.5852), S: (1471.771, 702.8296)]",
+        "structure_labels": [
+          {
+            "at": "(487.384, 234.357)",
+            "color": "(0.8157, 0.7725, 0.6745, 1.0)",
+            "event": {
+              "duration": 1.0,
+              "id": -2,
+              "kind": "structure",
+              "label": "재생성 1초",
+              "life": 1.0,
+              "p": "(2200.0, 620.0)"
+            },
+            "font_size": 12,
+            "rect": "[P: (484.384, 218.357), S: (60.0, 22.0)]",
+            "text": "재생성 1초"
+          }
+        ],
+        "structure_markers": [
+          {
+            "at": "(479.384, 256.357)",
+            "bar": "[P: (498.384, 286.357), S: (32.0, 3.0)]",
+            "boxes": [
+              "[P: (472.384, 249.357), S: (14.0, 14.0)]",
+              "[P: (497.384, 285.357), S: (34.0, 5.0)]"
+            ],
+            "damaged": false,
+            "id": -2,
+            "progress": 0.99888888888888,
+            "waiting": true
+          },
+          {
+            "at": "(1074.384, 266.3378)",
+            "bar": "[P: (0.0, 0.0), S: (0.0, 0.0)]",
+            "boxes": [
+              "[P: (1067.384, 259.3378), S: (14.0, 14.0)]"
+            ],
+            "damaged": false,
+            "id": -3,
+            "progress": 1.0,
+            "waiting": false
+          }
+        ],
+        "supply_items": [
+          {
+            "generation": 1,
+            "id": 1,
+            "kind": "hp",
+            "p": "(2200.0, 620.0)",
+            "source": -2
+          }
+        ],
+        "supply_receipts": [],
+        "viewport": "(1280, 720)"
+      },
+      {
+        "actor_animation": "shape",
+        "actor_cache": 1,
+        "actor_frame": -1,
+        "actor_pose": "attack",
+        "audio_active": 0,
+        "audio_played": {
+          "fire": 1,
+          "hit": 1,
+          "magic": 1
+        },
+        "battle_ratio": 0.747455912098246,
+        "boss_guidance": "{  }",
+        "camera_offset": "(0.0, 0.0)",
+        "display_dense": false,
+        "display_labels": 1,
+        "draw_counts": {
+          "actors": 0,
+          "commands": 7,
+          "detailed_actors": true,
+          "display_dense": false,
+          "effects": 0,
+          "labels": 1,
+          "occluders": 0,
+          "skipped_links": 0,
+          "tiles": 154
+        },
+        "image": "structure_restored_paused",
+        "incoming": "{  }",
+        "master_muted": false,
+        "mission_caption": "최후의 성벽 방어 ▸",
+        "planned_overlaps": 0,
+        "raw_events": 0,
+        "raw_label_boxes": 0,
+        "raw_label_overlaps": 0,
+        "reaction": "전투 집중",
+        "received": "[]",
+        "render_center": "(2320.0, 620.0)",
+        "renderer_high": true,
+        "save_checkpoint": 0,
+        "save_context": "마지막 전투 저장\n저장된 전투 · 캠페인 S1\n프롤로그 · 최후의 도시 성벽\n진행 00:45 · 체크포인트 0/2 · Lv.1\nHP 100 · MP 100.0 · 획득 금화 0",
+        "save_sequence": 0,
+        "save_until": -1.0,
+        "spawn_guard": "[P: (1584.115, 268.5852), S: (1471.771, 702.8296)]",
+        "structure_labels": [
+          {
+            "at": "(487.384, 234.357)",
+            "color": "(0.8157, 0.7725, 0.6745, 1.0)",
+            "event": {
+              "duration": 1.0,
+              "id": -2,
+              "kind": "structure",
+              "label": "재생성 1초",
+              "life": 1.0,
+              "p": "(2200.0, 620.0)"
+            },
+            "font_size": 12,
+            "rect": "[P: (484.384, 218.357), S: (60.0, 22.0)]",
+            "text": "재생성 1초"
+          }
+        ],
+        "structure_markers": [
+          {
+            "at": "(479.384, 256.357)",
+            "bar": "[P: (498.384, 286.357), S: (32.0, 3.0)]",
+            "boxes": [
+              "[P: (472.384, 249.357), S: (14.0, 14.0)]",
+              "[P: (497.384, 285.357), S: (34.0, 5.0)]"
+            ],
+            "damaged": false,
+            "id": -2,
+            "progress": 0.99888888888888,
+            "waiting": true
+          },
+          {
+            "at": "(1074.384, 266.3378)",
+            "bar": "[P: (0.0, 0.0), S: (0.0, 0.0)]",
+            "boxes": [
+              "[P: (1067.384, 259.3378), S: (14.0, 14.0)]"
+            ],
+            "damaged": false,
+            "id": -3,
+            "progress": 1.0,
+            "waiting": false
+          }
+        ],
+        "supply_items": [
+          {
+            "generation": 1,
+            "id": 1,
+            "kind": "hp",
+            "p": "(2200.0, 620.0)",
+            "source": -2
+          }
+        ],
+        "supply_receipts": [],
+        "viewport": "(1280, 720)"
+      },
+      {
+        "actor_animation": "shape",
+        "actor_cache": 1,
+        "actor_frame": -1,
+        "actor_pose": "attack",
+        "audio_active": 0,
+        "audio_played": {
+          "fire": 1,
+          "hit": 1,
+          "magic": 1
+        },
+        "battle_ratio": 0.747455912098246,
+        "boss_guidance": "{  }",
+        "camera_offset": "(0.0, 0.0)",
+        "display_dense": false,
+        "display_labels": 0,
+        "draw_counts": {
+          "actors": 0,
+          "commands": 7,
+          "detailed_actors": true,
+          "display_dense": false,
+          "effects": 0,
+          "labels": 0,
+          "occluders": 0,
+          "skipped_links": 0,
+          "tiles": 154
+        },
+        "image": "structure_regenerated_high",
+        "incoming": "{  }",
+        "master_muted": false,
+        "mission_caption": "최후의 성벽 방어 ▸",
+        "planned_overlaps": 0,
+        "raw_events": 0,
+        "raw_label_boxes": 0,
+        "raw_label_overlaps": 0,
+        "reaction": "전투 집중",
+        "received": "[]",
+        "render_center": "(2320.0, 620.0)",
+        "renderer_high": true,
+        "save_checkpoint": 0,
+        "save_context": "마지막 전투 저장\n저장된 전투 · 캠페인 S1\n프롤로그 · 최후의 도시 성벽\n진행 00:45 · 체크포인트 0/2 · Lv.1\nHP 100 · MP 100.0 · 획득 금화 0",
+        "save_sequence": 0,
+        "save_until": -1.0,
+        "spawn_guard": "[P: (1584.115, 268.5852), S: (1471.771, 702.8296)]",
+        "structure_labels": [],
+        "structure_markers": [
+          {
+            "at": "(484.384, 240.357)",
+            "bar": "[P: (0.0, 0.0), S: (0.0, 0.0)]",
+            "boxes": [
+              "[P: (477.384, 233.357), S: (14.0, 14.0)]"
+            ],
+            "damaged": false,
+            "id": -2,
+            "progress": 1.0,
+            "waiting": false
+          },
+          {
+            "at": "(1074.384, 266.3378)",
+            "bar": "[P: (0.0, 0.0), S: (0.0, 0.0)]",
+            "boxes": [
+              "[P: (1067.384, 259.3378), S: (14.0, 14.0)]"
+            ],
+            "damaged": false,
+            "id": -3,
+            "progress": 1.0,
+            "waiting": false
+          }
+        ],
+        "supply_items": [
+          {
+            "generation": 1,
+            "id": 1,
+            "kind": "hp",
+            "p": "(2200.0, 620.0)",
+            "source": -2
+          }
+        ],
+        "supply_receipts": [],
+        "viewport": "(1280, 720)"
+      },
+      {
+        "actor_animation": "shape",
+        "actor_cache": 1,
+        "actor_frame": -1,
+        "actor_pose": "attack",
+        "audio_active": 0,
+        "audio_played": {
+          "fire": 1,
+          "hit": 1,
+          "magic": 1
+        },
+        "battle_ratio": 0.747455912098246,
+        "boss_guidance": "{  }",
+        "camera_offset": "(0.0, 0.0)",
+        "display_dense": false,
+        "display_labels": 0,
+        "draw_counts": {
+          "actors": 0,
+          "commands": 7,
+          "detailed_actors": true,
+          "display_dense": false,
+          "effects": 0,
+          "labels": 0,
+          "occluders": 0,
+          "skipped_links": 0,
+          "tiles": 154
+        },
+        "image": "structure_regenerated_legacy",
+        "incoming": "{  }",
+        "master_muted": false,
+        "mission_caption": "최후의 성벽 방어 ▸",
+        "planned_overlaps": 0,
+        "raw_events": 0,
+        "raw_label_boxes": 0,
+        "raw_label_overlaps": 0,
+        "reaction": "전투 집중",
+        "received": "[]",
+        "render_center": "(2320.0, 620.0)",
+        "renderer_high": false,
+        "save_checkpoint": 0,
+        "save_context": "마지막 전투 저장\n저장된 전투 · 캠페인 S1\n프롤로그 · 최후의 도시 성벽\n진행 00:45 · 체크포인트 0/2 · Lv.1\nHP 100 · MP 100.0 · 획득 금화 0",
+        "save_sequence": 0,
+        "save_until": -1.0,
+        "spawn_guard": "[P: (1584.115, 268.5852), S: (1471.771, 702.8296)]",
+        "structure_labels": [],
+        "structure_markers": [
+          {
+            "at": "(484.384, 240.357)",
+            "bar": "[P: (0.0, 0.0), S: (0.0, 0.0)]",
+            "boxes": [
+              "[P: (477.384, 233.357), S: (14.0, 14.0)]"
+            ],
+            "damaged": false,
+            "id": -2,
+            "progress": 1.0,
+            "waiting": false
+          },
+          {
+            "at": "(1074.384, 270.357)",
+            "bar": "[P: (0.0, 0.0), S: (0.0, 0.0)]",
+            "boxes": [
+              "[P: (1067.384, 263.357), S: (14.0, 14.0)]"
+            ],
+            "damaged": false,
+            "id": -3,
+            "progress": 1.0,
+            "waiting": false
+          }
+        ],
+        "supply_items": [
+          {
+            "generation": 1,
+            "id": 1,
+            "kind": "hp",
+            "p": "(2200.0, 620.0)",
+            "source": -2
+          }
+        ],
+        "supply_receipts": [],
+        "viewport": "(1280, 720)"
+      },
+      {
+        "actor_animation": "shape",
+        "actor_cache": 1,
+        "actor_frame": -1,
+        "actor_pose": "attack",
+        "audio_active": 0,
+        "audio_played": {
+          "fire": 1,
+          "hit": 2,
+          "magic": 2
+        },
+        "battle_ratio": 0.747455912098246,
+        "boss_guidance": "{  }",
+        "camera_offset": "(0.0, 0.0)",
+        "display_dense": false,
+        "display_labels": 2,
+        "draw_counts": {
+          "actors": 0,
+          "commands": 7,
+          "detailed_actors": true,
+          "display_dense": false,
+          "effects": 4,
+          "labels": 2,
+          "occluders": 0,
+          "skipped_links": 0,
+          "tiles": 154
+        },
+        "image": "structure_second_generation_paused",
+        "incoming": "{  }",
+        "master_muted": false,
+        "mission_caption": "최후의 성벽 방어 ▸",
+        "planned_overlaps": 0,
+        "raw_events": 2,
+        "raw_label_boxes": 2,
+        "raw_label_overlaps": 0,
+        "reaction": "마법 · 결의",
+        "received": "[]",
+        "render_center": "(2320.0, 620.0)",
+        "renderer_high": true,
+        "save_checkpoint": 0,
+        "save_context": "마지막 전투 저장\n저장된 전투 · 캠페인 S1\n프롤로그 · 최후의 도시 성벽\n진행 00:45 · 체크포인트 0/2 · Lv.1\nHP 100 · MP 60.0 · 획득 금화 0",
+        "save_sequence": 0,
+        "save_until": -1.0,
+        "spawn_guard": "[P: (1584.115, 268.5852), S: (1471.771, 702.8296)]",
+        "structure_labels": [
+          {
+            "at": "(483.884, 190.357)",
+            "color": "(0.8157, 0.7725, 0.6745, 1.0)",
+            "event": {
+              "duration": 1.0,
+              "id": -2,
+              "kind": "structure",
+              "label": "재생성 45초",
+              "life": 1.0,
+              "p": "(2200.0, 620.0)"
+            },
+            "font_size": 12,
+            "rect": "[P: (480.884, 174.357), S: (67.0, 22.0)]",
+            "text": "재생성 45초"
+          }
+        ],
+        "structure_markers": [
+          {
+            "at": "(479.384, 256.357)",
+            "bar": "[P: (498.384, 286.357), S: (32.0, 3.0)]",
+            "boxes": [
+              "[P: (472.384, 249.357), S: (14.0, 14.0)]",
+              "[P: (497.384, 285.357), S: (34.0, 5.0)]"
+            ],
+            "damaged": false,
+            "id": -2,
+            "progress": 0.0,
+            "waiting": true
+          },
+          {
+            "at": "(1074.384, 266.3378)",
+            "bar": "[P: (0.0, 0.0), S: (0.0, 0.0)]",
+            "boxes": [
+              "[P: (1067.384, 259.3378), S: (14.0, 14.0)]"
+            ],
+            "damaged": false,
+            "id": -3,
+            "progress": 1.0,
+            "waiting": false
+          }
+        ],
+        "supply_items": [
+          {
+            "generation": 1,
+            "id": 1,
+            "kind": "hp",
+            "p": "(2200.0, 620.0)",
+            "source": -2
+          },
+          {
+            "generation": 2,
+            "id": 2,
+            "kind": "mp",
+            "p": "(2200.0, 620.0)",
+            "source": -2
+          }
+        ],
+        "supply_receipts": [],
+        "viewport": "(1280, 720)"
+      },
+      {
+        "actor_animation": "shape",
+        "actor_cache": 1,
+        "actor_frame": -1,
+        "actor_pose": "attack",
+        "audio_active": 0,
+        "audio_played": {
+          "fire": 1,
+          "hit": 2,
+          "magic": 2
+        },
+        "battle_ratio": 0.747455912098246,
+        "boss_guidance": "{  }",
+        "camera_offset": "(0.0, 0.0)",
+        "display_dense": false,
+        "display_labels": 2,
+        "draw_counts": {
+          "actors": 0,
+          "commands": 7,
+          "detailed_actors": true,
+          "display_dense": false,
+          "effects": 4,
+          "labels": 2,
+          "occluders": 0,
+          "skipped_links": 0,
+          "tiles": 154
+        },
+        "image": "structure_second_generation",
+        "incoming": "{  }",
+        "master_muted": false,
+        "mission_caption": "최후의 성벽 방어 ▸",
+        "planned_overlaps": 0,
+        "raw_events": 2,
+        "raw_label_boxes": 2,
+        "raw_label_overlaps": 0,
+        "reaction": "마법 · 결의",
+        "received": "[]",
+        "render_center": "(2320.0, 620.0)",
+        "renderer_high": true,
+        "save_checkpoint": 0,
+        "save_context": "마지막 전투 저장\n저장된 전투 · 캠페인 S1\n프롤로그 · 최후의 도시 성벽\n진행 00:45 · 체크포인트 0/2 · Lv.1\nHP 100 · MP 60.0 · 획득 금화 0",
+        "save_sequence": 0,
+        "save_until": -1.0,
+        "spawn_guard": "[P: (1584.115, 268.5852), S: (1471.771, 702.8296)]",
+        "structure_labels": [
+          {
+            "at": "(483.884, 190.357)",
+            "color": "(0.8157, 0.7725, 0.6745, 1.0)",
+            "event": {
+              "duration": 1.0,
+              "id": -2,
+              "kind": "structure",
+              "label": "재생성 45초",
+              "life": 1.0,
+              "p": "(2200.0, 620.0)"
+            },
+            "font_size": 12,
+            "rect": "[P: (480.884, 174.357), S: (67.0, 22.0)]",
+            "text": "재생성 45초"
+          }
+        ],
+        "structure_markers": [
+          {
+            "at": "(479.384, 256.357)",
+            "bar": "[P: (498.384, 286.357), S: (32.0, 3.0)]",
+            "boxes": [
+              "[P: (472.384, 249.357), S: (14.0, 14.0)]",
+              "[P: (497.384, 285.357), S: (34.0, 5.0)]"
+            ],
+            "damaged": false,
+            "id": -2,
+            "progress": 0.0,
+            "waiting": true
+          },
+          {
+            "at": "(1074.384, 266.3378)",
+            "bar": "[P: (0.0, 0.0), S: (0.0, 0.0)]",
+            "boxes": [
+              "[P: (1067.384, 259.3378), S: (14.0, 14.0)]"
+            ],
+            "damaged": false,
+            "id": -3,
+            "progress": 1.0,
+            "waiting": false
+          }
+        ],
+        "supply_items": [
+          {
+            "generation": 1,
+            "id": 1,
+            "kind": "hp",
+            "p": "(2200.0, 620.0)",
+            "source": -2
+          },
+          {
+            "generation": 2,
+            "id": 2,
+            "kind": "mp",
+            "p": "(2200.0, 620.0)",
+            "source": -2
+          }
+        ],
+        "supply_receipts": [],
+        "viewport": "(1280, 720)"
+      },
+      {
+        "actor_animation": "shape",
+        "actor_cache": 1,
+        "actor_frame": -1,
+        "actor_pose": "attack",
+        "audio_active": 0,
+        "audio_played": {
+          "fire": 1,
+          "hit": 2,
+          "magic": 2
+        },
+        "battle_ratio": 0.747455912098246,
+        "boss_guidance": "{ \"id\": 122, \"p\": (2120.0, 740.0), \"hp\": 3200, \"max_hp\": 3200, \"distance\": 233.238082885742, \"reach\": 520.0, \"blocked\": false, \"in_range\": true, \"aimed\": true, \"status\": \"기본 공격 · 보스 조준\", &\"font_size\": 13, &\"status_rect\": [P: (418.6934, 26.0), S: (360.0, 22.0)], &\"screen\": (434.384, 366.2801), &\"offscreen\": false, &\"marker_rect\": [P: (0.0, 0.0), S: (0.0, 0.0)] }",
+        "camera_offset": "(0.0, 0.0)",
+        "display_dense": true,
+        "display_labels": 2,
+        "draw_counts": {
+          "actors": 122,
+          "commands": 129,
+          "detailed_actors": false,
+          "display_dense": true,
+          "effects": 4,
+          "labels": 2,
+          "occluders": 0,
+          "skipped_links": 0,
+          "tiles": 154
+        },
+        "image": "structures_dense_high",
+        "incoming": "{  }",
+        "master_muted": false,
+        "mission_caption": "최후의 성벽 방어 ▸",
+        "planned_overlaps": 0,
+        "raw_events": 2,
+        "raw_label_boxes": 2,
+        "raw_label_overlaps": 0,
+        "reaction": "마법 · 결의",
+        "received": "[]",
+        "render_center": "(2320.0, 620.0)",
+        "renderer_high": true,
+        "save_checkpoint": 0,
+        "save_context": "마지막 전투 저장\n저장된 전투 · 캠페인 S1\n프롤로그 · 최후의 도시 성벽\n진행 00:45 · 체크포인트 0/2 · Lv.1\nHP 100 · MP 60.0 · 획득 금화 0",
+        "save_sequence": 0,
+        "save_until": -1.0,
+        "spawn_guard": "[P: (1584.115, 268.5852), S: (1471.771, 702.8296)]",
+        "structure_labels": [
+          {
+            "at": "(483.884, 190.357)",
+            "color": "(0.8157, 0.7725, 0.6745, 1.0)",
+            "event": {
+              "duration": 1.0,
+              "id": -2,
+              "kind": "structure",
+              "label": "재생성 45초",
+              "life": 1.0,
+              "p": "(2200.0, 620.0)"
+            },
+            "font_size": 12,
+            "rect": "[P: (480.884, 174.357), S: (67.0, 22.0)]",
+            "text": "재생성 45초"
+          }
+        ],
+        "structure_markers": [
+          {
+            "at": "(479.384, 256.357)",
+            "bar": "[P: (498.384, 286.357), S: (32.0, 3.0)]",
+            "boxes": [
+              "[P: (472.384, 249.357), S: (14.0, 14.0)]",
+              "[P: (497.384, 285.357), S: (34.0, 5.0)]"
+            ],
+            "damaged": false,
+            "id": -2,
+            "progress": 0.0,
+            "waiting": true
+          },
+          {
+            "at": "(1074.384, 266.3378)",
+            "bar": "[P: (0.0, 0.0), S: (0.0, 0.0)]",
+            "boxes": [
+              "[P: (1067.384, 259.3378), S: (14.0, 14.0)]"
+            ],
+            "damaged": false,
+            "id": -3,
+            "progress": 1.0,
+            "waiting": false
+          }
+        ],
+        "supply_items": [
+          {
+            "generation": 1,
+            "id": 1,
+            "kind": "hp",
+            "p": "(2200.0, 620.0)",
+            "source": -2
+          },
+          {
+            "generation": 2,
+            "id": 2,
+            "kind": "mp",
+            "p": "(2200.0, 620.0)",
+            "source": -2
+          }
+        ],
+        "supply_receipts": [],
+        "viewport": "(1280, 720)"
+      },
+      {
+        "actor_animation": "shape",
+        "actor_cache": 1,
+        "actor_frame": -1,
+        "actor_pose": "attack",
+        "audio_active": 0,
+        "audio_played": {
+          "fire": 1,
+          "hit": 2,
+          "magic": 2
+        },
+        "battle_ratio": 0.72656833669527,
+        "boss_guidance": "{ \"id\": 122, \"p\": (2120.0, 740.0), \"hp\": 3200, \"max_hp\": 3200, \"distance\": 233.238082885742, \"reach\": 520.0, \"blocked\": false, \"in_range\": true, \"aimed\": true, \"status\": \"기본 공격 · 보스 조준\", &\"font_size\": 11, &\"status_rect\": [P: (261.0775, 26.0), S: (316.4576, 22.0)], &\"screen\": (195.572, 236.885), &\"offscreen\": false, &\"marker_rect\": [P: (0.0, 0.0), S: (0.0, 0.0)] }",
+        "camera_offset": "(0.0, 0.0)",
+        "display_dense": true,
+        "display_labels": 1,
+        "draw_counts": {
+          "actors": 116,
+          "commands": 120,
+          "detailed_actors": false,
+          "display_dense": true,
+          "effects": 3,
+          "labels": 1,
+          "occluders": 0,
+          "skipped_links": 0,
+          "tiles": 70
+        },
+        "image": "structures_dense_compact",
+        "incoming": "{  }",
+        "master_muted": false,
+        "mission_caption": "임무 ▸",
+        "planned_overlaps": 0,
+        "raw_events": 2,
+        "raw_label_boxes": 1,
+        "raw_label_overlaps": 0,
+        "reaction": "마법 · 결의",
+        "received": "[]",
+        "render_center": "(2320.0, 620.0)",
+        "renderer_high": true,
+        "save_checkpoint": 0,
+        "save_context": "마지막 전투 저장\n저장된 전투 · 캠페인 S1\n프롤로그 · 최후의 도시 성벽\n진행 00:45 · 체크포인트 0/2 · Lv.1\nHP 100 · MP 60.0 · 획득 금화 0",
+        "save_sequence": 0,
+        "save_until": -1.0,
+        "spawn_guard": "[P: (1861.136, 441.9037), S: (917.727, 356.1926)]",
+        "structure_labels": [],
+        "structure_markers": [
+          {
+            "at": "(240.572, 126.962)",
+            "bar": "[P: (259.572, 156.962), S: (32.0, 3.0)]",
+            "boxes": [
+              "[P: (233.572, 119.962), S: (14.0, 14.0)]",
+              "[P: (258.572, 155.962), S: (34.0, 5.0)]"
+            ],
+            "damaged": false,
+            "id": -2,
+            "progress": 0.0,
+            "waiting": true
+          }
+        ],
+        "supply_items": [
+          {
+            "generation": 1,
+            "id": 1,
+            "kind": "hp",
+            "p": "(2200.0, 620.0)",
+            "source": -2
+          },
+          {
+            "generation": 2,
+            "id": 2,
+            "kind": "mp",
+            "p": "(2200.0, 620.0)",
+            "source": -2
+          }
+        ],
+        "supply_receipts": [],
+        "viewport": "(853, 384)"
+      },
+      {
+        "actor_animation": "shape",
+        "actor_cache": 1,
+        "actor_frame": -1,
+        "actor_pose": "attack",
+        "audio_active": 0,
+        "audio_played": {
+          "fire": 1,
+          "hit": 2,
+          "magic": 2
+        },
+        "battle_ratio": 0.72656833669527,
+        "boss_guidance": "{ \"id\": 122, \"p\": (2120.0, 740.0), \"hp\": 3200, \"max_hp\": 3200, \"distance\": 233.238082885742, \"reach\": 520.0, \"blocked\": false, \"in_range\": true, \"aimed\": true, \"status\": \"기본 공격 · 보스 조준\", &\"font_size\": 11, &\"status_rect\": [P: (261.0775, 26.0), S: (316.4576, 22.0)], &\"screen\": (195.572, 252.962), &\"offscreen\": false, &\"marker_rect\": [P: (0.0, 0.0), S: (0.0, 0.0)] }",
+        "camera_offset": "(0.0, 0.0)",
+        "display_dense": true,
+        "display_labels": 1,
+        "draw_counts": {
+          "actors": 116,
+          "commands": 120,
+          "detailed_actors": false,
+          "display_dense": true,
+          "effects": 3,
+          "labels": 1,
+          "occluders": 0,
+          "skipped_links": 0,
+          "tiles": 70
+        },
+        "image": "structures_dense_legacy",
+        "incoming": "{  }",
+        "master_muted": false,
+        "mission_caption": "임무 ▸",
+        "planned_overlaps": 0,
+        "raw_events": 2,
+        "raw_label_boxes": 1,
+        "raw_label_overlaps": 0,
+        "reaction": "마법 · 결의",
+        "received": "[]",
+        "render_center": "(2320.0, 620.0)",
+        "renderer_high": false,
+        "save_checkpoint": 0,
+        "save_context": "마지막 전투 저장\n저장된 전투 · 캠페인 S1\n프롤로그 · 최후의 도시 성벽\n진행 00:45 · 체크포인트 0/2 · Lv.1\nHP 100 · MP 60.0 · 획득 금화 0",
+        "save_sequence": 0,
+        "save_until": -1.0,
+        "spawn_guard": "[P: (1861.136, 441.9037), S: (917.727, 356.1926)]",
+        "structure_labels": [],
+        "structure_markers": [
+          {
+            "at": "(240.572, 126.962)",
+            "bar": "[P: (259.572, 156.962), S: (32.0, 3.0)]",
+            "boxes": [
+              "[P: (233.572, 119.962), S: (14.0, 14.0)]",
+              "[P: (258.572, 155.962), S: (34.0, 5.0)]"
+            ],
+            "damaged": false,
+            "id": -2,
+            "progress": 0.0,
+            "waiting": true
+          }
+        ],
+        "supply_items": [
+          {
+            "generation": 1,
+            "id": 1,
+            "kind": "hp",
+            "p": "(2200.0, 620.0)",
+            "source": -2
+          },
+          {
+            "generation": 2,
+            "id": 2,
+            "kind": "mp",
+            "p": "(2200.0, 620.0)",
+            "source": -2
+          }
+        ],
+        "supply_receipts": [],
+        "viewport": "(853, 384)"
+      }
+    ],
+    "detail_records": {
+      "failures": [],
+      "records": [
+        {
+          "actor_animation": "shape",
+          "actor_cache": 0,
+          "actor_frame": -1,
+          "actor_pose": "idle",
+          "audio_active": 0,
+          "audio_played": {},
+          "battle_ratio": 0.747455912098246,
+          "boss_guidance": "{  }",
+          "camera_offset": "(0.0, 0.0)",
+          "display_dense": false,
+          "display_labels": 1,
+          "draw_counts": {
+            "actors": 0,
+            "commands": 5,
+            "detailed_actors": true,
+            "display_dense": false,
+            "effects": 0,
+            "labels": 1,
+            "occluders": 0,
+            "skipped_links": 0,
+            "tiles": 154
+          },
+          "image": "structure_debris_high",
+          "incoming": "{  }",
+          "master_muted": false,
+          "mission_caption": "최후의 성벽 방어 ▸",
+          "planned_overlaps": 0,
+          "raw_events": 1,
+          "raw_label_boxes": 1,
+          "raw_label_overlaps": 0,
+          "reaction": "전투 집중",
+          "received": "[]",
+          "render_center": "(2800.0, 1180.0)",
+          "renderer_high": true,
+          "save_checkpoint": 0,
+          "save_context": "",
+          "save_sequence": 0,
+          "save_until": -1.0,
+          "spawn_guard": "[P: (2064.115, 828.5852), S: (1471.771, 702.8296)]",
+          "structure_labels": [],
+          "structure_markers": [
+            {
+              "at": "(484.384, 240.357)",
+              "bar": "[P: (0.0, 0.0), S: (0.0, 0.0)]",
+              "boxes": [
+                "[P: (477.384, 233.357), S: (14.0, 14.0)]"
+              ],
+              "damaged": true,
+              "id": -5,
+              "progress": 1.0,
+              "waiting": false
+            },
+            {
+              "at": "(854.384, 127.7737)",
+              "bar": "[P: (0.0, 0.0), S: (0.0, 0.0)]",
+              "boxes": [
+                "[P: (847.384, 120.7737), S: (14.0, 14.0)]"
+              ],
+              "damaged": false,
+              "id": -7,
+              "progress": 1.0,
+              "waiting": false
+            },
+            {
+              "at": "(254.384, 32.51086)",
+              "bar": "[P: (0.0, 0.0), S: (0.0, 0.0)]",
+              "boxes": [
+                "[P: (247.384, 25.51086), S: (14.0, 14.0)]"
+              ],
+              "damaged": false,
+              "id": -4,
+              "progress": 1.0,
+              "waiting": false
+            }
+          ],
+          "supply_items": [],
+          "supply_receipts": [],
+          "viewport": "(1280, 720)"
+        },
+        {
+          "actor_animation": "shape",
+          "actor_cache": 0,
+          "actor_frame": -1,
+          "actor_pose": "idle",
+          "audio_active": 0,
+          "audio_played": {},
+          "battle_ratio": 0.747455912098246,
+          "boss_guidance": "{  }",
+          "camera_offset": "(0.0, 0.0)",
+          "display_dense": false,
+          "display_labels": 1,
+          "draw_counts": {
+            "actors": 0,
+            "commands": 5,
+            "detailed_actors": true,
+            "display_dense": false,
+            "effects": 0,
+            "labels": 1,
+            "occluders": 0,
+            "skipped_links": 0,
+            "tiles": 154
+          },
+          "image": "structure_debris_legacy",
+          "incoming": "{  }",
+          "master_muted": false,
+          "mission_caption": "최후의 성벽 방어 ▸",
+          "planned_overlaps": 0,
+          "raw_events": 1,
+          "raw_label_boxes": 1,
+          "raw_label_overlaps": 0,
+          "reaction": "전투 집중",
+          "received": "[]",
+          "render_center": "(2800.0, 1180.0)",
+          "renderer_high": false,
+          "save_checkpoint": 0,
+          "save_context": "",
+          "save_sequence": 0,
+          "save_until": -1.0,
+          "spawn_guard": "[P: (2064.115, 828.5852), S: (1471.771, 702.8296)]",
+          "structure_labels": [],
+          "structure_markers": [
+            {
+              "at": "(484.384, 240.357)",
+              "bar": "[P: (0.0, 0.0), S: (0.0, 0.0)]",
+              "boxes": [
+                "[P: (477.384, 233.357), S: (14.0, 14.0)]"
+              ],
+              "damaged": true,
+              "id": -5,
+              "progress": 1.0,
+              "waiting": false
+            },
+            {
+              "at": "(854.384, 110.357)",
+              "bar": "[P: (0.0, 0.0), S: (0.0, 0.0)]",
+              "boxes": [
+                "[P: (847.384, 103.357), S: (14.0, 14.0)]"
+              ],
+              "damaged": false,
+              "id": -7,
+              "progress": 1.0,
+              "waiting": false
+            }
+          ],
+          "supply_items": [],
+          "supply_receipts": [],
+          "viewport": "(1280, 720)"
+        },
+        {
+          "actor_animation": "shape",
+          "actor_cache": 0,
+          "actor_frame": -1,
+          "actor_pose": "idle",
+          "audio_active": 0,
+          "audio_played": {},
+          "battle_ratio": 0.747455912098246,
+          "boss_guidance": "{  }",
+          "camera_offset": "(0.0, 0.0)",
+          "display_dense": false,
+          "display_labels": 1,
+          "draw_counts": {
+            "actors": 0,
+            "commands": 6,
+            "detailed_actors": true,
+            "display_dense": false,
+            "effects": 0,
+            "labels": 1,
+            "occluders": 0,
+            "skipped_links": 0,
+            "tiles": 154
+          },
+          "image": "structure_urn_high",
+          "incoming": "{  }",
+          "master_muted": false,
+          "mission_caption": "최후의 성벽 방어 ▸",
+          "planned_overlaps": 0,
+          "raw_events": 2,
+          "raw_label_boxes": 1,
+          "raw_label_overlaps": 0,
+          "reaction": "전투 집중",
+          "received": "[]",
+          "render_center": "(2910.0, 650.0)",
+          "renderer_high": true,
+          "save_checkpoint": 0,
+          "save_context": "",
+          "save_sequence": 0,
+          "save_until": -1.0,
+          "spawn_guard": "[P: (2174.115, 298.5852), S: (1471.771, 702.8296)]",
+          "structure_labels": [],
+          "structure_markers": [
+            {
+              "at": "(484.384, 240.357)",
+              "bar": "[P: (0.0, 0.0), S: (0.0, 0.0)]",
+              "boxes": [
+                "[P: (477.384, 233.357), S: (14.0, 14.0)]"
+              ],
+              "damaged": true,
+              "id": -3,
+              "progress": 1.0,
+              "waiting": false
+            },
+            {
+              "at": "(1094.384, 153.7545)",
+              "bar": "[P: (0.0, 0.0), S: (0.0, 0.0)]",
+              "boxes": [
+                "[P: (1087.384, 146.7545), S: (14.0, 14.0)]"
+              ],
+              "damaged": false,
+              "id": -23,
+              "progress": 1.0,
+              "waiting": false
+            },
+            {
+              "at": "(144.384, 491.5044)",
+              "bar": "[P: (0.0, 0.0), S: (0.0, 0.0)]",
+              "boxes": [
+                "[P: (137.384, 484.5044), S: (14.0, 14.0)]"
+              ],
+              "damaged": false,
+              "id": -4,
+              "progress": 1.0,
+              "waiting": false
+            }
+          ],
+          "supply_items": [],
+          "supply_receipts": [],
+          "viewport": "(1280, 720)"
+        },
+        {
+          "actor_animation": "shape",
+          "actor_cache": 0,
+          "actor_frame": -1,
+          "actor_pose": "idle",
+          "audio_active": 0,
+          "audio_played": {},
+          "battle_ratio": 0.747455912098246,
+          "boss_guidance": "{  }",
+          "camera_offset": "(0.0, 0.0)",
+          "display_dense": false,
+          "display_labels": 1,
+          "draw_counts": {
+            "actors": 0,
+            "commands": 6,
+            "detailed_actors": true,
+            "display_dense": false,
+            "effects": 0,
+            "labels": 1,
+            "occluders": 0,
+            "skipped_links": 0,
+            "tiles": 154
+          },
+          "image": "structure_urn_legacy",
+          "incoming": "{  }",
+          "master_muted": false,
+          "mission_caption": "최후의 성벽 방어 ▸",
+          "planned_overlaps": 0,
+          "raw_events": 2,
+          "raw_label_boxes": 1,
+          "raw_label_overlaps": 0,
+          "reaction": "전투 집중",
+          "received": "[]",
+          "render_center": "(2910.0, 650.0)",
+          "renderer_high": false,
+          "save_checkpoint": 0,
+          "save_context": "",
+          "save_sequence": 0,
+          "save_until": -1.0,
+          "spawn_guard": "[P: (2174.115, 298.5852), S: (1471.771, 702.8296)]",
+          "structure_labels": [],
+          "structure_markers": [
+            {
+              "at": "(484.384, 240.357)",
+              "bar": "[P: (0.0, 0.0), S: (0.0, 0.0)]",
+              "boxes": [
+                "[P: (477.384, 233.357), S: (14.0, 14.0)]"
+              ],
+              "damaged": true,
+              "id": -3,
+              "progress": 1.0,
+              "waiting": false
+            },
+            {
+              "at": "(1094.384, 140.357)",
+              "bar": "[P: (0.0, 0.0), S: (0.0, 0.0)]",
+              "boxes": [
+                "[P: (1087.384, 133.357), S: (14.0, 14.0)]"
+              ],
+              "damaged": false,
+              "id": -23,
+              "progress": 1.0,
+              "waiting": false
+            }
+          ],
+          "supply_items": [],
+          "supply_receipts": [],
+          "viewport": "(1280, 720)"
+        }
+      ],
+      "scope": "Actual existing debris/urn hit and identification in both renderers,no replacement art or persistent-state changes",
+      "status": "PASS"
+    },
+    "visual_inspection": [
+      "structure_hit_high.png",
+      "structure_broken_compact.png",
+      "structures_dense_compact.png",
+      "structure_debris_high.png"
+    ],
+    "historical_fresh_processes": [
+      {
+        "tag": "v1",
+        "status": "PASS",
+        "exit_code": 0,
+        "old_version": 1,
+        "new_version": 15,
+        "gold_reward_version": 0,
+        "rng_streams": 7,
+        "future_frames_equal": true,
+        "audio_silent_initial": true,
+        "ready_summary": ""
+      },
+      {
+        "tag": "v2",
+        "status": "PASS",
+        "exit_code": 0,
+        "old_version": 2,
+        "new_version": 15,
+        "gold_reward_version": 0,
+        "rng_streams": 7,
+        "future_frames_equal": true,
+        "audio_silent_initial": true,
+        "ready_summary": "저장된 전투 · 캠페인 S1\n기존 전투 저장 전장\n진행 05:00 · 체크포인트 2/2 · Lv.1\nHP 100 · MP 100.0 · 획득 금화 0"
+      },
+      {
+        "tag": "v3",
+        "status": "PASS",
+        "exit_code": 0,
+        "old_version": 3,
+        "new_version": 15,
+        "gold_reward_version": 0,
+        "rng_streams": 7,
+        "future_frames_equal": true,
+        "audio_silent_initial": true,
+        "ready_summary": "저장된 전투 · 캠페인 S1\n기존 전투 저장 전장\n진행 03:00 · 체크포인트 1/2 · Lv.1\nHP 88 · MP 100.0 · 획득 금화 0"
+      },
+      {
+        "tag": "v4",
+        "status": "PASS",
+        "exit_code": 0,
+        "old_version": 4,
+        "new_version": 15,
+        "gold_reward_version": 0,
+        "rng_streams": 7,
+        "future_frames_equal": true,
+        "audio_silent_initial": true,
+        "ready_summary": "저장된 전투 · 캠페인 S2\n기존 전투 저장 전장\n진행 00:00 · 체크포인트 0/2 · Lv.1\nHP 100 · MP 60.0 · 획득 금화 0"
+      },
+      {
+        "tag": "v5",
+        "status": "PASS",
+        "exit_code": 0,
+        "old_version": 5,
+        "new_version": 15,
+        "gold_reward_version": 0,
+        "rng_streams": 7,
+        "future_frames_equal": true,
+        "audio_silent_initial": true,
+        "ready_summary": "저장된 전투 · 캠페인 S2\n기존 전투 저장 전장\n진행 00:00 · 체크포인트 0/2 · Lv.1\nHP 103 · MP 60.1 · 획득 금화 0"
+      },
+      {
+        "tag": "v6",
+        "status": "PASS",
+        "exit_code": 0,
+        "old_version": 6,
+        "new_version": 15,
+        "gold_reward_version": 0,
+        "rng_streams": 7,
+        "future_frames_equal": true,
+        "audio_silent_initial": true,
+        "ready_summary": "저장된 전투 · 캠페인 S2\n기존 전투 저장 전장\n진행 00:01 · 체크포인트 0/2 · Lv.1\nHP 95 · MP 40.9 · 획득 금화 0"
+      },
+      {
+        "tag": "v7",
+        "status": "PASS",
+        "exit_code": 0,
+        "old_version": 7,
+        "new_version": 15,
+        "gold_reward_version": 0,
+        "rng_streams": 7,
+        "future_frames_equal": true,
+        "audio_silent_initial": true,
+        "ready_summary": "저장된 전투 · 캠페인 S1\n기존 전투 저장 전장\n진행 00:00 · 체크포인트 0/2 · Lv.1\nHP 100 · MP 100.0 · 획득 금화 0"
+      },
+      {
+        "tag": "v8",
+        "status": "PASS",
+        "exit_code": 0,
+        "old_version": 8,
+        "new_version": 15,
+        "gold_reward_version": 0,
+        "rng_streams": 7,
+        "future_frames_equal": true,
+        "audio_silent_initial": true,
+        "ready_summary": "저장된 전투 · 캠페인 S2\n[시험] 도시 외곽 황무지\n진행 00:13 · 체크포인트 0/2 · Lv.1\nHP 100 · MP 100.0 · 획득 금화 0"
+      },
+      {
+        "tag": "v9",
+        "status": "PASS",
+        "exit_code": 0,
+        "old_version": 9,
+        "new_version": 15,
+        "gold_reward_version": 0,
+        "rng_streams": 7,
+        "future_frames_equal": true,
+        "audio_silent_initial": true,
+        "ready_summary": "저장된 전투 · 캠페인 S1\n프롤로그 · 최후의 도시 성벽\n진행 00:44 · 체크포인트 0/2 · Lv.1\nHP 75 · MP 50.1 · 획득 금화 0"
+      },
+      {
+        "tag": "v10",
+        "status": "PASS",
+        "exit_code": 0,
+        "old_version": 10,
+        "new_version": 15,
+        "gold_reward_version": 0,
+        "rng_streams": 7,
+        "future_frames_equal": true,
+        "audio_silent_initial": true,
+        "ready_summary": "저장된 전투 · 캠페인 S1\n프롤로그 · 최후의 도시 성벽\n진행 00:00 · 체크포인트 0/2 · Lv.100\nHP 100 · MP 60.0 · 획득 금화 0"
+      },
+      {
+        "tag": "v11",
+        "status": "PASS",
+        "exit_code": 0,
+        "old_version": 11,
+        "new_version": 15,
+        "gold_reward_version": 0,
+        "rng_streams": 7,
+        "future_frames_equal": true,
+        "audio_silent_initial": true,
+        "ready_summary": "저장된 전투 · 캠페인 S1\n프롤로그 · 최후의 도시 성벽\n진행 00:00 · 체크포인트 0/2 · Lv.50\nHP 73 · MP 42.5 · 획득 금화 0"
+      },
+      {
+        "tag": "v12",
+        "status": "PASS",
+        "exit_code": 0,
+        "old_version": 12,
+        "new_version": 15,
+        "gold_reward_version": 0,
+        "rng_streams": 7,
+        "future_frames_equal": true,
+        "audio_silent_initial": true,
+        "ready_summary": "저장된 전투 · 캠페인 S2\n[시험] 도시 외곽 황무지\n진행 02:00 · 체크포인트 1/2 · Lv.1\nHP 73 · MP 42.5 · 획득 금화 0"
+      },
+      {
+        "tag": "v13",
+        "status": "PASS",
+        "exit_code": 0,
+        "old_version": 13,
+        "new_version": 15,
+        "gold_reward_version": 0,
+        "rng_streams": 7,
+        "future_frames_equal": true,
+        "audio_silent_initial": true,
+        "ready_summary": "저장된 전투 · 골드 던전\n[시제품] 골드 슬라임 채굴장\n진행 01:00 · 체크포인트 1/2 · Lv.1\nHP 73 · MP 42.5 · 획득 금화 0\n이어하기는 추가 입장 횟수를 사용하지 않습니다"
+      },
+      {
+        "tag": "v14-campaign",
+        "status": "PASS",
+        "exit_code": 0,
+        "old_version": 14,
+        "new_version": 15,
+        "gold_reward_version": 0,
+        "rng_streams": 7,
+        "future_frames_equal": true,
+        "audio_silent_initial": true,
+        "ready_summary": "저장된 전투 · 캠페인 S1\n프롤로그 · 최후의 도시 성벽\n진행 02:00 · 체크포인트 1/2 · Lv.10\nHP 73 · MP 42.5 · 획득 금화 0"
+      },
+      {
+        "tag": "v14-dungeon",
+        "status": "PASS",
+        "exit_code": 0,
+        "old_version": 14,
+        "new_version": 15,
+        "gold_reward_version": 0,
+        "rng_streams": 7,
+        "future_frames_equal": true,
+        "audio_silent_initial": true,
+        "ready_summary": "저장된 전투 · 골드 던전\n[시제품] 골드 슬라임 채굴장\n진행 01:00 · 체크포인트 1/2 · Lv.1\nHP 61 · MP 33.3 · 획득 금화 0\n이어하기는 추가 입장 횟수를 사용하지 않습니다"
+      },
+      {
+        "tag": "v15-campaign",
+        "status": "PASS",
+        "exit_code": 0,
+        "old_version": 15,
+        "new_version": 15,
+        "gold_reward_version": 0,
+        "rng_streams": 7,
+        "future_frames_equal": true,
+        "audio_silent_initial": true,
+        "ready_summary": "저장된 전투 · 캠페인 S1\n프롤로그 · 최후의 도시 성벽\n진행 00:02 · 체크포인트 0/2 · Lv.1\nHP 100 · MP 100.0 · 획득 금화 0"
+      },
+      {
+        "tag": "v15-dungeon",
+        "status": "PASS",
+        "exit_code": 0,
+        "old_version": 15,
+        "new_version": 15,
+        "gold_reward_version": 1,
+        "rng_streams": 7,
+        "future_frames_equal": true,
+        "audio_silent_initial": true,
+        "ready_summary": "저장된 전투 · 골드 던전\n[시제품] 골드 슬라임 채굴장\n진행 01:00 · 체크포인트 1/2 · Lv.1\nHP 61 · MP 33.3 · 획득 금화 0\n이어하기는 추가 입장 횟수를 사용하지 않습니다"
+      }
+    ],
+    "actual_structure_fresh_processes": [
+      {
+        "daily_after": 2,
+        "daily_before": 2,
+        "errors": [],
+        "future100frames_equal": true,
+        "label": "저장된 전투 · 캠페인 S1\n프롤로그 · 최후의 도시 성벽\n진행 00:45 · 체크포인트 0/2 · Lv.1\nHP 100 · MP 100.0 · 획득 금화 0",
+        "mode": "campaign",
+        "offer": [],
+        "pending_choices": 0,
+        "rng_streams": 7,
+        "save_toast_sequence": 0,
+        "saved_checkpoint": 0,
+        "saved_elapsed": 45.0499999999996,
+        "saved_hp": 100,
+        "saved_mp": 100.0,
+        "status": "PASS",
+        "structure_after": {
+          "generation": 1,
+          "hp": 30,
+          "id": -2,
+          "max_hp": 30,
+          "p": "(2200.0, 620.0)",
+          "respawn_left": 0.0,
+          "style": "crate"
+        },
+        "structure_before": {
+          "generation": 1,
+          "hp": 0,
+          "id": -2,
+          "max_hp": 30,
+          "p": "(2200.0, 620.0)",
+          "respawn_left": 0.050000000000418,
+          "style": "crate"
+        },
+        "tag": "structure-waiting",
+        "unclaimed_items": [
+          {
+            "generation": 1,
+            "id": 1,
+            "kind": "hp",
+            "p": "(2200.0, 620.0)",
+            "source": -2
+          }
+        ],
+        "wallet_after": 0,
+        "wallet_before": 0
+      },
+      {
+        "daily_after": 2,
+        "daily_before": 2,
+        "errors": [],
+        "future100frames_equal": true,
+        "label": "저장된 전투 · 캠페인 S1\n프롤로그 · 최후의 도시 성벽\n진행 00:45 · 체크포인트 0/2 · Lv.1\nHP 100 · MP 60.0 · 획득 금화 0",
+        "mode": "campaign",
+        "offer": [],
+        "pending_choices": 0,
+        "rng_streams": 7,
+        "save_toast_sequence": 0,
+        "saved_checkpoint": 0,
+        "saved_elapsed": 45.0999999999996,
+        "saved_hp": 100,
+        "saved_mp": 60.0,
+        "status": "PASS",
+        "structure_after": {
+          "generation": 2,
+          "hp": 0,
+          "id": -2,
+          "max_hp": 30,
+          "p": "(2200.0, 620.0)",
+          "respawn_left": 40.0000000000003,
+          "style": "crate"
+        },
+        "structure_before": {
+          "generation": 2,
+          "hp": 0,
+          "id": -2,
+          "max_hp": 30,
+          "p": "(2200.0, 620.0)",
+          "respawn_left": 45.0,
+          "style": "crate"
+        },
+        "tag": "structure-second",
+        "unclaimed_items": [
+          {
+            "generation": 1,
+            "id": 1,
+            "kind": "hp",
+            "p": "(2200.0, 620.0)",
+            "source": -2
+          },
+          {
+            "generation": 2,
+            "id": 2,
+            "kind": "mp",
+            "p": "(2200.0, 620.0)",
+            "source": -2
+          }
+        ],
+        "wallet_after": 0,
+        "wallet_before": 0
+      }
+    ],
+    "actual_path": "Original auto-fire damages fixed-layout prop;native MPbutton destroys it with existing seed-selected loot;899real simulation steps of.05leave.05seconds;pause/save/explicit Continue reaches actual45second restoration;second nativeMP cast creates second-generation drop. Separate processes resume both near-finished and second-generation saves and compare100followup steps/sevenRNG/gold/admission. Existing old-field loot retained.",
+    "native_input": "100inherited movement/MPparallel cases,3extra inheritedmagic touches,2masterslider mouse,5Continue mouse,1save retry,1magnetgrowth card;new structure-native magic touches2and Continue1 are included separately from inherited counts.",
+    "fixture_scope": "QA seeds,positions,resources/unscheduledcrowds and some legacy boundary clock placements are explicit. The structure45second proof uses899steps of0.05seconds plus one resumed0.05second step,not45seconds of wall-clock gameplay. No natural6minute/income/physical-device approval claim. Debris/urn detail probe uses original fixed-layout props and committed7damage,not replacement art.",
+    "warnings": "Final behavioral engine/restore and GUI have no script/leak errors. GUI has existing software-driverunsupportedVSync warning. No new performance/mixer measurement."
+  },
+  "limits": {
+    "android_device": "NOT_VERIFIED",
+    "ios_device": "NOT_VERIFIED",
+    "windows_f5_export": "NOT_VERIFIED",
+    "physical_audio_human_readability": "NOT_VERIFIED",
+    "new_performance_natural6minute_economy_mixer": "NOT_RUN",
+    "final_art_audio": "NOT_APPROVED"
+  },
+  "next": "전투 결과·보상 지급 상태 안내",
+  "artifacts": {
+    ".local_validation/GAME034/audio_focus_paused.png": {
+      "sha256": "88c5cf989e6fa3ceff2d548ceb4283c579c4a5739015f9dc4d296d933de50f7d",
+      "bytes": 94611
+    },
+    ".local_validation/GAME034/audio_focus_regained.png": {
+      "sha256": "88c5cf989e6fa3ceff2d548ceb4283c579c4a5739015f9dc4d296d933de50f7d",
+      "bytes": 94611
+    },
+    ".local_validation/GAME034/audio_magic.png": {
+      "sha256": "a45640ab1a5d372ea19361a61f92a6955f2af599d38665a41d5433dd7cb230da",
+      "bytes": 267256
+    },
+    ".local_validation/GAME034/audio_muted_gameplay.png": {
+      "sha256": "e53a526df13ea1fc60fd9521a4f37068efe87c5095ba5bc30da8aa159aeb3b05",
+      "bytes": 267151
+    },
+    ".local_validation/GAME034/audio_muted_settings.png": {
+      "sha256": "63f6977c572bc279fad63ea1444dc6bc5a561ddb4e06a8a066e263c98cd5009c",
+      "bytes": 94540
+    },
+    ".local_validation/GAME034/audio_unmuted_settings.png": {
+      "sha256": "d382fd79e653b07f8a6f208cee7fd35563f0952a38973784ac8ca4e460e1eca7",
+      "bytes": 94498
+    },
+    ".local_validation/GAME034/boss_1600x720.png": {
+      "sha256": "f4b3477d1bab1636aac90a50e1a4445f825a3e6ba4ab757f4d108d5a76173143",
+      "bytes": 308508
+    },
+    ".local_validation/GAME034/boss_853x384.png": {
+      "sha256": "c8f26335aec7ac03d6f9f8f303ded1ebaebc70d0c80f18a73c064fcb99bf8b6c",
+      "bytes": 177682
+    },
+    ".local_validation/GAME034/boss_960x540.png": {
+      "sha256": "cd8820a5be9fa8db4c44fca5389789ada5bc9ec8fff504bbe4b9dc64409e11c4",
+      "bytes": 230452
+    },
+    ".local_validation/GAME034/boss_blocked.png": {
+      "sha256": "9238a5d9a73c7deb6cd15dbd650bb4fc2821b7ab90b9359eb27c1ccb4026540d",
+      "bytes": 304429
+    },
+    ".local_validation/GAME034/boss_choice.png": {
+      "sha256": "dde086b7d6c935f4af690cd2c7f36d9573e31388a275969142e35d32eef2f7b0",
+      "bytes": 162039
+    },
+    ".local_validation/GAME034/boss_legacy.png": {
+      "sha256": "4fdcf01292125891971b76985421448e56f2bd0c61660092c0ebba053c7ebc69",
+      "bytes": 169378
+    },
+    ".local_validation/GAME034/boss_mission.png": {
+      "sha256": "13792ee53257747cdac51888ae528983cf3b07c2dcd520d02d4587575ff4b1ac",
+      "bytes": 83061
+    },
+    ".local_validation/GAME034/boss_offscreen_bottom.png": {
+      "sha256": "0d813e5971166e64c1627857a3fca7ba05677110bca7194ba92a08556bcfcab6",
+      "bytes": 298100
+    },
+    ".local_validation/GAME034/boss_offscreen_left.png": {
+      "sha256": "fbbf45c22af1e0b4ba77487110696b542896f15e109d79af125d62d677554c74",
+      "bytes": 298876
+    },
+    ".local_validation/GAME034/boss_offscreen_right.png": {
+      "sha256": "70c0d78013701689f38adcf15ff1d6f87ede63194ee4a35fc69277a9b138a8cc",
+      "bytes": 298834
+    },
+    ".local_validation/GAME034/boss_offscreen_top.png": {
+      "sha256": "ec675e24a819f1296538ab007a1f403c965d4aa184c6bc1141b1c60d56cc00d1",
+      "bytes": 298897
+    },
+    ".local_validation/GAME034/boss_paused.png": {
+      "sha256": "5ef8df78b9ae475d23974322e211a2b05466705f829dfe2ca7062b7fc7dc6472",
+      "bytes": 94654
+    },
+    ".local_validation/GAME034/boss_visible_open.png": {
+      "sha256": "2a38a6f7123871a7bc77bbeb7ec16f7e178c8dfde835a646605b089da9cd6fe9",
+      "bytes": 303139
+    },
+    ".local_validation/GAME034/camera_forward.png": {
+      "sha256": "5d9eac1f6bd8830a2bf4fc58f8a7e0601348ad2fc27c13c38043412556211ad2",
+      "bytes": 157361
+    },
+    ".local_validation/GAME034/camera_mission.png": {
+      "sha256": "a55996972d8d2e73f6f012c6d65f44169039d2423600d40c69a763ebc682dad7",
+      "bytes": 82477
+    },
+    ".local_validation/GAME034/camera_reversal.png": {
+      "sha256": "5baa7d00d1f3728199e8c9dc0b0dd8e16b63d96a122e20a12bc8d898dac1c589",
+      "bytes": 159486
+    },
+    ".local_validation/GAME034/continue-structure-second.log": {
+      "sha256": "a4a683e97b1f91fb764da6a6e02caf83a6e391aee27d5c68845123c54e8f08c1",
+      "bytes": 979
+    },
+    ".local_validation/GAME034/continue-structure-waiting.log": {
+      "sha256": "34c3f7c098223822ec90d446cfe8e1d7263937ee2399f2885eced62b9d11c899",
+      "bytes": 913
+    },
+    ".local_validation/GAME034/continue_probe.gd": {
+      "sha256": "c2819876d13d233140f34c6cefe7f00cf195bdacf9b4ed008c96019658541256",
+      "bytes": 4791
+    },
+    ".local_validation/GAME034/dense_compact.png": {
+      "sha256": "8209cf14cdc10760aeadb49af653eb54bce165c3078c88b217541cf103add70e",
+      "bytes": 182149
+    },
+    ".local_validation/GAME034/engine_0.log": {
+      "sha256": "edff16c1721dd4ae989cadf29a01f574ae8d51b118221f664725bd6980bbba5d",
+      "bytes": 32
+    },
+    ".local_validation/GAME034/engine_1.log": {
+      "sha256": "0ce7f15b789bf9a60441a1db5ad2cb13bb3f8016f3f19b53127f066a6d9b1159",
+      "bytes": 1410
+    },
+    ".local_validation/GAME034/engine_2.log": {
+      "sha256": "1938b93b03756e658dd6fc29e699189d67afb2aec05905c840e9c22f5b89a6cd",
+      "bytes": 117
+    },
+    ".local_validation/GAME034/engine_3.log": {
+      "sha256": "190487dfb2bdf99cdccfff084fd5d95b81eac04fcfe3ec43e502d524daacb8eb",
+      "bytes": 117
+    },
+    ".local_validation/GAME034/engine_4.log": {
+      "sha256": "0dc80f41a9d961a6b4d962614c905af0b7c3bc209f569871d09048860b58f7ff",
+      "bytes": 118
+    },
+    ".local_validation/GAME034/engine_5.log": {
+      "sha256": "c5a9e5b87c0439795f9d5bcfe6c17d74bce134acc53d7f341cfb55a11bdb1e1d",
+      "bytes": 117
+    },
+    ".local_validation/GAME034/engine_6.log": {
+      "sha256": "570a42343d370c104902d16c9ff0b402573f94ed3076772afb70e6bce96084fc",
+      "bytes": 119
+    },
+    ".local_validation/GAME034/engine_7.log": {
+      "sha256": "025f863c84ce84466e9269a07033239400176c7aad50ada31ff794c6e59b0837",
+      "bytes": 117
+    },
+    ".local_validation/GAME034/engine_8.log": {
+      "sha256": "f839bacba08b5e641393ceb95105d928191a99bc88c51740184ea1312c3a9e53",
+      "bytes": 119
+    },
+    ".local_validation/GAME034/engine_9.log": {
+      "sha256": "6d1c065383a27c36804949b6ffa4b09714470b112e5dacc0bd5aeb7b9c147c4e",
+      "bytes": 73
+    },
+    ".local_validation/GAME034/front_of_ruin.png": {
+      "sha256": "9d5bf391212550e99fc6c12a4d6b4a6afd6ad28d4b9f1d8707db5e2a6237a884",
+      "bytes": 142698
+    },
+    ".local_validation/GAME034/guide_200.png": {
+      "sha256": "984dafdc873066d24af8342db87995306dca67c4b49f1b24241b78a42f9fbd3c",
+      "bytes": 329384
+    },
+    ".local_validation/GAME034/high_100.png": {
+      "sha256": "22d0dde80bd26f6714321e477dda16ea1f32865f48dcc3ca89f2ddac44942404",
+      "bytes": 305811
+    },
+    ".local_validation/GAME034/high_1600x720.png": {
+      "sha256": "67cfd68d86104b143a3013c793c76ea70da90db671e484b031835ba7e519e62b",
+      "bytes": 214412
+    },
+    ".local_validation/GAME034/high_30.png": {
+      "sha256": "9a9f020a3bb7c3acb2c44909683dccaa443f8da2a5ba7bf799c83cc0c0671bbe",
+      "bytes": 192224
+    },
+    ".local_validation/GAME034/high_853x384.png": {
+      "sha256": "fad8e2d7e39c34738bfbec1d62cad3d95c868624e066e6b967ea49e1bf29f97e",
+      "bytes": 131441
+    },
+    ".local_validation/GAME034/high_960x540.png": {
+      "sha256": "06f421fb8d997ecc0c8832f1d645e0498bd153c6e7e1a7727900946ee78f5ab0",
+      "bytes": 151879
+    },
+    ".local_validation/GAME034/historical-inputs.json": {
+      "sha256": "b1623da9589fbd8d0513f1280411df1e621121da449b709d39150b2764c6ead1",
+      "bytes": 2594
+    },
+    ".local_validation/GAME034/historical-runner.log": {
+      "sha256": "39274c502dc07ec043363561645e29203283ec6019ce2995a214cb999a8b314e",
+      "bytes": 406
+    },
+    ".local_validation/GAME034/import.log": {
+      "sha256": "232f48142cf04036d57d6a09959e277122de443665c0ba60078c1ad0064dd333",
+      "bytes": 19860
+    },
+    ".local_validation/GAME034/item_hp_clamped.png": {
+      "sha256": "962dc9c0f74cf6327f1df0471d0912c3e530461d500744fffd753002ad72bae0",
+      "bytes": 161475
+    },
+    ".local_validation/GAME034/item_magnet_choice.png": {
+      "sha256": "a727caa87523d4fbb5e4baa58c98c7f10d3dbbbc9acad39c5993320233ae0ddb",
+      "bytes": 131663
+    },
+    ".local_validation/GAME034/item_magnet_compact.png": {
+      "sha256": "56e5a4ca1eb8a84c797971a29b25a07b8076c0676da7cd007ca64e9cd7d9c0c7",
+      "bytes": 91290
+    },
+    ".local_validation/GAME034/item_magnet_receipt.png": {
+      "sha256": "757f595fc94a9c63c4ea2278810ee4a4f35cb462ff6650fb60572422def67b7f",
+      "bytes": 169234
+    },
+    ".local_validation/GAME034/item_mp_fractional.png": {
+      "sha256": "0fc7ec247b3db6a27d3d86c129c7823fd29e8a3a538ee5b22880819131b076f9",
+      "bytes": 164052
+    },
+    ".local_validation/GAME034/item_purge_boss.png": {
+      "sha256": "fab0ff115fee874986ca12b53645b23141df7191b19d69d74d71a556a3a86cd1",
+      "bytes": 184035
+    },
+    ".local_validation/GAME034/item_purge_compact.png": {
+      "sha256": "025ba3ec4abab8036a8e604d07b24cd02a71557ec1d33202fe5ec75d5baf4840",
+      "bytes": 105204
+    },
+    ".local_validation/GAME034/items_dense_compact.png": {
+      "sha256": "9c4f202cef0a20c535e40b590cbfc1fd23eda7a3ac3cda7536a2d40ea81c1a5d",
+      "bytes": 192405
+    },
+    ".local_validation/GAME034/items_dense_legacy.png": {
+      "sha256": "8df74c2ce84d44cc3a7b14e031ecad621ebccd16e60a13fc1f0d589f2157a630",
+      "bytes": 129342
+    },
+    ".local_validation/GAME034/items_dense_standard.png": {
+      "sha256": "e6368fb1f6f54078f2da2f2aa489c4f295b05c0f8e949309e2f32722d8a818b4",
+      "bytes": 320040
+    },
+    ".local_validation/GAME034/items_full_resources.png": {
+      "sha256": "9baf37a4a855dae234dfa2a123531adaa2b31134fc6edebbf186fb3d19c9c088",
+      "bytes": 167430
+    },
+    ".local_validation/GAME034/items_high_1600.png": {
+      "sha256": "8cc5eabb02038602c72042abb86e625bb042ecf8b36544591b154a72a28640af",
+      "bytes": 175829
+    },
+    ".local_validation/GAME034/items_high_853.png": {
+      "sha256": "d35c73525c41d3c32fd10e6ef008df48c0dc33830c6f37f9728e397aab59a624",
+      "bytes": 90694
+    },
+    ".local_validation/GAME034/items_high_standard.png": {
+      "sha256": "8438bbf148469df7a640522ce6a2d461ff80e44a5c97a9265fe56ed53ea8b847",
+      "bytes": 168567
+    },
+    ".local_validation/GAME034/items_legacy_compact.png": {
+      "sha256": "242cff627bd0a4845fd7b3edbfdc2a6a09a41036eb8adbf82605675684d2146d",
+      "bytes": 43354
+    },
+    ".local_validation/GAME034/items_legacy_standard.png": {
+      "sha256": "3ea313fd8acc75692267d4808dd7216337c007abddd2644059db55e0ffadb0e6",
+      "bytes": 69545
+    },
+    ".local_validation/GAME034/items_paused1.png": {
+      "sha256": "5ef8df78b9ae475d23974322e211a2b05466705f829dfe2ca7062b7fc7dc6472",
+      "bytes": 94654
+    },
+    ".local_validation/GAME034/items_paused2.png": {
+      "sha256": "5ef8df78b9ae475d23974322e211a2b05466705f829dfe2ca7062b7fc7dc6472",
+      "bytes": 94654
+    },
+    ".local_validation/GAME034/items_restore_neutral.png": {
+      "sha256": "7d9d5a3e3f195b639d5e5c4d93b2d7bb413836d917562b84e616f576311d1c22",
+      "bytes": 93013
+    },
+    ".local_validation/GAME034/items_saved_after_pickup.png": {
+      "sha256": "81b5f5d320c192fb1a0d0c81fd5a5450da4898ef52997ef581b2cfd9e8bc84fc",
+      "bytes": 39357
+    },
+    ".local_validation/GAME034/legacy_30.png": {
+      "sha256": "e85534f3b1a493700fa4aa5565c7e977d6b4459d99ff9fb2bc2a0667c234269a",
+      "bytes": 123139
+    },
+    ".local_validation/GAME034/mission_compact.png": {
+      "sha256": "d47b80e1e55a038955316d19f3df50c3dc7b1e1b273e3308639638cb451d5b6c",
+      "bytes": 42233
+    },
+    ".local_validation/GAME034/occlusion_behind_ruin.png": {
+      "sha256": "b204252fdf40d4f461450216a73897f8f2a76d8635476290c7c68cf6ceb262b7",
+      "bytes": 155984
+    },
+    ".local_validation/GAME034/process-results.json": {
+      "sha256": "4744e19b1d73c925dbd4c6384112de831730bf7ab5ff5a16653043317e85c677",
+      "bytes": 47488
+    },
+    ".local_validation/GAME034/process-v1.log": {
+      "sha256": "6397e5c33b815ef633e2a0646d46e0dc795f566cb2070587a68f66273b017974",
+      "bytes": 1176
+    },
+    ".local_validation/GAME034/process-v10.log": {
+      "sha256": "67a76610fc3ffb063951b34fed17e84d52d3937b61e9e7230ec66cfffcf84622",
+      "bytes": 1455
+    },
+    ".local_validation/GAME034/process-v11.log": {
+      "sha256": "c316adeb3b72de56ee2eb75d9cce5be0fa8aeffc805bcd6af4c4d90bae3f647b",
+      "bytes": 1289
+    },
+    ".local_validation/GAME034/process-v12.log": {
+      "sha256": "c1f29f7b9bf819787e1db3f93192291edf145fdd5b2a1aaf820480a274a8434b",
+      "bytes": 1326
+    },
+    ".local_validation/GAME034/process-v13.log": {
+      "sha256": "938c6329d644234fe90ca4cbf354b1d45496b27409fda53499a8d4542784b7bc",
+      "bytes": 3490
+    },
+    ".local_validation/GAME034/process-v14-campaign.log": {
+      "sha256": "081bbd99e7f28fe9cdd4dae3f55b94b1c44e63e9bd1d92642c7f1cfb1e1b5325",
+      "bytes": 1760
+    },
+    ".local_validation/GAME034/process-v14-dungeon.log": {
+      "sha256": "1909c1691f273451c5dba3d7561462af964b417c9206474043b27fa4148828e3",
+      "bytes": 3898
+    },
+    ".local_validation/GAME034/process-v15-campaign.log": {
+      "sha256": "ec4a51ccc6c7b723c9a2e1c585ea5356537c43c36d1a21c1e8c2777aa49a76ac",
+      "bytes": 1420
+    },
+    ".local_validation/GAME034/process-v15-dungeon.log": {
+      "sha256": "a8816a6a987b830833aaa06098ed0298b38506c5b032aa84f662c01be4148ce6",
+      "bytes": 3898
+    },
+    ".local_validation/GAME034/process-v2.log": {
+      "sha256": "fc12952c805c7aa288e77611c12c56fff5d7524f221bd8b27d01342a849435d4",
+      "bytes": 1534
+    },
+    ".local_validation/GAME034/process-v3.log": {
+      "sha256": "5c68f759a611bd858821facc1826cdb9ba7d4d15f31a0b183394996d34c8a935",
+      "bytes": 3163
+    },
+    ".local_validation/GAME034/process-v4.log": {
+      "sha256": "07bd067dccefdf0a2fe5e7761e49e53c5bd2f5fb5c18af756bb59b87d47e27f5",
+      "bytes": 1268
+    },
+    ".local_validation/GAME034/process-v5.log": {
+      "sha256": "f08b29e48e72617b3676e0d04233e65e0f37a28d08c1f5b84598abc5364dcc1f",
+      "bytes": 1269
+    },
+    ".local_validation/GAME034/process-v6.log": {
+      "sha256": "c8870d09f91cc92f22bf42c796ae6c583cd939bc28adc748d2c7af81d321032d",
+      "bytes": 1264
+    },
+    ".local_validation/GAME034/process-v7.log": {
+      "sha256": "11f070017685b9e322faad37b674f10aab5808c5ab5bf186a7a60cebb5f8e9e9",
+      "bytes": 2775
+    },
+    ".local_validation/GAME034/process-v8.log": {
+      "sha256": "2081ce5b2649b04781983baaabcc574db25360f1ed687ad771f87e990fb7dfb3",
+      "bytes": 1664
+    },
+    ".local_validation/GAME034/process-v9.log": {
+      "sha256": "6a94f8f1f903d3660002e32a9d8d2fd14085114457d7c89ba00ab7d7084661d7",
+      "bytes": 1281
+    },
+    ".local_validation/GAME034/process_probe.gd": {
+      "sha256": "75ed222ddbc481c9562f039d0df9e0594df3786e55ae88ed4d144b0469a5089a",
+      "bytes": 5201
+    },
+    ".local_validation/GAME034/python.log": {
+      "sha256": "4945a3b3036111c9b95ad9ea6bc2daaa3ea3ca16cfd78bc5138e4e13558e3934",
+      "bytes": 98
+    },
+    ".local_validation/GAME034/received_1600x720.png": {
+      "sha256": "8447067d51c8cdf1c67a9d7d6af5c422d2b283cda8729d6d248c468fae50b2b3",
+      "bytes": 180030
+    },
+    ".local_validation/GAME034/received_853x384.png": {
+      "sha256": "1ca5ae36864ea6f8bd09e406c5ae83dfcd69c615320a3bab5f5edc4b5a60550f",
+      "bytes": 94030
+    },
+    ".local_validation/GAME034/received_960x540.png": {
+      "sha256": "b22acd8e47a6649d53e3ddecf9db8c6d8379d357cc520a250bd7ff906a975b07",
+      "bytes": 115199
+    },
+    ".local_validation/GAME034/received_contact_bottom.png": {
+      "sha256": "322f80950dd385be3d3a4e3c86135aabf19d55b4b4d104e78af570324f2d8e2d",
+      "bytes": 162422
+    },
+    ".local_validation/GAME034/received_contact_frame1.png": {
+      "sha256": "a56b988049c5cad9dcad8752232ae7c14287102489e28b6b26281eaac5af6802",
+      "bytes": 162293
+    },
+    ".local_validation/GAME034/received_contact_left.png": {
+      "sha256": "eed7236a1ac383d0630d48438f4075d899cf1ee09fdc8272f928537edbdcbb2c",
+      "bytes": 162299
+    },
+    ".local_validation/GAME034/received_contact_right.png": {
+      "sha256": "6ce3da89bc90b0ab6a6b607510396051dd1b35e274c758336a18197d6028e6cc",
+      "bytes": 162400
+    },
+    ".local_validation/GAME034/received_contact_top.png": {
+      "sha256": "f41cd4e861a41ee4d569f5dbb905518872503dfde134c3fce71782e42ccaa800",
+      "bytes": 162102
+    },
+    ".local_validation/GAME034/received_expired.png": {
+      "sha256": "e64ff21569759c61b39cc217af700d567bf43f21ad9fdba904e3b5649b672f77",
+      "bytes": 172025
+    },
+    ".local_validation/GAME034/received_input_contact.png": {
+      "sha256": "b14fa137b4f4b62bbd31b570a117387298cd80fe8d83aec3f5ddf5ef8f4eba61",
+      "bytes": 165654
+    },
+    ".local_validation/GAME034/received_legacy.png": {
+      "sha256": "2905db3cf27afe8be3e19d12c6fffedbcfde28e58628316dc3ce5cf9fd0abaa0",
+      "bytes": 70857
+    },
+    ".local_validation/GAME034/received_mission.png": {
+      "sha256": "947443452cfcda37ef8ba5bcbf3fb2ef1af484396647e3e4bd8d1f8d97684359",
+      "bytes": 83150
+    },
+    ".local_validation/GAME034/received_numbers_hidden.png": {
+      "sha256": "deaf7b7d496acfc174e7912f2662e8623f978802ec155d52e58d0d78e8fb51c4",
+      "bytes": 171328
+    },
+    ".local_validation/GAME034/received_paused_a.png": {
+      "sha256": "f508699f62d9030def90eb55d755486f2339eb296383027a9405a2c9f6b9023c",
+      "bytes": 94324
+    },
+    ".local_validation/GAME034/received_paused_b.png": {
+      "sha256": "f508699f62d9030def90eb55d755486f2339eb296383027a9405a2c9f6b9023c",
+      "bytes": 94324
+    },
+    ".local_validation/GAME034/received_projectile.png": {
+      "sha256": "575053fc12b57f130e7ee87b52eb86143552c59b34356c4956ce10b1fa0db618",
+      "bytes": 162028
+    },
+    ".local_validation/GAME034/received_resumed.png": {
+      "sha256": "af1a1bb6e61268d76a7f16f4ece45d4faa5d79d3d80c90c45ad590eba1145240",
+      "bytes": 172324
+    },
+    ".local_validation/GAME034/received_unknown.png": {
+      "sha256": "b23d63553796fb261ec9767f17e59ee29876658fb7f4cd3b412f0b3e49651e0c",
+      "bytes": 174474
+    },
+    ".local_validation/GAME034/render-live/battle.save": {
+      "sha256": "068fa810ec95df71a2d8bb0df238ccbfe470fa16c5273eb6cd2e2ba7d0a4fa66",
+      "bytes": 9804
+    },
+    ".local_validation/GAME034/render-live/campaign-cp1.save": {
+      "sha256": "3da724cceb51b25d9b9adbc309d77b7f476ef6187180523a440dfbcb65595524",
+      "bytes": 9496
+    },
+    ".local_validation/GAME034/render-live/campaign-cp2.save": {
+      "sha256": "5ca92f15b84050c863e1d56e27c96a9d1bdfdabbe5d2534f03809b4334dcc924",
+      "bytes": 9804
+    },
+    ".local_validation/GAME034/render-live/campaign.save": {
+      "sha256": "0d91ad9ab66e0bc87975187c0f8924769097d48f8fad97570830a9fd157abf67",
+      "bytes": 9164
+    },
+    ".local_validation/GAME034/render-live/details/battle.save": {
+      "sha256": "6f6c3468696da145f15f9dfeb203116460b57edddf38fb9e3eeda1dff668cf21",
+      "bytes": 9168
+    },
+    ".local_validation/GAME034/render-live/dungeon-choice-gold.cfg": {
+      "sha256": "fb938434f0bd44d4326633c9327ad0a85ea82782b4a35017e72f7cb006590e5a",
+      "bytes": 3120
+    },
+    ".local_validation/GAME034/render-live/dungeon-choice.save": {
+      "sha256": "0386a435eec50b152ebf9a06c7ad85d180ddb65baee2cd370ddcf082e54ffccb",
+      "bytes": 3400
+    },
+    ".local_validation/GAME034/render-live/dungeon-cp1-gold.cfg": {
+      "sha256": "fb938434f0bd44d4326633c9327ad0a85ea82782b4a35017e72f7cb006590e5a",
+      "bytes": 3120
+    },
+    ".local_validation/GAME034/render-live/dungeon-cp1.save": {
+      "sha256": "3290fae6e87c52d42653f888fddd38acdf2a97482dd876df1af250fa1cba82b7",
+      "bytes": 3324
+    },
+    ".local_validation/GAME034/render-live/gold-case/battle.save": {
+      "sha256": "36f2d103b8b24a89a2f241812152bedfce3ef916a91f163405438bfcd1637927",
+      "bytes": 3400
+    },
+    ".local_validation/GAME034/render-live/gold-case/gold.cfg": {
+      "sha256": "fb938434f0bd44d4326633c9327ad0a85ea82782b4a35017e72f7cb006590e5a",
+      "bytes": 3120
+    },
+    ".local_validation/GAME034/render-live/settings.cfg": {
+      "sha256": "9c630afbcfbd2792ec75b42318baabf003c9fa2d2474aace484b72dd0ed5b497",
+      "bytes": 83
+    },
+    ".local_validation/GAME034/render-live/structure-case/battle.save": {
+      "sha256": "dc3662bff425ddcc8582b982e236b0a4ddd09532ed24cbd9957578459fbe4d68",
+      "bytes": 9436
+    },
+    ".local_validation/GAME034/render-live/structure-second.save": {
+      "sha256": "b0958ec888002a1445f0db81102f361a3e0206c0f9aa8ba69db6548de3fcbdb1",
+      "bytes": 9436
+    },
+    ".local_validation/GAME034/render-live/structure-waiting.save": {
+      "sha256": "be33005cbd639dfb1783ea854acf8cca880fd7c496d24459a170917e924b986e",
+      "bytes": 9316
+    },
+    ".local_validation/GAME034/render-live/supply-after-purge.save": {
+      "sha256": "bf42d0194bcf086f5f0360edead53882ae88d5970837a9c7f9b23fd2c5b8e202",
+      "bytes": 14616
+    },
+    ".local_validation/GAME034/render-live/supply-case/battle.save": {
+      "sha256": "f057e27f7f1c571a0fc6eff360280214040abad596c3b32f1997732ae1060527",
+      "bytes": 14616
+    },
+    ".local_validation/GAME034/render-live/supply-magnet-choice.save": {
+      "sha256": "ac02c59659fc3fb96aeaa3f7ae2eca71df5c9b32406db6c7f08585f23657ec4d",
+      "bytes": 9796
+    },
+    ".local_validation/GAME034/render-results.json": {
+      "sha256": "ce3a2152a4407471f1ccd480c23cd58ce011bf5c1c92718688b4395afdbb2f25",
+      "bytes": 302009
+    },
+    ".local_validation/GAME034/render.log": {
+      "sha256": "51795b9cb69a58677772d996c200946f276ca7bec04ccc81e6e401bb97fa1a05",
+      "bytes": 205129
+    },
+    ".local_validation/GAME034/render_probe.gd": {
+      "sha256": "36b7c177d7037bf5f8d5b89a27dcec810d855522b9d3871818b8fdaf253a10a3",
+      "bytes": 42167
+    },
+    ".local_validation/GAME034/report.json": {
+      "sha256": "9b36df69a2507ae403a075ad9de5c5b7d7dd51524487239c877c895921710d4b",
+      "bytes": 25140
+    },
+    ".local_validation/GAME034/save_1600x720.png": {
+      "sha256": "901fbabe63969a4ec65da8d2f9e491ba93e57bdf7bc3b3c25d631f6f5ec9d502",
+      "bytes": 168543
+    },
+    ".local_validation/GAME034/save_853x384.png": {
+      "sha256": "f61b2a9fc9ac8ffcbc534a5dca75aac6ca3c6f48b3aa53b60780140d3d5f86dd",
+      "bytes": 85516
+    },
+    ".local_validation/GAME034/save_960x540.png": {
+      "sha256": "c0c80447e1527feb4357e1671e5a2d76c9809bbfa1a099a91c4da4f6604d2d87",
+      "bytes": 107056
+    },
+    ".local_validation/GAME034/save_checkpoint1.png": {
+      "sha256": "c4c433e3cc2e3401ffe3871e9f113e7cbd27fdd648d8ca76da3e5e025ecbb1a5",
+      "bytes": 160888
+    },
+    ".local_validation/GAME034/save_choice_paused.png": {
+      "sha256": "6b5778a7d8e2289a4439afe4706717e37a133f24e5e7706243ac32092f224e4e",
+      "bytes": 107214
+    },
+    ".local_validation/GAME034/save_dungeon_checkpoint1.png": {
+      "sha256": "df11da911fad33367c55c074305146475858824fd878facbabe3bca661494554",
+      "bytes": 130021
+    },
+    ".local_validation/GAME034/save_dungeon_choice.png": {
+      "sha256": "09b42b7a071ea9707906ccaa60b43dc16a571402077e2f41c67ef306d161fa45",
+      "bytes": 155444
+    },
+    ".local_validation/GAME034/save_dungeon_lobby.png": {
+      "sha256": "d66eb1d0d54850d30062dd92bfe744003eb208e2478ee2df60f4afda508dfd61",
+      "bytes": 67244
+    },
+    ".local_validation/GAME034/save_failed_cp2.png": {
+      "sha256": "d8274303ced8cc5df27f016826c5bf51051f55b8b394263f281cb04dacee8b7d",
+      "bytes": 89567
+    },
+    ".local_validation/GAME034/save_lobby_continue.png": {
+      "sha256": "73d90b8f5aca5abc8162fa54bca129b909997a730589c490d860a59279958361",
+      "bytes": 64286
+    },
+    ".local_validation/GAME034/save_lobby_details.png": {
+      "sha256": "73d90b8f5aca5abc8162fa54bca129b909997a730589c490d860a59279958361",
+      "bytes": 64286
+    },
+    ".local_validation/GAME034/save_mission_context.png": {
+      "sha256": "2dc0a5fa6f426fe3504dabd561e1cd6aadecbf9e21aa4ec4e880a904dfaa5537",
+      "bytes": 84772
+    },
+    ".local_validation/GAME034/save_notice_expired.png": {
+      "sha256": "54ab72d6771b87e20017a4b79c91e16acc6525fd7f14aa5562ddc1290a9eb69d",
+      "bytes": 161821
+    },
+    ".local_validation/GAME034/save_pause_context.png": {
+      "sha256": "91bd903a4b3a59045a70cbe0b5b992c7f965f7e979e26f8d97b3357e00991bcc",
+      "bytes": 95567
+    },
+    ".local_validation/GAME034/save_restore_paused.png": {
+      "sha256": "91bd903a4b3a59045a70cbe0b5b992c7f965f7e979e26f8d97b3357e00991bcc",
+      "bytes": 95567
+    },
+    ".local_validation/GAME034/save_retry_confirmed.png": {
+      "sha256": "ae762c919ea872dd2ddf30433ba2f572e6eb63c3d800a9ab3e13f4f5cc1fb653",
+      "bytes": 95352
+    },
+    ".local_validation/GAME034/save_retry_running.png": {
+      "sha256": "871958ece288e856bcb4c27b0b5be622a8c94b43bf26f886e12595bc86ac0659",
+      "bytes": 161061
+    },
+    ".local_validation/GAME034/source-contract.json": {
+      "sha256": "18c94947b28163dfcacced879ce04a8c390b2f35e5a87cb40607d1e3b740a2af",
+      "bytes": 2540
+    },
+    ".local_validation/GAME034/source-proof.json": {
+      "sha256": "981082e2749aa2c9055aded848394b8b408ca1982beb2a8fa6ea66d5149910ad",
+      "bytes": 7681
+    },
+    ".local_validation/GAME034/structure-detail-results.json": {
+      "sha256": "96ce40c1cd7ebc8242bd9343606b91ca17d33b2eb4a8c7cc2753aa4fd0a0ece1",
+      "bytes": 8511
+    },
+    ".local_validation/GAME034/structure-details.log": {
+      "sha256": "f84eb68b83e4797a4b16745d63303342f7c6aaa422b33fd6363354e0b53063ec",
+      "bytes": 6055
+    },
+    ".local_validation/GAME034/structure-process-results.json": {
+      "sha256": "932d5591f1769b64817f40a0d63fa9fc6eea8236bbbafdc434048ab566b22a31",
+      "bytes": 2459
+    },
+    ".local_validation/GAME034/structure-runner.log": {
+      "sha256": "c2fadb1df378a14e673c37384276e7eb328dd4a1468bf55cdfb921b958e01cc8",
+      "bytes": 117
+    },
+    ".local_validation/GAME034/structure_broken_compact.png": {
+      "sha256": "c5d5fd8baa730f1a5c30c19fc5b391b0e27c107f780a0fdefcefee8eb2f751f5",
+      "bytes": 103076
+    },
+    ".local_validation/GAME034/structure_broken_high.png": {
+      "sha256": "14096245100e6c78305850bf5530e6f69476d319a39969a3e109a8773b752469",
+      "bytes": 208755
+    },
+    ".local_validation/GAME034/structure_broken_legacy.png": {
+      "sha256": "973a356016e6fd7b112203bfa362bb8f20f0ad2fdb702d599344c0b205c671af",
+      "bytes": 86493
+    },
+    ".local_validation/GAME034/structure_debris_high.png": {
+      "sha256": "3b6fd49b38c91a50de3edb5ca77ce5513baa58f5c33651c6b5f93e03819038f3",
+      "bytes": 145198
+    },
+    ".local_validation/GAME034/structure_debris_legacy.png": {
+      "sha256": "7cdd5c7300f118fb39dcb627ec3f295ffb37e29c1a161f176d64adbc6da18d7e",
+      "bytes": 64017
+    },
+    ".local_validation/GAME034/structure_details_probe.gd": {
+      "sha256": "ea770ee0cdf786d17f8c5cac892af313b25d50e9c4b6fe9e70c90a5121bdfec4",
+      "bytes": 9129
+    },
+    ".local_validation/GAME034/structure_hit_high.png": {
+      "sha256": "e932ffad4d6154f74d1c6a6a0cb04a0935a414c67e87f31d0130451cfdc05fd9",
+      "bytes": 122743
+    },
+    ".local_validation/GAME034/structure_hit_legacy.png": {
+      "sha256": "91d9a5a11b46532f5d55dab40d6c37a0f947d2bc2d244763025423f4dde0700a",
+      "bytes": 64627
+    },
+    ".local_validation/GAME034/structure_intact_compact.png": {
+      "sha256": "c97d29752b24445f5611bcabb4491a34799a6c98e49cf602c56b1865f3e1eae7",
+      "bytes": 70702
+    },
+    ".local_validation/GAME034/structure_intact_high.png": {
+      "sha256": "072e8c2c1cf184c9091dc4bef0404a1b5fe1c4375a9ceddfdb5421f8db720a14",
+      "bytes": 122275
+    },
+    ".local_validation/GAME034/structure_intact_legacy.png": {
+      "sha256": "f2fa8d56be19a7ed75d38f7040579ec5ea68cb9dc723010d136db5edcd2adbec",
+      "bytes": 64030
+    },
+    ".local_validation/GAME034/structure_intact_wide.png": {
+      "sha256": "18d85fab86800a3055a44afe3bd5f9180c144af6d4cf5a36685fc23d3b528111",
+      "bytes": 129250
+    },
+    ".local_validation/GAME034/structure_last_second.png": {
+      "sha256": "bd328cd555562a6d43c0856e20a6af75cd07a35fda408f3f7fe74ab8f18bccc9",
+      "bytes": 124745
+    },
+    ".local_validation/GAME034/structure_paused1.png": {
+      "sha256": "d81270b93da432dfb8bc8475aca106615e4b5d8b98b8ee9bfbcbd46dec05e7b7",
+      "bytes": 91237
+    },
+    ".local_validation/GAME034/structure_paused2.png": {
+      "sha256": "d81270b93da432dfb8bc8475aca106615e4b5d8b98b8ee9bfbcbd46dec05e7b7",
+      "bytes": 91237
+    },
+    ".local_validation/GAME034/structure_regenerated_high.png": {
+      "sha256": "0942ff54d8f706f9c1cf60f6c3fd408f9821f7106e7cb1803ae425025c6ad71b",
+      "bytes": 123228
+    },
+    ".local_validation/GAME034/structure_regenerated_legacy.png": {
+      "sha256": "d77f32ce145f933112e6581c3e590f75a2b94b0ec0802b84c26288154d4e10c4",
+      "bytes": 65362
+    },
+    ".local_validation/GAME034/structure_restored_paused.png": {
+      "sha256": "d81270b93da432dfb8bc8475aca106615e4b5d8b98b8ee9bfbcbd46dec05e7b7",
+      "bytes": 91237
+    },
+    ".local_validation/GAME034/structure_runner.gd": {
+      "sha256": "581e53327e6192c4f2955480e9455272930173f2bcdbab9083233eda055fa498",
+      "bytes": 535
+    },
+    ".local_validation/GAME034/structure_second_generation.png": {
+      "sha256": "f497e4f9cb924b8295c6ebc675a839430549d63b6a3e917e10bc4191e158c7b5",
+      "bytes": 208777
+    },
+    ".local_validation/GAME034/structure_second_generation_paused.png": {
+      "sha256": "83408321e25d0f9e5a04d552459e136a64e97aaa0df7d9a12e72231f1091dc88",
+      "bytes": 90987
+    },
+    ".local_validation/GAME034/structure_urn_high.png": {
+      "sha256": "e628848552d3dc25c8bed9e41fc7427fdb7b73c581e483bef6769909fb6543d9",
+      "bytes": 126643
+    },
+    ".local_validation/GAME034/structure_urn_legacy.png": {
+      "sha256": "cab915306790c32d016396f80ebf0eec357d0204942d54205fdde5e70112bc7e",
+      "bytes": 61698
+    },
+    ".local_validation/GAME034/structures_dense_compact.png": {
+      "sha256": "1d0edd925cdd7c42b8bb68842a2d3c6a78ab9d9db741f3d8e3b50ea8675930fb",
+      "bytes": 180085
+    },
+    ".local_validation/GAME034/structures_dense_high.png": {
+      "sha256": "926fecdd19f8766707a4ec73213311629296ca65fab52945904cb671441764bf",
+      "bytes": 306633
+    },
+    ".local_validation/GAME034/structures_dense_legacy.png": {
+      "sha256": "17c7057aaee5ffabdbc274af854bdea159ffbe23b7a656e0347da48cc5d9f1cc",
+      "bytes": 126407
+    },
+    ".local_validation/GAME034/v1-gold.cfg": {
+      "sha256": "19c9c8680d5b33d3582f5e42a5dceaa8a93ec559344a0b8204394c17d3fc6a3f",
+      "bytes": 75
+    },
+    ".local_validation/GAME034/v1.save": {
+      "sha256": "a61143f570daf1b59e2b23df114855e49369565701f0753d30e8a8608c8ec3b6",
+      "bytes": 4124
+    },
+    ".local_validation/GAME034/v10.save": {
+      "sha256": "faedcea69ee6fda390f1b3dc53237e34162033431a6bf8fe613ec6029e17b88b",
+      "bytes": 15856
+    },
+    ".local_validation/GAME034/v11.save": {
+      "sha256": "41a56fc69c68de9d160901c936e285fd2f389b7912a731a29ddd56b7f851b002",
+      "bytes": 14908
+    },
+    ".local_validation/GAME034/v12-gold.cfg": {
+      "sha256": "2d771f338d36154158c886b5ad905d3d1eb3a974ea23f325850d69ccfc3653bf",
+      "bytes": 461
+    },
+    ".local_validation/GAME034/v12.save": {
+      "sha256": "47bd1c25b34f781683053a1dc576523a5164893991dbee04a67a411a1fd6f143",
+      "bytes": 10168
+    },
+    ".local_validation/GAME034/v13-gold.cfg": {
+      "sha256": "b01c0ebfd465b09558f1ba064ae353307c2b511284784a1f6aa2776b0c3c99bd",
+      "bytes": 3062
+    },
+    ".local_validation/GAME034/v13.save": {
+      "sha256": "749254b0a1473b0c8e3d5f44967f325021b0f6c1c0a23848dee3f77a5f1895f8",
+      "bytes": 56944
+    },
+    ".local_validation/GAME034/v14-campaign.save": {
+      "sha256": "827efabccd9327a86a9c25d5cc6eeee20012bef5bdd7fbc4e7a2ac9a4a30d68b",
+      "bytes": 24580
+    },
+    ".local_validation/GAME034/v14-dungeon-gold.cfg": {
+      "sha256": "e41d9ae5611f8ebfa7140cc18bc78bfdd10d8f34caeeb2b955ac33ac1a04facf",
+      "bytes": 3076
+    },
+    ".local_validation/GAME034/v14-dungeon.save": {
+      "sha256": "afb7cbaa42b91a8119e73e22bb2c49305804d90be04c9ddf2c47ce8fe14c94cb",
+      "bytes": 56644
+    },
+    ".local_validation/GAME034/v15-campaign.save": {
+      "sha256": "86570455397abbbe01cc3f884151d08d00b41bb28330629de7ef9367ddb2e9d1",
+      "bytes": 12028
+    },
+    ".local_validation/GAME034/v15-dungeon-gold.cfg": {
+      "sha256": "520cefe6dd42fee7320249c75a6fca3a935c16359535947cb866b73102574b87",
+      "bytes": 3102
+    },
+    ".local_validation/GAME034/v15-dungeon.save": {
+      "sha256": "9f1a1adf03af8d9277c7e5ebd89274b04d3133abc862bc236348f59a521c551f",
+      "bytes": 57936
+    },
+    ".local_validation/GAME034/v2.save": {
+      "sha256": "97509dbd4216b43039a67ac0140aa49bc0cac17290776c7f1239bdbc386c9f4a",
+      "bytes": 10740
+    },
+    ".local_validation/GAME034/v3.save": {
+      "sha256": "54df0ef138655f77d960dad2d596a739fe11e834ab5adfce2649d5c9cd11b7db",
+      "bytes": 48908
+    },
+    ".local_validation/GAME034/v4-gold.cfg": {
+      "sha256": "9d6232a14127d855fe39dffce42a8243323a66cdf8945168becc71170b0cd757",
+      "bytes": 97
+    },
+    ".local_validation/GAME034/v4.save": {
+      "sha256": "b818c739ae4ccc90857c3b95aeeb0966d7520d62dacf6cca001cc6016deda0b2",
+      "bytes": 3304
+    },
+    ".local_validation/GAME034/v5-gold.cfg": {
+      "sha256": "d74306940ed9a119fd77b381fc52d9109149cf54f2d21ea5d9ce2c4bdcbce12e",
+      "bytes": 216
+    },
+    ".local_validation/GAME034/v5.save": {
+      "sha256": "7888a5609f12fbd96acdb8aab7fa9a9715c1c7535d880a4f90351fe63d3bf7c0",
+      "bytes": 3328
+    },
+    ".local_validation/GAME034/v6-gold.cfg": {
+      "sha256": "064e5d7170081ee940f7937067443cfc7729163b617861313581619b6725d8d9",
+      "bytes": 459
+    },
+    ".local_validation/GAME034/v6.save": {
+      "sha256": "05466a04d1d164982187a279179dcc1429a18f39a24bcbfc1290c8a26e078f3e",
+      "bytes": 3448
+    },
+    ".local_validation/GAME034/v7.save": {
+      "sha256": "961293fc4bb5192be88f712992c970b3d624ef8b12431f6abf57fa1974527462",
+      "bytes": 40064
+    },
+    ".local_validation/GAME034/v8-gold.cfg": {
+      "sha256": "61fee1fc485c37b252db36ded6d15cfe1e45ba255e6d50202debbf3b4d6748c9",
+      "bytes": 474
+    },
+    ".local_validation/GAME034/v8.save": {
+      "sha256": "4375041b473fc8f8fe070167eb71f9a1286cfef04dad3b15ef6c561ae51424ca",
+      "bytes": 12316
+    },
+    ".local_validation/GAME034/v9.save": {
+      "sha256": "758d859d34b50b3f14ee81a0ddf91adbf97095deec0aa12f49671a3b8775bb5a",
+      "bytes": 9548
+    }
+  }
+}

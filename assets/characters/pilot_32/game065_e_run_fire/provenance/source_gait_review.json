@@ -1,0 +1,172 @@
+{
+  "candidate_job": "d1817f67-fb19-4b70-b4a9-605f82981497",
+  "gait_verdict": "ACCEPT_FOR_SELECTED_47_PHASES",
+  "delivery_verdict": "REJECT_RESIDUAL_BAKED_FLASH",
+  "source_cycle_interval": [
+    0,
+    94
+  ],
+  "selected_source_frames": [
+    0,
+    2,
+    4,
+    6,
+    8,
+    10,
+    12,
+    14,
+    16,
+    18,
+    20,
+    22,
+    24,
+    26,
+    28,
+    30,
+    32,
+    34,
+    36,
+    38,
+    40,
+    42,
+    44,
+    46,
+    48,
+    50,
+    52,
+    54,
+    56,
+    58,
+    60,
+    62,
+    64,
+    66,
+    68,
+    70,
+    72,
+    74,
+    76,
+    78,
+    80,
+    82,
+    84,
+    86,
+    88,
+    90,
+    92
+  ],
+  "existing_weighted_47_timing_reuse_for_this_candidate": true,
+  "visual_evidence": [
+    "All47 paired full-body phases inspected; thigh straps/occlusion distinguish near/far legs.",
+    "Near stance12..34, far58..80, both recoveries and92to0 remain phase-compatible.",
+    "Fixed-registration hips/upper-thigh detail comparisons at source0,20,48,68 show aligned costume/body landmarks; raised rifle naturally differs.",
+    "Native right-edge crops confirm residual yellow/white flashes at source13..16 and60..63."
+  ],
+  "all97_lower_body_mask_summary": {
+    "count": 97,
+    "lower_body_iou_min": 0.9165454923140839,
+    "lower_body_iou_median": 0.9814038286235187,
+    "lower_body_centroid_max_native": 2.137099916802612,
+    "best_nearby_reference_is_same_source_count": 95
+  },
+  "selected47_lower_body_summary": {
+    "lower_body_iou_min": 0.9713924632352942,
+    "lower_body_iou_median": 0.9822734796305195,
+    "max_lower_body_centroid_distance_display_pixels": 0.11652813022314125,
+    "best_nearby_same_source_count": 46
+  },
+  "contact_forefoot_max_samephase_display_pixels": 0.27165943600867565,
+  "contact_boundary_residuals": {
+    "near": {
+      "slide_authored_660ms_world": {
+        "net": 0.22264705711003607,
+        "max_interval_abs": 0.3313192638629423,
+        "max_cumulative_abs": 0.33812357139555616
+      },
+      "slide_distance_stride155_world": {
+        "net": 0.201718903146906,
+        "max_interval_abs": 0.33170628375489386,
+        "max_cumulative_abs": 0.3237767082474141
+      }
+    },
+    "far": {
+      "slide_authored_660ms_world": {
+        "net": 0.24160904940463745,
+        "max_interval_abs": 0.3683024125588825,
+        "max_cumulative_abs": 0.4003702511912812
+      },
+      "slide_distance_stride155_world": {
+        "net": 0.22171957669473596,
+        "max_interval_abs": 0.37051706742127033,
+        "max_cumulative_abs": 0.38563295248426543
+      }
+    }
+  },
+  "hip_detail_measurement": {
+    "roi_reference": [
+      320,
+      710,
+      470,
+      820
+    ],
+    "method": "Image-detail translation measured by normalized cross-correlation in a fixed +/-8 native pixel window. No transform is applied to output images. Distinct from anatomical skeletal tracking. Excludes lowered-run rifle/magazine that contaminated the broad pelvis silhouette ROI.",
+    "minimum_correlation": 0.9761265386377462,
+    "selected47_shift_scenarios": {
+      "0": {
+        "max_hip_detail_translation_display_pixels": 0.12806148625003222,
+        "median_hip_detail_translation_display_pixels": 0.0
+      },
+      "-1": {
+        "max_hip_detail_translation_display_pixels": 0.4448667379593161,
+        "median_hip_detail_translation_display_pixels": 0.345
+      },
+      "-2": {
+        "max_hip_detail_translation_display_pixels": 0.7857881933603726,
+        "median_hip_detail_translation_display_pixels": 0.69
+      }
+    }
+  },
+  "registration_scenarios": {
+    "0": {
+      "constant_shift_canvas_pixels": 0.0,
+      "constant_shift_display_pixels": 0.0,
+      "measured_contact_foot_switch_max_display_pixels": 0.27165943600867676,
+      "hip_detail_translation_max_display_pixels": 0.12806148625003222,
+      "caution": "Broad pelvis silhouette centroid is excluded because the lowered RUN rifle/magazine overlaps it."
+    },
+    "-1": {
+      "constant_shift_canvas_pixels": -1.0,
+      "constant_shift_display_pixels": -0.345,
+      "measured_contact_foot_switch_max_display_pixels": 0.5338423936101453,
+      "hip_detail_translation_max_display_pixels": 0.4448667379593161,
+      "caution": "Broad pelvis silhouette centroid is excluded because the lowered RUN rifle/magazine overlaps it."
+    },
+    "-2": {
+      "constant_shift_canvas_pixels": -2.0,
+      "constant_shift_display_pixels": -0.69,
+      "measured_contact_foot_switch_max_display_pixels": 0.8758002293784813,
+      "hip_detail_translation_max_display_pixels": 0.7857881933603726,
+      "caution": "Broad pelvis silhouette centroid is excluded because the lowered RUN rifle/magazine overlaps it."
+    }
+  },
+  "registration_decision": "NO_TRANSLATION_APPLIED_OR_APPROVED. A minimal constant horizontal shift can be assessed only after clean output and matte extent are known. Shifting cannot repair source clipping or remove baked flash. Preserve scaleY, ground and pivot.",
+  "observed_source15_note": "One discarded odd source frame best matches reference14 in silhouette. The selected even source set remains coherent; same framecount was not used as proof of correspondence.",
+  "native_foreground_union": [
+    18,
+    192,
+    720,
+    1114
+  ],
+  "native_edge_foreground_sources": [
+    13,
+    14,
+    15,
+    16,
+    60,
+    61,
+    62,
+    63
+  ],
+  "final_art_approval": false,
+  "assets_modified": false
+}

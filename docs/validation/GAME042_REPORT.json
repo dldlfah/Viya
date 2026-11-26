@@ -1,0 +1,2380 @@
+{
+  "unit": "GAME-042",
+  "date_kst": "2026-11-24",
+  "status": "COMFORT_CAMERA_CONNECTED_TECHNICAL_PASS",
+  "user_comfort_approval": "NOT_VERIFIED",
+  "code_commit": "c63a5e40451e28a9642f08d7701920f95dcb46dd",
+  "code_tree": "8e436e13786c4347088014a387aab32d8a04e229",
+  "starting_document_head": "7f3cf28ce52258924b5e99cae0b2088bd5521c1b",
+  "branch": "work/viya-turnaround-qa-20261117",
+  "main_unchanged": "d7d8e7561adfb445653e1c49f92336d0701dc939",
+  "behavior": {
+    "deadzone_axis_fraction": 0.06,
+    "maximum_axis_offset": 0.08,
+    "directional_lead": false,
+    "drift_after_release": false,
+    "camera_motion_limited_to_actual_displacement": true,
+    "spawn_envelope_unchanged": 1.16,
+    "unobserved_movement_tolerance_world_units": 0.1,
+    "save_version_unchanged": 18
+  },
+  "source_and_engine_checks": {
+    "static_integrity": {
+      "status": "PASS",
+      "files_checked": 139,
+      "resource_references_checked": 431,
+      "errors": [],
+      "source_sha256": {
+        "project.godot": "0d8f7fce157178f7bf31acc183593b40f23cff6d266ea5270f4b75f0899b79e5",
+        "scenes/main.tscn": "17a2e77db7cf47af860de3c263dc9119b0df349bafdf2a8b52a40f7450c9e22c",
+        "scripts/combat/actor_motion.gd": "77c63ca6327c28a4b99aafea6f104a0b0ae9a91c2e364914d79307d4e90b5261",
+        "scripts/combat/approach_cues.gd": "3b61db842e2fced8e08c391e83fe342a2f349e7453d2d37421f51d1b340ce4fe",
+        "scripts/combat/attack_visuals.gd": "49e9acdb93325368fbf4c6d2732d11877e25f9daa829e6b00a466b74d339556f",
+        "scripts/combat/battle_forms.gd": "a0e9ebcf2cb5d369c0db53f089ab9bb9df0163b1f171908a57bd63f7e285ab95",
+        "scripts/combat/battle_projection.gd": "f8abad51e46f2353d01cc6f1f4b904485621d00ccf75e854ab873bc688f160a0",
+        "scripts/combat/battle_view.gd": "412e4d6b12bb97bb2a6c89903d5b6ba731eed19683010e1ebae664a44e6b4ed7",
+        "scripts/combat/boss_guidance.gd": "d7c1195590ce6fedd3cc8c90cbcdfdf4a2aaf7b994fdfe1a26206e3a9709fef9",
+        "scripts/combat/combat_audio.gd": "9d8d1f2e1d6b617e63a5f8454d182b5e16f08b99b28ade31c1e24cb95be18d2b",
+        "scripts/combat/combat_audio_bank.gd": "589afc536b6514a10a86b5436bc5271ffa6c522452e12949842a1ba8ca65d9ce",
+        "scripts/combat/combat_camera.gd": "0039e471d576f4daeb00f6b453f54a29d32917fe71aef4490b3f0bd33e90f896",
+        "scripts/combat/combat_cues.gd": "04027c56be8fa43d6465a165569b1e209dd7782a630d97a6e96d0acc3235ebda",
+        "scripts/combat/combat_display.gd": "dbb2493bf333b9972603f6cc5ae123010f5cd57e660133e44b4a9110a935d4f7",
+        "scripts/combat/combat_profiles.gd": "515689ca733856a0855739531ad4ebeddb20609839210df41c3b6f6202c898e0",
+        "scripts/combat/curse_visuals.gd": "f6fd054527091a5631eb003a2ea38c8308d1bccc29098f5542250916ea0fb3ac",
+        "scripts/combat/defense_rules.gd": "1fa247925d4d5a33dfdf7371285d9192b85b0cd83603efed33894693053691f8",
+        "scripts/combat/enemy_pattern_visuals.gd": "ffe5032905c8df738b2d7f2a92346206b7df14502b4d2f8babc88304adc5d666",
+        "scripts/combat/enemy_patterns.gd": "a19cad533e9185a0bbca1671028349463a2c9c7c020c0e26dea1d5f59b3eebda",
+        "scripts/combat/enemy_patterns_v1.gd": "4059f30002b56fa0ccb73ed38b4fe4af9c0fe8092a8f5836ad53f6e3cef5a4af",
+        "scripts/combat/enemy_patterns_v17.gd": "df42114040f4da370a67257445063fdb851033182108111eac609758334b81ab",
+        "scripts/combat/enemy_patterns_v2.gd": "60ff5da133476bd9c851aaef695cd07ae748e313d9f654dd4b2b0e258af7ca1d",
+        "scripts/combat/enemy_patterns_v3.gd": "1c5ea0cee251c0fda6a5a77b40201dba8d97b27f42f5ac92c93602e43c831114",
+        "scripts/combat/feedback_state.gd": "3ee19238fb9307bc9953fed3ecc266ecff420e2c74ceffe81409069372e87d88",
+        "scripts/combat/gold_dungeon.gd": "f7073b32297d4326a0abc973022d7280c53f92114d49db53933874118b3ccc0d",
+        "scripts/combat/high_angle_battle.gd": "9fa791f763965d6f49ea0ed0dfaebf7da0180b761d342749824d54c8e2d56240",
+        "scripts/combat/incoming_feedback.gd": "71dfbafc9d3e58435afa40b2f1f427387ad899f118906cda72b028538fdb853b",
+        "scripts/combat/magic_state.gd": "41a9a7739edc46e98dda26986f23dddf1c0ff6bdf9b40d80640f797460b9223b",
+        "scripts/combat/run_state.gd": "2797a9052386f5c5d331bb7437bd4fa610dfcd25293ad754dcac10157efbf635",
+        "scripts/combat/stage_catalog.gd": "8059f41d7134818deeea1978d2f81fddc2456d530e33479d458461004600516f",
+        "scripts/combat/structure_feedback.gd": "5eb5b6acd005b04652a1c337caaacfa47de2dfb0ca5a758ea06c5b4e3b4d6d11",
+        "scripts/combat/supply_feedback.gd": "09731b47d1cd26ed58fac503525ca349006efd8f3542545b4dd61f381c1f8287",
+        "scripts/combat/weapon_modules.gd": "a405c2ddad96a396c8e5e0820ac0d4ee4093a951c473ac7c849294e872616a2e",
+        "scripts/main.gd": "ca74e6a3a4030b2ad9e505a63f118f4558e8b366585a79a4abd0b2b202d995a4",
+        "scripts/progression/account_talents.gd": "0774659235d3bea9276574996565b315156260274750ef8c7f9969f18550f43e",
+        "scripts/progression/combat_pacing.gd": "07f73dae843a7779f992976efb1901774782db1bd021bef01999a83ea7814826",
+        "scripts/progression/gold_progress.gd": "2289fc850fc5f856d674863de6119987da74ed6bd931ade50f0faa11ea0f7012",
+        "scripts/progression/growth_state.gd": "07287b03d12eac144dce6f1858ceb2b6561e6281b4c011ac6bc5d5d3c72a0e6e",
+        "scripts/progression/run_snapshot.gd": "f6e6abd9dd2ff61e66505ee0e35ee6d208c9965d59f9e0681737c0ac14ca3bab",
+        "scripts/progression/run_store.gd": "bab493f1963ea2a6d98770f9ef9686d70d4b257e0b49afb3386de661a6081986",
+        "scripts/progression/skill_catalog.gd": "ccd13a2b02f4b57497beae39e483edfca53617cc3a39e43cbaf8009535c820d8",
+        "scripts/progression/weapon_catalog.gd": "aced8b45e765780b4053bfa436e1dbbc1696d2173cb4cb762f21298d5f91421b",
+        "scripts/ui/account_bonus_summary.gd": "c75ffab9d10f7b73fa9b89df9c532a119f00431447651ca13a1f004122e4cee8",
+        "scripts/ui/actor_assets.gd": "f98126291f60e27b9d903999c61f6a1c03a34555eb824a5fdd3e51db18a359c1",
+        "scripts/ui/asset_slots.gd": "26ffa91b19932e5d123eb03d6b63cd41e0f42881961ab6d668ccc543513a114a",
+        "scripts/ui/battle_chrome.gd": "6be2ec2203a0517ce6842d3c7979135ec7c94afaa5b69b1fff2508f083473a2a",
+        "scripts/ui/battle_save_notice.gd": "4030876186c66ae7de4ec2b8808d8b905881c40d0c0af29bd241f659dcdf2189",
+        "scripts/ui/city_preview.gd": "d01c0ca26b7d812b2b7d6d63339788be98241f6a09ec58a1a8d35a6f7b788937",
+        "scripts/ui/combat_skin.gd": "b9ed37f5c7f1831095805e13c6e3eaa986e762081209372cf8a4e09ff6608c66",
+        "scripts/ui/combat_slot_button.gd": "91a02ab52e8ebcb26985ae143dd596fbd4b62bd3fa6e440e5b0d12e44132a81d",
+        "scripts/ui/encounter_notice.gd": "316faf9f8de95b3917268b4773092a205cb0019e5860044294e0f781cb640e3e",
+        "scripts/ui/feedback_panel.gd": "2103fd9b8692c5606273175b415447f35a995f9a18306a5e8f0abeeb7c5d465b",
+        "scripts/ui/growth_overview.gd": "43dfb9306f4e280b57c8445b179c0e797938bc9fd0e5fa070053474cadb53a42",
+        "scripts/ui/hud_layout.gd": "d9a5dacd8e3816611b1658557c5366e1dbd6caeded4312d8f2e5e5584becddb6",
+        "scripts/ui/mobile_main.gd": "9b2cbd89a9f6b735ff5c7f1443bb9cc652a5e456e6ec320a7855212412bca367",
+        "scripts/ui/move_input.gd": "cee8e709185740d1cb964fff13873a0818d14d0b3653f36d6416a1b17da40bd8",
+        "scripts/ui/responsive_feedback_panel.gd": "b36ce744a7378d696b91018935f637da0ae88beccdeddd85b1187a238958ed5b",
+        "scripts/ui/reward_payment.gd": "d3fc0b75e7f9fbb5f55ffdbfe708039ccb77e4a35231c58d6fdcd4996a246c11",
+        "scripts/ui/skill_preview.gd": "5c3de40b161d38de44234f6f1a2c63064bbc99021c4def95f7995382b02af5db",
+        "scripts/world/map_catalog.gd": "952abbc81d539817dfdd98ed4a59185f13fb8c1adac0210839d176ebee087ea6",
+        "scripts/world/map_space.gd": "8110f4a28e04e67fe738011ea888f31a9c74c450ed79148d88c1da602fa03ae8",
+        "scripts/world/supply_catalog.gd": "1af21cb685b8da0858491a961f007e8a0511c24e0f70b0165e0051d7fcb310a1",
+        "tests/measure_armor.gd": "19a42c9db8ac7b52b6bc2778f24e78ff05b433676c1443d3300a7d4bdd67c6af",
+        "tests/measure_balance.gd": "40b9f4cb6f528e5e40c72e20785f5fc094773ebec5022dc4890617054e232a6d",
+        "tests/measure_boss_guidance.gd": "891bd7aba3c747e25b065acfd5ef45d9057e01047ff374656247e02744d46b13",
+        "tests/measure_campaign.gd": "acc9b093cdc59af87d11f342a88a537b7f0d35ac8745149eb1ca0046ac791e6c",
+        "tests/measure_combat_audio.gd": "727d34de154acb4bb080553683e423a5cdea35fcf4592ee23fe00540848d199c",
+        "tests/measure_enemy_curse.gd": "665ce8a3fcf0b981a1a7bf824cbe6a9da0a3efbebdf23d18385a2c3e1666d36e",
+        "tests/measure_enemy_patterns.gd": "d49f9091fcde4ca3fecf19d2263917a51d4e9cb84bda27f0fb2e788a7cbbd9e9",
+        "tests/measure_pattern_reacquire.gd": "5dceefb39529e718a12aa0068f0f769eec0f7b52aab51643e48cce16b7abc528",
+        "tests/profile_combat.gd": "1499a2a5db64c0869bca71f94582729a029bd7b240dd9ba1ad75a52e3333a2cf",
+        "tests/test_account_bonus_summary.gd": "8949dd854d50c6fbe4898180848c4b9377b91ff55bfd7e9b0c04a24e5bef64c7",
+        "tests/test_account_expansion.gd": "97d23a6d5bc708b9ebdcc76a492982d5b8e0e2fa4be6f2ad0c2ca501d5d35422",
+        "tests/test_account_talents.gd": "a85b5b84514323481e45137ab05e611af9d18f364393b9a6891fe45f1fe2b9f3",
+        "tests/test_actor_animation.gd": "a85f368b78cd6000f1b27407e3dc42ccd45852f794675aba5db32a174640ba44",
+        "tests/test_attack_visuals.gd": "b091e1672614637797907658c628e86bd6f16ca728ce7cb1dae67d1529f1b443",
+        "tests/test_battle_save_notice.gd": "2bbfd4ef99e616b4be393a204e7c99a1acd17e0c3c1fb0b90629166ae0dd178c",
+        "tests/test_boss_guidance.gd": "2f3e94e8c0cb9e61e9343a6fd87ac26fc3e77316d42da42e99fd4d32100329b3",
+        "tests/test_camera_lead.gd": "858cb6e2db1ca9b7d95df7e41ecfb08e16074d129fbd68c5a5c6d3d9be7b9587",
+        "tests/test_campaign.gd": "07c21cb62d12d5394b0864afe3ce47f62b3cd11146fa4bd2780957c54d3f1f49",
+        "tests/test_chapter_ui.gd": "b48b6813b9d8a5e8d98c4d1e7d6a9ba65f7c54c5995bee66b8afcb55348db984",
+        "tests/test_combat_audio.gd": "cd4b66cf0f8e48faf98fdcf6ea4b0c87d687d06b47e424bb1a3210857e2e2beb",
+        "tests/test_combat_cues.gd": "04166b18e6f5e6a34cd6e9154ee5fab5efad5f052e019854aa9affd9f43dd399",
+        "tests/test_combat_display.gd": "15b28b0a80b539bf9ccdce23ee988777307bfb875a84e4429796ba32575dbcdf",
+        "tests/test_combat_foundation.gd": "57efe421768dad47bee7a560325214a0c8a30d5fdf8d015fc2648f2b8c71416d",
+        "tests/test_combat_pacing.gd": "d321ef8b3e01f9879b8240bb439d93eaae8b5b75e5962437ddd40f7e6298b600",
+        "tests/test_combat_profiles.gd": "b9bd77beba226279c7c4fb4825e4290dd078974abd96969b4785778995b12f95",
+        "tests/test_encounter_notice.gd": "3d300aafff042d777c4bec71fc481f039a2e1486975be8c360ad0810350e2488",
+        "tests/test_enemy_curse.gd": "2094a238b45a1ecec918598b725289913a3535618d704dc5df39312aa396adc2",
+        "tests/test_enemy_patterns.gd": "f3d70f9cc5f66471cc0cc51c568d25d88e2690d8ab3979af1f612e59fb4f9624",
+        "tests/test_enemy_variety.gd": "1cf96b74184dd2cc8fcfc93513d4308fe9f2d50b7c870c54459e73f99a7f8b6a",
+        "tests/test_feedback.gd": "a0558acd7ab6216ccceb597f90c823a1078b0cda9337392440fe6523f22fce86",
+        "tests/test_gold_dungeon.gd": "5bf6924c97cb1bb83bb3b9586e2a5ba97dc045dceb345aa2819f49fd4eda5709",
+        "tests/test_gold_rewards.gd": "ea84e51520721ad62e52416145f51163d541ef0c3eac40cc125ef343d08c28b4",
+        "tests/test_gold_settings.gd": "29358cc8bd690213f4fab1fde43cc0a921689983201cfbcbffa18dd872e047a9",
+        "tests/test_growth.gd": "98f63a46d71eeba5f8807655ba6bd9d87fe89b240fca92bbbc12f253fbe0ba72",
+        "tests/test_growth_overview.gd": "bd6706bf3253d25b8b41c6374a53732762af0d361d11c04aac47abee4f565e87",
+        "tests/test_guide_skin.gd": "50502dc737876e114d1443ad66af92d5973b131f746a2162952d7385797d1b6a",
+        "tests/test_high_angle.gd": "ea73c65df5d875d9bf9f62dea1ecdd0dcf29c7eb9c5163b1448bc5a9bfbf2046",
+        "tests/test_incoming_feedback.gd": "19965b733e2e28451744a1af948a236631e3bc9d0b8bf83b3beb4f4a737e37ee",
+        "tests/test_magic.gd": "2969ef796d9255f7b4c79534c68ebabb1b2e349adb0828929d3450ab8f75a090",
+        "tests/test_map_pilot.gd": "fb53cca0a073f1ecba7f2f2c60b78b575eceb27fba509b7ba5e161fc1afe15a0",
+        "tests/test_maps.gd": "3c129f9fe4aac09e01ad4d7f380d03faebb67f8b9f45f0f2d84175d79be4e2f7",
+        "tests/test_mobile_hud.gd": "3d0234bea7a3883f6cb38fe127d8062cbd393b97c3132109e853e84c68e75a76",
+        "tests/test_pattern_reacquire.gd": "13af5d2bd9698a7208c019abdee7649afdd9596b95b5cc056eae38c44253cba7",
+        "tests/test_reward_payment.gd": "3025a1882616b2d7fcdecb276a8b772d633bcbef93990d426ded5e733c3fded1",
+        "tests/test_run_navigation.gd": "14b88030cf3b84cdaed8c559e04c0f1b15552a9860f32c1c959be06bea9ee475",
+        "tests/test_scatter_packs.gd": "1d642ed432b31e509721d9867f5e7dde4d904499cf7555b163670ef9b5c07f2d",
+        "tests/test_skill_preview.gd": "0a62fc3bcdafeb525507f4107621d5c14a955e5d5270750a99d7de1e61f9ad9f",
+        "tests/test_structure_feedback.gd": "99ccd533fc5acb0071a33b4a6e54ac8bc575cd86b2ca7568546a37b01edcd833",
+        "tests/test_supplies.gd": "5de153bb81aaa06f5f6bbd321b8689d7afe59160d314a6cb06353fac39d8678d",
+        "tests/test_supply_feedback.gd": "72f6b9ea21ba920944c8148be4a376840f0b1c4a562fd8256fe4f6025c6c7597",
+        "tests/test_talent_tree.gd": "984fdf593f086254dd17fde222ac7cafa35d8b223195fd46bc04ee170ddada21",
+        "tests/test_weapon_skills.gd": "c3982eea863bca99f046b8f9e35823f244a792fd00d6ac9ff91808dd7f4c92cb",
+        "data/actor_presentation.json": "e82ae99f672bd3e6979778f9a6201efb659b160a3407d9b1b6099eb0e0257f04",
+        "data/chapter_one.json": "c32e288ddc61dc8193cd78de416d3682b7c11f1924bbaaa3ea4afe4b78104f76",
+        "data/combat_pacing.json": "d153666f7f77506da281d1f90ae5fbc5822cd997c6db76590f35ef8a6662d597",
+        "data/combat_profiles.json": "d36abf0b4d0feb950e6448474732decdac9f98035a9962e5f5287b09eb1d1144",
+        "data/destructibles.json": "130421dd85d4dbf9ff9f70ab297b36586870e65fb9426cec0c2f58ce57a49b39",
+        "data/enemy_curse_v3.json": "c1d23889286fe1f91d4ef3b206de5b6e910211a52e935162da42355dc5d39659",
+        "data/enemy_patterns.json": "ba04c2b3076746724a09cf212576886edfa33821f666daa97a541d5042680bec",
+        "data/enemy_patterns_v2.json": "83bf0449e6dad16499af5a4c533c51d0ce3dc06fd73c02eb626de2d1e2e7ac21",
+        "data/gold_dungeon.json": "9a3427a6ddfb3462123f92e6918966ff7b1887ff324f368c600a9ad5993b1f9e",
+        "data/gold_rewards.json": "8f465cd44d1bf712b0fa758b2b8ff7cd17ecb450cff7f8e567d27f0397154993",
+        "data/map_presentation_slots.json": "6264830a0ccd4c9ec5c46684b67f51378805d3a13915b43d550527ffe56ebb35",
+        "data/maps.json": "925638f794696b96fdf48df8c266654cef3af002f43e57f91daa80f8d70e8bd4",
+        "data/presentation_slots.json": "d0a2e6ea1a55d37680bfa02ef9f9036f00deb03575ff9e9dcd10fa7179aa1001",
+        "data/prototype_skills.json": "a6ba197fe558d328e1fcab96506fa098465a4c72aebfe1a1b29cb98642628d1a",
+        "data/stages.json": "2e656d2dc155ad93c76b8a1303133992d95529283be7f5b16423738f4edaeeae",
+        "data/weapon_skills.json": "be23e1eb349958fcebf3dba088fcf389d50654fc31cb83523513c178ff81c659",
+        "tools/bootstrap_godot.py": "4c3ca17c3b90f9c5590d7a82a76ae71a353f4d15aae973cf37e03e745ebfdecc",
+        "tools/check_combat_cues.py": "271dbb3ee2705efb985a6ebe6888a8dfbc375417556986a1d21f27a83d247474",
+        "tools/check_feedback_data.py": "f1bd6f415e919a32faab1b403073e24dcdda4b819938b9b707dacfc32320bec7",
+        "tools/check_growth_data.py": "304be6a17484dd44525d94bad31f422bd13be315ba3309a366ca2bd5b9e2ebfd",
+        "tools/check_magic_data.py": "9405ac2a576b42d279944aacec82f00500ad50c70e5f141413a05e64b1f39e5b",
+        "tools/check_mobile_hud.py": "9e43cace28480d3aacb45dabaf67acb2ad24e1c8a9366aa5c011a279eba35487",
+        "tools/check_project.py": "eeafd73fc4503c7af952331c093272a5510aade3fbae04e42afb77eb23f55157",
+        "tools/check_run_navigation.py": "82fbdd522682329e597017bf5fc80e40df104169c0463a492f265354ba734518",
+        "tools/report_economy.py": "5c449e04b43847c57ec9617c7c43b2408566dbc7691e32b8d3e33d8b33b24bd6"
+      },
+      "source_fingerprint": "20463910b25c8c98e1d4182716fc1a70c0f0cc78d2f6a60581fecda39685dc66",
+      "scope": "UTF-8, delimiters, whitespace, JSON/Python syntax, resource existence, project settings; NOT GDScript parser/typechecking or gameplay."
+    },
+    "growth_data_contract": {
+      "status": "PASS",
+      "pool_count": 18,
+      "counts": {
+        "common_attack": 8,
+        "character_attack": 1,
+        "common_passive": 8,
+        "ultimate_enhancement": 1
+      },
+      "negative_controls": [
+        {
+          "fixture": "duplicate",
+          "rejected": true
+        },
+        {
+          "fixture": "resistance",
+          "rejected": true
+        },
+        {
+          "fixture": "foreign_owner",
+          "rejected": true
+        },
+        {
+          "fixture": "missing_ultimate",
+          "rejected": true
+        },
+        {
+          "fixture": "wrong_row",
+          "rejected": true
+        }
+      ],
+      "errors": [],
+      "scope": "JSON schema/content and source integration markers only; not GDScript runtime/behavior."
+    },
+    "magic_data_contract": {
+      "status": "PASS",
+      "errors": [],
+      "negative_controls": [
+        {
+          "fixture": "plain_name",
+          "rejected": true
+        },
+        {
+          "fixture": "foreign_owner",
+          "rejected": true
+        },
+        {
+          "fixture": "missing_magic",
+          "rejected": true
+        },
+        {
+          "fixture": "negative_cost",
+          "rejected": true
+        },
+        {
+          "fixture": "negative_cooldown",
+          "rejected": true
+        },
+        {
+          "fixture": "wrong_upgrade",
+          "rejected": true
+        },
+        {
+          "fixture": "nonfinite_radius",
+          "rejected": true
+        },
+        {
+          "fixture": "impossible_cost",
+          "rejected": true
+        }
+      ],
+      "temporary_skill_names": 18,
+      "required_xp_first_five": [
+        30,
+        48,
+        66,
+        84,
+        102
+      ],
+      "xp_drop_unchanged": 5.0,
+      "scope": "JSON validation, negative data controls and source markers/arithmetic; NOT GDScript runtime, UI, input dispatch or mobile tests."
+    },
+    "feedback_source_contract": {
+      "status": "PASS",
+      "errors": [],
+      "negative_controls": [
+        {
+          "fixture": "missing_damage_hook",
+          "rejected": true
+        },
+        {
+          "fixture": "missing_reset",
+          "rejected": true
+        },
+        {
+          "fixture": "negative_duration",
+          "rejected": true
+        },
+        {
+          "fixture": "missing_low_hp_warning",
+          "rejected": true
+        },
+        {
+          "fixture": "missing_stale_guard",
+          "rejected": true
+        }
+      ],
+      "files_checked": 7,
+      "source_sha256": {
+        "scripts/combat/feedback_state.gd": "3ee19238fb9307bc9953fed3ecc266ecff420e2c74ceffe81409069372e87d88",
+        "scripts/combat/run_state.gd": "2797a9052386f5c5d331bb7437bd4fa610dfcd25293ad754dcac10157efbf635",
+        "scripts/ui/feedback_panel.gd": "2103fd9b8692c5606273175b415447f35a995f9a18306a5e8f0abeeb7c5d465b",
+        "scripts/main.gd": "ca74e6a3a4030b2ad9e505a63f118f4558e8b366585a79a4abd0b2b202d995a4",
+        "tests/test_feedback.gd": "a0558acd7ab6216ccceb597f90c823a1078b0cda9337392440fe6523f22fce86",
+        "tools/check_project.py": "eeafd73fc4503c7af952331c093272a5510aade3fbae04e42afb77eb23f55157",
+        "tools/check_feedback_data.py": "f1bd6f415e919a32faab1b403073e24dcdda4b819938b9b707dacfc32320bec7"
+      },
+      "scope": "7 affected code/test/checker files: UTF-8, delimiters, whitespace, Python syntax, reaction constants, integration markers, engine-test registration and new dependency paths only. NOT the full project check or GDScript parser/type/runtime, rendering, or mobile input tests."
+    },
+    "mobile_hud_source_contract": {
+      "status": "PASS",
+      "files_checked": 8,
+      "errors": [],
+      "negative_controls": [
+        {
+          "fixture": "layout_detached",
+          "rejected": true
+        },
+        {
+          "fixture": "detail_not_paused",
+          "rejected": true
+        },
+        {
+          "fixture": "detail_mutates_skill",
+          "rejected": true
+        },
+        {
+          "fixture": "resize_retains_touch",
+          "rejected": true
+        },
+        {
+          "fixture": "test_not_registered",
+          "rejected": true
+        }
+      ],
+      "source_sha256": {
+        "scenes/main.tscn": "17a2e77db7cf47af860de3c263dc9119b0df349bafdf2a8b52a40f7450c9e22c",
+        "scripts/ui/mobile_main.gd": "9b2cbd89a9f6b735ff5c7f1443bb9cc652a5e456e6ec320a7855212412bca367",
+        "scripts/ui/hud_layout.gd": "d9a5dacd8e3816611b1658557c5366e1dbd6caeded4312d8f2e5e5584becddb6",
+        "scripts/ui/responsive_feedback_panel.gd": "b36ce744a7378d696b91018935f637da0ae88beccdeddd85b1187a238958ed5b",
+        "scripts/ui/move_input.gd": "cee8e709185740d1cb964fff13873a0818d14d0b3653f36d6416a1b17da40bd8",
+        "tests/test_mobile_hud.gd": "3d0234bea7a3883f6cb38fe127d8062cbd393b97c3132109e853e84c68e75a76",
+        "tools/check_project.py": "eeafd73fc4503c7af952331c093272a5510aade3fbae04e42afb77eb23f55157",
+        "tools/check_mobile_hud.py": "9e43cace28480d3aacb45dabaf67acb2ad24e1c8a9366aa5c011a279eba35487"
+      },
+      "source_fingerprint": "ac282af6e6dbe5a7aaca12f1b34b0fc4b94072bbfccfcf852491d99e74502f40",
+      "scope": "Changed UTF-8 files, delimiters, Python syntax and integration source checks only. NOT GDScript parsing/typechecking, actual Control geometry, touch dispatch, rendering or mobile execution."
+    },
+    "run_navigation_source_contract": {
+      "status": "PASS",
+      "files_checked": 5,
+      "errors": [],
+      "negative_controls": [
+        {
+          "fixture": "unescaped_string_newline",
+          "rejected": true
+        },
+        {
+          "fixture": "unguarded_intent",
+          "rejected": true
+        },
+        {
+          "fixture": "confirmation_resets_hp",
+          "rejected": true
+        },
+        {
+          "fixture": "cancel_rerolls",
+          "rejected": true
+        },
+        {
+          "fixture": "leave_fakes_death",
+          "rejected": true
+        },
+        {
+          "fixture": "no_result_copy",
+          "rejected": true
+        },
+        {
+          "fixture": "stale_menu_revision",
+          "rejected": true
+        },
+        {
+          "fixture": "unregistered_engine_test",
+          "rejected": true
+        }
+      ],
+      "source_sha256": {
+        "scripts/combat/run_state.gd": "2797a9052386f5c5d331bb7437bd4fa610dfcd25293ad754dcac10157efbf635",
+        "scripts/ui/mobile_main.gd": "9b2cbd89a9f6b735ff5c7f1443bb9cc652a5e456e6ec320a7855212412bca367",
+        "tests/test_run_navigation.gd": "14b88030cf3b84cdaed8c559e04c0f1b15552a9860f32c1c959be06bea9ee475",
+        "tools/check_project.py": "eeafd73fc4503c7af952331c093272a5510aade3fbae04e42afb77eb23f55157",
+        "tools/check_run_navigation.py": "82fbdd522682329e597017bf5fc80e40df104169c0463a492f265354ba734518"
+      },
+      "source_fingerprint": "97c18abd9b48b20dd5b2373f9eebafb3cd937b374e95189fcd7abd44e1a29dcc",
+      "scope": "UTF-8/delimiters/Python syntax and navigation SOURCE contracts only; NOT GDScript parsing/types, native execution, actual UI/input, or mobile testing."
+    },
+    "combat_cues_source_contract": {
+      "status": "PASS",
+      "files_checked": 20,
+      "errors": [],
+      "negative_controls": [
+        {
+          "fixture": "stable_camera_unregistered",
+          "rejected": true
+        },
+        {
+          "fixture": "stable_camera_adapter",
+          "rejected": true
+        },
+        {
+          "fixture": "stable_camera_limit",
+          "rejected": true
+        },
+        {
+          "fixture": "curse_unregistered",
+          "rejected": true
+        },
+        {
+          "fixture": "curse_doublefire",
+          "rejected": true
+        },
+        {
+          "fixture": "v17_retrofit",
+          "rejected": true
+        },
+        {
+          "fixture": "curse_gate",
+          "rejected": true
+        },
+        {
+          "fixture": "curse_render",
+          "rejected": true
+        },
+        {
+          "fixture": "reacquire_unregistered",
+          "rejected": true
+        },
+        {
+          "fixture": "v16_retrofit",
+          "rejected": true
+        },
+        {
+          "fixture": "pattern_single_hit",
+          "rejected": true
+        },
+        {
+          "fixture": "pattern_old_ai",
+          "rejected": true
+        },
+        {
+          "fixture": "pattern_visual_mutation",
+          "rejected": true
+        },
+        {
+          "fixture": "pattern_unregistered",
+          "rejected": true
+        },
+        {
+          "fixture": "pattern_gate",
+          "rejected": true
+        },
+        {
+          "fixture": "pattern_contact_guard",
+          "rejected": true
+        },
+        {
+          "fixture": "pattern_stop_on_defeat",
+          "rejected": true
+        },
+        {
+          "fixture": "missing_reset",
+          "rejected": true
+        },
+        {
+          "fixture": "early_clock",
+          "rejected": true
+        },
+        {
+          "fixture": "changed_damage",
+          "rejected": true
+        },
+        {
+          "fixture": "drop_as_collection",
+          "rejected": true
+        },
+        {
+          "fixture": "unbounded_received",
+          "rejected": true
+        },
+        {
+          "fixture": "received_before_hp",
+          "rejected": true
+        },
+        {
+          "fixture": "unbounded_visuals",
+          "rejected": true
+        },
+        {
+          "fixture": "cosmetic_rng",
+          "rejected": true
+        },
+        {
+          "fixture": "mutable_view",
+          "rejected": true
+        },
+        {
+          "fixture": "supply_changes_rewards",
+          "rejected": true
+        },
+        {
+          "fixture": "supply_mutates_observation",
+          "rejected": true
+        },
+        {
+          "fixture": "supply_glyph_mutates_state",
+          "rejected": true
+        },
+        {
+          "fixture": "unregistered_test",
+          "rejected": true
+        },
+        {
+          "fixture": "ignored_engine_exit",
+          "rejected": true
+        },
+        {
+          "fixture": "ignored_engine_errors",
+          "rejected": true
+        },
+        {
+          "fixture": "ignored_test_result",
+          "rejected": true
+        }
+      ],
+      "source_sha256": {
+        "scripts/combat/run_state.gd": "2797a9052386f5c5d331bb7437bd4fa610dfcd25293ad754dcac10157efbf635",
+        "scripts/combat/battle_view.gd": "412e4d6b12bb97bb2a6c89903d5b6ba731eed19683010e1ebae664a44e6b4ed7",
+        "scripts/combat/combat_cues.gd": "04027c56be8fa43d6465a165569b1e209dd7782a630d97a6e96d0acc3235ebda",
+        "tests/test_combat_cues.gd": "04166b18e6f5e6a34cd6e9154ee5fab5efad5f052e019854aa9affd9f43dd399",
+        "tools/check_project.py": "eeafd73fc4503c7af952331c093272a5510aade3fbae04e42afb77eb23f55157",
+        "tools/check_combat_cues.py": "271dbb3ee2705efb985a6ebe6888a8dfbc375417556986a1d21f27a83d247474",
+        "scripts/combat/enemy_patterns.gd": "a19cad533e9185a0bbca1671028349463a2c9c7c020c0e26dea1d5f59b3eebda",
+        "scripts/combat/enemy_pattern_visuals.gd": "ffe5032905c8df738b2d7f2a92346206b7df14502b4d2f8babc88304adc5d666",
+        "scripts/progression/run_snapshot.gd": "f6e6abd9dd2ff61e66505ee0e35ee6d208c9965d59f9e0681737c0ac14ca3bab",
+        "scripts/combat/actor_motion.gd": "77c63ca6327c28a4b99aafea6f104a0b0ae9a91c2e364914d79307d4e90b5261",
+        "data/enemy_patterns.json": "ba04c2b3076746724a09cf212576886edfa33821f666daa97a541d5042680bec",
+        "scripts/combat/enemy_patterns_v1.gd": "4059f30002b56fa0ccb73ed38b4fe4af9c0fe8092a8f5836ad53f6e3cef5a4af",
+        "scripts/combat/enemy_patterns_v2.gd": "60ff5da133476bd9c851aaef695cd07ae748e313d9f654dd4b2b0e258af7ca1d",
+        "data/enemy_patterns_v2.json": "83bf0449e6dad16499af5a4c533c51d0ce3dc06fd73c02eb626de2d1e2e7ac21",
+        "scripts/combat/enemy_patterns_v17.gd": "df42114040f4da370a67257445063fdb851033182108111eac609758334b81ab",
+        "scripts/combat/enemy_patterns_v3.gd": "1c5ea0cee251c0fda6a5a77b40201dba8d97b27f42f5ac92c93602e43c831114",
+        "scripts/combat/curse_visuals.gd": "f6fd054527091a5631eb003a2ea38c8308d1bccc29098f5542250916ea0fb3ac",
+        "data/enemy_curse_v3.json": "c1d23889286fe1f91d4ef3b206de5b6e910211a52e935162da42355dc5d39659",
+        "scripts/combat/approach_cues.gd": "3b61db842e2fced8e08c391e83fe342a2f349e7453d2d37421f51d1b340ce4fe",
+        "scripts/combat/combat_camera.gd": "0039e471d576f4daeb00f6b453f54a29d32917fe71aef4490b3f0bd33e90f896"
+      },
+      "source_fingerprint": "6f0f0cbf435389e8a86e18757bac1e430f6e984c927311b917ae2eec303d105b",
+      "baseline_run_blob": "673d75a748fa5f1f9ac72ec73bbd9120fdcfce02",
+      "baseline_runner_blob": "1ab68ad8a51271e3d47db8b02d433991f42e8d6c",
+      "baseline_engine_function_sha256": "9156043eaf896d72565563cc1e2f623cf0c8fbac7f032f19bffee7e4946a69ee",
+      "scope": "Changed-source UTF-8/delimiters/Python syntax, hook order, bounds, isolation, reviewed GAME-024 RunState/GAME-030 view baselines with exact GAME-033 observations and GAME-038/039/040 version-gated pattern adapters and frozen v1/v2/v17, preserved engine runner. NOT Godot parser/type/runtime, visual quality, input dispatch, or FPS."
+    },
+    "godot_runtime": {
+      "status": "PASS",
+      "commands": [
+        {
+          "command": [
+            "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+            "--headless",
+            "--version"
+          ],
+          "exit_code": 0,
+          "status": "PASS"
+        },
+        {
+          "command": [
+            "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+            "--headless",
+            "--path",
+            "/workspace/Viya",
+            "--editor",
+            "--import",
+            "--quit"
+          ],
+          "exit_code": 0,
+          "status": "PASS"
+        },
+        {
+          "command": [
+            "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+            "--headless",
+            "--path",
+            "/workspace/Viya",
+            "--script",
+            "res://tests/test_combat_foundation.gd"
+          ],
+          "exit_code": 0,
+          "status": "PASS"
+        },
+        {
+          "command": [
+            "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+            "--headless",
+            "--path",
+            "/workspace/Viya",
+            "--script",
+            "res://tests/test_growth.gd"
+          ],
+          "exit_code": 0,
+          "status": "PASS"
+        },
+        {
+          "command": [
+            "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+            "--headless",
+            "--path",
+            "/workspace/Viya",
+            "--script",
+            "res://tests/test_magic.gd"
+          ],
+          "exit_code": 0,
+          "status": "PASS"
+        },
+        {
+          "command": [
+            "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+            "--headless",
+            "--path",
+            "/workspace/Viya",
+            "--script",
+            "res://tests/test_feedback.gd"
+          ],
+          "exit_code": 0,
+          "status": "PASS"
+        },
+        {
+          "command": [
+            "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+            "--headless",
+            "--path",
+            "/workspace/Viya",
+            "--script",
+            "res://tests/test_mobile_hud.gd"
+          ],
+          "exit_code": 0,
+          "status": "PASS"
+        },
+        {
+          "command": [
+            "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+            "--headless",
+            "--path",
+            "/workspace/Viya",
+            "--script",
+            "res://tests/test_run_navigation.gd"
+          ],
+          "exit_code": 0,
+          "status": "PASS"
+        },
+        {
+          "command": [
+            "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+            "--headless",
+            "--path",
+            "/workspace/Viya",
+            "--script",
+            "res://tests/test_combat_cues.gd"
+          ],
+          "exit_code": 0,
+          "status": "PASS"
+        },
+        {
+          "command": [
+            "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+            "--headless",
+            "--path",
+            "/workspace/Viya",
+            "--quit-after",
+            "120"
+          ],
+          "exit_code": 0,
+          "status": "PASS"
+        }
+      ],
+      "scope": "headless import, actual foundation/growth/magic/feedback/mobile-HUD/run-navigation/combat-cues GDScript tests and main boot; visual/mobile approval separate"
+    },
+    "windows_f5": "NOT_VERIFIED",
+    "android_device": "NOT_VERIFIED",
+    "ios_device": "NOT_VERIFIED"
+  },
+  "native_checks": [
+    23,
+    70,
+    122,
+    57,
+    1336,
+    68,
+    2125
+  ],
+  "native_total": 3801,
+  "camera_checks_total": 39,
+  "camera_checks_net_increase": 7,
+  "negative_controls": 33,
+  "python_tests": {
+    "status": "PASS",
+    "count": 12
+  },
+  "production_source_proof": {
+    "base": "7f3cf28ce52258924b5e99cae0b2088bd5521c1b",
+    "unchanged_count": 91,
+    "unchanged_sha256": {
+      "assets/characters/viya/spec/turnaround_contract.v1.json": "a8f65fa1637b49235d2158ef582f9d696a2cb13caddc86a5dd27dbeccbca117a",
+      "assets/characters/viya/spec/turnaround_r1_result.json": "6c337719be2f54e5ea35304cb32b4f5f6bf5b4cca987e00ce6b4d59a37983db8",
+      "assets/characters/viya/spec/turnaround_r2_result.json": "8ca504e6b4165cf9ced1addf06878c0bb7018030c070119c446345ac6ebcb421",
+      "assets/maps/pilot_01/README.md": "29bfa4c4393763c362dff9535e8eedd32895adb835b71ec39373a0b96a4fdf9b",
+      "assets/maps/pilot_01/prop_crate.png": "7a0fefb9f935a5026e1bb9ded4029542e9f33323bbac87481f22144ece712edc",
+      "assets/maps/pilot_01/prop_crate.png.import": "8dd47f11b17dcb4f9a82cbb50769882670f62d7edeb560c1e0040df21d21bf84",
+      "assets/maps/pilot_01/source_manifest.json": "b946ce97e1cd3e8dcefd3aca8946812b75de532a8506fd2ac2539f70e04f97e0",
+      "assets/maps/pilot_01/stone_floor_tile.png": "9beefd01712a5c45b71908ad679d105b00a7ce6b99e61a639e384b7de06257e6",
+      "assets/maps/pilot_01/stone_floor_tile.png.import": "6e5bf6315ac4134457cfc8fa4e77c23407b8285fdeb32ec8953c532b81093cf3",
+      "assets/maps/pilot_01/wall_segment.png": "15b4a1a6f64b88df88424075d6710c0761cac7e7ac30dfc3ff889d0b3705d11a",
+      "assets/maps/pilot_01/wall_segment.png.import": "3e3fc099910e77537d7b5d84b7ac5b7c90cb23f38b94f3e6fd316011e2a33f3d",
+      "assets/references/GEN-005_viya_combat_pose_three_quarter_front.png": "d3c0084c73aff9a706a50a6cac760d124c0647d23fa36e6ae30635dc6929a730",
+      "assets/references/README.md": "ccee5345d56bbe2ecdf03cc0a54eea7c61dd684f9582a3ec83284218742e18a5",
+      "assets/references/qa/viya_4view_alignment_preview.jpg": "8fbd8b3c99af7099de926ca3c39feae0217dd984ff959e314e51d2338786fd0c",
+      "assets/references/qa/viya_side_silhouette_comparison.jpg": "1f8fe11aa693d84ebec41db9b6bea3af2bf61f61fd80f2ffdd45f799acd23170",
+      "data/actor_presentation.json": "e82ae99f672bd3e6979778f9a6201efb659b160a3407d9b1b6099eb0e0257f04",
+      "data/chapter_one.json": "c32e288ddc61dc8193cd78de416d3682b7c11f1924bbaaa3ea4afe4b78104f76",
+      "data/combat_pacing.json": "d153666f7f77506da281d1f90ae5fbc5822cd997c6db76590f35ef8a6662d597",
+      "data/combat_profiles.json": "d36abf0b4d0feb950e6448474732decdac9f98035a9962e5f5287b09eb1d1144",
+      "data/destructibles.json": "130421dd85d4dbf9ff9f70ab297b36586870e65fb9426cec0c2f58ce57a49b39",
+      "data/enemy_curse_v3.json": "c1d23889286fe1f91d4ef3b206de5b6e910211a52e935162da42355dc5d39659",
+      "data/enemy_patterns.json": "ba04c2b3076746724a09cf212576886edfa33821f666daa97a541d5042680bec",
+      "data/enemy_patterns_v2.json": "83bf0449e6dad16499af5a4c533c51d0ce3dc06fd73c02eb626de2d1e2e7ac21",
+      "data/gold_dungeon.json": "9a3427a6ddfb3462123f92e6918966ff7b1887ff324f368c600a9ad5993b1f9e",
+      "data/gold_rewards.json": "8f465cd44d1bf712b0fa758b2b8ff7cd17ecb450cff7f8e567d27f0397154993",
+      "data/map_presentation_slots.json": "6264830a0ccd4c9ec5c46684b67f51378805d3a13915b43d550527ffe56ebb35",
+      "data/maps.json": "925638f794696b96fdf48df8c266654cef3af002f43e57f91daa80f8d70e8bd4",
+      "data/presentation_slots.json": "d0a2e6ea1a55d37680bfa02ef9f9036f00deb03575ff9e9dcd10fa7179aa1001",
+      "data/prototype_skills.json": "a6ba197fe558d328e1fcab96506fa098465a4c72aebfe1a1b29cb98642628d1a",
+      "data/stages.json": "2e656d2dc155ad93c76b8a1303133992d95529283be7f5b16423738f4edaeeae",
+      "data/weapon_skills.json": "be23e1eb349958fcebf3dba088fcf389d50654fc31cb83523513c178ff81c659",
+      "project.godot": "0d8f7fce157178f7bf31acc183593b40f23cff6d266ea5270f4b75f0899b79e5",
+      "scenes/main.tscn": "17a2e77db7cf47af860de3c263dc9119b0df349bafdf2a8b52a40f7450c9e22c",
+      "scripts/combat/actor_motion.gd": "77c63ca6327c28a4b99aafea6f104a0b0ae9a91c2e364914d79307d4e90b5261",
+      "scripts/combat/approach_cues.gd": "3b61db842e2fced8e08c391e83fe342a2f349e7453d2d37421f51d1b340ce4fe",
+      "scripts/combat/attack_visuals.gd": "49e9acdb93325368fbf4c6d2732d11877e25f9daa829e6b00a466b74d339556f",
+      "scripts/combat/battle_forms.gd": "a0e9ebcf2cb5d369c0db53f089ab9bb9df0163b1f171908a57bd63f7e285ab95",
+      "scripts/combat/battle_projection.gd": "f8abad51e46f2353d01cc6f1f4b904485621d00ccf75e854ab873bc688f160a0",
+      "scripts/combat/boss_guidance.gd": "d7c1195590ce6fedd3cc8c90cbcdfdf4a2aaf7b994fdfe1a26206e3a9709fef9",
+      "scripts/combat/combat_audio.gd": "9d8d1f2e1d6b617e63a5f8454d182b5e16f08b99b28ade31c1e24cb95be18d2b",
+      "scripts/combat/combat_audio_bank.gd": "589afc536b6514a10a86b5436bc5271ffa6c522452e12949842a1ba8ca65d9ce",
+      "scripts/combat/combat_cues.gd": "04027c56be8fa43d6465a165569b1e209dd7782a630d97a6e96d0acc3235ebda",
+      "scripts/combat/combat_display.gd": "dbb2493bf333b9972603f6cc5ae123010f5cd57e660133e44b4a9110a935d4f7",
+      "scripts/combat/combat_profiles.gd": "515689ca733856a0855739531ad4ebeddb20609839210df41c3b6f6202c898e0",
+      "scripts/combat/curse_visuals.gd": "f6fd054527091a5631eb003a2ea38c8308d1bccc29098f5542250916ea0fb3ac",
+      "scripts/combat/defense_rules.gd": "1fa247925d4d5a33dfdf7371285d9192b85b0cd83603efed33894693053691f8",
+      "scripts/combat/enemy_pattern_visuals.gd": "ffe5032905c8df738b2d7f2a92346206b7df14502b4d2f8babc88304adc5d666",
+      "scripts/combat/enemy_patterns.gd": "a19cad533e9185a0bbca1671028349463a2c9c7c020c0e26dea1d5f59b3eebda",
+      "scripts/combat/enemy_patterns_v1.gd": "4059f30002b56fa0ccb73ed38b4fe4af9c0fe8092a8f5836ad53f6e3cef5a4af",
+      "scripts/combat/enemy_patterns_v17.gd": "df42114040f4da370a67257445063fdb851033182108111eac609758334b81ab",
+      "scripts/combat/enemy_patterns_v2.gd": "60ff5da133476bd9c851aaef695cd07ae748e313d9f654dd4b2b0e258af7ca1d",
+      "scripts/combat/enemy_patterns_v3.gd": "1c5ea0cee251c0fda6a5a77b40201dba8d97b27f42f5ac92c93602e43c831114",
+      "scripts/combat/feedback_state.gd": "3ee19238fb9307bc9953fed3ecc266ecff420e2c74ceffe81409069372e87d88",
+      "scripts/combat/gold_dungeon.gd": "f7073b32297d4326a0abc973022d7280c53f92114d49db53933874118b3ccc0d",
+      "scripts/combat/high_angle_battle.gd": "9fa791f763965d6f49ea0ed0dfaebf7da0180b761d342749824d54c8e2d56240",
+      "scripts/combat/incoming_feedback.gd": "71dfbafc9d3e58435afa40b2f1f427387ad899f118906cda72b028538fdb853b",
+      "scripts/combat/magic_state.gd": "41a9a7739edc46e98dda26986f23dddf1c0ff6bdf9b40d80640f797460b9223b",
+      "scripts/combat/run_state.gd": "2797a9052386f5c5d331bb7437bd4fa610dfcd25293ad754dcac10157efbf635",
+      "scripts/combat/stage_catalog.gd": "8059f41d7134818deeea1978d2f81fddc2456d530e33479d458461004600516f",
+      "scripts/combat/structure_feedback.gd": "5eb5b6acd005b04652a1c337caaacfa47de2dfb0ca5a758ea06c5b4e3b4d6d11",
+      "scripts/combat/supply_feedback.gd": "09731b47d1cd26ed58fac503525ca349006efd8f3542545b4dd61f381c1f8287",
+      "scripts/combat/weapon_modules.gd": "a405c2ddad96a396c8e5e0820ac0d4ee4093a951c473ac7c849294e872616a2e",
+      "scripts/main.gd": "ca74e6a3a4030b2ad9e505a63f118f4558e8b366585a79a4abd0b2b202d995a4",
+      "scripts/progression/account_talents.gd": "0774659235d3bea9276574996565b315156260274750ef8c7f9969f18550f43e",
+      "scripts/progression/combat_pacing.gd": "07f73dae843a7779f992976efb1901774782db1bd021bef01999a83ea7814826",
+      "scripts/progression/gold_progress.gd": "2289fc850fc5f856d674863de6119987da74ed6bd931ade50f0faa11ea0f7012",
+      "scripts/progression/growth_state.gd": "07287b03d12eac144dce6f1858ceb2b6561e6281b4c011ac6bc5d5d3c72a0e6e",
+      "scripts/progression/run_snapshot.gd": "f6e6abd9dd2ff61e66505ee0e35ee6d208c9965d59f9e0681737c0ac14ca3bab",
+      "scripts/progression/run_store.gd": "bab493f1963ea2a6d98770f9ef9686d70d4b257e0b49afb3386de661a6081986",
+      "scripts/progression/skill_catalog.gd": "ccd13a2b02f4b57497beae39e483edfca53617cc3a39e43cbaf8009535c820d8",
+      "scripts/progression/weapon_catalog.gd": "aced8b45e765780b4053bfa436e1dbbc1696d2173cb4cb762f21298d5f91421b",
+      "scripts/ui/account_bonus_summary.gd": "c75ffab9d10f7b73fa9b89df9c532a119f00431447651ca13a1f004122e4cee8",
+      "scripts/ui/actor_assets.gd": "f98126291f60e27b9d903999c61f6a1c03a34555eb824a5fdd3e51db18a359c1",
+      "scripts/ui/asset_slots.gd": "26ffa91b19932e5d123eb03d6b63cd41e0f42881961ab6d668ccc543513a114a",
+      "scripts/ui/battle_chrome.gd": "6be2ec2203a0517ce6842d3c7979135ec7c94afaa5b69b1fff2508f083473a2a",
+      "scripts/ui/battle_save_notice.gd": "4030876186c66ae7de4ec2b8808d8b905881c40d0c0af29bd241f659dcdf2189",
+      "scripts/ui/city_preview.gd": "d01c0ca26b7d812b2b7d6d63339788be98241f6a09ec58a1a8d35a6f7b788937",
+      "scripts/ui/combat_skin.gd": "b9ed37f5c7f1831095805e13c6e3eaa986e762081209372cf8a4e09ff6608c66",
+      "scripts/ui/combat_slot_button.gd": "91a02ab52e8ebcb26985ae143dd596fbd4b62bd3fa6e440e5b0d12e44132a81d",
+      "scripts/ui/encounter_notice.gd": "316faf9f8de95b3917268b4773092a205cb0019e5860044294e0f781cb640e3e",
+      "scripts/ui/feedback_panel.gd": "2103fd9b8692c5606273175b415447f35a995f9a18306a5e8f0abeeb7c5d465b",
+      "scripts/ui/growth_overview.gd": "43dfb9306f4e280b57c8445b179c0e797938bc9fd0e5fa070053474cadb53a42",
+      "scripts/ui/hud_layout.gd": "d9a5dacd8e3816611b1658557c5366e1dbd6caeded4312d8f2e5e5584becddb6",
+      "scripts/ui/mobile_main.gd": "9b2cbd89a9f6b735ff5c7f1443bb9cc652a5e456e6ec320a7855212412bca367",
+      "scripts/ui/move_input.gd": "cee8e709185740d1cb964fff13873a0818d14d0b3653f36d6416a1b17da40bd8",
+      "scripts/ui/responsive_feedback_panel.gd": "b36ce744a7378d696b91018935f637da0ae88beccdeddd85b1187a238958ed5b",
+      "scripts/ui/reward_payment.gd": "d3fc0b75e7f9fbb5f55ffdbfe708039ccb77e4a35231c58d6fdcd4996a246c11",
+      "scripts/ui/skill_preview.gd": "5c3de40b161d38de44234f6f1a2c63064bbc99021c4def95f7995382b02af5db",
+      "scripts/world/map_catalog.gd": "952abbc81d539817dfdd98ed4a59185f13fb8c1adac0210839d176ebee087ea6",
+      "scripts/world/map_space.gd": "8110f4a28e04e67fe738011ea888f31a9c74c450ed79148d88c1da602fa03ae8",
+      "scripts/world/supply_catalog.gd": "1af21cb685b8da0858491a961f007e8a0511c24e0f70b0165e0051d7fcb310a1"
+    },
+    "changed_existing_production_files": [
+      "scripts/combat/battle_view.gd",
+      "scripts/combat/combat_camera.gd"
+    ],
+    "save_version_unchanged": 18,
+    "spawn_guard_size_unchanged": 1.16
+  },
+  "render": {
+    "errors": [],
+    "mouse_controls": 6,
+    "records": [
+      {
+        "arrival_caption": "임무 ▸",
+        "audio_active": 0,
+        "bound_textures": [
+          "res://assets/maps/pilot_01/stone_floor_tile.png",
+          "res://assets/maps/pilot_01/wall_segment.png",
+          "res://assets/maps/pilot_01/prop_crate.png"
+        ],
+        "dense": false,
+        "enemy_bullets": [],
+        "high_angle": true,
+        "hp": 100,
+        "image": "camera_before_11",
+        "incoming": {},
+        "label_overlaps": 0,
+        "labels": 0,
+        "map": "prologue_wall",
+        "mp": 100.0,
+        "occluders": 0,
+        "patterns": [],
+        "phase": 1,
+        "pixels_sha256": "7fd144942f36869232cb70182f5917ba3ad0fd003b493620372c6a0c3997807d",
+        "telegraph": [],
+        "viewport": "(854, 394)"
+      },
+      {
+        "arrival_caption": "임무 ▸",
+        "audio_active": 0,
+        "bound_textures": [
+          "res://assets/maps/pilot_01/stone_floor_tile.png",
+          "res://assets/maps/pilot_01/wall_segment.png",
+          "res://assets/maps/pilot_01/prop_crate.png"
+        ],
+        "dense": false,
+        "enemy_bullets": [],
+        "high_angle": true,
+        "hp": 100,
+        "image": "camera_before_12",
+        "incoming": {},
+        "label_overlaps": 0,
+        "labels": 0,
+        "map": "prologue_wall",
+        "mp": 100.0,
+        "occluders": 0,
+        "patterns": [],
+        "phase": 1,
+        "pixels_sha256": "d5f24dadc0178fb5fd733a9c8b717d8e0dae62b4657950e274d1a454ffdb6f57",
+        "telegraph": [],
+        "viewport": "(854, 394)"
+      },
+      {
+        "arrival_caption": "임무 ▸",
+        "audio_active": 0,
+        "bound_textures": [
+          "res://assets/maps/pilot_01/stone_floor_tile.png",
+          "res://assets/maps/pilot_01/wall_segment.png",
+          "res://assets/maps/pilot_01/prop_crate.png"
+        ],
+        "dense": false,
+        "enemy_bullets": [],
+        "high_angle": true,
+        "hp": 100,
+        "image": "camera_before_67",
+        "incoming": {},
+        "label_overlaps": 0,
+        "labels": 0,
+        "map": "prologue_wall",
+        "mp": 100.0,
+        "occluders": 0,
+        "patterns": [],
+        "phase": 1,
+        "pixels_sha256": "bbcb0259cef396b4f0323b55223a0c2d61aec1263c4b4f0516c7e7aea47c30c3",
+        "telegraph": [],
+        "viewport": "(854, 394)"
+      },
+      {
+        "arrival_caption": "임무 ▸",
+        "audio_active": 0,
+        "bound_textures": [
+          "res://assets/maps/pilot_01/stone_floor_tile.png",
+          "res://assets/maps/pilot_01/wall_segment.png",
+          "res://assets/maps/pilot_01/prop_crate.png"
+        ],
+        "dense": false,
+        "enemy_bullets": [],
+        "high_angle": true,
+        "hp": 100,
+        "image": "camera_before_68",
+        "incoming": {},
+        "label_overlaps": 0,
+        "labels": 0,
+        "map": "prologue_wall",
+        "mp": 100.0,
+        "occluders": 0,
+        "patterns": [],
+        "phase": 1,
+        "pixels_sha256": "50afb9fc5f2b301791a5819573316044937c027de715293c6794d98a666ae451",
+        "telegraph": [],
+        "viewport": "(854, 394)"
+      },
+      {
+        "arrival_caption": "임무 ▸",
+        "audio_active": 0,
+        "bound_textures": [
+          "res://assets/maps/pilot_01/stone_floor_tile.png",
+          "res://assets/maps/pilot_01/wall_segment.png",
+          "res://assets/maps/pilot_01/prop_crate.png"
+        ],
+        "dense": false,
+        "enemy_bullets": [],
+        "high_angle": true,
+        "hp": 100,
+        "image": "camera_before_87",
+        "incoming": {},
+        "label_overlaps": 0,
+        "labels": 0,
+        "map": "prologue_wall",
+        "mp": 100.0,
+        "occluders": 0,
+        "patterns": [],
+        "phase": 1,
+        "pixels_sha256": "7d2619661b13dea712bf5cfa169928f9458f88965df8c1e61f60f0f4f54e36ec",
+        "telegraph": [],
+        "viewport": "(854, 394)"
+      },
+      {
+        "arrival_caption": "임무 ▸",
+        "audio_active": 0,
+        "bound_textures": [
+          "res://assets/maps/pilot_01/stone_floor_tile.png",
+          "res://assets/maps/pilot_01/wall_segment.png",
+          "res://assets/maps/pilot_01/prop_crate.png"
+        ],
+        "dense": false,
+        "enemy_bullets": [],
+        "high_angle": true,
+        "hp": 100,
+        "image": "camera_before_119",
+        "incoming": {},
+        "label_overlaps": 0,
+        "labels": 0,
+        "map": "prologue_wall",
+        "mp": 100.0,
+        "occluders": 0,
+        "patterns": [],
+        "phase": 1,
+        "pixels_sha256": "317a7227e17766b1b8ca4a02af682df681fe2aa76b7991697b7ceabaf3e3a17a",
+        "telegraph": [],
+        "viewport": "(854, 394)"
+      },
+      {
+        "arrival_caption": "임무 ▸",
+        "audio_active": 0,
+        "bound_textures": [
+          "res://assets/maps/pilot_01/stone_floor_tile.png",
+          "res://assets/maps/pilot_01/wall_segment.png",
+          "res://assets/maps/pilot_01/prop_crate.png"
+        ],
+        "dense": false,
+        "enemy_bullets": [],
+        "high_angle": true,
+        "hp": 100,
+        "image": "camera_after_11",
+        "incoming": {},
+        "label_overlaps": 0,
+        "labels": 0,
+        "map": "prologue_wall",
+        "mp": 100.0,
+        "occluders": 0,
+        "patterns": [],
+        "phase": 1,
+        "pixels_sha256": "777216ed93f29590349f5293e1fddf64e226c350c0e854125cbc9a323d92828e",
+        "telegraph": [],
+        "viewport": "(854, 394)"
+      },
+      {
+        "arrival_caption": "임무 ▸",
+        "audio_active": 0,
+        "bound_textures": [
+          "res://assets/maps/pilot_01/stone_floor_tile.png",
+          "res://assets/maps/pilot_01/wall_segment.png",
+          "res://assets/maps/pilot_01/prop_crate.png"
+        ],
+        "dense": false,
+        "enemy_bullets": [],
+        "high_angle": true,
+        "hp": 100,
+        "image": "camera_after_12",
+        "incoming": {},
+        "label_overlaps": 0,
+        "labels": 0,
+        "map": "prologue_wall",
+        "mp": 100.0,
+        "occluders": 0,
+        "patterns": [],
+        "phase": 1,
+        "pixels_sha256": "9ee9158ad9152cd3608b37f42472fa9856e677d983b50580f3d1e97350999e4a",
+        "telegraph": [],
+        "viewport": "(854, 394)"
+      },
+      {
+        "arrival_caption": "임무 ▸",
+        "audio_active": 0,
+        "bound_textures": [
+          "res://assets/maps/pilot_01/stone_floor_tile.png",
+          "res://assets/maps/pilot_01/wall_segment.png",
+          "res://assets/maps/pilot_01/prop_crate.png"
+        ],
+        "dense": false,
+        "enemy_bullets": [],
+        "high_angle": true,
+        "hp": 100,
+        "image": "camera_after_67",
+        "incoming": {},
+        "label_overlaps": 0,
+        "labels": 0,
+        "map": "prologue_wall",
+        "mp": 100.0,
+        "occluders": 0,
+        "patterns": [],
+        "phase": 1,
+        "pixels_sha256": "a00abfb14d43f78c87177fffb56d5efaeecf409a2a469387a3695755feac5ea8",
+        "telegraph": [],
+        "viewport": "(854, 394)"
+      },
+      {
+        "arrival_caption": "임무 ▸",
+        "audio_active": 0,
+        "bound_textures": [
+          "res://assets/maps/pilot_01/stone_floor_tile.png",
+          "res://assets/maps/pilot_01/wall_segment.png",
+          "res://assets/maps/pilot_01/prop_crate.png"
+        ],
+        "dense": false,
+        "enemy_bullets": [],
+        "high_angle": true,
+        "hp": 100,
+        "image": "camera_after_68",
+        "incoming": {},
+        "label_overlaps": 0,
+        "labels": 0,
+        "map": "prologue_wall",
+        "mp": 100.0,
+        "occluders": 0,
+        "patterns": [],
+        "phase": 1,
+        "pixels_sha256": "fe25789234825c64b83962fe1eb2834eaf1456368520170448739f691d309c12",
+        "telegraph": [],
+        "viewport": "(854, 394)"
+      },
+      {
+        "arrival_caption": "임무 ▸",
+        "audio_active": 0,
+        "bound_textures": [
+          "res://assets/maps/pilot_01/stone_floor_tile.png",
+          "res://assets/maps/pilot_01/wall_segment.png",
+          "res://assets/maps/pilot_01/prop_crate.png"
+        ],
+        "dense": false,
+        "enemy_bullets": [],
+        "high_angle": true,
+        "hp": 100,
+        "image": "camera_after_87",
+        "incoming": {},
+        "label_overlaps": 0,
+        "labels": 0,
+        "map": "prologue_wall",
+        "mp": 100.0,
+        "occluders": 0,
+        "patterns": [],
+        "phase": 1,
+        "pixels_sha256": "9f4868d607c573c5d7f7838b0682f2a3b158b4cfdcd67dfc02736cfe12969f28",
+        "telegraph": [],
+        "viewport": "(854, 394)"
+      },
+      {
+        "arrival_caption": "임무 ▸",
+        "audio_active": 0,
+        "bound_textures": [
+          "res://assets/maps/pilot_01/stone_floor_tile.png",
+          "res://assets/maps/pilot_01/wall_segment.png",
+          "res://assets/maps/pilot_01/prop_crate.png"
+        ],
+        "dense": false,
+        "enemy_bullets": [],
+        "high_angle": true,
+        "hp": 100,
+        "image": "camera_after_119",
+        "incoming": {},
+        "label_overlaps": 0,
+        "labels": 0,
+        "map": "prologue_wall",
+        "mp": 100.0,
+        "occluders": 0,
+        "patterns": [],
+        "phase": 1,
+        "pixels_sha256": "dc0dbcd6bd76cea3fc062d254ce012af4becc423ba06a72900d35c5f467160b9",
+        "telegraph": [],
+        "viewport": "(854, 394)"
+      },
+      {
+        "arrival_caption": "임무 ▸",
+        "audio_active": 0,
+        "bound_textures": [
+          "res://assets/maps/pilot_01/stone_floor_tile.png",
+          "res://assets/maps/pilot_01/wall_segment.png",
+          "res://assets/maps/pilot_01/prop_crate.png"
+        ],
+        "dense": false,
+        "enemy_bullets": [],
+        "high_angle": true,
+        "hp": 100,
+        "image": "camera_pause",
+        "incoming": {},
+        "label_overlaps": 0,
+        "labels": 0,
+        "map": "prologue_wall",
+        "mp": 100.0,
+        "occluders": 0,
+        "patterns": [],
+        "phase": 2,
+        "pixels_sha256": "e86cafd05f6677e489f63af22bd4a751d746d16d166f57f702732df09b568f03",
+        "telegraph": [],
+        "viewport": "(854, 394)"
+      },
+      {
+        "arrival_caption": "임무 ▸",
+        "audio_active": 0,
+        "bound_textures": [
+          "res://assets/maps/pilot_01/stone_floor_tile.png",
+          "res://assets/maps/pilot_01/wall_segment.png",
+          "res://assets/maps/pilot_01/prop_crate.png"
+        ],
+        "dense": false,
+        "enemy_bullets": [],
+        "high_angle": true,
+        "hp": 100,
+        "image": "camera_resume",
+        "incoming": {},
+        "label_overlaps": 0,
+        "labels": 0,
+        "map": "prologue_wall",
+        "mp": 100.0,
+        "occluders": 0,
+        "patterns": [],
+        "phase": 1,
+        "pixels_sha256": "344f8e012cbee9243d5230e946b8ab51440dfd7403e7128e1343028129a94e7b",
+        "telegraph": [],
+        "viewport": "(854, 394)"
+      },
+      {
+        "arrival_caption": "임무 ▸",
+        "audio_active": 0,
+        "bound_textures": [
+          "res://assets/maps/pilot_01/stone_floor_tile.png",
+          "res://assets/maps/pilot_01/wall_segment.png",
+          "res://assets/maps/pilot_01/prop_crate.png"
+        ],
+        "dense": false,
+        "enemy_bullets": [],
+        "high_angle": true,
+        "hp": 100,
+        "image": "camera_choice",
+        "incoming": {},
+        "label_overlaps": 0,
+        "labels": 0,
+        "map": "prologue_wall",
+        "mp": 100.0,
+        "occluders": 0,
+        "patterns": [],
+        "phase": 4,
+        "pixels_sha256": "dae989f94be876535668107189883385f108dd85b200e6a907fb2ee1e86e4410",
+        "telegraph": [],
+        "viewport": "(854, 394)"
+      },
+      {
+        "arrival_caption": "임무 ▸",
+        "audio_active": 1,
+        "bound_textures": [
+          "res://assets/maps/pilot_01/stone_floor_tile.png",
+          "res://assets/maps/pilot_01/wall_segment.png",
+          "res://assets/maps/pilot_01/prop_crate.png"
+        ],
+        "dense": false,
+        "enemy_bullets": [],
+        "high_angle": false,
+        "hp": 100,
+        "image": "camera_f8",
+        "incoming": {},
+        "label_overlaps": 0,
+        "labels": 0,
+        "map": "prologue_wall",
+        "mp": 100.0,
+        "occluders": 0,
+        "patterns": [],
+        "phase": 1,
+        "pixels_sha256": "d71d714d5eb6a8cf44875b8c8525632972ada32ea5c11db911f75ee2a6a4cc0b",
+        "telegraph": [],
+        "viewport": "(854, 394)"
+      }
+    ],
+    "same120authoritative_states": true,
+    "scope": "120actual rendered/native input frames each at explicit.05simulation steps/20fps,identical battle and original spawn guard;pause/Continue/choice/F8;not mobileFPS or human comfort approval.",
+    "status": "PASS",
+    "summary": {
+      "after": {
+        "peak_camera_step": 11.75,
+        "stop_drift_20frames": 0.0
+      },
+      "before": {
+        "peak_camera_step": 44.798583984375,
+        "stop_drift_20frames": 64.16748046875
+      }
+    }
+  },
+  "same_120_authoritative_states_and_seven_rng": true,
+  "motion_series": [
+    {
+      "frame": 0,
+      "before_camera_step": 28.503173828125,
+      "after_camera_step": 0.0,
+      "player_step": 11.75,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 1,
+      "before_camera_step": 24.1611328125,
+      "after_camera_step": 0.0,
+      "player_step": 11.75,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 2,
+      "before_camera_step": 20.9443359375,
+      "after_camera_step": 0.0,
+      "player_step": 11.75,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 3,
+      "before_camera_step": 18.561279296875,
+      "after_camera_step": 0.0,
+      "player_step": 11.75,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 4,
+      "before_camera_step": 16.7958984375,
+      "after_camera_step": 2.662109375,
+      "player_step": 11.75,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 5,
+      "before_camera_step": 15.48828125,
+      "after_camera_step": 5.017578125,
+      "player_step": 11.75,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 6,
+      "before_camera_step": 14.519287109375,
+      "after_camera_step": 9.931640625,
+      "player_step": 11.75,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 7,
+      "before_camera_step": 13.801513671875,
+      "after_camera_step": 11.75,
+      "player_step": 11.75,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 8,
+      "before_camera_step": 13.269775390625,
+      "after_camera_step": 11.75,
+      "player_step": 11.75,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 9,
+      "before_camera_step": 12.8759765625,
+      "after_camera_step": 11.75,
+      "player_step": 11.75,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 10,
+      "before_camera_step": 12.583984375,
+      "after_camera_step": 11.75,
+      "player_step": 11.75,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 11,
+      "before_camera_step": 12.367919921875,
+      "after_camera_step": 11.75,
+      "player_step": 11.75,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 12,
+      "before_camera_step": 44.798583984375,
+      "after_camera_step": 0.0,
+      "player_step": 11.75,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 13,
+      "before_camera_step": 36.23291015625,
+      "after_camera_step": 0.0,
+      "player_step": 11.75,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 14,
+      "before_camera_step": 29.887451171875,
+      "after_camera_step": 0.0,
+      "player_step": 11.75,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 15,
+      "before_camera_step": 25.186767578125,
+      "after_camera_step": 0.0,
+      "player_step": 11.75,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 16,
+      "before_camera_step": 21.703857421875,
+      "after_camera_step": 0.0,
+      "player_step": 11.75,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 17,
+      "before_camera_step": 19.124267578125,
+      "after_camera_step": 0.0,
+      "player_step": 11.75,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 18,
+      "before_camera_step": 17.212890625,
+      "after_camera_step": 0.0,
+      "player_step": 11.75,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 19,
+      "before_camera_step": 15.796875,
+      "after_camera_step": 0.0,
+      "player_step": 11.75,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 20,
+      "before_camera_step": 14.748291015625,
+      "after_camera_step": 0.0,
+      "player_step": 11.75,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 21,
+      "before_camera_step": 13.970947265625,
+      "after_camera_step": 1.1357421875,
+      "player_step": 11.75,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 22,
+      "before_camera_step": 13.3955078125,
+      "after_camera_step": 3.88671875,
+      "player_step": 11.75,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 23,
+      "before_camera_step": 12.96875,
+      "after_camera_step": 6.7001953125,
+      "player_step": 11.75,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 24,
+      "before_camera_step": 44.353271484375,
+      "after_camera_step": 0.0,
+      "player_step": 11.75,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 25,
+      "before_camera_step": 35.903076171875,
+      "after_camera_step": 0.0,
+      "player_step": 11.75,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 26,
+      "before_camera_step": 29.64306640625,
+      "after_camera_step": 0.0,
+      "player_step": 11.75,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 27,
+      "before_camera_step": 25.005615234375,
+      "after_camera_step": 0.0,
+      "player_step": 11.75,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 28,
+      "before_camera_step": 21.56982421875,
+      "after_camera_step": 0.0,
+      "player_step": 11.75,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 29,
+      "before_camera_step": 19.02490234375,
+      "after_camera_step": 0.0,
+      "player_step": 11.75,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 30,
+      "before_camera_step": 17.139404296875,
+      "after_camera_step": 0.0,
+      "player_step": 11.75,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 31,
+      "before_camera_step": 15.742431640625,
+      "after_camera_step": 0.0,
+      "player_step": 11.75,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 32,
+      "before_camera_step": 14.707763671875,
+      "after_camera_step": 0.0,
+      "player_step": 11.75,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 33,
+      "before_camera_step": 13.94091796875,
+      "after_camera_step": 1.1357421875,
+      "player_step": 11.75,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 34,
+      "before_camera_step": 13.373291015625,
+      "after_camera_step": 3.88671875,
+      "player_step": 11.75,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 35,
+      "before_camera_step": 12.95263671875,
+      "after_camera_step": 6.7001953125,
+      "player_step": 11.75,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 36,
+      "before_camera_step": 44.365478515625,
+      "after_camera_step": 0.0,
+      "player_step": 11.75,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 37,
+      "before_camera_step": 35.912353515625,
+      "after_camera_step": 0.0,
+      "player_step": 11.75,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 38,
+      "before_camera_step": 29.649658203125,
+      "after_camera_step": 0.0,
+      "player_step": 11.75,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 39,
+      "before_camera_step": 25.010498046875,
+      "after_camera_step": 0.0,
+      "player_step": 11.75,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 40,
+      "before_camera_step": 21.57373046875,
+      "after_camera_step": 0.0,
+      "player_step": 11.75,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 41,
+      "before_camera_step": 19.02734375,
+      "after_camera_step": 0.0,
+      "player_step": 11.75,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 42,
+      "before_camera_step": 17.141357421875,
+      "after_camera_step": 0.0,
+      "player_step": 11.75,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 43,
+      "before_camera_step": 15.743896484375,
+      "after_camera_step": 0.0,
+      "player_step": 11.75,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 44,
+      "before_camera_step": 14.708984375,
+      "after_camera_step": 0.0,
+      "player_step": 11.75,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 45,
+      "before_camera_step": 13.94189453125,
+      "after_camera_step": 1.1357421875,
+      "player_step": 11.75,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 46,
+      "before_camera_step": 13.373779296875,
+      "after_camera_step": 3.88671875,
+      "player_step": 11.75,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 47,
+      "before_camera_step": 12.952880859375,
+      "after_camera_step": 6.7001953125,
+      "player_step": 11.75,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 48,
+      "before_camera_step": 44.364990234375,
+      "after_camera_step": 0.0,
+      "player_step": 11.75,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 49,
+      "before_camera_step": 35.912109375,
+      "after_camera_step": 0.0,
+      "player_step": 11.75,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 50,
+      "before_camera_step": 29.6494140625,
+      "after_camera_step": 0.0,
+      "player_step": 11.75,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 51,
+      "before_camera_step": 25.010498046875,
+      "after_camera_step": 0.0,
+      "player_step": 11.75,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 52,
+      "before_camera_step": 21.573486328125,
+      "after_camera_step": 0.0,
+      "player_step": 11.75,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 53,
+      "before_camera_step": 19.02734375,
+      "after_camera_step": 0.0,
+      "player_step": 11.75,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 54,
+      "before_camera_step": 17.141357421875,
+      "after_camera_step": 0.0,
+      "player_step": 11.75,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 55,
+      "before_camera_step": 15.743896484375,
+      "after_camera_step": 0.0,
+      "player_step": 11.75,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 56,
+      "before_camera_step": 14.708740234375,
+      "after_camera_step": 0.0,
+      "player_step": 11.75,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 57,
+      "before_camera_step": 13.94189453125,
+      "after_camera_step": 1.1357421875,
+      "player_step": 11.75,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 58,
+      "before_camera_step": 13.373779296875,
+      "after_camera_step": 3.88671875,
+      "player_step": 11.75,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 59,
+      "before_camera_step": 12.953125,
+      "after_camera_step": 6.7001953125,
+      "player_step": 11.75,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 60,
+      "before_camera_step": 12.64111328125,
+      "after_camera_step": 11.75,
+      "player_step": 11.75,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 61,
+      "before_camera_step": 12.41015625,
+      "after_camera_step": 11.75,
+      "player_step": 11.75,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 62,
+      "before_camera_step": 12.239013671875,
+      "after_camera_step": 11.75,
+      "player_step": 11.75,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 63,
+      "before_camera_step": 12.1123046875,
+      "after_camera_step": 11.75,
+      "player_step": 11.75,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 64,
+      "before_camera_step": 12.0185546875,
+      "after_camera_step": 11.75,
+      "player_step": 11.75,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 65,
+      "before_camera_step": 11.94873046875,
+      "after_camera_step": 11.75,
+      "player_step": 11.75,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 66,
+      "before_camera_step": 11.8974609375,
+      "after_camera_step": 11.75,
+      "player_step": 11.75,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 67,
+      "before_camera_step": 11.859130859375,
+      "after_camera_step": 11.75,
+      "player_step": 11.75,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 68,
+      "before_camera_step": 16.67236328125,
+      "after_camera_step": 0.0,
+      "player_step": 0.0,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 69,
+      "before_camera_step": 12.351318359375,
+      "after_camera_step": 0.0,
+      "player_step": 0.0,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 70,
+      "before_camera_step": 9.14990234375,
+      "after_camera_step": 0.0,
+      "player_step": 0.0,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 71,
+      "before_camera_step": 6.778564453125,
+      "after_camera_step": 0.0,
+      "player_step": 0.0,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 72,
+      "before_camera_step": 5.021484375,
+      "after_camera_step": 0.0,
+      "player_step": 0.0,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 73,
+      "before_camera_step": 3.72021484375,
+      "after_camera_step": 0.0,
+      "player_step": 0.0,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 74,
+      "before_camera_step": 2.755859375,
+      "after_camera_step": 0.0,
+      "player_step": 0.0,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 75,
+      "before_camera_step": 2.04150390625,
+      "after_camera_step": 0.0,
+      "player_step": 0.0,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 76,
+      "before_camera_step": 1.5126953125,
+      "after_camera_step": 0.0,
+      "player_step": 0.0,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 77,
+      "before_camera_step": 1.120361328125,
+      "after_camera_step": 0.0,
+      "player_step": 0.0,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 78,
+      "before_camera_step": 0.830078125,
+      "after_camera_step": 0.0,
+      "player_step": 0.0,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 79,
+      "before_camera_step": 0.614990234375,
+      "after_camera_step": 0.0,
+      "player_step": 0.0,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 80,
+      "before_camera_step": 0.45556640625,
+      "after_camera_step": 0.0,
+      "player_step": 0.0,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 81,
+      "before_camera_step": 0.33740234375,
+      "after_camera_step": 0.0,
+      "player_step": 0.0,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 82,
+      "before_camera_step": 0.25,
+      "after_camera_step": 0.0,
+      "player_step": 0.0,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 83,
+      "before_camera_step": 0.185302734375,
+      "after_camera_step": 0.0,
+      "player_step": 0.0,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 84,
+      "before_camera_step": 0.13720703125,
+      "after_camera_step": 0.0,
+      "player_step": 0.0,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 85,
+      "before_camera_step": 0.1015625,
+      "after_camera_step": 0.0,
+      "player_step": 0.0,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 86,
+      "before_camera_step": 0.0751953125,
+      "after_camera_step": 0.0,
+      "player_step": 0.0,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 87,
+      "before_camera_step": 0.055908203125,
+      "after_camera_step": 0.0,
+      "player_step": 0.0,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 88,
+      "before_camera_step": 28.54443359375,
+      "after_camera_step": 0.0,
+      "player_step": 11.75,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 89,
+      "before_camera_step": 24.191650390625,
+      "after_camera_step": 0.0,
+      "player_step": 11.75,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 90,
+      "before_camera_step": 20.967041015625,
+      "after_camera_step": 0.0,
+      "player_step": 11.75,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 91,
+      "before_camera_step": 18.578125,
+      "after_camera_step": 0.0,
+      "player_step": 11.75,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 92,
+      "before_camera_step": 16.808349609375,
+      "after_camera_step": 0.0,
+      "player_step": 11.75,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 93,
+      "before_camera_step": 15.49755859375,
+      "after_camera_step": 0.0,
+      "player_step": 11.75,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 94,
+      "before_camera_step": 14.526123046875,
+      "after_camera_step": 0.0,
+      "player_step": 11.75,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 95,
+      "before_camera_step": 13.806396484375,
+      "after_camera_step": 0.0,
+      "player_step": 11.75,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 96,
+      "before_camera_step": 13.273681640625,
+      "after_camera_step": 0.0,
+      "player_step": 11.75,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 97,
+      "before_camera_step": 12.878662109375,
+      "after_camera_step": 1.1357421875,
+      "player_step": 11.75,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 98,
+      "before_camera_step": 12.586181640625,
+      "after_camera_step": 3.88671875,
+      "player_step": 11.75,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 99,
+      "before_camera_step": 12.369384765625,
+      "after_camera_step": 6.7001953125,
+      "player_step": 11.75,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 100,
+      "before_camera_step": 24.5116138458252,
+      "after_camera_step": 0.0,
+      "player_step": 11.75,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 101,
+      "before_camera_step": 20.5339260101318,
+      "after_camera_step": 1.16949462890625,
+      "player_step": 11.75,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 102,
+      "before_camera_step": 17.7657985687256,
+      "after_camera_step": 8.7635498046875,
+      "player_step": 11.75,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 103,
+      "before_camera_step": 15.8669443130493,
+      "after_camera_step": 11.75,
+      "player_step": 11.75,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 104,
+      "before_camera_step": 14.5772933959961,
+      "after_camera_step": 11.75,
+      "player_step": 11.75,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 105,
+      "before_camera_step": 13.7051582336426,
+      "after_camera_step": 11.75,
+      "player_step": 11.75,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 106,
+      "before_camera_step": 13.1142129898071,
+      "after_camera_step": 11.75,
+      "player_step": 11.75,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 107,
+      "before_camera_step": 12.711088180542,
+      "after_camera_step": 11.75,
+      "player_step": 11.75,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 108,
+      "before_camera_step": 12.4334678649902,
+      "after_camera_step": 11.75,
+      "player_step": 11.75,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 109,
+      "before_camera_step": 12.2400541305542,
+      "after_camera_step": 11.75,
+      "player_step": 11.75,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 110,
+      "before_camera_step": 12.1039094924927,
+      "after_camera_step": 11.75,
+      "player_step": 11.75,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 111,
+      "before_camera_step": 12.00705909729,
+      "after_camera_step": 11.75,
+      "player_step": 11.75,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 112,
+      "before_camera_step": 9.18011856079102,
+      "after_camera_step": 8.99002075195312,
+      "player_step": 8.99002075195312,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 113,
+      "before_camera_step": 6.43731927871704,
+      "after_camera_step": 0.0,
+      "player_step": 0.0,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 114,
+      "before_camera_step": 4.76888799667358,
+      "after_camera_step": 0.0,
+      "player_step": 0.0,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 115,
+      "before_camera_step": 3.53287625312805,
+      "after_camera_step": 0.0,
+      "player_step": 0.0,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 116,
+      "before_camera_step": 2.61720371246338,
+      "after_camera_step": 0.0,
+      "player_step": 0.0,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 117,
+      "before_camera_step": 1.93888819217682,
+      "after_camera_step": 0.0,
+      "player_step": 0.0,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 118,
+      "before_camera_step": 1.43635976314545,
+      "after_camera_step": 0.0,
+      "player_step": 0.0,
+      "same_authoritative_state": true
+    },
+    {
+      "frame": 119,
+      "before_camera_step": 1.06408929824829,
+      "after_camera_step": 0.0,
+      "player_step": 0.0,
+      "same_authoritative_state": true
+    }
+  ],
+  "actual_rendered_motion_frames": 240,
+  "frame_manifest": ".local_validation/GAME042/frame-manifest.json",
+  "portable_videos": {
+    "docs/validation/GAME042_CAMERA_BEFORE.mp4": {
+      "bytes": 342357,
+      "sha256": "6143133095182cc4d01bdc79edd6112ca3ff323b7f2d4426e9c1dafaf10768db",
+      "metadata": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "width": 854,
+            "height": 394,
+            "duration": "6.000000",
+            "nb_frames": "120"
+          }
+        ]
+      }
+    },
+    "docs/validation/GAME042_CAMERA_AFTER.mp4": {
+      "bytes": 258868,
+      "sha256": "816faa6d31c01df569db3e85e54aa7b6824ca6ca546c207f6329264ff40340d0",
+      "metadata": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "width": 854,
+            "height": 394,
+            "duration": "6.000000",
+            "nb_frames": "120"
+          }
+        ]
+      }
+    }
+  },
+  "fresh_process_restore": {
+    "status": "PASS",
+    "count": 3,
+    "records": [
+      {
+        "camera_offset": "(0.0, 0.0)",
+        "errors": [],
+        "final_hp": 100,
+        "final_mp": 100.0,
+        "gold": 0,
+        "original_18_rules_unchanged": true,
+        "prop_generation": 0,
+        "prop_hp": 30,
+        "rng_streams": 7,
+        "running100_equal": true,
+        "saved_hp": 100,
+        "saved_mp": 100.0,
+        "schema": 18,
+        "status": "PASS",
+        "tag": "held",
+        "used_entries": 0
+      },
+      {
+        "camera_offset": "(0.0, 0.0)",
+        "errors": [],
+        "final_hp": 100,
+        "final_mp": 100.0,
+        "gold": 0,
+        "original_18_rules_unchanged": true,
+        "prop_generation": 1,
+        "prop_hp": 30,
+        "rng_streams": 7,
+        "running100_equal": true,
+        "saved_hp": 100,
+        "saved_mp": 100.0,
+        "schema": 18,
+        "status": "PASS",
+        "tag": "waiting",
+        "used_entries": 0
+      },
+      {
+        "camera_offset": "(0.0, 0.0)",
+        "errors": [],
+        "final_hp": 70,
+        "final_mp": 100.0,
+        "gold": 0,
+        "original_18_rules_unchanged": true,
+        "prop_generation": 0,
+        "prop_hp": 30,
+        "rng_streams": 7,
+        "running100_equal": true,
+        "saved_hp": 100,
+        "saved_mp": 100.0,
+        "schema": 18,
+        "status": "PASS",
+        "tag": "old-flight",
+        "used_entries": 0
+      }
+    ],
+    "scope": "new held854x394,current prior waiting1280x720,published18curseflight1280x720;100RUNNINGsteps each;neutral camera reconstruction,no past drift/audio/arrival,currency/admission unchanged"
+  },
+  "development_fix": "Fixed false teleport rebasing from float subtraction at60Hz with0.1world-unit tolerance;final full suites rerun,earlier failed/interrupted logs excluded",
+  "gameplay_balance": {
+    "new_six_minute_run": "NOT_RUN",
+    "prior_GAME040_result": "old20/20,new19/20,prologueNONE407defeat277.55",
+    "status": "OPEN_UNCHANGED"
+  },
+  "artifact_index": {
+    ".local_validation/GAME042/camera-runner.log": {
+      "bytes": 115,
+      "sha256": "7740e4acefd3a9b0b2cbfb8b8ecec9bd172cc21201b5f599e94f0377b469a1d0"
+    },
+    ".local_validation/GAME042/camera_after.mp4": {
+      "bytes": 258868,
+      "sha256": "816faa6d31c01df569db3e85e54aa7b6824ca6ca546c207f6329264ff40340d0"
+    },
+    ".local_validation/GAME042/camera_after_11.png": {
+      "bytes": 122291,
+      "sha256": "11524c8256ac77dceba26b6d66b1fd924f4064c50db337b2c437ea0f6f2ebe57"
+    },
+    ".local_validation/GAME042/camera_after_119.png": {
+      "bytes": 116730,
+      "sha256": "1c38beb05830ef44102258dd89741073797a77ac2f242ece6764f5c30c4d694c"
+    },
+    ".local_validation/GAME042/camera_after_12.png": {
+      "bytes": 122273,
+      "sha256": "f84e488c8ad783d470c8b39babb315d900776e5efe61c7f3ec0d3c75c80a7c6d"
+    },
+    ".local_validation/GAME042/camera_after_67.png": {
+      "bytes": 118010,
+      "sha256": "acb79f7df2a95f3397baf4fe1e173694262288ce78330b58eb341efeaec79e4a"
+    },
+    ".local_validation/GAME042/camera_after_68.png": {
+      "bytes": 116878,
+      "sha256": "90e4d4985f01aad247ca72ee564e09875884a4137b76392fcda9257cc981b298"
+    },
+    ".local_validation/GAME042/camera_after_87.png": {
+      "bytes": 117016,
+      "sha256": "0d96d21cf4f3b0410074f7db0fb3452bcbe18d47800587235063c7197af3630c"
+    },
+    ".local_validation/GAME042/camera_before.mp4": {
+      "bytes": 342357,
+      "sha256": "6143133095182cc4d01bdc79edd6112ca3ff323b7f2d4426e9c1dafaf10768db"
+    },
+    ".local_validation/GAME042/camera_before_11.png": {
+      "bytes": 117473,
+      "sha256": "2d7d79b6b217f3f561b270aa8cc0ca5ef2a40858578327d017b3cc7ddc2caa43"
+    },
+    ".local_validation/GAME042/camera_before_119.png": {
+      "bytes": 117537,
+      "sha256": "178194394f0562c34a1c33e38542b8e681f38e6519b1d4f9d4f248873017a93f"
+    },
+    ".local_validation/GAME042/camera_before_12.png": {
+      "bytes": 117279,
+      "sha256": "198012df806fb1912febe530d9ba378f2c3185cb60fc94a3c5e7fe3df7601237"
+    },
+    ".local_validation/GAME042/camera_before_67.png": {
+      "bytes": 117971,
+      "sha256": "eafb9ddb853fc332e2de60e5a10f317d98f5a0796886ea83f60499b14079ac28"
+    },
+    ".local_validation/GAME042/camera_before_68.png": {
+      "bytes": 116986,
+      "sha256": "39483f6070791d8d68933f89b1dd3b824631d5b73f974f4b11c8ff323dd1f3c9"
+    },
+    ".local_validation/GAME042/camera_before_87.png": {
+      "bytes": 117659,
+      "sha256": "5aad28a4bee70b81c0c3aac413b71fe8e3e37d9fd6d60d4cf2aa07ee5736afa4"
+    },
+    ".local_validation/GAME042/camera_choice.png": {
+      "bytes": 44130,
+      "sha256": "b0386c5c86e7bc73d893e6864a01079d53da1d5f15e4e424bfce22bd2ac86772"
+    },
+    ".local_validation/GAME042/camera_f8.png": {
+      "bytes": 37562,
+      "sha256": "33753928ec1610f712738057c066c7cd18716d44d17600860f932f171601a6c2"
+    },
+    ".local_validation/GAME042/camera_pause.png": {
+      "bytes": 41200,
+      "sha256": "febca463aad7152ff0f8c13a3626b79aabc4c555b3cf00dd3dc116962265b7fd"
+    },
+    ".local_validation/GAME042/camera_resume.png": {
+      "bytes": 116270,
+      "sha256": "d61720bfd226b7a8daec5216caef0e8a635bda11c7435ab7352dbb5bff20a852"
+    },
+    ".local_validation/GAME042/camera_runner.gd": {
+      "bytes": 525,
+      "sha256": "4ba830c83434d1bf1407b60377ee75535673af9c06d35cbd951a864d18afb93e"
+    },
+    ".local_validation/GAME042/cold-held.log": {
+      "bytes": 355,
+      "sha256": "5042cedf2b12c885fbe1ebcf4af1b46eede2dee62d74a78166092b612998f7a7"
+    },
+    ".local_validation/GAME042/cold-old-flight.log": {
+      "bytes": 360,
+      "sha256": "85ce3969ceb93496f4209e8b49f4bc08b1d4b2ecdd0ef658d7504450d6dbd858"
+    },
+    ".local_validation/GAME042/cold-results.json": {
+      "bytes": 1163,
+      "sha256": "7b705de410a634729bd2023bcaaf549eaa3d0d28f38e2340721618cb7f02daf4"
+    },
+    ".local_validation/GAME042/cold-runner.log": {
+      "bytes": 35,
+      "sha256": "8ca166849de616d0108443a34d7b8bd86704e8232359d805b4a7a94aec648283"
+    },
+    ".local_validation/GAME042/cold-waiting.log": {
+      "bytes": 358,
+      "sha256": "a186570078833f73a1fcb7a82a32dcdc7359956b109d2815aef2509125af7e0f"
+    },
+    ".local_validation/GAME042/cold_probe.gd": {
+      "bytes": 4152,
+      "sha256": "52c995c298ea84178f7ab932b7d27e9db06b5a17107e6960111f95e36eae9450"
+    },
+    ".local_validation/GAME042/engine_0.log": {
+      "bytes": 32,
+      "sha256": "edff16c1721dd4ae989cadf29a01f574ae8d51b118221f664725bd6980bbba5d"
+    },
+    ".local_validation/GAME042/engine_1.log": {
+      "bytes": 1017,
+      "sha256": "f15ffd4c558b01611d562c8c257508942bdc2dc542124f423ae2a592a46edfa6"
+    },
+    ".local_validation/GAME042/engine_2.log": {
+      "bytes": 117,
+      "sha256": "1938b93b03756e658dd6fc29e699189d67afb2aec05905c840e9c22f5b89a6cd"
+    },
+    ".local_validation/GAME042/engine_3.log": {
+      "bytes": 117,
+      "sha256": "190487dfb2bdf99cdccfff084fd5d95b81eac04fcfe3ec43e502d524daacb8eb"
+    },
+    ".local_validation/GAME042/engine_4.log": {
+      "bytes": 118,
+      "sha256": "0dc80f41a9d961a6b4d962614c905af0b7c3bc209f569871d09048860b58f7ff"
+    },
+    ".local_validation/GAME042/engine_5.log": {
+      "bytes": 117,
+      "sha256": "c5a9e5b87c0439795f9d5bcfe6c17d74bce134acc53d7f341cfb55a11bdb1e1d"
+    },
+    ".local_validation/GAME042/engine_6.log": {
+      "bytes": 119,
+      "sha256": "570a42343d370c104902d16c9ff0b402573f94ed3076772afb70e6bce96084fc"
+    },
+    ".local_validation/GAME042/engine_7.log": {
+      "bytes": 117,
+      "sha256": "025f863c84ce84466e9269a07033239400176c7aad50ada31ff794c6e59b0837"
+    },
+    ".local_validation/GAME042/engine_8.log": {
+      "bytes": 119,
+      "sha256": "db8b21e51c6aa39255032d468703c3d7aa5089e663a674552742207b5171763b"
+    },
+    ".local_validation/GAME042/engine_9.log": {
+      "bytes": 73,
+      "sha256": "6d1c065383a27c36804949b6ffa4b09714470b112e5dacc0bd5aeb7b9c147c4e"
+    },
+    ".local_validation/GAME042/frame-manifest.json": {
+      "bytes": 44078,
+      "sha256": "112e3fdb27d9907e2a71622fc3a45ec39329748eb5080ccdcc5a9b0698a6d897"
+    },
+    ".local_validation/GAME042/generated-cleanup.json": {
+      "bytes": 6403,
+      "sha256": "742cf0c1723aced98074593c0f8f7534abeef0fcc61aeea4c7fcb835190b18f9"
+    },
+    ".local_validation/GAME042/guard.json": {
+      "bytes": 5381,
+      "sha256": "255d148dfe3f409a75172cde1aa51da7492996cae989c46dd09e429b2862c2b9"
+    },
+    ".local_validation/GAME042/old_camera.gd": {
+      "bytes": 1337,
+      "sha256": "ecb81da9ebb62e9f2b84f9ba7ffb4de578646d5c3d5accad647fd63c74b09567"
+    },
+    ".local_validation/GAME042/old_camera_adapter.gd": {
+      "bytes": 492,
+      "sha256": "412a5c7bd99df2fa2929c90531d93d604011f709e4539abd2fe4c4c17f2f4776"
+    },
+    ".local_validation/GAME042/python.log": {
+      "bytes": 98,
+      "sha256": "75b5a0e0f55be22315fa68019216d006180d8bf045f127585b4c16713cda1045"
+    },
+    ".local_validation/GAME042/render-live/after/battle.save": {
+      "bytes": 9252,
+      "sha256": "70cf157cde108e16a7649ce7fe5796ca60e33c4d17075818a1d6c126bbbccd8b"
+    },
+    ".local_validation/GAME042/render-live/before/battle.save": {
+      "bytes": 9208,
+      "sha256": "2d59597441cb54621e1cbf1bae1a61943b34ce85d47f26bed18a0cd1f841cb0a"
+    },
+    ".local_validation/GAME042/render-live/held.save": {
+      "bytes": 9224,
+      "sha256": "1ffc84e9ecf92e61986c7a2fbfc9f376c55e7f1f44b6cf8c5ec86d609ce5e5d5"
+    },
+    ".local_validation/GAME042/render-results.json": {
+      "bytes": 69293,
+      "sha256": "e6fd693e25ff044a6d67df5e551db84cd23d008d3c66da060e60e69ad8ee74ad"
+    },
+    ".local_validation/GAME042/render.log": {
+      "bytes": 588,
+      "sha256": "0ae16190e077fc450d39bb2dd0ae69a7aee888f53c926fa833ac4db0a8a78985"
+    },
+    ".local_validation/GAME042/render_probe.gd": {
+      "bytes": 10133,
+      "sha256": "542071e27d0a2746a80263749ff7e5b57171912434a5c497d82804b700fe7eec"
+    },
+    ".local_validation/GAME042/report.json": {
+      "bytes": 30753,
+      "sha256": "8b88325a86df902bd0ccfd4ffc7f7af5c2a51765fe41e0a295d549ab9bc63caf"
+    },
+    ".local_validation/GAME042/source-proof.json": {
+      "bytes": 10114,
+      "sha256": "b26c7966260a1c35a9c68b5265fbb9235a1fd394a5bdb2f2fc3bd7ff56772307"
+    },
+    ".local_validation/GAME042/video-after-metadata.json": {
+      "bytes": 224,
+      "sha256": "2fce4d14c44304aff2127a7cd4b1cc29ae8e05a68128fabd901b552e34816b3d"
+    },
+    ".local_validation/GAME042/video-before-metadata.json": {
+      "bytes": 224,
+      "sha256": "2fce4d14c44304aff2127a7cd4b1cc29ae8e05a68128fabd901b552e34816b3d"
+    },
+    ".local_validation/GAME042/video-readback.png": {
+      "bytes": 286259,
+      "sha256": "19af0ced6c13c994afdb2c7e4807a65a3f0cee470a8e7119ddedae535520dab8"
+    }
+  },
+  "not_verified": [
+    "actual user comfort",
+    "physical Android/iOS",
+    "WindowsF5/export",
+    "DP/notch/touchlatency",
+    "mobileFPS/thermal",
+    "new performance/mixer/economy",
+    "final art/audio/global difficulty"
+  ],
+  "next_single_unit": "GAME-043 주술사 패턴의 실전 교전·재추적 균형 보완"
+}

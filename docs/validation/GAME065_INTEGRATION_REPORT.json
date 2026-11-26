@@ -1,0 +1,180 @@
+{
+  "schema": 1,
+  "task": "GAME065_E_FULL_BODY_MOVING_FIRE",
+  "status": "PASS_TECHNICAL_ASSET_AND_GAME_INTEGRATION",
+  "recorded_at_utc": "2026-11-26T12:55:54.573311+00:00",
+  "branch": "work/viya-turnaround-qa-20261117",
+  "base_commit": "2b5238992431f53e7742e3bc7cd5309d3b75b2b2",
+  "tested_source_sha256": {
+    "scripts/combat/viya_presentation.gd": "ada816cc3b82a02e9a8798263bae37bca9124359f706e82ccfac801863310062",
+    "data/viya_motion.json": "bc5b4b933dddb2439ab71ee1370405d47d7c1340e6df499531d4d2dd1ff75d04",
+    "data/presentation_slots.json": "d6e3628a61b87ac35566dafd568630a42545b763a86a15ccd7e8929cf575ef48",
+    "tests/test_viya_game065.gd": "0e9d4158c0dd8eebc8e374836ccd8eda68af7e8a09b298ad84f425ce3cc1c8fc",
+    "tests/test_viya_presentation.gd": "bc28e4fde33ea0d906db308231efbf025418a3c350ebc7a79c9e9fa1d4f17bb7",
+    "tests/test_character_pilot.gd": "a64954034e61051c0a498a7f04d3e7b2244c5876c1b604928c461bf350d3c206",
+    "tests/test_actor_animation.gd": "545c6023b6eb9fb51dc419f7b08c0d95d676af1b9621cb43e2ed153443891d04",
+    "tests/test_map_pilot.gd": "70751c6b6a46654bdd59c1350cd0dd85a50da61d2e528a1e352b49acb87a341a",
+    "tests/test_maps.gd": "e03d092d10a6495df0e676858ede970af2a4b38f22c45d4f9b609ef4dfd2cc59",
+    "tools/check_combat_cues.py": "4a49c797b1e5affd3a9dbc8e53b6bcd97312eddcba6bec166f6d3613b43dba8e",
+    "tools/inspect_viya_game065.gd": "a66314b95203b735c47cdd177dcd28c480834b65b3988bde21eb44bce1c89cfd",
+    "tools/verify_viya_game065_import.gd": "527d830f87818737b39c1a5c266aa67c85f79e4e6657f843cf2829e171499ad3",
+    "tools/prepare_viya_game065.py": "c6a27dd46ca0497a1cb7a08cbfee702822237cbae46bc1cdeb90dcecb214b969",
+    "tools/measure_viya_game065.py": "91501817ca3408c2a8c6266873dbe0e28461b8722e03ffac3b67e09bd22e205d",
+    "tools/build_viya_game065.py": "1be6272b5658dce1cd54193514076cc7f759ae16951ed61edc3d3119ecd5dc7e",
+    "assets/characters/pilot_32/game065_e_run_fire/viya_game065_frames.tres": "95886e3b759e8fc8b7d6be0afbc741230f3ab0bd72c1931722a533415e7a5210",
+    "assets/characters/pilot_32/game065_e_run_fire/manifest.json": "bf9d5cf249a8edf79ff5f455ee89c4604e5fdef4c2888cce602ca96e381c2e92"
+  },
+  "implementation": {
+    "active_slot": "res://assets/characters/pilot_32/game065_e_run_fire/viya_game065_frames.tres",
+    "new_clip": "run_fire_e",
+    "actual_new_frame_count": 47,
+    "animation_count": 33,
+    "active_frame_count": 291,
+    "old_frames_preserved": 244,
+    "canvas": [
+      200,
+      248
+    ],
+    "display": [
+      69,
+      85.56
+    ],
+    "pivot": [
+      100,
+      248
+    ],
+    "nominal_cycle_ms": 660,
+    "distance_driven_cycle_ms": 659.5744680851063,
+    "stride_world": 155,
+    "speed_world_per_second": 235,
+    "phase": "Shared cumulative traveled-distance phase, variable durations; no reset on shot/mode switch.",
+    "muzzle": "Measured independently on each final new frame; original engine owns real shots/flash/projectile state.",
+    "fallback": "In a successfully loaded valid composite, missing/unusable optional fire clip/metadata falls back to accepted run at the same gait phase. Opaque import can recover its own PNG. Whole-resource first-load null/wrong-sized texture rejection remains unchanged."
+  },
+  "asset_qa": {
+    "status": "PASS",
+    "report": "assets/characters/pilot_32/game065_e_run_fire/provenance/review/final_qa.json",
+    "imported_png_rgba_identical": 47,
+    "import_report": "docs/validation/GAME065_IMPORT_REPORT.json",
+    "raw_source_is_not_delivery_approved": true,
+    "muzzle_landmarks_reviewed_all47": true
+  },
+  "native_tests": {
+    "status": "PASS",
+    "checks": 435,
+    "new_game065_checks": 18,
+    "elapsed_seconds": 29.630903569996008,
+    "timeout_seconds": 120,
+    "exit_code": 0,
+    "engine_error_lines": [],
+    "report": "docs/validation/GAME065_NATIVE_REPORT.json",
+    "log": "docs/validation/GAME065_NATIVE.log",
+    "source_unchanged": true
+  },
+  "static_contracts": {
+    "status": "PASS",
+    "report": "docs/validation/GAME065_STATIC_REPORT.json",
+    "contracts": 6,
+    "combat_negative_controls": 125,
+    "note": "Existing122negative controls retained and3GAME065 controls added; same original runtime/test runner gates. Final report carries the exact source count/hash.",
+    "files_checked": 182,
+    "resource_references_checked": 596
+  },
+  "actual_gui": {
+    "status": "PASS",
+    "checks": 1544,
+    "draw_checks": 489,
+    "errors": [],
+    "exit_code": 0,
+    "display": "X11",
+    "renderer": "Mesa llvmpipe OpenGL4.5 compatibility",
+    "engine": {
+      "build": "official",
+      "hash": "ed1daf0bf001b61586d9930840f2f1394092c079",
+      "hex": 263938,
+      "major": 4,
+      "minor": 7,
+      "patch": 2,
+      "status": "stable",
+      "string": "4.7.2-stable (official)",
+      "timestamp": 0
+    },
+    "audio_driver": "Dummy",
+    "run_distinct_frames": 47,
+    "moving_fire_distinct_frames": 47,
+    "run_wraps": 4,
+    "moving_fire_wraps": 4,
+    "actual_moving_shots": 9,
+    "backward_steps": 48,
+    "report": "docs/validation/GAME065_GUI_REPORT.json",
+    "scope": "Production main.tscn, isolated existing-stage fixture, native key events, fixed1/60updates and actual rendered frames. E travel/release/SE direction/actual moving-fire on and off at continuous gait phase/backward aiming/stationary fire/pause. Not real-time FPS, mobile or final art approval.",
+    "environment_warning": "X11 graphics driver cannot change V-Sync mode. No GDScript/resource errors or leaks.",
+    "first_attempt": {
+      "status": "FAIL_TEST_FIXTURE_ROUTE",
+      "report": "docs/validation/GAME065_GUI_INITIAL_FIXTURE_REPORT.json",
+      "failures": 118,
+      "cause": "Longer route from2500,610 reaches existing B5 east barracks; physical wall sliding reduces actual speed and changes motion direction. Fixed-speed E assertions fail correctly.",
+      "resolution": "Only inspector fixture start moved to1500,460; production map/collision/runtime unchanged. Same scenario passes680logic-only preflight and1544actualGUI checks.",
+      "preflight_report": "docs/validation/GAME065_GUI_PREFLIGHT_REPORT.json"
+    }
+  },
+  "preservation": {
+    "status": "PASS",
+    "base_head": "2b5238992431f53e7742e3bc7cd5309d3b75b2b2",
+    "checked_existing_files": 1188,
+    "unchanged_existing_files": 1185,
+    "changed_existing_files": [
+      "data/presentation_slots.json",
+      "data/viya_motion.json",
+      "scripts/combat/viya_presentation.gd"
+    ]
+  },
+  "production": {
+    "record": "assets/characters/pilot_32/game065_e_run_fire/provenance/production.json",
+    "model": "seedance_2_5",
+    "selected_job_id": "d1817f67-fb19-4b70-b4a9-605f82981497",
+    "generation_count": 3,
+    "actual_credits": 93,
+    "observed_balance_after": 873.25,
+    "new_payment": false,
+    "auto_recharge": false,
+    "balance_rechecked_at_completion": 873.25
+  },
+  "preview_files": {
+    "gameplay": "docs/validation/GAME065_GAMEPLAY.mp4",
+    "gameplay_note": "160moving-fire frames followed immediately by48fire-off frames, actual fixed1/60steps and actual draws at1280x720. This is not a real-time performance measurement.",
+    "gameplay_capture": "docs/validation/GAME065_IN_GAME.png",
+    "asset_loop": "docs/validation/GAME065_LOOP.mp4",
+    "asset_comparison": "docs/validation/GAME065_MODE_SWITCH.mp4",
+    "asset_preview_note": "Asset-only previews are not game execution. The standalone loop samples authored timing at240fps with no blending."
+  },
+  "not_verified": [
+    "Final user art approval",
+    "Windows and Android/iOS device execution",
+    "Real-time FPS/thermals",
+    "Audio output with hardware audio",
+    "All4465historical native checks on this revision; current scope is435relevantnative checks plus actualGUI/import/static checks"
+  ],
+  "open_existing_items": [
+    "1540-actor dense combat load",
+    "Original tiny remaining-flight save rejection",
+    "Economy/fun tuning"
+  ],
+  "scope": "E moving-fire only. No regeneration of original208, ARTFIX001, GAME064E47; no other-direction/stationary-attack/enemy redesign or gameplay/save/RNG changes.",
+  "packaging_after_runtime_verification": {
+    "change": "New GAME065 timing CSV normalized from CRLF to LF; all parsed cells identical. Measurement writer explicitly emits LF. Builder regenerated only manifest timing hash; SpriteFrames/47PNGs/runtime/config are byte-identical to executed version.",
+    "changed_packaging_files": [
+      {
+        "path": "tools/measure_viya_game065.py",
+        "tested_sha256": "91501817ca3408c2a8c6266873dbe0e28461b8722e03ffac3b67e09bd22e205d",
+        "packaged_sha256": "415fcde9fa1bc892b9e9def6c83837e35fa5a8ced1a89d410afd99116a049deb"
+      },
+      {
+        "path": "assets/characters/pilot_32/game065_e_run_fire/manifest.json",
+        "tested_sha256": "bf9d5cf249a8edf79ff5f455ee89c4604e5fdef4c2888cce602ca96e381c2e92",
+        "packaged_sha256": "c3c3396fff4bddf6b566b3e5a5428ef89cb8305a5ebac296c910f233c0332024"
+      }
+    ],
+    "native_runtime_reexecution_required": false
+  }
+}

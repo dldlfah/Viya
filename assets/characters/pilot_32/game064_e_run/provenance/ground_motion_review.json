@@ -1,0 +1,89 @@
+{
+  "output": "/workspace/scratch/e2f5b3e224d3/viya_game064_recovery/VIYA_GAME064_E_RUN_DERIVATIVE_20261126/previews/VIYA_GAME064_E_ground_motion_review.mp4",
+  "source_job_id": "fbf2fd2d-8596-4ca4-87e7-875712a2f7c9",
+  "package_read_only": "/workspace/scratch/e2f5b3e224d3/viya_game064_recovery/VIYA_GAME064_E_RUN_DERIVATIVE_20261126",
+  "duration_seconds": 6.6,
+  "fps": 60,
+  "rendered_frames": 396,
+  "cycle_ms": 660.000000000002,
+  "world_speed": 235.0,
+  "ground_native_y": 1108.0,
+  "ground_canvas_y": 244.42516268980478,
+  "native_scale": 0.26247288503253796,
+  "translation": [
+    12.334056399132322,
+    -46.39479392624729
+  ],
+  "display_scale": 0.345,
+  "display_sizes": [
+    [
+      69,
+      85.56
+    ],
+    [
+      207,
+      256.68
+    ]
+  ],
+  "sprite_files_unchanged": true,
+  "sprite_count": 47,
+  "per_frame_registration": false,
+  "ground_markers_follow_feet": false,
+  "game_execution": false,
+  "frame_boundary_residuals": {
+    "near": {
+      "n_intervals": 11,
+      "duration_ms": 138.12581615662273,
+      "displacement_world": 32.23691973969631,
+      "expected_displacement_world": 32.45956679680634,
+      "net_forward_slide_world": 0.2226470571100314,
+      "max_interval_abs_slide_world": 0.22060280039280578,
+      "rms_interval_slide_world": 0.15292303022833356,
+      "max_cumulative_slide_world": 0.2226470571100314
+    },
+    "far": {
+      "n_intervals": 11,
+      "duration_ms": 131.27051988531443,
+      "displacement_world": 30.606963123644245,
+      "expected_displacement_world": 30.84857217304889,
+      "net_forward_slide_world": 0.24160904940464012,
+      "max_interval_abs_slide_world": 0.1871961218864331,
+      "rms_interval_slide_world": 0.14937453432835407,
+      "max_cumulative_slide_world": 0.24160904940464012
+    },
+    "min_ms": 7.603777467082428,
+    "max_ms": 17.332792768862383,
+    "sum_ms": 660.0000000000002
+  },
+  "held_60fps_sample_residuals": {
+    "near": {
+      "samples": 82,
+      "min_world": 0.07763835605922687,
+      "max_world": 3.8983975751481634,
+      "rms_world": 1.9268924424160516
+    },
+    "far": {
+      "samples": 80,
+      "min_world": 0.012389522982475682,
+      "max_world": 3.29615669579524,
+      "rms_world": 1.809006073503345
+    }
+  },
+  "ffprobe": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "width": 1100,
+        "height": 620,
+        "avg_frame_rate": "60/1",
+        "nb_frames": "396"
+      }
+    ],
+    "format": {
+      "duration": "6.600000",
+      "size": "1482481"
+    }
+  },
+  "visual_qa": "pending decoded-frame inspection"
+}

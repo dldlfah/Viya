@@ -1,0 +1,853 @@
+{
+  "date_kst": "2026-11-18",
+  "code_commit": "f7ae9dbd0eace9d82ac4f0b610c500fb80ac9348",
+  "code_tree": "f7dca92194a2912777a83a901feb9de414d20ed7",
+  "baseline_commit": "8fdd78af8bf8301388c47a1f678e840b8de5d73f",
+  "remote_planning": "Fast-forwarded the three user planning commits before editing. Preserved baseline/PLANNED section6 collection/roster design; did not implement that separate planning scope.",
+  "engine": "4.7.2.stable.official.ed1daf0bf",
+  "project_report": {
+    "static_integrity": {
+      "status": "PASS",
+      "files_checked": 49,
+      "resource_references_checked": 91,
+      "errors": [],
+      "source_sha256": {
+        "project.godot": "0d8f7fce157178f7bf31acc183593b40f23cff6d266ea5270f4b75f0899b79e5",
+        "scenes/main.tscn": "17a2e77db7cf47af860de3c263dc9119b0df349bafdf2a8b52a40f7450c9e22c",
+        "scripts/combat/attack_visuals.gd": "61bdbdd2c09b250bc67e0df4db320fe1bea00192d6fb57a8e94661a5ecf173b2",
+        "scripts/combat/battle_view.gd": "0c2780843b262f54b5c386acc28782038bb13f5479006c8edd92e95845c5a66d",
+        "scripts/combat/combat_cues.gd": "ab4fbf025127efe6a6b152adb57fdd007b3a0c8db53be97f48e89663eda68c58",
+        "scripts/combat/feedback_state.gd": "3ee19238fb9307bc9953fed3ecc266ecff420e2c74ceffe81409069372e87d88",
+        "scripts/combat/magic_state.gd": "f1f6101d4033bcbe0801b64b4521a7358248a5b671b2f974a7e93fdd2073e944",
+        "scripts/combat/run_state.gd": "9592ae8e357233659ad404ae9a4e846e3c01edec955d51b90bb465cb74d84d81",
+        "scripts/combat/stage_catalog.gd": "3c6cc42fc0820a2eb173d135c6ff5023f0d9cbe509bd658a2898ed47520c0e7d",
+        "scripts/main.gd": "761aae723b23a3a4be2e254dfa49281f3babddb02b59331b2568ba6e61d260d6",
+        "scripts/progression/account_talents.gd": "522f1052fe0d2b6c1ea65ad99706f02764026978009976f31149205c6dae829e",
+        "scripts/progression/gold_progress.gd": "b636327f78eef2ed5d25effeda6ffd738d3b43d646c41ff09676cfd1d7cca353",
+        "scripts/progression/growth_state.gd": "4d17798e1d3e470e15e76eec7d3d2a9b881aae8f4142e3a73199c38a9244f72a",
+        "scripts/progression/run_snapshot.gd": "59dc23e0dcd297c4e21c2b0e2f5bda5fd81091feb54ce25702ff69cd9a4e1d95",
+        "scripts/progression/run_store.gd": "bab493f1963ea2a6d98770f9ef9686d70d4b257e0b49afb3386de661a6081986",
+        "scripts/progression/skill_catalog.gd": "73f8cc38e3f998cc1f88e90fdf7c9963037f3ee6087fbc1d9a5f1e85852119d2",
+        "scripts/ui/feedback_panel.gd": "e6fa69fd4752e785eeaaa3a06f1652fe106436763d44217918688233903b2d10",
+        "scripts/ui/growth_overview.gd": "2b1fec6d44946e8b4d8c0f6cbbbf479c30513473d6e7fecfcf36ae20b616176a",
+        "scripts/ui/hud_layout.gd": "f85a7fdc757693b55909c93957b235ff0f343e50396ee2365edf353866c07da5",
+        "scripts/ui/mobile_main.gd": "7e0a17eb4009f3768f0d004b82a90f3c1a423101d5c1a0c20091a3283944d68e",
+        "scripts/ui/move_input.gd": "cee8e709185740d1cb964fff13873a0818d14d0b3653f36d6416a1b17da40bd8",
+        "scripts/ui/responsive_feedback_panel.gd": "60efa5e9a99e3a9d4f66c23b3ebb2f7954379cf26f3a2d4d759b5d19584e94ea",
+        "scripts/ui/skill_preview.gd": "8a9d2ea20b0ae60d54fe3c4fa2da8e9071d0fd76a36d4b9ecc5ac1a2d85d67f0",
+        "tests/measure_campaign.gd": "b04ddd7f55202f1c4a91973d65c36dcee6b7ce2ecef7ef7237a655d8c8e79deb",
+        "tests/test_account_expansion.gd": "1a78eb783576ec2d4e551afd4ccbfd58a204744625c61bc05b74e16f2786526b",
+        "tests/test_account_talents.gd": "f318c3a3b2755cc92674cd4d17144dcff1a1926bcdb7ca35af42ba7a713563b7",
+        "tests/test_attack_visuals.gd": "ec29302f9786696fab8c3951d059efddbf84a1b570976e209f897ac4caf027c5",
+        "tests/test_campaign.gd": "464dd0495602a0d00431dc6a1d2aaaa4a33841328b9ffba4babe87726f24cf09",
+        "tests/test_combat_cues.gd": "b6c4e3f974248acaa635e607f171a1c71601ff2d80746b08bd66bf2a321571cc",
+        "tests/test_combat_foundation.gd": "3429125943d63f2db05bc590b01571f1087ff3cfa32a6e3ad3bd964c99a7401b",
+        "tests/test_enemy_variety.gd": "03d156df07722749d7569719069afe9dc01ecd6d89dc563fab42c1dfd7a5c6af",
+        "tests/test_feedback.gd": "3b5ff1a83378a96fcca6cfeff3773a23201bf1aad6f4717de917be86c2bea25a",
+        "tests/test_gold_settings.gd": "ec1806253041dbaf6e6ed1a906fa8ebe1b914d5962e53151934f60e782ed1a8b",
+        "tests/test_growth.gd": "ddaa54ed7faac7d1d1ab4ac4229e9a854418d4155186a4e4d014f513911e1505",
+        "tests/test_growth_overview.gd": "ff8acc5acbff5de78deb5a43215722077b8dc93bdc07fa74f337b5935b5c3391",
+        "tests/test_magic.gd": "4d175da13efd6d729040591f49bfe8edf659731df8246e10319a680f9fc2b533",
+        "tests/test_mobile_hud.gd": "006cd283e56a67c3266c05c298194b5aadfd264670b0eb4b2a64120cf2776cc4",
+        "tests/test_run_navigation.gd": "4797fbd7a9a4c2faf3fae8446e9da36048f57357f16fb61de1472d89f246619e",
+        "tests/test_skill_preview.gd": "0a62fc3bcdafeb525507f4107621d5c14a955e5d5270750a99d7de1e61f9ad9f",
+        "data/prototype_skills.json": "a6ba197fe558d328e1fcab96506fa098465a4c72aebfe1a1b29cb98642628d1a",
+        "data/stages.json": "a71dee9b035fca407a1038194ee1994ac43101859e4ce5c81d9dda5aa2eaf934",
+        "tools/bootstrap_godot.py": "4c3ca17c3b90f9c5590d7a82a76ae71a353f4d15aae973cf37e03e745ebfdecc",
+        "tools/check_combat_cues.py": "dab21f2af1ddc07024b971616067b45ff3fab84283f5fdcf771d35aa322f7625",
+        "tools/check_feedback_data.py": "f1bd6f415e919a32faab1b403073e24dcdda4b819938b9b707dacfc32320bec7",
+        "tools/check_growth_data.py": "8b7e1efed2533932681074382040ca7a0792d8a850b75f259dfeae00d3e44153",
+        "tools/check_magic_data.py": "ca62bcabd9fd384392f1db5a3508041220be1628b16f554adfcda9eb4097f3e9",
+        "tools/check_mobile_hud.py": "9e43cace28480d3aacb45dabaf67acb2ad24e1c8a9366aa5c011a279eba35487",
+        "tools/check_project.py": "eeafd73fc4503c7af952331c093272a5510aade3fbae04e42afb77eb23f55157",
+        "tools/check_run_navigation.py": "1b2e4fdb993cb9dd3094026ec05c1e5f2c2b84e06dd3fc98ab6fedfa4a3eab54"
+      },
+      "source_fingerprint": "6ab5d09aea821f9a13c5cc7239dcd3702a3b8056b972d78cc30ecf9d7fb6c79e",
+      "scope": "UTF-8, delimiters, whitespace, JSON/Python syntax, resource existence, project settings; NOT GDScript parser/typechecking or gameplay."
+    },
+    "growth_data_contract": {
+      "status": "PASS",
+      "pool_count": 18,
+      "counts": {
+        "common_attack": 8,
+        "character_attack": 1,
+        "common_passive": 8,
+        "ultimate_enhancement": 1
+      },
+      "negative_controls": [
+        {
+          "fixture": "duplicate",
+          "rejected": true
+        },
+        {
+          "fixture": "resistance",
+          "rejected": true
+        },
+        {
+          "fixture": "foreign_owner",
+          "rejected": true
+        },
+        {
+          "fixture": "missing_ultimate",
+          "rejected": true
+        },
+        {
+          "fixture": "wrong_row",
+          "rejected": true
+        }
+      ],
+      "errors": [],
+      "scope": "JSON schema/content and source integration markers only; not GDScript runtime/behavior."
+    },
+    "magic_data_contract": {
+      "status": "PASS",
+      "errors": [],
+      "negative_controls": [
+        {
+          "fixture": "plain_name",
+          "rejected": true
+        },
+        {
+          "fixture": "foreign_owner",
+          "rejected": true
+        },
+        {
+          "fixture": "missing_magic",
+          "rejected": true
+        },
+        {
+          "fixture": "negative_cost",
+          "rejected": true
+        },
+        {
+          "fixture": "negative_cooldown",
+          "rejected": true
+        },
+        {
+          "fixture": "wrong_upgrade",
+          "rejected": true
+        },
+        {
+          "fixture": "nonfinite_radius",
+          "rejected": true
+        },
+        {
+          "fixture": "impossible_cost",
+          "rejected": true
+        }
+      ],
+      "temporary_skill_names": 18,
+      "required_xp_first_five": [
+        30,
+        48,
+        66,
+        84,
+        102
+      ],
+      "xp_drop_unchanged": 5.0,
+      "scope": "JSON validation, negative data controls and source markers/arithmetic; NOT GDScript runtime, UI, input dispatch or mobile tests."
+    },
+    "feedback_source_contract": {
+      "status": "PASS",
+      "errors": [],
+      "negative_controls": [
+        {
+          "fixture": "missing_damage_hook",
+          "rejected": true
+        },
+        {
+          "fixture": "missing_reset",
+          "rejected": true
+        },
+        {
+          "fixture": "negative_duration",
+          "rejected": true
+        },
+        {
+          "fixture": "missing_low_hp_warning",
+          "rejected": true
+        },
+        {
+          "fixture": "missing_stale_guard",
+          "rejected": true
+        }
+      ],
+      "files_checked": 7,
+      "source_sha256": {
+        "scripts/combat/feedback_state.gd": "3ee19238fb9307bc9953fed3ecc266ecff420e2c74ceffe81409069372e87d88",
+        "scripts/combat/run_state.gd": "9592ae8e357233659ad404ae9a4e846e3c01edec955d51b90bb465cb74d84d81",
+        "scripts/ui/feedback_panel.gd": "e6fa69fd4752e785eeaaa3a06f1652fe106436763d44217918688233903b2d10",
+        "scripts/main.gd": "761aae723b23a3a4be2e254dfa49281f3babddb02b59331b2568ba6e61d260d6",
+        "tests/test_feedback.gd": "3b5ff1a83378a96fcca6cfeff3773a23201bf1aad6f4717de917be86c2bea25a",
+        "tools/check_project.py": "eeafd73fc4503c7af952331c093272a5510aade3fbae04e42afb77eb23f55157",
+        "tools/check_feedback_data.py": "f1bd6f415e919a32faab1b403073e24dcdda4b819938b9b707dacfc32320bec7"
+      },
+      "scope": "7 affected code/test/checker files: UTF-8, delimiters, whitespace, Python syntax, reaction constants, integration markers, engine-test registration and new dependency paths only. NOT the full project check or GDScript parser/type/runtime, rendering, or mobile input tests."
+    },
+    "mobile_hud_source_contract": {
+      "status": "PASS",
+      "files_checked": 8,
+      "errors": [],
+      "negative_controls": [
+        {
+          "fixture": "layout_detached",
+          "rejected": true
+        },
+        {
+          "fixture": "detail_not_paused",
+          "rejected": true
+        },
+        {
+          "fixture": "detail_mutates_skill",
+          "rejected": true
+        },
+        {
+          "fixture": "resize_retains_touch",
+          "rejected": true
+        },
+        {
+          "fixture": "test_not_registered",
+          "rejected": true
+        }
+      ],
+      "source_sha256": {
+        "scenes/main.tscn": "17a2e77db7cf47af860de3c263dc9119b0df349bafdf2a8b52a40f7450c9e22c",
+        "scripts/ui/mobile_main.gd": "7e0a17eb4009f3768f0d004b82a90f3c1a423101d5c1a0c20091a3283944d68e",
+        "scripts/ui/hud_layout.gd": "f85a7fdc757693b55909c93957b235ff0f343e50396ee2365edf353866c07da5",
+        "scripts/ui/responsive_feedback_panel.gd": "60efa5e9a99e3a9d4f66c23b3ebb2f7954379cf26f3a2d4d759b5d19584e94ea",
+        "scripts/ui/move_input.gd": "cee8e709185740d1cb964fff13873a0818d14d0b3653f36d6416a1b17da40bd8",
+        "tests/test_mobile_hud.gd": "006cd283e56a67c3266c05c298194b5aadfd264670b0eb4b2a64120cf2776cc4",
+        "tools/check_project.py": "eeafd73fc4503c7af952331c093272a5510aade3fbae04e42afb77eb23f55157",
+        "tools/check_mobile_hud.py": "9e43cace28480d3aacb45dabaf67acb2ad24e1c8a9366aa5c011a279eba35487"
+      },
+      "source_fingerprint": "f63bd0d222cb99b9535a6dc2956a27d2beb9e4294af926dda0a2bb8c5101801f",
+      "scope": "Changed UTF-8 files, delimiters, Python syntax and integration source checks only. NOT GDScript parsing/typechecking, actual Control geometry, touch dispatch, rendering or mobile execution."
+    },
+    "run_navigation_source_contract": {
+      "status": "PASS",
+      "files_checked": 5,
+      "errors": [],
+      "negative_controls": [
+        {
+          "fixture": "unescaped_string_newline",
+          "rejected": true
+        },
+        {
+          "fixture": "unguarded_intent",
+          "rejected": true
+        },
+        {
+          "fixture": "confirmation_resets_hp",
+          "rejected": true
+        },
+        {
+          "fixture": "cancel_rerolls",
+          "rejected": true
+        },
+        {
+          "fixture": "leave_fakes_death",
+          "rejected": true
+        },
+        {
+          "fixture": "no_result_copy",
+          "rejected": true
+        },
+        {
+          "fixture": "stale_menu_revision",
+          "rejected": true
+        },
+        {
+          "fixture": "unregistered_engine_test",
+          "rejected": true
+        }
+      ],
+      "source_sha256": {
+        "scripts/combat/run_state.gd": "9592ae8e357233659ad404ae9a4e846e3c01edec955d51b90bb465cb74d84d81",
+        "scripts/ui/mobile_main.gd": "7e0a17eb4009f3768f0d004b82a90f3c1a423101d5c1a0c20091a3283944d68e",
+        "tests/test_run_navigation.gd": "4797fbd7a9a4c2faf3fae8446e9da36048f57357f16fb61de1472d89f246619e",
+        "tools/check_project.py": "eeafd73fc4503c7af952331c093272a5510aade3fbae04e42afb77eb23f55157",
+        "tools/check_run_navigation.py": "1b2e4fdb993cb9dd3094026ec05c1e5f2c2b84e06dd3fc98ab6fedfa4a3eab54"
+      },
+      "source_fingerprint": "499cbc35756532b7c82bc544d28347470da420993c273fc99b000e5d505155af",
+      "scope": "UTF-8/delimiters/Python syntax and navigation SOURCE contracts only; NOT GDScript parsing/types, native execution, actual UI/input, or mobile testing."
+    },
+    "combat_cues_source_contract": {
+      "status": "PASS",
+      "files_checked": 6,
+      "errors": [],
+      "negative_controls": [
+        {
+          "fixture": "missing_reset",
+          "rejected": true
+        },
+        {
+          "fixture": "early_clock",
+          "rejected": true
+        },
+        {
+          "fixture": "changed_damage",
+          "rejected": true
+        },
+        {
+          "fixture": "drop_as_collection",
+          "rejected": true
+        },
+        {
+          "fixture": "unbounded_visuals",
+          "rejected": true
+        },
+        {
+          "fixture": "cosmetic_rng",
+          "rejected": true
+        },
+        {
+          "fixture": "mutable_view",
+          "rejected": true
+        },
+        {
+          "fixture": "unregistered_test",
+          "rejected": true
+        },
+        {
+          "fixture": "ignored_engine_exit",
+          "rejected": true
+        },
+        {
+          "fixture": "ignored_engine_errors",
+          "rejected": true
+        },
+        {
+          "fixture": "ignored_test_result",
+          "rejected": true
+        }
+      ],
+      "source_sha256": {
+        "scripts/combat/run_state.gd": "9592ae8e357233659ad404ae9a4e846e3c01edec955d51b90bb465cb74d84d81",
+        "scripts/combat/battle_view.gd": "0c2780843b262f54b5c386acc28782038bb13f5479006c8edd92e95845c5a66d",
+        "scripts/combat/combat_cues.gd": "ab4fbf025127efe6a6b152adb57fdd007b3a0c8db53be97f48e89663eda68c58",
+        "tests/test_combat_cues.gd": "b6c4e3f974248acaa635e607f171a1c71601ff2d80746b08bd66bf2a321571cc",
+        "tools/check_project.py": "eeafd73fc4503c7af952331c093272a5510aade3fbae04e42afb77eb23f55157",
+        "tools/check_combat_cues.py": "dab21f2af1ddc07024b971616067b45ff3fab84283f5fdcf771d35aa322f7625"
+      },
+      "source_fingerprint": "f3f643af44cb973c390f6a0f663b488f57f7f50ac43417941c49eba3c7f484f3",
+      "baseline_run_blob": "d35d857fb3de3dfe5be1a0191bc8b319458ea347",
+      "baseline_runner_blob": "1ab68ad8a51271e3d47db8b02d433991f42e8d6c",
+      "baseline_engine_function_sha256": "9156043eaf896d72565563cc1e2f623cf0c8fbac7f032f19bffee7e4946a69ee",
+      "scope": "Changed-source UTF-8/delimiters/Python syntax, hook order, bounds, isolation, reviewed GAME-013 source baselines and preserved engine runner. NOT Godot parser/type/runtime, visual quality, input dispatch, or FPS."
+    },
+    "godot_runtime": {
+      "status": "PASS",
+      "commands": [
+        {
+          "command": [
+            "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+            "--headless",
+            "--version"
+          ],
+          "exit_code": 0,
+          "status": "PASS"
+        },
+        {
+          "command": [
+            "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+            "--headless",
+            "--path",
+            "/workspace/Viya",
+            "--editor",
+            "--import",
+            "--quit"
+          ],
+          "exit_code": 0,
+          "status": "PASS"
+        },
+        {
+          "command": [
+            "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+            "--headless",
+            "--path",
+            "/workspace/Viya",
+            "--script",
+            "res://tests/test_combat_foundation.gd"
+          ],
+          "exit_code": 0,
+          "status": "PASS"
+        },
+        {
+          "command": [
+            "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+            "--headless",
+            "--path",
+            "/workspace/Viya",
+            "--script",
+            "res://tests/test_growth.gd"
+          ],
+          "exit_code": 0,
+          "status": "PASS"
+        },
+        {
+          "command": [
+            "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+            "--headless",
+            "--path",
+            "/workspace/Viya",
+            "--script",
+            "res://tests/test_magic.gd"
+          ],
+          "exit_code": 0,
+          "status": "PASS"
+        },
+        {
+          "command": [
+            "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+            "--headless",
+            "--path",
+            "/workspace/Viya",
+            "--script",
+            "res://tests/test_feedback.gd"
+          ],
+          "exit_code": 0,
+          "status": "PASS"
+        },
+        {
+          "command": [
+            "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+            "--headless",
+            "--path",
+            "/workspace/Viya",
+            "--script",
+            "res://tests/test_mobile_hud.gd"
+          ],
+          "exit_code": 0,
+          "status": "PASS"
+        },
+        {
+          "command": [
+            "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+            "--headless",
+            "--path",
+            "/workspace/Viya",
+            "--script",
+            "res://tests/test_run_navigation.gd"
+          ],
+          "exit_code": 0,
+          "status": "PASS"
+        },
+        {
+          "command": [
+            "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+            "--headless",
+            "--path",
+            "/workspace/Viya",
+            "--script",
+            "res://tests/test_combat_cues.gd"
+          ],
+          "exit_code": 0,
+          "status": "PASS"
+        },
+        {
+          "command": [
+            "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+            "--headless",
+            "--path",
+            "/workspace/Viya",
+            "--quit-after",
+            "120"
+          ],
+          "exit_code": 0,
+          "status": "PASS"
+        }
+      ],
+      "scope": "headless import, actual foundation/growth/magic/feedback/mobile-HUD/run-navigation/combat-cues GDScript tests and main boot; visual/mobile approval separate"
+    },
+    "windows_f5": "NOT_VERIFIED",
+    "android_device": "NOT_VERIFIED",
+    "ios_device": "NOT_VERIFIED"
+  },
+  "native_suites": [
+    {
+      "suite": "res://tests/test_combat_foundation.gd",
+      "checks": 23,
+      "failures": [],
+      "status": "PASS"
+    },
+    {
+      "suite": "res://tests/test_growth.gd",
+      "checks": 70,
+      "failures": [],
+      "status": "PASS"
+    },
+    {
+      "suite": "res://tests/test_magic.gd",
+      "checks": 122,
+      "failures": [],
+      "status": "PASS"
+    },
+    {
+      "suite": "res://tests/test_feedback.gd",
+      "checks": 57,
+      "failures": [],
+      "status": "PASS"
+    },
+    {
+      "suite": "res://tests/test_mobile_hud.gd",
+      "checks": 1336,
+      "failures": [],
+      "status": "PASS"
+    },
+    {
+      "suite": "res://tests/test_run_navigation.gd",
+      "checks": 68,
+      "failures": [],
+      "status": "PASS"
+    },
+    {
+      "suite": "res://tests/test_combat_cues.gd",
+      "checks": 436,
+      "failures": [],
+      "status": "PASS"
+    }
+  ],
+  "native_total_checks": 2112,
+  "python_runner_tests": {
+    "tests": 12,
+    "status": "PASS"
+  },
+  "talents": {
+    "attack_power": [
+      0.05,
+      0.1,
+      0.15
+    ],
+    "attack_speed": [
+      0.02,
+      0.04,
+      0.06
+    ],
+    "max_hp": [
+      0.05,
+      0.1,
+      0.15
+    ],
+    "damage_reduction": [
+      0.01,
+      0.02,
+      0.03
+    ],
+    "hp_regen_per_second": [
+      0.05,
+      0.1,
+      0.15
+    ],
+    "mp_regen_per_second_bonus": [
+      0.05,
+      0.1,
+      0.15
+    ]
+  },
+  "interpretation": "All stages are cumulative values. New five talents inherit the existing common per-stage prices1,000/50,000/1,000,000, stated during work. Each talent progresses independently; all18 purchases total6,306,000. No additional talents or character rarity/collection content.",
+  "formulas": {
+    "power": "existing run power passive multiplier * (1+account power)",
+    "rate": "existing automatic attack rate * (1+account speed); no movement/global animation/ultimate acceleration",
+    "max_hp": "round(existing maximum HP including vitality * (1+account HP)); fresh battles start at full maximum",
+    "damage_reduction": "Accumulate fractional prevention on accepted hits only, subtract whole accumulated credit from integer HP damage, save remaining credit. 100 accepted10-damage hits produce990/980/970 total damage at ranks1/2/3. Invulnerable/rejected hits earn no credit.",
+    "hp_regen": "existing run HP regen + account0.05/0.10/0.15. Fractional HP accumulates and saves; epsilon stabilizes integer-boundary floating noise. Full HP discards unused healing carry.",
+    "mp_regen": "base selected-character mana regen + account0.05/0.10/0.15, derived from frozen ranks on restore. Viya now totals1.05/1.10/1.15; max mana remains100/cost40/no cooldown."
+  },
+  "persistence": {
+    "wallet": "schema2 stores all six ranks atomically with gold/stage/last_run and retains unknown keys. Original attack_level is a validated compatibility mirror. Schema1 power purchases migrate without recharging, new traits start0; older gold-only accounts remain0.",
+    "battle": "payload5 saves all six departure ranks plus fractional mitigation/healing. Known version4 retains its existing power rank and gives the new five0; known versions1/2/3 retain prior zero-account migration. Explicit Continue, frozen saved-run ranks, newest account on departure/restart, checksum/rejection and prior reward idempotence remain.",
+    "scope": "Existing single runtime RunState and local account profile; no login/cloud sync service."
+  },
+  "actual_process_tests": {
+    "current": {
+      "actors": 0,
+      "damage_carry": 0.36,
+      "gold": 0,
+      "hp": 103,
+      "max_hp": 115,
+      "mp": 60.0575,
+      "mp_regen": 1.15,
+      "new_version": 5,
+      "old_version": 5,
+      "run_levels": {
+        "attack_power": 3,
+        "attack_speed": 3,
+        "damage_reduction": 3,
+        "hp_regen": 3,
+        "max_hp": 3,
+        "mp_regen": 3
+      },
+      "status": "PASS",
+      "wallet_levels": {
+        "attack_power": 3,
+        "attack_speed": 3,
+        "damage_reduction": 3,
+        "hp_regen": 3,
+        "max_hp": 3,
+        "mp_regen": 3
+      }
+    },
+    "v1": {
+      "actors": 2,
+      "damage_carry": 0.0,
+      "gold": 117,
+      "hp": 73,
+      "max_hp": 100,
+      "mp": 48.5,
+      "mp_regen": 1.0,
+      "new_version": 5,
+      "old_version": 1,
+      "run_levels": {
+        "attack_power": 0,
+        "attack_speed": 0,
+        "damage_reduction": 0,
+        "hp_regen": 0,
+        "max_hp": 0,
+        "mp_regen": 0
+      },
+      "status": "PASS",
+      "wallet_levels": {
+        "attack_power": 0,
+        "attack_speed": 0,
+        "damage_reduction": 0,
+        "hp_regen": 0,
+        "max_hp": 0,
+        "mp_regen": 0
+      }
+    },
+    "v2": {
+      "actors": 27,
+      "damage_carry": 0.0,
+      "gold": 0,
+      "hp": 100,
+      "max_hp": 100,
+      "mp": 100.0,
+      "mp_regen": 1.0,
+      "new_version": 5,
+      "old_version": 2,
+      "run_levels": {
+        "attack_power": 0,
+        "attack_speed": 0,
+        "damage_reduction": 0,
+        "hp_regen": 0,
+        "max_hp": 0,
+        "mp_regen": 0
+      },
+      "status": "PASS",
+      "wallet_levels": {
+        "attack_power": 0,
+        "attack_speed": 0,
+        "damage_reduction": 0,
+        "hp_regen": 0,
+        "max_hp": 0,
+        "mp_regen": 0
+      }
+    },
+    "v3": {
+      "actors": 190,
+      "damage_carry": 0.0,
+      "gold": 0,
+      "hp": 88,
+      "max_hp": 100,
+      "mp": 100.0,
+      "mp_regen": 1.0,
+      "new_version": 5,
+      "old_version": 3,
+      "run_levels": {
+        "attack_power": 0,
+        "attack_speed": 0,
+        "damage_reduction": 0,
+        "hp_regen": 0,
+        "max_hp": 0,
+        "mp_regen": 0
+      },
+      "status": "PASS",
+      "wallet_levels": {
+        "attack_power": 0,
+        "attack_speed": 0,
+        "damage_reduction": 0,
+        "hp_regen": 0,
+        "max_hp": 0,
+        "mp_regen": 0
+      }
+    },
+    "v4": {
+      "actors": 0,
+      "damage_carry": 0.0,
+      "gold": 1050000,
+      "hp": 100,
+      "max_hp": 100,
+      "mp": 60.0,
+      "mp_regen": 1.0,
+      "new_version": 5,
+      "old_version": 4,
+      "run_levels": {
+        "attack_power": 1,
+        "attack_speed": 0,
+        "damage_reduction": 0,
+        "hp_regen": 0,
+        "max_hp": 0,
+        "mp_regen": 0
+      },
+      "status": "PASS",
+      "wallet_levels": {
+        "attack_power": 1,
+        "attack_speed": 0,
+        "damage_reduction": 0,
+        "hp_regen": 0,
+        "max_hp": 0,
+        "mp_regen": 0
+      }
+    }
+  },
+  "render": {
+    "result": {
+      "compact": true,
+      "damage_carry": 0.36,
+      "gold": 0,
+      "hp": 103,
+      "levels": {
+        "attack_power": 3,
+        "attack_speed": 3,
+        "damage_reduction": 3,
+        "hp_regen": 3,
+        "max_hp": 3,
+        "mp_regen": 3
+      },
+      "mana": 60.0575,
+      "max_hp": 115,
+      "mp_regen": 1.15,
+      "renderer": "llvmpipe (LLVM 19.1.7, 256 bits)",
+      "run_levels": {
+        "attack_power": 3,
+        "attack_speed": 3,
+        "damage_reduction": 3,
+        "hp_regen": 3,
+        "max_hp": 3,
+        "mp_regen": 3
+      },
+      "status": "PASS"
+    },
+    "scope": "Actual original scene, all three categories/two traits each/three stages, exact table/price labels and purchase locks, scroll/top/bottom return, full18-rank lobby,115HP battle,853x384 compact recovery. Controlled test funding through wallet API only. Capture compares simulation snapshots; images inspected.",
+    "driver": "X11/OpenGL4.5 Mesa llvmpipe"
+  },
+  "regression_scope": "Same seven native commands/pass-fail detector and mutation guards. Original blank-category expectations replaced with two independent talents per category. Previous power APIs retained. Added all18 purchases/schema1/malformed schema2, exact rank effects, real attack intervals, fractional mitigation/recovery, composition, second character, exact continuation, version4 migration, parked/new battle integration. Differential presentation snapshots now include six ranks/carries/derived mana regen. Reviewed RunState baseline hash updated.",
+  "artifacts": {
+    "attack.png": {
+      "path": ".local_validation/GAME013/attack.png",
+      "sha256": "88927687d7cf500ee9a3c3cffbb7a74bdb8ca9ab73320c1ce4f7aa8ed1f4abe2"
+    },
+    "attack_lower.png": {
+      "path": ".local_validation/GAME013/attack_lower.png",
+      "sha256": "bc106979e98b51ca7f47a983d22282f64b721b66ed4ab8071a8e11b824643d6e"
+    },
+    "battle_all.png": {
+      "path": ".local_validation/GAME013/battle_all.png",
+      "sha256": "d0829eb68dfa2619b8c374b40d85471acfa5a59067617b2b55d5f485a7f850f5"
+    },
+    "compact_recovery.png": {
+      "path": ".local_validation/GAME013/compact_recovery.png",
+      "sha256": "633226a169e4e3c0fe5012942d1c8924a914aef1691944763e3bc017520c2876"
+    },
+    "defense.png": {
+      "path": ".local_validation/GAME013/defense.png",
+      "sha256": "455bbac6ac87e77083e3ef5a217589ede0eeb4ae2ccd90e6de9f6409a67035ae"
+    },
+    "defense_lower.png": {
+      "path": ".local_validation/GAME013/defense_lower.png",
+      "sha256": "f8bb5ef324f189f01db771c8e8a244eb7391a1bd653d95936fdcd1bcf55b624d"
+    },
+    "engine_0.log": {
+      "path": ".local_validation/GAME013/engine_0.log",
+      "sha256": "edff16c1721dd4ae989cadf29a01f574ae8d51b118221f664725bd6980bbba5d"
+    },
+    "engine_1.log": {
+      "path": ".local_validation/GAME013/engine_1.log",
+      "sha256": "bd175cdf7c9db6376ff16d7e39ebc7f084e899ed5358467e834bf6e8bdbe9165"
+    },
+    "engine_2.log": {
+      "path": ".local_validation/GAME013/engine_2.log",
+      "sha256": "1938b93b03756e658dd6fc29e699189d67afb2aec05905c840e9c22f5b89a6cd"
+    },
+    "engine_3.log": {
+      "path": ".local_validation/GAME013/engine_3.log",
+      "sha256": "190487dfb2bdf99cdccfff084fd5d95b81eac04fcfe3ec43e502d524daacb8eb"
+    },
+    "engine_4.log": {
+      "path": ".local_validation/GAME013/engine_4.log",
+      "sha256": "0dc80f41a9d961a6b4d962614c905af0b7c3bc209f569871d09048860b58f7ff"
+    },
+    "engine_5.log": {
+      "path": ".local_validation/GAME013/engine_5.log",
+      "sha256": "c5a9e5b87c0439795f9d5bcfe6c17d74bce134acc53d7f341cfb55a11bdb1e1d"
+    },
+    "engine_6.log": {
+      "path": ".local_validation/GAME013/engine_6.log",
+      "sha256": "570a42343d370c104902d16c9ff0b402573f94ed3076772afb70e6bce96084fc"
+    },
+    "engine_7.log": {
+      "path": ".local_validation/GAME013/engine_7.log",
+      "sha256": "025f863c84ce84466e9269a07033239400176c7aad50ada31ff794c6e59b0837"
+    },
+    "engine_8.log": {
+      "path": ".local_validation/GAME013/engine_8.log",
+      "sha256": "ffdc69db147a1dc2186cb3d9f0722c1c7c8ab9244f4f33e7adda8258524592a0"
+    },
+    "engine_9.log": {
+      "path": ".local_validation/GAME013/engine_9.log",
+      "sha256": "6d1c065383a27c36804949b6ffa4b09714470b112e5dacc0bd5aeb7b9c147c4e"
+    },
+    "lobby_all.png": {
+      "path": ".local_validation/GAME013/lobby_all.png",
+      "sha256": "896f63a3ebaf39bb2e802a21c85491900f4d9ad8e2c75a13e83fa47b34bb1852"
+    },
+    "process-current.log": {
+      "path": ".local_validation/GAME013/process-current.log",
+      "sha256": "4d45e3efaf5acf8e4d53b13b3fd9359fb391ba31ee87e9dd7441b123916cd947"
+    },
+    "process-v1.log": {
+      "path": ".local_validation/GAME013/process-v1.log",
+      "sha256": "54ae3c68c7b7a4a3a1d5d077313b8366bb433ffd5c9f24f80c821ac82e49f50e"
+    },
+    "process-v2.log": {
+      "path": ".local_validation/GAME013/process-v2.log",
+      "sha256": "5a22afe9ace50c3d4d5e230c3fe58aa6cc7fbc22ac4b6d7c5a1c015f404f984f"
+    },
+    "process-v3.log": {
+      "path": ".local_validation/GAME013/process-v3.log",
+      "sha256": "ad55e4e222374ff1d7681768c0eb34a300b6ffb0cf5b79d49e0c9ec99f473bab"
+    },
+    "process-v4.log": {
+      "path": ".local_validation/GAME013/process-v4.log",
+      "sha256": "ea1000eb5c752c328a48b6fc881de58ad8fd85aa11b02c13009cabf366132acc"
+    },
+    "process_probe.gd": {
+      "path": ".local_validation/GAME013/process_probe.gd",
+      "sha256": "1c46f4e66d78af02ff3629736aead00f05afbd49bbaf480140e6382a5f334881"
+    },
+    "recovery.png": {
+      "path": ".local_validation/GAME013/recovery.png",
+      "sha256": "404bec07f48fa3e9b5c4a603d34cd0b2d3cf0ff82af20c4328c824ffdf953ed6"
+    },
+    "recovery_lower.png": {
+      "path": ".local_validation/GAME013/recovery_lower.png",
+      "sha256": "1c0f9d22a3af5ccad9e0e2c940a620b2a6134f27d21fa2714895f5f32859c168"
+    },
+    "render.log": {
+      "path": ".local_validation/GAME013/render.log",
+      "sha256": "7ac34755c29fb3f6129fbaa58e1bf9b0d0978b83f950199608627d2ce21d4757"
+    },
+    "render_probe.gd": {
+      "path": ".local_validation/GAME013/render_probe.gd",
+      "sha256": "66da38877182e8bb0839a3b34a51e048e348dc8a6bdb3adef846adc6fb4e241a"
+    }
+  },
+  "balance": "No new six-minute/talent economy or completion-rate measurement. Prior GAME011 growth14-17 vs10-12 goal remains historical FAIL evidence; this feature does not claim to resolve it.",
+  "mobile_devices": "NOT_VERIFIED",
+  "windows_f5": "NOT_VERIFIED",
+  "fps_and_player_balance": "NOT_VERIFIED",
+  "concurrent_planning_merge": {
+    "remote_head": "ea2e2ae86cc3ede827fd5b10add8a21c427c4aa2",
+    "scope": "Merged the two concurrent user planning commits after the first push was rejected. Only GAME_DESIGN_BASELINE and PLANNED changed. Preserved all collection/18-talent/prerequisite/economy planning; added current six-talent implementation clarification. No extra12 talents or prerequisite gameplay implemented. Runtime/test/data/tool sources still exactly match tested f7ae9db."
+  }
+}

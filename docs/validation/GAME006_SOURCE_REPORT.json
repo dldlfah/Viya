@@ -1,0 +1,50 @@
+{
+  "status": "PASS",
+  "base_commit": "647f53531db4714c4da084c0090e9f67731d75e8",
+  "command": "python /mnt/data/viya_game006/verify_source.py",
+  "python_version": "3.13.5",
+  "verified_base_git_blobs": {
+    "scripts/combat/run_state.gd": "ccb759e21cd96a5fe2e59099097648a602437e19",
+    "scripts/main.gd": "308fbaad2e142ca7dc40a0f01d6f5b4a2023d834",
+    "tests/test_growth_overview.gd": "2f09527111c3dcb0cbeaa558b87ce47ed033b371",
+    "tools/check_combat_cues.py": "a636d27b9ff59eda40ef90f3d103c390c92ee1be"
+  },
+  "source_files_checked": 6,
+  "arithmetic_expression_comparisons": {
+    "attack_profiles": 135,
+    "stat_profiles": 51,
+    "health_after_selection": 24
+  },
+  "unchanged_existing_run_methods": 30,
+  "reviewed_modified_run_methods": ["select_skill", "_refresh_stats", "_auto_fire", "_tick_skills"],
+  "original_main_reconstructed_after_removing_preview_hooks": true,
+  "existing_overview_test_preserved": true,
+  "source_guard_negative_controls": [
+    {"case": "damage_changed", "rejected_by_exact_source_guard": true},
+    {"case": "preview_formula_changed", "rejected_by_exact_source_guard": true},
+    {"case": "missing_cue_reset", "rejected_by_exact_source_guard": true},
+    {"case": "extra_visual_clock", "rejected_by_exact_source_guard": true}
+  ],
+  "new_stripped_run_baseline": "379e205f8c82ec76030b1081a21183247f405059",
+  "native_tests": "AUTHORED_NOT_RUN",
+  "godot_parser_runtime": "NOT_VERIFIED",
+  "render_mobile_fps": "NOT_VERIFIED",
+  "full_project_regression": "NOT_RUN",
+  "scope": "Actual Python checks of source structure, old/new arithmetic expression evaluation and source preservation. This does NOT execute GDScript, game state, native callbacks or render any screen. Native tests cover 89 eligible skill/rank upgrades and UI/actual attacks but were not run.",
+  "source_sha256": {
+    "scripts/main.gd": "9bf728ba0e593b39f29dc0eb80aa0f09ad583f5f05598ee158eca205016c6828",
+    "tests/test_growth_overview.gd": "22389136d5e9b1c88c90253107baeacf7d21bcff202684068da9d16c2efb6bfb",
+    "tests/test_skill_preview.gd": "a69261d8daa6f7e40f9901b498634f35f31afd4465d53221e8b91184b1951a9e",
+    "tools/check_combat_cues.py": "a9898219e6179c11335d86400717f9d79d8706954d2b6442732bc1905095650a",
+    "scripts/ui/skill_preview.gd": "48a5823652f75d9540feebc81b17e6e48cf33e9536881a6ed11c6ff877b661d0",
+    "scripts/combat/run_state.gd": "1ac002d382a3f6201f65b33d892c1a4c08d0c71455604010f7438ffb54d9f92b"
+  },
+  "source_git_blobs": {
+    "scripts/main.gd": "a6d4b6c7b60b025d7463767a1cd9b0f6a533bb31",
+    "tests/test_growth_overview.gd": "48256c10d6e0d3186dbf55272d1d1305072862a5",
+    "tests/test_skill_preview.gd": "144f95e263cf0da514abb2cf48a0c2c1cf7ec904",
+    "tools/check_combat_cues.py": "67c0997e00fd2112d3f2881be4308701d16a56b3",
+    "scripts/ui/skill_preview.gd": "c22d1a097ed36686345f4c128c1532ad6ddf307e",
+    "scripts/combat/run_state.gd": "9490ba29005abe2350a0f5ae53bf3001f1756df2"
+  }
+}

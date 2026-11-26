@@ -1,0 +1,21 @@
+{
+  "status": "PASS",
+  "reproduced_artifacts": 44,
+  "all_byte_exact": true,
+  "canonical_source_changes": [],
+  "changed_cache_pngs": [
+    "assets/characters/pilot_32/render_cache/viya_run_e_00.png",
+    "assets/characters/pilot_32/render_cache/viya_run_e_01.png",
+    "assets/characters/pilot_32/render_cache/viya_run_e_02.png",
+    "assets/characters/pilot_32/render_cache/viya_run_e_03.png",
+    "assets/characters/pilot_32/render_cache/viya_run_e_04.png",
+    "assets/characters/pilot_32/render_cache/viya_run_e_05.png",
+    "assets/characters/pilot_32/render_cache/viya_run_e_06.png",
+    "assets/characters/pilot_32/render_cache/viya_run_e_07.png",
+    "assets/characters/pilot_32/render_cache/viya_run_e_08.png",
+    "assets/characters/pilot_32/render_cache/viya_run_e_09.png",
+    "assets/characters/pilot_32/render_cache/viya_run_e_10.png"
+  ],
+  "reproduced_frames": 11,
+  "generator_sha256": "03df0ecddf1f54cbb24034862d0a5e01ad7a2cf9ff29e5190730829e48b99ba8"
+}

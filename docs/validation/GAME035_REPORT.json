@@ -1,0 +1,3275 @@
+{
+  "unit": "GAME-035",
+  "recorded_date_kst": "2026-11-23",
+  "branch": "work/viya-turnaround-qa-20261117",
+  "code_commit": "b87c5073b4cef9c3df5c9280505cf957a84453c6",
+  "code_tree": "0106e96892bedcfcd44aa0a47eade2bd32504e0f",
+  "base_document_head": "b795f9c1840d38c43e0fbe9b265e99cf141b086d",
+  "base_game_code": "488c52fad5a58e5bb7dc286ae98192c71a9024d2",
+  "overall": "Actual current-result payment/pending/unpaid/recorded status connected to existing result and final-growth UI. Original settlement/atomic persistence/retry/admission/navigation rules retained. Full Godot3527/GUI129/24separate-process restore PASS;mobile/finalart-audio/economy approval separate.",
+  "implementation": {
+    "formatter": "reward_payment.gd is stateless/read-only. References original RunState.Phase enum,matching durable pending runID/phase/end_reason/mode/stage/collected gold plus loaded account current campaign last_run/nextstage or dungeon closedID/outcome/reward. No constructor/fileIO/settle/commit/RNG/timer or new stored state.",
+    "status": "Paid requires matching current terminal snapshot and actual account record with successful relevant operations. Generic success/settings persistence/another run/another snapshot cannot claim paid. Missing credit is pending with quoted reward and last-confirmed balance;unreadable account has unknown balance. Prior matching credit with later save failure is recorded-but-needs-confirmation,not a false promise of another payout.",
+    "nonclear": "Defeat/timeout/forfeit still reward0. Dungeon entry close confirmation is separate from unpaid reward:closed0record versus pendingclose. Campaign unlock/daily charge/no refund/clearbonus and reward rates unchanged.",
+    "ui": "Main.gd replaces only its two reward append strings with one virtual text formatter. Existing settlement branches,return/error handling/controlbindings remain byte-identical when these text hooks are reversed. Mobile uses existing result label,exposes same receipt in existing final-growth overview and names that button finalgrowth/reward details. No new payment modal/confirmation. Existing primary battle/account retry is moved immediately below heading to remain visible on compact screens.",
+    "recovery": "Original retries/cold terminal recovery/idempotent run IDs do all writes. Opening final overview is read-only. Restored paid and pending results reach the existing lobby without automatic newbattle;final overview still shows the confirmed frozen outcome. Clarify the old no-permanent-archive caption as growth-record scope,not an assertion that currency is unsaved.",
+    "ownership": "69other production/data/assets files including RunState/Cues/View/progression/GoldProgress/RunStore/Snapshot/audio and original guard unchanged. SingleRunState/save15/7RNG/economy/6min3min/daily2/HP/XP/spawns/MP40/4+4/art unchanged."
+  },
+  "validation": {
+    "final_engine_run": {
+      "static_integrity": {
+        "status": "PASS",
+        "files_checked": 117,
+        "resource_references_checked": 350,
+        "errors": [],
+        "source_sha256": {
+          "project.godot": "0d8f7fce157178f7bf31acc183593b40f23cff6d266ea5270f4b75f0899b79e5",
+          "scenes/main.tscn": "17a2e77db7cf47af860de3c263dc9119b0df349bafdf2a8b52a40f7450c9e22c",
+          "scripts/combat/actor_motion.gd": "e75bfd25a61446500f5e4f9494bff583dd4d9dbcc4050c25d69ea9a435b53bb7",
+          "scripts/combat/approach_cues.gd": "a30074eec96a887c5fbdd99c96ea3ff247303974bd93fb7ef288eed2eaac6131",
+          "scripts/combat/attack_visuals.gd": "49e9acdb93325368fbf4c6d2732d11877e25f9daa829e6b00a466b74d339556f",
+          "scripts/combat/battle_forms.gd": "a0e9ebcf2cb5d369c0db53f089ab9bb9df0163b1f171908a57bd63f7e285ab95",
+          "scripts/combat/battle_projection.gd": "f8abad51e46f2353d01cc6f1f4b904485621d00ccf75e854ab873bc688f160a0",
+          "scripts/combat/battle_view.gd": "966d0e7fb608b0de067f6cfa02d0c611d2fba52be482a97ff76d6c139e25af34",
+          "scripts/combat/boss_guidance.gd": "d7c1195590ce6fedd3cc8c90cbcdfdf4a2aaf7b994fdfe1a26206e3a9709fef9",
+          "scripts/combat/combat_audio.gd": "9d8d1f2e1d6b617e63a5f8454d182b5e16f08b99b28ade31c1e24cb95be18d2b",
+          "scripts/combat/combat_audio_bank.gd": "589afc536b6514a10a86b5436bc5271ffa6c522452e12949842a1ba8ca65d9ce",
+          "scripts/combat/combat_camera.gd": "ecb81da9ebb62e9f2b84f9ba7ffb4de578646d5c3d5accad647fd63c74b09567",
+          "scripts/combat/combat_cues.gd": "990db858f95f0f0e109bc45d4a1382fcf843d01712be909640e6fa799a5734cf",
+          "scripts/combat/combat_display.gd": "dbb2493bf333b9972603f6cc5ae123010f5cd57e660133e44b4a9110a935d4f7",
+          "scripts/combat/combat_profiles.gd": "515689ca733856a0855739531ad4ebeddb20609839210df41c3b6f6202c898e0",
+          "scripts/combat/defense_rules.gd": "1fa247925d4d5a33dfdf7371285d9192b85b0cd83603efed33894693053691f8",
+          "scripts/combat/feedback_state.gd": "3ee19238fb9307bc9953fed3ecc266ecff420e2c74ceffe81409069372e87d88",
+          "scripts/combat/gold_dungeon.gd": "f7073b32297d4326a0abc973022d7280c53f92114d49db53933874118b3ccc0d",
+          "scripts/combat/high_angle_battle.gd": "3ae7b64f8cc7b8351ca147c40855041093d9d74fd3109ca531a54f5a7137c6e4",
+          "scripts/combat/incoming_feedback.gd": "71dfbafc9d3e58435afa40b2f1f427387ad899f118906cda72b028538fdb853b",
+          "scripts/combat/magic_state.gd": "41a9a7739edc46e98dda26986f23dddf1c0ff6bdf9b40d80640f797460b9223b",
+          "scripts/combat/run_state.gd": "6637a163edd9b7c0167c1867ff90e716ccd1ff12297c246258fd612d402f4773",
+          "scripts/combat/stage_catalog.gd": "8059f41d7134818deeea1978d2f81fddc2456d530e33479d458461004600516f",
+          "scripts/combat/structure_feedback.gd": "5eb5b6acd005b04652a1c337caaacfa47de2dfb0ca5a758ea06c5b4e3b4d6d11",
+          "scripts/combat/supply_feedback.gd": "09731b47d1cd26ed58fac503525ca349006efd8f3542545b4dd61f381c1f8287",
+          "scripts/combat/weapon_modules.gd": "a405c2ddad96a396c8e5e0820ac0d4ee4093a951c473ac7c849294e872616a2e",
+          "scripts/main.gd": "ca74e6a3a4030b2ad9e505a63f118f4558e8b366585a79a4abd0b2b202d995a4",
+          "scripts/progression/account_talents.gd": "0774659235d3bea9276574996565b315156260274750ef8c7f9969f18550f43e",
+          "scripts/progression/combat_pacing.gd": "07f73dae843a7779f992976efb1901774782db1bd021bef01999a83ea7814826",
+          "scripts/progression/gold_progress.gd": "2289fc850fc5f856d674863de6119987da74ed6bd931ade50f0faa11ea0f7012",
+          "scripts/progression/growth_state.gd": "07287b03d12eac144dce6f1858ceb2b6561e6281b4c011ac6bc5d5d3c72a0e6e",
+          "scripts/progression/run_snapshot.gd": "068e7dc82a6ec7cec87075e7f64e2eb553752679f22ef88d84db0bfc33a11389",
+          "scripts/progression/run_store.gd": "bab493f1963ea2a6d98770f9ef9686d70d4b257e0b49afb3386de661a6081986",
+          "scripts/progression/skill_catalog.gd": "ccd13a2b02f4b57497beae39e483edfca53617cc3a39e43cbaf8009535c820d8",
+          "scripts/progression/weapon_catalog.gd": "aced8b45e765780b4053bfa436e1dbbc1696d2173cb4cb762f21298d5f91421b",
+          "scripts/ui/actor_assets.gd": "f98126291f60e27b9d903999c61f6a1c03a34555eb824a5fdd3e51db18a359c1",
+          "scripts/ui/asset_slots.gd": "b6f7edc881a4a4f658d3df115a2b7444fd2d8731cbc11fdb8048eddb56dc7353",
+          "scripts/ui/battle_chrome.gd": "6be2ec2203a0517ce6842d3c7979135ec7c94afaa5b69b1fff2508f083473a2a",
+          "scripts/ui/battle_save_notice.gd": "4030876186c66ae7de4ec2b8808d8b905881c40d0c0af29bd241f659dcdf2189",
+          "scripts/ui/city_preview.gd": "d01c0ca26b7d812b2b7d6d63339788be98241f6a09ec58a1a8d35a6f7b788937",
+          "scripts/ui/combat_skin.gd": "b9ed37f5c7f1831095805e13c6e3eaa986e762081209372cf8a4e09ff6608c66",
+          "scripts/ui/combat_slot_button.gd": "91a02ab52e8ebcb26985ae143dd596fbd4b62bd3fa6e440e5b0d12e44132a81d",
+          "scripts/ui/feedback_panel.gd": "2103fd9b8692c5606273175b415447f35a995f9a18306a5e8f0abeeb7c5d465b",
+          "scripts/ui/growth_overview.gd": "43dfb9306f4e280b57c8445b179c0e797938bc9fd0e5fa070053474cadb53a42",
+          "scripts/ui/hud_layout.gd": "d9a5dacd8e3816611b1658557c5366e1dbd6caeded4312d8f2e5e5584becddb6",
+          "scripts/ui/mobile_main.gd": "b40e5c4e31e03f3346002490804cee13a41198e8f1d10781fb4c1df7cff09fc2",
+          "scripts/ui/move_input.gd": "cee8e709185740d1cb964fff13873a0818d14d0b3653f36d6416a1b17da40bd8",
+          "scripts/ui/responsive_feedback_panel.gd": "b36ce744a7378d696b91018935f637da0ae88beccdeddd85b1187a238958ed5b",
+          "scripts/ui/reward_payment.gd": "d3fc0b75e7f9fbb5f55ffdbfe708039ccb77e4a35231c58d6fdcd4996a246c11",
+          "scripts/ui/skill_preview.gd": "5c3de40b161d38de44234f6f1a2c63064bbc99021c4def95f7995382b02af5db",
+          "scripts/world/map_catalog.gd": "952abbc81d539817dfdd98ed4a59185f13fb8c1adac0210839d176ebee087ea6",
+          "scripts/world/map_space.gd": "8110f4a28e04e67fe738011ea888f31a9c74c450ed79148d88c1da602fa03ae8",
+          "scripts/world/supply_catalog.gd": "1af21cb685b8da0858491a961f007e8a0511c24e0f70b0165e0051d7fcb310a1",
+          "tests/measure_armor.gd": "19a42c9db8ac7b52b6bc2778f24e78ff05b433676c1443d3300a7d4bdd67c6af",
+          "tests/measure_balance.gd": "d5b57b7f3370a007df2a54475d7c5c63b70cae614c4f3ce0981c5a18f99f24fc",
+          "tests/measure_boss_guidance.gd": "891bd7aba3c747e25b065acfd5ef45d9057e01047ff374656247e02744d46b13",
+          "tests/measure_campaign.gd": "acc9b093cdc59af87d11f342a88a537b7f0d35ac8745149eb1ca0046ac791e6c",
+          "tests/measure_combat_audio.gd": "727d34de154acb4bb080553683e423a5cdea35fcf4592ee23fe00540848d199c",
+          "tests/profile_combat.gd": "1499a2a5db64c0869bca71f94582729a029bd7b240dd9ba1ad75a52e3333a2cf",
+          "tests/test_account_expansion.gd": "97d23a6d5bc708b9ebdcc76a492982d5b8e0e2fa4be6f2ad0c2ca501d5d35422",
+          "tests/test_account_talents.gd": "a85b5b84514323481e45137ab05e611af9d18f364393b9a6891fe45f1fe2b9f3",
+          "tests/test_actor_animation.gd": "a85f368b78cd6000f1b27407e3dc42ccd45852f794675aba5db32a174640ba44",
+          "tests/test_attack_visuals.gd": "b091e1672614637797907658c628e86bd6f16ca728ce7cb1dae67d1529f1b443",
+          "tests/test_battle_save_notice.gd": "2bbfd4ef99e616b4be393a204e7c99a1acd17e0c3c1fb0b90629166ae0dd178c",
+          "tests/test_boss_guidance.gd": "2f3e94e8c0cb9e61e9343a6fd87ac26fc3e77316d42da42e99fd4d32100329b3",
+          "tests/test_camera_lead.gd": "9334aa9bf5ccae3770b6677e16c8b7717df6c31e4772ff852d2a39f2f65cd1be",
+          "tests/test_campaign.gd": "07c21cb62d12d5394b0864afe3ce47f62b3cd11146fa4bd2780957c54d3f1f49",
+          "tests/test_chapter_ui.gd": "b48b6813b9d8a5e8d98c4d1e7d6a9ba65f7c54c5995bee66b8afcb55348db984",
+          "tests/test_combat_audio.gd": "cd4b66cf0f8e48faf98fdcf6ea4b0c87d687d06b47e424bb1a3210857e2e2beb",
+          "tests/test_combat_cues.gd": "e145c63ac64bc13005b7c890fdd7163d9def91b63e6b137d003ff05df971d90b",
+          "tests/test_combat_display.gd": "15b28b0a80b539bf9ccdce23ee988777307bfb875a84e4429796ba32575dbcdf",
+          "tests/test_combat_foundation.gd": "57efe421768dad47bee7a560325214a0c8a30d5fdf8d015fc2648f2b8c71416d",
+          "tests/test_combat_pacing.gd": "d321ef8b3e01f9879b8240bb439d93eaae8b5b75e5962437ddd40f7e6298b600",
+          "tests/test_combat_profiles.gd": "42b9e84e68307362dc9859a25c2d99cba259863bb7545e0ae3615411c865064a",
+          "tests/test_enemy_variety.gd": "76049646b0e67b54e9e2b53ddaa5a7b339806fefc7c197a95164f3666fcc6c4d",
+          "tests/test_feedback.gd": "a0558acd7ab6216ccceb597f90c823a1078b0cda9337392440fe6523f22fce86",
+          "tests/test_gold_dungeon.gd": "5bf6924c97cb1bb83bb3b9586e2a5ba97dc045dceb345aa2819f49fd4eda5709",
+          "tests/test_gold_rewards.gd": "ea84e51520721ad62e52416145f51163d541ef0c3eac40cc125ef343d08c28b4",
+          "tests/test_gold_settings.gd": "29358cc8bd690213f4fab1fde43cc0a921689983201cfbcbffa18dd872e047a9",
+          "tests/test_growth.gd": "98f63a46d71eeba5f8807655ba6bd9d87fe89b240fca92bbbc12f253fbe0ba72",
+          "tests/test_growth_overview.gd": "bd6706bf3253d25b8b41c6374a53732762af0d361d11c04aac47abee4f565e87",
+          "tests/test_guide_skin.gd": "50502dc737876e114d1443ad66af92d5973b131f746a2162952d7385797d1b6a",
+          "tests/test_high_angle.gd": "b1122832611f7fc1bbe9b45a33d3925e6278a54323f7d962c9b32fe143cdb666",
+          "tests/test_incoming_feedback.gd": "19965b733e2e28451744a1af948a236631e3bc9d0b8bf83b3beb4f4a737e37ee",
+          "tests/test_magic.gd": "2969ef796d9255f7b4c79534c68ebabb1b2e349adb0828929d3450ab8f75a090",
+          "tests/test_maps.gd": "3c129f9fe4aac09e01ad4d7f380d03faebb67f8b9f45f0f2d84175d79be4e2f7",
+          "tests/test_mobile_hud.gd": "3d0234bea7a3883f6cb38fe127d8062cbd393b97c3132109e853e84c68e75a76",
+          "tests/test_reward_payment.gd": "3025a1882616b2d7fcdecb276a8b772d633bcbef93990d426ded5e733c3fded1",
+          "tests/test_run_navigation.gd": "14b88030cf3b84cdaed8c559e04c0f1b15552a9860f32c1c959be06bea9ee475",
+          "tests/test_scatter_packs.gd": "1d642ed432b31e509721d9867f5e7dde4d904499cf7555b163670ef9b5c07f2d",
+          "tests/test_skill_preview.gd": "0a62fc3bcdafeb525507f4107621d5c14a955e5d5270750a99d7de1e61f9ad9f",
+          "tests/test_structure_feedback.gd": "99ccd533fc5acb0071a33b4a6e54ac8bc575cd86b2ca7568546a37b01edcd833",
+          "tests/test_supplies.gd": "5de153bb81aaa06f5f6bbd321b8689d7afe59160d314a6cb06353fac39d8678d",
+          "tests/test_supply_feedback.gd": "72f6b9ea21ba920944c8148be4a376840f0b1c4a562fd8256fe4f6025c6c7597",
+          "tests/test_talent_tree.gd": "984fdf593f086254dd17fde222ac7cafa35d8b223195fd46bc04ee170ddada21",
+          "tests/test_weapon_skills.gd": "a5385a7c03cc22962679b8d8e86f800ff81462a742d5f9fba01be4ee80ddb4eb",
+          "data/actor_presentation.json": "e82ae99f672bd3e6979778f9a6201efb659b160a3407d9b1b6099eb0e0257f04",
+          "data/chapter_one.json": "c32e288ddc61dc8193cd78de416d3682b7c11f1924bbaaa3ea4afe4b78104f76",
+          "data/combat_pacing.json": "d153666f7f77506da281d1f90ae5fbc5822cd997c6db76590f35ef8a6662d597",
+          "data/combat_profiles.json": "d36abf0b4d0feb950e6448474732decdac9f98035a9962e5f5287b09eb1d1144",
+          "data/destructibles.json": "130421dd85d4dbf9ff9f70ab297b36586870e65fb9426cec0c2f58ce57a49b39",
+          "data/gold_dungeon.json": "9a3427a6ddfb3462123f92e6918966ff7b1887ff324f368c600a9ad5993b1f9e",
+          "data/gold_rewards.json": "8f465cd44d1bf712b0fa758b2b8ff7cd17ecb450cff7f8e567d27f0397154993",
+          "data/maps.json": "925638f794696b96fdf48df8c266654cef3af002f43e57f91daa80f8d70e8bd4",
+          "data/presentation_slots.json": "d0a2e6ea1a55d37680bfa02ef9f9036f00deb03575ff9e9dcd10fa7179aa1001",
+          "data/prototype_skills.json": "a6ba197fe558d328e1fcab96506fa098465a4c72aebfe1a1b29cb98642628d1a",
+          "data/stages.json": "2e656d2dc155ad93c76b8a1303133992d95529283be7f5b16423738f4edaeeae",
+          "data/weapon_skills.json": "be23e1eb349958fcebf3dba088fcf389d50654fc31cb83523513c178ff81c659",
+          "tools/bootstrap_godot.py": "4c3ca17c3b90f9c5590d7a82a76ae71a353f4d15aae973cf37e03e745ebfdecc",
+          "tools/check_combat_cues.py": "65b4bfde02d3b6bfca1de997df13b303867145602fd436f3f0e759887d332709",
+          "tools/check_feedback_data.py": "f1bd6f415e919a32faab1b403073e24dcdda4b819938b9b707dacfc32320bec7",
+          "tools/check_growth_data.py": "304be6a17484dd44525d94bad31f422bd13be315ba3309a366ca2bd5b9e2ebfd",
+          "tools/check_magic_data.py": "9405ac2a576b42d279944aacec82f00500ad50c70e5f141413a05e64b1f39e5b",
+          "tools/check_mobile_hud.py": "9e43cace28480d3aacb45dabaf67acb2ad24e1c8a9366aa5c011a279eba35487",
+          "tools/check_project.py": "eeafd73fc4503c7af952331c093272a5510aade3fbae04e42afb77eb23f55157",
+          "tools/check_run_navigation.py": "82fbdd522682329e597017bf5fc80e40df104169c0463a492f265354ba734518",
+          "tools/report_economy.py": "5c449e04b43847c57ec9617c7c43b2408566dbc7691e32b8d3e33d8b33b24bd6"
+        },
+        "source_fingerprint": "359b6df5ada12261356bed26cc08dccfeb9e33478dd9fd67c6bf9fee2867c512",
+        "scope": "UTF-8, delimiters, whitespace, JSON/Python syntax, resource existence, project settings; NOT GDScript parser/typechecking or gameplay."
+      },
+      "growth_data_contract": {
+        "status": "PASS",
+        "pool_count": 18,
+        "counts": {
+          "common_attack": 8,
+          "character_attack": 1,
+          "common_passive": 8,
+          "ultimate_enhancement": 1
+        },
+        "negative_controls": [
+          {
+            "fixture": "duplicate",
+            "rejected": true
+          },
+          {
+            "fixture": "resistance",
+            "rejected": true
+          },
+          {
+            "fixture": "foreign_owner",
+            "rejected": true
+          },
+          {
+            "fixture": "missing_ultimate",
+            "rejected": true
+          },
+          {
+            "fixture": "wrong_row",
+            "rejected": true
+          }
+        ],
+        "errors": [],
+        "scope": "JSON schema/content and source integration markers only; not GDScript runtime/behavior."
+      },
+      "magic_data_contract": {
+        "status": "PASS",
+        "errors": [],
+        "negative_controls": [
+          {
+            "fixture": "plain_name",
+            "rejected": true
+          },
+          {
+            "fixture": "foreign_owner",
+            "rejected": true
+          },
+          {
+            "fixture": "missing_magic",
+            "rejected": true
+          },
+          {
+            "fixture": "negative_cost",
+            "rejected": true
+          },
+          {
+            "fixture": "negative_cooldown",
+            "rejected": true
+          },
+          {
+            "fixture": "wrong_upgrade",
+            "rejected": true
+          },
+          {
+            "fixture": "nonfinite_radius",
+            "rejected": true
+          },
+          {
+            "fixture": "impossible_cost",
+            "rejected": true
+          }
+        ],
+        "temporary_skill_names": 18,
+        "required_xp_first_five": [
+          30,
+          48,
+          66,
+          84,
+          102
+        ],
+        "xp_drop_unchanged": 5.0,
+        "scope": "JSON validation, negative data controls and source markers/arithmetic; NOT GDScript runtime, UI, input dispatch or mobile tests."
+      },
+      "feedback_source_contract": {
+        "status": "PASS",
+        "errors": [],
+        "negative_controls": [
+          {
+            "fixture": "missing_damage_hook",
+            "rejected": true
+          },
+          {
+            "fixture": "missing_reset",
+            "rejected": true
+          },
+          {
+            "fixture": "negative_duration",
+            "rejected": true
+          },
+          {
+            "fixture": "missing_low_hp_warning",
+            "rejected": true
+          },
+          {
+            "fixture": "missing_stale_guard",
+            "rejected": true
+          }
+        ],
+        "files_checked": 7,
+        "source_sha256": {
+          "scripts/combat/feedback_state.gd": "3ee19238fb9307bc9953fed3ecc266ecff420e2c74ceffe81409069372e87d88",
+          "scripts/combat/run_state.gd": "6637a163edd9b7c0167c1867ff90e716ccd1ff12297c246258fd612d402f4773",
+          "scripts/ui/feedback_panel.gd": "2103fd9b8692c5606273175b415447f35a995f9a18306a5e8f0abeeb7c5d465b",
+          "scripts/main.gd": "ca74e6a3a4030b2ad9e505a63f118f4558e8b366585a79a4abd0b2b202d995a4",
+          "tests/test_feedback.gd": "a0558acd7ab6216ccceb597f90c823a1078b0cda9337392440fe6523f22fce86",
+          "tools/check_project.py": "eeafd73fc4503c7af952331c093272a5510aade3fbae04e42afb77eb23f55157",
+          "tools/check_feedback_data.py": "f1bd6f415e919a32faab1b403073e24dcdda4b819938b9b707dacfc32320bec7"
+        },
+        "scope": "7 affected code/test/checker files: UTF-8, delimiters, whitespace, Python syntax, reaction constants, integration markers, engine-test registration and new dependency paths only. NOT the full project check or GDScript parser/type/runtime, rendering, or mobile input tests."
+      },
+      "mobile_hud_source_contract": {
+        "status": "PASS",
+        "files_checked": 8,
+        "errors": [],
+        "negative_controls": [
+          {
+            "fixture": "layout_detached",
+            "rejected": true
+          },
+          {
+            "fixture": "detail_not_paused",
+            "rejected": true
+          },
+          {
+            "fixture": "detail_mutates_skill",
+            "rejected": true
+          },
+          {
+            "fixture": "resize_retains_touch",
+            "rejected": true
+          },
+          {
+            "fixture": "test_not_registered",
+            "rejected": true
+          }
+        ],
+        "source_sha256": {
+          "scenes/main.tscn": "17a2e77db7cf47af860de3c263dc9119b0df349bafdf2a8b52a40f7450c9e22c",
+          "scripts/ui/mobile_main.gd": "b40e5c4e31e03f3346002490804cee13a41198e8f1d10781fb4c1df7cff09fc2",
+          "scripts/ui/hud_layout.gd": "d9a5dacd8e3816611b1658557c5366e1dbd6caeded4312d8f2e5e5584becddb6",
+          "scripts/ui/responsive_feedback_panel.gd": "b36ce744a7378d696b91018935f637da0ae88beccdeddd85b1187a238958ed5b",
+          "scripts/ui/move_input.gd": "cee8e709185740d1cb964fff13873a0818d14d0b3653f36d6416a1b17da40bd8",
+          "tests/test_mobile_hud.gd": "3d0234bea7a3883f6cb38fe127d8062cbd393b97c3132109e853e84c68e75a76",
+          "tools/check_project.py": "eeafd73fc4503c7af952331c093272a5510aade3fbae04e42afb77eb23f55157",
+          "tools/check_mobile_hud.py": "9e43cace28480d3aacb45dabaf67acb2ad24e1c8a9366aa5c011a279eba35487"
+        },
+        "source_fingerprint": "8b3cc931d972b0ac27343e3e1a9d11bd0fc476d569d2afcdb864175c06186fe2",
+        "scope": "Changed UTF-8 files, delimiters, Python syntax and integration source checks only. NOT GDScript parsing/typechecking, actual Control geometry, touch dispatch, rendering or mobile execution."
+      },
+      "run_navigation_source_contract": {
+        "status": "PASS",
+        "files_checked": 5,
+        "errors": [],
+        "negative_controls": [
+          {
+            "fixture": "unescaped_string_newline",
+            "rejected": true
+          },
+          {
+            "fixture": "unguarded_intent",
+            "rejected": true
+          },
+          {
+            "fixture": "confirmation_resets_hp",
+            "rejected": true
+          },
+          {
+            "fixture": "cancel_rerolls",
+            "rejected": true
+          },
+          {
+            "fixture": "leave_fakes_death",
+            "rejected": true
+          },
+          {
+            "fixture": "no_result_copy",
+            "rejected": true
+          },
+          {
+            "fixture": "stale_menu_revision",
+            "rejected": true
+          },
+          {
+            "fixture": "unregistered_engine_test",
+            "rejected": true
+          }
+        ],
+        "source_sha256": {
+          "scripts/combat/run_state.gd": "6637a163edd9b7c0167c1867ff90e716ccd1ff12297c246258fd612d402f4773",
+          "scripts/ui/mobile_main.gd": "b40e5c4e31e03f3346002490804cee13a41198e8f1d10781fb4c1df7cff09fc2",
+          "tests/test_run_navigation.gd": "14b88030cf3b84cdaed8c559e04c0f1b15552a9860f32c1c959be06bea9ee475",
+          "tools/check_project.py": "eeafd73fc4503c7af952331c093272a5510aade3fbae04e42afb77eb23f55157",
+          "tools/check_run_navigation.py": "82fbdd522682329e597017bf5fc80e40df104169c0463a492f265354ba734518"
+        },
+        "source_fingerprint": "2775243e82769a05eb79ba73747c20881e45d5b0ff200c0d148ace6f8885cdcd",
+        "scope": "UTF-8/delimiters/Python syntax and navigation SOURCE contracts only; NOT GDScript parsing/types, native execution, actual UI/input, or mobile testing."
+      },
+      "combat_cues_source_contract": {
+        "status": "PASS",
+        "files_checked": 6,
+        "errors": [],
+        "negative_controls": [
+          {
+            "fixture": "missing_reset",
+            "rejected": true
+          },
+          {
+            "fixture": "early_clock",
+            "rejected": true
+          },
+          {
+            "fixture": "changed_damage",
+            "rejected": true
+          },
+          {
+            "fixture": "drop_as_collection",
+            "rejected": true
+          },
+          {
+            "fixture": "unbounded_received",
+            "rejected": true
+          },
+          {
+            "fixture": "received_before_hp",
+            "rejected": true
+          },
+          {
+            "fixture": "unbounded_visuals",
+            "rejected": true
+          },
+          {
+            "fixture": "cosmetic_rng",
+            "rejected": true
+          },
+          {
+            "fixture": "mutable_view",
+            "rejected": true
+          },
+          {
+            "fixture": "supply_changes_rewards",
+            "rejected": true
+          },
+          {
+            "fixture": "supply_mutates_observation",
+            "rejected": true
+          },
+          {
+            "fixture": "supply_glyph_mutates_state",
+            "rejected": true
+          },
+          {
+            "fixture": "unregistered_test",
+            "rejected": true
+          },
+          {
+            "fixture": "ignored_engine_exit",
+            "rejected": true
+          },
+          {
+            "fixture": "ignored_engine_errors",
+            "rejected": true
+          },
+          {
+            "fixture": "ignored_test_result",
+            "rejected": true
+          }
+        ],
+        "source_sha256": {
+          "scripts/combat/run_state.gd": "6637a163edd9b7c0167c1867ff90e716ccd1ff12297c246258fd612d402f4773",
+          "scripts/combat/battle_view.gd": "966d0e7fb608b0de067f6cfa02d0c611d2fba52be482a97ff76d6c139e25af34",
+          "scripts/combat/combat_cues.gd": "990db858f95f0f0e109bc45d4a1382fcf843d01712be909640e6fa799a5734cf",
+          "tests/test_combat_cues.gd": "e145c63ac64bc13005b7c890fdd7163d9def91b63e6b137d003ff05df971d90b",
+          "tools/check_project.py": "eeafd73fc4503c7af952331c093272a5510aade3fbae04e42afb77eb23f55157",
+          "tools/check_combat_cues.py": "65b4bfde02d3b6bfca1de997df13b303867145602fd436f3f0e759887d332709"
+        },
+        "source_fingerprint": "f1ec2fe111d713f8e9e2e171c28fb07477991b3200983d4180aaa15b8b397d5b",
+        "baseline_run_blob": "673d75a748fa5f1f9ac72ec73bbd9120fdcfce02",
+        "baseline_runner_blob": "1ab68ad8a51271e3d47db8b02d433991f42e8d6c",
+        "baseline_engine_function_sha256": "9156043eaf896d72565563cc1e2f623cf0c8fbac7f032f19bffee7e4946a69ee",
+        "scope": "Changed-source UTF-8/delimiters/Python syntax, hook order, bounds, isolation, reviewed GAME-024 RunState/GAME-030 view baselines with exact GAME-033 read-only adapters and preserved engine runner. NOT Godot parser/type/runtime, visual quality, input dispatch, or FPS."
+      },
+      "godot_runtime": {
+        "status": "PASS",
+        "commands": [
+          {
+            "command": [
+              "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+              "--headless",
+              "--version"
+            ],
+            "exit_code": 0,
+            "status": "PASS"
+          },
+          {
+            "command": [
+              "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+              "--headless",
+              "--path",
+              "/workspace/Viya",
+              "--editor",
+              "--import",
+              "--quit"
+            ],
+            "exit_code": 0,
+            "status": "PASS"
+          },
+          {
+            "command": [
+              "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+              "--headless",
+              "--path",
+              "/workspace/Viya",
+              "--script",
+              "res://tests/test_combat_foundation.gd"
+            ],
+            "exit_code": 0,
+            "status": "PASS"
+          },
+          {
+            "command": [
+              "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+              "--headless",
+              "--path",
+              "/workspace/Viya",
+              "--script",
+              "res://tests/test_growth.gd"
+            ],
+            "exit_code": 0,
+            "status": "PASS"
+          },
+          {
+            "command": [
+              "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+              "--headless",
+              "--path",
+              "/workspace/Viya",
+              "--script",
+              "res://tests/test_magic.gd"
+            ],
+            "exit_code": 0,
+            "status": "PASS"
+          },
+          {
+            "command": [
+              "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+              "--headless",
+              "--path",
+              "/workspace/Viya",
+              "--script",
+              "res://tests/test_feedback.gd"
+            ],
+            "exit_code": 0,
+            "status": "PASS"
+          },
+          {
+            "command": [
+              "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+              "--headless",
+              "--path",
+              "/workspace/Viya",
+              "--script",
+              "res://tests/test_mobile_hud.gd"
+            ],
+            "exit_code": 0,
+            "status": "PASS"
+          },
+          {
+            "command": [
+              "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+              "--headless",
+              "--path",
+              "/workspace/Viya",
+              "--script",
+              "res://tests/test_run_navigation.gd"
+            ],
+            "exit_code": 0,
+            "status": "PASS"
+          },
+          {
+            "command": [
+              "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+              "--headless",
+              "--path",
+              "/workspace/Viya",
+              "--script",
+              "res://tests/test_combat_cues.gd"
+            ],
+            "exit_code": 0,
+            "status": "PASS"
+          },
+          {
+            "command": [
+              "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+              "--headless",
+              "--path",
+              "/workspace/Viya",
+              "--quit-after",
+              "120"
+            ],
+            "exit_code": 0,
+            "status": "PASS"
+          }
+        ],
+        "scope": "headless import, actual foundation/growth/magic/feedback/mobile-HUD/run-navigation/combat-cues GDScript tests and main boot; visual/mobile approval separate"
+      },
+      "windows_f5": "NOT_VERIFIED",
+      "android_device": "NOT_VERIFIED",
+      "ios_device": "NOT_VERIFIED"
+    },
+    "native_results": [
+      {
+        "log": ".local_validation/GAME035/engine_2.log",
+        "status": "PASS",
+        "checks": 23,
+        "failures": []
+      },
+      {
+        "log": ".local_validation/GAME035/engine_3.log",
+        "status": "PASS",
+        "checks": 70,
+        "failures": []
+      },
+      {
+        "log": ".local_validation/GAME035/engine_4.log",
+        "status": "PASS",
+        "checks": 122,
+        "failures": []
+      },
+      {
+        "log": ".local_validation/GAME035/engine_5.log",
+        "status": "PASS",
+        "checks": 57,
+        "failures": []
+      },
+      {
+        "log": ".local_validation/GAME035/engine_6.log",
+        "status": "PASS",
+        "checks": 1336,
+        "failures": []
+      },
+      {
+        "log": ".local_validation/GAME035/engine_7.log",
+        "status": "PASS",
+        "checks": 68,
+        "failures": []
+      },
+      {
+        "log": ".local_validation/GAME035/engine_8.log",
+        "status": "PASS",
+        "checks": 1851,
+        "failures": []
+      }
+    ],
+    "native_total": 3527,
+    "new_payment_assertions": 44,
+    "python": {
+      "tests": 12,
+      "status": "PASS"
+    },
+    "source_proof": {
+      "base": "b795f9c1840d38c43e0fbe9b265e99cf141b086d",
+      "protected_count": 69,
+      "protected_files": {
+        "assets/characters/viya/spec/turnaround_contract.v1.json": "a8f65fa1637b49235d2158ef582f9d696a2cb13caddc86a5dd27dbeccbca117a",
+        "assets/characters/viya/spec/turnaround_r1_result.json": "6c337719be2f54e5ea35304cb32b4f5f6bf5b4cca987e00ce6b4d59a37983db8",
+        "assets/characters/viya/spec/turnaround_r2_result.json": "8ca504e6b4165cf9ced1addf06878c0bb7018030c070119c446345ac6ebcb421",
+        "assets/references/GEN-005_viya_combat_pose_three_quarter_front.png": "d3c0084c73aff9a706a50a6cac760d124c0647d23fa36e6ae30635dc6929a730",
+        "assets/references/README.md": "ccee5345d56bbe2ecdf03cc0a54eea7c61dd684f9582a3ec83284218742e18a5",
+        "assets/references/qa/viya_4view_alignment_preview.jpg": "8fbd8b3c99af7099de926ca3c39feae0217dd984ff959e314e51d2338786fd0c",
+        "assets/references/qa/viya_side_silhouette_comparison.jpg": "1f8fe11aa693d84ebec41db9b6bea3af2bf61f61fd80f2ffdd45f799acd23170",
+        "data/actor_presentation.json": "e82ae99f672bd3e6979778f9a6201efb659b160a3407d9b1b6099eb0e0257f04",
+        "data/chapter_one.json": "c32e288ddc61dc8193cd78de416d3682b7c11f1924bbaaa3ea4afe4b78104f76",
+        "data/combat_pacing.json": "d153666f7f77506da281d1f90ae5fbc5822cd997c6db76590f35ef8a6662d597",
+        "data/combat_profiles.json": "d36abf0b4d0feb950e6448474732decdac9f98035a9962e5f5287b09eb1d1144",
+        "data/destructibles.json": "130421dd85d4dbf9ff9f70ab297b36586870e65fb9426cec0c2f58ce57a49b39",
+        "data/gold_dungeon.json": "9a3427a6ddfb3462123f92e6918966ff7b1887ff324f368c600a9ad5993b1f9e",
+        "data/gold_rewards.json": "8f465cd44d1bf712b0fa758b2b8ff7cd17ecb450cff7f8e567d27f0397154993",
+        "data/maps.json": "925638f794696b96fdf48df8c266654cef3af002f43e57f91daa80f8d70e8bd4",
+        "data/presentation_slots.json": "d0a2e6ea1a55d37680bfa02ef9f9036f00deb03575ff9e9dcd10fa7179aa1001",
+        "data/prototype_skills.json": "a6ba197fe558d328e1fcab96506fa098465a4c72aebfe1a1b29cb98642628d1a",
+        "data/stages.json": "2e656d2dc155ad93c76b8a1303133992d95529283be7f5b16423738f4edaeeae",
+        "data/weapon_skills.json": "be23e1eb349958fcebf3dba088fcf389d50654fc31cb83523513c178ff81c659",
+        "project.godot": "0d8f7fce157178f7bf31acc183593b40f23cff6d266ea5270f4b75f0899b79e5",
+        "scenes/main.tscn": "17a2e77db7cf47af860de3c263dc9119b0df349bafdf2a8b52a40f7450c9e22c",
+        "scripts/combat/actor_motion.gd": "e75bfd25a61446500f5e4f9494bff583dd4d9dbcc4050c25d69ea9a435b53bb7",
+        "scripts/combat/approach_cues.gd": "a30074eec96a887c5fbdd99c96ea3ff247303974bd93fb7ef288eed2eaac6131",
+        "scripts/combat/attack_visuals.gd": "49e9acdb93325368fbf4c6d2732d11877e25f9daa829e6b00a466b74d339556f",
+        "scripts/combat/battle_forms.gd": "a0e9ebcf2cb5d369c0db53f089ab9bb9df0163b1f171908a57bd63f7e285ab95",
+        "scripts/combat/battle_projection.gd": "f8abad51e46f2353d01cc6f1f4b904485621d00ccf75e854ab873bc688f160a0",
+        "scripts/combat/battle_view.gd": "966d0e7fb608b0de067f6cfa02d0c611d2fba52be482a97ff76d6c139e25af34",
+        "scripts/combat/boss_guidance.gd": "d7c1195590ce6fedd3cc8c90cbcdfdf4a2aaf7b994fdfe1a26206e3a9709fef9",
+        "scripts/combat/combat_audio.gd": "9d8d1f2e1d6b617e63a5f8454d182b5e16f08b99b28ade31c1e24cb95be18d2b",
+        "scripts/combat/combat_audio_bank.gd": "589afc536b6514a10a86b5436bc5271ffa6c522452e12949842a1ba8ca65d9ce",
+        "scripts/combat/combat_camera.gd": "ecb81da9ebb62e9f2b84f9ba7ffb4de578646d5c3d5accad647fd63c74b09567",
+        "scripts/combat/combat_cues.gd": "990db858f95f0f0e109bc45d4a1382fcf843d01712be909640e6fa799a5734cf",
+        "scripts/combat/combat_display.gd": "dbb2493bf333b9972603f6cc5ae123010f5cd57e660133e44b4a9110a935d4f7",
+        "scripts/combat/combat_profiles.gd": "515689ca733856a0855739531ad4ebeddb20609839210df41c3b6f6202c898e0",
+        "scripts/combat/defense_rules.gd": "1fa247925d4d5a33dfdf7371285d9192b85b0cd83603efed33894693053691f8",
+        "scripts/combat/feedback_state.gd": "3ee19238fb9307bc9953fed3ecc266ecff420e2c74ceffe81409069372e87d88",
+        "scripts/combat/gold_dungeon.gd": "f7073b32297d4326a0abc973022d7280c53f92114d49db53933874118b3ccc0d",
+        "scripts/combat/high_angle_battle.gd": "3ae7b64f8cc7b8351ca147c40855041093d9d74fd3109ca531a54f5a7137c6e4",
+        "scripts/combat/incoming_feedback.gd": "71dfbafc9d3e58435afa40b2f1f427387ad899f118906cda72b028538fdb853b",
+        "scripts/combat/magic_state.gd": "41a9a7739edc46e98dda26986f23dddf1c0ff6bdf9b40d80640f797460b9223b",
+        "scripts/combat/run_state.gd": "6637a163edd9b7c0167c1867ff90e716ccd1ff12297c246258fd612d402f4773",
+        "scripts/combat/stage_catalog.gd": "8059f41d7134818deeea1978d2f81fddc2456d530e33479d458461004600516f",
+        "scripts/combat/structure_feedback.gd": "5eb5b6acd005b04652a1c337caaacfa47de2dfb0ca5a758ea06c5b4e3b4d6d11",
+        "scripts/combat/supply_feedback.gd": "09731b47d1cd26ed58fac503525ca349006efd8f3542545b4dd61f381c1f8287",
+        "scripts/combat/weapon_modules.gd": "a405c2ddad96a396c8e5e0820ac0d4ee4093a951c473ac7c849294e872616a2e",
+        "scripts/progression/account_talents.gd": "0774659235d3bea9276574996565b315156260274750ef8c7f9969f18550f43e",
+        "scripts/progression/combat_pacing.gd": "07f73dae843a7779f992976efb1901774782db1bd021bef01999a83ea7814826",
+        "scripts/progression/gold_progress.gd": "2289fc850fc5f856d674863de6119987da74ed6bd931ade50f0faa11ea0f7012",
+        "scripts/progression/growth_state.gd": "07287b03d12eac144dce6f1858ceb2b6561e6281b4c011ac6bc5d5d3c72a0e6e",
+        "scripts/progression/run_snapshot.gd": "068e7dc82a6ec7cec87075e7f64e2eb553752679f22ef88d84db0bfc33a11389",
+        "scripts/progression/run_store.gd": "bab493f1963ea2a6d98770f9ef9686d70d4b257e0b49afb3386de661a6081986",
+        "scripts/progression/skill_catalog.gd": "ccd13a2b02f4b57497beae39e483edfca53617cc3a39e43cbaf8009535c820d8",
+        "scripts/progression/weapon_catalog.gd": "aced8b45e765780b4053bfa436e1dbbc1696d2173cb4cb762f21298d5f91421b",
+        "scripts/ui/actor_assets.gd": "f98126291f60e27b9d903999c61f6a1c03a34555eb824a5fdd3e51db18a359c1",
+        "scripts/ui/asset_slots.gd": "b6f7edc881a4a4f658d3df115a2b7444fd2d8731cbc11fdb8048eddb56dc7353",
+        "scripts/ui/battle_chrome.gd": "6be2ec2203a0517ce6842d3c7979135ec7c94afaa5b69b1fff2508f083473a2a",
+        "scripts/ui/battle_save_notice.gd": "4030876186c66ae7de4ec2b8808d8b905881c40d0c0af29bd241f659dcdf2189",
+        "scripts/ui/city_preview.gd": "d01c0ca26b7d812b2b7d6d63339788be98241f6a09ec58a1a8d35a6f7b788937",
+        "scripts/ui/combat_skin.gd": "b9ed37f5c7f1831095805e13c6e3eaa986e762081209372cf8a4e09ff6608c66",
+        "scripts/ui/combat_slot_button.gd": "91a02ab52e8ebcb26985ae143dd596fbd4b62bd3fa6e440e5b0d12e44132a81d",
+        "scripts/ui/feedback_panel.gd": "2103fd9b8692c5606273175b415447f35a995f9a18306a5e8f0abeeb7c5d465b",
+        "scripts/ui/growth_overview.gd": "43dfb9306f4e280b57c8445b179c0e797938bc9fd0e5fa070053474cadb53a42",
+        "scripts/ui/hud_layout.gd": "d9a5dacd8e3816611b1658557c5366e1dbd6caeded4312d8f2e5e5584becddb6",
+        "scripts/ui/move_input.gd": "cee8e709185740d1cb964fff13873a0818d14d0b3653f36d6416a1b17da40bd8",
+        "scripts/ui/responsive_feedback_panel.gd": "b36ce744a7378d696b91018935f637da0ae88beccdeddd85b1187a238958ed5b",
+        "scripts/ui/skill_preview.gd": "5c3de40b161d38de44234f6f1a2c63064bbc99021c4def95f7995382b02af5db",
+        "scripts/world/map_catalog.gd": "952abbc81d539817dfdd98ed4a59185f13fb8c1adac0210839d176ebee087ea6",
+        "scripts/world/map_space.gd": "8110f4a28e04e67fe738011ea888f31a9c74c450ed79148d88c1da602fa03ae8",
+        "scripts/world/supply_catalog.gd": "1af21cb685b8da0858491a961f007e8a0511c24e0f70b0165e0051d7fcb310a1"
+      },
+      "main_after_reverting_only_result_text_hook_byte_identical": true,
+      "payment_formatter_has_no_write_settlement_rng_or_constructor_calls": true,
+      "unchanged_save_schema": 15,
+      "unchanged_rng_streams": 7,
+      "ownership": "Original RunState/Cues/Main persistence and settlement flow,GoldProgress/RunStore/Snapshot/data/assets/audio remain unchanged. Only result text hook and mobile display/recovery-control placement/final-overview content change."
+    },
+    "gui": {
+      "extra_native_audio_magic": 3,
+      "failures": [],
+      "native_dispatched_parallel_touch_cases": 100,
+      "native_master_slider_clicks": 2,
+      "reward_native_account_retries": 3,
+      "reward_native_battle_retries": 2,
+      "reward_native_forfeit_clicks": 4,
+      "reward_native_lobby_clicks": 1,
+      "reward_native_overview_closes": 1,
+      "reward_native_overview_opens": 3,
+      "save_native_continue_clicks": 5,
+      "save_native_retry_clicks": 1,
+      "scope": "Actual X11/current-result paid/pending/unpaid/recorded,real writes/native retries/overview/forfeit plus inherited gameplay/UI regression. Receipt values,clock jumps and previous crowd/pose fixtures are QA,not new natural income/campaign/device proof.",
+      "status": "PASS",
+      "structure_native_continue_clicks": 1,
+      "structure_native_magic_touches": 2,
+      "supply_native_choice_clicks": 1
+    },
+    "gui_capture_count": 129,
+    "inherited_main_gui_capture_count": 108,
+    "new_payment_capture_count": 21,
+    "new_payment_records": [
+      {
+        "actor_animation": "shape",
+        "actor_cache": 1,
+        "actor_frame": -1,
+        "actor_pose": "idle",
+        "audio_active": 1,
+        "audio_played": {
+          "clear": 1
+        },
+        "battle_ratio": 0.747455912098246,
+        "boss_guidance": "{  }",
+        "camera_offset": "(0.0, 0.0)",
+        "display_dense": false,
+        "display_labels": 1,
+        "draw_counts": {
+          "actors": 0,
+          "commands": 6,
+          "detailed_actors": true,
+          "display_dense": false,
+          "effects": 0,
+          "labels": 1,
+          "occluders": 0,
+          "skipped_links": 0,
+          "tiles": 154
+        },
+        "image": "reward_campaign_paid",
+        "incoming": "{  }",
+        "master_muted": false,
+        "mission_caption": "최후의 성벽 방어 ▸",
+        "planned_overlaps": 0,
+        "raw_events": 2,
+        "raw_label_boxes": 1,
+        "raw_label_overlaps": 0,
+        "reaction": "전투 종료",
+        "received": "[]",
+        "render_center": "(2500.0, 600.0)",
+        "renderer_high": true,
+        "result_text": "Lv.1 / 생존 360.0초 / 처치 1\n발사 0회 / 고유 마법 0회\n캠페인 S1\n지급 완료 · 168 금화\n기본 보상 100 + 획득 금화 68 = 총 168 금화\n보유 금화 168",
+        "reward_payment": {
+          "recorded": true,
+          "saved": true,
+          "state": "paid",
+          "text": "캠페인 S1\n지급 완료 · 168 금화\n기본 보상 100 + 획득 금화 68 = 총 168 금화\n보유 금화 168"
+        },
+        "save_checkpoint": 0,
+        "save_context": "",
+        "save_sequence": 0,
+        "save_until": -1.0,
+        "spawn_guard": "[P: (1764.115, 248.5852), S: (1471.771, 702.8296)]",
+        "structure_labels": [],
+        "structure_markers": [],
+        "supply_items": [],
+        "supply_receipts": [],
+        "viewport": "(1280, 720)"
+      },
+      {
+        "actor_animation": "shape",
+        "actor_cache": 1,
+        "actor_frame": -1,
+        "actor_pose": "idle",
+        "audio_active": 1,
+        "audio_played": {
+          "clear": 1
+        },
+        "battle_ratio": 0.72656833669527,
+        "boss_guidance": "{  }",
+        "camera_offset": "(0.0, 0.0)",
+        "display_dense": false,
+        "display_labels": 1,
+        "draw_counts": {
+          "actors": 0,
+          "commands": 4,
+          "detailed_actors": true,
+          "display_dense": false,
+          "effects": 0,
+          "labels": 1,
+          "occluders": 0,
+          "skipped_links": 0,
+          "tiles": 70
+        },
+        "image": "reward_paid_compact",
+        "incoming": "{  }",
+        "master_muted": false,
+        "mission_caption": "임무 ▸",
+        "planned_overlaps": 0,
+        "raw_events": 2,
+        "raw_label_boxes": 1,
+        "raw_label_overlaps": 0,
+        "reaction": "전투 종료",
+        "received": "[]",
+        "render_center": "(2500.0, 600.0)",
+        "renderer_high": true,
+        "result_text": "Lv.1 / 생존 360.0초 / 처치 1\n발사 0회 / 고유 마법 0회\n캠페인 S1\n지급 완료 · 168 금화\n기본 보상 100 + 획득 금화 68 = 총 168 금화\n보유 금화 168",
+        "reward_payment": {
+          "recorded": true,
+          "saved": true,
+          "state": "paid",
+          "text": "캠페인 S1\n지급 완료 · 168 금화\n기본 보상 100 + 획득 금화 68 = 총 168 금화\n보유 금화 168"
+        },
+        "save_checkpoint": 0,
+        "save_context": "",
+        "save_sequence": 0,
+        "save_until": -1.0,
+        "spawn_guard": "[P: (2041.136, 421.9037), S: (917.727, 356.1926)]",
+        "structure_labels": [],
+        "structure_markers": [],
+        "supply_items": [],
+        "supply_receipts": [],
+        "viewport": "(853, 384)"
+      },
+      {
+        "actor_animation": "shape",
+        "actor_cache": 1,
+        "actor_frame": -1,
+        "actor_pose": "idle",
+        "audio_active": 0,
+        "audio_played": {
+          "clear": 1
+        },
+        "battle_ratio": 0.72656833669527,
+        "boss_guidance": "{  }",
+        "camera_offset": "(0.0, 0.0)",
+        "display_dense": false,
+        "display_labels": 1,
+        "draw_counts": {
+          "actors": 0,
+          "commands": 4,
+          "detailed_actors": true,
+          "display_dense": false,
+          "effects": 0,
+          "labels": 1,
+          "occluders": 0,
+          "skipped_links": 0,
+          "tiles": 70
+        },
+        "image": "reward_final_overview",
+        "incoming": "{  }",
+        "master_muted": false,
+        "mission_caption": "임무 ▸",
+        "planned_overlaps": 0,
+        "raw_events": 2,
+        "raw_label_boxes": 1,
+        "raw_label_overlaps": 0,
+        "reaction": "전투 종료",
+        "received": "[]",
+        "render_center": "(2500.0, 600.0)",
+        "renderer_high": true,
+        "result_text": "",
+        "reward_payment": {
+          "recorded": true,
+          "saved": true,
+          "state": "paid",
+          "text": "캠페인 S1\n지급 완료 · 168 금화\n기본 보상 100 + 획득 금화 68 = 총 168 금화\n보유 금화 168"
+        },
+        "save_checkpoint": 0,
+        "save_context": "",
+        "save_sequence": 0,
+        "save_until": -1.0,
+        "spawn_guard": "[P: (2041.136, 421.9037), S: (917.727, 356.1926)]",
+        "structure_labels": [],
+        "structure_markers": [],
+        "supply_items": [],
+        "supply_receipts": [],
+        "viewport": "(853, 384)"
+      },
+      {
+        "actor_animation": "shape",
+        "actor_cache": 1,
+        "actor_frame": -1,
+        "actor_pose": "idle",
+        "audio_active": 0,
+        "audio_played": {
+          "clear": 1
+        },
+        "battle_ratio": 0.72656833669527,
+        "boss_guidance": "{  }",
+        "camera_offset": "(0.0, 0.0)",
+        "display_dense": false,
+        "display_labels": 1,
+        "draw_counts": {
+          "actors": 0,
+          "commands": 4,
+          "detailed_actors": true,
+          "display_dense": false,
+          "effects": 0,
+          "labels": 1,
+          "occluders": 0,
+          "skipped_links": 0,
+          "tiles": 70
+        },
+        "image": "reward_already_recorded",
+        "incoming": "{  }",
+        "master_muted": false,
+        "mission_caption": "임무 ▸",
+        "planned_overlaps": 0,
+        "raw_events": 2,
+        "raw_label_boxes": 1,
+        "raw_label_overlaps": 0,
+        "reaction": "전투 종료",
+        "received": "[]",
+        "render_center": "(2500.0, 600.0)",
+        "renderer_high": true,
+        "result_text": "Lv.1 / 생존 360.0초 / 처치 1\n발사 0회 / 고유 마법 0회\n캠페인 S1\n지급 기록 있음 · 저장 확인 필요\n기본 보상 100 + 획득 금화 68 = 총 168 금화\n마지막 확인 금화 168\n전투 결과 저장 확인 필요",
+        "reward_payment": {
+          "recorded": true,
+          "saved": false,
+          "state": "recorded",
+          "text": "캠페인 S1\n지급 기록 있음 · 저장 확인 필요\n기본 보상 100 + 획득 금화 68 = 총 168 금화\n마지막 확인 금화 168\n전투 결과 저장 확인 필요"
+        },
+        "save_checkpoint": 0,
+        "save_context": "",
+        "save_sequence": 0,
+        "save_until": -1.0,
+        "spawn_guard": "[P: (2041.136, 421.9037), S: (917.727, 356.1926)]",
+        "structure_labels": [],
+        "structure_markers": [],
+        "supply_items": [],
+        "supply_receipts": [],
+        "viewport": "(853, 384)"
+      },
+      {
+        "actor_animation": "shape",
+        "actor_cache": 1,
+        "actor_frame": -1,
+        "actor_pose": "idle",
+        "audio_active": 0,
+        "audio_played": {
+          "clear": 1
+        },
+        "battle_ratio": 0.72656833669527,
+        "boss_guidance": "{  }",
+        "camera_offset": "(0.0, 0.0)",
+        "display_dense": false,
+        "display_labels": 1,
+        "draw_counts": {
+          "actors": 0,
+          "commands": 4,
+          "detailed_actors": true,
+          "display_dense": false,
+          "effects": 0,
+          "labels": 1,
+          "occluders": 0,
+          "skipped_links": 0,
+          "tiles": 70
+        },
+        "image": "reward_record_reconfirmed",
+        "incoming": "{  }",
+        "master_muted": false,
+        "mission_caption": "임무 ▸",
+        "planned_overlaps": 0,
+        "raw_events": 2,
+        "raw_label_boxes": 1,
+        "raw_label_overlaps": 0,
+        "reaction": "전투 종료",
+        "received": "[]",
+        "render_center": "(2500.0, 600.0)",
+        "renderer_high": true,
+        "result_text": "Lv.1 / 생존 360.0초 / 처치 1\n발사 0회 / 고유 마법 0회\n캠페인 S1\n지급 완료 · 168 금화\n기본 보상 100 + 획득 금화 68 = 총 168 금화\n보유 금화 168",
+        "reward_payment": {
+          "recorded": true,
+          "saved": true,
+          "state": "paid",
+          "text": "캠페인 S1\n지급 완료 · 168 금화\n기본 보상 100 + 획득 금화 68 = 총 168 금화\n보유 금화 168"
+        },
+        "save_checkpoint": 0,
+        "save_context": "",
+        "save_sequence": 0,
+        "save_until": -1.0,
+        "spawn_guard": "[P: (2041.136, 421.9037), S: (917.727, 356.1926)]",
+        "structure_labels": [],
+        "structure_markers": [],
+        "supply_items": [],
+        "supply_receipts": [],
+        "viewport": "(853, 384)"
+      },
+      {
+        "actor_animation": "shape",
+        "actor_cache": 1,
+        "actor_frame": -1,
+        "actor_pose": "idle",
+        "audio_active": 0,
+        "audio_played": {
+          "clear": 1
+        },
+        "battle_ratio": 0.72656833669527,
+        "boss_guidance": "{  }",
+        "camera_offset": "(0.0, 0.0)",
+        "display_dense": false,
+        "display_labels": 1,
+        "draw_counts": {
+          "actors": 0,
+          "commands": 4,
+          "detailed_actors": true,
+          "display_dense": false,
+          "effects": 0,
+          "labels": 1,
+          "occluders": 0,
+          "skipped_links": 0,
+          "tiles": 70
+        },
+        "image": "reward_lobby_overview",
+        "incoming": "{  }",
+        "master_muted": false,
+        "mission_caption": "임무 ▸",
+        "planned_overlaps": 0,
+        "raw_events": 2,
+        "raw_label_boxes": 1,
+        "raw_label_overlaps": 0,
+        "reaction": "전투 종료",
+        "received": "[]",
+        "render_center": "(2500.0, 600.0)",
+        "renderer_high": true,
+        "result_text": "",
+        "reward_payment": {
+          "recorded": true,
+          "saved": true,
+          "state": "paid",
+          "text": "캠페인 S1\n지급 완료 · 168 금화\n기본 보상 100 + 획득 금화 68 = 총 168 금화\n보유 금화 168"
+        },
+        "save_checkpoint": 0,
+        "save_context": "",
+        "save_sequence": 0,
+        "save_until": -1.0,
+        "spawn_guard": "[P: (2041.136, 421.9037), S: (917.727, 356.1926)]",
+        "structure_labels": [],
+        "structure_markers": [],
+        "supply_items": [],
+        "supply_receipts": [],
+        "viewport": "(853, 384)"
+      },
+      {
+        "actor_animation": "shape",
+        "actor_cache": 1,
+        "actor_frame": -1,
+        "actor_pose": "idle",
+        "audio_active": 1,
+        "audio_played": {
+          "clear": 1
+        },
+        "battle_ratio": 0.747455912098246,
+        "boss_guidance": "{  }",
+        "camera_offset": "(0.0, 0.0)",
+        "display_dense": false,
+        "display_labels": 1,
+        "draw_counts": {
+          "actors": 0,
+          "commands": 6,
+          "detailed_actors": true,
+          "display_dense": false,
+          "effects": 0,
+          "labels": 1,
+          "occluders": 0,
+          "skipped_links": 0,
+          "tiles": 154
+        },
+        "image": "reward_campaign_pending",
+        "incoming": "{  }",
+        "master_muted": false,
+        "mission_caption": "최후의 성벽 방어 ▸",
+        "planned_overlaps": 0,
+        "raw_events": 2,
+        "raw_label_boxes": 1,
+        "raw_label_overlaps": 0,
+        "reaction": "전투 종료",
+        "received": "[]",
+        "render_center": "(2500.0, 600.0)",
+        "renderer_high": true,
+        "result_text": "Lv.1 / 생존 360.0초 / 처치 1\n발사 0회 / 고유 마법 0회\n캠페인 S1\n지급 대기 · 예정 168 금화\n기본 보상 100 + 획득 금화 68 = 정산 대상 168 금화\n마지막 확인 금화 0\n금화 저장 확인 필요",
+        "reward_payment": {
+          "recorded": false,
+          "saved": true,
+          "state": "pending",
+          "text": "캠페인 S1\n지급 대기 · 예정 168 금화\n기본 보상 100 + 획득 금화 68 = 정산 대상 168 금화\n마지막 확인 금화 0\n금화 저장 확인 필요"
+        },
+        "save_checkpoint": 0,
+        "save_context": "",
+        "save_sequence": 0,
+        "save_until": -1.0,
+        "spawn_guard": "[P: (1764.115, 248.5852), S: (1471.771, 702.8296)]",
+        "structure_labels": [],
+        "structure_markers": [],
+        "supply_items": [],
+        "supply_receipts": [],
+        "viewport": "(1280, 720)"
+      },
+      {
+        "actor_animation": "shape",
+        "actor_cache": 1,
+        "actor_frame": -1,
+        "actor_pose": "idle",
+        "audio_active": 1,
+        "audio_played": {
+          "clear": 1
+        },
+        "battle_ratio": 0.72656833669527,
+        "boss_guidance": "{  }",
+        "camera_offset": "(0.0, 0.0)",
+        "display_dense": false,
+        "display_labels": 1,
+        "draw_counts": {
+          "actors": 0,
+          "commands": 4,
+          "detailed_actors": true,
+          "display_dense": false,
+          "effects": 0,
+          "labels": 1,
+          "occluders": 0,
+          "skipped_links": 0,
+          "tiles": 70
+        },
+        "image": "reward_pending_compact",
+        "incoming": "{  }",
+        "master_muted": false,
+        "mission_caption": "임무 ▸",
+        "planned_overlaps": 0,
+        "raw_events": 2,
+        "raw_label_boxes": 1,
+        "raw_label_overlaps": 0,
+        "reaction": "전투 종료",
+        "received": "[]",
+        "render_center": "(2500.0, 600.0)",
+        "renderer_high": true,
+        "result_text": "Lv.1 / 생존 360.0초 / 처치 1\n발사 0회 / 고유 마법 0회\n캠페인 S1\n지급 대기 · 예정 168 금화\n기본 보상 100 + 획득 금화 68 = 정산 대상 168 금화\n마지막 확인 금화 0\n금화 저장 확인 필요",
+        "reward_payment": {
+          "recorded": false,
+          "saved": true,
+          "state": "pending",
+          "text": "캠페인 S1\n지급 대기 · 예정 168 금화\n기본 보상 100 + 획득 금화 68 = 정산 대상 168 금화\n마지막 확인 금화 0\n금화 저장 확인 필요"
+        },
+        "save_checkpoint": 0,
+        "save_context": "",
+        "save_sequence": 0,
+        "save_until": -1.0,
+        "spawn_guard": "[P: (2041.136, 421.9037), S: (917.727, 356.1926)]",
+        "structure_labels": [],
+        "structure_markers": [],
+        "supply_items": [],
+        "supply_receipts": [],
+        "viewport": "(853, 384)"
+      },
+      {
+        "actor_animation": "shape",
+        "actor_cache": 1,
+        "actor_frame": -1,
+        "actor_pose": "idle",
+        "audio_active": 0,
+        "audio_played": {
+          "clear": 1
+        },
+        "battle_ratio": 0.72656833669527,
+        "boss_guidance": "{  }",
+        "camera_offset": "(0.0, 0.0)",
+        "display_dense": false,
+        "display_labels": 1,
+        "draw_counts": {
+          "actors": 0,
+          "commands": 4,
+          "detailed_actors": true,
+          "display_dense": false,
+          "effects": 0,
+          "labels": 1,
+          "occluders": 0,
+          "skipped_links": 0,
+          "tiles": 70
+        },
+        "image": "reward_retry_paid",
+        "incoming": "{  }",
+        "master_muted": false,
+        "mission_caption": "임무 ▸",
+        "planned_overlaps": 0,
+        "raw_events": 2,
+        "raw_label_boxes": 1,
+        "raw_label_overlaps": 0,
+        "reaction": "전투 종료",
+        "received": "[]",
+        "render_center": "(2500.0, 600.0)",
+        "renderer_high": true,
+        "result_text": "Lv.1 / 생존 360.0초 / 처치 1\n발사 0회 / 고유 마법 0회\n캠페인 S1\n지급 완료 · 168 금화\n기본 보상 100 + 획득 금화 68 = 총 168 금화\n보유 금화 168",
+        "reward_payment": {
+          "recorded": true,
+          "saved": true,
+          "state": "paid",
+          "text": "캠페인 S1\n지급 완료 · 168 금화\n기본 보상 100 + 획득 금화 68 = 총 168 금화\n보유 금화 168"
+        },
+        "save_checkpoint": 0,
+        "save_context": "",
+        "save_sequence": 0,
+        "save_until": -1.0,
+        "spawn_guard": "[P: (2041.136, 421.9037), S: (917.727, 356.1926)]",
+        "structure_labels": [],
+        "structure_markers": [],
+        "supply_items": [],
+        "supply_receipts": [],
+        "viewport": "(853, 384)"
+      },
+      {
+        "actor_animation": "shape",
+        "actor_cache": 1,
+        "actor_frame": -1,
+        "actor_pose": "idle",
+        "audio_active": 1,
+        "audio_played": {
+          "clear": 1
+        },
+        "battle_ratio": 0.747455912098246,
+        "boss_guidance": "{  }",
+        "camera_offset": "(0.0, 0.0)",
+        "display_dense": false,
+        "display_labels": 1,
+        "draw_counts": {
+          "actors": 0,
+          "commands": 6,
+          "detailed_actors": true,
+          "display_dense": false,
+          "effects": 0,
+          "labels": 1,
+          "occluders": 0,
+          "skipped_links": 0,
+          "tiles": 154
+        },
+        "image": "reward_battle_pending",
+        "incoming": "{  }",
+        "master_muted": false,
+        "mission_caption": "최후의 성벽 방어 ▸",
+        "planned_overlaps": 0,
+        "raw_events": 2,
+        "raw_label_boxes": 1,
+        "raw_label_overlaps": 0,
+        "reaction": "전투 종료",
+        "received": "[]",
+        "render_center": "(2500.0, 600.0)",
+        "renderer_high": true,
+        "result_text": "Lv.1 / 생존 360.0초 / 처치 1\n발사 0회 / 고유 마법 0회\n캠페인 S1\n지급 대기 · 예정 168 금화\n기본 보상 100 + 획득 금화 68 = 정산 대상 168 금화\n마지막 확인 금화 0\n전투 결과 저장 확인 필요",
+        "reward_payment": {
+          "recorded": false,
+          "saved": false,
+          "state": "pending",
+          "text": "캠페인 S1\n지급 대기 · 예정 168 금화\n기본 보상 100 + 획득 금화 68 = 정산 대상 168 금화\n마지막 확인 금화 0\n전투 결과 저장 확인 필요"
+        },
+        "save_checkpoint": 0,
+        "save_context": "",
+        "save_sequence": 0,
+        "save_until": -1.0,
+        "spawn_guard": "[P: (1764.115, 248.5852), S: (1471.771, 702.8296)]",
+        "structure_labels": [],
+        "structure_markers": [],
+        "supply_items": [],
+        "supply_receipts": [],
+        "viewport": "(1280, 720)"
+      },
+      {
+        "actor_animation": "shape",
+        "actor_cache": 1,
+        "actor_frame": -1,
+        "actor_pose": "idle",
+        "audio_active": 0,
+        "audio_played": {
+          "clear": 1
+        },
+        "battle_ratio": 0.747455912098246,
+        "boss_guidance": "{  }",
+        "camera_offset": "(0.0, 0.0)",
+        "display_dense": false,
+        "display_labels": 1,
+        "draw_counts": {
+          "actors": 0,
+          "commands": 6,
+          "detailed_actors": true,
+          "display_dense": false,
+          "effects": 0,
+          "labels": 1,
+          "occluders": 0,
+          "skipped_links": 0,
+          "tiles": 154
+        },
+        "image": "reward_battle_retry_paid",
+        "incoming": "{  }",
+        "master_muted": false,
+        "mission_caption": "최후의 성벽 방어 ▸",
+        "planned_overlaps": 0,
+        "raw_events": 2,
+        "raw_label_boxes": 1,
+        "raw_label_overlaps": 0,
+        "reaction": "전투 종료",
+        "received": "[]",
+        "render_center": "(2500.0, 600.0)",
+        "renderer_high": true,
+        "result_text": "Lv.1 / 생존 360.0초 / 처치 1\n발사 0회 / 고유 마법 0회\n캠페인 S1\n지급 완료 · 168 금화\n기본 보상 100 + 획득 금화 68 = 총 168 금화\n보유 금화 168",
+        "reward_payment": {
+          "recorded": true,
+          "saved": true,
+          "state": "paid",
+          "text": "캠페인 S1\n지급 완료 · 168 금화\n기본 보상 100 + 획득 금화 68 = 총 168 금화\n보유 금화 168"
+        },
+        "save_checkpoint": 0,
+        "save_context": "",
+        "save_sequence": 0,
+        "save_until": -1.0,
+        "spawn_guard": "[P: (1764.115, 248.5852), S: (1471.771, 702.8296)]",
+        "structure_labels": [],
+        "structure_markers": [],
+        "supply_items": [],
+        "supply_receipts": [],
+        "viewport": "(1280, 720)"
+      },
+      {
+        "actor_animation": "shape",
+        "actor_cache": 0,
+        "actor_frame": -1,
+        "actor_pose": "idle",
+        "audio_active": 0,
+        "audio_played": {},
+        "battle_ratio": 0.747455912098246,
+        "boss_guidance": "{  }",
+        "camera_offset": "(0.0, 0.0)",
+        "display_dense": false,
+        "display_labels": 0,
+        "draw_counts": {
+          "actors": 0,
+          "commands": 6,
+          "detailed_actors": true,
+          "display_dense": false,
+          "effects": 0,
+          "labels": 0,
+          "occluders": 0,
+          "skipped_links": 0,
+          "tiles": 154
+        },
+        "image": "reward_defeat",
+        "incoming": "{  }",
+        "master_muted": false,
+        "mission_caption": "최후의 성벽 방어 ▸",
+        "planned_overlaps": 0,
+        "raw_events": 0,
+        "raw_label_boxes": 0,
+        "raw_label_overlaps": 0,
+        "reaction": "전투 종료",
+        "received": "[{ \"serial\": 1, \"kind\": \"unknown\", \"id\": 0, \"p\": (2500.0, 600.0), \"origin\": (2500.0, 600.0), \"direction\": (0.0, 0.0), \"amount\": 100, \"life\": 0.55, \"duration\": 0.55 }]",
+        "render_center": "(2500.0, 600.0)",
+        "renderer_high": true,
+        "result_text": "Lv.1 / 생존 0.0초 / 처치 0\n발사 0회 / 고유 마법 0회\n캠페인 S1\n보상 미지급 · 0 금화\n획득 금화 321 · 클리어 보상 미지급\n보유 금화 0",
+        "reward_payment": {
+          "recorded": false,
+          "saved": true,
+          "state": "unpaid",
+          "text": "캠페인 S1\n보상 미지급 · 0 금화\n획득 금화 321 · 클리어 보상 미지급\n보유 금화 0"
+        },
+        "save_checkpoint": 0,
+        "save_context": "",
+        "save_sequence": 0,
+        "save_until": -1.0,
+        "spawn_guard": "[P: (1764.115, 248.5852), S: (1471.771, 702.8296)]",
+        "structure_labels": [],
+        "structure_markers": [],
+        "supply_items": [],
+        "supply_receipts": [],
+        "viewport": "(1280, 720)"
+      },
+      {
+        "actor_animation": "shape",
+        "actor_cache": 1,
+        "actor_frame": -1,
+        "actor_pose": "idle",
+        "audio_active": 1,
+        "audio_played": {
+          "defeat": 1
+        },
+        "battle_ratio": 0.747455912098246,
+        "boss_guidance": "{  }",
+        "camera_offset": "(0.0, 0.0)",
+        "display_dense": false,
+        "display_labels": 0,
+        "draw_counts": {
+          "actors": 0,
+          "commands": 6,
+          "detailed_actors": true,
+          "display_dense": false,
+          "effects": 0,
+          "labels": 0,
+          "occluders": 0,
+          "skipped_links": 0,
+          "tiles": 154
+        },
+        "image": "reward_timeout",
+        "incoming": "{  }",
+        "master_muted": false,
+        "mission_caption": "최후의 성벽 방어 ▸",
+        "planned_overlaps": 0,
+        "raw_events": 0,
+        "raw_label_boxes": 0,
+        "raw_label_overlaps": 0,
+        "reaction": "전투 종료",
+        "received": "[]",
+        "render_center": "(2500.0, 600.0)",
+        "renderer_high": true,
+        "result_text": "Lv.1 / 생존 360.0초 / 처치 0\n발사 0회 / 고유 마법 0회\n캠페인 S1\n보상 미지급 · 0 금화\n획득 금화 321 · 클리어 보상 미지급\n보유 금화 0",
+        "reward_payment": {
+          "recorded": false,
+          "saved": true,
+          "state": "unpaid",
+          "text": "캠페인 S1\n보상 미지급 · 0 금화\n획득 금화 321 · 클리어 보상 미지급\n보유 금화 0"
+        },
+        "save_checkpoint": 0,
+        "save_context": "",
+        "save_sequence": 0,
+        "save_until": -1.0,
+        "spawn_guard": "[P: (1764.115, 248.5852), S: (1471.771, 702.8296)]",
+        "structure_labels": [],
+        "structure_markers": [],
+        "supply_items": [],
+        "supply_receipts": [],
+        "viewport": "(1280, 720)"
+      },
+      {
+        "actor_animation": "shape",
+        "actor_cache": 1,
+        "actor_frame": -1,
+        "actor_pose": "idle",
+        "audio_active": 1,
+        "audio_played": {
+          "defeat": 1
+        },
+        "battle_ratio": 0.72656833669527,
+        "boss_guidance": "{  }",
+        "camera_offset": "(0.0, 0.0)",
+        "display_dense": false,
+        "display_labels": 0,
+        "draw_counts": {
+          "actors": 0,
+          "commands": 4,
+          "detailed_actors": true,
+          "display_dense": false,
+          "effects": 0,
+          "labels": 0,
+          "occluders": 0,
+          "skipped_links": 0,
+          "tiles": 70
+        },
+        "image": "reward_timeout_compact",
+        "incoming": "{  }",
+        "master_muted": false,
+        "mission_caption": "임무 ▸",
+        "planned_overlaps": 0,
+        "raw_events": 0,
+        "raw_label_boxes": 0,
+        "raw_label_overlaps": 0,
+        "reaction": "전투 종료",
+        "received": "[]",
+        "render_center": "(2500.0, 600.0)",
+        "renderer_high": true,
+        "result_text": "Lv.1 / 생존 360.0초 / 처치 0\n발사 0회 / 고유 마법 0회\n캠페인 S1\n보상 미지급 · 0 금화\n획득 금화 321 · 클리어 보상 미지급\n보유 금화 0",
+        "reward_payment": {
+          "recorded": false,
+          "saved": true,
+          "state": "unpaid",
+          "text": "캠페인 S1\n보상 미지급 · 0 금화\n획득 금화 321 · 클리어 보상 미지급\n보유 금화 0"
+        },
+        "save_checkpoint": 0,
+        "save_context": "",
+        "save_sequence": 0,
+        "save_until": -1.0,
+        "spawn_guard": "[P: (2041.136, 421.9037), S: (917.727, 356.1926)]",
+        "structure_labels": [],
+        "structure_markers": [],
+        "supply_items": [],
+        "supply_receipts": [],
+        "viewport": "(853, 384)"
+      },
+      {
+        "actor_animation": "shape",
+        "actor_cache": 0,
+        "actor_frame": -1,
+        "actor_pose": "idle",
+        "audio_active": 0,
+        "audio_played": {},
+        "battle_ratio": 0.747455912098246,
+        "boss_guidance": "{  }",
+        "camera_offset": "(0.0, 0.0)",
+        "display_dense": false,
+        "display_labels": 0,
+        "draw_counts": {
+          "actors": 0,
+          "commands": 6,
+          "detailed_actors": true,
+          "display_dense": false,
+          "effects": 0,
+          "labels": 0,
+          "occluders": 0,
+          "skipped_links": 0,
+          "tiles": 154
+        },
+        "image": "reward_abandoned",
+        "incoming": "{  }",
+        "master_muted": false,
+        "mission_caption": "최후의 성벽 방어 ▸",
+        "planned_overlaps": 0,
+        "raw_events": 0,
+        "raw_label_boxes": 0,
+        "raw_label_overlaps": 0,
+        "reaction": "전투 종료",
+        "received": "[]",
+        "render_center": "(2500.0, 600.0)",
+        "renderer_high": true,
+        "result_text": "Lv.1 / 생존 0.0초 / 처치 0\n발사 0회 / 고유 마법 0회\n캠페인 S1\n보상 미지급 · 0 금화\n획득 금화 321 · 클리어 보상 미지급\n보유 금화 0",
+        "reward_payment": {
+          "recorded": false,
+          "saved": true,
+          "state": "unpaid",
+          "text": "캠페인 S1\n보상 미지급 · 0 금화\n획득 금화 321 · 클리어 보상 미지급\n보유 금화 0"
+        },
+        "save_checkpoint": 0,
+        "save_context": "",
+        "save_sequence": 0,
+        "save_until": -1.0,
+        "spawn_guard": "[P: (1764.115, 248.5852), S: (1471.771, 702.8296)]",
+        "structure_labels": [],
+        "structure_markers": [],
+        "supply_items": [],
+        "supply_receipts": [],
+        "viewport": "(1280, 720)"
+      },
+      {
+        "actor_animation": "shape",
+        "actor_cache": 0,
+        "actor_frame": -1,
+        "actor_pose": "idle",
+        "audio_active": 0,
+        "audio_played": {},
+        "battle_ratio": 0.747455912098246,
+        "boss_guidance": "{  }",
+        "camera_offset": "(0.0, 0.0)",
+        "display_dense": false,
+        "display_labels": 0,
+        "draw_counts": {
+          "actors": 0,
+          "commands": 1,
+          "detailed_actors": true,
+          "display_dense": false,
+          "effects": 0,
+          "labels": 0,
+          "occluders": 0,
+          "skipped_links": 0,
+          "tiles": 168
+        },
+        "image": "reward_dungeon_pending",
+        "incoming": "{  }",
+        "master_muted": false,
+        "mission_caption": "전투 임무 ▸",
+        "planned_overlaps": 0,
+        "raw_events": 0,
+        "raw_label_boxes": 0,
+        "raw_label_overlaps": 0,
+        "reaction": "전투 종료",
+        "received": "[]",
+        "render_center": "(1800.0, 1200.0)",
+        "renderer_high": true,
+        "result_text": "Lv.1 / 생존 180.0초 / 처치 0\n발사 0회 / 고유 마법 0회\n골드 슬라임 던전\n지급 대기 · 예정 100000 금화\n기본 보상 0 + 획득 금화 100000 = 정산 대상 100000 금화\n마지막 확인 금화 0\n금화 저장 확인 필요",
+        "reward_payment": {
+          "recorded": false,
+          "saved": true,
+          "state": "pending",
+          "text": "골드 슬라임 던전\n지급 대기 · 예정 100000 금화\n기본 보상 0 + 획득 금화 100000 = 정산 대상 100000 금화\n마지막 확인 금화 0\n금화 저장 확인 필요"
+        },
+        "save_checkpoint": 0,
+        "save_context": "",
+        "save_sequence": 0,
+        "save_until": -1.0,
+        "spawn_guard": "[P: (1064.115, 848.5852), S: (1471.771, 702.8296)]",
+        "structure_labels": [],
+        "structure_markers": [],
+        "supply_items": [],
+        "supply_receipts": [],
+        "viewport": "(1280, 720)"
+      },
+      {
+        "actor_animation": "shape",
+        "actor_cache": 0,
+        "actor_frame": -1,
+        "actor_pose": "idle",
+        "audio_active": 0,
+        "audio_played": {},
+        "battle_ratio": 0.72656833669527,
+        "boss_guidance": "{  }",
+        "camera_offset": "(0.0, 0.0)",
+        "display_dense": false,
+        "display_labels": 0,
+        "draw_counts": {
+          "actors": 0,
+          "commands": 1,
+          "detailed_actors": true,
+          "display_dense": false,
+          "effects": 0,
+          "labels": 0,
+          "occluders": 0,
+          "skipped_links": 0,
+          "tiles": 80
+        },
+        "image": "reward_dungeon_pending_compact",
+        "incoming": "{  }",
+        "master_muted": false,
+        "mission_caption": "임무 ▸",
+        "planned_overlaps": 0,
+        "raw_events": 0,
+        "raw_label_boxes": 0,
+        "raw_label_overlaps": 0,
+        "reaction": "전투 종료",
+        "received": "[]",
+        "render_center": "(1800.0, 1200.0)",
+        "renderer_high": true,
+        "result_text": "Lv.1 / 생존 180.0초 / 처치 0\n발사 0회 / 고유 마법 0회\n골드 슬라임 던전\n지급 대기 · 예정 100000 금화\n기본 보상 0 + 획득 금화 100000 = 정산 대상 100000 금화\n마지막 확인 금화 0\n금화 저장 확인 필요",
+        "reward_payment": {
+          "recorded": false,
+          "saved": true,
+          "state": "pending",
+          "text": "골드 슬라임 던전\n지급 대기 · 예정 100000 금화\n기본 보상 0 + 획득 금화 100000 = 정산 대상 100000 금화\n마지막 확인 금화 0\n금화 저장 확인 필요"
+        },
+        "save_checkpoint": 0,
+        "save_context": "",
+        "save_sequence": 0,
+        "save_until": -1.0,
+        "spawn_guard": "[P: (1341.136, 1021.904), S: (917.727, 356.1926)]",
+        "structure_labels": [],
+        "structure_markers": [],
+        "supply_items": [],
+        "supply_receipts": [],
+        "viewport": "(853, 384)"
+      },
+      {
+        "actor_animation": "shape",
+        "actor_cache": 0,
+        "actor_frame": -1,
+        "actor_pose": "idle",
+        "audio_active": 0,
+        "audio_played": {},
+        "battle_ratio": 0.72656833669527,
+        "boss_guidance": "{  }",
+        "camera_offset": "(0.0, 0.0)",
+        "display_dense": false,
+        "display_labels": 0,
+        "draw_counts": {
+          "actors": 0,
+          "commands": 1,
+          "detailed_actors": true,
+          "display_dense": false,
+          "effects": 0,
+          "labels": 0,
+          "occluders": 0,
+          "skipped_links": 0,
+          "tiles": 80
+        },
+        "image": "reward_dungeon_paid",
+        "incoming": "{  }",
+        "master_muted": false,
+        "mission_caption": "임무 ▸",
+        "planned_overlaps": 0,
+        "raw_events": 0,
+        "raw_label_boxes": 0,
+        "raw_label_overlaps": 0,
+        "reaction": "전투 종료",
+        "received": "[]",
+        "render_center": "(1800.0, 1200.0)",
+        "renderer_high": true,
+        "result_text": "Lv.1 / 생존 180.0초 / 처치 0\n발사 0회 / 고유 마법 0회\n골드 슬라임 던전\n지급 완료 · 100000 금화\n기본 보상 0 + 획득 금화 100000 = 총 100000 금화\n보유 금화 100000",
+        "reward_payment": {
+          "recorded": true,
+          "saved": true,
+          "state": "paid",
+          "text": "골드 슬라임 던전\n지급 완료 · 100000 금화\n기본 보상 0 + 획득 금화 100000 = 총 100000 금화\n보유 금화 100000"
+        },
+        "save_checkpoint": 0,
+        "save_context": "",
+        "save_sequence": 0,
+        "save_until": -1.0,
+        "spawn_guard": "[P: (1341.136, 1021.904), S: (917.727, 356.1926)]",
+        "structure_labels": [],
+        "structure_markers": [],
+        "supply_items": [],
+        "supply_receipts": [],
+        "viewport": "(853, 384)"
+      },
+      {
+        "actor_animation": "shape",
+        "actor_cache": 0,
+        "actor_frame": -1,
+        "actor_pose": "idle",
+        "audio_active": 0,
+        "audio_played": {},
+        "battle_ratio": 0.72656833669527,
+        "boss_guidance": "{  }",
+        "camera_offset": "(0.0, 0.0)",
+        "display_dense": false,
+        "display_labels": 0,
+        "draw_counts": {
+          "actors": 0,
+          "commands": 1,
+          "detailed_actors": true,
+          "display_dense": false,
+          "effects": 0,
+          "labels": 0,
+          "occluders": 0,
+          "skipped_links": 0,
+          "tiles": 80
+        },
+        "image": "reward_dungeon_overview",
+        "incoming": "{  }",
+        "master_muted": false,
+        "mission_caption": "임무 ▸",
+        "planned_overlaps": 0,
+        "raw_events": 0,
+        "raw_label_boxes": 0,
+        "raw_label_overlaps": 0,
+        "reaction": "전투 종료",
+        "received": "[]",
+        "render_center": "(1800.0, 1200.0)",
+        "renderer_high": true,
+        "result_text": "",
+        "reward_payment": {
+          "recorded": true,
+          "saved": true,
+          "state": "paid",
+          "text": "골드 슬라임 던전\n지급 완료 · 100000 금화\n기본 보상 0 + 획득 금화 100000 = 총 100000 금화\n보유 금화 100000"
+        },
+        "save_checkpoint": 0,
+        "save_context": "",
+        "save_sequence": 0,
+        "save_until": -1.0,
+        "spawn_guard": "[P: (1341.136, 1021.904), S: (917.727, 356.1926)]",
+        "structure_labels": [],
+        "structure_markers": [],
+        "supply_items": [],
+        "supply_receipts": [],
+        "viewport": "(853, 384)"
+      },
+      {
+        "actor_animation": "shape",
+        "actor_cache": 0,
+        "actor_frame": -1,
+        "actor_pose": "idle",
+        "audio_active": 0,
+        "audio_played": {},
+        "battle_ratio": 0.747455912098246,
+        "boss_guidance": "{  }",
+        "camera_offset": "(0.0, 0.0)",
+        "display_dense": false,
+        "display_labels": 0,
+        "draw_counts": {
+          "actors": 0,
+          "commands": 1,
+          "detailed_actors": true,
+          "display_dense": false,
+          "effects": 0,
+          "labels": 0,
+          "occluders": 0,
+          "skipped_links": 0,
+          "tiles": 168
+        },
+        "image": "reward_dungeon_forfeit_pending",
+        "incoming": "{  }",
+        "master_muted": false,
+        "mission_caption": "전투 임무 ▸",
+        "planned_overlaps": 0,
+        "raw_events": 0,
+        "raw_label_boxes": 0,
+        "raw_label_overlaps": 0,
+        "reaction": "전투 종료",
+        "received": "[]",
+        "render_center": "(1800.0, 1200.0)",
+        "renderer_high": true,
+        "result_text": "Lv.1 / 생존 0.0초 / 처치 0\n발사 0회 / 고유 마법 0회\n골드 슬라임 던전\n보상 미지급 · 0 금화\n획득 금화 100000 · 클리어 보상 미지급\n마지막 확인 금화 0\n던전 종료 기록 저장 대기",
+        "reward_payment": {
+          "recorded": false,
+          "saved": true,
+          "state": "unpaid",
+          "text": "골드 슬라임 던전\n보상 미지급 · 0 금화\n획득 금화 100000 · 클리어 보상 미지급\n마지막 확인 금화 0\n던전 종료 기록 저장 대기"
+        },
+        "save_checkpoint": 0,
+        "save_context": "",
+        "save_sequence": 0,
+        "save_until": -1.0,
+        "spawn_guard": "[P: (1064.115, 848.5852), S: (1471.771, 702.8296)]",
+        "structure_labels": [],
+        "structure_markers": [],
+        "supply_items": [],
+        "supply_receipts": [],
+        "viewport": "(1280, 720)"
+      },
+      {
+        "actor_animation": "shape",
+        "actor_cache": 0,
+        "actor_frame": -1,
+        "actor_pose": "idle",
+        "audio_active": 0,
+        "audio_played": {},
+        "battle_ratio": 0.747455912098246,
+        "boss_guidance": "{  }",
+        "camera_offset": "(0.0, 0.0)",
+        "display_dense": false,
+        "display_labels": 0,
+        "draw_counts": {
+          "actors": 0,
+          "commands": 1,
+          "detailed_actors": true,
+          "display_dense": false,
+          "effects": 0,
+          "labels": 0,
+          "occluders": 0,
+          "skipped_links": 0,
+          "tiles": 168
+        },
+        "image": "reward_dungeon_forfeit_closed",
+        "incoming": "{  }",
+        "master_muted": false,
+        "mission_caption": "전투 임무 ▸",
+        "planned_overlaps": 0,
+        "raw_events": 0,
+        "raw_label_boxes": 0,
+        "raw_label_overlaps": 0,
+        "reaction": "전투 종료",
+        "received": "[]",
+        "render_center": "(1800.0, 1200.0)",
+        "renderer_high": true,
+        "result_text": "Lv.1 / 생존 0.0초 / 처치 0\n발사 0회 / 고유 마법 0회\n골드 슬라임 던전\n보상 미지급 · 0 금화\n획득 금화 100000 · 클리어 보상 미지급\n보유 금화 0\n던전 종료 기록 저장 완료",
+        "reward_payment": {
+          "recorded": true,
+          "saved": true,
+          "state": "unpaid",
+          "text": "골드 슬라임 던전\n보상 미지급 · 0 금화\n획득 금화 100000 · 클리어 보상 미지급\n보유 금화 0\n던전 종료 기록 저장 완료"
+        },
+        "save_checkpoint": 0,
+        "save_context": "",
+        "save_sequence": 0,
+        "save_until": -1.0,
+        "spawn_guard": "[P: (1064.115, 848.5852), S: (1471.771, 702.8296)]",
+        "structure_labels": [],
+        "structure_markers": [],
+        "supply_items": [],
+        "supply_receipts": [],
+        "viewport": "(1280, 720)"
+      }
+    ],
+    "visual_inspection": [
+      "reward_pending_compact.png",
+      "reward_paid_compact.png",
+      "reward_dungeon_forfeit_closed.png",
+      "reward_lobby_overview.png"
+    ],
+    "historical_fresh_processes": [
+      {
+        "tag": "v1",
+        "status": "PASS",
+        "exit_code": 0,
+        "old_version": 1,
+        "new_version": 15,
+        "gold_reward_version": 0,
+        "rng_streams": 7,
+        "future_frames_equal": true,
+        "audio_silent_initial": true,
+        "ready_summary": ""
+      },
+      {
+        "tag": "v2",
+        "status": "PASS",
+        "exit_code": 0,
+        "old_version": 2,
+        "new_version": 15,
+        "gold_reward_version": 0,
+        "rng_streams": 7,
+        "future_frames_equal": true,
+        "audio_silent_initial": true,
+        "ready_summary": "저장된 전투 · 캠페인 S1\n기존 전투 저장 전장\n진행 05:00 · 체크포인트 2/2 · Lv.1\nHP 100 · MP 100.0 · 획득 금화 0"
+      },
+      {
+        "tag": "v3",
+        "status": "PASS",
+        "exit_code": 0,
+        "old_version": 3,
+        "new_version": 15,
+        "gold_reward_version": 0,
+        "rng_streams": 7,
+        "future_frames_equal": true,
+        "audio_silent_initial": true,
+        "ready_summary": "저장된 전투 · 캠페인 S1\n기존 전투 저장 전장\n진행 03:00 · 체크포인트 1/2 · Lv.1\nHP 88 · MP 100.0 · 획득 금화 0"
+      },
+      {
+        "tag": "v4",
+        "status": "PASS",
+        "exit_code": 0,
+        "old_version": 4,
+        "new_version": 15,
+        "gold_reward_version": 0,
+        "rng_streams": 7,
+        "future_frames_equal": true,
+        "audio_silent_initial": true,
+        "ready_summary": "저장된 전투 · 캠페인 S2\n기존 전투 저장 전장\n진행 00:00 · 체크포인트 0/2 · Lv.1\nHP 100 · MP 60.0 · 획득 금화 0"
+      },
+      {
+        "tag": "v5",
+        "status": "PASS",
+        "exit_code": 0,
+        "old_version": 5,
+        "new_version": 15,
+        "gold_reward_version": 0,
+        "rng_streams": 7,
+        "future_frames_equal": true,
+        "audio_silent_initial": true,
+        "ready_summary": "저장된 전투 · 캠페인 S2\n기존 전투 저장 전장\n진행 00:00 · 체크포인트 0/2 · Lv.1\nHP 103 · MP 60.1 · 획득 금화 0"
+      },
+      {
+        "tag": "v6",
+        "status": "PASS",
+        "exit_code": 0,
+        "old_version": 6,
+        "new_version": 15,
+        "gold_reward_version": 0,
+        "rng_streams": 7,
+        "future_frames_equal": true,
+        "audio_silent_initial": true,
+        "ready_summary": "저장된 전투 · 캠페인 S2\n기존 전투 저장 전장\n진행 00:01 · 체크포인트 0/2 · Lv.1\nHP 95 · MP 40.9 · 획득 금화 0"
+      },
+      {
+        "tag": "v7",
+        "status": "PASS",
+        "exit_code": 0,
+        "old_version": 7,
+        "new_version": 15,
+        "gold_reward_version": 0,
+        "rng_streams": 7,
+        "future_frames_equal": true,
+        "audio_silent_initial": true,
+        "ready_summary": "저장된 전투 · 캠페인 S1\n기존 전투 저장 전장\n진행 00:00 · 체크포인트 0/2 · Lv.1\nHP 100 · MP 100.0 · 획득 금화 0"
+      },
+      {
+        "tag": "v8",
+        "status": "PASS",
+        "exit_code": 0,
+        "old_version": 8,
+        "new_version": 15,
+        "gold_reward_version": 0,
+        "rng_streams": 7,
+        "future_frames_equal": true,
+        "audio_silent_initial": true,
+        "ready_summary": "저장된 전투 · 캠페인 S2\n[시험] 도시 외곽 황무지\n진행 00:13 · 체크포인트 0/2 · Lv.1\nHP 100 · MP 100.0 · 획득 금화 0"
+      },
+      {
+        "tag": "v9",
+        "status": "PASS",
+        "exit_code": 0,
+        "old_version": 9,
+        "new_version": 15,
+        "gold_reward_version": 0,
+        "rng_streams": 7,
+        "future_frames_equal": true,
+        "audio_silent_initial": true,
+        "ready_summary": "저장된 전투 · 캠페인 S1\n프롤로그 · 최후의 도시 성벽\n진행 00:44 · 체크포인트 0/2 · Lv.1\nHP 75 · MP 50.1 · 획득 금화 0"
+      },
+      {
+        "tag": "v10",
+        "status": "PASS",
+        "exit_code": 0,
+        "old_version": 10,
+        "new_version": 15,
+        "gold_reward_version": 0,
+        "rng_streams": 7,
+        "future_frames_equal": true,
+        "audio_silent_initial": true,
+        "ready_summary": "저장된 전투 · 캠페인 S1\n프롤로그 · 최후의 도시 성벽\n진행 00:00 · 체크포인트 0/2 · Lv.100\nHP 100 · MP 60.0 · 획득 금화 0"
+      },
+      {
+        "tag": "v11",
+        "status": "PASS",
+        "exit_code": 0,
+        "old_version": 11,
+        "new_version": 15,
+        "gold_reward_version": 0,
+        "rng_streams": 7,
+        "future_frames_equal": true,
+        "audio_silent_initial": true,
+        "ready_summary": "저장된 전투 · 캠페인 S1\n프롤로그 · 최후의 도시 성벽\n진행 00:00 · 체크포인트 0/2 · Lv.50\nHP 73 · MP 42.5 · 획득 금화 0"
+      },
+      {
+        "tag": "v12",
+        "status": "PASS",
+        "exit_code": 0,
+        "old_version": 12,
+        "new_version": 15,
+        "gold_reward_version": 0,
+        "rng_streams": 7,
+        "future_frames_equal": true,
+        "audio_silent_initial": true,
+        "ready_summary": "저장된 전투 · 캠페인 S2\n[시험] 도시 외곽 황무지\n진행 02:00 · 체크포인트 1/2 · Lv.1\nHP 73 · MP 42.5 · 획득 금화 0"
+      },
+      {
+        "tag": "v13",
+        "status": "PASS",
+        "exit_code": 0,
+        "old_version": 13,
+        "new_version": 15,
+        "gold_reward_version": 0,
+        "rng_streams": 7,
+        "future_frames_equal": true,
+        "audio_silent_initial": true,
+        "ready_summary": "저장된 전투 · 골드 던전\n[시제품] 골드 슬라임 채굴장\n진행 01:00 · 체크포인트 1/2 · Lv.1\nHP 73 · MP 42.5 · 획득 금화 0\n이어하기는 추가 입장 횟수를 사용하지 않습니다"
+      },
+      {
+        "tag": "v14-campaign",
+        "status": "PASS",
+        "exit_code": 0,
+        "old_version": 14,
+        "new_version": 15,
+        "gold_reward_version": 0,
+        "rng_streams": 7,
+        "future_frames_equal": true,
+        "audio_silent_initial": true,
+        "ready_summary": "저장된 전투 · 캠페인 S1\n프롤로그 · 최후의 도시 성벽\n진행 02:00 · 체크포인트 1/2 · Lv.10\nHP 73 · MP 42.5 · 획득 금화 0"
+      },
+      {
+        "tag": "v14-dungeon",
+        "status": "PASS",
+        "exit_code": 0,
+        "old_version": 14,
+        "new_version": 15,
+        "gold_reward_version": 0,
+        "rng_streams": 7,
+        "future_frames_equal": true,
+        "audio_silent_initial": true,
+        "ready_summary": "저장된 전투 · 골드 던전\n[시제품] 골드 슬라임 채굴장\n진행 01:00 · 체크포인트 1/2 · Lv.1\nHP 61 · MP 33.3 · 획득 금화 0\n이어하기는 추가 입장 횟수를 사용하지 않습니다"
+      },
+      {
+        "tag": "v15-campaign",
+        "status": "PASS",
+        "exit_code": 0,
+        "old_version": 15,
+        "new_version": 15,
+        "gold_reward_version": 0,
+        "rng_streams": 7,
+        "future_frames_equal": true,
+        "audio_silent_initial": true,
+        "ready_summary": "저장된 전투 · 캠페인 S1\n프롤로그 · 최후의 도시 성벽\n진행 00:02 · 체크포인트 0/2 · Lv.1\nHP 100 · MP 100.0 · 획득 금화 0"
+      },
+      {
+        "tag": "v15-dungeon",
+        "status": "PASS",
+        "exit_code": 0,
+        "old_version": 15,
+        "new_version": 15,
+        "gold_reward_version": 1,
+        "rng_streams": 7,
+        "future_frames_equal": true,
+        "audio_silent_initial": true,
+        "ready_summary": "저장된 전투 · 골드 던전\n[시제품] 골드 슬라임 채굴장\n진행 01:00 · 체크포인트 1/2 · Lv.1\nHP 61 · MP 33.3 · 획득 금화 0\n이어하기는 추가 입장 횟수를 사용하지 않습니다"
+      }
+    ],
+    "actual_terminal_fresh_processes": [
+      {
+        "exit_code": 0,
+        "errors": [],
+        "expected_balance": 168.0,
+        "final_balance": 168,
+        "lobby100frames_equal": true,
+        "mode": "campaign",
+        "next_stage": 2,
+        "original_balance": 168,
+        "outcome": "cleared",
+        "reward": 168.0,
+        "rng_streams": 7,
+        "run_id": "d9762d91ce1312ebf4af4109dc192093",
+        "state": "paid",
+        "status": "PASS",
+        "tag": "reward-campaign-paid",
+        "text": "캠페인 S1\n지급 완료 · 168 금화\n기본 보상 100 + 획득 금화 68 = 총 168 금화\n보유 금화 168",
+        "two_loads_idempotent": true,
+        "used_after": 0,
+        "used_before": 0
+      },
+      {
+        "exit_code": 0,
+        "errors": [],
+        "expected_balance": 168.0,
+        "final_balance": 168,
+        "lobby100frames_equal": true,
+        "mode": "campaign",
+        "next_stage": 2,
+        "original_balance": 0,
+        "outcome": "cleared",
+        "reward": 168.0,
+        "rng_streams": 7,
+        "run_id": "d9762d91ce1312ebf4af4109dc192093",
+        "state": "paid",
+        "status": "PASS",
+        "tag": "reward-campaign-pending",
+        "text": "캠페인 S1\n지급 완료 · 168 금화\n기본 보상 100 + 획득 금화 68 = 총 168 금화\n보유 금화 168",
+        "two_loads_idempotent": true,
+        "used_after": 0,
+        "used_before": 0
+      },
+      {
+        "exit_code": 0,
+        "errors": [],
+        "expected_balance": 0.0,
+        "final_balance": 0,
+        "lobby100frames_equal": true,
+        "mode": "campaign",
+        "next_stage": 1,
+        "original_balance": 0,
+        "outcome": "timeout",
+        "reward": 0.0,
+        "rng_streams": 7,
+        "run_id": "11463a4a99bf57671317027eaf2d205d",
+        "state": "unpaid",
+        "status": "PASS",
+        "tag": "reward-campaign-timeout",
+        "text": "캠페인 S1\n보상 미지급 · 0 금화\n획득 금화 321 · 클리어 보상 미지급\n보유 금화 0",
+        "two_loads_idempotent": true,
+        "used_after": 0,
+        "used_before": 0
+      },
+      {
+        "exit_code": 0,
+        "errors": [],
+        "expected_balance": 0.0,
+        "final_balance": 0,
+        "lobby100frames_equal": true,
+        "mode": "gold_slime",
+        "next_stage": 1,
+        "original_balance": 0,
+        "outcome": "abandoned",
+        "reward": 0.0,
+        "rng_streams": 7,
+        "run_id": "6d7f1c4fd134a083baa7973820574968",
+        "state": "unpaid",
+        "status": "PASS",
+        "tag": "reward-dungeon-forfeit-closed",
+        "text": "골드 슬라임 던전\n보상 미지급 · 0 금화\n획득 금화 100000 · 클리어 보상 미지급\n보유 금화 0\n던전 종료 기록 저장 완료",
+        "two_loads_idempotent": true,
+        "used_after": 1,
+        "used_before": 1
+      },
+      {
+        "exit_code": 0,
+        "errors": [],
+        "expected_balance": 0.0,
+        "final_balance": 0,
+        "lobby100frames_equal": true,
+        "mode": "gold_slime",
+        "next_stage": 1,
+        "original_balance": 0,
+        "outcome": "abandoned",
+        "reward": 0.0,
+        "rng_streams": 7,
+        "run_id": "6d7f1c4fd134a083baa7973820574968",
+        "state": "unpaid",
+        "status": "PASS",
+        "tag": "reward-dungeon-forfeit-pending",
+        "text": "골드 슬라임 던전\n보상 미지급 · 0 금화\n획득 금화 100000 · 클리어 보상 미지급\n보유 금화 0\n던전 종료 기록 저장 완료",
+        "two_loads_idempotent": true,
+        "used_after": 1,
+        "used_before": 1
+      },
+      {
+        "exit_code": 0,
+        "errors": [],
+        "expected_balance": 100000.0,
+        "final_balance": 100000,
+        "lobby100frames_equal": true,
+        "mode": "gold_slime",
+        "next_stage": 1,
+        "original_balance": 100000,
+        "outcome": "cleared",
+        "reward": 100000.0,
+        "rng_streams": 7,
+        "run_id": "2ea974352dcafdb339c52585c61c6d66",
+        "state": "paid",
+        "status": "PASS",
+        "tag": "reward-dungeon-paid",
+        "text": "골드 슬라임 던전\n지급 완료 · 100000 금화\n기본 보상 0 + 획득 금화 100000 = 총 100000 금화\n보유 금화 100000",
+        "two_loads_idempotent": true,
+        "used_after": 1,
+        "used_before": 1
+      },
+      {
+        "exit_code": 0,
+        "errors": [],
+        "expected_balance": 100000.0,
+        "final_balance": 100000,
+        "lobby100frames_equal": true,
+        "mode": "gold_slime",
+        "next_stage": 1,
+        "original_balance": 0,
+        "outcome": "cleared",
+        "reward": 100000.0,
+        "rng_streams": 7,
+        "run_id": "2ea974352dcafdb339c52585c61c6d66",
+        "state": "paid",
+        "status": "PASS",
+        "tag": "reward-dungeon-pending",
+        "text": "골드 슬라임 던전\n지급 완료 · 100000 금화\n기본 보상 0 + 획득 금화 100000 = 총 100000 금화\n보유 금화 100000",
+        "two_loads_idempotent": true,
+        "used_after": 1,
+        "used_before": 1
+      }
+    ],
+    "terminal_scope": "Seven OS processes load actually produced campaignpaid/pending/timeout and dungeonpaid/pending/forfeitclosed/forfeitpending snapshots+accounts. Pending recovers through original auto-settlement. Each performs a second scene load and verifies unchanged credited wallet,unlock,usedentries and account bytes.100READYframes remain frozen;these are not100RUNNINGcombat frames. Historical14/15 retain their original100RUNNINGfollowup comparison.",
+    "native_input": "Inherited movement/MPparallel100,extramagic3+structuremagic2,masterslider2,Continue5,checkpointretry1,magnetcard1. Newreward cases use actual mouse battle-retry2/account-retry3/overview-open3/overview-close1/lobby1/forfeit-controls4. No new input-owner/button callbacks.",
+    "fixture_scope": "Quoted168campaign/100000dungeon/321nonclear amounts and boundary clock placements are explicit QA fixtures,not measured income or naturalcampaign. Existing renderer/crowd/pose/structure fixtures remain QA. GUI harness now waits for layout before ensure-control-visible and mouse coordinates;initial early-layout clicks were a harness issue. Native development caught initial duplicated numeric phase assumptions;final formatter references original enum. Old partial payment-probe/runner logs excluded from final evidence index.",
+    "warnings": "Final behavioral engine/restore/GUI have no script/leak errors. GUI retains existing software-driverunsupportedVSync warning only. No new performance,mixer,natural6minute or income measurement."
+  },
+  "limits": {
+    "android_device": "NOT_VERIFIED",
+    "ios_device": "NOT_VERIFIED",
+    "windows_f5_export": "NOT_VERIFIED",
+    "physical_audio_human_readability": "NOT_VERIFIED",
+    "new_performance_natural6minute_economy_mixer": "NOT_RUN",
+    "final_art_audio": "NOT_APPROVED"
+  },
+  "next": "출격 전 계정 강화 효과 요약",
+  "artifacts": {
+    ".local_validation/GAME035/audio_focus_paused.png": {
+      "sha256": "88c5cf989e6fa3ceff2d548ceb4283c579c4a5739015f9dc4d296d933de50f7d",
+      "bytes": 94611
+    },
+    ".local_validation/GAME035/audio_focus_regained.png": {
+      "sha256": "88c5cf989e6fa3ceff2d548ceb4283c579c4a5739015f9dc4d296d933de50f7d",
+      "bytes": 94611
+    },
+    ".local_validation/GAME035/audio_magic.png": {
+      "sha256": "a45640ab1a5d372ea19361a61f92a6955f2af599d38665a41d5433dd7cb230da",
+      "bytes": 267256
+    },
+    ".local_validation/GAME035/audio_muted_gameplay.png": {
+      "sha256": "e53a526df13ea1fc60fd9521a4f37068efe87c5095ba5bc30da8aa159aeb3b05",
+      "bytes": 267151
+    },
+    ".local_validation/GAME035/audio_muted_settings.png": {
+      "sha256": "63f6977c572bc279fad63ea1444dc6bc5a561ddb4e06a8a066e263c98cd5009c",
+      "bytes": 94540
+    },
+    ".local_validation/GAME035/audio_unmuted_settings.png": {
+      "sha256": "d382fd79e653b07f8a6f208cee7fd35563f0952a38973784ac8ca4e460e1eca7",
+      "bytes": 94498
+    },
+    ".local_validation/GAME035/boss_1600x720.png": {
+      "sha256": "f4b3477d1bab1636aac90a50e1a4445f825a3e6ba4ab757f4d108d5a76173143",
+      "bytes": 308508
+    },
+    ".local_validation/GAME035/boss_853x384.png": {
+      "sha256": "c8f26335aec7ac03d6f9f8f303ded1ebaebc70d0c80f18a73c064fcb99bf8b6c",
+      "bytes": 177682
+    },
+    ".local_validation/GAME035/boss_960x540.png": {
+      "sha256": "cd8820a5be9fa8db4c44fca5389789ada5bc9ec8fff504bbe4b9dc64409e11c4",
+      "bytes": 230452
+    },
+    ".local_validation/GAME035/boss_blocked.png": {
+      "sha256": "9238a5d9a73c7deb6cd15dbd650bb4fc2821b7ab90b9359eb27c1ccb4026540d",
+      "bytes": 304429
+    },
+    ".local_validation/GAME035/boss_choice.png": {
+      "sha256": "dde086b7d6c935f4af690cd2c7f36d9573e31388a275969142e35d32eef2f7b0",
+      "bytes": 162039
+    },
+    ".local_validation/GAME035/boss_legacy.png": {
+      "sha256": "4fdcf01292125891971b76985421448e56f2bd0c61660092c0ebba053c7ebc69",
+      "bytes": 169378
+    },
+    ".local_validation/GAME035/boss_mission.png": {
+      "sha256": "13792ee53257747cdac51888ae528983cf3b07c2dcd520d02d4587575ff4b1ac",
+      "bytes": 83061
+    },
+    ".local_validation/GAME035/boss_offscreen_bottom.png": {
+      "sha256": "0d813e5971166e64c1627857a3fca7ba05677110bca7194ba92a08556bcfcab6",
+      "bytes": 298100
+    },
+    ".local_validation/GAME035/boss_offscreen_left.png": {
+      "sha256": "fbbf45c22af1e0b4ba77487110696b542896f15e109d79af125d62d677554c74",
+      "bytes": 298876
+    },
+    ".local_validation/GAME035/boss_offscreen_right.png": {
+      "sha256": "70c0d78013701689f38adcf15ff1d6f87ede63194ee4a35fc69277a9b138a8cc",
+      "bytes": 298834
+    },
+    ".local_validation/GAME035/boss_offscreen_top.png": {
+      "sha256": "ec675e24a819f1296538ab007a1f403c965d4aa184c6bc1141b1c60d56cc00d1",
+      "bytes": 298897
+    },
+    ".local_validation/GAME035/boss_paused.png": {
+      "sha256": "5ef8df78b9ae475d23974322e211a2b05466705f829dfe2ca7062b7fc7dc6472",
+      "bytes": 94654
+    },
+    ".local_validation/GAME035/boss_visible_open.png": {
+      "sha256": "2a38a6f7123871a7bc77bbeb7ec16f7e178c8dfde835a646605b089da9cd6fe9",
+      "bytes": 303139
+    },
+    ".local_validation/GAME035/camera_forward.png": {
+      "sha256": "5d9eac1f6bd8830a2bf4fc58f8a7e0601348ad2fc27c13c38043412556211ad2",
+      "bytes": 157361
+    },
+    ".local_validation/GAME035/camera_mission.png": {
+      "sha256": "a55996972d8d2e73f6f012c6d65f44169039d2423600d40c69a763ebc682dad7",
+      "bytes": 82477
+    },
+    ".local_validation/GAME035/camera_reversal.png": {
+      "sha256": "5baa7d00d1f3728199e8c9dc0b0dd8e16b63d96a122e20a12bc8d898dac1c589",
+      "bytes": 159486
+    },
+    ".local_validation/GAME035/dense_compact.png": {
+      "sha256": "66169b249753af8e8393633fd9e73bf8234f166370cf1334d26df52ac5fca5fc",
+      "bytes": 183526
+    },
+    ".local_validation/GAME035/engine_0.log": {
+      "sha256": "edff16c1721dd4ae989cadf29a01f574ae8d51b118221f664725bd6980bbba5d",
+      "bytes": 32
+    },
+    ".local_validation/GAME035/engine_1.log": {
+      "sha256": "f15ffd4c558b01611d562c8c257508942bdc2dc542124f423ae2a592a46edfa6",
+      "bytes": 1017
+    },
+    ".local_validation/GAME035/engine_2.log": {
+      "sha256": "1938b93b03756e658dd6fc29e699189d67afb2aec05905c840e9c22f5b89a6cd",
+      "bytes": 117
+    },
+    ".local_validation/GAME035/engine_3.log": {
+      "sha256": "190487dfb2bdf99cdccfff084fd5d95b81eac04fcfe3ec43e502d524daacb8eb",
+      "bytes": 117
+    },
+    ".local_validation/GAME035/engine_4.log": {
+      "sha256": "0dc80f41a9d961a6b4d962614c905af0b7c3bc209f569871d09048860b58f7ff",
+      "bytes": 118
+    },
+    ".local_validation/GAME035/engine_5.log": {
+      "sha256": "c5a9e5b87c0439795f9d5bcfe6c17d74bce134acc53d7f341cfb55a11bdb1e1d",
+      "bytes": 117
+    },
+    ".local_validation/GAME035/engine_6.log": {
+      "sha256": "570a42343d370c104902d16c9ff0b402573f94ed3076772afb70e6bce96084fc",
+      "bytes": 119
+    },
+    ".local_validation/GAME035/engine_7.log": {
+      "sha256": "025f863c84ce84466e9269a07033239400176c7aad50ada31ff794c6e59b0837",
+      "bytes": 117
+    },
+    ".local_validation/GAME035/engine_8.log": {
+      "sha256": "97282f31522cd0cfe219c9f25f47294facb302aa696a58cda998d483df7da6fa",
+      "bytes": 119
+    },
+    ".local_validation/GAME035/engine_9.log": {
+      "sha256": "6d1c065383a27c36804949b6ffa4b09714470b112e5dacc0bd5aeb7b9c147c4e",
+      "bytes": 73
+    },
+    ".local_validation/GAME035/front_of_ruin.png": {
+      "sha256": "9d5bf391212550e99fc6c12a4d6b4a6afd6ad28d4b9f1d8707db5e2a6237a884",
+      "bytes": 142698
+    },
+    ".local_validation/GAME035/guide_200.png": {
+      "sha256": "7ce3b6784abf274f4a6e1f0ca3cf0eac8657784d2eee4de79e7d1a75fc7cb8ef",
+      "bytes": 330982
+    },
+    ".local_validation/GAME035/high_100.png": {
+      "sha256": "bb38af8292ccb064487c6986dffe57542ab9a1c8c7dc996851198fffa3a2efc9",
+      "bytes": 307583
+    },
+    ".local_validation/GAME035/high_1600x720.png": {
+      "sha256": "876f72672abd154e390a5a769ae976cb9f286950d5c442ddbd28a48a0d63e225",
+      "bytes": 217503
+    },
+    ".local_validation/GAME035/high_30.png": {
+      "sha256": "9a9f020a3bb7c3acb2c44909683dccaa443f8da2a5ba7bf799c83cc0c0671bbe",
+      "bytes": 192224
+    },
+    ".local_validation/GAME035/high_853x384.png": {
+      "sha256": "3a2e7c656ba83c7b071dc8ea48adeb7ec2032e913a59de91588febaf158b94a4",
+      "bytes": 133453
+    },
+    ".local_validation/GAME035/high_960x540.png": {
+      "sha256": "c989e2103ce1ceec69e2a686a3cdee744030f5aad6010a3bd6ced0b72a315a8e",
+      "bytes": 154748
+    },
+    ".local_validation/GAME035/historical-inputs.json": {
+      "sha256": "b1623da9589fbd8d0513f1280411df1e621121da449b709d39150b2764c6ead1",
+      "bytes": 2594
+    },
+    ".local_validation/GAME035/historical-runner.log": {
+      "sha256": "39274c502dc07ec043363561645e29203283ec6019ce2995a214cb999a8b314e",
+      "bytes": 406
+    },
+    ".local_validation/GAME035/item_hp_clamped.png": {
+      "sha256": "962dc9c0f74cf6327f1df0471d0912c3e530461d500744fffd753002ad72bae0",
+      "bytes": 161475
+    },
+    ".local_validation/GAME035/item_magnet_choice.png": {
+      "sha256": "98d411c120986652ab19133a6f00ac2c78c2e50f3eca1128917334d2190fefc6",
+      "bytes": 170542
+    },
+    ".local_validation/GAME035/item_magnet_compact.png": {
+      "sha256": "2ac3156b694b27e06bf5c5454a94906b181e22cfa4e0eed9cd5270592e657673",
+      "bytes": 92599
+    },
+    ".local_validation/GAME035/item_magnet_receipt.png": {
+      "sha256": "b893f410b64106b8f09b4e580aa74627e178e036b8412ae92025c00ff2e0122f",
+      "bytes": 171257
+    },
+    ".local_validation/GAME035/item_mp_fractional.png": {
+      "sha256": "0fc7ec247b3db6a27d3d86c129c7823fd29e8a3a538ee5b22880819131b076f9",
+      "bytes": 164052
+    },
+    ".local_validation/GAME035/item_purge_boss.png": {
+      "sha256": "989522e08a027e8ebc7ecf8922d3901e687a28cd9e01fec2086c732638e8c719",
+      "bytes": 185309
+    },
+    ".local_validation/GAME035/item_purge_compact.png": {
+      "sha256": "9065acf4e5efe6244c86b6ae533b697fffb96fad1867712373a99ffc31257147",
+      "bytes": 105864
+    },
+    ".local_validation/GAME035/items_dense_compact.png": {
+      "sha256": "9c4f202cef0a20c535e40b590cbfc1fd23eda7a3ac3cda7536a2d40ea81c1a5d",
+      "bytes": 192405
+    },
+    ".local_validation/GAME035/items_dense_legacy.png": {
+      "sha256": "8df74c2ce84d44cc3a7b14e031ecad621ebccd16e60a13fc1f0d589f2157a630",
+      "bytes": 129342
+    },
+    ".local_validation/GAME035/items_dense_standard.png": {
+      "sha256": "e6368fb1f6f54078f2da2f2aa489c4f295b05c0f8e949309e2f32722d8a818b4",
+      "bytes": 320040
+    },
+    ".local_validation/GAME035/items_full_resources.png": {
+      "sha256": "9baf37a4a855dae234dfa2a123531adaa2b31134fc6edebbf186fb3d19c9c088",
+      "bytes": 167430
+    },
+    ".local_validation/GAME035/items_high_1600.png": {
+      "sha256": "8cc5eabb02038602c72042abb86e625bb042ecf8b36544591b154a72a28640af",
+      "bytes": 175829
+    },
+    ".local_validation/GAME035/items_high_853.png": {
+      "sha256": "d35c73525c41d3c32fd10e6ef008df48c0dc33830c6f37f9728e397aab59a624",
+      "bytes": 90694
+    },
+    ".local_validation/GAME035/items_high_standard.png": {
+      "sha256": "8438bbf148469df7a640522ce6a2d461ff80e44a5c97a9265fe56ed53ea8b847",
+      "bytes": 168567
+    },
+    ".local_validation/GAME035/items_legacy_compact.png": {
+      "sha256": "242cff627bd0a4845fd7b3edbfdc2a6a09a41036eb8adbf82605675684d2146d",
+      "bytes": 43354
+    },
+    ".local_validation/GAME035/items_legacy_standard.png": {
+      "sha256": "3ea313fd8acc75692267d4808dd7216337c007abddd2644059db55e0ffadb0e6",
+      "bytes": 69545
+    },
+    ".local_validation/GAME035/items_paused1.png": {
+      "sha256": "5ef8df78b9ae475d23974322e211a2b05466705f829dfe2ca7062b7fc7dc6472",
+      "bytes": 94654
+    },
+    ".local_validation/GAME035/items_paused2.png": {
+      "sha256": "5ef8df78b9ae475d23974322e211a2b05466705f829dfe2ca7062b7fc7dc6472",
+      "bytes": 94654
+    },
+    ".local_validation/GAME035/items_restore_neutral.png": {
+      "sha256": "1ccfa6a4cd7a26d69d1815d62b9dbec84f024577f7a10bfec80a41f3a42d7454",
+      "bytes": 93641
+    },
+    ".local_validation/GAME035/items_saved_after_pickup.png": {
+      "sha256": "4f385058cabd022a726f931a44be2854b9085dc0fab5b752f9759b0de0e89589",
+      "bytes": 39337
+    },
+    ".local_validation/GAME035/legacy_30.png": {
+      "sha256": "e85534f3b1a493700fa4aa5565c7e977d6b4459d99ff9fb2bc2a0667c234269a",
+      "bytes": 123139
+    },
+    ".local_validation/GAME035/mission_compact.png": {
+      "sha256": "d47b80e1e55a038955316d19f3df50c3dc7b1e1b273e3308639638cb451d5b6c",
+      "bytes": 42233
+    },
+    ".local_validation/GAME035/occlusion_behind_ruin.png": {
+      "sha256": "b204252fdf40d4f461450216a73897f8f2a76d8635476290c7c68cf6ceb262b7",
+      "bytes": 155984
+    },
+    ".local_validation/GAME035/payment_probe.gd": {
+      "sha256": "c65e2545026e244c6dd4998eccb4451312e788e5d24cceb6610a660a8e21c3e5",
+      "bytes": 843
+    },
+    ".local_validation/GAME035/payment_runner.gd": {
+      "sha256": "03cd294627b5228b018670c4299daf0d01c5e6253b13802468c0edd0b972301e",
+      "bytes": 531
+    },
+    ".local_validation/GAME035/process-results.json": {
+      "sha256": "4744e19b1d73c925dbd4c6384112de831730bf7ab5ff5a16653043317e85c677",
+      "bytes": 47488
+    },
+    ".local_validation/GAME035/process-v1.log": {
+      "sha256": "6397e5c33b815ef633e2a0646d46e0dc795f566cb2070587a68f66273b017974",
+      "bytes": 1176
+    },
+    ".local_validation/GAME035/process-v10.log": {
+      "sha256": "67a76610fc3ffb063951b34fed17e84d52d3937b61e9e7230ec66cfffcf84622",
+      "bytes": 1455
+    },
+    ".local_validation/GAME035/process-v11.log": {
+      "sha256": "c316adeb3b72de56ee2eb75d9cce5be0fa8aeffc805bcd6af4c4d90bae3f647b",
+      "bytes": 1289
+    },
+    ".local_validation/GAME035/process-v12.log": {
+      "sha256": "c1f29f7b9bf819787e1db3f93192291edf145fdd5b2a1aaf820480a274a8434b",
+      "bytes": 1326
+    },
+    ".local_validation/GAME035/process-v13.log": {
+      "sha256": "938c6329d644234fe90ca4cbf354b1d45496b27409fda53499a8d4542784b7bc",
+      "bytes": 3490
+    },
+    ".local_validation/GAME035/process-v14-campaign.log": {
+      "sha256": "081bbd99e7f28fe9cdd4dae3f55b94b1c44e63e9bd1d92642c7f1cfb1e1b5325",
+      "bytes": 1760
+    },
+    ".local_validation/GAME035/process-v14-dungeon.log": {
+      "sha256": "1909c1691f273451c5dba3d7561462af964b417c9206474043b27fa4148828e3",
+      "bytes": 3898
+    },
+    ".local_validation/GAME035/process-v15-campaign.log": {
+      "sha256": "ec4a51ccc6c7b723c9a2e1c585ea5356537c43c36d1a21c1e8c2777aa49a76ac",
+      "bytes": 1420
+    },
+    ".local_validation/GAME035/process-v15-dungeon.log": {
+      "sha256": "a8816a6a987b830833aaa06098ed0298b38506c5b032aa84f662c01be4148ce6",
+      "bytes": 3898
+    },
+    ".local_validation/GAME035/process-v2.log": {
+      "sha256": "fc12952c805c7aa288e77611c12c56fff5d7524f221bd8b27d01342a849435d4",
+      "bytes": 1534
+    },
+    ".local_validation/GAME035/process-v3.log": {
+      "sha256": "5c68f759a611bd858821facc1826cdb9ba7d4d15f31a0b183394996d34c8a935",
+      "bytes": 3163
+    },
+    ".local_validation/GAME035/process-v4.log": {
+      "sha256": "07bd067dccefdf0a2fe5e7761e49e53c5bd2f5fb5c18af756bb59b87d47e27f5",
+      "bytes": 1268
+    },
+    ".local_validation/GAME035/process-v5.log": {
+      "sha256": "f08b29e48e72617b3676e0d04233e65e0f37a28d08c1f5b84598abc5364dcc1f",
+      "bytes": 1269
+    },
+    ".local_validation/GAME035/process-v6.log": {
+      "sha256": "c8870d09f91cc92f22bf42c796ae6c583cd939bc28adc748d2c7af81d321032d",
+      "bytes": 1264
+    },
+    ".local_validation/GAME035/process-v7.log": {
+      "sha256": "11f070017685b9e322faad37b674f10aab5808c5ab5bf186a7a60cebb5f8e9e9",
+      "bytes": 2775
+    },
+    ".local_validation/GAME035/process-v8.log": {
+      "sha256": "2081ce5b2649b04781983baaabcc574db25360f1ed687ad771f87e990fb7dfb3",
+      "bytes": 1664
+    },
+    ".local_validation/GAME035/process-v9.log": {
+      "sha256": "6a94f8f1f903d3660002e32a9d8d2fd14085114457d7c89ba00ab7d7084661d7",
+      "bytes": 1281
+    },
+    ".local_validation/GAME035/process_probe.gd": {
+      "sha256": "3884d62578d32f3648c954a9d80b56aea7ae4c798febe8e65b41905fb8dbb9f4",
+      "bytes": 5201
+    },
+    ".local_validation/GAME035/python.log": {
+      "sha256": "48d1c506a49494ef2c8e5dc2953ef84789aaf0d7cff8d7f30c79cada07340b65",
+      "bytes": 98
+    },
+    ".local_validation/GAME035/received_1600x720.png": {
+      "sha256": "8447067d51c8cdf1c67a9d7d6af5c422d2b283cda8729d6d248c468fae50b2b3",
+      "bytes": 180030
+    },
+    ".local_validation/GAME035/received_853x384.png": {
+      "sha256": "1ca5ae36864ea6f8bd09e406c5ae83dfcd69c615320a3bab5f5edc4b5a60550f",
+      "bytes": 94030
+    },
+    ".local_validation/GAME035/received_960x540.png": {
+      "sha256": "b22acd8e47a6649d53e3ddecf9db8c6d8379d357cc520a250bd7ff906a975b07",
+      "bytes": 115199
+    },
+    ".local_validation/GAME035/received_contact_bottom.png": {
+      "sha256": "322f80950dd385be3d3a4e3c86135aabf19d55b4b4d104e78af570324f2d8e2d",
+      "bytes": 162422
+    },
+    ".local_validation/GAME035/received_contact_frame1.png": {
+      "sha256": "a56b988049c5cad9dcad8752232ae7c14287102489e28b6b26281eaac5af6802",
+      "bytes": 162293
+    },
+    ".local_validation/GAME035/received_contact_left.png": {
+      "sha256": "eed7236a1ac383d0630d48438f4075d899cf1ee09fdc8272f928537edbdcbb2c",
+      "bytes": 162299
+    },
+    ".local_validation/GAME035/received_contact_right.png": {
+      "sha256": "6ce3da89bc90b0ab6a6b607510396051dd1b35e274c758336a18197d6028e6cc",
+      "bytes": 162400
+    },
+    ".local_validation/GAME035/received_contact_top.png": {
+      "sha256": "f41cd4e861a41ee4d569f5dbb905518872503dfde134c3fce71782e42ccaa800",
+      "bytes": 162102
+    },
+    ".local_validation/GAME035/received_expired.png": {
+      "sha256": "e64ff21569759c61b39cc217af700d567bf43f21ad9fdba904e3b5649b672f77",
+      "bytes": 172025
+    },
+    ".local_validation/GAME035/received_input_contact.png": {
+      "sha256": "b14fa137b4f4b62bbd31b570a117387298cd80fe8d83aec3f5ddf5ef8f4eba61",
+      "bytes": 165654
+    },
+    ".local_validation/GAME035/received_legacy.png": {
+      "sha256": "2905db3cf27afe8be3e19d12c6fffedbcfde28e58628316dc3ce5cf9fd0abaa0",
+      "bytes": 70857
+    },
+    ".local_validation/GAME035/received_mission.png": {
+      "sha256": "947443452cfcda37ef8ba5bcbf3fb2ef1af484396647e3e4bd8d1f8d97684359",
+      "bytes": 83150
+    },
+    ".local_validation/GAME035/received_numbers_hidden.png": {
+      "sha256": "deaf7b7d496acfc174e7912f2662e8623f978802ec155d52e58d0d78e8fb51c4",
+      "bytes": 171328
+    },
+    ".local_validation/GAME035/received_paused_a.png": {
+      "sha256": "f508699f62d9030def90eb55d755486f2339eb296383027a9405a2c9f6b9023c",
+      "bytes": 94324
+    },
+    ".local_validation/GAME035/received_paused_b.png": {
+      "sha256": "f508699f62d9030def90eb55d755486f2339eb296383027a9405a2c9f6b9023c",
+      "bytes": 94324
+    },
+    ".local_validation/GAME035/received_projectile.png": {
+      "sha256": "575053fc12b57f130e7ee87b52eb86143552c59b34356c4956ce10b1fa0db618",
+      "bytes": 162028
+    },
+    ".local_validation/GAME035/received_resumed.png": {
+      "sha256": "af1a1bb6e61268d76a7f16f4ece45d4faa5d79d3d80c90c45ad590eba1145240",
+      "bytes": 172324
+    },
+    ".local_validation/GAME035/received_unknown.png": {
+      "sha256": "b23d63553796fb261ec9767f17e59ee29876658fb7f4cd3b412f0b3e49651e0c",
+      "bytes": 174474
+    },
+    ".local_validation/GAME035/render-live/battle.save": {
+      "sha256": "284ac7300a6e1cfe0b4e14f64076972a3286ff1f9814140c7854e0ad415d7714",
+      "bytes": 9804
+    },
+    ".local_validation/GAME035/render-live/campaign-cp1.save": {
+      "sha256": "55958e093b8f9916160cd0224be615d992cc3217ae0bdf63c4baa55ea5a86a5d",
+      "bytes": 9496
+    },
+    ".local_validation/GAME035/render-live/campaign-cp2.save": {
+      "sha256": "768bd29162f3ee92cc1618ada5b79a5fbdf878145df0a6a203d2959c5786f05b",
+      "bytes": 9804
+    },
+    ".local_validation/GAME035/render-live/campaign.save": {
+      "sha256": "f1051c7e378a346a74acc604229dbafafcef0e3e9ac05a24fd86bb6944450f60",
+      "bytes": 9164
+    },
+    ".local_validation/GAME035/render-live/dungeon-choice-gold.cfg": {
+      "sha256": "f0754ab3c7bc68b0484a198cc378e4cdafce742aa200161ddb0797912465e6de",
+      "bytes": 3116
+    },
+    ".local_validation/GAME035/render-live/dungeon-choice.save": {
+      "sha256": "1b145003d4b2b5b2a440f029f5307a59e389735426f67a45457b2455c61f3048",
+      "bytes": 3404
+    },
+    ".local_validation/GAME035/render-live/dungeon-cp1-gold.cfg": {
+      "sha256": "f0754ab3c7bc68b0484a198cc378e4cdafce742aa200161ddb0797912465e6de",
+      "bytes": 3116
+    },
+    ".local_validation/GAME035/render-live/dungeon-cp1.save": {
+      "sha256": "7514b41e6e33325726573ad61bfbac023a8427456257d59b19df43150805a9e2",
+      "bytes": 3324
+    },
+    ".local_validation/GAME035/render-live/gold-case/battle.save": {
+      "sha256": "1eff36986b8c2b721c3d3816e25d687da6dcf9971024496e9904e7b9e8c2c8c7",
+      "bytes": 3404
+    },
+    ".local_validation/GAME035/render-live/gold-case/gold.cfg": {
+      "sha256": "f0754ab3c7bc68b0484a198cc378e4cdafce742aa200161ddb0797912465e6de",
+      "bytes": 3116
+    },
+    ".local_validation/GAME035/render-live/payment-abandoned/battle.save": {
+      "sha256": "083e8d3735b268a013344780f2af3b67c60fc82db594b2c8c9b6e650c335ccf9",
+      "bytes": 9176
+    },
+    ".local_validation/GAME035/render-live/payment-battle-failure/battle.save": {
+      "sha256": "f36a27dae20119e79732ce6553a4ff9d223bc659aa8ae9b856cf486a9ca48cc4",
+      "bytes": 9236
+    },
+    ".local_validation/GAME035/render-live/payment-battle-failure/gold.cfg": {
+      "sha256": "7ef7ff606e66ef600aeca63fbc1ab4bda4002de8d8f6d0189a6fe140d5661dca",
+      "bytes": 605
+    },
+    ".local_validation/GAME035/render-live/payment-defeat/battle.save": {
+      "sha256": "b0ba43b7efd7cb2ab75ba0318d0abc8483aa0e52ad626ce90ca88a097c67115a",
+      "bytes": 9176
+    },
+    ".local_validation/GAME035/render-live/payment-dungeon-clear/battle.save": {
+      "sha256": "53090b323477a46a0ab1c9d9bc85d65cbcaf462e60a64fa5e816c1b06e87204a",
+      "bytes": 3320
+    },
+    ".local_validation/GAME035/render-live/payment-dungeon-clear/gold.cfg": {
+      "sha256": "247ee5b67ad838d44c0f652c561d30cb0cfa81a38d847d36bb082188830214b3",
+      "bytes": 638
+    },
+    ".local_validation/GAME035/render-live/payment-dungeon-forfeit/battle.save": {
+      "sha256": "5f9a124a2f359eb2d474c6c60c1b956187661e48b613df79c7f028a4cf84edc2",
+      "bytes": 3316
+    },
+    ".local_validation/GAME035/render-live/payment-dungeon-forfeit/gold.cfg": {
+      "sha256": "6eadf20b94e126263f0dcf29f747e826b0526890d0be40489d5dd0635734a542",
+      "bytes": 630
+    },
+    ".local_validation/GAME035/render-live/payment-paid/battle.save": {
+      "sha256": "534452b3c9e636a215013c536c315cd312d2c2216825ac06a07cbde9f08b7c1b",
+      "bytes": 9236
+    },
+    ".local_validation/GAME035/render-live/payment-paid/gold.cfg": {
+      "sha256": "dce34f4b25302bf1decc42a0658437e3bc897051ea72ef5a016e2076b18ebc19",
+      "bytes": 605
+    },
+    ".local_validation/GAME035/render-live/payment-pending/battle.save": {
+      "sha256": "d9fc0d1b34c9ff170dc25a887a5d0e71acbf1aeed1f4d5ea138dc9366f8fa3b8",
+      "bytes": 9236
+    },
+    ".local_validation/GAME035/render-live/payment-pending/gold.cfg": {
+      "sha256": "ff0509d664cd684efc9ab0208ecbbbc69a50575804a7fed34ba71d0d9451f19b",
+      "bytes": 605
+    },
+    ".local_validation/GAME035/render-live/payment-timeout/battle.save": {
+      "sha256": "c63a0fa1acd19681c11fe0a7b924be4c9b8d267457b4b76df0cc54bb779a70c1",
+      "bytes": 9492
+    },
+    ".local_validation/GAME035/render-live/reward-campaign-paid-gold.cfg": {
+      "sha256": "ff0509d664cd684efc9ab0208ecbbbc69a50575804a7fed34ba71d0d9451f19b",
+      "bytes": 605
+    },
+    ".local_validation/GAME035/render-live/reward-campaign-paid.save": {
+      "sha256": "d9fc0d1b34c9ff170dc25a887a5d0e71acbf1aeed1f4d5ea138dc9366f8fa3b8",
+      "bytes": 9236
+    },
+    ".local_validation/GAME035/render-live/reward-campaign-pending.save": {
+      "sha256": "8e150442b2d8050fc9c2b8344a022c6fbb99d540234ed6d44d671fa8a0d332ef",
+      "bytes": 9236
+    },
+    ".local_validation/GAME035/render-live/reward-campaign-timeout.save": {
+      "sha256": "c63a0fa1acd19681c11fe0a7b924be4c9b8d267457b4b76df0cc54bb779a70c1",
+      "bytes": 9492
+    },
+    ".local_validation/GAME035/render-live/reward-dungeon-forfeit-closed-gold.cfg": {
+      "sha256": "6eadf20b94e126263f0dcf29f747e826b0526890d0be40489d5dd0635734a542",
+      "bytes": 630
+    },
+    ".local_validation/GAME035/render-live/reward-dungeon-forfeit-closed.save": {
+      "sha256": "5f9a124a2f359eb2d474c6c60c1b956187661e48b613df79c7f028a4cf84edc2",
+      "bytes": 3316
+    },
+    ".local_validation/GAME035/render-live/reward-dungeon-forfeit-pending-gold.cfg": {
+      "sha256": "820c76d24b47640c1e8093fa241ea74768f12a723c09f3912f02eec4585af85c",
+      "bytes": 3120
+    },
+    ".local_validation/GAME035/render-live/reward-dungeon-forfeit-pending.save": {
+      "sha256": "5f9a124a2f359eb2d474c6c60c1b956187661e48b613df79c7f028a4cf84edc2",
+      "bytes": 3316
+    },
+    ".local_validation/GAME035/render-live/reward-dungeon-paid-gold.cfg": {
+      "sha256": "247ee5b67ad838d44c0f652c561d30cb0cfa81a38d847d36bb082188830214b3",
+      "bytes": 638
+    },
+    ".local_validation/GAME035/render-live/reward-dungeon-paid.save": {
+      "sha256": "53090b323477a46a0ab1c9d9bc85d65cbcaf462e60a64fa5e816c1b06e87204a",
+      "bytes": 3320
+    },
+    ".local_validation/GAME035/render-live/reward-dungeon-pending-gold.cfg": {
+      "sha256": "27c7b67d08b304c4a8c6f8dd2d90f712e136f5ea63aecd0c49af319ff24ae9ac",
+      "bytes": 3122
+    },
+    ".local_validation/GAME035/render-live/reward-dungeon-pending.save": {
+      "sha256": "6f5fbd1559132e9b22765af3b6a0ac60bbf5fd2efe34d74d8d88ad7a47da88f5",
+      "bytes": 3320
+    },
+    ".local_validation/GAME035/render-live/settings.cfg": {
+      "sha256": "9c630afbcfbd2792ec75b42318baabf003c9fa2d2474aace484b72dd0ed5b497",
+      "bytes": 83
+    },
+    ".local_validation/GAME035/render-live/structure-case/battle.save": {
+      "sha256": "c64579a5c4d0039b0ff862ce75fa2dce468645b6a590e5646bd638c5b2b722f9",
+      "bytes": 9436
+    },
+    ".local_validation/GAME035/render-live/structure-second.save": {
+      "sha256": "c64579a5c4d0039b0ff862ce75fa2dce468645b6a590e5646bd638c5b2b722f9",
+      "bytes": 9436
+    },
+    ".local_validation/GAME035/render-live/structure-waiting.save": {
+      "sha256": "006ea4fa8ac507a490bc1e81a7dcb486c93d4962cce7b571518fb0e3bc713832",
+      "bytes": 9316
+    },
+    ".local_validation/GAME035/render-live/supply-after-purge.save": {
+      "sha256": "aafa3f1c933908c8fc896a7f98287d74e576582670d248c0e8da8bede67a7896",
+      "bytes": 10528
+    },
+    ".local_validation/GAME035/render-live/supply-case/battle.save": {
+      "sha256": "4c5bd02569866d20204ac2068eca6eaa66b88787cd55ba7868bb6564b59155ac",
+      "bytes": 10528
+    },
+    ".local_validation/GAME035/render-live/supply-magnet-choice.save": {
+      "sha256": "636bf088a9cfae346c80faf3f0022ad9b4d13a40e659683e79be4f22ed77827c",
+      "bytes": 9800
+    },
+    ".local_validation/GAME035/render-results.json": {
+      "sha256": "4456dd4771c6a731ad3d4d69b57aa5d580f962ee810aad4937d330861ad72763",
+      "bytes": 349390
+    },
+    ".local_validation/GAME035/render.log": {
+      "sha256": "701ea5e2d2b0fec17e550916c8c44917b9e5407519c9d116c490f00f58a7948c",
+      "bytes": 239367
+    },
+    ".local_validation/GAME035/render_probe.gd": {
+      "sha256": "7515a1ffe86d42add01681e61a393ba14260f141fa328dad569ad4894f9ead1b",
+      "bytes": 50597
+    },
+    ".local_validation/GAME035/report.json": {
+      "sha256": "fa8bbc686b9344829aaf2cb779fe5656493e03621466059ae620f76f39c608b3",
+      "bytes": 25352
+    },
+    ".local_validation/GAME035/reward_abandoned.png": {
+      "sha256": "935fce2830d51fa26697ece57be442a95cb0bf8831e36308f9c55305462bee8e",
+      "bytes": 82210
+    },
+    ".local_validation/GAME035/reward_already_recorded.png": {
+      "sha256": "5ec94fa03118ae6f89cf2e554793ecba87297d732d187f36c869092adafc06dd",
+      "bytes": 39630
+    },
+    ".local_validation/GAME035/reward_battle_pending.png": {
+      "sha256": "ab29c5870398deb972c5bc4be927a9f8e3aefbe5db334205da90b5f4e79837c3",
+      "bytes": 94725
+    },
+    ".local_validation/GAME035/reward_battle_retry_paid.png": {
+      "sha256": "a6027d4eff4471ad9dbc18110209a393514492512e262e0b173fc4858ae51798",
+      "bytes": 80797
+    },
+    ".local_validation/GAME035/reward_campaign_paid.png": {
+      "sha256": "a6027d4eff4471ad9dbc18110209a393514492512e262e0b173fc4858ae51798",
+      "bytes": 80797
+    },
+    ".local_validation/GAME035/reward_campaign_pending.png": {
+      "sha256": "a54c31b898e3035ea4ecf715dfef9cfe4372f0d7b01d31f2bb3045f86c8f83b7",
+      "bytes": 94740
+    },
+    ".local_validation/GAME035/reward_defeat.png": {
+      "sha256": "2f923401ea53e5e5041b184d7c0e3d3d77e1f28d8e452b568129df46bca2b3ca",
+      "bytes": 80726
+    },
+    ".local_validation/GAME035/reward_dungeon_forfeit_closed.png": {
+      "sha256": "8d3b72304238b5b96b9258c8bfaae62ff39e4d358eedbc143ebaaa65d0fd16b1",
+      "bytes": 102626
+    },
+    ".local_validation/GAME035/reward_dungeon_forfeit_pending.png": {
+      "sha256": "82cf4cf3f01ab5717515e40c877be0b44400616d0d7c5e3407d080117f538344",
+      "bytes": 107922
+    },
+    ".local_validation/GAME035/reward_dungeon_overview.png": {
+      "sha256": "1736e479184ca07b24c31fc4d1c07da0fc8254e36dc77a9710a4c6717354ae12",
+      "bytes": 46780
+    },
+    ".local_validation/GAME035/reward_dungeon_paid.png": {
+      "sha256": "ae94e4116a9fe13c4273dd0004f20160b322b5908fe2c9407cda6e00e337e9bf",
+      "bytes": 33507
+    },
+    ".local_validation/GAME035/reward_dungeon_pending.png": {
+      "sha256": "060801454fc46c0d4202eb0d3b97ed5b3cb67f1fcf6a6b90b2d7c8843c63f062",
+      "bytes": 107468
+    },
+    ".local_validation/GAME035/reward_dungeon_pending_compact.png": {
+      "sha256": "56ccd64d552e8727da90571d98bb20746bbdb3b6086e53fc7d1220aaaafa6ee3",
+      "bytes": 37643
+    },
+    ".local_validation/GAME035/reward_final_overview.png": {
+      "sha256": "504f31b86649690868680ea2a232c05ea15568624e96e27bb0054697ecc0c24d",
+      "bytes": 47086
+    },
+    ".local_validation/GAME035/reward_lobby_overview.png": {
+      "sha256": "9f1dfba14056199db529705d0f3b9785766a640af1cfd76c5ae2735202ee8bbc",
+      "bytes": 46993
+    },
+    ".local_validation/GAME035/reward_paid_compact.png": {
+      "sha256": "0f32c6d76b57afece33d028fc248971754aa64fedebdab59ce3573d5c6ad1b5e",
+      "bytes": 34264
+    },
+    ".local_validation/GAME035/reward_pending_compact.png": {
+      "sha256": "f9274235dfc287c98ab9a65c05124e624c736ca30b85cba49908fe13dd2f316a",
+      "bytes": 38189
+    },
+    ".local_validation/GAME035/reward_record_reconfirmed.png": {
+      "sha256": "0f32c6d76b57afece33d028fc248971754aa64fedebdab59ce3573d5c6ad1b5e",
+      "bytes": 34264
+    },
+    ".local_validation/GAME035/reward_retry_paid.png": {
+      "sha256": "0f32c6d76b57afece33d028fc248971754aa64fedebdab59ce3573d5c6ad1b5e",
+      "bytes": 34264
+    },
+    ".local_validation/GAME035/reward_timeout.png": {
+      "sha256": "e6ef106915639bfa49dd1f7794b12be25ef7f4016ad71c131a72b0532cab9d34",
+      "bytes": 87338
+    },
+    ".local_validation/GAME035/reward_timeout_compact.png": {
+      "sha256": "f906204418f665c92b5a5ce7fe82673c416fc520cb47a0958d48e244cb5b98bf",
+      "bytes": 32295
+    },
+    ".local_validation/GAME035/save_1600x720.png": {
+      "sha256": "901fbabe63969a4ec65da8d2f9e491ba93e57bdf7bc3b3c25d631f6f5ec9d502",
+      "bytes": 168543
+    },
+    ".local_validation/GAME035/save_853x384.png": {
+      "sha256": "f61b2a9fc9ac8ffcbc534a5dca75aac6ca3c6f48b3aa53b60780140d3d5f86dd",
+      "bytes": 85516
+    },
+    ".local_validation/GAME035/save_960x540.png": {
+      "sha256": "c0c80447e1527feb4357e1671e5a2d76c9809bbfa1a099a91c4da4f6604d2d87",
+      "bytes": 107056
+    },
+    ".local_validation/GAME035/save_checkpoint1.png": {
+      "sha256": "c4c433e3cc2e3401ffe3871e9f113e7cbd27fdd648d8ca76da3e5e025ecbb1a5",
+      "bytes": 160888
+    },
+    ".local_validation/GAME035/save_choice_paused.png": {
+      "sha256": "6b5778a7d8e2289a4439afe4706717e37a133f24e5e7706243ac32092f224e4e",
+      "bytes": 107214
+    },
+    ".local_validation/GAME035/save_dungeon_checkpoint1.png": {
+      "sha256": "df11da911fad33367c55c074305146475858824fd878facbabe3bca661494554",
+      "bytes": 130021
+    },
+    ".local_validation/GAME035/save_dungeon_choice.png": {
+      "sha256": "3b1641171ea96c8ff9fc8b3e64bf37b542ec81d614e7e62a036a2d3618f52be6",
+      "bytes": 150583
+    },
+    ".local_validation/GAME035/save_dungeon_lobby.png": {
+      "sha256": "d66eb1d0d54850d30062dd92bfe744003eb208e2478ee2df60f4afda508dfd61",
+      "bytes": 67244
+    },
+    ".local_validation/GAME035/save_failed_cp2.png": {
+      "sha256": "d8274303ced8cc5df27f016826c5bf51051f55b8b394263f281cb04dacee8b7d",
+      "bytes": 89567
+    },
+    ".local_validation/GAME035/save_lobby_continue.png": {
+      "sha256": "73d90b8f5aca5abc8162fa54bca129b909997a730589c490d860a59279958361",
+      "bytes": 64286
+    },
+    ".local_validation/GAME035/save_lobby_details.png": {
+      "sha256": "73d90b8f5aca5abc8162fa54bca129b909997a730589c490d860a59279958361",
+      "bytes": 64286
+    },
+    ".local_validation/GAME035/save_mission_context.png": {
+      "sha256": "2dc0a5fa6f426fe3504dabd561e1cd6aadecbf9e21aa4ec4e880a904dfaa5537",
+      "bytes": 84772
+    },
+    ".local_validation/GAME035/save_notice_expired.png": {
+      "sha256": "9611646304cdf089c1d4abcd4cfd8e4d9cdf0e21a112411a9c19768220c99852",
+      "bytes": 161806
+    },
+    ".local_validation/GAME035/save_pause_context.png": {
+      "sha256": "91bd903a4b3a59045a70cbe0b5b992c7f965f7e979e26f8d97b3357e00991bcc",
+      "bytes": 95567
+    },
+    ".local_validation/GAME035/save_restore_paused.png": {
+      "sha256": "91bd903a4b3a59045a70cbe0b5b992c7f965f7e979e26f8d97b3357e00991bcc",
+      "bytes": 95567
+    },
+    ".local_validation/GAME035/save_retry_confirmed.png": {
+      "sha256": "ae762c919ea872dd2ddf30433ba2f572e6eb63c3d800a9ab3e13f4f5cc1fb653",
+      "bytes": 95352
+    },
+    ".local_validation/GAME035/save_retry_running.png": {
+      "sha256": "3468d4d8be3faea11402cf1577a7399d5ada33dfebe1f97a9ff4e239bf098e3a",
+      "bytes": 161044
+    },
+    ".local_validation/GAME035/source-proof.json": {
+      "sha256": "7cdb75146be72cd95b740111de735dd29d2f01f97b9c3d9db7ad7ea97508909c",
+      "bytes": 7961
+    },
+    ".local_validation/GAME035/structure_broken_compact.png": {
+      "sha256": "c5d5fd8baa730f1a5c30c19fc5b391b0e27c107f780a0fdefcefee8eb2f751f5",
+      "bytes": 103076
+    },
+    ".local_validation/GAME035/structure_broken_high.png": {
+      "sha256": "14096245100e6c78305850bf5530e6f69476d319a39969a3e109a8773b752469",
+      "bytes": 208755
+    },
+    ".local_validation/GAME035/structure_broken_legacy.png": {
+      "sha256": "973a356016e6fd7b112203bfa362bb8f20f0ad2fdb702d599344c0b205c671af",
+      "bytes": 86493
+    },
+    ".local_validation/GAME035/structure_hit_high.png": {
+      "sha256": "e932ffad4d6154f74d1c6a6a0cb04a0935a414c67e87f31d0130451cfdc05fd9",
+      "bytes": 122743
+    },
+    ".local_validation/GAME035/structure_hit_legacy.png": {
+      "sha256": "91d9a5a11b46532f5d55dab40d6c37a0f947d2bc2d244763025423f4dde0700a",
+      "bytes": 64627
+    },
+    ".local_validation/GAME035/structure_intact_compact.png": {
+      "sha256": "c97d29752b24445f5611bcabb4491a34799a6c98e49cf602c56b1865f3e1eae7",
+      "bytes": 70702
+    },
+    ".local_validation/GAME035/structure_intact_high.png": {
+      "sha256": "072e8c2c1cf184c9091dc4bef0404a1b5fe1c4375a9ceddfdb5421f8db720a14",
+      "bytes": 122275
+    },
+    ".local_validation/GAME035/structure_intact_legacy.png": {
+      "sha256": "f2fa8d56be19a7ed75d38f7040579ec5ea68cb9dc723010d136db5edcd2adbec",
+      "bytes": 64030
+    },
+    ".local_validation/GAME035/structure_intact_wide.png": {
+      "sha256": "18d85fab86800a3055a44afe3bd5f9180c144af6d4cf5a36685fc23d3b528111",
+      "bytes": 129250
+    },
+    ".local_validation/GAME035/structure_last_second.png": {
+      "sha256": "bd328cd555562a6d43c0856e20a6af75cd07a35fda408f3f7fe74ab8f18bccc9",
+      "bytes": 124745
+    },
+    ".local_validation/GAME035/structure_paused1.png": {
+      "sha256": "d81270b93da432dfb8bc8475aca106615e4b5d8b98b8ee9bfbcbd46dec05e7b7",
+      "bytes": 91237
+    },
+    ".local_validation/GAME035/structure_paused2.png": {
+      "sha256": "d81270b93da432dfb8bc8475aca106615e4b5d8b98b8ee9bfbcbd46dec05e7b7",
+      "bytes": 91237
+    },
+    ".local_validation/GAME035/structure_regenerated_high.png": {
+      "sha256": "0942ff54d8f706f9c1cf60f6c3fd408f9821f7106e7cb1803ae425025c6ad71b",
+      "bytes": 123228
+    },
+    ".local_validation/GAME035/structure_regenerated_legacy.png": {
+      "sha256": "d77f32ce145f933112e6581c3e590f75a2b94b0ec0802b84c26288154d4e10c4",
+      "bytes": 65362
+    },
+    ".local_validation/GAME035/structure_restored_paused.png": {
+      "sha256": "d81270b93da432dfb8bc8475aca106615e4b5d8b98b8ee9bfbcbd46dec05e7b7",
+      "bytes": 91237
+    },
+    ".local_validation/GAME035/structure_second_generation.png": {
+      "sha256": "f497e4f9cb924b8295c6ebc675a839430549d63b6a3e917e10bc4191e158c7b5",
+      "bytes": 208777
+    },
+    ".local_validation/GAME035/structure_second_generation_paused.png": {
+      "sha256": "83408321e25d0f9e5a04d552459e136a64e97aaa0df7d9a12e72231f1091dc88",
+      "bytes": 90987
+    },
+    ".local_validation/GAME035/structures_dense_compact.png": {
+      "sha256": "1d0edd925cdd7c42b8bb68842a2d3c6a78ab9d9db741f3d8e3b50ea8675930fb",
+      "bytes": 180085
+    },
+    ".local_validation/GAME035/structures_dense_high.png": {
+      "sha256": "926fecdd19f8766707a4ec73213311629296ca65fab52945904cb671441764bf",
+      "bytes": 306633
+    },
+    ".local_validation/GAME035/structures_dense_legacy.png": {
+      "sha256": "17c7057aaee5ffabdbc274af854bdea159ffbe23b7a656e0347da48cc5d9f1cc",
+      "bytes": 126407
+    },
+    ".local_validation/GAME035/terminal-inputs.json": {
+      "sha256": "6c573d18be2ef6bbb652975d94c817c2a2aa1efc399958423ce519e43e1db05d",
+      "bytes": 3122
+    },
+    ".local_validation/GAME035/terminal-process/reward-campaign-paid/battle.save": {
+      "sha256": "686d84bc204a6f2a84a833d4845b053a1e1b8b936cefd41c6cdbfa9a51845d20",
+      "bytes": 9236
+    },
+    ".local_validation/GAME035/terminal-process/reward-campaign-paid/gold.cfg": {
+      "sha256": "ff0509d664cd684efc9ab0208ecbbbc69a50575804a7fed34ba71d0d9451f19b",
+      "bytes": 605
+    },
+    ".local_validation/GAME035/terminal-process/reward-campaign-pending/battle.save": {
+      "sha256": "c5bd88d86db439b1a0b842199332cc14ad026eadccf0f07d4d0cad53703a39e2",
+      "bytes": 9236
+    },
+    ".local_validation/GAME035/terminal-process/reward-campaign-pending/gold.cfg": {
+      "sha256": "ff0509d664cd684efc9ab0208ecbbbc69a50575804a7fed34ba71d0d9451f19b",
+      "bytes": 605
+    },
+    ".local_validation/GAME035/terminal-process/reward-campaign-timeout/battle.save": {
+      "sha256": "b6cbbec13bf82de930ea4d1c91ed0c607cb67bab236d64a2c7433e7c33fb3a06",
+      "bytes": 9492
+    },
+    ".local_validation/GAME035/terminal-process/reward-dungeon-forfeit-closed/battle.save": {
+      "sha256": "796f8f9e06a8c50cdec0f8eaa6f5179a485a127d4889cd0cdbad111df16eeec3",
+      "bytes": 3316
+    },
+    ".local_validation/GAME035/terminal-process/reward-dungeon-forfeit-closed/gold.cfg": {
+      "sha256": "6eadf20b94e126263f0dcf29f747e826b0526890d0be40489d5dd0635734a542",
+      "bytes": 630
+    },
+    ".local_validation/GAME035/terminal-process/reward-dungeon-forfeit-pending/battle.save": {
+      "sha256": "796f8f9e06a8c50cdec0f8eaa6f5179a485a127d4889cd0cdbad111df16eeec3",
+      "bytes": 3316
+    },
+    ".local_validation/GAME035/terminal-process/reward-dungeon-forfeit-pending/gold.cfg": {
+      "sha256": "6eadf20b94e126263f0dcf29f747e826b0526890d0be40489d5dd0635734a542",
+      "bytes": 630
+    },
+    ".local_validation/GAME035/terminal-process/reward-dungeon-paid/battle.save": {
+      "sha256": "9ac3ec7198210e4cc153d51896e148b452a3cff97e929c6de3cca961da0f5b6b",
+      "bytes": 3320
+    },
+    ".local_validation/GAME035/terminal-process/reward-dungeon-paid/gold.cfg": {
+      "sha256": "247ee5b67ad838d44c0f652c561d30cb0cfa81a38d847d36bb082188830214b3",
+      "bytes": 638
+    },
+    ".local_validation/GAME035/terminal-process/reward-dungeon-pending/battle.save": {
+      "sha256": "036e854ec0f46911a67da26ecac516a21299289b7ceb38c26ac28b3c75c7a270",
+      "bytes": 3320
+    },
+    ".local_validation/GAME035/terminal-process/reward-dungeon-pending/gold.cfg": {
+      "sha256": "247ee5b67ad838d44c0f652c561d30cb0cfa81a38d847d36bb082188830214b3",
+      "bytes": 638
+    },
+    ".local_validation/GAME035/terminal-process-results.json": {
+      "sha256": "0adbc4ec64c79d9a95ebc4efff79afeaad0e29f7ca346134f1e172f437ef0312",
+      "bytes": 4475
+    },
+    ".local_validation/GAME035/terminal-reward-campaign-paid.log": {
+      "sha256": "3e6e2ca4f61019c15daca37e1f9c312744a5e621cd579cbd1e6e793d564ec673",
+      "bytes": 555
+    },
+    ".local_validation/GAME035/terminal-reward-campaign-pending.log": {
+      "sha256": "db8ba669fdffb27cdb09941d61acf12dc2306fd44fe516845069c97b93fbfd03",
+      "bytes": 556
+    },
+    ".local_validation/GAME035/terminal-reward-campaign-timeout.log": {
+      "sha256": "78bfb85bd5f73097b6c6f40cf41232204ece13256eee3bcdd293a89114122aa0",
+      "bytes": 545
+    },
+    ".local_validation/GAME035/terminal-reward-dungeon-forfeit-closed.log": {
+      "sha256": "cb64d51800a9bf999d42edd492ec3ce533f9670eaf23955db3b777ca26e72c3e",
+      "bytes": 605
+    },
+    ".local_validation/GAME035/terminal-reward-dungeon-forfeit-pending.log": {
+      "sha256": "bc20a6eeaa8803c7a62b297921d7fc35d91f2a97c0777aeb2cf296a260f13b93",
+      "bytes": 606
+    },
+    ".local_validation/GAME035/terminal-reward-dungeon-paid.log": {
+      "sha256": "9ec83fd738988e4f554d4bd5855417a42b556c4073be5ad9b555ca17b9eb301f",
+      "bytes": 590
+    },
+    ".local_validation/GAME035/terminal-reward-dungeon-pending.log": {
+      "sha256": "569b7928c003ac971399a05f06719346b33e08e9e540657212f51c88e1ed72d6",
+      "bytes": 588
+    },
+    ".local_validation/GAME035/terminal-runner.log": {
+      "sha256": "0e5b8658d951750581d9e523353b4ca39e7383d5e4270984099332f084829e5b",
+      "bytes": 374
+    },
+    ".local_validation/GAME035/terminal_probe.gd": {
+      "sha256": "a60bc5b5f97cf630a65d373dc34ab6f077e01de4dcd2d68a7e46c55c8aaff225",
+      "bytes": 5535
+    },
+    ".local_validation/GAME035/v1-gold.cfg": {
+      "sha256": "19c9c8680d5b33d3582f5e42a5dceaa8a93ec559344a0b8204394c17d3fc6a3f",
+      "bytes": 75
+    },
+    ".local_validation/GAME035/v1.save": {
+      "sha256": "a61143f570daf1b59e2b23df114855e49369565701f0753d30e8a8608c8ec3b6",
+      "bytes": 4124
+    },
+    ".local_validation/GAME035/v10.save": {
+      "sha256": "faedcea69ee6fda390f1b3dc53237e34162033431a6bf8fe613ec6029e17b88b",
+      "bytes": 15856
+    },
+    ".local_validation/GAME035/v11.save": {
+      "sha256": "41a56fc69c68de9d160901c936e285fd2f389b7912a731a29ddd56b7f851b002",
+      "bytes": 14908
+    },
+    ".local_validation/GAME035/v12-gold.cfg": {
+      "sha256": "2d771f338d36154158c886b5ad905d3d1eb3a974ea23f325850d69ccfc3653bf",
+      "bytes": 461
+    },
+    ".local_validation/GAME035/v12.save": {
+      "sha256": "47bd1c25b34f781683053a1dc576523a5164893991dbee04a67a411a1fd6f143",
+      "bytes": 10168
+    },
+    ".local_validation/GAME035/v13-gold.cfg": {
+      "sha256": "b01c0ebfd465b09558f1ba064ae353307c2b511284784a1f6aa2776b0c3c99bd",
+      "bytes": 3062
+    },
+    ".local_validation/GAME035/v13.save": {
+      "sha256": "749254b0a1473b0c8e3d5f44967f325021b0f6c1c0a23848dee3f77a5f1895f8",
+      "bytes": 56944
+    },
+    ".local_validation/GAME035/v14-campaign.save": {
+      "sha256": "827efabccd9327a86a9c25d5cc6eeee20012bef5bdd7fbc4e7a2ac9a4a30d68b",
+      "bytes": 24580
+    },
+    ".local_validation/GAME035/v14-dungeon-gold.cfg": {
+      "sha256": "e41d9ae5611f8ebfa7140cc18bc78bfdd10d8f34caeeb2b955ac33ac1a04facf",
+      "bytes": 3076
+    },
+    ".local_validation/GAME035/v14-dungeon.save": {
+      "sha256": "afb7cbaa42b91a8119e73e22bb2c49305804d90be04c9ddf2c47ce8fe14c94cb",
+      "bytes": 56644
+    },
+    ".local_validation/GAME035/v15-campaign.save": {
+      "sha256": "86570455397abbbe01cc3f884151d08d00b41bb28330629de7ef9367ddb2e9d1",
+      "bytes": 12028
+    },
+    ".local_validation/GAME035/v15-dungeon-gold.cfg": {
+      "sha256": "520cefe6dd42fee7320249c75a6fca3a935c16359535947cb866b73102574b87",
+      "bytes": 3102
+    },
+    ".local_validation/GAME035/v15-dungeon.save": {
+      "sha256": "9f1a1adf03af8d9277c7e5ebd89274b04d3133abc862bc236348f59a521c551f",
+      "bytes": 57936
+    },
+    ".local_validation/GAME035/v2.save": {
+      "sha256": "97509dbd4216b43039a67ac0140aa49bc0cac17290776c7f1239bdbc386c9f4a",
+      "bytes": 10740
+    },
+    ".local_validation/GAME035/v3.save": {
+      "sha256": "54df0ef138655f77d960dad2d596a739fe11e834ab5adfce2649d5c9cd11b7db",
+      "bytes": 48908
+    },
+    ".local_validation/GAME035/v4-gold.cfg": {
+      "sha256": "9d6232a14127d855fe39dffce42a8243323a66cdf8945168becc71170b0cd757",
+      "bytes": 97
+    },
+    ".local_validation/GAME035/v4.save": {
+      "sha256": "b818c739ae4ccc90857c3b95aeeb0966d7520d62dacf6cca001cc6016deda0b2",
+      "bytes": 3304
+    },
+    ".local_validation/GAME035/v5-gold.cfg": {
+      "sha256": "d74306940ed9a119fd77b381fc52d9109149cf54f2d21ea5d9ce2c4bdcbce12e",
+      "bytes": 216
+    },
+    ".local_validation/GAME035/v5.save": {
+      "sha256": "7888a5609f12fbd96acdb8aab7fa9a9715c1c7535d880a4f90351fe63d3bf7c0",
+      "bytes": 3328
+    },
+    ".local_validation/GAME035/v6-gold.cfg": {
+      "sha256": "064e5d7170081ee940f7937067443cfc7729163b617861313581619b6725d8d9",
+      "bytes": 459
+    },
+    ".local_validation/GAME035/v6.save": {
+      "sha256": "05466a04d1d164982187a279179dcc1429a18f39a24bcbfc1290c8a26e078f3e",
+      "bytes": 3448
+    },
+    ".local_validation/GAME035/v7.save": {
+      "sha256": "961293fc4bb5192be88f712992c970b3d624ef8b12431f6abf57fa1974527462",
+      "bytes": 40064
+    },
+    ".local_validation/GAME035/v8-gold.cfg": {
+      "sha256": "61fee1fc485c37b252db36ded6d15cfe1e45ba255e6d50202debbf3b4d6748c9",
+      "bytes": 474
+    },
+    ".local_validation/GAME035/v8.save": {
+      "sha256": "4375041b473fc8f8fe070167eb71f9a1286cfef04dad3b15ef6c561ae51424ca",
+      "bytes": 12316
+    },
+    ".local_validation/GAME035/v9.save": {
+      "sha256": "758d859d34b50b3f14ee81a0ddf91adbf97095deec0aa12f49671a3b8775bb5a",
+      "bytes": 9548
+    }
+  }
+}
