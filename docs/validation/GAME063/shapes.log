@@ -1,0 +1,6 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:372)
+OpenGL API 4.5 (Core Profile) Mesa 25.0.7-2+deb13u1 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 19.1.7, 256 bits)
+
+{"maximum_channel_difference":1,"rows":[{"bodies":20,"changed_channels":3815,"max_channel_difference":1,"move_clock":-1.0},{"bodies":20,"changed_channels":3815,"max_channel_difference":1,"move_clock":0.0},{"bodies":20,"changed_channels":3872,"max_channel_difference":1,"move_clock":0.03125},{"bodies":20,"changed_channels":3797,"max_channel_difference":1,"move_clock":0.09375},{"bodies":20,"changed_channels":3861,"max_channel_difference":1,"move_clock":0.2}],"scope":"100 body poses against untouched pre-GAME063 primitives; at most1/255 vertex-colour encoding difference, original ordering/AA/shape/colours retained.","status":"PASS"}

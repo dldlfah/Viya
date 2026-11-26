@@ -4,11 +4,17 @@
 
 ## 세션 필수 문서
 
-[CURRENT_WORK](docs/CURRENT_WORK.md)와 **[누적 DEVELOPMENT_STATUS](docs/DEVELOPMENT_STATUS.md)**를 함께 읽는다. [PLANNED_WORK](docs/PLANNED_WORK.md) · [NEXT_TASK](docs/NEXT_TASK.md) · [AGENTS](AGENTS.md) · [제작 스킬](.agents/skills/viya-game-production/SKILL.md). ARTFIX001 코드 **`4793d743c1451131c91d0ffe3776c2f7cfec85fc`**, 브랜치 `work/viya-turnaround-qa-20261117`. 문서 HEAD는 코드 뒤에 오며 main 자동 병합은 하지 않는다.
+[CURRENT_WORK](docs/CURRENT_WORK.md)와 **[누적 DEVELOPMENT_STATUS](docs/DEVELOPMENT_STATUS.md)**를 함께 읽는다. [PLANNED_WORK](docs/PLANNED_WORK.md) · [NEXT_TASK](docs/NEXT_TASK.md) · [AGENTS](AGENTS.md) · [제작 스킬](.agents/skills/viya-game-production/SKILL.md). GAME063 코드 **`d7d72cffec61f88deb5aa72ba59b0c84e3c088f6`**, 브랜치 `work/viya-turnaround-qa-20261117`. 문서 HEAD는 코드 뒤에 오며 main 자동 병합은 하지 않는다.
 
 ## 다음 제작 우선순위
 
-[PLANNED_WORK63](docs/PLANNED_WORK.md)에 **전투 부하 개선 → 비야 달리기·이동 사격 → 대표 적1종 → 전투 표시 → 초상화4종 → 1스테이지 마감** 순서와 종료 조건을 정리했다. 다음 구현은 GAME063을 유지한다. 다음 Higgsfield 동작 제작은 E 달리기 루프, 첫 신규 몬스터 원화는 고블린 약탈병을 제안한다. 이 갱신은 계획이며 새 기능·생성 완료가 아니다.
+[PLANNED_WORK63](docs/PLANNED_WORK.md)에 **전투 부하 개선 → 비야 달리기·이동 사격 → 대표 적1종 → 전투 표시 → 초상화4종 → 1스테이지 마감** 순서와 종료 조건을 정리했다. GAME063은 아래 부분 렌더 개선을 마쳤으며 다음 한 단위는 GAME064 비야 E 달리기 루프 보정이다. 다음 Higgsfield 동작 제작은 E 달리기 루프, 첫 신규 몬스터 원화는 고블린 약탈병을 제안한다. 이 갱신은 계획이며 새 기능·생성 완료가 아니다.
+
+## 밀집 전투 렌더 개선 — GAME063
+
+고정된 임시 적 몸체를 공유 벡터 메시로 재사용한다. 같은6저장/3회 A/B에서 몸체 CPU16~28%·그리기 명령 준비7~14%를 줄였고 적 수/스폰·AI·깊이/가림·피격/예고·보스 보호와 비야 동작을 유지했다. 실제 Linux300초의 반복 중앙값은83.483→77.421ms다. 합성1,540개체의 계산 약44ms·자동 처리 지연/일부p95는 남으며 사용자 Windows/모바일 FPS나 렉 전면 해결을 의미하지 않는다.
+
+기존10명령/7묶음·120초/4,456네이티브, Python20·6계약/118negative와 실제 GUI100몸체자세/6전투쌍을 확인했다. [실제 전투](docs/validation/GAME063_AFTER.png) · [전후 측정/한계](docs/validation/GAME063_REPORT.json) · [구현과 재현](docs/design/DENSE_RENDER_CACHE.md). 다음은 [NEXT](docs/NEXT_TASK.md)의 E 달리기 한 주기 보정이다.
 
 ## Higgsfield 원화 재생성·적용 완료
 
@@ -16,11 +22,11 @@
 
 원본208장과 다른 표시197장은 변경하지 않았다. E11의 확인된 배경 마스크1,467픽셀만 알파를 줄이고, 경계색을 보정한 뒤 Godot 임포트와 같은 방식으로 정규화했다. 기존69×85.56 크기·200×248 캔버스·32동작·달리기60ms×11을 유지한다. 실제 모델·입력·작업 ID·해시·마스크와 재현 도구는 [수정 패킷](assets/characters/pilot_32/edge_repair/README.md)에 보관했다. 잔액 조회 차이는13.75크레딧이며 새 결제는 없다. [SDK 실행기](tools/higgsfield/README.md)의 과거 인증 차단은 현재 생성 상태와 구분한다.
 
-**이번 검증:** 재현44파일·E11 저장/임포트 RGBA·소스171/6계약·Python20·네이티브6묶음2,000검사·별도 headless 부트 PASS. 전체 회귀는 전투 검사120초 TIMEOUT이며 수정 전 기준 `b6340f5`도 동일했다. 실제 GUI 렌더는 환경 제약으로 BLOCKED, Windows/모바일·최종 아트 승인은 미검증이다. 전후 이미지는 실제 캐시 비교이며 새 전투 화면 캡처가 아니다.
+**ARTFIX001 당시 검증:** 재현44파일·E11 저장/임포트 RGBA·소스171/6계약·Python20·네이티브6묶음2,000검사·별도 headless 부트 PASS. 전체 회귀는 전투 검사120초 TIMEOUT이며 수정 전 기준 `b6340f5`도 동일했다. 당시 실제 GUI 렌더는 환경 제약으로 BLOCKED였으며, 이후 GAME063의 실제 GUI 검증은 위 최신 절을 따른다. Windows/모바일·최종 아트 승인은 별도다. 전후 이미지는 실제 캐시 비교이며 새 전투 화면 캡처가 아니다.
 
 ## 비야 크기·보행·사격 보정
 
-비야는69×85.56 고정 크기이며 원본8방향run11장을 사용한다. GAME061의 고정 캔버스·전후진 보행 위상·방향 유지·정지 전신 사격/조준 유지와 이동 보행/총구 연결을 보존했다. 노란 발밑 표시 제거·투명도 검사/보정 PNG 복구와 넓은 지면 배율1도 유지한다. 원본10→00 보행 루프 이음과 후반 밀집 부하는 여전히 후속이다. 다음은 **GAME063 밀집 렌더 부하 보완**이다.
+비야는69×85.56 고정 크기이며 원본8방향run11장을 사용한다. GAME061의 고정 캔버스·전후진 보행 위상·방향 유지·정지 전신 사격/조준 유지와 이동 보행/총구 연결을 보존했다. 노란 발밑 표시 제거·투명도 검사/보정 PNG 복구와 넓은 지면 배율1도 유지한다. 원본10→00 보행 루프 이음과 후반 밀집 부하는 여전히 후속이다. GAME063의 현재 부분 개선과 남은 부하는 위 최신 절을 따른다.
 
 [GAME061 크기/동작 비교](docs/validation/GAME061_COMPARISON.mp4)와 [GAME062 테두리/15% 확대 검증](docs/validation/GAME062_REPORT.json)은 당시 기록이다. GAME062의4,428검사·832렌더 PASS를 이번 변경의 검증으로 재사용하지 않는다. [캐릭터 연결/이력](docs/design/CHARACTER_PILOT_032.md).
 
