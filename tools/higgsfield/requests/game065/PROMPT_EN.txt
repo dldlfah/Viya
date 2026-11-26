@@ -1,0 +1,17 @@
+VIYA — ONE EAST-FACING FULL-BODY RUN-AND-FIRE CYCLE
+
+Use the accepted GAME064 eastward running cycle as the motion/foot-contact reference. Use the current VIYA idle and stationary firing images only for identity, the original rifle, hands and aiming posture. The clean reference video replays the existing RUN; it is not a new firing animation.
+
+Create the SAME mature adult VIYA in the exact existing east/right-facing in-game camera angle. Preserve her face, body proportions, long dark-brown wavy hair, ivory top, fitted black corset, partial gloves, brass/gold ornaments, short lower garments, thigh straps, tall boots, asymmetric crimson fabric and SAME rune-decorated firearm. Preserve the painted dark-fantasy anime style and asymmetry. No redesign, new armor/sleeves, mirrored costume or additional characters.
+
+Produce a coherent FULL-BODY cycle of running while aiming and firing. Keep anatomically correct hands and stable two-handed rifle handling. Show natural shooting posture and restrained shoulder/torso/rifle recoil while the legs continue their accepted gait. Do not restart the gait for each shot. Match alternating foot contacts, recovery and normalized gait phase to the accepted running reference so toggling RUN and RUN-AND-FIRE at the SAME gait phase does not teleport the feet or body. Do not copy stationary attack leg motion into the running cycle.
+
+Maintain continuous hair/cloth motion, natural weight transfer and a consistent ground plane/root. The last distinct pose must lead naturally into the first. Do not duplicate the closing frame, ping-pong, crossfade ghosted poses, cut out limbs, puppet the upper body or warp the body. Every final frame must depict the complete character. Do not return unchanged running frames with a flash overlay.
+
+Reference scale is a200x248 full canvas,69x85.56 game display,root/pivot(100,248),235world-units/second and155world-units per gait cycle. Nominal authored cycle is660ms; actual distance-driven cycle at base speed is659.574ms. Use the number of distinct frames needed for the coherent motion, not a target frame count, while supplying timing/phase correspondence to the accepted gait.
+
+Do not bake muzzle flashes, projectiles, impacts, shadows, environment, labels or checkerboard pixels into the PNGs. The game owns real firing events and the base rifle0.3second cadence. Animation recoil alone must not be reported as already synchronized to every real bullet. Supply a measured muzzle/barrel-tip position for every final frame.
+
+Before generation, check CURRENT Higgsfield models, motion/image-reference support, alpha/sequence outputs, price estimate and balance where available. Use a supported workflow and only this one-direction production scope. No purchases, automatic recharge, subscription changes, unrelated directions or character batches. Prefer genuine transparent RGBA sequences if supported; if the service produces RGB video, preserve that original and distinguish subsequent alpha preparation. Remove visible white/green matte residue from final frames without deleting ivory clothes, skin or fine hair.
+
+Deliver the source result, distinct ordered full-body frames on one registered canvas, timing and gait-phase correspondence, muzzle landmarks, looping preview, actual model/settings/reference/job IDs and observed costs. Preserve all accepted originals. Generation, game integration, execution validation and final producer art approval are separate outcomes.
