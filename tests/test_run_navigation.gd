@@ -202,6 +202,7 @@ func _run() -> void:
 	# Keep the full dense regression in a separate existing engine suite budget.
 	await preload("res://tests/test_combat_performance.gd").run(scene, verify)
 	preload("res://tests/test_enemy_shape_cache.gd").run(scene, verify)
+	await preload("res://tests/test_flier_expiry.gd").run(scene, verify)
 	preload("res://tests/test_loot_attraction.gd").run(scene, verify)
 	preload("res://tests/test_route_queries.gd").run(scene, verify)
 	await preload("res://tests/test_purge_feedback.gd").run(scene, verify)

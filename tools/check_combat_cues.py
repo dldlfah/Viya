@@ -12,7 +12,7 @@ FILES = ('scripts/combat/run_state.gd', 'scripts/combat/battle_view.gd', 'script
 # GAME064 adds a separate active resource and its immutable production PNG provenance.
 FILES += ('assets/characters/pilot_32/game064_e_run/viya_game064_frames.tres',
           'assets/characters/pilot_32/game064_e_run/provenance/asset_manifest.json')
-FILES += ('tests/test_gun_receipt.gd',)
+FILES += ('tests/test_gun_receipt.gd','tests/test_flier_expiry.gd','tests/fixtures/savefix001/flier_before.gd','tests/test_combat_performance.gd')
 # GAME065 preserves that complete resource and adds one separately tested E clip.
 FILES += ('assets/characters/pilot_32/game065_e_run_fire/viya_game065_frames.tres',
           'tests/test_viya_game065.gd')
@@ -101,6 +101,10 @@ OBLIQUE_VIEW_ADAPTERS = (('const ApproachCues = preload("res://scripts/combat/ap
 # GAME060: actual wide viewport, exact rollback before historical byte proofs.
 SURVIVOR_VIEW_ADAPTERS = (('func camera_center() -> Vector2:\n\tif uses_oblique():\n\t\tvar extent:Vector2=BattleProjection.world_view_size(size)\n\t\tvar lag:Vector2=camera.offset*extent if camera.run_id==simulation.run_id and camera._initialized and camera._viewport==size else Vector2.ZERO\n\t\tvar projected:Vector2=ObliqueProjection.screen_direction(lag,size)\n\t\tvar fraction:float=minf(1,minf(size.x*.08/maxf(.001,absf(projected.x)),size.y*.08/maxf(.001,absf(projected.y))))\n\t\tvar target:Vector2=simulation.player+lag*fraction\n\t\tvar center:Vector2=target if simulation.map_id=="legacy_arena" else simulation.map_space.camera_center(target,ObliqueProjection.world_view_size(size))\n\t\treturn ObliqueProjection.keep_player_visible(simulation.player,center,size)\n\treturn camera.center(simulation,size)\n', 'func camera_center() -> Vector2:\n\tif uses_oblique():\n\t\tvar extent:Vector2=BattleProjection.world_view_size(size)\n\t\tvar lag:Vector2=camera.offset*extent if camera.run_id==simulation.run_id and camera._initialized and camera._viewport==size else Vector2.ZERO\n\t\tvar projected:Vector2=ObliqueProjection.screen_direction(lag,size)\n\t\tvar fraction:float=minf(1,minf(size.x*.08/maxf(.001,absf(projected.x)),size.y*.08/maxf(.001,absf(projected.y))))\n\t\tvar target:Vector2=simulation.player+lag*fraction\n\t\treturn target if simulation.map_id=="legacy_arena" else simulation.map_space.camera_center(target,extent)\n\treturn camera.center(simulation,size)\n'), ('func spawn_guard_size() -> Vector2:\n\treturn world_view_size()*(1.0+2.0*camera.MAX_OFFSET_FRACTION)\n', 'func spawn_guard_size() -> Vector2:\n\treturn camera.guard_size(size)\n'), ('func world_view_size() -> Vector2:\n\t# Layout feeds this actual display footprint into the existing viewport input.\n\treturn ObliqueProjection.world_view_size(size) if uses_oblique() else BattleProjection.world_view_size(size)\n', 'func world_view_size() -> Vector2:\n\t# The comparison toggle does not change saved viewport geometry or spawn RNG.\n\t# Unshifted extent; spawn_guard_size also covers the entire possible lead.\n\treturn BattleProjection.world_view_size(size)\n'))
 
+
+# SAVEFIX001: freeze the original reproduction and the narrowly reviewed new golden.
+FLIER_REVIEWED_SHA256 = {'tests/fixtures/savefix001/flier_before.gd': '76e935bd016c29eb8c8687a9181f88e077ce87ef7999a51ad15165cac6e80405', 'tests/test_flier_expiry.gd': '53354de6942ef42b095fcaeb3bed5329df3aad4153e120d4c9d141f6f6851193', 'tests/test_combat_performance.gd': '9b2e05a0e6406fb437ed4dc483d8c6d5c61c63503b142cc603e2d586cf3ba2f0'}
+
 def blob(text: str) -> str:
     data = text.encode('utf-8')
     return hashlib.sha1(b'blob ' + str(len(data)).encode() + b'\0' + data).hexdigest()
@@ -140,6 +144,13 @@ def validate(sources: dict[str, str]) -> list[str]:
         errors.append('Four portrait reaction runtime tests are not registered')
     if 'res://tests/test_character_pilot.gd' not in sources['tests/test_run_navigation.gd']:
         errors.append('Supplied character pilot runtime tests are not registered')
+    for path, expected in FLIER_REVIEWED_SHA256.items():
+        if hashlib.sha256(sources[path].encode('utf-8')).hexdigest() != expected:
+            errors.append('Reviewed flier expiry reproduction/golden changed: ' + path)
+    expiry_hook = '\t\t# Match the existing snapshot\'s one-microsecond live-lifetime floor.\n\t\t# Repeated subtraction of 5s can leave ~9e-15s and one ghost update.\n\t\tif flier.life < 0.000001:'
+    if run.count(expiry_hook) != 1:
+        errors.append('Missing/changed reviewed flier expiry correction')
+    run = run.replace(expiry_hook, '\t\tif flier.life <= 0.0:', 1)
     gun_hook = '\tcues.record_gun_fire(direction, source)\n'
     if run.count(gun_hook) != 1:
         errors.append('Missing/changed committed legacy gun receipt adapter')
@@ -232,6 +243,10 @@ def validate(sources: dict[str, str]) -> list[str]:
             if reviewed.count(registration) != 1:
                 errors.append('Missing GAME063 cache regression registration')
             reviewed = reviewed.replace(registration, '', 1)
+            expiry_registration = '\tawait preload("res://tests/test_flier_expiry.gd").run(scene, verify)\n'
+            if reviewed.count(expiry_registration) != 1:
+                errors.append('Missing flier expiry/disk regression registration')
+            reviewed = reviewed.replace(expiry_registration, '', 1)
         if hashlib.sha256(reviewed.encode('utf-8')).hexdigest() != expected:
             errors.append('Reviewed GAME038-040 pattern/compatibility source changed: ' + path)
     if 'res://tests/test_pattern_reacquire.gd' not in tests:
@@ -459,6 +474,11 @@ def check() -> dict:
 
         ('optimization_unregistered', 'tests/test_run_navigation.gd', 'res://tests/test_combat_performance.gd', 'res://tests/missing.gd'),
         ('optimization_order', 'scripts/combat/spatial_candidates.gd', 'return a.order<b.order', 'return a.order>b.order'),
+        ('flier_original_proof_changed', 'tests/fixtures/savefix001/flier_before.gd', 'if flier.life <= 0.0:', 'if flier.life < 0.000001:'),
+        ('flier_corrected_golden_changed', 'tests/test_combat_performance.gd', '7450ea3a8ce3b39b7d5108a220e7c8f4f65051c368f99e0cb51b14b9160e02ad', '0000000000000000000000000000000000000000000000000000000000000000'),
+        ('flier_expiry_reverted', 'scripts/combat/run_state.gd', 'if flier.life < 0.000001:', 'if flier.life <= 0.0:'),
+        ('flier_expiry_overbroad', 'scripts/combat/run_state.gd', 'if flier.life < 0.000001:', 'if flier.life < 0.01:'),
+        ('flier_expiry_unregistered', 'tests/test_run_navigation.gd', 'res://tests/test_flier_expiry.gd', 'res://tests/missing.gd'),
         ('gun_receipt_unregistered', 'tests/test_actor_animation.gd', 'res://tests/test_gun_receipt.gd', 'res://tests/missing.gd'),
         ('gun_receipt_skipped', 'scripts/combat/run_state.gd', '\tcues.record_gun_fire(direction, source)\n', ''),
         ('gun_receipt_before_commit', 'scripts/combat/run_state.gd', '\tshots += 1\n\tcues.record_gun_fire(direction, source)', '\tcues.record_gun_fire(direction, source)\n\tshots += 1'),

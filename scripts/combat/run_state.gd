@@ -708,7 +708,9 @@ func _move_fliers(dt: float) -> void:
 		if flier.variant != "flier":
 			continue
 		flier.life -= dt
-		if flier.life <= 0.0:
+		# Match the existing snapshot's one-microsecond live-lifetime floor.
+		# Repeated subtraction of 5s can leave ~9e-15s and one ghost update.
+		if flier.life < 0.000001:
 			enemies.remove_at(index) # Expiry never awards a kill or loot.
 			continue
 		if _push_candidates==null and enemies.size()>=96:
