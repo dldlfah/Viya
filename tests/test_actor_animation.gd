@@ -102,7 +102,7 @@ static func run(host,verify:Callable)->void:
 	shot_state._projectile(Vector2.LEFT,1,1,3000)
 	shot_state.step(.05,Vector2.ZERO)
 	shot_observer.sync(shot_state,Vector2.ZERO,true)
-	verify.call(shot_state.bullets.size()==1 and shot_observer.pose(shot_state).direction=="s","A new shot removed by an immediate hit cannot reuse an older surviving bullet's facing")
+	verify.call(shot_state.bullets.size()==1 and shot_observer.pose(shot_state).direction=="w" and shot_observer.pose(shot_state).gun_aim==Vector2.LEFT and shot_observer.pose(shot_state).shot_age==0,"An immediately consumed shot retains its committed direction instead of borrowing an older surviving bullet")
 	var rapid=State.new()
 	rapid.start(2814)
 	rapid.shot_clock=999
@@ -221,3 +221,4 @@ static func run(host,verify:Callable)->void:
 	await host.get_tree().process_frame
 	for file in ["actor.tres","generic.tres","right.tres","bad.tres","battle.save","gold.cfg","settings.cfg"]:DirAccess.remove_absolute(folder.path_join(file))
 	DirAccess.remove_absolute(folder)
+	await preload("res://tests/test_gun_receipt.gd").run(host,verify)

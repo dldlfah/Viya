@@ -20,6 +20,7 @@ func prepare(state, track_enemies:bool=true, motion_region:Rect2=Rect2()) -> voi
 	if not entries.has(0):entries[0]={"p":state.player,"hp":state.hp,"shots":state.shots,"casts":state.magic.casts,"pose":"idle","moving":false,"since":state.elapsed,"direction":direction(state.facing),"facing":state.facing}
 	entries[0].before_bullets=state.bullets.duplicate()
 	entries[0].before_received=state.cues.received_serial
+	entries[0].before_gun=state.cues.gun_serial
 	if not track_enemies:return
 	var bounded:bool=motion_region.has_area()
 	for enemy in state.enemies:
@@ -54,12 +55,19 @@ func sync(state, hero_displacement:Vector2, active:bool, track_enemies:bool=true
 					hero.gun_since=state.elapsed
 					hero.gun_aim=bullet.direction
 				break
+	# A committed shot may already have hit or reached a wall this tick. Its
+	# receipt also wins over a later non-gun projectile from another skill.
+	if state.cues.gun_serial>int(hero.get("before_gun",state.cues.gun_serial)):
+		aim=state.cues.gun_direction
+		hero.gun_since=state.elapsed
+		hero.gun_aim=aim
 	update(0,hero,state.player,state.hp,hero_displacement if hero_intent else Vector2.ZERO,aim,fired,0,state)
 	entries[0].distance=float(hero.get("distance",0))+hero_displacement.length() if hero_intent else float(hero.get("distance",0))
 	entries[0].shots=state.shots
 	entries[0].casts=state.magic.casts
 	entries[0].before_bullets=[]
 	entries[0].before_received=state.cues.received_serial
+	entries[0].before_gun=state.cues.gun_serial
 	var bounded:bool=motion_region.has_area()
 	for enemy in (state.enemies if track_enemies else []):
 		if bounded and enemy.kind=="normal" and not motion_region.has_point(enemy.p):continue

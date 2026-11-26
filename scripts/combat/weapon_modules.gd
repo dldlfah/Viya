@@ -212,6 +212,7 @@ static func projectile(state, at: Vector2, direction: Vector2, p: Dictionary) ->
 		"damage":float(p.damage),"remaining":int(p.hits),"seen":{},"source":p.id,
 		"weapon":p.duplicate(true),"age":0.0,"returning":false})
 	state.shots += 1
+	state.cues.record_gun_fire(direction, str(p.id), bool(p.get("fragment",false)))
 
 static func fragments(state, at: Vector2, p: Dictionary) -> void:
 	if p.fragments <= 0:

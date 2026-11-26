@@ -910,6 +910,7 @@ func _projectile(direction: Vector2, damage: float, hits: int, speed: float = BU
 	bullets.append({"p": player, "direction": direction, "life": 0.75,
 		"speed": speed, "damage": damage, "remaining": hits, "seen": {}, "source": source})
 	shots += 1
+	cues.record_gun_fire(direction, source)
 	return true
 
 func _damage_enemy(id: int, base_damage: float, damage_type: String = "physical", source_id: String = "") -> void:

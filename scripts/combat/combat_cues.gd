@@ -16,12 +16,26 @@ var events: Array[Dictionary] = []
 var flashes: Dictionary = {}
 var received: Array[Dictionary] = []
 var received_serial: int = 0
+var gun_serial: int = 0
+var gun_direction: Vector2 = Vector2.ZERO
 
 func reset() -> void:
 	events.clear()
 	flashes.clear()
 	received.clear()
 	received_serial = 0
+	gun_serial = 0
+	gun_direction = Vector2.ZERO
+
+func record_gun_fire(direction: Vector2, source: String, fragment: bool = false) -> void:
+	# One committed receipt survives same-tick impact/wall removal. No event pool,
+	# gameplay clock or saved state; bow/magic/secondary fragments are excluded.
+	if not enabled or fragment or not direction.is_finite() or direction.is_zero_approx():
+		return
+	if source not in ["rifle","scatter","lance","crossfire","heavy","viya_runebullet_v1"] and not source.begins_with("gun_"):
+		return
+	gun_serial += 1
+	gun_direction = direction.normalized()
 
 func record_received(at: Vector2, hp_lost: int, source: Dictionary = {}) -> void:
 	if not enabled or hp_lost <= 0 or not at.is_finite():
@@ -135,4 +149,4 @@ func flash_alpha(id: int) -> float:
 	return clampf(float(flashes.get(id, 0.0)) / FLASH_SECONDS, 0.0, 1.0)
 
 func snapshot() -> Dictionary:
-	return {"events": events.duplicate(true), "flashes": flashes.duplicate(true), "received":received.duplicate(true)}
+	return {"events": events.duplicate(true), "flashes": flashes.duplicate(true), "received":received.duplicate(true), "gun_serial":gun_serial, "gun_direction":gun_direction}
