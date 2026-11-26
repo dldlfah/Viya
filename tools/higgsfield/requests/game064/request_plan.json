@@ -1,0 +1,82 @@
+{
+  "task": "GAME064_E_RUN_LOOP",
+  "status": "BLOCKED_HIGGSFIELD_EXECUTION_UNAVAILABLE",
+  "authorization": "Existing user instruction permits this one-direction cycle correction; no repeated execution permission needed.",
+  "base_document_head": "eebfba100f0fc3bf74ac2c3dc8d61beaf5e2dee7",
+  "game_code": "d7d72cffec61f88deb5aa72ba59b0c84e3c088f6",
+  "artfix_code": "4793d743c1451131c91d0ffe3776c2f7cfec85fc",
+  "reference_state": "Current game pilot references preserve ART-001 identity; they are not a new final-design approval. GEN-005 must not substitute for identity.",
+  "approved_design_sha256": "ccf3c90ea8383e0fe8eec95380bec181d9485e5d29196bb856dbe5c7bcd974d0",
+  "references": [
+    {
+      "path": "assets/characters/pilot_32/render_cache/viya_run_e_00.png",
+      "sha256": "09b7f0f62a2daa178f4f3f182fc6c0884b7c1e719e0623a28d53ae89d203a16f",
+      "role": "run_phase_context"
+    },
+    {
+      "path": "assets/characters/pilot_32/render_cache/viya_run_e_01.png",
+      "sha256": "9a48bcdc0d8aaf05801ca6e9cfca56ad2d8cb8958599652e0e3fb6c81c32fc5d",
+      "role": "run_phase_context"
+    },
+    {
+      "path": "assets/characters/pilot_32/render_cache/viya_run_e_02.png",
+      "sha256": "b8e8cc2c01248f8a16a097b553e4b278e8ccde66233c6b3a72b4f3f06106bd48",
+      "role": "run_phase_context"
+    },
+    {
+      "path": "assets/characters/pilot_32/render_cache/viya_run_e_03.png",
+      "sha256": "ecf571520141e50832eabc87529f89d631b9bcdb414da307b0bd0aba438e469e",
+      "role": "run_phase_context"
+    },
+    {
+      "path": "assets/characters/pilot_32/render_cache/viya_run_e_04.png",
+      "sha256": "d64faa20f6cbcb312f633d1831c84405bc7e69ef17852a5b2a2974e2d8c536c6",
+      "role": "run_phase_context"
+    },
+    {
+      "path": "assets/characters/pilot_32/render_cache/viya_run_e_05.png",
+      "sha256": "e48687cfe29d0e80b2e90ff75d94fec4690ba6b786093a3c6d231dbda28c9b5d",
+      "role": "run_phase_context"
+    },
+    {
+      "path": "assets/characters/pilot_32/render_cache/viya_run_e_06.png",
+      "sha256": "bd1c420925e8281dd9d05c617b0c2adcf1ac77b34edf1af0b9ef17b135813051",
+      "role": "run_phase_context"
+    },
+    {
+      "path": "assets/characters/pilot_32/render_cache/viya_run_e_07.png",
+      "sha256": "b992937f93981f6d76ce66d52662fdbdc0cb7cd9548b55427ddf0e709bd6ead4",
+      "role": "run_phase_context"
+    },
+    {
+      "path": "assets/characters/pilot_32/render_cache/viya_run_e_08.png",
+      "sha256": "08c2d1ec202e2402c1eb0560ff420d39ac90f261b04ef4fa83dcd0a862c124e4",
+      "role": "run_phase_context"
+    },
+    {
+      "path": "assets/characters/pilot_32/render_cache/viya_run_e_09.png",
+      "sha256": "8a9d1d2cde0e0ab0852bfd2f2191c5765a16997b5fac85a2c9e0baefc1787183",
+      "role": "run_phase_context"
+    },
+    {
+      "path": "assets/characters/pilot_32/render_cache/viya_run_e_10.png",
+      "sha256": "7a88914b0bb6e035a7b08f9ee46ae462e48ac5edeb79521a69ab9cf2b2a20703",
+      "role": "run_phase_context"
+    },
+    {
+      "path": "assets/characters/pilot_32/render_cache/viya_idle_e.png",
+      "sha256": "99daf52484511e3f6aa329cb3a7546d7a74f854a70295865606808e5ab705a81",
+      "role": "current_idle_identity_context"
+    }
+  ],
+  "model": null,
+  "supported_features_checked": false,
+  "balance": null,
+  "quote": null,
+  "submitted_task_ids": [],
+  "new_generation_requests": 0,
+  "new_credit_expenditure": 0,
+  "desired_scope": "One east full-body run cycle, no fixed frame count; later dedicated moving-fire art not started.",
+  "integration": "Only after real outputs pass inspection: create derived frames/resource, update the E sequence sampler to actual frame timing as necessary, preserve the other7directions/original208frames/GAME063cache and game rules. No dummy override or fabricated interpolation is active.",
+  "submitter": "Use a callable authenticated Higgsfield tool/API after checking current capabilities/costs. This is a production request plan, not the old edge-repair CLI schema. Do not feed it to the old one-frame edge-repair submit command or resubmit completed ARTFIX001."
+}
