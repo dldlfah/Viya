@@ -134,3 +134,23 @@
 - [ARTFIX001_REPORT](validation/ARTFIX001_REPORT.json): 실제 적용·재현/임포트 검증과 전체 회귀 TIMEOUT·실기 미검증을 구분. 최종 ART001 승인 승격은 없다.
 
 **다음 제작 순위:** [PLANNED_WORK63](PLANNED_WORK.md). E 달리기 반복 연결/이동 사격을 먼저 보완하고, 신규 적은 고블린 약탈병1종부터 실제 전투에 연결하는 순서를 제안한다. 초상화4경로는 여전히 비어 있으며 이번 계획 갱신에서 새 자산을 생성하거나 연결하지 않았다.
+
+
+## 2026-11-26 — GAME064 E 달리기 파생47장
+
+사용자의 “게임에 반영해” 지시로 기존 `viya_battle`을 [GAME064 파생 SpriteFrames](../assets/characters/pilot_32/game064_e_run/viya_game064_frames.tres)에 연결했다. E 달리기47장과 보존된 캐시197장을 참조해32동작/244프레임이다. 원본208PNG/원본 리소스와 ARTFIX001 표시 캐시208PNG/리소스를 변경하지 않고 별도 경로에 준비했다. 새47PNG는 최종 납품본과 바이트 동일하다.
+
+| 항목 | 경로 / 값 |
+| --- | --- |
+| 새 E PNG | `assets/characters/pilot_32/game064_e_run/frames/viya_run_e_000.png`~`046.png` |
+| 활성 리소스 | `assets/characters/pilot_32/game064_e_run/viya_game064_frames.tres` |
+| 해시/시간/연결 명세 | [manifest.json](../assets/characters/pilot_32/game064_e_run/manifest.json) |
+| 개별 표시 시간 | [frame_timing.csv](../assets/characters/pilot_32/game064_e_run/provenance/frame_timing.csv) |
+| 모델 / 작업 | `hf_mult_motion_control` / `fbf2fd2d-8596-4ca4-87e7-875712a2f7c9` |
+| 원출력 SHA256 | `103a6aa16585f5c6160f03c4373f8fcbba55283e655ff8dfcff371faded4d29d` |
+| 캔버스 / 표시 / 기준점 | 200×248 / 69×85.56 / (100,248), 정규화(.5,1) |
+| 시간 | 명목660ms 가변47구간; 이동235·stride155에서659.574468ms |
+
+서비스 원출력은720×1280/24fps RGB MP4다. 이47장은 제작 단계의 알파 추출·고정 변환으로 준비한 RGBA이며 Godot 재매트 처리를 끈 무손실2D 임포트를 사용한다. 원본0,2,…92와 실제 두 다리 주기를 유지하고 다음 대응 프레임94는 제외한다. 대형 원본/탈락 후보 전체를 런타임에 복사하지 않고 출처·해시·비용·선정 근거를 [provenance](../assets/characters/pilot_32/game064_e_run/provenance/production_record.txt)에 보존했다. 그 안의 미연결 표시는 제작 당시 이력이며 현재 적용 상태는 CURRENT/DEVELOPMENT8.60을 따른다.
+
+이번 통합의 추가 생성·크레딧 사용·새 결제·자동충전은0이다. 채택 작업은 제작 당시 무료1회/0크레딧을 사용했고, 이전 보정 전체의 관측 차감62/마지막 조회966.25는 별도 비용 기록이다. 최종 아트 승인·다른 방향/전용 이동사격 제작으로 계산하지 않는다. 기존 승인 원본·ARTFIX001 근거·다른52공유경로·초상화4빈칸·GEN005미승인/3D보류를 유지한다.

@@ -1,0 +1,412 @@
+{
+  "schema": 1,
+  "scope": "GAME064 E run only; existing 197 frame references unchanged",
+  "resource": "res://assets/characters/pilot_32/game064_e_run/viya_game064_frames.tres",
+  "resource_sha256": "50766b0e761623aa1768806cc20c2399b1812a604bc40dfd6b44e69c71ae085a",
+  "preserved_resource": "res://assets/characters/pilot_32/render_cache/viya_render_frames.tres",
+  "preserved_resource_sha256": "245c025c908ba7ea21c3e27015c8aa16daafe05049b8c9d3b18964b03da0c66b",
+  "source_job_id": "fbf2fd2d-8596-4ca4-87e7-875712a2f7c9",
+  "model": "hf_mult_motion_control",
+  "canvas": [
+    200,
+    248
+  ],
+  "pivot": [
+    100,
+    248
+  ],
+  "display_size": [
+    69,
+    85.56
+  ],
+  "nominal_cycle_ms": 660.000000000002,
+  "fps": 71.21212121212099,
+  "frames": [
+    {
+      "index": 0,
+      "path": "frames/viya_run_e_000.png",
+      "sha256": "d7925db10bcca60854fb3ee5392930d052be359c123288cbe35ea43f40a56c20",
+      "source_frame": 0,
+      "duration_ms": 17.252474520075,
+      "relative_duration": 1.22858530673261
+    },
+    {
+      "index": 1,
+      "path": "frames/viya_run_e_001.png",
+      "sha256": "6b37b06ef9ebed3df2348d4ba8fc1d4b535171a06d8974ba760075ce926f6bf3",
+      "source_frame": 2,
+      "duration_ms": 17.320080824416,
+      "relative_duration": 1.2333996950720445
+    },
+    {
+      "index": 2,
+      "path": "frames/viya_run_e_002.png",
+      "sha256": "db40e71e2b9793f6e98b9d7653f4dc5be04c563fa635554f8b51d9d776a4c503",
+      "source_frame": 4,
+      "duration_ms": 17.332792768862,
+      "relative_duration": 1.234304939600775
+    },
+    {
+      "index": 3,
+      "path": "frames/viya_run_e_003.png",
+      "sha256": "240dd342ac97b18389216592dc4af2c83056d73ba515ce0b87c89598bec31f86",
+      "source_frame": 6,
+      "duration_ms": 17.292518452373,
+      "relative_duration": 1.231436920093225
+    },
+    {
+      "index": 4,
+      "path": "frames/viya_run_e_004.png",
+      "sha256": "eaf58840666d3b334f18b3066b20a9ee7d4ecc00b025d1c167d4ba1096771285",
+      "source_frame": 8,
+      "duration_ms": 17.193216253397,
+      "relative_duration": 1.2243653998631159
+    },
+    {
+      "index": 5,
+      "path": "frames/viya_run_e_005.png",
+      "sha256": "c12a4e33aeaa15ec0ec932ea51c78953ae3a8decae7801d08cef59ca52d00517",
+      "source_frame": 10,
+      "duration_ms": 17.019991329182,
+      "relative_duration": 1.2120296855629569
+    },
+    {
+      "index": 6,
+      "path": "frames/viya_run_e_006.png",
+      "sha256": "ec7a0506111508032527b1f64d2e11be42dcc070c82feed6c1bbcee7a6916349",
+      "source_frame": 12,
+      "duration_ms": 16.746859775244,
+      "relative_duration": 1.192579408237069
+    },
+    {
+      "index": 7,
+      "path": "frames/viya_run_e_007.png",
+      "sha256": "61fa49b6040e6db018f4144c98995c70e58f775b75970cb2e8fbeb5e84287912",
+      "source_frame": 14,
+      "duration_ms": 13.849490438984,
+      "relative_duration": 0.9862515918670395
+    },
+    {
+      "index": 8,
+      "path": "frames/viya_run_e_008.png",
+      "sha256": "2cec3461e2626ad8fce9f1c2bab97db2926316600703141fd67c29b391d20b69",
+      "source_frame": 16,
+      "duration_ms": 10.180792982583,
+      "relative_duration": 0.7249958639112114
+    },
+    {
+      "index": 9,
+      "path": "frames/viya_run_e_009.png",
+      "sha256": "9b43923d0d4df348a5ec6672c34f77a798c67b545adfdf08d774884e837fb193",
+      "source_frame": 18,
+      "duration_ms": 15.293696558007,
+      "relative_duration": 1.089096573070192
+    },
+    {
+      "index": 10,
+      "path": "frames/viya_run_e_010.png",
+      "sha256": "8515bd13a446f510b670b803a2e314586d4dad42eb82079b142d77942654dadb",
+      "source_frame": 20,
+      "duration_ms": 10.957381187807,
+      "relative_duration": 0.7802983573135264
+    },
+    {
+      "index": 11,
+      "path": "frames/viya_run_e_011.png",
+      "sha256": "34b8b508ca372609c18581cc304c5641479e3d4a96023719f2214dc3037ac11f",
+      "source_frame": 22,
+      "duration_ms": 15.461895693482,
+      "relative_duration": 1.101074390293412
+    },
+    {
+      "index": 12,
+      "path": "frames/viya_run_e_012.png",
+      "sha256": "1f2069447c3d8d98ee2f74c3657c24839250e553c1a20354cb58d28820310fb5",
+      "source_frame": 24,
+      "duration_ms": 12.199180141605,
+      "relative_duration": 0.8687294949324746
+    },
+    {
+      "index": 13,
+      "path": "frames/viya_run_e_013.png",
+      "sha256": "d95b5e965cf12ea108dd1159f4245d453250622561558c2e56988cd91b6c8ac5",
+      "source_frame": 26,
+      "duration_ms": 14.781980912529,
+      "relative_duration": 1.052656216498274
+    },
+    {
+      "index": 14,
+      "path": "frames/viya_run_e_014.png",
+      "sha256": "5e885eb00520c4fe898836e80623affccdea14ded3d6add20b3e18c95e969ad2",
+      "source_frame": 28,
+      "duration_ms": 10.505055625487,
+      "relative_duration": 0.7480872945422538
+    },
+    {
+      "index": 15,
+      "path": "frames/viya_run_e_015.png",
+      "sha256": "89070d18cb00a83229af96fe0fa8151124688acdc9928e21736ce43976669563",
+      "source_frame": 30,
+      "duration_ms": 10.545705373813,
+      "relative_duration": 0.7509820493472871
+    },
+    {
+      "index": 16,
+      "path": "frames/viya_run_e_016.png",
+      "sha256": "4cf636c355e1835002e7b86cdeb358b52b47ffb727024ec289364ae794525163",
+      "source_frame": 32,
+      "duration_ms": 7.603777467082,
+      "relative_duration": 0.5414811226558377
+    },
+    {
+      "index": 17,
+      "path": "frames/viya_run_e_017.png",
+      "sha256": "965d9e8c09ed525a09356085d14cd3fffdcf440e8db7a2497e7b0bce3c5b6e12",
+      "source_frame": 34,
+      "duration_ms": 10.793245447173,
+      "relative_duration": 0.7686099030562568
+    },
+    {
+      "index": 18,
+      "path": "frames/viya_run_e_018.png",
+      "sha256": "66467baf3e08e23bf7f4720aad41608dcff59fa377fba8ec3bbcb59c80a96c69",
+      "source_frame": 36,
+      "duration_ms": 12.948794785323,
+      "relative_duration": 0.9221111438033017
+    },
+    {
+      "index": 19,
+      "path": "frames/viya_run_e_019.png",
+      "sha256": "9a59e0350179f4954e3e360500464691c6699752419d2f5f36384cdf75703156",
+      "source_frame": 38,
+      "duration_ms": 14.393756151529,
+      "relative_duration": 1.0250099077603954
+    },
+    {
+      "index": 20,
+      "path": "frames/viya_run_e_020.png",
+      "sha256": "0b66b8037e66788daa57c1fa009e72641b84daeabe19a4f6db83ccd858a4e7ad",
+      "source_frame": 40,
+      "duration_ms": 15.344874713051,
+      "relative_duration": 1.0927410780505982
+    },
+    {
+      "index": 21,
+      "path": "frames/viya_run_e_021.png",
+      "sha256": "a202914c4e28908871b224c3fea281e9212933c42bccc40526162e5dc4b7fc1c",
+      "source_frame": 42,
+      "duration_ms": 15.944820681705,
+      "relative_duration": 1.1354645030911101
+    },
+    {
+      "index": 22,
+      "path": "frames/viya_run_e_022.png",
+      "sha256": "361a85c9adda4db76491313898cb4c89041e75c86cd31b61d90bffebd47dbe8c",
+      "source_frame": 44,
+      "duration_ms": 16.283584649116,
+      "relative_duration": 1.1595886038006813
+    },
+    {
+      "index": 23,
+      "path": "frames/viya_run_e_023.png",
+      "sha256": "77a13fa44c65c10fcedce0b50c443a46bb67865301acdf4d2f6cc875b3f91ac4",
+      "source_frame": 46,
+      "duration_ms": 16.41198055037,
+      "relative_duration": 1.1687319482839207
+    },
+    {
+      "index": 24,
+      "path": "frames/viya_run_e_024.png",
+      "sha256": "aede13296a0d7679f41c325d6c44feca89f52decd01f2fe75ae835c82673f9fc",
+      "source_frame": 48,
+      "duration_ms": 16.349267387074,
+      "relative_duration": 1.1642660108976903
+    },
+    {
+      "index": 25,
+      "path": "frames/viya_run_e_025.png",
+      "sha256": "58e7aae2febe16297ba31f2c507d3f9e36b37c3c926cda2551e036b4a5a4c6a4",
+      "source_frame": 50,
+      "duration_ms": 16.086040019627,
+      "relative_duration": 1.145521031700707
+    },
+    {
+      "index": 26,
+      "path": "frames/viya_run_e_026.png",
+      "sha256": "6ba4d7682e9e39c83f73a6947ce0b06522774ccfec915f431bb299bd45d0a229",
+      "source_frame": 52,
+      "duration_ms": 15.58281424281,
+      "relative_duration": 1.109685256684951
+    },
+    {
+      "index": 27,
+      "path": "frames/viya_run_e_027.png",
+      "sha256": "d0e4acb7698b0cf9685e060a77d47ef0a778f0af95aa46e411b6315a6f1e4e53",
+      "source_frame": 54,
+      "duration_ms": 14.764104869177,
+      "relative_duration": 1.0513832255322981
+    },
+    {
+      "index": 28,
+      "path": "frames/viya_run_e_028.png",
+      "sha256": "ba539a7b684e2bd186d9b42325888bf1790836f8c90e9ca0d92f8f895ffb0143",
+      "source_frame": 56,
+      "duration_ms": 13.507104823723,
+      "relative_duration": 0.9618695859317863
+    },
+    {
+      "index": 29,
+      "path": "frames/viya_run_e_029.png",
+      "sha256": "aa42f4270605ce94aa438b70fd9632c78f284bb5d43997f0ea71e87acc0af7ea",
+      "source_frame": 58,
+      "duration_ms": 11.623265160032,
+      "relative_duration": 0.8277173674568217
+    },
+    {
+      "index": 30,
+      "path": "frames/viya_run_e_030.png",
+      "sha256": "908fbf6175958927369f8f53c11fd210ec1664586873e980440a7432fbe62ad8",
+      "source_frame": 60,
+      "duration_ms": 9.82579474528,
+      "relative_duration": 0.6997156864063009
+    },
+    {
+      "index": 31,
+      "path": "frames/viya_run_e_031.png",
+      "sha256": "4981e9e178c4a505f5e564306a12c4a389e48741f6432d0a1f75ec8f689daf5a",
+      "source_frame": 62,
+      "duration_ms": 13.259943382894,
+      "relative_duration": 0.9442686954485092
+    },
+    {
+      "index": 32,
+      "path": "frames/viya_run_e_032.png",
+      "sha256": "d6b324cecf47be9b5e84f8c171342e20326207895ef13ee0c2567d32b2582146",
+      "source_frame": 64,
+      "duration_ms": 10.027290751839,
+      "relative_duration": 0.7140646444491388
+    },
+    {
+      "index": 33,
+      "path": "frames/viya_run_e_033.png",
+      "sha256": "48150f67bd61bd6d26e5cc283fde73cc60a9749397ffb1e4a711a670f9b89a5e",
+      "source_frame": 66,
+      "duration_ms": 14.041214243071,
+      "relative_duration": 0.9999046506429318
+    },
+    {
+      "index": 34,
+      "path": "frames/viya_run_e_034.png",
+      "sha256": "6a6557d4cbe15764f98428c134408cd9a8fd1a407bf816ccd6f09ffd36ff05e1",
+      "source_frame": 68,
+      "duration_ms": 11.494396314276,
+      "relative_duration": 0.8185403435923794
+    },
+    {
+      "index": 35,
+      "path": "frames/viya_run_e_035.png",
+      "sha256": "ba2eeb6c10ac1aa448eefc9be9949296ff423f3dd8a069b27bf9751475bc2878",
+      "source_frame": 70,
+      "duration_ms": 15.451911486587,
+      "relative_duration": 1.100363393741798
+    },
+    {
+      "index": 36,
+      "path": "frames/viya_run_e_036.png",
+      "sha256": "dd94cfe7fbf695979f9cc04d381010fb5a38e995464a499c41b451cd3433a45a",
+      "source_frame": 72,
+      "duration_ms": 11.542355382299,
+      "relative_duration": 0.8219556105576534
+    },
+    {
+      "index": 37,
+      "path": "frames/viya_run_e_037.png",
+      "sha256": "bc026186c5d3d3b84199b7c7bbdf69f1047386a488ef92298a3192fd4b6a7b67",
+      "source_frame": 74,
+      "duration_ms": 14.616722091756,
+      "relative_duration": 1.0408877853220149
+    },
+    {
+      "index": 38,
+      "path": "frames/viya_run_e_038.png",
+      "sha256": "c0bae25f88ff1aeb8b320bb71bafb267583dd1ac399e07637b5aaa911c3bb718",
+      "source_frame": 76,
+      "duration_ms": 9.178771457396,
+      "relative_duration": 0.6536397856024404
+    },
+    {
+      "index": 39,
+      "path": "frames/viya_run_e_039.png",
+      "sha256": "5aac843d512ef0d705ae597d3feb443ac78e5b22a10c4ff7d2a7c2022a903855",
+      "source_frame": 78,
+      "duration_ms": 10.208854869886,
+      "relative_duration": 0.7269942104312734
+    },
+    {
+      "index": 40,
+      "path": "frames/viya_run_e_040.png",
+      "sha256": "59b111a6a0be9045f47411e93fced3806ace45b7d60e79e0b133d4e6370fc499",
+      "source_frame": 80,
+      "duration_ms": 12.594503643873,
+      "relative_duration": 0.8968813200939836
+    },
+    {
+      "index": 41,
+      "path": "frames/viya_run_e_041.png",
+      "sha256": "d2c325ee7544550c4225d0c357a3219b2d26f5966502fd21e10f5eb52130ebea",
+      "source_frame": 82,
+      "duration_ms": 14.216422431825,
+      "relative_duration": 1.0123815974178378
+    },
+    {
+      "index": 42,
+      "path": "frames/viya_run_e_042.png",
+      "sha256": "fb99901b9848f6349ab554509fe26342d35d4ca3bc40762d188167218d3f36b5",
+      "source_frame": 84,
+      "duration_ms": 15.317899736416,
+      "relative_duration": 1.0908201327447724
+    },
+    {
+      "index": 43,
+      "path": "frames/viya_run_e_043.png",
+      "sha256": "85a2ff3924549a46829c22dfc99206e6f761efe84f4b175786004314bd4f5616",
+      "source_frame": 86,
+      "duration_ms": 16.064155273233,
+      "relative_duration": 1.1439625724878009
+    },
+    {
+      "index": 44,
+      "path": "frames/viya_run_e_044.png",
+      "sha256": "f81e323bb32015e8e4411d890a5fdb49482ef0297806396157ddcab081eda9d9",
+      "source_frame": 88,
+      "duration_ms": 16.567126597105,
+      "relative_duration": 1.1797802273695948
+    },
+    {
+      "index": 45,
+      "path": "frames/viya_run_e_045.png",
+      "sha256": "33144da1be57e8ea815dee1a757d93380c314b1aa1873c38ca1a4a18312a0b87",
+      "source_frame": 90,
+      "duration_ms": 16.902261355459,
+      "relative_duration": 1.2036458844038949
+    },
+    {
+      "index": 46,
+      "path": "frames/viya_run_e_046.png",
+      "sha256": "b761ecffc83e349059db66b93f22de9a64b7797181605f90ed21f2f76565040c",
+      "source_frame": 92,
+      "duration_ms": 17.119832451169,
+      "relative_duration": 1.2191395836438492
+    }
+  ],
+  "animation_count": 32,
+  "active_frame_count": 244,
+  "unchanged_frame_count": 197,
+  "stride_world": 155,
+  "speed_world_per_second": 235,
+  "distance_driven_cycle_ms_at_base_speed": 659.5744680851063,
+  "timing_note": "Relative CSV durations retained. Movement advances phase by distance/155; nominal660ms becomes659.574468ms at235 world/s.",
+  "originals_rewritten": false,
+  "new_generation_during_integration": false,
+  "art_approval": "User requested game integration; final visual approval remains separate."
+}

@@ -1,0 +1,1048 @@
+{
+  "source_job_prefix": "fbf2fd2d",
+  "source_video": "masters/canonical_motion_fbf2fd2d_run_e.mp4",
+  "purpose": "Remeasured timing for selected canonical motion-control output; unchanged source frames/order and one clip-wide affine registration",
+  "canvas_scale_native_to_canvas": 0.26247288503253796,
+  "display_scale": 0.345,
+  "native_to_world_scale": 0.09055314533622559,
+  "world_speed": 235,
+  "cycle_ms": 660,
+  "source_frame_count_cycle": 94,
+  "delivered_frame_count": 47,
+  "registration": {
+    "foreground_union_native": [
+      18,
+      192,
+      650,
+      1114
+    ],
+    "uniform_scale": 0.26247288503253796,
+    "translation": [
+      12.334056399132322,
+      -46.39479392624729
+    ],
+    "pivot_canvas": [
+      100,
+      248
+    ],
+    "ground_native_y": 1108,
+    "ground_canvas_y": 244.42516268980478,
+    "per_frame_alignment": false
+  },
+  "landmark_method": "Rightmost forefoot sole edge within fixed native y1093..1115 band, visually verified on identified near/far boot. Foreground mask uses green dominance<25; original background dominance about66. No per-frame alpha bbox alignment.",
+  "contact_windows_source": {
+    "near": [
+      12,
+      34
+    ],
+    "far": [
+      58,
+      80
+    ]
+  },
+  "motion_comparison": {
+    "complete_cycle_interval": [
+      0,
+      94
+    ],
+    "endpoint_excluded": 94,
+    "same_silhouette_half_cycle_not_selected": 48,
+    "reuse_old_timing": false,
+    "reason": "Foreground geometry/sole trajectories and uniform scale changed; timing recomputed from this clip.",
+    "seam_forefoot_native": {
+      "90": [
+        579,
+        1043
+      ],
+      "92": [
+        595,
+        1053
+      ],
+      "0": [
+        601,
+        1057
+      ],
+      "2": [
+        605,
+        1063
+      ],
+      "4": [
+        609,
+        1071
+      ]
+    }
+  },
+  "limitations": [
+    "Contact is visually inferred; no source skeleton or physical floor metadata exists.",
+    "Shoe deformation and rollover make the forefoot edge an approximate material point.",
+    "Boundary residuals measure the frame-start positions only; held-frame playback at60fps has larger within-frame offsets.",
+    "This is not an in-game test."
+  ],
+  "baseline_summary": {
+    "near": {
+      "n_intervals": 11,
+      "duration_ms": 154.46808510638297,
+      "displacement_world": 32.23691973969631,
+      "expected_displacement_world": 36.3,
+      "net_forward_slide_world": 4.063080260303687,
+      "max_interval_abs_slide_world": 1.6700433839479392,
+      "rms_interval_slide_world": 0.8448753233450499,
+      "max_cumulative_slide_world": 4.063080260303687
+    },
+    "far": {
+      "n_intervals": 11,
+      "duration_ms": 154.46808510638297,
+      "displacement_world": 30.606963123644245,
+      "expected_displacement_world": 36.3,
+      "net_forward_slide_world": 5.693036876355748,
+      "max_interval_abs_slide_world": 1.3078308026030367,
+      "rms_interval_slide_world": 0.7995141507619483,
+      "max_cumulative_slide_world": 5.693036876355748
+    },
+    "min_ms": 14.042553191489361,
+    "max_ms": 14.042553191489361,
+    "sum_ms": 659.9999999999998
+  },
+  "previous_timing_summary_on_new_geometry": {
+    "near": {
+      "n_intervals": 11,
+      "duration_ms": 133.07899678452765,
+      "displacement_world": 32.23691973969631,
+      "expected_displacement_world": 31.273564244363996,
+      "net_forward_slide_world": -0.9633554953323198,
+      "max_interval_abs_slide_world": 1.6498934154020541,
+      "rms_interval_slide_world": 0.572994372630231,
+      "max_cumulative_slide_world": 1.6498934154020541
+    },
+    "far": {
+      "n_intervals": 11,
+      "duration_ms": 134.3233344378864,
+      "displacement_world": 30.606963123644245,
+      "expected_displacement_world": 31.5659835929033,
+      "net_forward_slide_world": 0.9590204692590534,
+      "max_interval_abs_slide_world": 0.35464919164998765,
+      "rms_interval_slide_world": 0.2690458169626095,
+      "max_cumulative_slide_world": 1.0654260788386738
+    },
+    "min_ms": 7.0,
+    "max_ms": 17.437770656410564,
+    "sum_ms": 660.0
+  },
+  "exact_contact_summary": {
+    "near": {
+      "n_intervals": 11,
+      "duration_ms": 137.17838187104812,
+      "displacement_world": 32.23691973969631,
+      "expected_displacement_world": 32.236919739696305,
+      "net_forward_slide_world": 8.881784197001252e-16,
+      "max_interval_abs_slide_world": 4.440892098500626e-16,
+      "rms_interval_slide_world": 1.8936027533166073e-16,
+      "max_cumulative_slide_world": 8.881784197001252e-16
+    },
+    "far": {
+      "n_intervals": 11,
+      "duration_ms": 130.24239627082662,
+      "displacement_world": 30.606963123644245,
+      "expected_displacement_world": 30.606963123644256,
+      "net_forward_slide_world": 6.661338147750939e-16,
+      "max_interval_abs_slide_world": 4.440892098500626e-16,
+      "rms_interval_slide_world": 1.4970244210116102e-16,
+      "max_cumulative_slide_world": 6.661338147750939e-16
+    },
+    "min_ms": 6.935985600221534,
+    "max_ms": 16.9546314672082,
+    "sum_ms": 660.0
+  },
+  "regularized_summary": {
+    "near": {
+      "n_intervals": 11,
+      "duration_ms": 138.12581615662273,
+      "displacement_world": 32.23691973969631,
+      "expected_displacement_world": 32.45956679680634,
+      "net_forward_slide_world": 0.2226470571100314,
+      "max_interval_abs_slide_world": 0.22060280039280578,
+      "rms_interval_slide_world": 0.15292303022833356,
+      "max_cumulative_slide_world": 0.2226470571100314
+    },
+    "far": {
+      "n_intervals": 11,
+      "duration_ms": 131.27051988531443,
+      "displacement_world": 30.606963123644245,
+      "expected_displacement_world": 30.84857217304889,
+      "net_forward_slide_world": 0.24160904940464012,
+      "max_interval_abs_slide_world": 0.1871961218864331,
+      "rms_interval_slide_world": 0.14937453432835407,
+      "max_cumulative_slide_world": 0.24160904940464012
+    },
+    "min_ms": 7.603777467082428,
+    "max_ms": 17.332792768862383,
+    "sum_ms": 660.0000000000002
+  },
+  "held_frame_sampling_60fps_summary": {
+    "near": {
+      "samples": 82,
+      "min_world": 0.07763835605922687,
+      "max_world": 3.8983975751481634,
+      "rms_world": 1.9268924424160516
+    },
+    "far": {
+      "samples": 80,
+      "min_world": 0.012389522982475682,
+      "max_world": 3.29615669579524,
+      "rms_world": 1.809006073503345
+    }
+  },
+  "contact_landmarks": [
+    {
+      "leg": "near",
+      "frame_index": 6,
+      "source_frame": 12,
+      "next_source_frame": 14,
+      "toe_x_start": 599,
+      "toe_x_end": 555,
+      "toe_y_start": 1095.0,
+      "toe_y_end": 1095.0,
+      "native_dx_backwards": 44,
+      "ideal_ms": 16.9546314672082
+    },
+    {
+      "leg": "near",
+      "frame_index": 7,
+      "source_frame": 14,
+      "next_source_frame": 16,
+      "toe_x_start": 555,
+      "toe_x_end": 519,
+      "toe_y_start": 1095.0,
+      "toe_y_end": 1094.0,
+      "native_dx_backwards": 36,
+      "ideal_ms": 13.871971200443069
+    },
+    {
+      "leg": "near",
+      "frame_index": 8,
+      "source_frame": 16,
+      "next_source_frame": 18,
+      "toe_x_start": 519,
+      "toe_x_end": 495,
+      "toe_y_start": 1094.0,
+      "toe_y_end": 1094.0,
+      "native_dx_backwards": 24,
+      "ideal_ms": 9.24798080029538
+    },
+    {
+      "leg": "near",
+      "frame_index": 9,
+      "source_frame": 18,
+      "next_source_frame": 20,
+      "toe_x_start": 495,
+      "toe_x_end": 453,
+      "toe_y_start": 1094.0,
+      "toe_y_end": 1095.0,
+      "native_dx_backwards": 42,
+      "ideal_ms": 16.183966400516915
+    },
+    {
+      "leg": "near",
+      "frame_index": 10,
+      "source_frame": 20,
+      "next_source_frame": 22,
+      "toe_x_start": 453,
+      "toe_x_end": 427,
+      "toe_y_start": 1095.0,
+      "toe_y_end": 1094.0,
+      "native_dx_backwards": 26,
+      "ideal_ms": 10.018645866986661
+    },
+    {
+      "leg": "near",
+      "frame_index": 11,
+      "source_frame": 22,
+      "next_source_frame": 24,
+      "toe_x_start": 427,
+      "toe_x_end": 385,
+      "toe_y_start": 1094.0,
+      "toe_y_end": 1095.0,
+      "native_dx_backwards": 42,
+      "ideal_ms": 16.183966400516915
+    },
+    {
+      "leg": "near",
+      "frame_index": 12,
+      "source_frame": 24,
+      "next_source_frame": 26,
+      "toe_x_start": 385,
+      "toe_x_end": 355,
+      "toe_y_start": 1095.0,
+      "toe_y_end": 1095.0,
+      "native_dx_backwards": 30,
+      "ideal_ms": 11.559976000369225
+    },
+    {
+      "leg": "near",
+      "frame_index": 13,
+      "source_frame": 26,
+      "next_source_frame": 28,
+      "toe_x_start": 355,
+      "toe_x_end": 315,
+      "toe_y_start": 1095.0,
+      "toe_y_end": 1095.0,
+      "native_dx_backwards": 40,
+      "ideal_ms": 15.413301333825633
+    },
+    {
+      "leg": "near",
+      "frame_index": 14,
+      "source_frame": 28,
+      "next_source_frame": 30,
+      "toe_x_start": 315,
+      "toe_x_end": 289,
+      "toe_y_start": 1095.0,
+      "toe_y_end": 1097.5,
+      "native_dx_backwards": 26,
+      "ideal_ms": 10.018645866986661
+    },
+    {
+      "leg": "near",
+      "frame_index": 15,
+      "source_frame": 30,
+      "next_source_frame": 32,
+      "toe_x_start": 289,
+      "toe_x_end": 261,
+      "toe_y_start": 1097.5,
+      "toe_y_end": 1099.5,
+      "native_dx_backwards": 28,
+      "ideal_ms": 10.789310933677942
+    },
+    {
+      "leg": "near",
+      "frame_index": 16,
+      "source_frame": 32,
+      "next_source_frame": 34,
+      "toe_x_start": 261,
+      "toe_x_end": 243,
+      "toe_y_start": 1099.5,
+      "toe_y_end": 1098.0,
+      "native_dx_backwards": 18,
+      "ideal_ms": 6.935985600221534
+    },
+    {
+      "leg": "far",
+      "frame_index": 29,
+      "source_frame": 58,
+      "next_source_frame": 60,
+      "toe_x_start": 583,
+      "toe_x_end": 553,
+      "toe_y_start": 1097.0,
+      "toe_y_end": 1095.0,
+      "native_dx_backwards": 30,
+      "ideal_ms": 11.559976000369225
+    },
+    {
+      "leg": "far",
+      "frame_index": 30,
+      "source_frame": 60,
+      "next_source_frame": 62,
+      "toe_x_start": 553,
+      "toe_x_end": 529,
+      "toe_y_start": 1095.0,
+      "toe_y_end": 1095.0,
+      "native_dx_backwards": 24,
+      "ideal_ms": 9.24798080029538
+    },
+    {
+      "leg": "far",
+      "frame_index": 31,
+      "source_frame": 62,
+      "next_source_frame": 64,
+      "toe_x_start": 529,
+      "toe_x_end": 493,
+      "toe_y_start": 1095.0,
+      "toe_y_end": 1094.0,
+      "native_dx_backwards": 36,
+      "ideal_ms": 13.871971200443069
+    },
+    {
+      "leg": "far",
+      "frame_index": 32,
+      "source_frame": 64,
+      "next_source_frame": 66,
+      "toe_x_start": 493,
+      "toe_x_end": 469,
+      "toe_y_start": 1094.0,
+      "toe_y_end": 1094.0,
+      "native_dx_backwards": 24,
+      "ideal_ms": 9.24798080029538
+    },
+    {
+      "leg": "far",
+      "frame_index": 33,
+      "source_frame": 66,
+      "next_source_frame": 68,
+      "toe_x_start": 469,
+      "toe_x_end": 431,
+      "toe_y_start": 1094.0,
+      "toe_y_end": 1095.0,
+      "native_dx_backwards": 38,
+      "ideal_ms": 14.642636267134352
+    },
+    {
+      "leg": "far",
+      "frame_index": 34,
+      "source_frame": 68,
+      "next_source_frame": 70,
+      "toe_x_start": 431,
+      "toe_x_end": 403,
+      "toe_y_start": 1095.0,
+      "toe_y_end": 1095.0,
+      "native_dx_backwards": 28,
+      "ideal_ms": 10.789310933677942
+    },
+    {
+      "leg": "far",
+      "frame_index": 35,
+      "source_frame": 70,
+      "next_source_frame": 72,
+      "toe_x_start": 403,
+      "toe_x_end": 361,
+      "toe_y_start": 1095.0,
+      "toe_y_end": 1096.0,
+      "native_dx_backwards": 42,
+      "ideal_ms": 16.183966400516915
+    },
+    {
+      "leg": "far",
+      "frame_index": 36,
+      "source_frame": 72,
+      "next_source_frame": 74,
+      "toe_x_start": 361,
+      "toe_x_end": 333,
+      "toe_y_start": 1096.0,
+      "toe_y_end": 1096.0,
+      "native_dx_backwards": 28,
+      "ideal_ms": 10.789310933677942
+    },
+    {
+      "leg": "far",
+      "frame_index": 37,
+      "source_frame": 74,
+      "next_source_frame": 76,
+      "toe_x_start": 333,
+      "toe_x_end": 293,
+      "toe_y_start": 1096.0,
+      "toe_y_end": 1098.0,
+      "native_dx_backwards": 40,
+      "ideal_ms": 15.413301333825633
+    },
+    {
+      "leg": "far",
+      "frame_index": 38,
+      "source_frame": 76,
+      "next_source_frame": 78,
+      "toe_x_start": 293,
+      "toe_x_end": 271,
+      "toe_y_start": 1098.0,
+      "toe_y_end": 1099.0,
+      "native_dx_backwards": 22,
+      "ideal_ms": 8.4773157336041
+    },
+    {
+      "leg": "far",
+      "frame_index": 39,
+      "source_frame": 78,
+      "next_source_frame": 80,
+      "toe_x_start": 271,
+      "toe_x_end": 245,
+      "toe_y_start": 1099.0,
+      "toe_y_end": 1096.0,
+      "native_dx_backwards": 26,
+      "ideal_ms": 10.018645866986661
+    }
+  ],
+  "measured_sole_points": [
+    {
+      "source_frame": 8,
+      "toe_x": null,
+      "toe_y": null
+    },
+    {
+      "source_frame": 10,
+      "toe_x": 599,
+      "toe_y": 1094.0
+    },
+    {
+      "source_frame": 12,
+      "toe_x": 599,
+      "toe_y": 1095.0
+    },
+    {
+      "source_frame": 14,
+      "toe_x": 555,
+      "toe_y": 1095.0
+    },
+    {
+      "source_frame": 16,
+      "toe_x": 519,
+      "toe_y": 1094.0
+    },
+    {
+      "source_frame": 18,
+      "toe_x": 495,
+      "toe_y": 1094.0
+    },
+    {
+      "source_frame": 20,
+      "toe_x": 453,
+      "toe_y": 1095.0
+    },
+    {
+      "source_frame": 22,
+      "toe_x": 427,
+      "toe_y": 1094.0
+    },
+    {
+      "source_frame": 24,
+      "toe_x": 385,
+      "toe_y": 1095.0
+    },
+    {
+      "source_frame": 26,
+      "toe_x": 355,
+      "toe_y": 1095.0
+    },
+    {
+      "source_frame": 28,
+      "toe_x": 315,
+      "toe_y": 1095.0
+    },
+    {
+      "source_frame": 30,
+      "toe_x": 289,
+      "toe_y": 1097.5
+    },
+    {
+      "source_frame": 32,
+      "toe_x": 261,
+      "toe_y": 1099.5
+    },
+    {
+      "source_frame": 34,
+      "toe_x": 243,
+      "toe_y": 1098.0
+    },
+    {
+      "source_frame": 36,
+      "toe_x": 223,
+      "toe_y": 1096.0
+    },
+    {
+      "source_frame": 38,
+      "toe_x": null,
+      "toe_y": null
+    },
+    {
+      "source_frame": 54,
+      "toe_x": null,
+      "toe_y": null
+    },
+    {
+      "source_frame": 56,
+      "toe_x": 601,
+      "toe_y": 1094.0
+    },
+    {
+      "source_frame": 58,
+      "toe_x": 583,
+      "toe_y": 1097.0
+    },
+    {
+      "source_frame": 60,
+      "toe_x": 553,
+      "toe_y": 1095.0
+    },
+    {
+      "source_frame": 62,
+      "toe_x": 529,
+      "toe_y": 1095.0
+    },
+    {
+      "source_frame": 64,
+      "toe_x": 493,
+      "toe_y": 1094.0
+    },
+    {
+      "source_frame": 66,
+      "toe_x": 469,
+      "toe_y": 1094.0
+    },
+    {
+      "source_frame": 68,
+      "toe_x": 431,
+      "toe_y": 1095.0
+    },
+    {
+      "source_frame": 70,
+      "toe_x": 403,
+      "toe_y": 1095.0
+    },
+    {
+      "source_frame": 72,
+      "toe_x": 361,
+      "toe_y": 1096.0
+    },
+    {
+      "source_frame": 74,
+      "toe_x": 333,
+      "toe_y": 1096.0
+    },
+    {
+      "source_frame": 76,
+      "toe_x": 293,
+      "toe_y": 1098.0
+    },
+    {
+      "source_frame": 78,
+      "toe_x": 271,
+      "toe_y": 1099.0
+    },
+    {
+      "source_frame": 80,
+      "toe_x": 245,
+      "toe_y": 1096.0
+    },
+    {
+      "source_frame": 82,
+      "toe_x": 231,
+      "toe_y": 1097.0
+    },
+    {
+      "source_frame": 84,
+      "toe_x": null,
+      "toe_y": null
+    }
+  ],
+  "frames": [
+    {
+      "frame_index": 0,
+      "source_frame": 0,
+      "file": "viya_run_e_000.png",
+      "baseline_duration_ms": 14.042553191489361,
+      "exact_contact_duration_ms": 15.70316887432501,
+      "regularized_duration_ms": 17.252474520074596,
+      "classification": "flight_or_contact_transition"
+    },
+    {
+      "frame_index": 1,
+      "source_frame": 2,
+      "file": "viya_run_e_001.png",
+      "baseline_duration_ms": 14.042553191489361,
+      "exact_contact_duration_ms": 15.70316887432501,
+      "regularized_duration_ms": 17.320080824416166,
+      "classification": "flight_or_contact_transition"
+    },
+    {
+      "frame_index": 2,
+      "source_frame": 4,
+      "file": "viya_run_e_002.png",
+      "baseline_duration_ms": 14.042553191489361,
+      "exact_contact_duration_ms": 15.70316887432501,
+      "regularized_duration_ms": 17.332792768862383,
+      "classification": "flight_or_contact_transition"
+    },
+    {
+      "frame_index": 3,
+      "source_frame": 6,
+      "file": "viya_run_e_003.png",
+      "baseline_duration_ms": 14.042553191489361,
+      "exact_contact_duration_ms": 15.70316887432501,
+      "regularized_duration_ms": 17.292518452373194,
+      "classification": "flight_or_contact_transition"
+    },
+    {
+      "frame_index": 4,
+      "source_frame": 8,
+      "file": "viya_run_e_004.png",
+      "baseline_duration_ms": 14.042553191489361,
+      "exact_contact_duration_ms": 15.70316887432501,
+      "regularized_duration_ms": 17.19321625339688,
+      "classification": "flight_or_contact_transition"
+    },
+    {
+      "frame_index": 5,
+      "source_frame": 10,
+      "file": "viya_run_e_005.png",
+      "baseline_duration_ms": 14.042553191489361,
+      "exact_contact_duration_ms": 15.70316887432501,
+      "regularized_duration_ms": 17.019991329182464,
+      "classification": "flight_or_contact_transition"
+    },
+    {
+      "frame_index": 6,
+      "source_frame": 12,
+      "file": "viya_run_e_006.png",
+      "baseline_duration_ms": 14.042553191489361,
+      "exact_contact_duration_ms": 16.9546314672082,
+      "regularized_duration_ms": 16.74685977524379,
+      "classification": "measured_contact"
+    },
+    {
+      "frame_index": 7,
+      "source_frame": 14,
+      "file": "viya_run_e_007.png",
+      "baseline_duration_ms": 14.042553191489361,
+      "exact_contact_duration_ms": 13.871971200443069,
+      "regularized_duration_ms": 13.84949043898354,
+      "classification": "measured_contact"
+    },
+    {
+      "frame_index": 8,
+      "source_frame": 16,
+      "file": "viya_run_e_008.png",
+      "baseline_duration_ms": 14.042553191489361,
+      "exact_contact_duration_ms": 9.24798080029538,
+      "regularized_duration_ms": 10.180792982582599,
+      "classification": "measured_contact"
+    },
+    {
+      "frame_index": 9,
+      "source_frame": 18,
+      "file": "viya_run_e_009.png",
+      "baseline_duration_ms": 14.042553191489361,
+      "exact_contact_duration_ms": 16.183966400516915,
+      "regularized_duration_ms": 15.293696558007152,
+      "classification": "measured_contact"
+    },
+    {
+      "frame_index": 10,
+      "source_frame": 20,
+      "file": "viya_run_e_010.png",
+      "baseline_duration_ms": 14.042553191489361,
+      "exact_contact_duration_ms": 10.018645866986661,
+      "regularized_duration_ms": 10.95738118780711,
+      "classification": "measured_contact"
+    },
+    {
+      "frame_index": 11,
+      "source_frame": 22,
+      "file": "viya_run_e_011.png",
+      "baseline_duration_ms": 14.042553191489361,
+      "exact_contact_duration_ms": 16.183966400516915,
+      "regularized_duration_ms": 15.461895693481706,
+      "classification": "measured_contact"
+    },
+    {
+      "frame_index": 12,
+      "source_frame": 24,
+      "file": "viya_run_e_012.png",
+      "baseline_duration_ms": 14.042553191489361,
+      "exact_contact_duration_ms": 11.559976000369225,
+      "regularized_duration_ms": 12.199180141605352,
+      "classification": "measured_contact"
+    },
+    {
+      "frame_index": 13,
+      "source_frame": 26,
+      "file": "viya_run_e_013.png",
+      "baseline_duration_ms": 14.042553191489361,
+      "exact_contact_duration_ms": 15.413301333825633,
+      "regularized_duration_ms": 14.781980912528663,
+      "classification": "measured_contact"
+    },
+    {
+      "frame_index": 14,
+      "source_frame": 28,
+      "file": "viya_run_e_014.png",
+      "baseline_duration_ms": 14.042553191489361,
+      "exact_contact_duration_ms": 10.018645866986661,
+      "regularized_duration_ms": 10.505055625487197,
+      "classification": "measured_contact"
+    },
+    {
+      "frame_index": 15,
+      "source_frame": 30,
+      "file": "viya_run_e_015.png",
+      "baseline_duration_ms": 14.042553191489361,
+      "exact_contact_duration_ms": 10.789310933677942,
+      "regularized_duration_ms": 10.545705373813192,
+      "classification": "measured_contact"
+    },
+    {
+      "frame_index": 16,
+      "source_frame": 32,
+      "file": "viya_run_e_016.png",
+      "baseline_duration_ms": 14.042553191489361,
+      "exact_contact_duration_ms": 6.935985600221534,
+      "regularized_duration_ms": 7.603777467082428,
+      "classification": "measured_contact"
+    },
+    {
+      "frame_index": 17,
+      "source_frame": 34,
+      "file": "viya_run_e_017.png",
+      "baseline_duration_ms": 14.042553191489361,
+      "exact_contact_duration_ms": 15.70316887432501,
+      "regularized_duration_ms": 10.793245447173138,
+      "classification": "flight_or_contact_transition"
+    },
+    {
+      "frame_index": 18,
+      "source_frame": 36,
+      "file": "viya_run_e_018.png",
+      "baseline_duration_ms": 14.042553191489361,
+      "exact_contact_duration_ms": 15.70316887432501,
+      "regularized_duration_ms": 12.948794785322988,
+      "classification": "flight_or_contact_transition"
+    },
+    {
+      "frame_index": 19,
+      "source_frame": 38,
+      "file": "viya_run_e_019.png",
+      "baseline_duration_ms": 14.042553191489361,
+      "exact_contact_duration_ms": 15.70316887432501,
+      "regularized_duration_ms": 14.39375615152936,
+      "classification": "flight_or_contact_transition"
+    },
+    {
+      "frame_index": 20,
+      "source_frame": 40,
+      "file": "viya_run_e_020.png",
+      "baseline_duration_ms": 14.042553191489361,
+      "exact_contact_duration_ms": 15.70316887432501,
+      "regularized_duration_ms": 15.344874713050949,
+      "classification": "flight_or_contact_transition"
+    },
+    {
+      "frame_index": 21,
+      "source_frame": 42,
+      "file": "viya_run_e_021.png",
+      "baseline_duration_ms": 14.042553191489361,
+      "exact_contact_duration_ms": 15.70316887432501,
+      "regularized_duration_ms": 15.944820681705137,
+      "classification": "flight_or_contact_transition"
+    },
+    {
+      "frame_index": 22,
+      "source_frame": 44,
+      "file": "viya_run_e_022.png",
+      "baseline_duration_ms": 14.042553191489361,
+      "exact_contact_duration_ms": 15.70316887432501,
+      "regularized_duration_ms": 16.28358464911591,
+      "classification": "flight_or_contact_transition"
+    },
+    {
+      "frame_index": 23,
+      "source_frame": 46,
+      "file": "viya_run_e_023.png",
+      "baseline_duration_ms": 14.042553191489361,
+      "exact_contact_duration_ms": 15.70316887432501,
+      "regularized_duration_ms": 16.4119805503699,
+      "classification": "flight_or_contact_transition"
+    },
+    {
+      "frame_index": 24,
+      "source_frame": 48,
+      "file": "viya_run_e_024.png",
+      "baseline_duration_ms": 14.042553191489361,
+      "exact_contact_duration_ms": 15.70316887432501,
+      "regularized_duration_ms": 16.3492673870741,
+      "classification": "flight_or_contact_transition"
+    },
+    {
+      "frame_index": 25,
+      "source_frame": 50,
+      "file": "viya_run_e_025.png",
+      "baseline_duration_ms": 14.042553191489361,
+      "exact_contact_duration_ms": 15.70316887432501,
+      "regularized_duration_ms": 16.086040019626896,
+      "classification": "flight_or_contact_transition"
+    },
+    {
+      "frame_index": 26,
+      "source_frame": 52,
+      "file": "viya_run_e_026.png",
+      "baseline_duration_ms": 14.042553191489361,
+      "exact_contact_duration_ms": 15.70316887432501,
+      "regularized_duration_ms": 15.582814242809562,
+      "classification": "flight_or_contact_transition"
+    },
+    {
+      "frame_index": 27,
+      "source_frame": 54,
+      "file": "viya_run_e_027.png",
+      "baseline_duration_ms": 14.042553191489361,
+      "exact_contact_duration_ms": 15.70316887432501,
+      "regularized_duration_ms": 14.764104869176895,
+      "classification": "flight_or_contact_transition"
+    },
+    {
+      "frame_index": 28,
+      "source_frame": 56,
+      "file": "viya_run_e_028.png",
+      "baseline_duration_ms": 14.042553191489361,
+      "exact_contact_duration_ms": 15.70316887432501,
+      "regularized_duration_ms": 13.507104823723234,
+      "classification": "flight_or_contact_transition"
+    },
+    {
+      "frame_index": 29,
+      "source_frame": 58,
+      "file": "viya_run_e_029.png",
+      "baseline_duration_ms": 14.042553191489361,
+      "exact_contact_duration_ms": 11.559976000369225,
+      "regularized_duration_ms": 11.623265160031979,
+      "classification": "measured_contact"
+    },
+    {
+      "frame_index": 30,
+      "source_frame": 60,
+      "file": "viya_run_e_030.png",
+      "baseline_duration_ms": 14.042553191489361,
+      "exact_contact_duration_ms": 9.24798080029538,
+      "regularized_duration_ms": 9.825794745280358,
+      "classification": "measured_contact"
+    },
+    {
+      "frame_index": 31,
+      "source_frame": 62,
+      "file": "viya_run_e_031.png",
+      "baseline_duration_ms": 14.042553191489361,
+      "exact_contact_duration_ms": 13.871971200443069,
+      "regularized_duration_ms": 13.259943382893692,
+      "classification": "measured_contact"
+    },
+    {
+      "frame_index": 32,
+      "source_frame": 64,
+      "file": "viya_run_e_032.png",
+      "baseline_duration_ms": 14.042553191489361,
+      "exact_contact_duration_ms": 9.24798080029538,
+      "regularized_duration_ms": 10.027290751838509,
+      "classification": "measured_contact"
+    },
+    {
+      "frame_index": 33,
+      "source_frame": 66,
+      "file": "viya_run_e_033.png",
+      "baseline_duration_ms": 14.042553191489361,
+      "exact_contact_duration_ms": 14.642636267134352,
+      "regularized_duration_ms": 14.041214243071352,
+      "classification": "measured_contact"
+    },
+    {
+      "frame_index": 34,
+      "source_frame": 68,
+      "file": "viya_run_e_034.png",
+      "baseline_duration_ms": 14.042553191489361,
+      "exact_contact_duration_ms": 10.789310933677942,
+      "regularized_duration_ms": 11.494396314275566,
+      "classification": "measured_contact"
+    },
+    {
+      "frame_index": 35,
+      "source_frame": 70,
+      "file": "viya_run_e_035.png",
+      "baseline_duration_ms": 14.042553191489361,
+      "exact_contact_duration_ms": 16.183966400516915,
+      "regularized_duration_ms": 15.451911486587425,
+      "classification": "measured_contact"
+    },
+    {
+      "frame_index": 36,
+      "source_frame": 72,
+      "file": "viya_run_e_036.png",
+      "baseline_duration_ms": 14.042553191489361,
+      "exact_contact_duration_ms": 10.789310933677942,
+      "regularized_duration_ms": 11.542355382298695,
+      "classification": "measured_contact"
+    },
+    {
+      "frame_index": 37,
+      "source_frame": 74,
+      "file": "viya_run_e_037.png",
+      "baseline_duration_ms": 14.042553191489361,
+      "exact_contact_duration_ms": 15.413301333825633,
+      "regularized_duration_ms": 14.616722091755705,
+      "classification": "measured_contact"
+    },
+    {
+      "frame_index": 38,
+      "source_frame": 76,
+      "file": "viya_run_e_038.png",
+      "baseline_duration_ms": 14.042553191489361,
+      "exact_contact_duration_ms": 8.4773157336041,
+      "regularized_duration_ms": 9.178771457395623,
+      "classification": "measured_contact"
+    },
+    {
+      "frame_index": 39,
+      "source_frame": 78,
+      "file": "viya_run_e_039.png",
+      "baseline_duration_ms": 14.042553191489361,
+      "exact_contact_duration_ms": 10.018645866986661,
+      "regularized_duration_ms": 10.208854869885519,
+      "classification": "measured_contact"
+    },
+    {
+      "frame_index": 40,
+      "source_frame": 80,
+      "file": "viya_run_e_040.png",
+      "baseline_duration_ms": 14.042553191489361,
+      "exact_contact_duration_ms": 15.70316887432501,
+      "regularized_duration_ms": 12.594503643872658,
+      "classification": "flight_or_contact_transition"
+    },
+    {
+      "frame_index": 41,
+      "source_frame": 82,
+      "file": "viya_run_e_041.png",
+      "baseline_duration_ms": 14.042553191489361,
+      "exact_contact_duration_ms": 15.70316887432501,
+      "regularized_duration_ms": 14.21642243182508,
+      "classification": "flight_or_contact_transition"
+    },
+    {
+      "frame_index": 42,
+      "source_frame": 84,
+      "file": "viya_run_e_042.png",
+      "baseline_duration_ms": 14.042553191489361,
+      "exact_contact_duration_ms": 15.70316887432501,
+      "regularized_duration_ms": 15.317899736416008,
+      "classification": "flight_or_contact_transition"
+    },
+    {
+      "frame_index": 43,
+      "source_frame": 86,
+      "file": "viya_run_e_043.png",
+      "baseline_duration_ms": 14.042553191489361,
+      "exact_contact_duration_ms": 15.70316887432501,
+      "regularized_duration_ms": 16.064155273232544,
+      "classification": "flight_or_contact_transition"
+    },
+    {
+      "frame_index": 44,
+      "source_frame": 88,
+      "file": "viya_run_e_044.png",
+      "baseline_duration_ms": 14.042553191489361,
+      "exact_contact_duration_ms": 15.70316887432501,
+      "regularized_duration_ms": 16.567126597104963,
+      "classification": "flight_or_contact_transition"
+    },
+    {
+      "frame_index": 45,
+      "source_frame": 90,
+      "file": "viya_run_e_045.png",
+      "baseline_duration_ms": 14.042553191489361,
+      "exact_contact_duration_ms": 15.70316887432501,
+      "regularized_duration_ms": 16.902261355458627,
+      "classification": "flight_or_contact_transition"
+    },
+    {
+      "frame_index": 46,
+      "source_frame": 92,
+      "file": "viya_run_e_046.png",
+      "baseline_duration_ms": 14.042553191489361,
+      "exact_contact_duration_ms": 15.70316887432501,
+      "regularized_duration_ms": 17.119832451169295,
+      "classification": "flight_or_contact_transition"
+    }
+  ]
+}

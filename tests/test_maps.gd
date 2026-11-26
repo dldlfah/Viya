@@ -43,7 +43,7 @@ static func run(scene, verify: Callable) -> void:
 	verify.call(scene.layout_data.battle.size.y > 100.0, "Default live HUD retains a usable battle viewport")
 	verify.call(scene._handle_mobile_back() and scene.simulation.phase == State.Phase.PAUSED, "Mobile Back pauses combat instead of quitting it")
 	var art = preload("res://scripts/ui/asset_slots.gd").new()
-	verify.call(art.definitions.keys().all(func(key):return key=="viya_battle" or art.definitions[key]=="") and art.definitions.viya_battle=="res://assets/characters/pilot_32/render_cache/viya_render_frames.tres","Only the explicitly requested Viya pilot is bound; other slots remain blank and art is still a pilot")
+	verify.call(art.definitions.keys().all(func(key):return key=="viya_battle" or art.definitions[key]=="") and art.definitions.viya_battle=="res://assets/characters/pilot_32/game064_e_run/viya_game064_frames.tres","Only the explicitly requested Viya pilot with its E derivative is bound; other slots remain blank and final art approval remains separate")
 	var fixture := "user://icon-" + Crypto.new().generate_random_bytes(8).hex_encode() + ".tres"
 	var texture := GradientTexture2D.new()
 	texture.gradient = Gradient.new()

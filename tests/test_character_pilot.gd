@@ -6,32 +6,81 @@ const Campaign=preload("res://tests/test_campaign.gd")
 const Scenery=preload("res://scripts/combat/oblique_scenery.gd")
 const MANIFEST:="res://assets/characters/pilot_32/source_manifest.json"
 const SOURCE_RESOURCE:="res://assets/characters/pilot_32/resources/viya_directional_motion.tres"
-const RESOURCE:="res://assets/characters/pilot_32/render_cache/viya_render_frames.tres"
+const RESOURCE:="res://assets/characters/pilot_32/game064_e_run/viya_game064_frames.tres"
+const CACHE=preload("res://assets/characters/pilot_32/render_cache/viya_render_frames.tres")
+const EAST_TIMING:="res://assets/characters/pilot_32/game064_e_run/provenance/frame_timing.csv"
+const EAST_FIRST:="res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_000.png"
+const EAST_MANIFEST:="res://assets/characters/pilot_32/game064_e_run/provenance/asset_manifest.json"
 const DIRECTIONS:=["e","se","s","sw","w","nw","n","ne"]
+
+static func east_timing() -> Array:
+	var rows:Array=[]
+	var input:FileAccess=FileAccess.open(EAST_TIMING,FileAccess.READ)
+	if input==null:return rows
+	if input.get_csv_line()!=PackedStringArray(["frame","filename","source_frame","source_time_ms","start_ms","duration_ms","classification"]):return rows
+	while not input.eof_reached():
+		var cells:PackedStringArray=input.get_csv_line()
+		if cells.size()==1 and cells[0].is_empty():continue
+		if cells.size()!=7:return []
+		rows.append({"index":int(cells[0]),"filename":cells[1],"source_index":int(cells[2]),"start_ms":float(cells[4]),"duration_ms":float(cells[5])})
+	input.close()
+	return rows
 
 static func run(host,verify:Callable) -> void:
 	var slots=Slots.new()
 	var asset:Resource=slots.resource("viya_battle")
-	verify.call(slots.definitions.viya_battle==RESOURCE and asset is SpriteFrames and is_same(asset,slots.resource("viya_battle")),"Matte-corrected derivative uses the existing Viya slot and cached SpriteFrames resource")
+	verify.call(slots.definitions.viya_battle==RESOURCE and asset is SpriteFrames and is_same(asset,slots.resource("viya_battle")),"GAME064 E derivative uses the existing Viya slot and a cached composite SpriteFrames resource")
 	if not asset is SpriteFrames:return
 	var manifest:Dictionary=JSON.parse_string(FileAccess.get_file_as_string(MANIFEST))
 	var exact:bool=FileAccess.get_sha256(SOURCE_RESOURCE)==manifest.source_package.resource_original_sha256
 	for entry in manifest.runtime_files:exact=exact and FileAccess.get_sha256(MANIFEST.get_base_dir().path_join(entry.path))==entry.sha256
 	verify.call(exact and manifest.runtime_files.size()==208,"Every shipped PNG and the relative-path resource match the supplied package bytes")
 	verify.call(asset.get_animation_names().size()==32 and not asset.has_animation("default") and not asset.has_animation("idle"),"Exactly32directional states are shipped without a generic or mirrored replacement")
+	var timing:Array=east_timing()
+	var derivative:Dictionary=JSON.parse_string(FileAccess.get_file_as_string(EAST_MANIFEST))
+	var checks:Array=derivative.get("bitmap_checks",[])
+	verify.call(timing.size()==47 and checks.size()==47,"The independent production CSV and bitmap provenance each contain47distinct E phases")
+	if timing.size()!=47 or checks.size()!=47:return
+	var end_ms:=0.0
+	var east_valid:=true
+	var unequal:=false
+	var hashes:Dictionary={}
+	for index in range(timing.size()):
+		var row:Dictionary=timing[index]
+		var expected_path:String=EAST_FIRST.get_base_dir().path_join("viya_run_e_%03d.png" % index)
+		var digest:String=FileAccess.get_sha256(expected_path)
+		east_valid=east_valid and row.index==index and row.source_index==index*2 and row.filename==expected_path.get_file() and is_finite(row.duration_ms) and row.duration_ms>0 and absf(row.start_ms-end_ms)<.000001
+		east_valid=east_valid and int(checks[index].index)==index and digest==str(checks[index].sha256)
+		unequal=unequal or not is_equal_approx(row.duration_ms,timing[0].duration_ms)
+		hashes[digest]=true
+		end_ms+=row.duration_ms
+	verify.call(east_valid and unequal and absf(end_ms-660.0)<.000001 and hashes.size()==47,"E preserves47unique derivative PNGs and the authored unequal660ms timing without an endpoint duplicate")
 	var total:=0
+	var preserved:=true
+	var preserved_count:=0
 	for pose in ["idle","run","attack","hurt"]:
 		var valid:=true
 		var expected:int={"idle":1,"run":11,"attack":8,"hurt":6}[pose]
 		var fps:float={"idle":1.0,"run":16.6666666667,"attack":50.0,"hurt":50.0}[pose]
 		for direction in DIRECTIONS:
 			var name:String=pose+"_"+direction
-			valid=valid and asset.has_animation(name) and asset.get_frame_count(name)==expected and is_equal_approx(asset.get_animation_speed(name),fps) and asset.get_animation_loop(name)==(pose in ["idle","run"])
+			var east:bool=name=="run_e"
+			valid=valid and asset.has_animation(name) and asset.get_frame_count(name)==(47 if east else expected) and is_equal_approx(asset.get_animation_speed(name),47.0/.66 if east else fps) and asset.get_animation_loop(name)==(pose in ["idle","run"])
 			for index in range(asset.get_frame_count(name)):
-				valid=valid and asset.get_frame_texture(name,index).get_size()==Vector2(200,248) and asset.get_frame_duration(name,index)==1.0
 				total+=1
-		verify.call(valid,"Eight supplied directions retain native count/timing/loop/canvas for:"+pose)
-	verify.call(total==208,"All208supplied frames are reachable in the game resource")
+				var texture:Texture2D=asset.get_frame_texture(name,index)
+				valid=valid and texture.get_size()==Vector2(200,248)
+				if east:
+					if index>=timing.size():
+						valid=false
+						continue
+					valid=valid and texture.resource_path==EAST_FIRST.get_base_dir().path_join(timing[index].filename) and is_equal_approx(asset.get_frame_duration(name,index),timing[index].duration_ms*47.0/660.0)
+				else:
+					valid=valid and asset.get_frame_duration(name,index)==1.0
+					preserved=preserved and is_same(texture,CACHE.get_frame_texture(name,index)) and asset.get_frame_duration(name,index)==CACHE.get_frame_duration(name,index) and asset.get_animation_speed(name)==CACHE.get_animation_speed(name) and asset.get_animation_loop(name)==CACHE.get_animation_loop(name)
+					preserved_count+=1
+		verify.call(valid,"Directional count/timing/loop/canvas match the native poses plus the authored E47 exception for:"+pose)
+	verify.call(total==244 and preserved and preserved_count==197,"Only E run changes:197previous display frames retain their exact resource references and timing within the244frame composite")
 	var ui=load("res://scenes/main.tscn").instantiate()
 	var folder:="user://character-pilot-"+Crypto.new().generate_random_bytes(8).hex_encode()
 	DirAccess.make_dir_recursive_absolute(folder)

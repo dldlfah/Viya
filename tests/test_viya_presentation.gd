@@ -1,6 +1,7 @@
 extends RefCounted
 const Campaign=preload("res://tests/test_campaign.gd")
 const Snapshot=preload("res://scripts/progression/run_snapshot.gd")
+const Pilot=preload("res://tests/test_character_pilot.gd")
 const IDLE="res://assets/characters/pilot_32/textures/viya_idle_e.png"
 
 static func run(host,verify:Callable) -> void:
@@ -17,7 +18,7 @@ static func run(host,verify:Callable) -> void:
 	for animation in asset.get_animation_names():
 		for index in range(asset.get_frame_count(animation)):
 			all_alpha=all_alpha and view.viya.transparent(asset.get_frame_texture(animation,index))
-	verify.call(all_alpha and view.viya._alpha.size()>=208 and view.viya._alpha.size()<=512,"Every shipped directional frame actually decodes with transparent corners in Godot, not an opaque/white import")
+	verify.call(all_alpha and view.viya._alpha.size()>=244 and view.viya._alpha.size()<=512,"Every active244directional frame actually decodes with transparent corners in Godot, not an opaque/white import")
 	var opaque:=Image.create(200,248,false,Image.FORMAT_RGBA8)
 	opaque.fill(Color.WHITE)
 	verify.call(not view.viya.transparent(ImageTexture.create_from_image(opaque)),"Lost-alpha white texture is rejected before it can be drawn as a rectangle")
@@ -39,21 +40,24 @@ static func run(host,verify:Callable) -> void:
 	view.viya.apply(view,failed_import)
 	verify.call(not failed_import.sample.is_empty() and view.viya.transparent(failed_import.sample.texture) and is_same(failed_import.sample.texture,view.viya.decoded("res://assets/characters/pilot_32/render_cache/viya_idle_e.png")),"A wholly opaque cached frame with a missing resource path recovers the correct east display frame rather than drawing a white square")
 	asset.set_frame("idle_e",0,east)
+	verify_e_cycle(view,asset,verify)
 	for index in range(8):
 		var direction:String=view.actors.DIRECTIONS[index]
 		var facing:Vector2=view.input_direction(Vector2.from_angle(index*PI/4))
 		view.viya._gait_run="" # Independent directional trial, not a target turn.
 		var visual:Dictionary={"pose":"run","direction":direction,"facing":facing,"clock":.06,"moving":true,"motion":facing,"distance":0.0,"sample":{}}
 		var seen:Dictionary={}
-		for step in range(44):
-			visual.distance=step*155.0/44.0
+		var expected_count:int=asset.get_frame_count("run_"+direction)
+		var steps:int=maxi(44,expected_count*4)
+		for step in range(steps):
+			visual.distance=step*155.0/float(steps)
 			view.viya.apply(view,visual)
 			seen[visual.sample.index]=true
 		var texture:Texture2D=visual.sample.texture
 		var region:Rect2=visual.region
 		var registered:Rect2=view.viya.body_rect(view.actor_art,visual,Vector2(200,180))
 		visual.pose="attack";visual.shot_age=0.0;visual.gun_aim=facing;view.viya.apply(view,visual)
-		verify.call(seen.size()==11 and registered.end.y==180 and is_equal_approx(registered.size.x/region.size.x,registered.size.y/region.size.y) and is_same(visual.sample.texture,texture) and visual.region==Rect2(0,0,200,248) and visual.recoil==0,"All11whole-body frames retain one canvas/root and gait phase through moving fire:"+direction)
+		verify.call(seen.size()==expected_count and expected_count==(47 if direction=="e" else 11) and registered.end.y==180 and is_equal_approx(registered.size.x/region.size.x,registered.size.y/region.size.y) and is_same(visual.sample.texture,texture) and visual.region==Rect2(0,0,200,248) and visual.recoil==0,"Every whole-body frame retains one canvas/root and gait phase through moving fire:"+direction)
 		visual.moving=false
 		var attack_frames:Dictionary={}
 		for step in range(8):
@@ -104,3 +108,82 @@ static func run(host,verify:Callable) -> void:
 	ui.queue_free();await host.get_tree().process_frame
 	for file in DirAccess.get_files_at(folder):DirAccess.remove_absolute(folder.path_join(file))
 	DirAccess.remove_absolute(folder)
+
+static func expected_e_index(timing:Array,phase:float) -> int:
+	var at_ms:float=fposmod(phase,1.0)*660.0
+	for row in timing:
+		if at_ms<float(row.start_ms)+float(row.duration_ms):return int(row.index)
+	return timing.size()-1
+
+static func verify_e_cycle(view,asset:SpriteFrames,verify:Callable) -> void:
+	var timing:Array=Pilot.east_timing()
+	verify.call(timing.size()==47,"E integration reads the47authored production timing rows")
+	if timing.size()!=47:return
+	var forward:Vector2=view.input_direction(Vector2.RIGHT)
+	var visual:Dictionary={"pose":"run","direction":"e","facing":forward,"motion":forward,"clock":0.0,"moving":true,"distance":0.0,"sample":{}}
+	view.viya._gait_run=""
+	view.viya.apply(view,visual)
+	var middles:=true
+	var boundaries:=true
+	var seam:=false
+	var muzzle_rows:=true
+	# Independent CSV times catch a uniform47-bin sampler even when it visits all frames.
+	for index in range(timing.size()):
+		var row:Dictionary=timing[index]
+		visual.distance=(float(row.start_ms)+float(row.duration_ms)*.5)/660.0*155.0
+		view.viya.apply(view,visual)
+		middles=middles and visual.sample.animation=="run_e" and visual.sample.index==index
+		var expected_muzzle:Array=view.viya.config.directions.e.run[index].muzzle
+		muzzle_rows=muzzle_rows and visual.muzzle==Vector2(expected_muzzle[0],expected_muzzle[1])
+		var boundary_ms:float=float(row.start_ms)+float(row.duration_ms)
+		visual.distance=(boundary_ms-.001)/660.0*155.0
+		view.viya.apply(view,visual)
+		var before_index:int=visual.sample.index
+		visual.distance=(boundary_ms+.001)/660.0*155.0
+		view.viya.apply(view,visual)
+		var after_index:int=visual.sample.index
+		if index==46:seam=before_index==46 and after_index==0 and visual.gait_phase>0 and visual.gait_phase<.00001
+		else:boundaries=boundaries and before_index==index and after_index==index+1
+	verify.call(middles and muzzle_rows,"Distance-driven E sampling honors every authored unequal midpoint and its matching gun muzzle")
+	verify.call(boundaries,"Every internal E boundary switches at the CSV time, checked one microsecond before and after")
+	verify.call(seam,"The last distinct E frame46wraps directly to frame0at one155world-unit cycle without a repeated endpoint")
+	view.viya._gait_run=""
+	visual.distance=0.0
+	view.viya.apply(view,visual)
+	visual.distance=.373*155.0
+	view.viya.apply(view,visual)
+	var held_phase:float=visual.gait_phase
+	var held_index:int=visual.sample.index
+	var southeast:Vector2=view.input_direction(Vector2(1,1).normalized())
+	visual.direction="se";visual.facing=southeast;visual.motion=southeast
+	view.viya.apply(view,visual)
+	var turn_keeps_phase:bool=visual.sample.animation=="run_se" and is_equal_approx(visual.gait_phase,held_phase)
+	visual.direction="e";visual.facing=forward;visual.motion=forward
+	view.viya.apply(view,visual)
+	verify.call(turn_keeps_phase and visual.sample.animation=="run_e" and visual.sample.index==held_index and is_equal_approx(visual.gait_phase,held_phase),"Same-distance E47toSE11and back preserves normalized gait phase and the returning E pose")
+	visual.motion=-forward
+	view.viya.apply(view,visual)
+	var reversal_keeps_phase:bool=visual.sample.index==held_index and is_equal_approx(visual.gait_phase,held_phase)
+	visual.distance+=5.0
+	view.viya.apply(view,visual)
+	var expected_phase:float=fposmod(held_phase-5.0/155.0,1.0)
+	verify.call(reversal_keeps_phase and is_equal_approx(visual.gait_phase,expected_phase) and visual.sample.index==expected_e_index(timing,expected_phase),"E reversal keeps the held phase then traverses the authored unequal durations backward only for new travel")
+	# The imported texture intentionally loses both alpha and its path; fallback
+	# must recover this exact derivative without borrowing an old E11 frame.
+	var recover_index:=23
+	var original:Texture2D=asset.get_frame_texture("run_e",recover_index)
+	var duration:float=asset.get_frame_duration("run_e",recover_index)
+	var opaque:=Image.create(200,248,false,Image.FORMAT_RGBA8)
+	opaque.fill(Color.WHITE)
+	asset.set_frame("run_e",recover_index,ImageTexture.create_from_image(opaque),duration)
+	view.viya._gait_run=""
+	visual.motion=forward;visual.distance=0.0
+	view.viya.apply(view,visual)
+	visual.distance=(float(timing[recover_index].start_ms)+float(timing[recover_index].duration_ms)*.5)/660.0*155.0
+	view.viya.apply(view,visual)
+	var expected_path:String=Pilot.EAST_FIRST.get_base_dir().path_join(timing[recover_index].filename)
+	var pixels:=Image.new()
+	var loaded:bool=pixels.load_png_from_buffer(FileAccess.get_file_as_bytes(expected_path))==OK
+	verify.call(not visual.sample.is_empty() and visual.sample.index==recover_index and is_same(visual.sample.texture,view.viya.decoded(expected_path)) and loaded and visual.sample.texture.get_image().get_data()==pixels.get_data(),"Lost-alpha E import recovers the exact registered three-digit derivative PNG and retains its authored duration")
+	asset.set_frame("run_e",recover_index,original,duration)
+	view.viya._gait_run=""

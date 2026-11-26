@@ -4,31 +4,39 @@
 
 ## 세션 필수 문서
 
-[CURRENT_WORK](docs/CURRENT_WORK.md)와 **[누적 DEVELOPMENT_STATUS](docs/DEVELOPMENT_STATUS.md)**를 함께 읽는다. [PLANNED_WORK](docs/PLANNED_WORK.md) · [NEXT_TASK](docs/NEXT_TASK.md) · [AGENTS](AGENTS.md) · [제작 스킬](.agents/skills/viya-game-production/SKILL.md). GAME063 코드 **`d7d72cffec61f88deb5aa72ba59b0c84e3c088f6`**, 브랜치 `work/viya-turnaround-qa-20261117`. 문서 HEAD는 코드 뒤에 오며 main 자동 병합은 하지 않는다.
+[CURRENT_WORK](docs/CURRENT_WORK.md)와 **[누적 DEVELOPMENT_STATUS](docs/DEVELOPMENT_STATUS.md)**를 함께 읽는다. [PLANNED_WORK](docs/PLANNED_WORK.md) · [NEXT_TASK](docs/NEXT_TASK.md) · [AGENTS](AGENTS.md) · [제작 스킬](.agents/skills/viya-game-production/SKILL.md). 현재 작업은 **GAME064 E 달리기 게임 연결**, 브랜치는 `work/viya-turnaround-qa-20261117`이다. 출발 HEAD는 `f5c4da84e00eaa5dcca67acfe7b94dcf854a893a`이며 main 자동 병합은 하지 않는다.
+
+## GAME064 — E 달리기 47프레임 연결
+
+사용자의 **“게임에 반영해”** 지시에 따라 완성된 Higgsfield E 달리기 파생물을 기존 `viya_battle`에 연결했다. [새 리소스와 제작 기록](assets/characters/pilot_32/game064_e_run/README.md)은 E 달리기 47장과 기존 나머지 197장을 참조한다. 총 32동작·244프레임이며, 원본 208장과 ARTFIX001 표시 캐시 208장은 별도 보존한다.
+
+프레임별 가변 표시 시간을 실제 이동 거리 위상에 연결했다. **200×248 캔버스·69×85.56 표시·pivot(100,248)·이동235·보행155**는 유지한다. 명목 시간표는660ms, 실제 기본 속도의 거리 주기는659.574468ms다. 총구는 새47장의 실제 총열 끝 좌표를 사용하며 정지 사격·다른7방향은 기존 자산을 쓴다. 이번 게임 연결에서 새 생성·결제·자동 충전은0이다.
+
+**실행 확인:** Godot4.7.2의 관련 네이티브417검사와 실제 Linux X11 렌더834검사/329회 그리기를 통과했다. E 이동160회에서47개 프레임·4회 반복을 확인했고 정지·방향 왕복·기존 자동사격·후진·정지사격·일시정지도 확인했다. [실제 게임 영상](docs/validation/GAME064_E_RUN_IN_GAME.mp4) · [실제 화면](docs/validation/GAME064_E_RUN_IN_GAME.png) · [통합 보고서](docs/validation/GAME064_INTEGRATION_REPORT.json).
+
+영상은 고정1/60초 갱신의 실제 렌더 재현이며 실시간FPS 측정은 아니다. 최종 아트 승인·Windows/모바일 실기는 별도다. 이전 세션의 Higgsfield 실행 차단과 기준 영상은 [DEVELOPMENT_STATUS8.59](docs/DEVELOPMENT_STATUS.md)·[기준 보고서](docs/validation/GAME064_BASELINE_REPORT.json)에 당시 이력으로 보존한다.
 
 ## 다음 제작 우선순위
 
-[PLANNED_WORK63](docs/PLANNED_WORK.md)에 **전투 부하 개선 → 비야 달리기·이동 사격 → 대표 적1종 → 전투 표시 → 초상화4종 → 1스테이지 마감** 순서와 종료 조건을 정리했다. GAME063은 아래 부분 렌더 개선을 마쳤으며 다음 한 단위는 GAME064 비야 E 달리기 루프 보정이다. 다음 Higgsfield 동작 제작은 E 달리기 루프, 첫 신규 몬스터 원화는 고블린 약탈병을 제안한다. 이 갱신은 계획이며 새 기능·생성 완료가 아니다.
-
-현재 GAME064는 [실제 크기 기준 장면](docs/validation/GAME064_SCALE_REFERENCE.png)과 [기존 E 달리기 반복](docs/validation/GAME064_E_RUN_BASELINE.mp4)을 확인하고 전신 주기 수정 자료를 준비했다. 새 루프 적용은 Higgsfield 실행 도구/인증·API접근 부재로 **미완료/BLOCKED**이며 [진행 보고서](docs/validation/GAME064_BASELINE_REPORT.json)를 따른다. 기존 ARTFIX001 수정본과 GAME063 결과는 유지한다.
+바로 다음 범위는 **게임에 적용한 E 달리기의 최종 아트 검토와 필요한 E 수정**이다. [NEXT](docs/NEXT_TASK.md)를 따른다. E 달리기를 확인한 뒤 전용 이동 사격을 별도 단위로 진행하며, 다른 방향이나 신규 적을 이번 작업에 자동 포함하지 않는다. 전체 후속 순서는 [PLANNED_WORK63·66](docs/PLANNED_WORK.md)의 전투 부하·캐릭터 동작·대표 적1종·표시·초상화·1스테이지 마감 계획을 유지한다.
 
 ## 밀집 전투 렌더 개선 — GAME063
 
 고정된 임시 적 몸체를 공유 벡터 메시로 재사용한다. 같은6저장/3회 A/B에서 몸체 CPU16~28%·그리기 명령 준비7~14%를 줄였고 적 수/스폰·AI·깊이/가림·피격/예고·보스 보호와 비야 동작을 유지했다. 실제 Linux300초의 반복 중앙값은83.483→77.421ms다. 합성1,540개체의 계산 약44ms·자동 처리 지연/일부p95는 남으며 사용자 Windows/모바일 FPS나 렉 전면 해결을 의미하지 않는다.
 
-기존10명령/7묶음·120초/4,456네이티브, Python20·6계약/118negative와 실제 GUI100몸체자세/6전투쌍을 확인했다. [실제 전투](docs/validation/GAME063_AFTER.png) · [전후 측정/한계](docs/validation/GAME063_REPORT.json) · [구현과 재현](docs/design/DENSE_RENDER_CACHE.md). 다음은 [NEXT](docs/NEXT_TASK.md)의 E 달리기 한 주기 보정이다.
+기존10명령/7묶음·120초/4,456네이티브, Python20·6계약/118negative와 실제 GUI100몸체자세/6전투쌍을 확인했다. [실제 전투](docs/validation/GAME063_AFTER.png) · [전후 측정/한계](docs/validation/GAME063_REPORT.json) · [구현과 재현](docs/design/DENSE_RENDER_CACHE.md). 현재 E 달리기 적용과 다음 한 단위는 [NEXT](docs/NEXT_TASK.md)를 따른다.
 
-## Higgsfield 원화 재생성·적용 완료
+## ARTFIX001 — 기존 흰 배경 잔사 수정 이력
 
-동쪽(E) 달리기 원화11장에 남은 머리 외곽·머리 뒤 틈·총 아래·다리 사이의 흰 배경 잔사를 확인했다. 실제 연결된 Higgsfield의 `gpt_image_2_6`로 투명 PNG11장을 생성하고, 원래 자세·얼굴·의상·무기를 유지하는 제한 영역 합성을 거쳐 **게임의 활성 표시 캐시에 적용했다.** [11장 전후 비교](docs/validation/ARTFIX001_COMPARE.png) · [머리 경계 확대](docs/validation/ARTFIX001_HAIR_DETAIL.png) · [보행 비교](docs/validation/ARTFIX001_RUN_COMPARISON.gif) · [검증 보고서](docs/validation/ARTFIX001_REPORT.json).
+동쪽(E) 달리기 원화11장에 남은 머리 외곽·머리 뒤 틈·총 아래·다리 사이의 흰 배경 잔사를 확인했다. 실제 연결된 Higgsfield의 `gpt_image_2_6`로 투명 PNG11장을 생성하고, 원래 자세·얼굴·의상·무기를 유지하는 제한 영역 합성을 거쳐 **당시 게임의 표시 캐시에 적용했다.** [11장 전후 비교](docs/validation/ARTFIX001_COMPARE.png) · [머리 경계 확대](docs/validation/ARTFIX001_HAIR_DETAIL.png) · [보행 비교](docs/validation/ARTFIX001_RUN_COMPARISON.gif) · [검증 보고서](docs/validation/ARTFIX001_REPORT.json).
 
-원본208장과 다른 표시197장은 변경하지 않았다. E11의 확인된 배경 마스크1,467픽셀만 알파를 줄이고, 경계색을 보정한 뒤 Godot 임포트와 같은 방식으로 정규화했다. 기존69×85.56 크기·200×248 캔버스·32동작·달리기60ms×11을 유지한다. 실제 모델·입력·작업 ID·해시·마스크와 재현 도구는 [수정 패킷](assets/characters/pilot_32/edge_repair/README.md)에 보관했다. 잔액 조회 차이는13.75크레딧이며 새 결제는 없다. [SDK 실행기](tools/higgsfield/README.md)의 과거 인증 차단은 현재 생성 상태와 구분한다.
+원본208장과 다른 표시197장은 변경하지 않았다. E11의 확인된 배경 마스크1,467픽셀만 알파를 줄이고, 경계색을 보정한 뒤 Godot 임포트와 같은 방식으로 정규화했다. 당시69×85.56 크기·200×248 캔버스·32동작·달리기60ms×11을 유지했다. 현재 E 달리기는 위 GAME064 파생물로 연결하며 이 캐시는 보존한다. 실제 모델·입력·작업 ID·해시·마스크와 재현 도구는 [수정 패킷](assets/characters/pilot_32/edge_repair/README.md)에 보관했다. 잔액 조회 차이는13.75크레딧이며 새 결제는 없다. [SDK 실행기](tools/higgsfield/README.md)의 과거 인증 차단은 현재 생성 상태와 구분한다.
 
 **ARTFIX001 당시 검증:** 재현44파일·E11 저장/임포트 RGBA·소스171/6계약·Python20·네이티브6묶음2,000검사·별도 headless 부트 PASS. 전체 회귀는 전투 검사120초 TIMEOUT이며 수정 전 기준 `b6340f5`도 동일했다. 당시 실제 GUI 렌더는 환경 제약으로 BLOCKED였으며, 이후 GAME063의 실제 GUI 검증은 위 최신 절을 따른다. Windows/모바일·최종 아트 승인은 별도다. 전후 이미지는 실제 캐시 비교이며 새 전투 화면 캡처가 아니다.
 
 ## 비야 크기·보행·사격 보정
 
-비야는69×85.56 고정 크기이며 원본8방향run11장을 사용한다. GAME061의 고정 캔버스·전후진 보행 위상·방향 유지·정지 전신 사격/조준 유지와 이동 보행/총구 연결을 보존했다. 노란 발밑 표시 제거·투명도 검사/보정 PNG 복구와 넓은 지면 배율1도 유지한다. 원본10→00 보행 루프 이음과 후반 밀집 부하는 여전히 후속이다. GAME063의 현재 부분 개선과 남은 부하는 위 최신 절을 따른다.
+비야는69×85.56 고정 크기이며 E 달리기만 GAME064의47장, 다른7방향 달리기는 기존11장을 사용한다. GAME061의 고정 캔버스·전후진 보행 위상·방향 유지·정지 전신 사격/조준 유지와 이동 보행/총구 연결을 보존했다. 노란 발밑 표시 제거·투명도 검사/보정 PNG 복구와 넓은 지면 배율1도 유지한다. E의 원본10→00 이음은 위 GAME064 파생 주기의46→00 연결로 대체했으며 최종 검토 범위를 구분한다. GAME063의 부분 개선과 남은 부하는 위 절을 따른다.
 
 [GAME061 크기/동작 비교](docs/validation/GAME061_COMPARISON.mp4)와 [GAME062 테두리/15% 확대 검증](docs/validation/GAME062_REPORT.json)은 당시 기록이다. GAME062의4,428검사·832렌더 PASS를 이번 변경의 검증으로 재사용하지 않는다. [캐릭터 연결/이력](docs/design/CHARACTER_PILOT_032.md).
 

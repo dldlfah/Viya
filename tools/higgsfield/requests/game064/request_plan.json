@@ -1,6 +1,6 @@
 {
   "task": "GAME064_E_RUN_LOOP",
-  "status": "BLOCKED_HIGGSFIELD_EXECUTION_UNAVAILABLE",
+  "status": "HISTORICAL_REQUEST_PLAN_SUPERSEDED_BY_GAME064_DERIVATIVE",
   "authorization": "Existing user instruction permits this one-direction cycle correction; no repeated execution permission needed.",
   "base_document_head": "eebfba100f0fc3bf74ac2c3dc8d61beaf5e2dee7",
   "game_code": "d7d72cffec61f88deb5aa72ba59b0c84e3c088f6",
@@ -78,5 +78,17 @@
   "new_credit_expenditure": 0,
   "desired_scope": "One east full-body run cycle, no fixed frame count; later dedicated moving-fire art not started.",
   "integration": "Only after real outputs pass inspection: create derived frames/resource, update the E sequence sampler to actual frame timing as necessary, preserve the other7directions/original208frames/GAME063cache and game rules. No dummy override or fabricated interpolation is active.",
-  "submitter": "Use a callable authenticated Higgsfield tool/API after checking current capabilities/costs. This is a production request plan, not the old edge-repair CLI schema. Do not feed it to the old one-frame edge-repair submit command or resubmit completed ARTFIX001."
+  "submitter": "Use a callable authenticated Higgsfield tool/API after checking current capabilities/costs. This is a production request plan, not the old edge-repair CLI schema. Do not feed it to the old one-frame edge-repair submit command or resubmit completed ARTFIX001.",
+  "historical_execution_status": "BLOCKED_HIGGSFIELD_EXECUTION_UNAVAILABLE",
+  "record_scope": "Preserved initial baseline request. Original model, supported_features_checked, balance, quote, submitted_task_ids, request count, cost and integration instructions below describe that historical blocked session; they are not the current generated asset or game-integration state.",
+  "current_result_reference": {
+    "selected_job_id": "fbf2fd2d-8596-4ca4-87e7-875712a2f7c9",
+    "model": "hf_mult_motion_control",
+    "asset_readme": "assets/characters/pilot_32/game064_e_run/README.md",
+    "active_resource": "assets/characters/pilot_32/game064_e_run/viya_game064_frames.tres",
+    "manifest": "assets/characters/pilot_32/game064_e_run/manifest.json",
+    "current_status_document": "docs/CURRENT_WORK.md",
+    "development_record": "docs/DEVELOPMENT_STATUS.md#8.60",
+    "note": "The completed E47 derivative is connected by explicit user instruction. Follow the linked current documents for validation; original reference hashes and historical failure records remain preserved. Final art approval is separate."
+  }
 }

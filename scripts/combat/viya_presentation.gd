@@ -5,6 +5,7 @@ var config:Dictionary=JSON.parse_string(FileAccess.get_file_as_string("res://dat
 var _alpha:Dictionary={}
 static var _verified_alpha:Dictionary={} # Immutable texture instances; bounded across views.
 var _decoded:Dictionary={}
+var _run_seconds:Dictionary={}
 var _shot_offsets:Dictionary={}
 var _run_id:String=""
 var _clock:float=-1
@@ -64,6 +65,21 @@ func decoded(path:String) -> Texture2D:
 	_decoded[path]=texture
 	return texture
 
+func run_clock(asset:SpriteFrames, direction:String, phase:float) -> float:
+	var animation:String="run_"+direction
+	var key:String=str(asset.get_instance_id())+":"+animation
+	if not _run_seconds.has(key):
+		var duration:float=0.0
+		for index in range(asset.get_frame_count(animation)):
+			duration+=asset.get_frame_duration(animation,index)
+		_run_seconds[key]=duration/asset.get_animation_speed(animation)
+	# Distance owns the gait. The shared sampler resolves the actual weighted
+	# frame durations; no second animation clock or equal-frame phase mapping.
+	var seconds:float=float(_run_seconds[key])
+	# Round-trip floating point must not move an exact authored boundary to
+	# the previous frame (e.g. 3/11). Keep the seam on the final distinct frame.
+	return minf(fposmod(phase,1.0)*seconds+.000000001,seconds-.000000001)
+
 func apply(view, visual:Dictionary) -> void:
 	if not accepts(view):return
 	var now:float=view.simulation.elapsed
@@ -100,10 +116,7 @@ func apply(view, visual:Dictionary) -> void:
 	var muzzle_pixels:=Vector2(row.muzzle[0],row.muzzle[1])
 	var clock:float=visual.clock
 	if selected=="run":
-		var index:int=floori(fposmod(_phase+float(row.phase_origin),1.0)*row.run.size())
-		var frame:Dictionary=row.run[index]
-		clock=float(frame.index)/16.6666666667+.000001
-		muzzle_pixels=Vector2(frame.muzzle[0],frame.muzzle[1])
+		clock=run_clock(view.art.resource("viya_battle"),visual.direction,_phase+float(row.phase_origin))
 	# Play the original whole-body attack once per stationary burst, not per
 	# projectile. Continuous .3s fire holds the aimed end pose between shots.
 	if selected=="idle" and gun_active:
@@ -115,9 +128,14 @@ func apply(view, visual:Dictionary) -> void:
 	if gun_active:_gun_until=maxf(_gun_until,now-shot_age+.4)
 	visual.sample=view.actor_art.frame(view.art,["viya_battle"],selected,visual.direction,clock,view.size)
 	if visual.sample.is_empty():return
+	var run_frame:Dictionary={}
+	if selected=="run":
+		run_frame=row.run[int(visual.sample.index)]
+		muzzle_pixels=Vector2(run_frame.muzzle[0],run_frame.muzzle[1])
 	if not transparent(visual.sample.texture):
-		var root:String=str(config.resource).get_base_dir()
+		var root:String=str(config.get("fallback_texture_root",str(config.resource).get_base_dir()))
 		var expected:String=root.path_join("viya_idle_"+str(visual.direction)+".png") if selected=="idle" else root.path_join("viya_%s_%s_%02d.png" % [selected,visual.direction,int(visual.sample.index)])
+		if run_frame.has("texture"):expected=str(run_frame.texture)
 		var repaired:Texture2D=decoded(expected)
 		if repaired==null:
 			visual.sample={}

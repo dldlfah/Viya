@@ -1,0 +1,186 @@
+{
+  "task": "GAME064 E running integration",
+  "status": "PASS",
+  "date_kst": "2026-11-26",
+  "base_head": "f5c4da84e00eaa5dcca67acfe7b94dcf854a893a",
+  "branch": "work/viya-turnaround-qa-20261117",
+  "revision_note": "The commit containing this report is the integration revision; exact reviewed source SHA256s are included below.",
+  "scope": "E running derivative connected to the existing production game; no new generations during integration.",
+  "completion": {
+    "generation": "Previously completed by Higgsfield",
+    "game_integration": "Implemented and exercised through main.tscn",
+    "native_engine": "PASS",
+    "actual_linux_render": "PASS",
+    "final_art_approval": "PENDING_USER_REVIEW",
+    "windows_mobile": "NOT_VERIFIED"
+  },
+  "asset": {
+    "resource": "res://assets/characters/pilot_32/game064_e_run/viya_game064_frames.tres",
+    "source_job_id": "fbf2fd2d-8596-4ca4-87e7-875712a2f7c9",
+    "model": "hf_mult_motion_control",
+    "canvas": [
+      200,
+      248
+    ],
+    "pivot": [
+      100,
+      248
+    ],
+    "display_size": [
+      69,
+      85.56
+    ],
+    "nominal_cycle_ms": 660.000000000002,
+    "fps": 71.21212121212099,
+    "animation_count": 32,
+    "active_frame_count": 244,
+    "unchanged_frame_count": 197,
+    "stride_world": 155,
+    "speed_world_per_second": 235,
+    "distance_driven_cycle_ms_at_base_speed": 659.5744680851063
+  },
+  "preservation": {
+    "original_and_artfix_tracked_files_unchanged": true,
+    "original_and_artfix_tracked_file_count": 944,
+    "original_png_count": 208,
+    "preserved_artfix_png_count": 208,
+    "other_game_source_data_files_unchanged": true,
+    "other_game_source_data_file_count": 93,
+    "other_directions_idle_attack_hurt_unchanged": true,
+    "pngs_copied_without_reencoding": 47
+  },
+  "native_tests": {
+    "command": "godot --headless --path . --script res://tests/test_run_navigation.gd",
+    "result": {
+      "checks": 417,
+      "failures": [],
+      "status": "PASS"
+    },
+    "log": "GAME064_INTEGRATION/navigation.log",
+    "coverage": "Existing navigation and character/map/presentation regressions, original208+ARTFIX208 integrity, E unequal-time midpoints and boundaries, seam, reverse phase, direction transitions, exact opaque-import recovery, authoritative simulation/save22/seven-RNG comparison."
+  },
+  "source_validation": {
+    "status": "PASS",
+    "files": 177,
+    "resource_references": 591,
+    "contracts": {
+      "growth_data_contract": "PASS",
+      "magic_data_contract": "PASS",
+      "feedback_source_contract": "PASS",
+      "mobile_hud_source_contract": "PASS",
+      "run_navigation_source_contract": "PASS",
+      "combat_cues_source_contract": "PASS"
+    },
+    "negative_controls_rejected": 122,
+    "errors": []
+  },
+  "actual_gui": {
+    "backward_steps": 48,
+    "checks": 834,
+    "display": "X11",
+    "draw_checks": 329,
+    "engine": {
+      "build": "official",
+      "hash": "ed1daf0bf001b61586d9930840f2f1394092c079",
+      "hex": 263938,
+      "major": 4,
+      "minor": 7,
+      "patch": 2,
+      "status": "stable",
+      "string": "4.7.2-stable (official)",
+      "timestamp": 0
+    },
+    "errors": [],
+    "frames_seen": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      9,
+      10,
+      11,
+      13,
+      14,
+      15,
+      17,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      30,
+      31,
+      33,
+      34,
+      35,
+      36,
+      38,
+      39,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      8,
+      12,
+      16,
+      18,
+      29,
+      32,
+      37,
+      40
+    ],
+    "loop_wraps": 4,
+    "renderer": "OpenGL compatibility",
+    "scope": "Production main.tscn, isolated existing-stage fixture, native key events, fixed1/60updates and actual rendered frames. E travel/release/SE direction/existing auto-fire/backward aiming/stationary fire/pause. Not real-time FPS, mobile or final art approval.",
+    "status": "PASS"
+  },
+  "gui_evidence": {
+    "command": "godot --path . --script res://tools/inspect_viya_game064.gd --rendering-method gl_compatibility",
+    "log": "GAME064_INTEGRATION/gui.log",
+    "records": "GAME064_INTEGRATION/gui_report.json",
+    "image": "GAME064_E_RUN_IN_GAME.png",
+    "video": "GAME064_E_RUN_IN_GAME.mp4",
+    "native_capture_count": 160,
+    "video_fps": 60,
+    "video_duration_seconds": 2.6666666666666665,
+    "image_size": [
+      1280,
+      720
+    ]
+  },
+  "environment_limits": [
+    "Godot4.7.2 Linux X11/OpenGL Mesa llvmpipe25.0.7, LLVM19.1.7. Fixed simulation updates and frame captures, not real-time FPS.",
+    "Native ALSA device is absent; Godot logged ERR_CANT_OPEN then used its dummy audio driver. Audio output was not validated.",
+    "Graphics driver reported V-Sync configuration unsupported. No GDScript/resource errors or exit leaks were observed.",
+    "47frames include durations below16.7ms; not all need display within one60Hz cycle. All47were observed across4cycles.",
+    "Source image landmarks and finite held-frame sampling do not imply zero foot sliding.",
+    "Windows, Android/iOS, physical touch, device performance and final visual approval remain separate."
+  ],
+  "credits": {
+    "new_generations_during_integration": 0,
+    "new_credits_spent_during_integration": 0,
+    "purchase_or_autorecharge": false,
+    "production_records": "../../assets/characters/pilot_32/game064_e_run/provenance/generation_costs.json"
+  },
+  "source_sha256": {
+    "scripts/combat/viya_presentation.gd": "74cf174fc5b0d61503efaf68b908fa5969fca9eca3917b9d3b4d63adbfddcbb8",
+    "data/viya_motion.json": "f5683727010d010e616e41baefac0b2d4261ae8891b6b8b6df073d5b1ec999bd",
+    "data/presentation_slots.json": "600e04580d4f524ea5ba2ce2804f6a44726a776b701a58890013b609ed06bb33",
+    "tools/build_viya_game064.py": "d7ead1f043319de726280b6b1f114fa3cd15cbe08d1f1424ba00dff4274da897",
+    "tools/inspect_viya_game064.gd": "56be462b31a9b28e4b42cae6689a61757f76a1acdbc1bf6e21e799851b7e5f42",
+    "tests/test_viya_presentation.gd": "e4ad9b45c31a4010850021b071bfa7ddf479e59d0d5b0e0350997e1ad2a8312a",
+    "tests/test_character_pilot.gd": "8f68a4bbab02601038b4a6c5621f105ad9e9df0a96848421056d3e6b0f73cb63",
+    "tools/check_combat_cues.py": "58a52ad73e62d1cda01a72cc9465db219d41a22c9dee064110b03290336b47e4"
+  }
+}
