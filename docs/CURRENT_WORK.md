@@ -2,7 +2,19 @@
 
 기록일 **2026-11-26 (KST)**. 브랜치 **`work/viya-turnaround-qa-20261117`**. [DEVELOPMENT_STATUS](DEVELOPMENT_STATUS.md) · [PLANNED_WORK](PLANNED_WORK.md) · [NEXT_TASK](NEXT_TASK.md).
 
-## 최신 — GAME065 검수·즉시 소멸 사격 관측 보정 → GAME066 SE 달리기
+## 최신 — SAVEFIX001 비행 수명 저장 결함 수정, 다음 GAME066 SE 유지
+
+원격 **`89bf6611f659e5ff61b9254c3b93580d9025888f`**까지 확인했으며 새 SE 원화는 없었다. 원화는 기존 기획/Higgsfield 역할을 유지하고,한 판 마감 전 해결하기로 한 기존 저장 결함을 독립 수정했다. 실제 코드 **`06fca9441b5b7dc41ad01538cead30cb487f8189`**. [누적8.64](DEVELOPMENT_STATUS.md) · [검증 보고서](validation/SAVEFIX001_REPORT.json).
+
+비행 몬스터의5초 수명이100×.05초 뒤 약9.4×10⁻¹⁵초로 남아 저장 검증의1µs 하한에 걸리는 문제를 재현했다. 기존 `_move_fliers`에서1µs **미만**을 이동/밀치기/접촉 전에 만료 처리한다. 정확히1µs인 살아 있는 개체와 일반 수명은 유지한다. 만료는 처치·XP·금화나 난수를 만들지 않는다. **저장22/지문/7난수·엄격 검증·원자 저장 코드는 그대로**다.
+
+원래6전투×101상태를 대조했다.605개 상태는 기존 골든과 같고 마지막 `fly1540`만 의도대로 다르다.187개 만료 비행 개체 제거·167개 지상 개체의 마지막 밀치기 제거·그 위치 차이에 따른 중장갑1076번의 HP59→46을 명시해 검증했다. 그 외 개체 필드·전투 상태·보상과 모든 시점의7난수는 동일하다. 원본 골든을 보존하고 마지막 수정 상태는 별도 정확한 전체 해시로 고정했다. 이 만료 결함 수정을 스폰 축소/렌더 성능 개선으로 보고하지 않는다.
+
+**PASS:** 기존10명령/7네이티브 묶음 **4,523검사**(신규22포함),각120초·오류/누수/PASS 규칙 유지. 최종 참조 fixture의 EOF공백 정리 후 신규22검사도 재통과했다. Python20·185소스/612참조·6계약/변이136거부. 실제 Linux X11/llvmpipe의 생산 장면 **11검사/3그리기**에서 정상5초 만료→일시정지 저장→새 파일 리더→계속하기와 정확한 복원을 확인했다. [저장 화면](validation/SAVEFIX001_SAVED_PAUSE.png) · [계속하기](validation/SAVEFIX001_CONTINUED.png) · [실제 로그](validation/SAVEFIX001_RUNTIME.log).
+
+원본/ARTFIX001/GAME064/GAME065·데이터1231파일은 바이트 불변이며 현재33클립/291프레임·표시69×85.56/200×248를 유지한다. 이번 생성/비용0이다. **다음 한 단위는 GAME066 SE 달리기 그대로**이며 [기획/Higgsfield 프롬프트](../tools/higgsfield/requests/game066/PROMPT_KO.txt)·[기존 SE 기준 영상](validation/GAME066_SE_RUN_REFERENCE.mp4)을 사용한다. 새 SE 제작/게임 적용은0이다. 과거 이미 무효인 파일의 자동 복구,1540과부하·경제·Windows/모바일·실시간FPS/발열·최종 아트는 미완성/미검증으로 유지한다.
+
+## 직전 GAME065 검수·즉시 소멸 사격 관측 보정 이력
 
 사용자의 “완료된 작업을 확인·필요한 수정 후 다음으로” 지시에 따라 원격 **`c0c8301af495d70df9cd7680eedbac842a95a4e9`**의 GAME065를 확인했다. 이번 실제 코드 커밋은 **`5bb73bf2b3863ee6c5275818aa95b240a8ea194a`**이며 이후 검증/인계 문서 커밋과 구분한다. [누적8.63](DEVELOPMENT_STATUS.md) · [검수 보고서](validation/GAME065_REVIEW_REPORT.json).
 

@@ -1,0 +1,48 @@
+extends SceneTree
+const Snapshot=preload("res://scripts/progression/run_snapshot.gd")
+const Store=preload("res://scripts/progression/run_store.gd")
+const State=preload("res://scripts/combat/run_state.gd")
+const Campaign=preload("res://tests/test_campaign.gd")
+const FOLDER="res://.local_validation/SAVEFIX001/game"
+var ui
+var checks:int=0
+var errors:Array=[]
+func _initialize():call_deferred("run")
+func expect(ok:bool,label:String):
+	checks+=1
+	if not ok:errors.append(label);printerr("FAIL: ",label)
+func capture(name:String):
+	ui._update_hud();ui.view.queue_redraw()
+	var saved:Dictionary=Snapshot.capture(ui.simulation)
+	var cues:Dictionary=ui.simulation.cues.snapshot()
+	await process_frame;await RenderingServer.frame_post_draw
+	expect(saved==Snapshot.capture(ui.simulation) and cues==ui.simulation.cues.snapshot(),"Read-only render:"+name)
+	expect(root.get_texture().get_image().save_png(FOLDER.path_join(name+".png"))==OK,"Capture:"+name)
+func run():
+	DirAccess.make_dir_recursive_absolute(FOLDER)
+	root.size=Vector2i(1280,720);root.content_scale_mode=Window.CONTENT_SCALE_MODE_DISABLED
+	ui=load("res://scenes/main.tscn").instantiate()
+	ui.run_store.path=FOLDER.path_join("battle.save");ui.gold_progress.path=FOLDER.path_join("gold.cfg");ui.settings_path=FOLDER.path_join("settings.cfg")
+	for path in [ui.run_store.path,ui.gold_progress.path,ui.settings_path]:DirAccess.remove_absolute(path)
+	root.add_child(ui);ui.set_physics_process(false);await process_frame;Campaign.depart(ui)
+	var state=ui.simulation
+	state.player=Vector2(2500,1700);state.enemies.clear();state.bullets.clear()
+	state.spawn_clock=999;state._scatter_clock=999;state._swarm_clock=999;state.shot_clock=999
+	state.add_enemy(state.player+Vector2(200,0),"normal","flier")
+	state.enemies[-1].velocity=Vector2.RIGHT*360;ui.view.camera.reset()
+	await capture("live_flier")
+	for step in range(100):ui._physics_process(.05)
+	expect(state.enemies.is_empty() and state.kills==0,"Actual100updates expire the flier without a rewarded kill")
+	ui.pause_game()
+	expect(state.phase==state.Phase.PAUSED and ui.battle_save_error==OK,"Actual pause saves without blocking on corrupt state")
+	await capture("saved_pause")
+	var disk=Store.new();disk.path=ui.run_store.path
+	var restored=State.new()
+	expect(disk.load_saved(restored)==OK and Snapshot.restore(disk.pending,restored),"New reader loads the actual pause file")
+	expect(Campaign.comparable(restored)==Campaign.comparable(state),"Disk Continue preserves the exact battle")
+	ui.resume_game();expect(state.phase==state.Phase.RUNNING and ui.movement.enabled and not ui.overlay.visible,"Actual Continue restores active movement and closes the menu")
+	ui._physics_process(.05)
+	await capture("continued")
+	var report:Dictionary={"status":"PASS" if errors.is_empty() else "FAIL","checks":checks,"errors":errors,"draws":3,"elapsed":state.elapsed,"kills":state.kills,"gold":state.gold_collected,"enemies":state.enemies.size(),"save_error":ui.battle_save_error,"display":DisplayServer.get_name(),"engine":Engine.get_version_info(),"scope":"Production main.tscn,normal5s flier expiry through100fixed.05updates,real pause and atomic disk reload,Continue and actual X11 renders;not realtime performance or target-device validation."}
+	FileAccess.open(FOLDER.path_join("report.json"),FileAccess.WRITE).store_string(JSON.stringify(report,"  "))
+	print(JSON.stringify(report));ui.combat_audio.stop_all();ui.queue_free();await process_frame;await process_frame;quit(0 if errors.is_empty() else 1)

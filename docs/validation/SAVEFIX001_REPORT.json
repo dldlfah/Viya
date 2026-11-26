@@ -1,0 +1,396 @@
+{
+  "task": "SAVEFIX001",
+  "date_kst": "2026-11-26",
+  "status": "PASS_IN_STATED_SCOPE",
+  "base_commit": "89bf6611f659e5ff61b9254c3b93580d9025888f",
+  "code_commit": "06fca9441b5b7dc41ad01538cead30cb487f8189",
+  "branch": "work/viya-turnaround-qa-20261117",
+  "scope": "While GAME066 awaits the planning/Higgsfield SE delivery,fix the already tracked nominal-flier-expiry strict-save defect before whole-stage completion. No art generation or completion claim.",
+  "before": {
+    "nominal_seconds": 5,
+    "updates": 100,
+    "dt": 0.05,
+    "life_remaining": 9.39526234589039e-15,
+    "policies_reproduced": [
+      0,
+      1,
+      2
+    ],
+    "remaining_fliers": 1,
+    "strict_snapshot_valid": false
+  },
+  "implementation": {
+    "file": "scripts/combat/run_state.gd",
+    "method": "_move_fliers",
+    "change": "Expire remaining life below the existing1microsecond live-actor minimum, before movement/push/contact. Exact1microsecond remains live. Expiry gives no kill or loot.",
+    "changed_rules": "Only numerical end-of-life handling and its eliminated ghost movement/push/contact consequences. This is a save/expiry correctness fix,not a render-performance result.",
+    "schema_version": 22,
+    "new_save_fields": 0,
+    "new_RunState": false
+  },
+  "compatibility_proof": {
+    "fixtures": 6,
+    "snapshots_each": 101,
+    "old_reference_matches_all606_published_goldens": true,
+    "current_matches605_of606": true,
+    "changed_sample": {
+      "fixture": "fly1540",
+      "index": 100,
+      "old_count": 1298,
+      "new_count": 1111,
+      "expired_fliers_removed": 187,
+      "remaining_life_each": 9.39526234589039e-15,
+      "ground_positions_without_ghost_push": 167,
+      "resulting_actual_hit": {
+        "id": 1076,
+        "variant": "heavy",
+        "old_hp": 59,
+        "new_hp": 46
+      },
+      "other_actor_fields_and_non_actor_state_exact": true,
+      "all_seven_rng_streams_exact_at_all606_samples": true,
+      "corrected_full_state_sha256": "7450ea3a8ce3b39b7d5108a220e7c8f4f65051c368f99e0cb51b14b9160e02ad"
+    },
+    "original_golden_manifest_preserved": true,
+    "original_golden_manifest_sha256": "8e5d50b54f4808ab5e60d3da46a9b9fd3bf20a5d2cdd958a848947aabcfca259",
+    "reviewed_new_golden_scope": "Only the previously invalid final fly1540sample;all other original samples remain exact. Frozen original lifetime implementation reproduces all original results and the failure. No old golden is deleted or its rejection threshold weakened.",
+    "details": "docs/validation/SAVEFIX001_REPLAY.json"
+  },
+  "preserved": {
+    "strict_validator_sha256": "74dde47c7790fff4fceb16555c86e3440411382d956a5c5106d78d414b3a1602",
+    "atomic_store_sha256": "bab493f1963ea2a6d98770f9ef9686d70d4b257e0b49afb3386de661a6081986",
+    "validator_and_store_byte_identical_to_base": true,
+    "assets_and_data_tracked_files_unchanged": 1231,
+    "fields": [
+      "spawn counts/cadence",
+      "AI rules except retiring expired fly-bys",
+      "HP/damage formulas and rewards",
+      "7RNG streams",
+      "save22 fingerprint and fields",
+      "6minute campaign and3minute dungeon",
+      "Viya E run/fire47frames,display69x85.56,canvas200x248",
+      "all existing art resources"
+    ],
+    "new_generated_art": 0,
+    "higgsfield_requests": 0,
+    "higgsfield_cost": 0
+  },
+  "native": {
+    "status": "PASS",
+    "engine": "4.7.2.stable.official.ed1daf0bf",
+    "commands": [
+      {
+        "command": [
+          "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+          "--headless",
+          "--version"
+        ],
+        "exit_code": 0,
+        "status": "PASS"
+      },
+      {
+        "command": [
+          "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+          "--headless",
+          "--path",
+          "/workspace/Viya",
+          "--editor",
+          "--import",
+          "--quit"
+        ],
+        "exit_code": 0,
+        "status": "PASS"
+      },
+      {
+        "command": [
+          "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+          "--headless",
+          "--path",
+          "/workspace/Viya",
+          "--script",
+          "res://tests/test_combat_foundation.gd"
+        ],
+        "exit_code": 0,
+        "status": "PASS"
+      },
+      {
+        "command": [
+          "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+          "--headless",
+          "--path",
+          "/workspace/Viya",
+          "--script",
+          "res://tests/test_growth.gd"
+        ],
+        "exit_code": 0,
+        "status": "PASS"
+      },
+      {
+        "command": [
+          "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+          "--headless",
+          "--path",
+          "/workspace/Viya",
+          "--script",
+          "res://tests/test_magic.gd"
+        ],
+        "exit_code": 0,
+        "status": "PASS"
+      },
+      {
+        "command": [
+          "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+          "--headless",
+          "--path",
+          "/workspace/Viya",
+          "--script",
+          "res://tests/test_feedback.gd"
+        ],
+        "exit_code": 0,
+        "status": "PASS"
+      },
+      {
+        "command": [
+          "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+          "--headless",
+          "--path",
+          "/workspace/Viya",
+          "--script",
+          "res://tests/test_mobile_hud.gd"
+        ],
+        "exit_code": 0,
+        "status": "PASS"
+      },
+      {
+        "command": [
+          "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+          "--headless",
+          "--path",
+          "/workspace/Viya",
+          "--script",
+          "res://tests/test_run_navigation.gd"
+        ],
+        "exit_code": 0,
+        "status": "PASS"
+      },
+      {
+        "command": [
+          "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+          "--headless",
+          "--path",
+          "/workspace/Viya",
+          "--script",
+          "res://tests/test_combat_cues.gd"
+        ],
+        "exit_code": 0,
+        "status": "PASS"
+      },
+      {
+        "command": [
+          "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+          "--headless",
+          "--path",
+          "/workspace/Viya",
+          "--quit-after",
+          "120"
+        ],
+        "exit_code": 0,
+        "status": "PASS"
+      }
+    ],
+    "strict_timeout_seconds_each": 120,
+    "runner_function_sha256": "9156043eaf896d72565563cc1e2f623cf0c8fbac7f032f19bffee7e4946a69ee",
+    "checks": 4523,
+    "suites": {
+      "foundation": 23,
+      "growth": 70,
+      "magic": 122,
+      "feedback": 57,
+      "mobile_hud": 1336,
+      "navigation": 457,
+      "combat_cues": 2458
+    },
+    "new_checks": 22,
+    "new_check_scope": [
+      "20/60/120Hz nominal expiry",
+      "exact/below/above1microsecond boundary",
+      "no ghost pushes or kill/loot/RNG",
+      "paused/live flier freezing and exact disk restore",
+      "strict invalid-payload rejection without mutation",
+      "frozen original1540replay and exact reviewed delta",
+      "actual main loop pause/save/new reader/Continue"
+    ],
+    "python_unittests": 20,
+    "post_suite_format_only_change": "Removed one trailing empty line from the frozen test-only reference and updated its SHA guard;runtime code and test statements unchanged. Final22targeted cases rerun after this formatting.",
+    "errors_or_leaks": 0,
+    "final_targeted_checks": 22,
+    "final_targeted_status": "PASS"
+  },
+  "final_source": {
+    "static_integrity": {
+      "status": "PASS",
+      "files_checked": 185,
+      "resource_references_checked": 612,
+      "errors": [],
+      "source_fingerprint": "c2763d287051b453ef98567aed34e25335b0bf23ae5857ac8378c76d05e6b87f",
+      "scope": "UTF-8, delimiters, whitespace, JSON/Python syntax, resource existence, project settings; NOT GDScript parser/typechecking or gameplay."
+    },
+    "growth_data_contract": {
+      "status": "PASS",
+      "pool_count": 18,
+      "counts": {
+        "common_attack": 8,
+        "character_attack": 1,
+        "common_passive": 8,
+        "ultimate_enhancement": 1
+      },
+      "errors": [],
+      "scope": "JSON schema/content and source integration markers only; not GDScript runtime/behavior."
+    },
+    "magic_data_contract": {
+      "status": "PASS",
+      "errors": [],
+      "temporary_skill_names": 18,
+      "required_xp_first_five": [
+        30,
+        48,
+        66,
+        84,
+        102
+      ],
+      "xp_drop_unchanged": 5.0,
+      "scope": "JSON validation, negative data controls and source markers/arithmetic; NOT GDScript runtime, UI, input dispatch or mobile tests."
+    },
+    "feedback_source_contract": {
+      "status": "PASS",
+      "errors": [],
+      "files_checked": 7,
+      "scope": "7 affected code/test/checker files: UTF-8, delimiters, whitespace, Python syntax, reaction constants, integration markers, engine-test registration and new dependency paths only. NOT the full project check or GDScript parser/type/runtime, rendering, or mobile input tests."
+    },
+    "mobile_hud_source_contract": {
+      "status": "PASS",
+      "files_checked": 8,
+      "errors": [],
+      "source_fingerprint": "6204edeaf6dcad51309846b3c98cc124a3061778447484d5ae40051e3579aa94",
+      "scope": "Changed UTF-8 files, delimiters, Python syntax and integration source checks only. NOT GDScript parsing/typechecking, actual Control geometry, touch dispatch, rendering or mobile execution."
+    },
+    "run_navigation_source_contract": {
+      "status": "PASS",
+      "files_checked": 5,
+      "errors": [],
+      "source_fingerprint": "b30f6b8db38e5b1b7f66f2abc406916d47584a6f8b30e7c4767c238c36b01517",
+      "scope": "UTF-8/delimiters/Python syntax and navigation SOURCE contracts only; NOT GDScript parsing/types, native execution, actual UI/input, or mobile testing."
+    },
+    "combat_cues_source_contract": {
+      "status": "PASS",
+      "files_checked": 103,
+      "errors": [],
+      "source_fingerprint": "61c1fe56c8e981a64285893aea928c93ec40615926bdc8392a9d9890a6fd09af",
+      "baseline_run_blob": "673d75a748fa5f1f9ac72ec73bbd9120fdcfce02",
+      "baseline_runner_blob": "1ab68ad8a51271e3d47db8b02d433991f42e8d6c",
+      "baseline_engine_function_sha256": "9156043eaf896d72565563cc1e2f623cf0c8fbac7f032f19bffee7e4946a69ee",
+      "scope": "Changed-source UTF-8/delimiters/Python syntax, hook order, bounds, isolation, reviewed GAME-024 RunState/GAME-030 view baselines with exact GAME-033 observations and GAME-038/039/040 version-gated pattern adapters and frozen v1/v2/v17, preserved engine runner. NOT Godot parser/type/runtime, visual quality, input dispatch, or FPS."
+    }
+  },
+  "mutation_controls": {
+    "count": 136,
+    "all_rejected": true,
+    "new": [
+      {
+        "fixture": "flier_original_proof_changed",
+        "rejected": true
+      },
+      {
+        "fixture": "flier_corrected_golden_changed",
+        "rejected": true
+      },
+      {
+        "fixture": "flier_expiry_reverted",
+        "rejected": true
+      },
+      {
+        "fixture": "flier_expiry_overbroad",
+        "rejected": true
+      },
+      {
+        "fixture": "flier_expiry_unregistered",
+        "rejected": true
+      }
+    ]
+  },
+  "actual_gui": {
+    "checks": 11,
+    "display": "X11",
+    "draws": 3,
+    "elapsed": 5.04999999999999,
+    "enemies": 0,
+    "engine": {
+      "build": "official",
+      "hash": "ed1daf0bf001b61586d9930840f2f1394092c079",
+      "hex": 263938,
+      "major": 4,
+      "minor": 7,
+      "patch": 2,
+      "status": "stable",
+      "string": "4.7.2-stable (official)",
+      "timestamp": 0
+    },
+    "errors": [],
+    "gold": 0,
+    "kills": 0,
+    "save_error": 0,
+    "scope": "Production main.tscn,normal5s flier expiry through100fixed.05updates,real pause and atomic disk reload,Continue and actual X11 renders;not realtime performance or target-device validation.",
+    "status": "PASS"
+  },
+  "artifacts": {
+    "docs/validation/SAVEFIX001_SAVED_PAUSE.png": "08b0f27e8c2dae97ebfb8b8c43facba90aa227184d3e02ba9c59d168c5120867",
+    "docs/validation/SAVEFIX001_CONTINUED.png": "e56ce78f727f7a3edf18374edf5c09554894cddc67af54a4f4d0b8f4b70138fe",
+    "docs/validation/SAVEFIX001_GUI.gd.txt": "cebfa8e8d439695e036d5df8b36e11d9fdf6a750e8c52fdb27640bae45d9dbbc",
+    "docs/validation/SAVEFIX001_RUNTIME.log": "3e443070f08c001a7f88f91487593dc4232517fec08c783deefb116178d138db",
+    "docs/validation/SAVEFIX001_REPLAY.json": "d7fe385f20b29203261779eafeeb443c03525c8909593cd75212405bfe8aa1b7"
+  },
+  "source_sha256": {
+    "scripts/combat/run_state.gd": "782d49387f34744f91c718f6b129e74e70e16c1531be3f931cdaa39c7161404d",
+    "tests/test_flier_expiry.gd": "53354de6942ef42b095fcaeb3bed5329df3aad4153e120d4c9d141f6f6851193",
+    "tests/test_combat_performance.gd": "9b2e05a0e6406fb437ed4dc483d8c6d5c61c63503b142cc603e2d586cf3ba2f0",
+    "tests/test_run_navigation.gd": "53adc1029a83733078410428df6ca21af526851b54e0a7292a56d384557c0596",
+    "tests/fixtures/savefix001/flier_before.gd": "76e935bd016c29eb8c8687a9181f88e077ce87ef7999a51ad15165cac6e80405",
+    "tools/check_combat_cues.py": "07d4827ad1a9badb34c98dc95392b6a5adc914011a528ecb21ce3c65453a548d"
+  },
+  "reproduce": [
+    "Set task-owned XDG_CACHE_HOME/XDG_CONFIG_HOME/XDG_DATA_HOME and import with Godot4.7.2.",
+    "python3 tools/check_project.py --godot /workspace/.viya-tools/godot-4.7.2/bin/godot --output .local_validation/SAVEFIX001/check",
+    "Native navigation invokes tests/test_flier_expiry.gd,including the frozen original comparison.",
+    "Copy docs/validation/SAVEFIX001_GUI.gd.txt to .local_validation/SAVEFIX001/inspect.gd;run on actual X11 DISPLAY=:99 with --audio-driver Dummy --rendering-method gl_compatibility."
+  ],
+  "qa_findings": [
+    "An early probe selected legacy_arena with campaign policy1/2,whose start is invalid;the clean three-policy reproduction uses siege_battlefield.",
+    "Initial delta assertions assumed only187removed actors. Detailed comparison identified167ghost-pushed ground positions and13extra damage on heavy1076;the test now specifies exactly those consequences and retains a strict full-state golden. No validator or runner threshold changed."
+  ],
+  "not_verified": [
+    "Windows/mobile devices",
+    "realtime FPS,heat,touch,audio hardware",
+    "producer final art approval"
+  ],
+  "limits": [
+    "Already invalid historical files remain rejected by the unchanged strict reader;no arbitrary save repair was added.",
+    "1540-actor CPU/render overload remains a separateOPEN item.",
+    "GAME066 still needs new SE full-body artwork from planning/Higgsfield."
+  ],
+  "next": {
+    "task": "GAME066_SE_RUN",
+    "status": "AWAITING_NEW_ART_NOT_IMPLEMENTED",
+    "prompt": "tools/higgsfield/requests/game066/PROMPT_KO.txt",
+    "reference": "docs/validation/GAME066_SE_RUN_REFERENCE.mp4"
+  },
+  "after": {
+    "policies": [
+      0,
+      1,
+      2
+    ],
+    "remaining_fliers": 0,
+    "strict_snapshot_valid": true,
+    "life_remaining": 0
+  }
+}
