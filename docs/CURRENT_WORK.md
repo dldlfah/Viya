@@ -2,6 +2,12 @@
 
 기록일 **2026-11-26 (KST)**. 브랜치 **`work/viya-turnaround-qa-20261117`**. [DEVELOPMENT_STATUS](DEVELOPMENT_STATUS.md) · [PLANNED_WORK](PLANNED_WORK.md) · [NEXT_TASK](NEXT_TASK.md).
 
+## 다음 제작 순위 정리 — 2026-11-26
+
+최신 브랜치 HEAD `6971ce93049e913c8592d0cec4cba86fe15f2980`와 자산/연결 경로를 조회해 [PLANNED_WORK63](PLANNED_WORK.md)에 **전투 부하 → 비야 동작 → 대표 적1종 → 전투 표시 → 초상화4종 → 1스테이지 마감** 순서를 정리했다. 다음 게임 구현은 **GAME063**을 유지한다. 다음 Higgsfield 동작은 **E 달리기 루프**, 첫 신규 몬스터 자산은 **고블린 약탈병**을 제안한다. 한 방향의 실제 동작을 기준으로 필요한 방향을 확대한다.
+
+이번 갱신은 계획 문서 정리다. 코드 기준은 아래 ARTFIX001 그대로이며 새 생성·크레딧 사용·게임 기능 완료·엔진/실기 PASS를 추가하지 않았다.
+
 ## ARTFIX001 — Higgsfield 문제 원화 재생성·게임 적용
 
 코드 **`4793d743c1451131c91d0ffe3776c2f7cfec85fc`**, 출발 HEAD `b6340f553d8c10ec9eebc26537230decbd8ef23e`. 사용자 요청에 따라 **동쪽(E) 달리기 11장을 Higgsfield로 재생성하고 검증한 수정 영역을 실제 표시 캐시에 적용했다.** [검증 보고서](validation/ARTFIX001_REPORT.json) · [11장 전후 비교](validation/ARTFIX001_COMPARE.png) · [머리 경계 확대](validation/ARTFIX001_HAIR_DETAIL.png) · [보행 비교](validation/ARTFIX001_RUN_COMPARISON.gif).

@@ -6,6 +6,10 @@
 
 [CURRENT_WORK](docs/CURRENT_WORK.md)와 **[누적 DEVELOPMENT_STATUS](docs/DEVELOPMENT_STATUS.md)**를 함께 읽는다. [PLANNED_WORK](docs/PLANNED_WORK.md) · [NEXT_TASK](docs/NEXT_TASK.md) · [AGENTS](AGENTS.md) · [제작 스킬](.agents/skills/viya-game-production/SKILL.md). ARTFIX001 코드 **`4793d743c1451131c91d0ffe3776c2f7cfec85fc`**, 브랜치 `work/viya-turnaround-qa-20261117`. 문서 HEAD는 코드 뒤에 오며 main 자동 병합은 하지 않는다.
 
+## 다음 제작 우선순위
+
+[PLANNED_WORK63](docs/PLANNED_WORK.md)에 **전투 부하 개선 → 비야 달리기·이동 사격 → 대표 적1종 → 전투 표시 → 초상화4종 → 1스테이지 마감** 순서와 종료 조건을 정리했다. 다음 구현은 GAME063을 유지한다. 다음 Higgsfield 동작 제작은 E 달리기 루프, 첫 신규 몬스터 원화는 고블린 약탈병을 제안한다. 이 갱신은 계획이며 새 기능·생성 완료가 아니다.
+
 ## Higgsfield 원화 재생성·적용 완료
 
 동쪽(E) 달리기 원화11장에 남은 머리 외곽·머리 뒤 틈·총 아래·다리 사이의 흰 배경 잔사를 확인했다. 실제 연결된 Higgsfield의 `gpt_image_2_6`로 투명 PNG11장을 생성하고, 원래 자세·얼굴·의상·무기를 유지하는 제한 영역 합성을 거쳐 **게임의 활성 표시 캐시에 적용했다.** [11장 전후 비교](docs/validation/ARTFIX001_COMPARE.png) · [머리 경계 확대](docs/validation/ARTFIX001_HAIR_DETAIL.png) · [보행 비교](docs/validation/ARTFIX001_RUN_COMPARISON.gif) · [검증 보고서](docs/validation/ARTFIX001_REPORT.json).

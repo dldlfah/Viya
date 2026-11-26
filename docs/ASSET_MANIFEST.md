@@ -124,3 +124,13 @@
 ## Higgsfield 수정 입력 원본 보관 (2026-11-26)
 
 현재 환경의 비공개 `tools/higgsfield/request/references/masters`에 업로드 CHARACTER-PILOT-032 ZIP에서 복원한 E달리기400×496의11PNG와 E대기1600×1984 PNG를 원본 그대로 보관했다. 복원 ZIP SHA256 `51d5972a9e818d275bc630f18489e37f893deef1ba6f5dce0467660c45dbc4b3`는 기존 source_manifest와 일치하며 프레임 해시는 service_job.json에 기록한다. 제작 도구 입력이며 `.gitignore`로 Git에서, `.gdignore`로 게임 임포트에서 제외한다. 신규 생성/ART001 승인 승격·게임 연결은 없고 기존208런타임/표시용 파생물은 유지한다.
+
+## 2026-11-26 — ARTFIX001 E 달리기 흰 배경 잔사 수정 완료
+
+위 GAME062의 알파 보존/SDK 입력 준비 설명은 당시 이력이다. 현재 수정 코드 `4793d743c1451131c91d0ffe3776c2f7cfec85fc`에서는 Higgsfield 결과11장을 검증해 기존 E 달리기의 경계색·흰 배경 틈을 한정 수정했다. 새 생성본을 그대로 전신 교체한 것이 아니라 원래 프레임의 자세·디자인을 유지한 파생 합성이다.
+
+- [입력·생성본·등록본·수정본·마스크](../assets/characters/pilot_32/edge_repair/README.md): 원본/생성11장과 작업 ID·해시·설정·견적 기록.
+- [실제 표시 캐시](../assets/characters/pilot_32/render_cache/README.md): E11 변경, 다른197장 바이트 동일. 원본208장/리소스 보존. E11 마스크1,467픽셀의 알파 감소 예외와 Godot 경계색 정규화를 반영.
+- [ARTFIX001_REPORT](validation/ARTFIX001_REPORT.json): 실제 적용·재현/임포트 검증과 전체 회귀 TIMEOUT·실기 미검증을 구분. 최종 ART001 승인 승격은 없다.
+
+**다음 제작 순위:** [PLANNED_WORK63](PLANNED_WORK.md). E 달리기 반복 연결/이동 사격을 먼저 보완하고, 신규 적은 고블린 약탈병1종부터 실제 전투에 연결하는 순서를 제안한다. 초상화4경로는 여전히 비어 있으며 이번 계획 갱신에서 새 자산을 생성하거나 연결하지 않았다.
