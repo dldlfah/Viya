@@ -2,6 +2,12 @@
 
 현재 게임 코드 **`d7d72cffec61f88deb5aa72ba59b0c84e3c088f6`**. [CURRENT](CURRENT_WORK.md) · [DEVELOPMENT_STATUS8.58](DEVELOPMENT_STATUS.md) · [PLANNED_WORK63·64](PLANNED_WORK.md) · [GAME063_REPORT](validation/GAME063_REPORT.json).
 
+## 현재 진행 — GAME064 원화 실행 대기
+
+진단/요청 자료 **`52af01d34cd7734e202f0b4a1ee1bdeea4cc2a26`**. [기준 보고서](validation/GAME064_BASELINE_REPORT.json)·[실제 기준 장면](validation/GAME064_SCALE_REFERENCE.png)·[수정 전 반복](validation/GAME064_E_RUN_BASELINE.mp4)·[Higgsfield 입력 계획](../tools/higgsfield/requests/game064/README.md)을 준비했다. 실제 E11/2회루프/정지 복귀를 확인했지만 새 원화/새 루프 적용은 미완료다.
+
+이 세션은 Higgsfield 호출 도구 없음·SDK 인증 없음·실행환경 API호스트 접근 미허용으로 BLOCKED다. 연결된 도구 또는 안전한 `HF_KEY`/API접근이 적용되면 아래 한 단위를 이어간다. 같은 생성 허가를 반복해 묻거나 완료한 ARTFIX001을 재제출하지 않는다. 현재 기능/견적·계정 잔액 조회 전 모델/비용/프레임 수를 추정하지 않는다. 기존 단일 프레임 테두리 CLI의 기본 프롬프트는 이번 전신 주기 제작용이 아니다.
+
 ## 다음 — GAME064 비야 E 달리기 한 주기 보정·실제 적용
 
 1. 현재69×85.56/200×248와 같은 카메라·지면에서 비야/기존 일반 적/문/상자 기준 장면을 만든다. GAME063 공유 몸체 캐시·깊이/가림·경고와 전투/저장22·7난수/보상은 유지한다.

@@ -10,6 +10,8 @@
 
 [PLANNED_WORK63](docs/PLANNED_WORK.md)에 **전투 부하 개선 → 비야 달리기·이동 사격 → 대표 적1종 → 전투 표시 → 초상화4종 → 1스테이지 마감** 순서와 종료 조건을 정리했다. GAME063은 아래 부분 렌더 개선을 마쳤으며 다음 한 단위는 GAME064 비야 E 달리기 루프 보정이다. 다음 Higgsfield 동작 제작은 E 달리기 루프, 첫 신규 몬스터 원화는 고블린 약탈병을 제안한다. 이 갱신은 계획이며 새 기능·생성 완료가 아니다.
 
+현재 GAME064는 [실제 크기 기준 장면](docs/validation/GAME064_SCALE_REFERENCE.png)과 [기존 E 달리기 반복](docs/validation/GAME064_E_RUN_BASELINE.mp4)을 확인하고 전신 주기 수정 자료를 준비했다. 새 루프 적용은 Higgsfield 실행 도구/인증·API접근 부재로 **미완료/BLOCKED**이며 [진행 보고서](docs/validation/GAME064_BASELINE_REPORT.json)를 따른다. 기존 ARTFIX001 수정본과 GAME063 결과는 유지한다.
+
 ## 밀집 전투 렌더 개선 — GAME063
 
 고정된 임시 적 몸체를 공유 벡터 메시로 재사용한다. 같은6저장/3회 A/B에서 몸체 CPU16~28%·그리기 명령 준비7~14%를 줄였고 적 수/스폰·AI·깊이/가림·피격/예고·보스 보호와 비야 동작을 유지했다. 실제 Linux300초의 반복 중앙값은83.483→77.421ms다. 합성1,540개체의 계산 약44ms·자동 처리 지연/일부p95는 남으며 사용자 Windows/모바일 FPS나 렉 전면 해결을 의미하지 않는다.

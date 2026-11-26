@@ -1,0 +1,294 @@
+{
+  "status": "BASELINE_ANALYZED_NOT_CORRECTED",
+  "files": [
+    {
+      "index": 0,
+      "path": "assets/characters/pilot_32/render_cache/viya_run_e_00.png",
+      "sha256": "09b7f0f62a2daa178f4f3f182fc6c0884b7c1e719e0623a28d53ae89d203a16f",
+      "opaque_bbox": [
+        17,
+        5,
+        182,
+        244
+      ],
+      "lower_opaque_centroid_x": 143.578125,
+      "muzzle": [
+        182,
+        131
+      ]
+    },
+    {
+      "index": 1,
+      "path": "assets/characters/pilot_32/render_cache/viya_run_e_01.png",
+      "sha256": "9a48bcdc0d8aaf05801ca6e9cfca56ad2d8cb8958599652e0e3fb6c81c32fc5d",
+      "opaque_bbox": [
+        21,
+        6,
+        180,
+        247
+      ],
+      "lower_opaque_centroid_x": 101.72972972972973,
+      "muzzle": [
+        179,
+        135
+      ]
+    },
+    {
+      "index": 2,
+      "path": "assets/characters/pilot_32/render_cache/viya_run_e_02.png",
+      "sha256": "b8e8cc2c01248f8a16a097b553e4b278e8ccde66233c6b3a72b4f3f06106bd48",
+      "opaque_bbox": [
+        20,
+        9,
+        178,
+        246
+      ],
+      "lower_opaque_centroid_x": 96.08968609865471,
+      "muzzle": [
+        178,
+        137
+      ]
+    },
+    {
+      "index": 3,
+      "path": "assets/characters/pilot_32/render_cache/viya_run_e_03.png",
+      "sha256": "ecf571520141e50832eabc87529f89d631b9bcdb414da307b0bd0aba438e469e",
+      "opaque_bbox": [
+        21,
+        13,
+        178,
+        237
+      ],
+      "lower_opaque_centroid_x": 90.02453987730061,
+      "muzzle": [
+        178,
+        137
+      ]
+    },
+    {
+      "index": 4,
+      "path": "assets/characters/pilot_32/render_cache/viya_run_e_04.png",
+      "sha256": "d64faa20f6cbcb312f633d1831c84405bc7e69ef17852a5b2a2974e2d8c536c6",
+      "opaque_bbox": [
+        19,
+        12,
+        180,
+        241
+      ],
+      "lower_opaque_centroid_x": 60.58730158730159,
+      "muzzle": [
+        180,
+        135
+      ]
+    },
+    {
+      "index": 5,
+      "path": "assets/characters/pilot_32/render_cache/viya_run_e_05.png",
+      "sha256": "e48687cfe29d0e80b2e90ff75d94fec4690ba6b786093a3c6d231dbda28c9b5d",
+      "opaque_bbox": [
+        16,
+        11,
+        182,
+        244
+      ],
+      "lower_opaque_centroid_x": 139.81333333333333,
+      "muzzle": [
+        181,
+        132
+      ]
+    },
+    {
+      "index": 6,
+      "path": "assets/characters/pilot_32/render_cache/viya_run_e_06.png",
+      "sha256": "bd1c420925e8281dd9d05c617b0c2adcf1ac77b34edf1af0b9ef17b135813051",
+      "opaque_bbox": [
+        19,
+        7,
+        183,
+        246
+      ],
+      "lower_opaque_centroid_x": 138.7403846153846,
+      "muzzle": [
+        182,
+        131
+      ]
+    },
+    {
+      "index": 7,
+      "path": "assets/characters/pilot_32/render_cache/viya_run_e_07.png",
+      "sha256": "b992937f93981f6d76ce66d52662fdbdc0cb7cd9548b55427ddf0e709bd6ead4",
+      "opaque_bbox": [
+        23,
+        7,
+        184,
+        245
+      ],
+      "lower_opaque_centroid_x": 101.92380952380952,
+      "muzzle": [
+        184,
+        130
+      ]
+    },
+    {
+      "index": 8,
+      "path": "assets/characters/pilot_32/render_cache/viya_run_e_08.png",
+      "sha256": "08c2d1ec202e2402c1eb0560ff420d39ac90f261b04ef4fa83dcd0a862c124e4",
+      "opaque_bbox": [
+        23,
+        6,
+        184,
+        247
+      ],
+      "lower_opaque_centroid_x": 89.46636771300449,
+      "muzzle": [
+        183,
+        131
+      ]
+    },
+    {
+      "index": 9,
+      "path": "assets/characters/pilot_32/render_cache/viya_run_e_09.png",
+      "sha256": "8a9d1d2cde0e0ab0852bfd2f2191c5765a16997b5fac85a2c9e0baefc1787183",
+      "opaque_bbox": [
+        20,
+        5,
+        182,
+        247
+      ],
+      "lower_opaque_centroid_x": 65.6282722513089,
+      "muzzle": [
+        182,
+        130
+      ]
+    },
+    {
+      "index": 10,
+      "path": "assets/characters/pilot_32/render_cache/viya_run_e_10.png",
+      "sha256": "7a88914b0bb6e035a7b08f9ee46ae462e48ac5edeb79521a69ab9cf2b2a20703",
+      "opaque_bbox": [
+        20,
+        5,
+        183,
+        247
+      ],
+      "lower_opaque_centroid_x": 53.76978417266187,
+      "muzzle": [
+        182,
+        130
+      ]
+    }
+  ],
+  "transitions": [
+    {
+      "from": 0,
+      "to": 1,
+      "silhouette_iou": 0.6466510398483866,
+      "lower_silhouette_iou": 0.3365309537088678,
+      "premult_rgb_mae_255": 44.75964858238942,
+      "muzzle_delta_display_px": 1.7249999999999999,
+      "lower_opaque_centroid_delta_display_px": 14.437696368243243
+    },
+    {
+      "from": 1,
+      "to": 2,
+      "silhouette_iou": 0.7453548917511646,
+      "lower_silhouette_iou": 0.5649280086932899,
+      "premult_rgb_mae_255": 43.46541485983267,
+      "muzzle_delta_display_px": 0.7714434522374274,
+      "lower_opaque_centroid_delta_display_px": 1.9458150527208806
+    },
+    {
+      "from": 2,
+      "to": 3,
+      "silhouette_iou": 0.7873321422396403,
+      "lower_silhouette_iou": 0.6545133784181123,
+      "premult_rgb_mae_255": 39.39630602745392,
+      "muzzle_delta_display_px": 0.0,
+      "lower_opaque_centroid_delta_display_px": 2.0924754463671635
+    },
+    {
+      "from": 3,
+      "to": 4,
+      "silhouette_iou": 0.7564318615885856,
+      "lower_silhouette_iou": 0.5847750865051903,
+      "premult_rgb_mae_255": 40.89518743946666,
+      "muzzle_delta_display_px": 0.9758073580374356,
+      "lower_opaque_centroid_delta_display_px": 10.155847210049663
+    },
+    {
+      "from": 4,
+      "to": 5,
+      "silhouette_iou": 0.6834869633921516,
+      "lower_silhouette_iou": 0.4338695812354169,
+      "premult_rgb_mae_255": 46.68167941322784,
+      "muzzle_delta_display_px": 1.0909857927580908,
+      "lower_opaque_centroid_delta_display_px": 27.332980952380947
+    },
+    {
+      "from": 5,
+      "to": 6,
+      "silhouette_iou": 0.8497932935231971,
+      "lower_silhouette_iou": 0.8103394091766185,
+      "premult_rgb_mae_255": 34.48616177446327,
+      "muzzle_delta_display_px": 0.4879036790187178,
+      "lower_opaque_centroid_delta_display_px": 0.37016730769230816
+    },
+    {
+      "from": 6,
+      "to": 7,
+      "silhouette_iou": 0.7305901461829994,
+      "lower_silhouette_iou": 0.47574602339950045,
+      "premult_rgb_mae_255": 36.174473213938164,
+      "muzzle_delta_display_px": 0.7714434522374274,
+      "lower_opaque_centroid_delta_display_px": 12.701718406593404
+    },
+    {
+      "from": 7,
+      "to": 8,
+      "silhouette_iou": 0.7849504507026482,
+      "lower_silhouette_iou": 0.5882520672939835,
+      "premult_rgb_mae_255": 31.931833223370155,
+      "muzzle_delta_display_px": 0.4879036790187178,
+      "lower_opaque_centroid_delta_display_px": 4.297817424727738
+    },
+    {
+      "from": 8,
+      "to": 9,
+      "silhouette_iou": 0.7122922546252743,
+      "lower_silhouette_iou": 0.44517224648229015,
+      "premult_rgb_mae_255": 41.28856998218959,
+      "muzzle_delta_display_px": 0.4879036790187178,
+      "lower_opaque_centroid_delta_display_px": 8.224142934284977
+    },
+    {
+      "from": 9,
+      "to": 10,
+      "silhouette_iou": 0.8035398230088495,
+      "lower_silhouette_iou": 0.648476821192053,
+      "premult_rgb_mae_255": 35.54337874668952,
+      "muzzle_delta_display_px": 0.0,
+      "lower_opaque_centroid_delta_display_px": 4.091178387133224
+    },
+    {
+      "from": 10,
+      "to": 0,
+      "silhouette_iou": 0.6901218537754694,
+      "lower_silhouette_iou": 0.42863725377260686,
+      "premult_rgb_mae_255": 47.4459869072146,
+      "muzzle_delta_display_px": 0.345,
+      "lower_opaque_centroid_delta_display_px": 30.983877585431653
+    }
+  ],
+  "display_size": [
+    69,
+    85.56
+  ],
+  "canvas": [
+    200,
+    248
+  ],
+  "source_frame_ms": 60,
+  "native_cycle_ms": 660,
+  "distance_cycle_ms_at_235": 659.5744680851063,
+  "interpretation": "Pixel/silhouette and lower opaque-band metrics identify change, not anatomical foot identity or artistic acceptance. This tool makes a review sheet only; it does not change/crop/reorder/warp game art."
+}

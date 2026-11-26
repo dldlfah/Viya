@@ -2,6 +2,16 @@
 
 기록일 **2026-11-26 (KST)**. 브랜치 **`work/viya-turnaround-qa-20261117`**. [DEVELOPMENT_STATUS](DEVELOPMENT_STATUS.md) · [PLANNED_WORK](PLANNED_WORK.md) · [NEXT_TASK](NEXT_TASK.md).
 
+## GAME064 진행 중 — E 달리기 기준 확인 / 원화 제작 차단
+
+진단 도구/요청 자료 **`52af01d34cd7734e202f0b4a1ee1bdeea4cc2a26`**, 실제 게임 코드는 아래 GAME063 그대로다. 현재 E 달리기 한 주기의 새 원화·루프 보정·게임 적용은 **미완료/BLOCKED**다. [실제 크기 기준 장면](validation/GAME064_SCALE_REFERENCE.png) · [현재 E11 검토 시트](validation/GAME064_E_CYCLE_BASELINE.png) · [수정 전 실제 반복 영상](validation/GAME064_E_RUN_BASELINE.mp4) · [진행 보고서](validation/GAME064_BASELINE_REPORT.json).
+
+기존1스테이지 성문·일반 적·상자와 비야를 같은 사선 카메라/지면에 두고69×85.56 크기를 확인했다. 실제 D입력90갱신에서 E11전체·루프2회와 해제 후idle_e를 관찰했고 그리기는 권위/cues를 바꾸지 않았다.10→00의 하체 실루엣IoU는0.429이며 내부00→01은0.337로, 마지막 이음과 전체 접지/위상을 함께 검수해야 한다. 불투명 하단 윤곽 지표는 실제 발의 신원/접지 판정이나 최종 아트 승인 자체가 아니다.
+
+**이번 세션에는 호출 가능한 Higgsfield 도구가 없고 공식 SDK 인증 값도 없다.** 현재 적용된 네트워크에서도 `api.higgsfield.ai`가 허용되지 않았다. 현재 계정 연결·모델/견적/잔액은 미확인, 새 생성/크레딧 사용/새 프레임은0이다. 완료된 ARTFIX001과 다른 이번 실행 경로의 차단이며 기존 수정본을 되돌리거나 재제출하지 않는다. [E 전신 한 주기 요청 자료](../tools/higgsfield/requests/game064/README.md)는 실제 연결 후 현재 지원 기능/가격을 확인해 사용한다. 과거 한 프레임 테두리용 CLI에 그대로 제출하는 형식이 아니다.
+
+추가한 것은 검토/기준 실행 도구와 요청 자료다.176소스/6계약·실제 Linux GUI 기준 확인은 PASS이나 루프 수정 완료로 계산하지 않는다. 기존 게임/데이터/자산1,079파일이 출발 HEAD와 바이트 동일하다. 전체 엔진 검사는 재실행하지 않았고 아래 GAME063의4,456결과는 당시 근거다. **NEXT는 GAME064 그대로 유지**하며 E 이동 사격이나 신규 적으로 진행 완료를 넘기지 않는다. 이 대화에서 쓸 수 있는 Higgsfield 연결 또는 환경 설정의 `HF_KEY`/API접근 적용이 필요하며 키는 채팅으로 받지 않는다.
+
 ## GAME063 — 후반 밀집 전투 정적 몸체 캐시
 
 코드 **`d7d72cffec61f88deb5aa72ba59b0c84e3c088f6`**, 출발 문서 HEAD `8cc972099339e728568810b993c6199c156fa8c1`, 자산 기준 ARTFIX001 `4793d743c1451131c91d0ffe3776c2f7cfec85fc`. 기존 고각 전투의 고정 몸체를 최대64개 공유 벡터 메시로 재사용한다. 움직이는 팔다리·피격 중 몸체·실제 스프라이트와 깊이/벽 가림·공격 예고·보스 보호는 유지한다. 적 숨김/감소·스폰/AI 변경은 없다. [구현](design/DENSE_RENDER_CACHE.md) · [실제 전투](validation/GAME063_AFTER.png) · [전후 근거](validation/GAME063_REPORT.json).
