@@ -1,0 +1,31 @@
+{
+  "source_report": "docs/validation/GAME052_REPORT.json",
+  "source_code": "bc237521b4c8e578de05f3c9e286e2f82414e7f3",
+  "records": [
+    {
+      "tag": "239",
+      "file": "natural_full_239.bin",
+      "sha256": "a85e2d656bc84dfeb689e2fad0b515da7377e1a2edb6dfc64f292bb8c45fc425",
+      "source": "Original GAME052 controlled natural progression, seed7/full account traits; no new population/stat adjustments"
+    },
+    {
+      "tag": "240",
+      "file": "natural_full_240.bin",
+      "sha256": "136a468160125ec9c49411238b04c936b39c410479fbaf64b4f8f51be14f36a2",
+      "source": "Original GAME052 controlled natural progression, seed7/full account traits; no new population/stat adjustments"
+    },
+    {
+      "tag": "270",
+      "file": "natural_full_270.bin",
+      "sha256": "e63be26be135a40aae0b8cd5e7990a71216427f475f80ce893c19f836766eec2",
+      "source": "Original GAME052 controlled natural progression, seed7/full account traits; no new population/stat adjustments"
+    },
+    {
+      "tag": "300",
+      "file": "natural_full_300.bin",
+      "sha256": "ac22f50a1f942ed406709ee7d76f3b4c2d3a068214dc139a8d1720087b316de3",
+      "source": "Original GAME052 controlled natural progression, seed7/full account traits; no new population/stat adjustments"
+    }
+  ],
+  "synthetic": "Use unchanged tests/fixtures/game050_v21/stage640.bin and fly1540.bin; not natural combat evidence."
+}

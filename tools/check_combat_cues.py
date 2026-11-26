@@ -188,7 +188,23 @@ def validate(sources: dict[str, str]) -> list[str]:
     if 'res://tests/test_campaign_encounters.gd' not in tests:
         errors.append('Campaign encounters runtime tests are not registered')
     for path, expected in PATTERN_REVIEWED_SHA256.items():
-        if hashlib.sha256(sources[path].encode('utf-8')).hexdigest() != expected:
+        reviewed = sources[path]
+        if path == 'scripts/combat/high_angle_battle.gd':
+            # Roll back only GAME063's two reviewed display adapters. Keep the
+            # original full-renderer proof and every authority proof unchanged.
+            for after, before in (
+                ('var body_cache=preload("res://scripts/combat/enemy_shape_cache.gd").new()\nvar cache_bodies:bool=true # Diagnostic A/B; never a gameplay or saved setting.\n', ''),
+                ('detail_actors or kind!="normal",visual,body_cache if cache_bodies and state.cues.flash_alpha(int(enemy.id))==0 else null)', 'detail_actors or kind!="normal",visual)'),
+            ):
+                if reviewed.count(after) != 1:
+                    errors.append('Missing/changed GAME063 static-body cache adapter')
+                reviewed = reviewed.replace(after, before, 1)
+        if path == 'tests/test_run_navigation.gd':
+            registration = '\tpreload("res://tests/test_enemy_shape_cache.gd").run(scene, verify)\n'
+            if reviewed.count(registration) != 1:
+                errors.append('Missing GAME063 cache regression registration')
+            reviewed = reviewed.replace(registration, '', 1)
+        if hashlib.sha256(reviewed.encode('utf-8')).hexdigest() != expected:
             errors.append('Reviewed GAME038-040 pattern/compatibility source changed: ' + path)
     if 'res://tests/test_pattern_reacquire.gd' not in tests:
         errors.append('Reacquisition runtime tests are not registered')
@@ -320,6 +336,8 @@ def check() -> dict:
             errors.append(f'{name}: {error}')
     negative = []
     cases = [
+        ('cache_hurt_bypass', 'scripts/combat/high_angle_battle.gd', 'cache_bodies and state.cues.flash_alpha(int(enemy.id))==0', 'cache_bodies'),
+        ('cache_unregistered', 'tests/test_run_navigation.gd', 'res://tests/test_enemy_shape_cache.gd', 'res://tests/missing_enemy_shape_cache.gd'),
         ('viya_edge_bypass','data/presentation_slots.json','res://assets/characters/pilot_32/render_cache/viya_render_frames.tres','res://assets/characters/pilot_32/resources/viya_directional_motion.tres'),
         ('viya_edge_filter','tools/viya_edge_filter.gd','var image:Image=clean(source)','var image:Image=source.duplicate()'),
         ('survivor_single_primitive','scripts/combat/viya_presentation.gd','canvas.draw_texture_rect_region(texture,box,source)','pass'),

@@ -10,6 +10,8 @@ const Battlefield=preload("res://scripts/combat/battlefield_presentation.gd")
 const ObliqueScenery=preload("res://scripts/combat/oblique_scenery.gd")
 const ObliqueProjection=preload("res://scripts/combat/oblique_projection.gd")
 var materials=CombatSkin.new()
+var body_cache=preload("res://scripts/combat/enemy_shape_cache.gd").new()
+var cache_bodies:bool=true # Diagnostic A/B; never a gameplay or saved setting.
 var detail_actors:bool=true
 var canvas
 var state
@@ -170,7 +172,7 @@ func _draw_enemy(enemy: Dictionary) -> void:
 		canvas.draw_circle(feet+Vector2(5,-16),2,Color("403822"))
 		if not canvas.simple_attacks:canvas.draw_arc(feet+Vector2(-3,-19),6,PI,PI*1.6,8,Color("fff0ac"),2,true)
 	else:
-		Forms.enemy(canvas,feet,variant,color,height,detail_actors or kind!="normal",visual)
+		Forms.enemy(canvas,feet,variant,color,height,detail_actors or kind!="normal",visual,body_cache if cache_bodies and state.cues.flash_alpha(int(enemy.id))==0 else null)
 	if kind!="normal" or enemy.hp < enemy.max_hp:
 		canvas.draw_rect(Rect2(feet+Vector2(-18,-height-7),Vector2(36,3)),Color("302b2e"))
 		canvas.draw_rect(Rect2(feet+Vector2(-18,-height-7),Vector2(36.0*enemy.hp/float(enemy.max_hp),3)),color)
