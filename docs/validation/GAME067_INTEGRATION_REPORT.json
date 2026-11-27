@@ -1,0 +1,166 @@
+{
+  "recorded_date_kst": "2026-11-27",
+  "branch": "work/viya-turnaround-qa-20261117",
+  "base_art_commit": "31b80cca86f47cdf7c88d85f63f37a35d6924cca",
+  "generation": "COMPLETE_IN_PRIOR_ART_COMMIT",
+  "game_connection": "CONNECTED_RUNTIME_LOGIC_PASS",
+  "producer_final_art": "NOT_VERIFIED",
+  "resource": "res://assets/characters/pilot_32/game067_se_run_fire/viya_game067_frames.tres",
+  "clips": 34,
+  "frames": 318,
+  "preserved_clips": 33,
+  "preserved_frames": 298,
+  "added_clip": "run_fire_se",
+  "added_frames": 20,
+  "canvas": [
+    200,
+    248
+  ],
+  "display": [
+    69,
+    85.56
+  ],
+  "root": [
+    100,
+    248
+  ],
+  "move_speed": 235,
+  "stride": 155,
+  "nominal_cycle_ms": 660,
+  "distance_cycle_ms": 659.5744680851063,
+  "run_fire_se_phase_origin": 0.819949494949495,
+  "muzzle_source": "Independently measured delivered SE20 muzzle_coordinates.csv",
+  "registration": "Fixed common transform/root; no per-frame alpha-bound alignment.",
+  "timing": "Integer source microsecond ticks/65536 plus matching fps preserve authored PTS ratios with Godot float32 duration weights.",
+  "engine_regression": {
+    "status": "PASS",
+    "version": "4.7.2.stable.official.ed1daf0bf",
+    "commands": 10,
+    "native_suites": 7,
+    "checks": 4558,
+    "suite_counts": [
+      23,
+      70,
+      122,
+      57,
+      1336,
+      492,
+      2458
+    ],
+    "per_command_timeout_seconds": 120,
+    "strict_error_leak_pass_detection": "UNCHANGED",
+    "report": "GAME067_INTEGRATION_REGRESSION.json"
+  },
+  "current_source_contracts": {
+    "status": "PASS",
+    "files": 189,
+    "references": 629,
+    "contracts": 6,
+    "rejected_negative_controls": 177,
+    "combat_rejected_negative_controls": 144,
+    "report": "GAME067_INTEGRATION_SOURCE.json",
+    "note": "Re-run after final test-fixture array isolation/hash update. Full 10-command run used the final gameplay code; final fixture cleanup was followed by a separate492-check navigation rerun. Raw original source snapshot and current source snapshot are both retained."
+  },
+  "python_unittest": {
+    "checks": 20,
+    "status": "PASS"
+  },
+  "production_main": {
+    "status": "PASS",
+    "checks": 1331,
+    "draws": 0,
+    "logic_only": true,
+    "display": "headless",
+    "real_shots": 43,
+    "run_wraps": 4,
+    "scope": "Headless logic; no actual draws. Production main.tscn,isolated open-stage route,native key events,fixed updates. SE18 cycles,E/SE turns,release,dedicated SE moving fire,on/off,E/SE firing turns,immediate target/wall consumption,actual hurt priority,backward aim,stationary attack,pause. Not realtime FPS,hardware QA,physical foot-contact proof or final producer approval."
+  },
+  "production_main_covered": [
+    "SE18 all frames and four seams",
+    "SE moving-fire20 all frames",
+    "actual committed automatic shots",
+    "on/off",
+    "E/SE movement and firing turns",
+    "immediate target and wall consumption",
+    "backward SE aiming48 updates",
+    "stationary attack",
+    "actual contact damage100->88/hurt_se priority",
+    "pause",
+    "unchanged display/root and signed distance phase"
+  ],
+  "production_main_report": "GAME067_INTEGRATION_MAIN_LOGIC.json",
+  "gui": {
+    "status": "BLOCKED",
+    "actual_draws": 0,
+    "reason": "Xorg AF_UNIX/local socket creation denied (EPERM); sandbox escalation rejected by automatic approval policy sandbox_approval:false.",
+    "actual_game_capture_created": false,
+    "helper": "tools/inspect_viya_game067.gd",
+    "not_evidence": [
+      "Prior GAME066 GUI captures/counts",
+      "Pillow/ffmpeg art_review.mp4"
+    ]
+  },
+  "preservation": {
+    "base": "31b80cca86f47cdf7c88d85f63f37a35d6924cca",
+    "identical_tracked_assets_scripts_data": 1380,
+    "intentional_changes": [
+      "data/presentation_slots.json",
+      "data/viya_motion.json",
+      "scripts/combat/viya_presentation.gd"
+    ],
+    "all_existing_assets_identical": true,
+    "other_motion_fields_unchanged": true
+  },
+  "isolated_builder": {
+    "status": "PASS",
+    "isolated_outputs_byte_identical": {
+      "assets/characters/pilot_32/game067_se_run_fire/viya_game067_frames.tres": true,
+      "assets/characters/pilot_32/game067_se_run_fire/integration_manifest.json": true,
+      "data/viya_motion.json": true,
+      "data/presentation_slots.json": true
+    }
+  },
+  "normal_import_pixel_equality": "20/20 imported texture RGBA pixels exactly match delivered PNGs",
+  "fallback": "Missing/invalid optional clip, muzzle/frame metadata, independent phase origin or timing => run_se at same global distance phase.",
+  "initial_diagnostics": [
+    "Float32 precision corrected without widening 1us assertions.",
+    "Old actor_animation active-slot expectation updated.",
+    "Main contact fixture corrected to preserve SE aim; deferred frees flushed before exit.",
+    "Optional metadata negative fixtures deep-copy rows to preserve originals."
+  ],
+  "additional_higgsfield_generation": 0,
+  "additional_credits": 0,
+  "new_payment_or_topup": 0,
+  "not_verified": [
+    "Actual GUI/transition appearance",
+    "Pixel-perfect foot contact/no sliding",
+    "Windows",
+    "Android/iOS device",
+    "Realtime FPS/temperature",
+    "Physical input/speaker audio",
+    "Producer final art approval",
+    "1540 dense overload resolved",
+    "Final economy and one-stage finish"
+  ],
+  "source_sha256": {
+    "scripts/combat/viya_presentation.gd": "848a6fb57789f896a9de692ddf8499ce28fcd7fbc2e41840795e29542e94c509",
+    "data/viya_motion.json": "629998ad687ae2c1ad508b86b91f08994f1edd28aa56e23f6bef764a82cca590",
+    "data/presentation_slots.json": "43474e228507b6d6d05b9e5963dc2ba2c0e386fb10f213ad89bf0294e7a7a476",
+    "tests/test_viya_game067.gd": "aea30a414ec6af0909d7cbcd35f99a8c45de0d3f83a12045f3b3b5e14220e99e",
+    "tools/build_viya_game067.py": "6e42220a1271fa23f5dac66fc9b180e54166076c9905d6f709dcf228c2c12df2",
+    "tools/inspect_viya_game067.gd": "14461afa97bc65568d95d4521eeeba4e4bb9d08fb1df1468fa6362711df2727e",
+    "tools/check_project.py": "eeafd73fc4503c7af952331c093272a5510aade3fbae04e42afb77eb23f55157",
+    "tools/check_combat_cues.py": "d937db0fc582a5b1200142a0e85b867c46b49f671c7db3d8b45bab03ed218854",
+    "assets/characters/pilot_32/game067_se_run_fire/viya_game067_frames.tres": "d44c9437cce0eb02c69ebfcde3ef13e691eae8ce3c14c9ca10f95b0fc2fad6e3",
+    "assets/characters/pilot_32/game067_se_run_fire/integration_manifest.json": "80a3636dde6f442d0834e72e54d36f7d996902f98b198b7b24327cd61ec7c6e3"
+  },
+  "final_navigation_rerun": {
+    "status": "PASS",
+    "checks": 492,
+    "command": "godot --headless --path . --script res://tests/test_run_navigation.gd",
+    "timeout_seconds": 120,
+    "exit_code": 0,
+    "strict_error_leak_detection": "PASS",
+    "scope": "Final test fixture array isolation; gameplay code unchanged from full suite."
+  }
+}

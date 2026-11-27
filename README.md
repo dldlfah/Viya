@@ -1,20 +1,14 @@
 # Viya — 모바일 서바이버 게임
 
-## GAME067 — SE 전용 이동사격 원화20장 납품 (2026-11-27)
+## GAME067 — SE 전용 이동사격 게임 연결 (2026-11-27)
 
-기획/Higgsfield에서 새 연속 전신 이동사격20장 RGBA·실제 시간표·독립 총구/발 위상·원출력/비용/반려 근거를 납품했다. [원화/기술 패킷](assets/characters/pilot_32/game067_se_run_fire/README.md) · [아트 비교 영상](assets/characters/pilot_32/game067_se_run_fire/provenance/art_review.mp4). 게임 연결은 아직 없고 활성 GAME066/33클립·298프레임과 게임 코드는 유지한다. SE18과 발 위치/벌림이 달라 실제 전환 검수와 최종 아트 승인은 별도다. 관측 차감158.25/잔액657·새 결제0. [현재/다음 제작 세션 인계](docs/CURRENT_WORK.md) · [누적8.67](docs/DEVELOPMENT_STATUS.md). 아래 GAME066절의 준비0 표기는 당시 이력이다.
+납품된 전신 RGBA20장을 실제 발사 관측에 연결했다. **34클립·318프레임**이며 기존33클립·298프레임 전체를 보존한다. 활성 리소스는 `res://assets/characters/pilot_32/game067_se_run_fire/viya_game067_frames.tres`다. E/SE 이동사격 선택·독립 총구/시간/발 위상·같은 거리 위상SE달리기 폴백을 적용했다. 원화20장과 원출력/비용 근거는 그대로다.
 
-## 이전 GAME066 검수 마감 → GAME067 (2026-11-27)
-
-SE 달리기11→18이 연결된 원격b42b7ed를 실제 전투에서 검수했다. 현재 검수 코드 **`f1998d280a03403d7022fd926a4f1e04ce52d247`**. 잘못된 검사 리소스 문자열2곳과 지도 슬롯 기대값2곳/보존 검사를 현재 리소스에 맞췄으며 원화·게임/저장 코드는 유지했다. 제작 기록 CSV의 번역 자동 임포트도 제외했다. 기존 전체10명령/7묶음 **4,531검사**·Python20·6계약/141변이거부와 실제 X11전투 **1,793검사/379그리기 PASS**다. 임포트 설정 보완 후 정상 import/관련465검사도 재통과했다. [보고서](docs/validation/GAME066_REVIEW_REPORT.json) · [실제 이동 영상](docs/validation/GAME066_REVIEW_GAMEPLAY.mp4) · [실제 화면](docs/validation/GAME066_REVIEW_IN_GAME.png).
-
-다음은 **GAME067 SE 전용 이동사격**이다. [기획/Higgsfield 제작 지시](tools/higgsfield/requests/game067/PROMPT_KO.txt)와 [새 SE18 기준 영상](docs/validation/GAME067_SE_RUN_REFERENCE.mp4)을 준비했다. 신규 사격 원화/게임 연결은 아직0이다. 기존 E47/이동사격47·SE18/298프레임·원본208·ARTFIX001·SAVEFIX001을 보존한다. 최종 아트·Windows/모바일/FPS·물리 접지의 완전한 일치는 미검증이다. 과거 절의 당시 NEXT/미완료 표현보다 [CURRENT](docs/CURRENT_WORK.md)·[NEXT](docs/NEXT_TASK.md)를 우선한다.
-
-기존 BREAKERS와 독립된 프로젝트. **프롤로그와 별도 1스테이지 고각 전장에 사용자 맵 파일럿12종을 활용했으며, 비야는 사용자8방향 스프라이트를 시범 사용하며 UI·몬스터/시설·나머지 전장은 임시 그래픽이다. Higgsfield 2D 원화 수정·재생성은 현재 허용하고, 3D 제작은 보류**한다.
+Godot4.7.2 전체10명령/7네이티브4,558검사, 생산main 헤드리스1,331검사/43발 PASS. **그리기0 / 실제 GUI 검증 BLOCKED**: 환경의 X11 소켓 제한과 자동 승인 정책 거절로 실제 화면을 실행하지 못했다. Windows/모바일·FPS/발열·물리 접지/전환 외관·프로듀서 최종 아트는 미검증이다. [실행 보고서](docs/validation/GAME067_INTEGRATION_REPORT.json) · [원화 납품/아트 분석](assets/characters/pilot_32/game067_se_run_fire/README.md). 분석 영상은 게임 캡처가 아니다. 이번 추가 생성/크레딧/결제0.
 
 ## 세션 필수 문서
 
-[CURRENT_WORK](docs/CURRENT_WORK.md)와 **[누적 DEVELOPMENT_STATUS](docs/DEVELOPMENT_STATUS.md)**를 함께 읽는다. [PLANNED_WORK](docs/PLANNED_WORK.md) · [NEXT_TASK](docs/NEXT_TASK.md) · [AGENTS](AGENTS.md) · [제작 스킬](.agents/skills/viya-game-production/SKILL.md). 현재 GAME066 SE18 검수를 마쳤다. 게임 연결은b42b7ed,검수 코드 기준은 **`f1998d280a03403d7022fd926a4f1e04ce52d247`**,다음은 **GAME067 SE 이동사격 한 방향**이다. 브랜치는 `work/viya-turnaround-qa-20261117`이며 문서/제작 참조 커밋과 구분한다. main 자동 병합은 하지 않는다.
+[CURRENT_WORK](docs/CURRENT_WORK.md)와 **[누적 DEVELOPMENT_STATUS8.68](docs/DEVELOPMENT_STATUS.md)**를 함께 읽는다. [PLANNED_WORK74](docs/PLANNED_WORK.md) · [NEXT_TASK](docs/NEXT_TASK.md) · [AGENTS](AGENTS.md) · [제작 스킬](.agents/skills/viya-game-production/SKILL.md). 원화 납품31b80cc와 이번 게임 구현을 구분한다. 다음은 연결한 GAME067의 실제 화면 검수다. 브랜치는 `work/viya-turnaround-qa-20261117`이며 main 자동 병합은 하지 않는다. 아래 과거 절의 NEXT/게임 연결0 표현보다 CURRENT/NEXT를 우선한다.
 
 ## SAVEFIX001 — 비행 몬스터 저장 보정 이력
 

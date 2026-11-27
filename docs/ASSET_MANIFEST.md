@@ -159,7 +159,7 @@
 
 기존에 게임에 연결된 E 전용 이동사격47장의 목록 누락만 보완한다. 이번 검수에서 새 원화를 만든 것이 아니다. [파생 자산](../assets/characters/pilot_32/game065_e_run_fire/README.md)·[시간표/메타데이터](../assets/characters/pilot_32/game065_e_run_fire/provenance/production.json)를 따른다. 원본 후보2 `d1817f67-fb19-4b70-b4a9-605f82981497`/Seedance2.5의 RGBA 파생물이며 GAME06432클립/244프레임을 보존해33클립/291프레임으로 연결했던 이력이다. 현재도 E 이동사격47은 아래 GAME066 복합 리소스에 그대로 보존된다. 당시93크레딧/873.25조회는 과거 기록이고 새 비용/조회가 아니다. 원출력의 구운 섬광 반려와 최종 파생물 기술 채택·최종 아트 승인을 구분한다.
 
-## GAME066 SE 달리기18 — 현재 활성 복합 리소스 (2026-11-27)
+## GAME066 SE 달리기18 — 이전 활성 복합 리소스 (2026-11-27)
 
 원격b42b7ed에서 기존 SE11만 파생18장으로 교체했다. 이번 재검수에서는 PNG/리소스/기존 메타데이터를 변경하지 않았다. 새 파일은 기존 E와 같은 `provenance/.gdignore`이며 시간표 CSV가 번역으로 자동 임포트되지 않도록 빌더도 같은 파일을 만든다. 정상 editor import와 원본 CSV를 읽는 관련465검사를 재확인했다. [자산 설명](../assets/characters/pilot_32/game066_se_run/README.md)·[등록/해시](../assets/characters/pilot_32/game066_se_run/provenance/source_registration.json)·[실행 검수](validation/GAME066_REVIEW_REPORT.json)를 따른다.
 
@@ -202,3 +202,22 @@
 20장 경계알파0·독립 총구/양수 시간표·전체 주기/이음과 SE 고각/캐릭터·무기/천을 검토했다. 새 발 벌림/위치는 SE18과 달라 실제 전환/물리 접지·무미끄러짐을 완료로 세지 않는다. provenance의240프레임 아트 분석 영상은 실제 main.tscn 화면/FPS 측정이 아니다. CSV/검토 이미지는 .gdignore로 자동 임포트에서 제외한다.
 
 반려 원출력과 실패 기록, 후보2의 미채택18장 참고 패킷도 보존했다. 실제 네이티브 GIF는 요청24장 대신16장/투명으로 나왔으며 보행 문제로 미채택했다. 전체 관측 차감158.25/마지막 조회657, 선택 생성28크레딧·새 결제/충전0이다. 기존 게임 수치/저장/스폰은 변경하지 않았다. 후속 연결은 NEXT/DEVELOPMENT_STATUS8.67을 따른다.
+
+
+## GAME067 — 게임 연결 등록 (2026-11-27, 원화 납품 이후)
+
+사용자의 게임 연결 지시로 위 원화20장을 별도 복합리소스에 추가했다. 위의 게임연결0/활성GAME066 표시는 원화 납품 당시 이력이며 현재는 아래를 따른다. 원화manifest/CHECKSUMS·PNG·provenance·원출력/비용 근거는 바이트 그대로다.
+
+| 항목 | 경로 / 값 |
+| --- | --- |
+| 현재 활성 SpriteFrames | assets/characters/pilot_32/game067_se_run_fire/viya_game067_frames.tres |
+| 새 통합 명세 | [integration_manifest.json](../assets/characters/pilot_32/game067_se_run_fire/integration_manifest.json) |
+| 총계 | 기존33클립/298프레임 보존+run_fire_se20장=34클립/318프레임 |
+| 엔진 메타데이터 | data/viya_motion.json의directions.se.run_fire 및 run_fire_phase_origin0.819949494949495 |
+| 임포트 |20PNG.import,lossless/fix_alpha_border=false,20장 실제 임포트RGBA가 원본과 동일 |
+| 빌더 | tools/build_viya_game067.py,격리한4출력바이트동일 |
+| 실제 검증 | 전체 네이티브4,558·main헤드리스1,331/43발/그리기0,PASS |
+| 화면 상태 | X11소켓 권한/자동 승인 정책으로 GUI BLOCKED,전환 외관/물리접지/최종 아트NOT_VERIFIED |
+| 증거 | [통합 보고서](validation/GAME067_INTEGRATION_REPORT.json)·[실행 로그](validation/GAME067_INTEGRATION_RUNTIME.log) |
+
+200×248/root(100,248)·표시69×85.56·235/stride155·명목660ms/거리659.574468ms를 유지한다. 원본208/ARTFIX001/GAME064·065·066/SAVEFIX001을 보존했다. 이번 추가 생성/크레딧/결제0. 모델/알파/과거 비용/선정 근거는 원화 제작 기록을 따르며 이번에 재조회하거나 생성하지 않았다.

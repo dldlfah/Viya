@@ -87,17 +87,19 @@ func phase_clock(asset:SpriteFrames, animation:String, phase:float) -> float:
 func run_clock(asset:SpriteFrames, direction:String, phase:float) -> float:
 	return phase_clock(asset,"run_"+direction,phase)
 
-func moving_fire_ready(asset:SpriteFrames, row:Dictionary) -> bool:
+func moving_fire_ready(asset:SpriteFrames, row:Dictionary, direction:String="e") -> bool:
 	# Optional whole-body art: absence must keep the accepted run, never fall
 	# through the shared sampler's generic idle fallback.
-	if asset==null or not asset.has_animation("run_fire_e"):return false
+	if direction not in ["e","se"]:return false
+	var animation:String="run_fire_"+direction
+	if asset==null or not asset.has_animation(animation):return false
 	var rows:Variant=row.get("run_fire")
-	if not rows is Array or rows.is_empty() or rows.size()!=asset.get_frame_count("run_fire_e"):return false
-	var speed:float=asset.get_animation_speed("run_fire_e")
-	if not asset.get_animation_loop("run_fire_e") or not is_finite(speed) or speed<=0:return false
-	var origin:Variant=row.get("run_fire_phase_origin",row.get("phase_origin",0.0))
-	if not (origin is int or origin is float) or not is_finite(float(origin)):return false
-	var key:String=str(asset.get_instance_id())+":"+str(rows.hash())+":"+str(speed)
+	if not rows is Array or rows.is_empty() or rows.size()!=asset.get_frame_count(animation):return false
+	var speed:float=asset.get_animation_speed(animation)
+	if not asset.get_animation_loop(animation) or not is_finite(speed) or speed<=0:return false
+	var origin:Variant=row.get("run_fire_phase_origin")
+	if not (origin is int or origin is float) or not is_finite(float(origin)) or float(origin)<0 or float(origin)>=1:return false
+	var key:String=str(asset.get_instance_id())+":"+animation+":"+str(rows.hash())+":"+str(speed)
 	if _fire_clips.has(key):return _fire_clips[key]
 	var valid:=true
 	var root:String=str(config.resource).get_base_dir().get_base_dir()+"/"
@@ -110,8 +112,13 @@ func moving_fire_ready(asset:SpriteFrames, row:Dictionary) -> bool:
 		var region:Variant=item.get("region")
 		var muzzle:Variant=item.get("muzzle")
 		var path:Variant=item.get("texture")
-		var texture:Texture2D=asset.get_frame_texture("run_fire_e",index)
-		var duration:float=asset.get_frame_duration("run_fire_e",index)
+		var texture:Texture2D=asset.get_frame_texture(animation,index)
+		var duration:float=asset.get_frame_duration(animation,index)
+		if direction=="se":
+			var milliseconds:Variant=item.get("duration_ms")
+			if not (milliseconds is int or milliseconds is float) or not is_finite(float(milliseconds)) or float(milliseconds)<=0 or absf(duration/speed*1000.0-float(milliseconds))>.000001:
+				valid=false
+				break
 		if not (frame_index is int or frame_index is float) or float(frame_index)!=index or not region is Array or region.size()!=4 or not muzzle is Array or muzzle.size()!=2 or not path is String:
 			valid=false
 			break
@@ -180,9 +187,9 @@ func apply(view, visual:Dictionary) -> void:
 	var clock:float=visual.clock
 	if selected=="run":
 		clock=run_clock(view.art.resource("viya_battle"),visual.direction,_phase+float(row.phase_origin))
-		if visual.direction=="e" and gun_active and moving_fire_ready(view.art.resource("viya_battle"),row):
+		if visual.direction in ["e","se"] and gun_active and moving_fire_ready(view.art.resource("viya_battle"),row,visual.direction):
 			selected="run_fire"
-			clock=phase_clock(view.art.resource("viya_battle"),"run_fire_e",_phase+float(row.get("run_fire_phase_origin",row.phase_origin)))
+			clock=phase_clock(view.art.resource("viya_battle"),"run_fire_"+visual.direction,_phase+float(row.get("run_fire_phase_origin",row.phase_origin)))
 	# Play the original whole-body attack once per stationary burst, not per
 	# projectile. Continuous .3s fire holds the aimed end pose between shots.
 	if selected=="idle" and gun_active:
@@ -194,7 +201,7 @@ func apply(view, visual:Dictionary) -> void:
 	if gun_active:_gun_until=maxf(_gun_until,now-shot_age+.4)
 	visual.sample=view.actor_art.frame(view.art,["viya_battle"],selected,visual.direction,clock,view.size)
 	var run_frame:Dictionary={}
-	if selected=="run_fire" and visual.sample.get("animation","")!="run_fire_e":visual.sample={}
+	if selected=="run_fire" and visual.sample.get("animation","")!="run_fire_"+visual.direction:visual.sample={}
 	if not visual.sample.is_empty() and selected in ["run","run_fire"]:run_frame=row[selected][int(visual.sample.index)]
 	if not repair_sample(visual,selected,run_frame):
 		if selected!="run_fire":

@@ -1909,3 +1909,20 @@ Godot 4.7.2 기존/추가 이동 관련 465개 네이티브 검사 PASS(실패0)
 [동일 위상/69×85.56전환 영상](../assets/characters/pilot_32/game067_se_run_fire/provenance/art_review.mp4)은240프레임/60fps/4초의 Pillow/ffmpeg 분석물이며 main.tscn 캡처/FPS 검증이 아니다. 후보2의18장 검토 패킷은 미채택 이력으로 보존했다. 새 원화 기술 납품과 게임/최종 승인을 구분한다.
 
 **현재:** 원화 기술 납품20장·게임 연결0·프로듀서 최종 아트 NOT_VERIFIED. 게임 코드·active SpriteFrames·data는 변경하지 않았으며 과거4,531/실제전투1,793·379을 이번 재실행 PASS로 세지 않는다. NEXT는 제작 세션의 GAME067 납품 검수/선택적run_fire_se·독립 총구/위상·같은 거리 위상SE달리기 폴백과 실제 main.tscn 검증이다. 발사 on/off·즉시 명중/벽 소비·E↔SE·후진 조준·정지/피격 우선·일시정지·크기/총구/발 위상을 본다. SAVEFIX001·저장22/7난수·스폰/AI/피해/HP·MP/보상/속도는 유지한다.1540과부하·경제·과거 무효파일 자동복구·기기/FPS/발열·최종 아트/한 판 마감과 후속 다른 방향/고블린/표시/초상화는 별도다.
+
+
+## 8.68. GAME067 — SE 전용 전신 이동사격 게임 연결 (2026-11-27)
+
+**재개와 구현:** 사용자의 “게임에 연결해” 지시로 원화 납품 `31b80cca86f47cdf7c88d85f63f37a35d6924cca`의 실제 원격/로컬 일치·깨끗한 작업 트리를 확인했다. 원화 제작8.67과 이번 게임 구현은 별개다. 활성 리소스는 `game067_se_run_fire/viya_game067_frames.tres`이며, 기존 GAME066의33클립/298프레임 경로·시간·loop/speed를 모두 보존하고 `run_fire_se`20장만 추가해 **34클립/318프레임**이다. 표시 스크립트의 기존 E 선택을 E/SE로 확장하고 실제 발사 관측·기존.4초 조준 창·거리 gait를 유지했다. 무효/누락 클립·총구·지역·경로·시간표·독립 위상은 같은 거리 위상의run_se로 복귀하며 idle에 빠지지 않는다.
+
+**원화와 등록:** PNG/원화manifest/CHECKSUMS/provenance·원출력/비용 기록은 그대로다. 독립 총구20개와 SE 이동사격 위상0.819949494949495를 사용하며 기존3/11/E총구를 복사하지 않았다.200×248·표시69×85.56·root(100,248),이동235/stride155·명목660ms/거리659.574468ms를 유지한다. PNG 임포트는 lossless/fix_alpha_border=false이며20장 모두 엔진 임포트 RGBA가 원본과 동일하다. 새 발 벌림/위치는 SE18과 달라 코드의 거리 위상 연속성을 물리 접지·픽셀 일치·무미끄러짐으로 확대하지 않는다.
+
+**빌드와 초기 수정:** `tools/build_viya_game067.py`는 원화해시/CSV를 검수하고 별도integration_manifest를 만든다. 격리 입력에서 resource/integration_manifest/motion/slot4출력을 바이트 동일하게 재현했다. 단순 정규화한float32 duration은 시간표와 약1.8e-6ms 차이가 났다. 검사 허용치를 넓히지 않고 원천 정수µs/65536과 대응fps로 실제 PTS 비율·660ms를 보존했다. 초기 전체 검사의 오래된actor_animation GAME066 슬롯 기대값은 활성GAME067로 수정했다. 피격 검사fixture는 정확한SE접촉 위치로 수정하고 deferred free를 기다린 뒤 오류/누수0을 확인했다. 메타데이터 음성 검사fixture는 배열을 복제해 원본을 보존한다. 이 준비 수정을 신규 게임 규칙 결함으로 세지 않는다.
+
+**엔진 검증 PASS:** Godot4.7.2의 기존10명령/7네이티브 묶음 **4,558=23+70+122+57+1336+492+2458검사**, 정상editor import/main boot PASS다. 기존 명령별120초·엄격ERROR/FAIL/누수/PASS판정은 그대로다. 최종 메타데이터fixture 정리 후 관련492검사와 현재 소스 계약을 별도 재확인했다. Python20·189소스/629리소스 참조·6계약·변조177거부(전투144+기타33)도 PASS다. 신규 검사는33기존클립/298프레임 보존·20장 임포트 동일성·CSV/1µs경계/루프·독립 총구·전환/방향/후진/피격·무효 폴백·손상 임포트 복구를 포함한다. [전체 회귀](validation/GAME067_INTEGRATION_REGRESSION.json) · [현재 소스 계약](validation/GAME067_INTEGRATION_SOURCE.json) · [실행 로그](validation/GAME067_INTEGRATION_RUNTIME.log) · [통합 보고서](validation/GAME067_INTEGRATION_REPORT.json).
+
+**생산main 로직 PASS:** `tools/inspect_viya_game067.gd -- --logic-only`가 실제main.tscn·격리 저장 경로·Godot키이벤트·고정1/60갱신을 실행했다. **1,331검사/43실발사/그리기0**다. SE달리기18장/4루프·E↔SE4왕복·입력 해제, 전용SE사격20장 전체·on/off·E↔SE사격2왕복·후진48단계·정지사격/pause·즉시명중/벽소멸·실제접촉HP100→88/hurt_se 우선을 확인했다. 실제 렌더와 Snapshot/cues의 그리기 불변조건은 이번에 실행하지 않았다. [전체 관측](validation/GAME067_INTEGRATION_MAIN_LOGIC.json)을 남겼다.
+
+**GUI BLOCKED / 최종 아트 NOT_VERIFIED:** 기존dummy설정의 Xorg:101이 로컬 소켓 생성 권한 부족으로 시작하지 못했다. AF_UNIX 생성은EPERM이며 제한 해제 실행도 자동 승인 정책(sandbox_approval:false)이 거절했다. 그리기/실제 캡처0이며 이전 GAME066 GUI1,793/379나 원화분석영상을 GAME067 전투 증거로 재사용하지 않는다. 준비한 검사도구를 허용된 디스플레이에서 실행해 실제 표시·총구·전환 외관을 확인하는 것이 다음 한 단위다. Windows/모바일·실시간FPS/발열·물리 입력/실제 오디오·프로듀서 최종 아트는 별도 미검증이다.
+
+**보존과 범위:** 출발31b80cc 대비 기존assets/scripts/data1,380파일은 바이트 동일하며 의도한 변경은viya_presentation1개·슬롯/모션2개다. 모션의 나머지 필드, 원본208/ARTFIX001/GAME064·065·066/SAVEFIX001·저장22/7난수·스폰/AI·발사간격·피해/HP·MP/보상·속도를 유지했다. SAVEFIX001은 수정 완료이며 과거 무효파일 자동복구만 없다. 이번 새 생성/추가 크레딧/결제0, 이전158.25/657은 과거 관측이다.1540과부하·최종 경제·한 판 마감과 다른 방향/고블린/표시/초상화는 별도다.3D/리그/코스튬 보류·서포터2+2 빈칸과 기존 브랜치/main자동병합·force push·유료Actions 금지를 유지한다.

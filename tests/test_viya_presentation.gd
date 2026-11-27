@@ -45,6 +45,7 @@ static func run(host,verify:Callable) -> void:
 	verify_e_cycle(view,asset,verify)
 	preload("res://tests/test_viya_game065.gd").run(view,asset,verify)
 	preload("res://tests/test_viya_game066.gd").run(view,asset,verify)
+	preload("res://tests/test_viya_game067.gd").run(view,asset,verify)
 	for index in range(8):
 		var direction:String=view.actors.DIRECTIONS[index]
 		var facing:Vector2=view.input_direction(Vector2.from_angle(index*PI/4))
@@ -62,7 +63,7 @@ static func run(host,verify:Callable) -> void:
 		var registered:Rect2=view.viya.body_rect(view.actor_art,visual,Vector2(200,180))
 		var held_phase:float=visual.gait_phase
 		visual.pose="attack";visual.shot_age=0.0;visual.gun_aim=facing;view.viya.apply(view,visual)
-		var firing_pose_ok:bool=(visual.sample.animation=="run_fire_e" and not is_same(visual.sample.texture,texture)) if direction=="e" else is_same(visual.sample.texture,texture)
+		var firing_pose_ok:bool=(visual.sample.animation=="run_fire_"+direction and not is_same(visual.sample.texture,texture)) if direction in ["e","se"] else is_same(visual.sample.texture,texture)
 		verify.call(seen.size()==expected_count and expected_count==(47 if direction=="e" else (18 if direction=="se" else 11)) and registered.end.y==180 and is_equal_approx(registered.size.x/region.size.x,registered.size.y/region.size.y) and firing_pose_ok and is_equal_approx(visual.gait_phase,held_phase) and visual.region==Rect2(0,0,200,248) and visual.recoil==0,"Every whole-body frame retains one canvas/root and gait phase through moving fire:"+direction)
 		visual.moving=false
 		var attack_frames:Dictionary={}

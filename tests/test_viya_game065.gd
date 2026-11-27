@@ -74,7 +74,7 @@ static func run(view,asset:SpriteFrames,verify:Callable) -> void:
 	var count:int=asset.get_frame_count(FIRE) if asset.has_animation(FIRE) else 0
 	var timing:Array=read_timing(GAME065_TIMING)
 	var rows:Variant=view.viya.config.directions.e.get("run_fire")
-	verify.call(count>0 and asset.get_animation_names().size()==33 and timing.size()==count and rows is Array and rows.size()==count,"The active composite adds exactly one E moving-fire clip backed by its actual delivered timing and frame metadata")
+	verify.call(count>0 and asset.get_animation_names().size()==34 and timing.size()==count and rows is Array and rows.size()==count,"The active composite adds exactly one E moving-fire clip backed by its actual delivered timing and frame metadata")
 	if count<=0 or timing.size()!=count or not rows is Array or rows.size()!=count:return
 	var total_ms:=0.0
 	var timing_valid:=true
@@ -165,10 +165,10 @@ static func run(view,asset:SpriteFrames,verify:Callable) -> void:
 	var southeast:Vector2=view.input_direction(Vector2(1,1).normalized())
 	visual.gun_aim=southeast;visual.facing=southeast;visual.motion=southeast
 	view.viya.apply(view,visual)
-	var turn_ok:bool=is_frame(visual,"run_se") and is_equal_approx(visual.gait_phase,held_phase)
+	var turn_ok:bool=is_frame(visual,"run_fire_se") and is_equal_approx(visual.gait_phase,held_phase)
 	visual.gun_aim=forward;visual.facing=forward;visual.motion=forward
 	view.viya.apply(view,visual)
-	verify.call(turn_ok and is_frame(visual,FIRE,held_index) and is_equal_approx(visual.gait_phase,held_phase),"E moving-fire to unchanged SE running and back preserves the shared phase across different frame counts")
+	verify.call(turn_ok and is_frame(visual,FIRE,held_index) and is_equal_approx(visual.gait_phase,held_phase),"E moving-fire to SE moving-fire and back preserves the shared phase across different frame counts")
 	visual.motion=-forward
 	view.viya.apply(view,visual)
 	var reverse_ok:bool=is_frame(visual,FIRE,held_index) and is_equal_approx(visual.gait_phase,held_phase)

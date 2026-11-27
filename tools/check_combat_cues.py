@@ -131,6 +131,15 @@ def engine_function_digest(source: str) -> str:
         return ''
 
 
+# GAME067 reviewed integration scope; historical authority/source pins above remain.
+FILES += ('assets/characters/pilot_32/game067_se_run_fire/viya_game067_frames.tres', 'assets/characters/pilot_32/game067_se_run_fire/integration_manifest.json', 'tests/test_viya_game067.gd', 'tools/build_viya_game067.py')
+PATTERN_REVIEWED_SHA256.update({'data/presentation_slots.json': '43474e228507b6d6d05b9e5963dc2ba2c0e386fb10f213ad89bf0294e7a7a476', 'tests/test_character_pilot.gd': '64175960922e285385f3fc1c39e1c4f13cab202f8b2da209983d7d72d633093d', 'tests/test_map_pilot.gd': '80ddc518543fbb12245b7b1363ec9b7a27496f1315679752913e360183d9923d', 'tests/test_maps.gd': '859edc7abf673a3b9a3277dd05776ae46c85ac62255cee736fb0a1473fb29f77', 'data/viya_motion.json': '629998ad687ae2c1ad508b86b91f08994f1edd28aa56e23f6bef764a82cca590', 'scripts/combat/viya_presentation.gd': '848a6fb57789f896a9de692ddf8499ce28fcd7fbc2e41840795e29542e94c509', 'tests/test_viya_presentation.gd': 'b34394e950b985048fc46f55504943b589037e1be4f6ffa5a9c4084a292f6896', 'tests/test_viya_game065.gd': 'c9954a206f2b05c9a3f7495003068ea87a75bf6a1f84582192114b3aac74fe9d'})
+GAME066_REVIEWED_SHA256["tests/test_viya_game066.gd"] = "624dcde65a3ad35a3ba8d8b38d4eb1a24687dc3b6e797ff9a5165505c207c5a9"
+GAME067_REVIEWED_SHA256 = {'assets/characters/pilot_32/game067_se_run_fire/viya_game067_frames.tres': 'd44c9437cce0eb02c69ebfcde3ef13e691eae8ce3c14c9ca10f95b0fc2fad6e3', 'assets/characters/pilot_32/game067_se_run_fire/integration_manifest.json': '80a3636dde6f442d0834e72e54d36f7d996902f98b198b7b24327cd61ec7c6e3', 'tests/test_viya_game067.gd': 'aea30a414ec6af0909d7cbcd35f99a8c45de0d3f83a12045f3b3b5e14220e99e', 'tools/build_viya_game067.py': '6e42220a1271fa23f5dac66fc9b180e54166076c9905d6f709dcf228c2c12df2'}
+
+
+PATTERN_REVIEWED_SHA256["tests/test_actor_animation.gd"] = "dbe967d362747bd0199fb6794a78e796662b8b69fe3d917459b6bfad0bc83201"
+
 def validate(sources: dict[str, str]) -> list[str]:
     errors: list[str] = []
     run, view, cues, tests, runner, _ = [sources[x] for x in FILES[:6]]
@@ -148,6 +157,11 @@ def validate(sources: dict[str, str]) -> list[str]:
         errors.append('Four portrait reaction runtime tests are not registered')
     if 'res://tests/test_character_pilot.gd' not in sources['tests/test_run_navigation.gd']:
         errors.append('Supplied character pilot runtime tests are not registered')
+    if 'res://tests/test_viya_game067.gd' not in sources['tests/test_viya_presentation.gd']:
+        errors.append('SE moving-fire runtime tests are not registered')
+    for path, expected in GAME067_REVIEWED_SHA256.items():
+        if hashlib.sha256(sources[path].encode('utf-8')).hexdigest() != expected:
+            errors.append('Reviewed GAME067 delivery/integration changed: ' + path)
     for path, expected in GAME066_REVIEWED_SHA256.items():
         if hashlib.sha256(sources[path].encode('utf-8')).hexdigest() != expected:
             errors.append('Reviewed GAME066 SE clip/provenance/regression changed: ' + path)
@@ -401,10 +415,13 @@ def check() -> dict:
     cases = [
         ('cache_hurt_bypass', 'scripts/combat/high_angle_battle.gd', 'cache_bodies and state.cues.flash_alpha(int(enemy.id))==0', 'cache_bodies'),
         ('cache_unregistered', 'tests/test_run_navigation.gd', 'res://tests/test_enemy_shape_cache.gd', 'res://tests/missing_enemy_shape_cache.gd'),
-        ('viya_edge_bypass','data/presentation_slots.json','res://assets/characters/pilot_32/game066_se_run/viya_game066_frames.tres','res://assets/characters/pilot_32/resources/viya_directional_motion.tres'),
-        ('game064_active_rollback','data/presentation_slots.json','res://assets/characters/pilot_32/game066_se_run/viya_game066_frames.tres','res://assets/characters/pilot_32/render_cache/viya_render_frames.tres'),
-        ('game065_active_rollback','data/presentation_slots.json','res://assets/characters/pilot_32/game066_se_run/viya_game066_frames.tres','res://assets/characters/pilot_32/game064_e_run/viya_game064_frames.tres'),
-        ('game066_active_rollback','data/presentation_slots.json','res://assets/characters/pilot_32/game066_se_run/viya_game066_frames.tres','res://assets/characters/pilot_32/game065_e_run_fire/viya_game065_frames.tres'),
+        ('viya_edge_bypass','data/presentation_slots.json','res://assets/characters/pilot_32/game067_se_run_fire/viya_game067_frames.tres','res://assets/characters/pilot_32/resources/viya_directional_motion.tres'),
+        ('game064_active_rollback','data/presentation_slots.json','res://assets/characters/pilot_32/game067_se_run_fire/viya_game067_frames.tres','res://assets/characters/pilot_32/render_cache/viya_render_frames.tres'),
+        ('game065_active_rollback','data/presentation_slots.json','res://assets/characters/pilot_32/game067_se_run_fire/viya_game067_frames.tres','res://assets/characters/pilot_32/game064_e_run/viya_game064_frames.tres'),
+        ('game066_active_rollback','data/presentation_slots.json','res://assets/characters/pilot_32/game067_se_run_fire/viya_game067_frames.tres','res://assets/characters/pilot_32/game065_e_run_fire/viya_game065_frames.tres'),
+        ('game067_active_rollback','data/presentation_slots.json', 'res://assets/characters/pilot_32/game067_se_run_fire/viya_game067_frames.tres', 'res://assets/characters/pilot_32/game066_se_run/viya_game066_frames.tres'),
+        ('game067_missing_fire','assets/characters/pilot_32/game067_se_run_fire/viya_game067_frames.tres','"name": &"run_fire_se"','"name": &"missing_fire_se"'),
+        ('game067_unregistered','tests/test_viya_presentation.gd','res://tests/test_viya_game067.gd','res://tests/missing.gd'),
         ('game066_missing_se','assets/characters/pilot_32/game066_se_run/viya_game066_frames.tres','"name": &"run_se"','"name": &"run_missing_se"'),
         ('game066_missing_old_fire','assets/characters/pilot_32/game066_se_run/viya_game066_frames.tres','"name": &"run_fire_e"','"name": &"run_missing_fire_e"'),
         ('game066_unregistered','tests/test_viya_presentation.gd','res://tests/test_viya_game066.gd','res://tests/missing.gd'),
@@ -441,7 +458,7 @@ def check() -> dict:
         ('stage_replay_receipt', 'scripts/progression/gold_progress.gd', 'if run_id in paid_campaign:', 'if false:'),
 
         ('character_pilot_unregistered', 'tests/test_run_navigation.gd', 'res://tests/test_character_pilot.gd', 'res://tests/missing.gd'),
-        ('character_pilot_slot', 'data/presentation_slots.json', 'res://assets/characters/pilot_32/game066_se_run/viya_game066_frames.tres', ''),
+        ('character_pilot_slot', 'data/presentation_slots.json', 'res://assets/characters/pilot_32/game067_se_run_fire/viya_game067_frames.tres', ''),
         ('character_pilot_hurt_loop', 'assets/characters/pilot_32/resources/viya_directional_motion.tres', '"loop": false', '"loop": true'),
         ('character_pilot_timing', 'assets/characters/pilot_32/resources/viya_directional_motion.tres', '"speed": 50.0', '"speed": 5.0'),
         ('character_pilot_checksum', 'assets/characters/pilot_32/source_manifest.json', '11254fff2baec6de74bce61988544a4296a9753007f27bef2950788aea8b6a19', '0'*64),

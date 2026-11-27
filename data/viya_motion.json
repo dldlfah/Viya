@@ -1,6 +1,6 @@
 {
   "schema": 4,
-  "resource": "res://assets/characters/pilot_32/game066_se_run/viya_game066_frames.tres",
+  "resource": "res://assets/characters/pilot_32/game067_se_run_fire/viya_game067_frames.tres",
   "stride_world": 155.0,
   "reference_canvas": [
     200,
@@ -1666,7 +1666,310 @@
         168,
         145
       ],
-      "attack_hold_frame": 7
+      "attack_hold_frame": 7,
+      "run_fire": [
+        {
+          "index": 0,
+          "texture": "res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_000.png",
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            189.5,
+            78.0
+          ],
+          "duration_ms": 32.999485199794066
+        },
+        {
+          "index": 1,
+          "texture": "res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_001.png",
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            189.5,
+            78.0
+          ],
+          "duration_ms": 33.000277200110894
+        },
+        {
+          "index": 2,
+          "texture": "res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_002.png",
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            189.5,
+            79.0
+          ],
+          "duration_ms": 33.000277200110894
+        },
+        {
+          "index": 3,
+          "texture": "res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_003.png",
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            189.5,
+            79.0
+          ],
+          "duration_ms": 32.999485199794066
+        },
+        {
+          "index": 4,
+          "texture": "res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_004.png",
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            189.5,
+            80.0
+          ],
+          "duration_ms": 33.000277200110894
+        },
+        {
+          "index": 5,
+          "texture": "res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_005.png",
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            189.5,
+            80.0
+          ],
+          "duration_ms": 33.000277200110894
+        },
+        {
+          "index": 6,
+          "texture": "res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_006.png",
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            190.5,
+            79.0
+          ],
+          "duration_ms": 32.999485199794066
+        },
+        {
+          "index": 7,
+          "texture": "res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_007.png",
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            190.5,
+            78.5
+          ],
+          "duration_ms": 33.000277200110894
+        },
+        {
+          "index": 8,
+          "texture": "res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_008.png",
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            190.5,
+            78.0
+          ],
+          "duration_ms": 33.000277200110894
+        },
+        {
+          "index": 9,
+          "texture": "res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_009.png",
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            191.5,
+            77.5
+          ],
+          "duration_ms": 32.999485199794066
+        },
+        {
+          "index": 10,
+          "texture": "res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_010.png",
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            191.5,
+            78.0
+          ],
+          "duration_ms": 33.000277200110894
+        },
+        {
+          "index": 11,
+          "texture": "res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_011.png",
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            191.5,
+            79.0
+          ],
+          "duration_ms": 33.000277200110894
+        },
+        {
+          "index": 12,
+          "texture": "res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_012.png",
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            191.5,
+            79.0
+          ],
+          "duration_ms": 32.999485199794066
+        },
+        {
+          "index": 13,
+          "texture": "res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_013.png",
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            191.5,
+            79.5
+          ],
+          "duration_ms": 33.000277200110894
+        },
+        {
+          "index": 14,
+          "texture": "res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_014.png",
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            191.5,
+            79.5
+          ],
+          "duration_ms": 33.00027720011081
+        },
+        {
+          "index": 15,
+          "texture": "res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_015.png",
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            191.5,
+            78.5
+          ],
+          "duration_ms": 32.99948519979424
+        },
+        {
+          "index": 16,
+          "texture": "res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_016.png",
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            191.5,
+            77.5
+          ],
+          "duration_ms": 33.00027720011081
+        },
+        {
+          "index": 17,
+          "texture": "res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_017.png",
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            190.5,
+            77.5
+          ],
+          "duration_ms": 33.00027720011081
+        },
+        {
+          "index": 18,
+          "texture": "res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_018.png",
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            190.5,
+            76.5
+          ],
+          "duration_ms": 32.99948519979424
+        },
+        {
+          "index": 19,
+          "texture": "res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_019.png",
+          "region": [
+            0,
+            0,
+            200,
+            248
+          ],
+          "muzzle": [
+            190.5,
+            77.0
+          ],
+          "duration_ms": 33.00027720011081
+        }
+      ],
+      "run_fire_phase_origin": 0.819949494949495
     },
     "s": {
       "muzzle": [

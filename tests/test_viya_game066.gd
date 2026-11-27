@@ -5,7 +5,7 @@ const Slots=preload("res://scripts/ui/asset_slots.gd")
 const META="res://assets/characters/pilot_32/game066_se_run/provenance/source_registration.json"
 const CSV="res://assets/characters/pilot_32/game066_se_run/provenance/frame_timing.csv"
 const FIRST="res://assets/characters/pilot_32/game066_se_run/frames/viya_run_se_000.png"
-const RESOURCE="res://assets/characters/pilot_32/game066_se_run/viya_game066_frames.tres"
+const RESOURCE="res://assets/characters/pilot_32/game067_se_run_fire/viya_game067_frames.tres"
 
 static func run(view,asset:SpriteFrames,verify:Callable) -> void:
 	var data:Variant=JSON.parse_string(FileAccess.get_file_as_string(META))
@@ -26,7 +26,7 @@ static func run(view,asset:SpriteFrames,verify:Callable) -> void:
 			var a:Texture2D=asset.get_frame_texture(name,i)
 			var b:Texture2D=Older.get_frame_texture(name,i)
 			other_animations=other_animations and a!=null and b!=null and a.resource_path==b.resource_path and asset.get_frame_duration(name,i)==Older.get_frame_duration(name,i)
-	verify.call(other_animations and old_frames==280 and asset.get_animation_names().size()==33,"GAME066 preserves the other32animations and280existing resolved frames and timings")
+	verify.call(other_animations and old_frames==280 and asset.get_animation_names().size()==34,"GAME066 preserves the other32animations and280existing resolved frames and timings")
 	var count:int=asset.get_frame_count(&"run_se")
 	verify.call(count==18 and is_equal_approx(asset.get_animation_speed(&"run_se"),18.0/.66) and asset.get_animation_loop(&"run_se"),"GAME066 SE has a genuine18frame 660ms looping clip")
 	var metadata_valid:bool=data.has("frame_checks") and data.frame_checks.size()==18

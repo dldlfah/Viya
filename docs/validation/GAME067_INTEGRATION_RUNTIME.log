@@ -1,0 +1,1102 @@
+=== full regression engine_0.log ===
+4.7.2.stable.official.ed1daf0bf
+
+=== full regression engine_1.log ===
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+[   0% ] [90m[1mfirst_scan_filesystem[22m | Started Project initialization (5 steps)[39m[0m
+[   0% ] [90m[1mfirst_scan_filesystem[22m | Scanning file structure...[39m[0m
+[  16% ] [90m[1mfirst_scan_filesystem[22m | Loading global class names...[39m[0m
+[  33% ] [90m[1mfirst_scan_filesystem[22m | Verifying GDExtensions...[39m[0m
+[  50% ] [90m[1mfirst_scan_filesystem[22m | Creating autoload scripts...[39m[0m
+[  66% ] [90m[1mfirst_scan_filesystem[22m | Initializing plugins...[39m[0m
+[  83% ] [90m[1mfirst_scan_filesystem[22m | Starting file scan...[39m[0m
+[92m[ DONE ][39m [1mfirst_scan_filesystem[22m
+[0m
+[   0% ] [90m[1mupdate_scripts_classes[22m | Started Registering global classes... (3 steps)[39m[0m
+[   0% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  25% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  50% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[92m[ DONE ][39m [1mupdate_scripts_classes[22m
+[0m
+[   0% ] [90m[1mloading_editor_layout[22m | Started Loading editor (5 steps)[39m[0m
+[   0% ] [90m[1mloading_editor_layout[22m | Loading editor layout...[39m[0m
+[  16% ] [90m[1mloading_editor_layout[22m | Loading docks...[39m[0m
+[92m[ DONE ][39m [1mloading_editor_layout[22m
+[0m
+
+=== full regression engine_2.log ===
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+{"checks":23,"failures":[],"status":"PASS"}
+
+=== full regression engine_3.log ===
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+{"checks":70,"failures":[],"status":"PASS"}
+
+=== full regression engine_4.log ===
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+{"checks":122,"failures":[],"status":"PASS"}
+
+=== full regression engine_5.log ===
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+{"checks":57,"failures":[],"status":"PASS"}
+
+=== full regression engine_6.log ===
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+{"checks":1336,"failures":[],"status":"PASS"}
+
+=== full regression engine_7.log ===
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+GAME066_meta res_ok=true muzzle_ok=true phase=0.27272727272727
+{"checks":492,"failures":[],"status":"PASS"}
+
+=== full regression engine_8.log ===
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+{"checks":2458,"failures":[],"status":"PASS"}
+
+=== full regression engine_9.log ===
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+
+=== production main headless logic (verbose) ===
+WorkerThreadPool: 9 threads, 2 max low-priority.
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+TextServer: Added interface "Dummy"
+TextServer: Added interface "ICU / HarfBuzz / Graphite (Built-in)"
+SDL: Init OK!
+Using "default" pen tablet driver...
+
+TextServer: Primary interface set to: "ICU / HarfBuzz / Graphite (Built-in)".
+CORE API HASH: 2004498165
+EDITOR API HASH: 1696660745
+Loading resource: res://tools/inspect_viya_game067.gd remapped: res://tools/inspect_viya_game067.gd
+Completed load for: 'res://tools/inspect_viya_game067.gd' remapped 'res://tools/inspect_viya_game067.gd' at thread -1
+SceneTreeFTI: traversal method DEFAULT
+Loaded system CA certificates
+Loading resource: res://scenes/main.tscn remapped: res://scenes/main.tscn
+Loading resource: res://scripts/ui/mobile_main.gd remapped: res://scripts/ui/mobile_main.gd
+Completed load for: 'res://scripts/ui/mobile_main.gd' remapped 'res://scripts/ui/mobile_main.gd' at thread -1
+Completed load for: 'res://scenes/main.tscn' remapped 'res://scenes/main.tscn' at thread -1
+Loading resource: res://assets/characters/pilot_32/game067_se_run_fire/viya_game067_frames.tres remapped: res://assets/characters/pilot_32/game067_se_run_fire/viya_game067_frames.tres
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_idle_se.png remapped: res://assets/characters/pilot_32/render_cache/viya_idle_se.png
+Loading resource: res://.godot/imported/viya_idle_se.png-3a45d251c514531749a50063c859059f.ctex remapped: res://.godot/imported/viya_idle_se.png-3a45d251c514531749a50063c859059f.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_idle_se.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_idle_se.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_attack_se_00.png remapped: res://assets/characters/pilot_32/render_cache/viya_attack_se_00.png
+Loading resource: res://.godot/imported/viya_attack_se_00.png-eddc19884c10f11a4efc0b2cc118360a.ctex remapped: res://.godot/imported/viya_attack_se_00.png-eddc19884c10f11a4efc0b2cc118360a.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_attack_se_00.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_attack_se_00.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_attack_se_01.png remapped: res://assets/characters/pilot_32/render_cache/viya_attack_se_01.png
+Loading resource: res://.godot/imported/viya_attack_se_01.png-be6dcfebdd4933a180aa2129a9c723be.ctex remapped: res://.godot/imported/viya_attack_se_01.png-be6dcfebdd4933a180aa2129a9c723be.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_attack_se_01.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_attack_se_01.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_attack_se_02.png remapped: res://assets/characters/pilot_32/render_cache/viya_attack_se_02.png
+Loading resource: res://.godot/imported/viya_attack_se_02.png-a2aa0f79a8fe93ec74ecf784a8ce25ed.ctex remapped: res://.godot/imported/viya_attack_se_02.png-a2aa0f79a8fe93ec74ecf784a8ce25ed.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_attack_se_02.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_attack_se_02.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_attack_se_03.png remapped: res://assets/characters/pilot_32/render_cache/viya_attack_se_03.png
+Loading resource: res://.godot/imported/viya_attack_se_03.png-51444aa44a183494235eff8fe6496ea1.ctex remapped: res://.godot/imported/viya_attack_se_03.png-51444aa44a183494235eff8fe6496ea1.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_attack_se_03.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_attack_se_03.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_attack_se_04.png remapped: res://assets/characters/pilot_32/render_cache/viya_attack_se_04.png
+Loading resource: res://.godot/imported/viya_attack_se_04.png-e9f7513632b5cb1391d72eeada244a74.ctex remapped: res://.godot/imported/viya_attack_se_04.png-e9f7513632b5cb1391d72eeada244a74.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_attack_se_04.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_attack_se_04.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_attack_se_05.png remapped: res://assets/characters/pilot_32/render_cache/viya_attack_se_05.png
+Loading resource: res://.godot/imported/viya_attack_se_05.png-61d7483f3b0e03dca9e65f8ec41f0071.ctex remapped: res://.godot/imported/viya_attack_se_05.png-61d7483f3b0e03dca9e65f8ec41f0071.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_attack_se_05.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_attack_se_05.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_attack_se_06.png remapped: res://assets/characters/pilot_32/render_cache/viya_attack_se_06.png
+Loading resource: res://.godot/imported/viya_attack_se_06.png-de116afdd8d05e93648a2f9ffbd9796f.ctex remapped: res://.godot/imported/viya_attack_se_06.png-de116afdd8d05e93648a2f9ffbd9796f.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_attack_se_06.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_attack_se_06.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_attack_se_07.png remapped: res://assets/characters/pilot_32/render_cache/viya_attack_se_07.png
+Loading resource: res://.godot/imported/viya_attack_se_07.png-4e6a7cc1b1ca9e1e5eb3dc5f37680e95.ctex remapped: res://.godot/imported/viya_attack_se_07.png-4e6a7cc1b1ca9e1e5eb3dc5f37680e95.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_attack_se_07.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_attack_se_07.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_hurt_se_00.png remapped: res://assets/characters/pilot_32/render_cache/viya_hurt_se_00.png
+Loading resource: res://.godot/imported/viya_hurt_se_00.png-690b3fa8a1037191d9c7fdfd2e74bb2a.ctex remapped: res://.godot/imported/viya_hurt_se_00.png-690b3fa8a1037191d9c7fdfd2e74bb2a.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_hurt_se_00.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_hurt_se_00.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_hurt_se_01.png remapped: res://assets/characters/pilot_32/render_cache/viya_hurt_se_01.png
+Loading resource: res://.godot/imported/viya_hurt_se_01.png-db6e9dac3e66593c5bf42f6c86d1200d.ctex remapped: res://.godot/imported/viya_hurt_se_01.png-db6e9dac3e66593c5bf42f6c86d1200d.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_hurt_se_01.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_hurt_se_01.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_hurt_se_02.png remapped: res://assets/characters/pilot_32/render_cache/viya_hurt_se_02.png
+Loading resource: res://.godot/imported/viya_hurt_se_02.png-b0ba93aa1dde277d6fb8f79be6a9c19f.ctex remapped: res://.godot/imported/viya_hurt_se_02.png-b0ba93aa1dde277d6fb8f79be6a9c19f.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_hurt_se_02.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_hurt_se_02.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_hurt_se_03.png remapped: res://assets/characters/pilot_32/render_cache/viya_hurt_se_03.png
+Loading resource: res://.godot/imported/viya_hurt_se_03.png-b68db9b0289b94432c2acafdc24123f5.ctex remapped: res://.godot/imported/viya_hurt_se_03.png-b68db9b0289b94432c2acafdc24123f5.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_hurt_se_03.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_hurt_se_03.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_hurt_se_04.png remapped: res://assets/characters/pilot_32/render_cache/viya_hurt_se_04.png
+Loading resource: res://.godot/imported/viya_hurt_se_04.png-20b83ab6075a1c9b18b588d30ef8f3b0.ctex remapped: res://.godot/imported/viya_hurt_se_04.png-20b83ab6075a1c9b18b588d30ef8f3b0.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_hurt_se_04.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_hurt_se_04.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_hurt_se_05.png remapped: res://assets/characters/pilot_32/render_cache/viya_hurt_se_05.png
+Loading resource: res://.godot/imported/viya_hurt_se_05.png-2200a9fe5735e9ab41f8ae244c743f8f.ctex remapped: res://.godot/imported/viya_hurt_se_05.png-2200a9fe5735e9ab41f8ae244c743f8f.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_hurt_se_05.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_hurt_se_05.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_idle_e.png remapped: res://assets/characters/pilot_32/render_cache/viya_idle_e.png
+Loading resource: res://.godot/imported/viya_idle_e.png-e3213f69430dc74eaff9c49a81066eb2.ctex remapped: res://.godot/imported/viya_idle_e.png-e3213f69430dc74eaff9c49a81066eb2.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_idle_e.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_idle_e.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_attack_e_00.png remapped: res://assets/characters/pilot_32/render_cache/viya_attack_e_00.png
+Loading resource: res://.godot/imported/viya_attack_e_00.png-d9fe4d1f105628e17d59f32c4abb2d13.ctex remapped: res://.godot/imported/viya_attack_e_00.png-d9fe4d1f105628e17d59f32c4abb2d13.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_attack_e_00.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_attack_e_00.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_attack_e_01.png remapped: res://assets/characters/pilot_32/render_cache/viya_attack_e_01.png
+Loading resource: res://.godot/imported/viya_attack_e_01.png-ef2fbcc550734ec72a742f5f3ac8772d.ctex remapped: res://.godot/imported/viya_attack_e_01.png-ef2fbcc550734ec72a742f5f3ac8772d.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_attack_e_01.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_attack_e_01.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_attack_e_02.png remapped: res://assets/characters/pilot_32/render_cache/viya_attack_e_02.png
+Loading resource: res://.godot/imported/viya_attack_e_02.png-704ee01531ebcc01368bbfe06abd5349.ctex remapped: res://.godot/imported/viya_attack_e_02.png-704ee01531ebcc01368bbfe06abd5349.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_attack_e_02.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_attack_e_02.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_attack_e_03.png remapped: res://assets/characters/pilot_32/render_cache/viya_attack_e_03.png
+Loading resource: res://.godot/imported/viya_attack_e_03.png-9549853d466fd59aa312518dd3530fc2.ctex remapped: res://.godot/imported/viya_attack_e_03.png-9549853d466fd59aa312518dd3530fc2.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_attack_e_03.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_attack_e_03.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_attack_e_04.png remapped: res://assets/characters/pilot_32/render_cache/viya_attack_e_04.png
+Loading resource: res://.godot/imported/viya_attack_e_04.png-74379ea4a6efa6883553c66828585518.ctex remapped: res://.godot/imported/viya_attack_e_04.png-74379ea4a6efa6883553c66828585518.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_attack_e_04.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_attack_e_04.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_attack_e_05.png remapped: res://assets/characters/pilot_32/render_cache/viya_attack_e_05.png
+Loading resource: res://.godot/imported/viya_attack_e_05.png-62a13257a0684daa406830538b50b5c0.ctex remapped: res://.godot/imported/viya_attack_e_05.png-62a13257a0684daa406830538b50b5c0.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_attack_e_05.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_attack_e_05.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_attack_e_06.png remapped: res://assets/characters/pilot_32/render_cache/viya_attack_e_06.png
+Loading resource: res://.godot/imported/viya_attack_e_06.png-a862dd0462fd3df3f288c2067e57866b.ctex remapped: res://.godot/imported/viya_attack_e_06.png-a862dd0462fd3df3f288c2067e57866b.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_attack_e_06.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_attack_e_06.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_attack_e_07.png remapped: res://assets/characters/pilot_32/render_cache/viya_attack_e_07.png
+Loading resource: res://.godot/imported/viya_attack_e_07.png-53849f0204efb73b6437c3b13af2a5d1.ctex remapped: res://.godot/imported/viya_attack_e_07.png-53849f0204efb73b6437c3b13af2a5d1.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_attack_e_07.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_attack_e_07.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_hurt_e_00.png remapped: res://assets/characters/pilot_32/render_cache/viya_hurt_e_00.png
+Loading resource: res://.godot/imported/viya_hurt_e_00.png-58971cc058882da0b5108b2a8fd9e90a.ctex remapped: res://.godot/imported/viya_hurt_e_00.png-58971cc058882da0b5108b2a8fd9e90a.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_hurt_e_00.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_hurt_e_00.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_hurt_e_01.png remapped: res://assets/characters/pilot_32/render_cache/viya_hurt_e_01.png
+Loading resource: res://.godot/imported/viya_hurt_e_01.png-93eef24f025ad415913be09d6f5b1d7c.ctex remapped: res://.godot/imported/viya_hurt_e_01.png-93eef24f025ad415913be09d6f5b1d7c.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_hurt_e_01.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_hurt_e_01.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_hurt_e_02.png remapped: res://assets/characters/pilot_32/render_cache/viya_hurt_e_02.png
+Loading resource: res://.godot/imported/viya_hurt_e_02.png-ef8f9b344a69aee082a72b823e7f3820.ctex remapped: res://.godot/imported/viya_hurt_e_02.png-ef8f9b344a69aee082a72b823e7f3820.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_hurt_e_02.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_hurt_e_02.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_hurt_e_03.png remapped: res://assets/characters/pilot_32/render_cache/viya_hurt_e_03.png
+Loading resource: res://.godot/imported/viya_hurt_e_03.png-77285b1087c5cb58c38ec69535dde694.ctex remapped: res://.godot/imported/viya_hurt_e_03.png-77285b1087c5cb58c38ec69535dde694.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_hurt_e_03.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_hurt_e_03.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_hurt_e_04.png remapped: res://assets/characters/pilot_32/render_cache/viya_hurt_e_04.png
+Loading resource: res://.godot/imported/viya_hurt_e_04.png-08b6b2be52b36586f51fc2b04917e24b.ctex remapped: res://.godot/imported/viya_hurt_e_04.png-08b6b2be52b36586f51fc2b04917e24b.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_hurt_e_04.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_hurt_e_04.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_hurt_e_05.png remapped: res://assets/characters/pilot_32/render_cache/viya_hurt_e_05.png
+Loading resource: res://.godot/imported/viya_hurt_e_05.png-968526eddf462de1295ab1119b921345.ctex remapped: res://.godot/imported/viya_hurt_e_05.png-968526eddf462de1295ab1119b921345.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_hurt_e_05.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_hurt_e_05.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_idle_s.png remapped: res://assets/characters/pilot_32/render_cache/viya_idle_s.png
+Loading resource: res://.godot/imported/viya_idle_s.png-2fda1eb674bd7d121adf43219edb8bb0.ctex remapped: res://.godot/imported/viya_idle_s.png-2fda1eb674bd7d121adf43219edb8bb0.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_idle_s.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_idle_s.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_run_s_00.png remapped: res://assets/characters/pilot_32/render_cache/viya_run_s_00.png
+Loading resource: res://.godot/imported/viya_run_s_00.png-e19dd2b9c9042dcf35215cb03e4d4840.ctex remapped: res://.godot/imported/viya_run_s_00.png-e19dd2b9c9042dcf35215cb03e4d4840.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_run_s_00.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_run_s_00.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_run_s_01.png remapped: res://assets/characters/pilot_32/render_cache/viya_run_s_01.png
+Loading resource: res://.godot/imported/viya_run_s_01.png-d5181ef1d517320f27257edc1dbbfa28.ctex remapped: res://.godot/imported/viya_run_s_01.png-d5181ef1d517320f27257edc1dbbfa28.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_run_s_01.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_run_s_01.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_run_s_02.png remapped: res://assets/characters/pilot_32/render_cache/viya_run_s_02.png
+Loading resource: res://.godot/imported/viya_run_s_02.png-16cce9696428603f9c31c4c924bcc037.ctex remapped: res://.godot/imported/viya_run_s_02.png-16cce9696428603f9c31c4c924bcc037.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_run_s_02.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_run_s_02.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_run_s_03.png remapped: res://assets/characters/pilot_32/render_cache/viya_run_s_03.png
+Loading resource: res://.godot/imported/viya_run_s_03.png-0d990dc7969265face0d4187f58bb5bb.ctex remapped: res://.godot/imported/viya_run_s_03.png-0d990dc7969265face0d4187f58bb5bb.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_run_s_03.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_run_s_03.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_run_s_04.png remapped: res://assets/characters/pilot_32/render_cache/viya_run_s_04.png
+Loading resource: res://.godot/imported/viya_run_s_04.png-d45bfef0b0362915bfd78767afc695d7.ctex remapped: res://.godot/imported/viya_run_s_04.png-d45bfef0b0362915bfd78767afc695d7.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_run_s_04.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_run_s_04.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_run_s_05.png remapped: res://assets/characters/pilot_32/render_cache/viya_run_s_05.png
+Loading resource: res://.godot/imported/viya_run_s_05.png-f435f381ca805ae515cef0f3733be12b.ctex remapped: res://.godot/imported/viya_run_s_05.png-f435f381ca805ae515cef0f3733be12b.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_run_s_05.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_run_s_05.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_run_s_06.png remapped: res://assets/characters/pilot_32/render_cache/viya_run_s_06.png
+Loading resource: res://.godot/imported/viya_run_s_06.png-f247a427f7f5ddd323fab8a8105d9dc3.ctex remapped: res://.godot/imported/viya_run_s_06.png-f247a427f7f5ddd323fab8a8105d9dc3.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_run_s_06.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_run_s_06.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_run_s_07.png remapped: res://assets/characters/pilot_32/render_cache/viya_run_s_07.png
+Loading resource: res://.godot/imported/viya_run_s_07.png-10780d178a9e90418a1c750e63c06df0.ctex remapped: res://.godot/imported/viya_run_s_07.png-10780d178a9e90418a1c750e63c06df0.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_run_s_07.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_run_s_07.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_run_s_08.png remapped: res://assets/characters/pilot_32/render_cache/viya_run_s_08.png
+Loading resource: res://.godot/imported/viya_run_s_08.png-eebba23ec802b4477d842b12daecf4d9.ctex remapped: res://.godot/imported/viya_run_s_08.png-eebba23ec802b4477d842b12daecf4d9.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_run_s_08.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_run_s_08.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_run_s_09.png remapped: res://assets/characters/pilot_32/render_cache/viya_run_s_09.png
+Loading resource: res://.godot/imported/viya_run_s_09.png-dfcd11d0c1a03cb269a1a43cb2df7b9f.ctex remapped: res://.godot/imported/viya_run_s_09.png-dfcd11d0c1a03cb269a1a43cb2df7b9f.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_run_s_09.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_run_s_09.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_run_s_10.png remapped: res://assets/characters/pilot_32/render_cache/viya_run_s_10.png
+Loading resource: res://.godot/imported/viya_run_s_10.png-41c3f746b86b3e85d41bccb0a8ab4ec3.ctex remapped: res://.godot/imported/viya_run_s_10.png-41c3f746b86b3e85d41bccb0a8ab4ec3.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_run_s_10.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_run_s_10.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_attack_s_00.png remapped: res://assets/characters/pilot_32/render_cache/viya_attack_s_00.png
+Loading resource: res://.godot/imported/viya_attack_s_00.png-214eac3de29eb80c3b2c7a7e32979c28.ctex remapped: res://.godot/imported/viya_attack_s_00.png-214eac3de29eb80c3b2c7a7e32979c28.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_attack_s_00.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_attack_s_00.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_attack_s_01.png remapped: res://assets/characters/pilot_32/render_cache/viya_attack_s_01.png
+Loading resource: res://.godot/imported/viya_attack_s_01.png-62a1f28d42d199d96e26324c0d8bff51.ctex remapped: res://.godot/imported/viya_attack_s_01.png-62a1f28d42d199d96e26324c0d8bff51.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_attack_s_01.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_attack_s_01.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_attack_s_02.png remapped: res://assets/characters/pilot_32/render_cache/viya_attack_s_02.png
+Loading resource: res://.godot/imported/viya_attack_s_02.png-24094b1551f818e2c54348081750744f.ctex remapped: res://.godot/imported/viya_attack_s_02.png-24094b1551f818e2c54348081750744f.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_attack_s_02.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_attack_s_02.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_attack_s_03.png remapped: res://assets/characters/pilot_32/render_cache/viya_attack_s_03.png
+Loading resource: res://.godot/imported/viya_attack_s_03.png-4f44f5be53a6084668c5650c92b089f0.ctex remapped: res://.godot/imported/viya_attack_s_03.png-4f44f5be53a6084668c5650c92b089f0.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_attack_s_03.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_attack_s_03.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_attack_s_04.png remapped: res://assets/characters/pilot_32/render_cache/viya_attack_s_04.png
+Loading resource: res://.godot/imported/viya_attack_s_04.png-e07cb54f76508400976372a5b1247ad0.ctex remapped: res://.godot/imported/viya_attack_s_04.png-e07cb54f76508400976372a5b1247ad0.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_attack_s_04.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_attack_s_04.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_attack_s_05.png remapped: res://assets/characters/pilot_32/render_cache/viya_attack_s_05.png
+Loading resource: res://.godot/imported/viya_attack_s_05.png-5e306e2b7c17cc3697308a6cb04a6e02.ctex remapped: res://.godot/imported/viya_attack_s_05.png-5e306e2b7c17cc3697308a6cb04a6e02.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_attack_s_05.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_attack_s_05.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_attack_s_06.png remapped: res://assets/characters/pilot_32/render_cache/viya_attack_s_06.png
+Loading resource: res://.godot/imported/viya_attack_s_06.png-4ef9fc4b13797596ec106852e514a615.ctex remapped: res://.godot/imported/viya_attack_s_06.png-4ef9fc4b13797596ec106852e514a615.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_attack_s_06.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_attack_s_06.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_attack_s_07.png remapped: res://assets/characters/pilot_32/render_cache/viya_attack_s_07.png
+Loading resource: res://.godot/imported/viya_attack_s_07.png-4b8276bb6dd54607bd688cc3db9c5171.ctex remapped: res://.godot/imported/viya_attack_s_07.png-4b8276bb6dd54607bd688cc3db9c5171.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_attack_s_07.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_attack_s_07.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_hurt_s_00.png remapped: res://assets/characters/pilot_32/render_cache/viya_hurt_s_00.png
+Loading resource: res://.godot/imported/viya_hurt_s_00.png-163f6149455b1ec1e451a5732246e7a3.ctex remapped: res://.godot/imported/viya_hurt_s_00.png-163f6149455b1ec1e451a5732246e7a3.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_hurt_s_00.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_hurt_s_00.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_hurt_s_01.png remapped: res://assets/characters/pilot_32/render_cache/viya_hurt_s_01.png
+Loading resource: res://.godot/imported/viya_hurt_s_01.png-c792a11750d9850e433f74933791eee5.ctex remapped: res://.godot/imported/viya_hurt_s_01.png-c792a11750d9850e433f74933791eee5.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_hurt_s_01.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_hurt_s_01.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_hurt_s_02.png remapped: res://assets/characters/pilot_32/render_cache/viya_hurt_s_02.png
+Loading resource: res://.godot/imported/viya_hurt_s_02.png-a12448c64446b77ce0e8f183e359b378.ctex remapped: res://.godot/imported/viya_hurt_s_02.png-a12448c64446b77ce0e8f183e359b378.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_hurt_s_02.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_hurt_s_02.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_hurt_s_03.png remapped: res://assets/characters/pilot_32/render_cache/viya_hurt_s_03.png
+Loading resource: res://.godot/imported/viya_hurt_s_03.png-be60b0ea7348322f7ca5f578dbcc591c.ctex remapped: res://.godot/imported/viya_hurt_s_03.png-be60b0ea7348322f7ca5f578dbcc591c.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_hurt_s_03.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_hurt_s_03.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_hurt_s_04.png remapped: res://assets/characters/pilot_32/render_cache/viya_hurt_s_04.png
+Loading resource: res://.godot/imported/viya_hurt_s_04.png-e00bcb9b7b42a4d91d2ef5e0c0e50dd6.ctex remapped: res://.godot/imported/viya_hurt_s_04.png-e00bcb9b7b42a4d91d2ef5e0c0e50dd6.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_hurt_s_04.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_hurt_s_04.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_hurt_s_05.png remapped: res://assets/characters/pilot_32/render_cache/viya_hurt_s_05.png
+Loading resource: res://.godot/imported/viya_hurt_s_05.png-6732898afe2101641e6dcbab690eb88b.ctex remapped: res://.godot/imported/viya_hurt_s_05.png-6732898afe2101641e6dcbab690eb88b.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_hurt_s_05.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_hurt_s_05.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_idle_sw.png remapped: res://assets/characters/pilot_32/render_cache/viya_idle_sw.png
+Loading resource: res://.godot/imported/viya_idle_sw.png-67e84c99b964f987315562ba14c10b82.ctex remapped: res://.godot/imported/viya_idle_sw.png-67e84c99b964f987315562ba14c10b82.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_idle_sw.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_idle_sw.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_run_sw_00.png remapped: res://assets/characters/pilot_32/render_cache/viya_run_sw_00.png
+Loading resource: res://.godot/imported/viya_run_sw_00.png-70df73f493d1952d940751677e8ac45a.ctex remapped: res://.godot/imported/viya_run_sw_00.png-70df73f493d1952d940751677e8ac45a.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_run_sw_00.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_run_sw_00.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_run_sw_01.png remapped: res://assets/characters/pilot_32/render_cache/viya_run_sw_01.png
+Loading resource: res://.godot/imported/viya_run_sw_01.png-18421e7a397adec66afae61cfd4c693d.ctex remapped: res://.godot/imported/viya_run_sw_01.png-18421e7a397adec66afae61cfd4c693d.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_run_sw_01.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_run_sw_01.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_run_sw_02.png remapped: res://assets/characters/pilot_32/render_cache/viya_run_sw_02.png
+Loading resource: res://.godot/imported/viya_run_sw_02.png-32562f6eb1f0b1995bf77795c0b0c6df.ctex remapped: res://.godot/imported/viya_run_sw_02.png-32562f6eb1f0b1995bf77795c0b0c6df.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_run_sw_02.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_run_sw_02.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_run_sw_03.png remapped: res://assets/characters/pilot_32/render_cache/viya_run_sw_03.png
+Loading resource: res://.godot/imported/viya_run_sw_03.png-95c86097ace6d4d4c51dc334d941a897.ctex remapped: res://.godot/imported/viya_run_sw_03.png-95c86097ace6d4d4c51dc334d941a897.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_run_sw_03.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_run_sw_03.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_run_sw_04.png remapped: res://assets/characters/pilot_32/render_cache/viya_run_sw_04.png
+Loading resource: res://.godot/imported/viya_run_sw_04.png-ff34548f77179c20f55572c654d388c6.ctex remapped: res://.godot/imported/viya_run_sw_04.png-ff34548f77179c20f55572c654d388c6.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_run_sw_04.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_run_sw_04.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_run_sw_05.png remapped: res://assets/characters/pilot_32/render_cache/viya_run_sw_05.png
+Loading resource: res://.godot/imported/viya_run_sw_05.png-a2870d86344a75886685f4ac991ac8db.ctex remapped: res://.godot/imported/viya_run_sw_05.png-a2870d86344a75886685f4ac991ac8db.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_run_sw_05.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_run_sw_05.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_run_sw_06.png remapped: res://assets/characters/pilot_32/render_cache/viya_run_sw_06.png
+Loading resource: res://.godot/imported/viya_run_sw_06.png-d3f34ef7256746318785a736e9d736fd.ctex remapped: res://.godot/imported/viya_run_sw_06.png-d3f34ef7256746318785a736e9d736fd.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_run_sw_06.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_run_sw_06.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_run_sw_07.png remapped: res://assets/characters/pilot_32/render_cache/viya_run_sw_07.png
+Loading resource: res://.godot/imported/viya_run_sw_07.png-ca286bc23fdd44959a399a407aa3eaf0.ctex remapped: res://.godot/imported/viya_run_sw_07.png-ca286bc23fdd44959a399a407aa3eaf0.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_run_sw_07.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_run_sw_07.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_run_sw_08.png remapped: res://assets/characters/pilot_32/render_cache/viya_run_sw_08.png
+Loading resource: res://.godot/imported/viya_run_sw_08.png-869f9eade9b103f7bb07d712ac1fb8ad.ctex remapped: res://.godot/imported/viya_run_sw_08.png-869f9eade9b103f7bb07d712ac1fb8ad.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_run_sw_08.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_run_sw_08.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_run_sw_09.png remapped: res://assets/characters/pilot_32/render_cache/viya_run_sw_09.png
+Loading resource: res://.godot/imported/viya_run_sw_09.png-6e8b7303516cb3199a78993e219b0c31.ctex remapped: res://.godot/imported/viya_run_sw_09.png-6e8b7303516cb3199a78993e219b0c31.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_run_sw_09.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_run_sw_09.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_run_sw_10.png remapped: res://assets/characters/pilot_32/render_cache/viya_run_sw_10.png
+Loading resource: res://.godot/imported/viya_run_sw_10.png-2e97f43e0f3192228e05a416bdb36b51.ctex remapped: res://.godot/imported/viya_run_sw_10.png-2e97f43e0f3192228e05a416bdb36b51.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_run_sw_10.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_run_sw_10.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_attack_sw_00.png remapped: res://assets/characters/pilot_32/render_cache/viya_attack_sw_00.png
+Loading resource: res://.godot/imported/viya_attack_sw_00.png-debff7d2298539759781a4436e93c5a3.ctex remapped: res://.godot/imported/viya_attack_sw_00.png-debff7d2298539759781a4436e93c5a3.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_attack_sw_00.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_attack_sw_00.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_attack_sw_01.png remapped: res://assets/characters/pilot_32/render_cache/viya_attack_sw_01.png
+Loading resource: res://.godot/imported/viya_attack_sw_01.png-8ac3d2c5ac3b72412e24fbd416b9c0a0.ctex remapped: res://.godot/imported/viya_attack_sw_01.png-8ac3d2c5ac3b72412e24fbd416b9c0a0.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_attack_sw_01.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_attack_sw_01.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_attack_sw_02.png remapped: res://assets/characters/pilot_32/render_cache/viya_attack_sw_02.png
+Loading resource: res://.godot/imported/viya_attack_sw_02.png-eefd87a1475849fefabe9158e4110cba.ctex remapped: res://.godot/imported/viya_attack_sw_02.png-eefd87a1475849fefabe9158e4110cba.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_attack_sw_02.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_attack_sw_02.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_attack_sw_03.png remapped: res://assets/characters/pilot_32/render_cache/viya_attack_sw_03.png
+Loading resource: res://.godot/imported/viya_attack_sw_03.png-06140cc6748a1d34ee1151d6f0ac9a0d.ctex remapped: res://.godot/imported/viya_attack_sw_03.png-06140cc6748a1d34ee1151d6f0ac9a0d.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_attack_sw_03.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_attack_sw_03.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_attack_sw_04.png remapped: res://assets/characters/pilot_32/render_cache/viya_attack_sw_04.png
+Loading resource: res://.godot/imported/viya_attack_sw_04.png-34201439343c97f29fc6e55cbb5339f4.ctex remapped: res://.godot/imported/viya_attack_sw_04.png-34201439343c97f29fc6e55cbb5339f4.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_attack_sw_04.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_attack_sw_04.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_attack_sw_05.png remapped: res://assets/characters/pilot_32/render_cache/viya_attack_sw_05.png
+Loading resource: res://.godot/imported/viya_attack_sw_05.png-e38fb0ae7acd6f84b9b9dacbdc4baf9c.ctex remapped: res://.godot/imported/viya_attack_sw_05.png-e38fb0ae7acd6f84b9b9dacbdc4baf9c.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_attack_sw_05.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_attack_sw_05.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_attack_sw_06.png remapped: res://assets/characters/pilot_32/render_cache/viya_attack_sw_06.png
+Loading resource: res://.godot/imported/viya_attack_sw_06.png-adeb5b7656e963e85a0c6c9853a14a72.ctex remapped: res://.godot/imported/viya_attack_sw_06.png-adeb5b7656e963e85a0c6c9853a14a72.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_attack_sw_06.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_attack_sw_06.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_attack_sw_07.png remapped: res://assets/characters/pilot_32/render_cache/viya_attack_sw_07.png
+Loading resource: res://.godot/imported/viya_attack_sw_07.png-a400d3a94950ce3c358eb5932378d0e7.ctex remapped: res://.godot/imported/viya_attack_sw_07.png-a400d3a94950ce3c358eb5932378d0e7.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_attack_sw_07.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_attack_sw_07.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_hurt_sw_00.png remapped: res://assets/characters/pilot_32/render_cache/viya_hurt_sw_00.png
+Loading resource: res://.godot/imported/viya_hurt_sw_00.png-bd6cdf901bd46efe8cf373cd2501116d.ctex remapped: res://.godot/imported/viya_hurt_sw_00.png-bd6cdf901bd46efe8cf373cd2501116d.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_hurt_sw_00.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_hurt_sw_00.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_hurt_sw_01.png remapped: res://assets/characters/pilot_32/render_cache/viya_hurt_sw_01.png
+Loading resource: res://.godot/imported/viya_hurt_sw_01.png-9c197b428d8a2040f7b72290987d53a5.ctex remapped: res://.godot/imported/viya_hurt_sw_01.png-9c197b428d8a2040f7b72290987d53a5.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_hurt_sw_01.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_hurt_sw_01.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_hurt_sw_02.png remapped: res://assets/characters/pilot_32/render_cache/viya_hurt_sw_02.png
+Loading resource: res://.godot/imported/viya_hurt_sw_02.png-eeb9c78f9f1e7dfadc3bdbaa98867aa8.ctex remapped: res://.godot/imported/viya_hurt_sw_02.png-eeb9c78f9f1e7dfadc3bdbaa98867aa8.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_hurt_sw_02.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_hurt_sw_02.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_hurt_sw_03.png remapped: res://assets/characters/pilot_32/render_cache/viya_hurt_sw_03.png
+Loading resource: res://.godot/imported/viya_hurt_sw_03.png-da9e4acb75fab6b2f1e1542e261939de.ctex remapped: res://.godot/imported/viya_hurt_sw_03.png-da9e4acb75fab6b2f1e1542e261939de.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_hurt_sw_03.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_hurt_sw_03.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_hurt_sw_04.png remapped: res://assets/characters/pilot_32/render_cache/viya_hurt_sw_04.png
+Loading resource: res://.godot/imported/viya_hurt_sw_04.png-8de333cf0c7236e846568cb135ca855a.ctex remapped: res://.godot/imported/viya_hurt_sw_04.png-8de333cf0c7236e846568cb135ca855a.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_hurt_sw_04.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_hurt_sw_04.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_hurt_sw_05.png remapped: res://assets/characters/pilot_32/render_cache/viya_hurt_sw_05.png
+Loading resource: res://.godot/imported/viya_hurt_sw_05.png-f0846f00511b089e1da0c31554d79e37.ctex remapped: res://.godot/imported/viya_hurt_sw_05.png-f0846f00511b089e1da0c31554d79e37.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_hurt_sw_05.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_hurt_sw_05.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_idle_w.png remapped: res://assets/characters/pilot_32/render_cache/viya_idle_w.png
+Loading resource: res://.godot/imported/viya_idle_w.png-37553b015af5a09bff52948f19576ac4.ctex remapped: res://.godot/imported/viya_idle_w.png-37553b015af5a09bff52948f19576ac4.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_idle_w.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_idle_w.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_run_w_00.png remapped: res://assets/characters/pilot_32/render_cache/viya_run_w_00.png
+Loading resource: res://.godot/imported/viya_run_w_00.png-3bc6939c34046aa6ebe3a46f0f9f8d67.ctex remapped: res://.godot/imported/viya_run_w_00.png-3bc6939c34046aa6ebe3a46f0f9f8d67.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_run_w_00.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_run_w_00.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_run_w_01.png remapped: res://assets/characters/pilot_32/render_cache/viya_run_w_01.png
+Loading resource: res://.godot/imported/viya_run_w_01.png-87d118e699ddd615c90c5d49f8eb301e.ctex remapped: res://.godot/imported/viya_run_w_01.png-87d118e699ddd615c90c5d49f8eb301e.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_run_w_01.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_run_w_01.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_run_w_02.png remapped: res://assets/characters/pilot_32/render_cache/viya_run_w_02.png
+Loading resource: res://.godot/imported/viya_run_w_02.png-a94eb51950793101af71156b904ba1ee.ctex remapped: res://.godot/imported/viya_run_w_02.png-a94eb51950793101af71156b904ba1ee.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_run_w_02.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_run_w_02.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_run_w_03.png remapped: res://assets/characters/pilot_32/render_cache/viya_run_w_03.png
+Loading resource: res://.godot/imported/viya_run_w_03.png-e18865afc8d5a4ecbd0002723e0d1b60.ctex remapped: res://.godot/imported/viya_run_w_03.png-e18865afc8d5a4ecbd0002723e0d1b60.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_run_w_03.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_run_w_03.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_run_w_04.png remapped: res://assets/characters/pilot_32/render_cache/viya_run_w_04.png
+Loading resource: res://.godot/imported/viya_run_w_04.png-6c4f67d71bf25353b482ffb5fedf3189.ctex remapped: res://.godot/imported/viya_run_w_04.png-6c4f67d71bf25353b482ffb5fedf3189.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_run_w_04.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_run_w_04.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_run_w_05.png remapped: res://assets/characters/pilot_32/render_cache/viya_run_w_05.png
+Loading resource: res://.godot/imported/viya_run_w_05.png-5c891096a55ec465f81c04d5294b67aa.ctex remapped: res://.godot/imported/viya_run_w_05.png-5c891096a55ec465f81c04d5294b67aa.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_run_w_05.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_run_w_05.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_run_w_06.png remapped: res://assets/characters/pilot_32/render_cache/viya_run_w_06.png
+Loading resource: res://.godot/imported/viya_run_w_06.png-0ade83ca3ae4be452fe351e2ab295148.ctex remapped: res://.godot/imported/viya_run_w_06.png-0ade83ca3ae4be452fe351e2ab295148.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_run_w_06.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_run_w_06.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_run_w_07.png remapped: res://assets/characters/pilot_32/render_cache/viya_run_w_07.png
+Loading resource: res://.godot/imported/viya_run_w_07.png-44c5854b8955be4e9ae938c70798a68c.ctex remapped: res://.godot/imported/viya_run_w_07.png-44c5854b8955be4e9ae938c70798a68c.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_run_w_07.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_run_w_07.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_run_w_08.png remapped: res://assets/characters/pilot_32/render_cache/viya_run_w_08.png
+Loading resource: res://.godot/imported/viya_run_w_08.png-c8314da2e55022003f661966d884cb05.ctex remapped: res://.godot/imported/viya_run_w_08.png-c8314da2e55022003f661966d884cb05.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_run_w_08.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_run_w_08.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_run_w_09.png remapped: res://assets/characters/pilot_32/render_cache/viya_run_w_09.png
+Loading resource: res://.godot/imported/viya_run_w_09.png-7afa70b4dc0436bfd2a17a8c98b0e8e2.ctex remapped: res://.godot/imported/viya_run_w_09.png-7afa70b4dc0436bfd2a17a8c98b0e8e2.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_run_w_09.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_run_w_09.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_run_w_10.png remapped: res://assets/characters/pilot_32/render_cache/viya_run_w_10.png
+Loading resource: res://.godot/imported/viya_run_w_10.png-9f5b9f5317332b1c06b2cd00c82a4f95.ctex remapped: res://.godot/imported/viya_run_w_10.png-9f5b9f5317332b1c06b2cd00c82a4f95.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_run_w_10.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_run_w_10.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_attack_w_00.png remapped: res://assets/characters/pilot_32/render_cache/viya_attack_w_00.png
+Loading resource: res://.godot/imported/viya_attack_w_00.png-e10280dcc544c6a4072a0b2eb642fa0d.ctex remapped: res://.godot/imported/viya_attack_w_00.png-e10280dcc544c6a4072a0b2eb642fa0d.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_attack_w_00.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_attack_w_00.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_attack_w_01.png remapped: res://assets/characters/pilot_32/render_cache/viya_attack_w_01.png
+Loading resource: res://.godot/imported/viya_attack_w_01.png-934930281c6a594142f63d0a8bac2b4d.ctex remapped: res://.godot/imported/viya_attack_w_01.png-934930281c6a594142f63d0a8bac2b4d.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_attack_w_01.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_attack_w_01.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_attack_w_02.png remapped: res://assets/characters/pilot_32/render_cache/viya_attack_w_02.png
+Loading resource: res://.godot/imported/viya_attack_w_02.png-f1fc031ba0a15cbe56a30cb057f7b0fd.ctex remapped: res://.godot/imported/viya_attack_w_02.png-f1fc031ba0a15cbe56a30cb057f7b0fd.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_attack_w_02.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_attack_w_02.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_attack_w_03.png remapped: res://assets/characters/pilot_32/render_cache/viya_attack_w_03.png
+Loading resource: res://.godot/imported/viya_attack_w_03.png-122193ec144f6673ec169f3e307a2981.ctex remapped: res://.godot/imported/viya_attack_w_03.png-122193ec144f6673ec169f3e307a2981.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_attack_w_03.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_attack_w_03.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_attack_w_04.png remapped: res://assets/characters/pilot_32/render_cache/viya_attack_w_04.png
+Loading resource: res://.godot/imported/viya_attack_w_04.png-892b8c932cd9fb5bc92c28eb4be87825.ctex remapped: res://.godot/imported/viya_attack_w_04.png-892b8c932cd9fb5bc92c28eb4be87825.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_attack_w_04.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_attack_w_04.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_attack_w_05.png remapped: res://assets/characters/pilot_32/render_cache/viya_attack_w_05.png
+Loading resource: res://.godot/imported/viya_attack_w_05.png-df7eea548f347db88b9b9181d007e4e1.ctex remapped: res://.godot/imported/viya_attack_w_05.png-df7eea548f347db88b9b9181d007e4e1.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_attack_w_05.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_attack_w_05.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_attack_w_06.png remapped: res://assets/characters/pilot_32/render_cache/viya_attack_w_06.png
+Loading resource: res://.godot/imported/viya_attack_w_06.png-627fe3e6d35dbfc14749a25206c071ae.ctex remapped: res://.godot/imported/viya_attack_w_06.png-627fe3e6d35dbfc14749a25206c071ae.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_attack_w_06.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_attack_w_06.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_attack_w_07.png remapped: res://assets/characters/pilot_32/render_cache/viya_attack_w_07.png
+Loading resource: res://.godot/imported/viya_attack_w_07.png-00199ecf3f2527d56505652e56d6ec3d.ctex remapped: res://.godot/imported/viya_attack_w_07.png-00199ecf3f2527d56505652e56d6ec3d.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_attack_w_07.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_attack_w_07.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_hurt_w_00.png remapped: res://assets/characters/pilot_32/render_cache/viya_hurt_w_00.png
+Loading resource: res://.godot/imported/viya_hurt_w_00.png-26be0f3e3e523d76c7d677de5fd5c90d.ctex remapped: res://.godot/imported/viya_hurt_w_00.png-26be0f3e3e523d76c7d677de5fd5c90d.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_hurt_w_00.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_hurt_w_00.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_hurt_w_01.png remapped: res://assets/characters/pilot_32/render_cache/viya_hurt_w_01.png
+Loading resource: res://.godot/imported/viya_hurt_w_01.png-7d9dcab5890209d7c0e2a17d45d29e43.ctex remapped: res://.godot/imported/viya_hurt_w_01.png-7d9dcab5890209d7c0e2a17d45d29e43.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_hurt_w_01.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_hurt_w_01.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_hurt_w_02.png remapped: res://assets/characters/pilot_32/render_cache/viya_hurt_w_02.png
+Loading resource: res://.godot/imported/viya_hurt_w_02.png-e36148c65d851865a8af7c52e8a7f3d5.ctex remapped: res://.godot/imported/viya_hurt_w_02.png-e36148c65d851865a8af7c52e8a7f3d5.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_hurt_w_02.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_hurt_w_02.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_hurt_w_03.png remapped: res://assets/characters/pilot_32/render_cache/viya_hurt_w_03.png
+Loading resource: res://.godot/imported/viya_hurt_w_03.png-b86fb9cc68c57b10cde156a480871fe5.ctex remapped: res://.godot/imported/viya_hurt_w_03.png-b86fb9cc68c57b10cde156a480871fe5.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_hurt_w_03.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_hurt_w_03.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_hurt_w_04.png remapped: res://assets/characters/pilot_32/render_cache/viya_hurt_w_04.png
+Loading resource: res://.godot/imported/viya_hurt_w_04.png-43ea17ccaa46751a0887754f2db7c7d6.ctex remapped: res://.godot/imported/viya_hurt_w_04.png-43ea17ccaa46751a0887754f2db7c7d6.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_hurt_w_04.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_hurt_w_04.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_hurt_w_05.png remapped: res://assets/characters/pilot_32/render_cache/viya_hurt_w_05.png
+Loading resource: res://.godot/imported/viya_hurt_w_05.png-7677d757bc1140c0ea75f76fc3f89e11.ctex remapped: res://.godot/imported/viya_hurt_w_05.png-7677d757bc1140c0ea75f76fc3f89e11.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_hurt_w_05.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_hurt_w_05.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_idle_nw.png remapped: res://assets/characters/pilot_32/render_cache/viya_idle_nw.png
+Loading resource: res://.godot/imported/viya_idle_nw.png-d7a327e83e5085bf9de6bf5ec896fbd1.ctex remapped: res://.godot/imported/viya_idle_nw.png-d7a327e83e5085bf9de6bf5ec896fbd1.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_idle_nw.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_idle_nw.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_run_nw_00.png remapped: res://assets/characters/pilot_32/render_cache/viya_run_nw_00.png
+Loading resource: res://.godot/imported/viya_run_nw_00.png-943550a2584c5b504be60cbddc86643b.ctex remapped: res://.godot/imported/viya_run_nw_00.png-943550a2584c5b504be60cbddc86643b.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_run_nw_00.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_run_nw_00.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_run_nw_01.png remapped: res://assets/characters/pilot_32/render_cache/viya_run_nw_01.png
+Loading resource: res://.godot/imported/viya_run_nw_01.png-971ea9ab77d1f2ebae3d711d90055fec.ctex remapped: res://.godot/imported/viya_run_nw_01.png-971ea9ab77d1f2ebae3d711d90055fec.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_run_nw_01.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_run_nw_01.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_run_nw_02.png remapped: res://assets/characters/pilot_32/render_cache/viya_run_nw_02.png
+Loading resource: res://.godot/imported/viya_run_nw_02.png-02404dbcba4a5c2302ea6a6ecf1174d5.ctex remapped: res://.godot/imported/viya_run_nw_02.png-02404dbcba4a5c2302ea6a6ecf1174d5.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_run_nw_02.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_run_nw_02.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_run_nw_03.png remapped: res://assets/characters/pilot_32/render_cache/viya_run_nw_03.png
+Loading resource: res://.godot/imported/viya_run_nw_03.png-b01b04a492eed85c7c333bd37cd9d7de.ctex remapped: res://.godot/imported/viya_run_nw_03.png-b01b04a492eed85c7c333bd37cd9d7de.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_run_nw_03.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_run_nw_03.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_run_nw_04.png remapped: res://assets/characters/pilot_32/render_cache/viya_run_nw_04.png
+Loading resource: res://.godot/imported/viya_run_nw_04.png-4cf508433d4c5f9a179a59ecb4c3bf8d.ctex remapped: res://.godot/imported/viya_run_nw_04.png-4cf508433d4c5f9a179a59ecb4c3bf8d.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_run_nw_04.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_run_nw_04.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_run_nw_05.png remapped: res://assets/characters/pilot_32/render_cache/viya_run_nw_05.png
+Loading resource: res://.godot/imported/viya_run_nw_05.png-4a39c032b88be86438b4d8b0d257f341.ctex remapped: res://.godot/imported/viya_run_nw_05.png-4a39c032b88be86438b4d8b0d257f341.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_run_nw_05.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_run_nw_05.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_run_nw_06.png remapped: res://assets/characters/pilot_32/render_cache/viya_run_nw_06.png
+Loading resource: res://.godot/imported/viya_run_nw_06.png-73b13220a4f19e5ed44495e6c98a84e9.ctex remapped: res://.godot/imported/viya_run_nw_06.png-73b13220a4f19e5ed44495e6c98a84e9.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_run_nw_06.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_run_nw_06.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_run_nw_07.png remapped: res://assets/characters/pilot_32/render_cache/viya_run_nw_07.png
+Loading resource: res://.godot/imported/viya_run_nw_07.png-14f30a641297e2a4f3c1b2e35c4e4aa7.ctex remapped: res://.godot/imported/viya_run_nw_07.png-14f30a641297e2a4f3c1b2e35c4e4aa7.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_run_nw_07.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_run_nw_07.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_run_nw_08.png remapped: res://assets/characters/pilot_32/render_cache/viya_run_nw_08.png
+Loading resource: res://.godot/imported/viya_run_nw_08.png-dfef0d6367d7ea8d6146eaf4f6adce46.ctex remapped: res://.godot/imported/viya_run_nw_08.png-dfef0d6367d7ea8d6146eaf4f6adce46.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_run_nw_08.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_run_nw_08.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_run_nw_09.png remapped: res://assets/characters/pilot_32/render_cache/viya_run_nw_09.png
+Loading resource: res://.godot/imported/viya_run_nw_09.png-b45886fc0df200cf34b5527792ea5b91.ctex remapped: res://.godot/imported/viya_run_nw_09.png-b45886fc0df200cf34b5527792ea5b91.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_run_nw_09.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_run_nw_09.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_run_nw_10.png remapped: res://assets/characters/pilot_32/render_cache/viya_run_nw_10.png
+Loading resource: res://.godot/imported/viya_run_nw_10.png-6bf0a5a4f07dad5669c151bc23f08276.ctex remapped: res://.godot/imported/viya_run_nw_10.png-6bf0a5a4f07dad5669c151bc23f08276.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_run_nw_10.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_run_nw_10.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_attack_nw_00.png remapped: res://assets/characters/pilot_32/render_cache/viya_attack_nw_00.png
+Loading resource: res://.godot/imported/viya_attack_nw_00.png-b123ec9d8482f1883251abd8ffecb382.ctex remapped: res://.godot/imported/viya_attack_nw_00.png-b123ec9d8482f1883251abd8ffecb382.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_attack_nw_00.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_attack_nw_00.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_attack_nw_01.png remapped: res://assets/characters/pilot_32/render_cache/viya_attack_nw_01.png
+Loading resource: res://.godot/imported/viya_attack_nw_01.png-15f3bcf4bc7e824842473bd6ea243d43.ctex remapped: res://.godot/imported/viya_attack_nw_01.png-15f3bcf4bc7e824842473bd6ea243d43.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_attack_nw_01.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_attack_nw_01.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_attack_nw_02.png remapped: res://assets/characters/pilot_32/render_cache/viya_attack_nw_02.png
+Loading resource: res://.godot/imported/viya_attack_nw_02.png-b179e11f0530bf929d03690dd1b87351.ctex remapped: res://.godot/imported/viya_attack_nw_02.png-b179e11f0530bf929d03690dd1b87351.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_attack_nw_02.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_attack_nw_02.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_attack_nw_03.png remapped: res://assets/characters/pilot_32/render_cache/viya_attack_nw_03.png
+Loading resource: res://.godot/imported/viya_attack_nw_03.png-b4f855e47fffbc65e2d1011df8acde23.ctex remapped: res://.godot/imported/viya_attack_nw_03.png-b4f855e47fffbc65e2d1011df8acde23.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_attack_nw_03.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_attack_nw_03.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_attack_nw_04.png remapped: res://assets/characters/pilot_32/render_cache/viya_attack_nw_04.png
+Loading resource: res://.godot/imported/viya_attack_nw_04.png-b2f218bd4feaf08161077df2802b8fba.ctex remapped: res://.godot/imported/viya_attack_nw_04.png-b2f218bd4feaf08161077df2802b8fba.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_attack_nw_04.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_attack_nw_04.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_attack_nw_05.png remapped: res://assets/characters/pilot_32/render_cache/viya_attack_nw_05.png
+Loading resource: res://.godot/imported/viya_attack_nw_05.png-95f079475d50daf882cb7ea6a6394c82.ctex remapped: res://.godot/imported/viya_attack_nw_05.png-95f079475d50daf882cb7ea6a6394c82.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_attack_nw_05.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_attack_nw_05.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_attack_nw_06.png remapped: res://assets/characters/pilot_32/render_cache/viya_attack_nw_06.png
+Loading resource: res://.godot/imported/viya_attack_nw_06.png-c8e14bac76752673e7e6d2dd7bdbc49e.ctex remapped: res://.godot/imported/viya_attack_nw_06.png-c8e14bac76752673e7e6d2dd7bdbc49e.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_attack_nw_06.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_attack_nw_06.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_attack_nw_07.png remapped: res://assets/characters/pilot_32/render_cache/viya_attack_nw_07.png
+Loading resource: res://.godot/imported/viya_attack_nw_07.png-c57692923423d4a6fa89ee409bd90006.ctex remapped: res://.godot/imported/viya_attack_nw_07.png-c57692923423d4a6fa89ee409bd90006.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_attack_nw_07.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_attack_nw_07.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_hurt_nw_00.png remapped: res://assets/characters/pilot_32/render_cache/viya_hurt_nw_00.png
+Loading resource: res://.godot/imported/viya_hurt_nw_00.png-be1b0e6cfdd3b3d5cda0ec4e3f911be6.ctex remapped: res://.godot/imported/viya_hurt_nw_00.png-be1b0e6cfdd3b3d5cda0ec4e3f911be6.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_hurt_nw_00.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_hurt_nw_00.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_hurt_nw_01.png remapped: res://assets/characters/pilot_32/render_cache/viya_hurt_nw_01.png
+Loading resource: res://.godot/imported/viya_hurt_nw_01.png-631f73dc988526d984b0b5990d9cec7a.ctex remapped: res://.godot/imported/viya_hurt_nw_01.png-631f73dc988526d984b0b5990d9cec7a.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_hurt_nw_01.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_hurt_nw_01.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_hurt_nw_02.png remapped: res://assets/characters/pilot_32/render_cache/viya_hurt_nw_02.png
+Loading resource: res://.godot/imported/viya_hurt_nw_02.png-0ce0ca80032290350181b28ced9b372f.ctex remapped: res://.godot/imported/viya_hurt_nw_02.png-0ce0ca80032290350181b28ced9b372f.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_hurt_nw_02.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_hurt_nw_02.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_hurt_nw_03.png remapped: res://assets/characters/pilot_32/render_cache/viya_hurt_nw_03.png
+Loading resource: res://.godot/imported/viya_hurt_nw_03.png-e42a70254520051e21ab12453faf9a9a.ctex remapped: res://.godot/imported/viya_hurt_nw_03.png-e42a70254520051e21ab12453faf9a9a.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_hurt_nw_03.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_hurt_nw_03.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_hurt_nw_04.png remapped: res://assets/characters/pilot_32/render_cache/viya_hurt_nw_04.png
+Loading resource: res://.godot/imported/viya_hurt_nw_04.png-93438aaea5531e0ad453340b84ac6348.ctex remapped: res://.godot/imported/viya_hurt_nw_04.png-93438aaea5531e0ad453340b84ac6348.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_hurt_nw_04.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_hurt_nw_04.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_hurt_nw_05.png remapped: res://assets/characters/pilot_32/render_cache/viya_hurt_nw_05.png
+Loading resource: res://.godot/imported/viya_hurt_nw_05.png-d9b7fa8cdfde7c8e8ff25bd8b484b3a1.ctex remapped: res://.godot/imported/viya_hurt_nw_05.png-d9b7fa8cdfde7c8e8ff25bd8b484b3a1.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_hurt_nw_05.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_hurt_nw_05.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_idle_n.png remapped: res://assets/characters/pilot_32/render_cache/viya_idle_n.png
+Loading resource: res://.godot/imported/viya_idle_n.png-a2c910ae47e2fc78d3f15f5eab3663cf.ctex remapped: res://.godot/imported/viya_idle_n.png-a2c910ae47e2fc78d3f15f5eab3663cf.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_idle_n.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_idle_n.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_run_n_00.png remapped: res://assets/characters/pilot_32/render_cache/viya_run_n_00.png
+Loading resource: res://.godot/imported/viya_run_n_00.png-8d1d3c073efaf6fc7a94be638ce69afd.ctex remapped: res://.godot/imported/viya_run_n_00.png-8d1d3c073efaf6fc7a94be638ce69afd.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_run_n_00.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_run_n_00.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_run_n_01.png remapped: res://assets/characters/pilot_32/render_cache/viya_run_n_01.png
+Loading resource: res://.godot/imported/viya_run_n_01.png-85d4d34a778cc123aa4a1b31a405e4d8.ctex remapped: res://.godot/imported/viya_run_n_01.png-85d4d34a778cc123aa4a1b31a405e4d8.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_run_n_01.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_run_n_01.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_run_n_02.png remapped: res://assets/characters/pilot_32/render_cache/viya_run_n_02.png
+Loading resource: res://.godot/imported/viya_run_n_02.png-2e316f69a14a9378165e83752de08495.ctex remapped: res://.godot/imported/viya_run_n_02.png-2e316f69a14a9378165e83752de08495.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_run_n_02.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_run_n_02.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_run_n_03.png remapped: res://assets/characters/pilot_32/render_cache/viya_run_n_03.png
+Loading resource: res://.godot/imported/viya_run_n_03.png-01ab11f8798e10ad32609398e3100f0e.ctex remapped: res://.godot/imported/viya_run_n_03.png-01ab11f8798e10ad32609398e3100f0e.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_run_n_03.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_run_n_03.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_run_n_04.png remapped: res://assets/characters/pilot_32/render_cache/viya_run_n_04.png
+Loading resource: res://.godot/imported/viya_run_n_04.png-ee066113a4a6108c9894051fb500ff38.ctex remapped: res://.godot/imported/viya_run_n_04.png-ee066113a4a6108c9894051fb500ff38.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_run_n_04.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_run_n_04.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_run_n_05.png remapped: res://assets/characters/pilot_32/render_cache/viya_run_n_05.png
+Loading resource: res://.godot/imported/viya_run_n_05.png-1127209c0557a93d69791435dbe5e493.ctex remapped: res://.godot/imported/viya_run_n_05.png-1127209c0557a93d69791435dbe5e493.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_run_n_05.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_run_n_05.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_run_n_06.png remapped: res://assets/characters/pilot_32/render_cache/viya_run_n_06.png
+Loading resource: res://.godot/imported/viya_run_n_06.png-29e8582896ec3d26d30787e91018a45e.ctex remapped: res://.godot/imported/viya_run_n_06.png-29e8582896ec3d26d30787e91018a45e.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_run_n_06.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_run_n_06.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_run_n_07.png remapped: res://assets/characters/pilot_32/render_cache/viya_run_n_07.png
+Loading resource: res://.godot/imported/viya_run_n_07.png-6243a21bbad77e9812d1e6b353ca95a4.ctex remapped: res://.godot/imported/viya_run_n_07.png-6243a21bbad77e9812d1e6b353ca95a4.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_run_n_07.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_run_n_07.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_run_n_08.png remapped: res://assets/characters/pilot_32/render_cache/viya_run_n_08.png
+Loading resource: res://.godot/imported/viya_run_n_08.png-176af954050ab864d36614441da2f01c.ctex remapped: res://.godot/imported/viya_run_n_08.png-176af954050ab864d36614441da2f01c.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_run_n_08.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_run_n_08.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_run_n_09.png remapped: res://assets/characters/pilot_32/render_cache/viya_run_n_09.png
+Loading resource: res://.godot/imported/viya_run_n_09.png-8284636b18d07f503b8b23528b0e7789.ctex remapped: res://.godot/imported/viya_run_n_09.png-8284636b18d07f503b8b23528b0e7789.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_run_n_09.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_run_n_09.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_run_n_10.png remapped: res://assets/characters/pilot_32/render_cache/viya_run_n_10.png
+Loading resource: res://.godot/imported/viya_run_n_10.png-a11eb634dd84a8b5678036d072d1b723.ctex remapped: res://.godot/imported/viya_run_n_10.png-a11eb634dd84a8b5678036d072d1b723.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_run_n_10.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_run_n_10.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_attack_n_00.png remapped: res://assets/characters/pilot_32/render_cache/viya_attack_n_00.png
+Loading resource: res://.godot/imported/viya_attack_n_00.png-88b38206391b9838d30e869bcea020af.ctex remapped: res://.godot/imported/viya_attack_n_00.png-88b38206391b9838d30e869bcea020af.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_attack_n_00.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_attack_n_00.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_attack_n_01.png remapped: res://assets/characters/pilot_32/render_cache/viya_attack_n_01.png
+Loading resource: res://.godot/imported/viya_attack_n_01.png-39851debcc77c6b21bcd86ef8467e6ed.ctex remapped: res://.godot/imported/viya_attack_n_01.png-39851debcc77c6b21bcd86ef8467e6ed.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_attack_n_01.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_attack_n_01.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_attack_n_02.png remapped: res://assets/characters/pilot_32/render_cache/viya_attack_n_02.png
+Loading resource: res://.godot/imported/viya_attack_n_02.png-aa678abec71f1d1f7da94517f469c549.ctex remapped: res://.godot/imported/viya_attack_n_02.png-aa678abec71f1d1f7da94517f469c549.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_attack_n_02.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_attack_n_02.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_attack_n_03.png remapped: res://assets/characters/pilot_32/render_cache/viya_attack_n_03.png
+Loading resource: res://.godot/imported/viya_attack_n_03.png-69340adcc9391ecba6c6964001e2a951.ctex remapped: res://.godot/imported/viya_attack_n_03.png-69340adcc9391ecba6c6964001e2a951.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_attack_n_03.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_attack_n_03.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_attack_n_04.png remapped: res://assets/characters/pilot_32/render_cache/viya_attack_n_04.png
+Loading resource: res://.godot/imported/viya_attack_n_04.png-ad77b7a354a549a89eb4ea4efe401cc1.ctex remapped: res://.godot/imported/viya_attack_n_04.png-ad77b7a354a549a89eb4ea4efe401cc1.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_attack_n_04.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_attack_n_04.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_attack_n_05.png remapped: res://assets/characters/pilot_32/render_cache/viya_attack_n_05.png
+Loading resource: res://.godot/imported/viya_attack_n_05.png-f03e2a8f95853b13b6d39819e3d522a5.ctex remapped: res://.godot/imported/viya_attack_n_05.png-f03e2a8f95853b13b6d39819e3d522a5.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_attack_n_05.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_attack_n_05.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_attack_n_06.png remapped: res://assets/characters/pilot_32/render_cache/viya_attack_n_06.png
+Loading resource: res://.godot/imported/viya_attack_n_06.png-457ea6b1cc8a695b21f78f92dc2e58d7.ctex remapped: res://.godot/imported/viya_attack_n_06.png-457ea6b1cc8a695b21f78f92dc2e58d7.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_attack_n_06.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_attack_n_06.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_attack_n_07.png remapped: res://assets/characters/pilot_32/render_cache/viya_attack_n_07.png
+Loading resource: res://.godot/imported/viya_attack_n_07.png-82f6da50035b503675f4df93d2a125c7.ctex remapped: res://.godot/imported/viya_attack_n_07.png-82f6da50035b503675f4df93d2a125c7.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_attack_n_07.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_attack_n_07.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_hurt_n_00.png remapped: res://assets/characters/pilot_32/render_cache/viya_hurt_n_00.png
+Loading resource: res://.godot/imported/viya_hurt_n_00.png-cb4c0f68964187a6a1aae7458940df15.ctex remapped: res://.godot/imported/viya_hurt_n_00.png-cb4c0f68964187a6a1aae7458940df15.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_hurt_n_00.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_hurt_n_00.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_hurt_n_01.png remapped: res://assets/characters/pilot_32/render_cache/viya_hurt_n_01.png
+Loading resource: res://.godot/imported/viya_hurt_n_01.png-d55ba2e00fd3b3c0dc65985f5e372a59.ctex remapped: res://.godot/imported/viya_hurt_n_01.png-d55ba2e00fd3b3c0dc65985f5e372a59.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_hurt_n_01.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_hurt_n_01.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_hurt_n_02.png remapped: res://assets/characters/pilot_32/render_cache/viya_hurt_n_02.png
+Loading resource: res://.godot/imported/viya_hurt_n_02.png-ea00ee878ffbf6e532fcd7809dc7034a.ctex remapped: res://.godot/imported/viya_hurt_n_02.png-ea00ee878ffbf6e532fcd7809dc7034a.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_hurt_n_02.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_hurt_n_02.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_hurt_n_03.png remapped: res://assets/characters/pilot_32/render_cache/viya_hurt_n_03.png
+Loading resource: res://.godot/imported/viya_hurt_n_03.png-0a4c3f443eaa13c16da1bdaf62a9f22b.ctex remapped: res://.godot/imported/viya_hurt_n_03.png-0a4c3f443eaa13c16da1bdaf62a9f22b.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_hurt_n_03.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_hurt_n_03.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_hurt_n_04.png remapped: res://assets/characters/pilot_32/render_cache/viya_hurt_n_04.png
+Loading resource: res://.godot/imported/viya_hurt_n_04.png-ca28f164de8c98ac70c915ad567a0e6f.ctex remapped: res://.godot/imported/viya_hurt_n_04.png-ca28f164de8c98ac70c915ad567a0e6f.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_hurt_n_04.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_hurt_n_04.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_hurt_n_05.png remapped: res://assets/characters/pilot_32/render_cache/viya_hurt_n_05.png
+Loading resource: res://.godot/imported/viya_hurt_n_05.png-b25e773de391af8e980f7a6d1be61fa1.ctex remapped: res://.godot/imported/viya_hurt_n_05.png-b25e773de391af8e980f7a6d1be61fa1.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_hurt_n_05.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_hurt_n_05.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_idle_ne.png remapped: res://assets/characters/pilot_32/render_cache/viya_idle_ne.png
+Loading resource: res://.godot/imported/viya_idle_ne.png-ec417ef82cba83da7369805feb107975.ctex remapped: res://.godot/imported/viya_idle_ne.png-ec417ef82cba83da7369805feb107975.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_idle_ne.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_idle_ne.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_run_ne_00.png remapped: res://assets/characters/pilot_32/render_cache/viya_run_ne_00.png
+Loading resource: res://.godot/imported/viya_run_ne_00.png-8dba896c1b2353e9176a68960afc8d8e.ctex remapped: res://.godot/imported/viya_run_ne_00.png-8dba896c1b2353e9176a68960afc8d8e.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_run_ne_00.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_run_ne_00.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_run_ne_01.png remapped: res://assets/characters/pilot_32/render_cache/viya_run_ne_01.png
+Loading resource: res://.godot/imported/viya_run_ne_01.png-499ca844ed11fa25b4584dc1ac02c63e.ctex remapped: res://.godot/imported/viya_run_ne_01.png-499ca844ed11fa25b4584dc1ac02c63e.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_run_ne_01.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_run_ne_01.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_run_ne_02.png remapped: res://assets/characters/pilot_32/render_cache/viya_run_ne_02.png
+Loading resource: res://.godot/imported/viya_run_ne_02.png-af6f76397fd3f6230cbf418ac6999acd.ctex remapped: res://.godot/imported/viya_run_ne_02.png-af6f76397fd3f6230cbf418ac6999acd.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_run_ne_02.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_run_ne_02.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_run_ne_03.png remapped: res://assets/characters/pilot_32/render_cache/viya_run_ne_03.png
+Loading resource: res://.godot/imported/viya_run_ne_03.png-6a0c2851dcf9c111c16d5062d431391f.ctex remapped: res://.godot/imported/viya_run_ne_03.png-6a0c2851dcf9c111c16d5062d431391f.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_run_ne_03.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_run_ne_03.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_run_ne_04.png remapped: res://assets/characters/pilot_32/render_cache/viya_run_ne_04.png
+Loading resource: res://.godot/imported/viya_run_ne_04.png-7c858d6fc46799a212dd18705e59d902.ctex remapped: res://.godot/imported/viya_run_ne_04.png-7c858d6fc46799a212dd18705e59d902.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_run_ne_04.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_run_ne_04.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_run_ne_05.png remapped: res://assets/characters/pilot_32/render_cache/viya_run_ne_05.png
+Loading resource: res://.godot/imported/viya_run_ne_05.png-61c271df239b920990e41ae2063765ca.ctex remapped: res://.godot/imported/viya_run_ne_05.png-61c271df239b920990e41ae2063765ca.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_run_ne_05.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_run_ne_05.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_run_ne_06.png remapped: res://assets/characters/pilot_32/render_cache/viya_run_ne_06.png
+Loading resource: res://.godot/imported/viya_run_ne_06.png-dc1de4d483f12144f1bf11566ff62ff1.ctex remapped: res://.godot/imported/viya_run_ne_06.png-dc1de4d483f12144f1bf11566ff62ff1.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_run_ne_06.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_run_ne_06.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_run_ne_07.png remapped: res://assets/characters/pilot_32/render_cache/viya_run_ne_07.png
+Loading resource: res://.godot/imported/viya_run_ne_07.png-9833f9ee035440010efe235078a414be.ctex remapped: res://.godot/imported/viya_run_ne_07.png-9833f9ee035440010efe235078a414be.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_run_ne_07.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_run_ne_07.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_run_ne_08.png remapped: res://assets/characters/pilot_32/render_cache/viya_run_ne_08.png
+Loading resource: res://.godot/imported/viya_run_ne_08.png-874ebda74cf0188f250fc2872d58d44a.ctex remapped: res://.godot/imported/viya_run_ne_08.png-874ebda74cf0188f250fc2872d58d44a.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_run_ne_08.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_run_ne_08.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_run_ne_09.png remapped: res://assets/characters/pilot_32/render_cache/viya_run_ne_09.png
+Loading resource: res://.godot/imported/viya_run_ne_09.png-94be994f35e3606e7ee202aa78c2a5c7.ctex remapped: res://.godot/imported/viya_run_ne_09.png-94be994f35e3606e7ee202aa78c2a5c7.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_run_ne_09.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_run_ne_09.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_run_ne_10.png remapped: res://assets/characters/pilot_32/render_cache/viya_run_ne_10.png
+Loading resource: res://.godot/imported/viya_run_ne_10.png-8ac744ac7940fe4d2e26ccbb0a8e2ef8.ctex remapped: res://.godot/imported/viya_run_ne_10.png-8ac744ac7940fe4d2e26ccbb0a8e2ef8.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_run_ne_10.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_run_ne_10.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_attack_ne_00.png remapped: res://assets/characters/pilot_32/render_cache/viya_attack_ne_00.png
+Loading resource: res://.godot/imported/viya_attack_ne_00.png-0482a0c4d93ce05a6511ecdb2572062b.ctex remapped: res://.godot/imported/viya_attack_ne_00.png-0482a0c4d93ce05a6511ecdb2572062b.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_attack_ne_00.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_attack_ne_00.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_attack_ne_01.png remapped: res://assets/characters/pilot_32/render_cache/viya_attack_ne_01.png
+Loading resource: res://.godot/imported/viya_attack_ne_01.png-1c8e1e970e8e6faaa5ebbdaadc2c07bf.ctex remapped: res://.godot/imported/viya_attack_ne_01.png-1c8e1e970e8e6faaa5ebbdaadc2c07bf.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_attack_ne_01.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_attack_ne_01.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_attack_ne_02.png remapped: res://assets/characters/pilot_32/render_cache/viya_attack_ne_02.png
+Loading resource: res://.godot/imported/viya_attack_ne_02.png-74513249435cba6afa19f1951f020896.ctex remapped: res://.godot/imported/viya_attack_ne_02.png-74513249435cba6afa19f1951f020896.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_attack_ne_02.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_attack_ne_02.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_attack_ne_03.png remapped: res://assets/characters/pilot_32/render_cache/viya_attack_ne_03.png
+Loading resource: res://.godot/imported/viya_attack_ne_03.png-24a9b8ac2fddaa653770b5c0b05ba2e5.ctex remapped: res://.godot/imported/viya_attack_ne_03.png-24a9b8ac2fddaa653770b5c0b05ba2e5.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_attack_ne_03.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_attack_ne_03.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_attack_ne_04.png remapped: res://assets/characters/pilot_32/render_cache/viya_attack_ne_04.png
+Loading resource: res://.godot/imported/viya_attack_ne_04.png-9aacfe6ee3e462518e3861d25a76030e.ctex remapped: res://.godot/imported/viya_attack_ne_04.png-9aacfe6ee3e462518e3861d25a76030e.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_attack_ne_04.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_attack_ne_04.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_attack_ne_05.png remapped: res://assets/characters/pilot_32/render_cache/viya_attack_ne_05.png
+Loading resource: res://.godot/imported/viya_attack_ne_05.png-3cf095f475cb0764fc199fe7ac03e4b6.ctex remapped: res://.godot/imported/viya_attack_ne_05.png-3cf095f475cb0764fc199fe7ac03e4b6.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_attack_ne_05.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_attack_ne_05.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_attack_ne_06.png remapped: res://assets/characters/pilot_32/render_cache/viya_attack_ne_06.png
+Loading resource: res://.godot/imported/viya_attack_ne_06.png-b177b1755f41a13643b817d045c9a271.ctex remapped: res://.godot/imported/viya_attack_ne_06.png-b177b1755f41a13643b817d045c9a271.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_attack_ne_06.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_attack_ne_06.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_attack_ne_07.png remapped: res://assets/characters/pilot_32/render_cache/viya_attack_ne_07.png
+Loading resource: res://.godot/imported/viya_attack_ne_07.png-33ead28a961c4ac81d4ed85c90a229f2.ctex remapped: res://.godot/imported/viya_attack_ne_07.png-33ead28a961c4ac81d4ed85c90a229f2.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_attack_ne_07.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_attack_ne_07.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_hurt_ne_00.png remapped: res://assets/characters/pilot_32/render_cache/viya_hurt_ne_00.png
+Loading resource: res://.godot/imported/viya_hurt_ne_00.png-a5e32e74624b78053b18e0bcf3ebf453.ctex remapped: res://.godot/imported/viya_hurt_ne_00.png-a5e32e74624b78053b18e0bcf3ebf453.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_hurt_ne_00.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_hurt_ne_00.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_hurt_ne_01.png remapped: res://assets/characters/pilot_32/render_cache/viya_hurt_ne_01.png
+Loading resource: res://.godot/imported/viya_hurt_ne_01.png-fc0041ea48845909cfd0e9e4272c85ba.ctex remapped: res://.godot/imported/viya_hurt_ne_01.png-fc0041ea48845909cfd0e9e4272c85ba.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_hurt_ne_01.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_hurt_ne_01.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_hurt_ne_02.png remapped: res://assets/characters/pilot_32/render_cache/viya_hurt_ne_02.png
+Loading resource: res://.godot/imported/viya_hurt_ne_02.png-b60f8aa7d85545cfa4f5a0a3e6452d34.ctex remapped: res://.godot/imported/viya_hurt_ne_02.png-b60f8aa7d85545cfa4f5a0a3e6452d34.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_hurt_ne_02.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_hurt_ne_02.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_hurt_ne_03.png remapped: res://assets/characters/pilot_32/render_cache/viya_hurt_ne_03.png
+Loading resource: res://.godot/imported/viya_hurt_ne_03.png-d1833a993590bab4af9550592eb400a5.ctex remapped: res://.godot/imported/viya_hurt_ne_03.png-d1833a993590bab4af9550592eb400a5.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_hurt_ne_03.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_hurt_ne_03.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_hurt_ne_04.png remapped: res://assets/characters/pilot_32/render_cache/viya_hurt_ne_04.png
+Loading resource: res://.godot/imported/viya_hurt_ne_04.png-1255edeae4fdaf911a21326f565273c5.ctex remapped: res://.godot/imported/viya_hurt_ne_04.png-1255edeae4fdaf911a21326f565273c5.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_hurt_ne_04.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_hurt_ne_04.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/render_cache/viya_hurt_ne_05.png remapped: res://assets/characters/pilot_32/render_cache/viya_hurt_ne_05.png
+Loading resource: res://.godot/imported/viya_hurt_ne_05.png-ff2820863857e827730e5f8cd8518597.ctex remapped: res://.godot/imported/viya_hurt_ne_05.png-ff2820863857e827730e5f8cd8518597.ctex
+Completed load for: 'res://assets/characters/pilot_32/render_cache/viya_hurt_ne_05.png' remapped 'res://assets/characters/pilot_32/render_cache/viya_hurt_ne_05.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_000.png remapped: res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_000.png
+Loading resource: res://.godot/imported/viya_run_e_000.png-6472200ac9db44e1bf9ecbbee9bd0e41.ctex remapped: res://.godot/imported/viya_run_e_000.png-6472200ac9db44e1bf9ecbbee9bd0e41.ctex
+Completed load for: 'res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_000.png' remapped 'res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_000.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_001.png remapped: res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_001.png
+Loading resource: res://.godot/imported/viya_run_e_001.png-c7b81019884bf6bb4585436d10dde14e.ctex remapped: res://.godot/imported/viya_run_e_001.png-c7b81019884bf6bb4585436d10dde14e.ctex
+Completed load for: 'res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_001.png' remapped 'res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_001.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_002.png remapped: res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_002.png
+Loading resource: res://.godot/imported/viya_run_e_002.png-db9304c7d85131c6cc798bc717b47447.ctex remapped: res://.godot/imported/viya_run_e_002.png-db9304c7d85131c6cc798bc717b47447.ctex
+Completed load for: 'res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_002.png' remapped 'res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_002.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_003.png remapped: res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_003.png
+Loading resource: res://.godot/imported/viya_run_e_003.png-c4e31c0dccd36fefa89a497f8fa121ec.ctex remapped: res://.godot/imported/viya_run_e_003.png-c4e31c0dccd36fefa89a497f8fa121ec.ctex
+Completed load for: 'res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_003.png' remapped 'res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_003.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_004.png remapped: res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_004.png
+Loading resource: res://.godot/imported/viya_run_e_004.png-63d4af09652e9e3ef1b80fa4b73e45eb.ctex remapped: res://.godot/imported/viya_run_e_004.png-63d4af09652e9e3ef1b80fa4b73e45eb.ctex
+Completed load for: 'res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_004.png' remapped 'res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_004.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_005.png remapped: res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_005.png
+Loading resource: res://.godot/imported/viya_run_e_005.png-6c26800b18487afe9d7df10576483cba.ctex remapped: res://.godot/imported/viya_run_e_005.png-6c26800b18487afe9d7df10576483cba.ctex
+Completed load for: 'res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_005.png' remapped 'res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_005.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_006.png remapped: res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_006.png
+Loading resource: res://.godot/imported/viya_run_e_006.png-26bfbacaf075abe5acb4c6fc0f40b9a0.ctex remapped: res://.godot/imported/viya_run_e_006.png-26bfbacaf075abe5acb4c6fc0f40b9a0.ctex
+Completed load for: 'res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_006.png' remapped 'res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_006.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_007.png remapped: res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_007.png
+Loading resource: res://.godot/imported/viya_run_e_007.png-d4168650d4c8526bb659769657855c0c.ctex remapped: res://.godot/imported/viya_run_e_007.png-d4168650d4c8526bb659769657855c0c.ctex
+Completed load for: 'res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_007.png' remapped 'res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_007.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_008.png remapped: res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_008.png
+Loading resource: res://.godot/imported/viya_run_e_008.png-e985fe17a637724b2bc967a9bb2c4388.ctex remapped: res://.godot/imported/viya_run_e_008.png-e985fe17a637724b2bc967a9bb2c4388.ctex
+Completed load for: 'res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_008.png' remapped 'res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_008.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_009.png remapped: res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_009.png
+Loading resource: res://.godot/imported/viya_run_e_009.png-290244aecbec8bfef83b2c26f2b06de5.ctex remapped: res://.godot/imported/viya_run_e_009.png-290244aecbec8bfef83b2c26f2b06de5.ctex
+Completed load for: 'res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_009.png' remapped 'res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_009.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_010.png remapped: res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_010.png
+Loading resource: res://.godot/imported/viya_run_e_010.png-becb663f3c0ea8566b9d196076281846.ctex remapped: res://.godot/imported/viya_run_e_010.png-becb663f3c0ea8566b9d196076281846.ctex
+Completed load for: 'res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_010.png' remapped 'res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_010.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_011.png remapped: res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_011.png
+Loading resource: res://.godot/imported/viya_run_e_011.png-5d2586467accb3efb022c3fca4f66a12.ctex remapped: res://.godot/imported/viya_run_e_011.png-5d2586467accb3efb022c3fca4f66a12.ctex
+Completed load for: 'res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_011.png' remapped 'res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_011.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_012.png remapped: res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_012.png
+Loading resource: res://.godot/imported/viya_run_e_012.png-7af92e3bc7f4d23382c3dbb52d856987.ctex remapped: res://.godot/imported/viya_run_e_012.png-7af92e3bc7f4d23382c3dbb52d856987.ctex
+Completed load for: 'res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_012.png' remapped 'res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_012.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_013.png remapped: res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_013.png
+Loading resource: res://.godot/imported/viya_run_e_013.png-6b6c91d18f31257d1a7d846b6e927c59.ctex remapped: res://.godot/imported/viya_run_e_013.png-6b6c91d18f31257d1a7d846b6e927c59.ctex
+Completed load for: 'res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_013.png' remapped 'res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_013.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_014.png remapped: res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_014.png
+Loading resource: res://.godot/imported/viya_run_e_014.png-283037886313dd8888c4f6155549efef.ctex remapped: res://.godot/imported/viya_run_e_014.png-283037886313dd8888c4f6155549efef.ctex
+Completed load for: 'res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_014.png' remapped 'res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_014.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_015.png remapped: res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_015.png
+Loading resource: res://.godot/imported/viya_run_e_015.png-f753eb5832aed6b0524748fb3ebc0ba9.ctex remapped: res://.godot/imported/viya_run_e_015.png-f753eb5832aed6b0524748fb3ebc0ba9.ctex
+Completed load for: 'res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_015.png' remapped 'res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_015.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_016.png remapped: res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_016.png
+Loading resource: res://.godot/imported/viya_run_e_016.png-f72dcd94dc633c21159c9427fef1a9da.ctex remapped: res://.godot/imported/viya_run_e_016.png-f72dcd94dc633c21159c9427fef1a9da.ctex
+Completed load for: 'res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_016.png' remapped 'res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_016.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_017.png remapped: res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_017.png
+Loading resource: res://.godot/imported/viya_run_e_017.png-10318f9f21b5d09c228d1755cdc7cdba.ctex remapped: res://.godot/imported/viya_run_e_017.png-10318f9f21b5d09c228d1755cdc7cdba.ctex
+Completed load for: 'res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_017.png' remapped 'res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_017.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_018.png remapped: res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_018.png
+Loading resource: res://.godot/imported/viya_run_e_018.png-5af0c28d5aa8afea41d7acaccbb6eef6.ctex remapped: res://.godot/imported/viya_run_e_018.png-5af0c28d5aa8afea41d7acaccbb6eef6.ctex
+Completed load for: 'res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_018.png' remapped 'res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_018.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_019.png remapped: res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_019.png
+Loading resource: res://.godot/imported/viya_run_e_019.png-383810e1072a0c4c181bc08b078be3e7.ctex remapped: res://.godot/imported/viya_run_e_019.png-383810e1072a0c4c181bc08b078be3e7.ctex
+Completed load for: 'res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_019.png' remapped 'res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_019.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_020.png remapped: res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_020.png
+Loading resource: res://.godot/imported/viya_run_e_020.png-f06a023738f4aaf3346dee2d72010f94.ctex remapped: res://.godot/imported/viya_run_e_020.png-f06a023738f4aaf3346dee2d72010f94.ctex
+Completed load for: 'res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_020.png' remapped 'res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_020.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_021.png remapped: res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_021.png
+Loading resource: res://.godot/imported/viya_run_e_021.png-a27f15c7e81992f87850debc6e8c6397.ctex remapped: res://.godot/imported/viya_run_e_021.png-a27f15c7e81992f87850debc6e8c6397.ctex
+Completed load for: 'res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_021.png' remapped 'res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_021.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_022.png remapped: res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_022.png
+Loading resource: res://.godot/imported/viya_run_e_022.png-21c041e059c9e2d29b4539e7ff1e10bb.ctex remapped: res://.godot/imported/viya_run_e_022.png-21c041e059c9e2d29b4539e7ff1e10bb.ctex
+Completed load for: 'res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_022.png' remapped 'res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_022.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_023.png remapped: res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_023.png
+Loading resource: res://.godot/imported/viya_run_e_023.png-3f1bc0f1f88f6948676ce64ac1e91d2e.ctex remapped: res://.godot/imported/viya_run_e_023.png-3f1bc0f1f88f6948676ce64ac1e91d2e.ctex
+Completed load for: 'res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_023.png' remapped 'res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_023.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_024.png remapped: res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_024.png
+Loading resource: res://.godot/imported/viya_run_e_024.png-5cdcf150d29a64649058e94a43aa726e.ctex remapped: res://.godot/imported/viya_run_e_024.png-5cdcf150d29a64649058e94a43aa726e.ctex
+Completed load for: 'res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_024.png' remapped 'res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_024.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_025.png remapped: res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_025.png
+Loading resource: res://.godot/imported/viya_run_e_025.png-ca9ca516bdccbd364a3a053420427ea4.ctex remapped: res://.godot/imported/viya_run_e_025.png-ca9ca516bdccbd364a3a053420427ea4.ctex
+Completed load for: 'res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_025.png' remapped 'res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_025.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_026.png remapped: res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_026.png
+Loading resource: res://.godot/imported/viya_run_e_026.png-7b2e18608a6fedec898d8d0211176c61.ctex remapped: res://.godot/imported/viya_run_e_026.png-7b2e18608a6fedec898d8d0211176c61.ctex
+Completed load for: 'res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_026.png' remapped 'res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_026.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_027.png remapped: res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_027.png
+Loading resource: res://.godot/imported/viya_run_e_027.png-6152be4d26b148533254da265df83442.ctex remapped: res://.godot/imported/viya_run_e_027.png-6152be4d26b148533254da265df83442.ctex
+Completed load for: 'res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_027.png' remapped 'res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_027.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_028.png remapped: res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_028.png
+Loading resource: res://.godot/imported/viya_run_e_028.png-b8a615ccc01982edd244b3cfe7a3a7e5.ctex remapped: res://.godot/imported/viya_run_e_028.png-b8a615ccc01982edd244b3cfe7a3a7e5.ctex
+Completed load for: 'res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_028.png' remapped 'res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_028.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_029.png remapped: res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_029.png
+Loading resource: res://.godot/imported/viya_run_e_029.png-54dc8a46b785d455ea3a2110a0055b0c.ctex remapped: res://.godot/imported/viya_run_e_029.png-54dc8a46b785d455ea3a2110a0055b0c.ctex
+Completed load for: 'res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_029.png' remapped 'res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_029.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_030.png remapped: res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_030.png
+Loading resource: res://.godot/imported/viya_run_e_030.png-c04643bac742622ce4d27fbd951b0b3e.ctex remapped: res://.godot/imported/viya_run_e_030.png-c04643bac742622ce4d27fbd951b0b3e.ctex
+Completed load for: 'res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_030.png' remapped 'res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_030.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_031.png remapped: res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_031.png
+Loading resource: res://.godot/imported/viya_run_e_031.png-22890f9ae792d46e7f4275ce12ec4489.ctex remapped: res://.godot/imported/viya_run_e_031.png-22890f9ae792d46e7f4275ce12ec4489.ctex
+Completed load for: 'res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_031.png' remapped 'res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_031.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_032.png remapped: res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_032.png
+Loading resource: res://.godot/imported/viya_run_e_032.png-6a8b872072bced83dae7640ce7ada977.ctex remapped: res://.godot/imported/viya_run_e_032.png-6a8b872072bced83dae7640ce7ada977.ctex
+Completed load for: 'res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_032.png' remapped 'res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_032.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_033.png remapped: res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_033.png
+Loading resource: res://.godot/imported/viya_run_e_033.png-2917c5e2fbd00c84974a328c3cc440dc.ctex remapped: res://.godot/imported/viya_run_e_033.png-2917c5e2fbd00c84974a328c3cc440dc.ctex
+Completed load for: 'res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_033.png' remapped 'res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_033.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_034.png remapped: res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_034.png
+Loading resource: res://.godot/imported/viya_run_e_034.png-d2592ba39d91e4d515336174cb7df2e5.ctex remapped: res://.godot/imported/viya_run_e_034.png-d2592ba39d91e4d515336174cb7df2e5.ctex
+Completed load for: 'res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_034.png' remapped 'res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_034.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_035.png remapped: res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_035.png
+Loading resource: res://.godot/imported/viya_run_e_035.png-87af74acb229a6a1dea7e2057266e6c6.ctex remapped: res://.godot/imported/viya_run_e_035.png-87af74acb229a6a1dea7e2057266e6c6.ctex
+Completed load for: 'res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_035.png' remapped 'res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_035.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_036.png remapped: res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_036.png
+Loading resource: res://.godot/imported/viya_run_e_036.png-9fac6ebf4f9ede0a5fd0ffb111aac901.ctex remapped: res://.godot/imported/viya_run_e_036.png-9fac6ebf4f9ede0a5fd0ffb111aac901.ctex
+Completed load for: 'res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_036.png' remapped 'res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_036.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_037.png remapped: res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_037.png
+Loading resource: res://.godot/imported/viya_run_e_037.png-e22bbbcbc28d329d0f2501ec6f85c272.ctex remapped: res://.godot/imported/viya_run_e_037.png-e22bbbcbc28d329d0f2501ec6f85c272.ctex
+Completed load for: 'res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_037.png' remapped 'res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_037.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_038.png remapped: res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_038.png
+Loading resource: res://.godot/imported/viya_run_e_038.png-37620354a5346f750a2c3073a03e996d.ctex remapped: res://.godot/imported/viya_run_e_038.png-37620354a5346f750a2c3073a03e996d.ctex
+Completed load for: 'res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_038.png' remapped 'res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_038.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_039.png remapped: res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_039.png
+Loading resource: res://.godot/imported/viya_run_e_039.png-a4691c069c9f537c095c627c16f0937f.ctex remapped: res://.godot/imported/viya_run_e_039.png-a4691c069c9f537c095c627c16f0937f.ctex
+Completed load for: 'res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_039.png' remapped 'res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_039.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_040.png remapped: res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_040.png
+Loading resource: res://.godot/imported/viya_run_e_040.png-8a9d3f918860c918eea02d177eb415ba.ctex remapped: res://.godot/imported/viya_run_e_040.png-8a9d3f918860c918eea02d177eb415ba.ctex
+Completed load for: 'res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_040.png' remapped 'res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_040.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_041.png remapped: res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_041.png
+Loading resource: res://.godot/imported/viya_run_e_041.png-da6dacf9bda13fd14d4c04e4287e9254.ctex remapped: res://.godot/imported/viya_run_e_041.png-da6dacf9bda13fd14d4c04e4287e9254.ctex
+Completed load for: 'res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_041.png' remapped 'res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_041.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_042.png remapped: res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_042.png
+Loading resource: res://.godot/imported/viya_run_e_042.png-e18d5fc4b24bbe428cbdecabe946fa0c.ctex remapped: res://.godot/imported/viya_run_e_042.png-e18d5fc4b24bbe428cbdecabe946fa0c.ctex
+Completed load for: 'res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_042.png' remapped 'res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_042.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_043.png remapped: res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_043.png
+Loading resource: res://.godot/imported/viya_run_e_043.png-2788d0d763ecca418bcceaf5d3860cc3.ctex remapped: res://.godot/imported/viya_run_e_043.png-2788d0d763ecca418bcceaf5d3860cc3.ctex
+Completed load for: 'res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_043.png' remapped 'res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_043.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_044.png remapped: res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_044.png
+Loading resource: res://.godot/imported/viya_run_e_044.png-cbe5b1b282e86ab7d36d968495e54745.ctex remapped: res://.godot/imported/viya_run_e_044.png-cbe5b1b282e86ab7d36d968495e54745.ctex
+Completed load for: 'res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_044.png' remapped 'res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_044.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_045.png remapped: res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_045.png
+Loading resource: res://.godot/imported/viya_run_e_045.png-79fb81279d2717973ff5e91b5803ffd3.ctex remapped: res://.godot/imported/viya_run_e_045.png-79fb81279d2717973ff5e91b5803ffd3.ctex
+Completed load for: 'res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_045.png' remapped 'res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_045.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_046.png remapped: res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_046.png
+Loading resource: res://.godot/imported/viya_run_e_046.png-504ada2775a8536a740ceec15ca23a5e.ctex remapped: res://.godot/imported/viya_run_e_046.png-504ada2775a8536a740ceec15ca23a5e.ctex
+Completed load for: 'res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_046.png' remapped 'res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_046.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_000.png remapped: res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_000.png
+Loading resource: res://.godot/imported/viya_run_fire_e_000.png-2ce8c4a6745a4cf3ceb2dadd4653ca6d.ctex remapped: res://.godot/imported/viya_run_fire_e_000.png-2ce8c4a6745a4cf3ceb2dadd4653ca6d.ctex
+Completed load for: 'res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_000.png' remapped 'res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_000.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_001.png remapped: res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_001.png
+Loading resource: res://.godot/imported/viya_run_fire_e_001.png-d771d8fbf394def6af9eaf2b40b26385.ctex remapped: res://.godot/imported/viya_run_fire_e_001.png-d771d8fbf394def6af9eaf2b40b26385.ctex
+Completed load for: 'res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_001.png' remapped 'res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_001.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_002.png remapped: res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_002.png
+Loading resource: res://.godot/imported/viya_run_fire_e_002.png-a27fcb48a1db24ebadcbc8ac013631a4.ctex remapped: res://.godot/imported/viya_run_fire_e_002.png-a27fcb48a1db24ebadcbc8ac013631a4.ctex
+Completed load for: 'res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_002.png' remapped 'res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_002.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_003.png remapped: res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_003.png
+Loading resource: res://.godot/imported/viya_run_fire_e_003.png-62ff19145c8ecbfaa351f6db2f8f0394.ctex remapped: res://.godot/imported/viya_run_fire_e_003.png-62ff19145c8ecbfaa351f6db2f8f0394.ctex
+Completed load for: 'res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_003.png' remapped 'res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_003.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_004.png remapped: res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_004.png
+Loading resource: res://.godot/imported/viya_run_fire_e_004.png-ba2d2887b3b3b140280612ad8d45b698.ctex remapped: res://.godot/imported/viya_run_fire_e_004.png-ba2d2887b3b3b140280612ad8d45b698.ctex
+Completed load for: 'res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_004.png' remapped 'res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_004.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_005.png remapped: res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_005.png
+Loading resource: res://.godot/imported/viya_run_fire_e_005.png-df71c482d8356246676905cc4e92e0ba.ctex remapped: res://.godot/imported/viya_run_fire_e_005.png-df71c482d8356246676905cc4e92e0ba.ctex
+Completed load for: 'res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_005.png' remapped 'res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_005.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_006.png remapped: res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_006.png
+Loading resource: res://.godot/imported/viya_run_fire_e_006.png-28c47f415a9f3e176b451468f8cdd44c.ctex remapped: res://.godot/imported/viya_run_fire_e_006.png-28c47f415a9f3e176b451468f8cdd44c.ctex
+Completed load for: 'res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_006.png' remapped 'res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_006.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_007.png remapped: res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_007.png
+Loading resource: res://.godot/imported/viya_run_fire_e_007.png-e1a578aca3062d94da4f2b1108721e38.ctex remapped: res://.godot/imported/viya_run_fire_e_007.png-e1a578aca3062d94da4f2b1108721e38.ctex
+Completed load for: 'res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_007.png' remapped 'res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_007.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_008.png remapped: res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_008.png
+Loading resource: res://.godot/imported/viya_run_fire_e_008.png-fac70dbb6fb02bb187790effef5c0d5d.ctex remapped: res://.godot/imported/viya_run_fire_e_008.png-fac70dbb6fb02bb187790effef5c0d5d.ctex
+Completed load for: 'res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_008.png' remapped 'res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_008.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_009.png remapped: res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_009.png
+Loading resource: res://.godot/imported/viya_run_fire_e_009.png-ddf7b85c14c0c4bbdf757929aa441305.ctex remapped: res://.godot/imported/viya_run_fire_e_009.png-ddf7b85c14c0c4bbdf757929aa441305.ctex
+Completed load for: 'res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_009.png' remapped 'res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_009.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_010.png remapped: res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_010.png
+Loading resource: res://.godot/imported/viya_run_fire_e_010.png-5b504d3b5103392bdca0bd3bad017d24.ctex remapped: res://.godot/imported/viya_run_fire_e_010.png-5b504d3b5103392bdca0bd3bad017d24.ctex
+Completed load for: 'res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_010.png' remapped 'res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_010.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_011.png remapped: res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_011.png
+Loading resource: res://.godot/imported/viya_run_fire_e_011.png-e70a0439b8a4cbab791dd2fcf9215eb7.ctex remapped: res://.godot/imported/viya_run_fire_e_011.png-e70a0439b8a4cbab791dd2fcf9215eb7.ctex
+Completed load for: 'res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_011.png' remapped 'res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_011.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_012.png remapped: res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_012.png
+Loading resource: res://.godot/imported/viya_run_fire_e_012.png-8d4afe7de11c12dc10077f2c57a92086.ctex remapped: res://.godot/imported/viya_run_fire_e_012.png-8d4afe7de11c12dc10077f2c57a92086.ctex
+Completed load for: 'res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_012.png' remapped 'res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_012.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_013.png remapped: res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_013.png
+Loading resource: res://.godot/imported/viya_run_fire_e_013.png-810e2860274fd1c695bd731ced443f01.ctex remapped: res://.godot/imported/viya_run_fire_e_013.png-810e2860274fd1c695bd731ced443f01.ctex
+Completed load for: 'res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_013.png' remapped 'res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_013.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_014.png remapped: res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_014.png
+Loading resource: res://.godot/imported/viya_run_fire_e_014.png-778c7916fca103529790de6bd8e842e0.ctex remapped: res://.godot/imported/viya_run_fire_e_014.png-778c7916fca103529790de6bd8e842e0.ctex
+Completed load for: 'res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_014.png' remapped 'res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_014.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_015.png remapped: res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_015.png
+Loading resource: res://.godot/imported/viya_run_fire_e_015.png-3802b9c3f5f630603186e798e60aa248.ctex remapped: res://.godot/imported/viya_run_fire_e_015.png-3802b9c3f5f630603186e798e60aa248.ctex
+Completed load for: 'res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_015.png' remapped 'res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_015.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_016.png remapped: res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_016.png
+Loading resource: res://.godot/imported/viya_run_fire_e_016.png-753b7479d38bf679853977e0a137ae46.ctex remapped: res://.godot/imported/viya_run_fire_e_016.png-753b7479d38bf679853977e0a137ae46.ctex
+Completed load for: 'res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_016.png' remapped 'res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_016.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_017.png remapped: res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_017.png
+Loading resource: res://.godot/imported/viya_run_fire_e_017.png-ca228c088fc392d4572336ab514a6358.ctex remapped: res://.godot/imported/viya_run_fire_e_017.png-ca228c088fc392d4572336ab514a6358.ctex
+Completed load for: 'res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_017.png' remapped 'res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_017.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_018.png remapped: res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_018.png
+Loading resource: res://.godot/imported/viya_run_fire_e_018.png-71ef63bf268b0144988604ff647a9491.ctex remapped: res://.godot/imported/viya_run_fire_e_018.png-71ef63bf268b0144988604ff647a9491.ctex
+Completed load for: 'res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_018.png' remapped 'res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_018.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_019.png remapped: res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_019.png
+Loading resource: res://.godot/imported/viya_run_fire_e_019.png-e0d06dbcf388aff91af895f0cf8edab1.ctex remapped: res://.godot/imported/viya_run_fire_e_019.png-e0d06dbcf388aff91af895f0cf8edab1.ctex
+Completed load for: 'res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_019.png' remapped 'res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_019.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_020.png remapped: res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_020.png
+Loading resource: res://.godot/imported/viya_run_fire_e_020.png-6e0bf513572376c85a5be625e346eaad.ctex remapped: res://.godot/imported/viya_run_fire_e_020.png-6e0bf513572376c85a5be625e346eaad.ctex
+Completed load for: 'res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_020.png' remapped 'res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_020.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_021.png remapped: res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_021.png
+Loading resource: res://.godot/imported/viya_run_fire_e_021.png-573cef4174da9889f505170377c6f66b.ctex remapped: res://.godot/imported/viya_run_fire_e_021.png-573cef4174da9889f505170377c6f66b.ctex
+Completed load for: 'res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_021.png' remapped 'res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_021.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_022.png remapped: res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_022.png
+Loading resource: res://.godot/imported/viya_run_fire_e_022.png-de3130bcb637bcb31404d57c5c9b28bf.ctex remapped: res://.godot/imported/viya_run_fire_e_022.png-de3130bcb637bcb31404d57c5c9b28bf.ctex
+Completed load for: 'res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_022.png' remapped 'res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_022.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_023.png remapped: res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_023.png
+Loading resource: res://.godot/imported/viya_run_fire_e_023.png-c0037de5ab82cc191bc79a7ee2925446.ctex remapped: res://.godot/imported/viya_run_fire_e_023.png-c0037de5ab82cc191bc79a7ee2925446.ctex
+Completed load for: 'res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_023.png' remapped 'res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_023.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_024.png remapped: res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_024.png
+Loading resource: res://.godot/imported/viya_run_fire_e_024.png-cf5534efd42ba0caea3c475880aeed9e.ctex remapped: res://.godot/imported/viya_run_fire_e_024.png-cf5534efd42ba0caea3c475880aeed9e.ctex
+Completed load for: 'res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_024.png' remapped 'res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_024.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_025.png remapped: res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_025.png
+Loading resource: res://.godot/imported/viya_run_fire_e_025.png-00a9b2668590b4f4e3ed66ceccf4a1fd.ctex remapped: res://.godot/imported/viya_run_fire_e_025.png-00a9b2668590b4f4e3ed66ceccf4a1fd.ctex
+Completed load for: 'res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_025.png' remapped 'res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_025.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_026.png remapped: res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_026.png
+Loading resource: res://.godot/imported/viya_run_fire_e_026.png-9e0c3b43c4ea1f195f4cd1dff99817ba.ctex remapped: res://.godot/imported/viya_run_fire_e_026.png-9e0c3b43c4ea1f195f4cd1dff99817ba.ctex
+Completed load for: 'res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_026.png' remapped 'res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_026.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_027.png remapped: res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_027.png
+Loading resource: res://.godot/imported/viya_run_fire_e_027.png-d8158b7bf715d156344e432e02e12d1d.ctex remapped: res://.godot/imported/viya_run_fire_e_027.png-d8158b7bf715d156344e432e02e12d1d.ctex
+Completed load for: 'res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_027.png' remapped 'res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_027.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_028.png remapped: res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_028.png
+Loading resource: res://.godot/imported/viya_run_fire_e_028.png-9337ecada2f123080967811432a86ccf.ctex remapped: res://.godot/imported/viya_run_fire_e_028.png-9337ecada2f123080967811432a86ccf.ctex
+Completed load for: 'res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_028.png' remapped 'res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_028.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_029.png remapped: res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_029.png
+Loading resource: res://.godot/imported/viya_run_fire_e_029.png-21c3d78d15d8930e031ec7de0c80edca.ctex remapped: res://.godot/imported/viya_run_fire_e_029.png-21c3d78d15d8930e031ec7de0c80edca.ctex
+Completed load for: 'res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_029.png' remapped 'res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_029.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_030.png remapped: res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_030.png
+Loading resource: res://.godot/imported/viya_run_fire_e_030.png-bf7348f392c7f4163c17c21ed09610aa.ctex remapped: res://.godot/imported/viya_run_fire_e_030.png-bf7348f392c7f4163c17c21ed09610aa.ctex
+Completed load for: 'res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_030.png' remapped 'res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_030.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_031.png remapped: res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_031.png
+Loading resource: res://.godot/imported/viya_run_fire_e_031.png-2aa12b859293a452e5fef1caf32a42c0.ctex remapped: res://.godot/imported/viya_run_fire_e_031.png-2aa12b859293a452e5fef1caf32a42c0.ctex
+Completed load for: 'res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_031.png' remapped 'res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_031.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_032.png remapped: res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_032.png
+Loading resource: res://.godot/imported/viya_run_fire_e_032.png-df23ce4d6a088516c2df6a51bf7575ba.ctex remapped: res://.godot/imported/viya_run_fire_e_032.png-df23ce4d6a088516c2df6a51bf7575ba.ctex
+Completed load for: 'res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_032.png' remapped 'res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_032.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_033.png remapped: res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_033.png
+Loading resource: res://.godot/imported/viya_run_fire_e_033.png-5b61a07d1bda3b4113ca2bf922fee16e.ctex remapped: res://.godot/imported/viya_run_fire_e_033.png-5b61a07d1bda3b4113ca2bf922fee16e.ctex
+Completed load for: 'res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_033.png' remapped 'res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_033.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_034.png remapped: res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_034.png
+Loading resource: res://.godot/imported/viya_run_fire_e_034.png-7886521a1ef2b3ac170603e7513d0c5a.ctex remapped: res://.godot/imported/viya_run_fire_e_034.png-7886521a1ef2b3ac170603e7513d0c5a.ctex
+Completed load for: 'res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_034.png' remapped 'res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_034.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_035.png remapped: res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_035.png
+Loading resource: res://.godot/imported/viya_run_fire_e_035.png-377045d3743a6c55c736b31ae2d64906.ctex remapped: res://.godot/imported/viya_run_fire_e_035.png-377045d3743a6c55c736b31ae2d64906.ctex
+Completed load for: 'res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_035.png' remapped 'res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_035.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_036.png remapped: res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_036.png
+Loading resource: res://.godot/imported/viya_run_fire_e_036.png-b99c549a1804c00a364e242345f64de0.ctex remapped: res://.godot/imported/viya_run_fire_e_036.png-b99c549a1804c00a364e242345f64de0.ctex
+Completed load for: 'res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_036.png' remapped 'res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_036.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_037.png remapped: res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_037.png
+Loading resource: res://.godot/imported/viya_run_fire_e_037.png-346d01becb71b57dcaea7c1b7db15b32.ctex remapped: res://.godot/imported/viya_run_fire_e_037.png-346d01becb71b57dcaea7c1b7db15b32.ctex
+Completed load for: 'res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_037.png' remapped 'res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_037.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_038.png remapped: res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_038.png
+Loading resource: res://.godot/imported/viya_run_fire_e_038.png-2f905b976b28e16eca9585324db87a5b.ctex remapped: res://.godot/imported/viya_run_fire_e_038.png-2f905b976b28e16eca9585324db87a5b.ctex
+Completed load for: 'res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_038.png' remapped 'res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_038.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_039.png remapped: res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_039.png
+Loading resource: res://.godot/imported/viya_run_fire_e_039.png-4d018b949f997e4c1e10931fd8f383ac.ctex remapped: res://.godot/imported/viya_run_fire_e_039.png-4d018b949f997e4c1e10931fd8f383ac.ctex
+Completed load for: 'res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_039.png' remapped 'res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_039.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_040.png remapped: res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_040.png
+Loading resource: res://.godot/imported/viya_run_fire_e_040.png-2ffac19bfefdf0331164d63df011bd69.ctex remapped: res://.godot/imported/viya_run_fire_e_040.png-2ffac19bfefdf0331164d63df011bd69.ctex
+Completed load for: 'res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_040.png' remapped 'res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_040.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_041.png remapped: res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_041.png
+Loading resource: res://.godot/imported/viya_run_fire_e_041.png-6ab02aed731c3778c9f46e3c9aea9cfa.ctex remapped: res://.godot/imported/viya_run_fire_e_041.png-6ab02aed731c3778c9f46e3c9aea9cfa.ctex
+Completed load for: 'res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_041.png' remapped 'res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_041.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_042.png remapped: res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_042.png
+Loading resource: res://.godot/imported/viya_run_fire_e_042.png-d344de15cffd1e65b3f2e00cc02928f0.ctex remapped: res://.godot/imported/viya_run_fire_e_042.png-d344de15cffd1e65b3f2e00cc02928f0.ctex
+Completed load for: 'res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_042.png' remapped 'res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_042.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_043.png remapped: res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_043.png
+Loading resource: res://.godot/imported/viya_run_fire_e_043.png-d8dc88c0b4a658846b09fa4957ba1f41.ctex remapped: res://.godot/imported/viya_run_fire_e_043.png-d8dc88c0b4a658846b09fa4957ba1f41.ctex
+Completed load for: 'res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_043.png' remapped 'res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_043.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_044.png remapped: res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_044.png
+Loading resource: res://.godot/imported/viya_run_fire_e_044.png-7826b2670a46d734a343a076d577db4a.ctex remapped: res://.godot/imported/viya_run_fire_e_044.png-7826b2670a46d734a343a076d577db4a.ctex
+Completed load for: 'res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_044.png' remapped 'res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_044.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_045.png remapped: res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_045.png
+Loading resource: res://.godot/imported/viya_run_fire_e_045.png-45a96f5556874c945186e0afddcf94b3.ctex remapped: res://.godot/imported/viya_run_fire_e_045.png-45a96f5556874c945186e0afddcf94b3.ctex
+Completed load for: 'res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_045.png' remapped 'res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_045.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_046.png remapped: res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_046.png
+Loading resource: res://.godot/imported/viya_run_fire_e_046.png-64dfdfc6063024e254b2a5edc1b8b55d.ctex remapped: res://.godot/imported/viya_run_fire_e_046.png-64dfdfc6063024e254b2a5edc1b8b55d.ctex
+Completed load for: 'res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_046.png' remapped 'res://assets/characters/pilot_32/game065_e_run_fire/frames/viya_run_fire_e_046.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game066_se_run/frames/viya_run_se_000.png remapped: res://assets/characters/pilot_32/game066_se_run/frames/viya_run_se_000.png
+Loading resource: res://.godot/imported/viya_run_se_000.png-1d7e8beb840d82f8da797a39824f768b.ctex remapped: res://.godot/imported/viya_run_se_000.png-1d7e8beb840d82f8da797a39824f768b.ctex
+Completed load for: 'res://assets/characters/pilot_32/game066_se_run/frames/viya_run_se_000.png' remapped 'res://assets/characters/pilot_32/game066_se_run/frames/viya_run_se_000.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game066_se_run/frames/viya_run_se_001.png remapped: res://assets/characters/pilot_32/game066_se_run/frames/viya_run_se_001.png
+Loading resource: res://.godot/imported/viya_run_se_001.png-a7d936c3f8b57dcdef3396547d755759.ctex remapped: res://.godot/imported/viya_run_se_001.png-a7d936c3f8b57dcdef3396547d755759.ctex
+Completed load for: 'res://assets/characters/pilot_32/game066_se_run/frames/viya_run_se_001.png' remapped 'res://assets/characters/pilot_32/game066_se_run/frames/viya_run_se_001.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game066_se_run/frames/viya_run_se_002.png remapped: res://assets/characters/pilot_32/game066_se_run/frames/viya_run_se_002.png
+Loading resource: res://.godot/imported/viya_run_se_002.png-bf4d9e9f3b89149cad2865963776fe67.ctex remapped: res://.godot/imported/viya_run_se_002.png-bf4d9e9f3b89149cad2865963776fe67.ctex
+Completed load for: 'res://assets/characters/pilot_32/game066_se_run/frames/viya_run_se_002.png' remapped 'res://assets/characters/pilot_32/game066_se_run/frames/viya_run_se_002.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game066_se_run/frames/viya_run_se_003.png remapped: res://assets/characters/pilot_32/game066_se_run/frames/viya_run_se_003.png
+Loading resource: res://.godot/imported/viya_run_se_003.png-a901dad3d51998916e0ec3d5cfa6871e.ctex remapped: res://.godot/imported/viya_run_se_003.png-a901dad3d51998916e0ec3d5cfa6871e.ctex
+Completed load for: 'res://assets/characters/pilot_32/game066_se_run/frames/viya_run_se_003.png' remapped 'res://assets/characters/pilot_32/game066_se_run/frames/viya_run_se_003.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game066_se_run/frames/viya_run_se_004.png remapped: res://assets/characters/pilot_32/game066_se_run/frames/viya_run_se_004.png
+Loading resource: res://.godot/imported/viya_run_se_004.png-6ec75d17708f6d93183ba97bea2dc4e1.ctex remapped: res://.godot/imported/viya_run_se_004.png-6ec75d17708f6d93183ba97bea2dc4e1.ctex
+Completed load for: 'res://assets/characters/pilot_32/game066_se_run/frames/viya_run_se_004.png' remapped 'res://assets/characters/pilot_32/game066_se_run/frames/viya_run_se_004.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game066_se_run/frames/viya_run_se_005.png remapped: res://assets/characters/pilot_32/game066_se_run/frames/viya_run_se_005.png
+Loading resource: res://.godot/imported/viya_run_se_005.png-42fac02bc3fa5c7356ee27e1dfed8c62.ctex remapped: res://.godot/imported/viya_run_se_005.png-42fac02bc3fa5c7356ee27e1dfed8c62.ctex
+Completed load for: 'res://assets/characters/pilot_32/game066_se_run/frames/viya_run_se_005.png' remapped 'res://assets/characters/pilot_32/game066_se_run/frames/viya_run_se_005.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game066_se_run/frames/viya_run_se_006.png remapped: res://assets/characters/pilot_32/game066_se_run/frames/viya_run_se_006.png
+Loading resource: res://.godot/imported/viya_run_se_006.png-6fabaeeda76d94126843bb6d83e98cb6.ctex remapped: res://.godot/imported/viya_run_se_006.png-6fabaeeda76d94126843bb6d83e98cb6.ctex
+Completed load for: 'res://assets/characters/pilot_32/game066_se_run/frames/viya_run_se_006.png' remapped 'res://assets/characters/pilot_32/game066_se_run/frames/viya_run_se_006.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game066_se_run/frames/viya_run_se_007.png remapped: res://assets/characters/pilot_32/game066_se_run/frames/viya_run_se_007.png
+Loading resource: res://.godot/imported/viya_run_se_007.png-d91f457871882947bfb1db42098e9805.ctex remapped: res://.godot/imported/viya_run_se_007.png-d91f457871882947bfb1db42098e9805.ctex
+Completed load for: 'res://assets/characters/pilot_32/game066_se_run/frames/viya_run_se_007.png' remapped 'res://assets/characters/pilot_32/game066_se_run/frames/viya_run_se_007.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game066_se_run/frames/viya_run_se_008.png remapped: res://assets/characters/pilot_32/game066_se_run/frames/viya_run_se_008.png
+Loading resource: res://.godot/imported/viya_run_se_008.png-b0a8501cea924f1aa9ca5a7f3d2e372b.ctex remapped: res://.godot/imported/viya_run_se_008.png-b0a8501cea924f1aa9ca5a7f3d2e372b.ctex
+Completed load for: 'res://assets/characters/pilot_32/game066_se_run/frames/viya_run_se_008.png' remapped 'res://assets/characters/pilot_32/game066_se_run/frames/viya_run_se_008.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game066_se_run/frames/viya_run_se_009.png remapped: res://assets/characters/pilot_32/game066_se_run/frames/viya_run_se_009.png
+Loading resource: res://.godot/imported/viya_run_se_009.png-b19683e9c0a24f2a376d55ba0197ce40.ctex remapped: res://.godot/imported/viya_run_se_009.png-b19683e9c0a24f2a376d55ba0197ce40.ctex
+Completed load for: 'res://assets/characters/pilot_32/game066_se_run/frames/viya_run_se_009.png' remapped 'res://assets/characters/pilot_32/game066_se_run/frames/viya_run_se_009.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game066_se_run/frames/viya_run_se_010.png remapped: res://assets/characters/pilot_32/game066_se_run/frames/viya_run_se_010.png
+Loading resource: res://.godot/imported/viya_run_se_010.png-4b08b8139bb09570886b06fddd49bb83.ctex remapped: res://.godot/imported/viya_run_se_010.png-4b08b8139bb09570886b06fddd49bb83.ctex
+Completed load for: 'res://assets/characters/pilot_32/game066_se_run/frames/viya_run_se_010.png' remapped 'res://assets/characters/pilot_32/game066_se_run/frames/viya_run_se_010.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game066_se_run/frames/viya_run_se_011.png remapped: res://assets/characters/pilot_32/game066_se_run/frames/viya_run_se_011.png
+Loading resource: res://.godot/imported/viya_run_se_011.png-28c8ef5787788e2743585bcf305d7557.ctex remapped: res://.godot/imported/viya_run_se_011.png-28c8ef5787788e2743585bcf305d7557.ctex
+Completed load for: 'res://assets/characters/pilot_32/game066_se_run/frames/viya_run_se_011.png' remapped 'res://assets/characters/pilot_32/game066_se_run/frames/viya_run_se_011.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game066_se_run/frames/viya_run_se_012.png remapped: res://assets/characters/pilot_32/game066_se_run/frames/viya_run_se_012.png
+Loading resource: res://.godot/imported/viya_run_se_012.png-550debb38824968260595dcb45fde8be.ctex remapped: res://.godot/imported/viya_run_se_012.png-550debb38824968260595dcb45fde8be.ctex
+Completed load for: 'res://assets/characters/pilot_32/game066_se_run/frames/viya_run_se_012.png' remapped 'res://assets/characters/pilot_32/game066_se_run/frames/viya_run_se_012.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game066_se_run/frames/viya_run_se_013.png remapped: res://assets/characters/pilot_32/game066_se_run/frames/viya_run_se_013.png
+Loading resource: res://.godot/imported/viya_run_se_013.png-6809972fb4c583fce1744cf8f5bc73cb.ctex remapped: res://.godot/imported/viya_run_se_013.png-6809972fb4c583fce1744cf8f5bc73cb.ctex
+Completed load for: 'res://assets/characters/pilot_32/game066_se_run/frames/viya_run_se_013.png' remapped 'res://assets/characters/pilot_32/game066_se_run/frames/viya_run_se_013.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game066_se_run/frames/viya_run_se_014.png remapped: res://assets/characters/pilot_32/game066_se_run/frames/viya_run_se_014.png
+Loading resource: res://.godot/imported/viya_run_se_014.png-b1324f6bb3b02b97aff624be27640c65.ctex remapped: res://.godot/imported/viya_run_se_014.png-b1324f6bb3b02b97aff624be27640c65.ctex
+Completed load for: 'res://assets/characters/pilot_32/game066_se_run/frames/viya_run_se_014.png' remapped 'res://assets/characters/pilot_32/game066_se_run/frames/viya_run_se_014.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game066_se_run/frames/viya_run_se_015.png remapped: res://assets/characters/pilot_32/game066_se_run/frames/viya_run_se_015.png
+Loading resource: res://.godot/imported/viya_run_se_015.png-56397392a5595bd67de8608ae86a2818.ctex remapped: res://.godot/imported/viya_run_se_015.png-56397392a5595bd67de8608ae86a2818.ctex
+Completed load for: 'res://assets/characters/pilot_32/game066_se_run/frames/viya_run_se_015.png' remapped 'res://assets/characters/pilot_32/game066_se_run/frames/viya_run_se_015.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game066_se_run/frames/viya_run_se_016.png remapped: res://assets/characters/pilot_32/game066_se_run/frames/viya_run_se_016.png
+Loading resource: res://.godot/imported/viya_run_se_016.png-e1b0419c707d558f83d5b4b01c3e2dbf.ctex remapped: res://.godot/imported/viya_run_se_016.png-e1b0419c707d558f83d5b4b01c3e2dbf.ctex
+Completed load for: 'res://assets/characters/pilot_32/game066_se_run/frames/viya_run_se_016.png' remapped 'res://assets/characters/pilot_32/game066_se_run/frames/viya_run_se_016.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game066_se_run/frames/viya_run_se_017.png remapped: res://assets/characters/pilot_32/game066_se_run/frames/viya_run_se_017.png
+Loading resource: res://.godot/imported/viya_run_se_017.png-0001191cd56b8034d23eb4b4e2799e35.ctex remapped: res://.godot/imported/viya_run_se_017.png-0001191cd56b8034d23eb4b4e2799e35.ctex
+Completed load for: 'res://assets/characters/pilot_32/game066_se_run/frames/viya_run_se_017.png' remapped 'res://assets/characters/pilot_32/game066_se_run/frames/viya_run_se_017.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_000.png remapped: res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_000.png
+Loading resource: res://.godot/imported/viya_run_fire_se_000.png-8a62e67d01842c5bc30f5b7f7851b6a6.ctex remapped: res://.godot/imported/viya_run_fire_se_000.png-8a62e67d01842c5bc30f5b7f7851b6a6.ctex
+Completed load for: 'res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_000.png' remapped 'res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_000.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_001.png remapped: res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_001.png
+Loading resource: res://.godot/imported/viya_run_fire_se_001.png-4f4f2bccc4291f3846629225ad6c0bf2.ctex remapped: res://.godot/imported/viya_run_fire_se_001.png-4f4f2bccc4291f3846629225ad6c0bf2.ctex
+Completed load for: 'res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_001.png' remapped 'res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_001.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_002.png remapped: res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_002.png
+Loading resource: res://.godot/imported/viya_run_fire_se_002.png-06b18f4f02188d33169920f13bbe7af5.ctex remapped: res://.godot/imported/viya_run_fire_se_002.png-06b18f4f02188d33169920f13bbe7af5.ctex
+Completed load for: 'res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_002.png' remapped 'res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_002.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_003.png remapped: res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_003.png
+Loading resource: res://.godot/imported/viya_run_fire_se_003.png-db45109946267e74e741ca8d3738a9de.ctex remapped: res://.godot/imported/viya_run_fire_se_003.png-db45109946267e74e741ca8d3738a9de.ctex
+Completed load for: 'res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_003.png' remapped 'res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_003.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_004.png remapped: res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_004.png
+Loading resource: res://.godot/imported/viya_run_fire_se_004.png-2daa9710a482c7351d5ce58644488ba2.ctex remapped: res://.godot/imported/viya_run_fire_se_004.png-2daa9710a482c7351d5ce58644488ba2.ctex
+Completed load for: 'res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_004.png' remapped 'res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_004.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_005.png remapped: res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_005.png
+Loading resource: res://.godot/imported/viya_run_fire_se_005.png-895c899b20023598e5bb3c31ad5aee45.ctex remapped: res://.godot/imported/viya_run_fire_se_005.png-895c899b20023598e5bb3c31ad5aee45.ctex
+Completed load for: 'res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_005.png' remapped 'res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_005.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_006.png remapped: res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_006.png
+Loading resource: res://.godot/imported/viya_run_fire_se_006.png-2483a9190ae9cc3e5e85af0968946e2b.ctex remapped: res://.godot/imported/viya_run_fire_se_006.png-2483a9190ae9cc3e5e85af0968946e2b.ctex
+Completed load for: 'res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_006.png' remapped 'res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_006.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_007.png remapped: res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_007.png
+Loading resource: res://.godot/imported/viya_run_fire_se_007.png-afe35d2d8ed2e176aed75ebf2d26c3b2.ctex remapped: res://.godot/imported/viya_run_fire_se_007.png-afe35d2d8ed2e176aed75ebf2d26c3b2.ctex
+Completed load for: 'res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_007.png' remapped 'res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_007.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_008.png remapped: res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_008.png
+Loading resource: res://.godot/imported/viya_run_fire_se_008.png-117f90f817fd1b38f61cc3336788c5b2.ctex remapped: res://.godot/imported/viya_run_fire_se_008.png-117f90f817fd1b38f61cc3336788c5b2.ctex
+Completed load for: 'res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_008.png' remapped 'res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_008.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_009.png remapped: res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_009.png
+Loading resource: res://.godot/imported/viya_run_fire_se_009.png-a5df4e23f0445f67721f65915813e353.ctex remapped: res://.godot/imported/viya_run_fire_se_009.png-a5df4e23f0445f67721f65915813e353.ctex
+Completed load for: 'res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_009.png' remapped 'res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_009.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_010.png remapped: res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_010.png
+Loading resource: res://.godot/imported/viya_run_fire_se_010.png-613b2be6784df3e9def5173e547ea0f0.ctex remapped: res://.godot/imported/viya_run_fire_se_010.png-613b2be6784df3e9def5173e547ea0f0.ctex
+Completed load for: 'res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_010.png' remapped 'res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_010.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_011.png remapped: res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_011.png
+Loading resource: res://.godot/imported/viya_run_fire_se_011.png-7ab17f21627e6b8afeb5efe6b3ea2fa6.ctex remapped: res://.godot/imported/viya_run_fire_se_011.png-7ab17f21627e6b8afeb5efe6b3ea2fa6.ctex
+Completed load for: 'res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_011.png' remapped 'res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_011.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_012.png remapped: res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_012.png
+Loading resource: res://.godot/imported/viya_run_fire_se_012.png-5ae8de7c56bf04f10e64f1b5fc830455.ctex remapped: res://.godot/imported/viya_run_fire_se_012.png-5ae8de7c56bf04f10e64f1b5fc830455.ctex
+Completed load for: 'res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_012.png' remapped 'res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_012.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_013.png remapped: res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_013.png
+Loading resource: res://.godot/imported/viya_run_fire_se_013.png-f5dfdfc1c01982994c21714ddde7ac6a.ctex remapped: res://.godot/imported/viya_run_fire_se_013.png-f5dfdfc1c01982994c21714ddde7ac6a.ctex
+Completed load for: 'res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_013.png' remapped 'res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_013.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_014.png remapped: res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_014.png
+Loading resource: res://.godot/imported/viya_run_fire_se_014.png-d24b3e30e875df652ea8130d5d013617.ctex remapped: res://.godot/imported/viya_run_fire_se_014.png-d24b3e30e875df652ea8130d5d013617.ctex
+Completed load for: 'res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_014.png' remapped 'res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_014.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_015.png remapped: res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_015.png
+Loading resource: res://.godot/imported/viya_run_fire_se_015.png-4fe40f88ceab040da1e8650e43c803f5.ctex remapped: res://.godot/imported/viya_run_fire_se_015.png-4fe40f88ceab040da1e8650e43c803f5.ctex
+Completed load for: 'res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_015.png' remapped 'res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_015.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_016.png remapped: res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_016.png
+Loading resource: res://.godot/imported/viya_run_fire_se_016.png-d08b42ffa434956b6e2b570400568501.ctex remapped: res://.godot/imported/viya_run_fire_se_016.png-d08b42ffa434956b6e2b570400568501.ctex
+Completed load for: 'res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_016.png' remapped 'res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_016.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_017.png remapped: res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_017.png
+Loading resource: res://.godot/imported/viya_run_fire_se_017.png-77270fe2d43f67892de0be2ad38d4427.ctex remapped: res://.godot/imported/viya_run_fire_se_017.png-77270fe2d43f67892de0be2ad38d4427.ctex
+Completed load for: 'res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_017.png' remapped 'res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_017.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_018.png remapped: res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_018.png
+Loading resource: res://.godot/imported/viya_run_fire_se_018.png-49e148508edbf1f360bbf693319fc7e2.ctex remapped: res://.godot/imported/viya_run_fire_se_018.png-49e148508edbf1f360bbf693319fc7e2.ctex
+Completed load for: 'res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_018.png' remapped 'res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_018.png' at thread -1
+Loading resource: res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_019.png remapped: res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_019.png
+Loading resource: res://.godot/imported/viya_run_fire_se_019.png-bd433f68d3c3d028c4904098e31f33cd.ctex remapped: res://.godot/imported/viya_run_fire_se_019.png-bd433f68d3c3d028c4904098e31f33cd.ctex
+Completed load for: 'res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_019.png' remapped 'res://assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_019.png' at thread -1
+Completed load for: 'res://assets/characters/pilot_32/game067_se_run_fire/viya_game067_frames.tres' remapped 'res://assets/characters/pilot_32/game067_se_run_fire/viya_game067_frames.tres' at thread -1
+Loading resource: res://assets/maps/pilot_01/stone_floor_tile.png remapped: res://assets/maps/pilot_01/stone_floor_tile.png
+Loading resource: res://.godot/imported/stone_floor_tile.png-9e6384cf2976c3d46382ab40af2b9e3f.ctex remapped: res://.godot/imported/stone_floor_tile.png-9e6384cf2976c3d46382ab40af2b9e3f.ctex
+Completed load for: 'res://assets/maps/pilot_01/stone_floor_tile.png' remapped 'res://assets/maps/pilot_01/stone_floor_tile.png' at thread -1
+Loading resource: res://assets/maps/pilot_03/ruin_top_tile.png remapped: res://assets/maps/pilot_03/ruin_top_tile.png
+Loading resource: res://.godot/imported/ruin_top_tile.png-b20e52a496c92cc09dd69d60b2610e3a.ctex remapped: res://.godot/imported/ruin_top_tile.png-b20e52a496c92cc09dd69d60b2610e3a.ctex
+Completed load for: 'res://assets/maps/pilot_03/ruin_top_tile.png' remapped 'res://assets/maps/pilot_03/ruin_top_tile.png' at thread -1
+Loading resource: res://assets/maps/pilot_02/ruin_block.png remapped: res://assets/maps/pilot_02/ruin_block.png
+Loading resource: res://.godot/imported/ruin_block.png-582e46769ca460fadfba474502947212.ctex remapped: res://.godot/imported/ruin_block.png-582e46769ca460fadfba474502947212.ctex
+Completed load for: 'res://assets/maps/pilot_02/ruin_block.png' remapped 'res://assets/maps/pilot_02/ruin_block.png' at thread -1
+Loading resource: res://assets/maps/pilot_02/prop_urn.png remapped: res://assets/maps/pilot_02/prop_urn.png
+Loading resource: res://.godot/imported/prop_urn.png-d4a2b47df3a5eaebd8986273bfa40928.ctex remapped: res://.godot/imported/prop_urn.png-d4a2b47df3a5eaebd8986273bfa40928.ctex
+Completed load for: 'res://assets/maps/pilot_02/prop_urn.png' remapped 'res://assets/maps/pilot_02/prop_urn.png' at thread -1
+Loading resource: res://assets/maps/pilot_02/prop_debris.png remapped: res://assets/maps/pilot_02/prop_debris.png
+Loading resource: res://.godot/imported/prop_debris.png-c8d1569602db73699c45137c9e17a51a.ctex remapped: res://.godot/imported/prop_debris.png-c8d1569602db73699c45137c9e17a51a.ctex
+Completed load for: 'res://assets/maps/pilot_02/prop_debris.png' remapped 'res://assets/maps/pilot_02/prop_debris.png' at thread -1
+Loading resource: res://assets/maps/pilot_01/prop_crate.png remapped: res://assets/maps/pilot_01/prop_crate.png
+Loading resource: res://.godot/imported/prop_crate.png-661c36f23a5984acd25e45afc2ac7090.ctex remapped: res://.godot/imported/prop_crate.png-661c36f23a5984acd25e45afc2ac7090.ctex
+Completed load for: 'res://assets/maps/pilot_01/prop_crate.png' remapped 'res://assets/maps/pilot_01/prop_crate.png' at thread -1
+hurt_debug=100/88/hurt_se
+{"checks":1331,"draws":0,"failures":[],"real_shots":43,"run_frames":18,"run_wraps":4,"status":"PASS"}
+XR: Clearing primary interface
+XR: Removed interface "Native mobile"
+XR: Removed interface "OpenXR"
+
+=== Python unittest ===
+....................
+----------------------------------------------------------------------
+Ran 20 tests in 0.048s
+
+OK
+
+=== Xorg launch BLOCKED ===
+_XSERVTransSocketOpenCOTSServer: Unable to open socket for local
+_XSERVTransOpen: transport open failed for local/0303487c4583:101
+_XSERVTransMakeAllCOTSServerListeners: failed to open listener for local
+_XSERVTransSocketOpenCOTSServer: Unable to open socket for unix
+_XSERVTransOpen: transport open failed for unix/0303487c4583:101
+_XSERVTransMakeAllCOTSServerListeners: failed to open listener for unix
+(EE) 
+Fatal server error:
+(EE) Cannot establish any listening sockets - Make sure an X server isn't already running(EE) 
+(EE) 
+Please consult the The X.Org Foundation support 
+	 at http://wiki.x.org
+ for help. 
+(EE) Please also check the log file at "/workspace/scratch/6291c6828a10/Viya/.local_validation/GAME067_Xorg.log" for additional information.
+(EE) 
+(EE) Server terminated with error (1). Closing log file.
+
+=== socket probe ===
+AF_UNIX socket creation: PermissionError [Errno 1] Operation not permitted.
+
+=== restricted execution request ===
+Automatic approval policy rejected sandbox escalation: sandbox_approval:false. That request did not launch a GUI process.
+
+=== final492 navigation rerun after fixture isolation ===
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+GAME066_meta res_ok=true muzzle_ok=true phase=0.27272727272727
+{"checks":492,"failures":[],"status":"PASS"}
