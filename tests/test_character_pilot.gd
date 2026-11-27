@@ -6,7 +6,7 @@ const Campaign=preload("res://tests/test_campaign.gd")
 const Scenery=preload("res://scripts/combat/oblique_scenery.gd")
 const MANIFEST:="res://assets/characters/pilot_32/source_manifest.json"
 const SOURCE_RESOURCE:="res://assets/characters/pilot_32/resources/viya_directional_motion.tres"
-const RESOURCE:="res://assets/characters/pilot_32/game068_s_run/viya_game068_frames.tres"
+const RESOURCE:="res://assets/characters/pilot_32/game069_s_run_fire/viya_game069_frames.tres"
 const CACHE=preload("res://assets/characters/pilot_32/render_cache/viya_render_frames.tres")
 const EAST_TIMING:="res://assets/characters/pilot_32/game064_e_run/provenance/frame_timing.csv"
 const SE_FIRST="res://assets/characters/pilot_32/game066_se_run/frames/viya_run_se_000.png"
@@ -51,7 +51,7 @@ static func run(host,verify:Callable) -> void:
 	var exact:bool=FileAccess.get_sha256(SOURCE_RESOURCE)==manifest.source_package.resource_original_sha256
 	for entry in manifest.runtime_files:exact=exact and FileAccess.get_sha256(MANIFEST.get_base_dir().path_join(entry.path))==entry.sha256
 	verify.call(exact and manifest.runtime_files.size()==208,"Every shipped PNG and the relative-path resource match the supplied package bytes")
-	verify.call(asset.get_animation_names().size()==34 and asset.has_animation("run_fire_e") and not asset.has_animation("default") and not asset.has_animation("idle"),"The32preserved directional states and one E moving-fire clip are shipped without a generic or mirrored replacement")
+	verify.call(asset.get_animation_names().size()==35 and asset.has_animation("run_fire_e") and not asset.has_animation("default") and not asset.has_animation("idle"),"The32preserved directional states and one E moving-fire clip are shipped without a generic or mirrored replacement")
 	var timing:Array=east_timing()
 	var derivative:Dictionary=JSON.parse_string(FileAccess.get_file_as_string(EAST_MANIFEST))
 	var checks:Array=derivative.get("bitmap_checks",[])

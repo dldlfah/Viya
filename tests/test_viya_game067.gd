@@ -56,7 +56,7 @@ static func run(view,asset:SpriteFrames,verify:Callable) -> void:
 	var count:int=asset.get_frame_count(FIRE) if asset.has_animation(FIRE) else 0
 	var timing:Array=read_timing(GAME067_TIMING)
 	var rows:Variant=view.viya.config.directions.se.get("run_fire")
-	verify.call(count>0 and asset.get_animation_names().size()==34 and timing.size()==count and rows is Array and rows.size()==count,"The active composite adds one SE moving-fire clip alongside preserved E backed by its actual delivered timing and frame metadata")
+	verify.call(count>0 and asset.get_animation_names().size()==35 and timing.size()==count and rows is Array and rows.size()==count,"The active composite adds one SE moving-fire clip alongside preserved E backed by its actual delivered timing and frame metadata")
 	if count<=0 or timing.size()!=count or not rows is Array or rows.size()!=count:return
 	var total_ms:=0.0
 	var timing_valid:=true

@@ -33,13 +33,13 @@ static func run(view,asset:SpriteFrames,verify:Callable) -> void:
 		preserved=preserved and asset.get_animation_loop(name)==Prior.get_animation_loop(name) and asset.get_animation_speed(name)==Prior.get_animation_speed(name)
 		for index in range(count):
 			preserved=preserved and asset.get_frame_texture(name,index).resource_path==Prior.get_frame_texture(name,index).resource_path and asset.get_frame_duration(name,index)==Prior.get_frame_duration(name,index)
-	verify.call(preserved and total==307 and asset.get_animation_names().size()==34,"GAME068 live resource preserves all33other clips/307resolved frames and exact weights/speeds/loops")
+	verify.call(preserved and total==307 and asset.get_animation_names().size()==35,"GAME068 live resource preserves all33other clips/307resolved frames and exact weights/speeds/loops")
 	var timing:Array=Reader.read_timing(CSV)
 	var metadata:Dictionary=JSON.parse_string(FileAccess.get_file_as_string(META))
 	var alignment:Dictionary=JSON.parse_string(FileAccess.get_file_as_string(PHASE))
 	var manifest:Dictionary=JSON.parse_string(FileAccess.get_file_as_string(MANIFEST))
 	var rows:Array=view.viya.config.directions.s.run
-	verify.call(asset.get_frame_count("run_s")==17 and asset.get_animation_loop("run_s") and not asset.has_animation("run_fire_s") and timing.size()==17 and rows.size()==17,"Only S ordinary running is replaced by17 native frames; no fabricated S firing clip")
+	verify.call(asset.get_frame_count("run_s")==17 and asset.get_animation_loop("run_s") and asset.has_animation("run_fire_s") and timing.size()==17 and rows.size()==17,"Only S ordinary running is replaced by17 native frames; separate GAME069 firing clip remains registered")
 	if timing.size()!=17 or rows.size()!=17:return
 	var speed:float=asset.get_animation_speed("run_s")
 	var elapsed:=0.0
@@ -82,9 +82,12 @@ static func run(view,asset:SpriteFrames,verify:Callable) -> void:
 	var visual:Dictionary=begin(view,.373)
 	var index:int=visual.sample.index
 	var held:float=visual.gait_phase
+	# Exercise the old generic-run contract with only the optional firing metadata absent.
+	var fire_rows:Array=view.viya.config.directions.s.run_fire
+	view.viya.config.directions.s.erase("run_fire")
 	visual.pose="attack";visual.shot_age=.01;visual.gun_aim=visual.facing
 	view.viya.apply(view,visual)
-	verify.call(frame(visual,"run_s",index) and is_equal_approx(visual.gait_phase,held) and visual.recoil==0,"Committed S gunfire preserves the same whole-body run phase without a dedicated firing asset or mesh deformation")
+	verify.call(frame(visual,"run_s",index) and is_equal_approx(visual.gait_phase,held) and visual.recoil==0,"Missing optional S firing metadata preserves ordinary S17 phase without mesh deformation")
 	var feet:=Vector2(200,180)
 	var muzzle:Vector2=view.viya.muzzle(view.actor_art,visual,feet)
 	var box:Rect2=view.viya.body_rect(view.actor_art,visual,feet)
@@ -113,5 +116,6 @@ static func run(view,asset:SpriteFrames,verify:Callable) -> void:
 	visual=begin(view,(timing[8].start_ms+timing[8].duration_ms*.5)/660.0-origin)
 	verify.call(frame(visual,"run_s",8) and is_same(visual.sample.texture,view.viya.decoded(rows[8].texture)),"A pathless white S import recovers the correct native PNG without changing the run phase")
 	asset.set_frame("run_s",8,texture,weight)
+	view.viya.config.directions.s.run_fire=fire_rows
 	view.viya=original
 	verify.call(Snapshot.capture(view.simulation)==saved and view.simulation.cues.snapshot()==cues and is_same(asset.get_frame_texture("run_s",8),texture),"All S presentation trials restore the asset and leave saves,RNG,rewards and cues unchanged")
