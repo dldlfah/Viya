@@ -1,0 +1,6 @@
+{
+  "exit_code": 0,
+  "stdout": "[{\"file\": \"/home/user/viya_game068/input_viya_run_s_00.png\", \"sha256\": \"d8284664e3a1a836db74385168d6bfdf253cfef7767b04b3731c27a68362ae2f\", \"source_sha256\": \"372713060298f7804ed54f4675c16d1b1097a9fa62d97f2ab4f38d4dd537abdc\", \"size\": [800, 992]}, {\"file\": \"/home/user/viya_game068/input_viya_run_s_05.png\", \"sha256\": \"78ea76832b30f62f6957ca9235fb5fe270b797f214dd8ca451233b2f96507b4d\", \"source_sha256\": \"e2c8509ce027c39e999cfd4d832bb846f3e05b7b7eb2be1421a4f2ed633d035a\", \"size\": [800, 992]}, {\"file\": \"/home/user/viya_game068/input_viya_idle_s.png\", \"sha256\": \"926dd48e9a5ec8a7ac73ae37fae6134d81aec470486fc71d1f329646f41ca344\", \"source_sha256\": \"d67e6d0debd593f03a4a23008d70ef291309185fe1052387f42477b49b8d25c7\", \"size\": [800, 992]}]\n\nHTTP 200\n\nHTTP 200\n\nHTTP 200\n",
+  "stderr": "",
+  "sandbox_id": "sb-01M8DS3SKN1QMBNCHF6BTWEE39"
+}

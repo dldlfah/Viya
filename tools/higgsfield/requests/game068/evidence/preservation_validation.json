@@ -1,0 +1,9 @@
+{
+  "base_commit": "6d9f0d07d0a3bc27bdfb544e2a1bbd2e05ed7488",
+  "existing_assets_scripts_data_identical": 1405,
+  "changed_existing_files": [],
+  "active_game_resource": "GAME067/34clips318frames; unchanged",
+  "source_and_14_reference_hashes": "PASS",
+  "generation_status": "ART_DELIVERY_ONLY",
+  "game_runtime_tests": "NOT_RERUN_FOR_ART_ONLY_WORK"
+}

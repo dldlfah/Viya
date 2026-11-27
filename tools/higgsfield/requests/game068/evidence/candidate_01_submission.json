@@ -1,0 +1,38 @@
+{
+  "results": [
+    {
+      "id": "3a872c40-f3fc-4180-b143-13001f789f44",
+      "type": "video",
+      "status": "pending",
+      "model": "seedance_2_5",
+      "params": {
+        "prompt": "Animate the exact adult VIYA shown in the supplied SOUTH-facing references into a continuous full-body running-in-place cycle.\n\nPreserve the existing fixed high-angle FRONT view facing straight toward the bottom of the screen. Keep the same camera elevation, perspective, body proportions and framing throughout. The character runs in place; the camera does not move, rotate, track or zoom.\n\nPreserve her approved mature face, long dark-brown wavy hair, ivory top, fitted black corset, partial gloves, brass and gold ornaments, short lower garments, thigh straps, tall decorated boots, asymmetric crimson fabric and original rune-decorated rifle. Keep the costume asymmetry on its original sides. Maintain the original painterly dark-fantasy anime style.\n\nThis is ordinary running with the rifle securely carried in BOTH hands in the same ready-carry position as the SOUTH reference. No firing, no aimed shooting pose and no recoil performance. Keep the original weapon intact and maintain coherent hand contact.\n\nShow a natural alternating left-right running gait: foot contact, weight-bearing support, toe-off, bent-knee recovery and the next contact. Both legs alternate through a complete cycle. Maintain continuous weight transfer through the pelvis and torso, modest natural head movement, stable weapon handling and coherent hair and cloth follow-through. Include naturally evolving full-body poses throughout, without held-pose blocks, repeated one-leg kicks, abrupt vertical jumps or a frozen torso.\n\nKeep the character centered within one consistent canvas registration. Hair, barrel tip, fabric and both boots remain inside the frame with clear margin. The final distinct pose must lead naturally into the first pose without a pause or duplicated endpoint. Continue the same steady gait throughout the clip.\n\nUse one flat, uniform saturated green background with no floor line, cast shadow, scenery or lighting changes. Keep clean character boundaries without green glow or reflected green tint.\n\nNo muzzle flash, bullets, tracers, casings, smoke, sparks, magic effects, text, panels, checkerboard or additional characters. No costume or weapon redesign, mirroring, camera turn, limb cutouts, puppet warping, ghost blends, double limbs, ping-pong playback or artificial endpoint holds. Silent video.",
+        "aspect_ratio": "auto",
+        "duration": 4,
+        "reference_images": [
+          "0e49e99b-9ccd-4015-88d9-e85ae9ef4eea",
+          "3e34fd9e-bb60-4cf3-b06c-2138faea040e"
+        ],
+        "mode": "omni_reference",
+        "resolution": "720p",
+        "generate_audio": false,
+        "bitrate_mode": "high",
+        "draft": false
+      }
+    }
+  ],
+  "adjustments": {
+    "medias[1].role": {
+      "requested": "image",
+      "used": "image_references",
+      "reason": "Seedance 2.5 backend expects schema-key media roles"
+    }
+  },
+  "references_read": [
+    {
+      "ref": "quote:nqlwdc_IERaFa48w4n-0HA",
+      "chars": 2671,
+      "sha256": "503aae28f1828063022aa7e668fb523547016911aa40cc4ac93cdeecdd6c4baf"
+    }
+  ]
+}

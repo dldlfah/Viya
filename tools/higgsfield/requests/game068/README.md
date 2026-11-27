@@ -1,8 +1,11 @@
-# GAME068 — S 일반 달리기 한 방향 제작 인계
+# GAME068 — S 일반 달리기 제작 완료·제작세션 인계
 
-기존 GAME067 SE 이동사격 검수 이후의 인접 방향이다. **새 S 원화/교체 게임 연결은 아직0**이며 현재 S는 원래11장이다. 사용자 지정 기획/Higgsfield 세션이 제작하고 제작 세션이 납품 검증/게임 연결한다.
+2026-11-27,KST. 재개 원격HEAD6d9f0d07d0a3bc27bdfb544e2a1bbd2e05ed7488와 준비 참조14개/S11 영상 해시를 대조했다. 현재 연결된 GAME067의34클립/318프레임을 보존했다.
 
-- [한글 제작·연결 기준](PROMPT_KO.txt) · [영문 동작 프롬프트](PROMPT_EN.txt) · `request_plan.json`의 참조 해시를 사용한다. API 제출 스키마가 아니다.
-- [기존 S11 기준 영상](../../../../docs/validation/GAME068_S_RUN_REFERENCE.mp4)은 실제 Godot로 현재 달리기를 회색600×744/60fps·5주기 재생한 참조다. 새 원화나 실시간FPS 측정이 아니다.
-- 현재34클립/318프레임에서 S run11만 바꾼다. 나머지33클립/307프레임과 E47/E사격47/SE18/SE사격20은 보존한다. S 전용 이동사격은 후속이다.
-- 실행할 때 실제 기능/입력·알파/가격/잔액을 다시 조회한다. 이전657을 현재 잔액으로 가정하지 않는다. 이번 패킷의 생성/비용/결제0이다.
+**실제 생성1건·기술 채택17장·게임 연결0·최종 아트NOT_VERIFIED**다. [원화 납품](../../../../assets/characters/pilot_32/game068_s_run/README.md) · [제작세션 인계](DELIVERY_HANDOFF.md) · [아트 분석 영상](../../../../assets/characters/pilot_32/game068_s_run/provenance/art_review.mp4).
+
+Seedance2.5의 현재 스키마를 조회하고4초/720p/omni_reference·음성false·high bitrate·draftfalse·count1을28크레딧으로 견적/제출했다. S00 시작/S05 보조 이미지 두 개만 사용했다. 일반image 역할은 현재 백엔드image_references로 정규화됐다. S11 영상과 E/SE 영상·접촉 시트는 생성 입력이 아니다. 원출력RGB97장/24fps의34~50을 채택하고 다음51은 제외했다. 정확한 프레임/주기 개수는 보장으로 취급하지 않았다.
+
+현재 관측잔액657→629·실차감28,유료1/2건·예산28/60/잔여32다. 정상 주기를 확보해 두 번째 생성은 하지 않았다. 새 결제/충전/요금제 변경·유료 업스케일/연장/음성/배경 제거0. 실패/환불0. [잔액/모델/입력·견적/작업·원본/채택 근거](evidence/)를 보존했다.
+
+PROMPT_EN.txt는 실제 모델에 전달한 시각/동작 지시만 포함한다. 운영/CSV/게임 검증은 PROMPT_KO와DELIVERY_HANDOFF에 구분했다. 초기request_plan은evidence/request_plan_before.json,최신 생산 결과는request_plan.json과evidence/candidate_01_review.json을 따른다. [기존 S11 기준 영상](../../../../docs/validation/GAME068_S_RUN_REFERENCE.mp4)은 기존 동작 확인용이며 새 원화/성능 검증이 아니다.

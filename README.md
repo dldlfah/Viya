@@ -1,6 +1,12 @@
 # Viya — 모바일 서바이버 게임
 
-## GAME067 실제 화면 검수 마감 → GAME068 (2026-11-27)
+## GAME068 — S 일반 달리기17장 원화 납품(2026-11-27)
+
+첫 유료 생성1건으로 연속 원천34~50의17장RGBA·실제 시간표·독립 총구/발 위상을 납품했다. **실차감28/한도60크레딧·남은32**,조회잔액657→629다. 정상 주기를 확보해 두 번째 생성은 하지 않았다. [납품/근거](assets/characters/pilot_32/game068_s_run/README.md) · [아트 분석 영상](assets/characters/pilot_32/game068_s_run/provenance/art_review.mp4) · [제작세션 인계](tools/higgsfield/requests/game068/DELIVERY_HANDOFF.md).
+
+**원화 기술 채택 / 신규S 게임 연결0 / 최종 아트NOT_VERIFIED**다. 활성GAME067의34클립/318프레임·기존게임/자산1,405파일을 유지한다. 다음은 제작세션의run_s11→17 교체와 실제main.tscn 검수다. 원화 분석 영상은 게임 캡처/FPS 검증이 아니다. [CURRENT](docs/CURRENT_WORK.md) · [누적8.70](docs/DEVELOPMENT_STATUS.md) · [계획76](docs/PLANNED_WORK.md) · [NEXT](docs/NEXT_TASK.md)를 우선한다. 아래 준비0/당시NEXT는 이전 이력이다.
+
+## 이전 GAME067 실제 화면 검수 마감 → GAME068 (2026-11-27)
 
 SE 이동사격20장의 게임 연결ce7e779를 검수했다. **실제main.tscn 2,473검사·444그리기·43발**, 기존 전체10명령/7네이티브 **4,558검사**·Python20·6계약/177변이거부 PASS다. 이번 환경에서는 별도 Xorg가 정상 실행돼 이전 GUI 차단을 해소했다. [실제 사격/해제 영상](docs/validation/GAME067_REVIEW_MOVING_FIRE.mp4) · [실제 화면](docs/validation/GAME067_REVIEW_IN_GAME.png) · [검수 보고서](docs/validation/GAME067_REVIEW_REPORT.json).
 

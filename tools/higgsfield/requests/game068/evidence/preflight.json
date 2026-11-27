@@ -1,0 +1,24 @@
+{
+  "date_kst": "2026-11-27",
+  "base_commit": "6d9f0d07d0a3bc27bdfb544e2a1bbd2e05ed7488",
+  "budget": {
+    "paid_submissions_max": 2,
+    "credits_max": 60,
+    "submitted_before": 0,
+    "charged_before": 0
+  },
+  "scope": "S ordinary running; no firing",
+  "inputs": [
+    "S00 as start_image",
+    "S05 as image_references (backend-normalized)"
+  ],
+  "idle_uploaded_but_not_submitted": true,
+  "video_input": false,
+  "reference_roles_reason": "S00 has intact face/rifle/cloth and front high-angle; S05 shows the opposite leg extension. Idle adds no unique identity detail and is omitted to reduce held-pose conditioning.",
+  "source_reference_hashes": "14 inputs and S11 video match prepared request_plan",
+  "pending_same_request": "No prior GAME068 submission exists in current packet/history of this task; do not re-submit if a job ID is issued.",
+  "current_connection": "Higgsfield connected MCP tools; model and balance read successfully",
+  "alpha": "No alpha-output parameter advertised for this video model. Preserve actual RGB master; derive RGBA locally if needed.",
+  "no_new_project": true,
+  "game_connection": "NOT_REQUESTED_THIS_ART_UNIT"
+}

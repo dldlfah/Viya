@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "isolated_identical_rgba_pngs": 17,
+  "frame_timing_csv_byte_identical": true,
+  "registration": {
+    "scale": 0.22916666666666666,
+    "translation": [
+      1,
+      0.3
+    ]
+  },
+  "no_pose_or_time_synthesis": true
+}

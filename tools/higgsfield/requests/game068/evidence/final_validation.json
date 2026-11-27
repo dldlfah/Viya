@@ -1,0 +1,26 @@
+{
+  "status": "PASS",
+  "base_commit": "6d9f0d07d0a3bc27bdfb544e2a1bbd2e05ed7488",
+  "rgba_frames": 17,
+  "source_frame_count": 97,
+  "source_window": [
+    34,
+    51
+  ],
+  "zero_based_exclusive_end": true,
+  "asset_checksum_entries_verified": 38,
+  "original_reference_hashes_verified": 14,
+  "reference_video_hash_verified": true,
+  "independent_muzzles": 17,
+  "positive_nominal_timing_total_ms": 660,
+  "base_speed_timing_total_ms": 659.5744680851063,
+  "isolated_reproduction": "17PNG plus timingCSV byte-identical",
+  "existing_assets_scripts_data_identical": 1405,
+  "game_integration": "NOT_RUN_ART_HANDOFF_ONLY",
+  "final_art": "NOT_VERIFIED",
+  "paid_submissions": 1,
+  "credit_debit_observed": 28,
+  "budget_remaining": 32,
+  "new_payment_topup_plan_change": 0,
+  "game_runtime_regression": "Not repeated in this art unit; prior GAME067 PASS remains historical."
+}

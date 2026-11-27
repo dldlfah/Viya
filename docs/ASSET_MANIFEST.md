@@ -236,3 +236,22 @@
 | S 제작 인계 | [GAME068 패킷](../tools/higgsfield/requests/game068/README.md) | 한글/영문·입력 해시·범위, 새S 원화/교체0 |
 
 검수 영상/참조 해시는 각 보고서와request_plan에 기록한다. 화면은 고정 시간 검수의 재생이며 실시간FPS/물리 입력/Windows·모바일·최종 아트 승인이 아니다. 신규 캐릭터PNG/이미지 편집/Higgsfield 요청/비용/결제는0이며 기존200×248·69×85.56·pivot(100,248)·34클립/318프레임을 유지한다.
+
+
+## GAME068 — S 일반 달리기17장 원화 납품(2026-11-27)
+
+| 항목 | 경로/실제 값 |
+| --- | --- |
+| 새 원화 | assets/characters/pilot_32/game068_s_run/frames/viya_run_s_000.png~016.png,RGBA200×248 |
+| 원출력 | tools/higgsfield/requests/game068/evidence/candidate_01.mp4,RGB H264/864×1072/24fps·97장·4.041667초 |
+| 원출력 SHA256 | 3a3e265b86320f21ed1970587c7faf2c997393a994127c68fa757cdac43007e1 |
+| 모델/작업 | Seedance2.5 omni_reference/3a872c40-f3fc-4180-b143-13001f789f44 |
+| 주기 선택 | 원천34~50,다음51제외;708.333ms→명목660ms/기본659.574468ms |
+| 등록 | scale0.22916666666666666/translation(1,0.3)/root(100,248)/표시69×85.56,전체공통 |
+| 독립 계측 | provenance/frame_timing.csv·muzzle_coordinates.csv·foot_landmarks.csv·phase_alignment.json,총구17개/위상권고0.4572192098143875 |
+| 알파 | RGB녹색에서별도분리,흑/백/회색17장검수,경계알파0;서비스네이티브알파아님 |
+| 근거 | [원화/전체해시](../assets/characters/pilot_32/game068_s_run/README.md)·[원출력/입력/견적/비용/채택](../tools/higgsfield/requests/game068/evidence/) |
+| 현재 상태 | 기술납품17장/게임연결0/최종아트NOT_VERIFIED,활성GAME067/34클립318그대로 |
+| 비용 | 유료1/최대2건,실차감28/한도60·남은32,실제잔액657→629,새결제/충전0 |
+
+원본208/ARTFIX001/GAME064~067/SAVEFIX001과기존게임/데이터/자산1,405파일을보존했다. 제작세션이run_s11만17장으로교체하면34클립/324,나머지33클립/307보존이다. 아트분석영상은main.tscn캡처가아니며 새S/기존SE발위치·투영차이/물리접지/실기·최종아트는별도다. CSV/QA파일은provenance/.gdignore로자동임포트에서제외한다.

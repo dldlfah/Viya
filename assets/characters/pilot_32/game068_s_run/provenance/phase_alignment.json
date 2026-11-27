@@ -1,0 +1,50 @@
+{
+  "method": "Two visually confirmed opposite boot-support/recovery stance anchors; circular least-squares phase offset from legacy S00/S05. New per-frame boot-tip coordinates are measured independently.",
+  "baseline_origin": 0.2727272727272727,
+  "recommended_phase_origin": 0.4572192098143875,
+  "anchors": [
+    {
+      "new_frame": 3,
+      "new_source_frame": 37,
+      "old_s_frame": 0,
+      "stance": "screen_left_support_right_recovery",
+      "new_local_phase": 0.1764706712803159,
+      "old_local_phase": 0.0,
+      "recommended_origin_from_anchor": 0.4491979440075886,
+      "boot_tips": [
+        [
+          97.11538461538461,
+          242.80769230769232
+        ],
+        [
+          115.5,
+          189.0
+        ]
+      ]
+    },
+    {
+      "new_frame": 11,
+      "new_source_frame": 45,
+      "old_s_frame": 5,
+      "stance": "screen_right_support_left_recovery",
+      "new_local_phase": 0.6470586574393683,
+      "old_local_phase": 0.45454545454545453,
+      "recommended_origin_from_anchor": 0.4652404756211865,
+      "boot_tips": [
+        [
+          88.5,
+          183.0
+        ],
+        [
+          112.05882352941177,
+          239.70588235294116
+        ]
+      ]
+    }
+  ],
+  "formula": "new_local=global+new_origin;old_local=global+old_origin;origin=new_local-old_local+old_origin(mod1)",
+  "maximum_anchor_residual_cycles": 0.00802126580679896,
+  "anatomical_note": "screen-left/right are frontal-camera landmark labels. No 3D skeleton or floor was reconstructed.",
+  "se_comparison": "Use existing SE18 origin and render both at common global distance phase. Its painted foot locations and legacy phase are not a physical-contact ground truth.",
+  "limitation": "2D stance correspondence only; different foot extents and camera projection remain. Actual main.tscn transitions and zero-slip/final art approval are not verified."
+}

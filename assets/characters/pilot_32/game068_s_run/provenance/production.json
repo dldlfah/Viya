@@ -1,0 +1,65 @@
+{
+  "task": "GAME068_S_RUN",
+  "base_commit": "6d9f0d07d0a3bc27bdfb544e2a1bbd2e05ed7488",
+  "game_connection_commit_preserved": "ce7e77939fb076f18352552262a6dcecb690c2b1",
+  "review_commit_preserved": "30058bb31894d56ef5fdffe1446ac0b38ab73342",
+  "model": "seedance_2_5",
+  "mode": "omni_reference",
+  "job_id": "3a872c40-f3fc-4180-b143-13001f789f44",
+  "params": "tools/higgsfield/requests/game068/evidence/candidate_01_params.json",
+  "quote": "tools/higgsfield/requests/game068/evidence/candidate_01_quote.json",
+  "raw_source": "tools/higgsfield/requests/game068/evidence/candidate_01.mp4",
+  "raw_sha256": "3a3e265b86320f21ed1970587c7faf2c997393a994127c68fa757cdac43007e1",
+  "raw_source_cycle_ms": 708.3330000000001,
+  "raw_source_frame_indices": [
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50
+  ],
+  "next_endpoint_excluded": 51,
+  "nominal_cycle_ms": 660,
+  "distance_cycle_ms": 659.5744680851063,
+  "registration": {
+    "scale": 0.22916666666666666,
+    "translation": [
+      1.0,
+      0.3
+    ],
+    "canvas": [
+      200,
+      248
+    ],
+    "pivot": [
+      100,
+      248
+    ],
+    "fixed_for_entire_clip": true,
+    "per_frame_bbox_alignment": false
+  },
+  "registration_reason": "A single0.99*(200/864) scale with centered1px translation and0.3px vertical shift keeps source full-body size close to S reference while retaining transparent hair/boot margin. Original S references touch the canvas bottom; no per-frame bbox registration is used.",
+  "model_alpha": "RGB output; alpha locally derived, not native",
+  "paid_submissions": 1,
+  "paid_submissions_max": 2,
+  "actual_credits": 28,
+  "credits_limit": 60,
+  "credits_remaining": 32,
+  "current_balance_observed": 629,
+  "new_payment_topup_plan_changes": 0,
+  "upscale_extension_audio_paid_background_removal": 0,
+  "game_integration": "NOT_RUN_ART_HANDOFF_ONLY",
+  "final_art": "NOT_VERIFIED"
+}

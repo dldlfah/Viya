@@ -1,6 +1,6 @@
 {
   "task": "GAME068_S_RUN",
-  "status": "PREPARED_FOR_PLANNING_HIGGSFIELD_PRODUCTION",
+  "status": "ART17_DELIVERED_FOR_PRODUCTION_INTEGRATION",
   "date_kst": "2026-11-27",
   "base_game_commit": "ce7e77939fb076f18352552262a6dcecb690c2b1",
   "current_resource": "res://assets/characters/pilot_32/game067_se_run_fire/viya_game067_frames.tres",
@@ -91,12 +91,28 @@
   "nominal_cycle_ms": 660,
   "existing_phase_origin": 0.2727272727272727,
   "phase_note": "Numerical old origin only; measure actual new contacts independently.",
-  "new_generated_frames": 0,
+  "new_generated_frames": 17,
   "new_game_resource": false,
-  "generation_cost": 0,
-  "current_features_price_balance": "NOT_QUERIED; assigned to planning/Higgsfield session.",
+  "generation_cost": 28,
+  "current_features_price_balance": "QUERIED; see evidence/model_seedance_2_5.json, candidate_01_quote.json, balance_before.json, balance_final.json",
   "art_approval": "NOT_VERIFIED",
   "review_code_commit": "30058bb31894d56ef5fdffe1446ac0b38ab73342",
   "reference_video_sha256": "7a07e36988947b141d4071698ab8956f7e86392ac4d355160415c27f721cf507",
-  "reference_export_report": "docs/validation/GAME068_REFERENCE_REPORT.json"
+  "reference_export_report": "docs/validation/GAME068_REFERENCE_REPORT.json",
+  "production": {
+    "paid_submissions": 1,
+    "paid_max": 2,
+    "credits_charged": 28,
+    "credits_max": 60,
+    "remaining_budget": 32,
+    "job_id": "3a872c40-f3fc-4180-b143-13001f789f44",
+    "selected_sources": [
+      34,
+      50
+    ],
+    "exclusive_next_boundary": 51,
+    "delivery": "assets/characters/pilot_32/game068_s_run",
+    "recommended_phase_origin": 0.4572192098143875,
+    "game_integration": "NOT_RUN"
+  }
 }
