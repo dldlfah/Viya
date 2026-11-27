@@ -134,3 +134,8 @@ Seedance2.5 b2409d39-ee7b-4c2a-95f5-686e3387dd4c와f432ca21-8f98-4f45-903b-5a4aa
 사용자지시로동일조건을1건재시도해RGB97장을확보했다. 작업da27204a-f0a6-47ce-9831-a4b5481b8d36의SW방향/외형·낮은총기휴대는유지됐지만가까운다리의추가지지반복과짧게자른루프의급변으로게임용원화에기술채택하지않았다. [원본/검수](../tools/higgsfield/requests/game070/evidence/packet_9927fcd/candidate_04_README.md).
 
 생성완료·기술미채택·게임연결0·프로듀서최종아트NOT_VERIFIED다. 기존ART001/원본·다른자산승인과현재게임SW11/GAME071/072는유지한다. 이번실차감28/관측반환0이며자동추가생성은없다.
+
+
+## GAME070 candidate04 — 적용 승인 (2026-11-28)
+
+후보4의 보행 한계 설명 이후 프로듀서가 **“이대로 적용해”**라고 지시했다. 해당 후보를 새SW17로 적용한다. 이는 원출력의 같은 다리 추가 지지와 접지 전환 잔차가 해결됐다는 판정이 아니다. 앞선 기술반려는 당시 이력으로 남기고 적용 승인을 별도로 기록한다. 최종 게임 화면의 후속 프로듀서 확인, Windows/모바일실기·실시간FPS는 별도다. [납품](../assets/characters/pilot_32/game070_sw_run/README.md) · [실행 기록](validation/GAME070_INTEGRATION_REPORT.json).

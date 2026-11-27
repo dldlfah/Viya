@@ -45,7 +45,7 @@ static func is_frame(visual:Dictionary,animation:String,index:int=-1) -> bool:
 
 static func run(view,asset:SpriteFrames,verify:Callable) -> void:
 	# Every existing clip must remain identical in the live active resource.
-	var preserved_asset:SpriteFrames=asset
+	var preserved_asset:SpriteFrames=load("res://assets/characters/pilot_32/game069_s_run_fire/viya_game069_frames.tres")
 	var preserved:=true
 	var old_count:=0
 	for animation in Baseline.get_animation_names():

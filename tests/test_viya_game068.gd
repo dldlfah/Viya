@@ -21,19 +21,20 @@ static func frame(visual:Dictionary,name:String,index:int=-1) -> bool:
 	return not visual.sample.is_empty() and visual.sample.animation==name and (index<0 or visual.sample.index==index)
 
 static func run(view,asset:SpriteFrames,verify:Callable) -> void:
+	var preserved_asset:SpriteFrames=load("res://assets/characters/pilot_32/game068_s_run/viya_game068_frames.tres")
 	var preserved:=true
 	var total:=0
 	for name in Prior.get_animation_names():
 		if name=="run_s":continue
 		var count:int=Prior.get_frame_count(name)
 		total+=count
-		if not asset.has_animation(name) or asset.get_frame_count(name)!=count:
+		if not preserved_asset.has_animation(name) or preserved_asset.get_frame_count(name)!=count:
 			preserved=false
 			continue
-		preserved=preserved and asset.get_animation_loop(name)==Prior.get_animation_loop(name) and asset.get_animation_speed(name)==Prior.get_animation_speed(name)
+		preserved=preserved and preserved_asset.get_animation_loop(name)==Prior.get_animation_loop(name) and preserved_asset.get_animation_speed(name)==Prior.get_animation_speed(name)
 		for index in range(count):
-			preserved=preserved and asset.get_frame_texture(name,index).resource_path==Prior.get_frame_texture(name,index).resource_path and asset.get_frame_duration(name,index)==Prior.get_frame_duration(name,index)
-	verify.call(preserved and total==307 and asset.get_animation_names().size()==35,"GAME068 live resource preserves all33other clips/307resolved frames and exact weights/speeds/loops")
+			preserved=preserved and preserved_asset.get_frame_texture(name,index).resource_path==Prior.get_frame_texture(name,index).resource_path and preserved_asset.get_frame_duration(name,index)==Prior.get_frame_duration(name,index)
+	verify.call(preserved and total==307 and asset.get_animation_names().size()==35,"Historical GAME068 composite preserves all33other clips/307resolved frames and exact weights/speeds/loops")
 	var timing:Array=Reader.read_timing(CSV)
 	var metadata:Dictionary=JSON.parse_string(FileAccess.get_file_as_string(META))
 	var alignment:Dictionary=JSON.parse_string(FileAccess.get_file_as_string(PHASE))

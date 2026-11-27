@@ -6,12 +6,13 @@ const Campaign=preload("res://tests/test_campaign.gd")
 const Scenery=preload("res://scripts/combat/oblique_scenery.gd")
 const MANIFEST:="res://assets/characters/pilot_32/source_manifest.json"
 const SOURCE_RESOURCE:="res://assets/characters/pilot_32/resources/viya_directional_motion.tres"
-const RESOURCE:="res://assets/characters/pilot_32/game069_s_run_fire/viya_game069_frames.tres"
+const RESOURCE:="res://assets/characters/pilot_32/game070_sw_run/viya_game070_frames.tres"
 const CACHE=preload("res://assets/characters/pilot_32/render_cache/viya_render_frames.tres")
 const EAST_TIMING:="res://assets/characters/pilot_32/game064_e_run/provenance/frame_timing.csv"
 const SE_FIRST="res://assets/characters/pilot_32/game066_se_run/frames/viya_run_se_000.png"
 const EAST_FIRST:="res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_000.png"
 const EAST_MANIFEST:="res://assets/characters/pilot_32/game064_e_run/provenance/asset_manifest.json"
+const SW_FIRST="res://assets/characters/pilot_32/game070_sw_run/frames/viya_run_sw_000.png"
 const SOUTH_FIRST="res://assets/characters/pilot_32/game068_s_run/frames/viya_run_s_000.png"
 const SOUTH_TIMING="res://assets/characters/pilot_32/game068_s_run/provenance/frame_timing.csv"
 const DIRECTIONS:=["e","se","s","sw","w","nw","n","ne"]
@@ -72,6 +73,11 @@ static func run(host,verify:Callable) -> void:
 		end_ms+=row.duration_ms
 	verify.call(east_valid and unequal and absf(end_ms-660.0)<.000001 and hashes.size()==47,"E preserves47unique derivative PNGs and the authored unequal660ms timing without an endpoint duplicate")
 	var south_rows:Array=south_timing()
+	var sw_rows:Array=preload("res://tests/test_viya_game069.gd").read_timing("res://assets/characters/pilot_32/game070_sw_run/provenance/frame_timing.csv")
+	var sw_speed:float=0.0
+	for item in sw_rows:sw_speed+=item.duration_ms/.66
+	var sw_weights:Array=[]
+	for item in sw_rows:sw_weights.append(item.duration_ms/1000.0)
 	var south_speed:float=0.0
 	for row in south_rows:south_speed+=row.weight/.66
 	verify.call(south_rows.size()==17,"S timing is read independently from the delivered17-row CSV")
@@ -86,8 +92,8 @@ static func run(host,verify:Callable) -> void:
 			var name:String=pose+"_"+direction
 			var east:bool=name=="run_e"
 			var southeast:bool=name=="run_se"
-			var south:bool=name=="run_s"
-			valid=valid and asset.has_animation(name) and asset.get_frame_count(name)==(47 if east else (18 if southeast else (17 if south else expected))) and is_equal_approx(asset.get_animation_speed(name),47.0/.66 if east else (18.0/.66 if southeast else (south_speed if south else fps))) and asset.get_animation_loop(name)==(pose in ["idle","run"])
+			var south:bool=name in ["run_s","run_sw"]
+			valid=valid and asset.has_animation(name) and asset.get_frame_count(name)==(47 if east else (18 if southeast else (17 if south else expected))) and is_equal_approx(asset.get_animation_speed(name),47.0/.66 if east else (18.0/.66 if southeast else (asset.get_animation_speed("run_sw") if direction=="sw" and pose=="run" else (south_speed if south else fps)))) and asset.get_animation_loop(name)==(pose in ["idle","run"])
 			for index in range(asset.get_frame_count(name)):
 				total+=1
 				var texture:Texture2D=asset.get_frame_texture(name,index)
@@ -100,14 +106,16 @@ static func run(host,verify:Callable) -> void:
 				elif southeast:
 					valid=valid and texture.resource_path==SE_FIRST.get_base_dir().path_join("viya_run_se_%03d.png" % index) and asset.get_frame_duration(name,index)==1.0
 				elif south:
-					valid=valid and index<south_rows.size()
-					if index<south_rows.size():valid=valid and texture.resource_path==SOUTH_FIRST.get_base_dir().path_join(south_rows[index].filename) and asset.get_frame_duration(name,index)==south_rows[index].weight
+					if direction=="s":
+						valid=valid and index<south_rows.size() and texture.resource_path==SOUTH_FIRST.get_base_dir().path_join(south_rows[index].filename) and asset.get_frame_duration(name,index)==south_rows[index].weight
+					else:
+						valid=valid and index<sw_rows.size() and texture.resource_path==SW_FIRST.get_base_dir().path_join("viya_run_sw_%03d.png"%index) and absf(asset.get_frame_duration(name,index)/asset.get_animation_speed(name)*1000.0-sw_rows[index].duration_ms)<.000001
 				else:
 					valid=valid and asset.get_frame_duration(name,index)==1.0
 					preserved=preserved and is_same(texture,CACHE.get_frame_texture(name,index)) and asset.get_frame_duration(name,index)==CACHE.get_frame_duration(name,index) and asset.get_animation_speed(name)==CACHE.get_animation_speed(name) and asset.get_animation_loop(name)==CACHE.get_animation_loop(name)
 					preserved_count+=1
 		verify.call(valid,"Directional count/timing/loop/canvas match the native poses plus the authored E47 exception for:"+pose)
-	verify.call(total==257 and preserved and preserved_count==175,"Only E/SE/S runs change:175previous native display frames preserve resources and timings within257 directional frames")
+	verify.call(total==263 and preserved and preserved_count==164,"E/SE/S/SW runs change;164original native frames preserve exact resources and timings within263 directional frames")
 	var ui=load("res://scenes/main.tscn").instantiate()
 	var folder:="user://character-pilot-"+Crypto.new().generate_random_bytes(8).hex_encode()
 	DirAccess.make_dir_recursive_absolute(folder)

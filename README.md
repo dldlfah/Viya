@@ -1,6 +1,6 @@
 # Viya — 모바일 서바이버 게임
 
-병행 GAME070은 사용자 지시로 재시도해 영상을 확보했으나 양발 교대와 루프 기준에 미달해 기술 미채택했다. 이번 실차감28/누적순차감84이며 기존SW11과GAME071/072를 유지한다. [원본·검수·비용](tools/higgsfield/requests/game070/evidence/packet_9927fcd/candidate_04_README.md).
+승인한 GAME070 SW 달리기를 기존11장 대신17장으로 적용했다. 현재35클립348프레임이며 나머지34클립331프레임과 GAME071/072를 보존한다. 같은 다리 지지 반복은 남겨둔 적용이다. 추가 생성/지출0. [현재 상태](docs/CURRENT_WORK.md) · [원화](assets/characters/pilot_32/game070_sw_run/README.md) · [실제 검증](docs/validation/GAME070_INTEGRATION_REPORT.json)
 
 ## GAME073 — 비야 성급·각인과 인벤토리 (2026-11-28)
 
@@ -38,7 +38,7 @@ SE 이동사격20장의 게임 연결ce7e779를 검수했다. **실제main.tscn 
 
 ## 세션 필수 문서
 
-[CURRENT_WORK](docs/CURRENT_WORK.md)와 **[누적 DEVELOPMENT_STATUS8.82](docs/DEVELOPMENT_STATUS.md)**를 함께 읽는다. [PLANNED_WORK87](docs/PLANNED_WORK.md) · [NEXT_TASK](docs/NEXT_TASK.md) · [AGENTS](AGENTS.md) · [제작 스킬](.agents/skills/viya-game-production/SKILL.md). 활성 브랜치는 `work/viya-turnaround-qa-20261117`이며main 자동 병합은 하지 않는다. 과거 절의 당시NEXT/미연결/GUI차단보다 CURRENT/NEXT와 최신 검수를 우선한다.
+[CURRENT_WORK](docs/CURRENT_WORK.md)와 **[누적 DEVELOPMENT_STATUS8.83](docs/DEVELOPMENT_STATUS.md)**를 함께 읽는다. [PLANNED_WORK88](docs/PLANNED_WORK.md) · [NEXT_TASK](docs/NEXT_TASK.md) · [AGENTS](AGENTS.md) · [제작 스킬](.agents/skills/viya-game-production/SKILL.md). 활성 브랜치는 `work/viya-turnaround-qa-20261117`이며main 자동 병합은 하지 않는다. 과거 절의 당시NEXT/미연결/GUI차단보다 CURRENT/NEXT와 최신 검수를 우선한다.
 
 ## SAVEFIX001 — 비행 몬스터 저장 보정 이력
 

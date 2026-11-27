@@ -362,3 +362,11 @@
 | 전체 해시 | 같은폴더candidate_04_CHECKSUMS.sha256 |
 
 직전3차의nsfw/28복원과구분하며이번은생성완료후보행검수에서미채택이다. 기존활성GAME069/35클립342·SW11과GAME071/072는그대로다. 이원본을게임용완성클립으로등록하지않는다. [전체기록](../tools/higgsfield/requests/game070/evidence/packet_9927fcd/candidate_04_README.md).
+
+
+## GAME070 — producer-accepted SW ordinary run17 (2026-11-28)
+
+- `assets/characters/pilot_32/game070_sw_run/`: RGBA17, timing/muzzle/foot CSV, common registration, independent phase, black/gray/white, seam and S17 comparison. Raw candidate04 remains at `tools/higgsfield/requests/game070/evidence/packet_9927fcd/candidate_04.mp4`; SHA-256342c0358f79bdf15166734663e468e20c08198dbe8fe033f75bd7c7d5c52e1b4.
+- Source34..50 inclusive (native708.333ms), endpoint51 excluded. Fixed0.245/(-13,-9),200×248/root(100,248),display69×85.56, nominal660ms/distance659.574468ms. Phase0.574866559295493 is measured against opposite supports;77.647ms maximum anchor residual and repeated near-leg support remain accepted limitations.
+- Active `res://assets/characters/pilot_32/game070_sw_run/viya_game070_frames.tres`:35clips348frames; replaces onlyrun_sw11 with17, preserves other34clips331frames and all prior art/code. No newrun_fire_sw.
+- User `이대로 적용해` supersedes candidate04 technical veto as an explicit application decision. Historical review/rejection/cost evidence unchanged.0 additional paid submissions/credits. In-game producer review and Windows/mobile are separate.

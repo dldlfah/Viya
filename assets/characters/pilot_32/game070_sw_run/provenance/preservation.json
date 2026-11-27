@@ -1,0 +1,17 @@
+{
+  "base": "e71a16fd249ff8a19020303c634acc1eb3ecda58",
+  "prior_assets_scripts_data_files": 1528,
+  "unchanged_files": 1526,
+  "changed_only": [
+    "data/presentation_slots.json",
+    "data/viya_motion.json"
+  ],
+  "other_motion_metadata_exact": true,
+  "source_original_sha256": "342c0358f79bdf15166734663e468e20c08198dbe8fe033f75bd7c7d5c52e1b4",
+  "existing_raw_and_review_evidence": "unchanged",
+  "preserved_other_clips": 34,
+  "preserved_other_frames": 331,
+  "status": "PASS",
+  "initial_art_validation_base": "2323e0777e78941cf0ca3b9c7d174d878d70a6c1",
+  "GAME073_code_preserved_exact": true
+}

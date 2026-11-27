@@ -1,0 +1,15 @@
+{
+  "source_resource": "res://assets/characters/pilot_32/game069_s_run_fire/viya_game069_frames.tres",
+  "source_sha256": "fe99d53e11d042343ef8261189e99925a9d29c117c8d9189ccfe8cc8c43082a6",
+  "resource": "res://assets/characters/pilot_32/game070_sw_run/viya_game070_frames.tres",
+  "replaced_clip": "run_sw",
+  "old_frames": 11,
+  "new_frames": 17,
+  "preserved_clips": 34,
+  "preserved_frames": 331,
+  "total_clips": 35,
+  "total_frames": 348,
+  "nominal_cycle_ms": 660.0000000000001,
+  "phase_origin": 0.574866559295493,
+  "status": "BUILT_NOT_RUNTIME_PROOF"
+}

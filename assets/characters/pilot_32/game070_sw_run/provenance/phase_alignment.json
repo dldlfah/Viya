@@ -1,0 +1,48 @@
+{
+  "method": "Circular mean of two directly inspected opposite projected boot-support anchors. No 3D skeleton or physical contact inference.",
+  "s_origin": 0.4572192098143875,
+  "phase_origin": 0.574866559295493,
+  "anchors": [
+    {
+      "sw_frame": 3,
+      "source_frame": 37,
+      "s_frame": 3,
+      "stance": "near_support / S screen-left support",
+      "sw_local": 0.1764706712803159,
+      "s_local": 0.1764706712803159,
+      "origin_from_anchor": 0.4572192098143875,
+      "sw_toe_tips": [
+        [
+          43,
+          234
+        ],
+        [
+          128,
+          180
+        ]
+      ]
+    },
+    {
+      "sw_frame": 15,
+      "source_frame": 49,
+      "s_frame": 11,
+      "stance": "far_support / S screen-right support",
+      "sw_local": 0.8823533564015794,
+      "s_local": 0.6470586574393683,
+      "origin_from_anchor": 0.6925139087765986,
+      "sw_toe_tips": [
+        [
+          59,
+          207
+        ],
+        [
+          91,
+          224
+        ]
+      ]
+    }
+  ],
+  "maximum_anchor_residual_cycles": 0.11764734948110556,
+  "maximum_anchor_residual_nominal_ms": 77.64725065752967,
+  "limitation": "Accepted raw motif contains a second near-leg support. One phase offset cannot align both support events exactly; numerical phase continuity is not pose continuity or zero-slip proof."
+}

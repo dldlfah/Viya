@@ -1,0 +1,242 @@
+[
+  {
+    "global_phase": 0,
+    "s_frame": 7,
+    "sw_frame": 9,
+    "s_projected_toes": [
+      [
+        95.07142857142857,
+        220.64285714285714
+      ],
+      [
+        113.0,
+        220.73333333333335
+      ]
+    ],
+    "sw_projected_toes": [
+      [
+        67.0,
+        232.0
+      ],
+      [
+        90.0,
+        183.0
+      ]
+    ],
+    "projected_pair_distance_canvas_px": [
+      30.28183937475343,
+      44.19054700322735
+    ],
+    "note": "Different camera projections; distances are screen-space differences, not world foot-slip."
+  },
+  {
+    "global_phase": 0.125,
+    "s_frame": 9,
+    "sw_frame": 11,
+    "s_projected_toes": [
+      [
+        90.4,
+        188.2
+      ],
+      [
+        112.10526315789474,
+        237.78947368421052
+      ]
+    ],
+    "sw_projected_toes": [
+      [
+        66.0,
+        245.0
+      ],
+      [
+        101.0,
+        178.0
+      ]
+    ],
+    "projected_pair_distance_canvas_px": [
+      61.81909090240653,
+      60.812071443431336
+    ],
+    "note": "Different camera projections; distances are screen-space differences, not world foot-slip."
+  },
+  {
+    "global_phase": 0.25,
+    "s_frame": 12,
+    "sw_frame": 14,
+    "s_projected_toes": [
+      [
+        88.0,
+        185.0
+      ],
+      [
+        111.85,
+        236.95
+      ]
+    ],
+    "sw_projected_toes": [
+      [
+        90.0,
+        229.0
+      ],
+      [
+        68.0,
+        195.0
+      ]
+    ],
+    "projected_pair_distance_canvas_px": [
+      44.04543109109048,
+      60.68463561726311
+    ],
+    "note": "Different camera projections; distances are screen-space differences, not world foot-slip."
+  },
+  {
+    "global_phase": 0.375,
+    "s_frame": 14,
+    "sw_frame": 16,
+    "s_projected_toes": [
+      [
+        92.5,
+        208.66666666666666
+      ],
+      [
+        111.35714285714286,
+        226.71428571428572
+      ]
+    ],
+    "sw_projected_toes": [
+      [
+        55.0,
+        217.0
+      ],
+      [
+        110.0,
+        216.0
+      ]
+    ],
+    "projected_pair_distance_canvas_px": [
+      38.4147685720537,
+      10.799896069038859
+    ],
+    "note": "Different camera projections; distances are screen-space differences, not world foot-slip."
+  },
+  {
+    "global_phase": 0.5,
+    "s_frame": 16,
+    "sw_frame": 1,
+    "s_projected_toes": [
+      [
+        96.26315789473685,
+        233.73684210526315
+      ],
+      [
+        111.71428571428571,
+        209.42857142857144
+      ]
+    ],
+    "sw_projected_toes": [
+      [
+        42.0,
+        233.0
+      ],
+      [
+        126.0,
+        178.0
+      ]
+    ],
+    "projected_pair_distance_canvas_px": [
+      54.26816047183865,
+      34.52298849598451
+    ],
+    "note": "Different camera projections; distances are screen-space differences, not world foot-slip."
+  },
+  {
+    "global_phase": 0.625,
+    "s_frame": 1,
+    "sw_frame": 3,
+    "s_projected_toes": [
+      [
+        97.26315789473685,
+        241.73684210526318
+      ],
+      [
+        114.0,
+        188.0
+      ]
+    ],
+    "sw_projected_toes": [
+      [
+        43.0,
+        234.0
+      ],
+      [
+        128.0,
+        180.0
+      ]
+    ],
+    "projected_pair_distance_canvas_px": [
+      54.81194240738888,
+      16.1245154965971
+    ],
+    "note": "Different camera projections; distances are screen-space differences, not world foot-slip."
+  },
+  {
+    "global_phase": 0.75,
+    "s_frame": 3,
+    "sw_frame": 5,
+    "s_projected_toes": [
+      [
+        97.11538461538461,
+        242.80769230769232
+      ],
+      [
+        115.5,
+        189.0
+      ]
+    ],
+    "sw_projected_toes": [
+      [
+        54.0,
+        228.0
+      ],
+      [
+        115.0,
+        191.0
+      ]
+    ],
+    "projected_pair_distance_canvas_px": [
+      45.58732435679719,
+      2.0615528128088303
+    ],
+    "note": "Different camera projections; distances are screen-space differences, not world foot-slip."
+  },
+  {
+    "global_phase": 0.875,
+    "s_frame": 5,
+    "sw_frame": 7,
+    "s_projected_toes": [
+      [
+        97.0,
+        237.68421052631578
+      ],
+      [
+        116.28571428571429,
+        193.42857142857142
+      ]
+    ],
+    "sw_projected_toes": [
+      [
+        91.0,
+        211.0
+      ],
+      [
+        78.0,
+        219.0
+      ]
+    ],
+    "projected_pair_distance_canvas_px": [
+      27.350449565093843,
+      46.04013333550438
+    ],
+    "note": "Different camera projections; distances are screen-space differences, not world foot-slip."
+  }
+]

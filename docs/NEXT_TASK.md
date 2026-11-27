@@ -9,7 +9,4 @@ GAME073 비야 각인·승급과 인벤토리 구현 이후 이 전투 검증을
 [현재 상태](CURRENT_WORK.md) · [GAME071 전후 계측](validation/GAME071_REPORT.json) · [후속 계획](PLANNED_WORK.md)
 
 
-병행 GAME070 원화세션은 승인된 추가1건을 제출했지만 공급자nsfw로 출력 없이 종료했다.28차감뒤28복원/추가순지출0이며 기존SW11·35클립342를 유지한다. 새SW연결 대상은없고 자동4번째제출은하지않는다. 이 기록은 위GAME071 다음제작단위를 대체하지 않는다. [작업/반환 근거](../tools/higgsfield/requests/game070/evidence/packet_9927fcd/candidate_03_work_state.json).
-
-
-2026-11-28사용자의직접재시도로GAME070 4차RGB영상97장을확보했다. SW방향은유지됐지만같은다리지지반복과끝→첫문제로기술미채택/게임연결0이다. 이번실차감28/관측반환0·누적순차감84이며자동5번째는없다. 기존SW11과GAME071/072·위전투검수다음단위를유지한다. [새검토기록](../tools/higgsfield/requests/game070/evidence/packet_9927fcd/candidate_04_README.md).
+GAME070은 사용자가 승인한 4차 영상의SW17을 연결했다. 다른34클립331프레임과 기존성능/드롭/로비 변경을 보존하며 자동 재생성은 하지 않는다. 원출력의 동일 다리 지지 반복과S↔SW 접지 잔차는 후속 프로듀서 화면 검토 항목이다. 위3:30 전투 재현 작업을 유지한다. [현재 적용](CURRENT_WORK.md) · [원화/측정](../assets/characters/pilot_32/game070_sw_run/README.md).
