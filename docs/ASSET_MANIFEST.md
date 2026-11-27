@@ -338,5 +338,6 @@
 | [SW 실제 게임 기준](validation/GAME070_SW_BASELINE.mp4) | 기존 SW11의 실제 `main.tscn` 반복과 S↔SW 전환, 112회 연속 캡처 |
 | [SW 이동 사격 화면](validation/GAME070_SW_BASELINE_FIRE.png) | 기존 SW의 자동사격 검수 캡처 |
 | [S 타이밍 참조](validation/GAME070_S_TIMING_REFERENCE.mp4) | GAME068 원천 34~50번의 24fps 재생, 6주기·102장. 양발 교대와 템포 참조 |
+| [기획세션 입력 ZIP 명세](../tools/higgsfield/requests/game070/READY_PACKET.json) | SW00·SW08을 같은 4배 확대와 여백으로 세로 3:4에 배치. 동일한 S 타이밍 영상과 프롬프트를 묶어 재현 검증 |
 
 현재 연결된 원화는 GAME069의 기존 SW11이다. 참조 영상은 검수와 후속 기획 자료다. [출처·해시와 엔진 실행](validation/GAME070_BASELINE_REPORT.json)

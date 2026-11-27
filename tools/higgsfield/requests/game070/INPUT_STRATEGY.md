@@ -28,3 +28,9 @@
 결과 검수는 같은 다리의 지지 자세에서 다음 같은 다리 지지 자세까지 본다. 그 사이 반대 다리가 정확히 한 번 지지하고, 회복에서 지지로 가는 중간 자세가 연속적이어야 한다. 마지막 장 다음에는 첫 장과 같은 운동 방향이 이어져야 한다. 자세를 눈으로 추적할 수 있는 프레임 번호를 적고, 같은 위상의 S↔SW 전환도 현재 게임 크기로 비교한다. 조건을 충족한 연속 주기에 한해 실제 원천 시간표, 프레임별 총구, 발 랜드마크, 고정 캔버스·기준점을 기록해 제작 세션에 납품한다.
 
 [검증 기록과 참조 해시](../../../../docs/validation/GAME070_BASELINE_REPORT.json)
+
+입력 패키지에는 세로 3:4의 SW00·SW08, 원본 102프레임 타이밍 참조, 생성 프롬프트와 파일 역할 명세를 담았다. 현재 세션은 SDK 인증이 없어 실제 견적이나 결과를 조회하지 못했다. [패키지 검증](READY_PACKET.json) · [기획세션 지시](PACKET_README.md) · [빌더](../../pack_game070_inputs.py)
+
+```sh
+python3 tools/higgsfield/pack_game070_inputs.py --output .local_validation/GAME070_HANDOFF/VIYA_GAME070_SW_INPUTS.zip
+```

@@ -4,7 +4,7 @@
 
 기존 SW11의 반복, S↔SW 전환, 사격·총구와 정지·피격을 실제 전투에서 842개 검사·136회 그리기로 확인했다. 두 생성 후보는 지지 자세 급변과 같은 다리 반복으로 반려되었으며 게임의 교체용 원화는 대기 중이다. [실제 SW 영상](docs/validation/GAME070_SW_BASELINE.mp4) · [검증 기록](docs/validation/GAME070_BASELINE_REPORT.json)
 
-다음 제작은 SW의 시점과 외형을 기존 이미지로 지정하고 검증된 S17의 교대 보행 타이밍을 별도 참조로 사용한다. [입력 수정안](tools/higgsfield/requests/game070/INPUT_STRATEGY.md) · [현재 상태](docs/CURRENT_WORK.md) · [다음 작업](docs/NEXT_TASK.md)
+다음 제작은 SW 이미지와 S17의 교대 보행 타이밍을 별도 참조로 사용한다. 기획세션에 전달할 입력 ZIP의 재현과 전체 영상 디코딩을 확인했다. [입력 패키지 재현](tools/higgsfield/requests/game070/INPUT_STRATEGY.md) · [현재 상태](docs/CURRENT_WORK.md) · [다음 작업](docs/NEXT_TASK.md)
 
 ## 이전 GAME069 — S 전용 이동사격 연결·검수 완료 (2026-11-27)
 
@@ -24,7 +24,7 @@ SE 이동사격20장의 게임 연결ce7e779를 검수했다. **실제main.tscn 
 
 ## 세션 필수 문서
 
-[CURRENT_WORK](docs/CURRENT_WORK.md)와 **[누적 DEVELOPMENT_STATUS8.75](docs/DEVELOPMENT_STATUS.md)**를 함께 읽는다. [PLANNED_WORK81](docs/PLANNED_WORK.md) · [NEXT_TASK](docs/NEXT_TASK.md) · [AGENTS](AGENTS.md) · [제작 스킬](.agents/skills/viya-game-production/SKILL.md). 활성 브랜치는 `work/viya-turnaround-qa-20261117`이며main 자동 병합은 하지 않는다. 과거 절의 당시NEXT/미연결/GUI차단보다 CURRENT/NEXT와 최신 검수를 우선한다.
+[CURRENT_WORK](docs/CURRENT_WORK.md)와 **[누적 DEVELOPMENT_STATUS8.76](docs/DEVELOPMENT_STATUS.md)**를 함께 읽는다. [PLANNED_WORK81](docs/PLANNED_WORK.md) · [NEXT_TASK](docs/NEXT_TASK.md) · [AGENTS](AGENTS.md) · [제작 스킬](.agents/skills/viya-game-production/SKILL.md). 활성 브랜치는 `work/viya-turnaround-qa-20261117`이며main 자동 병합은 하지 않는다. 과거 절의 당시NEXT/미연결/GUI차단보다 CURRENT/NEXT와 최신 검수를 우선한다.
 
 ## SAVEFIX001 — 비행 몬스터 저장 보정 이력
 

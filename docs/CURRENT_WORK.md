@@ -1,8 +1,10 @@
 # VIYA — 현재 작업 상태
 
-2026-11-27 (KST) · `work/viya-turnaround-qa-20261117` · [누적 개발현황 8.75](DEVELOPMENT_STATUS.md#875-game070--sw-기준-검수와-입력-수정) · [다음 작업](NEXT_TASK.md) · [후속 계획](PLANNED_WORK.md)
+2026-11-27 (KST) · `work/viya-turnaround-qa-20261117` · [누적 개발현황 8.76](DEVELOPMENT_STATUS.md#876-game070--기획세션용-입력-패키지) · [다음 작업](NEXT_TASK.md) · [후속 계획](PLANNED_WORK.md)
 
 ## GAME070 — SW 기준 검수와 입력 수정
+
+다음 기획세션용 ZIP을 준비했다. 세로 3:4의 SW 외형 이미지 두 장, S 타이밍 영상, 프롬프트와 입력 역할 명세가 들어 있다. ZIP 재현, 이미지 여백과 원본 불투명 픽셀, 영상 102프레임의 전체 디코딩을 검증했다. 이 세션에서 공식 SDK는 `MISSING_CREDENTIALS`를 반환했다. 새 작업 제출과 추가 차감은 0이다. [패키지 생성·실행 근거](../tools/higgsfield/requests/game070/READY_PACKET.json) · [기획세션 지시](../tools/higgsfield/requests/game070/PACKET_README.md)
 
 원격 `d5f7dfd59926f01199e2496e5c1cb51dc50b0b18`의 두 후보는 교체용 원화 미채택 상태다. 저장소의 확대 시트에서 후보 1의 43→44 자세 급변과 후보 2의 가까운 다리 지지 반복을 확인했다. 원본 ZIP 다운로드는 403으로 차단되어 원본 전체를 독립 재생하지 못했다. 이전 전체 검수와 비용은 그때의 기록으로 보존한다. [후보 기록](../tools/higgsfield/requests/game070/README.md)
 

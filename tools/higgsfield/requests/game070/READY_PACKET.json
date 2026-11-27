@@ -1,0 +1,87 @@
+{
+  "packet_file": "VIYA_GAME070_SW_INPUTS.zip",
+  "sha256": "4d882207c75685f04f27dc8bf246795ce3b75d0c34578c354f1d1e34d53a8a2c",
+  "bytes": 1633115,
+  "checks": {
+    "rebuild_byte_identical": true,
+    "all_packaged_hashes_verified": true,
+    "media_role_mappings_verified": true,
+    "portrait_size_and_green_border_verified": true,
+    "opaque_source_pixels_preserved": true,
+    "timing_video_byte_identical_and_decodes": true
+  },
+  "source_state": "ae3e39af5e1a0629f9b1f785fd649896d9479e44",
+  "manifest": {
+    "task": "GAME070_SW_RUN",
+    "kind": "local planning packet",
+    "model": "seedance_2_5",
+    "model_schema_scope": "Checked against the saved catalog. Review current fields and quote in the connected planning session.",
+    "settings": {
+      "mode": "omni_reference",
+      "duration": 4,
+      "resolution": "720p",
+      "aspect_ratio": "3:4",
+      "generate_audio": false,
+      "count": 1
+    },
+    "media": [
+      {
+        "file": "sw_00_appearance.png",
+        "role": "image_references",
+        "source": "assets/characters/pilot_32/render_cache/viya_run_sw_00.png",
+        "source_sha256": "b29c5ee38d4562d8d5f1eb98c063a34e4ee8d004264fc39d6c19b79b49b8ea7f"
+      },
+      {
+        "file": "sw_08_appearance.png",
+        "role": "image_references",
+        "source": "assets/characters/pilot_32/render_cache/viya_run_sw_08.png",
+        "source_sha256": "b5d2acd28711971488a3d2c9f82927fc921011ac35d2af34ddcb626ddfdac9fd"
+      },
+      {
+        "file": "s17_gait_timing.mp4",
+        "role": "video_references",
+        "source": "docs/validation/GAME070_S_TIMING_REFERENCE.mp4",
+        "source_sha256": "3cb586f02cbba804fae5cbd412737715aff5677e048e62ff2b29a3b7eaac3cb5"
+      }
+    ],
+    "portrait": {
+      "canvas": [
+        960,
+        1280
+      ],
+      "original_scale": 4,
+      "offset": [
+        80,
+        144
+      ],
+      "background_rgb": [
+        28,
+        223,
+        28
+      ]
+    },
+    "timing": {
+      "source_frames_zero_based": [
+        34,
+        50
+      ],
+      "fps": 24,
+      "frames": 102,
+      "repeats": 6
+    },
+    "sha256": {
+      "sw_00_appearance.png": "e9089fc94a6428dbf0e20d0d1882e96141a7aef1bcc1f6cdbd0c02e2912be1a8",
+      "sw_08_appearance.png": "cd5f965537ea0dfb0b54cce0c766d78714000e814814660456cf4e138741703f",
+      "s17_gait_timing.mp4": "3cb586f02cbba804fae5cbd412737715aff5677e048e62ff2b29a3b7eaac3cb5",
+      "prompt.txt": "6ce23240d16e01ffaf25037d4eb36302e0533d71db4d82587330ac547596642f",
+      "README.md": "d28351f4f8e46b454588dc0c51ee71b31fa0a5036b4e3a0c8a4d74000267326a"
+    }
+  },
+  "live_account": {
+    "connector_available": false,
+    "sdk_check": "MISSING_CREDENTIALS",
+    "quote": "NOT_CHECKED",
+    "submissions": 0,
+    "credits_used": 0
+  }
+}
