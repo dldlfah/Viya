@@ -5,6 +5,7 @@ const HudLayout = preload("res://scripts/ui/hud_layout.gd")
 const ResponsiveFeedback = preload("res://scripts/ui/responsive_feedback_panel.gd")
 const GrowthOverview = preload("res://scripts/ui/growth_overview.gd")
 const AccountTalents = preload("res://scripts/progression/account_talents.gd")
+const CharacterInfo = preload("res://scripts/ui/character_info.gd")
 const CombatSkin=preload("res://scripts/ui/combat_skin.gd")
 const CombatSlot=preload("res://scripts/ui/combat_slot_button.gd")
 var combat_skin=CombatSkin.new()
@@ -864,7 +865,7 @@ func _unhandled_key_input(event: InputEvent) -> void:
 		view.queue_redraw()
 		get_viewport().set_input_as_handled()
 		return
-	if _modal_kind in ["stages", "lobby_settings", "gold_dungeon"] and event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_ESCAPE:
+	if _modal_kind in ["stages", "lobby_settings", "gold_dungeon", "character_info"] and event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_ESCAPE:
 		_campaign_back(simulation.navigation_ticket, _menu_revision)
 		get_viewport().set_input_as_handled()
 		return
@@ -1192,13 +1193,18 @@ func _decorate_lobby() -> void:
 	dungeon_button.disabled=gold_error!=OK or battle_save_error!=OK or _has_saved_battle() or not gold_progress.dungeon.initial.is_empty()
 	dungeon_button.size_flags_horizontal=Control.SIZE_EXPAND_FILL
 	menus.add_child(dungeon_button)
-	for title in ["캐릭터", "뽑기", "도시", "원정"]:
+	var ticket: int = simulation.navigation_ticket
+	var revision: int = _menu_revision
+	var character_button := _button("캐릭터 정보", _open_character_info.bind(ticket, revision))
+	character_button.name = "CharacterInfoButton"
+	character_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	menus.add_child(character_button)
+	menus.move_child(character_button, 1)
+	for title in ["뽑기", "도시", "원정"]:
 		var button := _button(title + " · 준비 중", func(): pass)
 		button.disabled = true
 		button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		menus.add_child(button)
-	var ticket: int = simulation.navigation_ticket
-	var revision: int = _menu_revision
 	lobby_settings_button = _button("설정", _open_lobby_settings.bind(ticket, revision))
 	dialog_body.add_child(lobby_settings_button)
 
@@ -1320,8 +1326,36 @@ func _launch_stage(ticket: int, revision: int) -> void:
 	_begin_campaign(_selected_stage)
 
 func _campaign_back(ticket: int, revision: int) -> void:
-	if _menu_matches(ticket, revision) and _modal_kind in ["stages", "lobby_settings", "gold_dungeon"]:
+	if _menu_matches(ticket, revision) and _modal_kind in ["stages", "lobby_settings", "gold_dungeon", "character_info"]:
 		_show_menu("ready")
+
+func _open_character_info(ticket: int, revision: int) -> void:
+	if not _menu_matches(ticket, revision) or _modal_kind != "ready" or simulation.phase != RunState.Phase.READY:
+		return
+	_clear_dialog()
+	_modal_kind = "character_info"
+	var base: Dictionary = simulation.profiles.hero(simulation.growth.character_id)
+	var name_text: String = base.get("name", "")
+	var header := HBoxContainer.new()
+	dialog_body.add_child(header)
+	var title := _label("캐릭터 정보" if name_text.is_empty() else "캐릭터 정보 · " + name_text, 24)
+	title.name = "CharacterInfoTitle"
+	title.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	header.add_child(title)
+	var back := _button("메인 로비로", _campaign_back.bind(ticket, _menu_revision))
+	back.name = "CharacterInfoBack"
+	back.custom_minimum_size.y = 44
+	back.add_theme_font_size_override("font_size", 16)
+	CombatSkin.style_button(back)
+	header.add_child(back)
+	var sheet := CharacterInfo.new()
+	sheet.name = "CharacterInfoSheet"
+	dialog_body.add_child(sheet)
+	var levels: Variant = gold_progress.talent_levels if gold_progress.loaded and gold_error == OK else null
+	sheet.setup(simulation, base, levels, combat_skin)
+	_scroll.scroll_vertical = 0
+	_fit_dialog()
+	back.grab_focus()
 
 func _open_lobby_settings(ticket: int, revision: int) -> void:
 	if not _menu_matches(ticket, revision) or simulation.phase != RunState.Phase.READY:
@@ -1499,7 +1533,7 @@ func _handle_mobile_back() -> bool:
 	if _mission_open:
 		_close_mission(simulation.navigation_ticket,_menu_revision)
 		return true
-	if _modal_kind in ["stages", "lobby_settings"]:
+	if _modal_kind in ["stages", "lobby_settings", "character_info"]:
 		_campaign_back(simulation.navigation_ticket,_menu_revision)
 		return true
 	if _talents_open:

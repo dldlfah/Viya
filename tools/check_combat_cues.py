@@ -169,6 +169,13 @@ CAMPAIGN_GOLD_ADAPTERS = (
      'gold_drop_chance = 1.0 if mode=="gold_slime" else (0.30 if previous_mode=="gold_slime" else gold_drop_chance)'),
 )
 
+# GAME072 connects the lobby sheet to the existing read-only character data.
+FILES += ('scripts/ui/character_info.gd',)
+PATTERN_REVIEWED_SHA256.update({
+    'scripts/ui/mobile_main.gd': '2cbd90e77a3652443d0ad2bcb00bdde25df8b31009c50617bd60f9149ec9b27a',
+    'scripts/ui/character_info.gd': 'c6e5221e2ea7eb6b84302ec16547b0525f4d93f71b8ac66e508f73cb8299dd36',
+})
+
 def validate(sources: dict[str, str]) -> list[str]:
     errors: list[str] = []
     run, view, cues, tests, runner, _ = [sources[x] for x in FILES[:6]]
@@ -464,6 +471,7 @@ def check() -> dict:
         ('game068_unregistered', 'tests/test_viya_presentation.gd', 'res://tests/test_viya_game068.gd', 'res://tests/missing_s.gd'),
 
         ('campaign_gold_old_default', 'scripts/combat/run_state.gd', 'CAMPAIGN_GOLD_DROP_CHANCE := 0.15', 'CAMPAIGN_GOLD_DROP_CHANCE := 0.30'),
+        ('character_info_invents_other_bonus', 'scripts/ui/character_info.gd', '_add_row(row[0], row[1], increase, "")', '_add_row(row[0], row[1], increase, "+5%")'),
         ('campaign_gold_affects_dungeon', 'scripts/combat/run_state.gd', 'gold_drop_chance = 1.0 if mode=="gold_slime"', 'gold_drop_chance = 0.15 if mode=="gold_slime"'),
         ('route_loses_endpoint', 'scripts/world/map_space.gd', 'bounds.intersects(wall,true)', 'bounds.intersects(wall,false)'),
         ('cache_hurt_bypass', 'scripts/combat/high_angle_battle.gd', 'cache_bodies and flash==0', 'cache_bodies'),

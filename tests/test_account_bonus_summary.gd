@@ -21,6 +21,39 @@ static func buy(ui,id:String,rank:int) -> void:
 	ui._select_talent_category(category,ui.simulation.navigation_ticket,ui._menu_revision)
 	ui.talent_buttons_by_id[id][rank].pressed.emit()
 
+static func stat_cells(table: GridContainer, stat_name: String) -> Array[String]:
+	for index in range(0, table.get_child_count(), 4):
+		if table.get_child(index).get_child(0).text == stat_name:
+			return [table.get_child(index+1).get_child(0).text, table.get_child(index+2).get_child(0).text, table.get_child(index+3).get_child(0).text]
+	return []
+
+static func check_character_info(ui, verify: Callable) -> void:
+	var snapshot: Dictionary = Snapshot.capture(ui.simulation)
+	var account_file := FileAccess.get_file_as_bytes(ui.gold_progress.path)
+	var open_button: Button = ui.dialog_body.find_child("CharacterInfoButton", true, false)
+	var stale_open: Callable = open_button.get_signal_connection_list("pressed")[0].callable
+	open_button.pressed.emit()
+	var sheet: Control = ui.dialog_body.get_node("CharacterInfoSheet")
+	var table: GridContainer = sheet.get_node("StatTable")
+	var talents: Button = sheet.find_child("TalentBonuses", true, false)
+	var other: Button = sheet.find_child("OtherBonuses", true, false)
+	var title: Label = ui.dialog_body.find_child("CharacterInfoTitle", true, false)
+	verify.call(ui._modal_kind == "character_info" and title.text.ends_with("비야") and table.columns == 2 and talents.icon != null and other.icon != null, "Lobby opens Viya's base sheet with two independent bonus icons")
+	talents.button_pressed = true
+	verify.call(table.columns == 3 and stat_cells(table, "최대 HP") == ["100", "+5", ""] and stat_cells(table, "공격력 배율") == ["100%", "+5%", ""] and stat_cells(table, "초당 MP 회복") == ["1.00", "+0.05", ""], "Character info shows real talent increases alongside the unmodified departure stats")
+	verify.call(stat_cells(table, "물리 관통") == ["15%", "", ""] and stat_cells(table, "소총 기본 피해") == ["10", "", ""], "Innate armor and weapon properties stay in the base column")
+	other.button_pressed = true
+	var other_empty := true
+	for index in range(7, table.get_child_count(), 4):
+		var cell: PanelContainer = table.get_child(index)
+		other_empty = other_empty and cell.visible and cell.get_child(0).text.is_empty()
+	verify.call(table.columns == 4 and other_empty, "Other bonuses open a column of empty cells even on an upgraded account")
+	talents.button_pressed = false
+	verify.call(table.columns == 3 and not table.get_child(2).visible and table.get_child(3).visible, "Closing talents keeps the Other column open")
+	verify.call(ui._handle_mobile_back() and ui._modal_kind == "ready", "Mobile Back returns the character sheet to the lobby")
+	stale_open.call()
+	verify.call(ui._modal_kind == "ready" and Snapshot.capture(ui.simulation) == snapshot and FileAccess.get_file_as_bytes(ui.gold_progress.path) == account_file, "Viewing character info rejects stale actions and leaves battle and account state intact")
+
 static func run(host,verify:Callable) -> void:
 	var none:Dictionary=Talents.empty_levels()
 	var data:Dictionary=Summary.for_levels(none)
@@ -48,6 +81,7 @@ static func run(host,verify:Callable) -> void:
 	buy(ui,"mp_regen",0)
 	verify.call(ui.gold_progress.total==1997000 and ui.gold_progress.talent_levels.attack_power==1,"Existing actual purchase buttons charge three1000gold roots before summary")
 	ui.talents_return_button.pressed.emit()
+	check_character_info(ui, verify)
 	ui.start_button.pressed.emit()
 	data=info(ui)
 	verify.call(ui._modal_kind=="stages" and data.levels==ui.gold_progress.talent_levels and data.total==3 and data.brief.contains("공격력 증가 +5%") and data.brief.contains("최대 HP 증가 +5%") and data.brief.contains("초당 MP 회복 +0.05"),"Production stage preparation shows the actual purchased attack/defense/recovery bonuses")
