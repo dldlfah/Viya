@@ -1,10 +1,10 @@
 # Viya — 모바일 서바이버 게임
 
-## GAME070 — SW 달리기 두 후보 미채택 (2026-11-27)
+## GAME070 — SW 기준 실행 확인 (2026-11-27)
 
-SW 일반 달리기 두 결과를 생성·검수했으나 다리 편중/반복이 남아 **교체용 원화0**으로 마감했다. 유료2/최대2건·실차감56/한도60·남은작업예산4/계정514다. 세 번째 자동 생성은 하지 않는다. [검토/반려 근거](tools/higgsfield/requests/game070/README.md) · [원본 포함 검토ZIP](tools/higgsfield/requests/game070/ARCHIVE.json) · [연결 보류 인계](tools/higgsfield/requests/game070/HANDOFF.md).
+기존 SW11의 반복, S↔SW 전환, 사격·총구와 정지·피격을 실제 전투에서 842개 검사·136회 그리기로 확인했다. 두 생성 후보는 지지 자세 급변과 같은 다리 반복으로 반려되었으며 게임의 교체용 원화는 대기 중이다. [실제 SW 영상](docs/validation/GAME070_SW_BASELINE.mp4) · [검증 기록](docs/validation/GAME070_BASELINE_REPORT.json)
 
-기존GAME069/35클립342·SW11은 그대로이며 이번 게임연결/실행은 NOT_RUN이다. 다음은 반려자료와 유효입력 전략 검토다. [CURRENT](docs/CURRENT_WORK.md) · [누적8.74](docs/DEVELOPMENT_STATUS.md) · [계획80](docs/PLANNED_WORK.md) · [NEXT](docs/NEXT_TASK.md)를 따른다. 아래 완료/과거NEXT는 당시 이력이다.
+다음 제작은 SW의 시점과 외형을 기존 이미지로 지정하고 검증된 S17의 교대 보행 타이밍을 별도 참조로 사용한다. [입력 수정안](tools/higgsfield/requests/game070/INPUT_STRATEGY.md) · [현재 상태](docs/CURRENT_WORK.md) · [다음 작업](docs/NEXT_TASK.md)
 
 ## 이전 GAME069 — S 전용 이동사격 연결·검수 완료 (2026-11-27)
 
@@ -24,7 +24,7 @@ SE 이동사격20장의 게임 연결ce7e779를 검수했다. **실제main.tscn 
 
 ## 세션 필수 문서
 
-[CURRENT_WORK](docs/CURRENT_WORK.md)와 **[누적 DEVELOPMENT_STATUS8.74](docs/DEVELOPMENT_STATUS.md)**를 함께 읽는다. [PLANNED_WORK80](docs/PLANNED_WORK.md) · [NEXT_TASK](docs/NEXT_TASK.md) · [AGENTS](AGENTS.md) · [제작 스킬](.agents/skills/viya-game-production/SKILL.md). 활성 브랜치는 `work/viya-turnaround-qa-20261117`이며main 자동 병합은 하지 않는다. 과거 절의 당시NEXT/미연결/GUI차단보다 CURRENT/NEXT와 최신 검수를 우선한다.
+[CURRENT_WORK](docs/CURRENT_WORK.md)와 **[누적 DEVELOPMENT_STATUS8.75](docs/DEVELOPMENT_STATUS.md)**를 함께 읽는다. [PLANNED_WORK81](docs/PLANNED_WORK.md) · [NEXT_TASK](docs/NEXT_TASK.md) · [AGENTS](AGENTS.md) · [제작 스킬](.agents/skills/viya-game-production/SKILL.md). 활성 브랜치는 `work/viya-turnaround-qa-20261117`이며main 자동 병합은 하지 않는다. 과거 절의 당시NEXT/미연결/GUI차단보다 CURRENT/NEXT와 최신 검수를 우선한다.
 
 ## SAVEFIX001 — 비행 몬스터 저장 보정 이력
 

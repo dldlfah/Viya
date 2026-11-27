@@ -1,0 +1,1177 @@
+{
+  "adapter": "llvmpipe (LLVM 19.1.7, 256 bits)",
+  "asset": "res://assets/characters/pilot_32/game069_s_run_fire/viya_game069_frames.tres",
+  "checks": 842,
+  "clips": 35,
+  "display": "X11",
+  "draws": 136,
+  "engine": {
+    "build": "official",
+    "hash": "ed1daf0bf001b61586d9930840f2f1394092c079",
+    "hex": 263938,
+    "major": 4,
+    "minor": 7,
+    "patch": 2,
+    "status": "stable",
+    "string": "4.7.2-stable (official)",
+    "timestamp": 0
+  },
+  "failures": [],
+  "run_frames": 11,
+  "shots": 4,
+  "status": "PASS",
+  "timeline": [
+    {
+      "animation": "run_sw",
+      "case": "SW run",
+      "file": "frames/000.png",
+      "frame": 0,
+      "phase": 0.0252694283762286,
+      "time": 0.0166666666666667
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW run",
+      "file": "frames/001.png",
+      "frame": 0,
+      "phase": 0.0505388567524572,
+      "time": 0.0333333333333333
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW run",
+      "file": "frames/002.png",
+      "frame": 0,
+      "phase": 0.0758082851286857,
+      "time": 0.05
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW run",
+      "file": "frames/003.png",
+      "frame": 1,
+      "phase": 0.101077713504914,
+      "time": 0.0666666666666667
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW run",
+      "file": "frames/004.png",
+      "frame": 1,
+      "phase": 0.126347141881143,
+      "time": 0.0833333333333333
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW run",
+      "file": "frames/005.png",
+      "frame": 1,
+      "phase": 0.151616570257371,
+      "time": 0.1
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW run",
+      "file": "frames/006.png",
+      "frame": 1,
+      "phase": 0.1768859986336,
+      "time": 0.116666666666667
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW run",
+      "file": "frames/007.png",
+      "frame": 2,
+      "phase": 0.202155427009829,
+      "time": 0.133333333333333
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW run",
+      "file": "frames/008.png",
+      "frame": 2,
+      "phase": 0.227424855386057,
+      "time": 0.15
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW run",
+      "file": "frames/009.png",
+      "frame": 2,
+      "phase": 0.252694283762286,
+      "time": 0.166666666666667
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW run",
+      "file": "frames/010.png",
+      "frame": 3,
+      "phase": 0.277963712138514,
+      "time": 0.183333333333333
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW run",
+      "file": "frames/011.png",
+      "frame": 3,
+      "phase": 0.303233140514743,
+      "time": 0.2
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW run",
+      "file": "frames/012.png",
+      "frame": 3,
+      "phase": 0.328502568890972,
+      "time": 0.216666666666667
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW run",
+      "file": "frames/013.png",
+      "frame": 3,
+      "phase": 0.3537719972672,
+      "time": 0.233333333333333
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW run",
+      "file": "frames/014.png",
+      "frame": 4,
+      "phase": 0.379041425643429,
+      "time": 0.25
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW run",
+      "file": "frames/015.png",
+      "frame": 4,
+      "phase": 0.404310854019657,
+      "time": 0.266666666666667
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW run",
+      "file": "frames/016.png",
+      "frame": 4,
+      "phase": 0.429580282395886,
+      "time": 0.283333333333333
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW run",
+      "file": "frames/017.png",
+      "frame": 5,
+      "phase": 0.454849710772115,
+      "time": 0.3
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW run",
+      "file": "frames/018.png",
+      "frame": 5,
+      "phase": 0.480119139148343,
+      "time": 0.316666666666667
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW run",
+      "file": "frames/019.png",
+      "frame": 5,
+      "phase": 0.505388567524572,
+      "time": 0.333333333333333
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW run",
+      "file": "frames/020.png",
+      "frame": 5,
+      "phase": 0.5306579959008,
+      "time": 0.35
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW run",
+      "file": "frames/021.png",
+      "frame": 6,
+      "phase": 0.555927424277029,
+      "time": 0.366666666666667
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW run",
+      "file": "frames/022.png",
+      "frame": 6,
+      "phase": 0.581196852653257,
+      "time": 0.383333333333333
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW run",
+      "file": "frames/023.png",
+      "frame": 6,
+      "phase": 0.606466281029486,
+      "time": 0.4
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW run",
+      "file": "frames/024.png",
+      "frame": 6,
+      "phase": 0.631735709405715,
+      "time": 0.416666666666667
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW run",
+      "file": "frames/025.png",
+      "frame": 7,
+      "phase": 0.657005137781943,
+      "time": 0.433333333333333
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW run",
+      "file": "frames/026.png",
+      "frame": 7,
+      "phase": 0.682274566158172,
+      "time": 0.45
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW run",
+      "file": "frames/027.png",
+      "frame": 7,
+      "phase": 0.7075439945344,
+      "time": 0.466666666666667
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW run",
+      "file": "frames/028.png",
+      "frame": 8,
+      "phase": 0.732813422910629,
+      "time": 0.483333333333333
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW run",
+      "file": "frames/029.png",
+      "frame": 8,
+      "phase": 0.758082851286857,
+      "time": 0.5
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW run",
+      "file": "frames/030.png",
+      "frame": 8,
+      "phase": 0.783352279663086,
+      "time": 0.516666666666667
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW run",
+      "file": "frames/031.png",
+      "frame": 8,
+      "phase": 0.808621708039315,
+      "time": 0.533333333333333
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW run",
+      "file": "frames/032.png",
+      "frame": 9,
+      "phase": 0.833891136415543,
+      "time": 0.55
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW run",
+      "file": "frames/033.png",
+      "frame": 9,
+      "phase": 0.859160564791772,
+      "time": 0.566666666666667
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW run",
+      "file": "frames/034.png",
+      "frame": 9,
+      "phase": 0.884429993168,
+      "time": 0.583333333333333
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW run",
+      "file": "frames/035.png",
+      "frame": 10,
+      "phase": 0.909699421544229,
+      "time": 0.6
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW run",
+      "file": "frames/036.png",
+      "frame": 10,
+      "phase": 0.934968849920458,
+      "time": 0.616666666666667
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW run",
+      "file": "frames/037.png",
+      "frame": 10,
+      "phase": 0.960238278296686,
+      "time": 0.633333333333334
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW run",
+      "file": "frames/038.png",
+      "frame": 10,
+      "phase": 0.985507706672915,
+      "time": 0.65
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW run",
+      "file": "frames/039.png",
+      "frame": 0,
+      "phase": 0.0107771350491432,
+      "time": 0.666666666666667
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW run",
+      "file": "frames/040.png",
+      "frame": 0,
+      "phase": 0.0360465634253718,
+      "time": 0.683333333333334
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW run",
+      "file": "frames/041.png",
+      "frame": 0,
+      "phase": 0.0613159918016004,
+      "time": 0.700000000000001
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW run",
+      "file": "frames/042.png",
+      "frame": 0,
+      "phase": 0.086585420177829,
+      "time": 0.716666666666667
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW run",
+      "file": "frames/043.png",
+      "frame": 1,
+      "phase": 0.111854848554058,
+      "time": 0.733333333333334
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW run",
+      "file": "frames/044.png",
+      "frame": 1,
+      "phase": 0.137124276930286,
+      "time": 0.750000000000001
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW run",
+      "file": "frames/045.png",
+      "frame": 1,
+      "phase": 0.162393705306515,
+      "time": 0.766666666666667
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW run",
+      "file": "frames/046.png",
+      "frame": 2,
+      "phase": 0.187663133682743,
+      "time": 0.783333333333334
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW run",
+      "file": "frames/047.png",
+      "frame": 2,
+      "phase": 0.212932562058972,
+      "time": 0.800000000000001
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW run",
+      "file": "frames/048.png",
+      "frame": 2,
+      "phase": 0.2382019904352,
+      "time": 0.816666666666668
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW run",
+      "file": "frames/049.png",
+      "frame": 2,
+      "phase": 0.263471418811429,
+      "time": 0.833333333333334
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW run",
+      "file": "frames/050.png",
+      "frame": 3,
+      "phase": 0.288740847187658,
+      "time": 0.850000000000001
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW run",
+      "file": "frames/051.png",
+      "frame": 3,
+      "phase": 0.314010275563886,
+      "time": 0.866666666666668
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW run",
+      "file": "frames/052.png",
+      "frame": 3,
+      "phase": 0.339279703940115,
+      "time": 0.883333333333334
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW run",
+      "file": "frames/053.png",
+      "frame": 4,
+      "phase": 0.364549132316343,
+      "time": 0.900000000000001
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW run",
+      "file": "frames/054.png",
+      "frame": 4,
+      "phase": 0.389818560692572,
+      "time": 0.916666666666668
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW run",
+      "file": "frames/055.png",
+      "frame": 4,
+      "phase": 0.415087989068801,
+      "time": 0.933333333333335
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW run",
+      "file": "frames/056.png",
+      "frame": 4,
+      "phase": 0.440357417445029,
+      "time": 0.950000000000001
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW run",
+      "file": "frames/057.png",
+      "frame": 5,
+      "phase": 0.465626845821258,
+      "time": 0.966666666666668
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW run",
+      "file": "frames/058.png",
+      "frame": 5,
+      "phase": 0.490896274197486,
+      "time": 0.983333333333335
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW run",
+      "file": "frames/059.png",
+      "frame": 5,
+      "phase": 0.516165702573715,
+      "time": 1.0
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW run",
+      "file": "frames/060.png",
+      "frame": 5,
+      "phase": 0.541435130949943,
+      "time": 1.01666666666667
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW run",
+      "file": "frames/061.png",
+      "frame": 6,
+      "phase": 0.566704559326172,
+      "time": 1.03333333333333
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW run",
+      "file": "frames/062.png",
+      "frame": 6,
+      "phase": 0.591973987702401,
+      "time": 1.05
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW run",
+      "file": "frames/063.png",
+      "frame": 6,
+      "phase": 0.617243416078629,
+      "time": 1.06666666666667
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW run",
+      "file": "frames/064.png",
+      "frame": 7,
+      "phase": 0.642512844454858,
+      "time": 1.08333333333333
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW run",
+      "file": "frames/065.png",
+      "frame": 7,
+      "phase": 0.667782272831086,
+      "time": 1.1
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW run",
+      "file": "frames/066.png",
+      "frame": 7,
+      "phase": 0.693051701207315,
+      "time": 1.11666666666667
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW run",
+      "file": "frames/067.png",
+      "frame": 7,
+      "phase": 0.718321129583544,
+      "time": 1.13333333333333
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW run",
+      "file": "frames/068.png",
+      "frame": 8,
+      "phase": 0.743590557959772,
+      "time": 1.15
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW run",
+      "file": "frames/069.png",
+      "frame": 8,
+      "phase": 0.768859986336001,
+      "time": 1.16666666666667
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW run",
+      "file": "frames/070.png",
+      "frame": 8,
+      "phase": 0.794129414712229,
+      "time": 1.18333333333333
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW run",
+      "file": "frames/071.png",
+      "frame": 9,
+      "phase": 0.819398843088458,
+      "time": 1.2
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW run",
+      "file": "frames/072.png",
+      "frame": 9,
+      "phase": 0.844668271464686,
+      "time": 1.21666666666667
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW run",
+      "file": "frames/073.png",
+      "frame": 9,
+      "phase": 0.869937699840915,
+      "time": 1.23333333333333
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW run",
+      "file": "frames/074.png",
+      "frame": 9,
+      "phase": 0.895207128217144,
+      "time": 1.25
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW run",
+      "file": "frames/075.png",
+      "frame": 10,
+      "phase": 0.920476556593372,
+      "time": 1.26666666666667
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW run",
+      "file": "frames/076.png",
+      "frame": 10,
+      "phase": 0.945745984969601,
+      "time": 1.28333333333333
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW run",
+      "file": "frames/077.png",
+      "frame": 10,
+      "phase": 0.971015413345829,
+      "time": 1.3
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW run",
+      "file": "frames/078.png",
+      "frame": 10,
+      "phase": 0.996284841722058,
+      "time": 1.31666666666667
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW run",
+      "file": "frames/079.png",
+      "frame": 0,
+      "phase": 0.0215542700982865,
+      "time": 1.33333333333333
+    },
+    {
+      "animation": "run_s",
+      "case": "Turn south",
+      "file": "frames/080.png",
+      "frame": 8,
+      "phase": 0.0468228909277149,
+      "time": 1.35
+    },
+    {
+      "animation": "run_s",
+      "case": "Turn south",
+      "file": "frames/081.png",
+      "frame": 8,
+      "phase": 0.0720915117571433,
+      "time": 1.36666666666667
+    },
+    {
+      "animation": "run_s",
+      "case": "Turn south",
+      "file": "frames/082.png",
+      "frame": 9,
+      "phase": 0.0973601325865717,
+      "time": 1.38333333333333
+    },
+    {
+      "animation": "run_s",
+      "case": "Turn south",
+      "file": "frames/083.png",
+      "frame": 9,
+      "phase": 0.122628753416,
+      "time": 1.4
+    },
+    {
+      "animation": "run_s",
+      "case": "Turn south",
+      "file": "frames/084.png",
+      "frame": 10,
+      "phase": 0.147897374245428,
+      "time": 1.41666666666667
+    },
+    {
+      "animation": "run_s",
+      "case": "Turn south",
+      "file": "frames/085.png",
+      "frame": 10,
+      "phase": 0.173165995074857,
+      "time": 1.43333333333333
+    },
+    {
+      "animation": "run_s",
+      "case": "Turn south",
+      "file": "frames/086.png",
+      "frame": 11,
+      "phase": 0.198434615904285,
+      "time": 1.45
+    },
+    {
+      "animation": "run_s",
+      "case": "Turn south",
+      "file": "frames/087.png",
+      "frame": 11,
+      "phase": 0.223703236733714,
+      "time": 1.46666666666667
+    },
+    {
+      "animation": "run_sw",
+      "case": "Turn southwest",
+      "file": "frames/088.png",
+      "frame": 2,
+      "phase": 0.248972665109942,
+      "time": 1.48333333333333
+    },
+    {
+      "animation": "run_sw",
+      "case": "Turn southwest",
+      "file": "frames/089.png",
+      "frame": 3,
+      "phase": 0.274242093486171,
+      "time": 1.5
+    },
+    {
+      "animation": "run_sw",
+      "case": "Turn southwest",
+      "file": "frames/090.png",
+      "frame": 3,
+      "phase": 0.299511521862399,
+      "time": 1.51666666666667
+    },
+    {
+      "animation": "run_sw",
+      "case": "Turn southwest",
+      "file": "frames/091.png",
+      "frame": 3,
+      "phase": 0.324780950238628,
+      "time": 1.53333333333333
+    },
+    {
+      "animation": "run_sw",
+      "case": "Turn southwest",
+      "file": "frames/092.png",
+      "frame": 3,
+      "phase": 0.350050378614857,
+      "time": 1.55
+    },
+    {
+      "animation": "run_sw",
+      "case": "Turn southwest",
+      "file": "frames/093.png",
+      "frame": 4,
+      "phase": 0.375319806991085,
+      "time": 1.56666666666667
+    },
+    {
+      "animation": "run_sw",
+      "case": "Turn southwest",
+      "file": "frames/094.png",
+      "frame": 4,
+      "phase": 0.400589235367314,
+      "time": 1.58333333333333
+    },
+    {
+      "animation": "run_sw",
+      "case": "Turn southwest",
+      "file": "frames/095.png",
+      "frame": 4,
+      "phase": 0.425858663743542,
+      "time": 1.6
+    },
+    {
+      "animation": "run_s",
+      "case": "Turn south",
+      "file": "frames/096.png",
+      "frame": 15,
+      "phase": 0.451127284572971,
+      "time": 1.61666666666667
+    },
+    {
+      "animation": "run_s",
+      "case": "Turn south",
+      "file": "frames/097.png",
+      "frame": 15,
+      "phase": 0.476395905402399,
+      "time": 1.63333333333333
+    },
+    {
+      "animation": "run_s",
+      "case": "Turn south",
+      "file": "frames/098.png",
+      "frame": 16,
+      "phase": 0.501664526231828,
+      "time": 1.65
+    },
+    {
+      "animation": "run_s",
+      "case": "Turn south",
+      "file": "frames/099.png",
+      "frame": 16,
+      "phase": 0.526933147061256,
+      "time": 1.66666666666667
+    },
+    {
+      "animation": "run_s",
+      "case": "Turn south",
+      "file": "frames/100.png",
+      "frame": 0,
+      "phase": 0.552201767890684,
+      "time": 1.68333333333333
+    },
+    {
+      "animation": "run_s",
+      "case": "Turn south",
+      "file": "frames/101.png",
+      "frame": 0,
+      "phase": 0.577470388720113,
+      "time": 1.7
+    },
+    {
+      "animation": "run_s",
+      "case": "Turn south",
+      "file": "frames/102.png",
+      "frame": 1,
+      "phase": 0.602739009549541,
+      "time": 1.71666666666667
+    },
+    {
+      "animation": "run_s",
+      "case": "Turn south",
+      "file": "frames/103.png",
+      "frame": 1,
+      "phase": 0.628007630378969,
+      "time": 1.73333333333333
+    },
+    {
+      "animation": "run_sw",
+      "case": "Turn southwest",
+      "file": "frames/104.png",
+      "frame": 7,
+      "phase": 0.653277058755198,
+      "time": 1.75
+    },
+    {
+      "animation": "run_sw",
+      "case": "Turn southwest",
+      "file": "frames/105.png",
+      "frame": 7,
+      "phase": 0.678546487131427,
+      "time": 1.76666666666667
+    },
+    {
+      "animation": "run_sw",
+      "case": "Turn southwest",
+      "file": "frames/106.png",
+      "frame": 7,
+      "phase": 0.703815915507655,
+      "time": 1.78333333333333
+    },
+    {
+      "animation": "run_sw",
+      "case": "Turn southwest",
+      "file": "frames/107.png",
+      "frame": 8,
+      "phase": 0.729085343883884,
+      "time": 1.8
+    },
+    {
+      "animation": "run_sw",
+      "case": "Turn southwest",
+      "file": "frames/108.png",
+      "frame": 8,
+      "phase": 0.754354772260112,
+      "time": 1.81666666666667
+    },
+    {
+      "animation": "run_sw",
+      "case": "Turn southwest",
+      "file": "frames/109.png",
+      "frame": 8,
+      "phase": 0.779624200636341,
+      "time": 1.83333333333333
+    },
+    {
+      "animation": "run_sw",
+      "case": "Turn southwest",
+      "file": "frames/110.png",
+      "frame": 8,
+      "phase": 0.80489362901257,
+      "time": 1.85
+    },
+    {
+      "animation": "run_sw",
+      "case": "Turn southwest",
+      "file": "frames/111.png",
+      "frame": 9,
+      "phase": 0.830163057388798,
+      "time": 1.86666666666666
+    },
+    {
+      "animation": "idle_sw",
+      "case": "Idle",
+      "file": "frames/112.png",
+      "frame": 0,
+      "phase": 0.830163057388798,
+      "time": 2.08333333333333
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW auto fire",
+      "file": "frames/113.png",
+      "frame": 9,
+      "phase": 0.855432485765027,
+      "time": 2.1
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW auto fire",
+      "file": "frames/114.png",
+      "frame": 10,
+      "phase": 0.931240770893712,
+      "time": 2.15
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW auto fire",
+      "file": "frames/115.png",
+      "frame": 0,
+      "phase": 0.00704905602239814,
+      "time": 2.2
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW auto fire",
+      "file": "frames/116.png",
+      "frame": 0,
+      "phase": 0.0828573411510839,
+      "time": 2.25
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW auto fire",
+      "file": "frames/117.png",
+      "frame": 1,
+      "phase": 0.15866562627977,
+      "time": 2.3
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW auto fire",
+      "file": "frames/118.png",
+      "frame": 2,
+      "phase": 0.234473911408455,
+      "time": 2.35
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW auto fire",
+      "file": "frames/119.png",
+      "frame": 3,
+      "phase": 0.310282196537141,
+      "time": 2.4
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW auto fire",
+      "file": "frames/120.png",
+      "frame": 4,
+      "phase": 0.386090481665827,
+      "time": 2.45
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW auto fire",
+      "file": "frames/121.png",
+      "frame": 5,
+      "phase": 0.461898766794513,
+      "time": 2.5
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW auto fire",
+      "file": "frames/122.png",
+      "frame": 5,
+      "phase": 0.537707051923198,
+      "time": 2.55
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW auto fire",
+      "file": "frames/123.png",
+      "frame": 6,
+      "phase": 0.613515337051884,
+      "time": 2.6
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW auto fire",
+      "file": "frames/124.png",
+      "frame": 7,
+      "phase": 0.68932362218057,
+      "time": 2.65
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW auto fire",
+      "file": "frames/125.png",
+      "frame": 8,
+      "phase": 0.765131907309256,
+      "time": 2.7
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW auto fire",
+      "file": "frames/126.png",
+      "frame": 9,
+      "phase": 0.840940192437941,
+      "time": 2.75
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW auto fire",
+      "file": "frames/127.png",
+      "frame": 10,
+      "phase": 0.916748477566627,
+      "time": 2.79999999999999
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW reverse aiming",
+      "file": "frames/128.png",
+      "frame": 10,
+      "phase": 0.942017905942856,
+      "time": 2.84999999999999
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW reverse aiming",
+      "file": "frames/129.png",
+      "frame": 9,
+      "phase": 0.86620962081417,
+      "time": 2.89999999999999
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW reverse aiming",
+      "file": "frames/130.png",
+      "frame": 8,
+      "phase": 0.790401335685484,
+      "time": 2.94999999999999
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW reverse aiming",
+      "file": "frames/131.png",
+      "frame": 7,
+      "phase": 0.714593050556798,
+      "time": 2.99999999999999
+    },
+    {
+      "animation": "run_sw",
+      "case": "SW reverse aiming",
+      "file": "frames/132.png",
+      "frame": 7,
+      "phase": 0.638784765428113,
+      "time": 3.04999999999999
+    },
+    {
+      "animation": "attack_sw",
+      "case": "Standing SW fire",
+      "file": "frames/133.png",
+      "frame": 2,
+      "phase": 0.588245908675656,
+      "time": 3.09999999999999
+    },
+    {
+      "animation": "hurt_sw",
+      "case": "SW hurt",
+      "file": "frames/134.png",
+      "frame": 0,
+      "phase": 0.588245908675656,
+      "time": 3.11666666666666
+    },
+    {
+      "animation": "hurt_sw",
+      "case": "Pause",
+      "file": "frames/135.png",
+      "frame": 0,
+      "phase": 0.588245908675656,
+      "time": 3.11666666666666
+    }
+  ],
+  "total_frames": 342,
+  "wraps": 2,
+  "task": "GAME070_BASELINE_REVIEW",
+  "date_kst": "2026-11-27",
+  "review_head": "d5f7dfd59926f01199e2496e5c1cb51dc50b0b18",
+  "game_code": "9fe051c41ac8c92c021a7452021d064e635b4e1c",
+  "mode": "Actual Linux X11 main.tscn, fixed 1/60 steps, injected Godot key events and separate QA saves. SW baseline only.",
+  "archived_candidates": {
+    "raw_archive_retrieval": "BLOCKED_HTTP_PROXY_403",
+    "available_evidence": "Checked committed enlarged frame crops and counters. Prior full video review is historical.",
+    "observed_discontinuities": [
+      "Candidate 1 43→44 abrupt change of folded leg to support.",
+      "Candidate 2 near-leg stance set 34–38, recovery 39–41, another near-leg stance 42–46 before far-leg stance 48."
+    ],
+    "adopted_frames": 0
+  },
+  "game_preservation": {
+    "byte_identical_project_paths_by_git_diff_vs_bea55a1": 1528,
+    "changed_tracked_project_paths": [],
+    "active_sw_frames": 11
+  },
+  "timing_reference": {
+    "source": "tools/higgsfield/requests/game068/evidence/candidate_01.mp4",
+    "source_sha256": "3a3e265b86320f21ed1970587c7faf2c997393a994127c68fa757cdac43007e1",
+    "source_frames_zero_based": [
+      34,
+      50
+    ],
+    "source_reference_support_frames": [
+      37,
+      45
+    ],
+    "repeats": 6,
+    "output_frames": 102,
+    "fps": 24,
+    "duration_seconds": 4.25,
+    "width": 864,
+    "height": 1072,
+    "sha256": "3cb586f02cbba804fae5cbd412737715aff5677e048e62ff2b29a3b7eaac3cb5",
+    "use": "Established S gait timing reference only. Use original SW art independently for appearance, camera and facing.",
+    "new_pose_count": 0,
+    "generation_spend": 0,
+    "full_decode": "PASS",
+    "frame_order_check": "All102downsampled decoded frames match intended source indices among17 in order."
+  },
+  "this_review_generation_credits": 0,
+  "captures": {
+    "baseline_video": "112 consecutive rendered frames at 60 fps covering SW loops and S↔SW turns.",
+    "baseline_fire_png": "Actual frame119 in SW firing case."
+  },
+  "limits": [
+    "Windows and mobile devices",
+    "Realtime FPS and thermal testing",
+    "Physical foot contact",
+    "Final producer art approval",
+    "Full original candidate replay (archive access denied)"
+  ],
+  "evidence_sha256": {
+    "GAME070_S_TIMING_REFERENCE.mp4": "3cb586f02cbba804fae5cbd412737715aff5677e048e62ff2b29a3b7eaac3cb5",
+    "GAME070_SW_BASELINE.mp4": "bde5607f6603e22b77057fccd13b82ff66818a1b8de0f80283c0612fbb2efcb1",
+    "GAME070_SW_BASELINE_FIRE.png": "af170548f00da93cd19ba2870a37f984a703fcd9014fece52ed496677d1351f3",
+    "GAME070_BASELINE.log": "87ead962aa43eba43853884e48fcb775598d23aa1028b9751235d3be37cadddf",
+    "GAME070_BASELINE_INSPECT.gd.txt": "f22b1081b1783cadda60b6043706a49a186cb534e37d466fc784e380ab3fc717"
+  }
+}

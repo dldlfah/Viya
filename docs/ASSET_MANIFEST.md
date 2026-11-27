@@ -330,3 +330,13 @@
 | 기존 상태 | GAME069/35클립342·기존SW11/다른34클립331 보존 |
 
 후보 두 개의 생성 완료를 기술채택/게임적용/실행·최종아트 승인으로 세지 않는다. 원본은ZIP 안에 실제파일로 보존하고 저장소는 다운로드/해시로 연결한다. 원본208/ARTFIX001/GAME064~069/SAVEFIX001·저장/전투규칙은 유지했다. 다음은 반려 자료/유효 입력 전략 검토이며 세 번째 자동 제출은 없다.
+
+## GAME070 — SW 비교 자료 (2026-11-27)
+
+| 자료 | 출처와 검증 범위 |
+| --- | --- |
+| [SW 실제 게임 기준](validation/GAME070_SW_BASELINE.mp4) | 기존 SW11의 실제 `main.tscn` 반복과 S↔SW 전환, 112회 연속 캡처 |
+| [SW 이동 사격 화면](validation/GAME070_SW_BASELINE_FIRE.png) | 기존 SW의 자동사격 검수 캡처 |
+| [S 타이밍 참조](validation/GAME070_S_TIMING_REFERENCE.mp4) | GAME068 원천 34~50번의 24fps 재생, 6주기·102장. 양발 교대와 템포 참조 |
+
+현재 연결된 원화는 GAME069의 기존 SW11이다. 참조 영상은 검수와 후속 기획 자료다. [출처·해시와 엔진 실행](validation/GAME070_BASELINE_REPORT.json)

@@ -1,25 +1,13 @@
-# VIYA — 현재 작업 상태 / 메인 작업문서
+# VIYA — 현재 작업 상태
 
-기록일 **2026-11-27(KST)**. 브랜치 **`work/viya-turnaround-qa-20261117`**. [누적8.74](DEVELOPMENT_STATUS.md) · [계획80](PLANNED_WORK.md) · [NEXT](NEXT_TASK.md).
+2026-11-27 (KST) · `work/viya-turnaround-qa-20261117` · [누적 개발현황 8.75](DEVELOPMENT_STATUS.md#875-game070--sw-기준-검수와-입력-수정) · [다음 작업](NEXT_TASK.md) · [후속 계획](PLANNED_WORK.md)
 
-## 최신 — GAME070 SW 일반 달리기 두 후보 검수, 교체 미채택
+## GAME070 — SW 기준 검수와 입력 수정
 
-실제 원격 **bea55a1e66e96df65c4acb3dbd31af687300b60b**와 깨끗한 작업 트리를 확인해 이어갔다. 기존 GAME069 게임 구현 **9fe051c41ac8c92c021a7452021d064e635b4e1c**과 이번 기획/Higgsfield 검수를 구분한다. [제작/반려 기록](../tools/higgsfield/requests/game070/README.md) · [원본 포함 검토ZIP](../tools/higgsfield/requests/game070/ARCHIVE.json) · [제작세션 연결 보류](../tools/higgsfield/requests/game070/HANDOFF.md).
+원격 `d5f7dfd59926f01199e2496e5c1cb51dc50b0b18`의 두 후보는 교체용 원화 미채택 상태다. 저장소의 확대 시트에서 후보 1의 43→44 자세 급변과 후보 2의 가까운 다리 지지 반복을 확인했다. 원본 ZIP 다운로드는 403으로 차단되어 원본 전체를 독립 재생하지 못했다. 이전 전체 검수와 비용은 그때의 기록으로 보존한다. [후보 기록](../tools/higgsfield/requests/game070/README.md)
 
-현재 SW11/대기·모션과 S17 실제 영상을 확인하고 SW00 시작/SW08 반대 다리 보조를 선택했다. 두 입력에 같은4배 확대/이동(100,124)과1000×1240 녹색 여백을 적용했다. 첫 Seedance2.5 omni_reference는 다리 편중/급한 자세 교체로 반려했다. 가운데38~49의12장 시험에도 문제가 남아 그 구간을 납품하지 않았다. 두 번째는 같은 두 이미지를 참조로만 사용하고 시작 자세 고정을 해제했다. 하지만 가까운 다리가 추가로 차이는 반복이 남았다.
+현재 게임의 SW11은 실제 `main.tscn`에서 842개 검사와 136회 그리기를 통과했다. 전체 11장, 마지막→첫 2회, S↔SW 왕복, 정지, 프레임별 총구, 실제 자동사격 4발, 후진 조준, 서서 사격, 피격 우선, 일시정지를 확인했다. 실제 구현 기준은 GAME069 `9fe051c41ac8c92c021a7452021d064e635b4e1c`다. 현행 표시 경로에서 교체를 요구하는 오류는 재현되지 않았다. [SW 실제 게임 영상](validation/GAME070_SW_BASELINE.mp4) · [이동 사격 화면](validation/GAME070_SW_BASELINE_FIRE.png) · [검증 보고서](validation/GAME070_BASELINE_REPORT.json)
 
-두 번째의 예는 원천32의먼다리지지→34~38의가까운다리지지→39~41회복→42~46에서같은가까운다리지지재발→48의먼다리지지다. 각각97장을 순서대로 보고 두 번째는 고정 확대 영역도 검토했으나, 올바른 양발 교대와 끝→첫을 함께 만족하는 연속 한 주기를 확보하지 못했다. 역할 변경만으로 해결되지 않아 첫 원인 추정을 확정하지 않는다.
+활성 리소스는 `res://assets/characters/pilot_32/game069_s_run_fire/viya_game069_frames.tres`의 35클립·342프레임이다. SW11을 교체할 유효한 원화가 아직 없다. 이번 검수의 신규 생성과 차감은 0이며 이전 2건과 56크레딧은 당시 제작 기록이다. 실행 검수는 Linux X11의 고정 업데이트와 Godot 입력 이벤트 기준이다. Windows·모바일, 실시간 성능, 물리 접지와 프로듀서 최종 아트 승인은 미검증이다.
 
-**생성2건 완료·기술 채택0·교체용RGBA/게임 시간표·총구/새 위상 납품0·GAME070 게임 연결/실행 NOT_RUN·최종 아트 NOT_VERIFIED.** 유효한 주기가 없는데 숫자나 위상을 꾸며 연결하지 않는다. 반전/사지조립·포즈변형/가짜보간·핑퐁/끝복제는 하지 않았다.
-
-현재 조회/견적에 따른 **유료2/최대2건·실차감56/한도60·남은작업예산4크레딧**으로 종료했다. 실제 계정570→542→514/완료후514다. 기존GAME069잔여1을 이월하지 않았다. 유료추가출력/새결제/자동충전/요금제변경0·세번째제출0이다. [비용 근거](../tools/higgsfield/requests/game070/evidence/cost_record.json).
-
-원본MP4 두 개/해시, 실제 원천97장씩의 시간표/전체 검토/결함 확대, 입력/변환/해시·모델/설정/작업/견적/잔액·반려 이유를 67파일 검토ZIP으로 보존했다. ZIP은Higgsfield 일반파일로 업로드/확인했으며 저장소 ARCHIVE.json에 영구 다운로드와SHA-256를 기록한다. 대용량 원본은ZIP 안에 실제 파일로 있으며 저장소에서는 이 패키지로 연결한다.
-
-## 보존된 게임과 다음 한 단위
-
-활성은 여전히 **`res://assets/characters/pilot_32/game069_s_run_fire/viya_game069_frames.tres`**·**35클립342프레임**이다. SW11과 다른34클립331을 유지했다. 환경 단절 전 기존assets/scripts/data1,526개가 출발bea55a1과 동일함을 확인했다. 그 뒤 미디어 검수는Higgsfield 작업공간, 원격 보존은GitHub 커넥터로 수행했으며 기존 게임/데이터/코드는 변경하지 않는다. 로컬환경은transport disconnected 후 사용불가여서 엔진을 실행하지 않았다.
-
-GAME069의 과거 전체4,602·실제main2,485/447그리기/43발은 [8.73 당시 검증](validation/GAME069_INTEGRATION_REPORT.json)이다. 이번 아트 검수로 재실행PASS를 부여하지 않는다. 다음은 **GAME070 반려 결과 검토와 유효한 SW 보행 입력 전략 확정**이며, 제작세션 연결/같은 예산의 자동재생성은 보류한다. SW 이동사격/다른방향/적/초상화는 이번 범위 밖이다.
-
-원본208/ARTFIX001/GAME064~069/SAVEFIX001·저장22/7난수/스폰/AI/피해/HP/MP/보상/전투속도·200×248/root(100,248)/표시69×85.56·235/stride155를 보존한다.1540과부하·경제·과거무효파일자동복구·실기/FPS/발열·최종아트/한판마감은 별도다. main병합/force push/유료Actions0·3D보류·지원2+2빈칸을 유지한다.
+다음 제작용으로 기존 SW 이미지의 시점과 외형, 검증된 S17 원천 영상의 보행 타이밍을 별도로 제공하도록 입력을 수정했다. S 타이밍 영상은 기존 원천 34~50번을 24fps로 반복한 102프레임이며, 새 SW 원화는 아직 없다. [입력 수정안](../tools/higgsfield/requests/game070/INPUT_STRATEGY.md) · [타이밍 참조](validation/GAME070_S_TIMING_REFERENCE.mp4)

@@ -1,0 +1,187 @@
+extends SceneTree
+
+const Campaign = preload("res://tests/test_campaign.gd")
+const Snapshot = preload("res://scripts/progression/run_snapshot.gd")
+const EXPECTED_RESOURCE = "res://assets/characters/pilot_32/game069_s_run_fire/viya_game069_frames.tres"
+const OUTPUT = "res://.local_validation/GAME070_REVIEW/game"
+const STEP = 1.0 / 60.0
+const START = Vector2(2650, 1260)
+var checks := 0
+var draws := 0
+var failures: Array[String] = []
+var timeline: Array[Dictionary] = []
+var ui
+
+func _initialize() -> void:
+	call_deferred("run")
+
+func expect(condition: bool, label: String) -> void:
+	checks += 1
+	if not condition:
+		failures.append(label)
+
+func key(code: Key, pressed: bool) -> void:
+	var event := InputEventKey.new()
+	event.physical_keycode = code
+	event.keycode = code
+	event.pressed = pressed
+	Input.parse_input_event(event)
+
+func movement_step(expected: String, direction_sign: float = 1.0) -> Dictionary:
+	var before: Dictionary = ui.view.actor_visual()
+	var position: Vector2 = ui.simulation.player
+	ui._physics_process(STEP)
+	var after: Dictionary = ui.view.actor_visual()
+	var traveled: float = position.distance_to(ui.simulation.player)
+	expect(after.sample.get("animation", "") == expected, "Select " + expected)
+	expect(absf(traveled - 235.0 * STEP) < .002, "Open route retains base speed")
+	expect(is_equal_approx(fposmod(after.gait_phase - before.gait_phase, 1.0), fposmod(direction_sign * traveled / 155.0, 1.0)), "Preserve distance-based phase")
+	return after
+
+func capture(label: String) -> void:
+	ui._update_hud()
+	ui.view.queue_redraw()
+	var state: Dictionary = Snapshot.capture(ui.simulation)
+	var cues: Dictionary = ui.simulation.cues.snapshot()
+	await process_frame
+	await RenderingServer.frame_post_draw
+	expect(Snapshot.capture(ui.simulation) == state and ui.simulation.cues.snapshot() == cues, "Drawing leaves simulation and cues intact")
+	var visual: Dictionary = ui.view.actor_visual()
+	var filename := "frames/%03d.png" % draws
+	expect(root.get_texture().get_image().save_png(OUTPUT.path_join(filename)) == OK, "Capture " + label)
+	timeline.append({"file": filename, "case": label, "animation": visual.sample.animation, "frame": visual.sample.index, "phase": visual.gait_phase, "time": ui.simulation.elapsed})
+	draws += 1
+
+func run() -> void:
+	if DisplayServer.get_name() == "headless":
+		printerr("Actual display required")
+		quit(2)
+		return
+	DirAccess.make_dir_recursive_absolute(OUTPUT.path_join("frames"))
+	root.size = Vector2i(1280, 720)
+	root.content_scale_mode = Window.CONTENT_SCALE_MODE_DISABLED
+	ui = load("res://scenes/main.tscn").instantiate()
+	ui.run_store.path = OUTPUT.path_join("battle.save")
+	ui.gold_progress.path = OUTPUT.path_join("gold.cfg")
+	ui.settings_path = OUTPUT.path_join("settings.cfg")
+	for path in [ui.run_store.path, ui.gold_progress.path, ui.settings_path]:
+		DirAccess.remove_absolute(path)
+	root.add_child(ui)
+	ui.set_physics_process(false)
+	await process_frame
+	Campaign.depart(ui)
+	ui.safe_area_override = Rect2(0, 6, 1280, 702)
+	ui._apply_layout()
+	var state = ui.simulation
+	state.player = START
+	state.enemies.clear()
+	state.bullets.clear()
+	state.spawn_clock = 999
+	state.shot_clock = 999
+	state._scatter_clock = 999
+	state._swarm_clock = 999
+	var southwest: Vector2 = ui.view.input_direction(Vector2(-1, 1).normalized())
+	state.facing = southwest
+	ui.view.camera.reset()
+	ui.view.actors.reset()
+	var asset: SpriteFrames = ui.view.art.resource("viya_battle")
+	var total := 0
+	for clip in asset.get_animation_names():
+		total += asset.get_frame_count(clip)
+	expect(asset.resource_path == EXPECTED_RESOURCE and asset.get_animation_names().size() == 35 and total == 342, "Active GAME069 resource still resolves 35 clips and 342 frames")
+	expect(asset.get_frame_count("run_sw") == 11 and asset.get_animation_loop("run_sw"), "Original SW eleven-frame loop")
+	var idle: Dictionary = ui.view.actor_visual()
+	expect(idle.sample["size"] == Vector2(69, 85.56) and idle.sample.pivot == Vector2(.5, 1), "Fixed character size and pivot")
+	key(KEY_A, true)
+	key(KEY_S, true)
+	await process_frame
+	var seen: Dictionary = {}
+	var wraps := 0
+	var previous := -1
+	for index in range(80):
+		var pose := movement_step("run_sw")
+		var frame: int = pose.sample.index
+		seen[frame] = true
+		if frame == 0 and previous == 10:
+			wraps += 1
+		previous = frame
+		await capture("SW run")
+	expect(seen.size() == 11 and wraps >= 2, "All SW frames and two native last-to-first loops")
+	for turn in range(2):
+		key(KEY_A, false)
+		await process_frame
+		for index in range(8):
+			movement_step("run_s")
+			await capture("Turn south")
+		key(KEY_A, true)
+		await process_frame
+		for index in range(8):
+			movement_step("run_sw")
+			await capture("Turn southwest")
+	key(KEY_A, false)
+	key(KEY_S, false)
+	await process_frame
+	ui._physics_process(STEP)
+	var released: Dictionary = ui.view.actor_visual()
+	for index in range(12):
+		ui._physics_process(STEP)
+	var stopped: Dictionary = ui.view.actor_visual()
+	expect(stopped.sample.animation == "idle_sw" and is_equal_approx(stopped.gait_phase, released.gait_phase), "Release stops movement and freezes gait")
+	await capture("Idle")
+	state.player = START
+	ui.view.camera.reset()
+	state.add_enemy(state.player + southwest * 250)
+	state.enemies[-1].speed = 0
+	state.enemies[-1].hp = 100000
+	state.enemies[-1].max_hp = 100000
+	state.shot_clock = 0
+	key(KEY_A, true)
+	key(KEY_S, true)
+	await process_frame
+	var shots: int = state.shots
+	for index in range(45):
+		state.enemies[-1].p = state.player + southwest * 250
+		var pose := movement_step("run_sw")
+		var expected: Array = ui.view.viya.config.directions.sw.run[pose.sample.index].muzzle
+		expect(pose.muzzle == Vector2(expected[0], expected[1]), "SW fires with the selected frame muzzle")
+		if index % 3 == 0:
+			await capture("SW auto fire")
+	expect(state.shots > shots, "Production simulation commits actual shots")
+	key(KEY_A, false)
+	key(KEY_S, false)
+	key(KEY_D, true)
+	key(KEY_W, true)
+	await process_frame
+	for index in range(15):
+		state.enemies[-1].p = state.player + southwest * 250
+		movement_step("run_sw", -1.0)
+		if index % 3 == 0:
+			await capture("SW reverse aiming")
+	key(KEY_D, false)
+	key(KEY_W, false)
+	await process_frame
+	ui._physics_process(STEP)
+	expect(ui.view.actor_visual().sample.animation == "attack_sw", "Release while firing uses the SW standing attack")
+	await capture("Standing SW fire")
+	state.enemies[-1].p = state.player + southwest * 16
+	state.hurt_clock = 0
+	var old_hp: int = state.hp
+	ui._physics_process(STEP)
+	expect(state.hp < old_hp and ui.view.actor_visual().sample.animation == "hurt_sw", "Accepted hit takes priority over fire")
+	await capture("SW hurt")
+	ui.pause_game()
+	var paused: Dictionary = Snapshot.capture(state)
+	var paused_pose: Dictionary = ui.view.actor_visual()
+	for index in range(12):
+		ui._physics_process(STEP)
+	expect(paused == Snapshot.capture(state) and paused_pose.sample.index == ui.view.actor_visual().sample.index, "Pause freezes battle and pose")
+	await capture("Pause")
+	var report := {"status": "PASS" if failures.is_empty() else "FAIL", "checks": checks, "draws": draws, "failures": failures, "run_frames": seen.size(), "wraps": wraps, "shots": state.shots - shots, "display": DisplayServer.get_name(), "adapter": RenderingServer.get_video_adapter_name(), "asset": asset.resource_path, "clips": asset.get_animation_names().size(), "total_frames": total, "engine": Engine.get_version_info(), "timeline": timeline}
+	FileAccess.open(OUTPUT.path_join("report.json"), FileAccess.WRITE).store_string(JSON.stringify(report, "  ") + "\n")
+	print(JSON.stringify({"status": report.status, "checks": checks, "draws": draws, "wraps": wraps, "shots": report.shots, "failures": failures}))
+	ui.combat_audio.stop_all()
+	ui.queue_free()
+	await process_frame
+	await process_frame
+	await create_timer(.1).timeout
+	quit(0 if failures.is_empty() else 1)
