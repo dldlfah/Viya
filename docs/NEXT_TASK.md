@@ -1,18 +1,9 @@
-# VIYA — 다음 단일 제작 작업
+# VIYA — next single production unit
 
-GAME065 검수 뒤,기존 비행 수명 저장 결함을 **SAVEFIX001**로 독립 수정했다. 실제 코드 기준은 **`06fca9441b5b7dc41ad01538cead30cb487f8189`**,출발 원격은 `89bf6611f659e5ff61b9254c3b93580d9025888f`다. 다음 원화 단위는 SE 달리기 그대로다. [CURRENT](CURRENT_WORK.md) · [누적8.64](DEVELOPMENT_STATUS.md) · [PLANNED70](PLANNED_WORK.md) · [저장 검증](validation/SAVEFIX001_REPORT.json).
+GAME066 SE full-body run is technically complete in the work branch. 18 unique RGBA frames on a fixed 200x248 canvas replace SE run11, nominal cycle660ms. Godot4.7.2 regression465 PASS and actual X11 SE renderer198 frames / 5 cycles PASS. User's final art approval and hardware FPS are separate. See docs/validation/GAME066_INTEGRATION_REPORT.json.
 
-## 다음 — GAME066 SE 달리기 한 주기 보정·게임 적용
+## Next: GAME067 SE moving fire
 
-사용자의 다음 진행에 따라 E와 인접한 **남동쪽(SE) 달리기 한 방향**을 다음 제작 단위로 정했다. E47/E이동사격47의 기술 검수를 최종 아트 승인으로 확대하지 않으며 나머지 방향을 일괄 생성하지 않는다.
+Create a true full-body southeast running-while-aiming/firing loop on the same southeast camera and original character identity. Use the accepted GAME066 SE run as gait reference and preserve its current run phase; do not rotate E pose or duplicate generic running frames. No baked flashes/bullets; game owns shot effects. Deliver registered transparent PNG frames, exact timings, separate per-frame muzzle and actual engine run/fire switches, stop/turn/reverse/pause checks. Retain other 32 poses, original 208, ARTFIX001, GAME064/GAME065, SAVEFIX001, save22, 7 RNG streams. Read current model pricing/balance before billed generation; no purchase or auto-recharge. Only mark art approval after user's actual approval.
 
-1. 기획/Higgsfield 세션에 [제작 프롬프트](../tools/higgsfield/requests/game066/PROMPT_KO.txt)·[참조 명세](../tools/higgsfield/requests/game066/request_plan.json)·[현재 SE 재생 영상](validation/GAME066_SE_RUN_REFERENCE.mp4)을 사용한다. 기존 SE11장/idle_se는 방향·카메라/외형, E47은 연속 보행의 품질 참조다. 현재 영상은 수정 전 참조이며 새 원화가 아니다. 현재 모델/입력/가격·잔액을 실행 때 조회한다. 원화 제작은 사용자가 지정한 기획/Higgsfield 세션에서 진행한다.
-2. SE 마지막→첫 프레임과 내부 교대 접지·몸 높이·총/손·천/머리카락을 한 전신 주기로 맞춘다. 필요한 프레임 수와 실제 가변 시간/총구·랜드마크를 납품한다.47장 자체가 목표는 아니다. 팔다리 조립·미러링·프레임별 몸/발 정렬·끝 복제/핑퐁으로 대체하지 않는다.
-3. 활성 `game065_e_run_fire/viya_game065_frames.tres`의 SE run만 파생 리소스에서 교체한다. 나머지32클립과 기존 경로/시간·E달리기/E이동사격을 보존한다. 현재69×85.56/캔버스200×248/pivot(100,248),이동235/stride155를 유지하고 SE 위상은 실제 접지 랜드마크로 E와 맞춘다.
-4. 실제 게임에서 여러 주기·E↔SE 왕복·정지 복귀·전후진·기존 사격/총구·일시정지를 확인한다. 제작→기술 QA→게임 연결→실제 실행→기록·원격 보존으로 마감한다. 새 SE 이동사격은 이 단위 완료 뒤 별도 후속이며 일반달리기 복사를 사격 제작으로 기록하지 않는다.
-
-## 현재 완료와 경계
-
-SAVEFIX001은 전체 기존10명령/7묶음·각120초의4,523네이티브·Python20·6계약/136변이거부·실제GUI11검사/3그리기 PASS다. 저장 검증기를 유지한 채1µs 미만 비행 수명을 만료 처리하며,마지막 밀치기와 그 결과 피격 차이를 별도 검증했다. GAME065의1,554검사/492그리기는 직전 동작 검수 이력이다. 기존 단일RunState/저장22·7난수·표시 관측·스폰/피해 공식·보상 규칙은 유지한다. 원본208장·ARTFIX001·GAME064/GAME065 원화/리소스는 바이트 불변이다. 최신 비용0, 새 SE 생성/적용0.
-
-후속은 필요한 SE 이동사격/다른 방향→고블린 약탈병1종→전투 표시/아이콘→초상화4종→1스테이지 한 판 마감이다. 기존1540부하·과거 무효 저장의 자동복구·경제·Windows/모바일/FPS/발열·최종 아트는 별도 OPEN이다. main자동병합/force push/유료Actions 금지,3D/리그/코스튬 보류·지원2+2를 유지한다.
+Other open items: Windows/mobile hardware QA, 1540-actor performance, economy and full first-stage finish.

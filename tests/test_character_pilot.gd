@@ -6,7 +6,7 @@ const Campaign=preload("res://tests/test_campaign.gd")
 const Scenery=preload("res://scripts/combat/oblique_scenery.gd")
 const MANIFEST:="res://assets/characters/pilot_32/source_manifest.json"
 const SOURCE_RESOURCE:="res://assets/characters/pilot_32/resources/viya_directional_motion.tres"
-const RESOURCE:="res://assets/characters/pilot_32/game065_e_run_fire/viya_game065_frames.tres"
+const RESOURCE:="res://assets/characters/pilot_32/game066_se_run/viya_game066_frames.tres"
 const CACHE=preload("res://assets/characters/pilot_32/render_cache/viya_render_frames.tres")
 const EAST_TIMING:="res://assets/characters/pilot_32/game064_e_run/provenance/frame_timing.csv"
 const EAST_FIRST:="res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_000.png"
@@ -65,7 +65,8 @@ static func run(host,verify:Callable) -> void:
 		for direction in DIRECTIONS:
 			var name:String=pose+"_"+direction
 			var east:bool=name=="run_e"
-			valid=valid and asset.has_animation(name) and asset.get_frame_count(name)==(47 if east else expected) and is_equal_approx(asset.get_animation_speed(name),47.0/.66 if east else fps) and asset.get_animation_loop(name)==(pose in ["idle","run"])
+			var southeast:bool=name=="run_se"
+			valid=valid and asset.has_animation(name) and asset.get_frame_count(name)==(47 if east else (18 if southeast else expected)) and is_equal_approx(asset.get_animation_speed(name),47.0/.66 if east else (18.0/.66 if southeast else fps)) and asset.get_animation_loop(name)==(pose in ["idle","run"])
 			for index in range(asset.get_frame_count(name)):
 				total+=1
 				var texture:Texture2D=asset.get_frame_texture(name,index)
@@ -75,12 +76,14 @@ static func run(host,verify:Callable) -> void:
 						valid=false
 						continue
 					valid=valid and texture.resource_path==EAST_FIRST.get_base_dir().path_join(timing[index].filename) and is_equal_approx(asset.get_frame_duration(name,index),timing[index].duration_ms*47.0/660.0)
+				elif southeast:
+					valid=valid and texture.resource_path=="res://assets/characters/pilot_32/game066_se_run/frames/viya_run_se_%03d.png" % index and asset.get_frame_duration(name,index)==1.0
 				else:
 					valid=valid and asset.get_frame_duration(name,index)==1.0
 					preserved=preserved and is_same(texture,CACHE.get_frame_texture(name,index)) and asset.get_frame_duration(name,index)==CACHE.get_frame_duration(name,index) and asset.get_animation_speed(name)==CACHE.get_animation_speed(name) and asset.get_animation_loop(name)==CACHE.get_animation_loop(name)
 					preserved_count+=1
 		verify.call(valid,"Directional count/timing/loop/canvas match the native poses plus the authored E47 exception for:"+pose)
-	verify.call(total==244 and preserved and preserved_count==197,"Only E run changes:197previous display frames retain their exact resource references and timing within the244frame composite")
+	verify.call(total==251 and preserved and preserved_count==186,"Only E run and SE run change:186previous native display frames preserve resources and timings within251 directional frames")
 	var ui=load("res://scenes/main.tscn").instantiate()
 	var folder:="user://character-pilot-"+Crypto.new().generate_random_bytes(8).hex_encode()
 	DirAccess.make_dir_recursive_absolute(folder)

@@ -1841,3 +1841,16 @@ NEXT/PLANNED69는 SE 달리기 한 단위로 갱신했다. 이후 필요한 SE�
 **실제 화면:** Linux X11/Mesa llvmpipe OpenGL4.5·Dummy에서 생산 main.tscn의100×.05갱신→정상 만료→일시정지 저장→새 디스크 리더→계속하기를 **11검사/3그리기 PASS**했다. 남은 적/kill/gold0·save_error0이며 그리기 전후 Snapshot/cues도 같다. [실제 저장 화면](validation/SAVEFIX001_SAVED_PAUSE.png) · [실제 계속하기](validation/SAVEFIX001_CONTINUED.png) · [재현 helper](validation/SAVEFIX001_GUI.gd.txt). 고정 갱신 동작 검증이며 실시간FPS/실기/실제 오디오·최종 아트와 구분한다.
 
 **원화와 후속:** 원격에 새 SE 이미지가 없어 GAME066의 새 생성/게임 적용은 아직0이다. 기존 E run47/run_fire47·33클립/291프레임·69×85.56/200×248·ARTFIX001/원본208장을 유지하고 Higgsfield 요청/비용0이다. 기존 [제작 패킷](../tools/higgsfield/requests/game066/README.md)·[SE 기준 영상](validation/GAME066_SE_RUN_REFERENCE.mp4)을 기획/Higgsfield에서 사용한다. 다음은 SE 한 주기→필요한 이동사격/다른 방향→고블린1종→표시/초상화→1스테이지 마감이다. 기존 무효 파일의 자동 복구는 추가하지 않아 strict reader가 계속 거부하며,1540CPU/렌더 과부하·경제·Windows/모바일/FPS/발열·최종 아트는 별도 OPEN이다. 기존 브랜치/main자동병합·force push·유료Actions금지/3D보류·지원2+2를 유지한다.
+
+
+## 8.65. GAME066 — SE 달리기 18프레임 게임 연결 및 검증 (2026-11-27)
+
+출발 작업 브랜치 HEAD는 20c4daee3e7875d68ca92ba250f42213252672d4이다. GAME065 E 이동사격의 후속 검수와 SAVEFIX001 저장 수정까지 포함한 기준을 보존했다.
+
+남동쪽 SE 기존11프레임/idle_se와 GAME064 E47을 참조해 제작했다. Higgsfield Genjutsu ee75ff39-7354-4f8e-a6fb-df30c4eeae46(28크레딧)은 SE 시점이 E 측면으로 바뀌어 반려했다. 기존 SE 영상 편집 Seedance2.5 a9ab0954-f528-4194-b8c1-3cb8954dd02c(30크레딧)를 채택했다. RGB 89프레임/24fps 영상의36~53번 서로 다른18프레임을 RGBA로 분리했고 54번 중복 끝 프레임은 제외했다. 미러링/팔다리 조립/핑퐁/프레임별 몸 재배치를 사용하지 않았다.
+
+게임의 viya_battle 슬롯은 GAME066 새 복합 SpriteFrames를 가리킨다. 기존 GAME065 33애니메이션/291프레임의 SE run11장만 신규18장으로 바꿔 33애니메이션/298프레임이다. 기존 GAME064 E 달리기47장·GAME065 E 이동사격47장, 다른32동작, 원본208장·ARTFIX001·SAVEFIX001 보존. 200×248 RGBA, 표시69×85.56, pivot(100,248), 이동235, stride155, 명목660ms, 기존 SE phase origin 3/11을 유지하고 총구18개를 별도로 측정했다.
+
+Godot 4.7.2 기존/추가 이동 관련 465개 네이티브 검사 PASS(실패0), X11 Godot SpriteFrames 실제 SE 렌더198프레임/명목5주기·서로 다른18프레임 도달 PASS. 근거는 docs/validation/GAME066_INTEGRATION_REPORT.json 및 관련 로그. 캡처는 실제 Godot 렌더이지만 실제 전투 UI/실시간FPS 측정이나 Windows/모바일 실기 증거는 아니다. 프로듀서 최종 아트 승인 역시 NOT_VERIFIED다.
+
+총 생성 차감58크레딧, 마지막 조회 잔액815.25. 새 결제/자동충전0. 모델 출력은 RGB이며 별도 추출한 RGBA 파생물만 게임에 적용했다. 다음 단일 작업은 GAME067 SE 이동사격이다. 나머지 방향·몬스터·초상화의 자동 확장 및 원본/흰 배경 재수정은 제외한다.

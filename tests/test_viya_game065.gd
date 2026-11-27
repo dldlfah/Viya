@@ -4,6 +4,7 @@ const Snapshot=preload("res://scripts/progression/run_snapshot.gd")
 const Baseline=preload("res://assets/characters/pilot_32/game064_e_run/viya_game064_frames.tres")
 const BASE_TIMING="res://assets/characters/pilot_32/game064_e_run/provenance/frame_timing.csv"
 const FIRE="run_fire_e"
+const GAME065_TIMING="res://assets/characters/pilot_32/game065_e_run_fire/provenance/frame_timing.csv"
 
 static func read_timing(path:String) -> Array:
 	var result:Array=[]
@@ -42,23 +43,36 @@ static func is_frame(visual:Dictionary,animation:String,index:int=-1) -> bool:
 	return not visual.sample.is_empty() and visual.sample.animation==animation and (index<0 or visual.sample.index==index)
 
 static func run(view,asset:SpriteFrames,verify:Callable) -> void:
+	# Independent disk resources: fixture tests temporarily alter cached animation objects.
+	var disk_baseline:SpriteFrames=ResourceLoader.load("res://assets/characters/pilot_32/game064_e_run/viya_game064_frames.tres","",ResourceLoader.CACHE_MODE_IGNORE)
+	var disk_derived:SpriteFrames=ResourceLoader.load("res://assets/characters/pilot_32/game066_se_run/viya_game066_frames.tres","",ResourceLoader.CACHE_MODE_IGNORE)
 	var old_count:=0
 	var preserved:=true
-	for animation in Baseline.get_animation_names():
-		if not asset.has_animation(animation):
+	for animation in disk_baseline.get_animation_names():
+		if not disk_derived.has_animation(animation):
 			preserved=false
 			continue
-		preserved=preserved and asset.get_frame_count(animation)==Baseline.get_frame_count(animation) and asset.get_animation_speed(animation)==Baseline.get_animation_speed(animation) and asset.get_animation_loop(animation)==Baseline.get_animation_loop(animation)
-		for index in range(Baseline.get_frame_count(animation)):
+		if animation=="run_se":
+			var southeast_match:bool=disk_derived.get_frame_count(animation)==18 and is_equal_approx(disk_derived.get_animation_speed(animation),18.0/.66) and disk_derived.get_animation_loop(animation)
+			preserved=preserved and southeast_match
+			old_count+=disk_baseline.get_frame_count(animation)
+			continue
+		var count_match:bool=disk_derived.get_frame_count(animation)==disk_baseline.get_frame_count(animation)
+		var speed_match:bool=disk_derived.get_animation_speed(animation)==disk_baseline.get_animation_speed(animation)
+		var loop_match:bool=disk_derived.get_animation_loop(animation)==disk_baseline.get_animation_loop(animation)
+		var animation_match:bool=count_match and speed_match and loop_match
+		preserved=preserved and animation_match
+		for index in range(disk_baseline.get_frame_count(animation)):
 			old_count+=1
-			if index>=asset.get_frame_count(animation):
+			if index>=disk_derived.get_frame_count(animation):
 				preserved=false
 				continue
-			var texture:Texture2D=asset.get_frame_texture(animation,index)
-			preserved=preserved and texture!=null and texture.resource_path==Baseline.get_frame_texture(animation,index).resource_path and asset.get_frame_duration(animation,index)==Baseline.get_frame_duration(animation,index)
-	verify.call(preserved and old_count==244 and Baseline.get_animation_names().size()==32,"GAME065 preserves all32GAME064 clips and244resolved PNG paths, orders, speeds, durations and loop flags")
+			var texture:Texture2D=disk_derived.get_frame_texture(animation,index)
+			var texture_match:bool=texture!=null and texture.resource_path==disk_baseline.get_frame_texture(animation,index).resource_path and disk_derived.get_frame_duration(animation,index)==disk_baseline.get_frame_duration(animation,index)
+			preserved=preserved and texture_match
+	verify.call(preserved and old_count==244 and disk_baseline.get_animation_names().size()==32,"GAME065 preserves31other GAME064 clips byte-identical while GAME066 replaces SE run18 in the same composite; all244baseline frames remain accounted")
 	var count:int=asset.get_frame_count(FIRE) if asset.has_animation(FIRE) else 0
-	var timing:Array=read_timing(asset.resource_path.get_base_dir().path_join("provenance/frame_timing.csv"))
+	var timing:Array=read_timing(GAME065_TIMING)
 	var rows:Variant=view.viya.config.directions.e.get("run_fire")
 	verify.call(count>0 and asset.get_animation_names().size()==33 and timing.size()==count and rows is Array and rows.size()==count,"The active composite adds exactly one E moving-fire clip backed by its actual delivered timing and frame metadata")
 	if count<=0 or timing.size()!=count or not rows is Array or rows.size()!=count:return

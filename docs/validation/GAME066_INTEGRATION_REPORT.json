@@ -1,0 +1,76 @@
+{
+  "task": "GAME066_SE_RUNNING",
+  "status": "PASS_TECHNICAL_AND_GODOT_RENDER",
+  "active_resource": "res://assets/characters/pilot_32/game066_se_run/viya_game066_frames.tres",
+  "new_run_se_frames": 18,
+  "other_animations_preserved": 32,
+  "total_animations": 33,
+  "total_frames": 298,
+  "fixed_canvas": [
+    200,
+    248
+  ],
+  "display_size": [
+    69,
+    85.56
+  ],
+  "pivot": [
+    100,
+    248
+  ],
+  "speed_world_per_second": 235,
+  "stride_world": 155,
+  "cycle_ms": 660,
+  "phase_origin": 0.2727272727272727,
+  "se_frame_interval_ms": 36.666666666666664,
+  "godot_4_7_2_navigation_regression": {
+    "status": "PASS",
+    "checks": 465,
+    "failures": 0,
+    "log": "docs/validation/GAME066_NATIVE.log"
+  },
+  "real_godot_x11_renderer": {
+    "status": "PASS",
+    "rendered_frames": 198,
+    "frames_seen": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17
+    ],
+    "nominal_cycles": 5,
+    "source_frame_count": 18,
+    "resource": "res://assets/characters/pilot_32/game066_se_run/viya_game066_frames.tres"
+  },
+  "source_jobs": {
+    "rejected": "ee75ff39-7354-4f8e-a6fb-df30c4eeae46",
+    "selected": "a9ab0954-f528-4194-b8c1-3cb8954dd02c",
+    "model": "seedance_2_5",
+    "mode": "video_edit"
+  },
+  "charged_credits": 58,
+  "balance_after": 815.25,
+  "new_payment": false,
+  "auto_recharge": false,
+  "old_art_and_gameplay_preserved": true,
+  "not_verified": [
+    "Final user art approval",
+    "Real Windows/mobile device execution",
+    "Measured realtime FPS/thermals",
+    "Full-game combat interactive GUI against this revision"
+  ]
+}

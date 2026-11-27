@@ -1,0 +1,55 @@
+{
+  "task": "GAME066",
+  "status": "TECHNICAL_REVIEWED_AWAITING_ENGINE_VALIDATION",
+  "resource": "res://assets/characters/pilot_32/game066_se_run/viya_game066_frames.tres",
+  "source": "game065_e_run_fire/viya_game065_frames.tres",
+  "source_sha256": "95886e3b759e8fc8b7d6be0afbc741230f3ab0bd72c1931722a533415e7a5210",
+  "replaced_animation": "run_se",
+  "new_frames": 18,
+  "old_frames": 11,
+  "animation_count": 33,
+  "expected_total_frames": 298,
+  "registration": {
+    "canvas": [
+      200,
+      248
+    ],
+    "pivot": [
+      100,
+      248
+    ],
+    "display": [
+      69,
+      85.56
+    ],
+    "scale": 0.231,
+    "translation": [
+      1.2,
+      -1.4
+    ],
+    "global_fixed": true
+  },
+  "timing": {
+    "source_frame_window": [
+      36,
+      54
+    ],
+    "source_fps": 24,
+    "source_cycle_ms": 750,
+    "game_cycle_ms": 660,
+    "actual_distance_cycle_ms": 659.5744680851063,
+    "frame_ms": 36.666666666666664,
+    "phase_origin_retained": 0.2727272727272727
+  },
+  "future_art_approval": false,
+  "preservation": [
+    "GAME065 E run/fire",
+    "GAME064 E run",
+    "ARTFIX001",
+    "208 original PNG",
+    "all other 32 animations",
+    "save22",
+    "7 RNG",
+    "weapons and spawns"
+  ]
+}

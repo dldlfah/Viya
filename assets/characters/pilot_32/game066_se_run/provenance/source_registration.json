@@ -1,0 +1,471 @@
+{
+  "source_job": "a9ab0954-f528-4194-b8c1-3cb8954dd02c",
+  "source_cycle_window": [
+    36,
+    54
+  ],
+  "cycle_frame_count": 18,
+  "canvas": [
+    200,
+    248
+  ],
+  "scale": 0.231,
+  "translation": [
+    1.2,
+    -1.4
+  ],
+  "pivot": [
+    100,
+    248
+  ],
+  "nominal_cycle_ms": 660,
+  "distance_driven_cycle_ms": 659.5744680851063,
+  "frame_checks": [
+    {
+      "index": 0,
+      "source_frame": 36,
+      "filename": "viya_run_se_000.png",
+      "bg": [
+        66.0,
+        150.28390502929688,
+        122.22711181640625
+      ],
+      "sha256": "a643b020f1055b736db2eeb0e16b99d2eda186f18d57f71863b756ad2a04f17b",
+      "bbox": [
+        36,
+        8,
+        176,
+        228
+      ],
+      "border_alpha_max": 0,
+      "muzzle": [
+        173.5,
+        144.5
+      ],
+      "green_excess": 3,
+      "partial": 1597
+    },
+    {
+      "index": 1,
+      "source_frame": 37,
+      "filename": "viya_run_se_001.png",
+      "bg": [
+        66.0,
+        150.29664611816406,
+        122.00000762939453
+      ],
+      "sha256": "6417b98a4a888246d7b5728fc02ee4bafc9f8dfea7fe0f1d1dd1283264bd075a",
+      "bbox": [
+        33,
+        9,
+        175,
+        232
+      ],
+      "border_alpha_max": 0,
+      "muzzle": [
+        172.5,
+        143.0
+      ],
+      "green_excess": 7,
+      "partial": 1763
+    },
+    {
+      "index": 2,
+      "source_frame": 38,
+      "filename": "viya_run_se_002.png",
+      "bg": [
+        66.0,
+        150.4438018798828,
+        122.2236328125
+      ],
+      "sha256": "bd1bbb9b8fbb365b76443125a3f6b520bfdda2db6c7d4c4bff159726302a25ef",
+      "bbox": [
+        33,
+        9,
+        175,
+        231
+      ],
+      "border_alpha_max": 0,
+      "muzzle": [
+        172.5,
+        143.0
+      ],
+      "green_excess": 7,
+      "partial": 1752
+    },
+    {
+      "index": 3,
+      "source_frame": 39,
+      "filename": "viya_run_se_003.png",
+      "bg": [
+        66.0,
+        150.47508239746094,
+        122.00000762939453
+      ],
+      "sha256": "d19603f0c168840c87c669a9a38ff7cf20027b4c8aece29f5450672bc7bfe09d",
+      "bbox": [
+        31,
+        4,
+        178,
+        238
+      ],
+      "border_alpha_max": 0,
+      "muzzle": [
+        174.5,
+        141.0
+      ],
+      "green_excess": 8,
+      "partial": 2041
+    },
+    {
+      "index": 4,
+      "source_frame": 40,
+      "filename": "viya_run_se_004.png",
+      "bg": [
+        66.0,
+        150.4588623046875,
+        122.29200744628906
+      ],
+      "sha256": "5151d4a514ca9110064e2b5e97f270f62b03d28ff6571e4eca00239fcda8e5b0",
+      "bbox": [
+        27,
+        4,
+        178,
+        245
+      ],
+      "border_alpha_max": 0,
+      "muzzle": [
+        174.5,
+        139.5
+      ],
+      "green_excess": 6,
+      "partial": 1983
+    },
+    {
+      "index": 5,
+      "source_frame": 41,
+      "filename": "viya_run_se_005.png",
+      "bg": [
+        66.0,
+        150.34414672851562,
+        122.14600372314453
+      ],
+      "sha256": "fb05f0fb7c8b295820233072b3a06c65f504645d7da14d8b8a934a81a616442e",
+      "bbox": [
+        28,
+        4,
+        178,
+        245
+      ],
+      "border_alpha_max": 0,
+      "muzzle": [
+        174.5,
+        139.5
+      ],
+      "green_excess": 7,
+      "partial": 2071
+    },
+    {
+      "index": 6,
+      "source_frame": 42,
+      "filename": "viya_run_se_006.png",
+      "bg": [
+        66.0,
+        150.43222045898438,
+        122.37196350097656
+      ],
+      "sha256": "472c13ed6a510e192f2516e5752997ba6863534e077f14109ef6eca0804c516d",
+      "bbox": [
+        26,
+        5,
+        177,
+        240
+      ],
+      "border_alpha_max": 0,
+      "muzzle": [
+        174.5,
+        139.0
+      ],
+      "green_excess": 10,
+      "partial": 1945
+    },
+    {
+      "index": 7,
+      "source_frame": 43,
+      "filename": "viya_run_se_007.png",
+      "bg": [
+        66.0,
+        150.3684844970703,
+        122.2027816772461
+      ],
+      "sha256": "fe162b6be9dc71a7a0aceb651c8fa89fbb2eeb97d7ccb4376a99bae64e023c13",
+      "bbox": [
+        26,
+        5,
+        177,
+        240
+      ],
+      "border_alpha_max": 0,
+      "muzzle": [
+        174.5,
+        139.0
+      ],
+      "green_excess": 7,
+      "partial": 2001
+    },
+    {
+      "index": 8,
+      "source_frame": 44,
+      "filename": "viya_run_se_008.png",
+      "bg": [
+        66.0,
+        150.3522491455078,
+        122.28504943847656
+      ],
+      "sha256": "f6b61a5e9884312b9867e3cdf51436a7927391e6bea59da7169ca3f3aa36f5fe",
+      "bbox": [
+        27,
+        6,
+        178,
+        230
+      ],
+      "border_alpha_max": 0,
+      "muzzle": [
+        174.5,
+        139.0
+      ],
+      "green_excess": 28,
+      "partial": 2095
+    },
+    {
+      "index": 9,
+      "source_frame": 45,
+      "filename": "viya_run_se_009.png",
+      "bg": [
+        66.0,
+        150.552734375,
+        122.26187896728516
+      ],
+      "sha256": "52b305cdc98c2c6fa3d2537d4649ec901b64b052fba25306052ab9ea96e1fc27",
+      "bbox": [
+        25,
+        4,
+        178,
+        245
+      ],
+      "border_alpha_max": 0,
+      "muzzle": [
+        175.5,
+        140.0
+      ],
+      "green_excess": 8,
+      "partial": 1957
+    },
+    {
+      "index": 10,
+      "source_frame": 46,
+      "filename": "viya_run_se_010.png",
+      "bg": [
+        66.0,
+        150.64425659179688,
+        122.42410278320312
+      ],
+      "sha256": "1d2b3d5a3e49196d2758fef893e23e3487f19068bbf67bcdfdc4fdf1238504b3",
+      "bbox": [
+        25,
+        4,
+        178,
+        245
+      ],
+      "border_alpha_max": 0,
+      "muzzle": [
+        174.5,
+        142.5
+      ],
+      "green_excess": 8,
+      "partial": 1813
+    },
+    {
+      "index": 11,
+      "source_frame": 47,
+      "filename": "viya_run_se_011.png",
+      "bg": [
+        66.0,
+        150.63497924804688,
+        122.35226440429688
+      ],
+      "sha256": "b29a1b28649eb0f5523c7cfc57ed8a4deaa76f58ec2d469d7f2163116abd0eb7",
+      "bbox": [
+        23,
+        8,
+        177,
+        243
+      ],
+      "border_alpha_max": 0,
+      "muzzle": [
+        173.5,
+        143.5
+      ],
+      "green_excess": 9,
+      "partial": 1814
+    },
+    {
+      "index": 12,
+      "source_frame": 48,
+      "filename": "viya_run_se_012.png",
+      "bg": [
+        66.0,
+        150.73696899414062,
+        122.52375030517578
+      ],
+      "sha256": "c3f0e680e4cd685433d73a41f97c72ba78e139c37b2ca0efc9c51a24f146acd5",
+      "bbox": [
+        26,
+        8,
+        177,
+        241
+      ],
+      "border_alpha_max": 0,
+      "muzzle": [
+        174.5,
+        144.0
+      ],
+      "green_excess": 5,
+      "partial": 2033
+    },
+    {
+      "index": 13,
+      "source_frame": 49,
+      "filename": "viya_run_se_013.png",
+      "bg": [
+        66.0,
+        150.4901580810547,
+        122.37774658203125
+      ],
+      "sha256": "21a24ce78f6033b7c59eacbe5fd5b99f117baef46ba35332cde862f8950c52d7",
+      "bbox": [
+        26,
+        8,
+        177,
+        241
+      ],
+      "border_alpha_max": 0,
+      "muzzle": [
+        174.5,
+        144.0
+      ],
+      "green_excess": 6,
+      "partial": 2008
+    },
+    {
+      "index": 14,
+      "source_frame": 50,
+      "filename": "viya_run_se_014.png",
+      "bg": [
+        66.0,
+        150.56082153320312,
+        122.46234130859375
+      ],
+      "sha256": "ef2cd0c1bf508f45956e35916340c16359c6475831eb89705798b3dd4c5b49d9",
+      "bbox": [
+        30,
+        8,
+        177,
+        238
+      ],
+      "border_alpha_max": 0,
+      "muzzle": [
+        174.5,
+        144.5
+      ],
+      "green_excess": 5,
+      "partial": 1800
+    },
+    {
+      "index": 15,
+      "source_frame": 51,
+      "filename": "viya_run_se_015.png",
+      "bg": [
+        66.0,
+        150.48899841308594,
+        122.1807632446289
+      ],
+      "sha256": "8309c266e0e8ec2bc21619e6438ac369e8af2cea5310295d62fabc16a8a4bedb",
+      "bbox": [
+        34,
+        8,
+        178,
+        233
+      ],
+      "border_alpha_max": 0,
+      "muzzle": [
+        174.5,
+        145.0
+      ],
+      "green_excess": 5,
+      "partial": 1713
+    },
+    {
+      "index": 16,
+      "source_frame": 52,
+      "filename": "viya_run_se_016.png",
+      "bg": [
+        66.0,
+        150.53302001953125,
+        122.3035888671875
+      ],
+      "sha256": "1a9df6fdba8e3b94a7a0b0b8bf512a738547c48462454eb30d0d83f3e4a2fb63",
+      "bbox": [
+        34,
+        7,
+        177,
+        230
+      ],
+      "border_alpha_max": 0,
+      "muzzle": [
+        173.5,
+        145.0
+      ],
+      "green_excess": 6,
+      "partial": 1543
+    },
+    {
+      "index": 17,
+      "source_frame": 53,
+      "filename": "viya_run_se_017.png",
+      "bg": [
+        66.0,
+        150.57241821289062,
+        122.29315948486328
+      ],
+      "sha256": "645cd529c2dbcdf5e6afb733a5fc9ed01a7c9a71c6ba691afceef7eacd35205a",
+      "bbox": [
+        37,
+        8,
+        176,
+        228
+      ],
+      "border_alpha_max": 0,
+      "muzzle": [
+        173.5,
+        145.0
+      ],
+      "green_excess": 4,
+      "partial": 1938
+    }
+  ],
+  "status": "TECHNICAL_REVIEWED_GAME066",
+  "rejected_genjutsu_job": "ee75ff39-7354-4f8e-a6fb-df30c4eeae46",
+  "rejected_reason": "Output rotated the original SE view toward side-facing E, unsuitable for SE sprite animation.",
+  "selected_job": "a9ab0954-f528-4194-b8c1-3cb8954dd02c",
+  "selected_model": "seedance_2_5",
+  "selected_mode": "video_edit",
+  "master_sha256": "53cf0b38aa393369bf72d33ece585bc95763f0634772321387b87b84bf8c82d3",
+  "source_memo": "Source SE reference video d4978306-0b8c-45f2-87a8-ac20dbc78645; 89 actual frames/24fps, source cycle repeated every 18 frames, select source36..53. No artificial frame duplication.",
+  "creation_cost_credits": {
+    "first_rejected": 28,
+    "selected_edit": 30,
+    "total": 58
+  },
+  "source_asset": "https://d8j0ntlcm91z4.cloudfront.net/user_3LHdo37hN3iiYXd8WT9stnWXw4M/hf_20261126_152901_a9ab0954-f528-4194-b8c1-3cb8954dd02c.mp4"
+}

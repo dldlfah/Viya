@@ -1,5 +1,15 @@
 # VIYA — 현재 작업 상태 / 메인 작업문서
 
+## GAME066 — 2026-11-27 SE running completed in work branch
+
+GAME066 SE running was replaced from 11 to 18 genuinely consecutive full-body RGBA poses on fixed 200x248 canvas, pivot(100,248), display69x85.56, stride155, speed235, 660ms cycle. All other32 animations, original 208, ARTFIX001, GAME064 E run47, GAME065 E moving-fire47 and SAVEFIX001 are preserved. Active battle slot points at game066_se_run/viya_game066_frames.tres. The original SE phase-origin 3/11 is unchanged.
+
+Higgsfield Genjutsu candidate ee75ff39-7354-4f8e-a6fb-df30c4eeae46 was rejected for side-angle drift (28 credits). Seedance2.5 SE source video edit a9ab0954-f528-4194-b8c1-3cb8954dd02c was accepted for technical production (30 credits). Total58 charged, balance815.25; no payment or recharge.
+
+PASS: Godot 4.7.2 native navigation and animation checks 465/465; actual Godot X11 SE renderer 198 rendered frames, 5 continuous cycles, 18 different frame indices all observed. See validation/GAME066_INTEGRATION_REPORT.json. NOT VERIFIED: final producer art approval, Windows/mobile devices, FPS/thermal, full-game realtime combat QA.
+
+Next one unit: GAME067 SE moving-fire pose loop and phase-preserving integration. Do not re-create E run/fire, redesign other directions, or change gameplay/save/RNG.
+
 기록일 **2026-11-26 (KST)**. 브랜치 **`work/viya-turnaround-qa-20261117`**. [DEVELOPMENT_STATUS](DEVELOPMENT_STATUS.md) · [PLANNED_WORK](PLANNED_WORK.md) · [NEXT_TASK](NEXT_TASK.md).
 
 ## 최신 — SAVEFIX001 비행 수명 저장 결함 수정, 다음 GAME066 SE 유지
