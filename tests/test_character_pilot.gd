@@ -6,12 +6,14 @@ const Campaign=preload("res://tests/test_campaign.gd")
 const Scenery=preload("res://scripts/combat/oblique_scenery.gd")
 const MANIFEST:="res://assets/characters/pilot_32/source_manifest.json"
 const SOURCE_RESOURCE:="res://assets/characters/pilot_32/resources/viya_directional_motion.tres"
-const RESOURCE:="res://assets/characters/pilot_32/game067_se_run_fire/viya_game067_frames.tres"
+const RESOURCE:="res://assets/characters/pilot_32/game068_s_run/viya_game068_frames.tres"
 const CACHE=preload("res://assets/characters/pilot_32/render_cache/viya_render_frames.tres")
 const EAST_TIMING:="res://assets/characters/pilot_32/game064_e_run/provenance/frame_timing.csv"
 const SE_FIRST="res://assets/characters/pilot_32/game066_se_run/frames/viya_run_se_000.png"
 const EAST_FIRST:="res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_000.png"
 const EAST_MANIFEST:="res://assets/characters/pilot_32/game064_e_run/provenance/asset_manifest.json"
+const SOUTH_FIRST="res://assets/characters/pilot_32/game068_s_run/frames/viya_run_s_000.png"
+const SOUTH_TIMING="res://assets/characters/pilot_32/game068_s_run/provenance/frame_timing.csv"
 const DIRECTIONS:=["e","se","s","sw","w","nw","n","ne"]
 
 static func east_timing() -> Array:
@@ -24,6 +26,19 @@ static func east_timing() -> Array:
 		if cells.size()==1 and cells[0].is_empty():continue
 		if cells.size()!=7:return []
 		rows.append({"index":int(cells[0]),"filename":cells[1],"source_index":int(cells[2]),"start_ms":float(cells[4]),"duration_ms":float(cells[5])})
+	input.close()
+	return rows
+
+static func south_timing() -> Array:
+	var rows:Array=[]
+	var input:FileAccess=FileAccess.open(SOUTH_TIMING,FileAccess.READ)
+	if input==null:return rows
+	var header:PackedStringArray=input.get_csv_line()
+	while not input.eof_reached():
+		var cells:PackedStringArray=input.get_csv_line()
+		if cells.size()==1 and cells[0].is_empty():continue
+		if cells.size()!=header.size():return []
+		rows.append({"index":int(cells[header.find("frame")]),"filename":cells[header.find("filename")],"duration_ms":float(cells[header.find("duration_ms")]),"weight":roundf(float(cells[header.find("source_duration_ms")])*1000.0)/65536.0})
 	input.close()
 	return rows
 
@@ -56,6 +71,10 @@ static func run(host,verify:Callable) -> void:
 		hashes[digest]=true
 		end_ms+=row.duration_ms
 	verify.call(east_valid and unequal and absf(end_ms-660.0)<.000001 and hashes.size()==47,"E preserves47unique derivative PNGs and the authored unequal660ms timing without an endpoint duplicate")
+	var south_rows:Array=south_timing()
+	var south_speed:float=0.0
+	for row in south_rows:south_speed+=row.weight/.66
+	verify.call(south_rows.size()==17,"S timing is read independently from the delivered17-row CSV")
 	var total:=0
 	var preserved:=true
 	var preserved_count:=0
@@ -67,7 +86,8 @@ static func run(host,verify:Callable) -> void:
 			var name:String=pose+"_"+direction
 			var east:bool=name=="run_e"
 			var southeast:bool=name=="run_se"
-			valid=valid and asset.has_animation(name) and asset.get_frame_count(name)==(47 if east else (18 if southeast else expected)) and is_equal_approx(asset.get_animation_speed(name),47.0/.66 if east else (18.0/.66 if southeast else fps)) and asset.get_animation_loop(name)==(pose in ["idle","run"])
+			var south:bool=name=="run_s"
+			valid=valid and asset.has_animation(name) and asset.get_frame_count(name)==(47 if east else (18 if southeast else (17 if south else expected))) and is_equal_approx(asset.get_animation_speed(name),47.0/.66 if east else (18.0/.66 if southeast else (south_speed if south else fps))) and asset.get_animation_loop(name)==(pose in ["idle","run"])
 			for index in range(asset.get_frame_count(name)):
 				total+=1
 				var texture:Texture2D=asset.get_frame_texture(name,index)
@@ -79,12 +99,15 @@ static func run(host,verify:Callable) -> void:
 					valid=valid and texture.resource_path==EAST_FIRST.get_base_dir().path_join(timing[index].filename) and is_equal_approx(asset.get_frame_duration(name,index),timing[index].duration_ms*47.0/660.0)
 				elif southeast:
 					valid=valid and texture.resource_path==SE_FIRST.get_base_dir().path_join("viya_run_se_%03d.png" % index) and asset.get_frame_duration(name,index)==1.0
+				elif south:
+					valid=valid and index<south_rows.size()
+					if index<south_rows.size():valid=valid and texture.resource_path==SOUTH_FIRST.get_base_dir().path_join(south_rows[index].filename) and asset.get_frame_duration(name,index)==south_rows[index].weight
 				else:
 					valid=valid and asset.get_frame_duration(name,index)==1.0
 					preserved=preserved and is_same(texture,CACHE.get_frame_texture(name,index)) and asset.get_frame_duration(name,index)==CACHE.get_frame_duration(name,index) and asset.get_animation_speed(name)==CACHE.get_animation_speed(name) and asset.get_animation_loop(name)==CACHE.get_animation_loop(name)
 					preserved_count+=1
 		verify.call(valid,"Directional count/timing/loop/canvas match the native poses plus the authored E47 exception for:"+pose)
-	verify.call(total==251 and preserved and preserved_count==186,"Only E run and SE run change:186previous native display frames preserve resources and timings within251 directional frames")
+	verify.call(total==257 and preserved and preserved_count==175,"Only E/SE/S runs change:175previous native display frames preserve resources and timings within257 directional frames")
 	var ui=load("res://scenes/main.tscn").instantiate()
 	var folder:="user://character-pilot-"+Crypto.new().generate_random_bytes(8).hex_encode()
 	DirAccess.make_dir_recursive_absolute(folder)

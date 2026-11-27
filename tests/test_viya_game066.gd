@@ -5,28 +5,30 @@ const Slots=preload("res://scripts/ui/asset_slots.gd")
 const META="res://assets/characters/pilot_32/game066_se_run/provenance/source_registration.json"
 const CSV="res://assets/characters/pilot_32/game066_se_run/provenance/frame_timing.csv"
 const FIRST="res://assets/characters/pilot_32/game066_se_run/frames/viya_run_se_000.png"
-const RESOURCE="res://assets/characters/pilot_32/game067_se_run_fire/viya_game067_frames.tres"
+const RESOURCE="res://assets/characters/pilot_32/game068_s_run/viya_game068_frames.tres"
 
 static func run(view,asset:SpriteFrames,verify:Callable) -> void:
 	var data:Variant=JSON.parse_string(FileAccess.get_file_as_string(META))
 	var slots=Slots.new()
 	verify.call(data is Dictionary and asset.resource_path==RESOURCE and slots.definitions.viya_battle==RESOURCE,"GAME066 active slot and metadata are from one approved derived resource")
 	if not data is Dictionary:return
+	# GAME068 replaces S; its separate suite proves the live33other clips unchanged.
+	var preserved_asset:SpriteFrames=load("res://assets/characters/pilot_32/game067_se_run_fire/viya_game067_frames.tres")
 	var other_animations:=true
 	var old_frames:int=0
 	for name:StringName in Older.get_animation_names():
-		if not asset.has_animation(name):
+		if not preserved_asset.has_animation(name):
 			other_animations=false
 			continue
 		if name==&"run_se":continue
 		var count:int=Older.get_frame_count(name)
 		old_frames+=count
-		other_animations=other_animations and asset.get_frame_count(name)==count and asset.get_animation_speed(name)==Older.get_animation_speed(name) and asset.get_animation_loop(name)==Older.get_animation_loop(name)
+		other_animations=other_animations and preserved_asset.get_frame_count(name)==count and preserved_asset.get_animation_speed(name)==Older.get_animation_speed(name) and preserved_asset.get_animation_loop(name)==Older.get_animation_loop(name)
 		for i in range(count):
-			var a:Texture2D=asset.get_frame_texture(name,i)
+			var a:Texture2D=preserved_asset.get_frame_texture(name,i)
 			var b:Texture2D=Older.get_frame_texture(name,i)
-			other_animations=other_animations and a!=null and b!=null and a.resource_path==b.resource_path and asset.get_frame_duration(name,i)==Older.get_frame_duration(name,i)
-	verify.call(other_animations and old_frames==280 and asset.get_animation_names().size()==34,"GAME066 preserves the other32animations and280existing resolved frames and timings")
+			other_animations=other_animations and a!=null and b!=null and a.resource_path==b.resource_path and preserved_asset.get_frame_duration(name,i)==Older.get_frame_duration(name,i)
+	verify.call(other_animations and old_frames==280 and preserved_asset.get_animation_names().size()==34,"GAME066 preserves the other32animations and280existing resolved frames and timings")
 	var count:int=asset.get_frame_count(&"run_se")
 	verify.call(count==18 and is_equal_approx(asset.get_animation_speed(&"run_se"),18.0/.66) and asset.get_animation_loop(&"run_se"),"GAME066 SE has a genuine18frame 660ms looping clip")
 	var metadata_valid:bool=data.has("frame_checks") and data.frame_checks.size()==18

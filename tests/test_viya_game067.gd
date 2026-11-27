@@ -43,13 +43,15 @@ static func is_frame(visual:Dictionary,animation:String,index:int=-1) -> bool:
 	return not visual.sample.is_empty() and visual.sample.animation==animation and (index<0 or visual.sample.index==index)
 
 static func run(view,asset:SpriteFrames,verify:Callable) -> void:
+	# Historical33-clip preservation remains exact; GAME068 tests its S replacement.
+	var preserved_asset:SpriteFrames=load("res://assets/characters/pilot_32/game067_se_run_fire/viya_game067_frames.tres")
 	var preserved:=true
 	var old_count:=0
 	for animation in Baseline.get_animation_names():
-		preserved=preserved and asset.has_animation(animation) and asset.get_frame_count(animation)==Baseline.get_frame_count(animation) and asset.get_animation_speed(animation)==Baseline.get_animation_speed(animation) and asset.get_animation_loop(animation)==Baseline.get_animation_loop(animation)
+		preserved=preserved and preserved_asset.has_animation(animation) and preserved_asset.get_frame_count(animation)==Baseline.get_frame_count(animation) and preserved_asset.get_animation_speed(animation)==Baseline.get_animation_speed(animation) and preserved_asset.get_animation_loop(animation)==Baseline.get_animation_loop(animation)
 		for index in range(Baseline.get_frame_count(animation)):
 			old_count+=1
-			preserved=preserved and asset.get_frame_texture(animation,index).resource_path==Baseline.get_frame_texture(animation,index).resource_path and asset.get_frame_duration(animation,index)==Baseline.get_frame_duration(animation,index)
+			preserved=preserved and preserved_asset.get_frame_texture(animation,index).resource_path==Baseline.get_frame_texture(animation,index).resource_path and preserved_asset.get_frame_duration(animation,index)==Baseline.get_frame_duration(animation,index)
 	verify.call(preserved and old_count==298 and Baseline.get_animation_names().size()==33,"GAME067 preserves every33existing clip/298resolved frames, durations, loop and speed")
 	var count:int=asset.get_frame_count(FIRE) if asset.has_animation(FIRE) else 0
 	var timing:Array=read_timing(GAME067_TIMING)
