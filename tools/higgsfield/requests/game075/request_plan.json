@@ -1,0 +1,40 @@
+{
+  "created_at_stage": "Post-generation delivery summary; pre-submit approvals/quotes are in evidence/preflight.json and candidate02_decision.json",
+  "base_commit": "bd5e8dc6c457ac7f9d2e25f425cc42ebfcefeade",
+  "scope": "SW-only full-body aimed run",
+  "maximum_paid_submissions": 2,
+  "maximum_credits": 60,
+  "actual_submissions": 2,
+  "actual_credits": 59,
+  "remaining_credits": 1,
+  "paid_extras": 0,
+  "active_game_clips_unchanged": 35,
+  "active_game_frames_unchanged": 348,
+  "candidate_frames": 15,
+  "prospective_after_production": [
+    36,
+    363
+  ],
+  "source_window": [
+    30,
+    45
+  ],
+  "canvas": [
+    200,
+    248
+  ],
+  "display": [
+    69,
+    85.56
+  ],
+  "root": [
+    100,
+    248
+  ],
+  "stride": 155,
+  "speed": 235,
+  "nominal_cycle_ms": 660,
+  "source_cycle_ms": 625,
+  "game_connection": "NOT_RUN",
+  "final_adoption": "NOT_ESTABLISHED_TRANSITION_REVIEW_CANDIDATE"
+}

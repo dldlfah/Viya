@@ -1,0 +1,25 @@
+{
+  "job_id": "7fa6e18e-a5ca-4607-b854-9099a8c30faf",
+  "generation": "COMPLETED",
+  "source_sha256": "4fbe8099b20eaa96288f5cb35f1c658c15bf458cc7efbcbc3719ba007756dc5b",
+  "actual_output": {
+    "width": 834,
+    "height": 1112,
+    "frames": 97,
+    "fps": 24,
+    "duration_seconds": 4.041667,
+    "audio_streams": 0,
+    "format": "RGB H264 yuv420p"
+  },
+  "all_frames_visually_inspected": true,
+  "camera_identity": "SW camera/costume/asymmetry and low carry retained; no baked firing effect observed",
+  "technical_adoption": "REJECTED_LOW_CARRY_NOT_AIMED_RUNNING",
+  "defect": "All inspected phases retain low waist carry rather than requested rifle buttstock/shoulder contact; no complete aimed cycle exists to trim out.",
+  "gait_observation": "Opposite projected support poses recur in continuous motion, e.g. source30/37/45/52. Reusable motion for a posture edit; not a final physical-contact or loop approval.",
+  "cause_status": "Inference, not provider diagnosis: image appearance/arm posture dominates despite no start_image and explicit changed-aim prompt.",
+  "next_change": "Use video_edit on completed candidate01, explicitly correct rifle/arms while preserving camera, identity and alternating motion.",
+  "evidence_for_change": "GAME069 candidate02 used video_edit to correct a low-carry output into the accepted S18 aimed-running clip; see existing candidate02 params/decision and delivered S frames. This is a grounded mode change, not a guaranteed result.",
+  "second_generation_requires_quote": true,
+  "first_paid_credits": 28,
+  "remaining_unit_budget": 32
+}

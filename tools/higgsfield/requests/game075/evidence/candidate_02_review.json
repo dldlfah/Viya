@@ -1,0 +1,38 @@
+{
+  "job_id": "18014a92-2bf2-4c77-ab40-19d288002022",
+  "generation": "COMPLETED",
+  "source_sha256": "07b915b344ce972b61230e8e86c1024bcb10b842abef7a66582d0ded1e7353e1",
+  "native_frames": 97,
+  "all_frames_visually_inspected": true,
+  "camera": "SW elevated three-quarter view retained; no mirror/rotation substitute",
+  "posture": "Raised two-handed aim with visible shoulder-supported stock; first low-carry defect corrected",
+  "character": "Hair/costume/rifle/asymmetry visually consistent at review scale; final producer identity/art approval unverified",
+  "effects": "No baked discharge/scenery/shadow/text observed",
+  "selected_cycle": {
+    "source_frames_inclusive": [
+      30,
+      44
+    ],
+    "next_boundary_excluded": 45,
+    "source_interval_seconds": [
+      1.25,
+      1.875
+    ],
+    "native_ms": 625,
+    "frames": 15,
+    "nominal_ms": 660,
+    "each_game_ms": 44
+  },
+  "gait": "Opposite projected support/recovery stances observed. Full-body poses progress through one selected cycle; no cutout/warp/interpolation/ping-pong/duplicate endpoint was introduced.",
+  "transition": "NOT_FINAL. ExistingSW17 contains an additional support motif and different foot trajectories; one independent phase offset leaves visible same-phase differences.",
+  "remaining_limits": {
+    "anchor_residual_nominal_ms": 78.94105314873099,
+    "maximum_sampled_labelled_projected_boot_difference_game_px": 31.71749201938892,
+    "maximum_sampled_unordered_bootset_difference_game_px": 19.541288500249927,
+    "interpretation": "2D painted landmark diagnostics, not measured world-ground slip or a hardware latency result"
+  },
+  "local_resolution": "Selected one continuous cycle; keyed RGB green; removed green spill including opaque boot shadows; applied one uniform scale/translation; independently measured muzzle/boot landmarks; prepared exact PTS/game timing and review comparisons.",
+  "adoption": "MEASURED_REVIEW_CANDIDATE_ONLY; no automatic game activation",
+  "paid_generation_complete": true,
+  "third_submission": false
+}

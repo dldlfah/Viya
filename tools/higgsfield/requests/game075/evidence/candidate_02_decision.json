@@ -1,0 +1,20 @@
+{
+  "first_job": "7fa6e18e-a5ca-4607-b854-9099a8c30faf",
+  "first_terminal_status": "completed",
+  "first_adoption": "REJECTED_LOW_CARRY",
+  "defect": "Rifle remains at waist throughout97native frames; no shouldered-aim interval to select",
+  "cause_inference": "Appearance-only generation preserved reference low carry despite the changed-arm prompt",
+  "change": {
+    "mode": "video_edit",
+    "input": "completed candidate01 video only",
+    "intent": "Explicitly change arm/rifle to right-shoulder-supported aim while preserving existing SW camera/identity/gait"
+  },
+  "evidence": "Accepted GAME069 candidate02 used video_edit to correct this observed low-carry failure",
+  "first_cost": 28,
+  "second_quote": 31,
+  "total_if_submitted": 59,
+  "budget_cap": 60,
+  "submission_cap": 2,
+  "remaining_after_second_quote": 1,
+  "automatic_third": false
+}

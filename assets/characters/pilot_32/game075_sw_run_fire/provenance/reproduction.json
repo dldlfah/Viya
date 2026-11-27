@@ -1,0 +1,25 @@
+{
+  "status": "PASS",
+  "source": "candidate_02.mp4",
+  "selected_native_frames": [
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44
+  ],
+  "exact_reproduced_pngs": 15,
+  "exact_timing_csv": true,
+  "method": "Re-ran the fixed matte, green-spill removal and one uniform registration in an isolated output directory.",
+  "engine_runtime": "NOT_RUN"
+}

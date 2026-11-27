@@ -1,0 +1,98 @@
+{
+  "status": "MEASURED_REVIEW_CANDIDATE_TRANSITION_NOT_FINAL",
+  "source_video": "tools/higgsfield/requests/game075/evidence/candidate_02.mp4",
+  "source_sha256": "07b915b344ce972b61230e8e86c1024bcb10b842abef7a66582d0ded1e7353e1",
+  "source_frames": [
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44
+  ],
+  "excluded_next_boundary": 45,
+  "source_cycle_ms": 625.0,
+  "frame_hashes": [
+    {
+      "file": "frames/viya_run_fire_sw_000.png",
+      "sha256": "19c32281e970585b5fe49c9ece151eec62bd4a342beec1acebda0560d6dcb9c7"
+    },
+    {
+      "file": "frames/viya_run_fire_sw_001.png",
+      "sha256": "e1c5533e47596fce643e8f4882b765d033c2ae5fa989142eeb89e9d28aef02f5"
+    },
+    {
+      "file": "frames/viya_run_fire_sw_002.png",
+      "sha256": "f43d27cf7ff9f5b095eb963cb91a47f1073e932f2937fd0f3ad4a20a3ab481ab"
+    },
+    {
+      "file": "frames/viya_run_fire_sw_003.png",
+      "sha256": "cf5ac4b679476ce41aad8cc7d0bdb8c26fce036e9bd7e34d9f3c6e4235e7ec19"
+    },
+    {
+      "file": "frames/viya_run_fire_sw_004.png",
+      "sha256": "de0a3fbc0e5e4e0a7d86545b92eb612d30a848058aca29eb0944035616d1c129"
+    },
+    {
+      "file": "frames/viya_run_fire_sw_005.png",
+      "sha256": "093e8254d6e4984f5f46abb1194123bd61d2ff2adda4961b185898e30fbcdafe"
+    },
+    {
+      "file": "frames/viya_run_fire_sw_006.png",
+      "sha256": "e40c05c17cdaf371cd0d9fd0c01e82d94bb251a35e778510e3182b07e584baac"
+    },
+    {
+      "file": "frames/viya_run_fire_sw_007.png",
+      "sha256": "a600ceac2e24667ba1feb836c485dfbe03e4164397e0f094edbc62a6aa0db2db"
+    },
+    {
+      "file": "frames/viya_run_fire_sw_008.png",
+      "sha256": "e40265a881ad3f796c67ac8b5fb5c9fb9f009acdaef8becfe965b464440d5c4b"
+    },
+    {
+      "file": "frames/viya_run_fire_sw_009.png",
+      "sha256": "bfb411c58fb650b2c6ede3bdee198051a17b2ddf18caf6a1fd82d92835b997e4"
+    },
+    {
+      "file": "frames/viya_run_fire_sw_010.png",
+      "sha256": "2eebbd157dd8d06ea14488b3b909b11d3e1b9719a8358e2d19902321efa60f82"
+    },
+    {
+      "file": "frames/viya_run_fire_sw_011.png",
+      "sha256": "9d82aeb797b2c15abf7d611049b2e9417fbfc7e324d9ec3c31471f3dd698beb2"
+    },
+    {
+      "file": "frames/viya_run_fire_sw_012.png",
+      "sha256": "df5fc9f1aa565b5e9530ce085ab448a4244c74a2efaae97a5c1e38188201441d"
+    },
+    {
+      "file": "frames/viya_run_fire_sw_013.png",
+      "sha256": "bcf5a08ba067a49b8e2880b41f4478b3e6e77cde7b557256ecd77ce90fe53be5"
+    },
+    {
+      "file": "frames/viya_run_fire_sw_014.png",
+      "sha256": "567b130c89a889e022510f1fd6eb4c059ed192b52a6998512acfb8c29e06ac6b"
+    }
+  ],
+  "model": "seedance_2_5",
+  "mode": "video_edit",
+  "job_id": "18014a92-2bf2-4c77-ab40-19d288002022",
+  "input_generation_job_id": "7fa6e18e-a5ca-4607-b854-9099a8c30faf",
+  "paid_submissions": 2,
+  "net_credits": 59,
+  "remaining_unit_budget": 1,
+  "active_resource_unchanged": "res://assets/characters/pilot_32/game070_sw_run/viya_game070_frames.tres",
+  "current_game_clips": 35,
+  "current_game_frames": 348,
+  "prospective_after_production_clips": 36,
+  "prospective_after_production_frames": 363
+}

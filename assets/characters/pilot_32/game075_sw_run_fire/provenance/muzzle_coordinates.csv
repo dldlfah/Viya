@@ -1,0 +1,16 @@
+frame,filename,source_frame,x,y,method
+0,viya_run_fire_sw_000.png,30,6.5,94.5,independent leftmost opaque barrel end in inspected ROI x0:45 y70:135
+1,viya_run_fire_sw_001.png,31,6.5,95.0,independent leftmost opaque barrel end in inspected ROI x0:45 y70:135
+2,viya_run_fire_sw_002.png,32,6.5,96.5,independent leftmost opaque barrel end in inspected ROI x0:45 y70:135
+3,viya_run_fire_sw_003.png,33,7.5,98.5,independent leftmost opaque barrel end in inspected ROI x0:45 y70:135
+4,viya_run_fire_sw_004.png,34,9.5,100.0,independent leftmost opaque barrel end in inspected ROI x0:45 y70:135
+5,viya_run_fire_sw_005.png,35,10.5,101.5,independent leftmost opaque barrel end in inspected ROI x0:45 y70:135
+6,viya_run_fire_sw_006.png,36,12.5,101.0,independent leftmost opaque barrel end in inspected ROI x0:45 y70:135
+7,viya_run_fire_sw_007.png,37,13.5,101.0,independent leftmost opaque barrel end in inspected ROI x0:45 y70:135
+8,viya_run_fire_sw_008.png,38,13.5,101.0,independent leftmost opaque barrel end in inspected ROI x0:45 y70:135
+9,viya_run_fire_sw_009.png,39,13.5,101.0,independent leftmost opaque barrel end in inspected ROI x0:45 y70:135
+10,viya_run_fire_sw_010.png,40,12.5,101.5,independent leftmost opaque barrel end in inspected ROI x0:45 y70:135
+11,viya_run_fire_sw_011.png,41,11.5,101.5,independent leftmost opaque barrel end in inspected ROI x0:45 y70:135
+12,viya_run_fire_sw_012.png,42,10.5,100.5,independent leftmost opaque barrel end in inspected ROI x0:45 y70:135
+13,viya_run_fire_sw_013.png,43,8.5,99.5,independent leftmost opaque barrel end in inspected ROI x0:45 y70:135
+14,viya_run_fire_sw_014.png,44,7.5,97.0,independent leftmost opaque barrel end in inspected ROI x0:45 y70:135

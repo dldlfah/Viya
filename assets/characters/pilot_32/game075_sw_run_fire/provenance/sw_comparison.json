@@ -1,0 +1,306 @@
+[
+  {
+    "minimum_unordered_bootset_difference_game_px": [
+      8.485877974611702,
+      16.549582182283736
+    ],
+    "global_phase": 0,
+    "old_frame": 9,
+    "new_frame": 9,
+    "old_projected_tips": [
+      [
+        67.0,
+        232.0
+      ],
+      [
+        90.0,
+        183.0
+      ]
+    ],
+    "new_projected_tips": [
+      [
+        137.85714285714286,
+        186.28571428571428
+      ],
+      [
+        89.0,
+        243.0
+      ]
+    ],
+    "projected_difference_canvas_px": [
+      84.32396226604214,
+      60.00833275470999
+    ],
+    "projected_difference_at_game_scale_px": [
+      29.091766981784538,
+      20.702874800374946
+    ],
+    "note": "Painted pose/recovery differences, not measured world ground-slip. Baseline gait has extra support; identical numeric phase is not identical contact."
+  },
+  {
+    "minimum_unordered_bootset_difference_game_px": [
+      10.954768653422125,
+      10.74496393665423
+    ],
+    "global_phase": 0.125,
+    "old_frame": 11,
+    "new_frame": 11,
+    "old_projected_tips": [
+      [
+        66.0,
+        245.0
+      ],
+      [
+        101.0,
+        178.0
+      ]
+    ],
+    "new_projected_tips": [
+      [
+        132.0,
+        181.0
+      ],
+      [
+        97.5,
+        241.0
+      ]
+    ],
+    "projected_difference_canvas_px": [
+      91.93475947648963,
+      63.09714732061981
+    ],
+    "projected_difference_at_game_scale_px": [
+      31.71749201938892,
+      21.768515825613832
+    ],
+    "note": "Painted pose/recovery differences, not measured world ground-slip. Baseline gait has extra support; identical numeric phase is not identical contact."
+  },
+  {
+    "minimum_unordered_bootset_difference_game_px": [
+      10.872974811430401,
+      15.187410300661037
+    ],
+    "global_phase": 0.25,
+    "old_frame": 14,
+    "new_frame": 13,
+    "old_projected_tips": [
+      [
+        90.0,
+        229.0
+      ],
+      [
+        68.0,
+        195.0
+      ]
+    ],
+    "new_projected_tips": [
+      [
+        112.0,
+        196.375
+      ],
+      [
+        121.5,
+        228.0
+      ]
+    ],
+    "projected_difference_canvas_px": [
+      39.34959497885588,
+      62.8589691293136
+    ],
+    "projected_difference_at_game_scale_px": [
+      13.57561026770528,
+      21.68634434961319
+    ],
+    "note": "Painted pose/recovery differences, not measured world ground-slip. Baseline gait has extra support; identical numeric phase is not identical contact."
+  },
+  {
+    "minimum_unordered_bootset_difference_game_px": [
+      6.509446981119056,
+      15.631964847708684
+    ],
+    "global_phase": 0.375,
+    "old_frame": 16,
+    "new_frame": 0,
+    "old_projected_tips": [
+      [
+        55.0,
+        217.0
+      ],
+      [
+        110.0,
+        216.0
+      ]
+    ],
+    "new_projected_tips": [
+      [
+        65.0,
+        233.0
+      ],
+      [
+        152.0,
+        199.0
+      ]
+    ],
+    "projected_difference_canvas_px": [
+      18.867962264113206,
+      45.31004303683677
+    ],
+    "projected_difference_at_game_scale_px": [
+      6.509446981119056,
+      15.631964847708684
+    ],
+    "note": "Painted pose/recovery differences, not measured world ground-slip. Baseline gait has extra support; identical numeric phase is not identical contact."
+  },
+  {
+    "minimum_unordered_bootset_difference_game_px": [
+      8.05410609565084,
+      9.416667404129765
+    ],
+    "global_phase": 0.5,
+    "old_frame": 1,
+    "new_frame": 2,
+    "old_projected_tips": [
+      [
+        42.0,
+        233.0
+      ],
+      [
+        126.0,
+        178.0
+      ]
+    ],
+    "new_projected_tips": [
+      [
+        65.0,
+        237.0
+      ],
+      [
+        153.0,
+        182.0
+      ]
+    ],
+    "projected_difference_canvas_px": [
+      23.345235059857504,
+      27.294688127912362
+    ],
+    "projected_difference_at_game_scale_px": [
+      8.05410609565084,
+      9.416667404129765
+    ],
+    "note": "Painted pose/recovery differences, not measured world ground-slip. Baseline gait has extra support; identical numeric phase is not identical contact."
+  },
+  {
+    "minimum_unordered_bootset_difference_game_px": [
+      14.637110370561533,
+      5.796102677661946
+    ],
+    "global_phase": 0.625,
+    "old_frame": 3,
+    "new_frame": 4,
+    "old_projected_tips": [
+      [
+        43.0,
+        234.0
+      ],
+      [
+        128.0,
+        180.0
+      ]
+    ],
+    "new_projected_tips": [
+      [
+        85.0,
+        228.0
+      ],
+      [
+        141.5,
+        190.0
+      ]
+    ],
+    "projected_difference_canvas_px": [
+      42.42640687119285,
+      16.80029761641144
+    ],
+    "projected_difference_at_game_scale_px": [
+      14.637110370561533,
+      5.796102677661946
+    ],
+    "note": "Painted pose/recovery differences, not measured world ground-slip. Baseline gait has extra support; identical numeric phase is not identical contact."
+  },
+  {
+    "minimum_unordered_bootset_difference_game_px": [
+      19.541288500249927,
+      6.591215745217267
+    ],
+    "global_phase": 0.75,
+    "old_frame": 5,
+    "new_frame": 6,
+    "old_projected_tips": [
+      [
+        54.0,
+        228.0
+      ],
+      [
+        115.0,
+        191.0
+      ]
+    ],
+    "new_projected_tips": [
+      [
+        124.8,
+        207.4
+      ],
+      [
+        110.5,
+        224.0
+      ]
+    ],
+    "projected_difference_canvas_px": [
+      73.7360156233031,
+      33.30540496676178
+    ],
+    "projected_difference_at_game_scale_px": [
+      25.438925390039568,
+      11.490364713532813
+    ],
+    "note": "Painted pose/recovery differences, not measured world ground-slip. Baseline gait has extra support; identical numeric phase is not identical contact."
+  },
+  {
+    "minimum_unordered_bootset_difference_game_px": [
+      15.273801098613271,
+      9.108261359886418
+    ],
+    "global_phase": 0.875,
+    "old_frame": 7,
+    "new_frame": 7,
+    "old_projected_tips": [
+      [
+        91.0,
+        211.0
+      ],
+      [
+        78.0,
+        219.0
+      ]
+    ],
+    "new_projected_tips": [
+      [
+        133.0,
+        197.0
+      ],
+      [
+        99.0,
+        235.0
+      ]
+    ],
+    "projected_difference_canvas_px": [
+      44.27188724235731,
+      26.40075756488817
+    ],
+    "projected_difference_at_game_scale_px": [
+      15.273801098613271,
+      9.108261359886418
+    ],
+    "note": "Painted pose/recovery differences, not measured world ground-slip. Baseline gait has extra support; identical numeric phase is not identical contact."
+  }
+]

@@ -1,0 +1,16 @@
+frame,source_frame,near_tip_x,near_tip_y,far_tip_x,far_tip_y,state,measurement
+0,30,65.0,233.0,152.0,199.0,near_support_far_recovery,lower opaque edge in manually reviewed per-boot ROI; anatomical/occlusion uncertainty not quantified; no world floor reconstruction
+1,31,64.0,236.0,152.5,189.0,near_support_far_recovery,lower opaque edge in manually reviewed per-boot ROI; anatomical/occlusion uncertainty not quantified; no world floor reconstruction
+2,32,65.0,237.0,153.0,182.0,near_support_far_recovery,lower opaque edge in manually reviewed per-boot ROI; anatomical/occlusion uncertainty not quantified; no world floor reconstruction
+3,33,74.0,233.0,148.5,183.0,near_support_far_recovery,lower opaque edge in manually reviewed per-boot ROI; anatomical/occlusion uncertainty not quantified; no world floor reconstruction
+4,34,85.0,228.0,141.5,190.0,near_toeoff_far_advances,lower opaque edge in manually reviewed per-boot ROI; anatomical/occlusion uncertainty not quantified; no world floor reconstruction
+5,35,129.0,204.0,102.5,218.0,near_toeoff_far_advances,lower opaque edge in manually reviewed per-boot ROI; anatomical/occlusion uncertainty not quantified; no world floor reconstruction
+6,36,124.8,207.4,110.5,224.0,far_support_near_recovery,lower opaque edge in manually reviewed per-boot ROI; anatomical/occlusion uncertainty not quantified; no world floor reconstruction
+7,37,133.0,197.0,99.0,235.0,far_support_near_recovery,lower opaque edge in manually reviewed per-boot ROI; anatomical/occlusion uncertainty not quantified; no world floor reconstruction
+8,38,136.0,192.16666666666666,94.0,239.0,far_support_near_recovery,lower opaque edge in manually reviewed per-boot ROI; anatomical/occlusion uncertainty not quantified; no world floor reconstruction
+9,39,137.85714285714286,186.28571428571428,89.0,243.0,far_support_near_recovery,lower opaque edge in manually reviewed per-boot ROI; anatomical/occlusion uncertainty not quantified; no world floor reconstruction
+10,40,137.5,182.0,88.5,245.0,far_support_near_recovery,lower opaque edge in manually reviewed per-boot ROI; anatomical/occlusion uncertainty not quantified; no world floor reconstruction
+11,41,132.0,181.0,97.5,241.0,far_support_near_recovery,lower opaque edge in manually reviewed per-boot ROI; anatomical/occlusion uncertainty not quantified; no world floor reconstruction
+12,42,118.0,206.0,109.0,235.0,far_toeoff_near_advances_flight,lower opaque edge in manually reviewed per-boot ROI; anatomical/occlusion uncertainty not quantified; no world floor reconstruction
+13,43,112.0,196.375,121.5,228.0,far_toeoff_near_advances_flight,lower opaque edge in manually reviewed per-boot ROI; anatomical/occlusion uncertainty not quantified; no world floor reconstruction
+14,44,88.0,216.0,135.5,218.0,far_toeoff_near_advances_flight,lower opaque edge in manually reviewed per-boot ROI; anatomical/occlusion uncertainty not quantified; no world floor reconstruction

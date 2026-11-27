@@ -6,4 +6,4 @@ GAME074를 적용한 작업 브랜치에서 3:00, 3:30, 4:00, 5:00 구간의 프
 
 [현재 상태](CURRENT_WORK.md) · [GAME074 비교 측정](validation/GAME074_REPORT.json)
 
-병행 기획/Higgsfield의GAME075는SW전용이동사격첫후보를생성중이다. 기존SW17/35클립348은유지하며완성원화는아직없다. 이작업은위Windows전투검수NEXT를대체하지않는다. [원화작업상태](../tools/higgsfield/requests/game075/README.md).
+병행 기획GAME075는 SW견착 이동사격15장 검토 후보를 납품했다. 기존SW17과 발자세 차이가 남아 게임용최종채택은 미확정이며 현재35클립348/활성슬롯은 그대로다.2유료/실차감59·예산잔여1/자동3차없음이다. 위Windows전투검수NEXT를 유지한다. [원화/비교](../assets/characters/pilot_32/game075_sw_run_fire/README.md) · [후속 제작 인계](../tools/higgsfield/requests/game075/HANDOFF.md).

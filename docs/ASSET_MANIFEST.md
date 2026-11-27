@@ -370,3 +370,12 @@
 - Source34..50 inclusive (native708.333ms), endpoint51 excluded. Fixed0.245/(-13,-9),200×248/root(100,248),display69×85.56, nominal660ms/distance659.574468ms. Phase0.574866559295493 is measured against opposite supports;77.647ms maximum anchor residual and repeated near-leg support remain accepted limitations.
 - Active `res://assets/characters/pilot_32/game070_sw_run/viya_game070_frames.tres`:35clips348frames; replaces onlyrun_sw11 with17, preserves other34clips331frames and all prior art/code. No newrun_fire_sw.
 - User `이대로 적용해` supersedes candidate04 technical veto as an explicit application decision. Historical review/rejection/cost evidence unchanged.0 additional paid submissions/credits. In-game producer review and Windows/mobile are separate.
+
+
+## GAME075 — SW 견착 이동사격 검토 후보15장 (2026-11-28)
+
+- `assets/characters/pilot_32/game075_sw_run_fire/`: RGBA15, 제안무손실import, 정수PTS/원천·게임시간표CSV, 독립총구15/발랜드마크, 고정등록/위상, 전체포즈·흑회백·끝→첫·SW17/표시크기 비교와 재현/보존증거.
+- 원천30~44/625ms, 다음45제외. 각44ms/명목660ms·거리주기659.574468ms. 공통200×248/69×85.56/root(100,248), 고정0.255/(-15,-14). 새위상0.6552589030095368과 최대78.941ms 앵커잔차를 기록한다.
+- 소스/모델/원본: `tools/higgsfield/requests/game075/evidence/`의 후보1/2 MP4·SHA256·실제설정/견적/작업/잔액. 후보2작업18014a92-2bf2-4c77-ab40-19d288002022, sourceSHA25607b915b344ce972b61230e8e86c1024bcb10b842abef7a66582d0ded1e7353e1이다. RGB의 녹색분리/번짐억제 방법과 소스원본을 보존한다.
+- 생성2완료/견착15장원화후보납품, 기존SW17전환차이로 게임용최종채택미확정. 게임연결/실행 NOT_RUN·실기/프로듀서최종승인 NOT_VERIFIED. 현재활성GAME070/35클립348과 기존1,582자산/코드/데이터를 전부 보존했다. 추후연결시에만36클립363이다.
+- 실차감59/60·잔여예산1·계정최종427, 자동3차/추가결제0. [납품/제한](../assets/characters/pilot_32/game075_sw_run_fire/README.md).

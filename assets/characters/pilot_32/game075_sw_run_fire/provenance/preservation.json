@@ -1,0 +1,11 @@
+{
+  "base_commit": "bd5e8dc6c457ac7f9d2e25f425cc42ebfcefeade",
+  "prior_assets_scripts_data_files": 1582,
+  "unchanged_existing_files": 1582,
+  "changed_existing_files": [],
+  "active_resource": "res://assets/characters/pilot_32/game070_sw_run/viya_game070_frames.tres",
+  "current_clips": 35,
+  "current_frames": 348,
+  "status": "PASS",
+  "scope": "Existing assets/scripts/data match their exact Git blob identities. GAME074 and SW17 untouched; new candidate folder is not active."
+}

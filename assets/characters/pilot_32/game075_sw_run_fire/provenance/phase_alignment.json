@@ -1,0 +1,75 @@
+{
+  "method": "Circular mean of two directly reviewed opposite projected boot-extension/recovery stances, using interval midpoints. Independent of the existing SW number.",
+  "formula": "new_origin = new_local - old_local + old_origin (mod1)",
+  "baseline_origin": 0.574866559295493,
+  "run_fire_phase_origin": 0.6552589030095368,
+  "anchors": [
+    {
+      "new_frame": 2,
+      "new_source_frame": 32,
+      "old_sw_frame": 3,
+      "stance": "near boot extended / far recovery",
+      "new_mid_phase": 0.16666666666666666,
+      "old_mid_phase": 0.20588197923857862,
+      "origin_from_anchor": 0.535651246723581,
+      "new_tips": [
+        [
+          65.0,
+          237.0
+        ],
+        [
+          153.0,
+          182.0
+        ]
+      ],
+      "old_tips": [
+        [
+          43.0,
+          234.0
+        ],
+        [
+          128.0,
+          180.0
+        ]
+      ]
+    },
+    {
+      "new_frame": 10,
+      "new_source_frame": 40,
+      "old_sw_frame": 8,
+      "stance": "far boot extended / near recovery",
+      "new_mid_phase": 0.7,
+      "old_mid_phase": 0.5000000000000001,
+      "origin_from_anchor": 0.7748665592954929,
+      "new_tips": [
+        [
+          137.5,
+          182.0
+        ],
+        [
+          88.5,
+          245.0
+        ]
+      ],
+      "old_tips": [
+        [
+          92.0,
+          207.0
+        ],
+        [
+          77.0,
+          224.0
+        ]
+      ]
+    }
+  ],
+  "maximum_anchor_residual_cycles": 0.11960765628595604,
+  "maximum_anchor_residual_nominal_ms": 78.94105314873099,
+  "anatomical_note": "Near/far track projected painted legs, not reconstructed anatomical/world-floor contacts. Painted edge samples have unquantified anatomical/recovery/occlusion correspondence uncertainty.",
+  "baseline_ambiguity": "Existing approved SW17 contains an additional near-support motif and another late opposite-leg pose at15. Frame8 was chosen for the corresponding recovery silhouette. One phase offset cannot make all old/new poses or foot positions equal.",
+  "limitations": [
+    "Exact physical foot contact/zero-slip not proven",
+    "Same distance phase does not remove painted foot/body position differences",
+    "Actual run/fire and S/SW transitions require production main.tscn review"
+  ]
+}

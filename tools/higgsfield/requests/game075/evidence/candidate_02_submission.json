@@ -1,0 +1,35 @@
+{
+  "results": [
+    {
+      "id": "18014a92-2bf2-4c77-ab40-19d288002022",
+      "type": "video",
+      "status": "pending",
+      "model": "seedance_2_5",
+      "params": {
+        "prompt": "Edit the supplied SOUTHWEST-facing VIYA running video to CHANGE THE ARM AND RIFLE POSTURE throughout the entire clip. The input incorrectly shows a LOW WAIST-CARRY. Replace that posture with a CLEARLY SHOULDER-SUPPORTED TWO-HANDED SOUTHWEST AIM. This is a real posture correction, not a request to continue or lightly stabilize the existing carry.\n\nPreserve the SAME adult VIYA: mature face, body proportions, long dark-brown wavy hair, ivory top, fitted black corset, partial gloves, brass/gold ornaments, short lower garments, thigh straps, tall decorated boots, asymmetric crimson fabric on its ORIGINAL sides, and the SAME original rune-decorated rifle. Preserve the painterly dark-fantasy anime style. Do not add sleeves, armor or accessories, redesign the costume, mirror the character or replace her face.\n\nKeep the SAME fixed elevated three-quarter SOUTHWEST camera. Her torso, gaze, running direction and rifle aim face LOWER LEFT. Do not rotate her body or camera into frontal SOUTH, side WEST, EAST or SOUTHEAST. Keep the existing registration and full-body proportions.\n\nVisibly seat the SAME rifle buttstock against her RIGHT SHOULDER. RAISE the rifle, trigger grip and both hands to an anatomically coherent chest/shoulder aiming height. Bend and raise the elbows appropriately, keep the trigger hand on the original grip and the opposite hand supporting the fore-end, and connect her cheek/head/gaze to the sights. Maintain unmistakable shoulder contact throughout. The barrel points down-left using natural foreshortening of the same rifle. Do NOT retain the diagonal low carry with hands down by her waist. Keep weapon structure, length, colors and both hand contacts coherent; no detached hands, pistol replacement, duplicate guns or torso penetration.\n\nPreserve the input's steady alternating two-leg running timing and continuous foot trajectories. Re-render coherent FULL-BODY aimed running, with pelvis weight transfer, coordinated torso and shoulder stabilization, modest natural head movement and connected hair/cloth follow-through. Do not freeze the legs, add held-pose blocks, repeat one-leg kicks, reverse playback or introduce abrupt vertical jumps. Both legs take their alternating support turns. Begin with the corrected aim; no low-ready introduction or lowering the gun halfway through is needed.\n\nKeep the character centered in the SAME consistent canvas. Full hair, original rifle barrel tip, crimson fabric and both boots remain inside the frame with clear margins. Maintain a steady gait across natural full-cycle boundaries so a complete distinct cycle can loop without a duplicated endpoint or artificial pause.\n\nPreserve the uniform saturated green background. No floor line, cast shadow, scenery, lighting changes or green spill. This is an aimed-running animation plate WITHOUT weapon discharge. No muzzle flashes, bullets, tracers, casings, smoke, sparks, magic effects, text, panels, checkerboard, additional characters, extra limbs, ghost blends, cutout assembly or puppet warping. Silent video.\n",
+        "reference_images": [
+          "7fa6e18e-a5ca-4607-b854-9099a8c30faf"
+        ],
+        "mode": "video_edit",
+        "resolution": "720p",
+        "generate_audio": false,
+        "bitrate_mode": "high",
+        "draft": false
+      }
+    }
+  ],
+  "adjustments": {
+    "medias[0].role": {
+      "requested": "video",
+      "used": "video_references",
+      "reason": "Seedance 2.5 backend expects schema-key media roles"
+    }
+  },
+  "references_read": [
+    {
+      "ref": "quote:Y1_xku2OcTcFK2XpGfLh9A",
+      "chars": 3292,
+      "sha256": "65b467a4ba0f63d4ffab7ed0d9e026f8e4afe856400a71f3aa5eb47cd452ffec"
+    }
+  ]
+}

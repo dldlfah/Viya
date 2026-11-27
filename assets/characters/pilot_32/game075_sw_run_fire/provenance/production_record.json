@@ -1,0 +1,35 @@
+{
+  "unit": "GAME075",
+  "stage": "DELIVERY_REVIEW_CANDIDATE_NOT_ACTIVE",
+  "generation_complete": true,
+  "full_game_adoption": false,
+  "jobs": [
+    {
+      "job_id": "7fa6e18e-a5ca-4607-b854-9099a8c30faf",
+      "model": "seedance_2_5",
+      "mode": "omni_reference",
+      "cost": 28,
+      "raw_sha256": "4fbe8099b20eaa96288f5cb35f1c658c15bf458cc7efbcbc3719ba007756dc5b",
+      "decision": "REJECTED_LOW_CARRY"
+    },
+    {
+      "job_id": "18014a92-2bf2-4c77-ab40-19d288002022",
+      "model": "seedance_2_5",
+      "mode": "video_edit",
+      "cost": 31,
+      "raw_sha256": "07b915b344ce972b61230e8e86c1024bcb10b842abef7a66582d0ded1e7353e1",
+      "decision": "15FRAME_REVIEW_CANDIDATE_TRANSITION_DIFFERENCES_REMAIN"
+    }
+  ],
+  "processing_scripts_sha256": {
+    "tools/higgsfield/prepare_game075.py": "5ac3cf10fc31318962e00803e34b993f153b9b73bdc14b4389b50a095a07cb0c",
+    "tools/higgsfield/measure_game075.py": "524ba5f6f2b28af4bd1668d516d8744cb0c5359b0b832eff461a00e9ba23ab3b",
+    "tools/higgsfield/preview_game075.py": "d7b719610e4eccc0df44d9398df95c3c73d80cd931c5106f57988faf775c7a92",
+    "tools/higgsfield/review_game075_source.py": "f9f1f1c2c78d3100f63811204709d97fa431647f5c1d1871603b0d68202a22b6"
+  },
+  "actual_cost": 59,
+  "remaining_budget": 1,
+  "account_final": 427,
+  "game_connection": "NOT_RUN",
+  "producer_final": "NOT_VERIFIED"
+}

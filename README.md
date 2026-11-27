@@ -1,5 +1,7 @@
 # Viya — 모바일 서바이버 게임
 
+병행 GAME075는 SW 견착 이동사격15장 검토 후보를 납품했다. 기존SW17과 발자세 차이가 남아 게임용최종채택은 미확정이며 현재35클립348은 그대로다. 유료2/실차감59·예산잔여1. [원화·비교](assets/characters/pilot_32/game075_sw_run_fire/README.md) · [현재상태](docs/CURRENT_WORK.md).
+
 ## GAME070 — SW17 재검수와 화면 갱신 사이의 보행 보정 (2026-11-28)
 
 남서쪽 달리기 SW17이 활성 리소스에서 재생되는 것을 확인했다. 화면 갱신 사이 조준 방향이 바뀌어도 보행 거리의 진행을 물리 틱마다 누적한다. [현재 상태](docs/CURRENT_WORK.md) · [재검증](docs/validation/GAME070_RECHECK_REPORT.json)
