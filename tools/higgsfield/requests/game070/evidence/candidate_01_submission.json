@@ -1,0 +1,59 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "This tool provides an auto-updating generation widget for these jobs. Do not call job_display, show_generations, or show_generation_by_ids to display these jobs again, either before or after completion, unless the user explicitly requests a separate display. If you need to await completion, use jobs_wait with timeout_seconds <= 15. Use job_display only if the user explicitly requests a separate re-display of one specific job."
+    },
+    {
+      "type": "text",
+      "text": "Note: adjustments applied — medias[1].role: \"image\" → \"image_references\" (Seedance 2.5 backend expects schema-key media roles).\n\nSubmitted 1 job. If a widget is visible, it polls automatically — do not call job_status or show_generations as a follow-up poll. In text-only clients, use job_status with sync:true to poll for completion.\n- b2409d39-ee7b-4c2a-95f5-686e3387dd4c  \"Animate the exact adult VIYA in the supplied SOUTHWEST references into a continuous full-body ordinary running cycle.\n\nKeep the reference camera fixed at the same elevated, three-quarter angle. Her torso, gaze and direction of travel face toward the LOWER LEFT of the screen. She runs in place with consistent framing. Preserve the SOUTHWEST reference perspective throughout the clip, including the original visible sides of her costume.\n\nPreserve her mature face, body proportions, long dark-brown wavy hair, ivory top, fitted black corset, partial gloves, brass and gold ornaments, short lower garments, thigh straps, tall decorated boots, asymmetric crimson fabric and original rune-decorated rifle. Keep every asymmetric detail on its original side and retain the painterly dark-fantasy anime style.\n\nKeep the original two-handed low carry from the SOUTHWEST running references. The rifle, hands and shoulders move together with mild natural motion. Keep the rifle intact and clear of the legs and torso. This is an ordinary running animation plate with no firing, shoulder-aimed pose or recoil.\n\nShow both legs alternating through contact, weight-bearing support, toe-off and bent-knee recovery. Let the pelvis and torso transfer weight naturally, with modest head movement and coherent hair and cloth follow-through. Continue the gait in genuinely successive full-body poses. Avoid repeated single-leg kicks, long held poses, abrupt vertical jumps and sliding support feet. The last distinct pose must flow directly into the first without a duplicated endpoint or a pause.\n\nKeep the complete hair, barrel tip, trailing cloth and both boots visible with clear margins. Use a single flat green background with no ground line, cast shadow or lighting changes. Keep the character edges free of green spill.\n\nNo camera pan, zoom or rotation. No mirroring, costume redesign, new armor or accessories, limb cutouts, pose warping, ghost blends, extra limbs or ping-pong playback. No muzzle flash, bullets, tracers, casings, smoke, sparks, magic, scenery, text, checkerboard or additional characters. Silent video.\""
+    },
+    {
+      "type": "text",
+      "text": "If the user requests a combined display of multiple generations, including jobs submitted through separate generate_* calls, collect all requested job IDs, wait for the complete set with jobs_wait, then call show_generation_by_ids with jobs: [{\"index\":0,\"job_id\":\"<first actual job ID>\"},{\"index\":1,\"job_id\":\"<second actual job ID>\"}, ...]. job_display accepts only one id: never pass ids to it or loop over it to show a group. Do not create an extra display when the existing generation widgets already satisfy the request."
+    },
+    {
+      "type": "text",
+      "text": "References read by the server:\n- quote:-6UEb9Gb9Foba5BOg5XUBw: 2470 chars, sha256 d64cb130ad8c39e84cb79a5a69235cca96a88860431767389020a9522aa34736"
+    }
+  ],
+  "structuredContent": {
+    "results": [
+      {
+        "id": "b2409d39-ee7b-4c2a-95f5-686e3387dd4c",
+        "type": "video",
+        "status": "pending",
+        "model": "seedance_2_5",
+        "params": {
+          "prompt": "Animate the exact adult VIYA in the supplied SOUTHWEST references into a continuous full-body ordinary running cycle.\n\nKeep the reference camera fixed at the same elevated, three-quarter angle. Her torso, gaze and direction of travel face toward the LOWER LEFT of the screen. She runs in place with consistent framing. Preserve the SOUTHWEST reference perspective throughout the clip, including the original visible sides of her costume.\n\nPreserve her mature face, body proportions, long dark-brown wavy hair, ivory top, fitted black corset, partial gloves, brass and gold ornaments, short lower garments, thigh straps, tall decorated boots, asymmetric crimson fabric and original rune-decorated rifle. Keep every asymmetric detail on its original side and retain the painterly dark-fantasy anime style.\n\nKeep the original two-handed low carry from the SOUTHWEST running references. The rifle, hands and shoulders move together with mild natural motion. Keep the rifle intact and clear of the legs and torso. This is an ordinary running animation plate with no firing, shoulder-aimed pose or recoil.\n\nShow both legs alternating through contact, weight-bearing support, toe-off and bent-knee recovery. Let the pelvis and torso transfer weight naturally, with modest head movement and coherent hair and cloth follow-through. Continue the gait in genuinely successive full-body poses. Avoid repeated single-leg kicks, long held poses, abrupt vertical jumps and sliding support feet. The last distinct pose must flow directly into the first without a duplicated endpoint or a pause.\n\nKeep the complete hair, barrel tip, trailing cloth and both boots visible with clear margins. Use a single flat green background with no ground line, cast shadow or lighting changes. Keep the character edges free of green spill.\n\nNo camera pan, zoom or rotation. No mirroring, costume redesign, new armor or accessories, limb cutouts, pose warping, ghost blends, extra limbs or ping-pong playback. No muzzle flash, bullets, tracers, casings, smoke, sparks, magic, scenery, text, checkerboard or additional characters. Silent video.",
+          "aspect_ratio": "auto",
+          "duration": 4,
+          "reference_images": [
+            "0ad35446-8b00-4e0a-9c1d-ff9c40cb08f9",
+            "39923a0d-6a1c-49f0-b656-7c6dc2b0fbab"
+          ],
+          "mode": "omni_reference",
+          "resolution": "720p",
+          "generate_audio": false,
+          "bitrate_mode": "high",
+          "draft": false
+        }
+      }
+    ],
+    "adjustments": {
+      "medias[1].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "Seedance 2.5 backend expects schema-key media roles"
+      }
+    },
+    "references_read": [
+      {
+        "ref": "quote:-6UEb9Gb9Foba5BOg5XUBw",
+        "chars": 2470,
+        "sha256": "d64cb130ad8c39e84cb79a5a69235cca96a88860431767389020a9522aa34736"
+      }
+    ]
+  },
+  "isError": false
+}

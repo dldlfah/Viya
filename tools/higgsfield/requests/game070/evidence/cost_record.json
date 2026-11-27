@@ -1,0 +1,29 @@
+{
+  "task": "GAME070",
+  "maximum_paid_submissions": 2,
+  "paid_submissions": 2,
+  "credit_limit": 60,
+  "quotes": [
+    28,
+    28
+  ],
+  "observed_debits": [
+    28,
+    28
+  ],
+  "total_actual_observed_debit": 56,
+  "remaining_unit_budget": 4,
+  "balances": [
+    570,
+    542,
+    514
+  ],
+  "final_observed_account_balance": 514,
+  "both_jobs": "COMPLETED",
+  "refund_observed": false,
+  "unknown_charge": false,
+  "previous_GAME069_budget_used": false,
+  "new_payment_auto_topup_plan_change": false,
+  "paid_extras": false,
+  "third_submission": "NOT_PERMITTED_MAX_SUBMISSIONS_REACHED"
+}

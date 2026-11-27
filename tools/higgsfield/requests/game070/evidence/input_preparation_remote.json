@@ -1,0 +1,19 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "Sandbox restarted after expiry: workspace files were preserved. Previous processes and RAM were not restored; check partial outputs before restarting work."
+    },
+    {
+      "type": "text",
+      "text": "exit code: 0\n--- stdout ---\n00 source_sha256 b29c5ee38d4562d8d5f1eb98c063a34e4ee8d004264fc39d6c19b79b49b8ea7f input_sha256 7d649534a455147b97c84983621bade478ae4fa6e0e47ffad1208ec132152ba4\n08 source_sha256 b5d2acd28711971488a3d2c9f82927fc921011ac35d2af34ddcb626ddfdac9fd input_sha256 4961113dfabfc9c5e020ddcb978bd619ab153cf0936829ea0bff2525298b5e66\nHTTP 200\nHTTP 200\n"
+    }
+  ],
+  "structuredContent": {
+    "exit_code": 0,
+    "stdout": "00 source_sha256 b29c5ee38d4562d8d5f1eb98c063a34e4ee8d004264fc39d6c19b79b49b8ea7f input_sha256 7d649534a455147b97c84983621bade478ae4fa6e0e47ffad1208ec132152ba4\n08 source_sha256 b5d2acd28711971488a3d2c9f82927fc921011ac35d2af34ddcb626ddfdac9fd input_sha256 4961113dfabfc9c5e020ddcb978bd619ab153cf0936829ea0bff2525298b5e66\nHTTP 200\nHTTP 200\n",
+    "stderr": "",
+    "sandbox_id": "sb-01M8E262CZG36QGX16MMJC4JAK"
+  },
+  "isError": false
+}

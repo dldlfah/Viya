@@ -1,0 +1,15 @@
+{
+  "job_id": "f432ca21-8f98-4f45-903b-5a4aa9afa821",
+  "generation": "COMPLETED",
+  "technical_adoption": "REJECTED",
+  "all_source_frames_inspected": 97,
+  "source_sha256": "9cfd649bb25138e5ab831440eddb5ce9025dc66aaa60f76eba5246fa9706e518",
+  "defect": "Recurring extra near-leg kick between two far-leg support stances. For example source32 far support ->34..38 near support ->39..41 near recovery ->42..46 near support again ->48 far support. A regular one-for-one alternating full cycle with a clean native seam was not established.",
+  "frame_count_for_runtime": 0,
+  "why_no_local_fix": "Consecutive-frame selection cannot insert the missing opposite-leg support/swing. Shortening the clip around repeated near-leg stances would not supply a complete alternating cycle. No fake inbetweens, limb assembly, pose warping or ping-pong used.",
+  "input_change_outcome": "Removing start_image did not resolve stance dominance. Start-image binding alone is therefore not an established root cause.",
+  "reusable_material": "Both SW identity/camera/low-carry inputs, native videos, opposing support-pose samples and frame timestamps/review sheets. Not approved for runtime.",
+  "engine_integration": "NOT_RUN",
+  "final_art": "NOT_VERIFIED",
+  "no_third_generation": true
+}

@@ -313,3 +313,20 @@
 | 근거 | [통합 보고서](validation/GAME069_INTEGRATION_REPORT.json) · [로그](validation/GAME069_RUNTIME.log) |
 
 200×248/root(100,248)·69×85.56·235/stride155와 원본208/ARTFIX001/GAME064~068/SAVEFIX001을 유지했다. 영상은 고정 시간 검수의 실제 렌더 재생이며 FPS/실기/물리 접지·최종 아트 승인이 아니다. 이번 이미지 생성/편집/추가 크레딧/결제0이다. 다음SW11은 아직 기존 자산이며 새 생성/교체0이다.
+
+
+## GAME070 — SW 일반 달리기 검토 후보 / 미채택 (2026-11-27)
+
+| 자료 | 경로 / 상태 |
+| --- | --- |
+| 검토 기록 | [game070 요청 폴더](../tools/higgsfield/requests/game070/README.md), 생성2/기술채택0 |
+| 원본 포함 검토ZIP | [ARCHIVE.json](../tools/higgsfield/requests/game070/ARCHIVE.json),67파일/11,407,172바이트·영구다운로드/SHA256 |
+| 원본1 | ZIP의 tools/higgsfield/requests/game070/evidence/candidate_01.mp4;125304d3ec75424db9d9ac86ffdfd328f5d15bf077537ce8c1b511548acee72d |
+| 원본2 | ZIP의 동일폴더 candidate_02.mp4;9cfd649bb25138e5ab831440eddb5ce9025dc66aaa60f76eba5246fa9706e518 |
+| 입력 | 동일SW00/SW08·1000×1240/scale4/translation(100,124),1차start+참조/2차참조만 |
+| 검수 | 양쪽97장/원천시간CSV/전체검토·결함확대, 역할변경 뒤에도 반복보행 반려 |
+| 비용 | 유료2/최대2·실차감56/60·남은4,570→542→514,추가결제/출력0 |
+| 게임용 납품 | RGBA/클립·게임시간표/총구/새위상0. 제작세션 연결 금지 |
+| 기존 상태 | GAME069/35클립342·기존SW11/다른34클립331 보존 |
+
+후보 두 개의 생성 완료를 기술채택/게임적용/실행·최종아트 승인으로 세지 않는다. 원본은ZIP 안에 실제파일로 보존하고 저장소는 다운로드/해시로 연결한다. 원본208/ARTFIX001/GAME064~069/SAVEFIX001·저장/전투규칙은 유지했다. 다음은 반려 자료/유효 입력 전략 검토이며 세 번째 자동 제출은 없다.

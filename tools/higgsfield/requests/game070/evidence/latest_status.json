@@ -1,0 +1,17 @@
+{
+  "jobs": [
+    {
+      "job_id": "b2409d39-ee7b-4c2a-95f5-686e3387dd4c",
+      "generation": "completed",
+      "adoption": "rejected"
+    },
+    {
+      "job_id": "f432ca21-8f98-4f45-903b-5a4aa9afa821",
+      "generation": "completed",
+      "adoption": "rejected"
+    }
+  ],
+  "paid_submissions": 2,
+  "accepted_frames": 0,
+  "no_more_generation": true
+}

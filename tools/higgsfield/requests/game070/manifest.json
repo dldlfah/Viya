@@ -1,0 +1,28 @@
+{
+  "task": "GAME070",
+  "generation": "TWO_COMPLETED",
+  "technical_adoption": "REJECTED_BOTH",
+  "accepted_runtime_frames": 0,
+  "game_integration": "NOT_RUN",
+  "final_art": "NOT_VERIFIED",
+  "new_phase_origin": null,
+  "new_muzzle_coordinates": null,
+  "reason_not_supplied": "No valid alternating complete cycle; do not fabricate a runtime timeline or phase.",
+  "originals": [
+    {
+      "file": "evidence/candidate_01.mp4",
+      "sha256": "125304d3ec75424db9d9ac86ffdfd328f5d15bf077537ce8c1b511548acee72d",
+      "bytes": 4146936
+    },
+    {
+      "file": "evidence/candidate_02.mp4",
+      "sha256": "9cfd649bb25138e5ab831440eddb5ce9025dc66aaa60f76eba5246fa9706e518",
+      "bytes": 3936502
+    }
+  ],
+  "cost_record": "evidence/cost_record.json",
+  "active_resource_unchanged": "res://assets/characters/pilot_32/game069_s_run_fire/viya_game069_frames.tres",
+  "existing_clips": 35,
+  "existing_frames": 342,
+  "run_sw_existing_frames": 11
+}

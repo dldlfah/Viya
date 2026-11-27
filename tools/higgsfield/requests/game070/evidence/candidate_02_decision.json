@@ -1,0 +1,21 @@
+{
+  "first_job_id": "b2409d39-ee7b-4c2a-95f5-686e3387dd4c",
+  "generation": "COMPLETED",
+  "technical_adoption": "REJECTED",
+  "all97_frames_reviewed": true,
+  "defect": "Uneven leg alternation and abrupt folded-to-support pose swaps recur. In inspected native source43→44 the near boot suddenly recovers high as the rear leg appears straight in support, without a continuous intermediate swing. Middle cycle38..49 still contains this change; trimming alone cannot repair it.",
+  "good_reusable_material": "SW camera, adult identity, original low rifle carry, green plate and full-body framing. Original preserved; not delivered as accepted running.",
+  "cause_inference": "A start image may be anchoring the original extended-near-leg pose. This is an inference from repeated stance dominance, not a model-internal diagnosis.",
+  "change": "Remove start_image binding; retain the exact same two SW images as identity/camera/opposite-leg references only. Add explicit balanced sequential recovery/support language. Same model, duration, resolution, audio and count.",
+  "improvement_basis": "Image-reference-only omni_reference in GAME069 candidate01 previously produced a continuously alternating ordinary S run; its rejected aim posture is irrelevant to this ordinary-running task. Current schema supports this role change.",
+  "first_actual_debit": 28,
+  "second_quote": {
+    "credits": 28,
+    "credits_exact": 28
+  },
+  "maximum_total": 60,
+  "paid_submissions_after": 2,
+  "maximum_paid_submissions": 2,
+  "third_submission_prohibited": true,
+  "local_environment": "Became unavailable after first native-frame inspection; continue media processing in Higgsfield sandbox and preserve via GitHub connector."
+}

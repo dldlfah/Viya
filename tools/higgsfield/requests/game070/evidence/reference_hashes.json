@@ -1,0 +1,50 @@
+[
+  {
+    "path": "assets/characters/pilot_32/render_cache/viya_idle_sw.png",
+    "sha256": "8784ae726195102636260d14335e6aedd6f0fcafc23ec0b0cb49d718380bf7d0"
+  },
+  {
+    "path": "assets/characters/pilot_32/render_cache/viya_run_sw_00.png",
+    "sha256": "b29c5ee38d4562d8d5f1eb98c063a34e4ee8d004264fc39d6c19b79b49b8ea7f"
+  },
+  {
+    "path": "assets/characters/pilot_32/render_cache/viya_run_sw_01.png",
+    "sha256": "77d683b702fc3f8164fe783614a185a9e7487226509a9ba490f0bc2f8e54cbb4"
+  },
+  {
+    "path": "assets/characters/pilot_32/render_cache/viya_run_sw_02.png",
+    "sha256": "32b4996a46c34a3878bd81b76406435201e38a06f432520c51f69137300525f2"
+  },
+  {
+    "path": "assets/characters/pilot_32/render_cache/viya_run_sw_03.png",
+    "sha256": "5b4d0457efd0e41070057fc9d4de9011fe5dd39c9c49b2456d5d906084f0f182"
+  },
+  {
+    "path": "assets/characters/pilot_32/render_cache/viya_run_sw_04.png",
+    "sha256": "ad77fba1c289e97229f66b1287e73ba7a2a24c278397c4e0a5b5ac669471741e"
+  },
+  {
+    "path": "assets/characters/pilot_32/render_cache/viya_run_sw_05.png",
+    "sha256": "bc65ac73280b220b34bd3b7ff5f1cc25ffcab94f648583898c543ab71fdec926"
+  },
+  {
+    "path": "assets/characters/pilot_32/render_cache/viya_run_sw_06.png",
+    "sha256": "11203807bdc6ac76ec2ef52606cb11b8e871446c4b12267e432feb2e101ab6f0"
+  },
+  {
+    "path": "assets/characters/pilot_32/render_cache/viya_run_sw_07.png",
+    "sha256": "d5c23ee485206d4ed49093c8a34fc1df0b7fc132a4cafeeb2b7985f7b2daf919"
+  },
+  {
+    "path": "assets/characters/pilot_32/render_cache/viya_run_sw_08.png",
+    "sha256": "b5d2acd28711971488a3d2c9f82927fc921011ac35d2af34ddcb626ddfdac9fd"
+  },
+  {
+    "path": "assets/characters/pilot_32/render_cache/viya_run_sw_09.png",
+    "sha256": "1dad69fb6f0c2ccb611d9d718e217fde4e47f264b3756670c724b421e3b10adb"
+  },
+  {
+    "path": "assets/characters/pilot_32/render_cache/viya_run_sw_10.png",
+    "sha256": "bd1e688d949f061aadad10468406da1786f24c19d1acb769d2f6436a8c11f9dd"
+  }
+]

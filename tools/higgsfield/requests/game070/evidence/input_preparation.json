@@ -1,0 +1,33 @@
+{
+  "source_canvas": [
+    200,
+    248
+  ],
+  "input_canvas": [
+    1000,
+    1240
+  ],
+  "transform": {
+    "scale": 4,
+    "translation": [
+      100,
+      124
+    ]
+  },
+  "background": [
+    28,
+    223,
+    28
+  ],
+  "same_for_both": true,
+  "character_redraw": false,
+  "first_roles": [
+    "start_image",
+    "image_references"
+  ],
+  "second_roles": [
+    "image_references",
+    "image_references"
+  ],
+  "first_to_second_same_media_ids": true
+}

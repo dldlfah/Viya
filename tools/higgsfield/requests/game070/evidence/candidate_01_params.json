@@ -1,0 +1,23 @@
+{
+  "model": "seedance_2_5",
+  "mode": "omni_reference",
+  "duration": 4,
+  "resolution": "720p",
+  "aspect_ratio": "auto",
+  "generate_audio": false,
+  "bitrate_mode": "high",
+  "draft": false,
+  "count": 1,
+  "use_unlim": false,
+  "medias": [
+    {
+      "role": "start_image",
+      "value": "0ad35446-8b00-4e0a-9c1d-ff9c40cb08f9"
+    },
+    {
+      "role": "image",
+      "value": "39923a0d-6a1c-49f0-b656-7c6dc2b0fbab"
+    }
+  ],
+  "prompt": "Animate the exact adult VIYA in the supplied SOUTHWEST references into a continuous full-body ordinary running cycle.\n\nKeep the reference camera fixed at the same elevated, three-quarter angle. Her torso, gaze and direction of travel face toward the LOWER LEFT of the screen. She runs in place with consistent framing. Preserve the SOUTHWEST reference perspective throughout the clip, including the original visible sides of her costume.\n\nPreserve her mature face, body proportions, long dark-brown wavy hair, ivory top, fitted black corset, partial gloves, brass and gold ornaments, short lower garments, thigh straps, tall decorated boots, asymmetric crimson fabric and original rune-decorated rifle. Keep every asymmetric detail on its original side and retain the painterly dark-fantasy anime style.\n\nKeep the original two-handed low carry from the SOUTHWEST running references. The rifle, hands and shoulders move together with mild natural motion. Keep the rifle intact and clear of the legs and torso. This is an ordinary running animation plate with no firing, shoulder-aimed pose or recoil.\n\nShow both legs alternating through contact, weight-bearing support, toe-off and bent-knee recovery. Let the pelvis and torso transfer weight naturally, with modest head movement and coherent hair and cloth follow-through. Continue the gait in genuinely successive full-body poses. Avoid repeated single-leg kicks, long held poses, abrupt vertical jumps and sliding support feet. The last distinct pose must flow directly into the first without a duplicated endpoint or a pause.\n\nKeep the complete hair, barrel tip, trailing cloth and both boots visible with clear margins. Use a single flat green background with no ground line, cast shadow or lighting changes. Keep the character edges free of green spill.\n\nNo camera pan, zoom or rotation. No mirroring, costume redesign, new armor or accessories, limb cutouts, pose warping, ghost blends, extra limbs or ping-pong playback. No muzzle flash, bullets, tracers, casings, smoke, sparks, magic, scenery, text, checkerboard or additional characters. Silent video."
+}

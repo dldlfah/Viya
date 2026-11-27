@@ -1,0 +1,19 @@
+{
+  "task": "GAME070_SW_RUN",
+  "base_commit": "bea55a1e66e96df65c4acb3dbd31af687300b60b",
+  "branch": "work/viya-turnaround-qa-20261117",
+  "status": "TWO_GENERATED_NONE_ADOPTED",
+  "paid_submissions": 2,
+  "actual_debit": 56,
+  "remaining_budget": 4,
+  "accepted_frames": 0,
+  "active_resource_preserved": "res://assets/characters/pilot_32/game069_s_run_fire/viya_game069_frames.tres",
+  "existing_clips": 35,
+  "existing_frames": 342,
+  "SW_run_frames_unchanged": 11,
+  "other_clips_preserved": 34,
+  "other_frames_preserved": 331,
+  "engine_integration": "NOT_RUN",
+  "final_art": "NOT_VERIFIED",
+  "automatic_retry": false
+}
