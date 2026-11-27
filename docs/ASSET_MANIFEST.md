@@ -255,3 +255,21 @@
 | 비용 | 유료1/최대2건,실차감28/한도60·남은32,실제잔액657→629,새결제/충전0 |
 
 원본208/ARTFIX001/GAME064~067/SAVEFIX001과기존게임/데이터/자산1,405파일을보존했다. 제작세션이run_s11만17장으로교체하면34클립/324,나머지33클립/307보존이다. 아트분석영상은main.tscn캡처가아니며 새S/기존SE발위치·투영차이/물리접지/실기·최종아트는별도다. CSV/QA파일은provenance/.gdignore로자동임포트에서제외한다.
+
+## GAME068 — S17 게임 연결 등록 (2026-11-27)
+
+사용자의 “확인하고 연결하고 수정하자” 지시로 납품93e11ed의17장을 기존 전투에 연결했다. 위 납품README/manifest/CHECKSUMS의 미연결은 당시 기록이며 현재는 아래 통합 상태를 따른다. 납품PNG·기술 자료·원출력 해시는 그대로다.
+
+| 항목 | 경로와 상태 |
+| --- | --- |
+| 활성 SpriteFrames | assets/characters/pilot_32/game068_s_run/viya_game068_frames.tres |
+| 통합 명세 | assets/characters/pilot_32/game068_s_run/integration_manifest.json |
+| 교체 범위 | run_s11→17, 총34클립/324프레임, 다른33클립/307프레임 유지 |
+| 임포트 |17PNG.import, lossless/fix_alpha_border=false, 엔진RGBA 원본 일치 |
+| 모션 | data/viya_motion.json의S run17·총구17개·위상0.4572192098143875 |
+| 빌더 | tools/build_viya_game068.py, 격리4출력 동일 |
+| 검증 | 전체4,573·실제GUI2,473/444그리기/43발 PASS |
+| 실제 게임 영상 | [S 이동](validation/GAME068_S_RUN_IN_GAME.mp4) · [전체QA](validation/GAME068_GAMEPLAY.mp4) |
+| 근거 | [통합 보고서](validation/GAME068_INTEGRATION_REPORT.json) · [로그](validation/GAME068_RUNTIME.log) |
+
+200×248/root(100,248)·표시69×85.56·이동235/stride155·명목660ms를 유지한다. 원본208/ARTFIX001/GAME064~067/SAVEFIX001·기존PNG/게임 스크립트는 보존한다. 이번 생성/추가 크레딧/결제0이다. 영상은 고정 시간 검수의 실제 렌더 재생이며 실시간FPS·실기/물리 접지·최종 아트 승인과 구분한다. 새S 전용 이동사격은 아직 없고 다음GAME069다.

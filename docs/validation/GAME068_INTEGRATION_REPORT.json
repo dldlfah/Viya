@@ -1,0 +1,201 @@
+{
+  "task": "GAME068_INTEGRATION",
+  "date_kst": "2026-11-27",
+  "status": "PASS_IN_STATED_SCOPE",
+  "branch": "work/viya-turnaround-qa-20261117",
+  "base_art_commit": "93e11ede0d7408957754c7d2609209010ec36838",
+  "implementation_commit": "3fc25db5a6bf6a5d0029f42c19fa81ed8635574a",
+  "observed_main_unchanged": "e2780feb2f62a7b115b9fb903201f5f069bf1290",
+  "resource": "res://assets/characters/pilot_32/game068_s_run/viya_game068_frames.tres",
+  "actual_change": "Only run_s11 replaced by delivered17;34clips/324frames,other33clips/307frames preserved. Existing renderer samples new timing/muzzle/phase metadata;no runtime script changes.",
+  "canvas": [
+    200,
+    248
+  ],
+  "display": [
+    69,
+    85.56
+  ],
+  "pivot": [
+    100,
+    248
+  ],
+  "speed": 235,
+  "stride_world": 155,
+  "phase_origin": 0.4572192098143875,
+  "nominal_cycle_ms": 660,
+  "distance_cycle_ms": 659.5744680851063,
+  "timing_implementation": "Positive integer source-microsecond ticks/65536 frame weights,matching clip speed;native boundaries and authored CSV agree within1microsecond.",
+  "import": "All17rawPNGpixel buffers equal normal Godot imports;lossless/fix_alpha_border=false. Existing provenance/.gdignore preserved.",
+  "native": {
+    "status": "PASS",
+    "commands": 10,
+    "suites": 7,
+    "checks": 4573,
+    "counts": [
+      23,
+      70,
+      122,
+      57,
+      1336,
+      507,
+      2458
+    ],
+    "timeout_per_command_seconds": 120,
+    "strict_runner_sha256": "9156043eaf896d72565563cc1e2f623cf0c8fbac7f032f19bffee7e4946a69ee",
+    "report": "GAME068_REGRESSION_REPORT.json"
+  },
+  "source_contracts": {
+    "status": "PASS",
+    "files": 191,
+    "resource_refs": 642,
+    "contracts": 6,
+    "negative_controls_rejected": 184,
+    "combat_negative_controls_rejected": 151,
+    "new_combat_controls": 7
+  },
+  "python_unittest": {
+    "checks": 20,
+    "status": "PASS"
+  },
+  "production_main": {
+    "status": "PASS",
+    "logic_checks": 1332,
+    "actual_gui_checks": 2473,
+    "draws": 444,
+    "real_shots": 43,
+    "run_frames": 17,
+    "global_run_wraps": 4,
+    "firing_run_frames": 17,
+    "firing_last_to_first_wraps": 2,
+    "display": "X11",
+    "video_adapter": "llvmpipe (LLVM 19.1.7, 256 bits)",
+    "all_draws_snapshot_cues_unchanged": true,
+    "covered": [
+      "S17loops",
+      "SE/Srunningandfiringturns",
+      "inputrelease/idle/feetstop",
+      "ordinarySrunwithactualgunshots/newmuzzles",
+      "fireon/off",
+      "backward48updates",
+      "preservedstationarySattack",
+      "immediatehitandwallconsumption",
+      "contactdamage100to88/hurtpriority",
+      "pause"
+    ],
+    "report": "GAME068_MAIN_RENDER.json",
+    "scope": "Production main.tscn,isolated QA saves,fixed1/60updates,native Godot key events,actual X11draws. Not real-time FPS,physical input,speaker audio or hardware/device approval."
+  },
+  "initial_fixture_failure": {
+    "status": "FAIL_PRESERVED",
+    "failed_assertions": 213,
+    "initial_start": [
+      2500,
+      1700
+    ],
+    "first_obstructed_step": 126,
+    "world_position": [
+      2346.304,
+      2169.99
+    ],
+    "cause": "S route hits existing old defense ruin at2100,2200,300,100 expanded by player collision radius;normal collision slides change facing and movement.",
+    "correction": "Only QA fixture start changed to2500,1200;no wall,collision,rules or assertion threshold changes.",
+    "final_logic_status": "PASS1332",
+    "raw_log": "GAME068_RUNTIME.log"
+  },
+  "preservation": {
+    "status": "PASS",
+    "base": "93e11ede0d7408957754c7d2609209010ec36838",
+    "tracked_assets_scripts_data": 1444,
+    "identical": 1442,
+    "changed": [
+      "data/presentation_slots.json",
+      "data/viya_motion.json"
+    ],
+    "runtime_scripts_changed": [],
+    "motion_changed_only": [
+      "resource",
+      "directions.s.run",
+      "directions.s.phase_origin"
+    ],
+    "slots_changed_only": [
+      "viya_battle"
+    ]
+  },
+  "builder": {
+    "status": "PASS",
+    "delivery_checksums": 38,
+    "source_master_sha256": "3a3e265b86320f21ed1970587c7faf2c997393a994127c68fa757cdac43007e1",
+    "outputs": {
+      "assets/characters/pilot_32/game068_s_run/viya_game068_frames.tres": {
+        "sha256": "e2b95bebb78f7127458081f4f4912e4d255cf55e6c24ab17aca28478f262b178",
+        "byte_identical": true
+      },
+      "assets/characters/pilot_32/game068_s_run/integration_manifest.json": {
+        "sha256": "a06dd6988072dbba98894001b3f265907667a08c6ebc58713acb514ca1b76174",
+        "byte_identical": true
+      },
+      "data/viya_motion.json": {
+        "sha256": "bdd36d9df74c5ee3a5dc73d60f538362497ddd76a310b3cdbb0c9af4a74a1973",
+        "byte_identical": true
+      },
+      "data/presentation_slots.json": {
+        "sha256": "510e18a0f127502d66daa1209da1fca74a47daff13d43662d2074745dcf3bce6",
+        "byte_identical": true
+      }
+    }
+  },
+  "historical_test_updates": "GAME066/GAME067 historical whole-resource comparisons remain exact against frozen GAME067;new GAME068 suite separately compares all33unchanged clips/307frames to live active resource. Existing live E/SE firing/phase tests remain active. Pilot S exception checks independent delivered CSV weights,not an equal-duration assumption.",
+  "art_approval": "NOT_VERIFIED",
+  "new_generated_frames_this_integration": 0,
+  "credit_cost_this_integration": 0,
+  "art_generation_cost_in_prior_session": 28,
+  "remaining_prior_art_budget_not_used": 32,
+  "limitations": [
+    "SE/Spainted foot extents and projection differ;2Dphase is not proof of physical contact/zero slip",
+    "Windows/Android/iOS",
+    "Real-time FPS/frame pacing/thermals",
+    "Physical keyboard/touch and speaker audio",
+    "Producer final art approval",
+    "1540denseoverload/final economy/one-stagefinish",
+    "Automatic recovery of old invalid saves not added;SAVEFIX001 tiny-life producer issue already fixed"
+  ],
+  "next": "GAME069 S dedicated full-body moving-fire production handoff;no new art/resource/generation submitted.",
+  "evidence_scope": {
+    "GAME068_S_RUN_IN_GAME.mp4": "160actualSrunframes at60fps,4globalphasewraps;fixed-step replay,not real-timeFPS.",
+    "GAME068_GAMEPLAY.mp4": "444actualQA draws at60fps including fixture resets and paused/consumed-shot trials;not uninterrupted real-time gameplay."
+  },
+  "source_sha256": {
+    "tools/build_viya_game068.py": "6c9262cc6f72e236f9ec31c88f0edfc37d76201c5c14e05a5d77f3bdf26ea338",
+    "tools/inspect_viya_game068.gd": "f0af57e8153cf658acf86a079e814b98e51357c30ff5f0dfdebee756e6620a1e",
+    "tests/test_viya_game068.gd": "d1431be764a1b3aaa1130323779e0f650c881a9124eb4a94abe6cb053da92ca1",
+    "tools/check_combat_cues.py": "dc9054c27b37e5b2b4cb96b701ae5e18cc1d2f4979b2104908681411dbd79344",
+    "tools/check_project.py": "eeafd73fc4503c7af952331c093272a5510aade3fbae04e42afb77eb23f55157",
+    "scripts/combat/viya_presentation.gd": "848a6fb57789f896a9de692ddf8499ce28fcd7fbc2e41840795e29542e94c509",
+    "data/viya_motion.json": "bdd36d9df74c5ee3a5dc73d60f538362497ddd76a310b3cdbb0c9af4a74a1973",
+    "data/presentation_slots.json": "510e18a0f127502d66daa1209da1fca74a47daff13d43662d2074745dcf3bce6",
+    "assets/characters/pilot_32/game068_s_run/viya_game068_frames.tres": "e2b95bebb78f7127458081f4f4912e4d255cf55e6c24ab17aca28478f262b178"
+  },
+  "evidence_sha256": {
+    "GAME068_HURT.png": "489f141994b94ab1057af1bff1ebfd3ed82af9aade51febf36d6cf1531fc0e6b",
+    "GAME068_S_RUN_IN_GAME.mp4": "a6d248d6538aa9d3e4a8b1dc028b9cf696a46e9c456963754004c2cddec2d2dd",
+    "GAME068_PAUSED.png": "73e9d5f31e2c4acf95acbd1445f5d3d3f6c73f76eecc96c51d5cc561934b8893",
+    "GAME068_REGRESSION_REPORT.json": "d5f60a535fa431652871b41b89046b552df32bce7c6f9aa5cd0f64b50cb574d6",
+    "GAME068_XORG.conf": "3068a248b9085dab2e9dea99a086d16ea17dcaf1f774d98eff2e1cd9ba0c62bc",
+    "GAME068_MOVING_FIRE.png": "1753336d32e22ffd831d3d01d96603b08361ec25ee9d83535d7090c2abccec13",
+    "GAME068_REFERENCE_REPORT.json": "7559d6ebb6dde2aebe7215b2c413fd6cbca5cf9b5a011c11424ccd888fa791d1",
+    "GAME068_MAIN_RENDER.json": "2fb27f3df3be1f66c98e0ef2df696847a2bf866816413b232d2dbd3de0d33339",
+    "GAME068_IN_GAME.png": "ff6f3714acae75aa67bf5394777f2e23f912878c8a5e30980d7b98d4e205f91b",
+    "GAME068_S_RUN_REFERENCE.mp4": "7a07e36988947b141d4071698ab8956f7e86392ac4d355160415c27f721cf507",
+    "GAME068_MAIN_LOGIC.json": "56e79bdf3353e75c77535244a9134b0b7eb58932105a90c11aa313d8d50dd8f3",
+    "GAME068_GAMEPLAY.mp4": "14e2d9164e726e694705ac4ee64b6fde77696f11667c2acdba982224f3afa05a",
+    "GAME068_RUNTIME.log": "b6aa18fb0c9c7b4c1578f5134bb5627fe821bcd1e1fb66a6d9904618c4463787"
+  },
+  "cleanup": {
+    "test_xorg_stopped": [
+      31048
+    ],
+    "generated_untracked_metadata_removed": 174,
+    "intended17newPNG_import_configs_preserved": true
+  }
+}
