@@ -4,7 +4,7 @@ const Older=preload("res://assets/characters/pilot_32/game065_e_run_fire/viya_ga
 const Slots=preload("res://scripts/ui/asset_slots.gd")
 const META="res://assets/characters/pilot_32/game066_se_run/provenance/source_registration.json"
 const CSV="res://assets/characters/pilot_32/game066_se_run/provenance/frame_timing.csv"
-const BASE="res://assets/characters/pilot_32/game066_se_run/frames/"
+const FIRST="res://assets/characters/pilot_32/game066_se_run/frames/viya_run_se_000.png"
 const RESOURCE="res://assets/characters/pilot_32/game066_se_run/viya_game066_frames.tres"
 
 static func run(view,asset:SpriteFrames,verify:Callable) -> void:
@@ -39,7 +39,7 @@ static func run(view,asset:SpriteFrames,verify:Callable) -> void:
 	if rows is Array:res_ok=res_ok and rows.size()==18
 	else:res_ok=false
 	for i in range(count):
-		var path:String=BASE+"viya_run_se_%03d.png" % i
+		var path:String=FIRST.get_base_dir().path_join("viya_run_se_%03d.png" % i)
 		var frame:Texture2D=asset.get_frame_texture(&"run_se",i)
 		var pic:=Image.new()
 		var image_ok:bool=pic.load_png_from_buffer(FileAccess.get_file_as_bytes(path))==OK

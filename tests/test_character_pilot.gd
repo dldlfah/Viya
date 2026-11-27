@@ -9,6 +9,7 @@ const SOURCE_RESOURCE:="res://assets/characters/pilot_32/resources/viya_directio
 const RESOURCE:="res://assets/characters/pilot_32/game066_se_run/viya_game066_frames.tres"
 const CACHE=preload("res://assets/characters/pilot_32/render_cache/viya_render_frames.tres")
 const EAST_TIMING:="res://assets/characters/pilot_32/game064_e_run/provenance/frame_timing.csv"
+const SE_FIRST="res://assets/characters/pilot_32/game066_se_run/frames/viya_run_se_000.png"
 const EAST_FIRST:="res://assets/characters/pilot_32/game064_e_run/frames/viya_run_e_000.png"
 const EAST_MANIFEST:="res://assets/characters/pilot_32/game064_e_run/provenance/asset_manifest.json"
 const DIRECTIONS:=["e","se","s","sw","w","nw","n","ne"]
@@ -77,7 +78,7 @@ static func run(host,verify:Callable) -> void:
 						continue
 					valid=valid and texture.resource_path==EAST_FIRST.get_base_dir().path_join(timing[index].filename) and is_equal_approx(asset.get_frame_duration(name,index),timing[index].duration_ms*47.0/660.0)
 				elif southeast:
-					valid=valid and texture.resource_path=="res://assets/characters/pilot_32/game066_se_run/frames/viya_run_se_%03d.png" % index and asset.get_frame_duration(name,index)==1.0
+					valid=valid and texture.resource_path==SE_FIRST.get_base_dir().path_join("viya_run_se_%03d.png" % index) and asset.get_frame_duration(name,index)==1.0
 				else:
 					valid=valid and asset.get_frame_duration(name,index)==1.0
 					preserved=preserved and is_same(texture,CACHE.get_frame_texture(name,index)) and asset.get_frame_duration(name,index)==CACHE.get_frame_duration(name,index) and asset.get_animation_speed(name)==CACHE.get_animation_speed(name) and asset.get_animation_loop(name)==CACHE.get_animation_loop(name)

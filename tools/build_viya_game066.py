@@ -12,6 +12,8 @@ FRAME_DIR=NEW/'frames'
 META=NEW/'provenance/source_registration.json'
 GAME_PATH='res://assets/characters/pilot_32/game066_se_run/'
 def build():
+ # Provenance CSV is runtime-readable data, not Godot translation input.
+ (NEW/"provenance"/".gdignore").touch()
  m=json.loads(META.read_text())
  assert m['status'] == 'TECHNICAL_REVIEWED_GAME066'
  entries=m['frame_checks'];assert len(entries)==18
