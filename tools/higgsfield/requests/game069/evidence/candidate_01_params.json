@@ -1,0 +1,27 @@
+{
+  "model": "seedance_2_5",
+  "mode": "omni_reference",
+  "duration": 4,
+  "resolution": "720p",
+  "aspect_ratio": "auto",
+  "generate_audio": false,
+  "bitrate_mode": "high",
+  "draft": false,
+  "count": 1,
+  "use_unlim": false,
+  "medias": [
+    {
+      "role": "image",
+      "value": "2f6d3e81-9bd1-4611-8a9c-73e9c9ed31e7"
+    },
+    {
+      "role": "image",
+      "value": "b07fb9e0-31c5-438c-97fc-0b77d2d939d0"
+    },
+    {
+      "role": "image",
+      "value": "ef3ecb7d-84cc-4f01-b652-b50f4f666c01"
+    }
+  ],
+  "prompt": "Create a continuous full-body SOUTH-facing aimed running cycle of the exact adult VIYA shown in the supplied references.\n\nPreserve the existing fixed high-angle FRONT view facing the bottom of the screen. Keep the same camera elevation, perspective, body proportions and canvas registration. Do not rotate toward an east or southeast side view. The character runs in place while the camera remains completely fixed.\n\nPreserve her mature face, long dark-brown wavy hair, ivory top, fitted black corset, partial gloves, brass and gold ornaments, short lower garments, thigh straps, tall decorated boots, asymmetric crimson fabric and original rune-decorated rifle. Maintain the costume asymmetry on its original sides and the original painterly dark-fantasy anime style.\n\nUse the first two current SOUTH running references for identity, camera and alternating gait. The third SOUTH attack reference establishes the same weapon and coherent two-handed grip, but it is a legacy LOW-CARRY pose, not a correct aimed endpoint. Do not retain the low-carry posture. Establish a clearly shoulder-supported aim: seat the original buttstock against her right shoulder, trigger hand at the same trigger grip, support hand under the fore-end, coordinated raised bent elbows, head and gaze connected to the rifle sights. Keep her torso front-facing. The muzzle points toward screen-bottom center, not diagonally toward the right edge. Use natural perspective foreshortening of the SAME rifle without redesigning it or turning her sideways.\n\nBegin and continue a natural full-body running drill with this securely aimed southward rifle posture. Maintain anatomically coherent hands, shoulder support and a consistent weapon grip. This aimed posture must read differently from simply carrying the rifle at the waist.\n\nAlternate both legs through contact, support, toe-off and bent-knee recovery. Maintain continuous pelvis weight transfer, modest natural head movement, coordinated torso and shoulder stabilization, and coherent hair and cloth follow-through. Both legs must alternate through a complete cycle. No held-pose blocks, repeated one-leg kicks, abrupt body-height jumps or frozen upper body.\n\nThe aimed gait must correspond naturally to the supplied ordinary running gait so that switching between them does not swap the support leg or reset the stride. The last distinct pose must lead naturally into the first without a pause or duplicated endpoint.\n\nKeep the full hair, barrel tip, fabric and both boots inside the frame with margin. Use one flat uniform saturated green background with no floor line, cast shadow, scenery or lighting changes. Avoid green spill on the character.\n\nThis is an aimed running animation plate. Do not depict weapon discharge. No muzzle flashes, bullets, tracers, casings, smoke, sparks or magic effects. No text, panels, checkerboard or additional characters. No mirroring, limb cutouts, puppet warping, ghost blends, double limbs or ping-pong playback. Silent video."
+}

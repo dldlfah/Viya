@@ -1,0 +1,24 @@
+{
+  "cost": {
+    "credits": 28,
+    "credits_exact": 28
+  },
+  "adjustments": {
+    "medias[0].role": {
+      "requested": "image",
+      "used": "image_references",
+      "reason": "Seedance 2.5 backend expects schema-key media roles"
+    },
+    "medias[1].role": {
+      "requested": "image",
+      "used": "image_references",
+      "reason": "Seedance 2.5 backend expects schema-key media roles"
+    },
+    "medias[2].role": {
+      "requested": "image",
+      "used": "image_references",
+      "reason": "Seedance 2.5 backend expects schema-key media roles"
+    }
+  },
+  "quote_ref": "quote:fXQup1HyHWj0atocdTm7LA"
+}

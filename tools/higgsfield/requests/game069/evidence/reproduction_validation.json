@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "compared_png": 18,
+  "timing_csv_byte_identical": true,
+  "fixed_registration": {
+    "scale": 0.273,
+    "translation": [
+      -31.04,
+      -8.2
+    ]
+  },
+  "engine_executed": false
+}

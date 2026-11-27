@@ -1,0 +1,28 @@
+{
+  "date_kst": "2026-11-27",
+  "base_commit": "872cc92eb1aab217a77cd7a320110dce77a9f0c5",
+  "budget": {
+    "paid_submissions_max": 2,
+    "credits_max": 60,
+    "charged_before": 0,
+    "paid_submissions_before": 0,
+    "independent_from_game068_remaining_budget": true
+  },
+  "references": [
+    "assets/characters/pilot_32/game068_s_run/frames/viya_run_s_003.png",
+    "assets/characters/pilot_32/game068_s_run/frames/viya_run_s_011.png",
+    "assets/characters/pilot_32/render_cache/viya_attack_s_02.png"
+  ],
+  "pose_finding": "All8 legacy S attack frames are low-carry, not a correct shouldered aiming reference.",
+  "response_to_missing_pose": "Do not bind a low-carry start_image. Use only image_references for S identity/gait/grip and require a newly established shouldered south aim in the generated video. Explicitly reject low-carry continuation.",
+  "start_image": false,
+  "video_input": false,
+  "e_se_input": false,
+  "contact_sheet_input": false,
+  "correct_shouldered_S_reference_available": false,
+  "pose_readability_must_be_checked_from_actual_output": true,
+  "additional_paid_reference_image_generation": false,
+  "pending_same_task": "No GAME069 jobs exist in this task packet. Save issued job ID and poll rather than repeat.",
+  "alpha": "No video alpha parameter advertised; inspect actual output then derive RGBA locally if technically adopted.",
+  "game_integration": "NOT_IN_THIS_ART_UNIT"
+}

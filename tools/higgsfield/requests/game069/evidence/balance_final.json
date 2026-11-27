@@ -1,0 +1,50 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "Credits: 570 | Plan: plus\nFree trial: pending\nFree generations: Higgsfield Genjutsu (ai_influencer_motion_control, ai_influencer_replace_object, hf_mult_motion_control, hf_mult_replace_object): 0 left — resolution: 480p, 720p; up to 30s\nFree generations: AI Influencer Builder (ai_influencer_sheet): 5 left"
+    }
+  ],
+  "structuredContent": {
+    "credits": 570,
+    "subscription_plan_type": "plus",
+    "free_trial": {
+      "status": "pending",
+      "eligible": false,
+      "offered_kind": null,
+      "kind": "mcp",
+      "trial_credits": 100,
+      "ends_at": null,
+      "unlim_available": false,
+      "unlim_remaining": null,
+      "unlim_expires_at": null
+    },
+    "free_gens": [
+      {
+        "job_set_types": [
+          "ai_influencer_motion_control",
+          "ai_influencer_replace_object",
+          "hf_mult_motion_control",
+          "hf_mult_replace_object"
+        ],
+        "remaining": 0,
+        "parameters": {
+          "resolution": [
+            "480p",
+            "720p"
+          ]
+        },
+        "max_duration": 30
+      },
+      {
+        "job_set_types": [
+          "ai_influencer_sheet"
+        ],
+        "remaining": 5,
+        "parameters": {},
+        "max_duration": null
+      }
+    ]
+  },
+  "isError": false
+}

@@ -1,0 +1,35 @@
+{
+  "unit": "GAME069",
+  "paid_submission_limit": 2,
+  "credit_limit": 60,
+  "paid_submissions": 2,
+  "quotes": [
+    28,
+    31
+  ],
+  "observed_debits": [
+    28,
+    31
+  ],
+  "observed_total_debit": 59,
+  "remaining_unit_budget": 1,
+  "balances": [
+    629,
+    601,
+    570
+  ],
+  "final_observed_account_balance": 570,
+  "both_jobs": "COMPLETED",
+  "refund_observed": false,
+  "unknown_charge": false,
+  "new_payment_auto_topup_plan_change": false,
+  "paid_extras": false,
+  "previous_GAME068_budget_used": false,
+  "third_submission": "PROHIBITED_MAX_SUBMISSIONS_REACHED",
+  "balance_evidence": [
+    "balance_before.json",
+    "balance_after_01.json",
+    "balance_after_02.json",
+    "balance_final.json"
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "method": "Circular least-squares offset from two visually matched opposite S17 support/recovery stances.",
+  "baseline_origin": 0.4572192098143875,
+  "recommended_phase_origin": 0.8510092121212124,
+  "anchors": [
+    {
+      "new_frame": 1,
+      "new_source_frame": 35,
+      "current_s17_frame": 11,
+      "stance": "screen_right_support_left_recovery",
+      "new_local_phase": 0.05555466666666694,
+      "current_s17_local_phase": 0.6470586574393683,
+      "origin_from_anchor": 0.8657152190416861,
+      "boot_tips": [
+        [
+          83.5,
+          179.66666666666666
+        ],
+        [
+          105.68181818181819,
+          238.72727272727275
+        ]
+      ]
+    },
+    {
+      "new_frame": 10,
+      "new_source_frame": 44,
+      "current_s17_frame": 3,
+      "stance": "screen_left_support_right_recovery",
+      "new_local_phase": 0.555554666666667,
+      "current_s17_local_phase": 0.1764706712803159,
+      "origin_from_anchor": 0.8363032052007386,
+      "boot_tips": [
+        [
+          91.46153846153845,
+          240.80769230769232
+        ],
+        [
+          110.7,
+          184.6
+        ]
+      ]
+    }
+  ],
+  "formula": "new_local=global+new_origin;old_local=global+old_origin;new_origin=new_local-old_local+old_origin(mod1)",
+  "maximum_anchor_residual_cycles": 0.014706006920473746,
+  "landmark_method": "Mean of lowest three alpha>180 rows, boot ROIs left x70:100/right x100:127,y163:247; visually inspected all frames.",
+  "limitation": "2D projected stance correspondence; not physical floor contact or zero-slip proof. Painted toe positions and silhouettes differ. main.tscn transitions remain unverified."
+}

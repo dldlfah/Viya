@@ -1,0 +1,39 @@
+{
+  "generation": "COMPLETED",
+  "technical_adoption": "ADOPTED_18_FRAME_CYCLE",
+  "job_id": "616f1112-110b-4c49-8fa8-a63dcd86d9de",
+  "source_sha256": "4a402d3011dd66d1168335884dc79be3d5251e876f2bdd8604b94bb943a36aa4",
+  "source_frames_inspected": 97,
+  "selected_consecutive_source_frames": [
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51
+  ],
+  "next_endpoint_excluded": 52,
+  "reason": "Raised shoulder-supported two-hand rifle aim is distinct from candidate01 waist carry. Fixed S front camera and opposite leg support/recovery cycle retained; no baked discharge observed.",
+  "visual_limitations": [
+    "Natural perspective shortens the aimed rifle; concealed markings and physical length cannot be verified from pixels.",
+    "Fine hair/tiny paint details remain limited by generated video and chroma matte; final art judgment pending.",
+    "Loop is visually usable, not pixel-identical at seam. No claim of physical zero-slip.",
+    "Aim/carry upper-body silhouette change remains visible in direct switching; no transition frames synthesized.",
+    "Actual game integration, engine transition validation, shot/recoil synchronization, Windows/mobile/FPS not performed."
+  ],
+  "engine_integration": "NOT_RUN",
+  "final_art": "NOT_VERIFIED",
+  "credits_observed": 31
+}

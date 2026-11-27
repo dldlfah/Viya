@@ -1,0 +1,43 @@
+{
+  "task": "GAME069_S_RUN_FIRE",
+  "base_commit": "872cc92eb1aab217a77cd7a320110dce77a9f0c5",
+  "active_resource_preserved": "res://assets/characters/pilot_32/game068_s_run/viya_game068_frames.tres",
+  "existing_clips": 34,
+  "existing_frames": 324,
+  "target_optional_clip": "run_fire_s",
+  "paid_submissions_max": 2,
+  "credits_max": 60,
+  "first_quote_credits": 28,
+  "job_id": "616f1112-110b-4c49-8fa8-a63dcd86d9de",
+  "status": "ART_TECHNICAL_DELIVERY_COMPLETE_ENGINE_NOT_CONNECTED",
+  "correct_S_aim_reference_available": false,
+  "input_decision": "Image references only; do not lock low-carry as start. Require and inspect new shoulder-supported south aim.",
+  "source_hashes": "evidence/reference_hashes.json",
+  "engine_integration": "NOT_RUN",
+  "final_art": "NOT_VERIFIED",
+  "paid_submissions": 2,
+  "actual_observed_debit": 59,
+  "remaining_budget": 1,
+  "second_job_id": "616f1112-110b-4c49-8fa8-a63dcd86d9de",
+  "first_adoption": "REJECTED_LOW_CARRY",
+  "first_job_id": "dd0d9d9c-f400-4948-a7ed-3ea9ae98b888",
+  "second_adoption": "18_CONSECUTIVE_RGBA_SOURCE34_51",
+  "new_frame_count": 18,
+  "expected_after_production": {
+    "clips": 35,
+    "frames": 342
+  },
+  "phase_origin": 0.8510092121212124,
+  "source_cycle_ms": 750,
+  "nominal_cycle_ms": 660,
+  "registration": {
+    "scale": 0.273,
+    "translation": [
+      -31.04,
+      -8.2
+    ]
+  },
+  "delivery": "assets/characters/pilot_32/game069_s_run_fire",
+  "cost_record": "evidence/cost_record.json",
+  "actual_balance_final": 570
+}

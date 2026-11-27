@@ -1,0 +1,13 @@
+{
+  "generation": "COMPLETED",
+  "technical_adoption": "REJECTED",
+  "job_id": "dd0d9d9c-f400-4948-a7ed-3ea9ae98b888",
+  "source_frames_inspected": 97,
+  "source_sha256": "988165ac9e1e5353ecae0174d5a0d94b173a28d0e5e7cbc4d81faa787f374450",
+  "defect": "All97 frames retain waist-high diagonal low carry. Buttstock is not visibly braced at shoulder; no valid shouldered SOUTH aiming cycle can be selected.",
+  "preserved_good_material": "S front high angle/identity/asymmetry and alternating native continuous run; no baked firing effects found.",
+  "cause_inference": "Despite no start image,3 low-carry reference images dominated the generated arm/weapon pose. This is an inference from observed output, not model internals.",
+  "local_solution_possible": false,
+  "local_solution_reason": "Cropping or alpha extraction cannot change a rifle carry into anatomical shoulder aim. No limb assembly/warping allowed.",
+  "credits_observed": 28
+}

@@ -1,0 +1,17 @@
+{
+  "all_terminal": true,
+  "jobs": [
+    {
+      "job_id": "dd0d9d9c-f400-4948-a7ed-3ea9ae98b888",
+      "generation": "completed",
+      "adoption": "rejected_low_carry"
+    },
+    {
+      "job_id": "616f1112-110b-4c49-8fa8-a63dcd86d9de",
+      "generation": "completed",
+      "adoption": "technical_18_frame_cycle"
+    }
+  ],
+  "paid_submissions": 2,
+  "no_more_generation": true
+}

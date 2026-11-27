@@ -1,0 +1,9 @@
+{
+  "base_commit": "872cc92eb1aab217a77cd7a320110dce77a9f0c5",
+  "existing_assets_scripts_data_identical": 1463,
+  "changed_existing_files": [],
+  "active_resource": "res://assets/characters/pilot_32/game068_s_run/viya_game068_frames.tres",
+  "clips": 34,
+  "frames": 324,
+  "game_integration_this_unit": "NOT_RUN"
+}

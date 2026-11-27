@@ -1,0 +1,298 @@
+{
+  "direction": "s",
+  "animation": "run_fire_s",
+  "optional": true,
+  "canvas": [
+    200,
+    248
+  ],
+  "pivot": [
+    100,
+    248
+  ],
+  "display": [
+    69,
+    85.56
+  ],
+  "nominal_cycle_ms": 660,
+  "distance_cycle_ms": 659.5744680851063,
+  "stride_world": 155,
+  "base_speed": 235,
+  "phase_origin": 0.8510092121212124,
+  "run_fire_phase_origin": 0.8510092121212124,
+  "source_cycle_ms": 750,
+  "runtime_status": "NOT_CONNECTED_ART_HANDOFF_ONLY",
+  "fallback": "same global-distance-phase current run_s17 when missing/invalid",
+  "frames": [
+    {
+      "index": 0,
+      "texture": "res://assets/characters/pilot_32/game069_s_run_fire/frames/viya_run_fire_s_000.png",
+      "region": [
+        0,
+        0,
+        200,
+        248
+      ],
+      "muzzle": [
+        109.8,
+        73.4
+      ],
+      "duration_ms": 36.66608000000018
+    },
+    {
+      "index": 1,
+      "texture": "res://assets/characters/pilot_32/game069_s_run_fire/frames/viya_run_fire_s_001.png",
+      "region": [
+        0,
+        0,
+        200,
+        248
+      ],
+      "muzzle": [
+        109.16666666666667,
+        74.83333333333333
+      ],
+      "duration_ms": 36.66695999999992
+    },
+    {
+      "index": 2,
+      "texture": "res://assets/characters/pilot_32/game069_s_run_fire/frames/viya_run_fire_s_002.png",
+      "region": [
+        0,
+        0,
+        200,
+        248
+      ],
+      "muzzle": [
+        108.5,
+        75.5
+      ],
+      "duration_ms": 36.66695999999992
+    },
+    {
+      "index": 3,
+      "texture": "res://assets/characters/pilot_32/game069_s_run_fire/frames/viya_run_fire_s_003.png",
+      "region": [
+        0,
+        0,
+        200,
+        248
+      ],
+      "muzzle": [
+        106.5,
+        74.5
+      ],
+      "duration_ms": 36.66608000000018
+    },
+    {
+      "index": 4,
+      "texture": "res://assets/characters/pilot_32/game069_s_run_fire/frames/viya_run_fire_s_004.png",
+      "region": [
+        0,
+        0,
+        200,
+        248
+      ],
+      "muzzle": [
+        105.75,
+        74.0
+      ],
+      "duration_ms": 36.66695999999992
+    },
+    {
+      "index": 5,
+      "texture": "res://assets/characters/pilot_32/game069_s_run_fire/frames/viya_run_fire_s_005.png",
+      "region": [
+        0,
+        0,
+        200,
+        248
+      ],
+      "muzzle": [
+        104.5,
+        73.5
+      ],
+      "duration_ms": 36.66695999999992
+    },
+    {
+      "index": 6,
+      "texture": "res://assets/characters/pilot_32/game069_s_run_fire/frames/viya_run_fire_s_006.png",
+      "region": [
+        0,
+        0,
+        200,
+        248
+      ],
+      "muzzle": [
+        104.4,
+        73.2
+      ],
+      "duration_ms": 36.66608000000018
+    },
+    {
+      "index": 7,
+      "texture": "res://assets/characters/pilot_32/game069_s_run_fire/frames/viya_run_fire_s_007.png",
+      "region": [
+        0,
+        0,
+        200,
+        248
+      ],
+      "muzzle": [
+        103.5,
+        72.5
+      ],
+      "duration_ms": 36.66695999999992
+    },
+    {
+      "index": 8,
+      "texture": "res://assets/characters/pilot_32/game069_s_run_fire/frames/viya_run_fire_s_008.png",
+      "region": [
+        0,
+        0,
+        200,
+        248
+      ],
+      "muzzle": [
+        103.2,
+        72.6
+      ],
+      "duration_ms": 36.66695999999992
+    },
+    {
+      "index": 9,
+      "texture": "res://assets/characters/pilot_32/game069_s_run_fire/frames/viya_run_fire_s_009.png",
+      "region": [
+        0,
+        0,
+        200,
+        248
+      ],
+      "muzzle": [
+        103.5,
+        73.5
+      ],
+      "duration_ms": 36.66608000000018
+    },
+    {
+      "index": 10,
+      "texture": "res://assets/characters/pilot_32/game069_s_run_fire/frames/viya_run_fire_s_010.png",
+      "region": [
+        0,
+        0,
+        200,
+        248
+      ],
+      "muzzle": [
+        103.5,
+        74.5
+      ],
+      "duration_ms": 36.66695999999992
+    },
+    {
+      "index": 11,
+      "texture": "res://assets/characters/pilot_32/game069_s_run_fire/frames/viya_run_fire_s_011.png",
+      "region": [
+        0,
+        0,
+        200,
+        248
+      ],
+      "muzzle": [
+        105.0,
+        75.5
+      ],
+      "duration_ms": 36.66695999999992
+    },
+    {
+      "index": 12,
+      "texture": "res://assets/characters/pilot_32/game069_s_run_fire/frames/viya_run_fire_s_012.png",
+      "region": [
+        0,
+        0,
+        200,
+        248
+      ],
+      "muzzle": [
+        105.5,
+        75.5
+      ],
+      "duration_ms": 36.66608000000018
+    },
+    {
+      "index": 13,
+      "texture": "res://assets/characters/pilot_32/game069_s_run_fire/frames/viya_run_fire_s_013.png",
+      "region": [
+        0,
+        0,
+        200,
+        248
+      ],
+      "muzzle": [
+        106.5,
+        74.5
+      ],
+      "duration_ms": 36.66695999999992
+    },
+    {
+      "index": 14,
+      "texture": "res://assets/characters/pilot_32/game069_s_run_fire/frames/viya_run_fire_s_014.png",
+      "region": [
+        0,
+        0,
+        200,
+        248
+      ],
+      "muzzle": [
+        107.5,
+        74.0
+      ],
+      "duration_ms": 36.66695999999992
+    },
+    {
+      "index": 15,
+      "texture": "res://assets/characters/pilot_32/game069_s_run_fire/frames/viya_run_fire_s_015.png",
+      "region": [
+        0,
+        0,
+        200,
+        248
+      ],
+      "muzzle": [
+        109.2,
+        72.4
+      ],
+      "duration_ms": 36.66608000000018
+    },
+    {
+      "index": 16,
+      "texture": "res://assets/characters/pilot_32/game069_s_run_fire/frames/viya_run_fire_s_016.png",
+      "region": [
+        0,
+        0,
+        200,
+        248
+      ],
+      "muzzle": [
+        109.6,
+        71.8
+      ],
+      "duration_ms": 36.66695999999992
+    },
+    {
+      "index": 17,
+      "texture": "res://assets/characters/pilot_32/game069_s_run_fire/frames/viya_run_fire_s_017.png",
+      "region": [
+        0,
+        0,
+        200,
+        248
+      ],
+      "muzzle": [
+        110.16666666666667,
+        72.16666666666667
+      ],
+      "duration_ms": 36.66695999999992
+    }
+  ]
+}

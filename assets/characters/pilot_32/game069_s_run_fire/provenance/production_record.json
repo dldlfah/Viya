@@ -1,0 +1,114 @@
+{
+  "task": "GAME069",
+  "base_commit": "872cc92eb1aab217a77cd7a320110dce77a9f0c5",
+  "branch": "work/viya-turnaround-qa-20261117",
+  "generation": "COMPLETED",
+  "technical_adoption": "18_FRAME_CYCLE",
+  "game_integration": "NOT_RUN",
+  "final_art": "NOT_VERIFIED",
+  "model": "seedance_2_5",
+  "mode": "video_edit",
+  "job_id": "616f1112-110b-4c49-8fa8-a63dcd86d9de",
+  "input_job_id": "dd0d9d9c-f400-4948-a7ed-3ea9ae98b888",
+  "settings": {
+    "model": "seedance_2_5",
+    "mode": "video_edit",
+    "resolution": "720p",
+    "generate_audio": false,
+    "bitrate_mode": "high",
+    "draft": false,
+    "count": 1,
+    "use_unlim": false,
+    "medias": [
+      {
+        "role": "video",
+        "value": "dd0d9d9c-f400-4948-a7ed-3ea9ae98b888"
+      }
+    ],
+    "prompt": "Edit the supplied SOUTH-facing VIYA running video to CHANGE THE ARM AND RIFLE POSTURE throughout the entire clip. The existing video incorrectly shows a low waist-carry. Replace that low-carry posture with a clearly shoulder-supported SOUTHWARD rifle aim. This is a real posture correction, not a request to continue the existing carry.\n\nKeep the SAME adult VIYA, approved mature face and body, long dark-brown wavy hair, ivory top, fitted black corset, partial gloves, brass/gold ornaments, short lower garments, thigh straps, tall boots, asymmetric crimson fabric on its original side, and SAME original rune-decorated rifle. Preserve the original painterly dark-fantasy anime style. No costume or weapon redesign.\n\nKeep the fixed high-angle FRONT camera and torso facing screen bottom. Do not turn the character or camera toward east or southeast. Seat the SAME original rifle buttstock against her RIGHT SHOULDER, visibly raise the trigger grip and both elbows to a coherent shouldered aiming position, support the fore-end with the other hand, and connect her head/gaze to the sights. Use correct foreshortening so the barrel aims toward SCREEN-BOTTOM CENTER. Do not keep the diagonal waist-high carry from the input. Do not replace the rifle with a pistol or a different gun.\n\nPreserve the input's continuous alternating left-right running cycle, timing and foot trajectories. Re-render coherent full-body aimed running poses with coordinated shoulder/torso stabilization, natural pelvis weight transfer, head movement, and hair/cloth follow-through. Do not freeze or restart the legs, introduce held-pose blocks, repeat one-leg kicks, or create abrupt body-height jumps. No initial low-ready segment is needed: maintain the corrected shouldered aimed posture across the clip.\n\nKeep all hair, the complete weapon and barrel tip, fabric and both boots inside a single consistent canvas with margin. Continue the same steady gait across natural full-cycle boundaries. The last distinct pose must lead naturally into the first without a duplicated endpoint or artificial hold.\n\nKeep the flat uniform saturated green background, no floor or shadows. No weapon discharge: NO muzzle flashes, bullets, tracers, casings, smoke, sparks, magic effects, text, panels, checkerboard, additional characters, green spill, double limbs, cutout assembly, puppet warping, ghost blends, mirroring or ping-pong. Silent video."
+  },
+  "request720p_actual": [
+    960,
+    960
+  ],
+  "raw_sha256": "4a402d3011dd66d1168335884dc79be3d5251e876f2bdd8604b94bb943a36aa4",
+  "raw_path": "tools/higgsfield/requests/game069/evidence/candidate_02.mp4",
+  "cost": {
+    "unit": "GAME069",
+    "paid_submission_limit": 2,
+    "credit_limit": 60,
+    "paid_submissions": 2,
+    "quotes": [
+      28,
+      31
+    ],
+    "observed_debits": [
+      28,
+      31
+    ],
+    "observed_total_debit": 59,
+    "remaining_unit_budget": 1,
+    "balances": [
+      629,
+      601,
+      570
+    ],
+    "final_observed_account_balance": 570,
+    "both_jobs": "COMPLETED",
+    "refund_observed": false,
+    "unknown_charge": false,
+    "new_payment_auto_topup_plan_change": false,
+    "paid_extras": false,
+    "previous_GAME068_budget_used": false,
+    "third_submission": "PROHIBITED_MAX_SUBMISSIONS_REACHED",
+    "balance_evidence": [
+      "balance_before.json",
+      "balance_after_01.json",
+      "balance_after_02.json",
+      "balance_final.json"
+    ]
+  },
+  "native_source_frames": [
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51
+  ],
+  "next_endpoint_excluded": 52,
+  "source_cycle_ms": 750,
+  "nominal_cycle_ms": 660,
+  "base_speed_distance_cycle_ms": 659.5744680851063,
+  "registration": {
+    "scale": 0.273,
+    "translation": [
+      -31.04,
+      -8.2
+    ],
+    "canvas": [
+      200,
+      248
+    ],
+    "root": [
+      100,
+      248
+    ]
+  },
+  "alpha_native": false,
+  "alpha_method": "prepare_game069.py measured chroma matte/opaque core/edge unmix; no pose synthesis",
+  "scope": "art only; all existing34 clips324 frames preserved",
+  "handoff": "tools/higgsfield/requests/game069/HANDOFF.md"
+}

@@ -273,3 +273,25 @@
 | 근거 | [통합 보고서](validation/GAME068_INTEGRATION_REPORT.json) · [로그](validation/GAME068_RUNTIME.log) |
 
 200×248/root(100,248)·표시69×85.56·이동235/stride155·명목660ms를 유지한다. 원본208/ARTFIX001/GAME064~067/SAVEFIX001·기존PNG/게임 스크립트는 보존한다. 이번 생성/추가 크레딧/결제0이다. 영상은 고정 시간 검수의 실제 렌더 재생이며 실시간FPS·실기/물리 접지·최종 아트 승인과 구분한다. 새S 전용 이동사격은 아직 없고 다음GAME069다.
+
+
+## GAME069 — S 전용 전신 이동사격18장 원화 납품 (2026-11-27)
+
+| 항목 | 경로 / 실제 값 |
+| --- | --- |
+| 새 파생 원화 | assets/characters/pilot_32/game069_s_run_fire/frames/viya_run_fire_s_000.png~017.png,RGBA200×248 |
+| 채택 원출력 | tools/higgsfield/requests/game069/evidence/candidate_02.mp4,RGB H264960×960/24fps97장/4.041667초·음성0 |
+| 원출력SHA256 | 4a402d3011dd66d1168335884dc79be3d5251e876f2bdd8604b94bb943a36aa4 |
+| 모델/작업 | Seedance2.5 video_edit /616f1112-110b-4c49-8fa8-a63dcd86d9de |
+| 반려 원본/재사용입력 | evidence/candidate_01.mp4 /dd0d9d9c-f400-4948-a7ed-3ea9ae98b888,허리휴대97장전체반려;SHA256 988165ac9e1e5353ecae0174d5a0d94b173a28d0e5e7cbc4d81faa787f374450 |
+| 원천 선택/시간 | 0기준34~51연속18/다음52제외,750ms→명목660ms/기본659.574468ms |
+| 공통 등록 | scale0.273/translation(-31.04,-8.2),pivot/root(100,248)/표시69×85.56,모든 프레임 공통 |
+| 계측 | provenance/frame_timing.csv·muzzle_coordinates.csv·foot_landmarks.csv·phase_alignment.json·clip_metadata.json |
+| 독립 위상 | 0.8510092121212124, S17반대지지발2쌍에서측정/최대잔차0.014706주기·물리접지증명아님 |
+| 알파/검수 | RGB녹색로컬분리,흑/백/회색전체18/내부장식검수·경계알파0·PNG/시간CSV격리재현동일 |
+| 납품/전체해시 | [README](../assets/characters/pilot_32/game069_s_run_fire/README.md)·manifest.json·CHECKSUMS.sha256 |
+| 같은위상비교 | [art_review.mp4](../assets/characters/pilot_32/game069_s_run_fire/provenance/art_review.mp4),Pillow/ffmpeg분석·게임캡처/FPS증거아님 |
+| 제작/비용/인계 | [요청패킷](../tools/higgsfield/requests/game069/README.md)·[HANDOFF](../tools/higgsfield/requests/game069/HANDOFF.md),유료2/최대2·실차감59/60·남은1·계정629→601→570 |
+| 상태 | 원화기술납품18/게임연결·실행NOT_RUN/최종아트NOT_VERIFIED |
+
+현재활성은GAME068/34클립324이며기존assets/scripts/data1,463개를보존했다. 제작세션의run_fire_s18추가뒤예상35클립342이며기존34클립은모두보존한다. S17·원본208/ARTFIX001/GAME064~068/SAVEFIX001을덮어쓰지않았다. 클립/메타데이터가누락·무효면같은거리위상run_s17로복귀해야한다. 상체윤곽전환/일부발위치·미세문양/총기원근·물리접지/실기/최종아트는남는다. CSV/검토이미지는provenance/.gdignore로자동임포트에서제외한다. 유료추가출력/새결제/자동충전0이며GAME068남은32를자동사용하지않았다.

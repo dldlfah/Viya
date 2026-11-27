@@ -1,0 +1,142 @@
+[
+  {
+    "path": "assets/characters/pilot_32/game068_s_run/frames/viya_run_s_000.png",
+    "sha256": "87b0023ced467be02eb4f32d90abc1f90864f3cbaedfc9ececb7defe9cd8333f"
+  },
+  {
+    "path": "assets/characters/pilot_32/game068_s_run/frames/viya_run_s_001.png",
+    "sha256": "e715271506d0a02ac5d72d766e0231df9aec62cf64b216ab13e8b25a53b04272"
+  },
+  {
+    "path": "assets/characters/pilot_32/game068_s_run/frames/viya_run_s_002.png",
+    "sha256": "394ac8e5ee1a99ab98c7edb337d84dbab3c3cf31bcaf812b976e15e0d43b609f"
+  },
+  {
+    "path": "assets/characters/pilot_32/game068_s_run/frames/viya_run_s_003.png",
+    "sha256": "c45c6616981a60da797bb0d574c11624c789b54a3c5ecb1255e60e300b6b9b56"
+  },
+  {
+    "path": "assets/characters/pilot_32/game068_s_run/frames/viya_run_s_004.png",
+    "sha256": "6fa68e25c06ce42e7e20b8f2b00e91acad4c0e07c2b8da283e15ef323bd44d22"
+  },
+  {
+    "path": "assets/characters/pilot_32/game068_s_run/frames/viya_run_s_005.png",
+    "sha256": "567870a8663776e6cfba820164179686cbc96e57cea96686817e0f0860d7f6f5"
+  },
+  {
+    "path": "assets/characters/pilot_32/game068_s_run/frames/viya_run_s_006.png",
+    "sha256": "f2364b9a9d30178f455b9b6a79c99091ec7993b32817f07ebc6da4613da3b261"
+  },
+  {
+    "path": "assets/characters/pilot_32/game068_s_run/frames/viya_run_s_007.png",
+    "sha256": "9189cc27eefbf46d39267b9e3fafce35a8e155097f668a2ef034ef237b3a800c"
+  },
+  {
+    "path": "assets/characters/pilot_32/game068_s_run/frames/viya_run_s_008.png",
+    "sha256": "766c0ddba52be2a48f6b9e3d69cd55f5bd53f7fbab37f22c54ff9adcfab457a9"
+  },
+  {
+    "path": "assets/characters/pilot_32/game068_s_run/frames/viya_run_s_009.png",
+    "sha256": "cbc988bea941051712dbecc69501836e92bc17a5052623a005d1ae48648650e1"
+  },
+  {
+    "path": "assets/characters/pilot_32/game068_s_run/frames/viya_run_s_010.png",
+    "sha256": "2bf17610b8f14ec16d57ddbcd7e033485e95da698d0f1384ddabe8b647cb86ec"
+  },
+  {
+    "path": "assets/characters/pilot_32/game068_s_run/frames/viya_run_s_011.png",
+    "sha256": "27a83ed386806bc89c1057ee215b54238b10ff9757c162d9b76067eac20dfd4d"
+  },
+  {
+    "path": "assets/characters/pilot_32/game068_s_run/frames/viya_run_s_012.png",
+    "sha256": "6f09dced9a726d752162b0fe6d688feabd3a0cd8bbfb5e2a6b3c622b8e4030d0"
+  },
+  {
+    "path": "assets/characters/pilot_32/game068_s_run/frames/viya_run_s_013.png",
+    "sha256": "f57b21b6a1e9e16f5a995187ecfa6e1419ee477622d16145d44c57ddd6241a60"
+  },
+  {
+    "path": "assets/characters/pilot_32/game068_s_run/frames/viya_run_s_014.png",
+    "sha256": "5236fe26442cbfa64702d34eaefcf230ea657b3a73308c397144b8efeb1f65a0"
+  },
+  {
+    "path": "assets/characters/pilot_32/game068_s_run/frames/viya_run_s_015.png",
+    "sha256": "481496a3333a6172d2e4e28203c81883303df3b7a1a8cb667078c91bdce1d697"
+  },
+  {
+    "path": "assets/characters/pilot_32/game068_s_run/frames/viya_run_s_016.png",
+    "sha256": "87bc8bef63beb2683854fc9a751168ada31750c7bd5539b60a6c115f3457d782"
+  },
+  {
+    "path": "assets/characters/pilot_32/render_cache/viya_attack_s_00.png",
+    "sha256": "6536ae79c4e9ee9d686c879cc7e2039dc1e647617ef7052a3204c759d960c780"
+  },
+  {
+    "path": "assets/characters/pilot_32/render_cache/viya_attack_s_01.png",
+    "sha256": "d2a21deb50eb48e3717dbbe15791e939ad28b323d8959d1738f522ed5d169c10"
+  },
+  {
+    "path": "assets/characters/pilot_32/render_cache/viya_attack_s_02.png",
+    "sha256": "cc539e761e6359b569dfe048fe623528b30bd559c16dacbf03a2672d7435a589"
+  },
+  {
+    "path": "assets/characters/pilot_32/render_cache/viya_attack_s_03.png",
+    "sha256": "9d3a74739f60e6c4e4e859bb61bb054da6a5096cb2f34f6eafd2da331e24ead9"
+  },
+  {
+    "path": "assets/characters/pilot_32/render_cache/viya_attack_s_04.png",
+    "sha256": "3441e40101dad7a10e9a930c7e12707b419865978104c83882160ec3bee3b55c"
+  },
+  {
+    "path": "assets/characters/pilot_32/render_cache/viya_attack_s_05.png",
+    "sha256": "bb4fa4c5fc01594805deb47af042b40f5a059ebecf37c8f8f6ecfecdf627dc86"
+  },
+  {
+    "path": "assets/characters/pilot_32/render_cache/viya_attack_s_06.png",
+    "sha256": "84479f1340c675d6b12e021b573b4344577efa5deb3f923c51b7d0b1b74d2013"
+  },
+  {
+    "path": "assets/characters/pilot_32/render_cache/viya_attack_s_07.png",
+    "sha256": "8f04fff0256a611b80675a2ce7f0be34e23b53e2617ea722ea5ae298a5b8de21"
+  },
+  {
+    "path": "assets/characters/pilot_32/render_cache/viya_idle_s.png",
+    "sha256": "d67e6d0debd593f03a4a23008d70ef291309185fe1052387f42477b49b8d25c7"
+  },
+  {
+    "path": "docs/validation/GAME068_S_RUN_IN_GAME.mp4",
+    "sha256": "a6d248d6538aa9d3e4a8b1dc028b9cf696a46e9c456963754004c2cddec2d2dd"
+  },
+  {
+    "path": "assets/characters/pilot_32/game068_s_run/provenance/source_registration.json",
+    "sha256": "e3ae03d016df5f9131f33b7278ae291c97d69bffa7eda07c7b09fe022685c81f"
+  },
+  {
+    "path": "assets/characters/pilot_32/game068_s_run/provenance/clip_metadata.json",
+    "sha256": "772eb0ffea792759dca2123f10a054d01314e52bcbc5975e98a7dab3f8166a8b"
+  },
+  {
+    "path": "assets/characters/pilot_32/game068_s_run/provenance/production.json",
+    "sha256": "6baea66c8f2e738b327997102d3ce11b60134027246a488ec6441a6454792e8d"
+  },
+  {
+    "path": "assets/characters/pilot_32/game068_s_run/provenance/phase_alignment.json",
+    "sha256": "040ebc9f990164065a173b93f1b9c9d10e189c01ba1814ae0b4377c1035d730b"
+  },
+  {
+    "path": "assets/characters/pilot_32/game068_s_run/provenance/technical_qa.json",
+    "sha256": "33979f24d98ca5e2f1dc82f3ab1cf6427d35414c700ab4bd2d21b5b4fff5c7d0"
+  },
+  {
+    "path": "assets/characters/pilot_32/game068_s_run/provenance/frame_timing.csv",
+    "sha256": "8b809c865e8ce61649df89c70572bc3cf9ec19cef51ac3a0b21b176b8bf28189"
+  },
+  {
+    "path": "assets/characters/pilot_32/game068_s_run/provenance/foot_landmarks.csv",
+    "sha256": "17d2a1c973974cbec670157f71a09f11a2866a6377ce7c3c15b4298ad08bca76"
+  },
+  {
+    "path": "assets/characters/pilot_32/game068_s_run/provenance/muzzle_coordinates.csv",
+    "sha256": "018e13a6f056c9574cbad14187d2e5707d4547171f6dcca54f8fc90d14784577"
+  }
+]

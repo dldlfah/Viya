@@ -1,0 +1,13 @@
+{
+  "defect_known": true,
+  "input_change": "Use the first completed native97-frame video as a single video_edit input; remove image references and no start_image. Explicit posture replacement rather than omni-reference continuation.",
+  "improvement_basis": "GAME067 candidate02 video_edit,job5e416190-d32c-41a1-b299-ed6b5d07b841,visually established shoulder aim where low-carry was present. Cadence issues from that historical attempt remain a known review risk; current input is an unretimed native continuous run.",
+  "new_quote_credits": 31,
+  "first_actual_debit": 28,
+  "total_projected": 59,
+  "limit": 60,
+  "paid_submission_after": 2,
+  "max_paid_submissions": 2,
+  "third_submission_prohibited": true,
+  "no_paid_reference_upscale_extension_audio_background_removal": true
+}

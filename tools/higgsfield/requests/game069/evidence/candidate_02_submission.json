@@ -1,0 +1,35 @@
+{
+  "results": [
+    {
+      "id": "616f1112-110b-4c49-8fa8-a63dcd86d9de",
+      "type": "video",
+      "status": "pending",
+      "model": "seedance_2_5",
+      "params": {
+        "prompt": "Edit the supplied SOUTH-facing VIYA running video to CHANGE THE ARM AND RIFLE POSTURE throughout the entire clip. The existing video incorrectly shows a low waist-carry. Replace that low-carry posture with a clearly shoulder-supported SOUTHWARD rifle aim. This is a real posture correction, not a request to continue the existing carry.\n\nKeep the SAME adult VIYA, approved mature face and body, long dark-brown wavy hair, ivory top, fitted black corset, partial gloves, brass/gold ornaments, short lower garments, thigh straps, tall boots, asymmetric crimson fabric on its original side, and SAME original rune-decorated rifle. Preserve the original painterly dark-fantasy anime style. No costume or weapon redesign.\n\nKeep the fixed high-angle FRONT camera and torso facing screen bottom. Do not turn the character or camera toward east or southeast. Seat the SAME original rifle buttstock against her RIGHT SHOULDER, visibly raise the trigger grip and both elbows to a coherent shouldered aiming position, support the fore-end with the other hand, and connect her head/gaze to the sights. Use correct foreshortening so the barrel aims toward SCREEN-BOTTOM CENTER. Do not keep the diagonal waist-high carry from the input. Do not replace the rifle with a pistol or a different gun.\n\nPreserve the input's continuous alternating left-right running cycle, timing and foot trajectories. Re-render coherent full-body aimed running poses with coordinated shoulder/torso stabilization, natural pelvis weight transfer, head movement, and hair/cloth follow-through. Do not freeze or restart the legs, introduce held-pose blocks, repeat one-leg kicks, or create abrupt body-height jumps. No initial low-ready segment is needed: maintain the corrected shouldered aimed posture across the clip.\n\nKeep all hair, the complete weapon and barrel tip, fabric and both boots inside a single consistent canvas with margin. Continue the same steady gait across natural full-cycle boundaries. The last distinct pose must lead naturally into the first without a duplicated endpoint or artificial hold.\n\nKeep the flat uniform saturated green background, no floor or shadows. No weapon discharge: NO muzzle flashes, bullets, tracers, casings, smoke, sparks, magic effects, text, panels, checkerboard, additional characters, green spill, double limbs, cutout assembly, puppet warping, ghost blends, mirroring or ping-pong. Silent video.",
+        "reference_images": [
+          "dd0d9d9c-f400-4948-a7ed-3ea9ae98b888"
+        ],
+        "mode": "video_edit",
+        "resolution": "720p",
+        "generate_audio": false,
+        "bitrate_mode": "high",
+        "draft": false
+      }
+    }
+  ],
+  "adjustments": {
+    "medias[0].role": {
+      "requested": "video",
+      "used": "video_references",
+      "reason": "Seedance 2.5 backend expects schema-key media roles"
+    }
+  },
+  "references_read": [
+    {
+      "ref": "quote:DTcVLvKVySiV9RNDVhR4hg",
+      "chars": 2659,
+      "sha256": "2a299030d66b9577ea2f8937a79653aecd61cf4b5895ba19934381bf2a5d7711"
+    }
+  ]
+}
