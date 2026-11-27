@@ -1,0 +1,109 @@
+{
+  "status": "PASS",
+  "baseline_commit_with_active_sw17": "055e044611606261379de3af80e544de230d98df",
+  "correction_commit": "a3a60cefb382f127086965d34924b6a32d9a2529",
+  "asset": {
+    "active_resource": "res://assets/characters/pilot_32/game070_sw_run/viya_game070_frames.tres",
+    "clips": 35,
+    "frames": 348,
+    "delivery_checksum_entries_verified": 53,
+    "game_data_and_images_identical_to_delivery": true
+  },
+  "skipped_draw_comparison": {
+    "scope": "Main scene. Identical 12 fixed ticks with southwest movement and a committed shot to the northeast, after six ticks. A regular run samples pose each tick. A sparse run reads pose at the start and end only.",
+    "before": [
+      {
+        "animation": "run_ne",
+        "index": 5,
+        "phase": 0.0,
+        "position": "(2460.438, 1225.375)",
+        "sampled_each_tick": true,
+        "shots": 1
+      },
+      {
+        "animation": "run_ne",
+        "index": 1,
+        "phase": 0.696766859485257,
+        "position": "(2460.438, 1225.375)",
+        "sampled_each_tick": false,
+        "shots": 1
+      }
+    ],
+    "after": [
+      {
+        "animation": "run_ne",
+        "index": 5,
+        "phase": 0.0,
+        "position": "(2460.438, 1225.375)",
+        "sampled_each_tick": true,
+        "shots": 1
+      },
+      {
+        "animation": "run_ne",
+        "index": 5,
+        "phase": 0.0,
+        "position": "(2460.438, 1225.375)",
+        "sampled_each_tick": false,
+        "shots": 1
+      }
+    ]
+  },
+  "southwest_return_regression": [
+    "Real southwest movement aims back and then southwest again as two shots commit",
+    "Omitting intermediate draws keeps the ending SW17 phase and frame across aim reversals",
+    "Sampling cadence does not change the authoritative battle",
+    "SW cadence check restores the original battle fixture"
+  ],
+  "actual_main_scene_linux_x11": {
+    "before": {
+      "checks": 1681,
+      "draws": 133,
+      "real_shots": 43,
+      "run_wraps": 4,
+      "firing_wraps": 2,
+      "display": "X11",
+      "scope": "Actual display draws. Production main.tscn,isolated open-stage route,native key events,fixed updates. SW17 cycles,S/SW turns,release,ordinary SW moving fire,on/off,S/SW firing turns,immediate target/wall consumption,actual hurt priority,backward aim,stationary attack,pause. Not realtime FPS,hardware QA,physical foot-contact proof or final producer approval.",
+      "ordinary_sw_frames": 17,
+      "firing_sw_frames": 17
+    },
+    "after": {
+      "checks": 1681,
+      "draws": 133,
+      "real_shots": 43,
+      "run_wraps": 4,
+      "firing_wraps": 2,
+      "display": "X11",
+      "scope": "Actual display draws. Production main.tscn,isolated open-stage route,native key events,fixed updates. SW17 cycles,S/SW turns,release,ordinary SW moving fire,on/off,S/SW firing turns,immediate target/wall consumption,actual hurt priority,backward aim,stationary attack,pause. Not realtime FPS,hardware QA,physical foot-contact proof or final producer approval.",
+      "ordinary_sw_frames": 17,
+      "firing_sw_frames": 17
+    },
+    "identical_sampled_pose_muzzle_and_movement_records": 414
+  },
+  "native_regression": {
+    "check_counts": [
+      23,
+      70,
+      122,
+      57,
+      1354,
+      612,
+      2469
+    ],
+    "total_checks": 4707,
+    "engine_commands": 10,
+    "status_by_contract": {
+      "static_integrity": "PASS",
+      "growth_data_contract": "PASS",
+      "magic_data_contract": "PASS",
+      "feedback_source_contract": "PASS",
+      "mobile_hud_source_contract": "PASS",
+      "run_navigation_source_contract": "PASS",
+      "combat_cues_source_contract": "PASS",
+      "godot_runtime": "PASS"
+    }
+  },
+  "limits": [
+    "The original repeated support-leg gesture and S/SW projected pose mismatch remain.",
+    "Fixed-tick checks and selective draws use Linux X11. Windows, mobile and realtime performance are unverified."
+  ]
+}
