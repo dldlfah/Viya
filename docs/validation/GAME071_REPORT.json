@@ -1,0 +1,2130 @@
+{
+  "status": "PASS",
+  "before_commit": "9927fcde99d58a05f1a3fd736e4bd7d6d7129dff",
+  "after_commit": "3037ef68045c62bd39d53f2cc333f6fe386eefd0",
+  "after_source_sha256": {
+    "scripts/combat/actor_motion.gd": "a1e4a899233531ef128bbac9f046014f321e0b0e5cd57a10465bb4773f761357",
+    "scripts/combat/high_angle_battle.gd": "ab3e98d7e0f02ee435836f0713785b8e8184ef80a6db6c0e17ea3f0868c80abe",
+    "scripts/combat/run_state.gd": "fccd4549a215f06a68265f0cc79647b58152115d26dceb49c5e783d4fe0eff0f",
+    "scripts/world/map_space.gd": "453fce85c5731942b308ab144a010af2a155a01d0817141e1fc50931df41921d",
+    "tests/test_gold_rewards.gd": "6493f8605849beb06069bc580282a26c8f3b07761ebdc287e59d00b53f9ff630",
+    "tests/test_gold_settings.gd": "6860542e27e453bcceac09943aed51e83b33f1a88316ac4cfd5c63c05ebbc025",
+    "tools/check_combat_cues.py": "537f6c246e2846af111c1e3b7b68d94aa6312c8e6ca4281b45d24a1ffc6a37f7"
+  },
+  "engine": "Godot 4.7.2.stable.official.ed1daf0bf",
+  "renderer": "Linux X11 Compatibility, OpenGL 4.5 Mesa 25.0.7, llvmpipe",
+  "replay": {
+    "scene": "res://scenes/main.tscn",
+    "root_size": [
+      1280,
+      720
+    ],
+    "safe_area": [
+      0,
+      6,
+      1280,
+      702
+    ],
+    "fixed_step_seconds": 0.016666666666666666,
+    "movement_axis": [
+      0.6,
+      0.8
+    ],
+    "warm_up_frames": 8,
+    "stat_order": [
+      "median",
+      "p95",
+      "max"
+    ],
+    "time_unit": "ms, except keys ending in _calls",
+    "scope": "Restore the same snapshot with its saved loot odds. Use Campaign.comparable (authority and seven RNG streams). Replay the actual physics callback. X11 rendered iteration includes frame scheduling, draw submission and frame_post_draw wait. Snapshots and hashes are outside timed blocks.",
+    "headless": [
+      {
+        "elapsed_seconds": 150,
+        "input_snapshot_sha256": "da87794562b7a826ebd0d2a3e61f01d62c80976556606786faf93e6f336e7072",
+        "input_snapshot": "seed 7 natural run",
+        "initial_enemies_xp_gold": [
+          74,
+          174,
+          53
+        ],
+        "end_enemies": 70,
+        "end_visible_enemies": null,
+        "end_player_displacement": 282.317413330078,
+        "authority_frames_identical": 68,
+        "authority_hash_list_sha256": "c9b16129065133a60d8831aaab35aeb6275743aa81b48f753cfa7bd0fb526eb0",
+        "timed_frames": 60,
+        "before": {
+          "auto_fire": [
+            0.23,
+            0.261,
+            0.261
+          ],
+          "bullets": [
+            1.976,
+            2.79,
+            3.499
+          ],
+          "enemies": [
+            2.587,
+            3.619,
+            4.936
+          ],
+          "fliers": [
+            0.012,
+            0.016,
+            0.02
+          ],
+          "loot": [
+            0.105,
+            0.231,
+            0.292
+          ],
+          "physics": [
+            6.573,
+            8.367,
+            9.144
+          ],
+          "skills": [
+            0.119,
+            0.273,
+            0.566
+          ]
+        },
+        "after": {
+          "auto_fire": [
+            0.191,
+            0.243,
+            0.243
+          ],
+          "bullets": [
+            1.911,
+            2.572,
+            3.7
+          ],
+          "enemies": [
+            1.726,
+            2.276,
+            2.701
+          ],
+          "fliers": [
+            0.011,
+            0.013,
+            0.016
+          ],
+          "loot": [
+            0.083,
+            0.186,
+            0.245
+          ],
+          "physics": [
+            5.239,
+            7.023,
+            7.796
+          ],
+          "skills": [
+            0.087,
+            0.178,
+            1.237
+          ]
+        }
+      },
+      {
+        "elapsed_seconds": 179,
+        "input_snapshot_sha256": "b43db6bef733e71cbe2cd7e3c5c55e447d399c09916be6accd6a6d12c3375133",
+        "input_snapshot": "seed 7 natural run",
+        "initial_enemies_xp_gold": [
+          107,
+          240,
+          113
+        ],
+        "end_enemies": 108,
+        "end_visible_enemies": null,
+        "end_player_displacement": 282.315460205078,
+        "authority_frames_identical": 68,
+        "authority_hash_list_sha256": "eef3602b620cf9db0e2d8ecb4f4041bfc92b6b05bcdfe02cf25ca2ef4dc652b1",
+        "timed_frames": 60,
+        "before": {
+          "auto_fire": [
+            0.229,
+            0.288,
+            0.288
+          ],
+          "bullets": [
+            0.44,
+            0.684,
+            0.775
+          ],
+          "enemies": [
+            2.787,
+            3.366,
+            3.94
+          ],
+          "fliers": [
+            0.016,
+            0.02,
+            0.086
+          ],
+          "loot": [
+            0.146,
+            0.237,
+            0.318
+          ],
+          "physics": [
+            5.314,
+            6.475,
+            7.872
+          ],
+          "skills": [
+            0.108,
+            0.205,
+            0.239
+          ]
+        },
+        "after": {
+          "auto_fire": [
+            0.222,
+            0.323,
+            0.323
+          ],
+          "bullets": [
+            0.419,
+            0.697,
+            1.094
+          ],
+          "enemies": [
+            2.033,
+            2.588,
+            3.545
+          ],
+          "fliers": [
+            0.015,
+            0.022,
+            0.061
+          ],
+          "loot": [
+            0.128,
+            0.215,
+            0.23
+          ],
+          "physics": [
+            4.383,
+            5.759,
+            8.024
+          ],
+          "skills": [
+            0.091,
+            0.171,
+            0.217
+          ]
+        }
+      },
+      {
+        "elapsed_seconds": 180,
+        "input_snapshot_sha256": "d3f727f758b8fb5831f79c1e1e18d26518a7a86fe512ae175fea20fb78c91eff",
+        "input_snapshot": "seed 7 natural run",
+        "initial_enemies_xp_gold": [
+          108,
+          240,
+          116
+        ],
+        "end_enemies": 116,
+        "end_visible_enemies": null,
+        "end_player_displacement": 282.315460205078,
+        "authority_frames_identical": 68,
+        "authority_hash_list_sha256": "c35315414a01b2e8a669f88a4b708dc3975892fb2708d816254ed69187fff0e5",
+        "timed_frames": 60,
+        "before": {
+          "auto_fire": [
+            0.233,
+            0.246,
+            0.246
+          ],
+          "bullets": [
+            0.415,
+            0.679,
+            0.862
+          ],
+          "enemies": [
+            2.937,
+            3.847,
+            5.813
+          ],
+          "fliers": [
+            0.017,
+            0.041,
+            0.047
+          ],
+          "loot": [
+            0.156,
+            0.377,
+            0.57
+          ],
+          "physics": [
+            5.388,
+            9.055,
+            11.303
+          ],
+          "skills": [
+            0.101,
+            0.21,
+            0.763
+          ]
+        },
+        "after": {
+          "auto_fire": [
+            0.214,
+            0.29,
+            0.29
+          ],
+          "bullets": [
+            0.396,
+            0.714,
+            0.787
+          ],
+          "enemies": [
+            1.975,
+            2.755,
+            3.04
+          ],
+          "fliers": [
+            0.016,
+            0.021,
+            0.028
+          ],
+          "loot": [
+            0.135,
+            0.231,
+            0.326
+          ],
+          "physics": [
+            4.229,
+            5.503,
+            11.801
+          ],
+          "skills": [
+            0.086,
+            0.19,
+            0.319
+          ]
+        }
+      },
+      {
+        "elapsed_seconds": 185,
+        "input_snapshot_sha256": "08b066b48c429aaab88ca7aae4f48e5652a15e1fb460ba008715429bc42f6d17",
+        "input_snapshot": "seed 7 natural run",
+        "initial_enemies_xp_gold": [
+          152,
+          230,
+          107
+        ],
+        "end_enemies": 147,
+        "end_visible_enemies": null,
+        "end_player_displacement": 173.585113525391,
+        "authority_frames_identical": 68,
+        "authority_hash_list_sha256": "52a08be362bbf579781af286e2467c901a4cfe7d5b6c77659d6360ecfc905e66",
+        "timed_frames": 60,
+        "before": {
+          "auto_fire": [
+            0.22,
+            0.246,
+            0.246
+          ],
+          "bullets": [
+            0.542,
+            0.891,
+            0.966
+          ],
+          "enemies": [
+            4.256,
+            5.006,
+            5.188
+          ],
+          "fliers": [
+            0.022,
+            0.038,
+            0.207
+          ],
+          "loot": [
+            0.145,
+            0.235,
+            0.277
+          ],
+          "physics": [
+            6.72,
+            8.228,
+            8.958
+          ],
+          "skills": [
+            0.103,
+            0.232,
+            0.366
+          ]
+        },
+        "after": {
+          "auto_fire": [
+            0.186,
+            0.269,
+            0.269
+          ],
+          "bullets": [
+            0.509,
+            0.648,
+            0.888
+          ],
+          "enemies": [
+            2.86,
+            3.917,
+            6.741
+          ],
+          "fliers": [
+            0.02,
+            0.032,
+            0.064
+          ],
+          "loot": [
+            0.142,
+            0.2,
+            0.223
+          ],
+          "physics": [
+            5.155,
+            7.209,
+            11.405
+          ],
+          "skills": [
+            0.108,
+            0.208,
+            0.349
+          ]
+        }
+      },
+      {
+        "elapsed_seconds": 210,
+        "input_snapshot_sha256": "e6ca79ca2db49c749eeb9a760fccff4c2a41a1000b6f64ca9318e9c19328e831",
+        "input_snapshot": "seed 7 natural run",
+        "initial_enemies_xp_gold": [
+          171,
+          240,
+          146
+        ],
+        "end_enemies": 156,
+        "end_visible_enemies": null,
+        "end_player_displacement": 277.6162109375,
+        "authority_frames_identical": 68,
+        "authority_hash_list_sha256": "6c7183241b239548dfc9a3b10d26c29e1208f2b58c8c99d35006469b261db891",
+        "timed_frames": 60,
+        "before": {
+          "auto_fire": [
+            0.289,
+            0.294,
+            0.294
+          ],
+          "bullets": [
+            0.498,
+            0.82,
+            1.124
+          ],
+          "enemies": [
+            4.399,
+            6.461,
+            6.855
+          ],
+          "fliers": [
+            0.025,
+            0.05,
+            0.068
+          ],
+          "loot": [
+            0.165,
+            0.243,
+            0.285
+          ],
+          "physics": [
+            7.317,
+            9.802,
+            11.856
+          ],
+          "skills": [
+            0.108,
+            0.226,
+            0.574
+          ]
+        },
+        "after": {
+          "auto_fire": [
+            0.38,
+            0.389,
+            0.389
+          ],
+          "bullets": [
+            0.601,
+            1.173,
+            1.401
+          ],
+          "enemies": [
+            3.663,
+            5.258,
+            5.514
+          ],
+          "fliers": [
+            0.029,
+            0.054,
+            0.098
+          ],
+          "loot": [
+            0.192,
+            0.314,
+            1.688
+          ],
+          "physics": [
+            6.474,
+            9.969,
+            10.124
+          ],
+          "skills": [
+            0.121,
+            0.233,
+            0.338
+          ]
+        }
+      },
+      {
+        "elapsed_seconds": 240,
+        "input_snapshot_sha256": "136a468160125ec9c49411238b04c936b39c410479fbaf64b4f8f51be14f36a2",
+        "input_snapshot": "tests/fixtures/game063/natural_full_240.bin",
+        "initial_enemies_xp_gold": [
+          200,
+          235,
+          180
+        ],
+        "end_enemies": 315,
+        "end_visible_enemies": null,
+        "end_player_displacement": 90.1318206787109,
+        "authority_frames_identical": 68,
+        "authority_hash_list_sha256": "0ed6b00b211d36778137e048e9bbe932e2e132c9c324a3847232ebfad1c637e5",
+        "timed_frames": 60,
+        "before": {
+          "auto_fire": [
+            0.282,
+            0.287,
+            0.287
+          ],
+          "bullets": [
+            0.578,
+            0.865,
+            0.9
+          ],
+          "enemies": [
+            5.616,
+            8.029,
+            8.316
+          ],
+          "fliers": [
+            0.058,
+            0.726,
+            0.801
+          ],
+          "loot": [
+            0.199,
+            0.282,
+            0.31
+          ],
+          "physics": [
+            9.008,
+            13.116,
+            22.355
+          ],
+          "skills": [
+            0.112,
+            0.275,
+            0.429
+          ]
+        },
+        "after": {
+          "auto_fire": [
+            0.286,
+            0.29,
+            0.29
+          ],
+          "bullets": [
+            0.526,
+            0.927,
+            1.073
+          ],
+          "enemies": [
+            4.05,
+            6.692,
+            9.949
+          ],
+          "fliers": [
+            0.032,
+            0.844,
+            0.971
+          ],
+          "loot": [
+            0.198,
+            0.309,
+            0.567
+          ],
+          "physics": [
+            7.311,
+            13.6,
+            21.184
+          ],
+          "skills": [
+            0.113,
+            0.203,
+            0.27
+          ]
+        }
+      },
+      {
+        "elapsed_seconds": 300,
+        "input_snapshot_sha256": "ac22f50a1f942ed406709ee7d76f3b4c2d3a068214dc139a8d1720087b316de3",
+        "input_snapshot": "tests/fixtures/game063/natural_full_300.bin",
+        "initial_enemies_xp_gold": [
+          388,
+          240,
+          240
+        ],
+        "end_enemies": 407,
+        "end_visible_enemies": null,
+        "end_player_displacement": 257.402587890625,
+        "authority_frames_identical": 68,
+        "authority_hash_list_sha256": "fce4ad6326510f1c1776466d7e17ecd6cfa2947f193a52edea2b6668836fc944",
+        "timed_frames": 60,
+        "before": {
+          "auto_fire": [
+            0.332,
+            0.346,
+            0.346
+          ],
+          "bullets": [
+            0.771,
+            1.382,
+            1.918
+          ],
+          "enemies": [
+            4.713,
+            6.779,
+            8.427
+          ],
+          "fliers": [
+            0.064,
+            1.403,
+            2.36
+          ],
+          "loot": [
+            0.218,
+            0.311,
+            0.367
+          ],
+          "physics": [
+            10.39,
+            14.542,
+            16.799
+          ],
+          "skills": [
+            0.112,
+            0.209,
+            0.312
+          ]
+        },
+        "after": {
+          "auto_fire": [
+            0.32,
+            0.328,
+            0.328
+          ],
+          "bullets": [
+            0.815,
+            1.4,
+            1.629
+          ],
+          "enemies": [
+            4.16,
+            5.196,
+            5.486
+          ],
+          "fliers": [
+            0.084,
+            1.077,
+            1.124
+          ],
+          "loot": [
+            0.238,
+            0.345,
+            0.361
+          ],
+          "physics": [
+            9.978,
+            12.578,
+            16.099
+          ],
+          "skills": [
+            0.121,
+            0.172,
+            0.226
+          ]
+        }
+      }
+    ],
+    "actual_x11": [
+      {
+        "elapsed_seconds": 150,
+        "input_snapshot_sha256": "da87794562b7a826ebd0d2a3e61f01d62c80976556606786faf93e6f336e7072",
+        "input_snapshot": "seed 7 natural run",
+        "initial_enemies_xp_gold": [
+          74,
+          174,
+          53
+        ],
+        "end_enemies": 76,
+        "end_visible_enemies": 53,
+        "end_player_displacement": 145.310424804688,
+        "authority_frames_identical": 35,
+        "authority_hash_list_sha256": "06a8ca1b0d8118953403ea813d40ce34e8943e79f5c34a783832208f271e30d1",
+        "timed_frames": 27,
+        "before": {
+          "actor_draw": [
+            0.955,
+            1.681,
+            2.542
+          ],
+          "auto_fire": [
+            0.302,
+            0.302,
+            0.302
+          ],
+          "bullets": [
+            2.248,
+            3.862,
+            4.531
+          ],
+          "draw": [
+            5.005,
+            7.396,
+            10.948
+          ],
+          "enemies": [
+            2.665,
+            3.446,
+            3.448
+          ],
+          "fliers": [
+            0.013,
+            0.02,
+            0.022
+          ],
+          "floor": [
+            0.903,
+            1.478,
+            4.874
+          ],
+          "iteration": [
+            36.039,
+            43.366,
+            43.757
+          ],
+          "loot": [
+            0.098,
+            0.207,
+            0.224
+          ],
+          "physics": [
+            7.024,
+            9.473,
+            10.006
+          ],
+          "skills": [
+            0.134,
+            0.206,
+            0.291
+          ]
+        },
+        "after": {
+          "actor_draw": [
+            0.559,
+            0.758,
+            0.941
+          ],
+          "auto_fire": [
+            0.249,
+            0.249,
+            0.249
+          ],
+          "bullets": [
+            2.274,
+            2.833,
+            9.331
+          ],
+          "draw": [
+            3.927,
+            4.777,
+            5.283
+          ],
+          "enemies": [
+            1.78,
+            2.234,
+            2.694
+          ],
+          "fliers": [
+            0.013,
+            0.015,
+            0.02
+          ],
+          "floor": [
+            0.182,
+            0.275,
+            0.31
+          ],
+          "iteration": [
+            33.131,
+            42.639,
+            46.673
+          ],
+          "loot": [
+            0.096,
+            0.168,
+            0.335
+          ],
+          "physics": [
+            6.198,
+            7.59,
+            16.269
+          ],
+          "skills": [
+            0.131,
+            1.293,
+            2.924
+          ]
+        }
+      },
+      {
+        "elapsed_seconds": 179,
+        "input_snapshot_sha256": "b43db6bef733e71cbe2cd7e3c5c55e447d399c09916be6accd6a6d12c3375133",
+        "input_snapshot": "seed 7 natural run",
+        "initial_enemies_xp_gold": [
+          107,
+          240,
+          113
+        ],
+        "end_enemies": 116,
+        "end_visible_enemies": 93,
+        "end_player_displacement": 145.309432983398,
+        "authority_frames_identical": 35,
+        "authority_hash_list_sha256": "56c1052b83bb4d4eae9f41b38933a9657a4c915164d23a20a54feba605879bc1",
+        "timed_frames": 27,
+        "before": {
+          "actor_draw": [
+            1.538,
+            2.154,
+            2.177
+          ],
+          "auto_fire": [
+            0.344,
+            0.344,
+            0.344
+          ],
+          "bullets": [
+            0.388,
+            0.648,
+            0.724
+          ],
+          "draw": [
+            5.097,
+            6.559,
+            7.156
+          ],
+          "enemies": [
+            2.862,
+            3.311,
+            4.709
+          ],
+          "fliers": [
+            0.016,
+            0.02,
+            0.038
+          ],
+          "floor": [
+            0.759,
+            0.959,
+            1.03
+          ],
+          "iteration": [
+            39.396,
+            43.699,
+            48.244
+          ],
+          "loot": [
+            0.198,
+            0.297,
+            0.299
+          ],
+          "physics": [
+            6.052,
+            6.933,
+            7.852
+          ],
+          "skills": [
+            0.136,
+            0.219,
+            0.222
+          ]
+        },
+        "after": {
+          "actor_draw": [
+            0.906,
+            1.224,
+            1.257
+          ],
+          "auto_fire": [
+            0.258,
+            0.258,
+            0.258
+          ],
+          "bullets": [
+            0.373,
+            0.622,
+            0.718
+          ],
+          "draw": [
+            3.933,
+            4.764,
+            5.154
+          ],
+          "enemies": [
+            2.163,
+            2.709,
+            3.227
+          ],
+          "fliers": [
+            0.015,
+            0.018,
+            0.026
+          ],
+          "floor": [
+            0.218,
+            0.254,
+            0.283
+          ],
+          "iteration": [
+            35.29,
+            40.349,
+            41.644
+          ],
+          "loot": [
+            0.175,
+            0.23,
+            0.295
+          ],
+          "physics": [
+            5.082,
+            5.891,
+            6.361
+          ],
+          "skills": [
+            0.129,
+            0.213,
+            0.235
+          ]
+        }
+      },
+      {
+        "elapsed_seconds": 180,
+        "input_snapshot_sha256": "d3f727f758b8fb5831f79c1e1e18d26518a7a86fe512ae175fea20fb78c91eff",
+        "input_snapshot": "seed 7 natural run",
+        "initial_enemies_xp_gold": [
+          108,
+          240,
+          116
+        ],
+        "end_enemies": 96,
+        "end_visible_enemies": 85,
+        "end_player_displacement": 145.309432983398,
+        "authority_frames_identical": 35,
+        "authority_hash_list_sha256": "6a025f9c02173aaae0efefef57737046c6501f055f3d6552c20a0dbb316cfd9d",
+        "timed_frames": 27,
+        "before": {
+          "actor_draw": [
+            1.549,
+            1.999,
+            2.033
+          ],
+          "auto_fire": [
+            0.265,
+            0.265,
+            0.265
+          ],
+          "bullets": [
+            0.456,
+            0.608,
+            0.64
+          ],
+          "draw": [
+            5.153,
+            6.251,
+            6.519
+          ],
+          "enemies": [
+            2.769,
+            3.978,
+            4.559
+          ],
+          "fliers": [
+            0.015,
+            0.02,
+            0.029
+          ],
+          "floor": [
+            0.72,
+            0.927,
+            0.98
+          ],
+          "iteration": [
+            43.187,
+            57.864,
+            58.649
+          ],
+          "loot": [
+            0.176,
+            0.347,
+            0.67
+          ],
+          "physics": [
+            5.466,
+            11.565,
+            19.792
+          ],
+          "skills": [
+            0.128,
+            0.19,
+            0.212
+          ]
+        },
+        "after": {
+          "actor_draw": [
+            1.0,
+            1.169,
+            1.389
+          ],
+          "auto_fire": [
+            0.275,
+            0.275,
+            0.275
+          ],
+          "bullets": [
+            0.439,
+            0.548,
+            0.636
+          ],
+          "draw": [
+            3.843,
+            8.079,
+            9.127
+          ],
+          "enemies": [
+            2.081,
+            3.129,
+            3.502
+          ],
+          "fliers": [
+            0.015,
+            0.037,
+            0.061
+          ],
+          "floor": [
+            0.198,
+            0.326,
+            0.401
+          ],
+          "iteration": [
+            36.058,
+            44.605,
+            52.469
+          ],
+          "loot": [
+            0.169,
+            0.572,
+            0.995
+          ],
+          "physics": [
+            5.025,
+            11.175,
+            12.133
+          ],
+          "skills": [
+            0.128,
+            0.208,
+            0.285
+          ]
+        }
+      },
+      {
+        "elapsed_seconds": 185,
+        "input_snapshot_sha256": "08b066b48c429aaab88ca7aae4f48e5652a15e1fb460ba008715429bc42f6d17",
+        "input_snapshot": "seed 7 natural run",
+        "initial_enemies_xp_gold": [
+          152,
+          230,
+          107
+        ],
+        "end_enemies": 145,
+        "end_visible_enemies": 37,
+        "end_player_displacement": 145.310424804688,
+        "authority_frames_identical": 35,
+        "authority_hash_list_sha256": "1bdb74336b3f942f0a48bf73152b2f060063a4df117d624d8e9b06d3b2534948",
+        "timed_frames": 27,
+        "before": {
+          "actor_draw": [
+            0.758,
+            1.084,
+            6.34
+          ],
+          "auto_fire": [
+            0.268,
+            0.268,
+            0.268
+          ],
+          "bullets": [
+            0.574,
+            0.768,
+            0.817
+          ],
+          "draw": [
+            4.597,
+            5.222,
+            21.317
+          ],
+          "enemies": [
+            4.316,
+            5.044,
+            6.421
+          ],
+          "fliers": [
+            0.022,
+            0.028,
+            0.028
+          ],
+          "floor": [
+            0.87,
+            1.004,
+            1.026
+          ],
+          "iteration": [
+            34.524,
+            43.376,
+            94.618
+          ],
+          "loot": [
+            0.168,
+            0.314,
+            0.342
+          ],
+          "physics": [
+            7.283,
+            9.605,
+            10.236
+          ],
+          "skills": [
+            0.134,
+            0.275,
+            0.301
+          ]
+        },
+        "after": {
+          "actor_draw": [
+            0.56,
+            0.731,
+            0.768
+          ],
+          "auto_fire": [
+            0.293,
+            0.293,
+            0.293
+          ],
+          "bullets": [
+            0.601,
+            0.866,
+            1.635
+          ],
+          "draw": [
+            3.912,
+            5.235,
+            5.239
+          ],
+          "enemies": [
+            3.331,
+            3.769,
+            3.997
+          ],
+          "fliers": [
+            0.024,
+            0.036,
+            0.047
+          ],
+          "floor": [
+            0.294,
+            0.591,
+            0.759
+          ],
+          "iteration": [
+            32.153,
+            38.643,
+            39.625
+          ],
+          "loot": [
+            0.18,
+            0.242,
+            0.264
+          ],
+          "physics": [
+            6.47,
+            7.158,
+            8.042
+          ],
+          "skills": [
+            0.131,
+            0.233,
+            0.295
+          ]
+        }
+      },
+      {
+        "elapsed_seconds": 210,
+        "input_snapshot_sha256": "e6ca79ca2db49c749eeb9a760fccff4c2a41a1000b6f64ca9318e9c19328e831",
+        "input_snapshot": "seed 7 natural run",
+        "initial_enemies_xp_gold": [
+          171,
+          240,
+          146
+        ],
+        "end_enemies": 168,
+        "end_visible_enemies": 104,
+        "end_player_displacement": 141.591339111328,
+        "authority_frames_identical": 35,
+        "authority_hash_list_sha256": "344edf7f557ddba10b8707fa3274635d4778ed11e0e19d2ff6ce3dcad0672010",
+        "timed_frames": 27,
+        "before": {
+          "actor_draw": [
+            1.986,
+            2.807,
+            2.85
+          ],
+          "auto_fire": [
+            0.294,
+            0.294,
+            0.294
+          ],
+          "bullets": [
+            0.461,
+            0.62,
+            0.633
+          ],
+          "draw": [
+            6.315,
+            11.765,
+            30.337
+          ],
+          "enemies": [
+            4.5,
+            4.998,
+            5.12
+          ],
+          "fliers": [
+            0.025,
+            0.036,
+            0.039
+          ],
+          "floor": [
+            1.208,
+            2.035,
+            4.253
+          ],
+          "iteration": [
+            41.812,
+            52.505,
+            78.431
+          ],
+          "loot": [
+            0.191,
+            0.227,
+            0.239
+          ],
+          "physics": [
+            7.581,
+            8.101,
+            9.295
+          ],
+          "skills": [
+            0.127,
+            0.258,
+            0.267
+          ]
+        },
+        "after": {
+          "actor_draw": [
+            1.365,
+            2.081,
+            2.171
+          ],
+          "auto_fire": [
+            0.313,
+            0.313,
+            0.313
+          ],
+          "bullets": [
+            0.49,
+            0.687,
+            1.419
+          ],
+          "draw": [
+            4.812,
+            8.137,
+            11.031
+          ],
+          "enemies": [
+            3.642,
+            6.402,
+            9.007
+          ],
+          "fliers": [
+            0.026,
+            0.043,
+            0.274
+          ],
+          "floor": [
+            0.33,
+            0.473,
+            0.49
+          ],
+          "iteration": [
+            37.827,
+            57.511,
+            73.033
+          ],
+          "loot": [
+            0.203,
+            0.297,
+            0.387
+          ],
+          "physics": [
+            7.003,
+            11.552,
+            12.486
+          ],
+          "skills": [
+            0.134,
+            0.188,
+            0.297
+          ]
+        }
+      },
+      {
+        "elapsed_seconds": 240,
+        "input_snapshot_sha256": "136a468160125ec9c49411238b04c936b39c410479fbaf64b4f8f51be14f36a2",
+        "input_snapshot": "tests/fixtures/game063/natural_full_240.bin",
+        "initial_enemies_xp_gold": [
+          200,
+          235,
+          180
+        ],
+        "end_enemies": 196,
+        "end_visible_enemies": 147,
+        "end_player_displacement": 70.0000762939453,
+        "authority_frames_identical": 35,
+        "authority_hash_list_sha256": "416d783559f79e33fb6108904ee745ac1010b90bc06a33c6668f0540100d44a2",
+        "timed_frames": 27,
+        "before": {
+          "actor_draw": [
+            2.64,
+            3.348,
+            4.23
+          ],
+          "auto_fire": [
+            0.345,
+            0.345,
+            0.345
+          ],
+          "bullets": [
+            0.56,
+            0.936,
+            0.948
+          ],
+          "draw": [
+            7.546,
+            11.068,
+            11.382
+          ],
+          "enemies": [
+            5.321,
+            6.566,
+            7.305
+          ],
+          "fliers": [
+            0.031,
+            0.052,
+            0.181
+          ],
+          "floor": [
+            1.165,
+            1.771,
+            2.118
+          ],
+          "iteration": [
+            47.358,
+            58.626,
+            87.531
+          ],
+          "loot": [
+            0.215,
+            0.407,
+            0.51
+          ],
+          "physics": [
+            9.147,
+            12.074,
+            13.054
+          ],
+          "skills": [
+            0.135,
+            0.235,
+            0.318
+          ]
+        },
+        "after": {
+          "actor_draw": [
+            1.562,
+            1.887,
+            1.94
+          ],
+          "auto_fire": [
+            0.297,
+            0.297,
+            0.297
+          ],
+          "bullets": [
+            0.53,
+            0.74,
+            0.804
+          ],
+          "draw": [
+            5.428,
+            6.249,
+            6.621
+          ],
+          "enemies": [
+            4.135,
+            4.759,
+            4.774
+          ],
+          "fliers": [
+            0.031,
+            0.043,
+            0.079
+          ],
+          "floor": [
+            0.311,
+            0.466,
+            0.489
+          ],
+          "iteration": [
+            39.484,
+            50.091,
+            51.663
+          ],
+          "loot": [
+            0.21,
+            0.306,
+            1.474
+          ],
+          "physics": [
+            7.932,
+            9.529,
+            10.178
+          ],
+          "skills": [
+            0.131,
+            0.237,
+            0.338
+          ]
+        }
+      },
+      {
+        "elapsed_seconds": 300,
+        "input_snapshot_sha256": "ac22f50a1f942ed406709ee7d76f3b4c2d3a068214dc139a8d1720087b316de3",
+        "input_snapshot": "tests/fixtures/game063/natural_full_300.bin",
+        "initial_enemies_xp_gold": [
+          388,
+          240,
+          240
+        ],
+        "end_enemies": 365,
+        "end_visible_enemies": 353,
+        "end_player_displacement": 140.949676513672,
+        "authority_frames_identical": 35,
+        "authority_hash_list_sha256": "a7ba7de491bba5e391d11f237abffee040885f7e38a23e5c7503005d36111e7c",
+        "timed_frames": 27,
+        "before": {
+          "actor_draw": [
+            8.67,
+            12.701,
+            13.3
+          ],
+          "auto_fire": [
+            0.393,
+            0.393,
+            0.393
+          ],
+          "bullets": [
+            1.101,
+            2.248,
+            2.412
+          ],
+          "draw": [
+            19.764,
+            29.101,
+            30.405
+          ],
+          "enemies": [
+            5.086,
+            6.067,
+            6.319
+          ],
+          "fliers": [
+            0.073,
+            0.248,
+            0.345
+          ],
+          "floor": [
+            1.773,
+            3.061,
+            3.491
+          ],
+          "iteration": [
+            89.147,
+            115.563,
+            117.154
+          ],
+          "loot": [
+            0.273,
+            0.593,
+            0.646
+          ],
+          "physics": [
+            12.839,
+            15.379,
+            16.914
+          ],
+          "skills": [
+            0.144,
+            0.233,
+            0.289
+          ]
+        },
+        "after": {
+          "actor_draw": [
+            4.616,
+            5.262,
+            7.399
+          ],
+          "auto_fire": [
+            0.339,
+            0.339,
+            0.339
+          ],
+          "bullets": [
+            0.935,
+            1.379,
+            1.499
+          ],
+          "draw": [
+            12.374,
+            13.943,
+            17.39
+          ],
+          "enemies": [
+            3.823,
+            4.124,
+            4.169
+          ],
+          "fliers": [
+            0.058,
+            0.08,
+            0.087
+          ],
+          "floor": [
+            0.363,
+            0.47,
+            0.522
+          ],
+          "iteration": [
+            72.336,
+            85.4,
+            90.748
+          ],
+          "loot": [
+            0.217,
+            0.303,
+            0.5
+          ],
+          "physics": [
+            10.551,
+            11.156,
+            11.338
+          ],
+          "skills": [
+            0.129,
+            0.155,
+            0.184
+          ]
+        }
+      }
+    ]
+  },
+  "route_diagnosis": {
+    "scope": "Baseline diagnostic wrappers on MapSpace and RunState methods. Route totals are within enemy movement totals. Loot totals measure collection, not rendering.",
+    "180_seconds": {
+      "auto_fire": [
+        0.374,
+        0.403,
+        0.403
+      ],
+      "bullets": [
+        0.544,
+        1.027,
+        1.921
+      ],
+      "enemies": [
+        3.501,
+        6.333,
+        8.927
+      ],
+      "fliers": [
+        0.022,
+        0.091,
+        0.456
+      ],
+      "loot": [
+        0.23,
+        0.383,
+        0.546
+      ],
+      "move": [
+        0.478,
+        0.998,
+        1.716
+      ],
+      "move_calls": [
+        113.0,
+        125.0,
+        127.0
+      ],
+      "physics": [
+        6.987,
+        12.775,
+        17.719
+      ],
+      "route": [
+        2.552,
+        5.063,
+        6.476
+      ],
+      "route_calls": [
+        99.0,
+        109.0,
+        111.0
+      ],
+      "skills": [
+        0.145,
+        0.338,
+        0.582
+      ],
+      "wall": [
+        0.055,
+        0.144,
+        0.291
+      ],
+      "wall_calls": [
+        13.0,
+        17.0,
+        18.0
+      ]
+    }
+  },
+  "campaign_gold": {
+    "old_chance": 0.3,
+    "new_chance": 0.15,
+    "natural_run": {
+      "seed": 7,
+      "outcome": "defeat",
+      "elapsed": 224.950000000017,
+      "kills": 2283,
+      "choices": 12,
+      "hp": 0
+    },
+    "choices_strategy": "tests/measure_balance.gd controller; account talents set to rank 3; production siege_battlefield, weapons_v1, encounter 2, loot 1; fixed .05s updates; identical spawn guard (1471.771,702.8296). One matched playthrough, no guaranteed human win or economic average.",
+    "identical_logged_non_coin_seconds": 224,
+    "floor_drops": [
+      {
+        "elapsed_seconds": 150,
+        "xp_gems": 174,
+        "gold_before": 53,
+        "gold_after": 19
+      },
+      {
+        "elapsed_seconds": 179,
+        "xp_gems": 240,
+        "gold_before": 113,
+        "gold_after": 61
+      },
+      {
+        "elapsed_seconds": 180,
+        "xp_gems": 240,
+        "gold_before": 116,
+        "gold_after": 62
+      },
+      {
+        "elapsed_seconds": 185,
+        "xp_gems": 230,
+        "gold_before": 107,
+        "gold_after": 54
+      },
+      {
+        "elapsed_seconds": 195,
+        "xp_gems": 240,
+        "gold_before": 88,
+        "gold_after": 47
+      },
+      {
+        "elapsed_seconds": 210,
+        "xp_gems": 240,
+        "gold_before": 146,
+        "gold_after": 75
+      },
+      {
+        "elapsed_seconds": 224,
+        "xp_gems": 240,
+        "gold_before": 206,
+        "gold_after": 97
+      }
+    ]
+  },
+  "project_validation": {
+    "static_integrity": {
+      "status": "PASS",
+      "files_checked": 193,
+      "resource_references_checked": 649
+    },
+    "strict_run_prior_to_fixture_fix": {
+      "status": "FAIL",
+      "reason": "Boss payout fixture relied on 100% odds carrying over through start()"
+    },
+    "assertion_count_by_native_suite": [
+      23,
+      70,
+      122,
+      57,
+      1336,
+      536,
+      2462
+    ],
+    "mutation_controls": 162,
+    "contracts": {
+      "growth_data_contract": "PASS",
+      "magic_data_contract": "PASS",
+      "feedback_source_contract": "PASS",
+      "mobile_hud_source_contract": "PASS",
+      "run_navigation_source_contract": "PASS",
+      "combat_cues_source_contract": "PASS"
+    },
+    "godot_runtime": {
+      "status": "PASS",
+      "commands": [
+        {
+          "command": [
+            "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+            "--headless",
+            "--version"
+          ],
+          "exit_code": 0,
+          "status": "PASS"
+        },
+        {
+          "command": [
+            "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+            "--headless",
+            "--path",
+            "/workspace/Viya",
+            "--editor",
+            "--import",
+            "--quit"
+          ],
+          "exit_code": 0,
+          "status": "PASS"
+        },
+        {
+          "command": [
+            "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+            "--headless",
+            "--path",
+            "/workspace/Viya",
+            "--script",
+            "res://tests/test_combat_foundation.gd"
+          ],
+          "exit_code": 0,
+          "status": "PASS"
+        },
+        {
+          "command": [
+            "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+            "--headless",
+            "--path",
+            "/workspace/Viya",
+            "--script",
+            "res://tests/test_growth.gd"
+          ],
+          "exit_code": 0,
+          "status": "PASS"
+        },
+        {
+          "command": [
+            "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+            "--headless",
+            "--path",
+            "/workspace/Viya",
+            "--script",
+            "res://tests/test_magic.gd"
+          ],
+          "exit_code": 0,
+          "status": "PASS"
+        },
+        {
+          "command": [
+            "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+            "--headless",
+            "--path",
+            "/workspace/Viya",
+            "--script",
+            "res://tests/test_feedback.gd"
+          ],
+          "exit_code": 0,
+          "status": "PASS"
+        },
+        {
+          "command": [
+            "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+            "--headless",
+            "--path",
+            "/workspace/Viya",
+            "--script",
+            "res://tests/test_mobile_hud.gd"
+          ],
+          "exit_code": 0,
+          "status": "PASS"
+        },
+        {
+          "command": [
+            "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+            "--headless",
+            "--path",
+            "/workspace/Viya",
+            "--script",
+            "res://tests/test_run_navigation.gd"
+          ],
+          "exit_code": 0,
+          "status": "PASS"
+        },
+        {
+          "command": [
+            "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+            "--headless",
+            "--path",
+            "/workspace/Viya",
+            "--script",
+            "res://tests/test_combat_cues.gd"
+          ],
+          "exit_code": 0,
+          "status": "PASS"
+        },
+        {
+          "command": [
+            "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+            "--headless",
+            "--path",
+            "/workspace/Viya",
+            "--quit-after",
+            "120"
+          ],
+          "exit_code": 0,
+          "status": "PASS"
+        }
+      ],
+      "scope": "headless import, actual foundation/growth/magic/feedback/mobile-HUD/run-navigation/combat-cues GDScript tests and main boot; visual/mobile approval separate"
+    }
+  },
+  "visual_checks": {
+    "errors": [],
+    "rows": [
+      {
+        "actors": 388,
+        "authority_and_cues_equal": true,
+        "boss_guidance": {
+          "aimed": true,
+          "blocked": false,
+          "direction": "(-0.331985, 0.943285)",
+          "distance": 457.408935546875,
+          "font_size": 13,
+          "hp": 3200,
+          "id": 5211,
+          "in_range": true,
+          "marker_rect": "[P: (720.0, 488.964), S: (80.0, 40.0)]",
+          "max_hp": 3200,
+          "offscreen": true,
+          "p": "(1772.475, 1622.794)",
+          "reach": 566.8,
+          "screen": "(712.5974, 643.6512)",
+          "status": "기본 공격 · 보스 조준",
+          "status_rect": "[P: (418.6934, 26.0), S: (360.0, 22.0)]"
+        },
+        "changed_channels": 875,
+        "hero_animation": "idle_ne",
+        "hero_frame": 0,
+        "max_channel_difference": 1,
+        "occluders": 0,
+        "tag": "natural300",
+        "visible": 362
+      },
+      {
+        "actors": 108,
+        "authority_and_cues_equal": true,
+        "boss_guidance": {},
+        "changed_channels": 1766,
+        "hero_animation": "idle_n",
+        "hero_frame": 0,
+        "max_channel_difference": 1,
+        "occluders": 1,
+        "tag": "natural180",
+        "visible": 91
+      },
+      {
+        "actors": 391,
+        "authority_and_cues_equal": true,
+        "boss_guidance": {
+          "aimed": true,
+          "blocked": false,
+          "direction": "(-0.331985, 0.943285)",
+          "distance": 457.408935546875,
+          "font_size": 13,
+          "hp": 3200,
+          "id": 5211,
+          "in_range": true,
+          "marker_rect": "[P: (720.0, 488.964), S: (80.0, 40.0)]",
+          "max_hp": 3200,
+          "offscreen": true,
+          "p": "(1772.475, 1622.794)",
+          "reach": 566.8,
+          "screen": "(712.5974, 643.6512)",
+          "status": "기본 공격 · 보스 조준",
+          "status_rect": "[P: (418.6934, 26.0), S: (360.0, 22.0)]"
+        },
+        "changed_channels": 1117,
+        "hero_animation": "hurt_sw",
+        "hero_frame": 0,
+        "max_channel_difference": 1,
+        "occluders": 0,
+        "tag": "hurt_tells_boss",
+        "visible": 365
+      },
+      {
+        "actors": 391,
+        "authority_and_cues_equal": true,
+        "boss_guidance": {
+          "aimed": false,
+          "blocked": true,
+          "direction": "(-0.033306, 0.999445)",
+          "distance": 1409.98559570312,
+          "font_size": 13,
+          "hp": 3200,
+          "id": 5211,
+          "in_range": false,
+          "marker_rect": "[P: (272.0, 488.964), S: (80.0, 40.0)]",
+          "max_hp": 3200,
+          "offscreen": true,
+          "p": "(1772.475, 1622.794)",
+          "reach": 566.8,
+          "screen": "(284.8816, 1322.731)",
+          "status": "기본 공격 · 사거리 밖 · 접근 필요",
+          "status_rect": "[P: (418.6934, 26.0), S: (360.0, 22.0)]"
+        },
+        "changed_channels": 75,
+        "hero_animation": "idle_ne",
+        "hero_frame": 0,
+        "max_channel_difference": 1,
+        "occluders": 1,
+        "tag": "wall_occlusion",
+        "visible": 8
+      },
+      {
+        "actors": 2,
+        "authority_and_cues_equal": true,
+        "boss_guidance": {
+          "aimed": false,
+          "blocked": false,
+          "direction": "(-1.0, 0.0)",
+          "distance": 731.610168457031,
+          "font_size": 13,
+          "hp": 3200,
+          "id": 5211,
+          "in_range": false,
+          "marker_rect": "[P: (48.0, 378.4938), S: (80.0, 40.0)]",
+          "max_hp": 3200,
+          "offscreen": true,
+          "p": "(1772.475, 1622.794)",
+          "reach": 566.8,
+          "screen": "(-81.39136, 398.4938)",
+          "status": "기본 공격 · 사거리 밖 · 접근 필요",
+          "status_rect": "[P: (418.6934, 26.0), S: (360.0, 22.0)]"
+        },
+        "changed_channels": 1538,
+        "hero_animation": "idle_ne",
+        "hero_frame": 0,
+        "max_channel_difference": 1,
+        "occluders": 0,
+        "tag": "purge_protected_boss",
+        "visible": 2
+      },
+      {
+        "actors": 2,
+        "authority_and_cues_equal": true,
+        "boss_guidance": {
+          "aimed": false,
+          "blocked": false,
+          "direction": "(-1.0, 0.0)",
+          "distance": 731.610168457031,
+          "font_size": 13,
+          "hp": 3200,
+          "id": 5211,
+          "in_range": false,
+          "marker_rect": "[P: (48.0, 177.2762), S: (80.0, 40.0)]",
+          "max_hp": 3200,
+          "offscreen": true,
+          "p": "(1772.475, 1622.794)",
+          "reach": 566.8,
+          "screen": "(-93.14105, 197.2762)",
+          "status": "기본 공격 · 사거리 밖 · 접근 필요",
+          "status_rect": "[P: (418.6934, 26.0), S: (360.0, 22.0)]"
+        },
+        "changed_channels": 0,
+        "hero_animation": "idle_ne",
+        "hero_frame": 0,
+        "max_channel_difference": 0,
+        "occluders": 0,
+        "tag": "legacy_f8",
+        "visible": 2
+      },
+      {
+        "actors": 2,
+        "authority_and_cues_equal": true,
+        "boss_guidance": {},
+        "changed_channels": 0,
+        "hero_animation": "idle_ne",
+        "hero_frame": 0,
+        "max_channel_difference": 0,
+        "occluders": 0,
+        "tag": "paused",
+        "visible": 2
+      }
+    ],
+    "scope": "Frozen actual production UI before/after only cache switch; all captures preserve authority/cues. Injected hurt/status/boss/ranged/occlusion/purge are visual QA, not natural balance or hardware FPS.",
+    "status": "PASS"
+  },
+  "automatic_input_after_only": {
+    "errors": [],
+    "rows": [
+      {
+        "actors": 120,
+        "cache": true,
+        "engine_process_frames": 13,
+        "final_authority_hash": "21f04d6adbbedbf7ffe870e387a9873291061f522d54be781e1b25ec0f619373",
+        "hero_animation": "run_sw",
+        "hero_frame": 1,
+        "input_released": true,
+        "input_to_first_movement_ms": 17.155,
+        "input_to_presented_movement_ms": 52.029,
+        "physics_callback": {
+          "max_ms": 12.182,
+          "p50_ms": 5.292,
+          "p95_ms": 11.13
+        },
+        "physics_ticks": 40,
+        "presented_interval": {
+          "max_ms": 106.066,
+          "p50_ms": 59.129,
+          "p95_ms": 106.066
+        },
+        "presented_intervals": 11,
+        "shots": 4649,
+        "tag": "180"
+      },
+      {
+        "actors": 170,
+        "cache": true,
+        "engine_process_frames": 9,
+        "final_authority_hash": "1bcfe8ebc34b28a3c0ee6abc4959da3510e3d9f840f4b8ad7365fb0dd8fd6acf",
+        "hero_animation": "run_fire_se",
+        "hero_frame": 2,
+        "input_released": true,
+        "input_to_first_movement_ms": 22.528,
+        "input_to_presented_movement_ms": 62.002,
+        "physics_callback": {
+          "max_ms": 12.801,
+          "p50_ms": 6.413,
+          "p95_ms": 8.568
+        },
+        "physics_ticks": 40,
+        "presented_interval": {
+          "max_ms": 120.877,
+          "p50_ms": 113.638,
+          "p95_ms": 120.877
+        },
+        "presented_intervals": 7,
+        "shots": 5691,
+        "tag": "210"
+      },
+      {
+        "actors": 366,
+        "cache": true,
+        "engine_process_frames": 7,
+        "final_authority_hash": "5ec365b17fcb8ec0ed81611162413fdbc83e3ba136281247626c51ed19f9f84c",
+        "hero_animation": "run_fire_s",
+        "hero_frame": 14,
+        "input_released": true,
+        "input_to_first_movement_ms": 22.925,
+        "input_to_presented_movement_ms": 146.903,
+        "physics_callback": {
+          "max_ms": 15.769,
+          "p50_ms": 10.424,
+          "p95_ms": 13.741
+        },
+        "physics_ticks": 40,
+        "presented_interval": {
+          "max_ms": 286.287,
+          "p50_ms": 270.86,
+          "p95_ms": 286.287
+        },
+        "presented_intervals": 5,
+        "shots": 8835,
+        "tag": "300"
+      }
+    ],
+    "scope": "Actual engine scheduled60Hz callbacks with real Input.parse_input_event D key, exactly40 updates and retained engine catch-up policy. Different presented frame counts; compare final authority after exactly40 physics callbacks, not wall-time battle duration. Linux input probe, not hardware latency/mobile FPS.",
+    "status": "PASS"
+  },
+  "unverified": [
+    "Windows PC Godot runtime and FPS",
+    "Android/iOS devices and thermal behavior",
+    "Campaign earnings across multiple seeds"
+  ]
+}
