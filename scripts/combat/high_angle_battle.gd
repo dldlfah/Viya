@@ -201,7 +201,7 @@ func _draw_enemy(enemy: Dictionary) -> void:
 		if not canvas.simple_attacks:canvas.draw_arc(feet+Vector2(-3,-19),6,PI,PI*1.6,8,Color("fff0ac"),2,true)
 	else:
 		var motion:Dictionary=canvas.actors.silhouette_motion(state,int(enemy.id))
-		Forms.enemy(canvas,feet,variant,color,height,detail_actors or kind!="normal",motion,body_cache if cache_bodies and flash==0 else null)
+		Forms.enemy(canvas,feet,variant,color,height,detail_actors or kind!="normal",motion,body_cache if cache_bodies and flash==0 else null,true)
 	if kind!="normal" or enemy.hp < enemy.max_hp:
 		canvas.draw_rect(Rect2(feet+Vector2(-18,-height-7),Vector2(36,3)),Color("302b2e"))
 		canvas.draw_rect(Rect2(feet+Vector2(-18,-height-7),Vector2(36.0*enemy.hp/float(enemy.max_hp),3)),color)

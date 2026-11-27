@@ -20,3 +20,12 @@ static func run(_host, verify:Callable) -> void:
 	geometry.draw_line(Vector2.ZERO,Vector2(10,0),Color.WHITE,5,true)
 	verify.call(geometry.vertices.size()==36 and geometry.indices.size()==54,"Native AA stroke retains centre, four feather strips and four corner quads")
 	verify.call(geometry.colors.count(Color(1,1,1,0))==20,"Feather triangles keep transparent edge colours instead of removing AA")
+	var tint := Color("b4a4dd")
+	var pose: ArrayMesh = cache.silhouette("flier", tint, 1.24)
+	verify.call(pose == cache.silhouette("flier", tint, 0.76), "Dense fallback actors share the nearest half-unit pose across their own clocks")
+	var next: ArrayMesh = cache.silhouette("flier", tint, 1.26)
+	verify.call(pose.surface_get_arrays(0)[Mesh.ARRAY_VERTEX] != next.surface_get_arrays(0)[Mesh.ARRAY_VERTEX], "Dense flier wings still change geometry through the stride cycle")
+	verify.call(pose.get_surface_count() == 1, "The two moving wings and both silhouette layers emit one ordered draw")
+	for index in range(Cache.SILHOUETTE_LIMIT + 3):
+		cache.silhouette("heavy", Color(float(index) / Cache.SILHOUETTE_LIMIT, 0.25, 0.5), 0.0)
+	verify.call(cache.silhouettes.size() == Cache.SILHOUETTE_LIMIT, "Dense poses use a bounded view cache alongside the static parts")

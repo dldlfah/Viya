@@ -159,7 +159,7 @@ GAME069_REVIEWED_SHA256 = {'assets/characters/pilot_32/game069_s_run_fire/viya_g
 PATTERN_REVIEWED_SHA256.update({
     'scripts/world/map_space.gd': '453fce85c5731942b308ab144a010af2a155a01d0817141e1fc50931df41921d',
     'scripts/combat/actor_motion.gd': 'a1e4a899233531ef128bbac9f046014f321e0b0e5cd57a10465bb4773f761357',
-    'scripts/combat/high_angle_battle.gd': 'ab3e98d7e0f02ee435836f0713785b8e8184ef80a6db6c0e17ea3f0868c80abe',
+    'scripts/combat/high_angle_battle.gd': 'd10340ca230f10c5821db2bc957f7aaaafd905076762286fe2e5625f09989156',
 })
 CAMPAIGN_GOLD_ADAPTERS = (
     ('const CAMPAIGN_GOLD_DROP_CHANCE := 0.15\n', ''),

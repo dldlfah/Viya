@@ -1,9 +1,16 @@
 extends RefCounted
 ## Low-cost replaceable silhouettes, not final character/monster designs.
-static func enemy(canvas: CanvasItem, feet: Vector2, variant: String, color: Color, height: float, detailed: bool, motion:Dictionary={}, cache=null) -> void:
+static func enemy(canvas: CanvasItem, feet: Vector2, variant: String, color: Color, height: float, detailed: bool, motion:Dictionary={}, cache=null, cache_pose: bool=false) -> void:
 	canvas.draw_set_transform(feet,0,Vector2.ONE*(height/56.0))
-	var dark:=color.darkened(.5)
 	var stride:float=sin(float(motion.get("move_clock",0))*TAU*2)*4 if motion.get("moving",false) else 0
+	if cache_pose and cache != null and not detailed and variant != "ranged":
+		canvas.draw_mesh(cache.silhouette(variant, color, stride), null)
+	else:
+		silhouette(canvas, variant, color, detailed, stride, cache)
+	canvas.draw_set_transform_matrix(Transform2D.IDENTITY)
+
+static func silhouette(canvas, variant: String, color: Color, detailed: bool, stride: float, cache=null) -> void:
+	var dark := color.darkened(.5)
 	if variant=="flier":
 		_part(canvas,variant,color,detailed,false,cache)
 		canvas.draw_line(Vector2(-27,-35+stride),Vector2(-4,-28),color,2,true)
@@ -18,7 +25,6 @@ static func enemy(canvas: CanvasItem, feet: Vector2, variant: String, color: Col
 		canvas.draw_line(Vector2(-6,-19),Vector2(-9,-1-maxf(0,stride)),dark,6,true)
 		canvas.draw_line(Vector2(6,-19),Vector2(9,-1-maxf(0,-stride)),dark,6,true)
 		_part(canvas,variant,color,detailed,false,cache)
-	canvas.draw_set_transform_matrix(Transform2D.IDENTITY)
 
 static func _part(canvas, variant:String, color:Color, detailed:bool, front:bool, cache) -> void:
 	if cache!=null and variant!="ranged":

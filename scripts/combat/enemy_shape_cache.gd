@@ -1,9 +1,11 @@
 extends RefCounted
-## Retain static vector triangles, not actor images or animation state.
+## Retain shared vector triangles, without per-actor resources or state.
 ## One shared bounded cache per view; no per-enemy nodes/RIDs/timers.
 const Forms=preload("res://scripts/combat/battle_forms.gd")
 const LIMIT:=64
+const SILHOUETTE_LIMIT := 8 * 17
 var meshes:Dictionary={}
+var silhouettes: Dictionary = {}
 var builds:int=0
 
 class Geometry:
@@ -69,3 +71,19 @@ func shape(variant:String, color:Color, detailed:bool, front:bool=false) -> Arra
 
 func draw_part(canvas:CanvasItem, variant:String, color:Color, detailed:bool, front:bool) -> void:
 	canvas.draw_mesh(shape(variant,color,detailed,front),null)
+
+func silhouette(variant: String, color: Color, stride: float) -> ArrayMesh:
+	# Half-unit samples give dense fallback figures a maximum quarter-unit
+	# limb error. The torso, part order and antialiasing use the native geometry.
+	var stride_step := roundi(stride * 2.0)
+	var key := [variant, color, stride_step]
+	if silhouettes.has(key):
+		return silhouettes[key]
+	var geometry := Geometry.new()
+	Forms.silhouette(geometry, variant, color, false, stride_step * 0.5)
+	var mesh := geometry.mesh()
+	# Outlying palettes cannot grow the per-view equipment and gait cache.
+	if silhouettes.size() >= SILHOUETTE_LIMIT:
+		silhouettes.erase(silhouettes.keys()[0])
+	silhouettes[key] = mesh
+	return mesh
