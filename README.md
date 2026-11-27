@@ -2,7 +2,11 @@
 
 병행 GAME070은 사용자 지시로 재시도해 영상을 확보했으나 양발 교대와 루프 기준에 미달해 기술 미채택했다. 이번 실차감28/누적순차감84이며 기존SW11과GAME071/072를 유지한다. [원본·검수·비용](tools/higgsfield/requests/game070/evidence/packet_9927fcd/candidate_04_README.md).
 
-## GAME072 — 로비 캐릭터 정보 (2026-11-27)
+## GAME073 — 비야 성급·각인과 인벤토리 (2026-11-28)
+
+비야는 3성 0각인으로 시작하고 3~5성에서 다섯 번째 각인 성공 시 승급한다. 6성 5각인이 상한이다. 로비 인벤토리에 비야의 조각을 등록했고, 획득처와 각인에 필요한 수량은 추후 연결한다. [현재 상태](docs/CURRENT_WORK.md)
+
+## 이전 GAME072 — 로비 캐릭터 정보 (2026-11-27)
 
 로비에서 비야의 기본 능력치를 보고, 두 아이콘으로 특성 증가분과 기타 증가 열을 확인한다. 특성은 실제 계정 데이터를 사용하며 기타는 빈 칸이다. [현재 상태](docs/CURRENT_WORK.md) · [검증 화면](docs/validation/GAME072_CHARACTER_INFO.png)
 
@@ -34,7 +38,7 @@ SE 이동사격20장의 게임 연결ce7e779를 검수했다. **실제main.tscn 
 
 ## 세션 필수 문서
 
-[CURRENT_WORK](docs/CURRENT_WORK.md)와 **[누적 DEVELOPMENT_STATUS8.80](docs/DEVELOPMENT_STATUS.md)**를 함께 읽는다. [PLANNED_WORK85](docs/PLANNED_WORK.md) · [NEXT_TASK](docs/NEXT_TASK.md) · [AGENTS](AGENTS.md) · [제작 스킬](.agents/skills/viya-game-production/SKILL.md). 활성 브랜치는 `work/viya-turnaround-qa-20261117`이며main 자동 병합은 하지 않는다. 과거 절의 당시NEXT/미연결/GUI차단보다 CURRENT/NEXT와 최신 검수를 우선한다.
+[CURRENT_WORK](docs/CURRENT_WORK.md)와 **[누적 DEVELOPMENT_STATUS8.82](docs/DEVELOPMENT_STATUS.md)**를 함께 읽는다. [PLANNED_WORK87](docs/PLANNED_WORK.md) · [NEXT_TASK](docs/NEXT_TASK.md) · [AGENTS](AGENTS.md) · [제작 스킬](.agents/skills/viya-game-production/SKILL.md). 활성 브랜치는 `work/viya-turnaround-qa-20261117`이며main 자동 병합은 하지 않는다. 과거 절의 당시NEXT/미연결/GUI차단보다 CURRENT/NEXT와 최신 검수를 우선한다.
 
 ## SAVEFIX001 — 비행 몬스터 저장 보정 이력
 
