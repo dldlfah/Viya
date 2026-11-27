@@ -176,6 +176,15 @@ PATTERN_REVIEWED_SHA256.update({
     'scripts/ui/character_info.gd': 'c6e5221e2ea7eb6b84302ec16547b0525f4d93f71b8ac66e508f73cb8299dd36',
 })
 
+# GAME073 adds account persistence and guarded lobby navigation for Viya.
+FILES += ('scripts/progression/character_progress.gd', 'tests/test_viya_progression.gd')
+PATTERN_REVIEWED_SHA256.update({
+    'scripts/progression/character_progress.gd': '41743ffab91391006e40d7e9c14cf79288ade7f4059c2e14bb636930b4b9bac5',
+    'scripts/progression/gold_progress.gd': '1e044e52166c1dd8acf4b248b4c1fc7577a64c8d918fb279b06b0e9434e93cf3',
+    'scripts/ui/mobile_main.gd': '98e6f8b0d1118bfb09000712dbb3f73aa45a64b9ab66c4309332e9a6c189b1ee',
+    'tests/test_viya_progression.gd': '0972cddc67d1869cac1867e45ef9a7db28e1d898dbc4833b106efc9353f31953',
+})
+
 def validate(sources: dict[str, str]) -> list[str]:
     errors: list[str] = []
     run, view, cues, tests, runner, _ = [sources[x] for x in FILES[:6]]
@@ -471,6 +480,8 @@ def check() -> dict:
         ('game068_unregistered', 'tests/test_viya_presentation.gd', 'res://tests/test_viya_game068.gd', 'res://tests/missing_s.gd'),
 
         ('campaign_gold_old_default', 'scripts/combat/run_state.gd', 'CAMPAIGN_GOLD_DROP_CHANCE := 0.15', 'CAMPAIGN_GOLD_DROP_CHANCE := 0.30'),
+        ('imprint_free_without_cost', 'scripts/progression/character_progress.gd', 'cost <= 0', 'cost < 0'),
+        ('imprint_stale_account', 'scripts/progression/gold_progress.gd', ' and other.character_progress == character_progress', ''),
         ('character_info_invents_other_bonus', 'scripts/ui/character_info.gd', '_add_row(row[0], row[1], increase, "")', '_add_row(row[0], row[1], increase, "+5%")'),
         ('campaign_gold_affects_dungeon', 'scripts/combat/run_state.gd', 'gold_drop_chance = 1.0 if mode=="gold_slime"', 'gold_drop_chance = 0.15 if mode=="gold_slime"'),
         ('route_loses_endpoint', 'scripts/world/map_space.gd', 'bounds.intersects(wall,true)', 'bounds.intersects(wall,false)'),

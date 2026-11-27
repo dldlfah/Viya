@@ -1,12 +1,14 @@
 extends RefCounted
-## One account file commits wallet, stage progress and talents together.
+## One account file commits wallet, stage progress, talents and character progress together.
 const Talents = preload("res://scripts/progression/account_talents.gd")
+const CharacterProgress = preload("res://scripts/progression/character_progress.gd")
 var path: String = "user://viya_gold.cfg"
 var total: int = 0
 var next_stage: int = 1
 var last_run: String = ""
 var loaded: bool = false
 var paid_campaign: Dictionary = {} # All receipts, including replays of old stages.
+var character_progress: Dictionary = CharacterProgress.empty()
 var dungeon: Dictionary = empty_dungeon()
 static func empty_dungeon() -> Dictionary:
 	return {"day":-1,"used":0,"initial":{},"closed_id":"","closed_outcome":"","closed_reward":0}
@@ -70,6 +72,7 @@ func load_progress() -> Error:
 		paid_campaign = {}
 		talent_levels = Talents.empty_levels()
 		dungeon = empty_dungeon()
+		character_progress = CharacterProgress.empty()
 		loaded = true
 		return OK
 	var file := ConfigFile.new()
@@ -113,7 +116,15 @@ func load_progress() -> Error:
 	var saved_dungeon: Variant=file.get_value("gold_dungeon","state",empty_dungeon())
 	if file.has_section("gold_dungeon") and file.get_value("gold_dungeon","schema",-1)!=1:return ERR_FILE_CORRUPT
 	if not valid_dungeon(saved_dungeon):return ERR_FILE_CORRUPT
+	var saved_characters := CharacterProgress.empty()
+	if file.has_section("character_progress"):
+		var schema: Variant = file.get_value("character_progress", "schema", -1)
+		var saved: Variant = file.get_value("character_progress", "state", null)
+		if not schema is int or schema != CharacterProgress.SCHEMA or not CharacterProgress.valid(saved):
+			return ERR_FILE_CORRUPT
+		saved_characters = saved.duplicate(true)
 	dungeon=saved_dungeon.duplicate(true)
+	character_progress = saved_characters
 	total = saved_total
 	next_stage = saved_stage
 	last_run = saved_run
@@ -158,6 +169,19 @@ func campaign_allows(run:Dictionary) -> bool:
 func purchase_attack(expected_level: int) -> Error:
 	return purchase_talent("attack_power", expected_level)
 
+func viya_imprint_cost() -> int:
+	return CharacterProgress.shard_cost(character_progress.viya)
+
+func complete_viya_imprint(expected_stars: int, expected_imprints: int) -> Error:
+	if not loaded or character_progress.viya.stars != expected_stars or character_progress.viya.imprints != expected_imprints:
+		return ERR_INVALID_PARAMETER
+	var updated := CharacterProgress.after_success(character_progress, viya_imprint_cost())
+	if updated.is_empty():
+		return ERR_UNAVAILABLE
+	if not FileAccess.file_exists(path):
+		return ERR_BUSY # A stale imprint must not recreate a reset account.
+	return _commit(total, next_stage, last_run, talent_levels, null, null, updated)
+
 func purchase_talent(id: String, expected_level: int) -> Error:
 	if not loaded or id not in Talents.IDS or not Talents.valid_level(expected_level) or expected_level != talent_levels[id]:
 		return ERR_INVALID_PARAMETER
@@ -177,11 +201,14 @@ func purchase_talent(id: String, expected_level: int) -> Error:
 	return _commit(total - int(Talents.ATTACK_COSTS[expected_level]), next_stage, last_run, next_levels)
 
 func _matches(other) -> bool:
-	return other.total == total and other.next_stage == next_stage and other.last_run == last_run and other.talent_levels == talent_levels and other.dungeon==dungeon and other.paid_campaign==paid_campaign
+	return other.total == total and other.next_stage == next_stage and other.last_run == last_run and other.talent_levels == talent_levels and other.dungeon==dungeon and other.paid_campaign==paid_campaign and other.character_progress == character_progress
 
-func _commit(balance: int, stage_number: int, run_id: String, levels: Dictionary, next_dungeon: Variant = null, next_receipts: Variant = null) -> Error:
+func _commit(balance: int, stage_number: int, run_id: String, levels: Dictionary, next_dungeon: Variant = null, next_receipts: Variant = null, next_character_progress: Variant = null) -> Error:
 	var saved_dungeon: Dictionary=dungeon.duplicate(true) if next_dungeon==null else next_dungeon.duplicate(true)
 	if not valid_dungeon(saved_dungeon):return ERR_INVALID_PARAMETER
+	var saved_characters: Variant = character_progress if next_character_progress == null else next_character_progress
+	if not CharacterProgress.valid(saved_characters):
+		return ERR_INVALID_PARAMETER
 	if run_id.is_empty():run_id="account-created"
 	var file := ConfigFile.new()
 	if FileAccess.file_exists(path):
@@ -204,6 +231,8 @@ func _commit(balance: int, stage_number: int, run_id: String, levels: Dictionary
 	file.set_value("account", "schema", Talents.SCHEMA)
 	file.set_value("account", "attack_level", levels.attack_power)
 	file.set_value("account", "talent_levels", levels.duplicate(true))
+	file.set_value("character_progress", "schema", CharacterProgress.SCHEMA)
+	file.set_value("character_progress", "state", saved_characters)
 	var temporary := path + ".tmp"
 	var error := file.save(temporary)
 	if error != OK:
@@ -217,4 +246,5 @@ func _commit(balance: int, stage_number: int, run_id: String, levels: Dictionary
 	last_run = run_id
 	if next_receipts!=null:paid_campaign=next_receipts.duplicate(true)
 	talent_levels = levels.duplicate(true)
+	character_progress = saved_characters.duplicate(true)
 	return OK

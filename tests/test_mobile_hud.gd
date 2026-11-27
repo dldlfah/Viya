@@ -213,6 +213,7 @@ func _run() -> void:
 	OverviewChecks.run(scene, verify)
 	scene.begin_run()
 	verify(not scene._detail_open and scene.simulation.growth.owned == {"common_rifle": 1}, "Restart clears detail state and per-run upgrades")
+	await preload("res://tests/test_viya_progression.gd").run(scene, verify)
 	scene.queue_free()
 	await process_frame
 	await process_frame

@@ -6,6 +6,7 @@ const ResponsiveFeedback = preload("res://scripts/ui/responsive_feedback_panel.g
 const GrowthOverview = preload("res://scripts/ui/growth_overview.gd")
 const AccountTalents = preload("res://scripts/progression/account_talents.gd")
 const CharacterInfo = preload("res://scripts/ui/character_info.gd")
+const CharacterProgress = preload("res://scripts/progression/character_progress.gd")
 const CombatSkin=preload("res://scripts/ui/combat_skin.gd")
 const CombatSlot=preload("res://scripts/ui/combat_slot_button.gd")
 var combat_skin=CombatSkin.new()
@@ -543,8 +544,23 @@ func _show_menu(kind: String) -> void:
 		var heading: Label = dialog_body.get_child(0) as Label
 		heading.text = "VIYA | 최후의 도시 · 메인 로비"
 		var account := _label("주력 비야 · 현재 계정 특성 강화 %d/54 · 공격력 %s" % [AccountTalents.IDS.reduce(func(sum, id): return sum + int(gold_progress.talent_levels[id]), 0), AccountTalents.effect_text("attack_power", gold_progress.attack_level)] if gold_progress.loaded and gold_error==OK else "현재 계정 특성 정보 확인 불가", 20)
-		dialog_body.add_child(account)
-		dialog_body.move_child(account, 1)
+		var account_row := HBoxContainer.new()
+		dialog_body.add_child(account_row)
+		dialog_body.move_child(account_row, 1)
+		account.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		account.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		account_row.add_child(account)
+		for entry in [
+			["캐릭터 정보", "CharacterInfoButton", _open_character_info],
+			["인벤토리", "InventoryButton", _open_inventory],
+		]:
+			var action: Callable = entry[2]
+			var button := _button(entry[0], action.bind(ticket, revision))
+			button.name = entry[1]
+			button.custom_minimum_size.y = 44
+			button.add_theme_font_size_override("font_size", 17)
+			CombatSkin.style_button(button)
+			account_row.add_child(button)
 		talents_button = _button("계정 특성 · 공격 / 방어 / 회복", _open_talents.bind(ticket, revision))
 		dialog_body.add_child(talents_button)
 	if kind == "ready":
@@ -865,7 +881,7 @@ func _unhandled_key_input(event: InputEvent) -> void:
 		view.queue_redraw()
 		get_viewport().set_input_as_handled()
 		return
-	if _modal_kind in ["stages", "lobby_settings", "gold_dungeon", "character_info"] and event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_ESCAPE:
+	if _modal_kind in ["stages", "lobby_settings", "gold_dungeon", "character_info", "inventory", "viya_imprint"] and event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_ESCAPE:
 		_campaign_back(simulation.navigation_ticket, _menu_revision)
 		get_viewport().set_input_as_handled()
 		return
@@ -1195,11 +1211,6 @@ func _decorate_lobby() -> void:
 	menus.add_child(dungeon_button)
 	var ticket: int = simulation.navigation_ticket
 	var revision: int = _menu_revision
-	var character_button := _button("캐릭터 정보", _open_character_info.bind(ticket, revision))
-	character_button.name = "CharacterInfoButton"
-	character_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	menus.add_child(character_button)
-	menus.move_child(character_button, 1)
 	for title in ["뽑기", "도시", "원정"]:
 		var button := _button(title + " · 준비 중", func(): pass)
 		button.disabled = true
@@ -1326,36 +1337,139 @@ func _launch_stage(ticket: int, revision: int) -> void:
 	_begin_campaign(_selected_stage)
 
 func _campaign_back(ticket: int, revision: int) -> void:
-	if _menu_matches(ticket, revision) and _modal_kind in ["stages", "lobby_settings", "gold_dungeon", "character_info"]:
+	if not _menu_matches(ticket, revision):
+		return
+	if _modal_kind == "viya_imprint":
+		_show_character_info()
+	elif _modal_kind in ["stages", "lobby_settings", "gold_dungeon", "character_info", "inventory"]:
 		_show_menu("ready")
 
 func _open_character_info(ticket: int, revision: int) -> void:
 	if not _menu_matches(ticket, revision) or _modal_kind != "ready" or simulation.phase != RunState.Phase.READY:
 		return
+	_show_character_info()
+
+func _show_character_info() -> void:
 	_clear_dialog()
 	_modal_kind = "character_info"
 	var base: Dictionary = simulation.profiles.hero(simulation.growth.character_id)
 	var name_text: String = base.get("name", "")
+	_add_collection_header("캐릭터 정보" if name_text.is_empty() else "캐릭터 정보 · " + name_text, "메인 로비로", "CharacterInfoBack").name = "CharacterInfoTitle"
+	var loaded: bool = gold_progress.loaded and gold_error == OK
+	if simulation.growth.character_id == "viya":
+		var viya: Dictionary = gold_progress.character_progress.viya
+		var caption := "%d성 · 각인 %d/%d  ›" % [viya.stars, viya.imprints, CharacterProgress.IMPRINTS_PER_STAR] if loaded else "각인 정보를 불러올 수 없습니다."
+		var imprint_button := _button(caption, _open_viya_imprint.bind(simulation.navigation_ticket, _menu_revision))
+		imprint_button.name = "ViyaImprintButton"
+		imprint_button.custom_minimum_size.y = 44
+		imprint_button.add_theme_font_size_override("font_size", 17)
+		imprint_button.disabled = not loaded
+		imprint_button.tooltip_text = "비야 각인 · 승급"
+		CombatSkin.style_button(imprint_button)
+		dialog_body.add_child(imprint_button)
+	var sheet := CharacterInfo.new()
+	sheet.name = "CharacterInfoSheet"
+	dialog_body.add_child(sheet)
+	sheet.setup(simulation, base, gold_progress.talent_levels if loaded else null, combat_skin)
+	_scroll.scroll_vertical = 0
+	_fit_dialog()
+
+func _add_collection_header(caption: String, back_text: String, back_name: String) -> Label:
 	var header := HBoxContainer.new()
 	dialog_body.add_child(header)
-	var title := _label("캐릭터 정보" if name_text.is_empty() else "캐릭터 정보 · " + name_text, 24)
-	title.name = "CharacterInfoTitle"
+	var title := _label(caption, 24)
 	title.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	header.add_child(title)
-	var back := _button("메인 로비로", _campaign_back.bind(ticket, _menu_revision))
-	back.name = "CharacterInfoBack"
+	var back := _button(back_text, _campaign_back.bind(simulation.navigation_ticket, _menu_revision))
+	back.name = back_name
 	back.custom_minimum_size.y = 44
 	back.add_theme_font_size_override("font_size", 16)
 	CombatSkin.style_button(back)
 	header.add_child(back)
-	var sheet := CharacterInfo.new()
-	sheet.name = "CharacterInfoSheet"
-	dialog_body.add_child(sheet)
-	var levels: Variant = gold_progress.talent_levels if gold_progress.loaded and gold_error == OK else null
-	sheet.setup(simulation, base, levels, combat_skin)
+	back.grab_focus()
+	return title
+
+func _open_inventory(ticket: int, revision: int) -> void:
+	if not _menu_matches(ticket, revision) or _modal_kind != "ready" or simulation.phase != RunState.Phase.READY:
+		return
+	_clear_dialog()
+	_modal_kind = "inventory"
+	_add_collection_header("인벤토리", "메인 로비로", "InventoryBack")
+	if not gold_progress.loaded or gold_error != OK:
+		dialog_body.add_child(_label("인벤토리를 불러올 수 없습니다.", 18))
+	else:
+		for id in CharacterProgress.ITEMS:
+			var item: Dictionary = CharacterProgress.ITEMS[id]
+			var row := HBoxContainer.new()
+			_panel(dialog_body).add_child(row)
+			var icon := TextureRect.new()
+			icon.texture = combat_skin.glyph("bonus")
+			icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+			icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+			icon.custom_minimum_size = Vector2(36, 36)
+			row.add_child(icon)
+			var label := _label(item.name + "\n" + item.description, 18)
+			label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			row.add_child(label)
+			var count := _label("%s개" % AccountTalents.gold_text(int(gold_progress.character_progress.items.get(id, 0))), 19)
+			count.name = "ItemCount_" + id
+			row.add_child(count)
 	_scroll.scroll_vertical = 0
 	_fit_dialog()
-	back.grab_focus()
+
+func _open_viya_imprint(ticket: int, revision: int) -> void:
+	if not _menu_matches(ticket, revision) or _modal_kind != "character_info" or gold_error != OK or not gold_progress.loaded:
+		return
+	_show_viya_imprint()
+
+func _show_viya_imprint(message: String = "") -> void:
+	_clear_dialog()
+	_modal_kind = "viya_imprint"
+	_add_collection_header("비야 각인 · 승급", "캐릭터 정보로", "ViyaImprintBack")
+	if not gold_progress.loaded or gold_error != OK:
+		dialog_body.add_child(_label("각인 정보를 불러올 수 없습니다.", 18))
+		_scroll.scroll_vertical = 0
+		_fit_dialog()
+		return
+	var viya: Dictionary = gold_progress.character_progress.viya
+	var progress := _label("%d성 · 각인 %d/%d" % [viya.stars, viya.imprints, CharacterProgress.IMPRINTS_PER_STAR], 22)
+	progress.name = "ImprintProgress"
+	dialog_body.add_child(progress)
+	var steps := HBoxContainer.new()
+	steps.add_theme_constant_override("separation", 6)
+	dialog_body.add_child(steps)
+	for index in range(1, CharacterProgress.IMPRINTS_PER_STAR + 1):
+		var slot := _panel(steps)
+		slot.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		var filled: bool = index <= viya.imprints
+		if filled:
+			slot.add_theme_stylebox_override("panel", CombatSkin.plate(Color("253429"), Color("8cb697")))
+		var step_label := _label("%d" % index, 20)
+		step_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		slot.add_child(step_label)
+	dialog_body.add_child(_label("5각인 완료 시 %d성으로 승급" % (viya.stars + 1) if viya.stars < CharacterProgress.LAST_STAR else "최대 성장 · 6성 5각인", 17))
+	var count: int = gold_progress.character_progress.items.get(CharacterProgress.VIYA_SHARD, 0)
+	var cost: int = gold_progress.viya_imprint_cost()
+	dialog_body.add_child(_label("비야의 조각 %s개" % AccountTalents.gold_text(count), 19))
+	var complete := CharacterProgress.is_complete(viya)
+	var action := _button("각인 완료" if complete else ("조각 %d개 사용 · 각인" % cost if cost > 0 else "각인 · 준비 중"),
+		_apply_viya_imprint.bind(viya.stars, viya.imprints, simulation.navigation_ticket, _menu_revision))
+	action.name = "ImprintAction"
+	action.disabled = complete or cost <= 0 or count < cost
+	CombatSkin.style_button(action)
+	dialog_body.add_child(action)
+	if not message.is_empty():
+		dialog_body.add_child(_label(message, 16))
+	_scroll.scroll_vertical = 0
+	_fit_dialog()
+
+func _apply_viya_imprint(stars: int, imprints: int, ticket: int, revision: int) -> void:
+	if not _menu_matches(ticket, revision) or _modal_kind != "viya_imprint" or gold_error != OK:
+		return
+	var result: Error = gold_progress.complete_viya_imprint(stars, imprints)
+	if result == ERR_BUSY:
+		gold_error = gold_progress.load_progress()
+	_show_viya_imprint("" if result == OK else "각인을 적용할 수 없습니다. 재료와 저장 상태를 확인하세요.")
 
 func _open_lobby_settings(ticket: int, revision: int) -> void:
 	if not _menu_matches(ticket, revision) or simulation.phase != RunState.Phase.READY:
@@ -1389,7 +1503,7 @@ func _ask_account_reset(ticket:int,revision:int) -> void:
 	_clear_dialog()
 	_modal_kind="account_reset"
 	dialog_body.add_child(_label("이 기기의 계정을 초기화할까요?",25))
-	var warning:=_label("보유 금화, 모든 계정 특성, 스테이지 진행,\n던전 이용 기록과 진행 중인 전투가 삭제됩니다.\n되돌릴 수 없으며, 진행 중인 전투 보상은 지급되지 않습니다.\n음량·화면 설정은 유지됩니다.",18)
+	var warning:=_label("보유 금화와 아이템, 각인·승급, 계정 특성,\n스테이지 진행, 던전 기록과 진행 중인 전투가 삭제됩니다.\n되돌릴 수 없으며, 진행 중인 전투 보상은 지급되지 않습니다.\n음량·화면 설정은 유지됩니다.",18)
 	warning.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART
 	dialog_body.add_child(warning)
 	cancel_button=_button("취소 · 설정으로",_cancel_account_reset.bind(simulation.navigation_ticket,_menu_revision))
@@ -1533,7 +1647,7 @@ func _handle_mobile_back() -> bool:
 	if _mission_open:
 		_close_mission(simulation.navigation_ticket,_menu_revision)
 		return true
-	if _modal_kind in ["stages", "lobby_settings", "character_info"]:
+	if _modal_kind in ["stages", "lobby_settings", "character_info", "inventory", "viya_imprint"]:
 		_campaign_back(simulation.navigation_ticket,_menu_revision)
 		return true
 	if _talents_open:
