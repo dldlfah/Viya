@@ -1,0 +1,506 @@
+{
+  "task": "GAME066_REVIEW",
+  "date_kst": "2026-11-27",
+  "status": "PASS_IN_STATED_SCOPE",
+  "base_art_game_commit": "b42b7ed819e907810774cedd98f929d572d816ac",
+  "review_code_commit": "f1998d280a03403d7022fd926a4f1e04ce52d247",
+  "branch": "work/viya-turnaround-qa-20261117",
+  "observed_main_untouched": "e2780feb2f62a7b115b9fb903201f5f069bf1290",
+  "reviewed_delivery": {
+    "run_se_frames": 18,
+    "animations": 33,
+    "total_frames": 298,
+    "other_preserved_clips": 32,
+    "other_preserved_frames": 280,
+    "display": [
+      69,
+      85.56
+    ],
+    "canvas": [
+      200,
+      248
+    ],
+    "pivot": [
+      100,
+      248
+    ],
+    "speed": 235,
+    "stride": 155,
+    "nominal_cycle_ms": 660,
+    "distance_cycle_ms": 659.5744680851063,
+    "phase_origin": 0.2727272727272727,
+    "source_job_record": "a9ab0954-f528-4194-b8c1-3cb8954dd02c",
+    "generation_cost_this_review": 0,
+    "delivery_cost_record_only": 58
+  },
+  "findings_and_fixes": [
+    "Four obsolete active-slot mutation needles and six reviewed presentation/test hashes had not followed the GAME066 resource. Retargeted existing guards and added five SE controls;no previous mutation case removed.",
+    "Two literal dynamic/directory paths in pilot/SE tests failed strict resource existence checking. Construct filenames from an actual first PNG;no resource validator relaxation.",
+    "First full native run reached2458combat checks but two map tests still expected GAME065. Corrected only their expected active resource;all blank-slot and other conditions remain.",
+    "No concrete further image/runtime correction identified;accepted18PNG/resource,uniform timing and inherited3/11origin preserved. Final producer review remains separate.",
+    "SE provenance lacked the same .gdignore used by E packages. Godot generated five unneeded CSV translations. Added only the empty provenance/.gdignore and made the builder create it;existing1272asset/data files are unchanged. Clean import and465navigation checks confirm no generated translations and continued raw CSV access."
+  ],
+  "preservation": {
+    "asset_and_data_files_byte_identical_to_delivery": 1272,
+    "runtime_scripts_byte_identical_to_delivery": true,
+    "save_schema": 22,
+    "rng_streams": 7,
+    "unchanged": [
+      "Original208/ARTFIX001/GAME064/GAME065/GAME066",
+      "SAVEFIX001 numerical expiry fix",
+      "spawns,AI,damage,HP/MP,fire cadence,rewards",
+      "single RunState and atomic save semantics"
+    ],
+    "new_artwork_generated": 0,
+    "new_paid_service_calls": 0,
+    "new_import_metadata_files": [
+      "assets/characters/pilot_32/game066_se_run/provenance/.gdignore"
+    ]
+  },
+  "isolated_builder_reproduction": {
+    "status": "PASS",
+    "scope": "Builder reproduction in isolated copied inputs;production art/resources/config never written.",
+    "outputs": [
+      {
+        "path": "assets/characters/pilot_32/game066_se_run/viya_game066_frames.tres",
+        "byte_identical": true,
+        "sha256": "403baa687c026db8479238aaa737727b2f3ed4ef078402bb92e31effe82e9390"
+      },
+      {
+        "path": "assets/characters/pilot_32/game066_se_run/manifest.json",
+        "byte_identical": true,
+        "sha256": "8339c85795b4c93b37f25ae157c45241bd7f16b9c9297f910c8f55465c674dcb"
+      },
+      {
+        "path": "data/viya_motion.json",
+        "byte_identical": true,
+        "sha256": "a0c2e008106e3b0cf417f241de10424db02bae1be334211eb629087564356b31"
+      },
+      {
+        "path": "data/presentation_slots.json",
+        "byte_identical": true,
+        "sha256": "990b35703c3de7235433c8397e39433fd27fb74274554a1120da6b7367f2a714"
+      }
+    ],
+    "provenance_import_exclusion_created": true
+  },
+  "native": {
+    "status": "PASS",
+    "engine": "4.7.2.stable.official.ed1daf0bf",
+    "commands": [
+      {
+        "command": [
+          "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+          "--headless",
+          "--version"
+        ],
+        "exit_code": 0,
+        "status": "PASS"
+      },
+      {
+        "command": [
+          "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+          "--headless",
+          "--path",
+          "/workspace/Viya",
+          "--editor",
+          "--import",
+          "--quit"
+        ],
+        "exit_code": 0,
+        "status": "PASS"
+      },
+      {
+        "command": [
+          "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+          "--headless",
+          "--path",
+          "/workspace/Viya",
+          "--script",
+          "res://tests/test_combat_foundation.gd"
+        ],
+        "exit_code": 0,
+        "status": "PASS"
+      },
+      {
+        "command": [
+          "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+          "--headless",
+          "--path",
+          "/workspace/Viya",
+          "--script",
+          "res://tests/test_growth.gd"
+        ],
+        "exit_code": 0,
+        "status": "PASS"
+      },
+      {
+        "command": [
+          "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+          "--headless",
+          "--path",
+          "/workspace/Viya",
+          "--script",
+          "res://tests/test_magic.gd"
+        ],
+        "exit_code": 0,
+        "status": "PASS"
+      },
+      {
+        "command": [
+          "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+          "--headless",
+          "--path",
+          "/workspace/Viya",
+          "--script",
+          "res://tests/test_feedback.gd"
+        ],
+        "exit_code": 0,
+        "status": "PASS"
+      },
+      {
+        "command": [
+          "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+          "--headless",
+          "--path",
+          "/workspace/Viya",
+          "--script",
+          "res://tests/test_mobile_hud.gd"
+        ],
+        "exit_code": 0,
+        "status": "PASS"
+      },
+      {
+        "command": [
+          "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+          "--headless",
+          "--path",
+          "/workspace/Viya",
+          "--script",
+          "res://tests/test_run_navigation.gd"
+        ],
+        "exit_code": 0,
+        "status": "PASS"
+      },
+      {
+        "command": [
+          "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+          "--headless",
+          "--path",
+          "/workspace/Viya",
+          "--script",
+          "res://tests/test_combat_cues.gd"
+        ],
+        "exit_code": 0,
+        "status": "PASS"
+      },
+      {
+        "command": [
+          "/workspace/.viya-tools/godot-4.7.2/bin/godot",
+          "--headless",
+          "--path",
+          "/workspace/Viya",
+          "--quit-after",
+          "120"
+        ],
+        "exit_code": 0,
+        "status": "PASS"
+      }
+    ],
+    "timeout_per_command_seconds": 120,
+    "unchanged_runner_function_sha256": "9156043eaf896d72565563cc1e2f623cf0c8fbac7f032f19bffee7e4946a69ee",
+    "checks": 4531,
+    "suites": {
+      "foundation": 23,
+      "growth": 70,
+      "magic": 122,
+      "feedback": 57,
+      "mobile_hud": 1336,
+      "navigation": 465,
+      "combat_cues": 2458
+    },
+    "python_checks": 20,
+    "errors_or_leaks": 0
+  },
+  "initial_full_run_preserved": {
+    "status": "FAIL",
+    "failed_suite": "combat_cues",
+    "failed_assertions": [
+      "Only the explicitly requested Viya pilot with its E derivative is bound; other slots remain blank and final art approval remains separate",
+      "Map pilot is unchanged; only the explicitly supplied Viya pilot with its E derivative occupies its shared slot"
+    ],
+    "resolution": "Expect the active GAME066 path while retaining every other assertion. Complete original10-command suite rerun successfully."
+  },
+  "final_source_checks": {
+    "static_integrity": {
+      "status": "PASS",
+      "files_checked": 187,
+      "resource_references_checked": 623,
+      "errors": [],
+      "source_fingerprint": "20b91d0594a1da386a4939b5b55110cbf16327f33d1ad93ebdb18939024ed1b4",
+      "scope": "UTF-8, delimiters, whitespace, JSON/Python syntax, resource existence, project settings; NOT GDScript parser/typechecking or gameplay."
+    },
+    "growth_data_contract": {
+      "status": "PASS",
+      "pool_count": 18,
+      "counts": {
+        "common_attack": 8,
+        "character_attack": 1,
+        "common_passive": 8,
+        "ultimate_enhancement": 1
+      },
+      "errors": [],
+      "scope": "JSON schema/content and source integration markers only; not GDScript runtime/behavior."
+    },
+    "magic_data_contract": {
+      "status": "PASS",
+      "errors": [],
+      "temporary_skill_names": 18,
+      "required_xp_first_five": [
+        30,
+        48,
+        66,
+        84,
+        102
+      ],
+      "xp_drop_unchanged": 5.0,
+      "scope": "JSON validation, negative data controls and source markers/arithmetic; NOT GDScript runtime, UI, input dispatch or mobile tests."
+    },
+    "feedback_source_contract": {
+      "status": "PASS",
+      "errors": [],
+      "files_checked": 7,
+      "scope": "7 affected code/test/checker files: UTF-8, delimiters, whitespace, Python syntax, reaction constants, integration markers, engine-test registration and new dependency paths only. NOT the full project check or GDScript parser/type/runtime, rendering, or mobile input tests."
+    },
+    "mobile_hud_source_contract": {
+      "status": "PASS",
+      "files_checked": 8,
+      "errors": [],
+      "source_fingerprint": "6204edeaf6dcad51309846b3c98cc124a3061778447484d5ae40051e3579aa94",
+      "scope": "Changed UTF-8 files, delimiters, Python syntax and integration source checks only. NOT GDScript parsing/typechecking, actual Control geometry, touch dispatch, rendering or mobile execution."
+    },
+    "run_navigation_source_contract": {
+      "status": "PASS",
+      "files_checked": 5,
+      "errors": [],
+      "source_fingerprint": "b30f6b8db38e5b1b7f66f2abc406916d47584a6f8b30e7c4767c238c36b01517",
+      "scope": "UTF-8/delimiters/Python syntax and navigation SOURCE contracts only; NOT GDScript parsing/types, native execution, actual UI/input, or mobile testing."
+    },
+    "combat_cues_source_contract": {
+      "status": "PASS",
+      "files_checked": 107,
+      "errors": [],
+      "source_fingerprint": "6f8c4f6a83a1ac1697b75385da2c9912b86f153f00cad92bd7a7ceb257c87e39",
+      "baseline_run_blob": "673d75a748fa5f1f9ac72ec73bbd9120fdcfce02",
+      "baseline_runner_blob": "1ab68ad8a51271e3d47db8b02d433991f42e8d6c",
+      "baseline_engine_function_sha256": "9156043eaf896d72565563cc1e2f623cf0c8fbac7f032f19bffee7e4946a69ee",
+      "scope": "Changed-source UTF-8/delimiters/Python syntax, hook order, bounds, isolation, reviewed GAME-024 RunState/GAME-030 view baselines with exact GAME-033 observations and GAME-038/039/040 version-gated pattern adapters and frozen v1/v2/v17, preserved engine runner. NOT Godot parser/type/runtime, visual quality, input dispatch, or FPS."
+    }
+  },
+  "negative_controls": {
+    "count": 141,
+    "all_rejected": true,
+    "new": [
+      {
+        "fixture": "game066_active_rollback",
+        "rejected": true
+      },
+      {
+        "fixture": "game066_missing_se",
+        "rejected": true
+      },
+      {
+        "fixture": "game066_missing_old_fire",
+        "rejected": true
+      },
+      {
+        "fixture": "game066_unregistered",
+        "rejected": true
+      },
+      {
+        "fixture": "game066_muzzle_corrupt",
+        "rejected": true
+      }
+    ]
+  },
+  "actual_gui": {
+    "checks": 1793,
+    "display": "X11",
+    "draws": 379,
+    "failures": [],
+    "firing_frames": [
+      17,
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16
+    ],
+    "logic_only": false,
+    "real_shots": 8,
+    "run_frames": [
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "run_wraps": 4,
+    "status": "PASS"
+  },
+  "actual_gui_scope": "Production main.tscn,isolated open-stage route,native key events,fixed updates,actual draws. SE18 cycles,E/SE turns,release,current generic moving fire,backward aim,stationary attack,pause. Not dedicated SE firing art,realtime FPS,hardware QA,physical foot-contact proof or final producer approval.",
+  "actual_gui_environment": {
+    "display": ":100",
+    "server": "Task-local Xorg dummy,not the unavailable shared:99",
+    "renderer": "Mesa25.0.7llvmpipe,OpenGL4.5compatibility",
+    "audio": "Dummy",
+    "input": "Injected Godot InputEventKey events,not physical keyboard/touch hardware",
+    "read_only_draws": 379,
+    "captured_pngs": 247
+  },
+  "visual_review": {
+    "examined": [
+      "all18full-body frames/contact sheet",
+      "last-to-first,current-size main-scene movement",
+      "E/SE transitions,release,real generic fire,reverse aim,stationary,pause",
+      "shared root/size and measured muzzle metadata"
+    ],
+    "result": "No concrete image correction identified. Body/root and numerical gait continuity are verified within the stated tests.",
+    "limits": "The unchanged inherited3/11offset is a numerical alignment,not proof of physically matching soles across camera directions. No source skeleton/floor data or independent no-slip measurement. Producer art approval remainsNOT_VERIFIED.",
+    "comparison_artifact": "docs/validation/GAME066_REVIEW_PHASES.png",
+    "comparison_scope": "2D source-phase contact sheet,not a game screenshot or new art."
+  },
+  "historical_source_retrieval": {
+    "status": "NOT_VERIFIED",
+    "reason": "<urlopen error Tunnel connection failed: 403 Forbidden>",
+    "scope": "Optional historical source retrieval;accepted RGBA remains available."
+  },
+  "manifest_status_note": "Delivery manifest.status describes its build-time state. Dated integration/review reports record subsequent engine/render verification;builder reproduction kept it unchanged.",
+  "reference_export": {
+    "canvas": [
+      600,
+      744
+    ],
+    "cycle_seconds": 0.66,
+    "direction": "se",
+    "fps": 60,
+    "frames": 198,
+    "nominal_cycles": 5,
+    "scale": 3,
+    "scope": "Replay of current full-body run on neutral gray for motion-control input. No new poses,shooting frames,limb edits or production asset changes; captured-frame export,not real-time FPS.",
+    "source_canvas": [
+      200,
+      248
+    ],
+    "source_frame_count": 18,
+    "source_frames_seen": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17
+    ],
+    "source_resource": "res://assets/characters/pilot_32/game066_se_run/viya_game066_frames.tres",
+    "status": "PASS"
+  },
+  "source_sha256": {
+    "tests/test_character_pilot.gd": "0085a282fca3d62a91f80c128e0cf24579dcfeabd4def210d7ccfca1150d94bf",
+    "tests/test_viya_game066.gd": "c359067d9888bc32361a5e685865d0cf55325983b208506fd20cfb332eb25983",
+    "tests/test_maps.gd": "409775b077994cef75364634876339028d23e3175f0fbd05a0f726147d3add74",
+    "tests/test_map_pilot.gd": "875ef4cd3abc73576a491e5ebd7c9d87476a22cf0f171691f38e2d4597d425cf",
+    "tools/check_combat_cues.py": "d3bae06a8c63297ab6dd94a5ab54ea0ae691c7933ca65bc5a31b0474ff2fc489",
+    "tools/inspect_viya_game066.gd": "0057bbbf0f14d9440929143378a60936c3857f3f62e4104fff9eb1487ac783b0",
+    "tools/build_viya_game066.py": "969867ce80a8053371b61041c815cc3b74aa1063194c53bc4de537a0a3a8fb1e",
+    "assets/characters/pilot_32/game066_se_run/provenance/.gdignore": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "artifacts": {
+    "docs/validation/GAME066_REVIEW_IN_GAME.png": "a1faf96720efea73a3abf51b3c8360a708a40f3b491cdc2d2a44fa30c26e0799",
+    "docs/validation/GAME066_REVIEW_PHASES.png": "8dcf9c650eb491b2c38fc94465b75afd286aae448f9326656c658af8dcb04981",
+    "docs/validation/GAME066_REVIEW_GAMEPLAY.mp4": "52a217b16c58c1eb9fa045d66ace920e546790e527d82f7f616a7fd20e4f6db3",
+    "docs/validation/GAME066_REVIEW_XORG.conf": "3068a248b9085dab2e9dea99a086d16ea17dcaf1f774d98eff2e1cd9ba0c62bc",
+    "docs/validation/GAME066_REVIEW_RUNTIME.log": "fe17df9c59f493ef02fa87a40b0f0c89762d4bb9a25c224b46c6e33d3491d324",
+    "docs/validation/GAME067_SE_RUN_REFERENCE.mp4": "d6286b03907b5676f648b100db23830b3de325ff610eef7554d95bbecbf6d1d7",
+    "docs/validation/GAME067_REFERENCE_REPORT.json": "29adc69f4f54f8f15303034958a6ca58d42d22dc0f8b3046643725091047c292",
+    "docs/validation/GAME066_REVIEW_IMPORT.json": "e352801d268c3a5e543bcef949349e7081a4f23c75777626bf2c710b422113b7"
+  },
+  "setup_notes": [
+    "Remote origin fetch refspec tracks only main. Fetched work branch was verified via ls-remote/FETCH_HEAD and fast-forwarded from20c4dae;stale origin/work tracking ref was not trusted or reconfigured.",
+    "Shared:99socket existed without a running Xserver. First GUI startup failed before the script ran. Used installed dummy driver on task-local Xorg:100 with no TCP listener;final application run had no errors/leaks.",
+    "Historical source CDN retrieval returned tunnel403 under existing network policy. Did not broaden network permissions or regenerate;accepted RGBA/provenance and engine tests remained available."
+  ],
+  "reproduce": [
+    "Set task-owned XDG_CACHE_HOME/XDG_CONFIG_HOME/XDG_DATA_HOME.",
+    "python3 tools/check_project.py --godot /workspace/.viya-tools/godot-4.7.2/bin/godot --output .local_validation/GAME066_REVIEW/check_final",
+    "Godot --headless --path . --script tools/inspect_viya_game066.gd -- --logic-only",
+    "Use existing X11 or run installed Xorg dummy with docs/validation/GAME066_REVIEW_XORG.conf;DISPLAY=:100 Godot --path . --display-driver x11 --audio-driver Dummy --rendering-method gl_compatibility --script tools/inspect_viya_game066.gd",
+    "tools/export_viya_run_reference.gd -- --direction=se --output=res://.local_validation/GAME067_REFERENCE;encode captured198frames at60fps."
+  ],
+  "not_verified": [
+    "Final producer art approval",
+    "Windows/mobile hardware,physical input,audio hardware",
+    "Realtime FPS/thermal/latency",
+    "Original selected RGB video bytes due CDN403"
+  ],
+  "open": [
+    "1540-actor CPU/render overload",
+    "Final economy and whole-stage finish",
+    "Historical invalid-file automatic repair"
+  ],
+  "next": {
+    "task": "GAME067_SE_MOVING_FIRE",
+    "status": "PREPARED_NOT_GENERATED_OR_CONNECTED",
+    "prompt": "tools/higgsfield/requests/game067/PROMPT_KO.txt",
+    "reference": "docs/validation/GAME067_SE_RUN_REFERENCE.mp4"
+  },
+  "post_import_cleanup": {
+    "editor_import_report": "docs/validation/GAME066_REVIEW_IMPORT.json",
+    "native_navigation_checks": 465,
+    "native_navigation_status": "PASS",
+    "scope": "Import-only addition and builder packaging after the full4531run;all game scripts,data,PNG and SpriteFrames bytes are the same as the full-suite/GUI tests.",
+    "editor_import": {
+      "status": "PASS",
+      "exit_code": 0,
+      "timeout_seconds": 120,
+      "generated_translation_files": [],
+      "scope": "Normal Godot editor import after matching prior E provenance exclusions;CSV remains raw-readable as verified by465native checks."
+    }
+  }
+}

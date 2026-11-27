@@ -1,9 +1,16 @@
-# VIYA — next single production unit
+# VIYA — 다음 단일 제작 작업
 
-GAME066 SE full-body run is technically complete in the work branch. 18 unique RGBA frames on a fixed 200x248 canvas replace SE run11, nominal cycle660ms. Godot4.7.2 regression465 PASS and actual X11 SE renderer198 frames / 5 cycles PASS. User's final art approval and hardware FPS are separate. See docs/validation/GAME066_INTEGRATION_REPORT.json.
+GAME066 SE18의 실제 전투 검수와 검증 연결 보완을 마쳤다. 원화/게임 연결 기준은 **`b42b7ed819e907810774cedd98f929d572d816ac`**,검수 코드 기준은 **`f1998d280a03403d7022fd926a4f1e04ce52d247`**다. [CURRENT](CURRENT_WORK.md) · [누적8.66](DEVELOPMENT_STATUS.md) · [PLANNED72](PLANNED_WORK.md) · [검수 근거](validation/GAME066_REVIEW_REPORT.json).
 
-## Next: GAME067 SE moving fire
+## 다음 — GAME067 SE 전용 전신 이동사격
 
-Create a true full-body southeast running-while-aiming/firing loop on the same southeast camera and original character identity. Use the accepted GAME066 SE run as gait reference and preserve its current run phase; do not rotate E pose or duplicate generic running frames. No baked flashes/bullets; game owns shot effects. Deliver registered transparent PNG frames, exact timings, separate per-frame muzzle and actual engine run/fire switches, stop/turn/reverse/pause checks. Retain other 32 poses, original 208, ARTFIX001, GAME064/GAME065, SAVEFIX001, save22, 7 RNG streams. Read current model pricing/balance before billed generation; no purchase or auto-recharge. Only mark art approval after user's actual approval.
+1. 사용자 지정 기획/Higgsfield 세션에서 [한글 제작/연결 기준](../tools/higgsfield/requests/game067/PROMPT_KO.txt)·[영문 프롬프트](../tools/higgsfield/requests/game067/PROMPT_EN.txt)·[참조 해시](../tools/higgsfield/requests/game067/request_plan.json)와 [현재 SE18 재생 영상](validation/GAME067_SE_RUN_REFERENCE.mp4)을 사용한다. 과거 GAME066_SE_RUN_REFERENCE는 이전11장 영상이므로 입력을 혼동하지 않는다. 실제 지원 기능/참조 입력·출력·알파/가격·잔액을 생성 때 조회한다. 기존815.25는 과거 조회다.
+2. SE18의 카메라/성인 비야 외형·총기/비대칭과 전신 보행을 기준으로 조준/반동이 있는 실제 새 주기를 제작한다. 필요한 서로 다른 프레임과 시간표·총구/발 랜드마크를 납품하며18장 숫자를 목표로 하지 않는다. E를 회전/반전하거나 달리기 복제·팔다리 조립·핑퐁으로 대체하지 않는다. 섬광/탄환은 엔진에 맡긴다.
+3. 기존33클립/298프레임을 모두 보존하고 새 선택적`run_fire_se`하나를 파생 리소스에 더한다.200×248·69×85.56·pivot(100,248),이동235/stride155와 SAVEFIX001/저장22/7난수·전투 규칙을 유지한다. 새 사격의 시간/위상·총구는 독립 측정한다. 숫자3/11이나 E총구를 무조건 복사하지 않는다.
+4. 현재 전용 사격 선택/검증은 E뿐이므로 SE 경로를 실제 표시 코드에 확장한다. 클립/메타데이터가 없거나 무효이면 같은 거리 위상의 SE달리기로 복귀한다. 실제 main.tscn에서 발사 켜기/끄기·즉시 명중/벽 소비·E↔SE·후진·정지사격·피격 우선·일시정지를 확인해 제작→연결→행동 확인→기록/원격 보존으로 마감한다.
 
-Other open items: Windows/mobile hardware QA, 1540-actor performance, economy and full first-stage finish.
+## 현재 완료와 미완성
+
+이번 재검수는 기존10명령/7묶음·각120초의4,531네이티브/Python20·6계약/141변이거부,실제 Linux X11전투1,793검사/379그리기 PASS다. 제작 기록 CSV 임포트 제외 후 정상 import/관련465검사를 재확인했다. 기존PNG/리소스·게임/저장 코드는 보존했고 구체적 추가 원화 결함은 찾지 못했다. 최종 아트·물리 접지의 완전한 일치·Windows/모바일/FPS는 별도다.
+
+**GAME067 신규 원화 생성/게임 적용은 아직0**이다. 현재 SE 실발사에는 SE18 일반달리기를 사용하며 그것을 전용 SE 이동사격 완료로 세지 않는다. 원화는 기획/Higgsfield,납품 검증·게임 연결은 제작 세션에서 진행한다. 후속은 필요한 다른 방향→고블린1종→표시/아이콘→초상화4종→1스테이지 마감이며 지금 자동 확장하지 않는다.1540과부하·경제·과거 무효파일 자동복구·기기/최종 아트는 별도 OPEN이다. 기존 브랜치/main자동병합·force push·유료Actions금지/3D보류·지원2+2를 유지한다.

@@ -1,26 +1,28 @@
 # Viya — 모바일 서바이버 게임
 
-## 최신 GAME066 (2026-11-27)
+## 최신 GAME066 검수 마감 → GAME067 (2026-11-27)
 
-작업 브랜치에서 SE 달리기11→18프레임 게임 연결을 완료했다. 기존 GAME065 E 이동사격47·GAME064 E 달리기47·원본208·ARTFIX001·SAVEFIX001은 보존한다. Godot4.7.2 이동 관련 검사465 PASS와 실제 X11 SE 렌더198프레임/명목5주기 PASS. 이전 문서의 미완료 표현은 작성 당시 이력이며 현재 NEXT_TASK의 GAME067 SE 이동사격으로 이어간다. 아트 최종 승인·Windows/모바일 실기/FPS는 미검증이다.
+SE 달리기11→18이 연결된 원격b42b7ed를 실제 전투에서 검수했다. 현재 검수 코드 **`f1998d280a03403d7022fd926a4f1e04ce52d247`**. 잘못된 검사 리소스 문자열2곳과 지도 슬롯 기대값2곳/보존 검사를 현재 리소스에 맞췄으며 원화·게임/저장 코드는 유지했다. 제작 기록 CSV의 번역 자동 임포트도 제외했다. 기존 전체10명령/7묶음 **4,531검사**·Python20·6계약/141변이거부와 실제 X11전투 **1,793검사/379그리기 PASS**다. 임포트 설정 보완 후 정상 import/관련465검사도 재통과했다. [보고서](docs/validation/GAME066_REVIEW_REPORT.json) · [실제 이동 영상](docs/validation/GAME066_REVIEW_GAMEPLAY.mp4) · [실제 화면](docs/validation/GAME066_REVIEW_IN_GAME.png).
+
+다음은 **GAME067 SE 전용 이동사격**이다. [기획/Higgsfield 제작 지시](tools/higgsfield/requests/game067/PROMPT_KO.txt)와 [새 SE18 기준 영상](docs/validation/GAME067_SE_RUN_REFERENCE.mp4)을 준비했다. 신규 사격 원화/게임 연결은 아직0이다. 기존 E47/이동사격47·SE18/298프레임·원본208·ARTFIX001·SAVEFIX001을 보존한다. 최종 아트·Windows/모바일/FPS·물리 접지의 완전한 일치는 미검증이다. 과거 절의 당시 NEXT/미완료 표현보다 [CURRENT](docs/CURRENT_WORK.md)·[NEXT](docs/NEXT_TASK.md)를 우선한다.
 
 기존 BREAKERS와 독립된 프로젝트. **프롤로그와 별도 1스테이지 고각 전장에 사용자 맵 파일럿12종을 활용했으며, 비야는 사용자8방향 스프라이트를 시범 사용하며 UI·몬스터/시설·나머지 전장은 임시 그래픽이다. Higgsfield 2D 원화 수정·재생성은 현재 허용하고, 3D 제작은 보류**한다.
 
 ## 세션 필수 문서
 
-[CURRENT_WORK](docs/CURRENT_WORK.md)와 **[누적 DEVELOPMENT_STATUS](docs/DEVELOPMENT_STATUS.md)**를 함께 읽는다. [PLANNED_WORK](docs/PLANNED_WORK.md) · [NEXT_TASK](docs/NEXT_TASK.md) · [AGENTS](AGENTS.md) · [제작 스킬](.agents/skills/viya-game-production/SKILL.md). 현재 GAME065 E 이동사격을 검수하고 즉시 명중/벽 충돌 때 사격 자세가 누락되는 관측을 보정했다. 최신 실제 게임 코드 기준은 **`06fca9441b5b7dc41ad01538cead30cb487f8189`**, 다음은 **GAME066 SE 달리기 한 방향**이다. 브랜치는 `work/viya-turnaround-qa-20261117`이며 문서/제작 참조 커밋과 구분한다. main 자동 병합은 하지 않는다.
+[CURRENT_WORK](docs/CURRENT_WORK.md)와 **[누적 DEVELOPMENT_STATUS](docs/DEVELOPMENT_STATUS.md)**를 함께 읽는다. [PLANNED_WORK](docs/PLANNED_WORK.md) · [NEXT_TASK](docs/NEXT_TASK.md) · [AGENTS](AGENTS.md) · [제작 스킬](.agents/skills/viya-game-production/SKILL.md). 현재 GAME066 SE18 검수를 마쳤다. 게임 연결은b42b7ed,검수 코드 기준은 **`f1998d280a03403d7022fd926a4f1e04ce52d247`**,다음은 **GAME067 SE 이동사격 한 방향**이다. 브랜치는 `work/viya-turnaround-qa-20261117`이며 문서/제작 참조 커밋과 구분한다. main 자동 병합은 하지 않는다.
 
-## SAVEFIX001 — 비행 몬스터 만료 후 저장·이어하기 보정
+## SAVEFIX001 — 비행 몬스터 저장 보정 이력
 
-SE 원화 인계를 기다리는 동안 기존 비행 수명 저장 결함을 수정했다.5초 뒤 극소 양수로 남던 비행 몬스터를 기존 저장 하한1마이크로초 미만에서 만료 처리하며,만료 후 밀치기·접촉도 종료한다. 저장22/엄격 검증·원자 파일/원화는 유지한다. 전체 **4,523검사**,Python20·6계약/136변이거부·실제GUI11검사/3그리기의 일시정지→저장→파일 재읽기→계속하기를 통과했다. [보고서](docs/validation/SAVEFIX001_REPORT.json) · [실제 계속하기](docs/validation/SAVEFIX001_CONTINUED.png).
+SE 원화 인계를 기다리던 당시 기존 비행 수명 저장 결함을 수정했다.5초 뒤 극소 양수로 남던 비행 몬스터를 기존 저장 하한1마이크로초 미만에서 만료 처리하며,만료 후 밀치기·접촉도 종료한다. 저장22/엄격 검증·원자 파일/원화는 유지한다. 전체 **4,523검사**,Python20·6계약/136변이거부·실제GUI11검사/3그리기의 일시정지→저장→파일 재읽기→계속하기를 통과했다. [보고서](docs/validation/SAVEFIX001_REPORT.json) · [실제 계속하기](docs/validation/SAVEFIX001_CONTINUED.png).
 
-이 수정은 만료된 개체의 마지막 밀치기와 그에 따른 피격 차이를 포함한다. 적 생성량/피해 공식/보상 수치를 변경한 성능 개선으로 보고하지 않는다. 과거 손상 파일 자동 복구·Windows/모바일/FPS·최종 아트 검증은 별도다. 다음은 기존 **GAME066 SE 달리기**,새 원화 생성/적용은 아직 없다.
+이 수정은 만료된 개체의 마지막 밀치기와 그에 따른 피격 차이를 포함한다. 적 생성량/피해 공식/보상 수치를 변경한 성능 개선으로 보고하지 않는다. 과거 손상 파일 자동 복구·Windows/모바일/FPS·최종 아트 검증은 별도다. 당시 다음은 GAME066이었으며 현재 SE18 연결/검수와 NEXT는 위 최신 절을 따른다.
 
 ## GAME065 검수 — 즉시 명중 사격 자세 보정
 
 생성 직후 사라진 탄환도 실제 발사 방향을 기록해 E 이동사격을 표시한다. 뒤이어 나온 활 투사체가 총 조준을 덮어쓰지 않도록 했다. 발사 간격·피해·적 수·저장22/7난수·기존 원화는 유지한다. 기존 전체10명령/7묶음·120초의 **4,501검사**, Python20·6계약/131변이거부·실제GUI **1,554검사/492그리기**를 통과했다. [검수 보고서](docs/validation/GAME065_REVIEW_REPORT.json) · [실제 이동사격 영상](docs/validation/GAME065_REVIEW_MOVING_FIRE.mp4). 실시간FPS·Windows/모바일·최종 아트 승인은 별도다.
 
-다음 SE 한 방향의 [기획/Higgsfield 제작 지시](tools/higgsfield/requests/game066/PROMPT_KO.txt)와 [현재 SE 기준 영상](docs/validation/GAME066_SE_RUN_REFERENCE.mp4)을 준비했다. 현재11장을 그대로 재생한 참조이며 **새 SE 원화 생성/게임 적용은 아직 없다.** E47 달리기·E47 이동사격은 보존한다.
+당시 SE 한 방향의 [기획/Higgsfield 제작 지시](tools/higgsfield/requests/game066/PROMPT_KO.txt)와 [현재 SE 기준 영상](docs/validation/GAME066_SE_RUN_REFERENCE.mp4)을 준비했다. 그 당시11장을 그대로 재생한 참조다. 현재 SE18은 위 GAME066에 연결돼 있으며 다음 입력은 새 GAME067 참조를 사용한다. E47 달리기·E47 이동사격은 보존한다.
 
 ## GAME064 — E 달리기 47프레임 연결
 

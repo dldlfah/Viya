@@ -1,119 +1,27 @@
 # VIYA — 현재 작업 상태 / 메인 작업문서
 
-## GAME066 — 2026-11-27 SE running completed in work branch
+기록일 **2026-11-27 (KST)**. 브랜치 **`work/viya-turnaround-qa-20261117`**. [누적 DEVELOPMENT_STATUS](DEVELOPMENT_STATUS.md) · [PLANNED_WORK](PLANNED_WORK.md) · [NEXT_TASK](NEXT_TASK.md).
 
-GAME066 SE running was replaced from 11 to 18 genuinely consecutive full-body RGBA poses on fixed 200x248 canvas, pivot(100,248), display69x85.56, stride155, speed235, 660ms cycle. All other32 animations, original 208, ARTFIX001, GAME064 E run47, GAME065 E moving-fire47 and SAVEFIX001 are preserved. Active battle slot points at game066_se_run/viya_game066_frames.tres. The original SE phase-origin 3/11 is unchanged.
+## 최신 — GAME066 SE 달리기 검수 마감 → GAME067 SE 이동사격
 
-Higgsfield Genjutsu candidate ee75ff39-7354-4f8e-a6fb-df30c4eeae46 was rejected for side-angle drift (28 credits). Seedance2.5 SE source video edit a9ab0954-f528-4194-b8c1-3cb8954dd02c was accepted for technical production (30 credits). Total58 charged, balance815.25; no payment or recharge.
+사용자의 완료본 확인·필요한 수정·다음 진행 지시에 따라 원격 **`b42b7ed819e907810774cedd98f929d572d816ac`**의 SE18 게임 연결을 확인했다. 현재 검수 코드 기준은 **`f1998d280a03403d7022fd926a4f1e04ce52d247`**이며,원화 제작/게임 적용 커밋 b42b7ed와 이후 검증·인계 문서 커밋을 구분한다. [누적8.66](DEVELOPMENT_STATUS.md) · [검수 보고서](validation/GAME066_REVIEW_REPORT.json).
 
-PASS: Godot 4.7.2 native navigation and animation checks 465/465; actual Godot X11 SE renderer 198 rendered frames, 5 continuous cycles, 18 different frame indices all observed. See validation/GAME066_INTEGRATION_REPORT.json. NOT VERIFIED: final producer art approval, Windows/mobile devices, FPS/thermal, full-game realtime combat QA.
+현재 활성 리소스는 `assets/characters/pilot_32/game066_se_run/viya_game066_frames.tres`다. SE run11→18의 파생물을 사용해 **33클립·298프레임**이며,다른32클립/280프레임의 경로·시간/루프와 기존 E47/E이동사격47·원본208/ARTFIX001을 보존한다. **200×248·표시69×85.56·pivot(100,248),이동235/stride155**와 명목660ms/거리주기659.574468ms·기존SE원점3/11을 유지한다.
 
-Next one unit: GAME067 SE moving-fire pose loop and phase-preserving integration. Do not re-create E run/fire, redesign other directions, or change gameplay/save/RNG.
+**수정한 검수 연결:** 현재 SE 리소스를 따라오지 않은 보존 해시/변조 입력을 갱신하고 SE 전용 변조5개를 추가했다. 검사 코드의 동적/디렉터리 리소스 문자열2곳은 실제 첫PNG에서 경로를 구성하도록 수정했다. 전체 회귀에서 발견한 지도 검사2곳의 이전 GAME065 슬롯 기대값도 현재 GAME066으로 바꿨다. 다른 슬롯의 빈칸·기존 조건·오류/누수/120초 판정은 유지했다. SE 제작 기록 CSV가 번역 파일5개로 임포트되는 문제도 기존 E폴더와 같은 provenance/.gdignore·빌더 설정으로 막았다. 시간표의 원본 읽기는 유지하며 실제 게임/저장 코드나 원화는 변경하지 않았다.
 
-기록일 **2026-11-26 (KST)**. 브랜치 **`work/viya-turnaround-qa-20261117`**. [DEVELOPMENT_STATUS](DEVELOPMENT_STATUS.md) · [PLANNED_WORK](PLANNED_WORK.md) · [NEXT_TASK](NEXT_TASK.md).
+**확정 PASS:** 기존10명령/7네이티브 묶음 **4,531검사**(23+70+122+57+1336+465+2458),각120초·엄격실패판정 유지. Python20·최종187소스/623참조·6계약/변이141거부. 빌더는 격리한 입력에서 재실행해 SpriteFrames/manifest/motion/slot4개 출력이 납품본과 바이트 동일함을 확인했다. 초기 회귀의 지도 슬롯2실패는 보존하고 최종 전체10명령을 다시 통과했다. 이후 제작 기록 임포트 설정만 추가한 뒤 정상 editor import와 관련465검사를 재통과했고 번역파일이 생성되지 않음을 확인했다.
 
-## 최신 — SAVEFIX001 비행 수명 저장 결함 수정, 다음 GAME066 SE 유지
+**실제 전투 화면 PASS:** 별도 Xorg:100/Linux X11/Mesa llvmpipe OpenGL4.5·Dummy에서 생산 `main.tscn`을 **1,793검사/379그리기**로 확인했다. SE18전체/4회 반복·E↔SE 4왕복·입력 해제와 발 정지·기존 SE실발사8회·후진 조준48단계·정지공격·일시정지를 확인했다. 모든 그리기 전후 Snapshot/cues는 같다. [실제 전투 화면](validation/GAME066_REVIEW_IN_GAME.png) · [실제 SE 이동 영상](validation/GAME066_REVIEW_GAMEPLAY.mp4) · [로그](validation/GAME066_REVIEW_RUNTIME.log). 고정시간 갱신/주입한 Godot 키 이벤트의 검증으로 실시간FPS·물리 입력·사용자 Windows/모바일 검증과 구분한다.
 
-원격 **`89bf6611f659e5ff61b9254c3b93580d9025888f`**까지 확인했으며 새 SE 원화는 없었다. 원화는 기존 기획/Higgsfield 역할을 유지하고,한 판 마감 전 해결하기로 한 기존 저장 결함을 독립 수정했다. 실제 코드 **`06fca9441b5b7dc41ad01538cead30cb487f8189`**. [누적8.64](DEVELOPMENT_STATUS.md) · [검증 보고서](validation/SAVEFIX001_REPORT.json).
+추가 원화 수정을 요하는 구체적 결함은 찾지 못해 SE18을 유지했다. 공통 거리 위상/고정 root는 확인했으나 숫자3/11 보존을 카메라 간 완전한 족저 접지/무미끄러짐의 증명으로 삼지 않는다. [원화 위상 비교](validation/GAME066_REVIEW_PHASES.png)는 실제 게임 캡처와 별도다. 최종 아트는 프로듀서 판단이며 **NOT_VERIFIED**다. 과거 RGB 원출력 URL은 현재 네트워크403으로 독립 재다운로드하지 못했고,기존 RGBA/메타데이터·해시를 검증했다.
 
-비행 몬스터의5초 수명이100×.05초 뒤 약9.4×10⁻¹⁵초로 남아 저장 검증의1µs 하한에 걸리는 문제를 재현했다. 기존 `_move_fliers`에서1µs **미만**을 이동/밀치기/접촉 전에 만료 처리한다. 정확히1µs인 살아 있는 개체와 일반 수명은 유지한다. 만료는 처치·XP·금화나 난수를 만들지 않는다. **저장22/지문/7난수·엄격 검증·원자 저장 코드는 그대로**다.
+**보존:** 출발b42b7ed 대비 게임/저장 scripts와 기존 assets/data1272추적파일은 바이트 동일하고 새 파일은 제작 기록 임포트 제외용 .gdignore 하나뿐이다. SAVEFIX001·저장22/7난수·스폰/AI/피해/HP·MP/보상·6분 캠페인/3분 던전을 유지한다. 이번 생성/크레딧/결제0이다. GAME066 제작 당시58크레딧/마지막815.25는 과거 기록이며 이번 잔액 조회가 아니다. [현재 자산 등록](ASSET_MANIFEST.md)을 보완했다.
 
-원래6전투×101상태를 대조했다.605개 상태는 기존 골든과 같고 마지막 `fly1540`만 의도대로 다르다.187개 만료 비행 개체 제거·167개 지상 개체의 마지막 밀치기 제거·그 위치 차이에 따른 중장갑1076번의 HP59→46을 명시해 검증했다. 그 외 개체 필드·전투 상태·보상과 모든 시점의7난수는 동일하다. 원본 골든을 보존하고 마지막 수정 상태는 별도 정확한 전체 해시로 고정했다. 이 만료 결함 수정을 스폰 축소/렌더 성능 개선으로 보고하지 않는다.
+## 다음 한 단위 — GAME067 SE 전용 전신 이동사격
 
-**PASS:** 기존10명령/7네이티브 묶음 **4,523검사**(신규22포함),각120초·오류/누수/PASS 규칙 유지. 최종 참조 fixture의 EOF공백 정리 후 신규22검사도 재통과했다. Python20·185소스/612참조·6계약/변이136거부. 실제 Linux X11/llvmpipe의 생산 장면 **11검사/3그리기**에서 정상5초 만료→일시정지 저장→새 파일 리더→계속하기와 정확한 복원을 확인했다. [저장 화면](validation/SAVEFIX001_SAVED_PAUSE.png) · [계속하기](validation/SAVEFIX001_CONTINUED.png) · [실제 로그](validation/SAVEFIX001_RUNTIME.log).
+기획/Higgsfield 세션용 [한글 지시](../tools/higgsfield/requests/game067/PROMPT_KO.txt)·[영문 프롬프트](../tools/higgsfield/requests/game067/PROMPT_EN.txt)·참조 해시와 [SE18 기준 영상](validation/GAME067_SE_RUN_REFERENCE.mp4)을 준비했다. 영상은 현재 채택 달리기를600×744/60fps·198프레임·명목5주기로 재생한 참조이며 새 사격 원화가 아니다. 예전 GAME066_SE_RUN_REFERENCE는 교체 전11장 영상으로 보존한다.
 
-원본/ARTFIX001/GAME064/GAME065·데이터1231파일은 바이트 불변이며 현재33클립/291프레임·표시69×85.56/200×248를 유지한다. 이번 생성/비용0이다. **다음 한 단위는 GAME066 SE 달리기 그대로**이며 [기획/Higgsfield 프롬프트](../tools/higgsfield/requests/game066/PROMPT_KO.txt)·[기존 SE 기준 영상](validation/GAME066_SE_RUN_REFERENCE.mp4)을 사용한다. 새 SE 제작/게임 적용은0이다. 과거 이미 무효인 파일의 자동 복구,1540과부하·경제·Windows/모바일·실시간FPS/발열·최종 아트는 미완성/미검증으로 유지한다.
+**새 SE 이동사격 원화/게임 연결은 아직0**이다. 현재 이동 중 SE 실발사는 SE달리기18과 측정 총구로 표현하며 전용 사격 클립 선택은 E에만 있다. 새 출력이 오면 선택적run_fire_se·독립 총구/위상 메타데이터·같은 위상 SE달리기 폴백을 기존 표시 경로에 연결한다. 실제 발사/즉시 명중·벽 소비/해제·전후진·정지/피격·일시정지까지 확인한다. 다른 방향·적·초상화로 확대하지 않는다.
 
-## 직전 GAME065 검수·즉시 소멸 사격 관측 보정 이력
-
-사용자의 “완료된 작업을 확인·필요한 수정 후 다음으로” 지시에 따라 원격 **`c0c8301af495d70df9cd7680eedbac842a95a4e9`**의 GAME065를 확인했다. 이번 실제 코드 커밋은 **`5bb73bf2b3863ee6c5275818aa95b240a8ea194a`**이며 이후 검증/인계 문서 커밋과 구분한다. [누적8.63](DEVELOPMENT_STATUS.md) · [검수 보고서](validation/GAME065_REVIEW_REPORT.json).
-
-근거리 즉시 명중이나 벽 충돌로 같은 갱신에 탄환이 제거되면 살아남은 탄환만 보던 관측에서 `gun_aim`이 없어져 `run_fire_e` 대신 일반달리기가 나오는 문제를 재현·수정했다. 실제 발사 성공 뒤 기존 CombatCues에 **최신 일련번호/방향 한 쌍**만 기록한다. 이동 관측은 이번 갱신의 새 기록만 읽으며 이후 활/마법 투사체가 총 조준을 덮어쓰지 않는다. 실패한 발사·보조 파편·과거 사격은 새 기록이 아니다. 기존 탄환 관측 폴백과 피격 우선도는 유지한다.
-
-**검증 PASS:** 전체 기존10명령/7네이티브 묶음 **4,501검사**, 각120초 제한·오류/누수/PASS 규칙 유지, Python20·183소스/602참조·6계약/변이131거부. 실제 Linux X11/Mesa llvmpipe 생산 장면에서 **1,554검사/492그리기**, E 달리기47개/이동사격47개 각각4회 반복·실제9발·사격 해제/후진48·정지공격/일시정지·근거리/벽 소비 사격 표시를 확인했다. [실제 이동사격](validation/GAME065_REVIEW_MOVING_FIRE.mp4). 고정시간 렌더 검증이며 실시간FPS·사용자 Windows/모바일·최종 아트 승인은 아니다.
-
-이번 검수에서 원화 수정이 필요한 구체적 결함은 발견하지 못해 **33동작·291프레임**, E47 달리기/이동사격,69×85.56·200×248·pivot(100,248),235/stride155를 유지했다. 원본208장·ARTFIX001/GAME064/GAME065 자산과 데이터는 바이트 불변이며 저장22·7난수·발사간격/피해·HP/MP·적/스폰·보상을 바꾸지 않았다. Higgsfield 생성·새 비용은0이다. 기술 검수를 프로듀서 최종 승인으로 확대하지 않는다.
-
-**NEXT: GAME066 — 인접 SE 달리기 한 주기 보정·게임 적용.** 기획/Higgsfield 세션용 [제작 지시](../tools/higgsfield/requests/game066/PROMPT_KO.txt)·참조 해시와 [현재 SE 기준 영상](validation/GAME066_SE_RUN_REFERENCE.mp4)을 준비했다. 기존 SE11장을 중성 배경에서 그대로 재생한600×744/60FPS/198프레임·명목5주기다. **새 SE 원화/게임 적용은 아직0**이며 SE 이동사격/다른 방향·고블린·초상화는 후속이다. 기존1540과부하·극소 비행 수명 저장 거절·경제/기기 검증은 별도 OPEN이다.
-
-## GAME065 — E 전용 이동사격47장 게임 적용·검증 완료
-
-사용자의 다음 진행 지시와 GAME065 인계 범위에 따라 **E 전용 전신 이동사격47장**을 제작하고 기존 게임 슬롯에 연결했다. 출발 HEAD는 **`2b5238992431f53e7742e3bc7cd5309d3b75b2b2`**, 직전 완성된 게임 기준은 GAME064 **`fcbb37bfee4c8beb9343f618ff8f6e43a7373694`**다. 기존 작업 브랜치에 보존하는 이번 GAME065 통합 변경이다. [파생 자산](../assets/characters/pilot_32/game065_e_run_fire/README.md) · [통합 명세](../assets/characters/pilot_32/game065_e_run_fire/manifest.json) · [누적8.62](DEVELOPMENT_STATUS.md).
-
-새 `viya_game065_frames.tres`는 기존 **32동작·244프레임을 보존**하고 `run_fire_e`47장을 더해 **33동작·291프레임**을 제공한다. 실제 사격 관측 창에서만 같은 거리 위상의 이동사격을 선택하며, 발사 때 보행을 처음으로 되돌리지 않는다. 기존 엔진의 총탄·섬광·발사간격/피해와 정지사격·다른7방향을 유지한다. 원본208장·ARTFIX001 캐시208장·GAME064 E47은 보존했다.
-
-**200×248·표시69×85.56·pivot(100,248)·이동235/stride155**를 유지한다. 실제 시간표는 명목660ms의 가변 구간이며 거리 기반 한 주기는 **659.574468ms**다. 새 주기 전체에만 고정 X−1캔버스픽셀(표시−0.345픽셀)을 적용했으며 Y·지면·프레임별 정렬은 바꾸지 않았다. [시간표](../assets/characters/pilot_32/game065_e_run_fire/provenance/frame_timing.csv) · [동일 위상 전환 비교](validation/GAME065_MODE_SWITCH.mp4).
-
-Higgsfield **`seedance_2_5` / `video_edit` / 720p / 무음**을 사용했다. 채택한 파생물의 출처는 후보2 **`d1817f67-fb19-4b70-b4a9-605f82981497`**다. 그 원본 RGB 영상에는8개 섬광 프레임이 있어 원본 그대로의 납품은 거절했다. 최종 RGBA는 배경·외부 발사 효과만 분리하고 같은 프레임의 총열 금속을 보호한 파생물이며, 몸/무기 재그리기나 부위 조립은 없다. 후보1·2의 원본 거절과 후보3 탈락은 이력으로 남긴다. **3회 생성에31씩 총93크레딧**, 조회 잔액 **966.25→873.25**이며 새 결제·자동 충전은 없다. [제작/비용 기록](../assets/characters/pilot_32/game065_e_run_fire/provenance/production.json).
-
-**검증 PASS:** 최종47장 RGBA 독립 기술 QA, Godot4.7.2 네이티브 **435검사·실패0·29.6309초/120초 제한**(신규18 포함), 정적182파일/596참조·6계약·전투99파일/변이125거부, 임포트47장 픽셀 일치를 확인했다. 실제 Linux X11/llvmpipe에서 생산 `main.tscn`을 실행해 **1544검사·489회 그리기·오류0**을 통과했다. 일반달리기47개/이동사격47개 각각4회 반복, 실제 이동 중9발, 사격 해제48단계의 같은 위상 일반달리기 복귀, 후진48/48·정지공격·일시정지를 확인했다. [통합 보고서](validation/GAME065_INTEGRATION_REPORT.json) · [실제 게임 영상](validation/GAME065_GAMEPLAY.mp4).
-
-기존 게임/데이터/자산1188파일 중1185개가 바이트 동일하며 변경3개는 표시 코드와2개 설정이다. 고정1/60초 갱신의 실제 렌더 검증이며 실시간FPS 측정은 아니다. VSync 미지원 경고와Dummy 오디오 환경을 기록했고 스크립트 오류/누수는 없다. 이전 GAME064 전체4,465검사를 이번 전체 재실행으로 기록하지 않는다. 생성 완료·기술적 채택·게임 실행 검증·사용자 최종 아트 승인은 별개다. 최종 아트·실제 오디오·Windows/모바일·실시간FPS/발열은 NOT_VERIFIED다.
-
-다음 한 단위는 **게임에 적용한 E 이동사격의 검토와 필요한 E 수정**이다. 다른 방향이나 신규 적을 자동 제작하지 않는다. 기존1540부하·극소 비행 수명 저장 거절·경제 등 기존 OPEN 범위도 유지한다.
-
-## GAME064 당시 재검수 PASS → GAME065 제작 인계 이력
-
-아래는 GAME065 생성·연결 전의 완료 이력이다. 현재 적용과 검증 상태는 위 GAME065 절을 따른다.
-
-사용자의 “완료한 작업을 확인·수정하고 다음으로 진행” 지시에 따라 원격 **`fcbb37bfee4c8beb9343f618ff8f6e43a7373694`**를 확인하고 재검수했다. **새 E47/기존197·시간표·총구와 게임 연결을 유지하며 추가 수정이 필요한 재현 오류는 발견하지 못했다.** 실제 게임 코드는 이 커밋 그대로다. [재검수 보고서](validation/GAME064_REVIEW_REPORT.json) · [이번 실제 화면](validation/GAME064_REVIEW_CAPTURE.png).
-
-Godot4.7.2 기존10명령/7묶음·각120초 **4,465=23+70+122+57+1336+417+2440검사 PASS**, Python20·6계약/변이122 PASS다. 별도 실제 Linux X11/Dummy에서834검사·329그리기·E47전체/4반복·정지/SE전환/자동사격/후진48/일시정지를 다시 확인했다.47PNG의해시/200×248/투명외곽은같고, 육안 검토와 녹색 잔사 진단에서 큰 배경 잔사를 확인하지 못했다.46→00실루엣IoU는0.923(이전E11은0.690), 하체는0.841이다. 이 지표나 기술 검수를 최종 프로듀서 아트 승인으로 승격하지 않는다.
-
-기존 게임/데이터/자산 **1188파일이 바이트 동일**하다. 다음 자료 도구 **`0a88bdc7cdb94e8997cc8dc2b61566e7fc69d1fd`**는 채택된 E47을 중성회색 위에서만 재생하는 참조 exporter다. [깨끗한 동작 참조](validation/GAME065_E_RUN_REFERENCE.mp4)는600×744/60FPS/198프레임/3.3초·명목5주기이며 신규 사격 원화/실시간FPS가 아니다.
-
-**당시 NEXT는 GAME065 — E 전용 이동사격 전신 주기 제작·검증**이었다. 현재 결과와 다음은 위 최신 절을 따른다. 사용자가 지정한 기획/Higgsfield 세션에 [한글 제작 지시](../tools/higgsfield/requests/game065/PROMPT_KO.txt)·[영문 프롬프트](../tools/higgsfield/requests/game065/PROMPT_EN.txt)·참조/해시를 준비했다. 현재 사격은 기존달리기를 유지하는 경로이며 **새 이동사격 프레임/게임 연결은 아직0**이다. 실제 출력이 온 뒤 같은 보행 위상으로 연결하고 실제 발사 간격/섬광·총구와 검증한다. 최종 아트·Windows/모바일/FPS·발열, 기존1540부하/극소 비행 수명 저장 거절은 별도 미검증/OPEN이다.
-
-## GAME064 — E 달리기 파생47장 게임 연결
-
-사용자의 **“게임에 반영해”** 지시에 따라 완성한 E 달리기를 기존 게임에 연결했다. 출발 HEAD는 `f5c4da84e00eaa5dcca67acfe7b94dcf854a893a`, 이전 게임 코드는 GAME063 `d7d72cffec61f88deb5aa72ba59b0c84e3c088f6`이다. [파생 자산/재현 안내](../assets/characters/pilot_32/game064_e_run/README.md) · [시간표](../assets/characters/pilot_32/game064_e_run/provenance/frame_timing.csv) · [통합 명세](../assets/characters/pilot_32/game064_e_run/manifest.json). 새 적용 커밋의 코드와 문서는 같은 작업 브랜치에서 관리한다.
-
-활성 리소스는 `assets/characters/pilot_32/game064_e_run/viya_game064_frames.tres`다. E 달리기47장과 기존 나머지197장을 참조해 **32동작·244프레임**을 제공한다. 원본208PNG/원본SpriteFrames와 ARTFIX001 캐시208PNG/리소스는 보존했다. 새47PNG는 최종 납품본과 같은 바이트이며 기존 흰 테두리 수정 작업을 재실행하지 않았다.
-
-`viya_presentation.gd`는 이동 거리 위상을 실제 프레임 duration 합계에 맞는 시간으로 변환하고, 기존 공통 샘플러가 가변 구간을 선택한다. 프레임 번호를 균등하게 나누던 계산과60ms 하드코딩을 제거했다. **200×248·69×85.56·pivot(100,248)·이동235·stride155**는 유지한다. 시간표660ms의 비율을 유지하므로 기본 이동 속도에서 한 주기는 **659.574468ms**다. 새 총구47개 좌표와 불투명 임포트의 원본 PNG 복구 경로를 연결했다. 정지 전신 사격·전후진 위상·방향 유지 구간은 기존 게임 흐름을 사용한다.
-
-제작 원본은 Higgsfield `hf_mult_motion_control`의 작업 **`fbf2fd2d-8596-4ca4-87e7-875712a2f7c9`**다. 서비스 출력은720×1280/24fps의 RGB MP4이며, 투명 PNG는 제작 단계의 별도 알파 추출·고정 변환 결과다. 원본0~93 중 짝수47장을 사용하고 다음 주기94를 제외해 마지막 프레임 복제 없이46→00으로 연결한다. [제작/비용 기록](../assets/characters/pilot_32/game064_e_run/provenance/production_record.txt)의 생성 당시 미연결 표시는 보존된 이력이며, 현재 게임 연결 상태는 이 문서와 DEVELOPMENT8.60을 따른다.
-
-**검증 PASS:** Godot4.7.2 headless 임포트·수정된 `test_run_navigation.gd`417검사(오류0/누수0), 정적177파일/591참조·6계약·변이122거부를 확인했다. 실제 Linux X11/Mesa llvmpipe OpenGL에서 생산 `main.tscn`을 실행해834검사/329회 그리기를 통과했다. E 이동160×1/60초에서47개 프레임·4회 반복, 입력 해제→idle_e·SE 왕복·이동 중 실제 자동발사·후진48단계의 위상 역증분·정지공격0→7·일시정지를 확인했다.329회 그리기 전후 Snapshot/cues가 같다. [통합 보고서](validation/GAME064_INTEGRATION_REPORT.json) · [실제 게임 영상](validation/GAME064_E_RUN_IN_GAME.mp4) · [실제 화면](validation/GAME064_E_RUN_IN_GAME.png).
-
-고정시간 갱신의 실제 렌더 검증이며 실시간FPS 측정은 아니다. GUI 환경은VSync 미지원·ALSA 부재에 따른Dummy 오디오 폴백이 있었고 GDScript/리소스 오류나 누수는 없었다. 실제 오디오·Windows/모바일 실기·FPS/발열·사용자의 최종 아트 승인은 NOT_VERIFIED다. 기존 전체4,456검사를 이번에 전부 재실행한 것으로 기록하지 않는다.
-
-이번 게임 연결에서 **새 생성·크레딧 소비·새 결제·자동 충전은0**이다. 제작 단계에서 관측한 추가 보정 비용은62크레딧, 마지막 조회 잔액은966.25였으며 채택 작업은 무료 생성1회를 사용했다. 이는 제작 당시 기록이고 이번에 잔액을 다시 조회한 것은 아니다. 연결 당시 NEXT는 E 달리기 검토였고, 이번 재검수/다음GAME065는 위 최신 절을 따른다. 전용 이동 사격·다른 방향·신규 적 제작으로 범위를 확대하지 않았다.
-
-### 이전 기준 검증과 차단 이력
-
-진단 커밋 `52af01d34cd7734e202f0b4a1ee1bdeea4cc2a26`의 E11 기준 장면·원래90회 이동/정지·Higgsfield 도구 부재는 [DEVELOPMENT8.59](DEVELOPMENT_STATUS.md)·[기준 보고서](validation/GAME064_BASELINE_REPORT.json)에 보존한다. 이후 연결된 Higgsfield에서 생성과 파생물 준비를 마쳤으므로 그 세션의 BLOCKED를 현재 상태로 사용하지 않는다. [수정 전 영상](validation/GAME064_E_RUN_BASELINE.mp4)과 ARTFIX001 근거도 유지한다.
-
-## GAME063 — 후반 밀집 전투 정적 몸체 캐시
-
-코드 **`d7d72cffec61f88deb5aa72ba59b0c84e3c088f6`**, 출발 문서 HEAD `8cc972099339e728568810b993c6199c156fa8c1`, 자산 기준 ARTFIX001 `4793d743c1451131c91d0ffe3776c2f7cfec85fc`. 기존 고각 전투의 고정 몸체를 최대64개 공유 벡터 메시로 재사용한다. 움직이는 팔다리·피격 중 몸체·실제 스프라이트와 깊이/벽 가림·공격 예고·보스 보호는 유지한다. 적 숨김/감소·스폰/AI 변경은 없다. [구현](design/DENSE_RENDER_CACHE.md) · [실제 전투](validation/GAME063_AFTER.png) · [전후 근거](validation/GAME063_REPORT.json).
-
-같은6저장·입력/시야·개체 수에서 기본 도형/캐시 순서를 바꾼3회 비교를 했다. 실제 Linux X11/llvmpipe에서 몸체 CPU 중앙값은16~28%, 전체 그리기 명령 준비는7~14% 감소했다. 자연300초의 그리기 CPU **18.563→17.319ms**, 갱신/화면 제시 대기 포함 반복 **83.483→77.421ms**다. 순수 GPU 시간이나 Windows/모바일 FPS가 아니다. 36쌍/1,536상태 대조(실제816갱신)의 권위·7난수·개체 수가 모두 일치한다.
-
-자동60Hz 물리/실제 키 입력도 별도 실행했다. 40틱 뒤의 전후 상태와 이동 사격/해제는 같지만,1,540개체의 전투 계산은 약44ms이고 자동 따라잡기 지연은 남는다. 해당 자동 표본의 입력→표시 지연은212.332→246.587ms로 개선되지 않았다. 239/300초의 일부p95도 개선되지 않았으므로 **밀집 렌더의 부분 개선 완료이며 렉 전체 해결은 아니다.**
-
-**검증:** 같은 런타임/등록 테스트의 Godot4.7.2 원래10명령/7묶음·각120초 **4,456검사 PASS**, 최종175소스/6계약·118negative/Python20 PASS. 현재 소스에서 전체 게이트가 통과했으며 ARTFIX001의 과거 TIMEOUT과 구분한다. 제한·실패 판정을 변경하거나 이번 최적화가 당시 TIMEOUT을 해결했다고 하지 않는다. 실제 GUI의 원래 도형100자세·전투6쌍(가림/피격/예고/보스/전멸/F8/정지)은 최대1/255채널 차이·권위/연출 상태 불변이다. 새 이미지 생성/교체는 없고 기존1,076개 게임/규칙/자산 파일은 바이트 동일이다.
-
-첫 SpriteFrames 로드는 별도 새3프로세스에서141.561~146.127ms, 반복은0.005~0.006ms이며 동일 리소스를 재사용한다. 할당기 증가41,800,532바이트는 전체 앱/GPU 메모리가 아니다. Windows·모바일/FPS·발열·최종 아트/재미·경제와 원래 극소 비행 수명 저장 거절은 미검증/OPEN이다. 다음 한 단위는 **GAME064 — 비야 E 달리기 한 주기 루프 보정·게임 적용**이며 이후 순서는 PLANNED63·64를 따른다.
-
-## ARTFIX001 당시 이력 — 문제 원화 재생성·게임 적용
-
-코드 **`4793d743c1451131c91d0ffe3776c2f7cfec85fc`**, 출발 HEAD `b6340f553d8c10ec9eebc26537230decbd8ef23e`. 사용자 요청에 따라 **동쪽(E) 달리기 11장을 Higgsfield로 재생성하고 검증한 수정 영역을 실제 표시 캐시에 적용했다.** [검증 보고서](validation/ARTFIX001_REPORT.json) · [11장 전후 비교](validation/ARTFIX001_COMPARE.png) · [머리 경계 확대](validation/ARTFIX001_HAIR_DETAIL.png) · [보행 비교](validation/ARTFIX001_RUN_COMPARISON.gif).
-
-문제의 출발 원화는 흰 배경을 포함한 `viya_run_e_opaque_attempt01.gif` 11장이다. 이후 투명화된 PNG에 머리 외곽·머리 뒤 틈·총 아래·다리 사이의 밝은 매트와 불투명 배경 잔사가 남았다. 현재 PNG 전체가 흰 직사각형인 문제와 구분한다. 스크린샷의 비야 오른쪽 흰 막대는 기존 공격 효과이며 이번 원화 수정 대상이 아니다.
-
-실제 연결된 Higgsfield 도구에서 `gpt_image_2_6`의 지원 입력과 견적을 확인했다. 원본 프레임을 각각 참조해 **800×992·PNG·투명 배경·high 품질 결과 11장**을 받았다. 최초 시험 1건은 생성 실패했고, 성공 결과 11건의 작업 ID·설정·입력/출력 해시를 보관한다. 잔액 조회 차이는 **1,105 → 1,091.25, 13.75크레딧**이며 새 결제·요금제 변경은 없다. 과거 SDK 인증/접근 차단은 당시 경로의 기록이며 현재 생성 차단 사유가 아니다.
-
-원래 얼굴·의상·무기·보폭과 캔버스 등록을 유지하도록 생성 결과의 확인된 경계색·배경 틈만 합성했다. 원본 208장과 원본 SpriteFrames는 변경하지 않았고, 표시 캐시 중 **E 달리기 11장만 변경**, 나머지 **197장은 바이트 동일**이다. 알파 감소는 확인된 흰 배경 마스크 **1,467픽셀(총/다리 497, 머리 뒤 970)**에만 허용한다. 마스크 밖 알파, 발 기준과 프레임 외곽 범위를 유지했다. 전신을 새 생성 이미지로 교체하거나 밝은 의상·피부를 일괄 지우지 않았다.
-
-`edge_repair`에 원본·생성본·등록본·수정본·마스크와 재현 도구를 보관했다. 최종 캐시 빌드 때 Godot의 `fix_alpha_edges()`를 미리 적용해 저장 PNG와 임포트 결과의 차이를 없앴다. 이 과정은 알파를 바꾸지 않으며 낮은 알파 경계색을 정규화한다. GAME062 대비 원래 보이는 위치의 RGB 변경은 합성 단계 6,159픽셀, 최종 캐시 6,577픽셀이다. 얼굴 영역의 극저알파 경계 4픽셀(알파 1/255 또는 3/255)도 정규화되므로 얼굴 영역 모든 픽셀이 동일하다고 보고하지 않는다. 불투명 내부의 보존 검사와 디자인 보존을 구분한다.
-
-## ARTFIX001 당시 표시와 검증 범위
-
-ARTFIX001 당시에는 GAME062의 **69×85.56 표시 크기**, **200×248 캔버스·32동작·208프레임·E 달리기60ms×11**을 유지했다. 현재 E47/244프레임 연결은 위 GAME064 절을 따른다. GAME061의 보행 위상·방향 유지·정지/이동 사격과 총구 연결도 그대로다. 단일 RunState·저장22·7난수·전투/보상·맵·카메라 수치는 바꾸지 않았다. 플레이 중 이미지 처리나 외부 생성 호출은 없다.
-
-**PASS:** 파생물 재현 44개 파일 일치, 활성 E11 저장/임포트 RGBA 일치, 소스 171개·6계약, Python20, 기존 네이티브 6묶음 2,000검사, 별도 headless 메인 부트. 기존 테두리 검사18개도 별도로 PASS했으며 이 수는2,000검사에 포함된다. **전체 회귀 게이트는 `test_combat_cues.gd`에서 원래 120초 제한 TIMEOUT으로 미통과**다. 수정 전 `b6340f5`도 같은 조건에서 시간 초과했다. 제한·실패 판정을 변경하지 않았으며, 과거 GAME062의 4,428검사/832렌더 PASS를 이번 결과로 재사용하지 않는다.
-
-ARTFIX001 당시 실제 GUI 렌더는 표시 환경 제약으로 **BLOCKED**, 사용자 Windows·모바일 실기와 최종 아트 승인은 **NOT_VERIFIED**다. 이미지 비교는 실제 캐시에서 만든 것이며 새 게임 화면 캡처가 아니다. 그 당시에는 원본의 **10→00 보행 루프 이음**과 후반 밀집 부하를 해결하지 않았다. 이후 E 파생 주기와 렌더 개선은 위 최신 절에서 구분한다.
-
-원화 생성·기술적 시범 적용은 완료했으며 최종 ART-001 비주얼 승인은 별도다. 3D/리그/코스튬 보류·GEN005 미승인·지원2+2 빈칸을 유지한다. 상세는 **DEVELOPMENT_STATUS8.57/PLANNED62**이며 당시 다음이었던 GAME063의 현재 결과는 위 최신 절을 따른다.
+남은 범위는 최종 아트·Windows/모바일·실시간FPS/발열/실제 오디오·1540과부하·경제·과거 무효파일 자동복구·1스테이지 한 판 마감이다. 원본/기존게임 보존,main자동병합/force push/유료Actions 금지,3D/리그/코스튬 보류·지원2+2를 유지한다. 누적 이력과 당시 상태는 [DEVELOPMENT_STATUS](DEVELOPMENT_STATUS.md)에 보존한다.

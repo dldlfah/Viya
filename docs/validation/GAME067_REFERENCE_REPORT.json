@@ -1,0 +1,40 @@
+{
+  "canvas": [
+    600,
+    744
+  ],
+  "cycle_seconds": 0.66,
+  "direction": "se",
+  "fps": 60,
+  "frames": 198,
+  "nominal_cycles": 5,
+  "scale": 3,
+  "scope": "Replay of current full-body run on neutral gray for motion-control input. No new poses,shooting frames,limb edits or production asset changes; captured-frame export,not real-time FPS.",
+  "source_canvas": [
+    200,
+    248
+  ],
+  "source_frame_count": 18,
+  "source_frames_seen": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17
+  ],
+  "source_resource": "res://assets/characters/pilot_32/game066_se_run/viya_game066_frames.tres",
+  "status": "PASS"
+}

@@ -154,3 +154,29 @@
 서비스 원출력은720×1280/24fps RGB MP4다. 이47장은 제작 단계의 알파 추출·고정 변환으로 준비한 RGBA이며 Godot 재매트 처리를 끈 무손실2D 임포트를 사용한다. 원본0,2,…92와 실제 두 다리 주기를 유지하고 다음 대응 프레임94는 제외한다. 대형 원본/탈락 후보 전체를 런타임에 복사하지 않고 출처·해시·비용·선정 근거를 [provenance](../assets/characters/pilot_32/game064_e_run/provenance/production_record.txt)에 보존했다. 그 안의 미연결 표시는 제작 당시 이력이며 현재 적용 상태는 CURRENT/DEVELOPMENT8.60을 따른다.
 
 이번 통합의 추가 생성·크레딧 사용·새 결제·자동충전은0이다. 채택 작업은 제작 당시 무료1회/0크레딧을 사용했고, 이전 보정 전체의 관측 차감62/마지막 조회966.25는 별도 비용 기록이다. 최종 아트 승인·다른 방향/전용 이동사격 제작으로 계산하지 않는다. 기존 승인 원본·ARTFIX001 근거·다른52공유경로·초상화4빈칸·GEN005미승인/3D보류를 유지한다.
+
+## GAME065 E 이동사격 등록 보완 — 제작 당시2026-11-26 / 기록2026-11-27
+
+기존에 게임에 연결된 E 전용 이동사격47장의 목록 누락만 보완한다. 이번 검수에서 새 원화를 만든 것이 아니다. [파생 자산](../assets/characters/pilot_32/game065_e_run_fire/README.md)·[시간표/메타데이터](../assets/characters/pilot_32/game065_e_run_fire/provenance/production.json)를 따른다. 원본 후보2 `d1817f67-fb19-4b70-b4a9-605f82981497`/Seedance2.5의 RGBA 파생물이며 GAME06432클립/244프레임을 보존해33클립/291프레임으로 연결했던 이력이다. 현재도 E 이동사격47은 아래 GAME066 복합 리소스에 그대로 보존된다. 당시93크레딧/873.25조회는 과거 기록이고 새 비용/조회가 아니다. 원출력의 구운 섬광 반려와 최종 파생물 기술 채택·최종 아트 승인을 구분한다.
+
+## GAME066 SE 달리기18 — 현재 활성 복합 리소스 (2026-11-27)
+
+원격b42b7ed에서 기존 SE11만 파생18장으로 교체했다. 이번 재검수에서는 PNG/리소스/기존 메타데이터를 변경하지 않았다. 새 파일은 기존 E와 같은 `provenance/.gdignore`이며 시간표 CSV가 번역으로 자동 임포트되지 않도록 빌더도 같은 파일을 만든다. 정상 editor import와 원본 CSV를 읽는 관련465검사를 재확인했다. [자산 설명](../assets/characters/pilot_32/game066_se_run/README.md)·[등록/해시](../assets/characters/pilot_32/game066_se_run/provenance/source_registration.json)·[실행 검수](validation/GAME066_REVIEW_REPORT.json)를 따른다.
+
+| 항목 | 경로 / 값 |
+| --- | --- |
+| SE 신규 RGBA | `assets/characters/pilot_32/game066_se_run/frames/viya_run_se_000.png`~`017.png` |
+| 현재 활성 SpriteFrames | `assets/characters/pilot_32/game066_se_run/viya_game066_frames.tres` |
+| SpriteFrames SHA256 | `403baa687c026db8479238aaa737727b2f3ed4ef078402bb92e31effe82e9390` |
+| 개별 원화 해시/총구 | `game066_se_run/provenance/source_registration.json`의18개 frame_checks |
+| 시간표 | [frame_timing.csv](../assets/characters/pilot_32/game066_se_run/provenance/frame_timing.csv),18×36.666666…ms/660ms |
+| 모델/작업 기록 | Seedance2.5/video_edit `a9ab0954-f528-4194-b8c1-3cb8954dd02c`,Genjutsu `ee75ff39-7354-4f8e-a6fb-df30c4eeae46`는 시점 드리프트로 반려 |
+| 출처/범위 기록 | RGB89프레임/24fps의36~53,54제외;원출력기록SHA `53cf0b38aa393369bf72d33ece585bc95763f0634772321387b87b84bf8c82d3` |
+| 등록 | 200×248 RGBA/표시69×85.56/pivot(100,248),고정scale.231·translation(1.2,-1.4),기존SE원점3/11 |
+| 보존 | 다른32클립/280프레임·원본208·ARTFIX001·GAME064 E47·GAME065 E이동사격47·SAVEFIX001 |
+| 현재 총계 | 33클립/298프레임,이동235/stride155,명목660ms/거리주기659.574468ms |
+| 상태 | 기술 채택·기존 전투 연결·이번 실제 전투 검수 PASS,프로듀서 최종 아트 승인 별도 |
+
+빌더를 격리 입력으로 재실행해 리소스/manifest/motion/slot4개가 납품본과 바이트 동일함을 확인했다. manifest.status는 빌드 시점의 상태 서술이고 이후의 실제 엔진 상태는 날짜가 있는 검증 보고서/CURRENT를 따른다. 원출력 URL은 현재 환경의 네트워크403으로 독립 재다운로드하지 못했으므로 기록된 원출력 해시를 이번 파일 독립 검증으로 승격하지 않는다. 실제 RGBA18은 해시/투명도와 Godot 실행에서 확인했다.
+
+제작 당시 차감58/조회815.25는 해당 세션 기록이며 이번 검수의 생성/추가 비용/결제0과 구분한다. 현재 실제전투1,793검사/379그리기와 전체네이티브4,531을 통과했다. 숫자 위상 보존을 물리 발 접지/미끄러짐·모바일FPS·최종 아트 승인으로 계산하지 않는다. 다음 GAME067 SE 이동사격은 제작 지시/참조만 준비했고 새 원화·연결은 아직 없다.

@@ -1,0 +1,7 @@
+{
+  "status": "PASS",
+  "exit_code": 0,
+  "timeout_seconds": 120,
+  "generated_translation_files": [],
+  "scope": "Normal Godot editor import after matching prior E provenance exclusions;CSV remains raw-readable as verified by465native checks."
+}
