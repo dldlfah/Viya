@@ -1,0 +1,27 @@
+{
+  "model": "seedance_2_5",
+  "mode": "omni_reference",
+  "duration": 4,
+  "resolution": "720p",
+  "aspect_ratio": "3:4",
+  "generate_audio": false,
+  "count": 1,
+  "bitrate_mode": "high",
+  "draft": false,
+  "use_unlim": false,
+  "medias": [
+    {
+      "role": "image",
+      "value": "94fe869e-2a38-4178-a67e-3045fa6e04e1"
+    },
+    {
+      "role": "image",
+      "value": "4b19b797-e197-4dd7-8f83-7c98659ddaac"
+    },
+    {
+      "role": "video",
+      "value": "a686df27-0c77-409a-8d45-62235c436d25"
+    }
+  ],
+  "prompt": "Animate the exact adult VIYA from the two SOUTHWEST image references in a continuous full-body run in place. The images determine her identity, proportions, costume, asymmetry, two-handed low rifle carry, and fixed high-angle view. Her torso, gaze, and direction of travel face screen down-left throughout. Preserve the original visible sides of the costume and weapon.\n\nThe SOUTH video is a timing reference only. Use its sequence and pace of alternating weight transfer. Keep the SOUTHWEST camera, framing, body projection, and direction defined by the images. Do not inherit the front-facing silhouette of the timing video. The two SOUTHWEST stills illustrate opposite leg poses. They are appearance references, not poses to hold.\n\nRepeat an even near-leg support, far-leg support, near-leg support sequence. Between supports, show the loaded foot pushing off, that leg bending and recovering, and the other leg extending and accepting weight. Each leg takes one turn in each cycle. Keep the pelvis and torso connected to the weight transfer, with stable rifle handling and natural hair and cloth follow-through. Use continuous intermediate poses, with no skipped recovery, same-leg double step, starting hold or repeated endpoint. The last distinct pose should lead naturally into the first.\n\nThe camera is locked. Keep the full hair, barrel tip, cloth and boots inside a stable portrait canvas with margins and a single uniform green background. Preserve the adult face, dark-brown wavy hair, ivory top, fitted black corset, partial gloves, brass and gold ornaments, short lower garments, thigh straps, tall decorated boots, and asymmetric crimson fabric. Keep the original painterly dark-fantasy anime style and the original rune-decorated rifle. Ordinary low-carry running only. No shoulder aiming, discharge, muzzle flash, projectiles, casings, recoil, scenery, shadows, text, extra characters, mirroring, duplicated limbs, camera motion, or audio.\n"
+}

@@ -1,0 +1,28 @@
+{
+  "job_id": "da27204a-f0a6-47ce-9831-a4b5481b8d36",
+  "generation": "COMPLETED",
+  "technical_adoption": "REJECTED_GAIT_SEQUENCE",
+  "source_sha256": "342c0358f79bdf15166734663e468e20c08198dbe8fe033f75bd7c7d5c52e1b4",
+  "source_frames_inspected": 97,
+  "output_dimensions": [
+    834,
+    1112
+  ],
+  "source_fps": 24,
+  "source_duration_seconds": 4.041667,
+  "audio_streams": 0,
+  "direction": "SW preserved in inspected frames",
+  "identity_and_low_carry": "Broad appearance and two-handed low rifle carry retained; no final producer approval implied.",
+  "defect": "A far-leg support at15/16 is followed by near-leg support17..22, recovery23..25, another near-leg support26..29, and only then far-leg support31/32. The same near-leg double-step pattern repeats in the video.",
+  "local_selection_trial": "Contiguous source15..26 was inspected as a shorter candidate; wrap26→15 switches boot poses abruptly. Not adopted. See review_04/trim_trial.json and trim15_26_seam.jpg.",
+  "all97_ordered_source_review": true,
+  "hash_alone_not_adoption": true,
+  "runtime_frames_adopted": 0,
+  "runtime_muzzle_phase_timing": "NOT_CREATED_NO_VALID_CYCLE",
+  "alpha_processing": "No final alpha separation/delivery; motion criterion failed before final registration. Diagnostic RGB crop is not a game asset.",
+  "reference_role_outcome": "S timing reference did not yield the required native alternating gait in this observed output. Internal cause not established.",
+  "no_temporal_or_pose_synthesis": true,
+  "game_integration": "NOT_RUN",
+  "final_art": "NOT_VERIFIED",
+  "no_automatic_fifth_job": true
+}

@@ -1,0 +1,22 @@
+{
+  "task": "GAME070",
+  "retry_job_id": "da27204a-f0a6-47ce-9831-a4b5481b8d36",
+  "current_retry_submissions": 1,
+  "retry_gross_debit": 28,
+  "retry_observed_return": 0,
+  "retry_net_debit": 28,
+  "retry_balance_sequence": [
+    514,
+    486,
+    486
+  ],
+  "cumulative_submissions": 4,
+  "cumulative_gross_debit": 112,
+  "cumulative_observed_credit_return": 28,
+  "cumulative_net_debit": 84,
+  "current_observed_balance": 486,
+  "previous_refund_job": "5ef16e39-0a39-40af-a521-bc0967e07ef5",
+  "new_payment_auto_topup_plan_change": false,
+  "paid_extras": false,
+  "no_automatic_fifth_job": true
+}

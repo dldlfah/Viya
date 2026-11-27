@@ -1,6 +1,6 @@
 # Viya — 모바일 서바이버 게임
 
-병행 GAME070 원화는 추가1건을 제출했으나 공급자필터로 영상 없이 종료했다.28차감뒤28복원을 확인해 이번순지출0/누적순지출56이며 SW11을 유지한다. [작업/비용 기록](tools/higgsfield/requests/game070/evidence/packet_9927fcd/candidate_03_work_state.json).
+병행 GAME070은 사용자 지시로 재시도해 영상을 확보했으나 양발 교대와 루프 기준에 미달해 기술 미채택했다. 이번 실차감28/누적순차감84이며 기존SW11과GAME071/072를 유지한다. [원본·검수·비용](tools/higgsfield/requests/game070/evidence/packet_9927fcd/candidate_04_README.md).
 
 ## GAME072 — 로비 캐릭터 정보 (2026-11-27)
 

@@ -1,0 +1,13 @@
+{
+  "source": "User explicitly requested 재시도해 after previous terminal nsfw and observed full return.",
+  "date_kst": "2026-11-28",
+  "authorized_jobs": 1,
+  "credits_max": 28,
+  "base_commit": "fc8dfca0cfdfa58343498830ca07cef3de37a538",
+  "retry_exact_inputs": true,
+  "prompt_edits": false,
+  "model_changed": false,
+  "prior_job_terminal": "nsfw",
+  "prior_job_id": "5ef16e39-0a39-40af-a521-bc0967e07ef5",
+  "automatic_fifth_job": false
+}

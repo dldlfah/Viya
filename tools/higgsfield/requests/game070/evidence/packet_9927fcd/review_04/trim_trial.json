@@ -1,0 +1,21 @@
+{
+  "source_range_zero_based_inclusive": [
+    15,
+    26
+  ],
+  "native_span_ms": 500,
+  "runtime_adopted": false,
+  "fixed_review_transform": {
+    "scale": 0.25,
+    "translation": [
+      -4.25,
+      -13.75
+    ],
+    "canvas": [
+      200,
+      248
+    ]
+  },
+  "scope": "Diagnostic RGB crop only, not a delivered registered game clip.",
+  "reason": "This shorter window cuts before the repeated near-leg stance, but wrapping26\u219215 introduces a sudden near/far boot pose switch. The next native source27 repeats the near support instead of furnishing the expected far support. No valid native alternating loop was adopted."
+}

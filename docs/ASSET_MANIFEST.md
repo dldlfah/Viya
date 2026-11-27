@@ -346,3 +346,19 @@
 ## GAME070 — 승인된 추가 후보의 공급자 차단 (2026-11-27)
 
 작업5ef16e39-0a39-40af-a521-bc0967e07ef5는SW외형2장/S17타이밍1개·4초/720p/3:4/무음으로 제출했으나 최종nsfw상태이며 원출력URL/영상/PNG는없다. [요청/결과/비용](../tools/higgsfield/requests/game070/evidence/packet_9927fcd/candidate_03_work_state.json)을 보존한다. 이번총차감28/관측반환28/순차감0,누적3회/순차감56이다. 새 런타임 자산/총구/위상0이며 기존GAME069활성35클립342/SW11·GAME071을 보존한다. 공급자차단과 사용자최종아트승인을 구분한다.
+
+
+## GAME070 — 4차 RGB 영상과 기술 반려 기록 (2026-11-28)
+
+| 항목 | 실제 경로/값 |
+| --- | --- |
+| 원본 | tools/higgsfield/requests/game070/evidence/packet_9927fcd/candidate_04.mp4 |
+| SHA256 | 342c0358f79bdf15166734663e468e20c08198dbe8fe033f75bd7c7d5c52e1b4 |
+| 모델/작업 | Seedance2.5 omni_reference /da27204a-f0a6-47ce-9831-a4b5481b8d36 |
+| 실제 출력 | RGB834×1112/H264·24fps97장·4.041667초·음성0 |
+| 검토/원천시간 | 같은폴더review_04/전체4시트·source_timing.csv·same_leg_repeat.jpg·trim15_26_seam.jpg·trim_trial.json |
+| 판단 | 같은가까운다리반복/짧은루프급변으로기술미채택,최종게임RGBA/총구/위상0 |
+| 비용 | 이번28/관측반환0·누적제출4/순차감84·계정486 |
+| 전체 해시 | 같은폴더candidate_04_CHECKSUMS.sha256 |
+
+직전3차의nsfw/28복원과구분하며이번은생성완료후보행검수에서미채택이다. 기존활성GAME069/35클립342·SW11과GAME071/072는그대로다. 이원본을게임용완성클립으로등록하지않는다. [전체기록](../tools/higgsfield/requests/game070/evidence/packet_9927fcd/candidate_04_README.md).
