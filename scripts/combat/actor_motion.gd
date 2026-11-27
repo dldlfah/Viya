@@ -116,6 +116,11 @@ func update(id:int, previous:Dictionary, position:Vector2, hp:float, displacemen
 	value.merge({"p":position,"hp":hp,"pose":pose,"moving":moving,"motion":displacement.normalized(),"direction":direction(face),"facing":face.normalized()},true)
 	entries[id]=value
 
+func silhouette_motion(state, id:int) -> Dictionary:
+	if run_id!=state.run_id or not entries.has(id):return {}
+	var value:Dictionary=entries[id]
+	return {"moving":value.moving,"move_clock":maxf(0,state.elapsed-float(value.get("move_since",state.elapsed)))}
+
 func pose(state, id:int=0) -> Dictionary:
 	if run_id!=state.run_id or not entries.has(id):return {"pose":"idle","direction":direction(state.facing if id==0 else Vector2.DOWN),"facing":state.facing if id==0 else Vector2.DOWN,"clock":0.0,"moving":false,"move_clock":0.0,"distance":0.0}
 	var value:Dictionary=entries[id]

@@ -155,6 +155,20 @@ GAME067_REVIEWED_SHA256["tests/test_viya_game067.gd"] = '4c23b0d5ad566e0aea1b820
 GAME068_REVIEWED_SHA256["tests/test_viya_game068.gd"] = '9484cbc33bf114431b0604c75aa055c8f47a1e9f876b99641e6db457d42c18fc'
 GAME069_REVIEWED_SHA256 = {'assets/characters/pilot_32/game069_s_run_fire/viya_game069_frames.tres': 'fe99d53e11d042343ef8261189e99925a9d29c117c8d9189ccfe8cc8c43082a6', 'assets/characters/pilot_32/game069_s_run_fire/integration_manifest.json': 'ad38f330b1ff5732dea4950bdd9764af2d7f1e1320db27fb28c094a7ab0fc28c', 'assets/characters/pilot_32/game069_s_run_fire/manifest.json': '992f87c2986f6f6e3ef0c58bd51ee17bdc91f3462801fe741f046e4191f313d1', 'assets/characters/pilot_32/game069_s_run_fire/provenance/clip_metadata.json': '7ec508cd67e936e66dd69fb268359dc08937ca48f17b4be44526821a97f4f8c5', 'assets/characters/pilot_32/game069_s_run_fire/provenance/frame_timing.csv': '7663733ac8fc749501065bbf8bd61ab98088cc72c77759bc702b684afd114e9c', 'assets/characters/pilot_32/game069_s_run_fire/provenance/phase_alignment.json': '1428671635f81ffacd98bdab6b6aff9eb7f469612067bfe7213322be85d0d179', 'tests/test_viya_game069.gd': 'e655dc49fc9ab55e2c696fe49ce2a08f4478b8388ca0ed0b8f9b19e5b98ff667', 'tools/build_viya_game069.py': '828778088f0a19cb97d7af4098501a998ab2d69015488079235b70d110a51870'}
 
+# GAME071 keeps full-source checks for the revised routing and rendering paths.
+PATTERN_REVIEWED_SHA256.update({
+    'scripts/world/map_space.gd': '453fce85c5731942b308ab144a010af2a155a01d0817141e1fc50931df41921d',
+    'scripts/combat/actor_motion.gd': 'a1e4a899233531ef128bbac9f046014f321e0b0e5cd57a10465bb4773f761357',
+    'scripts/combat/high_angle_battle.gd': 'ab3e98d7e0f02ee435836f0713785b8e8184ef80a6db6c0e17ea3f0868c80abe',
+})
+CAMPAIGN_GOLD_ADAPTERS = (
+    ('const CAMPAIGN_GOLD_DROP_CHANCE := 0.15\n', ''),
+    ('var gold_drop_chance: float = CAMPAIGN_GOLD_DROP_CHANCE', 'var gold_drop_chance: float = 0.3'),
+    ('\trun_mode = mode\n', '\tvar previous_mode: String=run_mode\n\trun_mode = mode\n'),
+    ('gold_drop_chance = 1.0 if mode=="gold_slime" else CAMPAIGN_GOLD_DROP_CHANCE',
+     'gold_drop_chance = 1.0 if mode=="gold_slime" else (0.30 if previous_mode=="gold_slime" else gold_drop_chance)'),
+)
+
 def validate(sources: dict[str, str]) -> list[str]:
     errors: list[str] = []
     run, view, cues, tests, runner, _ = [sources[x] for x in FILES[:6]]
@@ -239,6 +253,10 @@ def validate(sources: dict[str, str]) -> list[str]:
         if view.count(after) != 1:
             errors.append('Missing/changed reviewed read-only purge draw adapter')
         view = view.replace(after, before, 1)
+    for after, before in CAMPAIGN_GOLD_ADAPTERS:
+        if run.count(after) != 1:
+            errors.append('Missing/changed reviewed campaign gold chance')
+        run = run.replace(after, before, 1)
     for after, before in LOOT_RUN_ADAPTERS:
         if run.count(after) != 1:
             errors.append('Missing/changed reviewed magnet/reward adapter')
@@ -274,16 +292,6 @@ def validate(sources: dict[str, str]) -> list[str]:
             if reviewed.count(hook) != 1:
                 errors.append('Missing/changed committed modular gun receipt adapter')
             reviewed = reviewed.replace(hook, '', 1)
-        if path == 'scripts/combat/high_angle_battle.gd':
-            # Roll back only GAME063's two reviewed display adapters. Keep the
-            # original full-renderer proof and every authority proof unchanged.
-            for after, before in (
-                ('var body_cache=preload("res://scripts/combat/enemy_shape_cache.gd").new()\nvar cache_bodies:bool=true # Diagnostic A/B; never a gameplay or saved setting.\n', ''),
-                ('detail_actors or kind!="normal",visual,body_cache if cache_bodies and state.cues.flash_alpha(int(enemy.id))==0 else null)', 'detail_actors or kind!="normal",visual)'),
-            ):
-                if reviewed.count(after) != 1:
-                    errors.append('Missing/changed GAME063 static-body cache adapter')
-                reviewed = reviewed.replace(after, before, 1)
         if path == 'tests/test_run_navigation.gd':
             registration = '\tpreload("res://tests/test_enemy_shape_cache.gd").run(scene, verify)\n'
             if reviewed.count(registration) != 1:
@@ -455,7 +463,10 @@ def check() -> dict:
         ('game068_muzzle_corrupt', 'assets/characters/pilot_32/game068_s_run/provenance/clip_metadata.json', '152.5', '199.0'),
         ('game068_unregistered', 'tests/test_viya_presentation.gd', 'res://tests/test_viya_game068.gd', 'res://tests/missing_s.gd'),
 
-        ('cache_hurt_bypass', 'scripts/combat/high_angle_battle.gd', 'cache_bodies and state.cues.flash_alpha(int(enemy.id))==0', 'cache_bodies'),
+        ('campaign_gold_old_default', 'scripts/combat/run_state.gd', 'CAMPAIGN_GOLD_DROP_CHANCE := 0.15', 'CAMPAIGN_GOLD_DROP_CHANCE := 0.30'),
+        ('campaign_gold_affects_dungeon', 'scripts/combat/run_state.gd', 'gold_drop_chance = 1.0 if mode=="gold_slime"', 'gold_drop_chance = 0.15 if mode=="gold_slime"'),
+        ('route_loses_endpoint', 'scripts/world/map_space.gd', 'bounds.intersects(wall,true)', 'bounds.intersects(wall,false)'),
+        ('cache_hurt_bypass', 'scripts/combat/high_angle_battle.gd', 'cache_bodies and flash==0', 'cache_bodies'),
         ('cache_unregistered', 'tests/test_run_navigation.gd', 'res://tests/test_enemy_shape_cache.gd', 'res://tests/missing_enemy_shape_cache.gd'),
         ('viya_edge_bypass','data/presentation_slots.json','res://assets/characters/pilot_32/game069_s_run_fire/viya_game069_frames.tres','res://assets/characters/pilot_32/resources/viya_directional_motion.tres'),
         ('game064_active_rollback','data/presentation_slots.json','res://assets/characters/pilot_32/game069_s_run_fire/viya_game069_frames.tres','res://assets/characters/pilot_32/render_cache/viya_render_frames.tres'),

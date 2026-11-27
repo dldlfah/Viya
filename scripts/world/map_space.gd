@@ -115,16 +115,17 @@ func line_clear(from: Vector2, to: Vector2, radius: float) -> bool:
 func _line_clear(from:Vector2, to:Vector2, walls:Dictionary) -> bool:
 	# Exact same intersection arithmetic as wall_fraction, ending at the first
 	# blocking hit. Route queries only need its >=1 predicate, never the fraction.
-	var distance:=maxf(from.distance_to(to),0.000001)
 	var low:=Vector2(minf(from.x,to.x),minf(from.y,to.y))-Vector2.ONE*.01
 	var high:=Vector2(maxf(from.x,to.x),maxf(from.y,to.y))+Vector2.ONE*.01
-	var limits:PackedFloat64Array=walls.limits
-	for index in range(walls.boxes.size()):
-		var offset:=index*4
-		if high.x < limits[offset] or low.x > limits[offset+1] or high.y < limits[offset+2] or low.y > limits[offset+3]:continue
-		var wall:Rect2=walls.boxes[index]
+	var bounds:=Rect2(low,high-low)
+	var boxes:Array[Rect2]=walls.boxes
+	var corners:Array=walls.corners
+	var distance:=maxf(from.distance_to(to),0.000001)
+	for index in range(boxes.size()):
+		var wall:=boxes[index]
+		if not bounds.intersects(wall,true):continue
 		if wall.has_point(from):return false
-		var points:Array=walls.corners[index]
+		var points:Array=corners[index]
 		for i in range(4):
 			var hit:Variant=Geometry2D.segment_intersects_segment(from,to,points[i],points[(i+1)%4])
 			if hit is Vector2 and from.distance_to(hit)/distance<1.0:return false
@@ -156,21 +157,26 @@ func _prepare_routes(goal:Vector2, radius:float, walls:Dictionary) -> void:
 		return
 	_goal = goal
 	_costs.clear()
-	var visited := {}
 	for at in _nodes:
 		_costs.append(at.distance_to(goal) if _line_clear(at,goal,walls) else INF)
+	if _costs.is_empty():return
+	# Native min/find keeps the same first-index tie break in the dense graph.
+	var unsettled:=_costs.duplicate()
+	var settled:=PackedByteArray()
+	settled.resize(_nodes.size())
 	for iteration in range(_nodes.size()):
-		var nearest := -1
-		var best := INF
-		for i in range(_nodes.size()):
-			if not visited.has(i) and _costs[i] < best:
-				nearest = i
-				best = _costs[i]
-		if nearest < 0:
+		var best:float=unsettled.min()
+		if best==INF:
 			break
-		visited[nearest] = true
-		for target in _edges[nearest]:
-			_costs[target] = minf(_costs[target],best + float(_edges[nearest][target]))
+		var nearest:=unsettled.find(best)
+		unsettled[nearest]=INF
+		settled[nearest]=1
+		var neighbors:Dictionary=_edges[nearest]
+		for target in neighbors:
+			var cost:=best+float(neighbors[target])
+			if cost>=_costs[target]:continue
+			_costs[target]=cost
+			if not settled[target]:unsettled[target]=cost
 func route_target(from: Vector2, goal: Vector2, radius: float) -> Vector2:
 	if solids.is_empty():return goal
 	var walls:Dictionary=_walls(radius)

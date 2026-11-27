@@ -74,6 +74,17 @@ static func run(_host,verify:Callable)->void:
 	var campaign=State.new()
 	campaign.start(2021)
 	verify.call(campaign.gold_reward_version==0 and campaign.gold_drop_range()==Vector2i(10,50) and campaign.gold_drop_range("elite")==Vector2i(100,1000) and campaign.gold_drop_range("boss")==Vector2i(100,1000),"Campaign normal/elite/boss ranges are unchanged")
+	verify.call(campaign.gold_drop_chance==0.15,"New campaign rolls gold at 15 percent")
+	var previous_campaign:Dictionary=Snapshot.capture(campaign)
+	previous_campaign.run.gold_drop_chance=0.30
+	verify.call(Snapshot.restore(previous_campaign,copy) and copy.gold_drop_chance==0.30,"Continued campaigns keep their stored gold odds")
+	verify.call(copy.start(2021) and copy.gold_drop_chance==0.15,"A fresh campaign starts with new odds even after restoring an older campaign")
+	var xp:float=0.0
+	for index in range(1000):
+		campaign.add_enemy(campaign.player+Vector2(100,0))
+		campaign._defeat_enemy(0)
+	for gem in campaign.pickups:xp+=float(gem.value)
+	verify.call(campaign.kills==1000 and xp==5000 and campaign.gold_pickups.size()>=120 and campaign.gold_pickups.size()<=180,"Lower coin odds preserve the full XP yield, including when the gem cap is reached")
 	var wallet=Wallet.new()
 	wallet.path="user://reward-test-"+Crypto.new().generate_random_bytes(8).hex_encode()+".cfg"
 	wallet.load_progress()

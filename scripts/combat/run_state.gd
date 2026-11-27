@@ -39,6 +39,7 @@ const SWARM_SIZE := 30
 const SCATTER_VARIANTS := ["normal", "fast", "heavy", "flier"]
 const MAX_BULLETS := 64
 const MAX_PICKUPS := 240
+const CAMPAIGN_GOLD_DROP_CHANCE := 0.15
 const MAX_EFFECTS := 32
 const SHOT_INTERVAL := 0.30
 const SHOT_RANGE := 520.0
@@ -81,7 +82,7 @@ var transition_action: String = ""
 var _finished_result: Dictionary = {}
 # Provisional stage length, probability and base bonus. Gold ranges are fixed.
 var stage_duration: float = 360.0
-var gold_drop_chance: float = 0.3
+var gold_drop_chance: float = CAMPAIGN_GOLD_DROP_CHANCE
 var stage_clear_gold: int = 100
 var stage: int = 1
 var gold_collected: int = 0
@@ -205,12 +206,11 @@ func start(seed_value: int = 0, character_id: String = "viya", account_level: Va
 	_chest_serial=0
 	_chests_opened=0
 	_chest_bonus_ranks=0
-	var previous_mode: String=run_mode
 	run_mode = mode
 	dungeon_day = entry_day
 	gold_reward_version=1 if mode=="gold_slime" else 0
 	loot_rules_version=loot_rules
-	gold_drop_chance = 1.0 if mode=="gold_slime" else (0.30 if previous_mode=="gold_slime" else gold_drop_chance)
+	gold_drop_chance = 1.0 if mode=="gold_slime" else CAMPAIGN_GOLD_DROP_CHANCE
 	support_attack_ids = loadout.attack.duplicate()
 	support_passive_ids = loadout.passive.duplicate()
 	gold_rng.seed = int(rng.seed) ^ 0x601D

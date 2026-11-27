@@ -9,6 +9,7 @@ const Forms=preload("res://scripts/combat/battle_forms.gd")
 const Battlefield=preload("res://scripts/combat/battlefield_presentation.gd")
 const ObliqueScenery=preload("res://scripts/combat/oblique_scenery.gd")
 const ObliqueProjection=preload("res://scripts/combat/oblique_projection.gd")
+const ENEMY_COLORS={"normal":Color("b07670"),"ranged":Color("91bd84"),"fast":Color("77c4d4"),"heavy":Color("bb966a"),"flier":Color("b4a4dd")}
 var materials=CombatSkin.new()
 var body_cache=preload("res://scripts/combat/enemy_shape_cache.gd").new()
 var cache_bodies:bool=true # Diagnostic A/B; never a gameplay or saved setting.
@@ -20,6 +21,8 @@ var visible: Rect2
 var viewport: Rect2
 var camera: Vector2
 var hero_body:Rect2
+var floor_disc:Texture2D
+var xp_gem:Texture2D
 var stats: Dictionary = {}
 
 func screen(at: Vector2) -> Vector2:
@@ -122,21 +125,41 @@ func _draw_ground() -> void:
 	if state.map_id=="siege_battlefield":Battlefield.draw_ground(self)
 	canvas.draw_rect(Rect2(Vector2.ZERO,state.world_size),Color("927753"),false,3)
 
-func _draw_floor_effects() -> void:
-	for enemy in state.enemies:
-		if visible.grow(50).has_point(enemy.p):
-			canvas.draw_circle(enemy.p,16 if enemy.kind=="normal" else 25,Color(0,0,0,.28))
+func _prepare_floor_glyphs() -> void:
+	# Shared textures keep the same ground transform and allow adjacent shadows
+	# or drops to batch. Only the magnet trails still need per-pickup geometry.
+	var disc:=Image.create_empty(32,32,false,Image.FORMAT_RGBA8)
+	var gem:=Image.create_empty(32,32,false,Image.FORMAT_RGBA8)
+	for y in range(32):
+		for x in range(32):
+			var offset:=Vector2(x+.5,y+.5)-Vector2(16,16)
+			disc.set_pixel(x,y,Color(1,1,1,clampf(16-offset.length(),0,1)))
+			var diamond:=absf(offset.x)+absf(offset.y)
+			var tint:=Color("d0fff1") if diamond<12 else Color("71c3b2")
+			gem.set_pixel(x,y,Color(tint,clampf(16-diamond,0,1)))
+	floor_disc=ImageTexture.create_from_image(disc)
+	xp_gem=ImageTexture.create_from_image(gem)
 
-	canvas.draw_circle(state.player,19,Color(0,0,0,.35))
-	for pickup in state.pickups:
-		if visible.grow(32).has_point(pickup.p):
-			var at: Vector2 = pickup.p
-			state.LootAttraction.draw_trail(canvas,pickup,state.player,false)
-			canvas.draw_colored_polygon(PackedVector2Array([at+Vector2(0,-6),at+Vector2(5,0),at+Vector2(0,6),at-Vector2(5,0)]),Color("8ad4c5"))
+func _draw_floor_effects() -> void:
+	if floor_disc==null:_prepare_floor_glyphs()
+	var shadow_area:=visible.grow(50)
+	for enemy in state.enemies:
+		if shadow_area.has_point(enemy.p):
+			var extent:=Vector2.ONE*(16 if enemy.kind=="normal" else 25)
+			canvas.draw_texture_rect(floor_disc,Rect2(enemy.p-extent,extent*2),false,Color(0,0,0,.28))
+
+	canvas.draw_texture_rect(floor_disc,Rect2(state.player-Vector2(19,19),Vector2(38,38)),false,Color(0,0,0,.35))
+	var loot_area:=visible.grow(32)
 	for gold in state.gold_pickups:
-		if visible.grow(32).has_point(gold.p):
+		if loot_area.has_point(gold.p):
 			state.LootAttraction.draw_trail(canvas,gold,state.player,true)
-			canvas.draw_circle(gold.p,6,Color("efc364"))
+			canvas.draw_texture_rect(floor_disc,Rect2(gold.p-Vector2(5,5),Vector2(10,10)),false,Color("efc364"))
+	for pickup in state.pickups:
+		if loot_area.has_point(pickup.p):
+			state.LootAttraction.draw_trail(canvas,pickup,state.player,false)
+			# A gem shares the kill position with a possible coin. Raise its
+			# marker slightly so both shapes remain readable at that position.
+			canvas.draw_texture_rect(xp_gem,Rect2(pickup.p-Vector2(7,12),Vector2(14,16)),false)
 	# Supply badges stay upright and the same screen size in both renderers.
 	canvas.draw_set_transform_matrix(Transform2D.IDENTITY)
 	canvas._draw_supply_items()
@@ -158,21 +181,27 @@ func _draw_enemy(enemy: Dictionary) -> void:
 	stats.actors += 1
 	var variant: String = enemy.get("variant","normal")
 	var kind: String = enemy.get("kind","normal")
-	var color: Color = {"normal":Color("b07670"),"ranged":Color("91bd84"),"fast":Color("77c4d4"),"heavy":Color("bb966a"),"flier":Color("b4a4dd")}[variant]
-	if enemy.get("species","")=="gold_slime":color=Color("e3bc48")
-	if str(enemy.get("species","")).begins_with("skeleton_"):color=Color("d4ccaf")
+	var color:Color=ENEMY_COLORS[variant]
+	var species:String=enemy.get("species","")
+	if species=="gold_slime":color=Color("e3bc48")
+	if species.begins_with("skeleton_"):color=Color("d4ccaf")
 	if kind!="normal":color=Color("bd85db") if kind=="elite" else Color("ee7777")
-	color=color.lerp(Color("fff1db"),state.cues.flash_alpha(int(enemy.id)))
+	var flash:float=state.cues.flash_alpha(int(enemy.id))
+	color=color.lerp(Color("fff1db"),flash)
 	var height: float = 92 if kind=="boss" else (66 if kind=="elite" else (50 if variant=="heavy" else 40))
-	var visual:Dictionary=canvas.actor_visual(enemy)
-	if not visual.sample.is_empty():canvas.draw_texture_rect(visual.sample.texture,canvas.actor_art.rectangle(visual.sample,feet),false,Color.WHITE.lerp(Color(1.8,1.8,1.8),state.cues.flash_alpha(int(enemy.id))))
-	elif enemy.get("species","")=="gold_slime":
+	var generic_slot:=variant if kind=="normal" else kind
+	var visual:Dictionary={}
+	if canvas.art.definitions.get(species,"")!="" or canvas.art.definitions.get(generic_slot,"")!="":
+		visual=canvas.actor_visual(enemy).sample
+	if not visual.is_empty():canvas.draw_texture_rect(visual.texture,canvas.actor_art.rectangle(visual,feet),false,Color.WHITE.lerp(Color(1.8,1.8,1.8),flash))
+	elif species=="gold_slime":
 		canvas.draw_circle(feet+Vector2(0,-13),16,color)
 		canvas.draw_circle(feet+Vector2(-5,-16),2,Color("403822"))
 		canvas.draw_circle(feet+Vector2(5,-16),2,Color("403822"))
 		if not canvas.simple_attacks:canvas.draw_arc(feet+Vector2(-3,-19),6,PI,PI*1.6,8,Color("fff0ac"),2,true)
 	else:
-		Forms.enemy(canvas,feet,variant,color,height,detail_actors or kind!="normal",visual,body_cache if cache_bodies and state.cues.flash_alpha(int(enemy.id))==0 else null)
+		var motion:Dictionary=canvas.actors.silhouette_motion(state,int(enemy.id))
+		Forms.enemy(canvas,feet,variant,color,height,detail_actors or kind!="normal",motion,body_cache if cache_bodies and flash==0 else null)
 	if kind!="normal" or enemy.hp < enemy.max_hp:
 		canvas.draw_rect(Rect2(feet+Vector2(-18,-height-7),Vector2(36,3)),Color("302b2e"))
 		canvas.draw_rect(Rect2(feet+Vector2(-18,-height-7),Vector2(36.0*enemy.hp/float(enemy.max_hp),3)),color)

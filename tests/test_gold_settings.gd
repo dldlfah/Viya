@@ -55,6 +55,7 @@ static func run(scene, verify: Callable) -> void:
 	state._damage_enemy(enemy_id, 1000)
 	verify.call(state.kills == 1 and state.gold_pickups.size() == 1 and state.pickups.size() == 1, "All attacks share one death path with independent XP and gold drops")
 	state.start(146)
+	state.gold_drop_chance = 1.0 # Guarantee a drop for the boss payout assertion.
 	state.elapsed = state.stage_duration / 3.0
 	state.spawn_clock = 999.0
 	state.step(0.01, Vector2.ZERO)
