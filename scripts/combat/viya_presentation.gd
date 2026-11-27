@@ -150,8 +150,11 @@ func repair_sample(visual:Dictionary, selected:String, run_frame:Dictionary) -> 
 		visual.sample.texture=repaired # Same PNG pixels, bypassing a damaged import.
 	return true
 
-func apply(view, visual:Dictionary) -> void:
-	if not accepts(view):return
+func observe_gait(view) -> void:
+	if view.art.definitions.get("viya_battle", "") == config.resource:
+		_advance_gait(view, view.actors.pose(view.simulation))
+
+func _advance_gait(view, visual:Dictionary) -> bool:
 	var now:float=view.simulation.elapsed
 	var distance:float=float(visual.get("distance",0))
 	if _gait_run!=view.simulation.run_id or now<_gait_time or distance<_distance:
@@ -180,6 +183,13 @@ func apply(view, visual:Dictionary) -> void:
 	if visual.moving:_phase=fposmod(_phase+sign*maxf(0,distance-_distance)/float(config.stride_world),1.0)
 	_distance=distance
 	visual.gait_phase=_phase
+	return gun_active
+
+func apply(view, visual:Dictionary) -> void:
+	if not accepts(view):return
+	var gun_active := _advance_gait(view, visual)
+	var now:float=view.simulation.elapsed
+	var shot_age:float=float(visual.get("shot_age",1000))
 	var row:Dictionary=config.directions[visual.direction]
 	var selected:String="hurt" if visual.pose=="hurt" else ("run" if visual.moving else "idle")
 	var region:=Rect2(0,0,200,248)

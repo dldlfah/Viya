@@ -3,7 +3,68 @@ extends RefCounted
 const Prior=preload("res://assets/characters/pilot_32/game069_s_run_fire/viya_game069_frames.tres")
 const Reader=preload("res://tests/test_viya_game069.gd")
 const Presenter=preload("res://scripts/combat/viya_presentation.gd")
+const Snapshot = preload("res://scripts/progression/run_snapshot.gd")
+const Campaign = preload("res://tests/test_campaign.gd")
 const Folder="res://"+"assets/characters/pilot_32/game070_sw_run/"
+
+static func verify_skipped_draws(ui, verify: Callable) -> void:
+	var state = ui.simulation
+	var view = ui.view
+	var initial: Dictionary = Snapshot.capture(state)
+	var presenter = view.viya
+	var audio_enabled: bool = ui.combat_audio.enabled
+	ui.combat_audio.enabled = false
+	var results: Array[Dictionary] = []
+	for sample_each_tick in [true, false]:
+		if not Snapshot.restore(initial, state):
+			verify.call(false, "SW cadence fixture restores the starting battle")
+			ui.combat_audio.enabled = audio_enabled
+			return
+		state.set_paused(false)
+		state.player = Vector2(2500, 1200)
+		state.shot_clock = 999.0
+		state.spawn_clock = 999.0
+		view.actors.reset()
+		view.camera.reset()
+		view.viya = Presenter.new()
+		var motion := Vector2(-1, 1).normalized()
+		var forward: Vector2 = view.input_direction(motion)
+		ui.movement.axis = motion
+		view.actor_visual()
+		var verified_turn := true
+		for tick in range(12):
+			if tick == 4:
+				state.add_enemy(state.player - forward * 250)
+				state.enemies[-1].speed = 0
+				state.enemies[-1].hp = 100000
+				state.enemies[-1].max_hp = 100000
+				state.shot_clock = 0
+			elif tick == 9:
+				state.enemies[-1].p = state.player + forward * 250
+				state.shot_clock = 0
+			ui._physics_process(1.0 / 60)
+			if sample_each_tick:
+				var visible: Dictionary = view.actor_visual()
+				var expected_direction := "ne" if tick >= 4 and tick < 9 else "sw"
+				verified_turn = verified_turn and visible.direction == expected_direction
+		var final_pose: Dictionary = view.actor_visual()
+		results.append({"phase": final_pose.gait_phase, "clip": final_pose.sample.animation,
+			"frame": final_pose.sample.index, "turn": verified_turn, "shots": state.shots,
+			"state": Campaign.comparable(state)})
+	var regular := results[0]
+	var skipped := results[1]
+	var phase_difference := wrapf(float(regular.phase) - float(skipped.phase), -0.5, 0.5)
+	verify.call(regular.turn and regular.shots == 2 and regular.clip == "run_sw", "Real southwest movement aims back and then southwest again as two shots commit")
+	verify.call(is_zero_approx(phase_difference) and regular.clip == skipped.clip and regular.frame == skipped.frame, "Omitting intermediate draws keeps the ending SW17 phase and frame across aim reversals")
+	verify.call(regular.state == skipped.state, "Sampling cadence does not change the authoritative battle")
+	ui.movement.axis = Vector2.ZERO
+	verify.call(Snapshot.restore(initial, state), "SW cadence check restores the original battle fixture")
+	state.set_paused(false)
+	view.actors.reset()
+	view.camera.reset()
+	view.viya = presenter
+	ui.combat_audio.enabled = audio_enabled
+
 static func begin(view,phase:float) -> Dictionary:
 	var forward:Vector2=view.input_direction(Vector2(-1,1).normalized())
 	var visual:Dictionary={"pose":"run","direction":"sw","facing":forward,"motion":forward,"clock":0.0,"moving":true,"distance":0.0,"shot_age":1000.0,"gun_aim":Vector2.ZERO,"sample":{}}

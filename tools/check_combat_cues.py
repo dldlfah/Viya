@@ -192,6 +192,14 @@ PATTERN_REVIEWED_SHA256.update({
     'tests/test_viya_progression.gd': '0972cddc67d1869cac1867e45ef9a7db28e1d898dbc4833b106efc9353f31953',
 })
 
+# GAME070 recheck keeps gait history independent of the draw cadence.
+PATTERN_REVIEWED_SHA256.update({
+    'scripts/combat/viya_presentation.gd': '6d1bc8f1accb8aa0f2a91524660483389439031331eaaa38cc10d8cb10143b1f',
+    'scripts/ui/mobile_main.gd': '686745c001b01e3f40f21c9eb7f18ab9f9cdb00931e204e8af9d22604697a2d4',
+    'tests/test_viya_game070.gd': 'd0e9e6ba034757f96b940a76ccd95d073940de46faf32a6da95281a6a6a09d97',
+    'tests/test_viya_presentation.gd': 'fd63e01e13ff785f33a9b060d74724835620ddbdb82b9a4653d545dedb9ecb26',
+})
+
 def validate(sources: dict[str, str]) -> list[str]:
     errors: list[str] = []
     run, view, cues, tests, runner, _ = [sources[x] for x in FILES[:6]]
@@ -514,6 +522,7 @@ def check() -> dict:
         ('survivor_single_primitive','scripts/combat/viya_presentation.gd','canvas.draw_texture_rect_region(texture,box,source)','pass'),
         ('survivor_world_zoom','scripts/combat/oblique_projection.gd','_basis=raw','_basis=Transform2D(raw.x*1.7,raw.y*1.7,Vector2.ZERO)'),
         ('survivor_spawn_guard','scripts/combat/battle_view.gd','return world_view_size()*(1.0+2.0*camera.MAX_OFFSET_FRACTION)','return camera.guard_size(size)'),
+        ('viya_skips_gait_without_draw', 'scripts/ui/mobile_main.gd', 'view.viya.observe_gait(view)', 'pass'),
         ('viya_phase_continuity','scripts/combat/viya_presentation.gd','_phase+sign*maxf(0,distance-_distance)','sign*distance'),
         ('viya_direction_chatter','scripts/combat/viya_presentation.gd','PI/8+deg_to_rad(float(config.direction_hysteresis_degrees))','0.0'),
         ('viya_full_body_attack','scripts/combat/viya_presentation.gd','selected="attack"','selected="idle"'),

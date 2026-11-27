@@ -98,8 +98,12 @@ func _physics_process(delta: float) -> void:
 	var before:Vector2=simulation.player
 	var active:bool=simulation.phase==RunState.Phase.RUNNING and not overlay.visible
 	super._physics_process(delta)
-	view.advance_camera(delta,simulation.player-before,active and simulation.phase==RunState.Phase.RUNNING and not overlay.visible)
-	view.actors.sync(simulation,simulation.player-before,active and simulation.phase==RunState.Phase.RUNNING and not overlay.visible,track_enemies,motion_region,movement.direction().length_squared()>.001)
+	var animating:bool=active and simulation.phase==RunState.Phase.RUNNING and not overlay.visible
+	view.advance_camera(delta,simulation.player-before,animating)
+	view.actors.sync(simulation,simulation.player-before,animating,track_enemies,motion_region,movement.direction().length_squared()>.001)
+	# Accumulate the signed distance before another physics tick can change aim.
+	if animating:
+		view.viya.observe_gait(view)
 	combat_audio.finish(simulation,active,not overlay.visible)
 
 func _cast_magic(expected_ticket:int=-1) -> void:

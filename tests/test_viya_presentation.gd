@@ -13,6 +13,7 @@ static func run(host,verify:Callable) -> void:
 	var view=ui.view
 	var state=ui.simulation
 	state.player=Vector2(2500,1700);state.spawn_clock=999;state.shot_clock=999;state._scatter_clock=999;state._swarm_clock=999
+	preload("res://tests/test_viya_game070.gd").verify_skipped_draws(ui, verify)
 	var asset:SpriteFrames=view.art.resource("viya_battle")
 	var all_alpha:=true
 	var active_count:=0
