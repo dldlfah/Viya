@@ -1,0 +1,246 @@
+{
+  "task": "GAME067_REVIEW",
+  "date_kst": "2026-11-27",
+  "status": "PASS_IN_STATED_SCOPE",
+  "branch": "work/viya-turnaround-qa-20261117",
+  "base_game_commit": "ce7e77939fb076f18352552262a6dcecb690c2b1",
+  "art_commit": "31b80cca86f47cdf7c88d85f63f37a35d6924cca",
+  "review_code_commit": "30058bb31894d56ef5fdffe1446ac0b38ab73342",
+  "observed_main_untouched": "e2780feb2f62a7b115b9fb903201f5f069bf1290",
+  "delivery": {
+    "resource": "res://assets/characters/pilot_32/game067_se_run_fire/viya_game067_frames.tres",
+    "clips": 34,
+    "frames": 318,
+    "run_fire_se_frames": 20,
+    "phase_origin": 0.819949494949495,
+    "canvas": [
+      200,
+      248
+    ],
+    "display": [
+      69,
+      85.56
+    ],
+    "pivot": [
+      100,
+      248
+    ],
+    "speed": 235,
+    "stride": 155,
+    "nominal_cycle_ms": 660,
+    "distance_cycle_ms": 659.5744680851063
+  },
+  "findings": {
+    "concrete_new_art_or_runtime_defect": "None identified in reviewed scope;no speculative art or gameplay edits.",
+    "implementation_change": "QA helper accepts isolated output,records every actual draw with read-only Snapshot/cues assertion,checks two moving-fire seams,records on/off and directional transitions;removed debug print.",
+    "documentation_correction": "DEVELOPMENT_STATUS top summary/table still pointed to GAME066 despite8.68;updated to current review. Source art README/manifest/CHECKSUMS remain historical delivery records."
+  },
+  "native_regression": {
+    "status": "PASS",
+    "commands": 10,
+    "suites": 7,
+    "checks": 4558,
+    "counts": [
+      23,
+      70,
+      122,
+      57,
+      1336,
+      492,
+      2458
+    ],
+    "timeout_seconds_per_command": 120,
+    "strict_runner_hash": "9156043eaf896d72565563cc1e2f623cf0c8fbac7f032f19bffee7e4946a69ee",
+    "report": "GAME067_REVIEW_REGRESSION.json"
+  },
+  "source_contracts": {
+    "static_files": 189,
+    "resource_references": 629,
+    "contracts": {
+      "growth_data_contract": {
+        "status": "PASS",
+        "rejected_negatives": 5
+      },
+      "magic_data_contract": {
+        "status": "PASS",
+        "rejected_negatives": 8
+      },
+      "feedback_source_contract": {
+        "status": "PASS",
+        "rejected_negatives": 7
+      },
+      "mobile_hud_source_contract": {
+        "status": "PASS",
+        "rejected_negatives": 5
+      },
+      "run_navigation_source_contract": {
+        "status": "PASS",
+        "rejected_negatives": 8
+      },
+      "combat_cues_source_contract": {
+        "status": "PASS",
+        "rejected_negatives": 144
+      }
+    },
+    "native_commands": 10,
+    "status": "PASS"
+  },
+  "python_unittest": {
+    "status": "PASS",
+    "checks": 20
+  },
+  "actual_game": {
+    "status": "PASS",
+    "checks": 2473,
+    "draws": 444,
+    "display": "X11",
+    "video_adapter": "llvmpipe (LLVM 19.1.7, 256 bits)",
+    "real_shots": 43,
+    "run_se_frames": 18,
+    "run_se_wraps": 4,
+    "run_fire_se_frames": 20,
+    "run_fire_se_wraps": 2,
+    "report": "GAME067_REVIEW_MAIN.json",
+    "scope": "Fixed1/60updates,native Godot key events,production main.tscn,isolated saves and controlled open-stage fixtures;not realtime FPS or physical input.",
+    "covered": [
+      "SE18allframes/fourglobalwraps",
+      "SE moving-fire20allframes/twolast-to-firstseams",
+      "fire on/off",
+      "E/SE running and firing turns",
+      "backward aim48updates",
+      "preserved stationary attack",
+      "pause and frozen pose",
+      "immediate hit and wall consumption",
+      "actual contact damage100to88/hurt_sepriority",
+      "display69x85.56/root and signed distance phase",
+      "Snapshot/cues unchanged around all444draws"
+    ]
+  },
+  "display_environment": {
+    "os": "Linux",
+    "server": "task-local Xorg:100",
+    "server_tcp_listener": false,
+    "renderer": "Mesa25.0.7llvmpipe/OpenGL4.5 compatibility",
+    "audio": "Dummy",
+    "warning": "VSync mode unsupported",
+    "app_errors_or_leaks": 0,
+    "previous_block": "Previous session X11socket denial and auto-review rejection retained in GAME067_INTEGRATION_REPORT;current ordinary-sandbox local Xorg start succeeded without escalation or permissions changes.",
+    "shared_display_99": "Untouched",
+    "task_server_stopped_cleanly": true
+  },
+  "preservation": {
+    "status": "PASS",
+    "base": "ce7e77939fb076f18352552262a6dcecb690c2b1",
+    "identical": 1405,
+    "changed": []
+  },
+  "builder": {
+    "status": "PASS",
+    "delivery_checksums": 36,
+    "outputs": {
+      "assets/characters/pilot_32/game067_se_run_fire/viya_game067_frames.tres": {
+        "sha256": "d44c9437cce0eb02c69ebfcde3ef13e691eae8ce3c14c9ca10f95b0fc2fad6e3",
+        "byte_identical": true
+      },
+      "assets/characters/pilot_32/game067_se_run_fire/integration_manifest.json": {
+        "sha256": "80a3636dde6f442d0834e72e54d36f7d996902f98b198b7b24327cd61ec7c6e3",
+        "byte_identical": true
+      },
+      "data/viya_motion.json": {
+        "sha256": "629998ad687ae2c1ad508b86b91f08994f1edd28aa56e23f6bef764a82cca590",
+        "byte_identical": true
+      },
+      "data/presentation_slots.json": {
+        "sha256": "43474e228507b6d6d05b9e5963dc2ba2c0e386fb10f213ad89bf0294e7a7a476",
+        "byte_identical": true
+      }
+    }
+  },
+  "source_master": {
+    "status": "PASS",
+    "path": "tools/higgsfield/requests/game067/evidence/candidate_07.mp4",
+    "sha256": "98e824c1ec416fb7ff5c0711cf806c8ccb9711f5f8e5b54bb1a36e80d487951e",
+    "matches_manifest": true,
+    "source_job": "5b7cc811-ad50-4759-b8ea-8d1a40de7c77",
+    "scope": "Hash of already committed source master, not a fresh service generation or download."
+  },
+  "art_approval": "NOT_VERIFIED",
+  "limits": [
+    "SE18andSEfire20painted foot positions differ;no pixel-identical contact/zero-slip proof",
+    "Physical keyboard/touch,speaker audio",
+    "Windows/Android/iOS",
+    "Realtime FPS/frame pacing/thermals",
+    "Producer final art approval",
+    "1540denseoverload/final economy/one-stage finish",
+    "No automatic recovery of old invalid saves;SAVEFIX001 producer bug is fixed"
+  ],
+  "generated_frames_this_review": 0,
+  "higgsfield_submissions": 0,
+  "credit_cost_this_review": 0,
+  "next": "GAME068 S ordinary run one full-body cycle;planning/Higgsfield packet and current11frame reference prepared,no new art or replacement connection yet.",
+  "videos": {
+    "GAME067_REVIEW_GAMEPLAY.mp4": "444actual QA draws replayed60fps/7.4s;fixture transitions and paused trials included,not uninterrupted realtime gameplay.",
+    "GAME067_REVIEW_MOVING_FIRE.mp4": "Actual QA draws226..335/110frames/60fps:SE moving-fire80updates then fire-off30updates;no new images or FPS claim."
+  },
+  "source_sha256": {
+    "tools/inspect_viya_game067.gd": "273870144bac27bc3a1b4af6f8f5dfdf26a6623875f4251ad59ab8ea91b3971a",
+    "scripts/combat/viya_presentation.gd": "848a6fb57789f896a9de692ddf8499ce28fcd7fbc2e41840795e29542e94c509",
+    "data/viya_motion.json": "629998ad687ae2c1ad508b86b91f08994f1edd28aa56e23f6bef764a82cca590",
+    "data/presentation_slots.json": "43474e228507b6d6d05b9e5963dc2ba2c0e386fb10f213ad89bf0294e7a7a476",
+    "tools/check_project.py": "eeafd73fc4503c7af952331c093272a5510aade3fbae04e42afb77eb23f55157",
+    "tools/check_combat_cues.py": "d937db0fc582a5b1200142a0e85b867c46b49f671c7db3d8b45bab03ed218854",
+    "tests/test_viya_game067.gd": "aea30a414ec6af0909d7cbcd35f99a8c45de0d3f83a12045f3b3b5e14220e99e"
+  },
+  "evidence_sha256": {
+    "GAME067_REVIEW_MAIN.json": "9a25f6919d9d78479a339dda1dfb3357e949e71943f2fc4c47325633e0684675",
+    "GAME067_REVIEW_REGRESSION.json": "cc0153c0bcc80b600c24d6d2a83558d808364f2a76c0634d2639534fdf2b36cb",
+    "GAME067_REVIEW_RUNTIME.log": "5d1cdb4c3c7fc80ac876063d51666d6b264d6cd5b1bfce68231147af2f6af940",
+    "GAME067_REVIEW_IN_GAME.png": "1a0504739801d3b62e8158bc1d9464faaf4974db302e616d3b2f610b33c0f9b9",
+    "GAME067_REVIEW_HURT.png": "a0d4b74032018ad89ccb5e852a87f952beb5de645a23ed0548a0ec06fce92177",
+    "GAME067_REVIEW_PAUSED.png": "229018021b3a54d246b9cf76ecf195e700a79360b90d37cc6e34506ae77b18af",
+    "GAME067_REVIEW_GAMEPLAY.mp4": "32e90b969af10e5a6a257a5cbe58ad9661cdf9f89829927de67f255a2ff595c9",
+    "GAME067_REVIEW_MOVING_FIRE.mp4": "8ed3a8fecc0b987bdba2f61c8a0d94623e1bfebb6421e02165c20673a9a99ee1",
+    "GAME068_S_RUN_REFERENCE.mp4": "7a07e36988947b141d4071698ab8956f7e86392ac4d355160415c27f721cf507"
+  },
+  "next_reference": {
+    "canvas": [
+      600,
+      744
+    ],
+    "cycle_seconds": 0.65999999999868,
+    "direction": "s",
+    "fps": 60,
+    "frames": 198,
+    "nominal_cycles": 5,
+    "scale": 3,
+    "scope": "Replay of current full-body run on neutral gray for motion-control input. No new poses,shooting frames,limb edits or production asset changes; captured-frame export,not real-time FPS.",
+    "source_canvas": [
+      200,
+      248
+    ],
+    "source_frame_count": 11,
+    "source_frames_seen": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "source_resource": "res://assets/characters/pilot_32/game067_se_run_fire/viya_game067_frames.tres",
+    "status": "PASS",
+    "video_sha256": "7a07e36988947b141d4071698ab8956f7e86392ac4d355160415c27f721cf507",
+    "full_video_decode": "PASS",
+    "new_generated_art": 0
+  },
+  "cleanup": {
+    "generated_untracked_import_uid_files_removed": 172,
+    "tracked_assets_untouched": true,
+    "source_tree_initially_clean": true
+  }
+}

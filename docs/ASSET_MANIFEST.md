@@ -221,3 +221,18 @@
 | 증거 | [통합 보고서](validation/GAME067_INTEGRATION_REPORT.json)·[실행 로그](validation/GAME067_INTEGRATION_RUNTIME.log) |
 
 200×248/root(100,248)·표시69×85.56·235/stride155·명목660ms/거리659.574468ms를 유지한다. 원본208/ARTFIX001/GAME064·065·066/SAVEFIX001을 보존했다. 이번 추가 생성/크레딧/결제0. 모델/알파/과거 비용/선정 근거는 원화 제작 기록을 따르며 이번에 재조회하거나 생성하지 않았다.
+
+## GAME067 실제 화면 검수·GAME068 참조 등록 (2026-11-27)
+
+원화31b80cc/게임 연결ce7e779를 검수했다. 기존assets/scripts/data1,405파일을 보존했고 납품CHECKSUMS36개/원출력 해시/격리 빌더4출력 일치를 확인했다. 위GUI 차단/게임 연결0은 각각 당시 기록이며 현재는 실제GUI 검수PASS다. 원화README/manifest/CHECKSUMS는 납품 당시 자료로 유지한다.
+
+| 자료 | 경로 | 출처와 범위 |
+| --- | --- | --- |
+| 실제 게임 검수 | [GAME067_REVIEW_REPORT.json](validation/GAME067_REVIEW_REPORT.json) | 생산main.tscn·2,473검사/444그리기/43발, 최종 아트/실기 별도 |
+| 실제 사격/해제 영상 | [GAME067_REVIEW_MOVING_FIRE.mp4](validation/GAME067_REVIEW_MOVING_FIRE.mp4) | 실제 연속110QA 캡처/60fps, 새 원화/FPS 증거 아님 |
+| 전체QA 영상 | [GAME067_REVIEW_GAMEPLAY.mp4](validation/GAME067_REVIEW_GAMEPLAY.mp4) |444회 실제 그리기 재생, 장면 전환/정지 시도 포함 |
+| 실제 스크린샷 | GAME067_REVIEW_IN_GAME.png / HURT.png / PAUSED.png (validation/) | 이동사격/피격/일시정지 |
+| S11 참조 | [GAME068_S_RUN_REFERENCE.mp4](validation/GAME068_S_RUN_REFERENCE.mp4) | 현재S11을 실제Godot로600×744/60fps·198장/명목5주기 재생 |
+| S 제작 인계 | [GAME068 패킷](../tools/higgsfield/requests/game068/README.md) | 한글/영문·입력 해시·범위, 새S 원화/교체0 |
+
+검수 영상/참조 해시는 각 보고서와request_plan에 기록한다. 화면은 고정 시간 검수의 재생이며 실시간FPS/물리 입력/Windows·모바일·최종 아트 승인이 아니다. 신규 캐릭터PNG/이미지 편집/Higgsfield 요청/비용/결제는0이며 기존200×248·69×85.56·pivot(100,248)·34클립/318프레임을 유지한다.

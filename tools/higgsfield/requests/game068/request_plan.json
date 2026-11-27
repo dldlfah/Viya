@@ -1,0 +1,102 @@
+{
+  "task": "GAME068_S_RUN",
+  "status": "PREPARED_FOR_PLANNING_HIGGSFIELD_PRODUCTION",
+  "date_kst": "2026-11-27",
+  "base_game_commit": "ce7e77939fb076f18352552262a6dcecb690c2b1",
+  "current_resource": "res://assets/characters/pilot_32/game067_se_run_fire/viya_game067_frames.tres",
+  "reference_video": "docs/validation/GAME068_S_RUN_REFERENCE.mp4",
+  "references": [
+    {
+      "path": "assets/characters/pilot_32/render_cache/viya_run_s_00.png",
+      "sha256": "372713060298f7804ed54f4675c16d1b1097a9fa62d97f2ab4f38d4dd537abdc"
+    },
+    {
+      "path": "assets/characters/pilot_32/render_cache/viya_run_s_01.png",
+      "sha256": "02b6294fdf8d992638eb4c58efd731aca587d1436ae0ffef3a2c4e3bab4695ba"
+    },
+    {
+      "path": "assets/characters/pilot_32/render_cache/viya_run_s_02.png",
+      "sha256": "1bee2b8638dc3881610e3a77327fe947dff147d2aab323898b12624d6f8c04df"
+    },
+    {
+      "path": "assets/characters/pilot_32/render_cache/viya_run_s_03.png",
+      "sha256": "0740fd387bc9cf81c809ee5a53c6a9d0e9f1e1092da085b1299083779710f2fb"
+    },
+    {
+      "path": "assets/characters/pilot_32/render_cache/viya_run_s_04.png",
+      "sha256": "1f13b56188fb36be675638824af64ef8e59eb8a84df04cba6220bed679061275"
+    },
+    {
+      "path": "assets/characters/pilot_32/render_cache/viya_run_s_05.png",
+      "sha256": "e2c8509ce027c39e999cfd4d832bb846f3e05b7b7eb2be1421a4f2ed633d035a"
+    },
+    {
+      "path": "assets/characters/pilot_32/render_cache/viya_run_s_06.png",
+      "sha256": "a2e17f180ee73d04fa0bc52f05323d6273e37cf60d4fe5b23f01b371a7660ac4"
+    },
+    {
+      "path": "assets/characters/pilot_32/render_cache/viya_run_s_07.png",
+      "sha256": "ce3efb524121483f25a63f0239f85ec71d3a326961134b3bce803c118dfe4a5c"
+    },
+    {
+      "path": "assets/characters/pilot_32/render_cache/viya_run_s_08.png",
+      "sha256": "b91ac304e120d3351bf30257e8666b48e70de518ec292412f57d3f4cfc4d0ac3"
+    },
+    {
+      "path": "assets/characters/pilot_32/render_cache/viya_run_s_09.png",
+      "sha256": "038449cb8dc0d541604d04f8df7235d904b8875fca01c8507aecde9a4b3669ed"
+    },
+    {
+      "path": "assets/characters/pilot_32/render_cache/viya_run_s_10.png",
+      "sha256": "94e2b9eb5e7d929f8840447c66ed70bee0bed094af174ade6c940b7e403a8b62"
+    },
+    {
+      "path": "assets/characters/pilot_32/render_cache/viya_idle_s.png",
+      "sha256": "d67e6d0debd593f03a4a23008d70ef291309185fe1052387f42477b49b8d25c7"
+    },
+    {
+      "path": "data/viya_motion.json",
+      "sha256": "629998ad687ae2c1ad508b86b91f08994f1edd28aa56e23f6bef764a82cca590"
+    },
+    {
+      "path": "assets/characters/pilot_32/game067_se_run_fire/viya_game067_frames.tres",
+      "sha256": "d44c9437cce0eb02c69ebfcde3ef13e691eae8ce3c14c9ca10f95b0fc2fad6e3"
+    }
+  ],
+  "selection_reason": "S is adjacent to completed SE and still uses the original11frame run; complete one ordinary gait before its firing cycle.",
+  "preserve": {
+    "existing_clips": 34,
+    "existing_frames": 318,
+    "other_clips": 33,
+    "other_frames": 307,
+    "replace_only": "run_s",
+    "canvas": [
+      200,
+      248
+    ],
+    "display": [
+      69,
+      85.56
+    ],
+    "pivot": [
+      100,
+      248
+    ],
+    "speed": 235,
+    "stride": 155,
+    "save_version": 22,
+    "rng_streams": 7,
+    "savefix001": true
+  },
+  "nominal_cycle_ms": 660,
+  "existing_phase_origin": 0.2727272727272727,
+  "phase_note": "Numerical old origin only; measure actual new contacts independently.",
+  "new_generated_frames": 0,
+  "new_game_resource": false,
+  "generation_cost": 0,
+  "current_features_price_balance": "NOT_QUERIED; assigned to planning/Higgsfield session.",
+  "art_approval": "NOT_VERIFIED",
+  "review_code_commit": "30058bb31894d56ef5fdffe1446ac0b38ab73342",
+  "reference_video_sha256": "7a07e36988947b141d4071698ab8956f7e86392ac4d355160415c27f721cf507",
+  "reference_export_report": "docs/validation/GAME068_REFERENCE_REPORT.json"
+}

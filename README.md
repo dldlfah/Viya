@@ -1,14 +1,16 @@
 # Viya — 모바일 서바이버 게임
 
-## GAME067 — SE 전용 이동사격 게임 연결 (2026-11-27)
+## GAME067 실제 화면 검수 마감 → GAME068 (2026-11-27)
 
-납품된 전신 RGBA20장을 실제 발사 관측에 연결했다. **34클립·318프레임**이며 기존33클립·298프레임 전체를 보존한다. 활성 리소스는 `res://assets/characters/pilot_32/game067_se_run_fire/viya_game067_frames.tres`다. E/SE 이동사격 선택·독립 총구/시간/발 위상·같은 거리 위상SE달리기 폴백을 적용했다. 원화20장과 원출력/비용 근거는 그대로다.
+SE 이동사격20장의 게임 연결ce7e779를 검수했다. **실제main.tscn 2,473검사·444그리기·43발**, 기존 전체10명령/7네이티브 **4,558검사**·Python20·6계약/177변이거부 PASS다. 이번 환경에서는 별도 Xorg가 정상 실행돼 이전 GUI 차단을 해소했다. [실제 사격/해제 영상](docs/validation/GAME067_REVIEW_MOVING_FIRE.mp4) · [실제 화면](docs/validation/GAME067_REVIEW_IN_GAME.png) · [검수 보고서](docs/validation/GAME067_REVIEW_REPORT.json).
 
-Godot4.7.2 전체10명령/7네이티브4,558검사, 생산main 헤드리스1,331검사/43발 PASS. **그리기0 / 실제 GUI 검증 BLOCKED**: 환경의 X11 소켓 제한과 자동 승인 정책 거절로 실제 화면을 실행하지 못했다. Windows/모바일·FPS/발열·물리 접지/전환 외관·프로듀서 최종 아트는 미검증이다. [실행 보고서](docs/validation/GAME067_INTEGRATION_REPORT.json) · [원화 납품/아트 분석](assets/characters/pilot_32/game067_se_run_fire/README.md). 분석 영상은 게임 캡처가 아니다. 이번 추가 생성/크레딧/결제0.
+추가 원화/게임 결함은 발견하지 못해34클립/318프레임·원본208/ARTFIX001/SAVEFIX001과 게임/데이터/자산1,405파일은 그대로다. 검수 도구에 격리 출력/연속 캡처/사격 이음 확인을 추가했다. 검수 코드는 **`30058bb31894d56ef5fdffe1446ac0b38ab73342`**이며 원화31b80cc·게임 연결ce7e779와 구분한다. 영상은 고정 시간 검수 재생이며 실시간FPS·Windows/모바일·완전 접지/최종 아트 승인은 별도다.
+
+다음은 **GAME068 S 일반 달리기 한 방향**이다. [기획/Higgsfield 지시](tools/higgsfield/requests/game068/PROMPT_KO.txt)·[기존 S11 참조](docs/validation/GAME068_S_RUN_REFERENCE.mp4)만 준비했고 새 원화/교체 연결은0이다. 이번 추가 생성/비용/결제0이다.
 
 ## 세션 필수 문서
 
-[CURRENT_WORK](docs/CURRENT_WORK.md)와 **[누적 DEVELOPMENT_STATUS8.68](docs/DEVELOPMENT_STATUS.md)**를 함께 읽는다. [PLANNED_WORK74](docs/PLANNED_WORK.md) · [NEXT_TASK](docs/NEXT_TASK.md) · [AGENTS](AGENTS.md) · [제작 스킬](.agents/skills/viya-game-production/SKILL.md). 원화 납품31b80cc와 이번 게임 구현을 구분한다. 다음은 연결한 GAME067의 실제 화면 검수다. 브랜치는 `work/viya-turnaround-qa-20261117`이며 main 자동 병합은 하지 않는다. 아래 과거 절의 NEXT/게임 연결0 표현보다 CURRENT/NEXT를 우선한다.
+[CURRENT_WORK](docs/CURRENT_WORK.md)와 **[누적 DEVELOPMENT_STATUS8.69](docs/DEVELOPMENT_STATUS.md)**를 함께 읽는다. [PLANNED_WORK75](docs/PLANNED_WORK.md) · [NEXT_TASK](docs/NEXT_TASK.md) · [AGENTS](AGENTS.md) · [제작 스킬](.agents/skills/viya-game-production/SKILL.md). 활성 브랜치는 `work/viya-turnaround-qa-20261117`이며main 자동 병합은 하지 않는다. 과거 절의 당시NEXT/미연결/GUI차단보다 CURRENT/NEXT와 최신 검수를 우선한다.
 
 ## SAVEFIX001 — 비행 몬스터 저장 보정 이력
 
