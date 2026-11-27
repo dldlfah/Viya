@@ -2,7 +2,11 @@
 
 병행 GAME070 원화는 추가1건을 제출했으나 공급자필터로 영상 없이 종료했다.28차감뒤28복원을 확인해 이번순지출0/누적순지출56이며 SW11을 유지한다. [작업/비용 기록](tools/higgsfield/requests/game070/evidence/packet_9927fcd/candidate_03_work_state.json).
 
-## GAME071 — 3분 이후 전투 성능과 드롭 개선 (2026-11-27)
+## GAME072 — 로비 캐릭터 정보 (2026-11-27)
+
+로비에서 비야의 기본 능력치를 보고, 두 아이콘으로 특성 증가분과 기타 증가 열을 확인한다. 특성은 실제 계정 데이터를 사용하며 기타는 빈 칸이다. [현재 상태](docs/CURRENT_WORK.md) · [검증 화면](docs/validation/GAME072_CHARACTER_INFO.png)
+
+## 이전 GAME071 — 3분 이후 전투 성능과 드롭 개선 (2026-11-27)
 
 적의 길찾기와 전장 그리기 부담을 줄였다. 새 캠페인의 금화 드롭률은 15%이며, 경험치 보석을 구분하기 쉽게 표시한다. 다음은 3:30 전투의 느린 프레임 재현이다. [현재 상태](docs/CURRENT_WORK.md) · [계측·검증](docs/validation/GAME071_REPORT.json)
 
@@ -30,7 +34,7 @@ SE 이동사격20장의 게임 연결ce7e779를 검수했다. **실제main.tscn 
 
 ## 세션 필수 문서
 
-[CURRENT_WORK](docs/CURRENT_WORK.md)와 **[누적 DEVELOPMENT_STATUS8.78](docs/DEVELOPMENT_STATUS.md)**를 함께 읽는다. [PLANNED_WORK83](docs/PLANNED_WORK.md) · [NEXT_TASK](docs/NEXT_TASK.md) · [AGENTS](AGENTS.md) · [제작 스킬](.agents/skills/viya-game-production/SKILL.md). 활성 브랜치는 `work/viya-turnaround-qa-20261117`이며main 자동 병합은 하지 않는다. 과거 절의 당시NEXT/미연결/GUI차단보다 CURRENT/NEXT와 최신 검수를 우선한다.
+[CURRENT_WORK](docs/CURRENT_WORK.md)와 **[누적 DEVELOPMENT_STATUS8.80](docs/DEVELOPMENT_STATUS.md)**를 함께 읽는다. [PLANNED_WORK85](docs/PLANNED_WORK.md) · [NEXT_TASK](docs/NEXT_TASK.md) · [AGENTS](AGENTS.md) · [제작 스킬](.agents/skills/viya-game-production/SKILL.md). 활성 브랜치는 `work/viya-turnaround-qa-20261117`이며main 자동 병합은 하지 않는다. 과거 절의 당시NEXT/미연결/GUI차단보다 CURRENT/NEXT와 최신 검수를 우선한다.
 
 ## SAVEFIX001 — 비행 몬스터 저장 보정 이력
 
