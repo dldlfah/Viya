@@ -341,3 +341,8 @@
 | [기획세션 입력 ZIP 명세](../tools/higgsfield/requests/game070/READY_PACKET.json) | SW00·SW08을 같은 4배 확대와 여백으로 세로 3:4에 배치. 동일한 S 타이밍 영상과 프롬프트를 묶어 재현 검증 |
 
 현재 연결된 원화는 GAME069의 기존 SW11이다. 참조 영상은 검수와 후속 기획 자료다. [출처·해시와 엔진 실행](validation/GAME070_BASELINE_REPORT.json)
+
+
+## GAME070 — 승인된 추가 후보의 공급자 차단 (2026-11-27)
+
+작업5ef16e39-0a39-40af-a521-bc0967e07ef5는SW외형2장/S17타이밍1개·4초/720p/3:4/무음으로 제출했으나 최종nsfw상태이며 원출력URL/영상/PNG는없다. [요청/결과/비용](../tools/higgsfield/requests/game070/evidence/packet_9927fcd/candidate_03_work_state.json)을 보존한다. 이번총차감28/관측반환28/순차감0,누적3회/순차감56이다. 새 런타임 자산/총구/위상0이며 기존GAME069활성35클립342/SW11·GAME071을 보존한다. 공급자차단과 사용자최종아트승인을 구분한다.

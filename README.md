@@ -1,5 +1,7 @@
 # Viya — 모바일 서바이버 게임
 
+병행 GAME070 원화는 추가1건을 제출했으나 공급자필터로 영상 없이 종료했다.28차감뒤28복원을 확인해 이번순지출0/누적순지출56이며 SW11을 유지한다. [작업/비용 기록](tools/higgsfield/requests/game070/evidence/packet_9927fcd/candidate_03_work_state.json).
+
 ## GAME071 — 3분 이후 전투 성능과 드롭 개선 (2026-11-27)
 
 적의 길찾기와 전장 그리기 부담을 줄였다. 새 캠페인의 금화 드롭률은 15%이며, 경험치 보석을 구분하기 쉽게 표시한다. 다음은 3:30 전투의 느린 프레임 재현이다. [현재 상태](docs/CURRENT_WORK.md) · [계측·검증](docs/validation/GAME071_REPORT.json)

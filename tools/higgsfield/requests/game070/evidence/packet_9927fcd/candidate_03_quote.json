@@ -1,0 +1,37 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "Cost preflight for seedance_2_5: 28 credits (28 exact). No job submitted."
+    },
+    {
+      "type": "text",
+      "text": "quote_ref quote:zO6fptO6s3P3mliTLd3pqA: to generate exactly this request, send params: {\"ref\": \"quote:zO6fptO6s3P3mliTLd3pqA\"} and nothing else. A key sent next to ref replaces the quoted one."
+    }
+  ],
+  "structuredContent": {
+    "cost": {
+      "credits": 28,
+      "credits_exact": 28
+    },
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "Seedance 2.5 backend expects schema-key media roles"
+      },
+      "medias[1].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "Seedance 2.5 backend expects schema-key media roles"
+      },
+      "medias[2].role": {
+        "requested": "video",
+        "used": "video_references",
+        "reason": "Seedance 2.5 backend expects schema-key media roles"
+      }
+    },
+    "quote_ref": "quote:zO6fptO6s3P3mliTLd3pqA"
+  },
+  "isError": false
+}

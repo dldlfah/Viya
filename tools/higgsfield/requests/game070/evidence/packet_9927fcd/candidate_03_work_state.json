@@ -1,0 +1,28 @@
+{
+  "job_id": "5ef16e39-0a39-40af-a521-bc0967e07ef5",
+  "generation": "BLOCKED_NO_OUTPUT",
+  "provider_status": "nsfw",
+  "provider_error": "콘텐츠가 안전 시스템에서 차단되었어요. 다른 프롬프트나 입력을 사용해 보세요.",
+  "additional_authorized_jobs": 1,
+  "additional_submitted_jobs": 1,
+  "additional_gross_debit": 28,
+  "observed_credit_return": 28,
+  "additional_net_debit": 0,
+  "balance_sequence": [
+    514,
+    486,
+    514
+  ],
+  "refund_evidence": "Balance recovery after terminal nsfw; no separate transaction receipt exposed by available tools.",
+  "cumulative_submissions": 3,
+  "cumulative_gross_debit": 84,
+  "cumulative_credit_return": 28,
+  "cumulative_net_debit": 56,
+  "current_observed_balance": 514,
+  "raw_output_exists": false,
+  "technical_adoption": "NOT_EVALUATED_NO_OUTPUT",
+  "adopted_frames": 0,
+  "game_integration": "NOT_RUN",
+  "final_art": "NOT_VERIFIED",
+  "fourth_job": "NOT_AUTHORIZED"
+}

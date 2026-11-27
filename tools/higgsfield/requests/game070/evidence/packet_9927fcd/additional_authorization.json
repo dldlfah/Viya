@@ -1,0 +1,12 @@
+{
+  "source": "User replied 다음 to explicit additional1 job/28credit question",
+  "additional_paid_jobs_max": 1,
+  "additional_credits_max": 28,
+  "previous_paid_jobs": 2,
+  "previous_actual_debit": 56,
+  "cumulative_paid_jobs_max": 3,
+  "cumulative_credits_max": 84,
+  "scope": "same prepared SW appearance2+S17 timing packet",
+  "base_commit": "30144f6898015ad7f4d5afd11f26bd38508ce819",
+  "no_automatic_fourth_job": true
+}

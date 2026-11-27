@@ -1,0 +1,29 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "jobs[1]{index,job_id,status,type,model,error}:\n  3,5ef16e39-0a39-40af-a521-bc0967e07ef5,nsfw,video,seedance_2_5,콘텐츠가 안전 시스템에서 차단되었어요. 다른 프롬프트나 입력을 사용해 보세요.\nsummary:\n  total: 1\n  completed: 0\n  failed: 1\n  active: 0\n  errors: 0\nall_terminal: true"
+    }
+  ],
+  "structuredContent": {
+    "jobs": [
+      {
+        "index": 3,
+        "job_id": "5ef16e39-0a39-40af-a521-bc0967e07ef5",
+        "status": "nsfw",
+        "type": "video",
+        "model": "seedance_2_5",
+        "error": "콘텐츠가 안전 시스템에서 차단되었어요. 다른 프롬프트나 입력을 사용해 보세요."
+      }
+    ],
+    "summary": {
+      "total": 1,
+      "completed": 0,
+      "failed": 1,
+      "active": 0,
+      "errors": 0
+    },
+    "all_terminal": true
+  },
+  "isError": false
+}

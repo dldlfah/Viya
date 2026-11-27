@@ -1,0 +1,16 @@
+{
+  "additional_gross_debit": 28,
+  "observed_credit_return": 28,
+  "additional_net_debit": 0,
+  "balance_sequence": [
+    514,
+    486,
+    514
+  ],
+  "refund_evidence": "Balance recovery after terminal nsfw; no separate transaction receipt exposed by available tools.",
+  "cumulative_submissions": 3,
+  "cumulative_gross_debit": 84,
+  "cumulative_credit_return": 28,
+  "cumulative_net_debit": 56,
+  "current_observed_balance": 514
+}
