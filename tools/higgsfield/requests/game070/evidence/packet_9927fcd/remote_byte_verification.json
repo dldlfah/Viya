@@ -1,0 +1,19 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "Sandbox restarted after expiry: workspace files were preserved. Previous processes and RAM were not restored; check partial outputs before restarting work."
+    },
+    {
+      "type": "text",
+      "text": "exit code: 0\n--- stdout ---\nAll three upload bytes match verified ZIP manifest\nHTTP 200\nHTTP 200\nHTTP 200\n"
+    }
+  ],
+  "structuredContent": {
+    "exit_code": 0,
+    "stdout": "All three upload bytes match verified ZIP manifest\nHTTP 200\nHTTP 200\nHTTP 200\n",
+    "stderr": "",
+    "sandbox_id": "sb-01M8ENFEXA88RQQCAQ4DA41Q1S"
+  },
+  "isError": false
+}

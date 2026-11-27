@@ -2071,3 +2071,12 @@ GAME069 구현 `9fe051c`의 기존 SW11을 Godot 4.7.2 Linux X11에서 실행했
 2026-11-27 (KST). 원격 `ae3e39a`에서 제작을 이어갔으며 새 SW 후보는 없다. SW00·SW08을 같은 4배 배율과 여백으로 960×1280 입력에 배치하고, 검증된 S17 원천의 24fps·102프레임 참조와 생성 지시를 묶었다. 이전 `auto` 설정의 가로 출력 이력을 반영해 세로 3:4를 견적 설정으로 제안했다. 아카이브 모델 스키마에서 이미지·영상 역할을 확인했고 ZIP 반복 생성의 바이트 재현, 파일 해시, 불투명 원본 픽셀, 102프레임 전체 디코딩을 통과했다.
 
 현재 도구에 Higgsfield 커넥터가 없고 공식 SDK 확인 결과는 `MISSING_CREDENTIALS`다. 보관 원본 ZIP 주소는 프록시 403을 다시 반환했다. 실제 신규 견적과 모델 동작은 미검증이며 추가 제출과 크레딧 차감은 0이다. 게임 코드와 기존 SW11은 이전 실행 검증 상태다. [실행 재현](../tools/higgsfield/requests/game070/INPUT_STRATEGY.md) · [패키지 해시](../tools/higgsfield/requests/game070/READY_PACKET.json)
+
+
+## 8.77. GAME070 — 입력 패키지 실검증과 현재 견적
+
+2026-11-27(KST). 사용자 지정 `/workspace/Viya/.local_validation/GAME070_HANDOFF/VIYA_GAME070_SW_INPUTS.zip`을 확인했다. 새 환경에 파일/체크아웃이 없어 실제 원격9927fcde99d58a05f1a3fd736e4bd7d6d7129dff를 확인하고 같은 프로젝트/기존 활성 브랜치를 복원했다. 미커밋 사용자 작업은 없었다. 저장소 빌더로 지정 경로에 재현한 ZIP은 READY_PACKET의4d882207c75685f04f27dc8bf246795ce3b75d0c34578c354f1d1e34d53a8a2c와 일치했다. 5구성파일 해시/CRC·SW00/SW08의 고각·비대칭/반대 다리 자세와 타이밍 영상102프레임/24fps/4.25초 전체 디코딩·첫17장의 교대 순서를 직접 확인했다.
+
+현재 Higgsfield 커넥터에서 Seedance2.5의 image_references/video_references·omni_reference·3:4/4초/720p/음성false/후보1을 조회했다. SW 이미지는960×1280/NEAREST4배/offset(80,144) 그대로이며 타이밍 영상도 원본과 같은 바이트로 업로드했다. 실제 HTTP200와 이미지2/영상1 confirm을 확인했다. 이미지참조2/영상참조1 요청의 실제 견적28, 현재Plus 잔액514다. 실제 모델/입력/옵션·견적/quote_ref/확인 응답은 [packet_9927fcd](../tools/higgsfield/requests/game070/evidence/packet_9927fcd/)에 기록했다. 과거 공식SDK의MISSING_CREDENTIALS와 현재 연결 성공을 구분한다. 영상 참조가 S 방향을 가져오지 않는다는 보증은 없으며 실제 결과에서 SW 카메라와 교대 보행을 검수해야 한다.
+
+이번 새 제출/차감0·새 작업ID없음·게임연결/실행NOT_RUN이다. 이전 GAME070의2회/56크레딧은 유지한다. 제출한도2회 소진/잔여4 때문에 새견적28을 기존 범위로 자동 실행하지 않는다. 추가1건28의 별도 범위를 결정하면 누적3회84이며 그1건만 실행한다. 이 요청을 무작위 같은 조건 재시도나 새 한도 자동 초기화로 기록하지 않는다. 기존35클립342/SW11·다른34클립331/게임코드·저장/전투 규칙은 유지한다.

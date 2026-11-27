@@ -2,6 +2,8 @@
 
 ## GAME070 — 보행 타이밍 참조로 SW 한 주기 확보
 
+입력 패키지 SHA/구성/전체 디코딩과 현재 커넥터 참조 역할을 확인했다. 새 후보1개 견적28/현재잔액514이며 아직 새 제출/차감0이다. 이전2회/56으로 제출한도2회가 소진됐고 남은4로는 이 견적을 실행할 수 없다. 추가1건/28크레딧의 별도 사용 범위 결정 후 준비된 quote 요청1건만 실행한다. 누적3회/84가 되며 이 변경을 자동 한도 초기화로 처리하지 않는다. [실제 사전 확인](../tools/higgsfield/requests/game070/evidence/packet_9927fcd/preflight.json).
+
 [현재 상태](CURRENT_WORK.md) · [입력 수정안](../tools/higgsfield/requests/game070/INPUT_STRATEGY.md) · [실제 SW11 기준](validation/GAME070_SW_BASELINE.mp4) · [S17 타이밍 참조](validation/GAME070_S_TIMING_REFERENCE.mp4)
 
 기획세션에서 준비한 입력 ZIP의 두 SW 이미지와 S17 타이밍 영상, 프롬프트를 사용한다. SW 이미지는 왼쪽 아래 시점과 외형을, S17 원천 34~50번은 양발 교대와 리듬을 지정한다. 현재 모델의 참조 역할과 견적을 확인한 뒤 적용 가능한 제작 범위에서 진행한다. 직전 GAME070 제작의 제출 2회는 이미 사용했다. [패키지 재현](../tools/higgsfield/requests/game070/INPUT_STRATEGY.md) · [검증된 입력 명세](../tools/higgsfield/requests/game070/READY_PACKET.json)

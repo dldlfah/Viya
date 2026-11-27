@@ -1,0 +1,30 @@
+{
+  "base_commit": "9927fcde99d58a05f1a3fd736e4bd7d6d7129dff",
+  "packet_path": "/workspace/Viya/.local_validation/GAME070_HANDOFF/VIYA_GAME070_SW_INPUTS.zip",
+  "packet_sha256": "4d882207c75685f04f27dc8bf246795ce3b75d0c34578c354f1d1e34d53a8a2c",
+  "all5_member_hashes_match": true,
+  "zip_crc": true,
+  "images_visually_checked": true,
+  "reference_sequence_visually_checked": true,
+  "timing_video": {
+    "frames": 102,
+    "fps": 24,
+    "duration": 4.25,
+    "full_decode": true
+  },
+  "current_balance": 514,
+  "current_quote": 28,
+  "prior_paid_submissions": 2,
+  "prior_observed_debit": 56,
+  "prior_limits": {
+    "submissions": 2,
+    "credits": 60
+  },
+  "would_be_cumulative_submissions": 3,
+  "would_be_cumulative_debit": 84,
+  "status": "READY_REQUEST_NEW_SPENDING_LIMIT",
+  "new_generation": 0,
+  "new_debit": 0,
+  "new_job_id": null,
+  "engine_integration": "NOT_RUN"
+}

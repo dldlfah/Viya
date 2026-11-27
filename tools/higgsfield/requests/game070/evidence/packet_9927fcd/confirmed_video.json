@@ -1,0 +1,18 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "Confirmed 1 upload. Pass media_id as value in the medias array of generation tools.\n- a686df27-0c77-409a-8d45-62235c436d25 (uploaded)"
+    }
+  ],
+  "structuredContent": {
+    "results": [
+      {
+        "media_id": "a686df27-0c77-409a-8d45-62235c436d25",
+        "status": "uploaded",
+        "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3LHdo37hN3iiYXd8WT9stnWXw4M/a686df27-0c77-409a-8d45-62235c436d25.mp4"
+      }
+    ]
+  },
+  "isError": false
+}
