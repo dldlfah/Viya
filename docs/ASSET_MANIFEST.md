@@ -295,3 +295,21 @@
 | 상태 | 원화기술납품18/게임연결·실행NOT_RUN/최종아트NOT_VERIFIED |
 
 현재활성은GAME068/34클립324이며기존assets/scripts/data1,463개를보존했다. 제작세션의run_fire_s18추가뒤예상35클립342이며기존34클립은모두보존한다. S17·원본208/ARTFIX001/GAME064~068/SAVEFIX001을덮어쓰지않았다. 클립/메타데이터가누락·무효면같은거리위상run_s17로복귀해야한다. 상체윤곽전환/일부발위치·미세문양/총기원근·물리접지/실기/최종아트는남는다. CSV/검토이미지는provenance/.gdignore로자동임포트에서제외한다. 유료추가출력/새결제/자동충전0이며GAME068남은32를자동사용하지않았다.
+
+## GAME069 — S 전용 이동사격 게임 연결 등록 (2026-11-27)
+
+사용자의 연결 지시로 원화cb81a1b의18장을 기존 전투에 추가했다. 납품README/manifest/CHECKSUMS의 미연결은 당시 기록이며 원화/제작기록은 그대로다.
+
+| 항목 | 경로와 실제 상태 |
+| --- | --- |
+| 활성 SpriteFrames | assets/characters/pilot_32/game069_s_run_fire/viya_game069_frames.tres |
+| 통합 명세 | assets/characters/pilot_32/game069_s_run_fire/integration_manifest.json |
+| 추가 범위 | 기존34클립/324 유지+run_fire_s18=35클립/342 |
+| 모션 | data/viya_motion.json의S run_fire18/새 총구·사격 위상0.8510092121212124 |
+| 임포트 |18PNG.import, lossless/fix_alpha_border=false, 원본RGBA와 엔진 픽셀 동일 |
+| 빌더 | tools/build_viya_game069.py, 격리4출력 동일 |
+| 실제 실행 | 최종 전체4,602·실제GUI2,485/447그리기/43발 PASS, 첫120초TIMEOUT 별도 보존 |
+| 영상 | [실제 사격/폴백](validation/GAME069_MOVING_FIRE.mp4) · [전체QA](validation/GAME069_GAMEPLAY.mp4) |
+| 근거 | [통합 보고서](validation/GAME069_INTEGRATION_REPORT.json) · [로그](validation/GAME069_RUNTIME.log) |
+
+200×248/root(100,248)·69×85.56·235/stride155와 원본208/ARTFIX001/GAME064~068/SAVEFIX001을 유지했다. 영상은 고정 시간 검수의 실제 렌더 재생이며 FPS/실기/물리 접지·최종 아트 승인이 아니다. 이번 이미지 생성/편집/추가 크레딧/결제0이다. 다음SW11은 아직 기존 자산이며 새 생성/교체0이다.

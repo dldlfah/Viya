@@ -1,0 +1,200 @@
+{
+  "task": "GAME069_INTEGRATION",
+  "date_kst": "2026-11-27",
+  "status": "PASS_IN_STATED_SCOPE",
+  "branch": "work/viya-turnaround-qa-20261117",
+  "base_art_commit": "cb81a1baf92aa9c80188a059c35af6d8b9884690",
+  "implementation_commit": "9fe051c41ac8c92c021a7452021d064e635b4e1c",
+  "observed_main_untouched": "e2780feb2f62a7b115b9fb903201f5f069bf1290",
+  "resource": "res://assets/characters/pilot_32/game069_s_run_fire/viya_game069_frames.tres",
+  "change": "Preserve34clips/324frames,add only run_fire_s18,35clips/342frames. Extend three existing direction/timing guards to S;no authoritative gameplay changes.",
+  "canvas": [
+    200,
+    248
+  ],
+  "display": [
+    69,
+    85.56
+  ],
+  "pivot": [
+    100,
+    248
+  ],
+  "speed": 235,
+  "stride": 155,
+  "nominal_cycle_ms": 660,
+  "distance_cycle_ms": 659.5744680851063,
+  "S_run_phase": 0.4572192098143875,
+  "S_fire_phase": 0.8510092121212124,
+  "muzzle": "18independently measured projected barrel-bore centers,not old diagonal S muzzle.",
+  "import": "18lossless imports,fix_alpha_border=false,pixels equal canonical RGBA;provenance/.gdignore preserved.",
+  "timing": "Integer source-microsecond weights/65536,matching speed;authored CSV and actual engine boundaries retained.",
+  "initial_regression": {
+    "status": "FAIL_TIMEOUT_PRESERVED",
+    "completed_commands": 8,
+    "passed_native_suites": 6,
+    "passed_checks": 2144,
+    "failed_command": "tests/test_combat_cues.gd",
+    "timeout_seconds": 120,
+    "concurrent_graphics_QA": true,
+    "report": "GAME069_REGRESSION_INITIAL.json"
+  },
+  "final_regression": {
+    "status": "PASS",
+    "commands": 10,
+    "suites": 7,
+    "checks": 4602,
+    "suite_counts": [
+      23,
+      70,
+      122,
+      57,
+      1336,
+      536,
+      2458
+    ],
+    "timeout_seconds": 120,
+    "strict_runner_sha256": "9156043eaf896d72565563cc1e2f623cf0c8fbac7f032f19bffee7e4946a69ee",
+    "graphics_QA_process_finished_before_run": true,
+    "report": "GAME069_REGRESSION_REPORT.json",
+    "interpretation": "Same strict runner passed without concurrent renderer. No claim that concurrency alone explains the earlier timeout;resource warming and host load are not separately measured."
+  },
+  "source": {
+    "status": "PASS",
+    "files": 193,
+    "resource_references": 649,
+    "contracts": 6,
+    "negative_controls_rejected": 192,
+    "combat_negatives": 159,
+    "new_combat_negatives": 8
+  },
+  "python_unittest": {
+    "status": "PASS",
+    "checks": 20
+  },
+  "main_logic": {
+    "status": "PASS",
+    "checks": 1335,
+    "draws": 0,
+    "report": "GAME069_MAIN_LOGIC.json"
+  },
+  "main_render": {
+    "status": "PASS",
+    "checks": 2485,
+    "draws": 447,
+    "real_shots": 43,
+    "S_run_frames": 17,
+    "global_run_wraps": 4,
+    "S_fire_frames": 18,
+    "fire_wraps": 2,
+    "display": "X11",
+    "adapter": "llvmpipe (LLVM 19.1.7, 256 bits)",
+    "all_draws_snapshot_cues_unchanged": true,
+    "report": "GAME069_MAIN_RENDER.json",
+    "covered": [
+      "18Sfireframes/loop",
+      "on/off",
+      "SE/Sturns",
+      "backward48updates",
+      "preservedstationaryattack",
+      "immediatehit/wallconsumption",
+      "actualcontactdamage100to88/hurtpriority",
+      "pause",
+      "missing/invalidmetadatafallbackandrestorationatunchangedphase"
+    ],
+    "scope": "Production main.tscn,isolatedQA saves,fixed1/60updates,native Godot key events,actual X11draws. Not realtimeFPS,physical input,speaker audio or device/final art approval."
+  },
+  "preservation": {
+    "status": "PASS",
+    "base": "cb81a1baf92aa9c80188a059c35af6d8b9884690",
+    "tracked_assets_scripts_data": 1506,
+    "byte_identical": 1503,
+    "changed": [
+      "data/presentation_slots.json",
+      "data/viya_motion.json",
+      "scripts/combat/viya_presentation.gd"
+    ],
+    "renderer_change": "Exactly three allowlist/timing-validation extensions to S;all other source bytes equal.",
+    "motion_changes": [
+      "resource",
+      "directions.s.run_fire added",
+      "directions.s.run_fire_phase_origin added"
+    ],
+    "existing_motion_rows_all_equal": true,
+    "slots_change_only": "viya_battle"
+  },
+  "builder": {
+    "status": "PASS",
+    "delivery_checksums": 42,
+    "source_master_sha256": "4a402d3011dd66d1168335884dc79be3d5251e876f2bdd8604b94bb943a36aa4",
+    "outputs": {
+      "assets/characters/pilot_32/game069_s_run_fire/viya_game069_frames.tres": {
+        "sha256": "fe99d53e11d042343ef8261189e99925a9d29c117c8d9189ccfe8cc8c43082a6",
+        "byte_identical": true
+      },
+      "assets/characters/pilot_32/game069_s_run_fire/integration_manifest.json": {
+        "sha256": "ad38f330b1ff5732dea4950bdd9764af2d7f1e1320db27fb28c094a7ab0fc28c",
+        "byte_identical": true
+      },
+      "data/viya_motion.json": {
+        "sha256": "8877457fe139693fbc690d40436dbc1cbeb08ea44addab83eca1e45233b46b63",
+        "byte_identical": true
+      },
+      "data/presentation_slots.json": {
+        "sha256": "bbd18736436c1e0a3ce62cea98b4ec9e7200ac68411c9d7cd064733198b028b8",
+        "byte_identical": true
+      }
+    }
+  },
+  "display_cleanup": {
+    "task_display_stopped": [
+      39283
+    ],
+    "shared_X99_untouched": true
+  },
+  "art_approval": "NOT_VERIFIED",
+  "new_generations_this_integration": 0,
+  "credit_cost_this_integration": 0,
+  "prior_art_cost": 59,
+  "prior_remaining_budget_not_used": 1,
+  "limits": [
+    "Carry/aim upper-body silhouette and painted foot extents differ;no transition frames fabricated",
+    "2Dphase is not physical contact/zero-slip proof",
+    "Concealed rifle structure/perspective and fine hair/costume marks await producer judgment",
+    "Windows/Android/iOS,physical input/audio,realtimeFPS/thermals",
+    "1540denseoverload,economy,one-stagefinish",
+    "Oldinvalidsaveautomaticrecovery notadded;SAVEFIX001tiny-life producerissue fixed"
+  ],
+  "next": "GAME070 SW ordinary-run one direction;current11frames unchanged,new art/game connection0.",
+  "video_scope": {
+    "GAME069_GAMEPLAY.mp4": "447actualQA draws/60fps,fixture transitions and paused trials included;not uninterrupted real-time gameplay.",
+    "GAME069_MOVING_FIRE.mp4": "Actual draws226..338,113frames/60fps:Sfire80,threefallback/restoredscreens,fireoff30;not FPS proof."
+  },
+  "source_sha256": {
+    "scripts/combat/viya_presentation.gd": "66a75a092e9447345dd788981e23647ed9f1198a18ab28dec1d7d2d3f87ae109",
+    "data/viya_motion.json": "8877457fe139693fbc690d40436dbc1cbeb08ea44addab83eca1e45233b46b63",
+    "data/presentation_slots.json": "bbd18736436c1e0a3ce62cea98b4ec9e7200ac68411c9d7cd064733198b028b8",
+    "tools/build_viya_game069.py": "828778088f0a19cb97d7af4098501a998ab2d69015488079235b70d110a51870",
+    "tools/inspect_viya_game069.gd": "259be49758c202c97c55dfd6d69a4c4bd5de1f7cda53f2e7b3bc75ba26bf4008",
+    "tests/test_viya_game069.gd": "e655dc49fc9ab55e2c696fe49ce2a08f4478b8388ca0ed0b8f9b19e5b98ff667",
+    "tools/check_project.py": "eeafd73fc4503c7af952331c093272a5510aade3fbae04e42afb77eb23f55157",
+    "tools/check_combat_cues.py": "d9ae074f9eeabf1abf8b5851f81c1868661e5f5d7379585d830302e3490a5e16"
+  },
+  "evidence_sha256": {
+    "GAME069_REGRESSION_INITIAL.json": "d2a3c97af56274e5daeaf0f584beefbd574437adb244845df1e108ec8d4aa7c1",
+    "GAME069_FALLBACK.png": "10a403f17cdd394ebfccfe60286a2cadedac8c724e7979e6c0931a9a8b128628",
+    "GAME069_MAIN_LOGIC.json": "4c4c369729b316a6b922af5c20c00594b393a2dce6943ffcb22dedffe1a17c22",
+    "GAME069_REGRESSION_REPORT.json": "8a9e518f794edb76f621868506a04738d43d082626a65f2640b63db3ec5d0f84",
+    "GAME069_RESTORED.png": "346398ccd79523b5fd9e792d17e3c83790743640b317bd4b6068fbbe453266f2",
+    "GAME069_MAIN_RENDER.json": "d78acbd3e42937cf1a4953ff834ea8b53ef7341a0e98d6dc4218ef1721caa24d",
+    "GAME069_HURT.png": "489f141994b94ab1057af1bff1ebfd3ed82af9aade51febf36d6cf1531fc0e6b",
+    "GAME069_MOVING_FIRE.mp4": "af490730846a863052d369e338d594f13dc70c8cd5ebc1262afdabfa393f7906",
+    "GAME069_XORG.conf": "3068a248b9085dab2e9dea99a086d16ea17dcaf1f774d98eff2e1cd9ba0c62bc",
+    "GAME069_GAMEPLAY.mp4": "aa3ad7b7341797d9ab84002467a8bd1a7573d686ed10a4d1409fca63011c024a",
+    "GAME069_RUNTIME.log": "eb1b94f692546269850f86fdb9c84676126ac7c02a278367525d9511166a4e0b",
+    "GAME069_PAUSED.png": "73e9d5f31e2c4acf95acbd1445f5d3d3f6c73f76eecc96c51d5cc561934b8893",
+    "GAME069_IN_GAME.png": "1e7749d6b722e88d86bb539b6e8a0977790f6020666e97295125c2d47b66c75e"
+  },
+  "cleanup_generated_untracked_metadata_removed": 176,
+  "intended18newPNG_import_configs_preserved": true
+}
