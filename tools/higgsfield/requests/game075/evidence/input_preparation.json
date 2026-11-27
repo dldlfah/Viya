@@ -1,0 +1,66 @@
+{
+  "records": [
+    {
+      "file": "tools/higgsfield/requests/game075/evidence/input_sw_003.png",
+      "sha256": "3b4058508b17816e93dfa7d9c95cf16794a53aa57b82daf1cdbe080428cd215f",
+      "source": "assets/characters/pilot_32/game070_sw_run/frames/viya_run_sw_003.png",
+      "source_sha256": "b644d87ede4c5bf9f70c9238945f9cb327ec2fbb5e7a78047f4dabcb9911e8da",
+      "source_canvas": [
+        200,
+        248
+      ],
+      "input_canvas": [
+        600,
+        800
+      ],
+      "uniform_transform": {
+        "scale": 2.8,
+        "translation": [
+          20,
+          53
+        ],
+        "root": [
+          300.0,
+          747.4
+        ]
+      },
+      "role": "image identity/camera reference only; reference arm posture explicitly superseded",
+      "support": "near_projected_support"
+    },
+    {
+      "file": "tools/higgsfield/requests/game075/evidence/input_sw_015.png",
+      "sha256": "b1bdb7fb7c077dc8f2ed0ad131f18e7ea5aa3bf5adddf1b2efd63c8e75757f1c",
+      "source": "assets/characters/pilot_32/game070_sw_run/frames/viya_run_sw_015.png",
+      "source_sha256": "1a6b9e79ce8e4619780660869c72b450153f91dc27c461813b107c234f015224",
+      "source_canvas": [
+        200,
+        248
+      ],
+      "input_canvas": [
+        600,
+        800
+      ],
+      "uniform_transform": {
+        "scale": 2.8,
+        "translation": [
+          20,
+          53
+        ],
+        "root": [
+          300.0,
+          747.4
+        ]
+      },
+      "role": "image identity/camera reference only; reference arm posture explicitly superseded",
+      "support": "far_projected_support"
+    }
+  ],
+  "background": [
+    0,
+    255,
+    0
+  ],
+  "pose_edits": false,
+  "per_image_bbox_alignment": false,
+  "paid_reference_generation": 0
+}

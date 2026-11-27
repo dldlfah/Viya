@@ -1,0 +1,31 @@
+{
+  "unit": "GAME075_SW_RUN_FIRE",
+  "base_commit": "bd5e8dc6c457ac7f9d2e25f425cc42ebfcefeade",
+  "paid_submissions_before": 0,
+  "submitted_jobs_before": [],
+  "maximum_paid_submissions": 2,
+  "maximum_net_credits": 60,
+  "quoted_first_credits": 28,
+  "remaining_after_first_quote": 32,
+  "input_images_only": true,
+  "start_image_omitted_to_avoid_low_carry_lock": true,
+  "video_reference": false,
+  "other_direction_inputs": false,
+  "audio": false,
+  "count": 1,
+  "framing_and_asymmetry_visually_checked": true,
+  "current_service_roles": {
+    "medias[0].role": {
+      "requested": "image",
+      "used": "image_references",
+      "reason": "Seedance 2.5 backend expects schema-key media roles"
+    },
+    "medias[1].role": {
+      "requested": "image",
+      "used": "image_references",
+      "reason": "Seedance 2.5 backend expects schema-key media roles"
+    }
+  },
+  "role_approval": "User continued SW-specific aimed-running proposal with 다음 and 다시; no repeated authorization request.",
+  "generation_state": "READY_NOT_SUBMITTED"
+}

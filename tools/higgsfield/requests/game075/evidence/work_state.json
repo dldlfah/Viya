@@ -1,0 +1,20 @@
+{
+  "unit": "GAME075",
+  "task": "SW full-body aimed running",
+  "base": "bd5e8dc6c457ac7f9d2e25f425cc42ebfcefeade",
+  "job_id": "7fa6e18e-a5ca-4607-b854-9099a8c30faf",
+  "status": "in_progress",
+  "paid_submissions": 1,
+  "charged_credits": 28,
+  "observed_returned_credits": 0,
+  "net_credits": 28,
+  "maximum_submissions": 2,
+  "maximum_credits": 60,
+  "remaining_unit_budget": 32,
+  "account_before": 486,
+  "account_after_submission": 458,
+  "duplicate_submission": false,
+  "technical_adoption": "NOT_EVALUATED",
+  "game_connection": "NOT_RUN",
+  "producer_final_art": "NOT_VERIFIED"
+}

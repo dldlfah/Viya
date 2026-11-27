@@ -1,0 +1,6 @@
+{
+  "exit_code": 0,
+  "stdout": "{\"source_frame\": 3, \"media_id\": \"4a5ed706-7981-4940-99a7-57ef81d4e07f\", \"sha256\": \"3b4058508b17816e93dfa7d9c95cf16794a53aa57b82daf1cdbe080428cd215f\", \"http_status\": 200}\n{\"source_frame\": 15, \"media_id\": \"876224c3-d666-4185-81ff-cfaa161ae076\", \"sha256\": \"b1bdb7fb7c077dc8f2ed0ad131f18e7ea5aa3bf5adddf1b2efd63c8e75757f1c\", \"http_status\": 200}\n",
+  "stderr": "",
+  "sandbox_id": "sb-01M8F9C88934Q577M02A31FX4T"
+}

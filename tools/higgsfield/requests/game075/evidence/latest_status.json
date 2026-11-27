@@ -1,0 +1,21 @@
+{
+  "jobs": [
+    {
+      "index": 0,
+      "job_id": "7fa6e18e-a5ca-4607-b854-9099a8c30faf",
+      "status": "in_progress",
+      "type": "video",
+      "model": "seedance_2_5"
+    }
+  ],
+  "summary": {
+    "total": 1,
+    "completed": 0,
+    "failed": 0,
+    "active": 1,
+    "errors": 0
+  },
+  "all_terminal": false,
+  "timed_out": true,
+  "poll_after_seconds": 10
+}
