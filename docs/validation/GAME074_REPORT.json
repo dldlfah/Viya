@@ -1,0 +1,1133 @@
+{
+  "game": "GAME074",
+  "status": "IMPLEMENTED_AND_VERIFIED_IN_LINUX",
+  "baseline": "c90344df748671633a2b6540a6e7585d3e2f646b",
+  "implementation": "cf78696ebcd9b4610c5ca5accc5451f3298c9ae5",
+  "environment": "Godot 4.7.2, Linux X11, OpenGL compatibility, Mesa 25.0.7 llvmpipe, 1280x720",
+  "fixtures": {
+    "180": {
+      "filename": "natural_full_180.bin",
+      "sha256": "d3f727f758b8fb5831f79c1e1e18d26518a7a86fe512ae175fea20fb78c91eff",
+      "source": "Saved snapshots from the GAME071 comparison set"
+    },
+    "210": {
+      "filename": "natural_full_210.bin",
+      "sha256": "e6ca79ca2db49c749eeb9a760fccff4c2a41a1000b6f64ca9318e9c19328e831",
+      "source": "Saved snapshots from the GAME071 comparison set"
+    },
+    "240": {
+      "filename": "natural_full_240.bin",
+      "sha256": "136a468160125ec9c49411238b04c936b39c410479fbaf64b4f8f51be14f36a2",
+      "source": "Saved snapshots from the GAME071 comparison set"
+    },
+    "300": {
+      "filename": "natural_full_300.bin",
+      "sha256": "ac22f50a1f942ed406709ee7d76f3b4c2d3a068214dc139a8d1720087b316de3",
+      "source": "Saved snapshots from the GAME071 comparison set"
+    }
+  },
+  "fixed_step": {
+    "method": "Restore stage snapshot and UI in the real scene, one 1/60 second update per draw, vector (0.6,0.8), all 35 states compared, 8 warm-up frames omitted from 27 measured intervals per run. Iteration includes physics, draw and presentation, not an isolated GPU timer.",
+    "rows": [
+      {
+        "elapsed_seconds": 180,
+        "authority_equal_each_step": 35,
+        "final_authority_sha256": "16a7c4f971c72ee406b8dfe97c2d508888a30af9cd6d6c0877030623ae2ee59a",
+        "before": {
+          "end_enemies": 96,
+          "player_displacement": 145.309432983398,
+          "sample_count": 27,
+          "start_enemies_xp_gold": [
+            108,
+            240,
+            116
+          ],
+          "video": {
+            "draw_calls": 635.0,
+            "primitives": 31445.0
+          },
+          "visible_enemies": 85,
+          "p50_p95_max_ms": {
+            "actor_draw": [
+              0.964,
+              1.288,
+              1.622
+            ],
+            "draw": [
+              3.951,
+              4.884,
+              5.988
+            ],
+            "enemies": [
+              2.01,
+              2.232,
+              2.27
+            ],
+            "floor": [
+              0.199,
+              0.274,
+              0.415
+            ],
+            "hud": [
+              0.75,
+              1.026,
+              1.999
+            ],
+            "iteration": [
+              33.949,
+              41.621,
+              44.31
+            ],
+            "loot": [
+              0.139,
+              0.217,
+              0.335
+            ],
+            "physics": [
+              4.867,
+              9.98,
+              11.189
+            ],
+            "scenery": [
+              0.289,
+              0.357,
+              0.364
+            ]
+          }
+        },
+        "after": {
+          "end_enemies": 96,
+          "player_displacement": 145.309432983398,
+          "sample_count": 27,
+          "start_enemies_xp_gold": [
+            108,
+            240,
+            116
+          ],
+          "video": {
+            "draw_calls": 635.0,
+            "primitives": 31445.0
+          },
+          "visible_enemies": 85,
+          "p50_p95_max_ms": {
+            "actor_draw": [
+              1.023,
+              1.258,
+              2.06
+            ],
+            "draw": [
+              4.044,
+              5.173,
+              5.4
+            ],
+            "enemies": [
+              1.993,
+              2.458,
+              2.487
+            ],
+            "floor": [
+              0.164,
+              0.216,
+              0.234
+            ],
+            "hud": [
+              0.779,
+              0.945,
+              2.104
+            ],
+            "iteration": [
+              33.968,
+              43.438,
+              44.281
+            ],
+            "loot": [
+              0.137,
+              0.249,
+              0.322
+            ],
+            "physics": [
+              4.874,
+              10.333,
+              11.533
+            ],
+            "scenery": [
+              0.297,
+              0.408,
+              0.52
+            ]
+          }
+        }
+      },
+      {
+        "elapsed_seconds": 210,
+        "authority_equal_each_step": 35,
+        "final_authority_sha256": "371541275bf645c401845da00565fc60817a70a0fe3c67e1cac17a574d284329",
+        "before": {
+          "end_enemies": 168,
+          "player_displacement": 141.591339111328,
+          "sample_count": 27,
+          "start_enemies_xp_gold": [
+            171,
+            240,
+            146
+          ],
+          "video": {
+            "draw_calls": 744.0,
+            "primitives": 32626.0
+          },
+          "visible_enemies": 104,
+          "p50_p95_max_ms": {
+            "actor_draw": [
+              1.254,
+              1.708,
+              2.549
+            ],
+            "draw": [
+              4.658,
+              10.176,
+              12.426
+            ],
+            "enemies": [
+              3.601,
+              4.058,
+              5.734
+            ],
+            "floor": [
+              0.318,
+              0.93,
+              3.01
+            ],
+            "hud": [
+              0.732,
+              0.989,
+              1.96
+            ],
+            "iteration": [
+              38.184,
+              55.495,
+              56.578
+            ],
+            "loot": [
+              0.173,
+              0.32,
+              0.367
+            ],
+            "physics": [
+              6.721,
+              9.226,
+              9.657
+            ],
+            "scenery": [
+              0.305,
+              0.434,
+              0.949
+            ]
+          }
+        },
+        "after": {
+          "end_enemies": 168,
+          "player_displacement": 141.591339111328,
+          "sample_count": 27,
+          "start_enemies_xp_gold": [
+            171,
+            240,
+            146
+          ],
+          "video": {
+            "draw_calls": 686.0,
+            "primitives": 32626.0
+          },
+          "visible_enemies": 104,
+          "p50_p95_max_ms": {
+            "actor_draw": [
+              1.432,
+              1.72,
+              1.786
+            ],
+            "draw": [
+              4.832,
+              5.433,
+              5.901
+            ],
+            "enemies": [
+              3.579,
+              4.173,
+              4.174
+            ],
+            "floor": [
+              0.263,
+              0.361,
+              0.408
+            ],
+            "hud": [
+              0.743,
+              0.929,
+              0.966
+            ],
+            "iteration": [
+              35.611,
+              44.392,
+              55.124
+            ],
+            "loot": [
+              0.172,
+              0.192,
+              0.252
+            ],
+            "physics": [
+              6.746,
+              7.618,
+              7.647
+            ],
+            "scenery": [
+              0.284,
+              0.517,
+              0.594
+            ]
+          }
+        }
+      },
+      {
+        "elapsed_seconds": 240,
+        "authority_equal_each_step": 35,
+        "final_authority_sha256": "06cb1f88a12f1293ff67b6368aa3135d96e55bca0ba39d22b267006161c5f042",
+        "before": {
+          "end_enemies": 196,
+          "player_displacement": 70.0000762939453,
+          "sample_count": 27,
+          "start_enemies_xp_gold": [
+            200,
+            235,
+            180
+          ],
+          "video": {
+            "draw_calls": 876.0,
+            "primitives": 38124.0
+          },
+          "visible_enemies": 147,
+          "p50_p95_max_ms": {
+            "actor_draw": [
+              1.536,
+              3.663,
+              7.471
+            ],
+            "draw": [
+              5.347,
+              9.557,
+              13.258
+            ],
+            "enemies": [
+              4.185,
+              4.513,
+              5.155
+            ],
+            "floor": [
+              0.318,
+              0.445,
+              0.5
+            ],
+            "hud": [
+              0.739,
+              1.188,
+              1.213
+            ],
+            "iteration": [
+              38.462,
+              48.923,
+              51.073
+            ],
+            "loot": [
+              0.196,
+              0.269,
+              0.403
+            ],
+            "physics": [
+              7.86,
+              8.478,
+              10.126
+            ],
+            "scenery": [
+              0.516,
+              0.604,
+              0.615
+            ]
+          }
+        },
+        "after": {
+          "end_enemies": 196,
+          "player_displacement": 70.0000762939453,
+          "sample_count": 27,
+          "start_enemies_xp_gold": [
+            200,
+            235,
+            180
+          ],
+          "video": {
+            "draw_calls": 784.0,
+            "primitives": 38124.0
+          },
+          "visible_enemies": 147,
+          "p50_p95_max_ms": {
+            "actor_draw": [
+              1.407,
+              1.787,
+              2.016
+            ],
+            "draw": [
+              5.156,
+              7.832,
+              9.872
+            ],
+            "enemies": [
+              4.264,
+              5.162,
+              7.163
+            ],
+            "floor": [
+              0.302,
+              0.409,
+              0.433
+            ],
+            "hud": [
+              0.759,
+              1.064,
+              1.09
+            ],
+            "iteration": [
+              36.192,
+              45.511,
+              47.24
+            ],
+            "loot": [
+              0.214,
+              0.283,
+              1.239
+            ],
+            "physics": [
+              8.08,
+              10.218,
+              14.442
+            ],
+            "scenery": [
+              0.502,
+              0.583,
+              0.586
+            ]
+          }
+        }
+      },
+      {
+        "elapsed_seconds": 300,
+        "authority_equal_each_step": 35,
+        "final_authority_sha256": "61034c5eece94e73ad67b57063158c199e1ebc20e88158885f4545711c03a5bc",
+        "before": {
+          "end_enemies": 365,
+          "player_displacement": 140.949676513672,
+          "sample_count": 27,
+          "start_enemies_xp_gold": [
+            388,
+            240,
+            240
+          ],
+          "video": {
+            "draw_calls": 2296.0,
+            "primitives": 89192.0
+          },
+          "visible_enemies": 353,
+          "p50_p95_max_ms": {
+            "actor_draw": [
+              4.414,
+              4.978,
+              5.143
+            ],
+            "draw": [
+              12.068,
+              13.757,
+              14.226
+            ],
+            "enemies": [
+              3.835,
+              4.221,
+              5.053
+            ],
+            "floor": [
+              0.387,
+              0.498,
+              0.499
+            ],
+            "hud": [
+              0.881,
+              0.999,
+              1.399
+            ],
+            "iteration": [
+              69.526,
+              119.396,
+              173.777
+            ],
+            "loot": [
+              0.206,
+              0.247,
+              0.268
+            ],
+            "physics": [
+              10.265,
+              11.549,
+              18.513
+            ],
+            "scenery": [
+              0.284,
+              0.617,
+              0.649
+            ]
+          }
+        },
+        "after": {
+          "end_enemies": 365,
+          "player_displacement": 140.949676513672,
+          "sample_count": 27,
+          "start_enemies_xp_gold": [
+            388,
+            240,
+            240
+          ],
+          "video": {
+            "draw_calls": 2122.0,
+            "primitives": 89192.0
+          },
+          "visible_enemies": 353,
+          "p50_p95_max_ms": {
+            "actor_draw": [
+              4.518,
+              8.236,
+              8.353
+            ],
+            "draw": [
+              12.318,
+              18.17,
+              23.411
+            ],
+            "enemies": [
+              3.936,
+              4.703,
+              8.201
+            ],
+            "floor": [
+              0.371,
+              0.461,
+              0.609
+            ],
+            "hud": [
+              0.92,
+              1.162,
+              1.538
+            ],
+            "iteration": [
+              70.757,
+              95.481,
+              114.672
+            ],
+            "loot": [
+              0.221,
+              0.287,
+              0.448
+            ],
+            "physics": [
+              10.695,
+              15.221,
+              16.312
+            ],
+            "scenery": [
+              0.364,
+              0.507,
+              0.516
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "repeated_fixed_step": {
+    "method": "Same replay method and real renderer. Alternating the original and new renderers in the same engine process isolates capture state. p50 is median of 54 pooled frames, p95 is upper-tail order statistic of the same frames. First frames are recorded separately, including lazy pose builds. The global engine/scene and shared resources have loaded.",
+    "rows": {
+      "210": {
+        "authority_equal_each_step": 35,
+        "visible_enemies": 104,
+        "before": {
+          "batch_count": 2,
+          "sample_count": 54,
+          "p50_ms": 39.545,
+          "p95_ms": 51.884,
+          "draw_calls_after_same_step": [
+            744.0,
+            744.0
+          ],
+          "first_draw_window": [
+            {
+              "draw_ms": 225.39,
+              "iteration_ms": 351.461,
+              "pose_meshes": 0
+            },
+            {
+              "draw_ms": 5.839,
+              "iteration_ms": 56.14,
+              "pose_meshes": 0
+            }
+          ]
+        },
+        "after": {
+          "batch_count": 2,
+          "sample_count": 54,
+          "p50_ms": 34.697,
+          "p95_ms": 44.179,
+          "draw_calls_after_same_step": [
+            686.0,
+            686.0
+          ],
+          "first_draw_window": [
+            {
+              "draw_ms": 4.947,
+              "iteration_ms": 46.415,
+              "pose_meshes": 0
+            },
+            {
+              "draw_ms": 4.385,
+              "iteration_ms": 47.99,
+              "pose_meshes": 33
+            }
+          ]
+        }
+      },
+      "300": {
+        "authority_equal_each_step": 35,
+        "visible_enemies": 353,
+        "before": {
+          "batch_count": 2,
+          "sample_count": 54,
+          "p50_ms": 63.302,
+          "p95_ms": 73.535,
+          "draw_calls_after_same_step": [
+            2296.0,
+            2296.0
+          ],
+          "first_draw_window": [
+            {
+              "draw_ms": 19.273,
+              "iteration_ms": 151.063,
+              "pose_meshes": 0
+            },
+            {
+              "draw_ms": 12.432,
+              "iteration_ms": 67.092,
+              "pose_meshes": 0
+            }
+          ]
+        },
+        "after": {
+          "batch_count": 2,
+          "sample_count": 54,
+          "p50_ms": 62.044,
+          "p95_ms": 70.613,
+          "draw_calls_after_same_step": [
+            2122.0,
+            2122.0
+          ],
+          "first_draw_window": [
+            {
+              "draw_ms": 11.536,
+              "iteration_ms": 67.825,
+              "pose_meshes": 33
+            },
+            {
+              "draw_ms": 12.1,
+              "iteration_ms": 68.722,
+              "pose_meshes": 39
+            }
+          ]
+        }
+      }
+    }
+  },
+  "scheduled_input": {
+    "method": "Real D input, 40 automatically scheduled physics callbacks per run after warm-up. Intervals are few, and p95 and first visible input latency vary. All before/after final authority hashes match.",
+    "runs": {
+      "before": {
+        "errors": [],
+        "rows": [
+          {
+            "actors": 120,
+            "cache": true,
+            "engine_process_frames": 14,
+            "final_authority_hash": "21f04d6adbbedbf7ffe870e387a9873291061f522d54be781e1b25ec0f619373",
+            "hero_animation": "run_sw",
+            "hero_frame": 12,
+            "hud": {
+              "max_ms": 12.574,
+              "p50_ms": 0.599,
+              "p95_ms": 1.929
+            },
+            "input_released": true,
+            "input_to_first_movement_ms": 20.537,
+            "input_to_presented_movement_ms": 55.6,
+            "physics_callback": {
+              "max_ms": 49.73,
+              "p50_ms": 5.028,
+              "p95_ms": 17.791
+            },
+            "physics_ticks": 40,
+            "presented_interval": {
+              "max_ms": 133.421,
+              "p50_ms": 51.372,
+              "p95_ms": 133.421
+            },
+            "presented_intervals": 12,
+            "shots": 4649,
+            "tag": "180"
+          },
+          {
+            "actors": 170,
+            "cache": true,
+            "engine_process_frames": 11,
+            "final_authority_hash": "1bcfe8ebc34b28a3c0ee6abc4959da3510e3d9f840f4b8ad7365fb0dd8fd6acf",
+            "hero_animation": "run_fire_se",
+            "hero_frame": 2,
+            "hud": {
+              "max_ms": 0.85,
+              "p50_ms": 0.532,
+              "p95_ms": 0.825
+            },
+            "input_released": true,
+            "input_to_first_movement_ms": 19.641,
+            "input_to_presented_movement_ms": 60.331,
+            "physics_callback": {
+              "max_ms": 7.938,
+              "p50_ms": 5.65,
+              "p95_ms": 7.909
+            },
+            "physics_ticks": 40,
+            "presented_interval": {
+              "max_ms": 93.159,
+              "p50_ms": 80.714,
+              "p95_ms": 93.159
+            },
+            "presented_intervals": 9,
+            "shots": 5691,
+            "tag": "210"
+          },
+          {
+            "actors": 190,
+            "cache": true,
+            "engine_process_frames": 9,
+            "final_authority_hash": "e01298d17c28c8721ac5895c45f03f247639865b46a0655c7b5dbe7983390cb9",
+            "hero_animation": "run_w",
+            "hero_frame": 8,
+            "hud": {
+              "max_ms": 2.212,
+              "p50_ms": 0.535,
+              "p95_ms": 0.876
+            },
+            "input_released": true,
+            "input_to_first_movement_ms": 20.594,
+            "input_to_presented_movement_ms": 60.477,
+            "physics_callback": {
+              "max_ms": 17.347,
+              "p50_ms": 6.977,
+              "p95_ms": 8.813
+            },
+            "physics_ticks": 40,
+            "presented_interval": {
+              "max_ms": 160.079,
+              "p50_ms": 117.259,
+              "p95_ms": 160.079
+            },
+            "presented_intervals": 7,
+            "shots": 6676,
+            "tag": "240"
+          },
+          {
+            "actors": 366,
+            "cache": true,
+            "engine_process_frames": 8,
+            "final_authority_hash": "5ec365b17fcb8ec0ed81611162413fdbc83e3ba136281247626c51ed19f9f84c",
+            "hero_animation": "run_fire_s",
+            "hero_frame": 14,
+            "hud": {
+              "max_ms": 5.958,
+              "p50_ms": 0.854,
+              "p95_ms": 1.636
+            },
+            "input_released": true,
+            "input_to_first_movement_ms": 27.399,
+            "input_to_presented_movement_ms": 100.195,
+            "physics_callback": {
+              "max_ms": 64.496,
+              "p50_ms": 10.255,
+              "p95_ms": 18.491
+            },
+            "physics_ticks": 40,
+            "presented_interval": {
+              "max_ms": 418.607,
+              "p50_ms": 268.629,
+              "p95_ms": 418.607
+            },
+            "presented_intervals": 6,
+            "shots": 8835,
+            "tag": "300"
+          }
+        ],
+        "scope": "Actual engine scheduled60Hz callbacks with real Input.parse_input_event D key, exactly40 updates and retained engine catch-up policy. Different presented frame counts; compare final authority after exactly40 physics callbacks, not wall-time battle duration. Linux input probe, not hardware latency/mobile FPS.",
+        "status": "PASS"
+      },
+      "after": {
+        "errors": [],
+        "rows": [
+          {
+            "actors": 120,
+            "cache": true,
+            "engine_process_frames": 13,
+            "final_authority_hash": "21f04d6adbbedbf7ffe870e387a9873291061f522d54be781e1b25ec0f619373",
+            "hero_animation": "run_sw",
+            "hero_frame": 12,
+            "hud": {
+              "max_ms": 1.974,
+              "p50_ms": 0.638,
+              "p95_ms": 0.933
+            },
+            "input_released": true,
+            "input_to_first_movement_ms": 21.42,
+            "input_to_presented_movement_ms": 62.169,
+            "physics_callback": {
+              "max_ms": 17.07,
+              "p50_ms": 5.399,
+              "p95_ms": 11.568
+            },
+            "physics_ticks": 40,
+            "presented_interval": {
+              "max_ms": 86.064,
+              "p50_ms": 58.25,
+              "p95_ms": 86.064
+            },
+            "presented_intervals": 11,
+            "shots": 4649,
+            "tag": "180"
+          },
+          {
+            "actors": 170,
+            "cache": true,
+            "engine_process_frames": 11,
+            "final_authority_hash": "1bcfe8ebc34b28a3c0ee6abc4959da3510e3d9f840f4b8ad7365fb0dd8fd6acf",
+            "hero_animation": "run_fire_se",
+            "hero_frame": 2,
+            "hud": {
+              "max_ms": 0.886,
+              "p50_ms": 0.619,
+              "p95_ms": 0.861
+            },
+            "input_released": true,
+            "input_to_first_movement_ms": 19.657,
+            "input_to_presented_movement_ms": 59.279,
+            "physics_callback": {
+              "max_ms": 9.17,
+              "p50_ms": 6.199,
+              "p95_ms": 8.795
+            },
+            "physics_ticks": 40,
+            "presented_interval": {
+              "max_ms": 101.461,
+              "p50_ms": 72.498,
+              "p95_ms": 101.461
+            },
+            "presented_intervals": 9,
+            "shots": 5691,
+            "tag": "210"
+          },
+          {
+            "actors": 190,
+            "cache": true,
+            "engine_process_frames": 9,
+            "final_authority_hash": "e01298d17c28c8721ac5895c45f03f247639865b46a0655c7b5dbe7983390cb9",
+            "hero_animation": "run_w",
+            "hero_frame": 8,
+            "hud": {
+              "max_ms": 0.863,
+              "p50_ms": 0.586,
+              "p95_ms": 0.855
+            },
+            "input_released": true,
+            "input_to_first_movement_ms": 23.816,
+            "input_to_presented_movement_ms": 73.233,
+            "physics_callback": {
+              "max_ms": 12.996,
+              "p50_ms": 7.278,
+              "p95_ms": 9.36
+            },
+            "physics_ticks": 40,
+            "presented_interval": {
+              "max_ms": 127.656,
+              "p50_ms": 104.219,
+              "p95_ms": 127.656
+            },
+            "presented_intervals": 7,
+            "shots": 6676,
+            "tag": "240"
+          },
+          {
+            "actors": 366,
+            "cache": true,
+            "engine_process_frames": 7,
+            "final_authority_hash": "5ec365b17fcb8ec0ed81611162413fdbc83e3ba136281247626c51ed19f9f84c",
+            "hero_animation": "run_fire_s",
+            "hero_frame": 14,
+            "hud": {
+              "max_ms": 2.996,
+              "p50_ms": 0.908,
+              "p95_ms": 1.356
+            },
+            "input_released": true,
+            "input_to_first_movement_ms": 23.099,
+            "input_to_presented_movement_ms": 131.065,
+            "physics_callback": {
+              "max_ms": 17.08,
+              "p50_ms": 10.934,
+              "p95_ms": 15.24
+            },
+            "physics_ticks": 40,
+            "presented_interval": {
+              "max_ms": 293.754,
+              "p50_ms": 256.272,
+              "p95_ms": 293.754
+            },
+            "presented_intervals": 5,
+            "shots": 8835,
+            "tag": "300"
+          }
+        ],
+        "scope": "Actual engine scheduled60Hz callbacks with real Input.parse_input_event D key, exactly40 updates and retained engine catch-up policy. Different presented frame counts; compare final authority after exactly40 physics callbacks, not wall-time battle duration. Linux input probe, not hardware latency/mobile FPS.",
+        "status": "PASS"
+      }
+    }
+  },
+  "render_checks": {
+    "scene_comparisons": {
+      "errors": [],
+      "rows": [
+        {
+          "actors": 388,
+          "authority_and_cues_equal": true,
+          "boss_guidance": {
+            "aimed": true,
+            "blocked": false,
+            "direction": "(-0.331985, 0.943285)",
+            "distance": 457.408935546875,
+            "font_size": 13,
+            "hp": 3200,
+            "id": 5211,
+            "in_range": true,
+            "marker_rect": "[P: (720.0, 488.964), S: (80.0, 40.0)]",
+            "max_hp": 3200,
+            "offscreen": true,
+            "p": "(1772.475, 1622.794)",
+            "reach": 566.8,
+            "screen": "(712.5974, 643.6512)",
+            "status": "기본 공격 · 보스 조준",
+            "status_rect": "[P: (418.6934, 26.0), S: (360.0, 22.0)]"
+          },
+          "changed_channels": 664,
+          "hero_animation": "idle_ne",
+          "hero_frame": 0,
+          "max_channel_difference": 1,
+          "occluders": 0,
+          "tag": "natural300",
+          "visible": 362
+        },
+        {
+          "actors": 391,
+          "authority_and_cues_equal": true,
+          "boss_guidance": {
+            "aimed": true,
+            "blocked": false,
+            "direction": "(-0.331985, 0.943285)",
+            "distance": 457.408935546875,
+            "font_size": 13,
+            "hp": 3200,
+            "id": 5211,
+            "in_range": true,
+            "marker_rect": "[P: (720.0, 488.964), S: (80.0, 40.0)]",
+            "max_hp": 3200,
+            "offscreen": true,
+            "p": "(1772.475, 1622.794)",
+            "reach": 566.8,
+            "screen": "(712.5974, 643.6512)",
+            "status": "기본 공격 · 보스 조준",
+            "status_rect": "[P: (418.6934, 26.0), S: (360.0, 22.0)]"
+          },
+          "changed_channels": 664,
+          "hero_animation": "hurt_sw",
+          "hero_frame": 0,
+          "max_channel_difference": 1,
+          "occluders": 0,
+          "tag": "hurt_tells_boss",
+          "visible": 365
+        },
+        {
+          "actors": 391,
+          "authority_and_cues_equal": true,
+          "boss_guidance": {
+            "aimed": false,
+            "blocked": true,
+            "direction": "(-0.033306, 0.999445)",
+            "distance": 1409.98559570312,
+            "font_size": 13,
+            "hp": 3200,
+            "id": 5211,
+            "in_range": false,
+            "marker_rect": "[P: (272.0, 488.964), S: (80.0, 40.0)]",
+            "max_hp": 3200,
+            "offscreen": true,
+            "p": "(1772.475, 1622.794)",
+            "reach": 566.8,
+            "screen": "(284.8816, 1322.731)",
+            "status": "기본 공격 · 사거리 밖 · 접근 필요",
+            "status_rect": "[P: (418.6934, 26.0), S: (360.0, 22.0)]"
+          },
+          "changed_channels": 0,
+          "hero_animation": "idle_ne",
+          "hero_frame": 0,
+          "max_channel_difference": 0,
+          "occluders": 1,
+          "tag": "wall_occlusion",
+          "visible": 8
+        },
+        {
+          "actors": 2,
+          "authority_and_cues_equal": true,
+          "boss_guidance": {
+            "aimed": false,
+            "blocked": false,
+            "direction": "(-1.0, 0.0)",
+            "distance": 731.610168457031,
+            "font_size": 13,
+            "hp": 3200,
+            "id": 5211,
+            "in_range": false,
+            "marker_rect": "[P: (48.0, 378.4938), S: (80.0, 40.0)]",
+            "max_hp": 3200,
+            "offscreen": true,
+            "p": "(1772.475, 1622.794)",
+            "reach": 566.8,
+            "screen": "(-81.39136, 398.4938)",
+            "status": "기본 공격 · 사거리 밖 · 접근 필요",
+            "status_rect": "[P: (418.6934, 26.0), S: (360.0, 22.0)]"
+          },
+          "changed_channels": 0,
+          "hero_animation": "idle_ne",
+          "hero_frame": 0,
+          "max_channel_difference": 0,
+          "occluders": 0,
+          "tag": "purge_protected_boss",
+          "visible": 2
+        },
+        {
+          "actors": 2,
+          "authority_and_cues_equal": true,
+          "boss_guidance": {
+            "aimed": false,
+            "blocked": false,
+            "direction": "(-1.0, 0.0)",
+            "distance": 731.610168457031,
+            "font_size": 13,
+            "hp": 3200,
+            "id": 5211,
+            "in_range": false,
+            "marker_rect": "[P: (48.0, 177.2762), S: (80.0, 40.0)]",
+            "max_hp": 3200,
+            "offscreen": true,
+            "p": "(1772.475, 1622.794)",
+            "reach": 566.8,
+            "screen": "(-93.14105, 197.2762)",
+            "status": "기본 공격 · 사거리 밖 · 접근 필요",
+            "status_rect": "[P: (418.6934, 26.0), S: (360.0, 22.0)]"
+          },
+          "changed_channels": 0,
+          "hero_animation": "idle_ne",
+          "hero_frame": 0,
+          "max_channel_difference": 0,
+          "occluders": 0,
+          "tag": "legacy_f8",
+          "visible": 0
+        },
+        {
+          "actors": 2,
+          "authority_and_cues_equal": true,
+          "boss_guidance": {},
+          "changed_channels": 0,
+          "hero_animation": "idle_ne",
+          "hero_frame": 0,
+          "max_channel_difference": 0,
+          "occluders": 0,
+          "tag": "paused",
+          "visible": 2
+        }
+      ],
+      "scope": "Frozen actual production UI before/after production renderer changes; all captures preserve authority/cues. Injected hurt/status/boss/ranged/occlusion/purge are visual QA, not natural balance or hardware FPS.",
+      "status": "PASS"
+    },
+    "original_static_native_reference": {
+      "maximum_channel_difference": 1,
+      "rows": [
+        {
+          "bodies": 20,
+          "changed_channels": 3815,
+          "max_channel_difference": 1,
+          "move_clock": -1.0
+        },
+        {
+          "bodies": 20,
+          "changed_channels": 3815,
+          "max_channel_difference": 1,
+          "move_clock": 0.0
+        },
+        {
+          "bodies": 20,
+          "changed_channels": 3872,
+          "max_channel_difference": 1,
+          "move_clock": 0.03125
+        },
+        {
+          "bodies": 20,
+          "changed_channels": 3797,
+          "max_channel_difference": 1,
+          "move_clock": 0.09375
+        },
+        {
+          "bodies": 20,
+          "changed_channels": 3861,
+          "max_channel_difference": 1,
+          "move_clock": 0.2
+        }
+      ],
+      "scope": "100 body poses against untouched pre-GAME063 primitives; at most1/255 vertex-colour encoding difference, original ordering/AA/shape/colours retained.",
+      "status": "PASS"
+    }
+  },
+  "regression": {
+    "commands_passed": 10,
+    "native_checks_total": 4711,
+    "native_suites": {
+      "test_combat_foundation": 23,
+      "test_growth": 70,
+      "test_magic": 122,
+      "test_feedback": 57,
+      "test_mobile_hud": 1354,
+      "test_run_navigation": 616,
+      "test_combat_cues": 2469
+    },
+    "source_checks_passed": 6,
+    "static_files_checked": 198
+  },
+  "not_verified": [
+    "Windows hardware",
+    "Android or iOS device",
+    "device FPS or thermals"
+  ]
+}
