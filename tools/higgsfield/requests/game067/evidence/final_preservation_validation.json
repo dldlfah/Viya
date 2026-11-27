@@ -1,0 +1,10 @@
+{
+  "base_head": "96745bded1371801d6c1e5e0173a1c2e8eb2cb82",
+  "preserved_original_game_asset_data_files": 1346,
+  "modified_original_files": [],
+  "delivery_checksum_files": 36,
+  "game_engine_tests_this_session": "NOT_RUN",
+  "art_pipeline": "actual prepare/measure/preview run on candidate07;20frames,20muzzles,positive timing,loop/alpha/phase visual review",
+  "final_producer_approval": "NOT_VERIFIED",
+  "alpha_refinement": "Checked source unchanged; new20 alpha cyan-haze extraction refined; final per-frame hashes/muzzles/phase/timing and previews remeasured."
+}

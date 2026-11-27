@@ -1,0 +1,43 @@
+{
+  "id": "hf_mult_motion_control",
+  "name": "Genjutsu",
+  "provider_name": "Higgsfield",
+  "description": "Transfer motion from a reference video to subjects in reference images",
+  "output_type": "video",
+  "parameters": [
+    {
+      "name": "resolution",
+      "required": "optional",
+      "type": "string",
+      "description": "Output resolution: 480p, 720p, or 1080p.",
+      "options": [
+        "480p",
+        "720p",
+        "1080p"
+      ],
+      "default": "720p"
+    }
+  ],
+  "medias": [
+    {
+      "name": "medias",
+      "type": "image",
+      "roles": [
+        "image_references",
+        "video_references"
+      ],
+      "description": "Media roles: image_references — Reference images containing the subjects to animate (1-49). (array, max 49) | video_references — Reference video supplying the motion to transfer. Exactly one is required. (array, max 1)"
+    }
+  ],
+  "aspect_ratios": [],
+  "tags": [
+    "motion-control",
+    "image-to-video",
+    "video-reference",
+    "480p",
+    "720p",
+    "1080p"
+  ],
+  "supports_free_gens": true,
+  "purpose": "Genjutsu motion transfer: a reference video drives the subjects of reference images."
+}

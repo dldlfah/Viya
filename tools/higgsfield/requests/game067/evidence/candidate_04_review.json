@@ -1,0 +1,9 @@
+{
+  "candidate": 4,
+  "generation": "FAILED",
+  "job_id": "5b1d7b10-3a34-4a7a-98de-8ddb045c902f",
+  "actual_error": "문제가 발생했어요. 다시 시도하거나 입력 파일 또는 프롬프트를 변경해 주세요.",
+  "output": null,
+  "observed_credit_debit": 0,
+  "technical_acceptance": "NO_OUTPUT"
+}

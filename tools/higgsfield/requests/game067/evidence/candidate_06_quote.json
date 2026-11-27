@@ -1,0 +1,42 @@
+{
+  "cost": {
+    "credits": 35,
+    "credits_exact": 35
+  },
+  "adjustments": {
+    "medias[0].role": {
+      "requested": "image",
+      "used": "image_references",
+      "reason": "Genjutsu backend expects schema-key media roles"
+    },
+    "medias[1].role": {
+      "requested": "video",
+      "used": "video_references",
+      "reason": "Genjutsu backend expects schema-key media roles"
+    }
+  },
+  "input_check": {
+    "required_media_present": true,
+    "image_count": 1,
+    "video_count": 1,
+    "missing_roles": [],
+    "generation_validated": false
+  },
+  "prepared_params": {
+    "model": "hf_mult_motion_control",
+    "prompt": "Transfer the exact slow alternating full-body running gait from the driving video to this same VIYA reference image, keeping her rifle firmly shouldered with two hands. Retain the two slow2.25-second full left-right cycles; smooth continuous genuine body poses between motion landmarks, no step-and-hold cadence or acceleration. Keep EXACT fixed elevated southeast three-quarter front/side camera, screen-down-right heading and front visibility. Never turn to an east side view. Same mature adult face/body, dark-brown wavy hair, ivory top, black corset, partial gloves, gold/brass ornaments, short garments/thigh straps, tall boots, asymmetric crimson cloth and original red-rune rifle. Preserve painterly anime details. Same body size and fixed root/framing. Full hair, both boots, cloth and barrel inside with margin. Stable shoulder aim and restrained shoulder settling, flowing hair/cloth. NO muzzle flash, glow, tracer, bullet, casing, smoke, spark, magic, shadow, scenery, text, checkerboard, extra subject, mirroring, endpoint duplication, ping-pong, ghosted limbs or puppet warping. One flat uniform green/cyan matte background.",
+    "count": 1,
+    "medias": [
+      {
+        "role": "image_references",
+        "value": "c68a9514-13d8-4596-a69a-ef7c3f99d4ed"
+      },
+      {
+        "role": "video_references",
+        "value": "5838b1a9-b45f-4928-9026-c74a154892ea"
+      }
+    ],
+    "resolution": "720p"
+  },
+  "quote_ref": "quote:ukF2qXyqpwrQe7O6_ZmgYw"
+}

@@ -1,0 +1,15 @@
+{
+  "model": "seedance_2_5",
+  "mode": "video_edit",
+  "resolution": "720p",
+  "generate_audio": false,
+  "bitrate_mode": "high",
+  "count": 1,
+  "medias": [
+    {
+      "role": "video",
+      "value": "5b6c384f-baae-4a81-8556-5f2bf0a0f72d"
+    }
+  ],
+  "prompt": "Edit the supplied VIYA southeast running video into a continuous SHOULDER-AIMED running drill. Keep this SAME fixed elevated three-quarter southeast camera, same screen-down-right heading, same full-body gait, leg phases, body size and fixed root registration. Preserve exactly this adult woman's face, hair, body, costume, asymmetrical crimson cloth and original detailed rune rifle.\n\nTHE REQUIRED VISIBLE CHANGE: raise and shoulder her original long rifle. The buttstock is braced against her right shoulder, cheek near the stock, eyes looking along the sights, trigger hand at the grip, support hand under the fore-end. Both elbows and shoulder move naturally to support the rifle. The rifle is held firmly across the upper chest with its muzzle directed southeast/down-right, rather than carried low at waist height. This is a calm target-tracking drill while running. Her feet keep alternating naturally with the reference's approximately 0.66-second full cycle; no new foot restart. Subtle small mechanical recoil and shoulder settling only. No dramatic body jerk. Hair and crimson cloth flow continuously. Keep the exact original high-angle front/side ratio; never rotate to an east side view.\n\nThe rifle remains completely dark and solid. There must be NO flashes, glowing muzzle, rays, tracers, smoke, cartridges, sparks or magical particles anywhere, at any time. Do not illustrate ammunition or projectile effects. Plain uniform chroma matte #42967A, no cast shadow or floor line. Preserve ivory top, black corset, partial gloves, brass/gold ornaments, bare thigh and straps, tall decorated boots, dark-brown wavy hair, mature adult proportions and original painterly anime style. No sleeves, new armor, weapon replacement, extra limbs or mirrored asymmetry.\n\nFull character including hair, both boots and barrel tip inside every frame with margin. Fixed scale and canvas position for the whole clip. Several seamless repeated real full-body cycles, no freeze, endpoint duplicates, ping-pong, ghost blends, cutout limbs or puppet deformation. Silent."
+}

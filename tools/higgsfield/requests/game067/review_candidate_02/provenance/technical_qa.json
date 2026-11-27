@@ -1,0 +1,42 @@
+{
+  "bitmap_status": "PASS",
+  "frames": 18,
+  "unique_pixel_hashes": 18,
+  "border_alpha_max": 0,
+  "nominal_cycle_ms": 660.0000000000001,
+  "base_speed_cycle_ms": 659.5744680851064,
+  "muzzle_count": 18,
+  "muzzle_ROI": [
+    155,
+    40,
+    199,
+    120
+  ],
+  "boot_adjacent_cyclic_MAE": [
+    1.3325269222259521,
+    23.881484985351562,
+    1.6810483932495117,
+    36.55675506591797,
+    1.4438507556915283,
+    45.18367004394531,
+    0.7044354677200317,
+    44.56296920776367,
+    0.7429771423339844,
+    34.31700134277344,
+    23.703125,
+    0.3747647702693939,
+    21.867338180541992,
+    16.4730167388916,
+    0.6468077898025513,
+    15.948925018310547,
+    2.865792989730835,
+    2.3447580337524414
+  ],
+  "seam_boot_MAE": 2.3447580337524414,
+  "internal_boot_MAE_median": 15.948925018310547,
+  "recommended_phase_origin": 0.24494949494949492,
+  "visual_review": "REQUIRED_SEPARATELY",
+  "engine_integration": "NOT_RUN",
+  "final_producer_approval": "NOT_VERIFIED",
+  "windows_mobile_FPS": "NOT_VERIFIED"
+}

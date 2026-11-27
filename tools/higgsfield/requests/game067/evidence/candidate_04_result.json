@@ -1,0 +1,20 @@
+{
+  "jobs": [
+    {
+      "index": 0,
+      "job_id": "5b1d7b10-3a34-4a7a-98de-8ddb045c902f",
+      "status": "failed",
+      "type": "image",
+      "model": "gpt_image_2_6",
+      "error": "문제가 발생했어요. 다시 시도하거나 입력 파일 또는 프롬프트를 변경해 주세요."
+    }
+  ],
+  "summary": {
+    "total": 1,
+    "completed": 0,
+    "failed": 1,
+    "active": 0,
+    "errors": 0
+  },
+  "all_terminal": true
+}

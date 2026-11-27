@@ -1,0 +1,691 @@
+{
+  "items": [
+    {
+      "id": "seedance_2_5",
+      "name": "Seedance 2.5",
+      "provider_name": "Bytedance",
+      "description": "Seedance 2.5 text-to-video, multimodal omni-reference generation, video edit, and video extension",
+      "output_type": "video",
+      "parameters": [
+        {
+          "name": "mode",
+          "required": "optional",
+          "type": "string",
+          "description": "Generation mode: 't2v' for prompt-only generation, 'omni_reference' for image, video, or audio references, 'video_edit' to edit one reference video (billed by that video's duration; 'duration' and 'aspect_ratio' are ignored), or 'video_extension' to extend a reference video ('aspect_ratio' is ignored — the output follows the extended video).",
+          "options": [
+            "t2v",
+            "omni_reference",
+            "video_edit",
+            "video_extension"
+          ],
+          "default": "t2v"
+        },
+        {
+          "name": "duration",
+          "required": "optional",
+          "type": "number",
+          "description": "Duration in seconds (4-30). Whole number.",
+          "min": 4,
+          "max": 30,
+          "default": 5
+        },
+        {
+          "name": "resolution",
+          "required": "optional",
+          "type": "string",
+          "description": "Output resolution.",
+          "options": [
+            "480p",
+            "720p",
+            "1080p",
+            "4k"
+          ],
+          "default": "720p"
+        },
+        {
+          "name": "generate_audio",
+          "required": "optional",
+          "type": "bool",
+          "description": "Generate audio for the output video.",
+          "default": true
+        },
+        {
+          "name": "bitrate_mode",
+          "required": "optional",
+          "type": "string",
+          "description": "'standard' = normal output bitrate; 'high' = higher bitrate output.",
+          "options": [
+            "standard",
+            "high"
+          ],
+          "default": "standard"
+        },
+        {
+          "name": "extension_mode",
+          "required": "optional",
+          "type": "string",
+          "description": "Extension direction; required for mode 'video_extension' and not allowed otherwise.",
+          "options": [
+            "backward",
+            "forward"
+          ],
+          "nullable": true
+        },
+        {
+          "name": "draft",
+          "required": "optional",
+          "type": "bool",
+          "description": "Generate a 480p draft that can be finalized within seven days.",
+          "default": false
+        },
+        {
+          "name": "draft_job_id",
+          "required": "optional",
+          "type": "string",
+          "description": "Completed draft job to finalize at the selected resolution. The final renders the draft's full duration and is billed for it; 'duration' is ignored.",
+          "nullable": true
+        }
+      ],
+      "medias": [
+        {
+          "name": "medias",
+          "type": "image",
+          "roles": [
+            "start_image",
+            "end_image",
+            "image_references",
+            "video_references",
+            "audio_references"
+          ],
+          "description": "Media roles: start_image — First frame of the output video (mode 'omni_reference' only). | end_image — Last frame of the output video (mode 'omni_reference' only). | image_references — Reference images for subject, style, or composition (max 30 across image_references + start_image + end_image). (array, max 30) | video_references — Reference video clips (max 10). (array, max 10) | audio_references — Reference audio clips (max 10). (array, max 10)"
+        }
+      ],
+      "aspect_ratios": [
+        "auto",
+        "21:9",
+        "16:9",
+        "4:3",
+        "1:1",
+        "3:4",
+        "9:16"
+      ],
+      "tags": [
+        "text-to-video",
+        "reference",
+        "identity",
+        "audio-reference",
+        "video-reference",
+        "video-edit",
+        "video-extension",
+        "480p",
+        "720p",
+        "1080p",
+        "unlim"
+      ],
+      "supports_unlim": true,
+      "purpose": "Default video model: general text-to-video and image-to-video, multi-shot continuity."
+    },
+    {
+      "id": "seedance_2_0",
+      "name": "Seedance 2.0",
+      "provider_name": "Bytedance",
+      "description": "Reference-driven video with image/video/audio reference inputs, consistent identity, multi-SKU; optional generate_audio for native audio",
+      "output_type": "video",
+      "parameters": [
+        {
+          "name": "duration",
+          "required": "optional",
+          "type": "number",
+          "description": "Duration in seconds (4-15). Whole number.",
+          "min": 4,
+          "max": 15,
+          "default": 5
+        },
+        {
+          "name": "resolution",
+          "required": "optional",
+          "type": "string",
+          "description": "Output resolution. 4k/1080p require mode='std'; mode='fast' supports 480p/720p only.",
+          "options": [
+            "480p",
+            "720p",
+            "1080p",
+            "4k"
+          ],
+          "default": "720p"
+        },
+        {
+          "name": "mode",
+          "required": "optional",
+          "type": "string",
+          "description": "'std' = higher quality, supports 480p/720p/1080p/4k, requires a Plus plan or higher (Pro on legacy plans); 'fast' = cheaper/faster, supports 480p/720p only, available from the Basic/Starter plan.",
+          "options": [
+            "std",
+            "fast"
+          ],
+          "default": "std"
+        },
+        {
+          "name": "bitrate_mode",
+          "required": "optional",
+          "type": "string",
+          "description": "'standard' = normal output bitrate; 'high' = higher bitrate output.",
+          "options": [
+            "standard",
+            "high"
+          ],
+          "default": "standard"
+        },
+        {
+          "name": "genre",
+          "required": "optional",
+          "type": "string",
+          "description": "Cinematic genre hint.",
+          "options": [
+            "auto",
+            "action",
+            "horror",
+            "comedy",
+            "noir",
+            "drama",
+            "epic"
+          ],
+          "default": "auto"
+        },
+        {
+          "name": "generate_audio",
+          "required": "optional",
+          "type": "bool",
+          "description": "Generate native audio for the video. Set false for a silent video. Independent of audio_references.",
+          "default": true
+        }
+      ],
+      "medias": [
+        {
+          "name": "medias",
+          "type": "image",
+          "roles": [
+            "start_image",
+            "end_image",
+            "image_references",
+            "video_references",
+            "audio_references"
+          ],
+          "description": "Media roles: start_image — First frame of the output video. | end_image — Last frame of the output video. | image_references — Generic reference images (style, composition, subject). At most 9 across image_references + start_image + end_image. (array) | video_references — Reference video clips (2-15s each, max 3). (array) | audio_references — Reference audio clips (2-15s each, max 3; require at least one image or video reference). (array)"
+        }
+      ],
+      "aspect_ratios": [
+        "auto",
+        "16:9",
+        "9:16",
+        "4:3",
+        "3:4",
+        "1:1",
+        "21:9"
+      ],
+      "tags": [
+        "reference",
+        "identity",
+        "consistent",
+        "product",
+        "multi-sku",
+        "e-commerce",
+        "audio",
+        "audio-reference",
+        "video-reference",
+        "start-frame",
+        "end-frame",
+        "4k",
+        "high-resolution",
+        "unlim"
+      ],
+      "supports_unlim": true,
+      "purpose": "Native 4K video, only when the user explicitly asks for true 4K."
+    },
+    {
+      "id": "magi_2",
+      "name": "MAGI-2",
+      "provider_name": "Sand AI",
+      "description": "MAGI-2 video with native audio from text, a first frame, first and last frames, or image, video and audio references",
+      "output_type": "video",
+      "parameters": [
+        {
+          "name": "duration",
+          "required": "optional",
+          "type": "number",
+          "description": "Output duration in seconds (4-30). Whole number.",
+          "min": 4,
+          "max": 30,
+          "default": 5
+        },
+        {
+          "name": "resolution",
+          "required": "optional",
+          "type": "string",
+          "description": "Output resolution. Only 1080p is available.",
+          "options": [
+            "1080p"
+          ],
+          "default": "1080p"
+        },
+        {
+          "name": "generate_audio",
+          "required": "optional",
+          "type": "bool",
+          "description": "Generate an audio track with the video.",
+          "default": true
+        },
+        {
+          "name": "enhance_prompt",
+          "required": "optional",
+          "type": "bool",
+          "description": "Let the model rewrite the prompt before generating.",
+          "default": false
+        },
+        {
+          "name": "seed",
+          "required": "optional",
+          "type": "number",
+          "description": "Seed for a repeatable result. Omit for a random one. Whole number.",
+          "min": 0,
+          "max": 4294967295,
+          "nullable": true
+        }
+      ],
+      "medias": [
+        {
+          "name": "medias",
+          "type": "image",
+          "roles": [
+            "start_image",
+            "end_image",
+            "image_references",
+            "video_references",
+            "audio_references"
+          ],
+          "description": "Media roles: start_image — First frame. Cannot be combined with reference media. | end_image — Last frame. Requires start_image. | image_references — Up to 10 reference images. (array, max 10) | video_references — Up to 5 reference videos, 2-30 seconds each and 30 seconds in total. (array, max 5) | audio_references — Up to 5 reference audio clips, 2-30 seconds each and 30 seconds in total. (array, max 5)"
+        }
+      ],
+      "aspect_ratios": [
+        "21:9",
+        "16:9",
+        "4:3",
+        "1:1",
+        "3:4",
+        "9:16"
+      ],
+      "tags": [
+        "audio",
+        "text-to-video",
+        "image-to-video",
+        "first-last-frame",
+        "reference",
+        "1080p"
+      ],
+      "purpose": "Lower-cost video with native audio from text, first/last frames, or image, video and audio references. Fixed output resolution, slower renders."
+    },
+    {
+      "id": "hf_mult_motion_control",
+      "name": "Genjutsu",
+      "provider_name": "Higgsfield",
+      "description": "Transfer motion from a reference video to subjects in reference images",
+      "output_type": "video",
+      "parameters": [
+        {
+          "name": "resolution",
+          "required": "optional",
+          "type": "string",
+          "description": "Output resolution: 480p, 720p, or 1080p.",
+          "options": [
+            "480p",
+            "720p",
+            "1080p"
+          ],
+          "default": "720p"
+        }
+      ],
+      "medias": [
+        {
+          "name": "medias",
+          "type": "image",
+          "roles": [
+            "image_references",
+            "video_references"
+          ],
+          "description": "Media roles: image_references — Reference images containing the subjects to animate (1-49). (array, max 49) | video_references — Reference video supplying the motion to transfer. Exactly one is required. (array, max 1)"
+        }
+      ],
+      "aspect_ratios": [],
+      "tags": [
+        "motion-control",
+        "image-to-video",
+        "video-reference",
+        "480p",
+        "720p",
+        "1080p"
+      ],
+      "supports_free_gens": true,
+      "purpose": "Genjutsu motion transfer: a reference video drives the subjects of reference images."
+    },
+    {
+      "id": "hf_mult_motion_control_flash",
+      "name": "Genjutsu Lite",
+      "provider_name": "Higgsfield",
+      "description": "Transfer motion from a reference video to subjects in reference images (MAGI-2, 1080p, up to 30 seconds)",
+      "output_type": "video",
+      "parameters": [
+        {
+          "name": "resolution",
+          "required": "optional",
+          "type": "string",
+          "description": "Output resolution: 1080p.",
+          "options": [
+            "1080p"
+          ],
+          "default": "1080p"
+        }
+      ],
+      "medias": [
+        {
+          "name": "medias",
+          "type": "image",
+          "roles": [
+            "image_references",
+            "video_references"
+          ],
+          "description": "Media roles: image_references — Reference images containing the subjects to animate (1-10). (array, max 10) | video_references — Reference video supplying the motion to transfer. Exactly one is required; output is capped at 30 seconds. (array, max 1)"
+        }
+      ],
+      "aspect_ratios": [],
+      "tags": [
+        "motion-control",
+        "image-to-video",
+        "video-reference",
+        "1080p"
+      ],
+      "purpose": "Genjutsu Lite motion transfer: a reference video drives the subjects of reference images."
+    },
+    {
+      "id": "cinematic_studio_3_0",
+      "name": "Cinema Studio Video 3.0",
+      "provider_name": "Higgsfield",
+      "description": "Most advanced cinema-grade model",
+      "output_type": "video",
+      "parameters": [
+        {
+          "name": "resolution",
+          "required": "optional",
+          "type": "string",
+          "description": "Output resolution (higher = more credits)",
+          "default": "720p",
+          "options": [
+            "480p",
+            "720p",
+            "1080p",
+            "4k"
+          ]
+        },
+        {
+          "name": "genre",
+          "required": "optional",
+          "type": "string",
+          "description": "Cinematic genre hint",
+          "default": "auto",
+          "options": [
+            "auto",
+            "action",
+            "horror",
+            "comedy",
+            "noir",
+            "drama",
+            "epic"
+          ]
+        },
+        {
+          "name": "generate_audio",
+          "required": "optional",
+          "type": "bool",
+          "description": "Generate audio for the video.",
+          "default": false
+        }
+      ],
+      "medias": [
+        {
+          "name": "medias",
+          "type": "image",
+          "roles": [
+            "image",
+            "start_image",
+            "end_image"
+          ]
+        }
+      ],
+      "aspect_ratios": [
+        "auto",
+        "21:9",
+        "16:9",
+        "4:3",
+        "1:1",
+        "3:4",
+        "9:16"
+      ],
+      "tags": [
+        "cinematic",
+        "premium",
+        "advanced",
+        "sota",
+        "film",
+        "best-quality"
+      ],
+      "duration_range": {
+        "min": 4,
+        "max": 15
+      }
+    },
+    {
+      "id": "cinematic_studio_video",
+      "name": "Cinema Studio Video",
+      "provider_name": "Higgsfield",
+      "description": "Solid cinematic, dramatic compositions",
+      "output_type": "video",
+      "parameters": [
+        {
+          "name": "slow_motion",
+          "required": "optional",
+          "type": "bool",
+          "description": "Enable slow motion effect",
+          "default": false
+        },
+        {
+          "name": "sound",
+          "required": "optional",
+          "type": "bool",
+          "description": "Enable sound generation",
+          "default": true
+        }
+      ],
+      "medias": [
+        {
+          "name": "medias",
+          "type": "image",
+          "roles": [
+            "image",
+            "start_image",
+            "end_image"
+          ]
+        }
+      ],
+      "aspect_ratios": [
+        "1:1",
+        "4:3",
+        "3:4",
+        "16:9",
+        "9:16"
+      ],
+      "tags": [
+        "cinematic",
+        "dramatic",
+        "compositions",
+        "sound",
+        "slow-motion"
+      ],
+      "durations": [
+        5,
+        10
+      ]
+    },
+    {
+      "id": "cinematic_studio_video_v2",
+      "name": "Cinema Studio Video",
+      "provider_name": "Higgsfield",
+      "description": "Refined cinematic camera and color, genre control",
+      "output_type": "video",
+      "parameters": [
+        {
+          "name": "genre",
+          "required": "optional",
+          "type": "string",
+          "description": "Video genre/style",
+          "default": "auto",
+          "options": [
+            "auto",
+            "action",
+            "horror",
+            "comedy",
+            "western",
+            "suspense",
+            "intimate",
+            "spectacle"
+          ]
+        },
+        {
+          "name": "mode",
+          "required": "optional",
+          "type": "string",
+          "description": "Quality mode: pro or standard",
+          "default": "std",
+          "options": [
+            "pro",
+            "std"
+          ]
+        },
+        {
+          "name": "sound",
+          "required": "optional",
+          "type": "string",
+          "description": "Generate audio. Use 'off' for a silent video.",
+          "default": "on",
+          "options": [
+            "on",
+            "off"
+          ]
+        },
+        {
+          "name": "speedramp",
+          "required": "optional",
+          "type": "string",
+          "description": "Speed-ramp time effect (slowmo, speedup, etc.).",
+          "default": "auto",
+          "options": [
+            "auto",
+            "custom",
+            "linear",
+            "slowmo",
+            "speedup",
+            "impact"
+          ]
+        },
+        {
+          "name": "multi_shots",
+          "required": "optional",
+          "type": "bool",
+          "description": "Split the video into multiple shots driven by multi_prompt.",
+          "default": false
+        },
+        {
+          "name": "multi_shot_mode",
+          "required": "optional",
+          "type": "string",
+          "description": "'auto' lets the model plan shots; 'custom' uses the given multi_prompt.",
+          "default": "custom",
+          "options": [
+            "auto",
+            "custom"
+          ]
+        },
+        {
+          "name": "cfg_scale",
+          "required": "optional",
+          "type": "number",
+          "description": "Prompt adherence strength (0-1).",
+          "default": 0.5,
+          "min": 0,
+          "max": 1
+        },
+        {
+          "name": "preset_id",
+          "required": "optional",
+          "type": "string",
+          "description": "Existing legacy preset ID. Do not pass get_presets catalog IDs here."
+        }
+      ],
+      "medias": [
+        {
+          "name": "medias",
+          "type": "image",
+          "roles": [
+            "image",
+            "start_image",
+            "end_image"
+          ]
+        }
+      ],
+      "aspect_ratios": [
+        "1:1",
+        "4:3",
+        "3:4",
+        "16:9",
+        "9:16"
+      ],
+      "tags": [
+        "cinematic",
+        "camera",
+        "color",
+        "genre",
+        "refined"
+      ],
+      "duration_range": {
+        "min": 3,
+        "max": 12
+      }
+    }
+  ],
+  "has_more": true,
+  "next_page_token": "8",
+  "free_gens": [
+    {
+      "job_set_types": [
+        "ai_influencer_motion_control",
+        "ai_influencer_replace_object",
+        "hf_mult_motion_control",
+        "hf_mult_replace_object"
+      ],
+      "remaining": 0,
+      "parameters": {
+        "resolution": [
+          "480p",
+          "720p"
+        ]
+      },
+      "max_duration": 30
+    },
+    {
+      "job_set_types": [
+        "ai_influencer_sheet"
+      ],
+      "remaining": 5,
+      "parameters": {},
+      "max_duration": null
+    }
+  ]
+}

@@ -1,0 +1,578 @@
+{
+  "status": "MEASURED_AWAITING_VISUAL_REVIEW",
+  "source_sha256": "627350d7e8e3262b94c090e01a911d85bcf41649b23aed114625e0ef9b1e5622",
+  "source_window": [
+    36,
+    54
+  ],
+  "source_cycle_ms": 750.0,
+  "nominal_cycle_ms": 660.0,
+  "registration": {
+    "scale": 0.23148148148148148,
+    "translation": [
+      0.0,
+      -0.14814814814815236
+    ],
+    "canvas": [
+      200,
+      248
+    ],
+    "pivot": [
+      100,
+      248
+    ],
+    "fixed_for_entire_clip": true,
+    "per_frame_bbox_alignment": false
+  },
+  "alpha_method": "Inspected green/cyan-minus-red key, opaque-core nearest-paint edge unmix; no pose or temporal synthesis.",
+  "source_video_stream": {
+    "index": 0,
+    "codec_name": "h264",
+    "codec_long_name": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+    "profile": "High",
+    "codec_type": "video",
+    "codec_tag_string": "avc1",
+    "codec_tag": "0x31637661",
+    "width": 864,
+    "height": 1072,
+    "coded_width": 864,
+    "coded_height": 1072,
+    "closed_captions": 0,
+    "film_grain": 0,
+    "has_b_frames": 2,
+    "pix_fmt": "yuv420p",
+    "level": 32,
+    "chroma_location": "left",
+    "field_order": "progressive",
+    "refs": 4,
+    "is_avc": "true",
+    "nal_length_size": "4",
+    "id": "0x1",
+    "r_frame_rate": "24/1",
+    "avg_frame_rate": "24/1",
+    "time_base": "1/90000",
+    "start_pts": 0,
+    "start_time": "0.000000",
+    "duration_ts": 333750,
+    "duration": "3.708333",
+    "bit_rate": "10138984",
+    "bits_per_raw_sample": "8",
+    "nb_frames": "89",
+    "nb_read_frames": "89",
+    "extradata_size": 46,
+    "disposition": {
+      "default": 1,
+      "dub": 0,
+      "original": 0,
+      "comment": 0,
+      "lyrics": 0,
+      "karaoke": 0,
+      "forced": 0,
+      "hearing_impaired": 0,
+      "visual_impaired": 0,
+      "clean_effects": 0,
+      "attached_pic": 0,
+      "timed_thumbnails": 0,
+      "non_diegetic": 0,
+      "captions": 0,
+      "descriptions": 0,
+      "metadata": 0,
+      "dependent": 0,
+      "still_image": 0,
+      "multilayer": 0
+    },
+    "tags": {
+      "language": "und",
+      "handler_name": "VideoHandler",
+      "vendor_id": "[0][0][0][0]"
+    }
+  },
+  "frame_checks": [
+    {
+      "index": 0,
+      "source_frame": 36,
+      "filename": "viya_run_fire_se_000.png",
+      "sha256": "4f083fd9e817d4a49a661cf40f74b6094845ab4de60787a5ec98bf2358526cce",
+      "bbox": [
+        37,
+        8,
+        192,
+        227
+      ],
+      "border_alpha_max": 0,
+      "partial_alpha_pixels": 1518,
+      "key": {
+        "background_rgb": [
+          84.0,
+          112.0,
+          117.0
+        ],
+        "opaque_core_pixels": 283158
+      },
+      "landmarks": null,
+      "muzzle": [
+        191.5,
+        78.0
+      ]
+    },
+    {
+      "index": 1,
+      "source_frame": 37,
+      "filename": "viya_run_fire_se_001.png",
+      "sha256": "f1d4625171771a7470296a11436c757055b55a3332bdb14f580810056fab9604",
+      "bbox": [
+        37,
+        9,
+        192,
+        227
+      ],
+      "border_alpha_max": 0,
+      "partial_alpha_pixels": 1506,
+      "key": {
+        "background_rgb": [
+          84.0,
+          113.0,
+          117.0
+        ],
+        "opaque_core_pixels": 283854
+      },
+      "landmarks": null,
+      "muzzle": [
+        190.5,
+        78.5
+      ]
+    },
+    {
+      "index": 2,
+      "source_frame": 38,
+      "filename": "viya_run_fire_se_002.png",
+      "sha256": "59447f4c0b9f3f0aecbd360029573e0d9cc71bfd43d5ade73c254dfb9de5b680",
+      "bbox": [
+        34,
+        9,
+        192,
+        231
+      ],
+      "border_alpha_max": 0,
+      "partial_alpha_pixels": 1509,
+      "key": {
+        "background_rgb": [
+          84.0,
+          113.0,
+          117.0
+        ],
+        "opaque_core_pixels": 283174
+      },
+      "landmarks": null,
+      "muzzle": [
+        190.5,
+        77.25
+      ]
+    },
+    {
+      "index": 3,
+      "source_frame": 39,
+      "filename": "viya_run_fire_se_003.png",
+      "sha256": "30b77322ab0fe9e568d3518f4f544a3ff6a7eea2598833bad63c9490d12660ed",
+      "bbox": [
+        34,
+        6,
+        192,
+        231
+      ],
+      "border_alpha_max": 0,
+      "partial_alpha_pixels": 1489,
+      "key": {
+        "background_rgb": [
+          84.0,
+          113.0,
+          117.0
+        ],
+        "opaque_core_pixels": 286368
+      },
+      "landmarks": null,
+      "muzzle": [
+        190.5,
+        77.5
+      ]
+    },
+    {
+      "index": 4,
+      "source_frame": 40,
+      "filename": "viya_run_fire_se_004.png",
+      "sha256": "ff5a87457c59f345144e738ce4145f75bef12ccbe34574cd4aa16f7e10acf33e",
+      "bbox": [
+        28,
+        5,
+        193,
+        245
+      ],
+      "border_alpha_max": 0,
+      "partial_alpha_pixels": 2018,
+      "key": {
+        "background_rgb": [
+          84.0,
+          113.0,
+          117.0
+        ],
+        "opaque_core_pixels": 283263
+      },
+      "landmarks": null,
+      "muzzle": [
+        191.5,
+        77.0
+      ]
+    },
+    {
+      "index": 5,
+      "source_frame": 41,
+      "filename": "viya_run_fire_se_005.png",
+      "sha256": "d2a09e5f71b5c795321a09b4f35ddd9bd0707c5eedddd67f04f4f316b6257ebf",
+      "bbox": [
+        27,
+        5,
+        193,
+        245
+      ],
+      "border_alpha_max": 0,
+      "partial_alpha_pixels": 1885,
+      "key": {
+        "background_rgb": [
+          84.0,
+          113.0,
+          117.0
+        ],
+        "opaque_core_pixels": 283236
+      },
+      "landmarks": null,
+      "muzzle": [
+        191.5,
+        75.5
+      ]
+    },
+    {
+      "index": 6,
+      "source_frame": 42,
+      "filename": "viya_run_fire_se_006.png",
+      "sha256": "c0caada4d9fa9b2a44461fe54d44052ed392e86d8f0db3fba4876d3e1feb9a2c",
+      "bbox": [
+        26,
+        6,
+        192,
+        239
+      ],
+      "border_alpha_max": 0,
+      "partial_alpha_pixels": 1663,
+      "key": {
+        "background_rgb": [
+          84.0,
+          113.0,
+          117.0
+        ],
+        "opaque_core_pixels": 280742
+      },
+      "landmarks": null,
+      "muzzle": [
+        190.5,
+        75.5
+      ]
+    },
+    {
+      "index": 7,
+      "source_frame": 43,
+      "filename": "viya_run_fire_se_007.png",
+      "sha256": "eadc32fd710d7b2b11b23657743d8142f86a07832252be6ff9ea05f885579f5a",
+      "bbox": [
+        26,
+        6,
+        192,
+        239
+      ],
+      "border_alpha_max": 0,
+      "partial_alpha_pixels": 1663,
+      "key": {
+        "background_rgb": [
+          84.0,
+          113.0,
+          117.0
+        ],
+        "opaque_core_pixels": 281342
+      },
+      "landmarks": null,
+      "muzzle": [
+        190.5,
+        75.5
+      ]
+    },
+    {
+      "index": 8,
+      "source_frame": 44,
+      "filename": "viya_run_fire_se_008.png",
+      "sha256": "883eb28bf797ef61e1bbc14d1476fa8135c1dfa3f768bda3e90e8720752f5d49",
+      "bbox": [
+        24,
+        6,
+        193,
+        244
+      ],
+      "border_alpha_max": 0,
+      "partial_alpha_pixels": 1581,
+      "key": {
+        "background_rgb": [
+          84.0,
+          113.0,
+          117.0
+        ],
+        "opaque_core_pixels": 286035
+      },
+      "landmarks": null,
+      "muzzle": [
+        191.5,
+        75.5
+      ]
+    },
+    {
+      "index": 9,
+      "source_frame": 45,
+      "filename": "viya_run_fire_se_009.png",
+      "sha256": "c4628c78ee149377d8274ceb5c7b31723e58b8bd101d7948d2e0ca0a3d077e81",
+      "bbox": [
+        24,
+        6,
+        193,
+        244
+      ],
+      "border_alpha_max": 0,
+      "partial_alpha_pixels": 1537,
+      "key": {
+        "background_rgb": [
+          84.0,
+          113.0,
+          117.0
+        ],
+        "opaque_core_pixels": 286730
+      },
+      "landmarks": null,
+      "muzzle": [
+        191.5,
+        76.0
+      ]
+    },
+    {
+      "index": 10,
+      "source_frame": 46,
+      "filename": "viya_run_fire_se_010.png",
+      "sha256": "65256a9b2cea3b608b7f5b589876cb0a98d447b849c97fa00b6a53264e4c106d",
+      "bbox": [
+        24,
+        9,
+        193,
+        242
+      ],
+      "border_alpha_max": 0,
+      "partial_alpha_pixels": 1491,
+      "key": {
+        "background_rgb": [
+          84.0,
+          113.0,
+          117.0
+        ],
+        "opaque_core_pixels": 279811
+      },
+      "landmarks": null,
+      "muzzle": [
+        191.5,
+        77.0
+      ]
+    },
+    {
+      "index": 11,
+      "source_frame": 47,
+      "filename": "viya_run_fire_se_011.png",
+      "sha256": "68ecec6c1f4a749381b7c1cb1b8d849c0c2804aa1b39daede62f4a375dfb709e",
+      "bbox": [
+        26,
+        9,
+        193,
+        240
+      ],
+      "border_alpha_max": 0,
+      "partial_alpha_pixels": 1592,
+      "key": {
+        "background_rgb": [
+          84.0,
+          113.0,
+          117.0
+        ],
+        "opaque_core_pixels": 285657
+      },
+      "landmarks": null,
+      "muzzle": [
+        191.5,
+        77.0
+      ]
+    },
+    {
+      "index": 12,
+      "source_frame": 48,
+      "filename": "viya_run_fire_se_012.png",
+      "sha256": "04763dc24d379b6261fab736ac672652f6a74af4566fa8879b6bd9299e46df4d",
+      "bbox": [
+        26,
+        9,
+        193,
+        240
+      ],
+      "border_alpha_max": 0,
+      "partial_alpha_pixels": 1608,
+      "key": {
+        "background_rgb": [
+          84.0,
+          113.0,
+          117.0
+        ],
+        "opaque_core_pixels": 285458
+      },
+      "landmarks": null,
+      "muzzle": [
+        192.5,
+        76.5
+      ]
+    },
+    {
+      "index": 13,
+      "source_frame": 49,
+      "filename": "viya_run_fire_se_013.png",
+      "sha256": "7c6d604d320cf221e3f43acfec729d987ff75265ae9c06cb4c43df9bdc4d43d5",
+      "bbox": [
+        31,
+        9,
+        193,
+        236
+      ],
+      "border_alpha_max": 0,
+      "partial_alpha_pixels": 1582,
+      "key": {
+        "background_rgb": [
+          84.0,
+          113.0,
+          117.0
+        ],
+        "opaque_core_pixels": 284723
+      },
+      "landmarks": null,
+      "muzzle": [
+        192.5,
+        76.5
+      ]
+    },
+    {
+      "index": 14,
+      "source_frame": 50,
+      "filename": "viya_run_fire_se_014.png",
+      "sha256": "5d722a25a63b194e154ab2afc0d059de161de92ad29fc1947616f01687682f67",
+      "bbox": [
+        34,
+        8,
+        193,
+        231
+      ],
+      "border_alpha_max": 0,
+      "partial_alpha_pixels": 1411,
+      "key": {
+        "background_rgb": [
+          85.0,
+          114.0,
+          117.0
+        ],
+        "opaque_core_pixels": 286529
+      },
+      "landmarks": null,
+      "muzzle": [
+        191.5,
+        79.0
+      ]
+    },
+    {
+      "index": 15,
+      "source_frame": 51,
+      "filename": "viya_run_fire_se_015.png",
+      "sha256": "dc961a48c51ee95b995423e913b243003c996ed93fea61abd91d888d537a724a",
+      "bbox": [
+        34,
+        8,
+        193,
+        231
+      ],
+      "border_alpha_max": 0,
+      "partial_alpha_pixels": 1408,
+      "key": {
+        "background_rgb": [
+          85.0,
+          114.0,
+          117.0
+        ],
+        "opaque_core_pixels": 286882
+      },
+      "landmarks": null,
+      "muzzle": [
+        192.5,
+        76.5
+      ]
+    },
+    {
+      "index": 16,
+      "source_frame": 52,
+      "filename": "viya_run_fire_se_016.png",
+      "sha256": "2322bb504f1e5877a20760d2fe38f4cd6a71142292ac9dd435f797df1d8b8ba8",
+      "bbox": [
+        37,
+        8,
+        192,
+        226
+      ],
+      "border_alpha_max": 0,
+      "partial_alpha_pixels": 1572,
+      "key": {
+        "background_rgb": [
+          84.0,
+          114.0,
+          117.0
+        ],
+        "opaque_core_pixels": 283513
+      },
+      "landmarks": null,
+      "muzzle": [
+        191.5,
+        78.5
+      ]
+    },
+    {
+      "index": 17,
+      "source_frame": 53,
+      "filename": "viya_run_fire_se_017.png",
+      "sha256": "b3afdeb2758fdd9b3628487b9a8b9ab99f2ce12fef344be264bc6257e6087db5",
+      "bbox": [
+        37,
+        8,
+        192,
+        226
+      ],
+      "border_alpha_max": 0,
+      "partial_alpha_pixels": 1508,
+      "key": {
+        "background_rgb": [
+          85.0,
+          114.0,
+          117.0
+        ],
+        "opaque_core_pixels": 283236
+      },
+      "landmarks": null,
+      "muzzle": [
+        190.5,
+        79.5
+      ]
+    }
+  ]
+}

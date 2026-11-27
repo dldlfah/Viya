@@ -1,0 +1,15 @@
+{
+  "model": "seedance_2_5",
+  "mode": "video_edit",
+  "resolution": "720p",
+  "generate_audio": false,
+  "bitrate_mode": "high",
+  "count": 1,
+  "medias": [
+    {
+      "role": "video",
+      "value": "5838b1a9-b45f-4928-9026-c74a154892ea"
+    }
+  ],
+  "prompt": "Refine this exact adult VIYA SHOULDER-AIMED SOUTHEAST running drill into one genuinely smooth continuous full-body animation. The input is a deliberately SLOWED motion study: two 2.25-second left-right gait cycles. Its held key poses specify only the path and landmarks, not freezes to reproduce. REDRAW natural distinct whole-body intermediate poses continuously between the landmarks at the output frame rate. Eliminate the visible step-and-hold cadence. Keep two complete continuous cycles at this SLOW source tempo; the game later retimes one complete cycle to 0.660 seconds. Do not accelerate back to normal running speed.\n\nMaintain this exact fixed elevated southeast three-quarter front/side camera and screen-down-right orientation, the same stationary root, framing, silhouette size, alternating foot-contact order, pelvis weight shift, boots clearing the ground and two-handed shoulder aim. The buttstock stays against the shoulder, cheek near stock, support hand under fore-end, original barrel solid and stably aimed down-right. Small controlled shoulder recoil and settling only. Smoothly flowing long hair and crimson cloth with coherent follow-through. No camera rotation, side-view turn, zoom or translation.\n\nPreserve the SAME mature adult face and body, long dark-brown wavy hair, ivory top, fitted black corset, partial gloves, gold/brass ornaments, short lower garments and thigh straps, tall decorated boots, asymmetric crimson cloth and same slim red-rune firearm. Retain the painterly dark-fantasy anime style. No costume, weapon or anatomy redesign.\n\nNo visible emission from the rifle: no flash, glowing tip, tracer, projectile, casing, smoke, spark or magic. Plain uniform green/cyan chroma background, no shadow, floor, scenery, text, logo or extra characters. Entire hair, body, boots, cloth and barrel inside the frame with margin. Output real continuous newly drawn full-body poses, no frozen holds, duplicate endpoints, ping-pong, cutout limbs, puppet warping, crossfades, ghost images or double limbs. Silent."
+}

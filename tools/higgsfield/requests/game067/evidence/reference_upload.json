@@ -1,0 +1,14 @@
+{
+  "media_id": "5b6c384f-baae-4a81-8556-5f2bf0a0f72d",
+  "source": "docs/validation/GAME067_SE_RUN_REFERENCE.mp4",
+  "sha256": "d6286b03907b5676f648b100db23830b3de325ff610eef7554d95bbecbf6d1d7",
+  "confirmation": {
+    "results": [
+      {
+        "media_id": "5b6c384f-baae-4a81-8556-5f2bf0a0f72d",
+        "status": "uploaded",
+        "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3LHdo37hN3iiYXd8WT9stnWXw4M/5b6c384f-baae-4a81-8556-5f2bf0a0f72d.mp4"
+      }
+    ]
+  }
+}

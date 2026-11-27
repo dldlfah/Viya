@@ -1,0 +1,20 @@
+{
+  "jobs": [
+    {
+      "index": 0,
+      "job_id": "7e8e4ae7-1315-40fe-8308-8bb199c0f320",
+      "status": "completed",
+      "type": "video",
+      "model": "hf_mult_motion_control",
+      "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3LHdo37hN3iiYXd8WT9stnWXw4M/hf_20261127_022559_7e8e4ae7-1315-40fe-8308-8bb199c0f320.mp4"
+    }
+  ],
+  "summary": {
+    "total": 1,
+    "completed": 1,
+    "failed": 0,
+    "active": 0,
+    "errors": 0
+  },
+  "all_terminal": true
+}

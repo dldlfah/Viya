@@ -1,0 +1,26 @@
+{
+  "model": "gpt_image_2_6",
+  "output_format": "gif",
+  "quality": "high",
+  "resolution": "1k",
+  "background": "transparent",
+  "size": "400x496",
+  "frame_count": 24,
+  "frame_duration_ms": 80,
+  "count": 1,
+  "medias": [
+    {
+      "role": "image",
+      "value": "c68a9514-13d8-4596-a69a-ef7c3f99d4ed"
+    },
+    {
+      "role": "image",
+      "value": "8865f26d-1e8a-4fbe-9d22-d83a868bad18"
+    },
+    {
+      "role": "image",
+      "value": "39c3b4e3-43cb-42df-ae8e-3c3d37d4386e"
+    }
+  ],
+  "prompt": "Animated GIF, one seamless full-body southeast running cycle of this SAME adult VIYA while keeping her original rifle shouldered in a steady two-handed aim. First reference: required southeast high-angle camera, identity, original costume, rifle and aim. Other references: alternating gait landmarks. Preserve her face, proportions, dark-brown hair, ivory/black/gold costume, tall boots, asymmetric crimson cloth and painted anime style. Smooth continuous whole-body movement, alternating foot plants and recovery, small controlled shoulder recoil, flowing hair and cloth. All24frames are distinct consecutive phases of ONE full left-right cycle over1.92seconds; last and first are adjacent phases, without a repeated endpoint. Fixed camera/root/body size, full body and barrel inside400x496canvas, pivot200,496. Transparent background. No flashes, bullets, smoke, particles, shadows, text or checkerboard. No side-view turn, mirroring, frozen holds, ping-pong, puppet warps, ghost blends or assembled limbs. Return an actual animated GIF, not a still or sprite sheet."
+}

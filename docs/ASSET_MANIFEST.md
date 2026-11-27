@@ -180,3 +180,25 @@
 빌더를 격리 입력으로 재실행해 리소스/manifest/motion/slot4개가 납품본과 바이트 동일함을 확인했다. manifest.status는 빌드 시점의 상태 서술이고 이후의 실제 엔진 상태는 날짜가 있는 검증 보고서/CURRENT를 따른다. 원출력 URL은 현재 환경의 네트워크403으로 독립 재다운로드하지 못했으므로 기록된 원출력 해시를 이번 파일 독립 검증으로 승격하지 않는다. 실제 RGBA18은 해시/투명도와 Godot 실행에서 확인했다.
 
 제작 당시 차감58/조회815.25는 해당 세션 기록이며 이번 검수의 생성/추가 비용/결제0과 구분한다. 현재 실제전투1,793검사/379그리기와 전체네이티브4,531을 통과했다. 숫자 위상 보존을 물리 발 접지/미끄러짐·모바일FPS·최종 아트 승인으로 계산하지 않는다. 다음 GAME067 SE 이동사격은 제작 지시/참조만 준비했고 새 원화·연결은 아직 없다.
+
+## GAME067 — SE 이동사격 원화20장 납품 (2026-11-27)
+
+[납품 README](../assets/characters/pilot_32/game067_se_run_fire/README.md) · [전체 해시/메타데이터 명세](../assets/characters/pilot_32/game067_se_run_fire/manifest.json) · [원출력/작업/비용/후보 판단](../tools/higgsfield/requests/game067/evidence/).
+
+| 항목 | 경로 / 값 |
+| --- | --- |
+| 새 RGBA20장 | assets/characters/pilot_32/game067_se_run_fire/frames/viya_run_fire_se_000.png~019.png |
+| 모델/실제 작업 | Seedance2.5/omni_reference/5b7cc811-ad50-4759-b8ea-8d1a40de7c77 |
+| 원출력 | RGB H264/864×1072/97장·24fps/4.041667초, 원출력 파일과SHA는 evidence/candidate_07_source.json |
+| 실제 선택 | 연속 원천10~29, 다음 대응30은 제외 |
+| 시간 | provenance/frame_timing.csv, 실제 원천 PTS→660ms/기본속도659.574468ms |
+| 총구 | provenance/muzzle_coordinates.csv, 새 원화에서 독립 측정20개 |
+| 발 위상 | provenance/phase_alignment.json, 권고0.819949494949495/기존3/11 복사 아님 |
+| 고정 등록 | 200×248/root(100,248)/표시69×85.56,scale200/864·translation(0,-0.148148148148),bbox 재정렬 없음 |
+| 출력/알파 | RGB 청록 매트에서 별도 RGBA 분리, 서비스 네이티브 알파 아님 |
+| 실제 상태 | 원화 기술 납품20장/게임 연결0/최종 아트 NOT_VERIFIED |
+| 활성 게임 보존 | GAME066/33클립·298프레임·원본208/ARTFIX001/GAME064·065·066/SAVEFIX001 그대로 |
+
+20장 경계알파0·독립 총구/양수 시간표·전체 주기/이음과 SE 고각/캐릭터·무기/천을 검토했다. 새 발 벌림/위치는 SE18과 달라 실제 전환/물리 접지·무미끄러짐을 완료로 세지 않는다. provenance의240프레임 아트 분석 영상은 실제 main.tscn 화면/FPS 측정이 아니다. CSV/검토 이미지는 .gdignore로 자동 임포트에서 제외한다.
+
+반려 원출력과 실패 기록, 후보2의 미채택18장 참고 패킷도 보존했다. 실제 네이티브 GIF는 요청24장 대신16장/투명으로 나왔으며 보행 문제로 미채택했다. 전체 관측 차감158.25/마지막 조회657, 선택 생성28크레딧·새 결제/충전0이다. 기존 게임 수치/저장/스폰은 변경하지 않았다. 후속 연결은 NEXT/DEVELOPMENT_STATUS8.67을 따른다.

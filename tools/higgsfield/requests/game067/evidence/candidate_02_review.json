@@ -1,0 +1,39 @@
+{
+  "candidate": 2,
+  "job_id": "5e416190-d32c-41a1-b299-ed6b5d07b841",
+  "generation": "COMPLETED",
+  "posture_review": "Shoulder aim and original southeast high-angle/costume broadly preserved; no visible baked flashes in all89-frame contact review.",
+  "technical_acceptance": "NOT_FINAL_CADENCE_REFINEMENT",
+  "reason": "Several successive lower-body poses are nearly held. Preserve as successful aim reference; request slow full-body redrawing rather than call18frames a quality target.",
+  "prepared_window_only": [
+    36,
+    54
+  ],
+  "registered_whole_RGBA_mean_abs_adjacent_delta": [
+    1.2525957822799683,
+    9.963372230529785,
+    5.32327127456665,
+    14.382867813110352,
+    1.3667490482330322,
+    13.566194534301758,
+    0.5517288446426392,
+    13.695125579833984,
+    0.700735867023468,
+    14.450952529907227,
+    6.7827467918396,
+    0.22859878838062286,
+    9.195645332336426,
+    6.984652042388916,
+    0.4383165240287781,
+    7.632328510284424,
+    2.376023292541504
+  ],
+  "game_integration": false,
+  "final_art_approval": "NOT_VERIFIED",
+  "not_claimed": [
+    "pixel-identical costume marks",
+    "physical3Dfoot contact",
+    "real-shot/recoil1to1sync",
+    "game or device QA"
+  ]
+}

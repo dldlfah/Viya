@@ -1,0 +1,24 @@
+{
+  "cost": {
+    "credits": 1.25,
+    "credits_exact": 1.25
+  },
+  "adjustments": {
+    "medias[0].role": {
+      "requested": "image",
+      "used": "image_references",
+      "reason": "GPT Image 2.6 backend expects schema-key media roles"
+    },
+    "medias[1].role": {
+      "requested": "image",
+      "used": "image_references",
+      "reason": "GPT Image 2.6 backend expects schema-key media roles"
+    },
+    "medias[2].role": {
+      "requested": "image",
+      "used": "image_references",
+      "reason": "GPT Image 2.6 backend expects schema-key media roles"
+    }
+  },
+  "quote_ref": "quote:_T62aZmXxmhw9an-kI57kg"
+}

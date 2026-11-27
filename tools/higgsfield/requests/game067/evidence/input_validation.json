@@ -1,0 +1,123 @@
+{
+  "checked_at_utc": "2026-11-27T02:11:42.746018+00:00",
+  "base_head": "96745bded1371801d6c1e5e0173a1c2e8eb2cb82",
+  "references": [
+    {
+      "path": "assets/characters/pilot_32/game066_se_run/frames/viya_run_se_000.png",
+      "expected": "a643b020f1055b736db2eeb0e16b99d2eda186f18d57f71863b756ad2a04f17b",
+      "observed": "a643b020f1055b736db2eeb0e16b99d2eda186f18d57f71863b756ad2a04f17b"
+    },
+    {
+      "path": "assets/characters/pilot_32/game066_se_run/frames/viya_run_se_001.png",
+      "expected": "6417b98a4a888246d7b5728fc02ee4bafc9f8dfea7fe0f1d1dd1283264bd075a",
+      "observed": "6417b98a4a888246d7b5728fc02ee4bafc9f8dfea7fe0f1d1dd1283264bd075a"
+    },
+    {
+      "path": "assets/characters/pilot_32/game066_se_run/frames/viya_run_se_002.png",
+      "expected": "bd1bbb9b8fbb365b76443125a3f6b520bfdda2db6c7d4c4bff159726302a25ef",
+      "observed": "bd1bbb9b8fbb365b76443125a3f6b520bfdda2db6c7d4c4bff159726302a25ef"
+    },
+    {
+      "path": "assets/characters/pilot_32/game066_se_run/frames/viya_run_se_003.png",
+      "expected": "d19603f0c168840c87c669a9a38ff7cf20027b4c8aece29f5450672bc7bfe09d",
+      "observed": "d19603f0c168840c87c669a9a38ff7cf20027b4c8aece29f5450672bc7bfe09d"
+    },
+    {
+      "path": "assets/characters/pilot_32/game066_se_run/frames/viya_run_se_004.png",
+      "expected": "5151d4a514ca9110064e2b5e97f270f62b03d28ff6571e4eca00239fcda8e5b0",
+      "observed": "5151d4a514ca9110064e2b5e97f270f62b03d28ff6571e4eca00239fcda8e5b0"
+    },
+    {
+      "path": "assets/characters/pilot_32/game066_se_run/frames/viya_run_se_005.png",
+      "expected": "fb05f0fb7c8b295820233072b3a06c65f504645d7da14d8b8a934a81a616442e",
+      "observed": "fb05f0fb7c8b295820233072b3a06c65f504645d7da14d8b8a934a81a616442e"
+    },
+    {
+      "path": "assets/characters/pilot_32/game066_se_run/frames/viya_run_se_006.png",
+      "expected": "472c13ed6a510e192f2516e5752997ba6863534e077f14109ef6eca0804c516d",
+      "observed": "472c13ed6a510e192f2516e5752997ba6863534e077f14109ef6eca0804c516d"
+    },
+    {
+      "path": "assets/characters/pilot_32/game066_se_run/frames/viya_run_se_007.png",
+      "expected": "fe162b6be9dc71a7a0aceb651c8fa89fbb2eeb97d7ccb4376a99bae64e023c13",
+      "observed": "fe162b6be9dc71a7a0aceb651c8fa89fbb2eeb97d7ccb4376a99bae64e023c13"
+    },
+    {
+      "path": "assets/characters/pilot_32/game066_se_run/frames/viya_run_se_008.png",
+      "expected": "f6b61a5e9884312b9867e3cdf51436a7927391e6bea59da7169ca3f3aa36f5fe",
+      "observed": "f6b61a5e9884312b9867e3cdf51436a7927391e6bea59da7169ca3f3aa36f5fe"
+    },
+    {
+      "path": "assets/characters/pilot_32/game066_se_run/frames/viya_run_se_009.png",
+      "expected": "52b305cdc98c2c6fa3d2537d4649ec901b64b052fba25306052ab9ea96e1fc27",
+      "observed": "52b305cdc98c2c6fa3d2537d4649ec901b64b052fba25306052ab9ea96e1fc27"
+    },
+    {
+      "path": "assets/characters/pilot_32/game066_se_run/frames/viya_run_se_010.png",
+      "expected": "1d2b3d5a3e49196d2758fef893e23e3487f19068bbf67bcdfdc4fdf1238504b3",
+      "observed": "1d2b3d5a3e49196d2758fef893e23e3487f19068bbf67bcdfdc4fdf1238504b3"
+    },
+    {
+      "path": "assets/characters/pilot_32/game066_se_run/frames/viya_run_se_011.png",
+      "expected": "b29a1b28649eb0f5523c7cfc57ed8a4deaa76f58ec2d469d7f2163116abd0eb7",
+      "observed": "b29a1b28649eb0f5523c7cfc57ed8a4deaa76f58ec2d469d7f2163116abd0eb7"
+    },
+    {
+      "path": "assets/characters/pilot_32/game066_se_run/frames/viya_run_se_012.png",
+      "expected": "c3f0e680e4cd685433d73a41f97c72ba78e139c37b2ca0efc9c51a24f146acd5",
+      "observed": "c3f0e680e4cd685433d73a41f97c72ba78e139c37b2ca0efc9c51a24f146acd5"
+    },
+    {
+      "path": "assets/characters/pilot_32/game066_se_run/frames/viya_run_se_013.png",
+      "expected": "21a24ce78f6033b7c59eacbe5fd5b99f117baef46ba35332cde862f8950c52d7",
+      "observed": "21a24ce78f6033b7c59eacbe5fd5b99f117baef46ba35332cde862f8950c52d7"
+    },
+    {
+      "path": "assets/characters/pilot_32/game066_se_run/frames/viya_run_se_014.png",
+      "expected": "ef2cd0c1bf508f45956e35916340c16359c6475831eb89705798b3dd4c5b49d9",
+      "observed": "ef2cd0c1bf508f45956e35916340c16359c6475831eb89705798b3dd4c5b49d9"
+    },
+    {
+      "path": "assets/characters/pilot_32/game066_se_run/frames/viya_run_se_015.png",
+      "expected": "8309c266e0e8ec2bc21619e6438ac369e8af2cea5310295d62fabc16a8a4bedb",
+      "observed": "8309c266e0e8ec2bc21619e6438ac369e8af2cea5310295d62fabc16a8a4bedb"
+    },
+    {
+      "path": "assets/characters/pilot_32/game066_se_run/frames/viya_run_se_016.png",
+      "expected": "1a9df6fdba8e3b94a7a0b0b8bf512a738547c48462454eb30d0d83f3e4a2fb63",
+      "observed": "1a9df6fdba8e3b94a7a0b0b8bf512a738547c48462454eb30d0d83f3e4a2fb63"
+    },
+    {
+      "path": "assets/characters/pilot_32/game066_se_run/frames/viya_run_se_017.png",
+      "expected": "645cd529c2dbcdf5e6afb733a5fc9ed01a7c9a71c6ba691afceef7eacd35205a",
+      "observed": "645cd529c2dbcdf5e6afb733a5fc9ed01a7c9a71c6ba691afceef7eacd35205a"
+    },
+    {
+      "path": "assets/characters/pilot_32/render_cache/viya_idle_se.png",
+      "expected": "5217cd8e7107cbe69d365a0dbd7665babbcf9fdb10d4f00206d0a849cccff212",
+      "observed": "5217cd8e7107cbe69d365a0dbd7665babbcf9fdb10d4f00206d0a849cccff212"
+    },
+    {
+      "path": "assets/characters/pilot_32/render_cache/viya_attack_se_00.png",
+      "expected": "4a69574d38fccbed71223f920b9fb523978829770a552d2b3430bdd53b923a02",
+      "observed": "4a69574d38fccbed71223f920b9fb523978829770a552d2b3430bdd53b923a02"
+    },
+    {
+      "path": "assets/characters/pilot_32/game066_se_run/provenance/frame_timing.csv",
+      "expected": "20002d4176fff629c639cf93a001f4167acc5ac352482a76d861a58178c806eb",
+      "observed": "20002d4176fff629c639cf93a001f4167acc5ac352482a76d861a58178c806eb"
+    },
+    {
+      "path": "data/viya_motion.json",
+      "expected": "a0c2e008106e3b0cf417f241de10424db02bae1be334211eb629087564356b31",
+      "observed": "a0c2e008106e3b0cf417f241de10424db02bae1be334211eb629087564356b31"
+    }
+  ],
+  "reference_video": {
+    "path": "docs/validation/GAME067_SE_RUN_REFERENCE.mp4",
+    "expected": "d6286b03907b5676f648b100db23830b3de325ff610eef7554d95bbecbf6d1d7",
+    "observed": "d6286b03907b5676f648b100db23830b3de325ff610eef7554d95bbecbf6d1d7"
+  },
+  "engine_code_or_active_resource_changed": false,
+  "prior_dirty_checkout_preserved": true
+}

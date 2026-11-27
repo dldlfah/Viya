@@ -1,0 +1,14 @@
+{
+  "cost": {
+    "credits": 30,
+    "credits_exact": 30
+  },
+  "adjustments": {
+    "medias[0].role": {
+      "requested": "video",
+      "used": "video_references",
+      "reason": "Seedance 2.5 backend expects schema-key media roles"
+    }
+  },
+  "quote_ref": "quote:03b-pMV7taXla_WyWiY6MQ"
+}

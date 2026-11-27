@@ -1,6 +1,6 @@
 {
   "task": "GAME067_SE_MOVING_FIRE",
-  "status": "PREPARED_FOR_PLANNING_HIGGSFIELD_PRODUCTION",
+  "status": "ART_DELIVERED_20_ENGINE_INTEGRATION_AND_FINAL_ART_PENDING",
   "authorization": "User asked to review the completed GAME066,fix concrete issues and proceed;Higgsfield creation remains assigned to planning session.",
   "base_game_commit": "b42b7ed819e907810774cedd98f929d572d816ac",
   "accepted_source_job": "a9ab0954-f528-4194-b8c1-3cb8954dd02c",
@@ -156,14 +156,89 @@
     "actual committed-shot observations including consumed bullets",
     "fire on/off,E/SE,reverse,stationary,hurt and pause QA"
   ],
-  "new_generated_frames": 0,
+  "new_generated_frames": 20,
   "new_resource_added": false,
-  "higgsfield_submission": null,
-  "generation_cost_this_review": 0,
-  "current_model_price_balance": "NOT_QUERIED: artwork production is assigned to planning session.",
+  "higgsfield_submission": {
+    "job_id": "e2f82385-bc3c-40b0-b261-c7b3e09341ba",
+    "model": "seedance_2_5",
+    "mode": "video_edit",
+    "status": "COMPLETED_REJECTED",
+    "quoted_credits": 30,
+    "input_media_id": "5b6c384f-baae-4a81-8556-5f2bf0a0f72d",
+    "evidence": "evidence/candidate_01_submission.json",
+    "review": "evidence/candidate_01_review.json"
+  },
+  "generation_cost_this_review": 158.25,
+  "current_model_price_balance": "Live queries2026-11-27: initial815.25,last657,observed debit158.25. Selected Seedance2.5 omni_reference4s quote/debit28. Full catalog/actual output differences and candidate decisions in evidence/ and delivery provenance/production.json.",
   "art_approval": "NOT_VERIFIED",
   "review_code_commit": "f1998d280a03403d7022fd926a4f1e04ce52d247",
   "prepared_date_kst": "2026-11-27",
   "reference_video_sha256": "d6286b03907b5676f648b100db23830b3de325ff610eef7554d95bbecbf6d1d7",
-  "reference_export_report": "docs/validation/GAME067_REFERENCE_REPORT.json"
+  "reference_export_report": "docs/validation/GAME067_REFERENCE_REPORT.json",
+  "additional_higgsfield_submissions": [
+    {
+      "job_id": "5e416190-d32c-41a1-b299-ed6b5d07b841",
+      "model": "seedance_2_5",
+      "mode": "video_edit",
+      "status": "COMPLETED_POSE_ACCEPTED_CADENCE_NOT_FINAL",
+      "quoted_credits": 30,
+      "evidence": "evidence/candidate_02_submission.json"
+    },
+    {
+      "job_id": "1cf6ac5c-c146-46f6-b355-49d43a90b3b4",
+      "model": "seedance_2_5",
+      "mode": "video_edit",
+      "status": "COMPLETED_REJECTED_TEMPORAL_CADENCE",
+      "quoted_credits": 34,
+      "evidence": "evidence/candidate_03_submission.json"
+    },
+    {
+      "job_id": "5b1d7b10-3a34-4a7a-98de-8ddb045c902f",
+      "model": "gpt_image_2_6",
+      "status": "FAILED",
+      "observed_credit_debit": 0
+    },
+    {
+      "job_id": "9129600d-eef5-496b-a25f-235b4ccd2090",
+      "model": "gpt_image_2_6",
+      "status": "COMPLETED_REJECTED_GAIT",
+      "observed_credit_debit": 1.25
+    },
+    {
+      "job_id": "7e8e4ae7-1315-40fe-8308-8bb199c0f320",
+      "model": "hf_mult_motion_control",
+      "status": "COMPLETED_REJECTED_HOLD_CADENCE",
+      "quoted_credits": 35
+    },
+    {
+      "job_id": "5b7cc811-ad50-4759-b8ea-8d1a40de7c77",
+      "model": "seedance_2_5",
+      "mode": "omni_reference",
+      "status": "COMPLETED_SELECTED_ART_DELIVERY",
+      "quoted_credits": 28
+    }
+  ],
+  "production_cost_observed_credits": 158.25,
+  "production_balance_last_observed": 657,
+  "native_GIF_observation": "Tool advertises native GIF/alpha;800x99232-frame request failed without observed debit;400x49624-frame request completed as16transparent80ms frames, rejected for gait continuity.",
+  "review_package": "review_candidate_02/",
+  "review_package_status": "CADENCE_NOT_ACCEPTED_DO_NOT_INTEGRATE",
+  "accepted_delivery_frames": 20,
+  "review_png_frames": 18,
+  "selected_delivery_frames": 20,
+  "previous_preparation_generation_cost": 0,
+  "selected_submission": {
+    "job_id": "5b7cc811-ad50-4759-b8ea-8d1a40de7c77",
+    "model": "seedance_2_5",
+    "mode": "omni_reference",
+    "selected_source_window": [
+      10,
+      30
+    ],
+    "frames": 20,
+    "delivery": "assets/characters/pilot_32/game067_se_run_fire",
+    "technical_status": "ART_DELIVERY_REVIEWED_TRANSITION_REVIEW_OPEN",
+    "game_integration": "NOT_RUN",
+    "final_art_approval": "NOT_VERIFIED"
+  }
 }

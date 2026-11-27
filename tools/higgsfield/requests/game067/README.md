@@ -1,9 +1,13 @@
-# GAME067 — SE 전용 전신 이동사격
+# GAME067 — SE 전용 전신 이동사격 원화20장 납품
 
-완료된 GAME066 SE18을 실제 전투에서 검수한 뒤 진행하는 한 방향의 제작 인계다. **새 SE 이동사격 원화/게임 연결은 아직 없다.** 현재 SE 이동 중 실발사는 기존 SE 달리기18과 측정 총구로 표시하며,전용 사격 클립 선택은 E에만 구현돼 있다.
+기획/Higgsfield 제작을 실행했고 [새 RGBA20장/메타데이터](../../../../assets/characters/pilot_32/game067_se_run_fire/README.md)를 납품했다. **원화 기술 납품20장·게임 연결0·최종 아트 NOT_VERIFIED**다. 선택 작업5b7cc811-ad50-4759-b8ea-8d1a40de7c77은 고정 SE 견착 이미지+기존 SE0을 사용한 Seedance2.5 omni_reference다. 원출력97장 중10~29를 실제 한 주기로 선택하고30은 제외했다. 원천97장/24fps/4.041667초이며 요청한 느린2주기와 다름을 기록했다.
 
-- [한글 제작/연결 기준](PROMPT_KO.txt), [Higgsfield 영문 프롬프트](PROMPT_EN.txt), `request_plan.json`의 참조 해시를 사용한다. API 제출 스키마가 아니다.
-- [현재 SE18 재생 영상](../../../../docs/validation/GAME067_SE_RUN_REFERENCE.mp4)은 기존 채택 달리기를 중성 회색에 그대로 재생한600×744/60fps/명목660ms·5주기 참조다. 새 사격/보간 프레임이나 FPS 측정이 아니다. 예전 GAME066_SE_RUN_REFERENCE는 교체 전11장 영상이므로 이번 입력과 혼동하지 않는다.
-- 재현: 실제 디스플레이에서 `tools/export_viya_run_reference.gd -- --direction=se --output=res://.local_validation/GAME067_REFERENCE`를 실행하고 캡처를60fps로 인코딩한다. 원본 PNG는 변경하지 않는다.
+`evidence/`에 실제 모델/입력/요청·견적/잔액·작업ID·원출력/해시·실패/반려 판단이 있다. 전체 관측 차감158.25/마지막 조회657, 선택 생성28크레딧이며 새 결제·충전·요금제 변경0이다. 진행 중 생성은 없다. 후보2의 `review_candidate_02/`는 견착 자세 참고 확보용18장으로 cadence 미채택이다. 반려 GIF/Genjutsu/영상 후보와 선택20장을 구분한다.
 
-원화는 사용자 지정 기획/Higgsfield 세션에서 제작한다. 실행 시 현재 기능/입력/비용·잔액을 다시 확인한다. 새 이미지가 오면 선택적SE사격/메타데이터와 폴백을 기존 표시 경로에 연결하고 생산 main.tscn에서 확인한다. SE/E 원본·SAVEFIX001·저장22/7난수·전투 규칙은 유지한다. 생성·기술 채택·게임 적용·실기·프로듀서 최종 승인은 구분한다.
+새 PNG는 고정200×248/root(100,248)·표시69×85.56, RGB 청록색 키에서 별도 알파 분리한 파생물이다. 한 고정 등록이며 팔다리 조립·시간 보간·핑퐁·끝 복제는 없다. 프레임별 새 총구20개와 실제 원천/명목660ms/기본속도659.574468ms 시간표, 독립2D장화 위상 권고0.819949494949495를 납품했다. SE18과 다리 벌림/발 위치 차이가 있어 실제 게임 전환은 제작 세션에서 검수한다. 위상 권고를 물리 접지/무미끄러짐 증명으로 삼지 않는다.
+
+현재 활성 GAME066/33클립·298프레임과 원본208/ARTFIX001·GAME064/065/066/SAVEFIX001·게임 scripts/data는 보존했다. NEXT는 제작 세션의 납품 검수→선택적run_fire_se·독립 메타데이터와 같은 거리 위상SE달리기 폴백→실제 main.tscn 검증이다. 사격 on/off·즉시 명중/벽 소비·E↔SE·후진/정지/피격/일시정지·크기/총구/발 위상을 확인한다. 다른 방향/새 적/아이콘/초상화를 이번에 확대하지 않는다.
+
+## 기존 준비 자료
+
+PROMPT_KO.txt/PROMPT_EN.txt와 request_plan.json의 원래 참조22개를 보존했다. [GAME067_SE_RUN_REFERENCE.mp4](../../../../docs/validation/GAME067_SE_RUN_REFERENCE.mp4)는 현재 SE18 기준이다. 과거 GAME066_SE_RUN_REFERENCE는 교체 전11장 영상이므로 구분한다. 느린 참조는 입력용 연구물이며 새 납품 프레임이 아니다. 재현/새20장 상세/남은 검증은 납품 README와 CURRENT/DEVELOPMENT_STATUS8.67을 따른다.

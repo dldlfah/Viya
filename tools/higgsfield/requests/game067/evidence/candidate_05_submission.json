@@ -1,0 +1,49 @@
+{
+  "results": [
+    {
+      "id": "9129600d-eef5-496b-a25f-235b4ccd2090",
+      "type": "image",
+      "status": "pending",
+      "model": "gpt_image_2_6",
+      "params": {
+        "prompt": "Animated GIF, one seamless full-body southeast running cycle of this SAME adult VIYA while keeping her original rifle shouldered in a steady two-handed aim. First reference: required southeast high-angle camera, identity, original costume, rifle and aim. Other references: alternating gait landmarks. Preserve her face, proportions, dark-brown hair, ivory/black/gold costume, tall boots, asymmetric crimson cloth and painted anime style. Smooth continuous whole-body movement, alternating foot plants and recovery, small controlled shoulder recoil, flowing hair and cloth. All24frames are distinct consecutive phases of ONE full left-right cycle over1.92seconds; last and first are adjacent phases, without a repeated endpoint. Fixed camera/root/body size, full body and barrel inside400x496canvas, pivot200,496. Transparent background. No flashes, bullets, smoke, particles, shadows, text or checkerboard. No side-view turn, mirroring, frozen holds, ping-pong, puppet warps, ghost blends or assembled limbs. Return an actual animated GIF, not a still or sprite sheet.",
+        "reference_images": [
+          "c68a9514-13d8-4596-a69a-ef7c3f99d4ed",
+          "8865f26d-1e8a-4fbe-9d22-d83a868bad18",
+          "39c3b4e3-43cb-42df-ae8e-3c3d37d4386e"
+        ],
+        "output_format": "gif",
+        "quality": "high",
+        "resolution": "1k",
+        "background": "transparent",
+        "size": "400x496",
+        "frame_count": 24,
+        "frame_duration_ms": 80
+      }
+    }
+  ],
+  "adjustments": {
+    "medias[0].role": {
+      "requested": "image",
+      "used": "image_references",
+      "reason": "GPT Image 2.6 backend expects schema-key media roles"
+    },
+    "medias[1].role": {
+      "requested": "image",
+      "used": "image_references",
+      "reason": "GPT Image 2.6 backend expects schema-key media roles"
+    },
+    "medias[2].role": {
+      "requested": "image",
+      "used": "image_references",
+      "reason": "GPT Image 2.6 backend expects schema-key media roles"
+    }
+  },
+  "references_read": [
+    {
+      "ref": "quote:_T62aZmXxmhw9an-kI57kg",
+      "chars": 1459,
+      "sha256": "8112e7d4d6c17b0f1aa5aa25817852e30094325bb90c4dcfcf57e71ba434c3be"
+    }
+  ]
+}

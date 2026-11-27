@@ -1,0 +1,30 @@
+{
+  "candidate": 6,
+  "job_id": "7e8e4ae7-1315-40fe-8308-8bb199c0f320",
+  "generation": "COMPLETED",
+  "technical_acceptance": "REJECTED_INHERITED_HOLD_CADENCE",
+  "retained": [
+    "SE high-angle identity",
+    "shouldered aim",
+    "no visible shot effects in overview"
+  ],
+  "actual_output": {
+    "size": [
+      834,
+      1112
+    ],
+    "frames": 121,
+    "fps": 24
+  },
+  "observed_boot_adjacent_MAE_quantiles": [
+    0.08560809,
+    0.26771484,
+    0.34971751,
+    0.81613886,
+    19.28623253
+  ],
+  "reason": "Motion transfer inherited the slowed reference held poses; most adjacent boot crops barely move, rather than new continuous in-between anatomy.",
+  "next_material_change": "Image-driven continuous generation without the hold-bearing driving video.",
+  "game_integration": false,
+  "art_approval": "NOT_VERIFIED"
+}

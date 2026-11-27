@@ -1,0 +1,139 @@
+{
+  "task": "GAME067",
+  "status": "ART_DELIVERED_ENGINE_INTEGRATION_AND_FINAL_APPROVAL_PENDING",
+  "base_remote_head": "96745bded1371801d6c1e5e0173a1c2e8eb2cb82",
+  "unchanged_game_review_code": "f1998d280a03403d7022fd926a4f1e04ce52d247",
+  "selected_job_id": "5b7cc811-ad50-4759-b8ea-8d1a40de7c77",
+  "selected_model": "seedance_2_5",
+  "selected_mode": "omni_reference",
+  "actual_output": {
+    "format": "RGB H264 yuv420p MP4",
+    "canvas": [
+      864,
+      1072
+    ],
+    "frames": 97,
+    "fps": 24,
+    "duration_seconds": 4.041667,
+    "native_alpha": false
+  },
+  "source_window_inclusive": [
+    10,
+    29
+  ],
+  "excluded_next_cycle_boundary": 30,
+  "selected_frames": 20,
+  "native_cycle_ms": 833.333,
+  "nominal_cycle_ms": 660,
+  "distance_cycle_ms": 659.5744680851063,
+  "registration": {
+    "scale": 0.23148148148148148,
+    "translation": [
+      0.0,
+      -0.14814814814815236
+    ],
+    "canvas": [
+      200,
+      248
+    ],
+    "pivot": [
+      100,
+      248
+    ],
+    "fixed_for_entire_clip": true,
+    "per_frame_bbox_alignment": false
+  },
+  "phase_evidence": "phase_alignment.json and phase_comparison.png; approximate2Dphase, actual foot-position transition remains open",
+  "input_refs": [
+    "aim_image_reference.json from candidate02/frame36",
+    "canonical GAME066 SE0 from original96745bd"
+  ],
+  "inputs_and_full_settings": "tools/higgsfield/requests/game067/evidence/candidate_07_params.json",
+  "candidate_decisions": [
+    {
+      "candidate": 1,
+      "job_id": "e2f82385-bc3c-40b0-b261-c7b3e09341ba",
+      "model": "seedance_2_5",
+      "observed_credits": 30,
+      "decision": "REJECTED_BAKED_FX_LOW_CARRY"
+    },
+    {
+      "candidate": 2,
+      "job_id": "5e416190-d32c-41a1-b299-ed6b5d07b841",
+      "model": "seedance_2_5",
+      "observed_credits": 30,
+      "decision": "AIM_REFERENCE_ONLY_HOLD_CADENCE"
+    },
+    {
+      "candidate": 3,
+      "job_id": "1cf6ac5c-c146-46f6-b355-49d43a90b3b4",
+      "model": "seedance_2_5",
+      "observed_credits": 34,
+      "decision": "REJECTED_CADENCE"
+    },
+    {
+      "candidate": 4,
+      "job_id": "5b1d7b10-3a34-4a7a-98de-8ddb045c902f",
+      "model": "gpt_image_2_6",
+      "observed_credits": 0,
+      "decision": "FAILED_NO_OUTPUT"
+    },
+    {
+      "candidate": 5,
+      "job_id": "9129600d-eef5-496b-a25f-235b4ccd2090",
+      "model": "gpt_image_2_6",
+      "observed_credits": 1.25,
+      "decision": "REJECTED_GAIT"
+    },
+    {
+      "candidate": 6,
+      "job_id": "7e8e4ae7-1315-40fe-8308-8bb199c0f320",
+      "model": "hf_mult_motion_control",
+      "observed_credits": 35,
+      "decision": "REJECTED_INHERITED_HOLDS"
+    },
+    {
+      "candidate": 7,
+      "job_id": "5b7cc811-ad50-4759-b8ea-8d1a40de7c77",
+      "model": "seedance_2_5",
+      "observed_credits": 28,
+      "decision": "SELECTED_ART_DELIVERY"
+    }
+  ],
+  "cost": {
+    "balance_before": 815.25,
+    "last_observed_balance": 657,
+    "observed_total_debit": 158.25,
+    "selected_generation": 28,
+    "payment": 0,
+    "automatic_recharge": false,
+    "plan_changed": false
+  },
+  "game_integration": "NOT_RUN",
+  "final_user_art_approval": "NOT_VERIFIED",
+  "preserved_active": {
+    "resource": "res://assets/characters/pilot_32/game066_se_run/viya_game066_frames.tres",
+    "clips": 33,
+    "frames": 298,
+    "original208": true,
+    "ARTFIX001": true,
+    "GAME064_065_066": true,
+    "SAVEFIX001": true,
+    "save_version": 22,
+    "rng_streams": 7
+  },
+  "not_claimed": [
+    "pixel-identical costume/rune paint",
+    "physical3Dfoot contact/zero slip",
+    "per-shot recoil1to1synchronization",
+    "engine/game integration",
+    "Windows/mobile/FPS/heat",
+    "final producer approval"
+  ],
+  "alpha_refinement": {
+    "cyan_axis_background_cutoff": 4,
+    "opaque_core_axis_cutoff": 2,
+    "source_unchanged": true,
+    "initial_derivative": "rejected visible cyan haze"
+  }
+}

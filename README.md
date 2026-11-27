@@ -1,6 +1,10 @@
 # Viya — 모바일 서바이버 게임
 
-## 최신 GAME066 검수 마감 → GAME067 (2026-11-27)
+## GAME067 — SE 전용 이동사격 원화20장 납품 (2026-11-27)
+
+기획/Higgsfield에서 새 연속 전신 이동사격20장 RGBA·실제 시간표·독립 총구/발 위상·원출력/비용/반려 근거를 납품했다. [원화/기술 패킷](assets/characters/pilot_32/game067_se_run_fire/README.md) · [아트 비교 영상](assets/characters/pilot_32/game067_se_run_fire/provenance/art_review.mp4). 게임 연결은 아직 없고 활성 GAME066/33클립·298프레임과 게임 코드는 유지한다. SE18과 발 위치/벌림이 달라 실제 전환 검수와 최종 아트 승인은 별도다. 관측 차감158.25/잔액657·새 결제0. [현재/다음 제작 세션 인계](docs/CURRENT_WORK.md) · [누적8.67](docs/DEVELOPMENT_STATUS.md). 아래 GAME066절의 준비0 표기는 당시 이력이다.
+
+## 이전 GAME066 검수 마감 → GAME067 (2026-11-27)
 
 SE 달리기11→18이 연결된 원격b42b7ed를 실제 전투에서 검수했다. 현재 검수 코드 **`f1998d280a03403d7022fd926a4f1e04ce52d247`**. 잘못된 검사 리소스 문자열2곳과 지도 슬롯 기대값2곳/보존 검사를 현재 리소스에 맞췄으며 원화·게임/저장 코드는 유지했다. 제작 기록 CSV의 번역 자동 임포트도 제외했다. 기존 전체10명령/7묶음 **4,531검사**·Python20·6계약/141변이거부와 실제 X11전투 **1,793검사/379그리기 PASS**다. 임포트 설정 보완 후 정상 import/관련465검사도 재통과했다. [보고서](docs/validation/GAME066_REVIEW_REPORT.json) · [실제 이동 영상](docs/validation/GAME066_REVIEW_GAMEPLAY.mp4) · [실제 화면](docs/validation/GAME066_REVIEW_IN_GAME.png).
 

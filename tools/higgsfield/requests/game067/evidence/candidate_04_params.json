@@ -1,0 +1,34 @@
+{
+  "model": "gpt_image_2_6",
+  "output_format": "gif",
+  "quality": "high",
+  "resolution": "1k",
+  "background": "transparent",
+  "size": "800x992",
+  "frame_count": 32,
+  "frame_duration_ms": 40,
+  "count": 1,
+  "medias": [
+    {
+      "role": "image",
+      "value": "c68a9514-13d8-4596-a69a-ef7c3f99d4ed"
+    },
+    {
+      "role": "image",
+      "value": "https://raw.githubusercontent.com/dldlfah/Viya/96745bded1371801d6c1e5e0173a1c2e8eb2cb82/assets/characters/pilot_32/game066_se_run/frames/viya_run_se_000.png"
+    },
+    {
+      "role": "image",
+      "value": "https://raw.githubusercontent.com/dldlfah/Viya/96745bded1371801d6c1e5e0173a1c2e8eb2cb82/assets/characters/pilot_32/game066_se_run/frames/viya_run_se_004.png"
+    },
+    {
+      "role": "image",
+      "value": "https://raw.githubusercontent.com/dldlfah/Viya/96745bded1371801d6c1e5e0173a1c2e8eb2cb82/assets/characters/pilot_32/game066_se_run/frames/viya_run_se_007.png"
+    },
+    {
+      "role": "image",
+      "value": "https://raw.githubusercontent.com/dldlfah/Viya/96745bded1371801d6c1e5e0173a1c2e8eb2cb82/assets/characters/pilot_32/game066_se_run/frames/viya_run_se_013.png"
+    }
+  ],
+  "prompt": "Create a TRUE NATIVE ANIMATED GIF: one seamless full-body southeast running-while-shoulder-aiming cycle of the SAME adult VIYA, transparent background. Reference1 establishes the required secure two-handed shouldered aim and fixed high-angle southeast camera. References2-5 establish her canonical southeast identity and alternating gait landmarks. Keep the southeast front/side ratio, screen-down-right orientation, same face, body proportions, dark-brown wavy hair, ivory top, black corset, partial gloves, brass/gold details, short lower garments, bare thighs/straps, tall boots, asymmetrical crimson fabric and original red-rune rifle. Preserve the detailed painterly dark-fantasy anime style.\n\nAnimate ONE complete left-right running cycle with genuinely different continuous full-body poses, smooth alternating boot contacts, natural pelvis weight transfer, stable two-hand aim and small shoulder recoil/settling. Hair and cloth follow smoothly. No stationary holds, duplicate end pose, ping-pong, puppet deformation, limb cutout assembly, ghosting or blended double limbs. Keep buttstock braced at the shoulder throughout and barrel aimed screen-down-right. The game adds actual shot effects; show NO muzzle flash, glowing muzzle, bullet, tracer, casing, smoke, sparks, magic, shadow, scenery, text, grid or checkerboard.\n\nAll32frames are consecutive phases of ONE full cycle, not32separate poses in a sheet. Last frame and first are adjacent phases without an extra repeated endpoint. Whole body, hair, both boots, cloth and barrel tip stay within every frame. One stationary common root and unchanged body scale in an800x992canvas, bottom pivot400,992; no per-frame recentering, zoom, camera rotation or mirroring. Native source timing32x40ms=1280ms; one full cycle will later be retimed to660ms in game. Return an actual transparent animated GIF, not a still image or contact sheet."
+}

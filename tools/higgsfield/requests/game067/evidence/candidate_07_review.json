@@ -1,0 +1,28 @@
+{
+  "candidate": 7,
+  "generation": "COMPLETED",
+  "job_id": "5b7cc811-ad50-4759-b8ea-8d1a40de7c77",
+  "technical_acceptance": "SELECTED_FOR_ART_DELIVERY_WITH_TRANSITION_REVIEW_OPEN",
+  "source_sha256": "98e824c1ec416fb7ff5c0711cf806c8ccb9711f5f8e5b54bb1a36e80d487951e",
+  "selected_source_frames": [
+    10,
+    29
+  ],
+  "frames": 20,
+  "selection": "Continuous image-driven gait; shortest repeated full left-right cycle around20frames. Endpoint30is excluded,10..29are consecutive native frames.",
+  "raw_boot_adjacent_MAE_quantiles": [
+    4.78474576,
+    6.35384329,
+    6.72262861,
+    7.74900387,
+    10.28661909
+  ],
+  "source_window_next_cycle_boot_error": 1.2586554882782177,
+  "registered_seam_boot_MAE": 6.2728495597839355,
+  "registered_internal_boot_MAE_median": 9.941699981689453,
+  "independent_phase_origin": 0.819949494949495,
+  "phase_transition_open": "SE18 leg extension/painted foot positions differ. The fitted phase matches the order of the2Dgait, not pixel-identical foot placement. Actual same-phase game switches require production review.",
+  "game_integration": false,
+  "final_art_approval": "NOT_VERIFIED",
+  "alpha_refinement": "Opaque-core2/cyan-key4 removes observed new-output cyan haze. Source unchanged."
+}

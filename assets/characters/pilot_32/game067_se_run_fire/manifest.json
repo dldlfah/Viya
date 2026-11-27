@@ -1,0 +1,105 @@
+{
+  "task": "GAME067",
+  "delivery": "20RGBA frames with source timing, muzzle and measured2Dphase",
+  "status": "ART_DELIVERY_REVIEWED_NOT_ACTIVE_IN_GAME",
+  "animation": "run_fire_se",
+  "frames": 20,
+  "frame_hashes": [
+    {
+      "filename": "viya_run_fire_se_000.png",
+      "sha256": "681862ad1900bf9864c85ed306d694d2ff9d939451d723eacf4dfa8af0d009e1"
+    },
+    {
+      "filename": "viya_run_fire_se_001.png",
+      "sha256": "6a52bdf12cfbe95d40c2eaf0d5b82ea9034aac4be08a78e5301478799db92693"
+    },
+    {
+      "filename": "viya_run_fire_se_002.png",
+      "sha256": "de9def36e2e6af2b4f372d7deb9ec8996f6e41b8b3918330bc5157712bccae72"
+    },
+    {
+      "filename": "viya_run_fire_se_003.png",
+      "sha256": "d59500acc2675ae47aef7308ea5bdb2b5356051e4f0ad7727af47f53b85faf9c"
+    },
+    {
+      "filename": "viya_run_fire_se_004.png",
+      "sha256": "15e10b94725ccf78f63104141983dbf7a801a8483f1940e28a0cf48b5e456c2b"
+    },
+    {
+      "filename": "viya_run_fire_se_005.png",
+      "sha256": "a9c41c9a445809608a1239c992c02a6a3823e6d6a688a84aab1e1d0c238b6254"
+    },
+    {
+      "filename": "viya_run_fire_se_006.png",
+      "sha256": "14e79a5e85331af393a3577317c0dcf889e463ca671f77cd783c3981f433340d"
+    },
+    {
+      "filename": "viya_run_fire_se_007.png",
+      "sha256": "93693ec360e0cb81f6292d3f732710dde240eea458726590e634cc91220308fc"
+    },
+    {
+      "filename": "viya_run_fire_se_008.png",
+      "sha256": "b2a4192d604b2fe4d1cc309281df1ad0484d8c691ed529d53ddbc4a688b103bd"
+    },
+    {
+      "filename": "viya_run_fire_se_009.png",
+      "sha256": "d3d3389613b8d386c4cba33700d182082b09d73739f76553b3212fa4bc780ad3"
+    },
+    {
+      "filename": "viya_run_fire_se_010.png",
+      "sha256": "41cbbd1e7fe8b1b82ac84bbb409120598d11c2d6cb8708e15e965e94ca73d929"
+    },
+    {
+      "filename": "viya_run_fire_se_011.png",
+      "sha256": "6553cf53c113c7f9d5a7d01e1dfed300a4c469fea1bc31786d391a90e1c50df8"
+    },
+    {
+      "filename": "viya_run_fire_se_012.png",
+      "sha256": "4c9ff4a0c28165f81f4c48c8b425ad23fe20b0bafe86db2eeb71b632ba8c0b96"
+    },
+    {
+      "filename": "viya_run_fire_se_013.png",
+      "sha256": "eb80dda0a69934f9525856f1cce79d9aaf7cac2f8a7b171c9b1761bca21622bd"
+    },
+    {
+      "filename": "viya_run_fire_se_014.png",
+      "sha256": "619db325807702c52fd0fa761f56d7f22074f306d95777b3f56e4256bb1b2b14"
+    },
+    {
+      "filename": "viya_run_fire_se_015.png",
+      "sha256": "f18d3281c1881ab0a597adfcd4a770906a09a36e15b36e9dc32b1c069f1a6759"
+    },
+    {
+      "filename": "viya_run_fire_se_016.png",
+      "sha256": "beebb9602d0dc559af47114388c4360db18b766f49b7b59fd156c1485589187e"
+    },
+    {
+      "filename": "viya_run_fire_se_017.png",
+      "sha256": "03d9382fff1e3b4c4b34344a198efce6fdaec21ef118590986a3e583a242d778"
+    },
+    {
+      "filename": "viya_run_fire_se_018.png",
+      "sha256": "a52c0d43e58de8dab1008998e461036454826eaaa9cc3e7a6728d1432f6169b3"
+    },
+    {
+      "filename": "viya_run_fire_se_019.png",
+      "sha256": "ee1788ed0185c164afa0f5e79d14ea987f75cc9ec0123c239ec425fa77e084a2"
+    }
+  ],
+  "source_sha256": "98e824c1ec416fb7ff5c0711cf806c8ccb9711f5f8e5b54bb1a36e80d487951e",
+  "source_job": "5b7cc811-ad50-4759-b8ea-8d1a40de7c77",
+  "metadata": [
+    "provenance/frame_timing.csv",
+    "provenance/muzzle_coordinates.csv",
+    "provenance/phase_alignment.json",
+    "provenance/clip_metadata.json",
+    "provenance/source_registration.json",
+    "provenance/production.json",
+    "provenance/technical_qa.json"
+  ],
+  "preview": "provenance/art_review.mp4",
+  "active_resource_changed": false,
+  "preserved_clips": 33,
+  "preserved_frames": 298,
+  "final_art_approval": "NOT_VERIFIED"
+}

@@ -1,0 +1,34 @@
+{
+  "results": [
+    {
+      "id": "e2f82385-bc3c-40b0-b261-c7b3e09341ba",
+      "type": "video",
+      "status": "pending",
+      "model": "seedance_2_5",
+      "params": {
+        "prompt": "GAME067: Edit ONLY this exact GAME067 SE18 running reference into a SOUTHEAST running-while-aiming/firing cycle of the SAME adult VIYA. Preserve the exact fixed high-angle three-quarter front/side view and screen-down-right heading, her face and adult body proportions, long dark-brown wavy hair, ivory top, fitted black corset, partial gloves, brass/gold shoulder details, short lower garments, thigh straps, tall boots, asymmetric crimson hanging fabric, and original long rune-decorated firearm. Preserve painterly dark-fantasy anime linework and material colors.\n\nShe runs in place southeast and aims the SAME rifle down-right with a secure two-handed grip, butt seated against the shoulder, cheek/eyes aligned with the sights. Add restrained shoulder recoil and recovery while the barrel stays stably aimed. Keep natural whole-body weight transfer, alternating left/right foot contact and recovery, and continuous hair/fabric follow-through. Match the reference's leg/body gait phase and roughly 0.66-second full left-right cycle so running and moving-fire can switch without restarting the feet. Maintain the SAME framing, fixed root, body scale and ground registration throughout. No camera movement, no turn toward side-facing east, no mirroring. Head, both boots, crimson cloth and barrel tip must remain fully inside the frame with margin.\n\nRender the entire continuous clip with several true repeated cycles so a single distinct complete cycle can be extracted; last-to-first poses must be adjacent natural phases. No endpoint duplication, ping-pong, frozen poses, limb cutouts, puppet warps or ghost-blended limbs.\n\nIMPORTANT: The character visibly aims and recoils but the rifle NEVER emits any visible effect. NO muzzle flash, flame, glow, projectile, tracer, bullet casing, smoke, magical effect, ground shadow, text, grid, checkerboard, extra character or environment. Replace only the neutral background with one perfectly flat uniform chroma matte #42967A, no gradient or lighting spill. All gun metal and its original red rune ornament remain solid and intact. The engine adds actual shots/effects. Keep the approved costume and original SE perspective unchanged.",
+        "reference_images": [
+          "5b6c384f-baae-4a81-8556-5f2bf0a0f72d"
+        ],
+        "mode": "video_edit",
+        "resolution": "720p",
+        "generate_audio": false,
+        "bitrate_mode": "high"
+      }
+    }
+  ],
+  "adjustments": {
+    "medias[0].role": {
+      "requested": "video",
+      "used": "video_references",
+      "reason": "Seedance 2.5 backend expects schema-key media roles"
+    }
+  },
+  "references_read": [
+    {
+      "ref": "quote:NEy0bLpO3Vmb3-3_Pxwhxg",
+      "chars": 2394,
+      "sha256": "ce12c15f410439ab068ea2fa87bed7299019057b93b97bd590e8988499584f54"
+    }
+  ]
+}

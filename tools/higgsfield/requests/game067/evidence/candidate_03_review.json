@@ -1,0 +1,19 @@
+{
+  "candidate": 3,
+  "job_id": "1cf6ac5c-c146-46f6-b355-49d43a90b3b4",
+  "generation": "COMPLETED",
+  "technical_acceptance": "REJECTED_TEMPORAL_CADENCE",
+  "reason": "Did not retain two slow2.25s cycles; repeated fast steps and near-held positions remain. No improved continuous cycle selected.",
+  "actual_decoded_frames": 105,
+  "actual_source_seconds": 4.375,
+  "lower_body_adjacent_MAE_quantiles": [
+    0.1726137377341659,
+    0.3287540886113589,
+    0.570130835563485,
+    11.422123104371098,
+    17.71269699672911
+  ],
+  "image_differences_are_not_proof_of_distinct_anatomical_poses": true,
+  "game_integration": false,
+  "final_art_approval": "NOT_VERIFIED"
+}

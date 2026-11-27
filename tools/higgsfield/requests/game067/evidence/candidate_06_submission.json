@@ -1,0 +1,37 @@
+{
+  "results": [
+    {
+      "id": "7e8e4ae7-1315-40fe-8308-8bb199c0f320",
+      "type": "video",
+      "status": "pending",
+      "model": "hf_mult_motion_control",
+      "params": {
+        "prompt": "Transfer the exact slow alternating full-body running gait from the driving video to this same VIYA reference image, keeping her rifle firmly shouldered with two hands. Retain the two slow2.25-second full left-right cycles; smooth continuous genuine body poses between motion landmarks, no step-and-hold cadence or acceleration. Keep EXACT fixed elevated southeast three-quarter front/side camera, screen-down-right heading and front visibility. Never turn to an east side view. Same mature adult face/body, dark-brown wavy hair, ivory top, black corset, partial gloves, gold/brass ornaments, short garments/thigh straps, tall boots, asymmetric crimson cloth and original red-rune rifle. Preserve painterly anime details. Same body size and fixed root/framing. Full hair, both boots, cloth and barrel inside with margin. Stable shoulder aim and restrained shoulder settling, flowing hair/cloth. NO muzzle flash, glow, tracer, bullet, casing, smoke, spark, magic, shadow, scenery, text, checkerboard, extra subject, mirroring, endpoint duplication, ping-pong, ghosted limbs or puppet warping. One flat uniform green/cyan matte background.",
+        "reference_images": [
+          "c68a9514-13d8-4596-a69a-ef7c3f99d4ed",
+          "5838b1a9-b45f-4928-9026-c74a154892ea"
+        ],
+        "resolution": "720p"
+      }
+    }
+  ],
+  "adjustments": {
+    "medias[0].role": {
+      "requested": "image",
+      "used": "image_references",
+      "reason": "Genjutsu backend expects schema-key media roles"
+    },
+    "medias[1].role": {
+      "requested": "video",
+      "used": "video_references",
+      "reason": "Genjutsu backend expects schema-key media roles"
+    }
+  },
+  "references_read": [
+    {
+      "ref": "quote:ukF2qXyqpwrQe7O6_ZmgYw",
+      "chars": 1352,
+      "sha256": "bb67418abc81f5a24af78efbccea53ed83f2f2bc535cdabd671d45941f1403b6"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "candidate": 5,
+  "generation": "COMPLETED",
+  "job_id": "9129600d-eef5-496b-a25f-235b4ccd2090",
+  "requested_frames": 24,
+  "actual_frames": 16,
+  "actual_cycle_ms": 1280,
+  "native_transparency": true,
+  "technical_acceptance": "REJECTED_GAIT_CONTINUITY",
+  "reason": "Leg recovery/contact progression is not a stable matching full left-right cycle; repeated kicks/held positions in all16-frame review. Output also differs from requested frame count and total time.",
+  "art_approval": "NOT_VERIFIED",
+  "game_integration": false
+}

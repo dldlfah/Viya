@@ -1,0 +1,18 @@
+{
+  "purpose": "INPUT MOTION STUDY ONLY; retimed source holds are not new generated art or a delivery sequence",
+  "source_job": "5e416190-d32c-41a1-b299-ed6b5d07b841",
+  "source_window": [
+    36,
+    54
+  ],
+  "source_fps": 24,
+  "study_fps": 24,
+  "native_poses": 18,
+  "study_cycle_seconds": 2.25,
+  "study_cycles": 2,
+  "study_frames": 108,
+  "study_sha256": "ec2388c48e679d89549b5ffc23380bf7c92642ecbd8e6b15b0c73a0066198f46",
+  "media_id": "5838b1a9-b45f-4928-9026-c74a154892ea",
+  "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3LHdo37hN3iiYXd8WT9stnWXw4M/5838b1a9-b45f-4928-9026-c74a154892ea.mp4",
+  "processing": "18 source poses read at8fps and encoded24fps; repeat complete cycle twice. No optical flow, limb assembly, artwork repaint or synthetic delivery frames."
+}

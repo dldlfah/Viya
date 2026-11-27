@@ -1,0 +1,37 @@
+{
+  "results": [
+    {
+      "id": "5b7cc811-ad50-4759-b8ea-8d1a40de7c77",
+      "type": "video",
+      "status": "pending",
+      "model": "seedance_2_5",
+      "params": {
+        "prompt": "Animate this exact adult VIYA from the first image into a smooth seamless full-body SOUTHEAST running-in-place cycle while maintaining the original two-handed shoulder-aimed rifle posture. The second image is the canonical character/camera design reference. Fixed high-angle three-quarter front/side view, facing screen down-right. Absolutely no camera movement or rotation toward a side view.\n\nCreate TWO complete natural left-right running cycles over the4-second clip, approximately2seconds per full cycle in slow motion. Newly render genuinely continuous intermediate full-body poses at every frame, with alternating foot plants, toe push-off, bent-leg recovery and balanced pelvis weight transfer. Both legs must alternate, not repeated kicks by one leg. Stable shoulders and rifle with tiny controlled recoil/settling. Hair and asymmetric crimson cloth flow with coherent follow-through. Smooth motion throughout, no freezes or held pose blocks. Last distinct pose and first must connect naturally.\n\nKeep the exact adult face/body, dark-brown wavy hair, ivory top, fitted black corset, partial gloves, brass/gold details, short lower garments, thigh straps, tall decorated boots, asymmetric crimson fabric and SAME slim red-rune rifle. Preserve painterly dark-fantasy anime detail. Keep the shoulder-braced buttstock, cheek/eyes near sights and support hand under the fore-end. Rifle muzzle remains stably aimed southeast/down-right, solid and dark.\n\nFull hair, body, both boots, fabric and barrel tip remain inside the frame with margin. One fixed root/body size and same framing throughout. Flat uniform green/cyan chroma background with no shadow or floor line. NO muzzle flashes, glowing tip, bullets, tracers, casings, smoke, spark, magic, scenery, text, checkerboard or extra character. No costume/weapon redesign, mirroring, limb cutouts, puppet warping, ghost blends, double limbs, ping-pong or duplicated endpoints. Silent.",
+        "aspect_ratio": "auto",
+        "duration": 4,
+        "reference_images": [
+          "c68a9514-13d8-4596-a69a-ef7c3f99d4ed",
+          "39250255-488b-4b36-887d-8b429f29fee3"
+        ],
+        "mode": "omni_reference",
+        "resolution": "720p",
+        "generate_audio": false,
+        "bitrate_mode": "high"
+      }
+    }
+  ],
+  "adjustments": {
+    "medias[1].role": {
+      "requested": "image",
+      "used": "image_references",
+      "reason": "Seedance 2.5 backend expects schema-key media roles"
+    }
+  },
+  "references_read": [
+    {
+      "ref": "quote:59Dl6KvG32j5-fGAHTL-Kg",
+      "chars": 2259,
+      "sha256": "31f9c39191b256ff446398acefdb3da2f9eadb448d7a8c01dce287b8438f9db8"
+    }
+  ]
+}
