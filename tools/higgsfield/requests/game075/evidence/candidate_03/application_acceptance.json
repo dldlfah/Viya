@@ -1,0 +1,26 @@
+{
+  "user_instruction": "적용해",
+  "scope": "Apply last candidate03 despite disclosed body/boot switching differences",
+  "supersedes_previous_conditional_nonadoption": true,
+  "resource": "res://assets/characters/pilot_32/game075_sw_run_fire_candidate03/viya_game075_frames.tres",
+  "game_clips": 36,
+  "game_frames": 363,
+  "frame_indices_inclusive": [
+    29,
+    43
+  ],
+  "main_scene_validation": {
+    "status": "PASS",
+    "checks": 1648,
+    "draws": 49,
+    "shots": 43
+  },
+  "native_checks": 4740,
+  "original120_bundle": "TIMEOUT_PRESERVED",
+  "cue_separate_timeout_seconds": 480,
+  "additional_generations": 0,
+  "additional_credits": 0,
+  "exact_physical_foot_contacts": "NOT_VERIFIED",
+  "producer_final_art": "NOT_VERIFIED",
+  "windows_mobile": "NOT_VERIFIED"
+}

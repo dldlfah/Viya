@@ -16,8 +16,8 @@
     363
   ],
   "source_window": [
-    30,
-    45
+    29,
+    44
   ],
   "canvas": [
     200,
@@ -35,8 +35,8 @@
   "speed": 235,
   "nominal_cycle_ms": 660,
   "source_cycle_ms": 625,
-  "game_connection": "NOT_RUN",
-  "final_adoption": "NOT_ESTABLISHED_TRANSITION_REVIEW_CANDIDATE",
+  "game_connection": "CONNECTED",
+  "final_adoption": "USER_ACCEPTED_APPLICATION_WITH_KNOWN_VISUAL_LIMITS",
   "original_closed_allocation": {
     "maximum_paid_submissions": 2,
     "maximum_credits": 60,
@@ -55,5 +55,37 @@
     "review_rgba_frames": 15,
     "approved_new_game_frames": 0,
     "automatic_fourth": false
+  },
+  "previous_candidate02_window": [
+    30,
+    45
+  ],
+  "current_active_clips": 36,
+  "current_active_frames": 363,
+  "application": {
+    "user_instruction": "적용해",
+    "scope": "Apply last candidate03 despite disclosed body/boot switching differences",
+    "supersedes_previous_conditional_nonadoption": true,
+    "resource": "res://assets/characters/pilot_32/game075_sw_run_fire_candidate03/viya_game075_frames.tres",
+    "game_clips": 36,
+    "game_frames": 363,
+    "frame_indices_inclusive": [
+      29,
+      43
+    ],
+    "main_scene_validation": {
+      "status": "PASS",
+      "checks": 1648,
+      "draws": 49,
+      "shots": 43
+    },
+    "native_checks": 4740,
+    "original120_bundle": "TIMEOUT_PRESERVED",
+    "cue_separate_timeout_seconds": 480,
+    "additional_generations": 0,
+    "additional_credits": 0,
+    "exact_physical_foot_contacts": "NOT_VERIFIED",
+    "producer_final_art": "NOT_VERIFIED",
+    "windows_mobile": "NOT_VERIFIED"
   }
 }

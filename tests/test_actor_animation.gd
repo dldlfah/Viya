@@ -33,7 +33,7 @@ static func run(host,verify:Callable)->void:
 	ResourceSaver.save(texture(Color.GREEN),generic)
 	var slots=Slots.new()
 	var art=ActorArt.new()
-	verify.call(slots.definitions.keys().all(func(k):return k=="viya_battle" or slots.definitions[k]=="") and slots.definitions.viya_battle=="res://assets/characters/pilot_32/game070_sw_run/viya_game070_frames.tres" and slots.definitions.has("gold_slime") and slots.definitions.has("skeleton_soldier"),"Only the explicitly supplied Viya pilot with its E derivative is bound; all species and other presentation paths remain blank")
+	verify.call(slots.definitions.keys().all(func(k):return k=="viya_battle" or slots.definitions[k]=="") and slots.definitions.viya_battle=="res://assets/characters/pilot_32/game075_sw_run_fire_candidate03/viya_game075_frames.tres" and slots.definitions.has("gold_slime") and slots.definitions.has("skeleton_soldier"),"Only the explicitly supplied Viya pilot with its E derivative is bound; all species and other presentation paths remain blank")
 	slots.definitions.normal=generic
 	slots.definitions.goblin_raider=path
 	var sample:Dictionary=art.frame(slots,["goblin_raider","normal"],"run","e",.49)

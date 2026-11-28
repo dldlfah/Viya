@@ -34,7 +34,7 @@ static func run(view,asset:SpriteFrames,verify:Callable) -> void:
 		preserved=preserved and preserved_asset.get_animation_loop(name)==Prior.get_animation_loop(name) and preserved_asset.get_animation_speed(name)==Prior.get_animation_speed(name)
 		for index in range(count):
 			preserved=preserved and preserved_asset.get_frame_texture(name,index).resource_path==Prior.get_frame_texture(name,index).resource_path and preserved_asset.get_frame_duration(name,index)==Prior.get_frame_duration(name,index)
-	verify.call(preserved and total==307 and asset.get_animation_names().size()==35,"Historical GAME068 composite preserves all33other clips/307resolved frames and exact weights/speeds/loops")
+	verify.call(preserved and total==307 and asset.get_animation_names().size()==36,"Historical GAME068 composite preserves all33other clips/307resolved frames and exact weights/speeds/loops")
 	var timing:Array=Reader.read_timing(CSV)
 	var metadata:Dictionary=JSON.parse_string(FileAccess.get_file_as_string(META))
 	var alignment:Dictionary=JSON.parse_string(FileAccess.get_file_as_string(PHASE))

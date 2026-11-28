@@ -54,7 +54,7 @@ static func verify_skipped_draws(ui, verify: Callable) -> void:
 	var regular := results[0]
 	var skipped := results[1]
 	var phase_difference := wrapf(float(regular.phase) - float(skipped.phase), -0.5, 0.5)
-	verify.call(regular.turn and regular.shots == 2 and regular.clip == "run_sw", "Real southwest movement aims back and then southwest again as two shots commit")
+	verify.call(regular.turn and regular.shots == 2 and regular.clip == "run_fire_sw", "Real southwest movement aims back and then southwest again as two shots commit")
 	verify.call(is_zero_approx(phase_difference) and regular.clip == skipped.clip and regular.frame == skipped.frame, "Omitting intermediate draws keeps the ending SW17 phase and frame across aim reversals")
 	verify.call(regular.state == skipped.state, "Sampling cadence does not change the authoritative battle")
 	ui.movement.axis = Vector2.ZERO
@@ -79,12 +79,12 @@ static func run(view,asset:SpriteFrames,verify:Callable) -> void:
 		var count:int=Prior.get_frame_count(name);total+=count
 		preserved=preserved and asset.get_frame_count(name)==count and asset.get_animation_speed(name)==Prior.get_animation_speed(name) and asset.get_animation_loop(name)==Prior.get_animation_loop(name)
 		for i in range(count):preserved=preserved and asset.get_frame_texture(name,i).resource_path==Prior.get_frame_texture(name,i).resource_path and asset.get_frame_duration(name,i)==Prior.get_frame_duration(name,i)
-	verify.call(preserved and total==331 and asset.get_animation_names().size()==35,"GAME070 preserves other34clips331frames, texture paths, weights, speeds, loops")
+	verify.call(preserved and total==331 and asset.get_animation_names().size()==36,"GAME070 preserves other34clips331frames, texture paths, weights, speeds, loops")
 	var timing:Array=Reader.read_timing(Folder+"provenance/frame_timing.csv")
 	var meta:Dictionary=JSON.parse_string(FileAccess.get_file_as_string(Folder+"provenance/clip_metadata.json"))
 	var manifest:Dictionary=JSON.parse_string(FileAccess.get_file_as_string(Folder+"manifest.json"))
 	var rows:Array=view.viya.config.directions.sw.run
-	verify.call(asset.resource_path==Folder+"viya_game070_frames.tres" and timing.size()==17 and rows.size()==17 and asset.get_frame_count("run_sw")==17,"Active GAME070 slot replaces only SW11 with17 measured native source frames")
+	verify.call(asset.resource_path=="res://assets/characters/pilot_32/game075_sw_run_fire_candidate03/viya_game075_frames.tres" and timing.size()==17 and rows.size()==17 and asset.get_frame_count("run_sw")==17,"Active GAME070 slot replaces only SW11 with17 measured native source frames")
 	if timing.size()!=17 or rows.size()!=17:return
 	var original=view.viya;view.viya=Presenter.new()
 	var elapsed:=0.0

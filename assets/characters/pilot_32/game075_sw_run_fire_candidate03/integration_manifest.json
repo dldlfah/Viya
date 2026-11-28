@@ -1,0 +1,14 @@
+{
+  "source_resource": "res://assets/characters/pilot_32/game070_sw_run/viya_game070_frames.tres",
+  "source_sha256": "1de72b71f36d8a984de507977917a59fd136330ffa7d0b3f78b7b36f21c93016",
+  "resource": "res://assets/characters/pilot_32/game075_sw_run_fire_candidate03/viya_game075_frames.tres",
+  "preserved_clips": 35,
+  "preserved_frames": 348,
+  "added_clip": "run_fire_sw",
+  "added_frames": 15,
+  "total_clips": 36,
+  "total_frames": 363,
+  "nominal_cycle_ms": 660.0,
+  "phase_origin": 0.42598039215686273,
+  "status": "BUILT_NOT_RUNTIME_PROOF"
+}

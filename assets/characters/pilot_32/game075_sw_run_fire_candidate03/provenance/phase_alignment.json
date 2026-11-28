@@ -1,0 +1,36 @@
+{
+  "status": "REVIEW_ONLY_NOT_ACTIVE",
+  "trial_source_window": [
+    29,
+    44
+  ],
+  "trial_source_ms": 625,
+  "trial_nominal_ms": 660,
+  "fixed_registration": {
+    "scale": 0.2997601918465228,
+    "translation": [
+      3,
+      -33.33333333333333
+    ],
+    "root": [
+      100,
+      248
+    ]
+  },
+  "phase_search": {
+    "origin": 0.42598039215686273,
+    "mean_lower_body_IoU": 0.19035290236547042
+  },
+  "phase_search_note": "Lower-body silhouette IoU(y165:248) search over2040 phase offsets. Numeric diagnostic only; anatomical phase and gait adoption NOT established. No pose/registration is changed per frame.",
+  "game_connection": "NOT_RUN",
+  "producer_final": "NOT_VERIFIED",
+  "method": "Full-cycle lower-body silhouette IoU over2040 offsets, independently fitted from rendered paint. No old phase value copied.",
+  "run_fire_phase_origin": 0.42598039215686273,
+  "foot_contact_phase": "NOT_VERIFIED",
+  "accepted_limitations": [
+    "Body/boot pose differences during run/fire switch",
+    "Repeated-support pattern inherited from approved SW17",
+    "Exact weapon details and final art remain producer review"
+  ],
+  "producer_instruction": "적용해"
+}

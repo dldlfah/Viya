@@ -90,7 +90,7 @@ func run_clock(asset:SpriteFrames, direction:String, phase:float) -> float:
 func moving_fire_ready(asset:SpriteFrames, row:Dictionary, direction:String="e") -> bool:
 	# Optional whole-body art: absence must keep the accepted run, never fall
 	# through the shared sampler's generic idle fallback.
-	if direction not in ["e","se","s"]:return false
+	if direction not in ["e","se","s","sw"]:return false
 	var animation:String="run_fire_"+direction
 	if asset==null or not asset.has_animation(animation):return false
 	var rows:Variant=row.get("run_fire")
@@ -114,7 +114,7 @@ func moving_fire_ready(asset:SpriteFrames, row:Dictionary, direction:String="e")
 		var path:Variant=item.get("texture")
 		var texture:Texture2D=asset.get_frame_texture(animation,index)
 		var duration:float=asset.get_frame_duration(animation,index)
-		if direction in ["se","s"]:
+		if direction in ["se","s","sw"]:
 			var milliseconds:Variant=item.get("duration_ms")
 			if not (milliseconds is int or milliseconds is float) or not is_finite(float(milliseconds)) or float(milliseconds)<=0 or absf(duration/speed*1000.0-float(milliseconds))>.000001:
 				valid=false
@@ -197,7 +197,7 @@ func apply(view, visual:Dictionary) -> void:
 	var clock:float=visual.clock
 	if selected=="run":
 		clock=run_clock(view.art.resource("viya_battle"),visual.direction,_phase+float(row.phase_origin))
-		if visual.direction in ["e","se","s"] and gun_active and moving_fire_ready(view.art.resource("viya_battle"),row,visual.direction):
+		if visual.direction in ["e","se","s","sw"] and gun_active and moving_fire_ready(view.art.resource("viya_battle"),row,visual.direction):
 			selected="run_fire"
 			clock=phase_clock(view.art.resource("viya_battle"),"run_fire_"+visual.direction,_phase+float(row.get("run_fire_phase_origin",row.phase_origin)))
 	# Play the original whole-body attack once per stationary burst, not per

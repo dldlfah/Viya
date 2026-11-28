@@ -23,7 +23,8 @@
       "status": "completed",
       "quoted_credits": 30,
       "observed_charge": 30,
-      "adoption": "NOT_ADOPTED_FOR_CURRENT_GAME_SWITCH"
+      "adoption": "NOT_ADOPTED_FOR_CURRENT_GAME_SWITCH",
+      "subsequent_user_application": "APPLIED_WITH_ACCEPTED_VISUAL_LIMITS"
     }
   ],
   "balance_before": 486,
@@ -52,5 +53,7 @@
     "remaining_extra_submissions": 0
   },
   "balance_after_third": 397,
-  "automatic_fourth": false
+  "automatic_fourth": false,
+  "integration_additional_generations": 0,
+  "integration_additional_credits": 0
 }

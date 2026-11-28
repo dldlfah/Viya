@@ -5,7 +5,7 @@ const Slots=preload("res://scripts/ui/asset_slots.gd")
 const META="res://assets/characters/pilot_32/game066_se_run/provenance/source_registration.json"
 const CSV="res://assets/characters/pilot_32/game066_se_run/provenance/frame_timing.csv"
 const FIRST="res://assets/characters/pilot_32/game066_se_run/frames/viya_run_se_000.png"
-const RESOURCE="res://assets/characters/pilot_32/game070_sw_run/viya_game070_frames.tres"
+const RESOURCE="res://assets/characters/pilot_32/game075_sw_run_fire_candidate03/viya_game075_frames.tres"
 
 static func run(view,asset:SpriteFrames,verify:Callable) -> void:
 	var data:Variant=JSON.parse_string(FileAccess.get_file_as_string(META))

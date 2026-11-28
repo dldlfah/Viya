@@ -372,7 +372,15 @@
 - User `이대로 적용해` supersedes candidate04 technical veto as an explicit application decision. Historical review/rejection/cost evidence unchanged.0 additional paid submissions/credits. In-game producer review and Windows/mobile are separate.
 
 
-## GAME075 — SW 견착 이동사격 검토 후보15장 (2026-11-28)
+## GAME075 — 승인한 후보03의 SW 이동사격15장 연결 (2026-11-28)
+
+- 새 활성: `assets/characters/pilot_32/game075_sw_run_fire_candidate03/viya_game075_frames.tres`. 원래35클립348의모든경로/가중치/속도/루프를보존하고run_fire_sw15장만추가해36클립363이다. 이전game075_sw_run_fire후보02/모든원본은변경하지않았다.
+- 원천29~43/625ms·각44ms/명목660ms·235/155거리659.574468ms. RGBA200×248/표시69×85.56/root(100,248),고정0.2997601918465228/(3,-33.33333333333333). 비교용15PNG와바이트동일복사/무손실임포트/원본RGBA일치. 독립총구15·원천PTS/표시시간·등록/시각위상·생성작업과SHA를함께보존한다.
+- 새위상0.42598039215686273은2040시작위상하체실루엣의독립시각적합이다. 해부학적접지/반대발일치가확정된위상이아니며기존SW17값복사가아니다. 전환몸/발차이와기존반복지지모양은사용자적용승인으로남긴다. 최종아트/기기는별도다.
+- 코드선택E/SE/S→SW확장·누락/무효시같은위상SW17복귀. 실제Linuxmain.tscn1,648검사49그리기43발PASS.7네이티브4,740/Python20·6계약204변이거부PASS(120초TIMEOUT기록후전투표현만별도480초제한). [자산/한계](../assets/characters/pilot_32/game075_sw_run_fire_candidate03/README.md) · [실제검증](validation/GAME075_INTEGRATION_REPORT.json).
+- 이번연결추가생성/비용0. 이전제작3건89·자동4차없음. 기존자산1,539개바이트동일과게임소스의표시선택1/표시데이터2파일만변경한것을확인했다. 저장22/7난수·스폰/AI·피해·HP/MP·보상·전투속도는그대로다.
+
+## 이전 GAME075 — SW 견착 이동사격 검토 후보15장 (2026-11-28)
 
 추가사용자1건의89장RGB원본과15장RGBA시험은 `tools/higgsfield/requests/game075/evidence/candidate_03/`에 별도보존한다. 실제24fps/3.708333초·작업ec7c9a20-e1a8-467d-b861-c46d2a5bed05·SHA25623af11250f8d25f504404d7c8f5743a0303e92a10e9b5dc24a2b966245165bf1이다. 원래SW17속도입력/실제옵션·견적30/실차감30·누적3건89/계정397·전체89장검토·625ms시험주기/총구/고정등록/비교와미채택근거를포함한다. 몸·발전환차이로현재게임용미채택이며새게임자산/클립추가0이다. 아래기존15후보와모든기존게임자산은변경하지않았다.
 

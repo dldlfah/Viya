@@ -6,6 +6,4 @@ GAME074를 적용한 작업 브랜치에서 3:00, 3:30, 4:00, 5:00 구간의 프
 
 [현재 상태](CURRENT_WORK.md) · [GAME074 비교 측정](validation/GAME074_REPORT.json)
 
-병행 기획GAME075는 SW견착 이동사격15장 검토 후보를 납품했다. 기존SW17과 발자세 차이가 남아 게임용최종채택은 미확정이며 현재35클립348/활성슬롯은 그대로다.2유료/실차감59·예산잔여1/자동3차없음이다. 위Windows전투검수NEXT를 유지한다. [원화/비교](../assets/characters/pilot_32/game075_sw_run_fire/README.md) · [후속 제작 인계](../tools/higgsfield/requests/game075/HANDOFF.md).
-
-이후 사용자 추가1건의 Seedance2.5 video_edit 작업`ec7c9a20-e1a8-467d-b861-c46d2a5bed05`는완료했다. 원래속도SW17을 입력했으나 몸/발 위치의 전환 차이가 남아 ‘미세하면 적용’ 조건으로 채택하지 않았다.89장원본과15장비교용시험/영상만 보존하고 게임은35클립348 그대로다. 추가30/누적3건89·계정397, 추가1건소진/자동4차없음이다. 위Windows 단일NEXT를 유지한다. [추가 결과](../tools/higgsfield/requests/game075/evidence/candidate_03/README.md).
+GAME075는사용자의최신 “적용해”로추가후보03의SW전용이동사격15장을연결했다. 기존35클립348을보존해36클립363이며선택불가/무효메타는같은거리위상SW17로복귀한다. 실제Linuxmain.tscn1,648검사49그리기43발·7네이티브4,740검사PASS다. 최초120초회귀TIMEOUT과별도480초제한전투표현2,469PASS를구분한다. 전환몸/발차이·최종아트/접지와Windows/모바일/FPS는별도검수다. 위Windows단일NEXT를유지한다. 연결추가지출0/제작누적3건89·자동4차없음. [실제화면/검증](validation/GAME075_INTEGRATION_REPORT.json) · [적용자산](../assets/characters/pilot_32/game075_sw_run_fire_candidate03/README.md).

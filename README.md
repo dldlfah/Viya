@@ -1,10 +1,14 @@
 # Viya — 모바일 서바이버 게임
 
-GAME075 사용자추가1건은생성을마쳤으나몸/발전환차이로게임에연결하지않았다. 원본89장·비교용15장/영상과근거를보존했다. 추가30·누적3건89크레딧·계정397/자동4차없음,현재게임35클립348은그대로다. [추가검수](tools/higgsfield/requests/game075/evidence/candidate_03/README.md).
+## GAME075 — SW 전용 이동사격 적용
 
-병행 GAME075는 SW 견착 이동사격15장 검토 후보를 납품했다. 기존SW17과 발자세 차이가 남아 게임용최종채택은 미확정이며 현재35클립348은 그대로다. 유료2/실차감59·예산잔여1. [원화·비교](assets/characters/pilot_32/game075_sw_run_fire/README.md) · [현재상태](docs/CURRENT_WORK.md).
+사용자의 **“적용해”** 지시로 마지막후보03의SW사격15장을연결했다. 기존35클립348을보존해 **36클립363**이며무효/누락메타는같은거리위상SW17로복귀한다. 전환몸/발차이는남겨둔적용이며추가생성/비용0이다. [현재상태](docs/CURRENT_WORK.md) · [적용자산](assets/characters/pilot_32/game075_sw_run_fire_candidate03/README.md).
 
-## GAME070 — SW17 재검수와 화면 갱신 사이의 보행 보정 (2026-11-28)
+실제LinuxX11 main.tscn **1,648검사·49그리기·43발**,7네이티브4,740/Python20·6계약204변이거부PASS. 최초120초전투표현TIMEOUT과별도480초제한2,469PASS를구분한다. 영상은선별실제캡처의고정시간QA이며Windows/모바일/FPS·접지/최종아트는별도다. [실제화면영상](docs/validation/GAME075_IN_GAME.mp4) · [검증/보존](docs/validation/GAME075_INTEGRATION_REPORT.json).
+
+이전생성3건89크레딧과조건부미채택이력은[누적현황8.86/8.87](docs/DEVELOPMENT_STATUS.md)에남긴다. 아래과거단계보다현재CURRENT/NEXT를우선한다.
+
+## 이전 GAME070 — SW17 재검수와 화면 갱신 사이의 보행 보정 (2026-11-28)
 
 남서쪽 달리기 SW17이 활성 리소스에서 재생되는 것을 확인했다. 화면 갱신 사이 조준 방향이 바뀌어도 보행 거리의 진행을 물리 틱마다 누적한다. [현재 상태](docs/CURRENT_WORK.md) · [재검증](docs/validation/GAME070_RECHECK_REPORT.json)
 

@@ -1,6 +1,6 @@
 {
   "unit": "GAME075",
-  "status": "AUTHORIZED_EXTRA_COMPLETED_NOT_ADOPTED",
+  "status": "USER_ACCEPTED_GAME_CONNECTED",
   "first_job": "7fa6e18e-a5ca-4607-b854-9099a8c30faf",
   "second_job": "18014a92-2bf2-4c77-ab40-19d288002022",
   "paid_submissions": 3,
@@ -8,18 +8,18 @@
   "remaining_unit_budget": 0,
   "final_account_credits": 397,
   "source_frames": [
-    30,
-    44
+    29,
+    43
   ],
-  "source_end_exclusive": 45,
+  "source_end_exclusive": 44,
   "rgba_frames": 15,
-  "technical_adoption": "NOT_FINAL_FOR_ACTIVE_GAME; shoulder-corrected standalone cycle available, SW17 transition differences remain",
-  "game_connection": "NOT_RUN",
-  "main_scene_validation": "NOT_RUN",
+  "technical_adoption": "USER_ACCEPTED_APPLICATION_WITH_KNOWN_VISUAL_LIMITS",
+  "game_connection": "CONNECTED",
+  "main_scene_validation": "PASS",
   "windows_mobile": "NOT_VERIFIED",
   "producer_final_art": "NOT_VERIFIED",
-  "current_active_clips": 35,
-  "current_active_frames": 348,
+  "current_active_clips": 36,
+  "current_active_frames": 363,
   "automatic_third": false,
   "previous_delivered_candidate": {
     "source_frames": [
@@ -32,7 +32,35 @@
   },
   "third_job": "ec7c9a20-e1a8-467d-b861-c46d2a5bed05",
   "extra_review_rgba_frames": 15,
-  "extra_game_ready_frames": 0,
+  "extra_game_ready_frames": 15,
   "third_was_explicitly_authorized": true,
-  "automatic_fourth": false
+  "automatic_fourth": false,
+  "art_review_before_application": "AUTHORIZED_EXTRA_COMPLETED_NOT_ADOPTED",
+  "active_resource": "res://assets/characters/pilot_32/game075_sw_run_fire_candidate03/viya_game075_frames.tres",
+  "application": {
+    "user_instruction": "적용해",
+    "scope": "Apply last candidate03 despite disclosed body/boot switching differences",
+    "supersedes_previous_conditional_nonadoption": true,
+    "resource": "res://assets/characters/pilot_32/game075_sw_run_fire_candidate03/viya_game075_frames.tres",
+    "game_clips": 36,
+    "game_frames": 363,
+    "frame_indices_inclusive": [
+      29,
+      43
+    ],
+    "main_scene_validation": {
+      "status": "PASS",
+      "checks": 1648,
+      "draws": 49,
+      "shots": 43
+    },
+    "native_checks": 4740,
+    "original120_bundle": "TIMEOUT_PRESERVED",
+    "cue_separate_timeout_seconds": 480,
+    "additional_generations": 0,
+    "additional_credits": 0,
+    "exact_physical_foot_contacts": "NOT_VERIFIED",
+    "producer_final_art": "NOT_VERIFIED",
+    "windows_mobile": "NOT_VERIFIED"
+  }
 }

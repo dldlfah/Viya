@@ -1,5 +1,9 @@
 # GAME075 — 제작세션 인계
 
+**최신:** 사용자가 “적용해”로추가후보03의적용을승인했고현재36클립363으로실제전투에연결됐다. 활성은 `res://assets/characters/pilot_32/game075_sw_run_fire_candidate03/viya_game075_frames.tres`이며E/SE/S/SW선택·무효시같은위상SW17복귀와실제main검증을완료했다. 이전미채택은역사기록이고같은연결을반복하지않는다. 전환한계/접지·최종아트/기기는별도다. [현재기술자료](../../../../assets/characters/pilot_32/game075_sw_run_fire_candidate03/README.md) · [실제검증](../../../../docs/validation/GAME075_INTEGRATION_REPORT.json).
+
+이하추가원본검수/이전후보02인계는적용지시전이력이다.
+
 **최신 추가1건:** ec7c9a20-e1a8-467d-b861-c46d2a5bed05는완료했으나현재SW17과몸/발위치차이가남아조건부적용대상으로채택하지않았다. `evidence/candidate_03/review_rgba/`의15장은비교용시험이며게임리소스가아니다. 새접지위상/클립메타데이터를승인한것으로간주하지않고자동연결하지않는다. 기존35클립348·아래이전15후보는그대로다. 추가30·누적3건89·계정397,허용된추가1건소진/자동4차없음. [새원본·비교·검수근거](evidence/candidate_03/README.md).
 
 상태: **SW 견착 이동사격15장 검토 후보 납품. 게임 연결/실행 NOT_RUN, 최종 게임 채택·프로듀서 승인 미확정.**
