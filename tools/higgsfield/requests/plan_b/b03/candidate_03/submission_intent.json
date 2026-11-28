@@ -1,7 +1,7 @@
 {
   "chapter": "B-03",
   "candidate": "03",
-  "status": "SUBMITTED",
+  "status": "GENERATION_COMPLETED_VISUAL_REVIEW_NOT_ACCEPTED",
   "baseline_commit": "a1cd7195e6685c3c03eb91259774fff370873765",
   "authorization": "Producer explicitly discarded both previous candidates and requested a completely fresh model based on all four supplied images.",
   "max_submissions": 1,

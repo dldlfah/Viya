@@ -2,7 +2,7 @@
   "content": [
     {
       "type": "text",
-      "text": "jobs[1]{index,job_id,status,type,model}:\n  0,80d507d5-6383-49c7-8fcf-062249c24e00,in_progress,3d,multi_image_to_3d\nsummary:\n  total: 1\n  completed: 0\n  failed: 0\n  active: 1\n  errors: 0\nall_terminal: false\ntimed_out: true\npoll_after_seconds: 10\n\nWork is still pending. Wait poll_after_seconds, then call jobs_wait again in this turn. Do not ask the user to say 'continue' just because the polling window ended. Respect cancellation and host execution limits."
+      "text": "jobs[1]{index,job_id,status,type,model,result_url}:\n  0,80d507d5-6383-49c7-8fcf-062249c24e00,completed,3d,multi_image_to_3d,\"https://d8j0ntlcm91z4.cloudfront.net/user_3LHdo37hN3iiYXd8WT9stnWXw4M/hf_20261128_115613_80d507d5-6383-49c7-8fcf-062249c24e00.glb\"\nsummary:\n  total: 1\n  completed: 1\n  failed: 0\n  active: 0\n  errors: 0\nall_terminal: true"
     }
   ],
   "structuredContent": {
@@ -10,21 +10,20 @@
       {
         "index": 0,
         "job_id": "80d507d5-6383-49c7-8fcf-062249c24e00",
-        "status": "in_progress",
+        "status": "completed",
         "type": "3d",
-        "model": "multi_image_to_3d"
+        "model": "multi_image_to_3d",
+        "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3LHdo37hN3iiYXd8WT9stnWXw4M/hf_20261128_115613_80d507d5-6383-49c7-8fcf-062249c24e00.glb"
       }
     ],
     "summary": {
       "total": 1,
-      "completed": 0,
+      "completed": 1,
       "failed": 0,
-      "active": 1,
+      "active": 0,
       "errors": 0
     },
-    "all_terminal": false,
-    "timed_out": true,
-    "poll_after_seconds": 10
+    "all_terminal": true
   },
   "isError": false
 }

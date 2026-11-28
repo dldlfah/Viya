@@ -1,0 +1,74 @@
+{
+  "raw_glb_sha256": "6a26853df3fd3fa2d0f3e85715d7ef8e3d28f4ed383b6eedb36d1802cdc6903e",
+  "blender_version": "4.3.2",
+  "raw_bounds_blender_xyz": {
+    "min": [
+      -0.6385330557823181,
+      -0.33667200803756714,
+      -0.9502820372581482
+    ],
+    "max": [
+      0.6564880609512329,
+      0.3342360556125641,
+      0.9432521462440491
+    ]
+  },
+  "mesh_objects": [
+    {
+      "name": "Mesh_0",
+      "vertices": 67666,
+      "polygons": 67596,
+      "triangles": 67596,
+      "uv_layers": [
+        "UVMap"
+      ],
+      "materials": [
+        "Material_0"
+      ],
+      "vertex_groups": [],
+      "armature_modifiers": [],
+      "unweighted_vertices": 67666
+    }
+  ],
+  "armatures": [],
+  "images": [
+    {
+      "name": "Image_0",
+      "width": 2048,
+      "height": 2048,
+      "channels": 4
+    }
+  ],
+  "excluded_importer_display_helpers": [],
+  "unweighted_vertices": 67666,
+  "actions": [],
+  "scope": "Candidate body inspection, not game integration or final design acceptance",
+  "registration": {
+    "kind": "One uniform parent transform",
+    "scale": 0.9083543434208111,
+    "translation": [
+      -0.008154753595590591,
+      0.0011063539423048496,
+      0.8631927967071533
+    ],
+    "target_height_m": 1.72,
+    "raw_geometry_edited": false,
+    "final_scale_one_contract": "Not finalized; candidate review parent retained"
+  },
+  "registered_bounds_blender_xyz": {
+    "min": [
+      -0.5881690382957458,
+      -0.30471113324165344,
+      0.0
+    ],
+    "max": [
+      0.5881690382957458,
+      0.30471113324165344,
+      1.7200000286102295
+    ]
+  },
+  "comparison_shading": "Unmodified source base-color texture via emission; original service materials restored in .blend",
+  "fresh_source_policy": "Only this job GLB imported; rejected generated geometry/materials are not loaded",
+  "rigging_policy": "No automatic rig or animation requested; unweighted vertices are expected until later rig creation",
+  "stress_test_bones": {}
+}

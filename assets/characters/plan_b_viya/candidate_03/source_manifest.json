@@ -1,0 +1,23 @@
+{
+  "job_id": "80d507d5-6383-49c7-8fcf-062249c24e00",
+  "source_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3LHdo37hN3iiYXd8WT9stnWXw4M/hf_20261128_115613_80d507d5-6383-49c7-8fcf-062249c24e00.glb",
+  "path": "assets/characters/plan_b_viya/candidate_03/source/viya_body_raw.glb",
+  "bytes": 6298124,
+  "sha256": "6a26853df3fd3fa2d0f3e85715d7ef8e3d28f4ed383b6eedb36d1802cdc6903e",
+  "mesh_count": 1,
+  "skins": 0,
+  "animations": 0,
+  "materials": 1,
+  "images": 1,
+  "all_four_originals_used": true,
+  "old_generated_geometry_or_materials_used": false,
+  "auto_rigging_requested": false,
+  "source_texture_extraction": "Embedded source image bytes copied unchanged",
+  "actual_body_triangles": 67596,
+  "actual_vertices": 67666,
+  "requested_target_polycount": 30000,
+  "requested_topology": "quad",
+  "delivered_format": "GLB triangulated mesh; editable quad topology not verified",
+  "rigging_status": "NOT_CREATED_PER_APPEARANCE_FIRST_METHOD",
+  "art_adoption": "NOT_ACCEPTED_FOR_GAME_PRODUCER_REVIEW_PENDING"
+}

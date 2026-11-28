@@ -1,0 +1,91 @@
+{
+  "chapter": "B-03",
+  "candidate": "03",
+  "job_id": "80d507d5-6383-49c7-8fcf-062249c24e00",
+  "generation": "COMPLETED",
+  "adoption": "NOT_ACCEPTED_FOR_GAME",
+  "producer_final_approval": "PENDING_REVIEW",
+  "producer_rejection_previous": {
+    "candidate_01": "DISCARDED_DO_NOT_USE",
+    "candidate_02": "DISCARDED_DO_NOT_USE",
+    "current_generated_outputs_removed": 26,
+    "historical_cost_hash_records_retained": true
+  },
+  "inputs": {
+    "all_four_used": true,
+    "order": [
+      "front",
+      "screen_right_profile",
+      "back",
+      "screen_left_profile"
+    ],
+    "previous_generated_mesh_rig_texture_inputs": 0,
+    "original_pixel_edits": 0
+  },
+  "technical": {
+    "raw_sha256": "6a26853df3fd3fa2d0f3e85715d7ef8e3d28f4ed383b6eedb36d1802cdc6903e",
+    "raw_bytes": 6298124,
+    "meshes": 1,
+    "vertices": 67666,
+    "triangles": 67596,
+    "texture_size": [
+      2048,
+      2048
+    ],
+    "texture_images": 1,
+    "materials": 1,
+    "skins": 0,
+    "armatures": 0,
+    "animations": 0,
+    "requested_target_polycount": 30000,
+    "requested_topology": "quad",
+    "quad_topology_verified": false,
+    "rigging": "Intentionally off for appearance-first generation; no skinning/animation quality claim",
+    "source_geometry_or_pixels_edited_locally": false,
+    "local_registration": "Single uniform parent transform to1.72m, raw source unchanged",
+    "editable_blend_reopen": "PASS Blender4.3.2,0armatures,packed Image_0"
+  },
+  "review": {
+    "views": [
+      "front",
+      "both profiles",
+      "back",
+      "55degree high angle",
+      "face closeup",
+      "untextured clay front and side",
+      "black/white/gray composite",
+      "all-four-originals vs one-new-model"
+    ],
+    "observations": [
+      "Fresh source has the supplied adult silhouette, corset/armor, boots and split crimson cloth in approximate form.",
+      "Hair still has a red/purple cast instead of the supplied deep dark-brown appearance.",
+      "Hair is reconstructed in coarse connected surfaces/strands; face and costume details are simplified and do not match the drawings exactly.",
+      "Cloth/hair/finger topology and controllable parts are not prepared for animation.",
+      "No skinning was generated, so prior arm/hair or leg/cloth deformation problems are not solved or tested by this static result."
+    ],
+    "decision": "Preserve as the actual fresh four-view output for producer review. Do not call it final art or a usable game character; do not recommend or reuse discarded candidates."
+  },
+  "cost": {
+    "paid_submissions_this_request": 1,
+    "current_quote": 30,
+    "observed_charge": 30,
+    "balance": [
+      327,
+      297,
+      297
+    ],
+    "plan_b_total_paid_submissions": 3,
+    "plan_b_total_observed_charge": 100,
+    "previous_discarded_cost": 70,
+    "automatic_additional_generation": false
+  },
+  "states": {
+    "geometry_generation": "COMPLETED",
+    "static_visual_review": "COMPLETED_WITH_FIDELITY_GAPS",
+    "rig_animation": "NOT_CREATED",
+    "game_integration": "NOT_RUN",
+    "windows_mobile": "NOT_VERIFIED",
+    "chapter_complete": "1/8"
+  },
+  "next": "Producer reviews the concrete fresh appearance. No further paid generation or game integration automatically; if accepted, proceed to local character parts/rig work."
+}
