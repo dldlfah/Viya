@@ -1,0 +1,27 @@
+{
+  "job_id": "ec7c9a20-e1a8-467d-b861-c46d2a5bed05",
+  "additional_authorized": 1,
+  "status": {
+    "jobs": [
+      {
+        "index": 0,
+        "job_id": "ec7c9a20-e1a8-467d-b861-c46d2a5bed05",
+        "status": "in_progress",
+        "type": "video",
+        "model": "seedance_2_5"
+      }
+    ],
+    "summary": {
+      "total": 1,
+      "completed": 0,
+      "failed": 0,
+      "active": 1,
+      "errors": 0
+    },
+    "all_terminal": false,
+    "timed_out": true,
+    "poll_after_seconds": 10
+  },
+  "quote": 30,
+  "automatic_fourth": false
+}

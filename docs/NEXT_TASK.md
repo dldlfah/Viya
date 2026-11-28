@@ -7,3 +7,5 @@ GAME074를 적용한 작업 브랜치에서 3:00, 3:30, 4:00, 5:00 구간의 프
 [현재 상태](CURRENT_WORK.md) · [GAME074 비교 측정](validation/GAME074_REPORT.json)
 
 병행 기획GAME075는 SW견착 이동사격15장 검토 후보를 납품했다. 기존SW17과 발자세 차이가 남아 게임용최종채택은 미확정이며 현재35클립348/활성슬롯은 그대로다.2유료/실차감59·예산잔여1/자동3차없음이다. 위Windows전투검수NEXT를 유지한다. [원화/비교](../assets/characters/pilot_32/game075_sw_run_fire/README.md) · [후속 제작 인계](../tools/higgsfield/requests/game075/HANDOFF.md).
+
+이후 사용자가 추가1건을 명시했다. 현재SW17의 원래 속도/발 궤적을 입력한 Seedance2.5 video_edit 작업`ec7c9a20-e1a8-467d-b861-c46d2a5bed05`가 생성 중이다. 추가30/누적3건89·계정397, 자동4차없음이다. 결과/전환 검토 전 자동 게임 연결은 하지 않으며 위Windows 단일NEXT를 유지한다.

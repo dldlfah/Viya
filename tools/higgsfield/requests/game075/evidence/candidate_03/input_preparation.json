@@ -1,0 +1,132 @@
+{
+  "source_commit": "dff3fc802958a75d9770b9ea9e2ad66b1fc558e0",
+  "source": "approved active SW17; known repeated-support motif preserved",
+  "input_canvas": [
+    600,
+    800
+  ],
+  "duration_seconds": 4,
+  "fps": 60,
+  "frames": 240,
+  "audio": false,
+  "scale": 2.4,
+  "translation": [
+    60,
+    80
+  ],
+  "root": [
+    300,
+    675.1999999999999
+  ],
+  "distance_cycle_ms": 659.5744680851063,
+  "phase_origin": 0.574866559295493,
+  "sources": [
+    {
+      "index": 0,
+      "path": "assets/characters/pilot_32/game070_sw_run/frames/viya_run_sw_000.png",
+      "sha256": "469b620e550941e3b5f48697a168beb76564418d734fc1dfe53a753f768d5642",
+      "duration_ms": 38.822926504906775
+    },
+    {
+      "index": 1,
+      "path": "assets/characters/pilot_32/game070_sw_run/frames/viya_run_sw_001.png",
+      "sha256": "1582bee1d54b8c9a01a428161f112e25725bf25d46f369a9ece869917dae22e7",
+      "duration_ms": 38.823858270050856
+    },
+    {
+      "index": 2,
+      "path": "assets/characters/pilot_32/game070_sw_run/frames/viya_run_sw_002.png",
+      "sha256": "6a8110451c8da0cd879b1de10751260afa0c652a354ad2dcdaabd65939b15d18",
+      "duration_ms": 38.823858270050856
+    },
+    {
+      "index": 3,
+      "path": "assets/characters/pilot_32/game070_sw_run/frames/viya_run_sw_003.png",
+      "sha256": "b644d87ede4c5bf9f70c9238945f9cb327ec2fbb5e7a78047f4dabcb9911e8da",
+      "duration_ms": 38.822926504906775
+    },
+    {
+      "index": 4,
+      "path": "assets/characters/pilot_32/game070_sw_run/frames/viya_run_sw_004.png",
+      "sha256": "bea24e12e7c0e5fe2ced2ec786a6ee2225a4a765d90f7e0f8f29ac71e5c3f589",
+      "duration_ms": 38.823858270050856
+    },
+    {
+      "index": 5,
+      "path": "assets/characters/pilot_32/game070_sw_run/frames/viya_run_sw_005.png",
+      "sha256": "a4594927e100a30b31be5b9925c5e06f21ec5a38ee5eaf78e8f0e5e51a24a2ea",
+      "duration_ms": 38.823858270050856
+    },
+    {
+      "index": 6,
+      "path": "assets/characters/pilot_32/game070_sw_run/frames/viya_run_sw_006.png",
+      "sha256": "efa2b1b3544ae1a7b532d8826fbf8d3eb4e879809bc88c5119637c96eb9128ec",
+      "duration_ms": 38.822926504906775
+    },
+    {
+      "index": 7,
+      "path": "assets/characters/pilot_32/game070_sw_run/frames/viya_run_sw_007.png",
+      "sha256": "59fa6d8d62a86fea1e4f41aa18f196e7202b4c108684128db53f42866d2799d3",
+      "duration_ms": 38.823858270050856
+    },
+    {
+      "index": 8,
+      "path": "assets/characters/pilot_32/game070_sw_run/frames/viya_run_sw_008.png",
+      "sha256": "e17df9c7ab8561ff67abca1869bcbcbd6c412c0485b870b8ad9c5e3cbc442a7b",
+      "duration_ms": 38.823858270050856
+    },
+    {
+      "index": 9,
+      "path": "assets/characters/pilot_32/game070_sw_run/frames/viya_run_sw_009.png",
+      "sha256": "acad4f84fd5720d4937363ac2035271b30030d622f079027efc1c24e166ff872",
+      "duration_ms": 38.822926504906775
+    },
+    {
+      "index": 10,
+      "path": "assets/characters/pilot_32/game070_sw_run/frames/viya_run_sw_010.png",
+      "sha256": "2960397daaf95eb95d204084bf7bd406b35bc878012a9730ab8995797623e61e",
+      "duration_ms": 38.823858270050856
+    },
+    {
+      "index": 11,
+      "path": "assets/characters/pilot_32/game070_sw_run/frames/viya_run_sw_011.png",
+      "sha256": "330d886bb2a86279f41b01c21eef30332806740ce917edf067cfa873a04481c2",
+      "duration_ms": 38.823858270050856
+    },
+    {
+      "index": 12,
+      "path": "assets/characters/pilot_32/game070_sw_run/frames/viya_run_sw_012.png",
+      "sha256": "0234360a06bebff292d331049cdf02b368cbe98cace847217cf3e2af9b765239",
+      "duration_ms": 38.822926504906775
+    },
+    {
+      "index": 13,
+      "path": "assets/characters/pilot_32/game070_sw_run/frames/viya_run_sw_013.png",
+      "sha256": "d50090182ee769008e15e5ea5aaff6d3bc02ae483fb2751513b3b8fd61b9fef1",
+      "duration_ms": 38.823858270050856
+    },
+    {
+      "index": 14,
+      "path": "assets/characters/pilot_32/game070_sw_run/frames/viya_run_sw_014.png",
+      "sha256": "e3d19ca0ee5093c1ec1e3ceb4f8f1418b73bcbab8d9828b4844693226b6ef374",
+      "duration_ms": 38.823858270050856
+    },
+    {
+      "index": 15,
+      "path": "assets/characters/pilot_32/game070_sw_run/frames/viya_run_sw_015.png",
+      "sha256": "1a6b9e79ce8e4619780660869c72b450153f91dc27c461813b107c234f015224",
+      "duration_ms": 38.822926504906775
+    },
+    {
+      "index": 16,
+      "path": "assets/characters/pilot_32/game070_sw_run/frames/viya_run_sw_016.png",
+      "sha256": "a6aad5b2ef1ccde16bc04c30121547d2b94cb277293ef5a3927bb15efa3c3954",
+      "duration_ms": 38.823858270050856
+    }
+  ],
+  "pose_synthesis": false,
+  "per_frame_registration": false,
+  "slow_motion": false,
+  "video_sha256": "423e50e7c093ef951a647340874518649e2f6e5c55bb85d60f2c547fc115a6fd",
+  "encoding_note": "Actual confirmed upload created/encoded in Higgsfield sandbox. Local encoder preview SHA is preserved separately; codec builds may differ."
+}

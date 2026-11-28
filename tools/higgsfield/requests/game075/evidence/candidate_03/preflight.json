@@ -1,0 +1,58 @@
+{
+  "stage": "READY_NOT_SUBMITTED",
+  "source_head": "dff3fc802958a75d9770b9ea9e2ad66b1fc558e0",
+  "user_authorization": "한개 더 제작해",
+  "additional_authorized_submissions": 1,
+  "additional_quoted_credits": 30,
+  "previous_closed_allocation": {
+    "submissions": 2,
+    "net_credits": 59,
+    "remaining_of_original60": 1
+  },
+  "cumulative_after_this_quote": {
+    "submissions": 3,
+    "net_credits": 89
+  },
+  "automatic_fourth": false,
+  "defect": "Previous15-frame fire gait differs from approved active SW17; global phase and registration cannot remove painted differences while retaining full barrel.",
+  "root_cause_inference": "Candidate02 edited newly generated candidate01 gait, rather than the approved SW17 gait. This is an input mismatch inference, not a provider diagnosis.",
+  "changed_input": "Native-speed current SW17 replay replaces candidate01 generated video; exact existing leg order/time is authoritative, aim/shoulder correction is the edit.",
+  "evidence_for_change": "Candidate02 video_edit changed low carry into shoulder aim. Current SW17 input directly supplies the gait that switching must match.",
+  "limitations": "Approved SW17 has a repeated-support motif; it is preserved, not mislabeled as physically perfect alternating gait. Provider preservation is not guaranteed.",
+  "input_media_id": "877448fd-bb37-47e4-a1ed-ebb9eadbcb61",
+  "input_sha256": "423e50e7c093ef951a647340874518649e2f6e5c55bb85d60f2c547fc115a6fd",
+  "supported_mode": "seedance_2_5/video_edit",
+  "input_duration_seconds": 4,
+  "output_resolution": "720p",
+  "generate_audio": false,
+  "count": 1,
+  "prior_known_jobs": {
+    "jobs": [
+      {
+        "index": 0,
+        "job_id": "7fa6e18e-a5ca-4607-b854-9099a8c30faf",
+        "status": "completed",
+        "type": "video",
+        "model": "seedance_2_5",
+        "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3LHdo37hN3iiYXd8WT9stnWXw4M/hf_20261127_195937_7fa6e18e-a5ca-4607-b854-9099a8c30faf.mp4"
+      },
+      {
+        "index": 1,
+        "job_id": "18014a92-2bf2-4c77-ab40-19d288002022",
+        "status": "completed",
+        "type": "video",
+        "model": "seedance_2_5",
+        "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3LHdo37hN3iiYXd8WT9stnWXw4M/hf_20261127_200646_18014a92-2bf2-4c77-ab40-19d288002022.mp4"
+      }
+    ],
+    "summary": {
+      "total": 2,
+      "completed": 2,
+      "failed": 0,
+      "active": 0,
+      "errors": 0
+    },
+    "all_terminal": true
+  },
+  "game_connection": "NOT_RUN"
+}
