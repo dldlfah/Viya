@@ -77,8 +77,14 @@ var dungeon_launch_button: Button
 var _dungeon_notice: String = ""
 
 func _ready() -> void:
+	if OS.get_cmdline_user_args().has("--plan-b-preview"):
+		_enable_plan_b_preview()
 	add_child(combat_audio)
 	super._ready()
+	if simulation.plan_b_preview:
+		var preview = load("res://scripts/combat/plan_b_preview.gd").new()
+		view.add_child(preview)
+		view.high_renderer.plan_b_actor = preview
 	save_notice.seed(run_store.pending,battle_save_error)
 	# Recover/pay terminal intent first, then start at the lobby with its frozen result.
 	if battle_save_error == OK and gold_error == OK and simulation.phase in [RunState.Phase.CLEARED, RunState.Phase.DEFEAT, RunState.Phase.ABANDONED]:
@@ -89,6 +95,18 @@ func _ready() -> void:
 	get_viewport().size_changed.connect(_queue_layout)
 	_apply_layout()
 
+func _enable_plan_b_preview() -> void:
+	var folder := "user://plan_b_preview"
+	var result := DirAccess.make_dir_recursive_absolute(folder)
+	if result != OK:
+		push_warning("Plan B preview profile could not be opened")
+		return
+	simulation.plan_b_preview = true
+	gold_progress.path = folder.path_join("viya_gold.cfg")
+	run_store.path = folder.path_join("viya_run.save")
+	settings_path = folder.path_join("viya_settings.cfg")
+	get_window().title += " [Plan B]"
+
 func _physics_process(delta: float) -> void:
 	if _account_reset_pending:return
 	combat_audio.prepare(simulation,not overlay.visible)
@@ -96,6 +114,7 @@ func _physics_process(delta: float) -> void:
 	var motion_region:Rect2=(view.ground_visible() if view.high_angle else Rect2(view.camera_center()-view.size*.5,view.size)).grow(180)
 	view.actors.prepare(simulation,track_enemies,motion_region)
 	var before:Vector2=simulation.player
+	var previous_rifle_shots: int = simulation.plan_b_rifle_shots
 	var active:bool=simulation.phase==RunState.Phase.RUNNING and not overlay.visible
 	super._physics_process(delta)
 	var animating:bool=active and simulation.phase==RunState.Phase.RUNNING and not overlay.visible
@@ -104,6 +123,10 @@ func _physics_process(delta: float) -> void:
 	# Accumulate the signed distance before another physics tick can change aim.
 	if animating:
 		view.viya.observe_gait(view)
+	var preview = view.high_renderer.plan_b_actor
+	if preview != null:
+		var distance: float = before.distance_to(simulation.player) if movement.direction().length_squared() > 0.001 else 0.0
+		preview.sync(simulation, delta, distance, animating, previous_rifle_shots)
 	combat_audio.finish(simulation,active,not overlay.visible)
 
 func _cast_magic(expected_ticket:int=-1) -> void:

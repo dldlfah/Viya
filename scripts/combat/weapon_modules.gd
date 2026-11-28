@@ -39,20 +39,28 @@ static func target(state, at: Vector2, reach: float, mode: String = "nearest", i
 static func fire(state, p: Dictionary, boss_priority:bool=false) -> bool:
 	if state.phase != state.Phase.RUNNING or state.weapon_events.size() >= MAX_EVENTS:
 		return false
-	var victim := target(state,state.player,float(p.reach),str(p.target))
-	if boss_priority:
-		for enemy in state.enemies:
-			if enemy.kind=="boss" and state.player.distance_to(enemy.p)<=float(p.reach):
-				victim=enemy
-				break
-	if victim.is_empty():
-		return false
-	var direction: Vector2 = state.player.direction_to(victim.p)
-	if direction.is_zero_approx():
-		direction = state.facing
-	state.facing = direction
+	var preview: bool = state.uses_plan_b_aiming()
+	var direction: Vector2 = state.facing
+	var aim_at: Vector2
+	if preview and p.id == "gun_rifle":
+		aim_at = state.player + direction * float(p.reach)
+	else:
+		var victim := target(state,state.player,float(p.reach),str(p.target))
+		if boss_priority:
+			for enemy in state.enemies:
+				if enemy.kind=="boss" and state.player.distance_to(enemy.p)<=float(p.reach):
+					victim=enemy
+					break
+		if victim.is_empty():
+			return false
+		aim_at = victim.p
+		direction = state.player.direction_to(aim_at)
+		if direction.is_zero_approx():
+			direction = state.facing
+		if not preview:
+			state.facing = direction
 	var repeats := int(p.ticks) if p.mode in ["zone","orbit"] else int(p.bursts)
-	var event := {"profile":p.duplicate(true),"p":victim.p,"direction":direction,
+	var event := {"profile":p.duplicate(true),"p":aim_at,"direction":direction,
 		"left":float(p.delay),"remaining":repeats,"index":0}
 	if event.left <= 0.0:
 		execute(state,event)
@@ -97,7 +105,8 @@ static func execute(state, event: Dictionary) -> void:
 	var center: Vector2 = state.player if p.follow else event.p
 	match str(p.mode):
 		"projectile":
-			volley(state,state.player,event.direction,p)
+			var shot_direction: Vector2 = state.facing if p.id == "gun_rifle" and state.uses_plan_b_aiming() else event.direction
+			volley(state,state.player,shot_direction,p)
 		"blast":
 			if event.index > 0:
 				center += Vector2.from_angle(event.index*2.399963) * minf(event.index*18.0,float(p.radius)*0.8)
@@ -213,6 +222,8 @@ static func projectile(state, at: Vector2, direction: Vector2, p: Dictionary) ->
 		"weapon":p.duplicate(true),"age":0.0,"returning":false})
 	state.shots += 1
 	state.cues.record_gun_fire(direction, str(p.id), bool(p.get("fragment",false)))
+	if p.id == "gun_rifle" and state.uses_plan_b_aiming() and not p.get("fragment", false):
+		state.plan_b_rifle_shots += 1
 
 static func fragments(state, at: Vector2, p: Dictionary) -> void:
 	if p.fragments <= 0:

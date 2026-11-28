@@ -21,6 +21,7 @@ var visible: Rect2
 var viewport: Rect2
 var camera: Vector2
 var hero_body:Rect2
+var plan_b_actor
 var floor_disc:Texture2D
 var xp_gem:Texture2D
 var stats: Dictionary = {}
@@ -78,9 +79,11 @@ func draw(view) -> void:
 	# Ground-space effects use the SAME transform as their actual damage geometry.
 	canvas.draw_set_transform_matrix(ground)
 	var inverse_ground:Transform2D=ground.affine_inverse()
+	var use_rig: bool = plan_b_actor != null and plan_b_actor.camera != null and state.uses_plan_b_aiming()
 	for bullet in state.bullets:
 		if not visible.grow(50).has_point(bullet.p):continue
-		var shown:Dictionary=canvas.viya.projectile(canvas,bullet)
+		var use_muzzle: bool = use_rig and bullet.source == "gun_rifle" and not bullet.weapon.get("fragment", false)
+		var shown: Dictionary = plan_b_actor.projectile(canvas, bullet) if use_muzzle else canvas.viya.projectile(canvas,bullet)
 		var heading:Vector2=(inverse_ground.x*shown.direction.x+inverse_ground.y*shown.direction.y).normalized()
 		Visuals.draw_projectile(canvas,inverse_ground*shown.p,heading,str(bullet.get("source","rifle")),canvas.display_plan.simple,bool(bullet.get("weapon",{}).get("evolved",false)),bool(bullet.get("weapon",{}).get("fragment",false)))
 
@@ -213,6 +216,9 @@ func _draw_enemy(enemy: Dictionary) -> void:
 
 func _draw_hero() -> void:
 	var feet := screen(state.player)
+	if plan_b_actor != null and plan_b_actor.camera != null and state.uses_plan_b_aiming():
+		plan_b_actor.draw_actor(canvas, feet, state.facing)
+		return
 	var visual:Dictionary=canvas.actor_visual()
 	if not visual.sample.is_empty():canvas.viya.draw(canvas,canvas.actor_art,visual,feet)
 	else:

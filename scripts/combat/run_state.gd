@@ -52,6 +52,8 @@ const FLIER_PLAYER_PUSH := 18.0
 var phase: int = Phase.READY
 var player := WORLD_SIZE * 0.5
 var facing := Vector2.RIGHT
+var plan_b_preview := false
+var plan_b_rifle_shots := 0
 var hp: int = 100
 var max_hp: int = 100
 var elapsed: float = 0.0
@@ -888,6 +890,9 @@ func _nearest(at: Vector2, reach: float, ignored: Array[int] = []) -> Dictionary
 				best = distance
 				found = structure
 	return found
+
+func uses_plan_b_aiming() -> bool:
+	return plan_b_preview and growth.ruleset == "weapons_v1" and growth.character_id == "viya"
 
 func _auto_fire() -> void:
 	if growth.ruleset == "weapons_v1":
