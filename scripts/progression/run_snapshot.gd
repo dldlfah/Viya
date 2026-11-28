@@ -3,6 +3,10 @@ extends RefCounted
 const VERSION := 22
 const GAME050_RULES := "e75a6c9be169029062a23741a93208e3088c2fef2b305f674d10f0d2353525de"
 const GAME048_RULES := "695c4691c0d6cad598c66fa825388aee5cc04b373f120c99332d622fc525adb0"
+# GAME076 changes GDScript spelling while preserving the published rules.
+# Accept only these exact reviewed source digests as the same saved rules.
+const GAME076_V20_SOURCE := "fc49210de68be5864de8d280a8eaa03aedb41fbb1f4c1583ff96c007e302ef16"
+const GAME076_V21_SOURCE := "941029b76fdfeb551c3fe4014958a74bea8d1cfe8ad484a144346d98b99e2629"
 const GAME047_RULES := "453182097a89e5b3da2dc52a7253ba68f33f50a2cf1fad91a4c23123cfcb3ed8"
 const GAME045_RULES := "d19d8361edf34b139b7e6d6416a70eec5f47eb7c34c5e757170d0b7ff53f51d1"
 const GAME039_RULES := "e537044ffa111e582b2762d59fbb56dbe0fc36968af297be831ae62aecc1c186"
@@ -66,13 +70,15 @@ static func fingerprint_for_v19()->String:
 	return (fingerprint_for_v18()+FileAccess.get_file_as_string("res://data/campaign_encounters.json").replace("\r\n","\n")+FileAccess.get_file_as_string("res://scripts/combat/campaign_encounters_v19.gd").replace("\r\n","\n")).sha256_text()
 
 static func fingerprint_for_v20()->String:
-	return (fingerprint_for_v19()+FileAccess.get_file_as_string("res://scripts/combat/campaign_encounters.gd").replace("\r\n","\n")+FileAccess.get_file_as_string("res://data/campaign_pressure.json").replace("\r\n","\n")+FileAccess.get_file_as_string("res://scripts/combat/campaign_pressure.gd").replace("\r\n","\n")).sha256_text()
+	var digest := (fingerprint_for_v19()+FileAccess.get_file_as_string("res://scripts/combat/campaign_encounters.gd").replace("\r\n","\n")+FileAccess.get_file_as_string("res://data/campaign_pressure.json").replace("\r\n","\n")+FileAccess.get_file_as_string("res://scripts/combat/campaign_pressure.gd").replace("\r\n","\n")).sha256_text()
+	return GAME048_RULES if digest == GAME076_V20_SOURCE else digest
 
 static func fingerprint_for_v21()->String:
 	var source:=fingerprint_for_v20()
 	for path in ["res://data/campaign_battlefield.json","res://scripts/world/map_catalog.gd","res://scripts/world/supply_catalog.gd","res://scripts/combat/combat_profiles.gd","res://scripts/combat/stage_catalog.gd"]:
 		source+=FileAccess.get_file_as_string(path).replace("\r\n","\n")
-	return source.sha256_text()
+	var digest := source.sha256_text()
+	return GAME050_RULES if digest == GAME076_V21_SOURCE else digest
 
 static func fingerprint()->String:
 	return (fingerprint_for_v21()+FileAccess.get_file_as_string("res://scripts/combat/loot_attraction.gd").replace("\r\n","\n")+"loot-rules-1:gold-floor-half;magnet-arrival").sha256_text()

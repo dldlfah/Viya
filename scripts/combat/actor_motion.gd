@@ -85,7 +85,7 @@ func sync(state, hero_displacement:Vector2, active:bool, track_enemies:bool=true
 		var aim_at:Vector2=enemy.get("aim",state.player) if attacking else state.player
 		if enemy.get("pattern",{}).get("phase","") in ["windup","strike"]:
 			attacking=true
-			windup=float(enemy.pattern.left) if enemy.pattern.phase=="windup" else 0
+			windup=float(enemy.pattern.left) if enemy.pattern.phase=="windup" else 0.0
 			aim_at=enemy.p+enemy.pattern.direction
 		if contacts.has(id):
 			attacking=true
@@ -107,13 +107,13 @@ func update(id:int, previous:Dictionary, position:Vector2, hp:float, displacemen
 		# Rapid multiweapon fire extends the pose without pinning frame0 forever.
 		if previous.get("pose","") not in ["attack","hurt"] or now-float(previous.get("attack_since",-1))>=.16:value.attack_since=now
 		value.aim=facing
-	var pose:String="hurt" if now<float(value.get("hurt_until",0)) else ("attack" if now<float(value.get("attack_until",0)) else ("run" if moving else "idle"))
-	if pose!=previous.get("pose",""):value.since=now
-	if pose=="attack":value.since=value.get("attack_since",now)
+	var current_pose:String="hurt" if now<float(value.get("hurt_until",0)) else ("attack" if now<float(value.get("attack_until",0)) else ("run" if moving else "idle"))
+	if current_pose!=previous.get("pose",""):value.since=now
+	if current_pose=="attack":value.since=value.get("attack_since",now)
 	if moving and not previous.get("moving",false):value.move_since=now
-	var face:Vector2=value.get("aim",facing) if pose=="attack" else (displacement if moving else facing)
-	if pose=="hurt":face=value.get("hurt_aim",face)
-	value.merge({"p":position,"hp":hp,"pose":pose,"moving":moving,"motion":displacement.normalized(),"direction":direction(face),"facing":face.normalized()},true)
+	var face:Vector2=value.get("aim",facing) if current_pose=="attack" else (displacement if moving else facing)
+	if current_pose=="hurt":face=value.get("hurt_aim",face)
+	value.merge({"p":position,"hp":hp,"pose":current_pose,"moving":moving,"motion":displacement.normalized(),"direction":direction(face),"facing":face.normalized()},true)
 	entries[id]=value
 
 func silhouette_motion(state, id:int) -> Dictionary:

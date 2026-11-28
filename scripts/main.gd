@@ -549,7 +549,7 @@ func _update_hud() -> void:
 		var target: String = "보스 등장까지 %d초" % maxi(0, int(ceil(float(simulation.stage_rules.boss_at) - simulation.elapsed)))
 		if simulation._boss_spawned:
 			target = "보스 처치 완료 · 생존 유지" if simulation._boss_defeated else "보스 처치"
-		stage_text.text = "스테이지 %d · 남은 시간 %02d:%02d · %s · 체크포인트 %d/2" % [simulation.stage, remaining / 60, remaining % 60, target, simulation.checkpoint_index]
+		stage_text.text = "스테이지 %d · 남은 시간 %02d:%02d · %s · 체크포인트 %d/2" % [simulation.stage, int(remaining / 60.0), remaining % 60, target, simulation.checkpoint_index]
 	status_text.text = "HP %d / %d%s" % [simulation.hp, simulation.max_hp, " · 피격" if simulation.hurt_clock > 0.0 else ""]
 	level_text.text = "Lv.%d  EXP %.1f / %.0f" % [simulation.growth.level, simulation.growth.xp, simulation.growth.threshold()]
 	if simulation._slow_left > 0.0:

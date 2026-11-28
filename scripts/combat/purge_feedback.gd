@@ -79,7 +79,7 @@ static func draw(view) -> void:
 	if not fx.simple:
 		view.draw_arc(origin, maxf(2, radius - 20), 0, TAU, 64, Color(gold, .6 * fade), 1.3, true)
 	# The activation sigil sits on the ground beneath the expanding wave.
-	view.draw_set_transform(origin, 0, Vector2(1, .58 if view.high_angle else 1))
+	view.draw_set_transform(origin, 0, Vector2(1, .58 if view.high_angle else 1.0))
 	var seal := 64.0 + minf(age, .3) * 80
 	view.draw_circle(Vector2.ZERO, seal, Color(.38, .035, .1, .18 * fade))
 	view.draw_arc(Vector2.ZERO, seal, 0, TAU, 40, Color(gold, .85 * fade), 2, true)

@@ -110,7 +110,7 @@ func moving_fire_ready(asset:SpriteFrames, row:Dictionary, direction:String="e")
 			break
 		var frame_index:Variant=item.get("index")
 		var region:Variant=item.get("region")
-		var muzzle:Variant=item.get("muzzle")
+		var frame_muzzle:Variant=item.get("muzzle")
 		var path:Variant=item.get("texture")
 		var texture:Texture2D=asset.get_frame_texture(animation,index)
 		var duration:float=asset.get_frame_duration(animation,index)
@@ -119,14 +119,14 @@ func moving_fire_ready(asset:SpriteFrames, row:Dictionary, direction:String="e")
 			if not (milliseconds is int or milliseconds is float) or not is_finite(float(milliseconds)) or float(milliseconds)<=0 or absf(duration/speed*1000.0-float(milliseconds))>.000001:
 				valid=false
 				break
-		if not (frame_index is int or frame_index is float) or float(frame_index)!=index or not region is Array or region.size()!=4 or not muzzle is Array or muzzle.size()!=2 or not path is String:
+		if not (frame_index is int or frame_index is float) or float(frame_index)!=index or not region is Array or region.size()!=4 or not frame_muzzle is Array or frame_muzzle.size()!=2 or not path is String:
 			valid=false
 			break
 		# JSON numbers are floats; Array equality also compares element types.
 		if not region.all(func(value):return (value is int or value is float) and is_finite(float(value))) or float(region[0])!=0.0 or float(region[1])!=0.0 or float(region[2])!=200.0 or float(region[3])!=248.0:
 			valid=false
 			break
-		if not muzzle.all(func(value):return (value is int or value is float) and is_finite(float(value))) or float(muzzle[0])<0 or float(muzzle[0])>200 or float(muzzle[1])<0 or float(muzzle[1])>248:
+		if not frame_muzzle.all(func(value):return (value is int or value is float) and is_finite(float(value))) or float(frame_muzzle[0])<0 or float(frame_muzzle[0])>200 or float(frame_muzzle[1])<0 or float(frame_muzzle[1])>248:
 			valid=false
 			break
 		if not path.begins_with(root) or not path.ends_with(".png") or ".." in path or not FileAccess.file_exists(path) or texture==null or texture.get_size()!=Vector2(200,248) or not is_finite(duration) or duration<=0:
@@ -179,8 +179,8 @@ func _advance_gait(view, visual:Dictionary) -> bool:
 	visual.direction=_direction
 	# Reverse only the next increment. Negating the accumulated travel reflected
 	# the current phase and teleported the legs whenever a target crossed behind.
-	var sign:float=-1.0 if visual.get("motion",Vector2.ZERO).dot(visual.facing)<-.2 else 1.0
-	if visual.moving:_phase=fposmod(_phase+sign*maxf(0,distance-_distance)/float(config.stride_world),1.0)
+	var stride_sign:float=-1.0 if visual.get("motion",Vector2.ZERO).dot(visual.facing)<-.2 else 1.0
+	if visual.moving:_phase=fposmod(_phase+stride_sign*maxf(0,distance-_distance)/float(config.stride_world),1.0)
 	_distance=distance
 	visual.gait_phase=_phase
 	return gun_active

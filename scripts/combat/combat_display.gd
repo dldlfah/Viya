@@ -68,7 +68,7 @@ static func build(view) -> Dictionary:
 	var bullets:=0
 	for bullet in state.bullets:
 		if area.grow(50).has_point(bullet.p):bullets+=1
-	var dense:bool=view.auto_display and (actors>=(DENSE_ACTORS/2 if compact else DENSE_ACTORS) or effects.size()>=DENSE_EFFECTS or bullets>=DENSE_BULLETS)
+	var dense:bool=view.auto_display and (actors>=(int(DENSE_ACTORS / 2.0) if compact else DENSE_ACTORS) or effects.size()>=DENSE_EFFECTS or bullets>=DENSE_BULLETS)
 	var simple:bool=view.simple_attacks or dense
 	var planned:Array=[]
 	var links:=0

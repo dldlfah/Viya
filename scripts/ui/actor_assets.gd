@@ -17,8 +17,8 @@ func spec_for(id:String) -> Dictionary:
 	if not spec is Dictionary or not pair(spec.get("size"),1,512) or not pair(spec.get("pivot"),0,1) or not pair(spec.get("canvas"),0,8192):return {}
 	if (spec.canvas[0]==0)!=(spec.canvas[1]==0):return {}
 	if spec.has("reference_view_height"):
-		var reference:Variant=spec.reference_view_height
-		if str(id)!="viya_battle" or not (reference is int or reference is float) or not is_finite(reference) or reference<1 or reference>16384:return {}
+		var reference_height:Variant=spec.reference_view_height
+		if str(id)!="viya_battle" or not (reference_height is int or reference_height is float) or not is_finite(reference_height) or reference_height<1 or reference_height>16384:return {}
 	return spec
 
 func consistent(asset:Resource, canvas:Vector2) -> bool:

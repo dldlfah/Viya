@@ -819,7 +819,7 @@ func _spawn_swarm() -> bool:
 	var rules: Dictionary = stage_rules.swarm
 	for index in range(SWARM_SIZE):
 		var offset := direction.orthogonal() * ((index % 5) - 2) * float(rules.spacing)
-		offset -= direction * int(index / 5) * float(rules.spacing)
+		offset -= direction * int(index / 5.0) * float(rules.spacing)
 		add_enemy(origin + offset, "normal", "flier")
 		enemies[-1].velocity = direction * float(enemies[-1].speed if combat_profile_version==1 else rules.speed)
 	return true
@@ -861,7 +861,7 @@ func _spawn_scatter() -> bool:
 	var species_id := profiles.select(map_id,"normal",variant,0,species_rng) if combat_profile_version==1 else ""
 	for index in range(SWARM_SIZE):
 		var offset := direction.orthogonal() * ((index % 6) - 2.5) * spacing
-		offset += direction * (int(index / 6) - 2) * spacing
+		offset += direction * (int(index / 6.0) - 2) * spacing
 		offset += Vector2(scatter_rng.randf_range(-jitter, jitter), scatter_rng.randf_range(-jitter, jitter))
 		add_enemy(center + offset, "normal", variant, _scatter_index, species_id)
 		if variant == "flier":
@@ -1183,14 +1183,14 @@ func _original_gold_range(kind:String)->Vector2i:
 
 func gold_drop_range(kind:String="normal")->Vector2i:
 	var limits:=_original_gold_range(kind)
-	return Vector2i(limits.x / 2, limits.y / 2) if loot_rules_version==1 else limits
+	return Vector2i(int(limits.x / 2.0), int(limits.y / 2.0)) if loot_rules_version==1 else limits
 
 func _drop_gold(at: Vector2, kind: String) -> void:
 	if gold_drop_chance < 1.0 and gold_rng.randf() >= gold_drop_chance:
 		return
 	var limits:Vector2i=_original_gold_range(kind)
 	var amount:int=gold_rng.randi_range(limits.x,limits.y)
-	if loot_rules_version==1:amount=maxi(1,amount / 2) # Same roll/chance; floor half to whole coins.
+	if loot_rules_version==1:amount=maxi(1, int(amount / 2.0)) # Same roll/chance; floor half to whole coins.
 	if gold_pickups.size() >= MAX_PICKUPS:
 		gold_pickups[-1]["value"] += amount
 	else:
@@ -1336,7 +1336,7 @@ func visible_world() -> Rect2:
 	return Rect2(camera_center() - spawn_view_size * 0.5, spawn_view_size)
 
 func _spawn_map_formation(variant: String, columns: int, spacing: float, jitter: float, generator: RandomNumberGenerator, scatter: bool) -> bool:
-	var rows := SWARM_SIZE / columns
+	var rows := int(SWARM_SIZE / float(columns))
 	var footprint := Vector2((columns - 1) * spacing, (rows - 1) * spacing).length() * 0.5 + jitter * sqrt(2.0) + 24.0
 	var at: Variant = map_space.spawn_anchor(generator, player, elapsed, "normal", visible_world(), footprint)
 	if not at is Vector2:
@@ -1346,7 +1346,7 @@ func _spawn_map_formation(variant: String, columns: int, spacing: float, jitter:
 	var positions: Array[Vector2] = []
 	for index in range(SWARM_SIZE):
 		var offset := direction.orthogonal() * ((index % columns) - (columns - 1) * 0.5) * spacing
-		offset += direction * (int(index / columns) - (rows - 1) * 0.5) * spacing
+		offset += direction * (int(index / float(columns)) - (rows - 1) * 0.5) * spacing
 		offset += Vector2(generator.randf_range(-jitter,jitter),generator.randf_range(-jitter,jitter)) if jitter > 0.0 else Vector2.ZERO
 		var position := center + offset
 		if not map_space.valid_position(position, 24.0) or visible_world().grow(32).has_point(position):

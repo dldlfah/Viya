@@ -648,8 +648,8 @@ func _update_slots(labels: Array[Label], row: String) -> void:
 			button.icon=button.glyph_texture
 			button.icon_alignment=HORIZONTAL_ALIGNMENT_LEFT
 			button.add_theme_constant_override("icon_max_width",28)
-			var name:String=str(entry.name).trim_prefix("[임시] ")
-			labels[index].text=("[임시] %d%s" % [rank," ✦" if rank==5 else ""]) if compact else ("%s\n[임시] Lv.%d%s" % [name,rank," 진화" if rank==5 and row=="attack" else ""])
+			var skill_name:String=str(entry.name).trim_prefix("[임시] ")
+			labels[index].text=("[임시] %d%s" % [rank," ✦" if rank==5 else ""]) if compact else ("%s\n[임시] Lv.%d%s" % [skill_name,rank," 진화" if rank==5 and row=="attack" else ""])
 		else:
 			button.glyph_id=""
 			button.rank=0
@@ -1607,12 +1607,13 @@ func _update_hud() -> void:
 		if simulation._elites_spawned < simulation.elite_schedule().size() and not simulation._boss_spawned:
 			next = "정예 %d초" % maxi(0,int(ceil(float(simulation.elite_schedule()[simulation._elites_spawned])-simulation.elapsed)))
 		stage_text.add_theme_font_size_override("font_size",14)
-		stage_text.text = "S%d %s · %02d:%02d · 생존+보스 · %s · 저장 %d/2" % [simulation.stage,simulation.map_space.definition.get("short_name","전장"),left/60,left%60,next,save_notice.count_for(simulation.run_id)]
+		stage_text.text = "S%d %s · %02d:%02d · 생존+보스 · %s · 저장 %d/2" % [simulation.stage,simulation.map_space.definition.get("short_name","전장"),int(left / 60.0),left%60,next,save_notice.count_for(simulation.run_id)]
 		stage_text.tooltip_text = simulation.map_space.definition.name
 	if simulation.run_mode=="gold_slime":
 		var left:=maxi(0,int(ceil(simulation.stage_duration-simulation.elapsed)))
-		stage_text.text="골드 슬라임 던전 · %02d:%02d · 생존 · 저장 %d/2" % [left/60,left%60,save_notice.count_for(simulation.run_id)]
-		stats_text.text="던전 %02d:%02d | 처치 %d | 금화 %d" % [int(simulation.elapsed)/60,int(simulation.elapsed)%60,simulation.kills,simulation.gold_collected]
+		var elapsed_seconds := int(simulation.elapsed)
+		stage_text.text="골드 슬라임 던전 · %02d:%02d · 생존 · 저장 %d/2" % [int(left / 60.0),left%60,save_notice.count_for(simulation.run_id)]
+		stats_text.text="던전 %02d:%02d | 처치 %d | 금화 %d" % [int(elapsed_seconds / 60.0),elapsed_seconds%60,simulation.kills,simulation.gold_collected]
 		stats_text.tooltip_text="3분 생존 시 획득 금화 정산 · 캠페인 해금 없음"
 	if _modal_kind=="gold_dungeon" and is_instance_valid(dungeon_launch_button):
 		dungeon_launch_button.text="입장 · 오늘 %d회 남음" % gold_progress.dungeon_remaining()
@@ -1623,14 +1624,14 @@ func _update_hud() -> void:
 	level_text.tooltip_text = stage_text.text
 	if not overlay.visible:
 		var remaining:int=maxi(0,int(ceil(simulation.stage_duration-simulation.elapsed)))
-		level_text.text += " · %02d:%02d" % [remaining/60,remaining%60]
+		level_text.text += " · %02d:%02d" % [int(remaining / 60.0),remaining%60]
 	ailment_text.visible = not overlay.visible
 	ailment_text.text = "둔화 · %.1f초" % simulation._slow_left if simulation._slow_left > 0.0 else ""
 	status_text.text = "HP %d / %d" % [simulation.hp, simulation.max_hp]
 	level_text.text="Lv.%d Viya · EXP %.0f/%.0f" % [simulation.growth.level,simulation.growth.xp,simulation.growth.threshold()]
 	var seconds:int=maxi(0,int(ceil(simulation.stage_duration-simulation.elapsed)))
 	var phase:int=simulation.stage_rules.get("waves",[]).find(simulation.wave_profile())+1 if not simulation.stage_rules.is_empty() else 0
-	_phase_text.text="%s · %02d:%02d" % ["골드 던전" if simulation.run_mode=="gold_slime" else ("보스전" if simulation._boss_spawned and not simulation._boss_defeated else "공세 %02d" % phase),seconds/60,seconds%60]
+	_phase_text.text="%s · %02d:%02d" % ["골드 던전" if simulation.run_mode=="gold_slime" else ("보스전" if simulation._boss_spawned and not simulation._boss_defeated else "공세 %02d" % phase),int(seconds / 60.0),seconds%60]
 	stats_text.text="금화 %s" % str(simulation.gold_collected)
 	stats_text.tooltip_text="이번 전투 %d · 계정 보유 %d" % [simulation.gold_collected,gold_progress.total]
 	mission_button.visible=simulation.has_active_run() and not overlay.visible

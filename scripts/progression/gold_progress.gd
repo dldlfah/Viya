@@ -217,9 +217,9 @@ func _commit(balance: int, stage_number: int, run_id: String, levels: Dictionary
 			return read_error
 		var disk = get_script().new()
 		disk.path = path
-		var error: Error = disk.load_progress()
-		if error != OK:
-			return error
+		var load_error: Error = disk.load_progress()
+		if load_error != OK:
+			return load_error
 		if not _matches(disk):
 			return ERR_BUSY
 	file.set_value("gold_dungeon","schema",1)

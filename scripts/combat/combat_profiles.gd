@@ -21,16 +21,16 @@ static func number(value: Variant, minimum: float, maximum: float) -> bool:
 static func valid(value: Variant) -> bool:
 	if not value is Dictionary or value.get("schema_version") != 1 or not value.get("characters") is Dictionary or not value.get("species") is Dictionary or not value.get("maps") is Dictionary:
 		return false
-	for hero in value.characters.values():
-		if not hero is Dictionary or not hero.get("name") is String or not hero.get("magic") is Dictionary:
+	for character in value.characters.values():
+		if not character is Dictionary or not character.get("name") is String or not character.get("magic") is Dictionary:
 			return false
 		for key in ["hp","speed","pickup","crit","crit_damage","hit_lock","hp_regen","power","rate"]:
-			if not number(hero.get(key),0,10000):return false
-		if hero.hp < 1 or hero.hp != floor(hero.hp) or hero.speed < 1 or hero.crit > 1 or hero.hit_lock < 0.01 or hero.power <= 0 or hero.rate <= 0:
+			if not number(character.get(key),0,10000):return false
+		if character.hp < 1 or character.hp != floor(character.hp) or character.speed < 1 or character.crit > 1 or character.hit_lock < 0.01 or character.power <= 0 or character.rate <= 0:
 			return false
 		for key in ["max_mana","mana_cost","mana_regen","damage","radius","cooldown"]:
-			if not number(hero.magic.get(key),0,10000):return false
-		if hero.magic.max_mana < 1 or hero.magic.mana_cost <= 0 or hero.magic.mana_cost > hero.magic.max_mana or hero.magic.damage <= 0 or hero.magic.radius <= 0:
+			if not number(character.magic.get(key),0,10000):return false
+		if character.magic.max_mana < 1 or character.magic.mana_cost <= 0 or character.magic.mana_cost > character.magic.max_mana or character.magic.damage <= 0 or character.magic.radius <= 0:
 			return false
 	for enemy in value.species.values():
 		if not enemy is Dictionary or not enemy.get("name") is String or enemy.get("kind") not in ["normal","elite","boss"] or enemy.get("variant") not in VARIANTS or enemy.get("shot") not in ["","javelin","arrow"]:

@@ -7,27 +7,27 @@ func _init() -> void:
 	if parsed is Dictionary:
 		data = parsed
 
-func for_stage(number: int) -> Dictionary:
+func for_stage(stage_number: int) -> Dictionary:
 	var defaults: Variant = data.get("default")
 	var overrides: Variant = data.get("overrides", {})
 	if not defaults is Dictionary or not overrides is Dictionary:
 		return {}
-	var custom: Variant = overrides.get(str(number), {})
+	var custom: Variant = overrides.get(str(stage_number), {})
 	if not custom is Dictionary:
 		return {}
 	var result: Dictionary = defaults.duplicate(true)
 	result.merge(custom, true)
 	return result if valid(result) else {}
 
-func for_departure(number: int) -> Dictionary:
+func for_departure(stage_number: int) -> Dictionary:
 	# Only fresh campaign departures use this map. Saved runs keep their map_id.
-	var rules:=for_stage(number)
-	if not rules.is_empty() and number==1:
+	var rules:=for_stage(stage_number)
+	if not rules.is_empty() and stage_number==1:
 		rules.map_id="siege_battlefield"
 	return rules if not rules.is_empty() and valid(rules) else {}
 
-func for_run(number: int, mode: String = "campaign") -> Dictionary:
-	var rules:=for_stage(number)
+func for_run(stage_number: int, mode: String = "campaign") -> Dictionary:
+	var rules:=for_stage(stage_number)
 	if mode=="campaign":return rules
 	if mode!="gold_slime" or rules.is_empty():return {}
 	rules=preload("res://scripts/combat/gold_dungeon.gd").new().rules(rules)

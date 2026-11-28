@@ -32,10 +32,10 @@ static func draw(view) -> void:
 			continue
 		if entry.phase=="reacquire":
 			var at:Vector2=entry.origin
-			var color:=Color("b7c4d0",.8)
-			view.draw_arc(at,23,.25,TAU-.25,24,color,2,true)
-			view.draw_line(at+Vector2(-5,-5),at+Vector2(5,5),color,2,true)
-			view.draw_line(at+Vector2(-5,5),at+Vector2(5,-5),color,2,true)
+			var reacquire_color:=Color("b7c4d0",.8)
+			view.draw_arc(at,23,.25,TAU-.25,24,reacquire_color,2,true)
+			view.draw_line(at+Vector2(-5,-5),at+Vector2(5,5),reacquire_color,2,true)
+			view.draw_line(at+Vector2(-5,5),at+Vector2(5,-5),reacquire_color,2,true)
 			continue
 		var points:PackedVector2Array=entry.points
 		var color:Color=Color("ffce80") if entry.phase=="windup" else Color("ff7b6e")

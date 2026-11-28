@@ -2,7 +2,7 @@ extends RefCounted
 ## Low-cost replaceable silhouettes, not final character/monster designs.
 static func enemy(canvas: CanvasItem, feet: Vector2, variant: String, color: Color, height: float, detailed: bool, motion:Dictionary={}, cache=null, cache_pose: bool=false) -> void:
 	canvas.draw_set_transform(feet,0,Vector2.ONE*(height/56.0))
-	var stride:float=sin(float(motion.get("move_clock",0))*TAU*2)*4 if motion.get("moving",false) else 0
+	var stride:float=sin(float(motion.get("move_clock",0))*TAU*2)*4 if motion.get("moving",false) else 0.0
 	if cache_pose and cache != null and not detailed and variant != "ranged":
 		canvas.draw_mesh(cache.silhouette(variant, color, stride), null)
 	else:
@@ -64,7 +64,7 @@ static func hero(canvas: CanvasItem, feet: Vector2, direction: Vector2, hurt: bo
 	# Warm adult-sized human silhouette and readable rifle direction; no portrait
 	# or unapproved GEN-005 crop is bound as finished production character art.
 	var cloth:=Color("a5384b")
-	var stride:float=sin(float(motion.get("move_clock",0))*TAU*2)*4 if motion.get("moving",false) else 0
+	var stride:float=sin(float(motion.get("move_clock",0))*TAU*2)*4 if motion.get("moving",false) else 0.0
 	canvas.draw_colored_polygon(PackedVector2Array([feet+Vector2(-6,-46),feet+Vector2(-25,-12),feet+Vector2(-33,-3),feet+Vector2(-11,-10),feet+Vector2(1,-4),feet+Vector2(9,-42)]),cloth.darkened(.18))
 	canvas.draw_line(feet+Vector2(-5,-18),feet+Vector2(-10,-1-maxf(0,stride)),Color("322d30"),5,true)
 	canvas.draw_line(feet+Vector2(6,-18),feet+Vector2(12,-1-maxf(0,-stride)),Color("322d30"),5,true)
@@ -75,7 +75,7 @@ static func hero(canvas: CanvasItem, feet: Vector2, direction: Vector2, hurt: bo
 	canvas.draw_circle(feet+Vector2(0,-49),7,Color("fff1db") if hurt else Color("d5b798"))
 	canvas.draw_colored_polygon(PackedVector2Array([feet+Vector2(-8,-49),feet+Vector2(-8,-54),feet+Vector2(3,-57),feet+Vector2(9,-49),feet+Vector2(6,-41),feet+Vector2(14,-29),feet+Vector2(-2,-34),feet+Vector2(-16,-24),feet+Vector2(-12,-42)]),Color("39252b"))
 	canvas.draw_line(feet+Vector2(-8,-25),feet+Vector2(7,-25),Color("c3a374"),2,true)
-	var recoil:float=3*maxf(0,1-float(motion.get("clock",0))/.16) if motion.get("pose","")=="attack" else 0
+	var recoil:float=3*maxf(0,1-float(motion.get("clock",0))/.16) if motion.get("pose","")=="attack" else 0.0
 	var origin:=feet+Vector2(2,-34)-direction*recoil
 	canvas.draw_line(origin-direction*7,origin+direction*30,Color("20232a"),6,true)
 	canvas.draw_line(origin+direction*5,origin+direction*31,Color("d0b783"),2,true)

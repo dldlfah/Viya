@@ -50,7 +50,6 @@ static func build(view) -> Dictionary:
 	result.marker_rect=Rect2()
 	if not result.offscreen:return result
 	# Use the real displayed camera, not RunState's larger spawn envelope.
-	var visible:Rect2=view.ground_visible() if view.high_angle else Rect2(view.camera_center()-view.size*.5,view.size)
 	var occupied:Array=[result.status_rect.grow(8),Rect2(view.world_to_screen(view.simulation.player)-Vector2(30,70),Vector2(60,100))]
 	for cue in view.approach_cues():
 		var at:Vector2=view.world_to_screen(cue.at).clamp(Vector2.ONE*20,view.size-Vector2.ONE*20)

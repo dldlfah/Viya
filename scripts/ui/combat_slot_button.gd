@@ -12,7 +12,7 @@ func _draw() -> void:
 	if ultimate:
 		var radius:float=19 if compact else 35
 		var center:=Vector2(27 if compact else 45,size.y*.5)
-		var color:=Color("df6b72",.45 if disabled else 1)
+		var color:=Color("df6b72",.45 if disabled else 1.0)
 		draw_circle(center,radius+3,Color("2b151d"))
 		CombatSkin.rune(self,center,radius,color,not compact)
 		draw_arc(center,radius+4,0,TAU,40,CombatSkin.GOLD,1,true)

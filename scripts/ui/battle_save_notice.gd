@@ -44,7 +44,7 @@ static func summary(data:Dictionary,catalog) -> String:
 	var name:String=str(map.get("name",run.get("map_id","전장 정보 없음")))
 	var seconds:int=maxi(0,int(floor(float(run.elapsed))))
 	var text:String="저장된 전투 · %s\n%s\n진행 %02d:%02d · 체크포인트 %d/2 · Lv.%d\nHP %d · MP %.1f · 획득 금화 %d" % [
-		"골드 던전" if dungeon else "캠페인 S%d" % int(run.stage),name,seconds/60,seconds%60,int(run.checkpoint_index),int(data.growth.level),int(run.hp),float(data.magic.mana),int(run.gold_collected)]
+		"골드 던전" if dungeon else "캠페인 S%d" % int(run.stage),name,int(seconds / 60.0),seconds%60,int(run.checkpoint_index),int(data.growth.level),int(run.hp),float(data.magic.mana),int(run.gold_collected)]
 	if int(data.growth.get("pending",0))>0:text+="\n남은 성장 선택 %d회 · 같은 선택을 이어갑니다" % int(data.growth.pending)
 	if dungeon:text+="\n이어하기는 추가 입장 횟수를 사용하지 않습니다"
 	return text

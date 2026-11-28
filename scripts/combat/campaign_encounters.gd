@@ -28,7 +28,7 @@ func elite_times(rules:Dictionary,version:int)->Array:
 		result.append(float(at))
 		previous=float(at)
 	return result
-func elite_index(version:int,index:int)->int:return mini(int(index/2),1) if version>0 else index
+func elite_index(version:int,index:int)->int:return mini(int(index / 2.0),1) if version>0 else index
 func batch(state,wave:Dictionary)->int:
 	var count:int=int(wave.batch)*multiplier(state.encounter_version,state.elapsed)
 	if state.encounter_version==0:return count
