@@ -1,0 +1,9 @@
+{
+  "status": "NOT_FINAL",
+  "defect": "Inner brow tip remains blunt in enlarged front comparison after removing stacked ink.",
+  "cause": "Authored width did not taper near both ends; only opacity faded over a short endpoint interval.",
+  "change": "Taper authored half-width smoothly over14percent at both ends, retaining observed-source coordinates and single compositing.",
+  "paid_submissions": 0,
+  "spent_credits": 0,
+  "independent_reopen_for_archived_trial": false
+}

@@ -1,0 +1,46 @@
+{
+  "stage": "B-03-04",
+  "role": "planning/art",
+  "date_kst": "2026-11-29",
+  "verified_remote_parent": "23e6b32e921a1def9d2e8f86f19136d4fc256658",
+  "status": "IN_PROGRESS_REFERENCE_APPEARANCE_NOT_PASSED",
+  "current_editable_file": "viya_face_expression.blend",
+  "output_sha256": "9be1757584e658a52296ba21923492e80e40790c74013add584f411e991f4271",
+  "local_unit_completed": [
+    "Single-composite brow join replaces stacked observed/underpaint ink.",
+    "Observed/hidden transition and authored tip-width taper revised; source path and oldUV unchanged.",
+    "Actual source mouth RGB/line width transferred to actual lip midpoint curve.",
+    "All geometry/controls/R4, UVs, eyes/lash neighborhood, iris PNGs, input blend and four source images preserved."
+  ],
+  "observed_improvements": [
+    "Brow fragment dark clumping and blunt tips reduced.",
+    "Mouth now carries source color and line weight rather than a uniform thin authored line.",
+    "Mouth line remains continuous in front/both obliques/profiles."
+  ],
+  "remaining_visual_differences": [
+    "Short visible left-brow segment still reads straight/blunt; its hair-occluded extensions remain hypothetical.",
+    "Reference warm lower-lid shading and detailed eyelid lines are still different.",
+    "Source graphic nose marks are missing; review lighting shows a different soft3D nose reading.",
+    "Overall reference-face impression/maturity is not accepted."
+  ],
+  "source_axis_caution": "Source2D eye-axis tilt explains most raw mouth endpoint height difference. Coordinate-only analysis is not a3D head-roll calibration or anatomical asymmetry measurement.",
+  "next_single_work": "Continue04 from this blend with local source lower-lid shade/detail and graphic nose marks on existingUV; preserve current brow/mouth, iris maps and all shape controls/R4, compare unlit/lit and both obliques/profiles. No UV restart or paid generation. Only actual shape defects justify local03 return.",
+  "producer_face_acceptance": "PENDING_B03_05",
+  "reference_likeness_approved": false,
+  "completed_plan_b_chapters": 1,
+  "game_integration": false,
+  "engine_device_verification": false,
+  "paid_submissions": 0,
+  "spent_credits": 0,
+  "balance_requeried": false,
+  "new_paid_budget_assigned": false,
+  "historical_only": {
+    "paid_submissions": 3,
+    "spent_credits": 100,
+    "last_observed_balance": 297
+  },
+  "numeric_eye_surface_contact_verified": false,
+  "full_self_intersection_verified": false,
+  "rig_deformation_verified": false,
+  "final_engine_material_verified": false
+}
