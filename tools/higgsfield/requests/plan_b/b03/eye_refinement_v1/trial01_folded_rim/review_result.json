@@ -1,0 +1,9 @@
+{
+  "status": "REJECTED_BEFORE_RENDER_OR_MODEL_SAVE",
+  "defect": "4new flipped control fan triangles around outer lid support",
+  "cause": "Different radial ring displacements compressed the already narrow rim; per-ring depth following was also discontinuous near helper coverage.",
+  "change": "Use a smooth local spatialZ displacement field across neighboring support vertices; preserveX/Y and measure helper gap change rather than claim exact full contact.",
+  "model_file_created": false,
+  "paid_submissions": 0,
+  "spent_credits": 0
+}

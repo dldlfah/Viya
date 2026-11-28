@@ -1,0 +1,18 @@
+{
+  "input_sha256": "33024888a9e9efe69685d6ca049ae0afa1900b96636da5961bc3cdcb0314ef01",
+  "new_key": "R5_LidExpression",
+  "outer_corner_lowering_working_m": 0.0018,
+  "upper_lid_mid_lowering_working_m": 0.0009,
+  "radial_weights": {
+    "aperture": 1.0,
+    "inner_rim": 1.0,
+    "outer_rim": 0.88,
+    "outer_transition1": 0.5,
+    "outer_transition2": 0.2,
+    "outer_transition3": 0.05
+  },
+  "preserve_helper_surface_gap_where_both_front_rays_hit": true,
+  "maximum_authored_displacement_working_m": 0.003,
+  "key_value": 1.0,
+  "scope": "Local reversible art trial, not calibrated3D measurements inferred from source pixels. Existing width/UV/old controls/iris maps unchanged."
+}

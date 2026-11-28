@@ -1,0 +1,8 @@
+{
+  "requested_support_samples": 1236,
+  "measured_changed_above_threshold": 1235,
+  "audit_threshold_working_m": 1e-08,
+  "requested_samples_at_or_below_threshold": 1,
+  "coordinates_from_reopened_evaluated_controls": true,
+  "note": "One requested support displacement is at/below audit threshold after floating-point key evaluation; it remains inCSV, not counted as a changed vertex."
+}

@@ -1,0 +1,45 @@
+{
+  "stage": "B-03-03 local return from04",
+  "role": "planning/art",
+  "date_kst": "2026-11-29",
+  "verified_remote_parent": "fe2cc2b3d981b6834194f81ede9e6f43df3c1c22",
+  "status": "LOCAL_SHAPE_WORKING_BASIS_ACCEPTED_FOR04_OVERALL_FACE_PENDING",
+  "current_editable_file": "viya_eye_refinement.blend",
+  "output_sha256": "aaeb5e4e62ce36be76525d2e531d8effafbb13130af1e054293d752ddeca6fb1",
+  "local_art_self_review": "Accept this reversible R5 shape as the working basis for04 surface review. Reduced upward outer-corner and round upper opening reading in the inspected views; not reference likeness or producer face acceptance.",
+  "first_rejected_trial": {
+    "new_flipped_fan_triangles": 4,
+    "model_saved": false,
+    "fix": "Replace differing radial-ring shifts with continuous local spatialZ support."
+  },
+  "technical_results": [
+    "All previous controls, basis/UV/topology/source-index data and packed image bytes retained; only newR5 key added.",
+    "Skin1235vertices, maximum2.108231mm;X/Y coordinates, helpers and selected nose361/mouth760control vertices unchanged.",
+    "Control fan new flips/degeneracy/nonfinite0; exact reopening/old-key snapshot and render-pixel checks.",
+    "Control aperture width retained; outer-minus-inner rise left2.0912215->.2912208mm/right2.2411570->.4411563mm."
+  ],
+  "remaining_visual_differences": [
+    "Bright sclera/lower-eye rim and iris exposure still need source-led review under the new aperture.",
+    "Overall source likeness/maturity is not accepted; hair/body/weapon unmade.",
+    "Uncalibrated source projection and occlusion limit direct geometric matching."
+  ],
+  "next_single_work": "Continue04 from this R5 model: inspect actual source sclera/lower-edge tone and iris exposure on currentUV before any necessary local material/registration change; retain R5 and all original controls/UV/maps. Existing render-raster positions are obsolete if rebaking: export/fingerprint the new evaluated geometry, keep sameUV. No paid generation or whole-head rebuild.",
+  "producer_face_acceptance": "PENDING_B03_05",
+  "reference_likeness_approved": false,
+  "completed_plan_b_chapters": 1,
+  "game_integration": false,
+  "engine_device_verification": false,
+  "paid_submissions": 0,
+  "spent_credits": 0,
+  "balance_requeried": false,
+  "new_paid_budget_assigned": false,
+  "historical_only": {
+    "paid_submissions": 3,
+    "spent_credits": 100,
+    "last_observed_balance": 297
+  },
+  "numeric_full_eye_surface_contact_verified": false,
+  "full_self_intersection_verified": false,
+  "rig_deformation_verified": false,
+  "final_engine_material_verified": false
+}

@@ -1,0 +1,11 @@
+{
+  "output_sha256": "aaeb5e4e62ce36be76525d2e531d8effafbb13130af1e054293d752ddeca6fb1",
+  "old_controls_topology_all_uv_unchanged": true,
+  "new_key_preserved": true,
+  "active_packed_images_identical": true,
+  "local_change_audit_identical": true,
+  "input_unchanged": true,
+  "external_blend_dependencies": 0,
+  "rig_objects": 0,
+  "scope": "Persistence and selected control geometry only; not visual/rig/game/device approval."
+}

@@ -1,0 +1,44 @@
+{
+  "input_sha256": "33024888a9e9efe69685d6ca049ae0afa1900b96636da5961bc3cdcb0314ef01",
+  "new_key": "R5_LidExpression",
+  "outer_corner_lowering_working_m": 0.0018,
+  "upper_lid_mid_lowering_working_m": 0.0009,
+  "radial_weights": {
+    "aperture": 1.0,
+    "inner_rim": 1.0,
+    "outer_rim": 0.88,
+    "outer_transition1": 0.5,
+    "outer_transition2": 0.2,
+    "outer_transition3": 0.05
+  },
+  "maximum_authored_displacement_working_m": 0.003,
+  "key_value": 1.0,
+  "scope": "Local reversible art trial, not calibrated3D measurements inferred from source pixels. Existing width/UV/old controls/iris maps unchanged.",
+  "method": "Smooth local spatialZ field across existing lid/support vertices;X/Y and helper mesh unchanged.",
+  "spatial_support": {
+    "inner_x_gate": [
+      0.01,
+      0.018
+    ],
+    "outer_x_gate": [
+      0.058,
+      0.074
+    ],
+    "lower_z_gate": [
+      0.089,
+      0.1
+    ],
+    "upper_z_gate": [
+      0.12,
+      0.128
+    ],
+    "front_depth_gate": [
+      0.04,
+      0.07
+    ],
+    "upper_lid_gate": [
+      0.109,
+      0.114
+    ]
+  }
+}

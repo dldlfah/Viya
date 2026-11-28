@@ -1,0 +1,10 @@
+{
+  "four_source_hashes_match": true,
+  "input_blend_sha256_unchanged": true,
+  "old_controls_topology_all_uv_preserved": true,
+  "active_packed_image_bytes_identical": true,
+  "reopened_decoded_rgba_identical": true,
+  "before_front_matches_source_v4_decoded_rgba": true,
+  "decoded_changed_bytes_for_reopen_or_baseline": 0,
+  "scope": "Preservation/persistence and baseline-render match only; not art/rig/game/device acceptance."
+}

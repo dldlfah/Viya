@@ -1,0 +1,26 @@
+{
+  "stats": {
+    "CC0_head_skin_UNAPPROVED": {
+      "changed_vertices": 1235,
+      "maximum_displacement_m": 0.0021082311927121703,
+      "new_flipped_fan_triangles": 0,
+      "degenerate_fan_triangles": 0,
+      "nonfinite_coordinates": 0
+    },
+    "CC0_helper-l-eye_UNAPPROVED": {
+      "changed_vertices": 0,
+      "maximum_displacement_m": 0,
+      "new_flipped_fan_triangles": 0,
+      "degenerate_fan_triangles": 0,
+      "nonfinite_coordinates": 0
+    },
+    "CC0_helper-r-eye_UNAPPROVED": {
+      "changed_vertices": 0,
+      "maximum_displacement_m": 0,
+      "new_flipped_fan_triangles": 0,
+      "degenerate_fan_triangles": 0,
+      "nonfinite_coordinates": 0
+    }
+  },
+  "failing_skin_fans": []
+}

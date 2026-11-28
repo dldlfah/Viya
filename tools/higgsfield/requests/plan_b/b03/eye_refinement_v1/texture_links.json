@@ -1,0 +1,23 @@
+{
+  "scope": "Existing image bytes retained; no new texture orUV unwrap/bake in this local shape unit.",
+  "images": [
+    {
+      "object": "CC0_head_skin_UNAPPROVED",
+      "source_path": "tools/higgsfield/requests/plan_b/b03/face_surface_v4/textures/head_color_details.png",
+      "sha256": "3642fabc7315233130d9017613856064b7b8bafb46b4d9054fa6d46a5c5261de",
+      "current_model_image_is_packed": true
+    },
+    {
+      "object": "CC0_helper-l-eye_UNAPPROVED",
+      "source_path": "tools/higgsfield/requests/plan_b/b03/face_surface_v4/textures/eye_screen_right.png",
+      "sha256": "3e27febf13d5666a2ea6bee89c97065324d0f5fdb3cf805838afbe1c1589f6a0",
+      "current_model_image_is_packed": true
+    },
+    {
+      "object": "CC0_helper-r-eye_UNAPPROVED",
+      "source_path": "tools/higgsfield/requests/plan_b/b03/face_surface_v4/textures/eye_screen_left.png",
+      "sha256": "e8ea50bcff44c585be163405e166e8e7525a83ef96d580f644b807621c4aa4e2",
+      "current_model_image_is_packed": true
+    }
+  ]
+}
