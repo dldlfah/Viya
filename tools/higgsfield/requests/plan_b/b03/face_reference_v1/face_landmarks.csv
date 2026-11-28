@@ -1,0 +1,23 @@
+reference,id,feature,source_x_px,source_y_px,estimated_manual_uncertainty_px,scope
+front,F1,screen_left_iris_center,727,182,4,manual approximate; not 3D fit/acceptance tolerance
+front,F2,screen_right_iris_center,809,174,4,manual approximate; not 3D fit/acceptance tolerance
+front,F3,painted_nose_mark_not_depth,770,202,5,manual approximate; not 3D fit/acceptance tolerance
+front,F4,screen_left_mouth_corner,756,233,4,manual approximate; not 3D fit/acceptance tolerance
+front,F5,screen_right_mouth_corner,795,229,4,manual approximate; not 3D fit/acceptance tolerance
+front,F6,chin_outline_lowest,775,267,4,manual approximate; not 3D fit/acceptance tolerance
+front,F7,screen_left_visible_cheek_outline,701,216,6,manual approximate; not 3D fit/acceptance tolerance
+front,F8,screen_right_visible_cheek_outline,834,217,6,manual approximate; not 3D fit/acceptance tolerance
+screen_right_profile,R1,visible_iris_center,842,201,4,manual approximate; not 3D fit/acceptance tolerance
+screen_right_profile,R2,nose_tip_outline,889,246,4,manual approximate; not 3D fit/acceptance tolerance
+screen_right_profile,R3,mouth_line_front,855,269,4,manual approximate; not 3D fit/acceptance tolerance
+screen_right_profile,R4,chin_outline_lowest,851,309,4,manual approximate; not 3D fit/acceptance tolerance
+screen_right_profile,R5,visible_ear_center_approximate,750,216,8,manual approximate; not 3D fit/acceptance tolerance
+screen_right_profile,R6,visible_upper_nose_bridge,872,216,6,manual approximate; not 3D fit/acceptance tolerance
+screen_right_profile,R7,visible_jaw_turn,805,291,7,manual approximate; not 3D fit/acceptance tolerance
+screen_left_profile,L1,visible_iris_center,685,199,4,manual approximate; not 3D fit/acceptance tolerance
+screen_left_profile,L2,nose_tip_outline,641,231,4,manual approximate; not 3D fit/acceptance tolerance
+screen_left_profile,L3,mouth_line_front,662,262,4,manual approximate; not 3D fit/acceptance tolerance
+screen_left_profile,L4,chin_outline_lowest,671,294,4,manual approximate; not 3D fit/acceptance tolerance
+screen_left_profile,L5,visible_ear_center_approximate,768,226,8,manual approximate; not 3D fit/acceptance tolerance
+screen_left_profile,L6,visible_upper_nose_bridge,650,211,6,manual approximate; not 3D fit/acceptance tolerance
+screen_left_profile,L7,visible_jaw_turn,719,279,7,manual approximate; not 3D fit/acceptance tolerance

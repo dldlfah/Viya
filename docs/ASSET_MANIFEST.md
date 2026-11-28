@@ -444,3 +444,11 @@ ART-001의 기록된 정확한 해시 파일은 관련 검색에서 찾지 못�
 - 작업`80d507d5-6383-49c7-8fcf-062249c24e00`completed. 이번1건30·계정327→297→297·누적3건100(폐기2건70포함)·자동4차없음.
 - 상태: 새외형시안·프로듀서판단전/게임용미채택. 머리색/뭉친표면·얼굴/의상세부차이,리그/총기·동작미완료. 게임연결/실기·최종승인없음.
 - [새원본/편집/네장대비](../assets/characters/plan_b_viya/candidate_03/README.md) · [실제입력/모델/옵션·작업/실차감·판단](../tools/higgsfield/requests/plan_b/b03/candidate_03/README.md).
+
+
+## 플랜B B-03-01 — 얼굴 기준·불일치 검수 파생물 (2026-11-28)
+
+- [자료 경로](../tools/higgsfield/requests/plan_b/b03/face_reference_v1/README.md): 원본4장 역할/SHA·발췌 좌표, 수동2D 관찰점22/CSV·불일치12항목, 기준안·재현 도구/체크섬.
+- [원본 얼굴 비교](../tools/higgsfield/requests/plan_b/b03/face_reference_v1/review/face_reference_board.png)와 [관찰점 표시](../tools/higgsfield/requests/plan_b/b03/face_reference_v1/review/face_landmark_board.png)는 발췌·2배 최근접 확대·주석만 한 무손실 검수PNG다. 원본 보정/AI 얼굴 복원·새 유료 생성/새 모델이 아니며 폴더.gdignore로 게임 임포트에서 제외한다.
+- 원본4장은candidate_03/references의 기존 바이트/해시 그대로다. 폐기01/02는 입력에 쓰지 않았고03 생성물도 이번 기준 자료의 얼굴 원본으로 쓰지 않았다.
+- 상태: B-03-01 참조 분석/자료 준비 완료, 정면 주 얼굴 기준은 제안·새 얼굴 승인 전. 게임 연결·엔진/기기/최종아트 검증0, 신규 제출/차감0. 다음02의 실제 얼굴 수정 시험은 아직 미실행이다. 기존36클립363·모델/텍스처/코드 불변.

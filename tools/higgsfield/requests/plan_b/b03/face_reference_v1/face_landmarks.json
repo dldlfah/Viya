@@ -1,0 +1,85 @@
+{
+  "packet": "PLAN_B_B03_01_FACE_REFERENCE_V1",
+  "date_kst": "2026-11-28",
+  "status": "REFERENCE_ANALYSIS_COMPLETE_PROPOSED_BASELINE_NOT_PRODUCER_APPROVAL",
+  "method": "Direct visual inspection; manual approximate 2D source-pixel points. Origin top-left, x right, y down. Crop and 2x nearest-neighbour enlargement only. No source pixel edits or generated detail.",
+  "limitations": [
+    "These drawings are not a calibrated orthographic turnaround of one identical posed model.",
+    "Point uncertainty describes manual annotation only, not a geometric acceptance tolerance.",
+    "Front head/eye-line tilt and profile perspective prohibit direct 3D fitting from raw 2D distances.",
+    "Hair covers parts of the hairline and ears; hidden landmarks are not invented.",
+    "Screen-facing profile names do not prove the anatomical visible side; do not mirror or infer asymmetry from filenames.",
+    "All four drawings are unarmed. The original rifle needs its existing separate reference before B-03-06.",
+    "No new face/model, rig, animation, game integration or producer acceptance is created by this packet."
+  ],
+  "proposed_baseline": {
+    "face_identity": "front",
+    "face_identity_scope": "Mature expression, eye/brow/mouth shapes and front proportions; proposal for subsequent study, not newly approved final geometry.",
+    "profiles_scope": "Cross-check nose/lip/chin depth and silhouette; reconcile against front, do not copy incompatible drawn features into one face.",
+    "back_scope": "Hair mass and rear costume only, no visible facial evidence.",
+    "body_conflict_policy": "Keep front/back as initial construction comparison; do not silently average profile costume differences. Final whole appearance remains B-03-07 producer decision.",
+    "producer_face_acceptance": "PENDING_B03_05",
+    "art001_exact_source": "NOT_RECOVERED_IN_PRIOR_AUDIT; four attached working references do not replace ART-001 provenance"
+  },
+  "references": [
+    {
+      "id": "front", "display_label": "FRONT | face identity proposal", "short_role": "Eye/brow/mouth and mature expression",
+      "path": "assets/characters/plan_b_viya/candidate_03/references/front.png",
+      "sha256": "28131fc01dbff28b3a5475ee2f73fcb37e5f9d7e81ab26477e9a1ce092b2b11b", "size_px": [1536,2048],
+      "inspection_crop_xyxy": [680,120,860,290],
+      "not_measurable": ["continuous central hairline under bangs", "nose depth from painted nostril marks"],
+      "landmarks": [
+        {"id":"F1","name":"screen_left_iris_center","xy":[727,182],"uncertainty_px":4,"label_offset":[-29,-27]},
+        {"id":"F2","name":"screen_right_iris_center","xy":[809,174],"uncertainty_px":4,"label_offset":[8,-27]},
+        {"id":"F3","name":"painted_nose_mark_not_depth","xy":[770,202],"uncertainty_px":5,"label_offset":[8,-20]},
+        {"id":"F4","name":"screen_left_mouth_corner","xy":[756,233],"uncertainty_px":4,"label_offset":[-30,-3]},
+        {"id":"F5","name":"screen_right_mouth_corner","xy":[795,229],"uncertainty_px":4,"label_offset":[8,-5]},
+        {"id":"F6","name":"chin_outline_lowest","xy":[775,267],"uncertainty_px":4,"label_offset":[8,-15]},
+        {"id":"F7","name":"screen_left_visible_cheek_outline","xy":[701,216],"uncertainty_px":6,"label_offset":[-26,-15]},
+        {"id":"F8","name":"screen_right_visible_cheek_outline","xy":[834,217],"uncertainty_px":6,"label_offset":[8,-15]}
+      ],
+      "legend": ["F1/F2 iris; F3 painted nose mark", "F4/F5 mouth corners; F6 chin", "F7/F8 visible cheek outline"]
+    },
+    {
+      "id":"screen_right_profile", "display_label":"FACING SCREEN RIGHT | profile", "short_role":"Profile depth cross-check, not mirroring",
+      "path":"assets/characters/plan_b_viya/candidate_03/references/screen_right_profile.png",
+      "sha256":"f786e9c4c8001418348822fbcc138e4ee97b08844205ae8c0610c55c19a988be", "size_px":[1529,2048],
+      "inspection_crop_xyxy":[725,155,905,325],
+      "not_measurable":["far eye and hidden skull/ear", "continuous forehead hairline under bangs"],
+      "landmarks":[
+        {"id":"R1","name":"visible_iris_center","xy":[842,201],"uncertainty_px":4,"label_offset":[7,-27]},
+        {"id":"R2","name":"nose_tip_outline","xy":[889,246],"uncertainty_px":4,"label_offset":[-28,-10]},
+        {"id":"R3","name":"mouth_line_front","xy":[855,269],"uncertainty_px":4,"label_offset":[8,-8]},
+        {"id":"R4","name":"chin_outline_lowest","xy":[851,309],"uncertainty_px":4,"label_offset":[8,-16]},
+        {"id":"R5","name":"visible_ear_center_approximate","xy":[750,216],"uncertainty_px":8,"label_offset":[-24,-27]},
+        {"id":"R6","name":"visible_upper_nose_bridge","xy":[872,216],"uncertainty_px":6,"label_offset":[8,-13]},
+        {"id":"R7","name":"visible_jaw_turn","xy":[805,291],"uncertainty_px":7,"label_offset":[-28,-4]}
+      ],
+      "legend":["R1 iris; R2 nose; R3 mouth; R4 chin", "R5 ear; R6 bridge; R7 jaw turn", "Hidden/far features: not annotated"]
+    },
+    {
+      "id":"screen_left_profile", "display_label":"FACING SCREEN LEFT | profile", "short_role":"Profile cross-check, different drawing",
+      "path":"assets/characters/plan_b_viya/candidate_03/references/screen_left_profile.png",
+      "sha256":"f0d229c4ca6c8a1f51bfe6a1dfc921195b1943e6d61f8a1c919aca2d152819df", "size_px":[1529,2048],
+      "inspection_crop_xyxy":[625,145,805,315],
+      "not_measurable":["far eye and hidden skull/ear", "continuous forehead hairline under bangs"],
+      "landmarks":[
+        {"id":"L1","name":"visible_iris_center","xy":[685,199],"uncertainty_px":4,"label_offset":[8,-27]},
+        {"id":"L2","name":"nose_tip_outline","xy":[641,231],"uncertainty_px":4,"label_offset":[8,-16]},
+        {"id":"L3","name":"mouth_line_front","xy":[662,262],"uncertainty_px":4,"label_offset":[8,-8]},
+        {"id":"L4","name":"chin_outline_lowest","xy":[671,294],"uncertainty_px":4,"label_offset":[8,-12]},
+        {"id":"L5","name":"visible_ear_center_approximate","xy":[768,226],"uncertainty_px":8,"label_offset":[8,-22]},
+        {"id":"L6","name":"visible_upper_nose_bridge","xy":[650,211],"uncertainty_px":6,"label_offset":[-25,-21]},
+        {"id":"L7","name":"visible_jaw_turn","xy":[719,279],"uncertainty_px":7,"label_offset":[8,-5]}
+      ],
+      "legend":["L1 iris; L2 nose; L3 mouth; L4 chin", "L5 ear; L6 bridge; L7 jaw turn", "Raw pixel lengths are not 3D dimensions"]
+    },
+    {
+      "id":"back", "display_label":"BACK | no visible face", "short_role":"Rear hair/costume; no face measurements",
+      "path":"assets/characters/plan_b_viya/candidate_03/references/back.png",
+      "sha256":"38f52e780b9c1fa91fce35534a1e649dbf562aa1365e6aee9c26ed0034ee82ff", "size_px":[1529,2048],
+      "inspection_crop_xyxy":[675,100,855,270],
+      "not_measurable":["all face landmarks are occluded"], "landmarks":[], "legend":[]
+    }
+  ]
+}
