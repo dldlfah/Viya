@@ -1,0 +1,5 @@
+id,finding,status,evidence,cause,uncertainty,next
+FGR01,왼쪽 홍채의 밝은 반사 누락,FAIL_CONFIRMED_SAMPLING_OMISSION,"iris_sampling_audit.json; review/iris_sampling.png; source(737,178)=RGB(211,197,200)","수동 홍채 중심(727,182)을 반경5.5px 전사의 확정 중심/범위로 사용해 가시 반사부를 원천 입력에서 제외함",보이는 밝은 표본의 제외는 확인. 완전한 홍채/동공 중심·가려진 표면은 측정되지 않음,"B-03-04 현재UV/형상 보존, 양쪽 보이는 홍채 범위·방향·세부를 따로 등록하고 숨은 부분은 작성 가정으로 분리"
+FGR02,눈썹/눈·입의 전체 표정 차이,FAIL_ART_JUDGMENT,review/front_profiles.png; review/shape_color.png,현재 선과 홍채/중립 표정의 조합이 정면 원화의 성숙한 표정과 충분히 맞지 않음,원본 기울기/앞머리 가림·시점 차이가 있어 눈높이/눈썹의 정확한3D 변위를 확정하지 않음,우선 FGR01 교정 뒤 같은 카메라로 재대조. 바로 눈 폭/눈꼬리·눈썹을 다시 재조정하지 않음
+FGR03,입술/턱 윤곽의 둥근 인상,FAIL_ART_JUDGMENT_GEOMETRY_REVIEW_PENDING,"review/front_profiles.png; review/shape_color.png, 정면/양측면",양측면의 입술/턱끝이 원화보다 둥글고 부드럽게 읽힘; 무채색에서도 둥근 윤곽이 보임,정합 도면이 아니므로 특정 턱 길이/돌출mm나 새 형태 키 수치를 확정하지 않음,홍채 보완 후에도 남으면03의 입술/턱 국소 영향 검수. 전체 머리/눈을 재생성하지 않음
+FGR04,머리만 축소한 표시에서 얼굴 정체성 검증 한계,NOT_VERIFIED_GAME_READABILITY,review/display_estimate.png; comparison_registration.json,1.72m작업신장/85.56px비교높이에 머리만 환산. 몸/머리카락·최종카메라/셰이더·실기 래스터 없음,실제 게임/기기 화면이 아니며 세부가 안 보이는 것을 품질 합격으로 해석하지 않음,얼굴 확대 기준은 유지하고 전체 외형/게임 표시는07/09 및 후속 B-06~07에서 실제 확인

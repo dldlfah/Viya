@@ -1,0 +1,59 @@
+{
+  "source_crops": {
+    "front": [
+      680,
+      120,
+      860,
+      290
+    ],
+    "screen_right_profile": [
+      725,
+      155,
+      905,
+      325
+    ],
+    "screen_left_profile": [
+      625,
+      145,
+      805,
+      315
+    ]
+  },
+  "render_crops": {
+    "front": [
+      118,
+      236,
+      398,
+      478
+    ],
+    "screen_right_profile": [
+      200,
+      230,
+      466,
+      480
+    ],
+    "screen_left_profile": [
+      46,
+      230,
+      312,
+      480
+    ]
+  },
+  "source_display": "2x nearest, unchanged180x170 crops",
+  "render_display": "Aspect-preserving rectangular crop thumbnails; no feature warp/rotation/mirroring",
+  "display_estimate": {
+    "assumed_character_height_m": 1.72,
+    "comparison_character_height_px": 85.56,
+    "studio_ortho_scale_m": 0.335,
+    "source_render_size": [
+      512,
+      640
+    ],
+    "continuous_uniform_scale": 0.026037972383720933,
+    "rounded_viewport_px": [
+      13,
+      17
+    ],
+    "actual_game_body_camera_raster_not_verified": true
+  }
+}

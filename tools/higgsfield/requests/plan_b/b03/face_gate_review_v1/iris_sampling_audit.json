@@ -1,0 +1,48 @@
+{
+  "source_sha256": "28131fc01dbff28b3a5475ee2f73fcb37e5f9d7e81ab26477e9a1ce092b2b11b",
+  "authoring_script": "tools/higgsfield/requests/plan_b/b03/face_surface_v1/bake_surface.py::eye_texture",
+  "windows": [
+    {
+      "side": "screen_left",
+      "center_px": [
+        727,
+        182
+      ],
+      "nominal_source_window_xyxy": [
+        721,
+        176,
+        734,
+        189
+      ],
+      "bake_sampling_half_span_px": 5.5
+    },
+    {
+      "side": "screen_right",
+      "center_px": [
+        809,
+        174
+      ],
+      "nominal_source_window_xyxy": [
+        803,
+        168,
+        816,
+        181
+      ],
+      "bake_sampling_half_span_px": 5.5
+    }
+  ],
+  "screen_left_visible_bright_sample": {
+    "xy": [
+      737,
+      178
+    ],
+    "rgb": [
+      211,
+      197,
+      200
+    ],
+    "outside_original_left_sampling_window": true
+  },
+  "confirmed_mechanism": "The existing small left source sampling window excludes a visible bright eye detail. Copying the atlas unchanged preserved this omission.",
+  "limitations": "This does not calibrate the complete iris anatomy/pupil center or explain every likeness difference. Hair occlusion/painted reflection and hidden iris need separate handling. No shifted window adopted in this diagnostic."
+}

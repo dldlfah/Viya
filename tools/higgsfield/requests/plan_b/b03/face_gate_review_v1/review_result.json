@@ -1,0 +1,31 @@
+{
+  "unit": "Plan B B-03-04 whole-face self-review",
+  "date_kst": "2026-11-29",
+  "remote_parent": "6de3767040ce6c7137fc70c8a2ca9eeaed57aa0c",
+  "input_blend": "tools/higgsfield/requests/plan_b/b03/eye_surface_v1/viya_eye_surface.blend",
+  "input_sha256": "97b8a658207b0f27af355c32c37bfd645f57addaa8230770e657bdb92c4b6c05",
+  "review_completed": true,
+  "whole_face_self_review": "FAIL",
+  "eligible_for_B03_05": false,
+  "producer_face_approval": "NOT_REQUESTED_OR_GRANTED",
+  "primary_confirmed_failure": "FGR01: existing left iris source sampling excludes visible bright detail",
+  "additional_observed_failures": [
+    "FGR02 eye/brow/mouth expression",
+    "FGR03 lip/chin roundness; uncalibrated art judgment"
+  ],
+  "next_single_task": "B-03-04 local iris transfer correction on current model/UV. Re-select and separately register each visible source iris region; preserve geometry/head image/sclera, record hidden-pixel assumptions and compare all three front/oblique views.",
+  "next_asset_directory": "tools/higgsfield/requests/plan_b/b03/eye_surface_v2/",
+  "no_model_or_texture_edit_this_unit": true,
+  "no_new_head_or_paid_generation": true,
+  "paid_submissions": 0,
+  "spent_credits": 0,
+  "balance_requery": false,
+  "new_paid_budget_assigned": false,
+  "plan_b_completed_chapters": 1,
+  "plan_b_total_chapters": 8,
+  "production_session": "WAITING_FOR_OFFICIAL_APPROVED_ASSETS",
+  "game_integration": false,
+  "game_execution": false,
+  "device_validation": "NOT_RUN",
+  "producer_final_approval": "NOT_GRANTED"
+}

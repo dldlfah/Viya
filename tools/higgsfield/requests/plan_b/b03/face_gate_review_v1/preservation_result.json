@@ -1,0 +1,9 @@
+{
+  "four_source_hashes_match": true,
+  "input_blend_sha256_unchanged": true,
+  "geometry_controls_uv_images_restored_in_read_only_session": true,
+  "six_fresh_color_renders_match_previous_decoded_rgba": true,
+  "model_or_texture_written": false,
+  "game_or_asset_changes": false,
+  "scope": "Diagnostic repeatability and no-edit preservation; not art/producer/game acceptance."
+}
