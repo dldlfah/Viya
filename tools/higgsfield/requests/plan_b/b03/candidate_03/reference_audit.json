@@ -1,0 +1,43 @@
+{
+  "all_four_used": true,
+  "references": [
+    {
+      "order": 0,
+      "role_label": "front",
+      "api_role": "image",
+      "path": "assets/characters/plan_b_viya/candidate_03/references/front.png",
+      "sha256": "28131fc01dbff28b3a5475ee2f73fcb37e5f9d7e81ab26477e9a1ce092b2b11b",
+      "bytes": 3993058,
+      "selected_for_generation": true
+    },
+    {
+      "order": 1,
+      "role_label": "screen_right_profile",
+      "api_role": "image",
+      "path": "assets/characters/plan_b_viya/candidate_03/references/screen_right_profile.png",
+      "sha256": "f786e9c4c8001418348822fbcc138e4ee97b08844205ae8c0610c55c19a988be",
+      "bytes": 4045459,
+      "selected_for_generation": true
+    },
+    {
+      "order": 2,
+      "role_label": "back",
+      "api_role": "image",
+      "path": "assets/characters/plan_b_viya/candidate_03/references/back.png",
+      "sha256": "38f52e780b9c1fa91fce35534a1e649dbf562aa1365e6aee9c26ed0034ee82ff",
+      "bytes": 5161631,
+      "selected_for_generation": true
+    },
+    {
+      "order": 3,
+      "role_label": "screen_left_profile",
+      "api_role": "image",
+      "path": "assets/characters/plan_b_viya/candidate_03/references/screen_left_profile.png",
+      "sha256": "f0d229c4ca6c8a1f51bfe6a1dfc921195b1943e6d61f8a1c919aca2d152819df",
+      "bytes": 3211108,
+      "selected_for_generation": true
+    }
+  ],
+  "source": "Original user attachments, copied unchanged. No generated output used as an input.",
+  "known_limit": "Side arm poses and costume details differ; all four used per explicit producer direction."
+}

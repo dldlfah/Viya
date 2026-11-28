@@ -3,8 +3,8 @@
   "candidate": "02",
   "job_id": "e77f2699-2ead-4505-8a05-06b2fd24bf52",
   "status": "GENERATION_COMPLETED_REVIEWED",
-  "adoption": "PREFERRED_LOCAL_REWORK_BASE_NOT_GAME_READY",
-  "producer_final_approval": "NOT_VERIFIED",
+  "adoption": "REJECTED_BY_PRODUCER_DO_NOT_USE",
+  "producer_final_approval": "REJECTED",
   "authorization": "Explicit user retry with four attached references; one additional35-credit candidate only",
   "cost": {
     "this_attempt_paid_submissions": 1,
@@ -79,5 +79,13 @@
     "final_art_approval": "NOT_VERIFIED",
     "plan_chapters_complete": "1/8"
   },
-  "next": "Work locally on candidate02 hair/cloth parts, skinning and visual details. Do not generate a third paid candidate automatically. Production remains waiting for finalized assets."
+  "next": "Work locally on candidate02 hair/cloth parts, skinning and visual details. Do not generate a third paid candidate automatically. Production remains waiting for finalized assets.",
+  "historical_adoption_before_producer_rejection": "PREFERRED_LOCAL_REWORK_BASE_NOT_GAME_READY",
+  "producer_disposition": {
+    "date_kst": "2026-11-28",
+    "decision": "DISCARDED",
+    "source": "맘에 하나도 안들어 2개 전부 폐기해. 제시했던 4장을 토대로 새롭게 만들어",
+    "reuse_generated_geometry_rig_textures": false,
+    "retention": "Rejected provenance/cost evidence only; never an active art candidate"
+  }
 }

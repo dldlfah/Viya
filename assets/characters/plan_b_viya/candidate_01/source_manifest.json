@@ -18,5 +18,13 @@
   "source_texture_extraction": "Original JPEG bufferView copied byte-for-byte from GLB, not repainted",
   "job_id": "9e824836-1b2a-4956-943e-eda4e3b0cd69",
   "source_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3LHdo37hN3iiYXd8WT9stnWXw4M/hf_20261128_105332_9e824836-1b2a-4956-943e-eda4e3b0cd69.glb",
-  "adoption": "LOCAL_REWORK_ONLY_NOT_GAME_READY"
+  "adoption": "REJECTED_BY_PRODUCER_DO_NOT_USE",
+  "historical_adoption_before_producer_rejection": "LOCAL_REWORK_ONLY_NOT_GAME_READY",
+  "producer_disposition": {
+    "date_kst": "2026-11-28",
+    "decision": "DISCARDED",
+    "source": "맘에 하나도 안들어 2개 전부 폐기해. 제시했던 4장을 토대로 새롭게 만들어",
+    "reuse_generated_geometry_rig_textures": false,
+    "retention": "Rejected provenance/cost evidence only; never an active art candidate"
+  }
 }

@@ -3,7 +3,7 @@
   "candidate": "01",
   "job_id": "9e824836-1b2a-4956-943e-eda4e3b0cd69",
   "generation_status": "COMPLETED",
-  "adoption": "RETAIN_FOR_LOCAL_REWORK_NOT_GAME_READY",
+  "adoption": "REJECTED_BY_PRODUCER_DO_NOT_USE",
   "paid_submissions": 1,
   "quote_credits": 35,
   "observed_charge_credits": 35,
@@ -72,5 +72,13 @@
     "producer_final_approval": "NOT_VERIFIED",
     "plan_chapters_complete": "1/8"
   },
-  "next": "Free local rework of body/hair/cloth parts and weights on this same source; no new paid generation. Production waits for actual finalized character assets."
+  "next": "Free local rework of body/hair/cloth parts and weights on this same source; no new paid generation. Production waits for actual finalized character assets.",
+  "historical_adoption_before_producer_rejection": "RETAIN_FOR_LOCAL_REWORK_NOT_GAME_READY",
+  "producer_disposition": {
+    "date_kst": "2026-11-28",
+    "decision": "DISCARDED",
+    "source": "맘에 하나도 안들어 2개 전부 폐기해. 제시했던 4장을 토대로 새롭게 만들어",
+    "reuse_generated_geometry_rig_textures": false,
+    "retention": "Rejected provenance/cost evidence only; never an active art candidate"
+  }
 }
