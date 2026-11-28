@@ -1,0 +1,57 @@
+{
+  "input_blend_sha256": "97b8a658207b0f27af355c32c37bfd645f57addaa8230770e657bdb92c4b6c05",
+  "source_front_sha256": "28131fc01dbff28b3a5475ee2f73fcb37e5f9d7e81ab26477e9a1ce092b2b11b",
+  "records": [
+    {
+      "side": "left",
+      "object": "CC0_helper-r-eye_UNAPPROVED",
+      "old_png_sha256": "8e668a8ef983b782ec13cbd3fabc36217066d3936d5f34dd7ce3b739db1d3016",
+      "new_png_sha256": "f098a1b677daa8fb2c91cb97a73626aa963eb2ba756607946a2fcaafb2c01300",
+      "iris_texels": 2028,
+      "changed_texels": 2028,
+      "changed_outside_iris": 0,
+      "selected_native_pixels": 156,
+      "contributing_native_pixels": 156,
+      "source_supported_texels": 704,
+      "partially_supported_texels": 364,
+      "authored_only_texels": 960,
+      "mean_source_weight_inside_iris": 0.4339904705842384,
+      "authored_unobserved_fill_rgb": [
+        29.0,
+        1.0,
+        1.0
+      ],
+      "excluded_native_pixels_contributing": 0,
+      "required_sample_output_texels": 24,
+      "required_sample_maximum_bilinear_weight": 0.7758909878953748,
+      "new_source_detail_recovered": false
+    },
+    {
+      "side": "right",
+      "object": "CC0_helper-l-eye_UNAPPROVED",
+      "old_png_sha256": "5cc1264fae220bb2f18d088d44d6d1cd014a32234137172adfd72dd2ce8a1b6f",
+      "new_png_sha256": "ba57f9eabe0d332998c01d26fb730948e9f8fcea248043fa4ff59bfb3d2c2d84",
+      "iris_texels": 2028,
+      "changed_texels": 2027,
+      "changed_outside_iris": 0,
+      "selected_native_pixels": 149,
+      "contributing_native_pixels": 149,
+      "source_supported_texels": 676,
+      "partially_supported_texels": 320,
+      "authored_only_texels": 1032,
+      "mean_source_weight_inside_iris": 0.4113808258924948,
+      "authored_unobserved_fill_rgb": [
+        27.5,
+        12.5,
+        9.0
+      ],
+      "excluded_native_pixels_contributing": 0,
+      "required_sample_output_texels": 0,
+      "required_sample_maximum_bilinear_weight": 0.0,
+      "new_source_detail_recovered": false
+    }
+  ],
+  "scope": "Separate per-eye visible painted-iris sampling, recorded authored continuation and original footprint. No geometry/UV/head/sclera change, mirroring, opposite-eye copying, service generation or detail recovery.",
+  "paid_submissions": 0,
+  "spent_credits": 0
+}

@@ -1,0 +1,14 @@
+{
+  "source_xy": [
+    737,
+    178
+  ],
+  "source_contribution_atlas_texels": 24,
+  "hard_green_visible_pixels": {
+    "front": 1,
+    "three_quarter": 3,
+    "three_quarter_opposite": 1
+  },
+  "criterion": "G>100,G>B+30,A>240 on temporary emission trace; interpolation/AA excluded by threshold",
+  "scope": "The known-source contribution footprint is visible in three review views. Not a likeness, full detail recovery, eye-contact or engine score."
+}

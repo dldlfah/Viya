@@ -1,0 +1,9 @@
+{
+  "stage": "Flat atlas inspection before model build",
+  "adopted": false,
+  "model_saved": false,
+  "reason": "Uniform dark fill leaves a dark discontinuity below the transferred visible lower iris in the flat atlas. The unsupported portion is not known to be uniformly dark.",
+  "change": "Use the same-eye existing map as explicitly labeled legacy underpaint for unsupported weights; apply limb darkening only to newly transferred source contributions. No opposite-eye copying or generated detail.",
+  "paid_submissions": 0,
+  "spent_credits": 0
+}

@@ -1,0 +1,12 @@
+{
+  "four_source_hashes_match": true,
+  "input_blend_sha256_unchanged": true,
+  "all_geometry_controls_uv_equal": true,
+  "head_image_bytes_identical": true,
+  "sclera_and_all_texels_outside_original_iris_identical": true,
+  "unsupported_source_weights_keep_same_eye_input": true,
+  "reopened_decoded_rgba_identical": true,
+  "new_active_packed_image_hashes_match_png": true,
+  "previous_materials_retained": true,
+  "scope": "Preservation/registration visibility and persistence only, not whole-face/producer/rig/game/device acceptance."
+}

@@ -1,0 +1,59 @@
+{
+  "input_blend_sha256": "97b8a658207b0f27af355c32c37bfd645f57addaa8230770e657bdb92c4b6c05",
+  "source_front_sha256": "28131fc01dbff28b3a5475ee2f73fcb37e5f9d7e81ab26477e9a1ce092b2b11b",
+  "records": [
+    {
+      "side": "left",
+      "object": "CC0_helper-r-eye_UNAPPROVED",
+      "old_png_sha256": "8e668a8ef983b782ec13cbd3fabc36217066d3936d5f34dd7ce3b739db1d3016",
+      "new_png_sha256": "bee456eda52b2a1309125abbb690d4d19f2ca34a8a7adde58f03ad144610b519",
+      "iris_texels": 2028,
+      "changed_texels": 1055,
+      "changed_outside_iris": 0,
+      "selected_native_pixels": 156,
+      "contributing_native_pixels": 156,
+      "source_supported_texels": 704,
+      "partially_supported_texels": 364,
+      "legacy_underpaint_only_texels": 960,
+      "mean_source_weight_inside_iris": 0.4339904705842384,
+      "unused_trial_dark_fill_rgb": [
+        29.0,
+        1.0,
+        1.0
+      ],
+      "unsupported_weights": "same-eye input atlas retained, not new source recovery",
+      "excluded_native_pixels_contributing": 0,
+      "required_sample_output_texels": 24,
+      "required_sample_maximum_bilinear_weight": 0.7758909878953748,
+      "new_source_detail_recovered": false
+    },
+    {
+      "side": "right",
+      "object": "CC0_helper-l-eye_UNAPPROVED",
+      "old_png_sha256": "5cc1264fae220bb2f18d088d44d6d1cd014a32234137172adfd72dd2ce8a1b6f",
+      "new_png_sha256": "eb30206a3d1a59cb3bf8151096c2dc2e72c90cf0146f7f4d7a07571ca6a9b089",
+      "iris_texels": 2028,
+      "changed_texels": 985,
+      "changed_outside_iris": 0,
+      "selected_native_pixels": 149,
+      "contributing_native_pixels": 149,
+      "source_supported_texels": 676,
+      "partially_supported_texels": 320,
+      "legacy_underpaint_only_texels": 1032,
+      "mean_source_weight_inside_iris": 0.4113808258924948,
+      "unused_trial_dark_fill_rgb": [
+        27.5,
+        12.5,
+        9.0
+      ],
+      "unsupported_weights": "same-eye input atlas retained, not new source recovery",
+      "excluded_native_pixels_contributing": 0,
+      "required_sample_output_texels": 0,
+      "required_sample_maximum_bilinear_weight": 0.0,
+      "new_source_detail_recovered": false
+    }
+  ],
+  "scope": "Separate per-eye visible painted-iris sampling, same-eye legacy underpaint and original footprint. No geometry/UV/head/sclera change, mirroring, opposite-eye copying, service generation or detail recovery.",
+  "paid_submissions": 0,
+  "spent_credits": 0
+}

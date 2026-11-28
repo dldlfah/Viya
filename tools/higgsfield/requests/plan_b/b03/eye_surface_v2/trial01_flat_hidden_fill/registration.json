@@ -1,0 +1,33 @@
+{
+  "input_sha256": "97b8a658207b0f27af355c32c37bfd645f57addaa8230770e657bdb92c4b6c05",
+  "source_front_sha256": "28131fc01dbff28b3a5475ee2f73fcb37e5f9d7e81ab26477e9a1ce092b2b11b",
+  "iris_radius_working_m": 0.0068,
+  "existing_limbal_edge_mix_max": 0.55,
+  "scope": "Manual visible painted-iris registration, not anatomical calibration or a new source image. Existing geometry/UV/iris footprint and sclera stay fixed.",
+  "eyes": [
+    {
+      "side": "left",
+      "object": "CC0_helper-r-eye_UNAPPROVED",
+      "center_px": [731, 181],
+      "right_axis_px": [10, -1],
+      "up_axis_px": [-1, -11],
+      "visible_polygon_px": [[722,180],[725,179],[730,178],[735,177],[738,177],[740,180],[739,184],[735,187],[730,188],[726,187],[723.5,184.5]],
+      "unobserved_fill_sample_xyxy": [725,178,730,181],
+      "inspection_crop_xyxy": [715,166,748,197],
+      "required_visible_sample_px": [737,178]
+    },
+    {
+      "side": "right",
+      "object": "CC0_helper-l-eye_UNAPPROVED",
+      "center_px": [811,172.5],
+      "right_axis_px": [10,-1],
+      "up_axis_px": [-1,-11],
+      "visible_polygon_px": [[801.5,171],[804,169],[808,169],[812,170],[816.5,170],[819,171.5],[819,175],[817,178],[811.5,178.5],[807,178],[804,176.5],[802,174.5]],
+      "unobserved_fill_sample_xyxy": [808,169,812,173],
+      "inspection_crop_xyxy": [794,159,827,190]
+    }
+  ],
+  "unobserved_area_policy": "Use one per-eye dark color sampled from the same eye, authored continuation only. No copied opposite eye, generated detail, reconstructed pupil or new highlight.",
+  "boundary_policy": "Bilinear color contributions only from manually selected source pixels; unsupported weights use the authored fill. Never sample the entire bounding rectangle as iris.",
+  "manual_uncertainty": "Visible boundary/center/axis choices are approximate painted-feature registration, not recovered anatomy, camera or acceptance tolerances. Ambiguous upper dark edges are excluded as far as direct inspection allows."
+}

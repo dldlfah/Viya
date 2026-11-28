@@ -1,0 +1,28 @@
+{
+  "unit": "Plan B B-03-04 local iris registration correction",
+  "date_kst": "2026-11-29",
+  "remote_parent": "7d98061f7c4fde5f16fe3377ca09d4aee1b1c674",
+  "local_iris_transfer": "ACCEPTED_AS_WORKING_BASIS",
+  "known_sampling_omission": "CORRECTED_AND_VISIBLE_IN_THREE_REVIEW_VIEWS",
+  "whole_face_self_review": "NOT_PASSED",
+  "producer_face_approval": "NOT_REQUESTED_OR_GRANTED",
+  "findings": [
+    "The formerly omitted left source sample(737,178) contributes to24 atlas texels and its trace footprint is visible in front and both oblique views.",
+    "Two visible iris regions are registered separately; the original iris footprint, sclera, head image, geometry, all keys and UV are unchanged.",
+    "Unsupported source weights retain same-eye legacy underpaint, not recovered detail. Original small painted-source and manual-boundary limitations remain.",
+    "The remaining overall eye/brow/mouth expression and rounded lip/chin impression are not declared solved."
+  ],
+  "next_single_task": "B-03-03 localized lip/chin silhouette impact review on the current eye_surface_v2 model, preserving all eye materials/UV and old keys. Compare front/both profiles/clay; change only a justified local control if needed, then recheck04. No whole-head regeneration or invented exact source dimensions.",
+  "next_input": "tools/higgsfield/requests/plan_b/b03/eye_surface_v2/viya_iris_registration.blend",
+  "paid_submissions": 0,
+  "spent_credits": 0,
+  "balance_requery": false,
+  "new_paid_budget_assigned": false,
+  "plan_b_completed_chapters": 1,
+  "plan_b_total_chapters": 8,
+  "production_session": "WAITING_FOR_OFFICIAL_APPROVED_ASSETS",
+  "game_integration": false,
+  "game_execution": false,
+  "device_validation": "NOT_RUN",
+  "producer_final_approval": "NOT_GRANTED"
+}
