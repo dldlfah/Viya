@@ -1,0 +1,69 @@
+{
+  "input_sha256": "f0eddaf89a763d9180f1efd2b99b45c347b70bc5c87111e02e047d318276765f",
+  "front_source_sha256": "28131fc01dbff28b3a5475ee2f73fcb37e5f9d7e81ab26477e9a1ce092b2b11b",
+  "surface_fingerprints": {
+    "CC0_head_skin_UNAPPROVED": {
+      "positions": "689d7310ea7d06cf834f7a3e1cf683a3d4fe66a262bdb495128ff37a2e9a7426",
+      "triangles": "3ef5a3ea0b01f51ae957e998cbebeaccddaf33151d38657fab5ef5c208022796",
+      "triangle_uv": "e797d5f90b43a6f73dab4152c885f52ae4803c243d1f84e2f2bdd083128f71e9"
+    },
+    "CC0_helper-l-eye_UNAPPROVED": {
+      "positions": "6e6dbf72f1e0270e7ce8f3cbddc2d42a171f7d543a5476fa9b08fdc86bf982da",
+      "triangles": "675ece6aba37bbc7a79c669a9dde4199742efce936b9bd324ab79a52f13341a7",
+      "triangle_uv": "8c91ad061f8c014b22a888ea57bced96eb28b7c81777e98f8010fa19b0a57bd4"
+    },
+    "CC0_helper-r-eye_UNAPPROVED": {
+      "positions": "8ec6ad6be7072af94ecd8d6a16358d4a6eff68026f60abd46421f12df1b84d90",
+      "triangles": "e989cd3ea40ca70545f798ef50cd30c4effc74cbec0a22af8480df6ebd7d7e14",
+      "triangle_uv": "477640d85435f8c75c9002d08df8be3220395d3254a4ed1c2fd3a56478838e8a"
+    }
+  },
+  "matched_prior_raster_reused": true,
+  "no_uv_reunwrap": true,
+  "no_geometry_changes": true,
+  "source_image_unchanged": true,
+  "source_rgb_sampling": "Bilinear along traced local source curves; darkness/proximity/endpoint alpha. No new source detail.",
+  "feature_transfers": [
+    {
+      "id": "screen_left_brow",
+      "visible_source_only": true,
+      "target_curve_length_working_m": 0.013761252325687033,
+      "source_curve_length_px": 19.112850452343103,
+      "source_px_per_working_m": 1388.888888888889,
+      "painted_surface_samples": 380
+    },
+    {
+      "id": "screen_right_brow",
+      "visible_source_only": true,
+      "target_curve_length_working_m": 0.024416541656440603,
+      "source_curve_length_px": 33.91186341172307,
+      "source_px_per_working_m": 1388.888888888889,
+      "painted_surface_samples": 685
+    },
+    {
+      "id": "screen_left_upper_lash",
+      "target_curve_length_working_m": 0.033689874918248104,
+      "source_curve_length_px": 34.86705274888697,
+      "source_px_per_working_m": 1034.9415910120001,
+      "painted_surface_samples": 21015
+    },
+    {
+      "id": "screen_right_upper_lash",
+      "target_curve_length_working_m": 0.0336850729509114,
+      "source_curve_length_px": 40.124968834452666,
+      "source_px_per_working_m": 1191.1795142295223,
+      "painted_surface_samples": 19025
+    }
+  ],
+  "inferred_brow_opacity": 0.85,
+  "head_png_sha256": "616521d426ecee9b4867518ca41e0c39b5a399f9130a21f68bdb09638cbb9fa5",
+  "iris_png_hashes_unchanged": true,
+  "changed_head_pixels": 18353,
+  "pre_restore_nonlocal_rounding_pixels": 21,
+  "maximum_nonlocal_rounding_delta": 1,
+  "outside_band_restored_exactly_from_v1": true,
+  "changed_pixels_outside_allowed_feature_band": 0,
+  "paid_submissions": 0,
+  "spent_credits": 0,
+  "scope": "Material transfer only; not likeness or producer acceptance"
+}

@@ -1,0 +1,10 @@
+{
+  "four_source_hashes_match": true,
+  "input_blend_sha256_unchanged": true,
+  "all_geometry_controls_and_uv_equal": true,
+  "active_packed_png_hashes_match_disk": true,
+  "eye_pngs_byte_identical": true,
+  "reopened_decoded_rgba_identical": true,
+  "decoded_changed_bytes": 0,
+  "scope": "Technical preservation only; no likeness/rig/game/device acceptance."
+}

@@ -1,0 +1,9 @@
+{
+  "status": "NOT_ADOPTED",
+  "observed_defect": "Observed brow fragments and inferred hidden continuation appear disconnected, with abrupt opacity/height differences.",
+  "cause": "Inferred curve failed to join actual transferred endpoint positions; hard observed-region subtraction removed overlap.",
+  "correction": "Join authored continuation through exact observed target samples, remove hard subtraction and use a continuous underpaint. Hidden continuation remains authored, not measured.",
+  "paid_submissions": 0,
+  "credits": 0,
+  "independent_reopen_for_archived_trial": false
+}

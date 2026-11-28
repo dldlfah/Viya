@@ -1,0 +1,41 @@
+{
+  "stage": "B-03-04",
+  "role": "planning/art",
+  "date_kst": "2026-11-29",
+  "verified_remote_parent": "1572e5bdd255563b4edc5181093483ed30281782",
+  "status": "IN_PROGRESS_REFERENCE_APPEARANCE_NOT_PASSED",
+  "current_editable_file": "viya_face_surface_transfer.blend",
+  "output_sha256": "badd7ca9dfc4c0dc10269856fbd7f340776cd2c89aba94d96c24770c91fff59a",
+  "completed_local_work": [
+    "Traced visible source brow and upper-lash RGB onto existing surface UV without whole-front image projection.",
+    "Separated visible brow evidence from authored hair-occluded continuation; no source mirroring.",
+    "Rejected first disconnected-brow trial, then joined continuous authored underpaint to exact observed endpoints.",
+    "Preserved all source geometry/controls, original and new UV, iris PNGs and source images; independently reopened and rerendered."
+  ],
+  "visual_findings": [
+    "Upper-lash lines are stronger and source color/weight is now visible.",
+    "Hard blank gaps in the first brow trial are reduced.",
+    "Brow fragment-to-extension thickness/opacity is still uneven, especially in enlarged and oblique comparisons.",
+    "Mouth contour and expression still differ from the source; unchanged in this unit."
+  ],
+  "not_adopted_as_final_face": true,
+  "next_single_work": "Continue04 locally: refine the brow observed/hidden-join taper and transfer the reference mouth contour/color through the existing mouth loops; compare expression in front/both obliques/profiles. Preserve current UV, geometry controls/R4 and iris maps; no UV restart or whole-face regeneration.",
+  "producer_face_acceptance": "PENDING_B03_05",
+  "reference_likeness_approved": false,
+  "completed_plan_b_chapters": 1,
+  "game_integration": false,
+  "engine_device_verification": false,
+  "paid_submissions": 0,
+  "spent_credits": 0,
+  "balance_requeried": false,
+  "new_paid_budget_assigned": false,
+  "historical_only": {
+    "paid_submissions": 3,
+    "spent_credits": 100,
+    "last_observed_balance": 297
+  },
+  "numeric_eye_surface_contact_verified": false,
+  "full_self_intersection_verified": false,
+  "rig_deformation_verified": false,
+  "final_engine_material_verified": false
+}
