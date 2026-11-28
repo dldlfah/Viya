@@ -1,0 +1,12 @@
+{
+  "reason": "First surface colors revealed a round/open eye reading compared with the mature reference. Return03 locally before accepting04; preserve original shape keys and add one reversible correction.",
+  "new_key": "R4_EyeReadability",
+  "width_contraction_fraction": 0.12,
+  "upper_lid_lowering_m": 0.0018,
+  "lower_lid_lift_m": 0.0003,
+  "center_x_m": 0.0359445,
+  "center_z_m": 0.11056,
+  "support_x_m": 0.028,
+  "support_z_m": 0.026,
+  "scope": "Authored corrective trial values, not 3D measurements fitted from uncalibrated image pixels. Existing source head and all old keys stay unchanged."
+}

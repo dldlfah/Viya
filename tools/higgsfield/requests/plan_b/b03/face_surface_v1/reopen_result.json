@@ -1,0 +1,16 @@
+{
+  "output_sha256": "f0eddaf89a763d9180f1efd2b99b45c347b70bc5c87111e02e047d318276765f",
+  "all_source_controls_original_uv_equal": true,
+  "local03_return_key_preserved": true,
+  "new_uv_material_image_metadata_equal": true,
+  "original_clay_materials_retained": true,
+  "external_blend_dependencies": 0,
+  "used_file_images_packed": true,
+  "packed_png_hashes_match": {
+    "head_color.png": "f2e3a6b3238d5f9df9d6c6bac6a3d124c76b9e0161f080a18d5c47a10c35a724",
+    "eye_screen_right.png": "3e27febf13d5666a2ea6bee89c97065324d0f5fdb3cf805838afbe1c1589f6a0",
+    "eye_screen_left.png": "e8ea50bcff44c585be163405e166e8e7525a83ef96d580f644b807621c4aa4e2"
+  },
+  "input_unchanged": true,
+  "scope": "Persistence only; geometry includes the documented local03 return, not likeness/producer/runtime acceptance"
+}

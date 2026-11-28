@@ -1,0 +1,193 @@
+{
+  "references": [
+    {
+      "id": "front",
+      "path": "assets/characters/plan_b_viya/candidate_03/references/front.png",
+      "sha256": "28131fc01dbff28b3a5475ee2f73fcb37e5f9d7e81ab26477e9a1ce092b2b11b",
+      "face_crop_size_px": [
+        180,
+        170
+      ]
+    },
+    {
+      "id": "screen_right_profile",
+      "path": "assets/characters/plan_b_viya/candidate_03/references/screen_right_profile.png",
+      "sha256": "f786e9c4c8001418348822fbcc138e4ee97b08844205ae8c0610c55c19a988be",
+      "face_crop_size_px": [
+        180,
+        170
+      ]
+    },
+    {
+      "id": "screen_left_profile",
+      "path": "assets/characters/plan_b_viya/candidate_03/references/screen_left_profile.png",
+      "sha256": "f0d229c4ca6c8a1f51bfe6a1dfc921195b1943e6d61f8a1c919aca2d152819df",
+      "face_crop_size_px": [
+        180,
+        170
+      ]
+    },
+    {
+      "id": "back",
+      "path": "assets/characters/plan_b_viya/candidate_03/references/back.png",
+      "sha256": "38f52e780b9c1fa91fce35534a1e649dbf562aa1365e6aee9c26ed0034ee82ff",
+      "face_crop_size_px": [
+        180,
+        170
+      ]
+    }
+  ],
+  "visible_front_face_inspection_px": [
+    160,
+    125
+  ],
+  "front_iris_source_windows_px": [
+    13,
+    13
+  ],
+  "source_palette_samples": {
+    "skin": {
+      "source_xy": [
+        793,
+        211
+      ],
+      "median3x3_rgb": [
+        243.0,
+        199.0,
+        190.0
+      ]
+    },
+    "brow": {
+      "source_xy": [
+        815,
+        148
+      ],
+      "median3x3_rgb": [
+        101.0,
+        59.0,
+        52.0
+      ]
+    },
+    "upper_liner": {
+      "source_xy": [
+        810,
+        167
+      ],
+      "median3x3_rgb": [
+        9.0,
+        7.0,
+        4.0
+      ]
+    },
+    "lip_tint": {
+      "source_xy": [
+        775,
+        230
+      ],
+      "median3x3_rgb": [
+        242.0,
+        186.0,
+        181.0
+      ]
+    },
+    "lip_line": {
+      "source_xy": [
+        780,
+        227
+      ],
+      "median3x3_rgb": [
+        142.0,
+        73.0,
+        72.0
+      ]
+    }
+  },
+  "authored_palette": {
+    "skin": [
+      243.0,
+      199.0,
+      190.0
+    ],
+    "brow": [
+      101.0,
+      59.0,
+      52.0
+    ],
+    "liner": [
+      9.0,
+      7.0,
+      4.0
+    ],
+    "mouth_line": [
+      142.0,
+      73.0,
+      72.0
+    ],
+    "lip_tint": [
+      242.0,
+      186.0,
+      181.0
+    ],
+    "blush": [
+      236,
+      159,
+      155
+    ],
+    "eye_wash": [
+      184,
+      111,
+      104
+    ],
+    "lower_lid": [
+      152,
+      76,
+      72
+    ]
+  },
+  "authored_line_method": "Existing mesh-loop anchored eye/mouth curves; separate reference-informed brow curves. New surface paint, not claimed as unchanged reference pixels.",
+  "head_uv_audit": {
+    "resolution": [
+      1024,
+      1024
+    ],
+    "raster_covered_pixels": 605859,
+    "multiple_hit_pixels": 0,
+    "zero_area_uv_triangles": 0,
+    "texels_per_working_m_p10_median_p90": [
+      922.8446340810335,
+      1433.8585788385208,
+      2718.0721945917735
+    ]
+  },
+  "surface_paint": {
+    "face_region_pixels": 118450,
+    "gutter_pixels": 52350,
+    "method": "Locally authored surface palette and loop-bound line curves, baked through nonplanar unwrapped head UV. No whole-front photo projection."
+  },
+  "texture_sha256": {
+    "head_color.png": "9d4a00cf93b9afb7a13cf887f6a7d864f3bc14a27a444cb7392409878f0c2841",
+    "eye_screen_right.png": "9b1c4b81cae51bcce247ab040b0909cfde521138e2f835ec5c06332bceb29230",
+    "eye_screen_left.png": "14b9b4595263d4de17dd47114680b5fce973e53a7b816fee57107f5362349544"
+  },
+  "texture_sizes": {
+    "head_color.png": [
+      1024,
+      1024
+    ],
+    "eye_screen_left.png": [
+      256,
+      256
+    ],
+    "eye_screen_right.png": [
+      256,
+      256
+    ]
+  },
+  "original_images_unchanged": true,
+  "paid_submissions": 0,
+  "spent_credits": 0,
+  "status": "Unreviewed local surface-color trial; not accepted VIYA face",
+  "new_source_detail_recovered": false,
+  "source_iris_resampled_into_eye_atlas": true,
+  "service_upscale": false
+}

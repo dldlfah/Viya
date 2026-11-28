@@ -1,0 +1,58 @@
+{
+  "stage": "B-03-04",
+  "role": "planning/art",
+  "status": "IN_PROGRESS_REFERENCE_APPEARANCE_NOT_PASSED",
+  "date_kst": "2026-11-29",
+  "verified_remote_parent": "eb6fb16b0b1f56f660880b4dddf28cf3ec6b361e",
+  "current_editable_file": "viya_face_surface.blend",
+  "uv_checkpoint": "viya_face_uv_checkpoint.blend",
+  "technical_results": [
+    "Separate angle-based head UV and per-eye ellipsoid UV, original UV and all source keys retained.",
+    "1024 head color plus two256 eye maps, locally authored loop-bound lines and source palette; source iris windows13px resampled, no detail restoration.",
+    "2048 sampling raster multiple-hit and zero-area UV triangles0; output1024 with surface supersampling.",
+    "Packed PNG hashes and independent reopening/render pixels verified."
+  ],
+  "first_surface_failure": "Round/open eye reading and weak brows/lip line diverged from the mature reference. First color trial not adopted.",
+  "local03_return": {
+    "new_key": "R4_EyeReadability",
+    "source_keys_uv_mesh_preserved": true,
+    "evaluated_geometry_changed": true,
+    "skin_changed_vertices": 2118,
+    "skin_max_displacement_m": 0.0023625434395282067,
+    "eye_vertices_changed_each": 72,
+    "eye_max_displacement_m": 0.0021413807008042476,
+    "previous56_aperture_lock_not_claimed_for_current_form": true,
+    "reviewed_in_clay_and_color": true
+  },
+  "observed_improvements": [
+    "Narrower upper-lid opening reduces the overly round eye impression.",
+    "Stronger tapered brow/upper liner and clearer mouth line.",
+    "Surface supersampling reduces pixel-level line aliasing while retaining1024 output."
+  ],
+  "remaining_visual_differences": [
+    "Authored brow and upper-lash shapes still differ from the specific reference artwork.",
+    "Mouth line/expression and fine line continuity need reference-led review at multiple views."
+  ],
+  "not_failure_by_itself": [
+    "Hair/body/weapon are not authored at this face-surface stage; their absence is not claimed as a face-texture defect."
+  ],
+  "next_single_work": "Continue04 from this file: transfer reference brow/upper-lash line/color locally through the surface UV, replace simplistic curve styling, review both obliques/profiles and mouth continuity. No whole-front projection, mirroring, UV restart or paid source generation.",
+  "producer_face_acceptance": "PENDING_B03_05",
+  "reference_likeness_approved": false,
+  "completed_plan_b_chapters": 1,
+  "game_integration": false,
+  "engine_device_verification": false,
+  "paid_submissions": 0,
+  "spent_credits": 0,
+  "balance_requeried": false,
+  "new_paid_budget_assigned": false,
+  "historical_only": {
+    "paid_submissions": 3,
+    "spent_credits": 100,
+    "last_observed_balance": 297
+  },
+  "numeric_eye_surface_contact_verified": false,
+  "full_self_intersection_verified": false,
+  "rig_deformation_verified": false,
+  "final_engine_material_verified": false
+}
