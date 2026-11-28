@@ -1,0 +1,23 @@
+{
+  "snapshot_equal": true,
+  "verified_fields": [
+    "base_positions",
+    "basis_shape",
+    "blend_weights",
+    "crop_pixels",
+    "edited_shape",
+    "original_uv",
+    "polygons",
+    "shape_value",
+    "source_texture_pixels",
+    "trial_uv",
+    "uv_switch",
+    "vertices"
+  ],
+  "shape_changed_vertices": 32,
+  "unexpected_shape_changes": 0,
+  "source_hashes_unchanged": true,
+  "no_armatures": true,
+  "blend_sha256": "69196607cfed69f17cff46281903e6e44b58cbebc961e5bde67559687fb624b3",
+  "scope": "file persistence/local edit only; visual quality and game/device approval not granted"
+}

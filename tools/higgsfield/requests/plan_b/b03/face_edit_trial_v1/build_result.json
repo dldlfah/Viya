@@ -1,0 +1,318 @@
+{
+  "stage": "B-03-02 local capability trial; not accepted VIYA",
+  "blender_version": "4.3.2",
+  "inputs": {
+    "raw_glb_sha256": "6a26853df3fd3fa2d0f3e85715d7ef8e3d28f4ed383b6eedb36d1802cdc6903e",
+    "linked_review_blend_sha256": "4b311e1572e4c51bdb0a18eac79ee9390c921c001c710a9b3bc8cb5bd03b4192",
+    "front_sha256": "28131fc01dbff28b3a5475ee2f73fcb37e5f9d7e81ab26477e9a1ce092b2b11b",
+    "source_face_crop_xyxy": [
+      665,
+      115,
+      875,
+      290
+    ],
+    "crop_sha256": "8fcc0729a58ee651e5b4f82494ac44c9158969698f50e2071fc7a81a53fc4ed0"
+  },
+  "source_scope": "candidate03 diagnostic only, not adopted. Rejected01/02 not loaded.",
+  "geometry_edit": {
+    "kind": "reversible local shape key",
+    "changed_vertices": 32,
+    "maximum_delta_world_m": 0.0026867884114202675,
+    "delta_records": [
+      {
+        "vertex": 625,
+        "delta_world_m": [
+          0,
+          -0.00020746394354042612,
+          0
+        ]
+      },
+      {
+        "vertex": 6994,
+        "delta_world_m": [
+          0,
+          -3.879492889409343e-05,
+          0
+        ]
+      },
+      {
+        "vertex": 7006,
+        "delta_world_m": [
+          0,
+          -0.00022392694694582473,
+          0
+        ]
+      },
+      {
+        "vertex": 7007,
+        "delta_world_m": [
+          0,
+          -0.00022392694694582473,
+          0
+        ]
+      },
+      {
+        "vertex": 7008,
+        "delta_world_m": [
+          0,
+          -0.0013822749881939838,
+          0
+        ]
+      },
+      {
+        "vertex": 7010,
+        "delta_world_m": [
+          0,
+          -0.0002501963398776473,
+          0
+        ]
+      },
+      {
+        "vertex": 7011,
+        "delta_world_m": [
+          0,
+          -0.0002501963398776473,
+          0
+        ]
+      },
+      {
+        "vertex": 7012,
+        "delta_world_m": [
+          0,
+          -0.0002501963398776473,
+          0
+        ]
+      },
+      {
+        "vertex": 7159,
+        "delta_world_m": [
+          0,
+          -0.00015747120051666283,
+          0
+        ]
+      },
+      {
+        "vertex": 7160,
+        "delta_world_m": [
+          0,
+          -0.0013550422436840687,
+          0
+        ]
+      },
+      {
+        "vertex": 7161,
+        "delta_world_m": [
+          0,
+          -0.0013550422436840687,
+          0
+        ]
+      },
+      {
+        "vertex": 7165,
+        "delta_world_m": [
+          0,
+          -0.0026379658507239595,
+          0
+        ]
+      },
+      {
+        "vertex": 7166,
+        "delta_world_m": [
+          0,
+          -0.0026379658507239595,
+          0
+        ]
+      },
+      {
+        "vertex": 8598,
+        "delta_world_m": [
+          0,
+          -3.3530383021810285e-05,
+          0
+        ]
+      },
+      {
+        "vertex": 8599,
+        "delta_world_m": [
+          0,
+          -3.3530383021810285e-05,
+          0
+        ]
+      },
+      {
+        "vertex": 8600,
+        "delta_world_m": [
+          0,
+          -3.3530383021810285e-05,
+          0
+        ]
+      },
+      {
+        "vertex": 8601,
+        "delta_world_m": [
+          0,
+          -0.0022298715768462396,
+          0
+        ]
+      },
+      {
+        "vertex": 8602,
+        "delta_world_m": [
+          0,
+          -0.0022298715768462396,
+          0
+        ]
+      },
+      {
+        "vertex": 30537,
+        "delta_world_m": [
+          0,
+          -0.00022436086899677403,
+          0
+        ]
+      },
+      {
+        "vertex": 30538,
+        "delta_world_m": [
+          0,
+          -0.00022436086899677403,
+          0
+        ]
+      },
+      {
+        "vertex": 48535,
+        "delta_world_m": [
+          0,
+          -0.00011525076471533219,
+          0
+        ]
+      },
+      {
+        "vertex": 48538,
+        "delta_world_m": [
+          0,
+          -0.0026867884114202675,
+          0
+        ]
+      },
+      {
+        "vertex": 48539,
+        "delta_world_m": [
+          0,
+          -0.0026867884114202675,
+          0
+        ]
+      },
+      {
+        "vertex": 48540,
+        "delta_world_m": [
+          0,
+          -0.0005911590355310455,
+          0
+        ]
+      },
+      {
+        "vertex": 48541,
+        "delta_world_m": [
+          0,
+          -0.0005911590355310455,
+          0
+        ]
+      },
+      {
+        "vertex": 48542,
+        "delta_world_m": [
+          0,
+          -0.0005911590355310455,
+          0
+        ]
+      },
+      {
+        "vertex": 48543,
+        "delta_world_m": [
+          0,
+          -0.0005911590355310455,
+          0
+        ]
+      },
+      {
+        "vertex": 48544,
+        "delta_world_m": [
+          0,
+          -0.00018797354812187796,
+          0
+        ]
+      },
+      {
+        "vertex": 48545,
+        "delta_world_m": [
+          0,
+          -0.00018797354812187796,
+          0
+        ]
+      },
+      {
+        "vertex": 48546,
+        "delta_world_m": [
+          0,
+          -0.00018797354812187796,
+          0
+        ]
+      },
+      {
+        "vertex": 48547,
+        "delta_world_m": [
+          0,
+          -0.00018797354812187796,
+          0
+        ]
+      },
+      {
+        "vertex": 48554,
+        "delta_world_m": [
+          0,
+          -0.00034231890061778904,
+          0
+        ]
+      }
+    ]
+  },
+  "uv_edit": {
+    "kind": "independent mouth projection UV layer + smooth local material blend, source pixels unchanged",
+    "weighted_vertices": 76,
+    "projection": {
+      "source_x": "770 + (world_x + .004)*1250",
+      "source_y": "178 - (world_z - 1.590)*1420"
+    },
+    "projection_scope": "manual test registration only, not calibrated anatomy or producer-approved face"
+  },
+  "checks": {
+    "original_basis_unchanged": true,
+    "original_uv_unchanged": true,
+    "topology_unchanged": true,
+    "rigs": 0,
+    "paid_submissions": 0,
+    "spent_credits": 0
+  },
+  "expected_reopen_snapshot": {
+    "vertices": 67666,
+    "polygons": 67596,
+    "base_positions": "6f2a7ec23427d08e1c569458bafc1570adfb6b5c55b03bdb61f1ff73f845a033",
+    "basis_shape": "6f2a7ec23427d08e1c569458bafc1570adfb6b5c55b03bdb61f1ff73f845a033",
+    "edited_shape": "b38b957cfda1eb8992c7a5ac205e11eda7da3157b042a7cf237a2a3d523da104",
+    "original_uv": "c8363b254e8495770873e56d7c3bf064a618c0733bd6856b284b9a95f319c383",
+    "trial_uv": "4cd0527b534d2838761989484e6285ca5cf02186882b3286ce69c836c6241d75",
+    "blend_weights": "8ec72bb5cbd3b129d0d52cc513f215a74579a957d3dbc9fb7a105d7cb4ee3162",
+    "source_texture_pixels": "29eefd036b9bde9cd92c627846eb98995077e2f8b61aab89da3d751632473a8c",
+    "crop_pixels": "27429fd9b90cebf54bffcd21faa1483d3adc2a8d412294872e92991a90225906",
+    "shape_value": 1.0,
+    "uv_switch": 1.0
+  },
+  "limits": [
+    "Local nose/mouth editing capability only",
+    "No eye repaint, full face reconstruction, retopology, rig or animation acceptance",
+    "Front projection may stretch in side/high-angle views; source face/hair remain simplified",
+    "Original texture is library-linked to the tracked unapproved03 review file; keep dependency",
+    "No game import or device verification"
+  ]
+}

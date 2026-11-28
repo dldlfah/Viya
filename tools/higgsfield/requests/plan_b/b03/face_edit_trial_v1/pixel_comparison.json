@@ -1,0 +1,34 @@
+{
+  "reopen_render": {
+    "equal_pixels": true,
+    "changed_pixels": 0,
+    "bbox_xyxy": null,
+    "width": 384,
+    "height": 384
+  },
+  "uv_only_change": {
+    "equal_pixels": false,
+    "changed_pixels": 4651,
+    "bbox_xyxy": [
+      145,
+      188,
+      243,
+      254
+    ],
+    "width": 384,
+    "height": 384
+  },
+  "geometry_change": {
+    "equal_pixels": false,
+    "changed_pixels": 4850,
+    "bbox_xyxy": [
+      26,
+      104,
+      375,
+      384
+    ],
+    "width": 384,
+    "height": 384
+  },
+  "interpretation": "Pixel differences demonstrate a visible operation, not reference likeness. Clay differences include renderer shading effects. Reopen equality checks persistence, not appearance approval."
+}

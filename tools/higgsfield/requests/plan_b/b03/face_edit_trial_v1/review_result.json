@@ -1,0 +1,38 @@
+{
+  "stage": "B-03-02",
+  "execution_status": "COMPLETE_LIMITED_LOCAL_EDIT_TRIAL",
+  "technical_result": "PASS_LOCAL_NOSE_SHAPE_KEY_AND_MOUTH_UV_SAVE_REOPEN",
+  "production_face_quality": "NOT_ACCEPTED",
+  "source_candidate_03": "UNAPPROVED_DIAGNOSTIC_NOT_PRODUCTION_BASE",
+  "rejected_candidates_01_02_loaded": false,
+  "verified_edit": {
+    "geometry_vertices": 32,
+    "maximum_world_displacement_m": 0.0026867884114202675,
+    "mouth_weighted_vertices": 76,
+    "reopened_snapshot_fields": 12,
+    "unexpected_shape_changes": 0
+  },
+  "visual_review": {
+    "front": "Mouth line placement changed; eyes/head/hair remain simplified and unlike approved front drawing",
+    "oblique": "Local mouth placement visible; flat facial geometry and hard chin/neck transition remain",
+    "clay": "Local edit operates on existing real mesh; original coarse facial shape remains inadequate",
+    "full_profile_high_angle_game_size": "NOT_VERIFIED"
+  },
+  "not_proven": [
+    "Full canonical face reconstruction",
+    "Eye/eyelid and complete face UV quality",
+    "Clean animation topology and deformation",
+    "Godot integration",
+    "Windows/mobile performance",
+    "Producer final approval"
+  ],
+  "cost": {
+    "new_paid_submissions": 0,
+    "new_credits_deducted": 0,
+    "balance_requeried": false,
+    "prior_spent_credits": 100,
+    "prior_last_observed_balance": 297
+  },
+  "plan_b_chapters_complete": 1,
+  "next": "B-03-03 small editable head-shape study against front and both profiles; no automatic production reuse of candidate03"
+}
