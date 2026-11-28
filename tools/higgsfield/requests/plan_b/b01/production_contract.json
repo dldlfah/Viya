@@ -1,0 +1,72 @@
+{
+  "plan": "B",
+  "chapter": "B-01",
+  "date_kst": "2026-11-28",
+  "status": "Planning baseline defined; final character and B-07 physical-device validation not performed",
+  "controls_source": "producer_decisions.json",
+  "baseline_source": "docs/PLANNED_WORK.md section97; production code421f98471b54401109a74befac4d4f728d16d747",
+  "asset_scope": {"characters": 1, "costumes": 1, "rifles": 1, "costume_switching_system": false},
+  "asset_format": {
+    "editable_master": ".blend with textures and editable meshes/skin/rig/actions",
+    "runtime_export": "glTF2.0 GLB; preserve original output and SHA-256 separately",
+    "provider_native_blend_expected": false,
+    "blender_meters_per_unit": 1,
+    "blender_up": "+Z",
+    "blender_model_forward": "-Y",
+    "godot_up": "+Y",
+    "godot_model_forward": "+Z",
+    "root": "Foot-ground center, scale1",
+    "height_meters_working_reference": 1.72,
+    "attachment_names": ["hand_r", "hand_l", "Muzzle"],
+    "rig_mapping": "Inspect actual generated hierarchy/weights before mapping; no claim that auto-rig names match the contract",
+    "weapon": "Separate rigid rifle; right-hand attachment, weapon-local left-hand support point and muzzle position/forward axis"
+  },
+  "animation_baseline": {
+    "clips": ["idle", "locomotion", "aim_fire", "ultimate", "hurt", "death"],
+    "locomotion": "One authored full-body alternating in-place forward gait; rotate the same actor to movement direction in the selected first control scheme",
+    "fire": "Coordinated upper-body stabilization/small recoil blended over idle/locomotion without resetting gait",
+    "future_independent_aim": "Keep movement and facing states distinct; backwards/strafe-with-fixed-aim clips are future additions, not required for the selected initial control",
+    "timing": "Author actual time/contact landmarks and loop seam; do not force17/20/47 frames or copy old2D phase/muzzle coordinates",
+    "authority": "Simulation owns movement, firing interval, shot direction and damage. Animation expresses events; it does not set combat speed"
+  },
+  "game_display": {
+    "renderer": "GL Compatibility baseline",
+    "logical_ui": [1280, 720],
+    "fixed_ground_yaw_degrees": -18,
+    "fixed_camera_elevation_degrees": 55,
+    "current_character_display_reference": [69, 85.56],
+    "current_pivot_reference": [100, 248],
+    "framing": "Include hair, cloth, rifle tip and boots at all used poses/rotations with margin; final character framing may differ from the temporary probe. Do not align each pose by alpha bounds",
+    "world_move_speed": 235,
+    "stride_world_units": 155
+  },
+  "first_device_validation": {
+    "device": "Samsung Galaxy S20+",
+    "orientation": "landscape",
+    "initial_refresh_rate_hz": 60,
+    "target_fps": 60,
+    "target_frame_time_ms": 16.666667,
+    "resolution": "Preserve current logicalUI1280x720; record actual Android display mode, window/framebuffer and3D viewport resolutions separately. Do not claim logical UI dimensions are actual GPU render resolution",
+    "comparison": "Same map, save/seed, enemy count and input for existing rendering and Plan B preview",
+    "sample_times_seconds": [180, 210, 240, 300],
+    "metrics": ["frame-time median", "frame-time p95", "frames over33.333ms", "input-to-first-visible-response", "actual display/render resolution", "sustained performance and temperature/throttling observations"],
+    "sustained_session": "At least10minutes of continuous play or consecutive same-stage runs covering that time; record start/end conditions",
+    "device_details": ["model code/SoC/RAM", "Android version", "graphics driver/build", "display refresh/resolution", "power/game mode", "charging/battery and initial thermal state"],
+    "acceptance": "Measure against60fps/16.67ms target and check recurring input/visual stalls; below-target results remain a failure/limitation requiring improvement or an explicit evidence-based producer criterion decision. Never mark an unrun device PASS",
+    "extreme1540_entity_stress_scope": "Separate known stress issue, not silently included as already solved",
+    "status": "NOT_VERIFIED"
+  },
+  "initial_gameplay_checks": [
+    "Nonzero movement input determines facing through the existing screen/world transform",
+    "Releasing movement retains the last valid facing; before the first movement use the existing valid initial direction",
+    "Basic rifle fires in facing direction during active combat even without enemies",
+    "Enemies behind/off the aim line do not turn the basic rifle or hero",
+    "Each burst bullet snapshots direction at its actual firing tick",
+    "Other skills retain their own targeting without overwriting hero-facing state",
+    "Pause, level-choice and terminal-state firing guards remain",
+    "Immediate wall/hit consumption still produces the committed-shot visual event",
+    "Do not reset gait on shooting/turning or modify damage/firing interval/movement speed"
+  ],
+  "official_device_reference": "https://news.samsung.com/global/introducing-the-samsung-galaxy-s20-change-the-way-you-experience-the-world",
+  "device_reference_scope": "S20+ display supports60/120Hz. This is a device specification, not evidence VIYA meets either frame rate"
+}

@@ -1,0 +1,21 @@
+{
+  "plan": "B",
+  "chapter": "B-01",
+  "date_kst": "2026-11-28",
+  "source": "Producer replies to the in-chat facing/fire policy and first mobile device questions",
+  "status": "CONFIRMED",
+  "facing_input": "movement_direction",
+  "on_movement_input_release": "retain_last_nonzero_facing",
+  "basic_rifle_automatic_fire": true,
+  "basic_rifle_fire_without_enemies_during_combat": true,
+  "basic_rifle_automatic_enemy_targeting": false,
+  "initial_dual_stick_aim": false,
+  "first_mobile_validation_device": "Samsung Galaxy S20+",
+  "device_model_code_soc_os_ram": "Record from the actual device during B-07; not assumed from the product family name",
+  "scope": "First Plan B gameplay prototype; existing targeting behavior is unchanged until production integration",
+  "unchanged": [
+    "Existing skill-specific homing/ricochet/area targeting rules are separate",
+    "Damage, firing interval and movement speed are not adjusted by this decision",
+    "No change to pause, level-selection or terminal combat-state firing guards is authorized by continuous firing during active combat"
+  ]
+}

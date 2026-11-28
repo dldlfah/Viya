@@ -1,0 +1,75 @@
+{
+  "date_kst": "2026-11-28",
+  "new_generation": false,
+  "game_assets_changed": false,
+  "references": [
+    {
+      "id": "ART-001",
+      "role": "Approved design direction",
+      "expected_sha256": "ccf3c90ea8383e0fe8eec95380bec181d9485e5d29196bb856dbe5c7bcd974d0",
+      "status": "Exact original file not resolved by scoped related Library searches; approval direction retained from ART_APPROVAL.md",
+      "usable_as_resolved_generation_input": false
+    },
+    {
+      "id": "ART-004",
+      "role": "Existing modeling reference sheet; not final design/model approval",
+      "library_file_id": "libfile_9ce9be3ca0588191a13df5181f9cb696",
+      "filename": "비야 캐릭터 모델링 제작 시트.png",
+      "sha256": "94978de2e081fcd2f9c6356b57b4d66a5e6683432447f1d0f0faa68a59bf5a28",
+      "size": [
+        1448,
+        1086
+      ],
+      "mode": "RGB",
+      "bytes": 3134163,
+      "status": "Recovered and visually inspected; hash matches existing ASSET_MANIFEST ART-004; multiple figures/panels, not a default single-character generation input",
+      "git_binary_registered": false
+    },
+    {
+      "id": "ART-004 alternate encoding",
+      "library_file_id": "libfile_be2b3dbc5ff48191ac4ee39e3908fb1a",
+      "filename": "비야 캐릭터 모델링 제작 시트(1).png",
+      "sha256": "10827884efea667d0c7a5032e0616cb1b347f586b09e8d22078e2958aebc5293",
+      "size": [
+        1448,
+        1086
+      ],
+      "mode": "RGBA",
+      "bytes": 3957493,
+      "status": "Decoded RGB pixels exactly match ART-004, alpha uniformly255; not an independent approved design"
+    },
+    {
+      "id": "GEN-001",
+      "role": "Existing full-body front A-pose derivative; cost-preflight reference only",
+      "source_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3LHdo37hN3iiYXd8WT9stnWXw4M/hf_20261116_174554_5a7ff135-f678-489d-98af-4acab0f49863.png",
+      "library_file_id": "libfile_d64a9bce081c8191a2a2300eb718410d",
+      "filename": "GEN-001_front_apose.png",
+      "sha256": "000b46195a375a713aaa4e75972a47bacf92a82cdbe21e5873168a00e0195f44",
+      "size": [
+        1728,
+        2304
+      ],
+      "mode": "RGB",
+      "bytes": 4248392,
+      "status": "Downloaded unchanged, visually inspected and archived. No weapon; hair/cloth/armor/silhouette are derivative and not final approved multi-view geometry. No submission."
+    },
+    {
+      "id": "Current game Viya",
+      "role": "Accepted current in-game appearance/gait comparison",
+      "resource": "res://assets/characters/pilot_32/game075_sw_run_fire_candidate03/viya_game075_frames.tres",
+      "status": "36 clips/363 frames preserved; current E/SE/S/SW frames and ART_APPROVAL are comparison evidence"
+    },
+    {
+      "id": "GEN-005",
+      "role": "Existing illustration candidate only",
+      "path": "assets/references/GEN-005_viya_combat_pose_three_quarter_front.png",
+      "status": "Not promoted to approved canonical reference"
+    },
+    {
+      "id": "GEN-002/003/004",
+      "role": "Old side/back derivatives",
+      "status": "Do not treat inconsistent views as a common 3D body; old turnaround QA failures remain"
+    }
+  ],
+  "selection_status": "Reference roles prepared; exact ART-001 original unresolved. No full contact sheet or mirrored multiview selected for paid generation. GEN-001 quote does not approve it as final B-03 input."
+}

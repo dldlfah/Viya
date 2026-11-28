@@ -395,3 +395,15 @@
 
 - [Godot용 GLB](../assets/characters/plan_b_probe/probe.glb)와 [Blender 4.3.2 편집 원본](../assets/characters/plan_b_probe/source/probe.blend). Blender에서 5개 뼈, 스킨, 이동·사격 동작과 오른손의 `Muzzle` 표식을 제작했다. 원본 폴더의 `.gdignore`는 게임 임포트 대상에서 편집 파일을 제외한다.
 - 사용 위치는 `scripts/combat/plan_b_preview.gd`다. 실행 인자를 준 시범 모드에서만 임시 모델을 표시한다. 일반 게임 비야의 승인 스프라이트 자산과 별도 관리한다. Blender 작업이며 외부 생성 작업 ID나 차감 비용은 없다. [실제 표시와 검증](validation/PLAN_B02_PREVIEW.png)
+
+## 플랜B B-01 — 기존 참조 원본 복구/출처 등록 (2026-11-28)
+
+새 원화/3D 생성이나 런타임 자산 변경이 아니다. [참조 감사](../tools/higgsfield/requests/plan_b/b01/reference_audit.json)에 원본 위치·크기/해시·승인 수준을 보존했다. 원본 PNG는 아래 보존 위치에 있으며 GitHub에 이미지 바이너리를 새 등록했다고 주장하지 않는다.
+
+| 참조 | 이번에 확인한 원본/보존 | 상태 |
+| --- | --- | --- |
+| ART-004 | 기존 보존본`libfile_9ce9be3ca0588191a13df5181f9cb696`; RGB1448×1086/3,134,163B; SHA256`94978de2e081fcd2f9c6356b57b4d66a5e6683432447f1d0f0faa68a59bf5a28` | 기존 명세와 해시 일치·시각 확인. 제작 참고 시트이며 최종 모델/디자인 승인 아님 |
+| ART-004 다른 PNG 인코딩 | 기존 보존본`libfile_be2b3dbc5ff48191ac4ee39e3908fb1a`; RGBA1448×1086/3,957,493B; SHA256`10827884efea667d0c7a5032e0616cb1b347f586b09e8d22078e2958aebc5293` | RGB픽셀은ART-004와 동일/알파255. 별도 새 승인 디자인 아님 |
+| GEN-001 전신 A포즈 | 기존Higgsfield 원본 재확보; 보존본`libfile_d64a9bce081c8191a2a2300eb718410d`; RGB1728×2304/4,248,392B; SHA256`000b46195a375a713aaa4e75972a47bacf92a82cdbe21e5873168a00e0195f44` | 새 생성 없음. 무기가 없는 파생 입력/견적 참조이며 최종 승인 원화로 승격하지 않음 |
+
+ART-001의 기록된 정확한 해시 파일은 관련 검색에서 찾지 못했으며 승인 방향/현재 적용 비야를 외형 검수 기준으로 유지한다. 기존 GEN-002~004 불합격 다방향을 정합한 원본으로 합치지 않는다. 이번Higgsfield 조회는 견적 전용2건·제출/차감0이며 현재 게임 자산은 보존했다.
