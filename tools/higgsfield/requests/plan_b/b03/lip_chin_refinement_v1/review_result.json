@@ -1,0 +1,35 @@
+{
+  "unit": "Plan B B-03-03 local lip/chin controls and04 impact review",
+  "date_kst": "2026-11-29",
+  "remote_parent": "1014954e1e25f5f0cd17cd3e1098661d7e76d32c",
+  "local_shape_working_basis": "ACCEPTED_FOR_INTERMEDIATE_FACE_REVIEW",
+  "technical_shape_uv_image_and_reopen_checks": "PASS_WITH_STATED_SCOPE",
+  "whole_face_source_likeness": "DIFFERENCES_REMAIN_NOT_FINAL_PASS",
+  "producer_face_acceptance": "PENDING_EXPLICIT_DECISION",
+  "formal_B03_05_acceptance": "NOT_GRANTED",
+  "changes": [
+    "Independent R6_LipProfile / R6_ChinContour keys preserve all previous controls and image/UV bytes.",
+    "Reduce lip projection; narrow/lower/advance the localized chin tip; add a smooth central mouth rise/corner drop.",
+    "793 skin controls changed, maximum2.396257 workingmm; eye helpers and stated protected control sets unchanged.",
+    "Trial01 passed structural/persistence checks but retained a flat mouth arc. It is archived, not the current candidate."
+  ],
+  "remaining_limitations": [
+    "Head skin/shading/brow and overall expression remain softer/different from the drawings; no exact likeness claim.",
+    "Uncalibrated drawings and different projection/occlusion; no recovered source camera or anatomical dimensions.",
+    "Hair/body/costume/weapon/rig are unmade; absence of hair is a comparison limit, not a sole gate failure.",
+    "No complete self-intersection/contact/rig/game/device check."
+  ],
+  "next_single_task": "Producer intermediate face decision on this exact candidate: accept this face level as the basis for body/costume or specify major remaining face corrections. Do not infer acceptance from silence or a generic next.",
+  "approval_candidate_sha256": "745744338831d2fca5f89de48801e5582c02052417a2c52f4d3aa34ecef087cb",
+  "paid_submissions": 0,
+  "spent_credits": 0,
+  "balance_requery": false,
+  "new_paid_budget_assigned": false,
+  "plan_b_completed_chapters": 1,
+  "plan_b_total_chapters": 8,
+  "production_session": "WAITING_FOR_OFFICIAL_APPROVED_ASSETS",
+  "game_integration": false,
+  "game_execution": false,
+  "device_validation": "NOT_RUN",
+  "producer_final_approval": "NOT_GRANTED"
+}

@@ -1,0 +1,11 @@
+{
+  "output_sha256": "745744338831d2fca5f89de48801e5582c02052417a2c52f4d3aa34ecef087cb",
+  "old_controls_topology_uv_equal": true,
+  "new_keys_preserved": true,
+  "active_packed_images_equal": true,
+  "geometry_audit_and_protected_regions_equal": true,
+  "csv_reopened_coordinates_equal": true,
+  "external_blend_dependencies": 0,
+  "armature_objects": 0,
+  "scope": "Persistence/control audit only, not likeness/contact/rig/game/device or producer approval."
+}

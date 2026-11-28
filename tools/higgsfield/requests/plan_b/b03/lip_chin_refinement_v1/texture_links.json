@@ -1,0 +1,23 @@
+{
+  "images": [
+    {
+      "object": "CC0_head_skin_UNAPPROVED",
+      "path": "tools/higgsfield/requests/plan_b/b03/face_surface_v4/textures/head_color_details.png",
+      "sha256": "3642fabc7315233130d9017613856064b7b8bafb46b4d9054fa6d46a5c5261de",
+      "packed": true
+    },
+    {
+      "object": "CC0_helper-l-eye_UNAPPROVED",
+      "path": "tools/higgsfield/requests/plan_b/b03/eye_surface_v2/textures/eye_screen_right.png",
+      "sha256": "eb30206a3d1a59cb3bf8151096c2dc2e72c90cf0146f7f4d7a07571ca6a9b089",
+      "packed": true
+    },
+    {
+      "object": "CC0_helper-r-eye_UNAPPROVED",
+      "path": "tools/higgsfield/requests/plan_b/b03/eye_surface_v2/textures/eye_screen_left.png",
+      "sha256": "bee456eda52b2a1309125abbb690d4d19f2ca34a8a7adde58f03ad144610b519",
+      "packed": true
+    }
+  ],
+  "scope": "All existing image bytes/UV retained; no new texture or raster bake in this local shape unit."
+}

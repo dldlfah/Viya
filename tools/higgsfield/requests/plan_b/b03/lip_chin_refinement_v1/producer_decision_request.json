@@ -1,0 +1,13 @@
+{
+  "status": "PENDING",
+  "candidate": "tools/higgsfield/requests/plan_b/b03/lip_chin_refinement_v1/viya_lip_chin_refinement.blend",
+  "candidate_sha256": "745744338831d2fca5f89de48801e5582c02052417a2c52f4d3aa34ecef087cb",
+  "review_board": "review/producer_face_review.png",
+  "decision_scope": "Face working baseline only. Not body/costume/hair/weapon/rig/game/mobile/final art acceptance. No paid budget assigned.",
+  "requested_decision": "Accept this face level as the basis of body/costume, or continue face corrections to the original drawings.",
+  "source_likeness_differences_disclosed": true,
+  "current_art_self_review_does_not_assert_exact_likeness": true,
+  "after_acceptance": "Record explicit producer decision and version in05 before06. Keep current face geometry/UV/images protected; paid work needs its own budget.",
+  "after_revision_request": "Prioritize the producer specified major face feature in03/04; preserve other finished work.",
+  "no_response_policy": "Stay pending. Silence or a generic next is not explicit face acceptance."
+}

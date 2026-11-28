@@ -1,0 +1,9 @@
+{
+  "four_source_hashes_match": true,
+  "input_blend_sha256_unchanged": true,
+  "old_controls_topology_and_all_uv_preserved": true,
+  "all_active_image_bytes_identical": true,
+  "zero_new_keys_front_matches_input_decoded_rgba": true,
+  "reopened_decoded_rgba_identical": true,
+  "scope": "Preservation/persistence only; not source likeness, full contact/intersection, rig/game/device or producer approval."
+}

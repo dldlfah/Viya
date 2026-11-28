@@ -1,0 +1,6 @@
+{
+  "mouth_loop_height": "Global maximumZ-minimumZ over the whole curved lip/opening loop. It increases with an arch/corner drop and is NOT an opposing-lip gap or mouth-opening thickness.",
+  "profile_samples": "Independent near-midline control samples, not a dense evaluated silhouette. The before/after sampling window can select different vertices; use CSV source/local IDs for point correspondence.",
+  "source_dimensions": "Working-unit authored values, not calibrated dimensions inferred from the original drawings.",
+  "geometry_audit": "Control polygon fans only; does not certify full subdivided self-intersection, contacts or rig deformation."
+}

@@ -1,6 +1,6 @@
 # Viya — 모바일 서바이버 게임
 
-**플랜B 현재 제작 순서:** [PLANNED_WORK103절](docs/PLANNED_WORK.md)의 얼굴 → 몸/총기 → 리그/동작 → 게임/실기 → 최종 승인을 따른다. [홍채 전사 보완본](tools/higgsfield/requests/plan_b/b03/eye_surface_v2/README.md)에서 누락된 밝은 세부를 포함시키고 형상·UV/머리색·흰자는 유지했다. 국소 보완만 작업 기반 수용/전체 얼굴·프로듀서05 전이다. 다음은 **03 입술·턱 윤곽 국소 영향 검수**다. 게임 적용 전·전체완료1/8.
+**플랜B 현재 제작 순서:** [PLANNED_WORK103절](docs/PLANNED_WORK.md)의 얼굴 → 몸/총기 → 리그/동작 → 게임/실기 → 최종 승인을 따른다. [입술·턱 보완본](tools/higgsfield/requests/plan_b/b03/lip_chin_refinement_v1/README.md)에 가역적R6키2개를 추가했고 기존 눈·색/UV는 보존했다. 다음은 **현재 얼굴 수준의 프로듀서 중간 판단**이다. 원화 인상 차이는 남으며 얼굴05/게임·최종 승인 전·전체완료1/8이다.
 
 **기획세션 재개:** [기획세션 연계문서](docs/PLANNING_SESSION_HANDOFF.md)에서 결정/미결정·현재 챕터·다음 작업·외부 작업ID/비용·납품/연결/검증 상태를 확인한다. 새 기획세션마다 읽고 의미 있는 작업/사용자 결정 뒤 같은 문서를 갱신한다. 실제 최신 HEAD와CURRENT/NEXT를 함께 대조한다.
 

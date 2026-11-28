@@ -1,0 +1,9 @@
+{
+  "adopted_as_current": false,
+  "state": "Saved/reopened local trial; structural and persistence checks passed, visual mouth arc not accepted.",
+  "reason": "Lip projection/chin contour improved but the central mouth arc remained flatter than the reference. The previous surface transfer mapped source arc-length onto an actual lip-midpoint target curve rather than preserving the source silhouette.",
+  "code_evidence": "face_surface_v3/bake_expression.py: target=base.curve(mids); source_field maps source arc-length to target curve.",
+  "revision": "Retain all maps and old keys. Add a smooth central rise/corner drop to the same independent lip key so the closed lip region and attached paint move together. Authored trial values, not calibrated source dimensions.",
+  "paid_submissions": 0,
+  "spent_credits": 0
+}
