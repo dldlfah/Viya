@@ -1,0 +1,65 @@
+{
+  "stage": "B-03-03",
+  "role": "planning/art",
+  "status": "IN_PROGRESS_REFERENCE_FORM_NOT_PASSED",
+  "verified_remote_parent": "340e5841824def1c2280f8b74384cd2071120f11",
+  "current_editable_file": "viya_head_contours.blend",
+  "input_model": "../head_refinement_v1/viya_head_refinement.blend",
+  "new_head_reconstruction": false,
+  "direct_visual_views": [
+    "front",
+    "screen_left_profile",
+    "screen_right_profile",
+    "three_quarter"
+  ],
+  "observed_changes": [
+    "Longer lid aperture with corresponding helper-eye transform.",
+    "Upper and lower socket depth smoothing reduces strong folds.",
+    "Nose projection reduced while retaining a partial profile at nose control0.55.",
+    "Mouth line/volume and lower jaw width adjusted."
+  ],
+  "remaining_form_defects": [
+    "Eyelid rim remains thick relative to the fine reference eye contour.",
+    "Mouth-corner curvature still differs from the proposed front reference."
+  ],
+  "not_form_failures_by_themselves": [
+    "Iris, brows, hair, face color and painted lines are not yet authored; these belong to04 and later face review."
+  ],
+  "discarded_local_changes": [
+    {
+      "trial": "trial01_pinch",
+      "cause": "Broad alar narrowing/backward movement pinched the underside.",
+      "resolution": "Do not narrow alar width; use a depth-only local control."
+    },
+    {
+      "trial": "trial02_projection",
+      "cause": "Inspected official morphs affected the tip and increased projection, contrary to the intended cavity-only simplification.",
+      "resolution": "Both official morphs weight0/excluded; preserve for provenance."
+    },
+    {
+      "trial": "trial04_full_nose",
+      "cause": "Full nose contraction reduced the profile too far.",
+      "resolution": "Current reversible nose control0.55."
+    }
+  ],
+  "local_blender_builds": 5,
+  "paid_submissions": 0,
+  "spent_credits": 0,
+  "balance_requeried": false,
+  "historical_only": {
+    "paid_submissions": 3,
+    "spent_credits": 100,
+    "last_observed_balance": 297
+  },
+  "new_paid_budget_assigned": false,
+  "geometry_scope": "Control topology, all old shape-key coordinates/values/relative keys and UV/source-index preservation, fan-triangle orientation/area and finite coordinates, independent final-file reopening and identical decoded render pixels.",
+  "eye_surface_contact_numeric_verified": false,
+  "full_self_intersection_verified": false,
+  "rig_or_deformed_fit_verified": false,
+  "producer_face_acceptance": "PENDING_B03_05",
+  "stage04_texture_started": false,
+  "game_integration": false,
+  "runtime_or_device_verification": false,
+  "completed_plan_b_chapters": 1,
+  "next_single_work": "Continue03 from this file. Identify actual upper/lower lid and corner loops, reduce rim thickness and adjust mouth-corner curvature. Preserve the current nose0.55 and all previous controls; inspect opposing views for gaps/protrusions before04."
+}

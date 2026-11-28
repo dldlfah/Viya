@@ -1,0 +1,48 @@
+{
+  "eye": {
+    "center_x": 0.0359445028,
+    "center_z": 0.1105609164,
+    "width_fraction": 0.22,
+    "height_fraction": 0.12,
+    "outer_corner_rise": 0.0012,
+    "radius_x": 0.03,
+    "radius_z": 0.026,
+    "crease_center_z": 0.125,
+    "crease_sigma_z": 0.0065,
+    "crease_plane_y": -0.08,
+    "crease_fraction": 0.55,
+    "crease_max_displacement": 0.0015,
+    "crease_smooth_fraction": 0.65,
+    "crease_smooth_iterations": 4
+  },
+  "nose": {
+    "wing_center_x": 0.011,
+    "wing_center_z": 0.085,
+    "sigma_x": 0.008,
+    "sigma_z": 0.006,
+    "width_fraction": 0,
+    "wing_depth_reduction": 0,
+    "smooth_fraction": 0,
+    "smooth_iterations": 4,
+    "source_targets": {
+      "nose-nostrils-angle-down.target.gz": 0.45,
+      "nose-volume-decr.target.gz": 0.75
+    }
+  },
+  "mouth": {
+    "center_z": 0.0645,
+    "sigma_x": 0.023,
+    "sigma_z": 0.01,
+    "vertical_contraction": 0.32,
+    "depth_reduction": 0.0018,
+    "center_rise": 0.0012,
+    "corner_drop": 0.0007
+  },
+  "jaw": {
+    "center_z": 0.035,
+    "sigma_z": 0.022,
+    "width_fraction": 0.07
+  },
+  "scope": "Local controls on the existing editable head, not reconstructed head geometry. Parameters are authored trial choices, not 3D measurements from uncalibrated illustrations.",
+  "revision_reason": "Broad alar narrowing/backward movement pinched the nose underside in trial01. Replace it with inspected anatomical internal-nostril volume/angle deltas. Replace arbitrary socket projection with adjacency depth smoothing to avoid a new brow ridge."
+}

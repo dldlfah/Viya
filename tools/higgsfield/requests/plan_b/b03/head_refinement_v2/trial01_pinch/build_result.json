@@ -1,0 +1,390 @@
+{
+  "input_sha256": "80a4c9b43a0acb9f8f865f619d241d61b2efaf50dea209ec9878d2e7266acdf6",
+  "output_sha256": "33fd0fb8a7c11e1d9c58950bd9981df499006240b7cde2df88f87a7cd76c18bf",
+  "parameters": {
+    "eye": {
+      "center_x": 0.0359445028,
+      "center_z": 0.1105609164,
+      "width_fraction": 0.22,
+      "height_fraction": 0.12,
+      "outer_corner_rise": 0.0012,
+      "radius_x": 0.03,
+      "radius_z": 0.026,
+      "crease_center_z": 0.125,
+      "crease_sigma_z": 0.0065,
+      "crease_plane_y": -0.08,
+      "crease_fraction": 0.55,
+      "crease_max_displacement": 0.0022
+    },
+    "nose": {
+      "wing_center_x": 0.011,
+      "wing_center_z": 0.085,
+      "sigma_x": 0.008,
+      "sigma_z": 0.006,
+      "width_fraction": 0.18,
+      "wing_depth_reduction": 0.002,
+      "smooth_fraction": 0.45,
+      "smooth_iterations": 4
+    },
+    "mouth": {
+      "center_z": 0.0645,
+      "sigma_x": 0.023,
+      "sigma_z": 0.01,
+      "vertical_contraction": 0.32,
+      "depth_reduction": 0.0018,
+      "center_rise": 0.0012,
+      "corner_drop": 0.0007
+    },
+    "jaw": {
+      "center_z": 0.035,
+      "sigma_z": 0.022,
+      "width_fraction": 0.07
+    },
+    "scope": "Local controls on the existing editable head, not reconstructed head geometry. Parameters are authored trial choices, not 3D measurements from uncalibrated illustrations."
+  },
+  "old_controls_uv_topology_preserved": true,
+  "baseline_snapshot": {
+    "CC0_head_skin_UNAPPROVED": {
+      "vertices": 4311,
+      "faces": 4286,
+      "topology": "933541d4e264a2732a82c7029fe23fb83c71d8093efa6e9bbe06239090e62850",
+      "uv": "150e681070eda447ad08e14f071e304729364d3a746ad444c5cdfec26403c1b2",
+      "source_indices": "35e80b5a37814d26d2a99e1d76048c9e20b05fee1d33b76c0408c38da33cd31d",
+      "keys": {
+        "CC0_adult_form_basis": {
+          "positions": "bd193b462f9d8ed8f6bbf3cd573c96d2aed56b774b8b928996a88ce29bdb663f",
+          "value": 0.0,
+          "relative": "CC0_adult_form_basis"
+        },
+        "VIYA_reference_proportion_STUDY": {
+          "positions": "baca2a406dae8a6626df0265e72b54d7629d4321b9ca482717eaf930af3e210b",
+          "value": 1.0,
+          "relative": "CC0_adult_form_basis"
+        },
+        "REFINE_Eyelids": {
+          "positions": "f12b041740ea179309f49c8e39948c07aed7926a71868ce15b886d69742f8163",
+          "value": 1.0,
+          "relative": "VIYA_reference_proportion_STUDY"
+        },
+        "REFINE_Nose": {
+          "positions": "73a5745fdbc83fcbcb8c0c0add6310f12c52cf6996bd3ec750741768e143ddf0",
+          "value": 1.0,
+          "relative": "VIYA_reference_proportion_STUDY"
+        },
+        "REFINE_Lips": {
+          "positions": "08b193b0d8f8116146da174dd6a6fa058a498013cf2f2a2ce07e34116d2b37b1",
+          "value": 1.0,
+          "relative": "VIYA_reference_proportion_STUDY"
+        }
+      },
+      "modifiers": [
+        {
+          "name": "Preview_subdivision_only",
+          "type": "SUBSURF",
+          "show_viewport": true,
+          "show_render": true
+        }
+      ]
+    },
+    "CC0_helper-l-eye_UNAPPROVED": {
+      "vertices": 72,
+      "faces": 70,
+      "topology": "b19f73110bdd33341eefe4f51fb0dd617e5f935804ee2978d1be1f174b450e30",
+      "uv": "20e70450e7bb1a05ec128560193f0fb2e8f0e6c9b88ed32f2ce92a3e33b618a0",
+      "source_indices": "b9b23ce23e5509af8f9734307797f1b3ec34358c8ef4385245d58676d51eebe6",
+      "keys": {
+        "CC0_adult_form_basis": {
+          "positions": "0c05f0f455f13aeda8b156e7d65d18510ff535a81b853d52e6003eb4ae807a2b",
+          "value": 0.0,
+          "relative": "CC0_adult_form_basis"
+        },
+        "VIYA_reference_proportion_STUDY": {
+          "positions": "ac8db36f10a70924d946fdfb36818314ee566a3964337f5dd76a1bcb0eff9ef6",
+          "value": 1.0,
+          "relative": "CC0_adult_form_basis"
+        },
+        "REFINE_Eyelids": {
+          "positions": "ac8db36f10a70924d946fdfb36818314ee566a3964337f5dd76a1bcb0eff9ef6",
+          "value": 1.0,
+          "relative": "VIYA_reference_proportion_STUDY"
+        },
+        "REFINE_Nose": {
+          "positions": "ac8db36f10a70924d946fdfb36818314ee566a3964337f5dd76a1bcb0eff9ef6",
+          "value": 1.0,
+          "relative": "VIYA_reference_proportion_STUDY"
+        },
+        "REFINE_Lips": {
+          "positions": "ac8db36f10a70924d946fdfb36818314ee566a3964337f5dd76a1bcb0eff9ef6",
+          "value": 1.0,
+          "relative": "VIYA_reference_proportion_STUDY"
+        }
+      },
+      "modifiers": [
+        {
+          "name": "Preview_subdivision_only",
+          "type": "SUBSURF",
+          "show_viewport": true,
+          "show_render": true
+        }
+      ]
+    },
+    "CC0_helper-r-eye_UNAPPROVED": {
+      "vertices": 72,
+      "faces": 70,
+      "topology": "10c2a0d02d240d5c77ad6d8368286d17690ecf7afe67f556dafd9c4cdef6eec9",
+      "uv": "0858b1c14c5ad3c7c4698447c9a41f1ccd7936082a950548566491e414caddc3",
+      "source_indices": "76c0cdd91f5a965d384dc82c2856b53b0f47e1aa4f41bb9de74d359d23f98243",
+      "keys": {
+        "CC0_adult_form_basis": {
+          "positions": "6ab99eefb17e0a19262b07095680bb1c5cba6d62c854934d1cca2f25689c2bce",
+          "value": 0.0,
+          "relative": "CC0_adult_form_basis"
+        },
+        "VIYA_reference_proportion_STUDY": {
+          "positions": "35ad52335374f5c9ab54c63c26f9659bcc0b82975a0436cbe20d7ac20a792a45",
+          "value": 1.0,
+          "relative": "CC0_adult_form_basis"
+        },
+        "REFINE_Eyelids": {
+          "positions": "35ad52335374f5c9ab54c63c26f9659bcc0b82975a0436cbe20d7ac20a792a45",
+          "value": 1.0,
+          "relative": "VIYA_reference_proportion_STUDY"
+        },
+        "REFINE_Nose": {
+          "positions": "35ad52335374f5c9ab54c63c26f9659bcc0b82975a0436cbe20d7ac20a792a45",
+          "value": 1.0,
+          "relative": "VIYA_reference_proportion_STUDY"
+        },
+        "REFINE_Lips": {
+          "positions": "35ad52335374f5c9ab54c63c26f9659bcc0b82975a0436cbe20d7ac20a792a45",
+          "value": 1.0,
+          "relative": "VIYA_reference_proportion_STUDY"
+        }
+      },
+      "modifiers": [
+        {
+          "name": "Preview_subdivision_only",
+          "type": "SUBSURF",
+          "show_viewport": true,
+          "show_render": true
+        }
+      ]
+    }
+  },
+  "saved_snapshot": {
+    "CC0_head_skin_UNAPPROVED": {
+      "vertices": 4311,
+      "faces": 4286,
+      "topology": "933541d4e264a2732a82c7029fe23fb83c71d8093efa6e9bbe06239090e62850",
+      "uv": "150e681070eda447ad08e14f071e304729364d3a746ad444c5cdfec26403c1b2",
+      "source_indices": "35e80b5a37814d26d2a99e1d76048c9e20b05fee1d33b76c0408c38da33cd31d",
+      "keys": {
+        "CC0_adult_form_basis": {
+          "positions": "bd193b462f9d8ed8f6bbf3cd573c96d2aed56b774b8b928996a88ce29bdb663f",
+          "value": 0.0,
+          "relative": "CC0_adult_form_basis"
+        },
+        "VIYA_reference_proportion_STUDY": {
+          "positions": "baca2a406dae8a6626df0265e72b54d7629d4321b9ca482717eaf930af3e210b",
+          "value": 1.0,
+          "relative": "CC0_adult_form_basis"
+        },
+        "REFINE_Eyelids": {
+          "positions": "f12b041740ea179309f49c8e39948c07aed7926a71868ce15b886d69742f8163",
+          "value": 1.0,
+          "relative": "VIYA_reference_proportion_STUDY"
+        },
+        "REFINE_Nose": {
+          "positions": "73a5745fdbc83fcbcb8c0c0add6310f12c52cf6996bd3ec750741768e143ddf0",
+          "value": 1.0,
+          "relative": "VIYA_reference_proportion_STUDY"
+        },
+        "REFINE_Lips": {
+          "positions": "08b193b0d8f8116146da174dd6a6fa058a498013cf2f2a2ce07e34116d2b37b1",
+          "value": 1.0,
+          "relative": "VIYA_reference_proportion_STUDY"
+        },
+        "R2_EyeContour": {
+          "positions": "a44ebbf1d4a0bead5ceb8ec410d04fbaca69034e57cc9c4dcdfe03db3dc5d2f3",
+          "value": 1.0,
+          "relative": "CC0_adult_form_basis"
+        },
+        "R2_NoseSimplify": {
+          "positions": "645610cd3b7bc62fba4716c63130cbced80043c2001f7565f80a51d8ca13c655",
+          "value": 1.0,
+          "relative": "CC0_adult_form_basis"
+        },
+        "R2_MouthLine": {
+          "positions": "76d9dd9634a430a350a255170b64b0f1bb6b749aa0b74867375aaf9ddfd48e29",
+          "value": 1.0,
+          "relative": "CC0_adult_form_basis"
+        },
+        "R2_JawContour": {
+          "positions": "621585c3655ae74620111c84af1e23c148dfaa3e070a52292483e75bb386bb74",
+          "value": 1.0,
+          "relative": "CC0_adult_form_basis"
+        }
+      },
+      "modifiers": [
+        {
+          "name": "Preview_subdivision_only",
+          "type": "SUBSURF",
+          "show_viewport": true,
+          "show_render": true
+        }
+      ]
+    },
+    "CC0_helper-l-eye_UNAPPROVED": {
+      "vertices": 72,
+      "faces": 70,
+      "topology": "b19f73110bdd33341eefe4f51fb0dd617e5f935804ee2978d1be1f174b450e30",
+      "uv": "20e70450e7bb1a05ec128560193f0fb2e8f0e6c9b88ed32f2ce92a3e33b618a0",
+      "source_indices": "b9b23ce23e5509af8f9734307797f1b3ec34358c8ef4385245d58676d51eebe6",
+      "keys": {
+        "CC0_adult_form_basis": {
+          "positions": "0c05f0f455f13aeda8b156e7d65d18510ff535a81b853d52e6003eb4ae807a2b",
+          "value": 0.0,
+          "relative": "CC0_adult_form_basis"
+        },
+        "VIYA_reference_proportion_STUDY": {
+          "positions": "ac8db36f10a70924d946fdfb36818314ee566a3964337f5dd76a1bcb0eff9ef6",
+          "value": 1.0,
+          "relative": "CC0_adult_form_basis"
+        },
+        "REFINE_Eyelids": {
+          "positions": "ac8db36f10a70924d946fdfb36818314ee566a3964337f5dd76a1bcb0eff9ef6",
+          "value": 1.0,
+          "relative": "VIYA_reference_proportion_STUDY"
+        },
+        "REFINE_Nose": {
+          "positions": "ac8db36f10a70924d946fdfb36818314ee566a3964337f5dd76a1bcb0eff9ef6",
+          "value": 1.0,
+          "relative": "VIYA_reference_proportion_STUDY"
+        },
+        "REFINE_Lips": {
+          "positions": "ac8db36f10a70924d946fdfb36818314ee566a3964337f5dd76a1bcb0eff9ef6",
+          "value": 1.0,
+          "relative": "VIYA_reference_proportion_STUDY"
+        },
+        "R2_EyeContour": {
+          "positions": "306b2ce7c5d9eb20449af42a4834a881a5428e097e8de3251691d7f2428a9558",
+          "value": 1.0,
+          "relative": "CC0_adult_form_basis"
+        },
+        "R2_NoseSimplify": {
+          "positions": "0c05f0f455f13aeda8b156e7d65d18510ff535a81b853d52e6003eb4ae807a2b",
+          "value": 1.0,
+          "relative": "CC0_adult_form_basis"
+        },
+        "R2_MouthLine": {
+          "positions": "0c05f0f455f13aeda8b156e7d65d18510ff535a81b853d52e6003eb4ae807a2b",
+          "value": 1.0,
+          "relative": "CC0_adult_form_basis"
+        },
+        "R2_JawContour": {
+          "positions": "0c05f0f455f13aeda8b156e7d65d18510ff535a81b853d52e6003eb4ae807a2b",
+          "value": 1.0,
+          "relative": "CC0_adult_form_basis"
+        }
+      },
+      "modifiers": [
+        {
+          "name": "Preview_subdivision_only",
+          "type": "SUBSURF",
+          "show_viewport": true,
+          "show_render": true
+        }
+      ]
+    },
+    "CC0_helper-r-eye_UNAPPROVED": {
+      "vertices": 72,
+      "faces": 70,
+      "topology": "10c2a0d02d240d5c77ad6d8368286d17690ecf7afe67f556dafd9c4cdef6eec9",
+      "uv": "0858b1c14c5ad3c7c4698447c9a41f1ccd7936082a950548566491e414caddc3",
+      "source_indices": "76c0cdd91f5a965d384dc82c2856b53b0f47e1aa4f41bb9de74d359d23f98243",
+      "keys": {
+        "CC0_adult_form_basis": {
+          "positions": "6ab99eefb17e0a19262b07095680bb1c5cba6d62c854934d1cca2f25689c2bce",
+          "value": 0.0,
+          "relative": "CC0_adult_form_basis"
+        },
+        "VIYA_reference_proportion_STUDY": {
+          "positions": "35ad52335374f5c9ab54c63c26f9659bcc0b82975a0436cbe20d7ac20a792a45",
+          "value": 1.0,
+          "relative": "CC0_adult_form_basis"
+        },
+        "REFINE_Eyelids": {
+          "positions": "35ad52335374f5c9ab54c63c26f9659bcc0b82975a0436cbe20d7ac20a792a45",
+          "value": 1.0,
+          "relative": "VIYA_reference_proportion_STUDY"
+        },
+        "REFINE_Nose": {
+          "positions": "35ad52335374f5c9ab54c63c26f9659bcc0b82975a0436cbe20d7ac20a792a45",
+          "value": 1.0,
+          "relative": "VIYA_reference_proportion_STUDY"
+        },
+        "REFINE_Lips": {
+          "positions": "35ad52335374f5c9ab54c63c26f9659bcc0b82975a0436cbe20d7ac20a792a45",
+          "value": 1.0,
+          "relative": "VIYA_reference_proportion_STUDY"
+        },
+        "R2_EyeContour": {
+          "positions": "23bda5abedb8d043369b5d12b7e93c31933c036e2b91c993c7d04e5621229b13",
+          "value": 1.0,
+          "relative": "CC0_adult_form_basis"
+        },
+        "R2_NoseSimplify": {
+          "positions": "6ab99eefb17e0a19262b07095680bb1c5cba6d62c854934d1cca2f25689c2bce",
+          "value": 1.0,
+          "relative": "CC0_adult_form_basis"
+        },
+        "R2_MouthLine": {
+          "positions": "6ab99eefb17e0a19262b07095680bb1c5cba6d62c854934d1cca2f25689c2bce",
+          "value": 1.0,
+          "relative": "CC0_adult_form_basis"
+        },
+        "R2_JawContour": {
+          "positions": "6ab99eefb17e0a19262b07095680bb1c5cba6d62c854934d1cca2f25689c2bce",
+          "value": 1.0,
+          "relative": "CC0_adult_form_basis"
+        }
+      },
+      "modifiers": [
+        {
+          "name": "Preview_subdivision_only",
+          "type": "SUBSURF",
+          "show_viewport": true,
+          "show_render": true
+        }
+      ]
+    }
+  },
+  "local_change_audit": {
+    "CC0_head_skin_UNAPPROVED": {
+      "changed_vertices": 2990,
+      "maximum_displacement_m": 0.005094874143369509,
+      "new_flipped_fan_triangles": 0,
+      "degenerate_fan_triangles": 0,
+      "nonfinite_coordinates": 0
+    },
+    "CC0_helper-l-eye_UNAPPROVED": {
+      "changed_vertices": 72,
+      "maximum_displacement_m": 0.0034847877420752793,
+      "new_flipped_fan_triangles": 0,
+      "degenerate_fan_triangles": 0,
+      "nonfinite_coordinates": 0
+    },
+    "CC0_helper-r-eye_UNAPPROVED": {
+      "changed_vertices": 72,
+      "maximum_displacement_m": 0.0034847877420752793,
+      "new_flipped_fan_triangles": 0,
+      "degenerate_fan_triangles": 0,
+      "nonfinite_coordinates": 0
+    }
+  },
+  "scope": "Local control geometry/persistence; no self-intersection, deformed-eye, likeness, rig or runtime PASS",
+  "new_source_assets": 0,
+  "paid_submissions": 0,
+  "spent_credits": 0,
+  "game_integration": false
+}

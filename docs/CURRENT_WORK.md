@@ -4,15 +4,17 @@
 
 새 기획세션은 [기획세션 연계문서](PLANNING_SESSION_HANDOFF.md)를 읽고 실제 최신 HEAD와 현재 작업을 대조한다.
 
-## 플랜B B-03-03 진행 — 눈꺼풀·코·입술 국소 수정, 형태 검수 미통과
+## 플랜B B-03-03 진행 — 눈확·코/입·턱 윤곽 수정, 눈꺼풀 테두리/입꼬리 미완료
 
-실제 원격3960e5f와 깨끗한 작업 트리를 확인하고 [현재 머리 수정본](../tools/higgsfield/requests/plan_b/b03/head_refinement_v1/README.md)을 제작했다. 기존 CC0 머리/목·눈 초안의 Basis·UV/면 구조·원본 정점 인덱스를 유지한 채 눈꺼풀·코·입술에 독립적으로 되돌릴 수 있는 Shape Key를 추가했다. 총4,455정점/4,426면은 그대로이며 피부2,626정점이 바뀌었다. 합산 최대변위 약4.942mm와 제어 팬 삼각형 반전/0면적0을 확인했다.
+실제 원격340e584와 깨끗한 작업 트리에서 [head_refinement_v2](../tools/higgsfield/requests/plan_b/b03/head_refinement_v2/README.md)를 제작했다. 이전 v1의 모든 제어 좌표/값/상대 기준·UV/면 구조/원본 정점 인덱스를 보존한 채 눈확/눈알·코 깊이·입선·턱의 네 독립 Shape Key를 추가했다. 총4,455정점/4,426면을 유지하며 이전 v1 대비 피부2,974정점/최대 약4.060mm, 눈 각72정점/최대 약3.485mm가 바뀌었다.
 
-첫 국소 수정은 눈 변화가 너무 작아 같은 해부학 제어의 개구/크기를 더 조정했다. 정면·양측면·사선에서 눈 개구 증가와 코/입술 돌출 감소를 확인했지만 눈확/눈꺼풀 주름·콧방울이 원화보다 사실적으로 남는다. **B-03-03 자체 형태 검수 미통과·진행**이며04 색칠로 넘어가지 않는다. [원화와 현재 형태](../tools/higgsfield/requests/plan_b/b03/head_refinement_v1/review/reference_vs_refinement.png) · [전후 비교](../tools/higgsfield/requests/plan_b/b03/head_refinement_v1/review/multiview_comparison.png)
+5회 로컬 빌드에서 콧방울 일괄 수축은 코 밑면이 좁아져 제외했고, 공식 코 변위 두 개도 실제 코끝 돌출을 키워 모두 현재 가중치0으로 제외했다. 현재는 폭 수축 없이 코 깊이를 줄이는 독립 제어0.55를 사용한다. 최대값1에서 측면이 너무 납작해진 결과를 확인한 조정이다. 눈확 위/아래 굴곡을 완화하고 입선/턱 폭을 조정했다. [정면 전후](../tools/higgsfield/requests/plan_b/b03/head_refinement_v2/review/front_comparison.png) · [양측면/사선](../tools/higgsfield/requests/plan_b/b03/head_refinement_v2/review/multiview_comparison.png)
 
-현재 후속 편집 파일은 `head_refinement_v1/viya_head_refinement.blend`다. 다음 한 작업은 눈확/눈꺼풀 경계·콧방울/비주 밑면·닫힌 입선을 같은 파일에서 조정하고 정면/반대 측면으로 확인하는03 작업이다. 별도 Blender 프로세스에서 모든 제어/기존 구조/UV 동일과 재렌더RGBA 픽셀 동일을 확인했으나 수치적 눈알 접촉·자기 교차/리그 변형/실제 게임 크기 검증은 아니다. [검수 범위와 남은 차이](../tools/higgsfield/requests/plan_b/b03/head_refinement_v1/review_result.json).
+눈꺼풀 가장자리가 원화의 가는 윤곽보다 두껍고 입꼬리 곡선 차이가 남아 **B-03-03 자체 형태 검수 미통과·진행**이다. 다음은 `head_refinement_v2/viya_head_contours.blend`의 실제 눈꺼풀 면 고리를 확인해 테두리 두께/단면과 입꼬리를 조정하는03 작업이다. 현재 코0.55와 보존된 제어를 이어 쓰며 전체 개구/콧방울 폭 수정 시험을 반복하지 않는다. 04 색칠·전신/리그로 넘기지 않는다.
 
-이번 유료 제출/실차감0·잔액 재조회 없음이다. 원본4장/기존 초안·기존2D36클립363·임시3D/게임 코드·전투/저장 규칙은 유지했다. 전체완료1/8, 제작세션 정식 자산 대기·게임/실기/최종 아트 미승인이다. 최신 누적 이력8.107/후속 계획107절을 따른다.
+별도 Blender 프로세스에서 기존 모든 제어/UV·구조와 새 제어·변위 검사/사선 재렌더RGBA 픽셀 보존을 확인했다. 제어 팬 삼각형 새 방향 반전/0면적·비유한 좌표0이다. 모든 자기 교차/눈알 수치 접촉·리그/실제 게임 크기·기기 검증은 아니다. [현재 파일/검수 범위·남은 차이](../tools/higgsfield/requests/plan_b/b03/head_refinement_v2/review_result.json).
+
+이번 유료 제출/실차감0·잔액 재조회 없음이다. 원본4장/기존 머리 초안·기존2D36클립363·임시3D/게임 코드·전투/저장 규칙은 유지했다. 전체완료1/8·B-03진행, 제작세션 정식 자산 대기·게임/실기/최종 아트 미승인이다. 최신 이력8.108/후속 계획108절을 따른다.
 
 ## 이전 B-03-02 국소 편집 시험 — 전체 얼굴 품질과 구분
 

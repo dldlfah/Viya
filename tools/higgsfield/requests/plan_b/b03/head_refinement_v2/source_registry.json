@@ -1,0 +1,20 @@
+{
+  "date_kst": "2026-11-28",
+  "scope": "Two official CC0 morph assets only, no addon code",
+  "license_evidence": "../head_shape_v1/cc0_topology_trial/source/MPFB_LICENSE.md",
+  "files": [
+    {
+      "file": "nose-nostrils-angle-down.target.gz",
+      "git_blob_sha": "640e243536d9c42c3a91f3e0e7e606b2bdf204e2",
+      "sha256": "01e88f10c24d1ecbdf2e764b929d0ff100ebf70691085790626d9eae57c93214",
+      "source_url": "https://github.com/makehumancommunity/mpfb2/blob/master/src/mpfb/data/targets/nose/nose-nostrils-angle-down.target.gz"
+    },
+    {
+      "file": "nose-volume-decr.target.gz",
+      "git_blob_sha": "fd9efa95909b3fcc68ec9b1ec1d6ee4d4db322a7",
+      "sha256": "7ef86294767b4813388c409541475684d6dec94711dde063154b49c9520a57bd",
+      "source_url": "https://github.com/makehumancommunity/mpfb2/blob/master/src/mpfb/data/targets/nose/nose-volume-decr.target.gz"
+    }
+  ],
+  "adoption": "Both morphs inspected, tested locally, then excluded from current result at weight0. The volume-decr morph moved the tip forward on this working head."
+}
