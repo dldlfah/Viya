@@ -1,0 +1,183 @@
+{
+  "input_sha256": "9be1757584e658a52296ba21923492e80e40790c74013add584f411e991f4271",
+  "source_front_sha256": "28131fc01dbff28b3a5475ee2f73fcb37e5f9d7e81ab26477e9a1ce092b2b11b",
+  "method": "Local sourceRGB feature overlays on existing surfaceUV; original reference bytes and all geometry/UV unchanged. Placement/width settings are authored, not calibrated3D anatomy.",
+  "lower_lids": [
+    {
+      "id": "screen_left_lower_lid",
+      "target_loop": "eye_left",
+      "source_points": [
+        [
+          714,
+          189.5
+        ],
+        [
+          721,
+          190.8
+        ],
+        [
+          728,
+          189.2
+        ],
+        [
+          735,
+          185.3
+        ],
+        [
+          741,
+          182.7
+        ],
+        [
+          744,
+          179.5
+        ]
+      ],
+      "source_half_band_px": 4.5
+    },
+    {
+      "id": "screen_right_lower_lid",
+      "target_loop": "eye_right",
+      "source_points": [
+        [
+          789,
+          174
+        ],
+        [
+          795,
+          177
+        ],
+        [
+          804,
+          180.2
+        ],
+        [
+          812,
+          180.7
+        ],
+        [
+          820,
+          180.2
+        ],
+        [
+          825,
+          176.5
+        ]
+      ],
+      "source_half_band_px": 4.5
+    }
+  ],
+  "upper_creases": [
+    {
+      "id": "screen_left_upper_crease",
+      "target_loop": "eye_left",
+      "source_points": [
+        [
+          720,
+          169
+        ],
+        [
+          726,
+          167.7
+        ],
+        [
+          733,
+          167.8
+        ],
+        [
+          739,
+          169
+        ]
+      ],
+      "source_half_band_px": 1.8,
+      "target_vertical_offset_working_m": 0.0053,
+      "target_trim_fraction": [
+        0.15,
+        0.85
+      ]
+    },
+    {
+      "id": "screen_right_upper_crease",
+      "target_loop": "eye_right",
+      "source_points": [
+        [
+          790,
+          162.5
+        ],
+        [
+          800,
+          159.5
+        ],
+        [
+          811,
+          158.8
+        ],
+        [
+          813,
+          159.2
+        ]
+      ],
+      "source_half_band_px": 1.8,
+      "target_vertical_offset_working_m": 0.0053,
+      "target_trim_fraction": [
+        0.15,
+        0.67
+      ],
+      "hair_occluded_end_excluded": true
+    }
+  ],
+  "nose_marks": [
+    {
+      "id": "screen_left_nose_mark",
+      "source_crop": [
+        760,
+        197,
+        770,
+        208
+      ],
+      "source_center_px": [
+        764.4,
+        202.2
+      ],
+      "target_xz_working_m": [
+        -0.0048,
+        0.0846
+      ],
+      "working_m_per_source_px": 0.0007
+    },
+    {
+      "id": "screen_right_nose_mark",
+      "source_crop": [
+        771,
+        197,
+        782,
+        208
+      ],
+      "source_center_px": [
+        775.9,
+        202.8
+      ],
+      "target_xz_working_m": [
+        0.0048,
+        0.0846
+      ],
+      "working_m_per_source_px": 0.0007
+    }
+  ],
+  "mask": {
+    "source_skin_luminance": 210,
+    "shadow_darkness_offset": 6,
+    "shadow_darkness_range": 95,
+    "lower_lid_opacity": 0.8,
+    "crease_opacity": 0.52,
+    "nose_opacity": 0.82,
+    "lower_lid_outside_only": true,
+    "upper_lash_protection_working_m": 0.0018,
+    "native_alpha_cutoff": 0.002
+  },
+  "scope": "Eye shading/crease and nose marks only. Existing brows/mouth/upper lash pixels protected; irisPNG, all shape controls/R4, UV and references immutable. Hair occlusion is not reconstructed.",
+  "nose_anchor_method": {
+    "frontmost_within_xz_radius_working_m": 0.0008,
+    "first_hit_negative_y_ray_max_gap_working_m": 0.0001,
+    "scope": "Front-axis surface registration only, not full camera/occlusion/self-intersection proof."
+  }
+}

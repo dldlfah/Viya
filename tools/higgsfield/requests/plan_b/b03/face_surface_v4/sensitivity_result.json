@@ -1,0 +1,114 @@
+{
+  "input_sha256": "33024888a9e9efe69685d6ca049ae0afa1900b96636da5961bc3cdcb0314ef01",
+  "hypotheses": [
+    {
+      "name": "head_lit15_front",
+      "yaw_pitch_roll_degrees": [
+        0,
+        0,
+        0
+      ],
+      "head_principled_weight": 0.15,
+      "eyes_keep_existing_material": true,
+      "camera_location": [
+        0.0,
+        -1.0,
+        0.10400000214576721
+      ],
+      "camera_rotation_euler": [
+        1.5707964897155762,
+        -0.0,
+        0.0
+      ],
+      "camera_ortho_scale": 0.33500000834465027
+    },
+    {
+      "name": "front_roll_hypothesis",
+      "yaw_pitch_roll_degrees": [
+        0,
+        0,
+        -5.5722
+      ],
+      "head_principled_weight": 0.35,
+      "eyes_keep_existing_material": true,
+      "camera_location": [
+        0.0,
+        -1.0,
+        0.10400000214576721
+      ],
+      "camera_rotation_euler": [
+        1.570796251296997,
+        0.09725331515073776,
+        0.0
+      ],
+      "camera_ortho_scale": 0.33500000834465027
+    },
+    {
+      "name": "yaw_minus12_roll_hypothesis",
+      "yaw_pitch_roll_degrees": [
+        -12,
+        0,
+        -5.5722
+      ],
+      "head_principled_weight": 0.35,
+      "eyes_keep_existing_material": true,
+      "camera_location": [
+        -0.2079116851091385,
+        -0.9781476259231567,
+        0.10400000214576721
+      ],
+      "camera_rotation_euler": [
+        1.5707963705062866,
+        0.09725333750247955,
+        -0.20943953096866608
+      ],
+      "camera_ortho_scale": 0.33500000834465027
+    },
+    {
+      "name": "yaw_plus12_roll_hypothesis",
+      "yaw_pitch_roll_degrees": [
+        12,
+        0,
+        -5.5722
+      ],
+      "head_principled_weight": 0.35,
+      "eyes_keep_existing_material": true,
+      "camera_location": [
+        0.2079116851091385,
+        -0.9781476259231567,
+        0.10400000214576721
+      ],
+      "camera_rotation_euler": [
+        1.5707963705062866,
+        0.09725332260131836,
+        0.20943953096866608
+      ],
+      "camera_ortho_scale": 0.33500000834465027
+    },
+    {
+      "name": "pitch_plus8_roll_hypothesis",
+      "yaw_pitch_roll_degrees": [
+        0,
+        8,
+        -5.5722
+      ],
+      "head_principled_weight": 0.35,
+      "eyes_keep_existing_material": true,
+      "camera_location": [
+        0.0,
+        -0.9902680516242981,
+        0.24317310750484467
+      ],
+      "camera_rotation_euler": [
+        1.4305157661437988,
+        0.09630391001701355,
+        -0.013577050529420376
+      ],
+      "camera_ortho_scale": 0.33500000834465027
+    }
+  ],
+  "geometry_controls_uv_and_images_unchanged": true,
+  "original_camera_and_head_material_restored": true,
+  "no_blend_saved_or_geometry_changes": true,
+  "scope": "Review hypotheses only, not recovered source camera, selected game view, anatomy fit or final engine material. Source iris landmarks have manual uncertainty."
+}

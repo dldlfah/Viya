@@ -1,0 +1,108 @@
+{
+  "input_sha256": "9be1757584e658a52296ba21923492e80e40790c74013add584f411e991f4271",
+  "front_source_sha256": "28131fc01dbff28b3a5475ee2f73fcb37e5f9d7e81ab26477e9a1ce092b2b11b",
+  "surface_fingerprints": {
+    "CC0_head_skin_UNAPPROVED": {
+      "positions": "689d7310ea7d06cf834f7a3e1cf683a3d4fe66a262bdb495128ff37a2e9a7426",
+      "triangles": "3ef5a3ea0b01f51ae957e998cbebeaccddaf33151d38657fab5ef5c208022796",
+      "triangle_uv": "e797d5f90b43a6f73dab4152c885f52ae4803c243d1f84e2f2bdd083128f71e9"
+    },
+    "CC0_helper-l-eye_UNAPPROVED": {
+      "positions": "6e6dbf72f1e0270e7ce8f3cbddc2d42a171f7d543a5476fa9b08fdc86bf982da",
+      "triangles": "675ece6aba37bbc7a79c669a9dde4199742efce936b9bd324ab79a52f13341a7",
+      "triangle_uv": "8c91ad061f8c014b22a888ea57bced96eb28b7c81777e98f8010fa19b0a57bd4"
+    },
+    "CC0_helper-r-eye_UNAPPROVED": {
+      "positions": "8ec6ad6be7072af94ecd8d6a16358d4a6eff68026f60abd46421f12df1b84d90",
+      "triangles": "e989cd3ea40ca70545f798ef50cd30c4effc74cbec0a22af8480df6ebd7d7e14",
+      "triangle_uv": "477640d85435f8c75c9002d08df8be3220395d3254a4ed1c2fd3a56478838e8a"
+    }
+  },
+  "matched_prior_raster_reused": true,
+  "no_uv_reunwrap": true,
+  "no_geometry_changes": true,
+  "feature_transfers": [
+    {
+      "id": "screen_left_lower_lid",
+      "target_curve_length_working_m": 0.034685560113641566,
+      "source_curve_length_px": 33.23879001356476,
+      "source_px_per_working_m": 958.2889797559359,
+      "outside_aperture_only": true,
+      "painted_surface_samples": 17137
+    },
+    {
+      "id": "screen_right_lower_lid",
+      "target_curve_length_working_m": 0.03466849682441776,
+      "source_curve_length_px": 38.511515239421996,
+      "source_px_per_working_m": 1110.8504483037614,
+      "outside_aperture_only": true,
+      "painted_surface_samples": 14190
+    },
+    {
+      "id": "screen_left_upper_crease",
+      "target_curve_length_working_m": 0.023040960708176357,
+      "source_curve_length_px": 19.258755856854528,
+      "source_px_per_working_m": 835.8486480132025,
+      "painted_surface_samples": 5891,
+      "target_offset_is_authored": true
+    },
+    {
+      "id": "screen_right_upper_crease",
+      "target_curve_length_working_m": 0.0230683930633171,
+      "source_curve_length_px": 31.82064535965825,
+      "source_px_per_working_m": 1379.404506951063,
+      "painted_surface_samples": 3778,
+      "target_offset_is_authored": true
+    },
+    {
+      "id": "screen_left_nose_mark",
+      "source_patch_size_px": [
+        10,
+        11
+      ],
+      "source_background_rgb": [
+        242.0,
+        194.0,
+        183.0
+      ],
+      "actual_surface_anchor_working_m": [
+        -0.0048523773439228535,
+        -0.07824520766735077,
+        0.08460608124732971
+      ],
+      "anchor_placement_is_authored_not_calibrated": true,
+      "painted_surface_samples": 376
+    },
+    {
+      "id": "screen_right_nose_mark",
+      "source_patch_size_px": [
+        11,
+        11
+      ],
+      "source_background_rgb": [
+        243.0,
+        193.0,
+        182.0
+      ],
+      "actual_surface_anchor_working_m": [
+        0.004841585177928209,
+        -0.07824011892080307,
+        0.08459587395191193
+      ],
+      "anchor_placement_is_authored_not_calibrated": true,
+      "painted_surface_samples": 361
+    }
+  ],
+  "head_png_sha256": "5dc862eb9e6637a690bf75b35785126b6c1bcc1e80c81f3c93c6a3bc99a4391f",
+  "changed_head_pixels": 10982,
+  "pixels_changed_outside_overlay": 0,
+  "protected_upper_lash_pixels_changed": 0,
+  "protected_brow_pixels_changed": 0,
+  "protected_mouth_pixels_changed": 0,
+  "all_other_head_pixels_byte_identical": true,
+  "overlay_premultiplied_supersampling": true,
+  "iris_png_hashes_unchanged": true,
+  "paid_submissions": 0,
+  "spent_credits": 0,
+  "scope": "Technical local overlay preservation only; no likeness/rig/game/device approval."
+}

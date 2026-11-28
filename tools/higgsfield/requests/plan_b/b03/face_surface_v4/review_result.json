@@ -1,0 +1,48 @@
+{
+  "stage": "B-03-04",
+  "role": "planning/art",
+  "date_kst": "2026-11-29",
+  "verified_remote_parent": "71e9c93f9b2f2dfd442dcb6d8c7e9129ee90cc76",
+  "status": "IN_PROGRESS_REFERENCE_APPEARANCE_NOT_PASSED_LOCAL03_REVIEW_NEXT",
+  "current_editable_file": "viya_face_details.blend",
+  "output_sha256": "33024888a9e9efe69685d6ca049ae0afa1900b96636da5961bc3cdcb0314ef01",
+  "local_work": [
+    "Added source lower-lid shading/upper crease and two tiny nose patches on existingUV.",
+    "Corrected initially hidden nose registration to first front-visible surface and rejected two known hidden anchors.",
+    "Excluded hair-occluded right crease endpoint after an observed stray dark mark.",
+    "Preserved all geometry/controls/R4, UVs, irisPNG and protected brow/mouth/upper-lash pixels.",
+    "Compared fixed material/view hypotheses without saving changes to model, camera or default material."
+  ],
+  "observed_improvements": [
+    "Lower-lid warm shade/crease lines and nose graphics are present.",
+    "Nose graphics are visible after surface-registration correction.",
+    "Stray dark right-crease endpoint removed by excluding occluding hair."
+  ],
+  "remaining_visual_differences": [
+    "Overall source eye/expression impression is still different in inspected material/view hypotheses.",
+    "Source/drawing projection and hidden shapes remain uncalibrated.",
+    "Softer3D nose shading changes with review light contribution; final engine material is unverified."
+  ],
+  "visual_assessment_not_a_proven_geometric_defect": true,
+  "next_single_work": "Local03 impact review from this blend: preserve currentUV/colors/iris/all controls and compare actual lid aperture/corners and visible eye ratio with source and existing view hypotheses. Account for occlusion/manual2D uncertainty before any localized shape change, then recheck04. No UV restart, whole-head regeneration or paid generation.",
+  "producer_face_acceptance": "PENDING_B03_05",
+  "reference_likeness_approved": false,
+  "completed_plan_b_chapters": 1,
+  "game_integration": false,
+  "engine_device_verification": false,
+  "paid_submissions": 0,
+  "spent_credits": 0,
+  "balance_requeried": false,
+  "new_paid_budget_assigned": false,
+  "historical_only": {
+    "paid_submissions": 3,
+    "spent_credits": 100,
+    "last_observed_balance": 297
+  },
+  "numeric_eye_surface_contact_verified": false,
+  "full_self_intersection_verified": false,
+  "rig_deformation_verified": false,
+  "final_engine_material_verified": false,
+  "current_head_principled_weight": 0.35,
+  "diagnostic_material_or_camera_adopted": false
+}

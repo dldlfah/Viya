@@ -1,0 +1,12 @@
+{
+  "status": "NOT_ADOPTED",
+  "observed_defects": [
+    "Nose graphic patches barely visible in front render.",
+    "Upper crease reads stronger than reference."
+  ],
+  "nose_cause": "ClosestXZ registration selected an inner nose surface atY about-.078 rather than the first front-visible surface.",
+  "correction": "Pick frontmost surface within0.8mmXZ neighborhood and verify first-hit depth with a frontal-Y BVH ray. Reduce crease opacity.",
+  "paid_submissions": 0,
+  "spent_credits": 0,
+  "archived_trial_independent_reopen_verified": false
+}

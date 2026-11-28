@@ -1,0 +1,46 @@
+{
+  "results": [
+    {
+      "id": "screen_left_nose_mark",
+      "anchor": [
+        -0.004609324969351292,
+        -0.09684230387210846,
+        0.08511531352996826
+      ],
+      "front_axis_first_hit": [
+        -0.004609324969351292,
+        -0.09684228897094727,
+        0.08511531352996826
+      ],
+      "depth_gap_working_m": 1.4901161193847656e-08
+    },
+    {
+      "id": "screen_right_nose_mark",
+      "anchor": [
+        0.004456148948520422,
+        -0.09692862629890442,
+        0.08506221324205399
+      ],
+      "front_axis_first_hit": [
+        0.004456148948520422,
+        -0.09692859649658203,
+        0.08506221324205399
+      ],
+      "depth_gap_working_m": 2.9802322387695312e-08
+    }
+  ],
+  "known_failure_counterexamples": [
+    {
+      "id": "screen_left_nose_mark",
+      "depth_gap_working_m": 0.017958536744117737,
+      "known_hidden_anchor_rejected": true
+    },
+    {
+      "id": "screen_right_nose_mark",
+      "depth_gap_working_m": 0.017960108816623688,
+      "known_hidden_anchor_rejected": true
+    }
+  ],
+  "first_visible_front_axis_surface": true,
+  "scope": "Frontal-Y point registration only; not all cameras or full self-intersection."
+}

@@ -4,15 +4,15 @@
 
 새 기획세션은 [기획세션 연계문서](PLANNING_SESSION_HANDOFF.md)를 읽고 실제 최신 HEAD와 현재 작업을 대조한다.
 
-## 플랜B B-03-04 진행 — 눈썹 연결·원본 입선 보완, 얼굴 인상 미통과
+## 플랜B B-03-04 진행 — 눈꺼풀/코 선·색 보완, 다음03 국소 영향 검수
 
-원격23e6b32/깨끗한 로컬에서 [face_surface_v3](../tools/higgsfield/requests/plan_b/b03/face_surface_v3/README.md)를 제작했다. 눈썹 관찰RGB와 가려진 작성 연장을 겹쳐 칠하던 방식에서 단일 합성/끝단 선폭 테이퍼로 바꾸고, 원본 입선8점의 실제 색·굵기를 기존 입술 면 고리의 중간 경로에 국소 전사했다. 원본/UV 배치·모든 형상 제어는 유지했다. [원화/이전/현재](../tools/higgsfield/requests/plan_b/b03/face_surface_v3/review/source_before_after.png) · [확대 대조](../tools/higgsfield/requests/plan_b/b03/face_surface_v3/review/feature_details.png).
+원격71e9c93/깨끗한 로컬에서 [face_surface_v4](../tools/higgsfield/requests/plan_b/b03/face_surface_v4/README.md)를 제작했다. 실제 원본의 하단 눈꺼풀 음영/위 접힌 선과 코 표시를 기존UV에 보완했다. 첫 코 표시가 안쪽 표면에 가려진 등록을 정면 첫 교차면으로 고쳤고, 오른쪽 접힌 선 끝에 섞인 앞머리 구간도 제외했다. [원화/전후](../tools/higgsfield/requests/plan_b/b03/face_surface_v4/review/source_before_after.png) · [눈/코 확대](../tools/higgsfield/requests/plan_b/b03/face_surface_v4/review/feature_details.png).
 
-현재 파일은 `face_surface_v3/viya_face_expression.blend`다. 4,455정점4,426면·모든 제어/R4·코0.55·평가 제어 좌표/원본UV·별도UV/양 홍채PNG와 입력v2/원본4장 바이트는 그대로다. 형상 변경0·머리색 지정 영역13,971px(눈썹1,325/입12,646) 변경, 영역 밖/기존 눈·속눈썹 주변 변경0이다. 패킹 이미지/모든 제어·UV/독립 재개방 사선RGBA 동일과 원본·입력 해시 보존을 확인했다. 원본의 양 눈을 잇는2D 축 약−5.572도 관찰로 입꼬리 차이를 신체 비대칭/3D 변위로 무조건 복사하지 않았다. 이전R4 전 개구56 고정 수치는 소급하지 않는다.
+현재 파일은 `face_surface_v4/viya_face_details.blend`다. 형상 변경0으로4,455정점4,426면·모든 제어/R4·코0.55/평가 제어 좌표/원본UV·별도UV/홍채와 원본4장·입력v3를 보존했다. 머리색10,419px만 변경·오버레이 밖/보호 눈썹·입선·상단 속눈썹 변경0이다. 코 등록의 정면 첫 교차·기존 실패 앵커2개 거부, 패킹/모든 제어·UV/독립 재개방 사선RGBA·원본/입력 해시 불변을 확인했다. 이전R4 전 개구56 고정 수치는 소급하지 않는다.
 
-눈썹 겹침과 균일한 가는 입선은 보완했으나, 짧은 눈썹 관찰 구간의 직선적인 읽힘·원본 하단 눈꺼풀 음영/세부선과 코의 짧은 표시/전체 인상 차이가 남아 **04 자체 검수 미통과·진행**이다. 다음 한 작업은 같은UV의 **하단 눈꺼풀 음영/세부선·코 표시 국소 보완**이다. 무조명/검수 조명·양 사선/측면으로 선과 조명 음영을 구분하며 실제 형상 결함만03 국소 영향 검수한다. UV 준비/광역 재생성·유료생성으로 되돌리지 않고04통과 전05/몸·총기·리그로 넘기지 않는다. [판단/다음](../tools/higgsfield/requests/plan_b/b03/face_surface_v3/review_result.json).
+[조명 비중](../tools/higgsfield/requests/plan_b/b03/face_surface_v4/review/material_sensitivity.png)과 [시점 가설](../tools/higgsfield/requests/plan_b/b03/face_surface_v4/review/view_sensitivity.png)을 추가 대조했으나 원화와의 눈매 인상 차이를 해소했다고 판단하지 못했다. **04 전체 원화 인상 미통과·진행**이며 다음은 **03 국소 복귀: 현재 색/UV를 보존한 눈꺼풀 개구·눈꼬리 영향 검수**다. 기하 결함을 확정한 것은 아니며 원본의 가림/기울기·수동2D 불확실성과 현재 투영을 함께 확인해 필요한 국소 제어만 편집한다. 카메라/재질 가설은 채택하지 않았고 저장본은 기존 검수 재질을 유지한다. UV 준비/광역 재생성·유료생성/05·몸·총기·리그로 건너뛰지 않는다. [판단/다음](../tools/higgsfield/requests/plan_b/b03/face_surface_v4/review_result.json).
 
-이번 유료 제출/차감0·잔액 재조회0, 원본208/ARTFIX001/GAME064~076/SAVEFIX001·기존2D36클립363/임시3D/게임 코드·전투/저장 규칙은 보존했다. B-03 전체진행·플랜B 완료1/8·제작세션 정식 자산 대기·게임/Windows/S20+실기·프로듀서 얼굴/최종 승인 전이다. 최신 이력8.112/계획112절을 따른다.
+이번 유료 제출/차감0·잔액 재조회0·기존2D36클립363/임시3D/게임 코드·원본208/ARTFIX001/GAME064~076/SAVEFIX001·전투/저장 규칙은 보존했다. B-03 전체진행·완료1/8·제작세션 정식 자산 대기·게임/Windows/S20+실기·프로듀서 얼굴/최종 승인 전이다. 최신 이력8.113/계획113절을 따른다.
 
 ## 이전 B-03-02 국소 편집 시험 — 전체 얼굴 품질과 구분
 

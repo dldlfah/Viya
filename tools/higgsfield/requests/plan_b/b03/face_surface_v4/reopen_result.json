@@ -1,0 +1,9 @@
+{
+  "output_sha256": "33024888a9e9efe69685d6ca049ae0afa1900b96636da5961bc3cdcb0314ef01",
+  "all_geometry_controls_uv_equal": true,
+  "active_packed_image_hashes_equal": true,
+  "baseline_head_material_retained": true,
+  "external_blend_dependencies": 0,
+  "input_unchanged": true,
+  "scope": "Persistence/material-only change, not producer likeness or rig/runtime acceptance"
+}
