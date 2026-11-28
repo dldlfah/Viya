@@ -1,0 +1,44 @@
+{
+  "stage": "B-03-03",
+  "role": "Planning/art",
+  "status": "IN_PROGRESS_REFERENCE_FORM_NOT_PASSED",
+  "verified_remote_parent": "3960e5f4e078b5e786e8d11d166c90c690b1dfaf",
+  "current_editable_file": "viya_head_refinement.blend",
+  "manual_review_method": "Direct sequential before/after comparison at front, both profiles, three-quarter and the existing 55-degree head diagnostic. Compare unchanged four-source face board without overlay fitting or numerical likeness claims.",
+  "observed_improvements": [
+    "Lid aperture increased relative to the old study and the insufficient first local edit.",
+    "Nose protrusion and lip volume reduced in front/profile.",
+    "Individual eye, nose and lip edits remain reversible."
+  ],
+  "remaining_form_defects": [
+    "Socket/eyelid folds and nostril/columella detail retain a realistic base-head appearance.",
+    "Eye horizontal contour, outer corner expression and closed mouth/jaw impression do not yet reproduce the proposed front reference."
+  ],
+  "not_form_defects_by_themselves": [
+    "No iris, brows, hair or painted colors at this geometry-only stage.",
+    "Uncalibrated original drawings disagree; their raw pixel coordinates are not valid 3D constraints."
+  ],
+  "eye_fit_review": {
+    "large_gap_visible_in_reviewed_images": false,
+    "helper_vertices_changed": 0,
+    "numerical_surface_contact_verified": false,
+    "rig_or_deformed_fit_verified": false
+  },
+  "integrity_scope": "Control fan triangle normals/areas, original topology/UV/source-index hashes, reversible shape keys, independent current-file reopening and identical decoded render pixels. Not a self-intersection/rig/engine/likeness proof.",
+  "first_edit_resolution": "Initial eyelid delta was visibly insufficient. Increase the same licensed anatomical controls to nominal weight1.0 and outer corner0.55. No paid regeneration.",
+  "paid_submissions": 0,
+  "spent_credits": 0,
+  "balance_requeried": false,
+  "historical_only": {
+    "paid_submissions": 3,
+    "spent_credits": 100,
+    "last_observed_balance": 297
+  },
+  "new_paid_budget_assigned": false,
+  "producer_face_acceptance": "PENDING_B03_05",
+  "stage04_texture_started": false,
+  "game_integration": false,
+  "runtime_or_device_verification": false,
+  "plan_b_completed_chapters": 1,
+  "next_single_work": "Continue B-03-03 on the current editable file: reshape eyelid/socket contour and simplify nostril/columella and closed mouth line; inspect front and opposite profiles before04. Preserve basis, UV and both previous local versions."
+}

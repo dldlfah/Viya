@@ -1,0 +1,15 @@
+{
+  "stage": "B-03-03 local form refinement; producer acceptance pending",
+  "eye_targets": {
+    "l-eye-scale-incr.target.gz": 0.30,
+    "r-eye-scale-incr.target.gz": 0.30,
+    "l-eye-height2-incr.target.gz": 0.40,
+    "r-eye-height2-incr.target.gz": 0.40,
+    "l-eye-corner1-up.target.gz": 0.35,
+    "r-eye-corner1-up.target.gz": 0.35
+  },
+  "nose": {"center_z_m": 0.091, "sigma_x_m": 0.020, "sigma_z_m": 0.019, "projection_plane_y_m": -0.085, "depth_fraction": 0.28, "max_depth_reduction_m": 0.005, "width_reduction_fraction": 0.10},
+  "lips": {"center_z_m": 0.065, "sigma_x_m": 0.021, "sigma_z_m": 0.008, "depth_reduction_m": 0.0015, "vertical_contraction_fraction": 0.15},
+  "scope": "Reversible eye/nose/lip shape keys on the previous CC0 head study. No texture, body, rig, generation service or gameplay changes.",
+  "evidence": "Eye corner1 is outer and corner2 inner from actual affected source-vertex positions; height2 affects the central lid region. Input names alone were not treated as proof."
+}

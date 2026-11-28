@@ -1,0 +1,30 @@
+{
+  "stage": "B-03-03 local form refinement; producer acceptance pending",
+  "eye_targets": {
+    "l-eye-scale-incr.target.gz": 1.0,
+    "r-eye-scale-incr.target.gz": 1.0,
+    "l-eye-height2-incr.target.gz": 1.0,
+    "r-eye-height2-incr.target.gz": 1.0,
+    "l-eye-corner1-up.target.gz": 0.55,
+    "r-eye-corner1-up.target.gz": 0.55
+  },
+  "nose": {
+    "center_z_m": 0.091,
+    "sigma_x_m": 0.02,
+    "sigma_z_m": 0.019,
+    "projection_plane_y_m": -0.085,
+    "depth_fraction": 0.28,
+    "max_depth_reduction_m": 0.005,
+    "width_reduction_fraction": 0.1
+  },
+  "lips": {
+    "center_z_m": 0.065,
+    "sigma_x_m": 0.021,
+    "sigma_z_m": 0.008,
+    "depth_reduction_m": 0.0015,
+    "vertical_contraction_fraction": 0.15
+  },
+  "scope": "Reversible eye/nose/lip shape keys on the previous CC0 head study. No texture, body, rig, generation service or gameplay changes.",
+  "evidence": "Eye corner1 is outer and corner2 inner from actual affected source-vertex positions; height2 affects the central lid region. Input names alone were not treated as proof.",
+  "revision_reason": "The first trial changes were visibly too small: lid aperture and width still read as a small realistic eye rather than the reference. Increase the same anatomical controls to their nominal 1.0 magnitude; inspect eye fit before adopting."
+}

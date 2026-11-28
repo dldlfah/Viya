@@ -1,0 +1,77 @@
+{
+  "date_kst": "2026-11-28",
+  "license": "CC0-1.0: MPFB core graphical targets; code not imported",
+  "license_record": "../head_shape_v1/cc0_topology_trial/source_registry.json",
+  "assets": [
+    {
+      "name": "l-eye-height1-incr.target.gz",
+      "git_blob_sha": "c739debc493bbfa076addf896a7204559e535fb8",
+      "original_path": "src/mpfb/data/targets/eyes/l-eye-height1-incr.target.gz",
+      "source_url": "https://github.com/makehumancommunity/mpfb2/blob/master/src/mpfb/data/targets/eyes/l-eye-height1-incr.target.gz",
+      "size": 911
+    },
+    {
+      "name": "r-eye-height1-incr.target.gz",
+      "git_blob_sha": "f162ae3cc31138f467142c5b5c0145fb393286fa",
+      "original_path": "src/mpfb/data/targets/eyes/r-eye-height1-incr.target.gz",
+      "source_url": "https://github.com/makehumancommunity/mpfb2/blob/master/src/mpfb/data/targets/eyes/r-eye-height1-incr.target.gz",
+      "size": 841
+    },
+    {
+      "name": "l-eye-height2-incr.target.gz",
+      "git_blob_sha": "e2d2ff9986fffb03ee4b5b7a9542169885654ead",
+      "original_path": "src/mpfb/data/targets/eyes/l-eye-height2-incr.target.gz",
+      "source_url": "https://github.com/makehumancommunity/mpfb2/blob/master/src/mpfb/data/targets/eyes/l-eye-height2-incr.target.gz",
+      "size": 1511
+    },
+    {
+      "name": "r-eye-height2-incr.target.gz",
+      "git_blob_sha": "fe95726fd1d48320dbc1a79d1589fbe6c50a1b5b",
+      "original_path": "src/mpfb/data/targets/eyes/r-eye-height2-incr.target.gz",
+      "source_url": "https://github.com/makehumancommunity/mpfb2/blob/master/src/mpfb/data/targets/eyes/r-eye-height2-incr.target.gz",
+      "size": 1278
+    },
+    {
+      "name": "l-eye-corner1-up.target.gz",
+      "git_blob_sha": "6caa65293a255f2ebd019f27baa47147e389f3f4",
+      "original_path": "src/mpfb/data/targets/eyes/l-eye-corner1-up.target.gz",
+      "source_url": "https://github.com/makehumancommunity/mpfb2/blob/master/src/mpfb/data/targets/eyes/l-eye-corner1-up.target.gz",
+      "size": 775
+    },
+    {
+      "name": "r-eye-corner1-up.target.gz",
+      "git_blob_sha": "06c0076c7534e99cf34a57b1bda2e7910f937f03",
+      "original_path": "src/mpfb/data/targets/eyes/r-eye-corner1-up.target.gz",
+      "source_url": "https://github.com/makehumancommunity/mpfb2/blob/master/src/mpfb/data/targets/eyes/r-eye-corner1-up.target.gz",
+      "size": 679
+    },
+    {
+      "name": "l-eye-corner2-up.target.gz",
+      "git_blob_sha": "1a2697bbd2fcb9b6ff655c1e7adce2c6383df05a",
+      "original_path": "src/mpfb/data/targets/eyes/l-eye-corner2-up.target.gz",
+      "source_url": "https://github.com/makehumancommunity/mpfb2/blob/master/src/mpfb/data/targets/eyes/l-eye-corner2-up.target.gz",
+      "size": 821
+    },
+    {
+      "name": "r-eye-corner2-up.target.gz",
+      "git_blob_sha": "e2804393d5630a87e710a13a966075ce8c2cacf0",
+      "original_path": "src/mpfb/data/targets/eyes/r-eye-corner2-up.target.gz",
+      "source_url": "https://github.com/makehumancommunity/mpfb2/blob/master/src/mpfb/data/targets/eyes/r-eye-corner2-up.target.gz",
+      "size": 768
+    },
+    {
+      "name": "l-eye-scale-incr.target.gz",
+      "git_blob_sha": "56700020b2d224a6009eb4690ed731f4b4feeef8",
+      "original_path": "src/mpfb/data/targets/eyes/l-eye-scale-incr.target.gz",
+      "source_url": "https://github.com/makehumancommunity/mpfb2/blob/master/src/mpfb/data/targets/eyes/l-eye-scale-incr.target.gz",
+      "size": 3270
+    },
+    {
+      "name": "r-eye-scale-incr.target.gz",
+      "git_blob_sha": "fb60b901f0dd2a08986092795cd3ecb5df2f2c9c",
+      "original_path": "src/mpfb/data/targets/eyes/r-eye-scale-incr.target.gz",
+      "source_url": "https://github.com/makehumancommunity/mpfb2/blob/master/src/mpfb/data/targets/eyes/r-eye-scale-incr.target.gz",
+      "size": 3070
+    }
+  ]
+}

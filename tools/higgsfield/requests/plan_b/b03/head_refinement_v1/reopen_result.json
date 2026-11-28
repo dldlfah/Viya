@@ -1,0 +1,8 @@
+{
+  "all_snapshots_equal": true,
+  "deformation_audit_equal": true,
+  "input_blend_unchanged": true,
+  "no_external_library": true,
+  "blend_sha256": "80a4c9b43a0acb9f8f865f619d241d61b2efaf50dea209ec9878d2e7266acdf6",
+  "scope": "Editable shape-key/persistence integrity, not likeness/rig/runtime acceptance"
+}
