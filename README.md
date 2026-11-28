@@ -1,5 +1,7 @@
 # Viya — 모바일 서바이버 게임
 
+GAME075 사용자추가1건은생성을마쳤으나몸/발전환차이로게임에연결하지않았다. 원본89장·비교용15장/영상과근거를보존했다. 추가30·누적3건89크레딧·계정397/자동4차없음,현재게임35클립348은그대로다. [추가검수](tools/higgsfield/requests/game075/evidence/candidate_03/README.md).
+
 병행 GAME075는 SW 견착 이동사격15장 검토 후보를 납품했다. 기존SW17과 발자세 차이가 남아 게임용최종채택은 미확정이며 현재35클립348은 그대로다. 유료2/실차감59·예산잔여1. [원화·비교](assets/characters/pilot_32/game075_sw_run_fire/README.md) · [현재상태](docs/CURRENT_WORK.md).
 
 ## GAME070 — SW17 재검수와 화면 갱신 사이의 보행 보정 (2026-11-28)

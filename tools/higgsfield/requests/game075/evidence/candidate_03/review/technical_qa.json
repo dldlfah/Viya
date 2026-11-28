@@ -1,0 +1,21 @@
+{
+  "source_frames_directly_reviewed": 89,
+  "trial_rgba_frames": 15,
+  "canvas": [
+    200,
+    248
+  ],
+  "source_ms": 625,
+  "nominal_review_ms": 660,
+  "border_alpha_max": 0,
+  "distinct_rgba_hashes": 15,
+  "protected_game_paths": 1635,
+  "protected_against": "4c0a28e8a977843d8101d61d62c5c32a32cfa9e7",
+  "game_diff": "NONE",
+  "active_clips": 35,
+  "active_frames": 348,
+  "game_connection": "NOT_RUN",
+  "main_tscn": "NOT_RUN",
+  "technical_adoption": "NOT_ADOPTED_FOR_CURRENT_GAME_SWITCH",
+  "producer_final": "NOT_VERIFIED"
+}

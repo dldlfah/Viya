@@ -1,27 +1,14 @@
 {
   "job_id": "ec7c9a20-e1a8-467d-b861-c46d2a5bed05",
+  "status": "completed",
+  "review": "NOT_ADOPTED_FOR_CURRENT_GAME_SWITCH",
+  "additional_user_request": "한개 더 제작해",
   "additional_authorized": 1,
-  "status": {
-    "jobs": [
-      {
-        "index": 0,
-        "job_id": "ec7c9a20-e1a8-467d-b861-c46d2a5bed05",
-        "status": "in_progress",
-        "type": "video",
-        "model": "seedance_2_5"
-      }
-    ],
-    "summary": {
-      "total": 1,
-      "completed": 0,
-      "failed": 0,
-      "active": 1,
-      "errors": 0
-    },
-    "all_terminal": false,
-    "timed_out": true,
-    "poll_after_seconds": 10
-  },
-  "quote": 30,
-  "automatic_fourth": false
+  "additional_used": 1,
+  "additional_net_credits": 30,
+  "cumulative_submissions": 3,
+  "cumulative_net_credits": 89,
+  "balance_final": 397,
+  "automatic_fourth": false,
+  "game_connection": "NOT_RUN"
 }

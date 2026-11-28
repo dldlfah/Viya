@@ -1,12 +1,12 @@
 {
   "unit": "GAME075",
-  "status": "CANDIDATE_DELIVERED_WITH_TRANSITION_DIFFERENCES",
+  "status": "AUTHORIZED_EXTRA_COMPLETED_NOT_ADOPTED",
   "first_job": "7fa6e18e-a5ca-4607-b854-9099a8c30faf",
   "second_job": "18014a92-2bf2-4c77-ab40-19d288002022",
-  "paid_submissions": 2,
-  "net_credits": 59,
-  "remaining_unit_budget": 1,
-  "final_account_credits": 427,
+  "paid_submissions": 3,
+  "net_credits": 89,
+  "remaining_unit_budget": 0,
+  "final_account_credits": 397,
   "source_frames": [
     30,
     44
@@ -20,5 +20,19 @@
   "producer_final_art": "NOT_VERIFIED",
   "current_active_clips": 35,
   "current_active_frames": 348,
-  "automatic_third": false
+  "automatic_third": false,
+  "previous_delivered_candidate": {
+    "source_frames": [
+      30,
+      44
+    ],
+    "source_end_exclusive": 45,
+    "rgba_frames": 15,
+    "technical_adoption": "NOT_FINAL_FOR_ACTIVE_GAME; shoulder-corrected standalone cycle available, SW17 transition differences remain"
+  },
+  "third_job": "ec7c9a20-e1a8-467d-b861-c46d2a5bed05",
+  "extra_review_rgba_frames": 15,
+  "extra_game_ready_frames": 0,
+  "third_was_explicitly_authorized": true,
+  "automatic_fourth": false
 }

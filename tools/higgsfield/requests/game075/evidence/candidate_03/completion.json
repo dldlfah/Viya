@@ -1,0 +1,20 @@
+{
+  "jobs": [
+    {
+      "index": 0,
+      "job_id": "ec7c9a20-e1a8-467d-b861-c46d2a5bed05",
+      "status": "completed",
+      "type": "video",
+      "model": "seedance_2_5",
+      "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3LHdo37hN3iiYXd8WT9stnWXw4M/hf_20261128_022008_ec7c9a20-e1a8-467d-b861-c46d2a5bed05.mp4"
+    }
+  ],
+  "summary": {
+    "total": 1,
+    "completed": 1,
+    "failed": 0,
+    "active": 0,
+    "errors": 0
+  },
+  "all_terminal": true
+}

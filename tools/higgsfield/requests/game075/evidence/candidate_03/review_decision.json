@@ -1,0 +1,78 @@
+{
+  "generation": "COMPLETED",
+  "job_id": "ec7c9a20-e1a8-467d-b861-c46d2a5bed05",
+  "model": "seedance_2_5",
+  "mode": "video_edit",
+  "source_sha256": "23af11250f8d25f504404d7c8f5743a0303e92a10e9b5dc24a2b966245165bf1",
+  "actual_output": {
+    "width": 834,
+    "height": 1112,
+    "fps": 24,
+    "frames": 89,
+    "duration_seconds": 3.7083333333333335,
+    "audio_streams": 0,
+    "alpha": false
+  },
+  "review_scope": "All89 native source frames viewed in order across4 contact sheets; full source20 and current SW/canonical E-SE weapons inspected.",
+  "positive": [
+    "SW elevated direction retained",
+    "shoulder-supported two-handed aim throughout",
+    "no baked weapon discharge observed",
+    "full body visible in raw output"
+  ],
+  "remaining_defects": [
+    "Input SW17 body/pelvis/boot registration and pose trajectories were not preserved sufficiently for a minor-change switch.",
+    "With full-rifle fixed registration, body and leg poses differ visibly from SW17. Moving the plate to align the body clips the long barrel.",
+    "Detailed vented muzzle and prominent magazine need producer comparison; exact original weapon structure is not proven."
+  ],
+  "trial": {
+    "source_frames_inclusive": [
+      29,
+      43
+    ],
+    "next_boundary_excluded": 44,
+    "source_ms": 625,
+    "nominal_review_ms": 660,
+    "rgba_frames": 15,
+    "canvas": [
+      200,
+      248
+    ],
+    "root": [
+      100,
+      248
+    ],
+    "scale": 0.2997601918465228,
+    "translation": [
+      3,
+      -33.33333333333333
+    ],
+    "per_frame_registration": false,
+    "pose_synthesis": false
+  },
+  "phase": "Silhouette-only full-cycle search is an analysis aid. No anatomical foot phase or zero-slip claim; no production phase metadata approved.",
+  "technical_adoption": "NOT_ADOPTED_FOR_CURRENT_GAME_SWITCH",
+  "producer_final": "NOT_VERIFIED",
+  "game_connection": "NOT_RUN",
+  "main_scene": "NOT_RUN",
+  "device_validation": "NOT_VERIFIED",
+  "existing_game": {
+    "clips": 35,
+    "frames": 348,
+    "active_resource": "res://assets/characters/pilot_32/game070_sw_run/viya_game070_frames.tres",
+    "unchanged": true
+  },
+  "cost": {
+    "additional_submissions": 1,
+    "additional_quote": 30,
+    "additional_net": 30,
+    "balance_before": 427,
+    "balance_after_submit": 397,
+    "balance_after_completion": 397,
+    "previous_net": 59,
+    "cumulative_submissions": 3,
+    "cumulative_net": 89,
+    "automatic_fourth": false,
+    "paid_extras": 0
+  }
+}

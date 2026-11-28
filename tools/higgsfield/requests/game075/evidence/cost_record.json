@@ -1,8 +1,8 @@
 {
   "unit": "GAME075",
-  "maximum_submissions": 2,
-  "maximum_net_credits": 60,
-  "paid_submissions": 2,
+  "maximum_submissions": 3,
+  "maximum_net_credits": 89,
+  "paid_submissions": 3,
   "jobs": [
     {
       "id": "7fa6e18e-a5ca-4607-b854-9099a8c30faf",
@@ -17,17 +17,40 @@
       "quoted_credits": 31,
       "observed_charge": 31,
       "adoption": "AIMED15_CANDIDATE; TRANSITION_NOT_FINAL"
+    },
+    {
+      "id": "ec7c9a20-e1a8-467d-b861-c46d2a5bed05",
+      "status": "completed",
+      "quoted_credits": 30,
+      "observed_charge": 30,
+      "adoption": "NOT_ADOPTED_FOR_CURRENT_GAME_SWITCH"
     }
   ],
   "balance_before": 486,
   "balance_after_first": 458,
   "balance_after_second": 427,
-  "balance_final": 427,
-  "gross_observed_charged": 59,
+  "balance_final": 397,
+  "gross_observed_charged": 89,
   "observed_returned": 0,
-  "net_observed_credits": 59,
-  "remaining_unit_budget": 1,
+  "net_observed_credits": 89,
+  "remaining_unit_budget": 0,
   "new_payment_or_plan_change": false,
   "paid_extras": 0,
-  "third_submission": false
+  "third_submission": true,
+  "original_closed_allocation": {
+    "maximum_submissions": 2,
+    "maximum_net_credits": 60,
+    "actual_submissions": 2,
+    "actual_net_credits": 59,
+    "unused_credits": 1
+  },
+  "additional_user_authorization": {
+    "text": "한개 더 제작해",
+    "one_extra_submission": true,
+    "current_quote_credits": 30,
+    "actual_net_credits": 30,
+    "remaining_extra_submissions": 0
+  },
+  "balance_after_third": 397,
+  "automatic_fourth": false
 }

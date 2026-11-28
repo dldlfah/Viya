@@ -2,11 +2,11 @@
   "created_at_stage": "Post-generation delivery summary; pre-submit approvals/quotes are in evidence/preflight.json and candidate02_decision.json",
   "base_commit": "bd5e8dc6c457ac7f9d2e25f425cc42ebfcefeade",
   "scope": "SW-only full-body aimed run",
-  "maximum_paid_submissions": 2,
-  "maximum_credits": 60,
-  "actual_submissions": 2,
-  "actual_credits": 59,
-  "remaining_credits": 1,
+  "maximum_paid_submissions": 3,
+  "maximum_credits": 89,
+  "actual_submissions": 3,
+  "actual_credits": 89,
+  "remaining_credits": 0,
   "paid_extras": 0,
   "active_game_clips_unchanged": 35,
   "active_game_frames_unchanged": 348,
@@ -36,5 +36,24 @@
   "nominal_cycle_ms": 660,
   "source_cycle_ms": 625,
   "game_connection": "NOT_RUN",
-  "final_adoption": "NOT_ESTABLISHED_TRANSITION_REVIEW_CANDIDATE"
+  "final_adoption": "NOT_ESTABLISHED_TRANSITION_REVIEW_CANDIDATE",
+  "original_closed_allocation": {
+    "maximum_paid_submissions": 2,
+    "maximum_credits": 60,
+    "actual_submissions": 2,
+    "actual_credits": 59,
+    "unused_credits": 1
+  },
+  "additional_authorized_candidate": {
+    "authorization": "한개 더 제작해",
+    "one_submission": true,
+    "quote": 30,
+    "actual": 30,
+    "job_id": "ec7c9a20-e1a8-467d-b861-c46d2a5bed05",
+    "result": "COMPLETED_NOT_ADOPTED_FOR_SWITCH",
+    "source_frames": 89,
+    "review_rgba_frames": 15,
+    "approved_new_game_frames": 0,
+    "automatic_fourth": false
+  }
 }
