@@ -1,0 +1,32 @@
+{
+  "candidate_01": {
+    "meshes": 1,
+    "triangles": 45064,
+    "bones": 24,
+    "unweighted_vertices": 0,
+    "raw_sha256": "cfac2cefc38525d7c0778e2eb3dae023146c0d28b83579f5b735444a6d125bdb",
+    "texture_images": [
+      {
+        "name": "Image_0",
+        "width": 2048,
+        "height": 2048,
+        "channels": 4
+      }
+    ]
+  },
+  "candidate_02": {
+    "meshes": 1,
+    "triangles": 44833,
+    "bones": 24,
+    "unweighted_vertices": 0,
+    "raw_sha256": "d9e022805f30fbb6c3216873928b8330da280d88f0e569c74fbe03721ba47187",
+    "texture_images": [
+      {
+        "name": "Image_0",
+        "width": 2048,
+        "height": 2048,
+        "channels": 4
+      }
+    ]
+  }
+}

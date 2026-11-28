@@ -1,0 +1,83 @@
+{
+  "chapter": "B-03",
+  "candidate": "02",
+  "job_id": "e77f2699-2ead-4505-8a05-06b2fd24bf52",
+  "status": "GENERATION_COMPLETED_REVIEWED",
+  "adoption": "PREFERRED_LOCAL_REWORK_BASE_NOT_GAME_READY",
+  "producer_final_approval": "NOT_VERIFIED",
+  "authorization": "Explicit user retry with four attached references; one additional35-credit candidate only",
+  "cost": {
+    "this_attempt_paid_submissions": 1,
+    "this_attempt_quote": 35,
+    "this_attempt_observed_charge": 35,
+    "balance": [
+      362,
+      327,
+      327
+    ],
+    "plan_b_total_paid_submissions": 2,
+    "plan_b_total_observed_charge": 70,
+    "remaining_this_retry_submissions": 0,
+    "remaining_this_retry_credits": 0
+  },
+  "inputs": {
+    "generation": [
+      "front.png",
+      "back.png"
+    ],
+    "comparison_only": [
+      "screen_left_profile.png",
+      "screen_right_profile.png"
+    ],
+    "selection_reason": "Front/back share the A-pose; profiles differ in arm pose and costume details.",
+    "known_limits": "Not a geometrically consistent approved turnaround. The front is the same composition at a different resolution as candidate01's input.",
+    "source_edits": "None; all four original attachments retained."
+  },
+  "technical": {
+    "raw_glb_sha256": "d9e022805f30fbb6c3216873928b8330da280d88f0e569c74fbe03721ba47187",
+    "raw_bytes": 6877492,
+    "body_meshes": 1,
+    "triangles": 44833,
+    "requested_target_polycount": 20000,
+    "requested_topology": "quad",
+    "actual_topology": "triangles",
+    "skin_joints": 24,
+    "texture_images": 1,
+    "texture_size": [
+      2048,
+      2048
+    ],
+    "materials": 1,
+    "unweighted_body_vertices": 0,
+    "animation": "Single bind-pose sample; no authored run/fire/ultimate animation",
+    "editable_blend_reopen": "PASS Blender4.3.2, one24-bone armature, packed Image_0",
+    "registration": "One uniform parent transform; same inspector/cameras/shading as candidate01; importer display helper excluded"
+  },
+  "comparison": {
+    "conditions": "Same Blender inspection script, cameras, whole-canvas registration and texture-only emission; no color repainting or source geometry edits.",
+    "observed_improvements": [
+      "Rear cloth is now visibly split into two side panels, exposing the shorts and legs instead of the broad joined cape in candidate01.",
+      "The large dark round patches previously visible on candidate01's rear cloth are not visible in the same candidate02 rear view.",
+      "Front hair appears somewhat darker in this output; rear hair still has a red/purple cast."
+    ],
+    "remaining_defects": [
+      "Hair surface near the arms still follows arm rotation and shows stretched/flat sheets.",
+      "Cloth still follows leg rotations too strongly; neither hair nor cloth has its own control chain.",
+      "Face, hair color/surface and costume details still differ from the supplied references and require manual rework.",
+      "Hand/finger control, original rifle, two-hand support, Muzzle and authored actions are missing.",
+      "44,833 triangles is not the requested20,000 quad output, and physical-device performance has not been tested."
+    ],
+    "causal_limit": "Input model, rear reference and texture guidance changed together; observed improvement is not a controlled proof of one parameter's isolated effect.",
+    "decision": "Planning recommends candidate02 as the next local-rework base because the rear structure improved; this is not producer approval or production-ready technical adoption."
+  },
+  "states": {
+    "art_generation": "COMPLETED",
+    "visual_review": "COMPLETED_REWORK_REQUIRED",
+    "game_integration": "NOT_RUN",
+    "godot_import": "NOT_RUN_BY_THIS_SESSION",
+    "windows_mobile": "NOT_VERIFIED",
+    "final_art_approval": "NOT_VERIFIED",
+    "plan_chapters_complete": "1/8"
+  },
+  "next": "Work locally on candidate02 hair/cloth parts, skinning and visual details. Do not generate a third paid candidate automatically. Production remains waiting for finalized assets."
+}

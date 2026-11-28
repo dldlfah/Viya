@@ -418,3 +418,14 @@ ART-001의 기록된 정확한 해시 파일은 관련 검색에서 찾지 못�
 - Higgsfield Meshy image_to_3d·GEN-001기존A포즈단일입력,텍스처/자동리그·동작없음·symmetry off/PBR off/A포즈/1.72m. 작업`9e824836-1b2a-4956-943e-eda4e3b0cd69`completed,1건실차감35·계정397→362→362·승인한도소진.
 - 채택: **로컬수정용보존/게임채택보류**. 머리색/후면천·얼굴/의상일치와팔/머리·다리/천스키닝보완필요. 총기/총구·전용액션/추가제어미완성. 게임연결/실기/프로듀서최종승인없음.
 - [원본·편집/비교/해시](../assets/characters/plan_b_viya/candidate_01/README.md) · [실제입력/원가·검수판단](../tools/higgsfield/requests/plan_b/b03/candidate_01/README.md). 기존2D36클립363과임시3D시범은보존.
+
+
+## 플랜B B-03 — 첨부 재시도 후보02, 로컬 수정 기반/미적용 (2026-11-28)
+
+- 경로: `assets/characters/plan_b_viya/candidate_02/`. 기존후보01/기존게임덮어쓰기0, `.gdignore`로후보전체활성임포트제외.
+- 원본GLB: `source/viya_body_raw.glb`,6,877,492바이트/SHA-256 `d9e022805f30fbb6c3216873928b8330da280d88f0e569c74fbe03721ba47187`. 원색상JPEG바이트추출·24관절/스킨·패킹편집 .blend·구조/공통등록/해시/비교보존.
+- 사용자첨부4장원본은`references/`에바이트동일보존. 정면/후면 A포즈2장생성입력, 측면2장은팔자세/의상차이로비교용. 정확한승인턴어라운드로승격하지않음.
+- Higgsfield Meshy multi_image_to_3d·텍스처/자동리그·동작없음·목표20,000/quad/symmetry off/PBR off/A포즈/1.72m·지원texture_prompt. 실제44,833삼각형/24관절/2048²텍스처1/재질1. 단일bind-pose는전용동작아님.
+- 작업`e77f2699-2ead-4505-8a05-06b2fd24bf52`completed. 이번추가1건35/계정362→327→327·플랜B누적2건70·자동세번째없음.
+- 판단: 후면천좌우분리/다리노출은후보01보다개선, 머리/팔·천/다리동조·머리색/표면/얼굴·복장세부는로컬수정필요. **기획추천로컬수정기반·게임채택보류**, 프로듀서최종승인/게임적용/실기없음.
+- [원본/편집·참조·비교/해시](../assets/characters/plan_b_viya/candidate_02/README.md) · [모델/실제입력·설정/작업/원가·판단](../tools/higgsfield/requests/plan_b/b03/candidate_02/README.md).

@@ -1,7 +1,7 @@
 {
   "chapter": "B-03",
   "candidate": "02",
-  "status": "SUBMITTED",
+  "status": "GENERATION_COMPLETED_REVIEWED_REWORK_REQUIRED",
   "baseline_commit": "c467afeda253ae2f9793d1509913891f4cf9dddb",
   "authorization": "User explicitly requested another attempt using the newly attached images; this is one additional candidate at the rechecked same35-credit price, not reuse of exhausted candidate01 budget.",
   "max_submissions": 1,

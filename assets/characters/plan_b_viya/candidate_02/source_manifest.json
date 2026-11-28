@@ -1,0 +1,44 @@
+{
+  "job_id": "e77f2699-2ead-4505-8a05-06b2fd24bf52",
+  "source_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3LHdo37hN3iiYXd8WT9stnWXw4M/hf_20261128_113308_e77f2699-2ead-4505-8a05-06b2fd24bf52.glb",
+  "path": "assets/characters/plan_b_viya/candidate_02/source/viya_body_raw.glb",
+  "bytes": 6877492,
+  "sha256": "d9e022805f30fbb6c3216873928b8330da280d88f0e569c74fbe03721ba47187",
+  "gltf_version": "2.0",
+  "mesh_count": 1,
+  "skin_count": 1,
+  "skin_joints": [
+    24
+  ],
+  "materials": 1,
+  "images": 1,
+  "animations": [
+    {
+      "name": "Armature|clip0|baselayer",
+      "time_accessors": [
+        {
+          "bufferView": 76,
+          "componentType": 5126,
+          "count": 1,
+          "type": "SCALAR",
+          "min": [
+            0.03333333507180214
+          ],
+          "max": [
+            0.03333333507180214
+          ]
+        }
+      ]
+    }
+  ],
+  "reference_images": [
+    "references/front.png",
+    "references/back.png"
+  ],
+  "texture_extraction": "Original embedded image bytes copied unchanged",
+  "actual_body_triangles": 44833,
+  "requested_target_polycount": 20000,
+  "actual_topology": "triangles",
+  "animation_note": "Single bind-pose time sample at0.033333335s, not an authored action",
+  "adoption": "PREFERRED_LOCAL_REWORK_BASE_NOT_GAME_READY"
+}
