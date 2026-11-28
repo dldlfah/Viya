@@ -1,0 +1,57 @@
+{
+  "stage": "B-03-03",
+  "role": "planning/art",
+  "status": "BASE_FORM_SELF_REVIEW_PASSED_FOR_B03_04",
+  "date_kst": "2026-11-29",
+  "verified_remote_parent": "d05b30c38bf7b736ef00a09f2f993221f93c2053",
+  "current_editable_file": "viya_head_rims.blend",
+  "assessment_type": "Planning/art self-review of the static base form, not producer face likeness approval",
+  "evidence_views": [
+    "front",
+    "screen_left_profile",
+    "screen_right_profile",
+    "three_quarter",
+    "three_quarter_opposite",
+    "game_high_angle_head_only"
+  ],
+  "visual_judgment": [
+    "Finer lid rim while preserving the complete aperture/spacing and both helper eyes.",
+    "Narrower mouth gap and less downward mouth-corner break, with a continuous line.",
+    "Nose/chin/global head proportions unchanged from v2; no new large gaps or protrusions visible in reviewed images."
+  ],
+  "criteria": {
+    "front_basic_proportion_and_local_contour": "PASS_FOR_UV_TRIAL_BY_ART_SELF_REVIEW",
+    "both_profile_and_oblique_continuity": "PASS_STATIC_RENDER_REVIEW",
+    "lid_rim_and_closed_mouth_local_blockers": "CLEARED_FOR_NEXT_UV_STAGE",
+    "original_controls_and_structure_preservation": "PASS",
+    "actual_game_size_and_runtime": "NOT_VERIFIED",
+    "producer_face_likeness": "PENDING_B03_05"
+  },
+  "not_yet_judged": [
+    "Face color, iris/brow/painted eye and mouth lines and mature expression after texturing.",
+    "Hair/hidden hairline and ear assumptions, body/weapon, rig/deformation, engine/device and final appearance."
+  ],
+  "return_condition": "If04 UV/color/line or later viewpoint review reveals a form defect, return to03 and review its affected views; no automatic whole-body/rig promotion.",
+  "paid_submissions": 0,
+  "spent_credits": 0,
+  "balance_requeried": false,
+  "new_paid_budget_assigned": false,
+  "historical_only": {
+    "paid_submissions": 3,
+    "spent_credits": 100,
+    "last_observed_balance": 297
+  },
+  "local_geometry_edit_builds": 1,
+  "local_build_invocations": 2,
+  "second_build_reason": "Add opposite oblique and high-angle diagnostics, same form parameters.",
+  "producer_face_acceptance": "PENDING_B03_05",
+  "reference_likeness_approved": false,
+  "stage04_texture_started": false,
+  "game_integration": false,
+  "runtime_or_device_verification": false,
+  "completed_plan_b_chapters": 1,
+  "numeric_eye_surface_contact_verified": false,
+  "full_self_intersection_verified": false,
+  "rig_or_deformed_fit_verified": false,
+  "next_single_work": "B-03-04: preserve this base form and keys, audit head UV/checker/seams and actual reference resolution, then author face colors and iris/brow/mouth lines from existing references without new paid generation; inspect front and both obliques and return03 if required."
+}

@@ -1,20 +1,20 @@
 # VIYA — 현재 작업 상태
 
-2026-11-28 (KST) · `work/viya-turnaround-qa-20261117` · [누적 개발현황](DEVELOPMENT_STATUS.md) · [다음 작업](NEXT_TASK.md) · [후속 계획](PLANNED_WORK.md)
+2026-11-29 (KST) · `work/viya-turnaround-qa-20261117` · [누적 개발현황](DEVELOPMENT_STATUS.md) · [다음 작업](NEXT_TASK.md) · [후속 계획](PLANNED_WORK.md)
 
 새 기획세션은 [기획세션 연계문서](PLANNING_SESSION_HANDOFF.md)를 읽고 실제 최신 HEAD와 현재 작업을 대조한다.
 
-## 플랜B B-03-03 진행 — 눈확·코/입·턱 윤곽 수정, 눈꺼풀 테두리/입꼬리 미완료
+## 플랜B B-03-03 내부 기본형 자체 검수 완료 — 다음04 얼굴UV/색·선
 
-실제 원격340e584와 깨끗한 작업 트리에서 [head_refinement_v2](../tools/higgsfield/requests/plan_b/b03/head_refinement_v2/README.md)를 제작했다. 이전 v1의 모든 제어 좌표/값/상대 기준·UV/면 구조/원본 정점 인덱스를 보존한 채 눈확/눈알·코 깊이·입선·턱의 네 독립 Shape Key를 추가했다. 총4,455정점/4,426면을 유지하며 이전 v1 대비 피부2,974정점/최대 약4.060mm, 눈 각72정점/최대 약3.485mm가 바뀌었다.
+실제 원격d05b30c와 깨끗한 작업 트리에서 [head_refinement_v3](../tools/higgsfield/requests/plan_b/b03/head_refinement_v3/README.md)를 제작했다. 양쪽 눈의 실제28정점 고리와38정점 입선 고리를 확인하고, 눈 개구56정점/눈알 두 개를 고정한 채 테두리 간격·입선 벌어짐/입꼬리를 국소 보완했다. 기존 코0.55와 모든 제어 좌표/값/상대 기준·UV/면 구조·원본 정점 인덱스는 보존했다. 총4,455정점/4,426면, 이전 v2 대비 피부546정점/최대 약0.919mm만 달라졌다.
 
-5회 로컬 빌드에서 콧방울 일괄 수축은 코 밑면이 좁아져 제외했고, 공식 코 변위 두 개도 실제 코끝 돌출을 키워 모두 현재 가중치0으로 제외했다. 현재는 폭 수축 없이 코 깊이를 줄이는 독립 제어0.55를 사용한다. 최대값1에서 측면이 너무 납작해진 결과를 확인한 조정이다. 눈확 위/아래 굴곡을 완화하고 입선/턱 폭을 조정했다. [정면 전후](../tools/higgsfield/requests/plan_b/b03/head_refinement_v2/review/front_comparison.png) · [양측면/사선](../tools/higgsfield/requests/plan_b/b03/head_refinement_v2/review/multiview_comparison.png)
+정면·양측면·양 사선/55도 무채색과 원본 비교에서 테두리/입선의 국소 차단 항목을 보완했다고 **기획·아트가 기본형을04 작업용으로 자체 수용**했다. B-03-03 내부 단계 완료이며 프로듀서 얼굴 수용/원화 닮음 확정이 아니다. 눈썹/홍채·색/그림의 선과 머리가 없는 상태의 한계는04~05에서 확인한다. [눈/입 전후 확대](../tools/higgsfield/requests/plan_b/b03/head_refinement_v3/review/feature_comparison.png) · [원화 대조](../tools/higgsfield/requests/plan_b/b03/head_refinement_v3/review/reference_comparison.png)
 
-눈꺼풀 가장자리가 원화의 가는 윤곽보다 두껍고 입꼬리 곡선 차이가 남아 **B-03-03 자체 형태 검수 미통과·진행**이다. 다음은 `head_refinement_v2/viya_head_contours.blend`의 실제 눈꺼풀 면 고리를 확인해 테두리 두께/단면과 입꼬리를 조정하는03 작업이다. 현재 코0.55와 보존된 제어를 이어 쓰며 전체 개구/콧방울 폭 수정 시험을 반복하지 않는다. 04 색칠·전신/리그로 넘기지 않는다.
+다음 한 작업은 현재 `head_refinement_v3/viya_head_rims.blend`를 보존한 **B-03-04 얼굴UV/색·선**이다. UV checker/면 고리·이음선/늘어짐과 원본 얼굴의 실제 해상도를 확인해 눈/눈썹·입선/색을 배치하고 정면·양 사선을 대조한다. 단순한 정면 평면 투영으로 측면을 뭉개거나 해상도 확대를 복원으로 세지 않는다. 색/시점에서 형상 결함이 드러나면03으로 돌아간다. 얼굴05 수용 전 몸/총기·리그로 넘어가지 않는다.
 
-별도 Blender 프로세스에서 기존 모든 제어/UV·구조와 새 제어·변위 검사/사선 재렌더RGBA 픽셀 보존을 확인했다. 제어 팬 삼각형 새 방향 반전/0면적·비유한 좌표0이다. 모든 자기 교차/눈알 수치 접촉·리그/실제 게임 크기·기기 검증은 아니다. [현재 파일/검수 범위·남은 차이](../tools/higgsfield/requests/plan_b/b03/head_refinement_v2/review_result.json).
+별도 Blender 재개방으로 기존/새 제어·UV/구조·변위 검사와 사선 재렌더RGBA 픽셀/원본4장·입력.blend 해시 보존을 확인했다. 실제602정점 표본/개구56 변위0과 제어 팬 삼각형 반전/0면적·비유한 좌표0을 기록했다. 수치적 눈알 접촉/전체 자기 교차·리그 변형·실제 게임 표시/기기 검증은 아니다. [판단·범위](../tools/higgsfield/requests/plan_b/b03/head_refinement_v3/review_result.json).
 
-이번 유료 제출/실차감0·잔액 재조회 없음이다. 원본4장/기존 머리 초안·기존2D36클립363·임시3D/게임 코드·전투/저장 규칙은 유지했다. 전체완료1/8·B-03진행, 제작세션 정식 자산 대기·게임/실기/최종 아트 미승인이다. 최신 이력8.108/후속 계획108절을 따른다.
+이번 유료 제출/실차감0·잔액 재조회0이다. 원본4장/기존 초안·기존2D36클립363/임시3D·게임 코드/전투·저장 규칙은 유지했다. **B-03 전체는 진행·플랜B 완료1/8**이며 제작세션 정식 자산 대기·게임/실기/프로듀서 얼굴/최종 승인은 별도다. 최신 이력8.109/후속 계획109절을 따른다.
 
 ## 이전 B-03-02 국소 편집 시험 — 전체 얼굴 품질과 구분
 

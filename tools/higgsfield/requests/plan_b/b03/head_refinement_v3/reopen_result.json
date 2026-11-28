@@ -1,0 +1,9 @@
+{
+  "output_sha256": "aca01d53211b6feb977064dd39217b5358320f0a222f19ffce099e344e14211a",
+  "all_old_and_new_controls_equal": true,
+  "old_uv_topology_source_indices_equal": true,
+  "deformation_audit_equal": true,
+  "input_unchanged": true,
+  "external_blend_dependencies": 0,
+  "scope": "Independent current-file persistence; not artwork acceptance"
+}

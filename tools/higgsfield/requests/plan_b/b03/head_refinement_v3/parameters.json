@@ -1,0 +1,11 @@
+{
+  "stage": "B-03-03 local eyelid-rim and mouth-line refinement",
+  "mouth_corner_lift_m": 0.00035,
+  "mouth_corner_support_start_x_m": 0.01,
+  "mouth_corner_support_full_x_m": 0.02,
+  "new_control_values": {
+    "R3_LidRim": 1,
+    "R3_MouthCorner": 1
+  },
+  "scope": "Selected existing topology only. Preserve the full eye aperture, helpers, old controls and R2 nose0.55. Actual working-coordinate dimensions are not fitted from 2D drawings."
+}
