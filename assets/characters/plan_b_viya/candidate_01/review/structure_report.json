@@ -1,0 +1,469 @@
+{
+  "raw_glb_sha256": "cfac2cefc38525d7c0778e2eb3dae023146c0d28b83579f5b735444a6d125bdb",
+  "blender_version": "4.3.2",
+  "raw_bounds_blender_xyz": {
+    "min": [
+      -0.604843020439148,
+      -0.32522720098495483,
+      -2.476357110481331e-07
+    ],
+    "max": [
+      0.604843020439148,
+      0.32522743940353394,
+      1.720000147819519
+    ]
+  },
+  "mesh_objects": [
+    {
+      "name": "char1",
+      "vertices": 50423,
+      "polygons": 45064,
+      "triangles": 45064,
+      "uv_layers": [
+        "UVMap"
+      ],
+      "materials": [
+        "Material_0"
+      ],
+      "vertex_groups": [
+        "Hips",
+        "Spine02",
+        "Spine01",
+        "Spine",
+        "neck",
+        "Head",
+        "head_end",
+        "headfront",
+        "LeftShoulder",
+        "LeftArm",
+        "LeftForeArm",
+        "LeftHand",
+        "RightShoulder",
+        "RightArm",
+        "RightForeArm",
+        "RightHand",
+        "LeftUpLeg",
+        "LeftLeg",
+        "LeftFoot",
+        "LeftToeBase",
+        "RightUpLeg",
+        "RightLeg",
+        "RightFoot",
+        "RightToeBase"
+      ],
+      "armature_modifiers": [
+        "Armature"
+      ],
+      "unweighted_vertices": 0
+    }
+  ],
+  "armatures": [
+    {
+      "name": "Armature",
+      "bone_count": 24,
+      "bones": [
+        {
+          "name": "Hips",
+          "parent": null,
+          "head_local": [
+            -2.2264504432678223,
+            -12.66763973236084,
+            104.77596282958984
+          ],
+          "tail_local": [
+            28.387733459472656,
+            -5.0703325271606445,
+            1210.45947265625
+          ]
+        },
+        {
+          "name": "Spine02",
+          "parent": "Hips",
+          "head_local": [
+            -1.9203089475631714,
+            -12.591670989990234,
+            115.83279418945312
+          ],
+          "tail_local": [
+            28.69383430480957,
+            -4.995428562164307,
+            1221.5147705078125
+          ]
+        },
+        {
+          "name": "Spine01",
+          "parent": "Spine02",
+          "head_local": [
+            -1.614166259765625,
+            -12.515705108642578,
+            126.88961029052734
+          ],
+          "tail_local": [
+            29.92763328552246,
+            -4.688163757324219,
+            1266.08056640625
+          ]
+        },
+        {
+          "name": "Spine",
+          "parent": "Spine01",
+          "head_local": [
+            -1.2987483739852905,
+            -12.437435150146484,
+            138.28152465820312
+          ],
+          "tail_local": [
+            38.79545974731445,
+            -8.544936180114746,
+            758.8797607421875
+          ]
+        },
+        {
+          "name": "neck",
+          "parent": "Spine",
+          "head_local": [
+            -0.8155285716056824,
+            -12.390524864196777,
+            145.76104736328125
+          ],
+          "tail_local": [
+            43.63310241699219,
+            -8.075282096862793,
+            833.7592163085938
+          ]
+        },
+        {
+          "name": "Head",
+          "parent": "neck",
+          "head_local": [
+            -0.37104296684265137,
+            -12.347372055053711,
+            152.64102172851562
+          ],
+          "tail_local": [
+            39.43012619018555,
+            -92.22434997558594,
+            662.5345458984375
+          ]
+        },
+        {
+          "name": "head_end",
+          "parent": "Head",
+          "head_local": [
+            0.9974057078361511,
+            -15.093716621398926,
+            170.17214965820312
+          ],
+          "tail_local": [
+            40.79855728149414,
+            -94.9711685180664,
+            680.0656127929688
+          ]
+        },
+        {
+          "name": "headfront",
+          "parent": "Head",
+          "head_local": [
+            -0.37104156613349915,
+            -17.52381706237793,
+            152.64102172851562
+          ],
+          "tail_local": [
+            -0.37104156613349915,
+            -535.1683349609375,
+            152.64102172851562
+          ]
+        },
+        {
+          "name": "LeftShoulder",
+          "parent": "Spine",
+          "head_local": [
+            2.3903188705444336,
+            -12.456189155578613,
+            143.886474609375
+          ],
+          "tail_local": [
+            1284.72998046875,
+            218.44784545898438,
+            143.886474609375
+          ]
+        },
+        {
+          "name": "LeftArm",
+          "parent": "LeftShoulder",
+          "head_local": [
+            15.213715553283691,
+            -10.147149085998535,
+            143.886474609375
+          ],
+          "tail_local": [
+            1462.3720703125,
+            -85.14324188232422,
+            -1488.8187255859375
+          ]
+        },
+        {
+          "name": "LeftForeArm",
+          "parent": "LeftArm",
+          "head_local": [
+            29.68532943725586,
+            -10.897123336791992,
+            127.5594482421875
+          ],
+          "tail_local": [
+            1627.479736328125,
+            -842.797607421875,
+            -1137.6201171875
+          ]
+        },
+        {
+          "name": "LeftHand",
+          "parent": "LeftForeArm",
+          "head_local": [
+            45.6633186340332,
+            -19.216150283813477,
+            114.90772247314453
+          ],
+          "tail_local": [
+            1596.1634521484375,
+            -371.20941162109375,
+            -1407.503662109375
+          ]
+        },
+        {
+          "name": "RightShoulder",
+          "parent": "Spine",
+          "head_local": [
+            -3.9920387268066406,
+            -12.352776527404785,
+            143.886474609375
+          ],
+          "tail_local": [
+            -1274.595703125,
+            187.08389282226562,
+            143.886474609375
+          ]
+        },
+        {
+          "name": "RightArm",
+          "parent": "RightShoulder",
+          "head_local": [
+            -16.69807243347168,
+            -10.358409881591797,
+            143.88644409179688
+          ],
+          "tail_local": [
+            -1500.9661865234375,
+            -108.8892822265625,
+            -1563.026123046875
+          ]
+        },
+        {
+          "name": "RightForeArm",
+          "parent": "RightArm",
+          "head_local": [
+            -31.540756225585938,
+            -11.343709945678711,
+            126.81732177734375
+          ],
+          "tail_local": [
+            -1569.4635009765625,
+            -813.6167602539062,
+            -1045.522705078125
+          ]
+        },
+        {
+          "name": "RightHand",
+          "parent": "RightForeArm",
+          "head_local": [
+            -46.92002868652344,
+            -19.366453170776367,
+            115.09398651123047
+          ],
+          "tail_local": [
+            -1534.3936767578125,
+            -546.7763671875,
+            -1260.5843505859375
+          ]
+        },
+        {
+          "name": "LeftUpLeg",
+          "parent": "Hips",
+          "head_local": [
+            9.764668464660645,
+            -12.667638778686523,
+            95.38056182861328
+          ],
+          "tail_local": [
+            591.775634765625,
+            -792.5647583007812,
+            -3662.7744140625
+          ]
+        },
+        {
+          "name": "LeftLeg",
+          "parent": "LeftUpLeg",
+          "head_local": [
+            15.58476448059082,
+            -20.46660041809082,
+            57.799015045166016
+          ],
+          "tail_local": [
+            535.079833984375,
+            1097.96533203125,
+            -4023.94091796875
+          ]
+        },
+        {
+          "name": "LeftFoot",
+          "parent": "LeftLeg",
+          "head_local": [
+            20.77972984313965,
+            -9.282275199890137,
+            16.981624603271484
+          ],
+          "tail_local": [
+            139.8365020751953,
+            -714.0515747070312,
+            -1175.4769287109375
+          ]
+        },
+        {
+          "name": "LeftToeBase",
+          "parent": "LeftFoot",
+          "head_local": [
+            21.970308303833008,
+            -16.329971313476562,
+            5.057043075561523
+          ],
+          "tail_local": [
+            312.3463439941406,
+            -1375.930419921875,
+            5.057043075561523
+          ]
+        },
+        {
+          "name": "RightUpLeg",
+          "parent": "Hips",
+          "head_local": [
+            -9.538386344909668,
+            -12.66763687133789,
+            95.15790557861328
+          ],
+          "tail_local": [
+            -317.32293701171875,
+            -279.3697204589844,
+            -3752.064208984375
+          ]
+        },
+        {
+          "name": "RightLeg",
+          "parent": "RightUpLeg",
+          "head_local": [
+            -12.616232872009277,
+            -15.334654808044434,
+            56.685672760009766
+          ],
+          "tail_local": [
+            135.80569458007812,
+            892.2893676757812,
+            -3950.8271484375
+          ]
+        },
+        {
+          "name": "RightFoot",
+          "parent": "RightLeg",
+          "head_local": [
+            -11.132028579711914,
+            -6.258432388305664,
+            16.61052703857422
+          ],
+          "tail_local": [
+            -402.3087463378906,
+            -461.1199951171875,
+            -1181.7279052734375
+          ]
+        },
+        {
+          "name": "RightToeBase",
+          "parent": "RightFoot",
+          "head_local": [
+            -15.04379940032959,
+            -10.807046890258789,
+            4.627141952514648
+          ],
+          "tail_local": [
+            -702.6749877929688,
+            -1161.0662841796875,
+            4.627141952514648
+          ]
+        }
+      ]
+    }
+  ],
+  "images": [
+    {
+      "name": "Image_0",
+      "width": 2048,
+      "height": 2048,
+      "channels": 4
+    }
+  ],
+  "excluded_importer_display_helpers": [
+    "Icosphere"
+  ],
+  "unweighted_vertices": 0,
+  "actions": [
+    "Armature|clip0|baselayer_Armature"
+  ],
+  "scope": "Candidate body inspection, not game integration or final design acceptance",
+  "registration": {
+    "kind": "One uniform parent transform",
+    "scale": 0.9999997700842214,
+    "translation": [
+      -0.0,
+      -1.1920926112907182e-07,
+      2.4763565420471423e-07
+    ],
+    "target_height_m": 1.72,
+    "raw_geometry_edited": false,
+    "final_scale_one_contract": "Not finalized; candidate review parent retained"
+  },
+  "registered_bounds_blender_xyz": {
+    "min": [
+      -0.6048429012298584,
+      -0.3252272307872772,
+      2.842170943040401e-14
+    ],
+    "max": [
+      0.6048429012298584,
+      0.32522720098495483,
+      1.71999990940094
+    ]
+  },
+  "comparison_shading": "Unmodified source base-color texture via emission; original service materials restored in .blend",
+  "stress_pose_bounds": {
+    "min": [
+      -0.5575907230377197,
+      -0.6530933380126953,
+      0.08454257994890213
+    ],
+    "max": [
+      0.4994243383407593,
+      0.509364902973175,
+      1.71999990940094
+    ]
+  },
+  "stress_test_bones": {
+    "Armature": [
+      "LeftArm",
+      "LeftForeArm",
+      "RightArm",
+      "RightForeArm",
+      "LeftUpLeg",
+      "LeftLeg",
+      "RightUpLeg",
+      "RightLeg"
+    ]
+  }
+}

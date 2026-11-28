@@ -16,8 +16,11 @@ out.mkdir(parents=True, exist_ok=True)
 bpy.ops.wm.read_factory_settings(use_empty=True)
 bpy.ops.import_scene.gltf(filepath=str(raw.resolve()))
 source_objects = list(bpy.context.scene.objects)
-meshes = [o for o in source_objects if o.type == 'MESH']
 armatures = [o for o in source_objects if o.type == 'ARMATURE']
+bone_display_helpers = {b.custom_shape for a in armatures for b in a.pose.bones if b.custom_shape}
+excluded_helpers = [o.name for o in source_objects if o in bone_display_helpers or o.hide_render]
+source_objects = [o for o in source_objects if o not in bone_display_helpers and not o.hide_render]
+meshes = [o for o in source_objects if o.type == 'MESH']
 assert meshes, 'No mesh in generated GLB'
 
 def bounds(objects, evaluated=False):
@@ -34,6 +37,7 @@ report = {
     'blender_version': bpy.app.version_string,
     'raw_bounds_blender_xyz': {'min': lo, 'max': hi},
     'mesh_objects': [], 'armatures': [], 'images': [],
+    'excluded_importer_display_helpers': excluded_helpers,
     'unweighted_vertices': 0, 'actions': [a.name for a in bpy.data.actions],
     'scope': 'Candidate body inspection, not game integration or final design acceptance',
 }
@@ -81,10 +85,31 @@ report['registered_bounds_blender_xyz'] = dict(zip(('min', 'max'), bounds(meshes
 
 # Pack source textures without repainting or replacing them.
 bpy.ops.file.pack_all()
+# Keep the original service shader in the editable file; use texture-only emission
+# for the color comparison renders so review lighting cannot wash out its colors.
+original_materials = {o.name: list(o.data.materials) for o in meshes}
+for obj in meshes:
+    for i, mat in enumerate(list(obj.data.materials)):
+        if not mat or not mat.use_nodes:
+            continue
+        texture_nodes = [n for n in mat.node_tree.nodes if n.type == 'TEX_IMAGE' and n.image]
+        if not texture_nodes:
+            continue
+        review = bpy.data.materials.new(mat.name + '_texture_only_REVIEW')
+        review.use_nodes = True
+        nt = review.node_tree; nt.nodes.clear()
+        tex = nt.nodes.new('ShaderNodeTexImage'); tex.image = texture_nodes[0].image
+        emission = nt.nodes.new('ShaderNodeEmission')
+        output = nt.nodes.new('ShaderNodeOutputMaterial')
+        nt.links.new(tex.outputs['Color'], emission.inputs['Color'])
+        nt.links.new(emission.outputs[0], output.inputs['Surface'])
+        obj.data.materials[i] = review
+report['comparison_shading'] = 'Unmodified source base-color texture via emission; original service materials restored in .blend'
 scene = bpy.context.scene
 scene.render.engine = 'CYCLES'
-scene.cycles.samples = 12
-scene.cycles.use_denoising = True
+scene.cycles.samples = 32
+# The installed Blender build has no OpenImageDenoise support.
+scene.cycles.use_denoising = False
 scene.render.resolution_x = 768
 scene.render.resolution_y = 960
 scene.render.resolution_percentage = 100
@@ -142,9 +167,13 @@ if any(stress.values()):
             b.rotation_euler = (0, 0, 0)
 report['stress_test_bones'] = stress
 bpy.context.view_layer.update()
+for obj in meshes:
+    obj.data.materials.clear()
+    for mat in original_materials[obj.name]:
+        obj.data.materials.append(mat)
 camera.location = (0, -5, 0.86)
 camera.rotation_euler = (Vector((0, 0, 0.86)) - camera.location).to_track_quat('-Z', 'Y').to_euler()
-bpy.ops.wm.save_as_mainfile(filepath=str((out / 'viya_body_review.blend').resolve()))
+bpy.ops.wm.save_as_mainfile(filepath=str((out / 'viya_body_review.blend').resolve()), compress=True)
 (out / 'structure_report.json').write_text(json.dumps(report, ensure_ascii=False, indent=2) + '\n')
 print('CANDIDATE_INSPECTION_COMPLETE', json.dumps({'meshes': len(meshes), 'armatures': len(armatures),
     'triangles': sum(m['triangles'] for m in report['mesh_objects']), 'unweighted_vertices': report['unweighted_vertices']}))

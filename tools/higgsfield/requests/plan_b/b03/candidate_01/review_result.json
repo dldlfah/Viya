@@ -1,0 +1,76 @@
+{
+  "chapter": "B-03",
+  "candidate": "01",
+  "job_id": "9e824836-1b2a-4956-943e-eda4e3b0cd69",
+  "generation_status": "COMPLETED",
+  "adoption": "RETAIN_FOR_LOCAL_REWORK_NOT_GAME_READY",
+  "paid_submissions": 1,
+  "quote_credits": 35,
+  "observed_charge_credits": 35,
+  "balance_observations": [
+    397,
+    362,
+    362
+  ],
+  "remaining_authorized_submissions": 0,
+  "remaining_authorized_credits": 0,
+  "approved_reference_status": "GEN-001 derivative A-pose approved for this trial input after offered 35-credit candidate; not canonical final character approval",
+  "technical": {
+    "raw_sha256": "cfac2cefc38525d7c0778e2eb3dae023146c0d28b83579f5b735444a6d125bdb",
+    "body_meshes": 1,
+    "triangles": 45064,
+    "requested_target_polycount": 20000,
+    "actual_topology": "triangles",
+    "skin_joints": 24,
+    "basecolor_size": [
+      2048,
+      2048
+    ],
+    "materials": 1,
+    "unweighted_body_vertices": 0,
+    "animation_note": "One bind-pose sample at 0.033333335 seconds, not a locomotion/fire clip",
+    "missing": "Separate rifle, Muzzle/left-hand support, finger/hair/cloth controls, authored actions and final engine contract"
+  },
+  "visual_review": {
+    "views_checked": [
+      "front",
+      "back",
+      "left",
+      "right",
+      "game_high_angle_55deg",
+      "skin_stress_front",
+      "skin_stress_side"
+    ],
+    "findings": [
+      "Basic adult silhouette, corset, boots and crimson fabric survive as a body draft.",
+      "Hair color is redder/lighter than the dark-brown reference and current game character.",
+      "Some hair follows arm motion under the eight-bone stress pose; hair/cloth need controlled parts and weights.",
+      "Long rear cloth spreads into a broad cape-like shape with visible dark patches; no approved back geometry was established.",
+      "Face and shoulder/costume detail still need comparison and local correction against current accepted Viya; derived input is not canonical.",
+      "No usable running/shooting/ultimate cycle is present; stress poses are diagnostic, not delivered animation."
+    ],
+    "judgment": "Do not replace the current game character or resume production integration with this candidate."
+  },
+  "local_work": {
+    "raw_glb_unchanged": true,
+    "source_texture": "JPEG bufferView extracted byte-for-byte; no repaint or generated reference",
+    "registration": "One common uniform parent transform; native height approximately1.72m; importer bone-display helper excluded from body bounds",
+    "editable_blend": "review/viya_body_review.blend, source service shader restored and textures packed",
+    "review_rendering": "Source base-color emission comparisons, no texture recoloring; transparent PNGs",
+    "first_local_render_failure": "Installed Blender lacks OpenImageDenoise; disabled local denoising and rerendered. No provider resubmission.",
+    "registration_fix": "Excluded imported bone-display Icosphere from model bounds; rerendered with one model registration, not limb/frame alignment.",
+    "deformation_checks": "Eight arm/leg bone rotations, all reset before saving; not authored animation",
+    "editable_blend_reopen": "PASS: compressed .blend reopened in Blender4.3.2, one24-bone armature, packed Image_0 retained"
+  },
+  "states": {
+    "art_generation": "COMPLETED",
+    "body_structure": "INSPECTED_NOT_FINAL_CONTRACT",
+    "art_technical_adoption": "REWORK_REQUIRED",
+    "game_integration": "NOT_RUN",
+    "godot_import": "NOT_RUN_BY_THIS_SESSION",
+    "windows_mobile": "NOT_VERIFIED",
+    "producer_final_approval": "NOT_VERIFIED",
+    "plan_chapters_complete": "1/8"
+  },
+  "next": "Free local rework of body/hair/cloth parts and weights on this same source; no new paid generation. Production waits for actual finalized character assets."
+}

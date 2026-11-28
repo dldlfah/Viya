@@ -1,0 +1,22 @@
+{
+  "path": "assets/characters/plan_b_viya/candidate_01/source/viya_body_raw.glb",
+  "bytes": 6919628,
+  "sha256": "cfac2cefc38525d7c0778e2eb3dae023146c0d28b83579f5b735444a6d125bdb",
+  "gltf_version": "2.0",
+  "mesh_count": 1,
+  "skin_count": 1,
+  "skin_joints": [
+    24
+  ],
+  "materials": 1,
+  "images": 1,
+  "animations": 1,
+  "raw_animation_note": "One 72-channel bind-pose record with one time sample at 0.033333335s, not a locomotion/fire animation",
+  "actual_body_triangles": 45064,
+  "requested_target_polycount": 20000,
+  "budget_note": "Requested quad/20000 not guaranteed; source is triangles. No geometry reduction yet.",
+  "source_texture_extraction": "Original JPEG bufferView copied byte-for-byte from GLB, not repainted",
+  "job_id": "9e824836-1b2a-4956-943e-eda4e3b0cd69",
+  "source_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3LHdo37hN3iiYXd8WT9stnWXw4M/hf_20261128_105332_9e824836-1b2a-4956-943e-eda4e3b0cd69.glb",
+  "adoption": "LOCAL_REWORK_ONLY_NOT_GAME_READY"
+}

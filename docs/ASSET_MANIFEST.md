@@ -407,3 +407,14 @@
 | GEN-001 전신 A포즈 | 기존Higgsfield 원본 재확보; 보존본`libfile_d64a9bce081c8191a2a2300eb718410d`; RGB1728×2304/4,248,392B; SHA256`000b46195a375a713aaa4e75972a47bacf92a82cdbe21e5873168a00e0195f44` | 새 생성 없음. 무기가 없는 파생 입력/견적 참조이며 최종 승인 원화로 승격하지 않음 |
 
 ART-001의 기록된 정확한 해시 파일은 관련 검색에서 찾지 못했으며 승인 방향/현재 적용 비야를 외형 검수 기준으로 유지한다. 기존 GEN-002~004 불합격 다방향을 정합한 원본으로 합치지 않는다. 이번Higgsfield 조회는 견적 전용2건·제출/차감0이며 현재 게임 자산은 보존했다.
+
+
+## 플랜B B-03 — 몸체 후보01, 미적용/로컬 수정용 (2026-11-28)
+
+- 경로: `assets/characters/plan_b_viya/candidate_01/`, 기존 자산 덮어쓰기0, `.gdignore`로후보전체를활성임포트에서제외.
+- 원본: `source/viya_body_raw.glb`,6,919,628바이트/SHA-256 `cfac2cefc38525d7c0778e2eb3dae023146c0d28b83579f5b735444a6d125bdb`. GLB색상JPEG를바이트그대로추출한`source/basecolor_0.jpg`.
+- 편집: `review/viya_body_review.blend`,원래서비스재질/패킹텍스처/24관절/스킨과공통등록유지. 정면/후면/양측면/고각55도/8뼈변형2장·구조JSON·전체CHECKSUMS.
+- 실제몸체1메시45,064삼각형,2048²색상텍스처1/재질1. 요청20,000/quad와차이. 단일bind-pose표본은전용액션이아님.
+- Higgsfield Meshy image_to_3d·GEN-001기존A포즈단일입력,텍스처/자동리그·동작없음·symmetry off/PBR off/A포즈/1.72m. 작업`9e824836-1b2a-4956-943e-eda4e3b0cd69`completed,1건실차감35·계정397→362→362·승인한도소진.
+- 채택: **로컬수정용보존/게임채택보류**. 머리색/후면천·얼굴/의상일치와팔/머리·다리/천스키닝보완필요. 총기/총구·전용액션/추가제어미완성. 게임연결/실기/프로듀서최종승인없음.
+- [원본·편집/비교/해시](../assets/characters/plan_b_viya/candidate_01/README.md) · [실제입력/원가·검수판단](../tools/higgsfield/requests/plan_b/b03/candidate_01/README.md). 기존2D36클립363과임시3D시범은보존.
