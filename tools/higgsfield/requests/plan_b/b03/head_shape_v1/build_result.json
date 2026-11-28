@@ -1,0 +1,122 @@
+{
+  "blender_version": "4.3.2",
+  "parameters_sha256": "acc7899e4abc5203050ba94d789e374cf66b5c101b3f2ba7cc0016e98ea6da0c",
+  "sources": [
+    {
+      "path": "assets/characters/plan_b_viya/candidate_03/references/front.png",
+      "sha256": "28131fc01dbff28b3a5475ee2f73fcb37e5f9d7e81ab26477e9a1ce092b2b11b",
+      "role": "Eye/brow/mouth and mature expression"
+    },
+    {
+      "path": "assets/characters/plan_b_viya/candidate_03/references/screen_right_profile.png",
+      "sha256": "f786e9c4c8001418348822fbcc138e4ee97b08844205ae8c0610c55c19a988be",
+      "role": "Profile depth cross-check, not mirroring"
+    },
+    {
+      "path": "assets/characters/plan_b_viya/candidate_03/references/screen_left_profile.png",
+      "sha256": "f0d229c4ca6c8a1f51bfe6a1dfc921195b1943e6d61f8a1c919aca2d152819df",
+      "role": "Profile cross-check, different drawing"
+    },
+    {
+      "path": "assets/characters/plan_b_viya/candidate_03/references/back.png",
+      "sha256": "38f52e780b9c1fa91fce35534a1e649dbf562aa1365e6aee9c26ed0034ee82ff",
+      "role": "Rear hair/costume; no face measurements"
+    }
+  ],
+  "source_meshes_loaded": [],
+  "independent_construction": true,
+  "snapshot": {
+    "L_ear_PROVISIONAL": {
+      "vertices": 160,
+      "polygons": 121,
+      "positions_sha256": "4af7292713d9cacfddea13980c143813f582bc7a94ed6ee7cc394baf3ad102b7",
+      "topology_sha256": "7cb2f72650d528387379b382cbfec73ababf13c3accc433f66b556cfa84ff56b",
+      "modifiers": [
+        [
+          "SUBSURF",
+          1,
+          1
+        ]
+      ]
+    },
+    "L_eyelid_form_GUIDE": {
+      "vertices": 390,
+      "polygons": 256,
+      "positions_sha256": "21f3deabb4128af21f6687cbe9906dd45cca3d5ad37869b79984d5aa8e5337f3",
+      "topology_sha256": "6246c9d7ba9e3cc02ed5b85d23d6e3c17660d5297e4f019d3492866bd5111e33",
+      "modifiers": [
+        [
+          "SUBSURF",
+          1,
+          1
+        ]
+      ]
+    },
+    "Neck_connection_GUIDE": {
+      "vertices": 192,
+      "polygons": 144,
+      "positions_sha256": "830701d0cb2b6cea2f1b8bbd9d6cac3326f2e50a6e2a3f7a503490fb3bb8288f",
+      "topology_sha256": "6714edbecbf1ecd5c8b79e1102c40066df53261f5c75a34e69aaa0ec75b6903f",
+      "modifiers": [
+        [
+          "SUBSURF",
+          1,
+          1
+        ]
+      ]
+    },
+    "R_ear_PROVISIONAL": {
+      "vertices": 160,
+      "polygons": 121,
+      "positions_sha256": "67ac564f6e7049c061e937b723b786b39cf8c65faf715cea56368ee992daef47",
+      "topology_sha256": "a44ede6a3fb99a8f956e2911b2233ae4c43fad821de3d294ad2b849e9fc1921e",
+      "modifiers": [
+        [
+          "SUBSURF",
+          1,
+          1
+        ]
+      ]
+    },
+    "R_eyelid_form_GUIDE": {
+      "vertices": 390,
+      "polygons": 256,
+      "positions_sha256": "0f6cc4f5dd46c4e50a300136214b13f6ddb317cbab6302ef2ac55464a60756a6",
+      "topology_sha256": "ea21709a2006faa3aca6cc116b0b3ea953a7846109948bd85ffdd47b52e995a1",
+      "modifiers": [
+        [
+          "SUBSURF",
+          1,
+          1
+        ]
+      ]
+    },
+    "VIYA_head_form_UNAPPROVED": {
+      "vertices": 12033,
+      "polygons": 12033,
+      "positions_sha256": "faff134e9cf377a283993bc754981b326f7dc69f8fd6649419d477019cc4bcfc",
+      "topology_sha256": "809b6c1c36d35ae4df9515753ed2cba928a479795560d052e7dbafb3df0710ce",
+      "modifiers": [
+        [
+          "SUBSURF",
+          1,
+          1
+        ]
+      ]
+    }
+  },
+  "bones": 0,
+  "animations": 0,
+  "painted_face_textures": 0,
+  "producer_approval": false,
+  "paid_submissions": 0,
+  "spent_credits": 0,
+  "limitations": [
+    "Neutral head orientation is symmetric; the drawn front eye-line tilt is treated as pose, not asymmetric skull evidence.",
+    "Scalp behind bangs and back hair is hidden. Cranium is a working form, not measured from hair silhouette.",
+    "Only partial ears are visible; simplified pinnae are provisional and not an approved redesign.",
+    "No hair, eyelashes, iris, painted facial features or clothing is being delivered at this form stage.",
+    "This control grid is a form study, not an approved facial animation topology.",
+    "Lower-face height is a manual proportion interpretation of the front drawing, not calibrated skull measurements. Eye-line/chin ratio is a construction target, not a likeness acceptance score."
+  ]
+}

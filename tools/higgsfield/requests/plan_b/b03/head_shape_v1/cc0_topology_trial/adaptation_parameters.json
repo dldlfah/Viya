@@ -1,0 +1,18 @@
+{
+  "preset_source": "CC0 anatomical head; full canonical face not automatically accepted",
+  "head_x_scale": 0.9,
+  "lower_face_z_scale": 0.82,
+  "pivot_eye_z_m": 0.11,
+  "eye_outward_shift_m": 0.01,
+  "eye_helper_x_scale": 1.12,
+  "nose_width_target_weight": 0.4,
+  "central_feature_lift_m": 0.0045,
+  "mouth_closure_max_m": 0.0014,
+  "mouth_closure_fraction": 0.6,
+  "mouth_closure_center_z_m": 0.064,
+  "notes": [
+    "Control adjustments respond to visible mouth gap and broad nose in first topology trial",
+    "Feature lift is a manual reference-proportion proposal; source images are not calibrated anatomy",
+    "The adult identity remains the supplied VIYA references, not the generic preset"
+  ]
+}

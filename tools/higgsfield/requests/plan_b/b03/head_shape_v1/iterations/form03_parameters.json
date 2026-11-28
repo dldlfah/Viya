@@ -1,0 +1,137 @@
+{
+  "stage": "B-03-03 independent head form study, not approved VIYA",
+  "units": "metres; Blender +Z up, -Y front; local chin origin",
+  "source_policy": "Build new control mesh from explicit curves; no prior generated candidate loaded",
+  "reference_scope": "Manual interpretation of front and both profiles. Not calibrated reconstruction from 2D pixel coordinates. Back gives no visible facial evidence.",
+  "rings_z_width_frontdepth_backdepth": [
+    [
+      0.0,
+      0.01,
+      0.052,
+      0.024
+    ],
+    [
+      0.006,
+      0.021,
+      0.057,
+      0.029
+    ],
+    [
+      0.014,
+      0.032,
+      0.06,
+      0.035
+    ],
+    [
+      0.025,
+      0.044,
+      0.061,
+      0.042
+    ],
+    [
+      0.04,
+      0.055,
+      0.06,
+      0.052
+    ],
+    [
+      0.06,
+      0.063,
+      0.06,
+      0.063
+    ],
+    [
+      0.08,
+      0.069,
+      0.062,
+      0.073
+    ],
+    [
+      0.1,
+      0.072,
+      0.062,
+      0.082
+    ],
+    [
+      0.12,
+      0.073,
+      0.065,
+      0.088
+    ],
+    [
+      0.145,
+      0.072,
+      0.068,
+      0.09
+    ],
+    [
+      0.17,
+      0.069,
+      0.067,
+      0.086
+    ],
+    [
+      0.193,
+      0.062,
+      0.058,
+      0.077
+    ],
+    [
+      0.212,
+      0.047,
+      0.043,
+      0.058
+    ],
+    [
+      0.227,
+      0.025,
+      0.022,
+      0.031
+    ],
+    [
+      0.233,
+      0.006,
+      0.006,
+      0.008
+    ]
+  ],
+  "samples": {
+    "rings": 92,
+    "around": 128,
+    "subdivision_preview": 1
+  },
+  "front_cross_section_power": 0.42,
+  "jaw_lift_side_m": 0.018,
+  "jaw_lift_back_m": 0.075,
+  "features": {
+    "eye_center_x": 0.038,
+    "eye_center_z": 0.11,
+    "eye_half_width": 0.02,
+    "eye_upper_arc": 0.0055,
+    "eye_lower_arc": 0.0035,
+    "eye_outer_lift": 0.002,
+    "socket_recess": 0.0028,
+    "nose_ridge_z": 0.106,
+    "nose_ridge_depth": 0.004,
+    "nose_tip_z": 0.08,
+    "nose_tip_depth": 0.0085,
+    "mouth_z": 0.047,
+    "mouth_half_width": 0.018,
+    "upper_lip_depth": 0.0016,
+    "lower_lip_depth": 0.0023,
+    "chin_z": 0.012,
+    "chin_depth": 0.001,
+    "cheek_depth": 0.0018
+  },
+  "assumptions": [
+    "Neutral head orientation is symmetric; the drawn front eye-line tilt is treated as pose, not asymmetric skull evidence.",
+    "Scalp behind bangs and back hair is hidden. Cranium is a working form, not measured from hair silhouette.",
+    "Only partial ears are visible; simplified pinnae are provisional and not an approved redesign.",
+    "No hair, eyelashes, iris, painted facial features or clothing is being delivered at this form stage.",
+    "This control grid is a form study, not an approved facial animation topology.",
+    "Lower-face height is a manual proportion interpretation of the front drawing, not calibrated skull measurements. Eye-line/chin ratio is a construction target, not a likeness acceptance score."
+  ],
+  "jaw_fade_height_m": 0.11,
+  "lower_face_vertical_scale": 0.75,
+  "lower_face_pivot_z": 0.11
+}

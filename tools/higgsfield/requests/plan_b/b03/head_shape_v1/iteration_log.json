@@ -1,0 +1,36 @@
+{
+  "date_kst": "2026-11-28",
+  "paid_submissions": 0,
+  "iteration01": {
+    "preserved_blend": "iterations/form01.blend",
+    "parameters": "iterations/form01_parameters.json",
+    "issues": [
+      "Initial 45/15/25W lighting clipped clay values; reduced to5/2/3W before judging form",
+      "At matched low lighting: nose projection/pointed chin and broad lip ridges were excessive relative to supplied drawings"
+    ],
+    "matched_light_before_renders": [
+      "review/form01_front.png",
+      "review/form01_screen_left_profile.png"
+    ]
+  },
+  "iteration02_changes": {
+    "lighting": "Key5W/Fill2W/Rim3W, world .15",
+    "nose": "Reduce protrusion and raise nose tip; retain an independently editable bridge",
+    "jaw": "Reduce side/back lift; multiply side lift by 1-cos(theta) to soften sharp front chin",
+    "lips": "Replace broad Gaussian lip spread with compact mouth-width mask and small cupid-arc/seam",
+    "scope": "Deterministic local form correction from observed defects, not a paid regeneration or new character approval"
+  },
+  "iteration03_changes": {
+    "reason": "In neutral front comparison the eye-to-chin extent was too long relative to interpupil width; underjaw cap remained pointed",
+    "preserved_blend": "iterations/form02.blend",
+    "proportion": "Scale lower-face Z by .75 about eyeZ .110m; projected source ratio is used as a design target, not 3D measurement",
+    "jaw": "Linear fade over .110m keeps row order monotonic; close underside with explicit inner control rings rather than one warped ngon",
+    "neck": "Shorter connection stub, not final body/neck fit"
+  },
+  "iteration04_changes": {
+    "reason": "Linear jaw-lift falloff left a slope discontinuity at the rear skull",
+    "preserved_blend": "iterations/form03.blend",
+    "correction": "Use cosine falloff over .160m; bounded derivative keeps ring height ordering and removes hard cutoff",
+    "scope": "Local deterministic correction; no new paid generation"
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "stage": "B-03-03 independent head form study, not approved VIYA",
+  "units": "metres; Blender +Z up, -Y front; local chin origin",
+  "source_policy": "Build new control mesh from explicit curves; no prior generated candidate loaded",
+  "reference_scope": "Manual interpretation of front and both profiles. Not calibrated reconstruction from 2D pixel coordinates. Back gives no visible facial evidence.",
+  "rings_z_width_frontdepth_backdepth": [
+    [0.000,0.010,0.052,0.024],
+    [0.006,0.021,0.057,0.029],
+    [0.014,0.032,0.060,0.035],
+    [0.025,0.044,0.061,0.042],
+    [0.040,0.055,0.060,0.052],
+    [0.060,0.063,0.060,0.063],
+    [0.080,0.069,0.062,0.073],
+    [0.100,0.072,0.062,0.082],
+    [0.120,0.073,0.065,0.088],
+    [0.145,0.072,0.068,0.090],
+    [0.170,0.069,0.067,0.086],
+    [0.193,0.062,0.058,0.077],
+    [0.212,0.047,0.043,0.058],
+    [0.227,0.025,0.022,0.031],
+    [0.233,0.006,0.006,0.008]
+  ],
+  "samples": {"rings":92,"around":128,"subdivision_preview":1},
+  "front_cross_section_power":0.42,
+  "jaw_lift_side_m":0.026,
+  "jaw_lift_back_m":0.056,
+  "features": {
+    "eye_center_x":0.038,"eye_center_z":0.110,
+    "eye_half_width":0.020,"eye_upper_arc":0.0055,"eye_lower_arc":0.0035,"eye_outer_lift":0.002,
+    "socket_recess":0.0045,
+    "nose_ridge_z":0.102,"nose_ridge_depth":0.006,"nose_tip_z":0.074,"nose_tip_depth":0.017,
+    "mouth_z":0.042,"mouth_half_width":0.018,
+    "upper_lip_depth":0.0042,"lower_lip_depth":0.0048,
+    "chin_z":0.012,"chin_depth":0.0015,
+    "cheek_depth":0.0035
+  },
+  "assumptions": [
+    "Neutral head orientation is symmetric; the drawn front eye-line tilt is treated as pose, not asymmetric skull evidence.",
+    "Scalp behind bangs and back hair is hidden. Cranium is a working form, not measured from hair silhouette.",
+    "Only partial ears are visible; simplified pinnae are provisional and not an approved redesign.",
+    "No hair, eyelashes, iris, painted facial features or clothing is being delivered at this form stage.",
+    "This control grid is a form study, not an approved facial animation topology."
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "source_repository": "makehumancommunity/mpfb2",
+  "base_blob_sha": "d26635e9326e3cca30778fd7b9c00062b03cce09",
+  "base_sha256": "8e761e6624b8f54536409135d1636da63b32486a90d4897f84e121d144f6fb4c",
+  "target_blob_sha": "32634e46613fef3e3b56e52c366ba0322a3c084b",
+  "target_sha256": "e9d6212373ac5f1e2c596fa145e363385f4d169c3c6c88ede3bab93b681af041",
+  "original_target_path": "src/mpfb/data/targets/macrodetails/caucasian-female-young.target.gz",
+  "nose_target_blob_sha": "7939ffc1026cf8853b295d71f3a8722ede7ceb01",
+  "nose_target_sha256": "95d8dc4a3589bbb6105191abc6e3cae47c3c424ce189b5f0a611dc098806060d",
+  "asset_license": "CC0-1.0; official MPFB asset license retained",
+  "addon_code_imported": false,
+  "full_body_instantiated": false,
+  "head_selection": "Only body-group faces all of whose original source Y coordinates exceed5.8; eyes from helper-l/r-eye",
+  "construction": "Existing CC0 anatomical face loops, adult-form target, explicit working proportion shape key. No generated VIYA candidate used.",
+  "eye_source_height": 6.795805931091309,
+  "eye_source_halfwidth_m": 0.02882722318172455,
+  "adaptation": {
+    "preset_source": "CC0 anatomical head; full canonical face not automatically accepted",
+    "head_x_scale": 0.9,
+    "lower_face_z_scale": 0.82,
+    "pivot_eye_z_m": 0.11,
+    "eye_outward_shift_m": 0.01,
+    "eye_helper_x_scale": 1.12,
+    "nose_width_target_weight": 0.4,
+    "central_feature_lift_m": 0.0045,
+    "mouth_closure_max_m": 0.0014,
+    "mouth_closure_fraction": 0.6,
+    "mouth_closure_center_z_m": 0.064,
+    "notes": [
+      "Control adjustments respond to visible mouth gap and broad nose in first topology trial",
+      "Feature lift is a manual reference-proportion proposal; source images are not calibrated anatomy",
+      "The adult identity remains the supplied VIYA references, not the generic preset"
+    ]
+  },
+  "snapshot": {
+    "CC0_head_skin_UNAPPROVED": {
+      "vertices": 4311,
+      "faces": 4286,
+      "basis_sha": "bd193b462f9d8ed8f6bbf3cd573c96d2aed56b774b8b928996a88ce29bdb663f",
+      "adapted_sha": "baca2a406dae8a6626df0265e72b54d7629d4321b9ca482717eaf930af3e210b",
+      "uv_sha": "150e681070eda447ad08e14f071e304729364d3a746ad444c5cdfec26403c1b2",
+      "topology_sha": "933541d4e264a2732a82c7029fe23fb83c71d8093efa6e9bbe06239090e62850",
+      "adapted_value": 1.0
+    },
+    "CC0_helper-l-eye_UNAPPROVED": {
+      "vertices": 72,
+      "faces": 70,
+      "basis_sha": "0c05f0f455f13aeda8b156e7d65d18510ff535a81b853d52e6003eb4ae807a2b",
+      "adapted_sha": "ac8db36f10a70924d946fdfb36818314ee566a3964337f5dd76a1bcb0eff9ef6",
+      "uv_sha": "20e70450e7bb1a05ec128560193f0fb2e8f0e6c9b88ed32f2ce92a3e33b618a0",
+      "topology_sha": "b19f73110bdd33341eefe4f51fb0dd617e5f935804ee2978d1be1f174b450e30",
+      "adapted_value": 1.0
+    },
+    "CC0_helper-r-eye_UNAPPROVED": {
+      "vertices": 72,
+      "faces": 70,
+      "basis_sha": "6ab99eefb17e0a19262b07095680bb1c5cba6d62c854934d1cca2f25689c2bce",
+      "adapted_sha": "35ad52335374f5c9ab54c63c26f9659bcc0b82975a0436cbe20d7ac20a792a45",
+      "uv_sha": "0858b1c14c5ad3c7c4698447c9a41f1ccd7936082a950548566491e414caddc3",
+      "topology_sha": "10c2a0d02d240d5c77ad6d8368286d17690ecf7afe67f556dafd9c4cdef6eec9",
+      "adapted_value": 1.0
+    }
+  },
+  "producer_approval": false,
+  "paid_submissions": 0,
+  "spent_credits": 0,
+  "limitations": [
+    "Generic licensed topology is not the approved VIYA face",
+    "Reference-proportion trial only; eyelid/eye fit and nose/lip/jaw likeness require review",
+    "Hair/painted features, rig/deformation and body/weapon not authored",
+    "Full side/face approval and runtime/mobile performance not granted"
+  ]
+}

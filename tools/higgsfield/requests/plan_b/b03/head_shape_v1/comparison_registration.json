@@ -1,0 +1,52 @@
+{
+  "scope": "Inspection only, no automatic likeness score; all scale/crop differences remain visible",
+  "source_crop_scale": "2x nearest, exact180x170 source crops",
+  "render_display": "one uniform thumbnail scale inside360x340; no per-feature warp",
+  "views": [
+    {
+      "view": "Front",
+      "source_crop_xyxy": [
+        680,
+        120,
+        860,
+        290
+      ],
+      "render_crop_xyxy": [
+        80,
+        210,
+        432,
+        530
+      ]
+    },
+    {
+      "view": "Facing right",
+      "source_crop_xyxy": [
+        725,
+        155,
+        905,
+        325
+      ],
+      "render_crop_xyxy": [
+        165,
+        215,
+        495,
+        540
+      ]
+    },
+    {
+      "view": "Facing left",
+      "source_crop_xyxy": [
+        625,
+        145,
+        805,
+        315
+      ],
+      "render_crop_xyxy": [
+        20,
+        215,
+        350,
+        540
+      ]
+    }
+  ]
+}

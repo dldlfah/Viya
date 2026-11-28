@@ -1,0 +1,56 @@
+{
+  "checked_kst": "2026-11-28",
+  "asset_license": "CC0-1.0",
+  "license_evidence": [
+    "https://github.com/makehumancommunity/mpfb2/blob/master/LICENSE.md",
+    "https://static.makehumancommunity.org/mpfb/faq/build_other_chargen.html"
+  ],
+  "scope": "Core graphical mesh and target assets only; no addon source code imported or installed",
+  "files": [
+    {
+      "local": "mpfb_hm08_base.obj",
+      "original_path": "src/mpfb/data/3dobjs/base.obj",
+      "git_blob_sha": "d26635e9326e3cca30778fd7b9c00062b03cce09",
+      "sha256": "8e761e6624b8f54536409135d1636da63b32486a90d4897f84e121d144f6fb4c",
+      "bytes": 1749303,
+      "source_url": "https://github.com/makehumancommunity/mpfb2/blob/master/src/mpfb/data/3dobjs/base.obj",
+      "immutable_blob_url": "https://api.github.com/repos/makehumancommunity/mpfb2/git/blobs/d26635e9326e3cca30778fd7b9c00062b03cce09"
+    },
+    {
+      "local": "adult_female_young.target.gz",
+      "original_path": "src/mpfb/data/targets/macrodetails/caucasian-female-young.target.gz",
+      "git_blob_sha": "32634e46613fef3e3b56e52c366ba0322a3c084b",
+      "sha256": "e9d6212373ac5f1e2c596fa145e363385f4d169c3c6c88ede3bab93b681af041",
+      "bytes": 127369,
+      "source_url": "https://github.com/makehumancommunity/mpfb2/blob/master/src/mpfb/data/targets/macrodetails/caucasian-female-young.target.gz",
+      "immutable_blob_url": "https://api.github.com/repos/makehumancommunity/mpfb2/git/blobs/32634e46613fef3e3b56e52c366ba0322a3c084b"
+    },
+    {
+      "local": "nose-scale-horiz-decr.target.gz",
+      "original_path": "src/mpfb/data/targets/nose/nose-scale-horiz-decr.target.gz",
+      "git_blob_sha": "7939ffc1026cf8853b295d71f3a8722ede7ceb01",
+      "sha256": "95d8dc4a3589bbb6105191abc6e3cae47c3c424ce189b5f0a611dc098806060d",
+      "bytes": 1234,
+      "source_url": "https://github.com/makehumancommunity/mpfb2/blob/master/src/mpfb/data/targets/nose/nose-scale-horiz-decr.target.gz",
+      "immutable_blob_url": "https://api.github.com/repos/makehumancommunity/mpfb2/git/blobs/7939ffc1026cf8853b295d71f3a8722ede7ceb01"
+    },
+    {
+      "local": "MPFB_LICENSE.md",
+      "original_path": "LICENSE.md",
+      "git_blob_sha": "88cf832acc18dd64fd27ff2efb84625718bf2201",
+      "sha256": "5cefb60680cb9efd4550a2e65d719021cfbec9dad3658481d11d48ae863ce04d",
+      "bytes": 3188,
+      "source_url": "https://github.com/makehumancommunity/mpfb2/blob/master/LICENSE.md",
+      "immutable_blob_url": "https://api.github.com/repos/makehumancommunity/mpfb2/git/blobs/88cf832acc18dd64fd27ff2efb84625718bf2201"
+    },
+    {
+      "local": "LICENSE.ASSETS.md",
+      "original_path": "LICENSE.ASSETS.md",
+      "git_blob_sha": "f3ede1fc3318f8d794e2cb51924186c62f02f71a",
+      "sha256": "f6089cba01cb570a24712b41ab8a586ccd3cc5ef53dc266ca50b95c288956d2c",
+      "bytes": 6962,
+      "source_url": "https://github.com/makehumancommunity/mpfb2/blob/master/LICENSE.ASSETS.md",
+      "immutable_blob_url": "https://api.github.com/repos/makehumancommunity/mpfb2/git/blobs/f3ede1fc3318f8d794e2cb51924186c62f02f71a"
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "geometry_uv_topology_shape_keys_equal": true,
+  "four_reference_hashes_verified": true,
+  "external_library_dependencies": 0,
+  "mesh_integrity": {
+    "CC0_head_skin_UNAPPROVED": {
+      "control_vertices": 4311,
+      "control_faces": 4286,
+      "boundary_edges": 48,
+      "zero_area_faces": 0
+    },
+    "CC0_helper-l-eye_UNAPPROVED": {
+      "control_vertices": 72,
+      "control_faces": 70,
+      "boundary_edges": 0,
+      "zero_area_faces": 0
+    },
+    "CC0_helper-r-eye_UNAPPROVED": {
+      "control_vertices": 72,
+      "control_faces": 70,
+      "boundary_edges": 0,
+      "zero_area_faces": 0
+    }
+  },
+  "blend_sha256": "aca23a984216d168f55ad57c0ca43e722c61e62bd6fbcedc57fa272702ddc73c",
+  "scope": "Persistence/control-mesh integrity only, not accepted VIYA face or deformation/runtime test"
+}

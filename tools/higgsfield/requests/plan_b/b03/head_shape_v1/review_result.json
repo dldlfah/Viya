@@ -1,0 +1,37 @@
+{
+  "stage": "B-03-03",
+  "status": "IN_PROGRESS_REFERENCE_FORM_NOT_PASSED",
+  "procedural_form": "REJECTED_INTERNAL_AS_PRODUCTION_FACE; snapshots/iterations retained",
+  "cc0_route": "WORKING_ANATOMICAL_TOPOLOGY_TRIAL_FOR_FURTHER_SCULPT; not approved VIYA",
+  "geometry_source": "CC0 MPFB core base mesh and two target assets; only head/neck skin and eye helpers instantiated",
+  "source_generated_candidates_loaded": false,
+  "rejected_user_candidates_01_02_loaded": false,
+  "technical_evidence": [
+    "Saved editable control meshes, preserved source indexes/UVs, reversible proportion shape keys",
+    "Front/both profiles/oblique/back/game55deg rendered with fixed review camera settings",
+    "Separate Blender reopen and pixel persistence verified in accompanying reports"
+  ],
+  "visual_review": {
+    "improved_method": "Actual eyelid, mouth and ear topology available, unlike initial smooth procedural form",
+    "not_passed": [
+      "Nose bridge/nostril shape remains more realistic/pronounced than approved drawing",
+      "Eyelid aperture/outer-corner and lip-volume character are not yet sufficiently matched to the primary front reference",
+      "Both profile drawings differ; do not claim one generic preset reproduces all four drawings"
+    ],
+    "not_judged_as_defect_at_this_stage": [
+      "No hair/iris or original face painting yet; these are later work, not an accepted replacement design"
+    ],
+    "needed_before_04": "Refine eyelid/nose/lip/chin form against original views, inspect clay, then decide03 pass; no automatic UV/body/rig progression"
+  },
+  "scope_limits": [
+    "No final head/producer likeness acceptance",
+    "No hair/costume/rifle or animation",
+    "No full character root/body seam or rig/deformation approval",
+    "No Godot integration/Windows/S20+ performance"
+  ],
+  "paid_submissions": 0,
+  "credits_deducted": 0,
+  "balance_requeried": false,
+  "plan_b_chapters_complete": 1,
+  "next": "Continue B-03-03 targeted face-form refinement on the anatomical topology study; do not repeat rejected procedural-head route or paid whole-body regeneration"
+}
