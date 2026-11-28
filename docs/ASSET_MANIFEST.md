@@ -389,3 +389,9 @@
 - 소스/모델/원본: `tools/higgsfield/requests/game075/evidence/`의 후보1/2 MP4·SHA256·실제설정/견적/작업/잔액. 후보2작업18014a92-2bf2-4c77-ab40-19d288002022, sourceSHA25607b915b344ce972b61230e8e86c1024bcb10b842abef7a66582d0ded1e7353e1이다. RGB의 녹색분리/번짐억제 방법과 소스원본을 보존한다.
 - 생성2완료/견착15장원화후보납품, 기존SW17전환차이로 게임용최종채택미확정. 게임연결/실행 NOT_RUN·실기/프로듀서최종승인 NOT_VERIFIED. 현재활성GAME070/35클립348과 기존1,582자산/코드/데이터를 전부 보존했다. 추후연결시에만36클립363이다.
 - 실차감59/60·잔여예산1·계정최종427, 자동3차/추가결제0. [납품/제한](../assets/characters/pilot_32/game075_sw_run_fire/README.md).
+
+
+## 플랜B B-02 — 시범 임시 리그 (2026-11-28)
+
+- [Godot용 GLB](../assets/characters/plan_b_probe/probe.glb)와 [Blender 4.3.2 편집 원본](../assets/characters/plan_b_probe/source/probe.blend). Blender에서 5개 뼈, 스킨, 이동·사격 동작과 오른손의 `Muzzle` 표식을 제작했다. 원본 폴더의 `.gdignore`는 게임 임포트 대상에서 편집 파일을 제외한다.
+- 사용 위치는 `scripts/combat/plan_b_preview.gd`다. 실행 인자를 준 시범 모드에서만 임시 모델을 표시한다. 일반 게임 비야의 승인 스프라이트 자산과 별도 관리한다. Blender 작업이며 외부 생성 작업 ID나 차감 비용은 없다. [실제 표시와 검증](validation/PLAN_B02_PREVIEW.png)
