@@ -1,0 +1,10 @@
+{
+  "output_sha256": "97b8a658207b0f27af355c32c37bfd645f57addaa8230770e657bdb92c4b6c05",
+  "all_geometry_controls_and_uv_equal": true,
+  "active_packed_images_equal": true,
+  "previous_materials_retained": true,
+  "head_image_unchanged": true,
+  "external_blend_dependencies": 0,
+  "rig_objects": 0,
+  "scope": "File/material persistence only; not source likeness, producer, rig/game/device acceptance."
+}

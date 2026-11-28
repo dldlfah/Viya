@@ -1,0 +1,42 @@
+{
+  "views": {
+    "front": {
+      "screen_left": {
+        "hard_labeled_helper_pixels": 712,
+        "hard_labeled_iris_pixels": 334,
+        "iris_fraction": 0.4691011235955056
+      },
+      "screen_right": {
+        "hard_labeled_helper_pixels": 713,
+        "hard_labeled_iris_pixels": 335,
+        "iris_fraction": 0.46984572230014027
+      }
+    },
+    "three_quarter": {
+      "screen_left": {
+        "hard_labeled_helper_pixels": 549,
+        "hard_labeled_iris_pixels": 264,
+        "iris_fraction": 0.4808743169398907
+      },
+      "screen_right": {
+        "hard_labeled_helper_pixels": 535,
+        "hard_labeled_iris_pixels": 273,
+        "iris_fraction": 0.5102803738317757
+      }
+    },
+    "three_quarter_opposite": {
+      "screen_left": {
+        "hard_labeled_helper_pixels": 533,
+        "hard_labeled_iris_pixels": 272,
+        "iris_fraction": 0.5103189493433395
+      },
+      "screen_right": {
+        "hard_labeled_helper_pixels": 551,
+        "hard_labeled_iris_pixels": 261,
+        "iris_fraction": 0.47368421052631576
+      }
+    }
+  },
+  "geometry_uv_and_iris_region_unchanged": true,
+  "scope": "Hard-label render counts exclude mixed/AA pixels. Not calibrated source exposure, likeness or physical eye-contact acceptance. Bilinear color mixing with the changed sclera can change rendered boundary contrast."
+}

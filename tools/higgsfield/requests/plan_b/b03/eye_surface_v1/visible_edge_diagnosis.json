@@ -1,0 +1,21 @@
+{
+  "views": {
+    "front": {
+      "hard_labeled_helper_pixels": 1425,
+      "bright_lower_band_samples": 3,
+      "samples_owned_by_eye_helper": 3
+    },
+    "three_quarter": {
+      "hard_labeled_helper_pixels": 1084,
+      "bright_lower_band_samples": 3,
+      "samples_owned_by_eye_helper": 3
+    },
+    "three_quarter_opposite": {
+      "hard_labeled_helper_pixels": 1084,
+      "bright_lower_band_samples": 0,
+      "samples_owned_by_eye_helper": 0
+    }
+  },
+  "rule": "Per helper-column bottom +/-1px; RGB mean>210, alpha>240; hard ID excludes antialias margins.",
+  "scope": "Conservative sparse ownership samples only, not all boundary/contact or intersection proof."
+}

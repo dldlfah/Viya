@@ -1,0 +1,11 @@
+{
+  "four_source_hashes_match": true,
+  "input_blend_sha256_unchanged": true,
+  "all_geometry_controls_uv_equal": true,
+  "head_image_bytes_identical": true,
+  "original_iris_texels_per_eye": 2028,
+  "iris_texels_identical": true,
+  "reopened_decoded_rgba_identical": true,
+  "previous_eye_materials_retained": true,
+  "scope": "Preservation and persistence only; not likeness/producer/rig/game/device approval."
+}

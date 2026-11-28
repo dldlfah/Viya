@@ -1,0 +1,33 @@
+{
+  "unit": "Plan B B-03-04 / R5 sclera tone and iris exposure review",
+  "date_kst": "2026-11-29",
+  "remote_parent": "b719dad51b89335f0635554c9de39c3831198aba",
+  "local_material_working_basis": "ACCEPTED_FOR_CONTINUED_FACE_REVIEW",
+  "whole_face_self_review": "NOT_PASSED",
+  "producer_face_approval": "NOT_REQUESTED_OR_GRANTED",
+  "findings": [
+    "Excessively bright uniform sclera is reduced in front and both obliques with the original iris image region retained.",
+    "No geometry, aperture, iris radius/placement or UV change was made; image sampling can change perceived boundary contrast.",
+    "The source remains different in the overall eye/brow expression, eye detail and mouth/chin impression. Hair/occlusion is unmade and the source projection is not calibrated.",
+    "The source iris is only a 13x13 native crop per eye; new detail has not been recovered."
+  ],
+  "next_single_task": "B-03-04 whole-face self-review: compare unchanged front/profiles with current views and display-size diagnostics; decide eligibility for B-03-05. If it fails, isolate a concrete failing feature and return only its geometry/material step.",
+  "preserved": "All R5/previous controls, geometry, topology, both UV layers, head color image, source4 images, previous eye materials and original iris texels.",
+  "not_verified": [
+    "continuous eye contact/self-intersection",
+    "rig deformation",
+    "final Godot shader",
+    "engine/game integration",
+    "Windows/Galaxy S20+",
+    "producer face/whole appearance/final approval"
+  ],
+  "paid_submissions": 0,
+  "spent_credits": 0,
+  "balance_requery": false,
+  "new_paid_budget_assigned": false,
+  "plan_b_completed_chapters": 1,
+  "plan_b_total_chapters": 8,
+  "production_session": "WAITING_FOR_OFFICIAL_APPROVED_ASSETS",
+  "game_integration": false,
+  "game_execution": false
+}

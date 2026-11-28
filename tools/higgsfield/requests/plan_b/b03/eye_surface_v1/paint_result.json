@@ -1,0 +1,104 @@
+{
+  "input_sha256": "aaeb5e4e62ce36be76525d2e531d8effafbb13130af1e054293d752ddeca6fb1",
+  "source_front_sha256": "28131fc01dbff28b3a5475ee2f73fcb37e5f9d7e81ab26477e9a1ce092b2b11b",
+  "records": [
+    {
+      "side": "left",
+      "object": "CC0_helper-r-eye_UNAPPROVED",
+      "original_png_sha256": "e8ea50bcff44c585be163405e166e8e7525a83ef96d580f644b807621c4aa4e2",
+      "new_png_sha256": "8e668a8ef983b782ec13cbd3fabc36217066d3936d5f34dd7ce3b739db1d3016",
+      "source_base": {
+        "box": [
+          717,
+          182,
+          721,
+          187
+        ],
+        "selected_native_pixels": 16,
+        "selection": "R>220,G>170,B>165 inside the manually observed bright patch",
+        "median_rgb": [
+          234.5,
+          194.0,
+          183.5
+        ],
+        "scope": "Observed painted colors; no calibrated illumination or exact physical sclera albedo."
+      },
+      "source_lower_edge": {
+        "box": [
+          721,
+          190,
+          725,
+          193
+        ],
+        "selected_native_pixels": 12,
+        "selection": "all pixels in the observed lower-edge patch",
+        "median_rgb": [
+          137.5,
+          69.0,
+          68.5
+        ],
+        "scope": "Observed painted colors; no calibrated illumination or exact physical sclera albedo."
+      },
+      "authored_lower_edge_mix_max": 0.18,
+      "iris_pixels_protected": 2028,
+      "changed_pixels": 63508,
+      "iris_bytes_identical": true,
+      "iris_uv_placement_radius_and_boundary_unchanged": true,
+      "all_pixels_outside_edit_mask_identical": true,
+      "new_source_detail_recovered": false
+    },
+    {
+      "side": "right",
+      "object": "CC0_helper-l-eye_UNAPPROVED",
+      "original_png_sha256": "3e27febf13d5666a2ea6bee89c97065324d0f5fdb3cf805838afbe1c1589f6a0",
+      "new_png_sha256": "5cc1264fae220bb2f18d088d44d6d1cd014a32234137172adfd72dd2ce8a1b6f",
+      "source_base": {
+        "box": [
+          792,
+          173,
+          796,
+          177
+        ],
+        "selected_native_pixels": 12,
+        "selection": "R>220,G>170,B>165 inside the manually observed bright patch",
+        "median_rgb": [
+          233.5,
+          191.0,
+          189.0
+        ],
+        "scope": "Observed painted colors; no calibrated illumination or exact physical sclera albedo."
+      },
+      "source_lower_edge": {
+        "box": [
+          806,
+          180,
+          812,
+          184
+        ],
+        "selected_native_pixels": 24,
+        "selection": "all pixels in the observed lower-edge patch",
+        "median_rgb": [
+          217.5,
+          147.5,
+          139.5
+        ],
+        "scope": "Observed painted colors; no calibrated illumination or exact physical sclera albedo."
+      },
+      "authored_lower_edge_mix_max": 0.18,
+      "iris_pixels_protected": 2028,
+      "changed_pixels": 63508,
+      "iris_bytes_identical": true,
+      "iris_uv_placement_radius_and_boundary_unchanged": true,
+      "all_pixels_outside_edit_mask_identical": true,
+      "new_source_detail_recovered": false
+    }
+  ],
+  "head_texture_unchanged": true,
+  "source_reference_images_unchanged": true,
+  "no_geometry_uv_or_raster_bake": true,
+  "no_old_R4_raster_used": true,
+  "ambiguous_outer_patch_not_used_as_sclera_albedo": true,
+  "scope": "Source-led local color authoring only; not reference likeness, eye contact or engine acceptance.",
+  "paid_submissions": 0,
+  "spent_credits": 0
+}

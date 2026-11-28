@@ -1,0 +1,11 @@
+{
+  "input_sha256": "aaeb5e4e62ce36be76525d2e531d8effafbb13130af1e054293d752ddeca6fb1",
+  "label_colors": {
+    "head": "gray",
+    "screen_right_helper": "green",
+    "screen_left_helper": "blue"
+  },
+  "geometry_controls_uv_and_active_images_restored": true,
+  "model_not_saved": true,
+  "scope": "Diagnostic visible object ownership with antialias margins, not physical eye contact/self-intersection."
+}

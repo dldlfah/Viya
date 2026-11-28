@@ -1,0 +1,23 @@
+{
+  "images": [
+    {
+      "object": "CC0_head_skin_UNAPPROVED",
+      "path": "tools/higgsfield/requests/plan_b/b03/face_surface_v4/textures/head_color_details.png",
+      "sha256": "3642fabc7315233130d9017613856064b7b8bafb46b4d9054fa6d46a5c5261de",
+      "packed": true
+    },
+    {
+      "object": "CC0_helper-l-eye_UNAPPROVED",
+      "path": "tools/higgsfield/requests/plan_b/b03/eye_surface_v1/textures/eye_screen_right.png",
+      "sha256": "5cc1264fae220bb2f18d088d44d6d1cd014a32234137172adfd72dd2ce8a1b6f",
+      "packed": true
+    },
+    {
+      "object": "CC0_helper-r-eye_UNAPPROVED",
+      "path": "tools/higgsfield/requests/plan_b/b03/eye_surface_v1/textures/eye_screen_left.png",
+      "sha256": "8e668a8ef983b782ec13cbd3fabc36217066d3936d5f34dd7ce3b739db1d3016",
+      "packed": true
+    }
+  ],
+  "scope": "Head retained, two derived eye maps; diagnostic masks are not final color maps."
+}
