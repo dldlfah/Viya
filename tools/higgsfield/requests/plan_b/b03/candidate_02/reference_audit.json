@@ -1,0 +1,43 @@
+{
+  "references": [
+    {
+      "role": "front",
+      "original_filename": "hf_20261116_174554_5a7ff135-f678-489d-98af-4acab0f49863.png",
+      "library_file_id": "libfile_d3329b73ee408191bd7ea863b2a63a6a",
+      "path": "assets/characters/plan_b_viya/candidate_02/references/front.png",
+      "selected_for_generation": true,
+      "sha256": "28131fc01dbff28b3a5475ee2f73fcb37e5f9d7e81ab26477e9a1ce092b2b11b",
+      "bytes": 3993058
+    },
+    {
+      "role": "back",
+      "original_filename": "e7ece0e9-48e0-4bb4-bdbd-4d2857f4f48f(1).png",
+      "library_file_id": "libfile_aa54015d3e308191b6938295de576ad7",
+      "path": "assets/characters/plan_b_viya/candidate_02/references/back.png",
+      "selected_for_generation": true,
+      "sha256": "38f52e780b9c1fa91fce35534a1e649dbf562aa1365e6aee9c26ed0034ee82ff",
+      "bytes": 5161631
+    },
+    {
+      "role": "screen_left_profile",
+      "original_filename": "ccde6d28-3e1d-4ffc-add0-82f12e07f10a.png",
+      "library_file_id": "libfile_1df5929796cc81919c95a9d5784b4e93",
+      "path": "assets/characters/plan_b_viya/candidate_02/references/screen_left_profile.png",
+      "selected_for_generation": false,
+      "sha256": "f0d229c4ca6c8a1f51bfe6a1dfc921195b1943e6d61f8a1c919aca2d152819df",
+      "bytes": 3211108
+    },
+    {
+      "role": "screen_right_profile",
+      "original_filename": "f182b323-ecbf-4324-8f2b-b8ef648a4013.png",
+      "library_file_id": "libfile_2173337478e481919885967ede31a72e",
+      "path": "assets/characters/plan_b_viya/candidate_02/references/screen_right_profile.png",
+      "selected_for_generation": false,
+      "sha256": "f786e9c4c8001418348822fbcc138e4ee97b08844205ae8c0610c55c19a988be",
+      "bytes": 4045459
+    }
+  ],
+  "selection": "Front+rear A-poses only; profile poses/costume details differ and are review-only",
+  "approval": "User-selected references for retry; final character design approval still separate",
+  "edits": "None; original bytes preserved, no watermark removal or repainting"
+}

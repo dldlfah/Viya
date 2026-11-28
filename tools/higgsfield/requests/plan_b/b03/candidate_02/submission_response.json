@@ -1,0 +1,63 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "This tool provides an auto-updating generation widget for these jobs. Do not call job_display, show_generations, or show_generation_by_ids to display these jobs again, either before or after completion, unless the user explicitly requests a separate display. If you need to await completion, use jobs_wait with timeout_seconds <= 15. Use job_display only if the user explicitly requests a separate re-display of one specific job."
+    },
+    {
+      "type": "text",
+      "text": "Submitted 1 job. If a widget is visible, it polls automatically — do not call job_status or show_generations as a follow-up poll. In text-only clients, use job_status with sync:true to poll for completion.\n- e77f2699-2ead-4505-8a05-06b2fd24bf52"
+    },
+    {
+      "type": "text",
+      "text": "If the user requests a combined display of multiple generations, including jobs submitted through separate generate_* calls, collect all requested job IDs, wait for the complete set with jobs_wait, then call show_generation_by_ids with jobs: [{\"index\":0,\"job_id\":\"<first actual job ID>\"},{\"index\":1,\"job_id\":\"<second actual job ID>\"}, ...]. job_display accepts only one id: never pass ids to it or loop over it to show a group. Do not create an extra display when the existing generation widgets already satisfy the request."
+    }
+  ],
+  "structuredContent": {
+    "results": [
+      {
+        "id": "e77f2699-2ead-4505-8a05-06b2fd24bf52",
+        "type": "3d",
+        "status": "pending",
+        "model": "multi_image_to_3d",
+        "params": {
+          "prompt": "",
+          "reference_images": [
+            "35734ec3-5862-4213-8647-49c044bc07d2",
+            "5aa7207a-db8b-409f-8289-bc1a549abe3d"
+          ],
+          "enable_animation": false,
+          "should_texture": true,
+          "enable_rigging": true,
+          "should_remesh": true,
+          "target_polycount": 20000,
+          "topology": "quad",
+          "symmetry_mode": "off",
+          "enable_pbr": false,
+          "pose_mode": "a-pose",
+          "rigging_height_meters": 1.72,
+          "texture_prompt": "Preserve the supplied adult character's deep dark-brown wavy hair, ivory top, black corset and armor, brass/gold ornaments, tall boots and asymmetric crimson side cloth panels. Match the front and rear references. Keep the open rear split between the cloth panels and visible shorts and legs. No new back cape, text, logos or extra accessories. Retain the painterly anime colors rather than reddish-pink hair.",
+          "medias": [
+            {
+              "role": "image",
+              "data": {
+                "id": "35734ec3-5862-4213-8647-49c044bc07d2",
+                "type": "media_input",
+                "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3LHdo37hN3iiYXd8WT9stnWXw4M/35734ec3-5862-4213-8647-49c044bc07d2.png"
+              }
+            },
+            {
+              "role": "image",
+              "data": {
+                "id": "5aa7207a-db8b-409f-8289-bc1a549abe3d",
+                "type": "media_input",
+                "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3LHdo37hN3iiYXd8WT9stnWXw4M/5aa7207a-db8b-409f-8289-bc1a549abe3d.png"
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "isError": false
+}

@@ -1,0 +1,280 @@
+{
+  "chapter": "B-03",
+  "candidate": "02",
+  "status": "SUBMITTED",
+  "baseline_commit": "c467afeda253ae2f9793d1509913891f4cf9dddb",
+  "authorization": "User explicitly requested another attempt using the newly attached images; this is one additional candidate at the rechecked same35-credit price, not reuse of exhausted candidate01 budget.",
+  "max_submissions": 1,
+  "max_credits": 35,
+  "quote": {
+    "cost": {
+      "credits": 35,
+      "credits_exact": 35
+    }
+  },
+  "balance_before": {
+    "credits": 362,
+    "subscription_plan_type": "plus",
+    "free_trial": {
+      "status": "pending",
+      "eligible": false,
+      "offered_kind": null,
+      "kind": "mcp",
+      "trial_credits": 100,
+      "ends_at": null,
+      "unlim_available": false,
+      "unlim_remaining": null,
+      "unlim_expires_at": null
+    },
+    "free_gens": [
+      {
+        "job_set_types": [
+          "ai_influencer_motion_control",
+          "ai_influencer_replace_object",
+          "hf_mult_motion_control",
+          "hf_mult_replace_object"
+        ],
+        "remaining": 0,
+        "parameters": {
+          "resolution": [
+            "480p",
+            "720p"
+          ]
+        },
+        "max_duration": 30
+      },
+      {
+        "job_set_types": [
+          "ai_influencer_sheet"
+        ],
+        "remaining": 5,
+        "parameters": {},
+        "max_duration": null
+      }
+    ]
+  },
+  "model_schema": {
+    "id": "multi_image_to_3d",
+    "name": "Multi-Image to 3D",
+    "provider_name": "Meshy",
+    "description": "1-4 images of the same subject to 3D GLB mesh. More views = better geometric accuracy. Supports texturing, rigging, animation",
+    "output_type": "3d",
+    "parameters": [
+      {
+        "name": "should_texture",
+        "required": "optional",
+        "type": "bool",
+        "description": "Apply surface textures to the mesh. Costs more credits but produces a textured GLB.",
+        "default": false
+      },
+      {
+        "name": "enable_rigging",
+        "required": "optional",
+        "type": "bool",
+        "description": "Auto-rig the resulting mesh with a humanoid skeleton. Works best on humanoid/character subjects; non-bipeds (animals, objects) may rig poorly. Adds cost.",
+        "default": false
+      },
+      {
+        "name": "enable_animation",
+        "required": "optional",
+        "type": "bool",
+        "description": "Apply a pre-canned animation clip to the rig. Requires enable_rigging=true. Pick the clip via animation_action_id. Adds cost.",
+        "default": false
+      },
+      {
+        "name": "should_remesh",
+        "required": "optional",
+        "type": "bool",
+        "description": "Re-topologize the mesh (default true). When false, returns the raw triangular mesh and topology/target_polycount are ignored."
+      },
+      {
+        "name": "texture_prompt",
+        "required": "optional",
+        "type": "string",
+        "description": "Text prompt to guide texturing. Requires should_texture=true."
+      },
+      {
+        "name": "texture_image_url",
+        "required": "optional",
+        "type": "string",
+        "description": "Reference image URL for texture style transfer. Requires should_texture=true."
+      },
+      {
+        "name": "target_polycount",
+        "required": "optional",
+        "type": "number",
+        "description": "Target triangle count, 100-300000 (default 30000). Higher = more detail, larger file.",
+        "min": 100,
+        "max": 300000
+      },
+      {
+        "name": "topology",
+        "required": "optional",
+        "type": "string",
+        "description": "Mesh topology: 'quad' for smooth/editable surfaces, 'triangle' (default) for detailed geometry.",
+        "options": [
+          "quad",
+          "triangle"
+        ]
+      },
+      {
+        "name": "symmetry_mode",
+        "required": "optional",
+        "type": "string",
+        "description": "Symmetry during generation: 'auto' (default) detects it, 'on' enforces it, 'off' disables it.",
+        "options": [
+          "off",
+          "auto",
+          "on"
+        ]
+      },
+      {
+        "name": "enable_pbr",
+        "required": "optional",
+        "type": "bool",
+        "description": "Generate PBR material maps (metallic, roughness, normal) in addition to base color. Requires should_texture=true."
+      },
+      {
+        "name": "pose_mode",
+        "required": "optional",
+        "type": "string",
+        "description": "Generate the character in a canonical rig-friendly pose ('a-pose' or 't-pose'). Omit for no specific pose. Recommended with enable_rigging for cleaner skeletons.",
+        "options": [
+          "a-pose",
+          "t-pose"
+        ]
+      },
+      {
+        "name": "rigging_height_meters",
+        "required": "optional",
+        "type": "number",
+        "description": "Approximate real-world character height in meters (default 1.7). Only used when enable_rigging=true.",
+        "min": 0
+      },
+      {
+        "name": "animation_action_id",
+        "required": "optional",
+        "type": "number",
+        "description": "Animation clip id (integer, 0-696) for the rig. Required when enable_animation=true. Common picks - idle: 0; walk: 30 (Casual_Walk); run: 16 (RunFast); jump: 466 (Regular_Jump); wave: 28 (Big_Wave_Hello); dance: 64 (All_Night_Dance). For anything else, call the animation_actions tool to search the full 678-action library by name or category.",
+        "min": 0,
+        "max": 696
+      },
+      {
+        "name": "enable_safety_checker",
+        "required": "optional",
+        "type": "bool",
+        "description": "Run NSFW safety check on output."
+      },
+      {
+        "name": "seed",
+        "required": "optional",
+        "type": "number",
+        "description": "Random seed for reproducibility."
+      }
+    ],
+    "medias": [
+      {
+        "name": "medias",
+        "type": "image",
+        "max": 4,
+        "required": true,
+        "roles": [
+          "image"
+        ],
+        "description": "1-4 images of the same subject from different angles (role: image). More images improve geometric accuracy."
+      }
+    ],
+    "aspect_ratios": [],
+    "tags": [
+      "3d",
+      "mesh",
+      "glb",
+      "multi-image-to-3d",
+      "multi-view",
+      "textured",
+      "pbr",
+      "rigging",
+      "animation"
+    ],
+    "free_gens": [
+      {
+        "job_set_types": [
+          "ai_influencer_motion_control",
+          "ai_influencer_replace_object",
+          "hf_mult_motion_control",
+          "hf_mult_replace_object"
+        ],
+        "remaining": 0,
+        "parameters": {
+          "resolution": [
+            "480p",
+            "720p"
+          ]
+        },
+        "max_duration": 30
+      },
+      {
+        "job_set_types": [
+          "ai_influencer_sheet"
+        ],
+        "remaining": 5,
+        "parameters": {},
+        "max_duration": null
+      }
+    ]
+  },
+  "params": {
+    "model": "multi_image_to_3d",
+    "count": 1,
+    "medias": [
+      {
+        "role": "image",
+        "value": "35734ec3-5862-4213-8647-49c044bc07d2"
+      },
+      {
+        "role": "image",
+        "value": "5aa7207a-db8b-409f-8289-bc1a549abe3d"
+      }
+    ],
+    "should_texture": true,
+    "enable_rigging": true,
+    "enable_animation": false,
+    "should_remesh": true,
+    "target_polycount": 20000,
+    "topology": "quad",
+    "symmetry_mode": "off",
+    "enable_pbr": false,
+    "pose_mode": "a-pose",
+    "rigging_height_meters": 1.72,
+    "texture_prompt": "Preserve the supplied adult character's deep dark-brown wavy hair, ivory top, black corset and armor, brass/gold ornaments, tall boots and asymmetric crimson side cloth panels. Match the front and rear references. Keep the open rear split between the cloth panels and visible shorts and legs. No new back cape, text, logos or extra accessories. Retain the painterly anime colors rather than reddish-pink hair."
+  },
+  "inputs": [
+    {
+      "role": "front",
+      "file": "/workspace/scratch/6291c6828a10/upload/hf_20261116_174554_5a7ff135-f678-489d-98af-4acab0f49863.png",
+      "media_id": "35734ec3-5862-4213-8647-49c044bc07d2",
+      "status": "uploaded",
+      "type": "image",
+      "filename": "hf_20261116_174554_5a7ff135-f678-489d-98af-4acab0f49863.png",
+      "content_type": "image/png",
+      "size_bytes": 3993058,
+      "source_file_id": "file_00000000d6d082098e19bb76fa7b5a39",
+      "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3LHdo37hN3iiYXd8WT9stnWXw4M/35734ec3-5862-4213-8647-49c044bc07d2.png"
+    },
+    {
+      "role": "back",
+      "file": "/workspace/scratch/6291c6828a10/upload/e7ece0e9-48e0-4bb4-bdbd-4d2857f4f48f(1).png",
+      "media_id": "5aa7207a-db8b-409f-8289-bc1a549abe3d",
+      "status": "uploaded",
+      "type": "image",
+      "filename": "e7ece0e9-48e0-4bb4-bdbd-4d2857f4f48f(1).png",
+      "content_type": "image/png",
+      "size_bytes": 5161631,
+      "source_file_id": "file_00000000a1048211b9de24c37b0485df",
+      "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3LHdo37hN3iiYXd8WT9stnWXw4M/5aa7207a-db8b-409f-8289-bc1a549abe3d.png"
+    }
+  ],
+  "change_rationale": "Use matching A-pose front+rear views in supported multi-image model to constrain back hair/cloth geometry; retain side views for comparison because pose/costume details conflict. Added supported texture_prompt for dark-brown hair/source colors and no added cape/logo.",
+  "known_limits": "Front is a resized copy of the earlier source, not a new canonical design. Views do not establish a fully consistent turnaround. Multi-view input does not guarantee good hair/cloth skinning.",
+  "job_id": "e77f2699-2ead-4505-8a05-06b2fd24bf52"
+}

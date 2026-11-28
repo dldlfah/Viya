@@ -1,0 +1,30 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "jobs[1]{index,job_id,status,type,model}:\n  0,e77f2699-2ead-4505-8a05-06b2fd24bf52,in_progress,3d,multi_image_to_3d\nsummary:\n  total: 1\n  completed: 0\n  failed: 0\n  active: 1\n  errors: 0\nall_terminal: false\ntimed_out: true\npoll_after_seconds: 10\n\nWork is still pending. Wait poll_after_seconds, then call jobs_wait again in this turn. Do not ask the user to say 'continue' just because the polling window ended. Respect cancellation and host execution limits."
+    }
+  ],
+  "structuredContent": {
+    "jobs": [
+      {
+        "index": 0,
+        "job_id": "e77f2699-2ead-4505-8a05-06b2fd24bf52",
+        "status": "in_progress",
+        "type": "3d",
+        "model": "multi_image_to_3d"
+      }
+    ],
+    "summary": {
+      "total": 1,
+      "completed": 0,
+      "failed": 0,
+      "active": 1,
+      "errors": 0
+    },
+    "all_terminal": false,
+    "timed_out": true,
+    "poll_after_seconds": 10
+  },
+  "isError": false
+}
